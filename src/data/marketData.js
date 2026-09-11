@@ -3013,22 +3013,6 @@ export const marketPacks = [
             "topic": "Text 02 · Brain Mapping Today"
       },
       {
-            "word": "behavior",
-            "translation": "xulq-atvor, hatti-harakat",
-            "definition": "the way a person acts",
-            "example": "Studying 'behavior' (the way a person acts) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 02 · Brain Mapping Today"
-      },
-      {
-            "word": "link",
-            "translation": "bog'lamoq, aloqa",
-            "definition": "a connection between things",
-            "example": "Studying 'link' (a connection between things) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 02 · Brain Mapping Today"
-      },
-      {
             "word": "living",
             "translation": "tirik, yashayotgan",
             "definition": "alive; not dead",
@@ -3057,22 +3041,6 @@ export const marketPacks = [
             "translation": "hujayra",
             "definition": "the smallest unit of a living thing",
             "example": "Studying 'cell' (the smallest unit of a living thing) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 02 · Brain Mapping Today"
-      },
-      {
-            "word": "complex",
-            "translation": "murakkab",
-            "definition": "complicated; having many parts",
-            "example": "Studying 'complex' (complicated; having many parts) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 02 · Brain Mapping Today"
-      },
-      {
-            "word": "function",
-            "translation": "ishlamoq, faoliyat ko'rsatmoq",
-            "definition": "the special activity of something",
-            "example": "Studying 'function' (the special activity of something) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 02 · Brain Mapping Today"
       },
@@ -3113,14 +3081,6 @@ export const marketPacks = [
             "translation": "paydo bo'lmoq",
             "definition": "to come into view; to become visible",
             "example": "Studying 'appear' (to come into view; to become visible) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 02 · Brain Mapping Today"
-      },
-      {
-            "word": "analyze",
-            "translation": "tahlil qilmoq",
-            "definition": "to examine in detail",
-            "example": "Studying 'analyze' (to examine in detail) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 02 · Brain Mapping Today"
       },
@@ -3169,14 +3129,6 @@ export const marketPacks = [
             "translation": "skaner apparati",
             "definition": "",
             "example": "The word 'scanner' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 02 · Brain Mapping Today"
-      },
-      {
-            "word": "location",
-            "translation": "joylashuv",
-            "definition": "",
-            "example": "The word 'location' is commonly used in English reading.",
             "partOfSpeech": "noun",
             "topic": "Text 02 · Brain Mapping Today"
       },
@@ -3234,14 +3186,6 @@ export const marketPacks = [
             "definition": "",
             "example": "The word 'smell' is commonly used in English reading.",
             "partOfSpeech": "noun",
-            "topic": "Text 02 · Brain Mapping Today"
-      },
-      {
-            "word": "average",
-            "translation": "o'rtacha",
-            "definition": "",
-            "example": "The word 'average' is commonly used in English reading.",
-            "partOfSpeech": "adjective",
             "topic": "Text 02 · Brain Mapping Today"
       },
       {
@@ -3317,26 +3261,10 @@ export const marketPacks = [
             "topic": "Text 02 · Brain Mapping Today"
       },
       {
-            "word": "examine",
-            "translation": "tekshirmoq",
-            "definition": "",
-            "example": "The word 'examine' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 02 · Brain Mapping Today"
-      },
-      {
             "word": "clock",
             "translation": "soat",
             "definition": "a device that shows the time",
             "example": "Studying 'clock' (a device that shows the time) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 03 · What Time Is It?"
-      },
-      {
-            "word": "appear",
-            "translation": "paydo bo'lmoq",
-            "definition": "to come into view; to become visible",
-            "example": "Studying 'appear' (to come into view; to become visible) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 03 · What Time Is It?"
       },
@@ -3361,14 +3289,6 @@ export const marketPacks = [
             "translation": "qorong'ilik",
             "definition": "the absence of light",
             "example": "Studying 'darkness' (the absence of light) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 03 · What Time Is It?"
-      },
-      {
-            "word": "measure",
-            "translation": "o'lchamoq",
-            "definition": "to find the size or amount",
-            "example": "Studying 'measure' (to find the size or amount) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 03 · What Time Is It?"
       },
@@ -3557,14 +3477,6 @@ export const marketPacks = [
             "topic": "Text 03 · What Time Is It?"
       },
       {
-            "word": "function",
-            "translation": "ishlamoq, faoliyat ko'rsatmoq",
-            "definition": "",
-            "example": "The word 'function' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 03 · What Time Is It?"
-      },
-      {
             "word": "object",
             "translation": "narsa, obyekt",
             "definition": "",
@@ -3677,14 +3589,6 @@ export const marketPacks = [
             "topic": "Text 04 · Time Zones"
       },
       {
-            "word": "location",
-            "translation": "joylashuv",
-            "definition": "a particular place or position",
-            "example": "Studying 'location' (a particular place or position) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 04 · Time Zones"
-      },
-      {
             "word": "local",
             "translation": "mahalliy",
             "definition": "relating to a particular area",
@@ -3697,30 +3601,6 @@ export const marketPacks = [
             "translation": "aylanmoq",
             "definition": "to move in a circle; to rotate",
             "example": "Studying 'turn' (to move in a circle; to rotate) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 04 · Time Zones"
-      },
-      {
-            "word": "appear",
-            "translation": "paydo bo'lmoq",
-            "definition": "to seem; to come into view",
-            "example": "Studying 'appear' (to seem; to come into view) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 04 · Time Zones"
-      },
-      {
-            "word": "shift",
-            "translation": "siljimoq, o'zgarmoq",
-            "definition": "to move from one place to another",
-            "example": "Studying 'shift' (to move from one place to another) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 04 · Time Zones"
-      },
-      {
-            "word": "vary",
-            "translation": "farqlanmoq, o'zgarmoq",
-            "definition": "to change; to be different",
-            "example": "Studying 'vary' (to change; to be different) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 04 · Time Zones"
       },
@@ -3773,22 +3653,6 @@ export const marketPacks = [
             "topic": "Text 04 · Time Zones"
       },
       {
-            "word": "difference",
-            "translation": "farq",
-            "definition": "a way in which things are not alike",
-            "example": "Studying 'difference' (a way in which things are not alike) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 04 · Time Zones"
-      },
-      {
-            "word": "important",
-            "translation": "muhim",
-            "definition": "having great value or meaning",
-            "example": "Studying 'important' (having great value or meaning) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 04 · Time Zones"
-      },
-      {
             "word": "railroad",
             "translation": "temir yo'l",
             "definition": "a track and system for trains",
@@ -3813,14 +3677,6 @@ export const marketPacks = [
             "topic": "Text 04 · Time Zones"
       },
       {
-            "word": "confused",
-            "translation": "sarsam, chalkashgan",
-            "definition": "",
-            "example": "The word 'confused' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 04 · Time Zones"
-      },
-      {
             "word": "watch",
             "translation": "qo'l soati",
             "definition": "",
@@ -3833,14 +3689,6 @@ export const marketPacks = [
             "translation": "olis, uzoq",
             "definition": "",
             "example": "The word 'distant' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 04 · Time Zones"
-      },
-      {
-            "word": "accurate",
-            "translation": "aniq",
-            "definition": "",
-            "example": "The word 'accurate' is commonly used in English reading.",
             "partOfSpeech": "noun",
             "topic": "Text 04 · Time Zones"
       },
@@ -3861,14 +3709,6 @@ export const marketPacks = [
             "topic": "Text 04 · Time Zones"
       },
       {
-            "word": "link",
-            "translation": "bog'lamoq, aloqa",
-            "definition": "",
-            "example": "The word 'link' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 04 · Time Zones"
-      },
-      {
             "word": "committee",
             "translation": "qo'mita",
             "definition": "",
@@ -3877,26 +3717,10 @@ export const marketPacks = [
             "topic": "Text 04 · Time Zones"
       },
       {
-            "word": "feature",
-            "translation": "xususiyat",
-            "definition": "",
-            "example": "The word 'feature' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 04 · Time Zones"
-      },
-      {
             "word": "zone",
             "translation": "zona",
             "definition": "",
             "example": "The word 'zone' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 04 · Time Zones"
-      },
-      {
-            "word": "divide",
-            "translation": "bo'lmoq",
-            "definition": "",
-            "example": "The word 'divide' is commonly used in English reading.",
             "partOfSpeech": "noun",
             "topic": "Text 04 · Time Zones"
       },
@@ -4013,14 +3837,6 @@ export const marketPacks = [
             "topic": "Text 05 · Harmful and Helpful Bacteria"
       },
       {
-            "word": "appear",
-            "translation": "paydo bo'lmoq",
-            "definition": "to come into view; to become visible",
-            "example": "Studying 'appear' (to come into view; to become visible) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 05 · Harmful and Helpful Bacteria"
-      },
-      {
             "word": "proceed",
             "translation": "davom ettirmoq",
             "definition": "to continue; to go on",
@@ -4081,14 +3897,6 @@ export const marketPacks = [
             "translation": "mikrob",
             "definition": "a tiny organism causing disease",
             "example": "Studying 'germ' (a tiny organism causing disease) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 05 · Harmful and Helpful Bacteria"
-      },
-      {
-            "word": "describe",
-            "translation": "tasvirlamoq",
-            "definition": "to say what something is like",
-            "example": "Studying 'describe' (to say what something is like) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 05 · Harmful and Helpful Bacteria"
       },
@@ -4213,14 +4021,6 @@ export const marketPacks = [
             "topic": "Text 05 · Harmful and Helpful Bacteria"
       },
       {
-            "word": "certain",
-            "translation": "muayyan, aniq",
-            "definition": "",
-            "example": "The word 'certain' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 05 · Harmful and Helpful Bacteria"
-      },
-      {
             "word": "break down",
             "translation": "parchalamoq",
             "definition": "",
@@ -4309,14 +4109,6 @@ export const marketPacks = [
             "topic": "Text 06 · Fighting Bacteria"
       },
       {
-            "word": "transfer",
-            "translation": "o'tkazmoq, yuqtirmoq",
-            "definition": "to move from one place to another",
-            "example": "Studying 'transfer' (to move from one place to another) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 06 · Fighting Bacteria"
-      },
-      {
             "word": "cause",
             "translation": "sabab bo'lmoq",
             "definition": "to make something happen",
@@ -4333,22 +4125,6 @@ export const marketPacks = [
             "topic": "Text 06 · Fighting Bacteria"
       },
       {
-            "word": "environment",
-            "translation": "atrof-muhit",
-            "definition": "the natural world around us",
-            "example": "Studying 'environment' (the natural world around us) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 06 · Fighting Bacteria"
-      },
-      {
-            "word": "exist",
-            "translation": "mavjud bo'lmoq",
-            "definition": "to be present; to live",
-            "example": "Studying 'exist' (to be present; to live) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 06 · Fighting Bacteria"
-      },
-      {
             "word": "discovery",
             "translation": "kashfiyot",
             "definition": "the act of finding something new",
@@ -4357,58 +4133,10 @@ export const marketPacks = [
             "topic": "Text 06 · Fighting Bacteria"
       },
       {
-            "word": "observe",
-            "translation": "kuzatmoq",
-            "definition": "to watch carefully",
-            "example": "Studying 'observe' (to watch carefully) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 06 · Fighting Bacteria"
-      },
-      {
-            "word": "link",
-            "translation": "bog'lamoq, aloqa",
-            "definition": "to connect one thing to another",
-            "example": "Studying 'link' (to connect one thing to another) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 06 · Fighting Bacteria"
-      },
-      {
-            "word": "suffer",
-            "translation": "aziyat chekmoq",
-            "definition": "to experience pain or harm",
-            "example": "Studying 'suffer' (to experience pain or harm) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 06 · Fighting Bacteria"
-      },
-      {
-            "word": "develop",
-            "translation": "rivojlantirmoq",
-            "definition": "to create or improve gradually",
-            "example": "Studying 'develop' (to create or improve gradually) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 06 · Fighting Bacteria"
-      },
-      {
-            "word": "prevent",
-            "translation": "oldini olmoq",
-            "definition": "to stop something from happening",
-            "example": "Studying 'prevent' (to stop something from happening) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 06 · Fighting Bacteria"
-      },
-      {
             "word": "procedure",
             "translation": "protsedura",
             "definition": "a way of doing something",
             "example": "Studying 'procedure' (a way of doing something) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 06 · Fighting Bacteria"
-      },
-      {
-            "word": "destroy",
-            "translation": "yo'q qilmoq",
-            "definition": "to damage so it no longer exists",
-            "example": "Studying 'destroy' (to damage so it no longer exists) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 06 · Fighting Bacteria"
       },
@@ -4425,14 +4153,6 @@ export const marketPacks = [
             "translation": "harorat",
             "definition": "how hot or cold something is",
             "example": "Studying 'temperature' (how hot or cold something is) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 06 · Fighting Bacteria"
-      },
-      {
-            "word": "process",
-            "translation": "jarayon",
-            "definition": "a series of actions or steps",
-            "example": "Studying 'process' (a series of actions or steps) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 06 · Fighting Bacteria"
       },
@@ -4493,14 +4213,6 @@ export const marketPacks = [
             "topic": "Text 06 · Fighting Bacteria"
       },
       {
-            "word": "analyze",
-            "translation": "tahlil qilmoq",
-            "definition": "",
-            "example": "The word 'analyze' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 06 · Fighting Bacteria"
-      },
-      {
             "word": "spray",
             "translation": "purkamoq",
             "definition": "",
@@ -4533,14 +4245,6 @@ export const marketPacks = [
             "topic": "Text 06 · Fighting Bacteria"
       },
       {
-            "word": "react",
-            "translation": "reaktsiya bildirmoq",
-            "definition": "",
-            "example": "The word 'react' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 06 · Fighting Bacteria"
-      },
-      {
             "word": "already",
             "translation": "allaqachon",
             "definition": "",
@@ -4569,14 +4273,6 @@ export const marketPacks = [
             "translation": "o'sish",
             "definition": "",
             "example": "The word 'growth' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 06 · Fighting Bacteria"
-      },
-      {
-            "word": "harmless",
-            "translation": "zararsiz",
-            "definition": "",
-            "example": "The word 'harmless' is commonly used in English reading.",
             "partOfSpeech": "noun",
             "topic": "Text 06 · Fighting Bacteria"
       },
@@ -4941,42 +4637,10 @@ export const marketPacks = [
             "topic": "Text 08 · Changing the Future"
       },
       {
-            "word": "earn",
-            "translation": "pul topshirmoq, daromad qilmoq",
-            "definition": "to get money by working",
-            "example": "Studying 'earn' (to get money by working) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 08 · Changing the Future"
-      },
-      {
-            "word": "community",
-            "translation": "jamiyat, jamoa",
-            "definition": "a group of people living together",
-            "example": "Studying 'community' (a group of people living together) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 08 · Changing the Future"
-      },
-      {
-            "word": "factor",
-            "translation": "omil",
-            "definition": "something that influences a result",
-            "example": "Studying 'factor' (something that influences a result) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 08 · Changing the Future"
-      },
-      {
             "word": "automation",
             "translation": "avtomatlashtirish",
             "definition": "the use of machines instead of people",
             "example": "Studying 'automation' (the use of machines instead of people) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 08 · Changing the Future"
-      },
-      {
-            "word": "business",
-            "translation": "biznes, tadbirkorlik",
-            "definition": "an organisation that sells goods",
-            "example": "Studying 'business' (an organisation that sells goods) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 08 · Changing the Future"
       },
@@ -4997,14 +4661,6 @@ export const marketPacks = [
             "topic": "Text 08 · Changing the Future"
       },
       {
-            "word": "factory",
-            "translation": "fabrika, zavod",
-            "definition": "a building where goods are made",
-            "example": "Studying 'factory' (a building where goods are made) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 08 · Changing the Future"
-      },
-      {
             "word": "leather",
             "translation": "leather",
             "definition": "material made from animal skin",
@@ -5017,30 +4673,6 @@ export const marketPacks = [
             "translation": "tikmoq",
             "definition": "to join with thread and needle",
             "example": "Studying 'sew' (to join with thread and needle) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 08 · Changing the Future"
-      },
-      {
-            "word": "physical",
-            "translation": "jismoniy",
-            "definition": "relating to the body",
-            "example": "Studying 'physical' (relating to the body) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 08 · Changing the Future"
-      },
-      {
-            "word": "consequence",
-            "translation": "oqibat",
-            "definition": "a result of an action",
-            "example": "Studying 'consequence' (a result of an action) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 08 · Changing the Future"
-      },
-      {
-            "word": "offer",
-            "translation": "taklif qilmoq",
-            "definition": "to present for acceptance",
-            "example": "Studying 'offer' (to present for acceptance) helps in reading comprehension.",
             "partOfSpeech": "verb",
             "topic": "Text 08 · Changing the Future"
       },
@@ -5069,14 +4701,6 @@ export const marketPacks = [
             "topic": "Text 08 · Changing the Future"
       },
       {
-            "word": "hire",
-            "translation": "ishga olmoq",
-            "definition": "to employ someone for work",
-            "example": "Studying 'hire' (to employ someone for work) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 08 · Changing the Future"
-      },
-      {
             "word": "insufficient",
             "translation": "yetarsiz",
             "definition": "not enough",
@@ -5093,34 +4717,10 @@ export const marketPacks = [
             "topic": "Text 08 · Changing the Future"
       },
       {
-            "word": "economy",
-            "translation": "iqtisodiyot",
-            "definition": "",
-            "example": "The word 'economy' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 08 · Changing the Future"
-      },
-      {
             "word": "serious",
             "translation": "jiddiy",
             "definition": "",
             "example": "The word 'serious' is commonly used in English reading.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 08 · Changing the Future"
-      },
-      {
-            "word": "seek",
-            "translation": "izlamoq",
-            "definition": "",
-            "example": "The word 'seek' is commonly used in English reading.",
-            "partOfSpeech": "verb",
-            "topic": "Text 08 · Changing the Future"
-      },
-      {
-            "word": "sufficient",
-            "translation": "yetarli",
-            "definition": "",
-            "example": "The word 'sufficient' is commonly used in English reading.",
             "partOfSpeech": "adjective",
             "topic": "Text 08 · Changing the Future"
       },
@@ -5141,43 +4741,11 @@ export const marketPacks = [
             "topic": "Text 08 · Changing the Future"
       },
       {
-            "word": "traditional",
-            "translation": "an'anaviy",
-            "definition": "",
-            "example": "The word 'traditional' is commonly used in English reading.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 08 · Changing the Future"
-      },
-      {
-            "word": "define",
-            "translation": "aniqlamoq, belgilamoq",
-            "definition": "",
-            "example": "The word 'define' is commonly used in English reading.",
-            "partOfSpeech": "verb",
-            "topic": "Text 08 · Changing the Future"
-      },
-      {
             "word": "definition",
             "translation": "ta'rif",
             "definition": "",
             "example": "The word 'definition' is commonly used in English reading.",
             "partOfSpeech": "noun",
-            "topic": "Text 08 · Changing the Future"
-      },
-      {
-            "word": "assist",
-            "translation": "yordam bermoq",
-            "definition": "",
-            "example": "The word 'assist' is commonly used in English reading.",
-            "partOfSpeech": "verb",
-            "topic": "Text 08 · Changing the Future"
-      },
-      {
-            "word": "assume",
-            "translation": "taxmin qilmoq",
-            "definition": "",
-            "example": "The word 'assume' is commonly used in English reading.",
-            "partOfSpeech": "verb",
             "topic": "Text 08 · Changing the Future"
       },
       {
@@ -5193,14 +4761,6 @@ export const marketPacks = [
             "translation": "yakka, yolg'iz",
             "definition": "",
             "example": "The word 'single' is commonly used in English reading.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 08 · Changing the Future"
-      },
-      {
-            "word": "average",
-            "translation": "o'rtacha",
-            "definition": "",
-            "example": "The word 'average' is commonly used in English reading.",
             "partOfSpeech": "adjective",
             "topic": "Text 08 · Changing the Future"
       },
@@ -5237,14 +4797,6 @@ export const marketPacks = [
             "topic": "Text 08 · Changing the Future"
       },
       {
-            "word": "cause",
-            "translation": "sabab bo'lmoq",
-            "definition": "",
-            "example": "The word 'cause' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 08 · Changing the Future"
-      },
-      {
             "word": "skyscraper",
             "translation": "osmono'par bino",
             "definition": "a very tall building",
@@ -5265,14 +4817,6 @@ export const marketPacks = [
             "translation": "tall",
             "definition": "of great height",
             "example": "Studying 'tall' (of great height) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 09 · Skyscrapers"
-      },
-      {
-            "word": "ancient",
-            "translation": "qadimiy",
-            "definition": "very old; from long ago",
-            "example": "Studying 'ancient' (very old; from long ago) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 09 · Skyscrapers"
       },
@@ -5309,22 +4853,6 @@ export const marketPacks = [
             "topic": "Text 09 · Skyscrapers"
       },
       {
-            "word": "exact",
-            "translation": "aniq",
-            "definition": "completely correct; precise",
-            "example": "Studying 'exact' (completely correct; precise) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 09 · Skyscrapers"
-      },
-      {
-            "word": "definition",
-            "translation": "ta'rif",
-            "definition": "a statement of meaning",
-            "example": "Studying 'definition' (a statement of meaning) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 09 · Skyscrapers"
-      },
-      {
             "word": "climb",
             "translation": "climb",
             "definition": "to go up using effort",
@@ -5346,14 +4874,6 @@ export const marketPacks = [
             "definition": "whole; complete",
             "example": "Studying 'entire' (whole; complete) helps in reading comprehension.",
             "partOfSpeech": "noun",
-            "topic": "Text 09 · Skyscrapers"
-      },
-      {
-            "word": "support",
-            "translation": "suyamoq, ushlab turmoq",
-            "definition": "to hold up; to bear weight",
-            "example": "Studying 'support' (to hold up; to bear weight) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 09 · Skyscrapers"
       },
       {
@@ -5401,14 +4921,6 @@ export const marketPacks = [
             "translation": "invention",
             "definition": "a new device that is created",
             "example": "Studying 'invention' (a new device that is created) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 09 · Skyscrapers"
-      },
-      {
-            "word": "process",
-            "translation": "jarayon",
-            "definition": "",
-            "example": "The word 'process' is commonly used in English reading.",
             "partOfSpeech": "noun",
             "topic": "Text 09 · Skyscrapers"
       },
@@ -5501,14 +5013,6 @@ export const marketPacks = [
             "topic": "Text 09 · Skyscrapers"
       },
       {
-            "word": "dangerous",
-            "translation": "xavfli",
-            "definition": "",
-            "example": "The word 'dangerous' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 09 · Skyscrapers"
-      },
-      {
             "word": "rope",
             "translation": "rope",
             "definition": "",
@@ -5521,14 +5025,6 @@ export const marketPacks = [
             "translation": "brake",
             "definition": "",
             "example": "The word 'brake' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 09 · Skyscrapers"
-      },
-      {
-            "word": "prevent",
-            "translation": "oldini olmoq",
-            "definition": "",
-            "example": "The word 'prevent' is commonly used in English reading.",
             "partOfSpeech": "noun",
             "topic": "Text 09 · Skyscrapers"
       },
@@ -5573,34 +5069,10 @@ export const marketPacks = [
             "topic": "Text 10 · The Growth of Cities"
       },
       {
-            "word": "billion",
-            "translation": "milliard",
-            "definition": "the number one thousand million",
-            "example": "Studying 'billion' (the number one thousand million) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 10 · The Growth of Cities"
-      },
-      {
-            "word": "previously",
-            "translation": "previously",
-            "definition": "before now; earlier",
-            "example": "Studying 'previously' (before now; earlier) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 10 · The Growth of Cities"
-      },
-      {
             "word": "farm",
             "translation": "farm",
             "definition": "land used for growing crops or animals",
             "example": "Studying 'farm' (land used for growing crops or animals) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 10 · The Growth of Cities"
-      },
-      {
-            "word": "grow",
-            "translation": "o'smoq, ko'paymoq",
-            "definition": "to become larger or greater",
-            "example": "Studying 'grow' (to become larger or greater) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 10 · The Growth of Cities"
       },
@@ -5613,43 +5085,11 @@ export const marketPacks = [
             "topic": "Text 10 · The Growth of Cities"
       },
       {
-            "word": "business",
-            "translation": "biznes, tadbirkorlik",
-            "definition": "an organisation that sells goods",
-            "example": "Studying 'business' (an organisation that sells goods) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 10 · The Growth of Cities"
-      },
-      {
-            "word": "center",
-            "translation": "markaz",
-            "definition": "a place of main activity",
-            "example": "Studying 'center' (a place of main activity) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 10 · The Growth of Cities"
-      },
-      {
-            "word": "factory",
-            "translation": "fabrika, zavod",
-            "definition": "a building where goods are made",
-            "example": "Studying 'factory' (a building where goods are made) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 10 · The Growth of Cities"
-      },
-      {
             "word": "locate",
             "translation": "locate",
             "definition": "to be situated in a place",
             "example": "Studying 'locate' (to be situated in a place) helps in reading comprehension.",
             "partOfSpeech": "noun",
-            "topic": "Text 10 · The Growth of Cities"
-      },
-      {
-            "word": "support",
-            "translation": "suyamoq, ushlab turmoq",
-            "definition": "to provide money or help",
-            "example": "Studying 'support' (to provide money or help) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 10 · The Growth of Cities"
       },
       {
@@ -5685,14 +5125,6 @@ export const marketPacks = [
             "topic": "Text 10 · The Growth of Cities"
       },
       {
-            "word": "material",
-            "translation": "material",
-            "definition": "the substance goods are made of",
-            "example": "Studying 'material' (the substance goods are made of) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 10 · The Growth of Cities"
-      },
-      {
             "word": "unload",
             "translation": "unload",
             "definition": "to remove goods from a vehicle or ship",
@@ -5705,14 +5137,6 @@ export const marketPacks = [
             "translation": "deliver",
             "definition": "to take goods to a place",
             "example": "Studying 'deliver' (to take goods to a place) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 10 · The Growth of Cities"
-      },
-      {
-            "word": "transportation",
-            "translation": "transport",
-            "definition": "the movement of people or goods",
-            "example": "Studying 'transportation' (the movement of people or goods) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 10 · The Growth of Cities"
       },
@@ -5757,26 +5181,10 @@ export const marketPacks = [
             "topic": "Text 10 · The Growth of Cities"
       },
       {
-            "word": "construct",
-            "translation": "construct",
-            "definition": "",
-            "example": "The word 'construct' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 10 · The Growth of Cities"
-      },
-      {
             "word": "empty",
             "translation": "empty",
             "definition": "",
             "example": "The word 'empty' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 10 · The Growth of Cities"
-      },
-      {
-            "word": "space",
-            "translation": "fazoy, joy",
-            "definition": "",
-            "example": "The word 'space' is commonly used in English reading.",
             "partOfSpeech": "noun",
             "topic": "Text 10 · The Growth of Cities"
       },
@@ -5801,22 +5209,6 @@ export const marketPacks = [
             "translation": "remove",
             "definition": "",
             "example": "The word 'remove' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 10 · The Growth of Cities"
-      },
-      {
-            "word": "replace",
-            "translation": "almashtirmoq",
-            "definition": "",
-            "example": "The word 'replace' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 10 · The Growth of Cities"
-      },
-      {
-            "word": "vertical",
-            "translation": "vertical",
-            "definition": "",
-            "example": "The word 'vertical' is commonly used in English reading.",
             "partOfSpeech": "noun",
             "topic": "Text 10 · The Growth of Cities"
       },
@@ -5877,22 +5269,6 @@ export const marketPacks = [
             "topic": "Text 10 · The Growth of Cities"
       },
       {
-            "word": "restrict",
-            "translation": "restrict",
-            "definition": "",
-            "example": "The word 'restrict' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 10 · The Growth of Cities"
-      },
-      {
-            "word": "culture",
-            "translation": "madaniyat",
-            "definition": "the customs and beliefs of a society",
-            "example": "Studying 'culture' (the customs and beliefs of a society) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 11 · Food Traditions"
-      },
-      {
             "word": "belief",
             "translation": "belief",
             "definition": "something accepted as true",
@@ -5905,14 +5281,6 @@ export const marketPacks = [
             "translation": "urf-odat",
             "definition": "a traditional way of doing things",
             "example": "Studying 'custom' (a traditional way of doing things) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 11 · Food Traditions"
-      },
-      {
-            "word": "develop",
-            "translation": "rivojlantirmoq",
-            "definition": "to grow or come into being gradually",
-            "example": "Studying 'develop' (to grow or come into being gradually) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 11 · Food Traditions"
       },
@@ -5937,14 +5305,6 @@ export const marketPacks = [
             "translation": "available",
             "definition": "able to be obtained or used",
             "example": "Studying 'available' (able to be obtained or used) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 11 · Food Traditions"
-      },
-      {
-            "word": "environment",
-            "translation": "atrof-muhit",
-            "definition": "the natural surroundings",
-            "example": "Studying 'environment' (the natural surroundings) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 11 · Food Traditions"
       },
@@ -5977,14 +5337,6 @@ export const marketPacks = [
             "translation": "forest",
             "definition": "a large area covered with trees",
             "example": "Studying 'forest' (a large area covered with trees) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 11 · Food Traditions"
-      },
-      {
-            "word": "hunt",
-            "translation": "ov qilmoq",
-            "definition": "to chase and kill animals for food",
-            "example": "Studying 'hunt' (to chase and kill animals for food) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 11 · Food Traditions"
       },
@@ -6029,22 +5381,6 @@ export const marketPacks = [
             "topic": "Text 11 · Food Traditions"
       },
       {
-            "word": "traditional",
-            "translation": "an'anaviy",
-            "definition": "based on long-established custom",
-            "example": "Studying 'traditional' (based on long-established custom) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 11 · Food Traditions"
-      },
-      {
-            "word": "farm",
-            "translation": "farm",
-            "definition": "to grow crops and raise animals",
-            "example": "Studying 'farm' (to grow crops and raise animals) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 11 · Food Traditions"
-      },
-      {
             "word": "tame",
             "translation": "tame",
             "definition": "",
@@ -6065,14 +5401,6 @@ export const marketPacks = [
             "translation": "grain",
             "definition": "",
             "example": "The word 'grain' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 11 · Food Traditions"
-      },
-      {
-            "word": "spread",
-            "translation": "tarqalmoq",
-            "definition": "",
-            "example": "The word 'spread' is commonly used in English reading.",
             "partOfSpeech": "noun",
             "topic": "Text 11 · Food Traditions"
       },
@@ -6109,34 +5437,10 @@ export const marketPacks = [
             "topic": "Text 11 · Food Traditions"
       },
       {
-            "word": "neighbor",
-            "translation": "qo'shni",
-            "definition": "",
-            "example": "The word 'neighbor' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 11 · Food Traditions"
-      },
-      {
-            "word": "traveler",
-            "translation": "yo'lovchi",
-            "definition": "",
-            "example": "The word 'traveler' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 11 · Food Traditions"
-      },
-      {
             "word": "technique",
             "translation": "technique",
             "definition": "",
             "example": "The word 'technique' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 11 · Food Traditions"
-      },
-      {
-            "word": "distant",
-            "translation": "olis, uzoq",
-            "definition": "",
-            "example": "The word 'distant' is commonly used in English reading.",
             "partOfSpeech": "noun",
             "topic": "Text 11 · Food Traditions"
       },
@@ -6181,14 +5485,6 @@ export const marketPacks = [
             "topic": "Text 11 · Food Traditions"
       },
       {
-            "word": "tool",
-            "translation": "asbob",
-            "definition": "",
-            "example": "The word 'tool' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 11 · Food Traditions"
-      },
-      {
             "word": "pointed",
             "translation": "pointed",
             "definition": "",
@@ -6205,30 +5501,6 @@ export const marketPacks = [
             "topic": "Text 11 · Food Traditions"
       },
       {
-            "word": "preserve",
-            "translation": "saqlamoq, konservalash",
-            "definition": "to keep food safe from decay",
-            "example": "Studying 'preserve' (to keep food safe from decay) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 12 · Preserving Foods"
-      },
-      {
-            "word": "diet",
-            "translation": "diet",
-            "definition": "the food a person usually eats",
-            "example": "Studying 'diet' (the food a person usually eats) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 12 · Preserving Foods"
-      },
-      {
-            "word": "depend on",
-            "translation": "depend on",
-            "definition": "to be decided by; to rely on",
-            "example": "Studying 'depend on' (to be decided by; to rely on) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 12 · Preserving Foods"
-      },
-      {
             "word": "search",
             "translation": "search",
             "definition": "to look carefully for something",
@@ -6237,34 +5509,10 @@ export const marketPacks = [
             "topic": "Text 12 · Preserving Foods"
       },
       {
-            "word": "available",
-            "translation": "available",
-            "definition": "able to be obtained or used",
-            "example": "Studying 'available' (able to be obtained or used) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 12 · Preserving Foods"
-      },
-      {
             "word": "root",
             "translation": "root",
             "definition": "the underground part of a plant",
             "example": "Studying 'root' (the underground part of a plant) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 12 · Preserving Foods"
-      },
-      {
-            "word": "hunt",
-            "translation": "ov qilmoq",
-            "definition": "to chase and kill animals for food",
-            "example": "Studying 'hunt' (to chase and kill animals for food) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 12 · Preserving Foods"
-      },
-      {
-            "word": "wild",
-            "translation": "wild",
-            "definition": "living or growing in nature",
-            "example": "Studying 'wild' (living or growing in nature) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 12 · Preserving Foods"
       },
@@ -6281,30 +5529,6 @@ export const marketPacks = [
             "translation": "tatib ko'rmoq",
             "definition": "to sense the flavour of food",
             "example": "Studying 'taste' (to sense the flavour of food) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 12 · Preserving Foods"
-      },
-      {
-            "word": "safe",
-            "translation": "xavfsiz",
-            "definition": "not dangerous; free from harm",
-            "example": "Studying 'safe' (not dangerous; free from harm) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 12 · Preserving Foods"
-      },
-      {
-            "word": "technique",
-            "translation": "technique",
-            "definition": "a particular way of doing something",
-            "example": "Studying 'technique' (a particular way of doing something) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 12 · Preserving Foods"
-      },
-      {
-            "word": "discover",
-            "translation": "discover",
-            "definition": "to find something for the first time",
-            "example": "Studying 'discover' (to find something for the first time) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 12 · Preserving Foods"
       },
@@ -6365,30 +5589,6 @@ export const marketPacks = [
             "topic": "Text 12 · Preserving Foods"
       },
       {
-            "word": "bacteria",
-            "translation": "bakteriyalar",
-            "definition": "",
-            "example": "The word 'bacteria' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 12 · Preserving Foods"
-      },
-      {
-            "word": "cause",
-            "translation": "sabab bo'lmoq",
-            "definition": "",
-            "example": "The word 'cause' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 12 · Preserving Foods"
-      },
-      {
-            "word": "growth",
-            "translation": "o'sish",
-            "definition": "",
-            "example": "The word 'growth' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 12 · Preserving Foods"
-      },
-      {
             "word": "dried",
             "translation": "dried",
             "definition": "",
@@ -6417,30 +5617,6 @@ export const marketPacks = [
             "translation": "significantly",
             "definition": "",
             "example": "The word 'significantly' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 12 · Preserving Foods"
-      },
-      {
-            "word": "rely on",
-            "translation": "rely on",
-            "definition": "",
-            "example": "The word 'rely on' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 12 · Preserving Foods"
-      },
-      {
-            "word": "supply",
-            "translation": "supply",
-            "definition": "",
-            "example": "The word 'supply' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 12 · Preserving Foods"
-      },
-      {
-            "word": "grain",
-            "translation": "grain",
-            "definition": "",
-            "example": "The word 'grain' is commonly used in English reading.",
             "partOfSpeech": "noun",
             "topic": "Text 12 · Preserving Foods"
       },
@@ -6477,14 +5653,6 @@ export const marketPacks = [
             "topic": "Text 12 · Preserving Foods"
       },
       {
-            "word": "significant",
-            "translation": "significant",
-            "definition": "",
-            "example": "The word 'significant' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 12 · Preserving Foods"
-      },
-      {
             "word": "seal",
             "translation": "seal",
             "definition": "",
@@ -6498,22 +5666,6 @@ export const marketPacks = [
             "definition": "",
             "example": "The word 'boil' is commonly used in English reading.",
             "partOfSpeech": "verb",
-            "topic": "Text 12 · Preserving Foods"
-      },
-      {
-            "word": "destroy",
-            "translation": "yo'q qilmoq",
-            "definition": "",
-            "example": "The word 'destroy' is commonly used in English reading.",
-            "partOfSpeech": "noun",
-            "topic": "Text 12 · Preserving Foods"
-      },
-      {
-            "word": "store",
-            "translation": "do'kon",
-            "definition": "",
-            "example": "The word 'store' is commonly used in English reading.",
-            "partOfSpeech": "noun",
             "topic": "Text 12 · Preserving Foods"
       },
       {
@@ -6541,26 +5693,10 @@ export const marketPacks = [
             "topic": "Text 13 · Bar Codes"
       },
       {
-            "word": "recently",
-            "translation": "yaqinda",
-            "definition": "a short time ago",
-            "example": "Studying 'recently' (a short time ago) helps in reading comprehension.",
-            "partOfSpeech": "adverb",
-            "topic": "Text 13 · Bar Codes"
-      },
-      {
             "word": "package",
             "translation": "qadoq, o'ram",
             "definition": "the wrapping of a product",
             "example": "Studying 'package' (the wrapping of a product) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 13 · Bar Codes"
-      },
-      {
-            "word": "pattern",
-            "translation": "naqsh, andoza",
-            "definition": "a regular arrangement of lines or shapes",
-            "example": "Studying 'pattern' (a regular arrangement of lines or shapes) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 13 · Bar Codes"
       },
@@ -6589,22 +5725,6 @@ export const marketPacks = [
             "topic": "Text 13 · Bar Codes"
       },
       {
-            "word": "technology",
-            "translation": "texnologiya",
-            "definition": "scientific tools and methods",
-            "example": "Studying 'technology' (scientific tools and methods) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 13 · Bar Codes"
-      },
-      {
-            "word": "useful",
-            "translation": "foydali",
-            "definition": "able to be used for a purpose",
-            "example": "Studying 'useful' (able to be used for a purpose) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 13 · Bar Codes"
-      },
-      {
             "word": "invent",
             "translation": "ixtiro qilmoq",
             "definition": "to create something new",
@@ -6626,22 +5746,6 @@ export const marketPacks = [
             "definition": "a worker who serves customers",
             "example": "Studying 'clerk' (a worker who serves customers) helps in reading comprehension.",
             "partOfSpeech": "noun",
-            "topic": "Text 13 · Bar Codes"
-      },
-      {
-            "word": "cost",
-            "translation": "narx",
-            "definition": "the price of something",
-            "example": "Studying 'cost' (the price of something) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 13 · Bar Codes"
-      },
-      {
-            "word": "search",
-            "translation": "qidirmoq",
-            "definition": "to look carefully for something",
-            "example": "Studying 'search' (to look carefully for something) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 13 · Bar Codes"
       },
       {
@@ -6689,30 +5793,6 @@ export const marketPacks = [
             "translation": "kassa",
             "definition": "the place where customers pay",
             "example": "Studying 'checkout' (the place where customers pay) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 13 · Bar Codes"
-      },
-      {
-            "word": "process",
-            "translation": "jarayon",
-            "definition": "a series of actions or steps",
-            "example": "Studying 'process' (a series of actions or steps) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 13 · Bar Codes"
-      },
-      {
-            "word": "scanner",
-            "translation": "skaner",
-            "definition": "a device that reads bar codes",
-            "example": "Studying 'scanner' (a device that reads bar codes) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 13 · Bar Codes"
-      },
-      {
-            "word": "memory",
-            "translation": "xotira",
-            "definition": "the part of a computer storing data",
-            "example": "Studying 'memory' (the part of a computer storing data) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 13 · Bar Codes"
       },
@@ -6781,22 +5861,6 @@ export const marketPacks = [
             "topic": "Text 13 · Bar Codes"
       },
       {
-            "word": "available",
-            "translation": "mavjud",
-            "definition": "able to be obtained or used",
-            "example": "Studying 'available' (able to be obtained or used) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 13 · Bar Codes"
-      },
-      {
-            "word": "design",
-            "translation": "ishlab chiqmoq",
-            "definition": "to plan how something is made",
-            "example": "Studying 'design' (to plan how something is made) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 13 · Bar Codes"
-      },
-      {
             "word": "unique",
             "translation": "noyob",
             "definition": "being the only one of its kind",
@@ -6829,43 +5893,11 @@ export const marketPacks = [
             "topic": "Text 13 · Bar Codes"
       },
       {
-            "word": "product",
-            "translation": "mahsulot",
-            "definition": "something that is made or grown",
-            "example": "Studying 'product' (something that is made or grown) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 13 · Bar Codes"
-      },
-      {
-            "word": "efficient",
-            "translation": "samarali",
-            "definition": "working well without waste",
-            "example": "Studying 'efficient' (working well without waste) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 13 · Bar Codes"
-      },
-      {
-            "word": "scan",
-            "translation": "skanerlamoq",
-            "definition": "to read a code with a machine",
-            "example": "Studying 'scan' (to read a code with a machine) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 14 · 2-D Bar Codes"
-      },
-      {
             "word": "print",
             "translation": "chop etmoq",
             "definition": "to put text or images on paper",
             "example": "Studying 'print' (to put text or images on paper) helps in reading comprehension.",
             "partOfSpeech": "verb",
-            "topic": "Text 14 · 2-D Bar Codes"
-      },
-      {
-            "word": "significant",
-            "translation": "muhim",
-            "definition": "important; large enough to matter",
-            "example": "Studying 'significant' (important; large enough to matter) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
             "topic": "Text 14 · 2-D Bar Codes"
       },
       {
@@ -6882,46 +5914,6 @@ export const marketPacks = [
             "definition": "at once; without delay",
             "example": "Studying 'immediately' (at once; without delay) helps in reading comprehension.",
             "partOfSpeech": "adverb",
-            "topic": "Text 14 · 2-D Bar Codes"
-      },
-      {
-            "word": "appear",
-            "translation": "paydo bo'lmoq",
-            "definition": "to come into view; to become visible",
-            "example": "Studying 'appear' (to come into view; to become visible) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 14 · 2-D Bar Codes"
-      },
-      {
-            "word": "product",
-            "translation": "mahsulot",
-            "definition": "something that is made or grown",
-            "example": "Studying 'product' (something that is made or grown) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 14 · 2-D Bar Codes"
-      },
-      {
-            "word": "install",
-            "translation": "o'rnatmoq",
-            "definition": "to put equipment in place to use",
-            "example": "Studying 'install' (to put equipment in place to use) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 14 · 2-D Bar Codes"
-      },
-      {
-            "word": "scanner",
-            "translation": "skaner",
-            "definition": "a device that reads bar codes",
-            "example": "Studying 'scanner' (a device that reads bar codes) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 14 · 2-D Bar Codes"
-      },
-      {
-            "word": "link",
-            "translation": "bog'lamoq",
-            "definition": "to connect one thing to another",
-            "example": "Studying 'link' (to connect one thing to another) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 14 · 2-D Bar Codes"
       },
       {
@@ -6949,14 +5941,6 @@ export const marketPacks = [
             "topic": "Text 14 · 2-D Bar Codes"
       },
       {
-            "word": "pattern",
-            "translation": "naqsh, andoza",
-            "definition": "a regular arrangement of lines or shapes",
-            "example": "Studying 'pattern' (a regular arrangement of lines or shapes) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 14 · 2-D Bar Codes"
-      },
-      {
             "word": "direction",
             "translation": "yo'nalish",
             "definition": "the way something points or moves",
@@ -6973,27 +5957,11 @@ export const marketPacks = [
             "topic": "Text 14 · 2-D Bar Codes"
       },
       {
-            "word": "manufacturer",
-            "translation": "ishlab chiqaruvchi",
-            "definition": "a company that makes goods",
-            "example": "Studying 'manufacturer' (a company that makes goods) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 14 · 2-D Bar Codes"
-      },
-      {
             "word": "include",
             "translation": "o'z ichiga olmoq",
             "definition": "to contain as a part",
             "example": "Studying 'include' (to contain as a part) helps in reading comprehension.",
             "partOfSpeech": "verb",
-            "topic": "Text 14 · 2-D Bar Codes"
-      },
-      {
-            "word": "invention",
-            "translation": "ixtiro",
-            "definition": "a new device that is created",
-            "example": "Studying 'invention' (a new device that is created) helps in reading comprehension.",
-            "partOfSpeech": "noun",
             "topic": "Text 14 · 2-D Bar Codes"
       },
       {
@@ -7021,14 +5989,6 @@ export const marketPacks = [
             "topic": "Text 14 · 2-D Bar Codes"
       },
       {
-            "word": "vertical",
-            "translation": "vertikal",
-            "definition": "going straight up and down",
-            "example": "Studying 'vertical' (going straight up and down) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 14 · 2-D Bar Codes"
-      },
-      {
             "word": "horizontal",
             "translation": "gorizontal",
             "definition": "going across; level",
@@ -7053,22 +6013,6 @@ export const marketPacks = [
             "topic": "Text 14 · 2-D Bar Codes"
       },
       {
-            "word": "unique",
-            "translation": "noyob",
-            "definition": "being the only one of its kind",
-            "example": "Studying 'unique' (being the only one of its kind) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 14 · 2-D Bar Codes"
-      },
-      {
-            "word": "complex",
-            "translation": "murakkab",
-            "definition": "complicated; having many parts",
-            "example": "Studying 'complex' (complicated; having many parts) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 14 · 2-D Bar Codes"
-      },
-      {
             "word": "require",
             "translation": "talab qilmoq",
             "definition": "to need something",
@@ -7082,14 +6026,6 @@ export const marketPacks = [
             "definition": "having great strength or capacity",
             "example": "Studying 'powerful' (having great strength or capacity) helps in reading comprehension.",
             "partOfSpeech": "adjective",
-            "topic": "Text 14 · 2-D Bar Codes"
-      },
-      {
-            "word": "analyze",
-            "translation": "tahlil qilmoq",
-            "definition": "to examine in detail",
-            "example": "Studying 'analyze' (to examine in detail) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 14 · 2-D Bar Codes"
       },
       {
@@ -7117,14 +6053,6 @@ export const marketPacks = [
             "topic": "Text 14 · 2-D Bar Codes"
       },
       {
-            "word": "notice",
-            "translation": "sezmoq",
-            "definition": "to become aware of something",
-            "example": "Studying 'notice' (to become aware of something) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 14 · 2-D Bar Codes"
-      },
-      {
             "word": "video",
             "translation": "video",
             "definition": "a recording of moving images",
@@ -7146,14 +6074,6 @@ export const marketPacks = [
             "definition": "to join or fix to something",
             "example": "Studying 'attach' (to join or fix to something) helps in reading comprehension.",
             "partOfSpeech": "verb",
-            "topic": "Text 14 · 2-D Bar Codes"
-      },
-      {
-            "word": "tool",
-            "translation": "asbob",
-            "definition": "a device used to do work",
-            "example": "Studying 'tool' (a device used to do work) helps in reading comprehension.",
-            "partOfSpeech": "noun",
             "topic": "Text 14 · 2-D Bar Codes"
       },
       {
@@ -7189,14 +6109,6 @@ export const marketPacks = [
             "topic": "Text 15 · Museum Theft"
       },
       {
-            "word": "ancient",
-            "translation": "qadimiy",
-            "definition": "very old; from long ago",
-            "example": "Studying 'ancient' (very old; from long ago) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 15 · Museum Theft"
-      },
-      {
             "word": "artifact",
             "translation": "arxeologik topilma",
             "definition": "an old human-made object",
@@ -7213,26 +6125,10 @@ export const marketPacks = [
             "topic": "Text 15 · Museum Theft"
       },
       {
-            "word": "source",
-            "translation": "manba",
-            "definition": "the place something comes from",
-            "example": "Studying 'source' (the place something comes from) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 15 · Museum Theft"
-      },
-      {
             "word": "civilization",
             "translation": "tsivilizatsiya",
             "definition": "an advanced human society",
             "example": "Studying 'civilization' (an advanced human society) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 15 · Museum Theft"
-      },
-      {
-            "word": "culture",
-            "translation": "madaniyat",
-            "definition": "the customs and beliefs of a society",
-            "example": "Studying 'culture' (the customs and beliefs of a society) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 15 · Museum Theft"
       },
@@ -7245,14 +6141,6 @@ export const marketPacks = [
             "topic": "Text 15 · Museum Theft"
       },
       {
-            "word": "preserve",
-            "translation": "saqlab qolmoq",
-            "definition": "to keep safe and unchanged",
-            "example": "Studying 'preserve' (to keep safe and unchanged) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 15 · Museum Theft"
-      },
-      {
             "word": "collection",
             "translation": "to'plam",
             "definition": "a group of items gathered together",
@@ -7261,27 +6149,11 @@ export const marketPacks = [
             "topic": "Text 15 · Museum Theft"
       },
       {
-            "word": "valuable",
-            "translation": "qimmatbaho",
-            "definition": "worth a lot of money",
-            "example": "Studying 'valuable' (worth a lot of money) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 15 · Museum Theft"
-      },
-      {
             "word": "thief",
             "translation": "o'g'ri",
             "definition": "a person who steals",
             "example": "Studying 'thief' (a person who steals) helps in reading comprehension.",
             "partOfSpeech": "noun",
-            "topic": "Text 15 · Museum Theft"
-      },
-      {
-            "word": "unique",
-            "translation": "noyob",
-            "definition": "being the only one of its kind",
-            "example": "Studying 'unique' (being the only one of its kind) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
             "topic": "Text 15 · Museum Theft"
       },
       {
@@ -7298,14 +6170,6 @@ export const marketPacks = [
             "definition": "having a particular value",
             "example": "Studying 'worth' (having a particular value) helps in reading comprehension.",
             "partOfSpeech": "adjective",
-            "topic": "Text 15 · Museum Theft"
-      },
-      {
-            "word": "prevent",
-            "translation": "oldini olmoq",
-            "definition": "to stop something from happening",
-            "example": "Studying 'prevent' (to stop something from happening) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 15 · Museum Theft"
       },
       {
@@ -7357,14 +6221,6 @@ export const marketPacks = [
             "topic": "Text 15 · Museum Theft"
       },
       {
-            "word": "remove",
-            "translation": "olib tashlamoq",
-            "definition": "to take away",
-            "example": "Studying 'remove' (to take away) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 15 · Museum Theft"
-      },
-      {
             "word": "arrest",
             "translation": "hibsga olmoq",
             "definition": "to take into custody by police",
@@ -7386,14 +6242,6 @@ export const marketPacks = [
             "definition": "a condition affecting a situation",
             "example": "Studying 'circumstance' (a condition affecting a situation) helps in reading comprehension.",
             "partOfSpeech": "noun",
-            "topic": "Text 15 · Museum Theft"
-      },
-      {
-            "word": "hide",
-            "translation": "yashirmoq",
-            "definition": "to keep out of sight",
-            "example": "Studying 'hide' (to keep out of sight) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 15 · Museum Theft"
       },
       {
@@ -7501,35 +6349,11 @@ export const marketPacks = [
             "topic": "Text 16 · A Bold Thief"
       },
       {
-            "word": "evidence",
-            "translation": "dalil",
-            "definition": "facts showing what happened",
-            "example": "Studying 'evidence' (facts showing what happened) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 16 · A Bold Thief"
-      },
-      {
             "word": "fingerprint",
             "translation": "barmoq izi",
             "definition": "a mark made by a finger",
             "example": "Studying 'fingerprint' (a mark made by a finger) helps in reading comprehension.",
             "partOfSpeech": "noun",
-            "topic": "Text 16 · A Bold Thief"
-      },
-      {
-            "word": "match",
-            "translation": "mos kelmoq",
-            "definition": "to be the same as; to correspond",
-            "example": "Studying 'match' (to be the same as; to correspond) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 16 · A Bold Thief"
-      },
-      {
-            "word": "identify",
-            "translation": "aniqlamoq",
-            "definition": "to recognise or name someone",
-            "example": "Studying 'identify' (to recognise or name someone) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 16 · A Bold Thief"
       },
       {
@@ -7541,38 +6365,6 @@ export const marketPacks = [
             "topic": "Text 16 · A Bold Thief"
       },
       {
-            "word": "security",
-            "translation": "xavfsizlik",
-            "definition": "protection against danger or theft",
-            "example": "Studying 'security' (protection against danger or theft) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 16 · A Bold Thief"
-      },
-      {
-            "word": "commit",
-            "translation": "sodir etmoq",
-            "definition": "to carry out a crime",
-            "example": "Studying 'commit' (to carry out a crime) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 16 · A Bold Thief"
-      },
-      {
-            "word": "valuable",
-            "translation": "qimmatbaho",
-            "definition": "worth a lot of money",
-            "example": "Studying 'valuable' (worth a lot of money) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 16 · A Bold Thief"
-      },
-      {
-            "word": "steal",
-            "translation": "o'g'irlamoq",
-            "definition": "to take without permission",
-            "example": "Studying 'steal' (to take without permission) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 16 · A Bold Thief"
-      },
-      {
             "word": "stolen",
             "translation": "o'g'irlangan",
             "definition": "taken without permission",
@@ -7581,34 +6373,10 @@ export const marketPacks = [
             "topic": "Text 16 · A Bold Thief"
       },
       {
-            "word": "collection",
-            "translation": "to'plam",
-            "definition": "a group of items gathered together",
-            "example": "Studying 'collection' (a group of items gathered together) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 16 · A Bold Thief"
-      },
-      {
             "word": "initial",
             "translation": "dastlabki",
             "definition": "first; at the beginning",
             "example": "Studying 'initial' (first; at the beginning) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 16 · A Bold Thief"
-      },
-      {
-            "word": "theft",
-            "translation": "o'g'irlik",
-            "definition": "the act of stealing",
-            "example": "Studying 'theft' (the act of stealing) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 16 · A Bold Thief"
-      },
-      {
-            "word": "ancient",
-            "translation": "qadimiy",
-            "definition": "very old; from long ago",
-            "example": "Studying 'ancient' (very old; from long ago) helps in reading comprehension.",
             "partOfSpeech": "adjective",
             "topic": "Text 16 · A Bold Thief"
       },
@@ -7621,38 +6389,6 @@ export const marketPacks = [
             "topic": "Text 16 · A Bold Thief"
       },
       {
-            "word": "guard",
-            "translation": "qorovul",
-            "definition": "a person who protects a place",
-            "example": "Studying 'guard' (a person who protects a place) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 16 · A Bold Thief"
-      },
-      {
-            "word": "remove",
-            "translation": "olib tashlamoq",
-            "definition": "to take away",
-            "example": "Studying 'remove' (to take away) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 16 · A Bold Thief"
-      },
-      {
-            "word": "frame",
-            "translation": "ramka",
-            "definition": "a border around a picture",
-            "example": "Studying 'frame' (a border around a picture) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 16 · A Bold Thief"
-      },
-      {
-            "word": "hide",
-            "translation": "yashirmoq",
-            "definition": "to keep out of sight",
-            "example": "Studying 'hide' (to keep out of sight) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 16 · A Bold Thief"
-      },
-      {
             "word": "jacket",
             "translation": "kurtka",
             "definition": "a short coat",
@@ -7661,42 +6397,10 @@ export const marketPacks = [
             "topic": "Text 16 · A Bold Thief"
       },
       {
-            "word": "weapon",
-            "translation": "qurol",
-            "definition": "an object used to cause harm",
-            "example": "Studying 'weapon' (an object used to cause harm) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 16 · A Bold Thief"
-      },
-      {
             "word": "museum",
             "translation": "muzey",
             "definition": "a building displaying objects of value",
             "example": "Studying 'museum' (a building displaying objects of value) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 16 · A Bold Thief"
-      },
-      {
-            "word": "complex",
-            "translation": "murakkab",
-            "definition": "complicated; having many parts",
-            "example": "Studying 'complex' (complicated; having many parts) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 16 · A Bold Thief"
-      },
-      {
-            "word": "notice",
-            "translation": "sezmoq",
-            "definition": "to become aware of something",
-            "example": "Studying 'notice' (to become aware of something) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 16 · A Bold Thief"
-      },
-      {
-            "word": "display",
-            "translation": "namoyish",
-            "definition": "an arrangement of items to be seen",
-            "example": "Studying 'display' (an arrangement of items to be seen) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 16 · A Bold Thief"
       },
@@ -7725,30 +6429,6 @@ export const marketPacks = [
             "topic": "Text 16 · A Bold Thief"
       },
       {
-            "word": "arrest",
-            "translation": "hibsga olmoq",
-            "definition": "to take into custody by police",
-            "example": "Studying 'arrest' (to take into custody by police) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 16 · A Bold Thief"
-      },
-      {
-            "word": "reaction",
-            "translation": "reaksiya",
-            "definition": "a response to something",
-            "example": "Studying 'reaction' (a response to something) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 16 · A Bold Thief"
-      },
-      {
-            "word": "destroy",
-            "translation": "yo'q qilmoq",
-            "definition": "to damage so it no longer exists",
-            "example": "Studying 'destroy' (to damage so it no longer exists) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 16 · A Bold Thief"
-      },
-      {
             "word": "garbage",
             "translation": "axlat",
             "definition": "waste material; rubbish",
@@ -7757,26 +6437,10 @@ export const marketPacks = [
             "topic": "Text 16 · A Bold Thief"
       },
       {
-            "word": "sculpture",
-            "translation": "haykal",
-            "definition": "a work of art carved or shaped",
-            "example": "Studying 'sculpture' (a work of art carved or shaped) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 16 · A Bold Thief"
-      },
-      {
             "word": "toss",
             "translation": "uloqtirmoq",
             "definition": "to throw lightly or carelessly",
             "example": "Studying 'toss' (to throw lightly or carelessly) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 16 · A Bold Thief"
-      },
-      {
-            "word": "search",
-            "translation": "qidirmoq",
-            "definition": "to look carefully for something",
-            "example": "Studying 'search' (to look carefully for something) helps in reading comprehension.",
             "partOfSpeech": "verb",
             "topic": "Text 16 · A Bold Thief"
       },
@@ -7813,14 +6477,6 @@ export const marketPacks = [
             "topic": "Text 17 · Hydroponics"
       },
       {
-            "word": "soil",
-            "translation": "tuproq",
-            "definition": "the top layer of earth plants grow in",
-            "example": "Studying 'soil' (the top layer of earth plants grow in) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 17 · Hydroponics"
-      },
-      {
             "word": "principle",
             "translation": "printsip, asos",
             "definition": "a basic idea or rule",
@@ -7841,22 +6497,6 @@ export const marketPacks = [
             "translation": "mineral",
             "definition": "a natural substance in the earth",
             "example": "Studying 'mineral' (a natural substance in the earth) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 17 · Hydroponics"
-      },
-      {
-            "word": "require",
-            "translation": "talab qilmoq",
-            "definition": "to need something",
-            "example": "Studying 'require' (to need something) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 17 · Hydroponics"
-      },
-      {
-            "word": "root",
-            "translation": "ildiz",
-            "definition": "the underground part of a plant",
-            "example": "Studying 'root' (the underground part of a plant) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 17 · Hydroponics"
       },
@@ -7885,14 +6525,6 @@ export const marketPacks = [
             "topic": "Text 17 · Hydroponics"
       },
       {
-            "word": "provide",
-            "translation": "ta'minlamoq",
-            "definition": "to give or supply",
-            "example": "Studying 'provide' (to give or supply) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 17 · Hydroponics"
-      },
-      {
             "word": "naturally",
             "translation": "tabiiy ravishda",
             "definition": "in a normal or expected way",
@@ -7917,70 +6549,6 @@ export const marketPacks = [
             "topic": "Text 17 · Hydroponics"
       },
       {
-            "word": "vertical",
-            "translation": "vertikal",
-            "definition": "going straight up and down",
-            "example": "Studying 'vertical' (going straight up and down) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 17 · Hydroponics"
-      },
-      {
-            "word": "growth",
-            "translation": "o'sish",
-            "definition": "the process of increasing in size",
-            "example": "Studying 'growth' (the process of increasing in size) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 17 · Hydroponics"
-      },
-      {
-            "word": "pattern",
-            "translation": "qonuniyat, tartib",
-            "definition": "a regular way that something happens",
-            "example": "Studying 'pattern' (a regular way that something happens) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 17 · Hydroponics"
-      },
-      {
-            "word": "benefit",
-            "translation": "foyda",
-            "definition": "an advantage or helpful effect",
-            "example": "Studying 'benefit' (an advantage or helpful effect) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 17 · Hydroponics"
-      },
-      {
-            "word": "method",
-            "translation": "usul",
-            "definition": "a way of doing something",
-            "example": "Studying 'method' (a way of doing something) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 17 · Hydroponics"
-      },
-      {
-            "word": "depend on",
-            "translation": "bog'liq bo'lmoq",
-            "definition": "to be decided by",
-            "example": "Studying 'depend on' (to be decided by) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 17 · Hydroponics"
-      },
-      {
-            "word": "factor",
-            "translation": "omil",
-            "definition": "something that influences a result",
-            "example": "Studying 'factor' (something that influences a result) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 17 · Hydroponics"
-      },
-      {
-            "word": "vary",
-            "translation": "o'zgarmoq",
-            "definition": "to change; to be different",
-            "example": "Studying 'vary' (to change; to be different) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 17 · Hydroponics"
-      },
-      {
             "word": "type",
             "translation": "tur",
             "definition": "a kind or category",
@@ -7994,30 +6562,6 @@ export const marketPacks = [
             "definition": "a plant grown for food",
             "example": "Studying 'vegetable' (a plant grown for food) helps in reading comprehension.",
             "partOfSpeech": "noun",
-            "topic": "Text 17 · Hydroponics"
-      },
-      {
-            "word": "supply",
-            "translation": "ta'minlamoq",
-            "definition": "to provide what is needed",
-            "example": "Studying 'supply' (to provide what is needed) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 17 · Hydroponics"
-      },
-      {
-            "word": "fresh",
-            "translation": "yangi",
-            "definition": "newly produced; not stale",
-            "example": "Studying 'fresh' (newly produced; not stale) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 17 · Hydroponics"
-      },
-      {
-            "word": "in contrast",
-            "translation": "farqli o'laroq",
-            "definition": "showing a clear difference",
-            "example": "Studying 'in contrast' (showing a clear difference) helps in reading comprehension.",
-            "partOfSpeech": "adverb",
             "topic": "Text 17 · Hydroponics"
       },
       {
@@ -8069,14 +6613,6 @@ export const marketPacks = [
             "topic": "Text 17 · Hydroponics"
       },
       {
-            "word": "deliver",
-            "translation": "yetkazib bermoq",
-            "definition": "to bring or supply to a place",
-            "example": "Studying 'deliver' (to bring or supply to a place) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 17 · Hydroponics"
-      },
-      {
             "word": "tray",
             "translation": "laganda, patnis",
             "definition": "a flat container for holding things",
@@ -8125,22 +6661,6 @@ export const marketPacks = [
             "topic": "Text 17 · Hydroponics"
       },
       {
-            "word": "population",
-            "translation": "aholi",
-            "definition": "the number of people in a place",
-            "example": "Studying 'population' (the number of people in a place) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 18 · Farming in Many Places"
-      },
-      {
-            "word": "billion",
-            "translation": "milliard",
-            "definition": "the number one thousand million",
-            "example": "Studying 'billion' (the number one thousand million) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 18 · Farming in Many Places"
-      },
-      {
             "word": "expert",
             "translation": "mutaxassis",
             "definition": "a person with special knowledge",
@@ -8157,34 +6677,10 @@ export const marketPacks = [
             "topic": "Text 18 · Farming in Many Places"
       },
       {
-            "word": "strategy",
-            "translation": "strategiya",
-            "definition": "a plan to achieve a goal",
-            "example": "Studying 'strategy' (a plan to achieve a goal) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 18 · Farming in Many Places"
-      },
-      {
-            "word": "supply",
-            "translation": "zaxira, ta'minot",
-            "definition": "an amount available to use",
-            "example": "Studying 'supply' (an amount available to use) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 18 · Farming in Many Places"
-      },
-      {
             "word": "feed",
             "translation": "oziqlantirmoq",
             "definition": "to give food to",
             "example": "Studying 'feed' (to give food to) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 18 · Farming in Many Places"
-      },
-      {
-            "word": "maintain",
-            "translation": "qat'iy turmoq",
-            "definition": "to state firmly; to keep up",
-            "example": "Studying 'maintain' (to state firmly; to keep up) helps in reading comprehension.",
             "partOfSpeech": "verb",
             "topic": "Text 18 · Farming in Many Places"
       },
@@ -8213,51 +6709,11 @@ export const marketPacks = [
             "topic": "Text 18 · Farming in Many Places"
       },
       {
-            "word": "soil",
-            "translation": "tuproq",
-            "definition": "the top layer of earth plants grow in",
-            "example": "Studying 'soil' (the top layer of earth plants grow in) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 18 · Farming in Many Places"
-      },
-      {
-            "word": "occupy",
-            "translation": "egallamoq",
-            "definition": "to take up space or area",
-            "example": "Studying 'occupy' (to take up space or area) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 18 · Farming in Many Places"
-      },
-      {
-            "word": "technique",
-            "translation": "usul, texnika",
-            "definition": "a particular way of doing something",
-            "example": "Studying 'technique' (a particular way of doing something) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 18 · Farming in Many Places"
-      },
-      {
             "word": "various",
             "translation": "xilma-xil",
             "definition": "of several different kinds",
             "example": "Studying 'various' (of several different kinds) helps in reading comprehension.",
             "partOfSpeech": "adjective",
-            "topic": "Text 18 · Farming in Many Places"
-      },
-      {
-            "word": "benefit",
-            "translation": "foyda",
-            "definition": "an advantage or helpful effect",
-            "example": "Studying 'benefit' (an advantage or helpful effect) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 18 · Farming in Many Places"
-      },
-      {
-            "word": "greenhouse",
-            "translation": "issiqxona",
-            "definition": "a glass building for growing plants",
-            "example": "Studying 'greenhouse' (a glass building for growing plants) helps in reading comprehension.",
-            "partOfSpeech": "noun",
             "topic": "Text 18 · Farming in Many Places"
       },
       {
@@ -8285,22 +6741,6 @@ export const marketPacks = [
             "topic": "Text 18 · Farming in Many Places"
       },
       {
-            "word": "traditional",
-            "translation": "an'anaviy",
-            "definition": "based on long-established custom",
-            "example": "Studying 'traditional' (based on long-established custom) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 18 · Farming in Many Places"
-      },
-      {
-            "word": "require",
-            "translation": "talab qilmoq",
-            "definition": "to need something",
-            "example": "Studying 'require' (to need something) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 18 · Farming in Many Places"
-      },
-      {
             "word": "produce",
             "translation": "yetishtirmoq",
             "definition": "to make or grow something",
@@ -8313,14 +6753,6 @@ export const marketPacks = [
             "translation": "qayta ishlamoq",
             "definition": "to use again after processing",
             "example": "Studying 'recycle' (to use again after processing) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 18 · Farming in Many Places"
-      },
-      {
-            "word": "increase",
-            "translation": "oshmoq",
-            "definition": "to become greater in amount",
-            "example": "Studying 'increase' (to become greater in amount) helps in reading comprehension.",
             "partOfSpeech": "verb",
             "topic": "Text 18 · Farming in Many Places"
       },
@@ -8341,124 +6773,12 @@ export const marketPacks = [
             "topic": "Text 18 · Farming in Many Places"
       },
       {
-            "word": "nutrient",
-            "translation": "ozuqa moddasi",
-            "definition": "a substance that helps living things grow",
-            "example": "Studying 'nutrient' (a substance that helps living things grow) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 18 · Farming in Many Places"
-      },
-      {
-            "word": "absorb",
-            "translation": "shimib olmoq",
-            "definition": "to take in liquid or substances",
-            "example": "Studying 'absorb' (to take in liquid or substances) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 18 · Farming in Many Places"
-      },
-      {
-            "word": "principle",
-            "translation": "printsip",
-            "definition": "a basic idea or rule",
-            "example": "Studying 'principle' (a basic idea or rule) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 18 · Farming in Many Places"
-      },
-      {
-            "word": "equipment",
-            "translation": "jihoz",
-            "definition": "tools needed for an activity",
-            "example": "Studying 'equipment' (tools needed for an activity) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 18 · Farming in Many Places"
-      },
-      {
             "word": "achieve",
             "translation": "erishmoq",
             "definition": "to succeed in doing something",
             "example": "Studying 'achieve' (to succeed in doing something) helps in reading comprehension.",
             "partOfSpeech": "verb",
             "topic": "Text 18 · Farming in Many Places"
-      },
-      {
-            "word": "depend on",
-            "translation": "bog'liq bo'lmoq",
-            "definition": "to rely on for support",
-            "example": "Studying 'depend on' (to rely on for support) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 18 · Farming in Many Places"
-      },
-      {
-            "word": "transport",
-            "translation": "tashimoq",
-            "definition": "to carry from one place to another",
-            "example": "Studying 'transport' (to carry from one place to another) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 18 · Farming in Many Places"
-      },
-      {
-            "word": "distant",
-            "translation": "uzoq",
-            "definition": "far away",
-            "example": "Studying 'distant' (far away) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 18 · Farming in Many Places"
-      },
-      {
-            "word": "fresh",
-            "translation": "yangi",
-            "definition": "newly produced; not stale",
-            "example": "Studying 'fresh' (newly produced; not stale) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 18 · Farming in Many Places"
-      },
-      {
-            "word": "expensive",
-            "translation": "qimmat",
-            "definition": "costing a lot of money",
-            "example": "Studying 'expensive' (costing a lot of money) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 18 · Farming in Many Places"
-      },
-      {
-            "word": "vertical",
-            "translation": "vertikal",
-            "definition": "going straight up and down",
-            "example": "Studying 'vertical' (going straight up and down) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 18 · Farming in Many Places"
-      },
-      {
-            "word": "skyscraper",
-            "translation": "osmono'par bino",
-            "definition": "a very tall building",
-            "example": "Studying 'skyscraper' (a very tall building) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 18 · Farming in Many Places"
-      },
-      {
-            "word": "regulate",
-            "translation": "boshqarmoq",
-            "definition": "to control or manage",
-            "example": "Studying 'regulate' (to control or manage) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 18 · Farming in Many Places"
-      },
-      {
-            "word": "depend on",
-            "translation": "bog'liq bo'lmoq",
-            "definition": "to rely on for support",
-            "example": "Studying 'depend on' (to rely on for support) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 19 · Sun, Wind, and Water"
-      },
-      {
-            "word": "power",
-            "translation": "kuch, quvvat",
-            "definition": "strength or energy; force",
-            "example": "Studying 'power' (strength or energy; force) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 19 · Sun, Wind, and Water"
       },
       {
             "word": "nature",
@@ -8477,26 +6797,10 @@ export const marketPacks = [
             "topic": "Text 19 · Sun, Wind, and Water"
       },
       {
-            "word": "source",
-            "translation": "manba",
-            "definition": "the place something comes from",
-            "example": "Studying 'source' (the place something comes from) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 19 · Sun, Wind, and Water"
-      },
-      {
             "word": "obtain",
             "translation": "olmoq, erishmoq",
             "definition": "to get something",
             "example": "Studying 'obtain' (to get something) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 19 · Sun, Wind, and Water"
-      },
-      {
-            "word": "combine",
-            "translation": "birlashtirmoq",
-            "definition": "to join or mix together",
-            "example": "Studying 'combine' (to join or mix together) helps in reading comprehension.",
             "partOfSpeech": "verb",
             "topic": "Text 19 · Sun, Wind, and Water"
       },
@@ -8509,43 +6813,11 @@ export const marketPacks = [
             "topic": "Text 19 · Sun, Wind, and Water"
       },
       {
-            "word": "hunt",
-            "translation": "ov qilmoq",
-            "definition": "to chase and kill animals for food",
-            "example": "Studying 'hunt' (to chase and kill animals for food) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 19 · Sun, Wind, and Water"
-      },
-      {
-            "word": "seed",
-            "translation": "urug'",
-            "definition": "the part of a plant that grows new plants",
-            "example": "Studying 'seed' (the part of a plant that grows new plants) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 19 · Sun, Wind, and Water"
-      },
-      {
-            "word": "sail",
-            "translation": "yelkan",
-            "definition": "cloth that catches wind to move a boat",
-            "example": "Studying 'sail' (cloth that catches wind to move a boat) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 19 · Sun, Wind, and Water"
-      },
-      {
             "word": "bake",
             "translation": "qizdirib qurutmoq",
             "definition": "to make very hot and dry",
             "example": "Studying 'bake' (to make very hot and dry) helps in reading comprehension.",
             "partOfSpeech": "verb",
-            "topic": "Text 19 · Sun, Wind, and Water"
-      },
-      {
-            "word": "soil",
-            "translation": "tuproq",
-            "definition": "the top layer of earth",
-            "example": "Studying 'soil' (the top layer of earth) helps in reading comprehension.",
-            "partOfSpeech": "noun",
             "topic": "Text 19 · Sun, Wind, and Water"
       },
       {
@@ -8613,22 +6885,6 @@ export const marketPacks = [
             "topic": "Text 19 · Sun, Wind, and Water"
       },
       {
-            "word": "powerful",
-            "translation": "kuchli",
-            "definition": "having great strength or force",
-            "example": "Studying 'powerful' (having great strength or force) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 19 · Sun, Wind, and Water"
-      },
-      {
-            "word": "destroy",
-            "translation": "yo'q qilmoq",
-            "definition": "to damage so it no longer exists",
-            "example": "Studying 'destroy' (to damage so it no longer exists) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 19 · Sun, Wind, and Water"
-      },
-      {
             "word": "uproot",
             "translation": "ildizi bilan yulib olmoq",
             "definition": "to pull a plant out by the roots",
@@ -8645,27 +6901,11 @@ export const marketPacks = [
             "topic": "Text 19 · Sun, Wind, and Water"
       },
       {
-            "word": "machine",
-            "translation": "mashina",
-            "definition": "a device that does work",
-            "example": "Studying 'machine' (a device that does work) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 19 · Sun, Wind, and Water"
-      },
-      {
             "word": "fuel",
             "translation": "yoqilg'i",
             "definition": "material burned to produce energy",
             "example": "Studying 'fuel' (material burned to produce energy) helps in reading comprehension.",
             "partOfSpeech": "noun",
-            "topic": "Text 19 · Sun, Wind, and Water"
-      },
-      {
-            "word": "burn",
-            "translation": "yonmoq",
-            "definition": "to be on fire; to use as fuel",
-            "example": "Studying 'burn' (to be on fire; to use as fuel) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 19 · Sun, Wind, and Water"
       },
       {
@@ -8682,14 +6922,6 @@ export const marketPacks = [
             "definition": "a machine that produces power",
             "example": "Studying 'engine' (a machine that produces power) helps in reading comprehension.",
             "partOfSpeech": "noun",
-            "topic": "Text 19 · Sun, Wind, and Water"
-      },
-      {
-            "word": "produce",
-            "translation": "ishlab chiqarmoq",
-            "definition": "to make or generate",
-            "example": "Studying 'produce' (to make or generate) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 19 · Sun, Wind, and Water"
       },
       {
@@ -8725,14 +6957,6 @@ export const marketPacks = [
             "topic": "Text 19 · Sun, Wind, and Water"
       },
       {
-            "word": "climate",
-            "translation": "iqlim",
-            "definition": "the usual weather of an area",
-            "example": "Studying 'climate' (the usual weather of an area) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 19 · Sun, Wind, and Water"
-      },
-      {
             "word": "blame",
             "translation": "ayblamoq",
             "definition": "to say someone is responsible",
@@ -8765,67 +6989,11 @@ export const marketPacks = [
             "topic": "Text 19 · Sun, Wind, and Water"
       },
       {
-            "word": "renewable",
-            "translation": "qayta tiklanadigan",
-            "definition": "able to be replaced naturally",
-            "example": "Studying 'renewable' (able to be replaced naturally) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 20 · Using Renewable Energy Sources"
-      },
-      {
-            "word": "power",
-            "translation": "quvvatlantirmoq",
-            "definition": "to supply energy to operate",
-            "example": "Studying 'power' (to supply energy to operate) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 20 · Using Renewable Energy Sources"
-      },
-      {
-            "word": "burn",
-            "translation": "yoqmoq",
-            "definition": "to use as fuel; to be on fire",
-            "example": "Studying 'burn' (to use as fuel; to be on fire) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 20 · Using Renewable Energy Sources"
-      },
-      {
-            "word": "fuel",
-            "translation": "yoqilg'i",
-            "definition": "material burned to produce energy",
-            "example": "Studying 'fuel' (material burned to produce energy) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 20 · Using Renewable Energy Sources"
-      },
-      {
-            "word": "electricity",
-            "translation": "elektr energiyasi",
-            "definition": "energy used to power devices",
-            "example": "Studying 'electricity' (energy used to power devices) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 20 · Using Renewable Energy Sources"
-      },
-      {
             "word": "natural",
             "translation": "tabiiy",
             "definition": "existing in or produced by nature",
             "example": "Studying 'natural' (existing in or produced by nature) helps in reading comprehension.",
             "partOfSpeech": "adjective",
-            "topic": "Text 20 · Using Renewable Energy Sources"
-      },
-      {
-            "word": "force",
-            "translation": "kuch",
-            "definition": "physical power or strength",
-            "example": "Studying 'force' (physical power or strength) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 20 · Using Renewable Energy Sources"
-      },
-      {
-            "word": "source",
-            "translation": "manba",
-            "definition": "the place something comes from",
-            "example": "Studying 'source' (the place something comes from) helps in reading comprehension.",
-            "partOfSpeech": "noun",
             "topic": "Text 20 · Using Renewable Energy Sources"
       },
       {
@@ -8845,83 +7013,11 @@ export const marketPacks = [
             "topic": "Text 20 · Using Renewable Energy Sources"
       },
       {
-            "word": "available",
-            "translation": "mavjud",
-            "definition": "able to be obtained or used",
-            "example": "Studying 'available' (able to be obtained or used) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 20 · Using Renewable Energy Sources"
-      },
-      {
-            "word": "wave",
-            "translation": "to'lqin",
-            "definition": "a moving ridge of water",
-            "example": "Studying 'wave' (a moving ridge of water) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 20 · Using Renewable Energy Sources"
-      },
-      {
-            "word": "approach",
-            "translation": "yaqinlashmoq",
-            "definition": "to come near to",
-            "example": "Studying 'approach' (to come near to) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 20 · Using Renewable Energy Sources"
-      },
-      {
-            "word": "engineer",
-            "translation": "muhandis",
-            "definition": "a person who designs machines or structures",
-            "example": "Studying 'engineer' (a person who designs machines or structures) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 20 · Using Renewable Energy Sources"
-      },
-      {
-            "word": "potential",
-            "translation": "imkoniyat",
-            "definition": "the possibility to develop or succeed",
-            "example": "Studying 'potential' (the possibility to develop or succeed) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 20 · Using Renewable Energy Sources"
-      },
-      {
-            "word": "develop",
-            "translation": "rivojlantirmoq",
-            "definition": "to create or improve gradually",
-            "example": "Studying 'develop' (to create or improve gradually) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 20 · Using Renewable Energy Sources"
-      },
-      {
-            "word": "technology",
-            "translation": "texnologiya",
-            "definition": "scientific tools and methods",
-            "example": "Studying 'technology' (scientific tools and methods) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 20 · Using Renewable Energy Sources"
-      },
-      {
-            "word": "secure",
-            "translation": "mahkamlamoq",
-            "definition": "to fix firmly in place",
-            "example": "Studying 'secure' (to fix firmly in place) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 20 · Using Renewable Energy Sources"
-      },
-      {
             "word": "floor",
             "translation": "tag qism, tub",
             "definition": "the bottom surface; the seabed",
             "example": "Studying 'floor' (the bottom surface; the seabed) helps in reading comprehension.",
             "partOfSpeech": "noun",
-            "topic": "Text 20 · Using Renewable Energy Sources"
-      },
-      {
-            "word": "connect",
-            "translation": "ulamoq",
-            "definition": "to join together",
-            "example": "Studying 'connect' (to join together) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 20 · Using Renewable Energy Sources"
       },
       {
@@ -8965,14 +7061,6 @@ export const marketPacks = [
             "topic": "Text 20 · Using Renewable Energy Sources"
       },
       {
-            "word": "estimate",
-            "translation": "taxmin qilmoq",
-            "definition": "to make an approximate judgement",
-            "example": "Studying 'estimate' (to make an approximate judgement) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 20 · Using Renewable Energy Sources"
-      },
-      {
             "word": "coast",
             "translation": "qirg'oq",
             "definition": "land along the edge of the sea",
@@ -8994,14 +7082,6 @@ export const marketPacks = [
             "definition": "continuous and regular",
             "example": "Studying 'steady' (continuous and regular) helps in reading comprehension.",
             "partOfSpeech": "adjective",
-            "topic": "Text 20 · Using Renewable Energy Sources"
-      },
-      {
-            "word": "collect",
-            "translation": "to'plamoq",
-            "definition": "to gather together",
-            "example": "Studying 'collect' (to gather together) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 20 · Using Renewable Energy Sources"
       },
       {
@@ -9061,14 +7141,6 @@ export const marketPacks = [
             "topic": "Text 20 · Using Renewable Energy Sources"
       },
       {
-            "word": "benefit",
-            "translation": "foyda keltirmoq",
-            "definition": "to help or be useful to",
-            "example": "Studying 'benefit' (to help or be useful to) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 20 · Using Renewable Energy Sources"
-      },
-      {
             "word": "complain",
             "translation": "shikoyat qilmoq",
             "definition": "to express dissatisfaction",
@@ -9093,22 +7165,6 @@ export const marketPacks = [
             "topic": "Text 21 · The History of the Pencil"
       },
       {
-            "word": "material",
-            "translation": "material",
-            "definition": "the substance something is made of",
-            "example": "Studying 'material' (the substance something is made of) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 21 · The History of the Pencil"
-      },
-      {
-            "word": "discover",
-            "translation": "kashf qilmoq",
-            "definition": "to find something for the first time",
-            "example": "Studying 'discover' (to find something for the first time) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 21 · The History of the Pencil"
-      },
-      {
             "word": "lightning",
             "translation": "chaqmoq",
             "definition": "a flash of electricity in the sky",
@@ -9129,22 +7185,6 @@ export const marketPacks = [
             "translation": "modda",
             "definition": "a particular kind of matter",
             "example": "Studying 'substance' (a particular kind of matter) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 21 · The History of the Pencil"
-      },
-      {
-            "word": "root",
-            "translation": "ildiz",
-            "definition": "the underground part of a plant",
-            "example": "Studying 'root' (the underground part of a plant) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 21 · The History of the Pencil"
-      },
-      {
-            "word": "mark",
-            "translation": "belgi",
-            "definition": "a small visible sign left on a surface",
-            "example": "Studying 'mark' (a small visible sign left on a surface) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 21 · The History of the Pencil"
       },
@@ -9197,14 +7237,6 @@ export const marketPacks = [
             "topic": "Text 21 · The History of the Pencil"
       },
       {
-            "word": "require",
-            "translation": "talab qilmoq",
-            "definition": "to need something",
-            "example": "Studying 'require' (to need something) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 21 · The History of the Pencil"
-      },
-      {
             "word": "wrap",
             "translation": "o'rab qo'ymoq",
             "definition": "to cover by folding material around",
@@ -9253,14 +7285,6 @@ export const marketPacks = [
             "topic": "Text 21 · The History of the Pencil"
       },
       {
-            "word": "technique",
-            "translation": "usul",
-            "definition": "a particular way of doing something",
-            "example": "Studying 'technique' (a particular way of doing something) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 21 · The History of the Pencil"
-      },
-      {
             "word": "carve",
             "translation": "o'ymoq",
             "definition": "to cut into a shape",
@@ -9285,26 +7309,10 @@ export const marketPacks = [
             "topic": "Text 21 · The History of the Pencil"
       },
       {
-            "word": "spread",
-            "translation": "tarqalmoq",
-            "definition": "to reach more places",
-            "example": "Studying 'spread' (to reach more places) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 21 · The History of the Pencil"
-      },
-      {
             "word": "core",
             "translation": "yadro, markaz",
             "definition": "the central part of something",
             "example": "Studying 'core' (the central part of something) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 21 · The History of the Pencil"
-      },
-      {
-            "word": "mixture",
-            "translation": "aralashma",
-            "definition": "a combination of substances",
-            "example": "Studying 'mixture' (a combination of substances) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 21 · The History of the Pencil"
       },
@@ -9341,35 +7349,11 @@ export const marketPacks = [
             "topic": "Text 21 · The History of the Pencil"
       },
       {
-            "word": "production",
-            "translation": "ishlab chiqarish",
-            "definition": "the making of goods in large amounts",
-            "example": "Studying 'production' (the making of goods in large amounts) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 21 · The History of the Pencil"
-      },
-      {
             "word": "demand",
             "translation": "talab",
             "definition": "the desire of buyers for goods",
             "example": "Studying 'demand' (the desire of buyers for goods) helps in reading comprehension.",
             "partOfSpeech": "noun",
-            "topic": "Text 21 · The History of the Pencil"
-      },
-      {
-            "word": "government",
-            "translation": "hukumat",
-            "definition": "the group that rules a country",
-            "example": "Studying 'government' (the group that rules a country) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 21 · The History of the Pencil"
-      },
-      {
-            "word": "guard",
-            "translation": "qo'riqlamoq",
-            "definition": "to protect or watch over",
-            "example": "Studying 'guard' (to protect or watch over) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 21 · The History of the Pencil"
       },
       {
@@ -9385,14 +7369,6 @@ export const marketPacks = [
             "translation": "jazolanadigan",
             "definition": "deserving of punishment",
             "example": "Studying 'punishable' (deserving of punishment) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 21 · The History of the Pencil"
-      },
-      {
-            "word": "mechanical",
-            "translation": "mexanik",
-            "definition": "operated by a machine",
-            "example": "Studying 'mechanical' (operated by a machine) helps in reading comprehension.",
             "partOfSpeech": "adjective",
             "topic": "Text 21 · The History of the Pencil"
       },
@@ -9517,14 +7493,6 @@ export const marketPacks = [
             "topic": "Text 22 · The History of Tea"
       },
       {
-            "word": "spread",
-            "translation": "tarqalmoq",
-            "definition": "to reach more places",
-            "example": "Studying 'spread' (to reach more places) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 22 · The History of Tea"
-      },
-      {
             "word": "lag behind",
             "translation": "orqada qolmoq",
             "definition": "to fail to keep up; to fall behind",
@@ -9557,26 +7525,10 @@ export const marketPacks = [
             "topic": "Text 22 · The History of Tea"
       },
       {
-            "word": "commercial",
-            "translation": "tijorat",
-            "definition": "relating to business and trade",
-            "example": "Studying 'commercial' (relating to business and trade) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 22 · The History of Tea"
-      },
-      {
             "word": "import",
             "translation": "import qilmoq",
             "definition": "goods brought into a country",
             "example": "Studying 'import' (goods brought into a country) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 22 · The History of Tea"
-      },
-      {
-            "word": "ship",
-            "translation": "kemada jo'natmoq",
-            "definition": "to send goods, especially by sea",
-            "example": "Studying 'ship' (to send goods, especially by sea) helps in reading comprehension.",
             "partOfSpeech": "verb",
             "topic": "Text 22 · The History of Tea"
       },
@@ -9621,34 +7573,10 @@ export const marketPacks = [
             "topic": "Text 22 · The History of Tea"
       },
       {
-            "word": "expensive",
-            "translation": "qimmat",
-            "definition": "costing a lot of money",
-            "example": "Studying 'expensive' (costing a lot of money) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 22 · The History of Tea"
-      },
-      {
-            "word": "widespread",
-            "translation": "keng tarqalgan",
-            "definition": "found or happening in many places",
-            "example": "Studying 'widespread' (found or happening in many places) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 22 · The History of Tea"
-      },
-      {
             "word": "taxation",
             "translation": "soliqqa tortish",
             "definition": "the system of charging taxes",
             "example": "Studying 'taxation' (the system of charging taxes) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 22 · The History of Tea"
-      },
-      {
-            "word": "consequence",
-            "translation": "oqibat",
-            "definition": "a result of an action",
-            "example": "Studying 'consequence' (a result of an action) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 22 · The History of Tea"
       },
@@ -9749,14 +7677,6 @@ export const marketPacks = [
             "topic": "Text 23 · A Brief History of Humans and Food"
       },
       {
-            "word": "discovery",
-            "translation": "kashfiyot",
-            "definition": "the act of finding something new",
-            "example": "Studying 'discovery' (the act of finding something new) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 23 · A Brief History of Humans and Food"
-      },
-      {
             "word": "emergence",
             "translation": "paydo bo'lish",
             "definition": "the process of appearing or arising",
@@ -9770,22 +7690,6 @@ export const marketPacks = [
             "definition": "the practice of farming",
             "example": "Studying 'agriculture' (the practice of farming) helps in reading comprehension.",
             "partOfSpeech": "noun",
-            "topic": "Text 23 · A Brief History of Humans and Food"
-      },
-      {
-            "word": "preserve",
-            "translation": "saqlamoq",
-            "definition": "to keep food safe from decay",
-            "example": "Studying 'preserve' (to keep food safe from decay) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 23 · A Brief History of Humans and Food"
-      },
-      {
-            "word": "raw",
-            "translation": "xom",
-            "definition": "not cooked",
-            "example": "Studying 'raw' (not cooked) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
             "topic": "Text 23 · A Brief History of Humans and Food"
       },
       {
@@ -9805,14 +7709,6 @@ export const marketPacks = [
             "topic": "Text 23 · A Brief History of Humans and Food"
       },
       {
-            "word": "destroy",
-            "translation": "yo'q qilmoq",
-            "definition": "to put an end to; to eliminate",
-            "example": "Studying 'destroy' (to put an end to; to eliminate) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 23 · A Brief History of Humans and Food"
-      },
-      {
             "word": "toxic",
             "translation": "zaharli",
             "definition": "poisonous; harmful",
@@ -9821,34 +7717,10 @@ export const marketPacks = [
             "topic": "Text 23 · A Brief History of Humans and Food"
       },
       {
-            "word": "chemical",
-            "translation": "kimyoviy modda",
-            "definition": "a substance used in chemistry",
-            "example": "Studying 'chemical' (a substance used in chemistry) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 23 · A Brief History of Humans and Food"
-      },
-      {
             "word": "manufacture",
             "translation": "ishlab chiqarmoq",
             "definition": "to make or produce",
             "example": "Studying 'manufacture' (to make or produce) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 23 · A Brief History of Humans and Food"
-      },
-      {
-            "word": "protect",
-            "translation": "himoya qilmoq",
-            "definition": "to keep safe from harm",
-            "example": "Studying 'protect' (to keep safe from harm) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 23 · A Brief History of Humans and Food"
-      },
-      {
-            "word": "consume",
-            "translation": "iste'mol qilmoq",
-            "definition": "to eat or use up",
-            "example": "Studying 'consume' (to eat or use up) helps in reading comprehension.",
             "partOfSpeech": "verb",
             "topic": "Text 23 · A Brief History of Humans and Food"
       },
@@ -9877,26 +7749,10 @@ export const marketPacks = [
             "topic": "Text 23 · A Brief History of Humans and Food"
       },
       {
-            "word": "energy",
-            "translation": "energiya",
-            "definition": "the power to do work",
-            "example": "Studying 'energy' (the power to do work) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 23 · A Brief History of Humans and Food"
-      },
-      {
             "word": "expend",
             "translation": "sarflamoq",
             "definition": "to use up or spend",
             "example": "Studying 'expend' (to use up or spend) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 23 · A Brief History of Humans and Food"
-      },
-      {
-            "word": "replace",
-            "translation": "almashtirmoq",
-            "definition": "to take the place of something",
-            "example": "Studying 'replace' (to take the place of something) helps in reading comprehension.",
             "partOfSpeech": "verb",
             "topic": "Text 23 · A Brief History of Humans and Food"
       },
@@ -9917,14 +7773,6 @@ export const marketPacks = [
             "topic": "Text 23 · A Brief History of Humans and Food"
       },
       {
-            "word": "population",
-            "translation": "aholi",
-            "definition": "the number of people in a place",
-            "example": "Studying 'population' (the number of people in a place) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 23 · A Brief History of Humans and Food"
-      },
-      {
             "word": "specialisation",
             "translation": "ixtisoslashuv",
             "definition": "focusing on one particular task",
@@ -9933,26 +7781,10 @@ export const marketPacks = [
             "topic": "Text 23 · A Brief History of Humans and Food"
       },
       {
-            "word": "maintain",
-            "translation": "saqlab turmoq",
-            "definition": "to keep up; to continue",
-            "example": "Studying 'maintain' (to keep up; to continue) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 23 · A Brief History of Humans and Food"
-      },
-      {
             "word": "record",
             "translation": "yozib qo'ymoq",
             "definition": "written information kept for use",
             "example": "Studying 'record' (written information kept for use) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 23 · A Brief History of Humans and Food"
-      },
-      {
-            "word": "establish",
-            "translation": "joriy etmoq",
-            "definition": "to set up firmly",
-            "example": "Studying 'establish' (to set up firmly) helps in reading comprehension.",
             "partOfSpeech": "verb",
             "topic": "Text 23 · A Brief History of Humans and Food"
       },
@@ -9997,14 +7829,6 @@ export const marketPacks = [
             "topic": "Text 23 · A Brief History of Humans and Food"
       },
       {
-            "word": "seal",
-            "translation": "berkitmoq",
-            "definition": "to close tightly",
-            "example": "Studying 'seal' (to close tightly) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 23 · A Brief History of Humans and Food"
-      },
-      {
             "word": "fabricate",
             "translation": "tayyorlamoq",
             "definition": "to make or manufacture",
@@ -10037,14 +7861,6 @@ export const marketPacks = [
             "topic": "Text 23 · A Brief History of Humans and Food"
       },
       {
-            "word": "observe",
-            "translation": "kuzatmoq",
-            "definition": "to notice or watch carefully",
-            "example": "Studying 'observe' (to notice or watch carefully) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 23 · A Brief History of Humans and Food"
-      },
-      {
             "word": "appearance",
             "translation": "ko'rinish",
             "definition": "the way something looks",
@@ -10061,35 +7877,11 @@ export const marketPacks = [
             "topic": "Text 24 · The History of the Poster"
       },
       {
-            "word": "commercial",
-            "translation": "tijorat",
-            "definition": "relating to business and trade",
-            "example": "Studying 'commercial' (relating to business and trade) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 24 · The History of the Poster"
-      },
-      {
             "word": "announcement",
             "translation": "e'lon",
             "definition": "a public statement of news",
             "example": "Studying 'announcement' (a public statement of news) helps in reading comprehension.",
             "partOfSpeech": "noun",
-            "topic": "Text 24 · The History of the Poster"
-      },
-      {
-            "word": "type",
-            "translation": "shrift, harflar",
-            "definition": "printed letters; printing blocks",
-            "example": "Studying 'type' (printed letters; printing blocks) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 24 · The History of the Poster"
-      },
-      {
-            "word": "produce",
-            "translation": "ishlab chiqarmoq",
-            "definition": "to make or manufacture",
-            "example": "Studying 'produce' (to make or manufacture) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 24 · The History of the Poster"
       },
       {
@@ -10129,14 +7921,6 @@ export const marketPacks = [
             "translation": "saqlash",
             "definition": "the keeping of things for later",
             "example": "Studying 'storage' (the keeping of things for later) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 24 · The History of the Poster"
-      },
-      {
-            "word": "demand",
-            "translation": "talab",
-            "definition": "the desire of buyers for goods",
-            "example": "Studying 'demand' (the desire of buyers for goods) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 24 · The History of the Poster"
       },
@@ -10181,14 +7965,6 @@ export const marketPacks = [
             "topic": "Text 24 · The History of the Poster"
       },
       {
-            "word": "lack",
-            "translation": "yetishmaslik",
-            "definition": "to be without something",
-            "example": "Studying 'lack' (to be without something) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 24 · The History of the Poster"
-      },
-      {
             "word": "lithography",
             "translation": "litografiya",
             "definition": "a printing method using stone",
@@ -10221,26 +7997,10 @@ export const marketPacks = [
             "topic": "Text 24 · The History of the Poster"
       },
       {
-            "word": "transfer",
-            "translation": "ko'chirmoq",
-            "definition": "to move from one place to another",
-            "example": "Studying 'transfer' (to move from one place to another) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 24 · The History of the Poster"
-      },
-      {
             "word": "reverse",
             "translation": "teskari tomon",
             "definition": "the opposite direction or order",
             "example": "Studying 'reverse' (the opposite direction or order) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 24 · The History of the Poster"
-      },
-      {
-            "word": "technique",
-            "translation": "usul",
-            "definition": "a particular way of doing something",
-            "example": "Studying 'technique' (a particular way of doing something) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 24 · The History of the Poster"
       },
@@ -10258,14 +8018,6 @@ export const marketPacks = [
             "definition": "very noticeable; impressive",
             "example": "Studying 'striking' (very noticeable; impressive) helps in reading comprehension.",
             "partOfSpeech": "adjective",
-            "topic": "Text 24 · The History of the Poster"
-      },
-      {
-            "word": "combine",
-            "translation": "birlashtirmoq",
-            "definition": "to join or mix together",
-            "example": "Studying 'combine' (to join or mix together) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 24 · The History of the Poster"
       },
       {
@@ -10365,22 +8117,6 @@ export const marketPacks = [
             "topic": "Text 24 · The History of the Poster"
       },
       {
-            "word": "origin",
-            "translation": "kelib chiqishi",
-            "definition": "the point where something begins",
-            "example": "Studying 'origin' (the point where something begins) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 25 · The History of Glass"
-      },
-      {
-            "word": "natural",
-            "translation": "tabiiy",
-            "definition": "existing in or formed by nature",
-            "example": "Studying 'natural' (existing in or formed by nature) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 25 · The History of Glass"
-      },
-      {
             "word": "obsidian",
             "translation": "obsidian",
             "definition": "a natural glass from volcanoes",
@@ -10413,14 +8149,6 @@ export const marketPacks = [
             "topic": "Text 25 · The History of Glass"
       },
       {
-            "word": "melt",
-            "translation": "eritmoq",
-            "definition": "to turn solid to liquid with heat",
-            "example": "Studying 'melt' (to turn solid to liquid with heat) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 25 · The History of Glass"
-      },
-      {
             "word": "tip",
             "translation": "uchi",
             "definition": "the pointed end of something",
@@ -10433,14 +8161,6 @@ export const marketPacks = [
             "translation": "nayza",
             "definition": "a long weapon with a sharp point",
             "example": "Studying 'spear' (a long weapon with a sharp point) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 25 · The History of Glass"
-      },
-      {
-            "word": "evidence",
-            "translation": "dalil",
-            "definition": "facts showing what is true",
-            "example": "Studying 'evidence' (facts showing what is true) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 25 · The History of Glass"
       },
@@ -10469,22 +8189,6 @@ export const marketPacks = [
             "topic": "Text 25 · The History of Glass"
       },
       {
-            "word": "hollow",
-            "translation": "ichi bo'sh",
-            "definition": "having an empty space inside",
-            "example": "Studying 'hollow' (having an empty space inside) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 25 · The History of Glass"
-      },
-      {
-            "word": "container",
-            "translation": "idish",
-            "definition": "an object used to hold things",
-            "example": "Studying 'container' (an object used to hold things) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 25 · The History of Glass"
-      },
-      {
             "word": "molten",
             "translation": "eritilgan",
             "definition": "melted by heat",
@@ -10501,26 +8205,10 @@ export const marketPacks = [
             "topic": "Text 25 · The History of Glass"
       },
       {
-            "word": "raw",
-            "translation": "qayta ishlanmagan",
-            "definition": "in a natural state; not processed",
-            "example": "Studying 'raw' (in a natural state; not processed) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 25 · The History of Glass"
-      },
-      {
             "word": "tint",
             "translation": "bo'yamoq",
             "definition": "to colour slightly",
             "example": "Studying 'tint' (to colour slightly) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 25 · The History of Glass"
-      },
-      {
-            "word": "guard",
-            "translation": "saqlamoq",
-            "definition": "to protect or keep secret",
-            "example": "Studying 'guard' (to protect or keep secret) helps in reading comprehension.",
             "partOfSpeech": "verb",
             "topic": "Text 25 · The History of Glass"
       },
@@ -10541,14 +8229,6 @@ export const marketPacks = [
             "topic": "Text 25 · The History of Glass"
       },
       {
-            "word": "widespread",
-            "translation": "keng tarqalgan",
-            "definition": "found or happening in many places",
-            "example": "Studying 'widespread' (found or happening in many places) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 25 · The History of Glass"
-      },
-      {
             "word": "reputation",
             "translation": "obro'",
             "definition": "the opinion people have of someone",
@@ -10557,34 +8237,10 @@ export const marketPacks = [
             "topic": "Text 25 · The History of Glass"
       },
       {
-            "word": "craftsman",
-            "translation": "hunarmand",
-            "definition": "a skilled maker of things",
-            "example": "Studying 'craftsman' (a skilled maker of things) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 25 · The History of Glass"
-      },
-      {
             "word": "milestone",
             "translation": "muhim bosqich",
             "definition": "an important stage or event",
             "example": "Studying 'milestone' (an important stage or event) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 25 · The History of Glass"
-      },
-      {
-            "word": "invention",
-            "translation": "ixtiro",
-            "definition": "a new device that is created",
-            "example": "Studying 'invention' (a new device that is created) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 25 · The History of Glass"
-      },
-      {
-            "word": "manufacturer",
-            "translation": "ishlab chiqaruvchi",
-            "definition": "a company that makes goods",
-            "example": "Studying 'manufacturer' (a company that makes goods) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 25 · The History of Glass"
       },
@@ -10661,27 +8317,11 @@ export const marketPacks = [
             "topic": "Text 25 · The History of Glass"
       },
       {
-            "word": "install",
-            "translation": "o'rnatmoq",
-            "definition": "to put equipment in place to use",
-            "example": "Studying 'install' (to put equipment in place to use) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 25 · The History of Glass"
-      },
-      {
             "word": "competitive",
             "translation": "raqobatbardosh",
             "definition": "involving strong rivalry",
             "example": "Studying 'competitive' (involving strong rivalry) helps in reading comprehension.",
             "partOfSpeech": "adjective",
-            "topic": "Text 25 · The History of Glass"
-      },
-      {
-            "word": "recycle",
-            "translation": "qayta ishlamoq",
-            "definition": "to process used items for reuse",
-            "example": "Studying 'recycle' (to process used items for reuse) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 25 · The History of Glass"
       },
       {
@@ -10701,35 +8341,11 @@ export const marketPacks = [
             "topic": "Text 26 · The History of the Picnic"
       },
       {
-            "word": "initially",
-            "translation": "dastlab",
-            "definition": "at the beginning; at first",
-            "example": "Studying 'initially' (at the beginning; at first) helps in reading comprehension.",
-            "partOfSpeech": "adverb",
-            "topic": "Text 26 · The History of the Picnic"
-      },
-      {
             "word": "indoor",
             "translation": "xona ichidagi",
             "definition": "happening inside a building",
             "example": "Studying 'indoor' (happening inside a building) helps in reading comprehension.",
             "partOfSpeech": "adjective",
-            "topic": "Text 26 · The History of the Picnic"
-      },
-      {
-            "word": "hire",
-            "translation": "ijaraga olmoq",
-            "definition": "to rent for temporary use",
-            "example": "Studying 'hire' (to rent for temporary use) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 26 · The History of the Picnic"
-      },
-      {
-            "word": "assume",
-            "translation": "taxmin qilmoq",
-            "definition": "to suppose to be true",
-            "example": "Studying 'assume' (to suppose to be true) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 26 · The History of the Picnic"
       },
       {
@@ -10805,30 +8421,6 @@ export const marketPacks = [
             "topic": "Text 26 · The History of the Picnic"
       },
       {
-            "word": "wealthy",
-            "translation": "boy",
-            "definition": "having a lot of money; rich",
-            "example": "Studying 'wealthy' (having a lot of money; rich) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 26 · The History of the Picnic"
-      },
-      {
-            "word": "maintain",
-            "translation": "davom ettirmoq",
-            "definition": "to keep up; to continue",
-            "example": "Studying 'maintain' (to keep up; to continue) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 26 · The History of the Picnic"
-      },
-      {
-            "word": "introduce",
-            "translation": "kiritmoq",
-            "definition": "to bring in for the first time",
-            "example": "Studying 'introduce' (to bring in for the first time) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 26 · The History of the Picnic"
-      },
-      {
             "word": "refined",
             "translation": "nafis, madaniyatli",
             "definition": "elegant and cultured",
@@ -10841,14 +8433,6 @@ export const marketPacks = [
             "translation": "asos solmoq",
             "definition": "to establish or start",
             "example": "Studying 'found' (to establish or start) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 26 · The History of the Picnic"
-      },
-      {
-            "word": "require",
-            "translation": "talab qilmoq",
-            "definition": "to need or demand",
-            "example": "Studying 'require' (to need or demand) helps in reading comprehension.",
             "partOfSpeech": "verb",
             "topic": "Text 26 · The History of the Picnic"
       },
@@ -10901,14 +8485,6 @@ export const marketPacks = [
             "topic": "Text 26 · The History of the Picnic"
       },
       {
-            "word": "fashionable",
-            "translation": "moda",
-            "definition": "popular at a particular time",
-            "example": "Studying 'fashionable' (popular at a particular time) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 26 · The History of the Picnic"
-      },
-      {
             "word": "cease",
             "translation": "to'xtamoq",
             "definition": "to stop happening",
@@ -10949,14 +8525,6 @@ export const marketPacks = [
             "topic": "Text 26 · The History of the Picnic"
       },
       {
-            "word": "civilization",
-            "translation": "tsivilizatsiya",
-            "definition": "an advanced human society",
-            "example": "Studying 'civilization' (an advanced human society) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 26 · The History of the Picnic"
-      },
-      {
             "word": "restoration",
             "translation": "tiklash",
             "definition": "bringing back to a former state",
@@ -10989,28 +8557,12 @@ export const marketPacks = [
             "topic": "Text 26 · The History of the Picnic"
       },
       {
-            "word": "transport",
-            "translation": "transport",
-            "definition": "a means of moving people or goods",
-            "example": "Studying 'transport' (a means of moving people or goods) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 26 · The History of the Picnic"
-      },
-      {
             "word": "accessible",
             "translation": "qulay, yetib bo'ladigan",
             "definition": "able to be reached easily",
             "example": "Studying 'accessible' (able to be reached easily) helps in reading comprehension.",
             "partOfSpeech": "adjective",
             "topic": "Text 26 · The History of the Picnic"
-      },
-      {
-            "word": "invent",
-            "translation": "ixtiro qilmoq",
-            "definition": "to create something new",
-            "example": "Studying 'invent' (to create something new) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 27 · The History of Bicycles"
       },
       {
             "word": "individual",
@@ -11021,26 +8573,10 @@ export const marketPacks = [
             "topic": "Text 27 · The History of Bicycles"
       },
       {
-            "word": "modern",
-            "translation": "zamonaviy",
-            "definition": "of the present or recent times",
-            "example": "Studying 'modern' (of the present or recent times) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 27 · The History of Bicycles"
-      },
-      {
             "word": "revolutionize",
             "translation": "tubdan o'zgartirmoq",
             "definition": "to change completely and greatly",
             "example": "Studying 'revolutionize' (to change completely and greatly) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 27 · The History of Bicycles"
-      },
-      {
-            "word": "appear",
-            "translation": "paydo bo'lmoq",
-            "definition": "to come into view; to become available",
-            "example": "Studying 'appear' (to come into view; to become available) helps in reading comprehension.",
             "partOfSpeech": "verb",
             "topic": "Text 27 · The History of Bicycles"
       },
@@ -11101,27 +8637,11 @@ export const marketPacks = [
             "topic": "Text 27 · The History of Bicycles"
       },
       {
-            "word": "framework",
-            "translation": "karkas",
-            "definition": "a supporting structure",
-            "example": "Studying 'framework' (a supporting structure) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 27 · The History of Bicycles"
-      },
-      {
             "word": "solid",
             "translation": "qattiq, mustahkam",
             "definition": "firm and not hollow",
             "example": "Studying 'solid' (firm and not hollow) helps in reading comprehension.",
             "partOfSpeech": "adjective",
-            "topic": "Text 27 · The History of Bicycles"
-      },
-      {
-            "word": "steel",
-            "translation": "po'lat",
-            "definition": "a strong metal made from iron",
-            "example": "Studying 'steel' (a strong metal made from iron) helps in reading comprehension.",
-            "partOfSpeech": "noun",
             "topic": "Text 27 · The History of Bicycles"
       },
       {
@@ -11133,35 +8653,11 @@ export const marketPacks = [
             "topic": "Text 27 · The History of Bicycles"
       },
       {
-            "word": "transportation",
-            "translation": "transport, tashish",
-            "definition": "the movement of people or goods",
-            "example": "Studying 'transportation' (the movement of people or goods) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 27 · The History of Bicycles"
-      },
-      {
-            "word": "manufacturer",
-            "translation": "ishlab chiqaruvchi",
-            "definition": "a company that makes goods",
-            "example": "Studying 'manufacturer' (a company that makes goods) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 27 · The History of Bicycles"
-      },
-      {
             "word": "overseas",
             "translation": "chet elga",
             "definition": "in or to a foreign country",
             "example": "Studying 'overseas' (in or to a foreign country) helps in reading comprehension.",
             "partOfSpeech": "adverb",
-            "topic": "Text 27 · The History of Bicycles"
-      },
-      {
-            "word": "hollow",
-            "translation": "ichi bo'sh",
-            "definition": "having an empty space inside",
-            "example": "Studying 'hollow' (having an empty space inside) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
             "topic": "Text 27 · The History of Bicycles"
       },
       {
@@ -11210,14 +8706,6 @@ export const marketPacks = [
             "definition": "to change something",
             "example": "Studying 'alter' (to change something) helps in reading comprehension.",
             "partOfSpeech": "verb",
-            "topic": "Text 27 · The History of Bicycles"
-      },
-      {
-            "word": "efficient",
-            "translation": "samarali",
-            "definition": "working well without waste",
-            "example": "Studying 'efficient' (working well without waste) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
             "topic": "Text 27 · The History of Bicycles"
       },
       {
@@ -11333,14 +8821,6 @@ export const marketPacks = [
             "topic": "Text 28 · The History of the Guitar"
       },
       {
-            "word": "instrument",
-            "translation": "asbob",
-            "definition": "a device for making music",
-            "example": "Studying 'instrument' (a device for making music) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 28 · The History of the Guitar"
-      },
-      {
             "word": "archaeologist",
             "translation": "arxeolog",
             "definition": "a scientist who studies remains",
@@ -11365,14 +8845,6 @@ export const marketPacks = [
             "topic": "Text 28 · The History of the Guitar"
       },
       {
-            "word": "ancient",
-            "translation": "qadimiy",
-            "definition": "very old; from long ago",
-            "example": "Studying 'ancient' (very old; from long ago) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 28 · The History of the Guitar"
-      },
-      {
             "word": "civilisation",
             "translation": "tsivilizatsiya",
             "definition": "an advanced human society",
@@ -11389,27 +8861,11 @@ export const marketPacks = [
             "topic": "Text 28 · The History of the Guitar"
       },
       {
-            "word": "tomb",
-            "translation": "maqbara",
-            "definition": "a place where a dead body is buried",
-            "example": "Studying 'tomb' (a place where a dead body is buried) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 28 · The History of the Guitar"
-      },
-      {
             "word": "advanced",
             "translation": "rivojlangan",
             "definition": "highly developed",
             "example": "Studying 'advanced' (highly developed) helps in reading comprehension.",
             "partOfSpeech": "adjective",
-            "topic": "Text 28 · The History of the Guitar"
-      },
-      {
-            "word": "develop",
-            "translation": "rivojlanmoq",
-            "definition": "to grow or come from gradually",
-            "example": "Studying 'develop' (to grow or come from gradually) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 28 · The History of the Guitar"
       },
       {
@@ -11426,14 +8882,6 @@ export const marketPacks = [
             "definition": "an object surviving from the past",
             "example": "Studying 'relic' (an object surviving from the past) helps in reading comprehension.",
             "partOfSpeech": "noun",
-            "topic": "Text 28 · The History of the Guitar"
-      },
-      {
-            "word": "survive",
-            "translation": "saqlanib qolmoq",
-            "definition": "to continue to exist",
-            "example": "Studying 'survive' (to continue to exist) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 28 · The History of the Guitar"
       },
       {
@@ -11477,14 +8925,6 @@ export const marketPacks = [
             "topic": "Text 28 · The History of the Guitar"
       },
       {
-            "word": "definition",
-            "translation": "ta'rif",
-            "definition": "a statement of meaning",
-            "example": "Studying 'definition' (a statement of meaning) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 28 · The History of the Guitar"
-      },
-      {
             "word": "fretted",
             "translation": "pardali",
             "definition": "having ridges on the neck",
@@ -11517,43 +8957,11 @@ export const marketPacks = [
             "topic": "Text 28 · The History of the Guitar"
       },
       {
-            "word": "indicate",
-            "translation": "ko'rsatmoq",
-            "definition": "to show or point out",
-            "example": "Studying 'indicate' (to show or point out) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 28 · The History of the Guitar"
-      },
-      {
-            "word": "evolve",
-            "translation": "rivojlanmoq",
-            "definition": "to develop gradually",
-            "example": "Studying 'evolve' (to develop gradually) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 28 · The History of the Guitar"
-      },
-      {
             "word": "radically",
             "translation": "tubdan",
             "definition": "in a basic and complete way",
             "example": "Studying 'radically' (in a basic and complete way) helps in reading comprehension.",
             "partOfSpeech": "adverb",
-            "topic": "Text 28 · The History of the Guitar"
-      },
-      {
-            "word": "spread",
-            "translation": "tarqalmoq",
-            "definition": "to reach more places",
-            "example": "Studying 'spread' (to reach more places) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 28 · The History of the Guitar"
-      },
-      {
-            "word": "merchant",
-            "translation": "savdogar",
-            "definition": "a person who trades goods",
-            "example": "Studying 'merchant' (a person who trades goods) helps in reading comprehension.",
-            "partOfSpeech": "noun",
             "topic": "Text 28 · The History of the Guitar"
       },
       {
@@ -11586,14 +8994,6 @@ export const marketPacks = [
             "definition": "to gain or obtain",
             "example": "Studying 'acquire' (to gain or obtain) helps in reading comprehension.",
             "partOfSpeech": "verb",
-            "topic": "Text 28 · The History of the Guitar"
-      },
-      {
-            "word": "dominant",
-            "translation": "ustun, hukmron",
-            "definition": "most common or powerful",
-            "example": "Studying 'dominant' (most common or powerful) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
             "topic": "Text 28 · The History of the Guitar"
       },
       {
@@ -11645,14 +9045,6 @@ export const marketPacks = [
             "topic": "Text 28 · The History of the Guitar"
       },
       {
-            "word": "universal",
-            "translation": "umumjahon, hamma joyda",
-            "definition": "found or used everywhere",
-            "example": "Studying 'universal' (found or used everywhere) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 29 · The History of the Chicken"
-      },
-      {
             "word": "cultural",
             "translation": "madaniy",
             "definition": "relating to a society's customs",
@@ -11677,14 +9069,6 @@ export const marketPacks = [
             "topic": "Text 29 · The History of the Chicken"
       },
       {
-            "word": "texture",
-            "translation": "tuzilish",
-            "definition": "the feel or structure of something",
-            "example": "Studying 'texture' (the feel or structure of something) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 29 · The History of the Chicken"
-      },
-      {
             "word": "cuisine",
             "translation": "oshxona uslubi, taomlar",
             "definition": "a style of cooking",
@@ -11693,35 +9077,11 @@ export const marketPacks = [
             "topic": "Text 29 · The History of the Chicken"
       },
       {
-            "word": "industrial",
-            "translation": "sanoat",
-            "definition": "relating to factories and industry",
-            "example": "Studying 'industrial' (relating to factories and industry) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 29 · The History of the Chicken"
-      },
-      {
             "word": "contribution",
             "translation": "hissa",
             "definition": "something given to help or add",
             "example": "Studying 'contribution' (something given to help or add) helps in reading comprehension.",
             "partOfSpeech": "noun",
-            "topic": "Text 29 · The History of the Chicken"
-      },
-      {
-            "word": "domestic",
-            "translation": "uy sharoitidagi, xonaki",
-            "definition": "kept by humans; not wild",
-            "example": "Studying 'domestic' (kept by humans; not wild) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 29 · The History of the Chicken"
-      },
-      {
-            "word": "inspire",
-            "translation": "ilhomlantirmoq",
-            "definition": "to give ideas or motivation",
-            "example": "Studying 'inspire' (to give ideas or motivation) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 29 · The History of the Chicken"
       },
       {
@@ -11746,14 +9106,6 @@ export const marketPacks = [
             "definition": "to tame animals for human use",
             "example": "Studying 'domesticate' (to tame animals for human use) helps in reading comprehension.",
             "partOfSpeech": "verb",
-            "topic": "Text 29 · The History of the Chicken"
-      },
-      {
-            "word": "ancestor",
-            "translation": "ajdod",
-            "definition": "an earlier form from which others come",
-            "example": "Studying 'ancestor' (an earlier form from which others come) helps in reading comprehension.",
-            "partOfSpeech": "noun",
             "topic": "Text 29 · The History of the Chicken"
       },
       {
@@ -11837,26 +9189,10 @@ export const marketPacks = [
             "topic": "Text 29 · The History of the Chicken"
       },
       {
-            "word": "decorate",
-            "translation": "bezamoq",
-            "definition": "to add ornament to make attractive",
-            "example": "Studying 'decorate' (to add ornament to make attractive) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 29 · The History of the Chicken"
-      },
-      {
             "word": "royal",
             "translation": "qirollik",
             "definition": "relating to a king or queen",
             "example": "Studying 'royal' (relating to a king or queen) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 29 · The History of the Chicken"
-      },
-      {
-            "word": "artificial",
-            "translation": "sun'iy",
-            "definition": "made by people, not natural",
-            "example": "Studying 'artificial' (made by people, not natural) helps in reading comprehension.",
             "partOfSpeech": "adjective",
             "topic": "Text 29 · The History of the Chicken"
       },
@@ -11893,14 +9229,6 @@ export const marketPacks = [
             "topic": "Text 29 · The History of the Chicken"
       },
       {
-            "word": "regulate",
-            "translation": "boshqarmoq",
-            "definition": "to control or manage",
-            "example": "Studying 'regulate' (to control or manage) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 29 · The History of the Chicken"
-      },
-      {
             "word": "delicacy",
             "translation": "noyob taom",
             "definition": "a rare and delicious food",
@@ -11925,27 +9253,11 @@ export const marketPacks = [
             "topic": "Text 29 · The History of the Chicken"
       },
       {
-            "word": "collapse",
-            "translation": "qulash",
-            "definition": "a sudden failure or fall",
-            "example": "Studying 'collapse' (a sudden failure or fall) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 29 · The History of the Chicken"
-      },
-      {
             "word": "enterprise",
             "translation": "korxona",
             "definition": "a business or undertaking",
             "example": "Studying 'enterprise' (a business or undertaking) helps in reading comprehension.",
             "partOfSpeech": "noun",
-            "topic": "Text 29 · The History of the Chicken"
-      },
-      {
-            "word": "protect",
-            "translation": "himoya qilmoq",
-            "definition": "to keep safe from harm",
-            "example": "Studying 'protect' (to keep safe from harm) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 29 · The History of the Chicken"
       },
       {
@@ -11978,14 +9290,6 @@ export const marketPacks = [
             "definition": "according to custom; usually",
             "example": "Studying 'customarily' (according to custom; usually) helps in reading comprehension.",
             "partOfSpeech": "adverb",
-            "topic": "Text 30 · The History of Cakes at Weddings"
-      },
-      {
-            "word": "celebrate",
-            "translation": "nishonlamoq",
-            "definition": "to mark a special occasion",
-            "example": "Studying 'celebrate' (to mark a special occasion) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 30 · The History of Cakes at Weddings"
       },
       {
@@ -12050,22 +9354,6 @@ export const marketPacks = [
             "definition": "to throw down in large quantities",
             "example": "Studying 'shower' (to throw down in large quantities) helps in reading comprehension.",
             "partOfSpeech": "verb",
-            "topic": "Text 30 · The History of Cakes at Weddings"
-      },
-      {
-            "word": "replace",
-            "translation": "almashtirmoq",
-            "definition": "to put in place of another",
-            "example": "Studying 'replace' (to put in place of another) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 30 · The History of Cakes at Weddings"
-      },
-      {
-            "word": "custom",
-            "translation": "urf-odat",
-            "definition": "a traditional way of doing things",
-            "example": "Studying 'custom' (a traditional way of doing things) helps in reading comprehension.",
-            "partOfSpeech": "noun",
             "topic": "Text 30 · The History of Cakes at Weddings"
       },
       {
@@ -12229,27 +9517,11 @@ export const marketPacks = [
             "topic": "Text 30 · The History of Cakes at Weddings"
       },
       {
-            "word": "refined",
-            "translation": "tozalangan",
-            "definition": "made pure by processing",
-            "example": "Studying 'refined' (made pure by processing) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 30 · The History of Cakes at Weddings"
-      },
-      {
             "word": "status",
             "translation": "maqom",
             "definition": "a person's rank or standing",
             "example": "Studying 'status' (a person's rank or standing) helps in reading comprehension.",
             "partOfSpeech": "noun",
-            "topic": "Text 30 · The History of Cakes at Weddings"
-      },
-      {
-            "word": "display",
-            "translation": "namoyish qilmoq",
-            "definition": "to show publicly",
-            "example": "Studying 'display' (to show publicly) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 30 · The History of Cakes at Weddings"
       },
       {
@@ -12301,34 +9573,10 @@ export const marketPacks = [
             "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
       },
       {
-            "word": "community",
-            "translation": "jamoa",
-            "definition": "a group of people living together",
-            "example": "Studying 'community' (a group of people living together) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
-      },
-      {
             "word": "chemist",
             "translation": "kimyogar",
             "definition": "a scientist who studies chemistry",
             "example": "Studying 'chemist' (a scientist who studies chemistry) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
-      },
-      {
-            "word": "manufacture",
-            "translation": "ishlab chiqarish",
-            "definition": "the making of goods",
-            "example": "Studying 'manufacture' (the making of goods) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
-      },
-      {
-            "word": "grade",
-            "translation": "daraja, sifat",
-            "definition": "a level of quality",
-            "example": "Studying 'grade' (a level of quality) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
       },
@@ -12365,35 +9613,11 @@ export const marketPacks = [
             "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
       },
       {
-            "word": "quantity",
-            "translation": "miqdor",
-            "definition": "an amount or number",
-            "example": "Studying 'quantity' (an amount or number) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
-      },
-      {
-            "word": "obtain",
-            "translation": "olmoq",
-            "definition": "to get something",
-            "example": "Studying 'obtain' (to get something) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
-      },
-      {
             "word": "pure",
             "translation": "toza",
             "definition": "not mixed with anything else",
             "example": "Studying 'pure' (not mixed with anything else) helps in reading comprehension.",
             "partOfSpeech": "adjective",
-            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
-      },
-      {
-            "word": "market",
-            "translation": "sotmoq, bozorga chiqarmoq",
-            "definition": "to advertise and sell",
-            "example": "Studying 'market' (to advertise and sell) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
       },
       {
@@ -12461,35 +9685,11 @@ export const marketPacks = [
             "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
       },
       {
-            "word": "combine",
-            "translation": "birlashtirmoq",
-            "definition": "to join or mix together",
-            "example": "Studying 'combine' (to join or mix together) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
-      },
-      {
-            "word": "experiment",
-            "translation": "sinab ko'rmoq",
-            "definition": "to test to discover something",
-            "example": "Studying 'experiment' (to test to discover something) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
-      },
-      {
             "word": "preparation",
             "translation": "tayyorlangan aralashma",
             "definition": "a mixture made for a purpose",
             "example": "Studying 'preparation' (a mixture made for a purpose) helps in reading comprehension.",
             "partOfSpeech": "noun",
-            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
-      },
-      {
-            "word": "establish",
-            "translation": "tashkil etmoq",
-            "definition": "to set up; to found",
-            "example": "Studying 'establish' (to set up; to found) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
       },
       {
@@ -12565,26 +9765,10 @@ export const marketPacks = [
             "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
       },
       {
-            "word": "separate",
-            "translation": "ajralmoq",
-            "definition": "to divide or come apart",
-            "example": "Studying 'separate' (to divide or come apart) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
-      },
-      {
             "word": "reproduce",
             "translation": "nusxa ko'chirmoq",
             "definition": "to make a copy of",
             "example": "Studying 'reproduce' (to make a copy of) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
-      },
-      {
-            "word": "secure",
-            "translation": "mahkamlamoq",
-            "definition": "to fix or fasten firmly",
-            "example": "Studying 'secure' (to fix or fasten firmly) helps in reading comprehension.",
             "partOfSpeech": "verb",
             "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
       },
@@ -12621,14 +9805,6 @@ export const marketPacks = [
             "topic": "Text 32 · The History of the Globe Theatre"
       },
       {
-            "word": "major",
-            "translation": "muhim, katta",
-            "definition": "important or large",
-            "example": "Studying 'major' (important or large) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 32 · The History of the Globe Theatre"
-      },
-      {
             "word": "playhouse",
             "translation": "teatr",
             "definition": "a theatre",
@@ -12645,27 +9821,11 @@ export const marketPacks = [
             "topic": "Text 32 · The History of the Globe Theatre"
       },
       {
-            "word": "company",
-            "translation": "truppa",
-            "definition": "a group of actors or performers",
-            "example": "Studying 'company' (a group of actors or performers) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 32 · The History of the Globe Theatre"
-      },
-      {
             "word": "playwright",
             "translation": "dramaturg",
             "definition": "a person who writes plays",
             "example": "Studying 'playwright' (a person who writes plays) helps in reading comprehension.",
             "partOfSpeech": "noun",
-            "topic": "Text 32 · The History of the Globe Theatre"
-      },
-      {
-            "word": "belong to",
-            "translation": "a'zosi bo'lmoq",
-            "definition": "to be a member of",
-            "example": "Studying 'belong to' (to be a member of) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 32 · The History of the Globe Theatre"
       },
       {
@@ -12701,38 +9861,6 @@ export const marketPacks = [
             "topic": "Text 32 · The History of the Globe Theatre"
       },
       {
-            "word": "construct",
-            "translation": "qurmoq",
-            "definition": "to build something",
-            "example": "Studying 'construct' (to build something) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 32 · The History of the Globe Theatre"
-      },
-      {
-            "word": "transport",
-            "translation": "tashimoq",
-            "definition": "to carry from one place to another",
-            "example": "Studying 'transport' (to carry from one place to another) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 32 · The History of the Globe Theatre"
-      },
-      {
-            "word": "successful",
-            "translation": "muvaffaqiyatli",
-            "definition": "achieving the desired result",
-            "example": "Studying 'successful' (achieving the desired result) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 32 · The History of the Globe Theatre"
-      },
-      {
-            "word": "artificial",
-            "translation": "sun'iy",
-            "definition": "made by people, not natural",
-            "example": "Studying 'artificial' (made by people, not natural) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 32 · The History of the Globe Theatre"
-      },
-      {
             "word": "merchandise",
             "translation": "sotuv mahsulotlari",
             "definition": "goods for sale",
@@ -12749,14 +9877,6 @@ export const marketPacks = [
             "topic": "Text 32 · The History of the Globe Theatre"
       },
       {
-            "word": "conceal",
-            "translation": "yashirmoq",
-            "definition": "to hide from view",
-            "example": "Studying 'conceal' (to hide from view) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 32 · The History of the Globe Theatre"
-      },
-      {
             "word": "identity",
             "translation": "o'ziga xoslik, shaxs",
             "definition": "who a person is",
@@ -12765,27 +9885,11 @@ export const marketPacks = [
             "topic": "Text 32 · The History of the Globe Theatre"
       },
       {
-            "word": "destroy",
-            "translation": "vayron qilmoq",
-            "definition": "to damage so it no longer exists",
-            "example": "Studying 'destroy' (to damage so it no longer exists) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 32 · The History of the Globe Theatre"
-      },
-      {
             "word": "ignite",
             "translation": "alangalantirmoq",
             "definition": "to set on fire",
             "example": "Studying 'ignite' (to set on fire) helps in reading comprehension.",
             "partOfSpeech": "verb",
-            "topic": "Text 32 · The History of the Globe Theatre"
-      },
-      {
-            "word": "beam",
-            "translation": "yog'och/temir bo'lak",
-            "definition": "a long thick piece of wood or metal",
-            "example": "Studying 'beam' (a long thick piece of wood or metal) helps in reading comprehension.",
-            "partOfSpeech": "noun",
             "topic": "Text 32 · The History of the Globe Theatre"
       },
       {
@@ -12801,14 +9905,6 @@ export const marketPacks = [
             "translation": "poydevor, asos",
             "definition": "the base of a building",
             "example": "Studying 'foundation' (the base of a building) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 32 · The History of the Globe Theatre"
-      },
-      {
-            "word": "predecessor",
-            "translation": "o'tmishdosh",
-            "definition": "something that came before",
-            "example": "Studying 'predecessor' (something that came before) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 32 · The History of the Globe Theatre"
       },
@@ -12869,14 +9965,6 @@ export const marketPacks = [
             "topic": "Text 32 · The History of the Globe Theatre"
       },
       {
-            "word": "support",
-            "translation": "ko'tarib turmoq",
-            "definition": "to hold up; to bear weight",
-            "example": "Studying 'support' (to hold up; to bear weight) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 32 · The History of the Globe Theatre"
-      },
-      {
             "word": "thatch",
             "translation": "somon tom",
             "definition": "a roof covering of dry straw",
@@ -12917,22 +10005,6 @@ export const marketPacks = [
             "topic": "Text 32 · The History of the Globe Theatre"
       },
       {
-            "word": "estimate",
-            "translation": "taxminan hisoblamoq",
-            "definition": "to judge an approximate amount",
-            "example": "Studying 'estimate' (to judge an approximate amount) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 32 · The History of the Globe Theatre"
-      },
-      {
-            "word": "depict",
-            "translation": "tasvirlamoq",
-            "definition": "to show or represent",
-            "example": "Studying 'depict' (to show or represent) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 33 · The History of Dolls"
-      },
-      {
             "word": "plaything",
             "translation": "o'yinchoq",
             "definition": "a toy",
@@ -12946,30 +10018,6 @@ export const marketPacks = [
             "definition": "simple and basic; early",
             "example": "Studying 'primitive' (simple and basic; early) helps in reading comprehension.",
             "partOfSpeech": "adjective",
-            "topic": "Text 33 · The History of Dolls"
-      },
-      {
-            "word": "material",
-            "translation": "material",
-            "definition": "the substance something is made of",
-            "example": "Studying 'material' (the substance something is made of) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 33 · The History of Dolls"
-      },
-      {
-            "word": "clay",
-            "translation": "loy",
-            "definition": "soft earth used for pottery",
-            "example": "Studying 'clay' (soft earth used for pottery) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 33 · The History of Dolls"
-      },
-      {
-            "word": "construct",
-            "translation": "yasamoq",
-            "definition": "to build or make",
-            "example": "Studying 'construct' (to build or make) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 33 · The History of Dolls"
       },
       {
@@ -12994,14 +10042,6 @@ export const marketPacks = [
             "definition": "something that is owned",
             "example": "Studying 'possession' (something that is owned) helps in reading comprehension.",
             "partOfSpeech": "noun",
-            "topic": "Text 33 · The History of Dolls"
-      },
-      {
-            "word": "offer",
-            "translation": "taqdim etmoq",
-            "definition": "to present for acceptance",
-            "example": "Studying 'offer' (to present for acceptance) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 33 · The History of Dolls"
       },
       {
@@ -13061,14 +10101,6 @@ export const marketPacks = [
             "topic": "Text 33 · The History of Dolls"
       },
       {
-            "word": "production",
-            "translation": "ishlab chiqarish",
-            "definition": "the making of goods",
-            "example": "Studying 'production' (the making of goods) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 33 · The History of Dolls"
-      },
-      {
             "word": "resemble",
             "translation": "o'xshamoq",
             "definition": "to be similar to; to look like",
@@ -13081,14 +10113,6 @@ export const marketPacks = [
             "translation": "tarkib, aralashma",
             "definition": "a mixture of pulped wood or paper",
             "example": "Studying 'composition' (a mixture of pulped wood or paper) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 33 · The History of Dolls"
-      },
-      {
-            "word": "mixture",
-            "translation": "aralashma",
-            "definition": "a combination of substances",
-            "example": "Studying 'mixture' (a combination of substances) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 33 · The History of Dolls"
       },
@@ -13106,22 +10130,6 @@ export const marketPacks = [
             "definition": "long-lasting; hard to damage",
             "example": "Studying 'durable' (long-lasting; hard to damage) helps in reading comprehension.",
             "partOfSpeech": "adjective",
-            "topic": "Text 33 · The History of Dolls"
-      },
-      {
-            "word": "guard",
-            "translation": "saqlamoq",
-            "definition": "to protect or keep secret",
-            "example": "Studying 'guard' (to protect or keep secret) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 33 · The History of Dolls"
-      },
-      {
-            "word": "recipe",
-            "translation": "retsept",
-            "definition": "a set of instructions for a mixture",
-            "example": "Studying 'recipe' (a set of instructions for a mixture) helps in reading comprehension.",
-            "partOfSpeech": "noun",
             "topic": "Text 33 · The History of Dolls"
       },
       {
@@ -13189,14 +10197,6 @@ export const marketPacks = [
             "topic": "Text 33 · The History of Dolls"
       },
       {
-            "word": "expensive",
-            "translation": "qimmat",
-            "definition": "costing a lot of money",
-            "example": "Studying 'expensive' (costing a lot of money) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 33 · The History of Dolls"
-      },
-      {
             "word": "fabric",
             "translation": "mato",
             "definition": "cloth; woven material",
@@ -13253,22 +10253,6 @@ export const marketPacks = [
             "topic": "Text 34 · The History of Building Telegraph Lines"
       },
       {
-            "word": "communication",
-            "translation": "aloqa",
-            "definition": "the sharing of information",
-            "example": "Studying 'communication' (the sharing of information) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 34 · The History of Building Telegraph Lines"
-      },
-      {
-            "word": "monk",
-            "translation": "rohib",
-            "definition": "a man living in a religious group",
-            "example": "Studying 'monk' (a man living in a religious group) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 34 · The History of Building Telegraph Lines"
-      },
-      {
             "word": "monastery",
             "translation": "monastir",
             "definition": "a building where monks live",
@@ -13281,14 +10265,6 @@ export const marketPacks = [
             "translation": "temir",
             "definition": "a hard grey metal",
             "example": "Studying 'iron' (a hard grey metal) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 34 · The History of Building Telegraph Lines"
-      },
-      {
-            "word": "wire",
-            "translation": "sim",
-            "definition": "a thin thread of metal",
-            "example": "Studying 'wire' (a thin thread of metal) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 34 · The History of Building Telegraph Lines"
       },
@@ -13306,14 +10282,6 @@ export const marketPacks = [
             "definition": "to release electricity or energy",
             "example": "Studying 'discharge' (to release electricity or energy) helps in reading comprehension.",
             "partOfSpeech": "verb",
-            "topic": "Text 34 · The History of Building Telegraph Lines"
-      },
-      {
-            "word": "primitive",
-            "translation": "ibtidoiy",
-            "definition": "simple and basic; early",
-            "example": "Studying 'primitive' (simple and basic; early) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
             "topic": "Text 34 · The History of Building Telegraph Lines"
       },
       {
@@ -13357,46 +10325,6 @@ export const marketPacks = [
             "topic": "Text 34 · The History of Building Telegraph Lines"
       },
       {
-            "word": "dial",
-            "translation": "siferblat",
-            "definition": "a round part with markings",
-            "example": "Studying 'dial' (a round part with markings) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 34 · The History of Building Telegraph Lines"
-      },
-      {
-            "word": "construct",
-            "translation": "qurmoq",
-            "definition": "to build something",
-            "example": "Studying 'construct' (to build something) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 34 · The History of Building Telegraph Lines"
-      },
-      {
-            "word": "require",
-            "translation": "talab qilmoq",
-            "definition": "to need something",
-            "example": "Studying 'require' (to need something) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 34 · The History of Building Telegraph Lines"
-      },
-      {
-            "word": "single",
-            "translation": "yagona",
-            "definition": "only one",
-            "example": "Studying 'single' (only one) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 34 · The History of Building Telegraph Lines"
-      },
-      {
-            "word": "code",
-            "translation": "kod",
-            "definition": "a system of signals for messages",
-            "example": "Studying 'code' (a system of signals for messages) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 34 · The History of Building Telegraph Lines"
-      },
-      {
             "word": "proficient",
             "translation": "malakali",
             "definition": "skilled; able to do well",
@@ -13421,26 +10349,10 @@ export const marketPacks = [
             "topic": "Text 34 · The History of Building Telegraph Lines"
       },
       {
-            "word": "spread",
-            "translation": "tarqalmoq",
-            "definition": "to reach more places",
-            "example": "Studying 'spread' (to reach more places) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 34 · The History of Building Telegraph Lines"
-      },
-      {
             "word": "cable",
             "translation": "kabel",
             "definition": "a thick wire for carrying signals",
             "example": "Studying 'cable' (a thick wire for carrying signals) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 34 · The History of Building Telegraph Lines"
-      },
-      {
-            "word": "empire",
-            "translation": "imperiya",
-            "definition": "a group of lands under one ruler",
-            "example": "Studying 'empire' (a group of lands under one ruler) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 34 · The History of Building Telegraph Lines"
       },
@@ -13474,14 +10386,6 @@ export const marketPacks = [
             "definition": "relating to hot, wet regions",
             "example": "Studying 'tropical' (relating to hot, wet regions) helps in reading comprehension.",
             "partOfSpeech": "adjective",
-            "topic": "Text 34 · The History of Building Telegraph Lines"
-      },
-      {
-            "word": "float",
-            "translation": "suzib yurmoq",
-            "definition": "to rest on the surface of water",
-            "example": "Studying 'float' (to rest on the surface of water) helps in reading comprehension.",
-            "partOfSpeech": "verb",
             "topic": "Text 34 · The History of Building Telegraph Lines"
       },
       {
@@ -13573,14 +10477,6 @@ export const marketPacks = [
             "topic": "Text 35 · The History and Impact of the Potato"
       },
       {
-            "word": "originate",
-            "translation": "kelib chiqmoq",
-            "definition": "to begin or start from",
-            "example": "Studying 'originate' (to begin or start from) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 35 · The History and Impact of the Potato"
-      },
-      {
             "word": "chronicler",
             "translation": "tarixchi",
             "definition": "a person who records history",
@@ -13605,34 +10501,10 @@ export const marketPacks = [
             "topic": "Text 35 · The History and Impact of the Potato"
       },
       {
-            "word": "preserve",
-            "translation": "saqlamoq",
-            "definition": "to keep food safe from decay",
-            "example": "Studying 'preserve' (to keep food safe from decay) helps in reading comprehension.",
-            "partOfSpeech": "verb",
-            "topic": "Text 35 · The History and Impact of the Potato"
-      },
-      {
-            "word": "storage",
-            "translation": "saqlash",
-            "definition": "the keeping of things for later use",
-            "example": "Studying 'storage' (the keeping of things for later use) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 35 · The History and Impact of the Potato"
-      },
-      {
             "word": "staple",
             "translation": "asosiy oziq-ovqat",
             "definition": "a basic, main food",
             "example": "Studying 'staple' (a basic, main food) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 35 · The History and Impact of the Potato"
-      },
-      {
-            "word": "crop",
-            "translation": "ekin",
-            "definition": "plants grown for food",
-            "example": "Studying 'crop' (plants grown for food) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 35 · The History and Impact of the Potato"
       },
@@ -13685,14 +10557,6 @@ export const marketPacks = [
             "topic": "Text 35 · The History and Impact of the Potato"
       },
       {
-            "word": "suspicion",
-            "translation": "shubha",
-            "definition": "a feeling of doubt or distrust",
-            "example": "Studying 'suspicion' (a feeling of doubt or distrust) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 35 · The History and Impact of the Potato"
-      },
-      {
             "word": "distaste",
             "translation": "yoqtirmaslik",
             "definition": "a feeling of dislike",
@@ -13733,14 +10597,6 @@ export const marketPacks = [
             "topic": "Text 35 · The History and Impact of the Potato"
       },
       {
-            "word": "resemblance",
-            "translation": "o'xshashlik",
-            "definition": "the state of looking alike",
-            "example": "Studying 'resemblance' (the state of looking alike) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 35 · The History and Impact of the Potato"
-      },
-      {
             "word": "recommend",
             "translation": "tavsiya qilmoq",
             "definition": "to advise as good",
@@ -13773,14 +10629,6 @@ export const marketPacks = [
             "topic": "Text 35 · The History and Impact of the Potato"
       },
       {
-            "word": "royal",
-            "translation": "qirollik",
-            "definition": "relating to a king or queen",
-            "example": "Studying 'royal' (relating to a king or queen) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 35 · The History and Impact of the Potato"
-      },
-      {
             "word": "approval",
             "translation": "tasdiq",
             "definition": "official agreement or acceptance",
@@ -13797,14 +10645,6 @@ export const marketPacks = [
             "topic": "Text 35 · The History and Impact of the Potato"
       },
       {
-            "word": "potential",
-            "translation": "imkoniyat",
-            "definition": "the possibility to develop",
-            "example": "Studying 'potential' (the possibility to develop) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 35 · The History and Impact of the Potato"
-      },
-      {
             "word": "prejudice",
             "translation": "noto'g'ri qarash",
             "definition": "an unfair negative opinion",
@@ -13817,22 +10657,6 @@ export const marketPacks = [
             "translation": "ocharchilik",
             "definition": "an extreme shortage of food",
             "example": "Studying 'famine' (an extreme shortage of food) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 35 · The History and Impact of the Potato"
-      },
-      {
-            "word": "reverse",
-            "translation": "teskari",
-            "definition": "opposite to the usual",
-            "example": "Studying 'reverse' (opposite to the usual) helps in reading comprehension.",
-            "partOfSpeech": "adjective",
-            "topic": "Text 35 · The History and Impact of the Potato"
-      },
-      {
-            "word": "diet",
-            "translation": "ovqatlanish tartibi",
-            "definition": "the food a person usually eats",
-            "example": "Studying 'diet' (the food a person usually eats) helps in reading comprehension.",
             "partOfSpeech": "noun",
             "topic": "Text 35 · The History and Impact of the Potato"
       },
@@ -13861,22 +10685,6 @@ export const marketPacks = [
             "topic": "Text 35 · The History and Impact of the Potato"
       },
       {
-            "word": "climate",
-            "translation": "iqlim",
-            "definition": "the usual weather of an area",
-            "example": "Studying 'climate' (the usual weather of an area) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 35 · The History and Impact of the Potato"
-      },
-      {
-            "word": "cultivation",
-            "translation": "yetishtirish",
-            "definition": "the growing of crops",
-            "example": "Studying 'cultivation' (the growing of crops) helps in reading comprehension.",
-            "partOfSpeech": "noun",
-            "topic": "Text 35 · The History and Impact of the Potato"
-      },
-      {
             "word": "investment",
             "translation": "sarmoya",
             "definition": "money or effort put into something",
@@ -13884,7 +10692,7 @@ export const marketPacks = [
             "partOfSpeech": "noun",
             "topic": "Text 35 · The History and Impact of the Potato"
       }
-]
+    ]
   },
   {
     id: "german-essentials",
