@@ -104,6 +104,57 @@
   font-weight: 600;
 }
 
+/* ─── Multi-Variant Tabs ─── */
+.spelling-variants-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  margin: 4px 0 2px;
+}
+
+.spelling-variants-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.spelling-variant-tab {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 6px 14px;
+  font-size: var(--font-xs);
+  font-weight: 700;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-family);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.spelling-variant-tab:hover:not(:disabled) {
+  border-color: #3b82f6;
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.spelling-variant-tab.active {
+  background: rgba(59, 130, 246, 0.18);
+  border-color: #3b82f6;
+  color: #60a5fa;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+.spelling-variant-tab.done {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: var(--success);
+  color: var(--success);
+}
+
 .spelling-tiles-wrapper {
   display: flex;
   flex-wrap: wrap;

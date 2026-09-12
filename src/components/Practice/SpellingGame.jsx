@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2, Check, X } from 'lucide-react';
 import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
@@ -18,11 +18,6 @@ function getWordVariants(rawWord) {
   return parts.length > 0 ? parts : [rawWord.trim()];
 }
 
-function getPrimarySpellingWord(rawWord) {
-  const variants = getWordVariants(rawWord);
-  return variants[0] || rawWord || '';
-}
-
 export default function SpellingGame({ words, allWords, onComplete, onUpdateWord, onAnswer, onProgress, language = 'en-US', isEnglishPack = false }) {
   const { user } = useAuth();
   const { t } = useLanguage();
@@ -39,18 +34,47 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
   const inputRef = useRef(null);
   const startTimeRef = useRef(Date.now());
 
-  const currentWord = words[currentIndex];
+  // Flatten words with multiple variants into separate sequential cards
+  const processedWords = useMemo(() => {
+    if (!words || !Array.isArray(words)) return [];
+    const list = [];
+    words.forEach((w) => {
+      const variants = getWordVariants(w.word);
+      if (variants.length > 1) {
+        variants.forEach((v, idx) => {
+          list.push({
+            ...w,
+            variantIndex: idx,
+            totalVariants: variants.length,
+            targetSpelling: v,
+            originalWord: w.word,
+          });
+        });
+      } else {
+        list.push({
+          ...w,
+          variantIndex: 0,
+          totalVariants: 1,
+          targetSpelling: (w.word || '').trim(),
+          originalWord: w.word,
+        });
+      }
+    });
+    return list;
+  }, [words]);
+
+  const currentWord = processedWords[currentIndex];
 
   // Report progress
   useEffect(() => {
-    if (onProgress && words) {
-      onProgress(currentIndex, words.length);
+    if (onProgress && processedWords) {
+      onProgress(currentIndex, processedWords.length);
     }
-  }, [currentIndex, words, onProgress]);
+  }, [currentIndex, processedWords, onProgress]);
 
   useEffect(() => {
     if (!currentWord) return;
-    const targetText = getPrimarySpellingWord(currentWord.word);
+    const targetText = currentWord.targetSpelling;
     setScrambledList(shuffleArray(targetText.split('')));
     setInput('');
     setUsedTileIndices([]);
@@ -58,11 +82,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
     setIsCorrect(false);
     setAnsweredWord('');
     startTimeRef.current = Date.now();
-  }, [currentIndex]);
-
-  useEffect(() => {
-    // Keep inputRef ready without forcing automatic cursor focus on load
-  }, [currentIndex, answered]);
+  }, [currentIndex, currentWord]);
 
   // Handle Enter keypress for both submitting answer and advancing to next word
   useEffect(() => {
@@ -82,7 +102,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [answered, input, currentIndex, words]);
+  }, [answered, input, currentIndex, processedWords]);
 
   const getLangAdjective = (langCode) => {
     if (!langCode) return 'English';
@@ -127,12 +147,17 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
     const cleanSubmitted = submittedInput.toLowerCase().trim().replace(/\s+/g, ' ');
     const normSubmitted = normalizeForComparison(cleanSubmitted);
 
-    const fullTargetClean = currentWord.word.toLowerCase().trim().replace(/\s+/g, ' ');
+    const cleanTarget = currentWord.targetSpelling.toLowerCase().trim().replace(/\s+/g, ' ');
+    const normTarget = normalizeForComparison(cleanTarget);
+
+    const fullTargetClean = (currentWord.originalWord || '').toLowerCase().trim().replace(/\s+/g, ' ');
     const fullTargetNorm = normalizeForComparison(fullTargetClean);
 
-    const variants = getWordVariants(currentWord.word);
+    const variants = getWordVariants(currentWord.originalWord);
 
     const correct =
+      cleanSubmitted === cleanTarget ||
+      normSubmitted === normTarget ||
       cleanSubmitted === fullTargetClean ||
       normSubmitted === fullTargetNorm ||
       variants.some(v => {
@@ -142,7 +167,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
 
     setAnswered(true);
     setIsCorrect(correct);
-    setAnsweredWord(currentWord.word);
+    setAnsweredWord(currentWord.targetSpelling || currentWord.originalWord);
     if (onAnswer) onAnswer(currentWord, correct);
 
     const confidence = inferConfidenceFromSpeed(responseTime, correct);
@@ -162,13 +187,6 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
     }
   };
 
-  // Tile identity is tracked by exact scrambled-tile index, in tap order —
-  // not re-derived from `input` text by matching letters position-blind.
-  // A word with a repeated letter (e.g. the two "l"s in "hello") has two
-  // tiles that look identical but sit at different positions; deriving
-  // "used" purely by scanning for the first matching letter could mark a
-  // DIFFERENT tile than the one actually tapped, making the two identical
-  // letters look like they'd been merged into one.
   const handleTileClick = (idx) => {
     if (answered) return;
     if (usedTileIndices.includes(idx)) {
@@ -181,12 +199,6 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
     }
   };
 
-  // Typing directly into the text field has no tile-click identity to
-  // preserve (no specific tile was ever "the one" pressed), so this
-  // recomputes the tile highlighting best-effort, position-blind — the
-  // same approach the click path used to rely on. That's fine here: the
-  // duplicate-letter mismatch above only bites when a specific tile's
-  // pressed/not-pressed state has to track a specific tap.
   const handleInputChange = (e) => {
     if (answered) return;
     const newValue = e.target.value;
@@ -204,12 +216,6 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
     setUsedTileIndices(used);
   };
 
-  /**
-   * A wrong spelling that closely matches a *different* word's spelling is
-   * evidence of interference between the two (e.g. typing "though" for
-   * "although") — feeds the same Confusion Network Memory Lab uses, so it's
-   * populated by regular practice too, not just Memory Lab sessions.
-   */
   const detectConfusion = (typedText) => {
     if (!user || !Array.isArray(allWords)) return;
 
@@ -220,7 +226,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
     });
     if (best) {
       recordConfusionPair(user.uid, currentWord.id, best.id, {
-        wordA: currentWord.word,
+        wordA: currentWord.originalWord,
         wordB: best.candidate.word,
         translationA: currentWord.translation,
         translationB: best.candidate.translation,
@@ -236,10 +242,10 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
   const handleSkip = async () => {
     if (answered) return;
     const responseTime = (Date.now() - startTimeRef.current) / 1000;
-    setInput(currentWord.word.trim());
+    setInput(currentWord.targetSpelling);
     setAnswered(true);
     setIsCorrect(false);
-    setAnsweredWord(currentWord.word);
+    setAnsweredWord(currentWord.targetSpelling);
     if (onAnswer) onAnswer(currentWord, false);
     onUpdateWord(currentWord.id, {
       isCorrect: false,
@@ -252,9 +258,9 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
   };
 
   const handleNext = () => {
-    if (currentIndex < words.length - 1) {
+    if (currentIndex < processedWords.length - 1) {
       const nextIndex = currentIndex + 1;
-      const nextWord = words[nextIndex];
+      const nextWord = processedWords[nextIndex];
       setCurrentIndex(nextIndex);
       setInput('');
       setUsedTileIndices([]);
@@ -262,21 +268,18 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
       setIsCorrect(false);
       setAnsweredWord('');
       if (nextWord) {
-        const targetText = getPrimarySpellingWord(nextWord.word);
-        setScrambledList(shuffleArray(targetText.split('')));
+        setScrambledList(shuffleArray(nextWord.targetSpelling.split('')));
       }
       startTimeRef.current = Date.now();
     } else {
-      onComplete({ totalWords: words.length, correctCount, incorrectCount });
+      onComplete({ totalWords: processedWords.length, correctCount, incorrectCount });
     }
   };
 
   if (!currentWord) return null;
 
-  const isLast = currentIndex === words.length - 1;
-
-  const primaryWord = getPrimarySpellingWord(currentWord ? currentWord.word : '');
-  const wordLength = primaryWord.length;
+  const isLast = currentIndex === processedWords.length - 1;
+  const wordLength = currentWord.targetSpelling.length;
   const tileSizeClass = wordLength > 16 ? 'size-xxs' : wordLength > 12 ? 'size-xs' : wordLength > 9 ? 'size-sm' : wordLength > 6 ? 'size-md' : '';
 
   const targetLength = currentWord ? (currentWord.translation || '').length : 0;
@@ -285,12 +288,9 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
   return (
     <div className="spelling-container">
       <div className="spelling-progress-label">
-        <span>{currentIndex + 1} / {words.length}</span>
-        {/* Speaking the word aloud would hand over the answer in English-pack
-            mode (the definition drill's whole point is recalling the word
-            from its meaning), so the audio hint is only offered otherwise. */}
+        <span>{currentIndex + 1} / {processedWords.length}</span>
         {!isEnglishPack && (
-          <button className="btn-spell-speak" type="button" onClick={() => speakWord(currentWord.word, language)}>
+          <button className="btn-spell-speak" type="button" onClick={() => speakWord(currentWord.targetSpelling, language)}>
             <Volume2 size={14} strokeWidth={2.3} />
             {t('practice.listen')}
           </button>
@@ -309,15 +309,22 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
         >
           {isEnglishPack ? (
             <>
-              <div className="spelling-card-label">{t('practice.whichWordDefined')}</div>
+              <div className="spelling-card-label">
+                {t('practice.whichWordDefined')}
+                {currentWord.totalVariants > 1 && ` (${currentWord.variantIndex + 1}-variant)`}
+              </div>
               <div className="spelling-definition">{currentWord.definition}</div>
             </>
           ) : (
             <>
-              <div className="spelling-card-label">{t('practice.typeWord', { lang: getLangAdjective(language) })}</div>
+              <div className="spelling-card-label">
+                {t('practice.typeWord', { lang: getLangAdjective(language) })}
+                {currentWord.totalVariants > 1 && ` (${currentWord.variantIndex + 1}-variant)`}
+              </div>
               <div className={`spelling-target ${targetSizeClass}`}>{currentWord.translation}</div>
             </>
           )}
+
           <div className="spelling-scramble-label">
             {t('practice.scrambledLetters', { count: wordLength })}
           </div>
@@ -391,7 +398,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
               <div className="spelling-bottom-feedback">
                 {isCorrect ? <Check size={18} strokeWidth={2.5} /> : <X size={18} strokeWidth={2.5} />}
                 <span>
-                  {isCorrect ? t('practice.greatSentence').split('!')[0] + '!' : <> {t('practice.answerIs', { answer: '' })} <strong>{answeredWord || currentWord.word}</strong></>}
+                  {isCorrect ? t('practice.greatSentence').split('!')[0] + '!' : <> {t('practice.answerIs', { answer: '' })} <strong>{answeredWord || currentWord.targetSpelling}</strong></>}
                 </span>
               </div>
               <button type="button" className="btn-spell-next" onClick={handleNext}>
