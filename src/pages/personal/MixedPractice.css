@@ -279,6 +279,7 @@
   font-size: var(--font-md);
   outline: none;
   transition: all var(--transition-base);
+  caret-color: transparent;
 }
 
 .mp-spelling-input:focus:not(:disabled) {

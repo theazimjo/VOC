@@ -117,6 +117,7 @@
 .spelling-tiles-wrapper.size-md { gap: 5px; }
 .spelling-tiles-wrapper.size-sm { gap: 4px; }
 .spelling-tiles-wrapper.size-xs { gap: 3px; }
+.spelling-tiles-wrapper.size-xxs { gap: 2px; }
 
 .scrambled-tile {
   display: inline-flex;
@@ -136,6 +137,13 @@
   user-select: none;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   cursor: pointer;
+}
+
+.scrambled-tile.space-tile {
+  background: rgba(255, 255, 255, 0.05);
+  border-style: dashed;
+  color: var(--text-muted);
+  font-size: 0.9em;
 }
 
 .scrambled-tile:hover:not(.used) {
@@ -171,6 +179,14 @@
   border-radius: 6px;
 }
 
+.spelling-tiles-wrapper.size-xxs .scrambled-tile {
+  min-width: 17px;
+  height: 24px;
+  padding: 0 3px;
+  font-size: 0.75rem;
+  border-radius: 5px;
+}
+
 .scrambled-tile.used {
   background: rgba(59, 130, 246, 0.22);
   border-color: #3b82f6;
@@ -202,6 +218,7 @@
   transition: all var(--transition-base);
   font-weight: 600;
   font-family: var(--font-family);
+  caret-color: transparent;
 }
 .spelling-input::placeholder { color: var(--text-muted); font-size: var(--font-md); }
 .spelling-input:focus {

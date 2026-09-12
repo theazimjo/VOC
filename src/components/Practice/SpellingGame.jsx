@@ -12,6 +12,17 @@ import './SpellingGame.css';
 
 const CONFUSION_THRESHOLD = 0.6;
 
+function getWordVariants(rawWord) {
+  if (!rawWord) return [];
+  const parts = rawWord.split(/[/;,]/).map(p => p.trim()).filter(Boolean);
+  return parts.length > 0 ? parts : [rawWord.trim()];
+}
+
+function getPrimarySpellingWord(rawWord) {
+  const variants = getWordVariants(rawWord);
+  return variants[0] || rawWord || '';
+}
+
 export default function SpellingGame({ words, allWords, onComplete, onUpdateWord, onAnswer, onProgress, language = 'en-US', isEnglishPack = false }) {
   const { user } = useAuth();
   const { t } = useLanguage();
@@ -39,7 +50,8 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
 
   useEffect(() => {
     if (!currentWord) return;
-    setScrambledList(shuffleArray(currentWord.word.trim().split('')));
+    const targetText = getPrimarySpellingWord(currentWord.word);
+    setScrambledList(shuffleArray(targetText.split('')));
     setInput('');
     setUsedTileIndices([]);
     setAnswered(false);
@@ -49,14 +61,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
   }, [currentIndex]);
 
   useEffect(() => {
-    if (!answered) {
-      const timer = setTimeout(() => {
-        if (inputRef.current) {
-          inputRef.current.focus();
-        }
-      }, 50);
-      return () => clearTimeout(timer);
-    }
+    // Keep inputRef ready without forcing automatic cursor focus on load
   }, [currentIndex, answered]);
 
   // Handle Enter keypress for both submitting answer and advancing to next word
@@ -120,8 +125,21 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
 
     const responseTime = (Date.now() - startTimeRef.current) / 1000;
     const cleanSubmitted = submittedInput.toLowerCase().trim().replace(/\s+/g, ' ');
-    const cleanTarget = currentWord.word.toLowerCase().trim().replace(/\s+/g, ' ');
-    const correct = cleanSubmitted === cleanTarget || normalizeForComparison(cleanSubmitted) === normalizeForComparison(cleanTarget);
+    const normSubmitted = normalizeForComparison(cleanSubmitted);
+
+    const fullTargetClean = currentWord.word.toLowerCase().trim().replace(/\s+/g, ' ');
+    const fullTargetNorm = normalizeForComparison(fullTargetClean);
+
+    const variants = getWordVariants(currentWord.word);
+
+    const correct =
+      cleanSubmitted === fullTargetClean ||
+      normSubmitted === fullTargetNorm ||
+      variants.some(v => {
+        const vClean = v.toLowerCase().trim().replace(/\s+/g, ' ');
+        return cleanSubmitted === vClean || normSubmitted === normalizeForComparison(vClean);
+      });
+
     setAnswered(true);
     setIsCorrect(correct);
     setAnsweredWord(currentWord.word);
@@ -244,7 +262,8 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
       setIsCorrect(false);
       setAnsweredWord('');
       if (nextWord) {
-        setScrambledList(shuffleArray(nextWord.word.trim().split('')));
+        const targetText = getPrimarySpellingWord(nextWord.word);
+        setScrambledList(shuffleArray(targetText.split('')));
       }
       startTimeRef.current = Date.now();
     } else {
@@ -256,8 +275,9 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
 
   const isLast = currentIndex === words.length - 1;
 
-  const wordLength = currentWord ? currentWord.word.trim().length : 0;
-  const tileSizeClass = wordLength > 12 ? 'size-xs' : wordLength > 9 ? 'size-sm' : wordLength > 6 ? 'size-md' : '';
+  const primaryWord = getPrimarySpellingWord(currentWord ? currentWord.word : '');
+  const wordLength = primaryWord.length;
+  const tileSizeClass = wordLength > 16 ? 'size-xxs' : wordLength > 12 ? 'size-xs' : wordLength > 9 ? 'size-sm' : wordLength > 6 ? 'size-md' : '';
 
   const targetLength = currentWord ? (currentWord.translation || '').length : 0;
   const targetSizeClass = targetLength > 30 ? 'target-xs' : targetLength > 18 ? 'target-sm' : '';
@@ -304,14 +324,15 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
           <div className={`spelling-tiles-wrapper ${tileSizeClass}`}>
             {scrambledList.map((letter, idx) => {
               const isUsed = usedTileIndices.includes(idx);
+              const isSpace = letter === ' ';
               return (
                 <span
                   key={idx}
-                  className={`scrambled-tile ${isUsed ? 'used' : ''}`}
+                  className={`scrambled-tile ${isSpace ? 'space-tile' : ''} ${isUsed ? 'used' : ''}`}
                   onClick={() => handleTileClick(idx)}
                   title={isUsed ? "O'chirish uchun bosing" : "Tanlash uchun bosing"}
                 >
-                  {letter}
+                  {isSpace ? '␣' : letter}
                 </span>
               );
             })}
@@ -321,9 +342,6 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
             <input
               ref={(el) => {
                 inputRef.current = el;
-                if (el && !answered) {
-                  requestAnimationFrame(() => el.focus());
-                }
               }}
               type="text"
               name="practice_no_autofill_input"
