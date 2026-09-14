@@ -1,0 +1,128 @@
+/* ==========================================================================
+   UNIFIED PRACTICE QUIT CONFIRMATION MODAL — SYSTEM THEME ADAPTIVE
+   ========================================================================== */
+
+.duo-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  animation: duoFadeIn 0.18s ease-out forwards;
+}
+
+@keyframes duoFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.duo-modal-card {
+  max-width: 440px;
+  width: 100%;
+  background-color: var(--bg-secondary, #ffffff);
+  border: 2px solid var(--border);
+  box-shadow: 0 8px 0 var(--border);
+  border-radius: 26px;
+  padding: 32px 26px 26px 26px;
+  box-sizing: border-box;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: duoPopIn 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes duoPopIn {
+  from {
+    transform: scale(0.9) translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.duo-modal-title {
+  font-size: 1.55rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin: 0 0 10px 0;
+  line-height: 1.25;
+}
+
+.duo-modal-desc {
+  font-size: 1.02rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  margin: 0 0 26px 0;
+  max-width: 360px;
+}
+
+.duo-modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.duo-btn-modal-cancel {
+  background-color: var(--accent-1, #007AFF);
+  border: 2px solid var(--accent-1, #007AFF);
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--accent-1) 75%, black);
+  color: #ffffff;
+  font-size: 0.98rem;
+  font-weight: 800;
+  padding: 15px 24px;
+  letter-spacing: 0.05em;
+  border-radius: 16px;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+}
+
+.duo-btn-modal-cancel:hover {
+  filter: brightness(1.08);
+}
+
+.duo-btn-modal-cancel:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--accent-1) 75%, black);
+}
+
+.duo-btn-modal-quit {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  color: var(--error, #FF3B30);
+  font-size: 0.95rem;
+  font-weight: 800;
+  padding: 12px 24px;
+  letter-spacing: 0.05em;
+  border-radius: 16px;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+}
+
+.duo-btn-modal-quit:hover {
+  background-color: color-mix(in srgb, var(--error) 10%, transparent);
+}
+
+.duo-btn-modal-quit:active {
+  transform: translateY(1px);
+}

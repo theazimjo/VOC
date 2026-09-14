@@ -28,6 +28,7 @@ import SentenceBuilder from '../../components/Practice/SentenceBuilder';
 import SpeedGame, { getSpeedRecord } from '../../components/Practice/SpeedGame';
 import GridMatchGame from '../../components/Practice/GridMatchGame';
 import PracticeResultsView from '../../components/Practice/PracticeResultsView';
+import PracticeQuitModal from '../../components/Practice/PracticeQuitModal';
 import './PracticePage.css';
 
 export default function PracticePage({ embedded = false, initialSource = null, initialTopic = null, onExit = null }) {
@@ -49,6 +50,7 @@ export default function PracticePage({ embedded = false, initialSource = null, i
   const [sourceWords, setSourceWords] = useState([]);
   const [sourceLoaded, setSourceLoaded] = useState(false);
   const [wrongWords, setWrongWords] = useState([]);
+  const [showQuitModal, setShowQuitModal] = useState(false);
   const [customModal, setCustomModal] = useState({ show: false, type: 'alert', message: '', onConfirm: null, onCancel: null, confirmText: '', cancelText: '' });
   const [progressPct, setProgressPct] = useState(0);
 
@@ -420,7 +422,8 @@ export default function PracticePage({ embedded = false, initialSource = null, i
 
   const handleBack = (skipConfirm = false) => {
     if (step === 'practice' || step === 'intro') {
-      if (skipConfirm === true) {
+      if (skipConfirm || skipConfirm === true) {
+        setShowQuitModal(false);
         if (selectedSource?.name === 'Irregular Verbs') {
           exitSession();
         } else {
@@ -428,13 +431,7 @@ export default function PracticePage({ embedded = false, initialSource = null, i
         }
         return;
       }
-      showConfirm(t('practice.confirmLeave'), () => {
-        if (selectedSource?.name === 'Irregular Verbs') {
-          exitSession();
-        } else {
-          setStep('mode');
-        }
-      });
+      setShowQuitModal(true);
       return;
     }
 
@@ -698,12 +695,12 @@ export default function PracticePage({ embedded = false, initialSource = null, i
           {!pageLoading && step === 'practice' && (
             <motion.div
               key="practice"
-              className={`practice-session ${selectedMode === 'spelling' ? 'spelling-session-fullscreen' : ''}`}
+              className={`practice-session ${selectedMode === 'spelling' || selectedMode === 'flashcard' ? 'spelling-session-fullscreen' : ''}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
             >
-              {selectedMode !== 'spelling' && (
+              {selectedMode !== 'spelling' && selectedMode !== 'flashcard' && (
                 <div className="practice-session-header clean-quiz-header">
                   <button className="clean-back-arrow" onClick={handleBack} title="Exit practice">
                     <ChevronLeft size={22} strokeWidth={2.5} />
@@ -780,6 +777,19 @@ export default function PracticePage({ embedded = false, initialSource = null, i
           </div>
         </div>
       )}
+
+      <PracticeQuitModal
+        isOpen={showQuitModal}
+        onClose={() => setShowQuitModal(false)}
+        onConfirm={() => {
+          setShowQuitModal(false);
+          if (selectedSource?.name === 'Irregular Verbs') {
+            exitSession();
+          } else {
+            setStep('mode');
+          }
+        }}
+      />
     </div>
   );
 }

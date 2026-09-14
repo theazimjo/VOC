@@ -21,7 +21,7 @@ export default function PracticeSessionView({ p }) {
       onComplete: handleComplete,
       onUpdateWord: handleUpdateWord, // Syncs spaced repetition statistics
       onAnswer: handleAnswer,
-      onExit: handleBack,
+      onExit: (skipConfirm = true) => handleBack(skipConfirm),
       sourceName: loadedPack.title || "Kutubxona",
       language: loadedPack.language || 'en-US',
       isEnglishPack: loadedPack?.type === 'english' || loadedPack?.type === 'monolingual',
@@ -43,27 +43,29 @@ export default function PracticeSessionView({ p }) {
   return (
     <motion.div
       key="practice"
-      className="practice-session"
+      className={`practice-session ${selectedMode === 'spelling' || selectedMode === 'flashcard' ? 'spelling-session-fullscreen' : ''}`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
     >
-      <div className="practice-session-header clean-quiz-header">
-        <button className="clean-back-arrow" onClick={handleBack} title="Exit practice">
-          <ChevronLeft size={22} strokeWidth={2.5} />
-        </button>
-        <h1 className="clean-quiz-title">
-          {selectedMode === 'flashcard' ? '🧠 Smart Flashcards' : selectedMode === 'spelling' ? '✍️ Spelling Practice' : selectedMode === 'match' ? '🔀 Match Game' : selectedMode === 'quiz' ? '📝 Multiple Choice Quiz' : selectedMode === 'pronounce' ? '🎙️ Pronunciation Practice' : 'Practice'}
-        </h1>
-        <div style={{ width: '40px', opacity: 0 }}></div>
+      {selectedMode !== 'spelling' && selectedMode !== 'flashcard' && (
+        <div className="practice-session-header clean-quiz-header">
+          <button className="clean-back-arrow" onClick={handleBack} title="Exit practice">
+            <ChevronLeft size={22} strokeWidth={2.5} />
+          </button>
+          <h1 className="clean-quiz-title">
+            {selectedMode === 'flashcard' ? '🧠 Smart Flashcards' : selectedMode === 'spelling' ? '✍️ Spelling Practice' : selectedMode === 'match' ? '🔀 Match Game' : selectedMode === 'quiz' ? '📝 Multiple Choice Quiz' : selectedMode === 'pronounce' ? '🎙️ Pronunciation Practice' : 'Practice'}
+          </h1>
+          <div style={{ width: '40px', opacity: 0 }}></div>
 
-        <div className="practice-header-progress-track">
-          <div
-            className="practice-header-progress-fill"
-            style={{ width: `${progressPct}%` }}
-          />
+          <div className="practice-header-progress-track">
+            <div
+              className="practice-header-progress-fill"
+              style={{ width: `${progressPct}%` }}
+            />
+          </div>
         </div>
-      </div>
+      )}
       <div className="practice-session-content">
         {renderPracticeMode()}
       </div>

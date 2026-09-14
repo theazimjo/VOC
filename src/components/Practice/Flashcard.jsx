@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Volume2, PenLine } from 'lucide-react';
+import { Volume2, X, RotateCw, Check, PenLine } from 'lucide-react';
 import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
 import { speakWord } from '../../utils/helpers';
 import { useLanguage } from '../../contexts/LanguageContext';
+import PracticeQuitModal from './PracticeQuitModal';
 import './Flashcard.css';
 
 // Short Uzbek labels for each part of speech
@@ -30,12 +31,22 @@ function PosBadge({ pos }) {
   );
 }
 
-export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, onProgress, language = 'en-US', isEnglishPack = false }) {
+export default function Flashcard({
+  words,
+  onComplete,
+  onUpdateWord,
+  onAnswer,
+  onProgress,
+  onExit,
+  language = 'en-US',
+  isEnglishPack = false,
+}) {
   const { t } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [answered, setAnswered] = useState(false);
   const [results, setResults] = useState({ correctCount: 0, incorrectCount: 0 });
+  const [showQuitModal, setShowQuitModal] = useState(false);
 
   const cardStartRef = useRef(Date.now());
   const revealElapsedRef = useRef(4);
@@ -53,8 +64,8 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
   // Autoplay pronunciation on card switch
   useEffect(() => {
     if (currentWord) {
-      const t = setTimeout(() => speakWord(currentWord.word, language), 350);
-      return () => clearTimeout(t);
+      const timer = setTimeout(() => speakWord(currentWord.word, language), 350);
+      return () => clearTimeout(timer);
     }
   }, [currentIndex, currentWord, language]);
 
@@ -69,7 +80,7 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
 
   const handleCardClick = () => {
     if (!isFlipped) revealElapsedRef.current = (Date.now() - cardStartRef.current) / 1000;
-    setIsFlipped(prev => !prev);
+    setIsFlipped((prev) => !prev);
   };
 
   const knownWordsRef = useRef([]);
@@ -77,7 +88,7 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
 
   const wordsKey = useMemo(() => {
     if (!words || !Array.isArray(words)) return '';
-    return words.map(w => w?.id || w?.word).join('_');
+    return words.map((w) => w?.id || w?.word).join('_');
   }, [words]);
 
   // Reset per-round state ONLY when word IDs list actually changes (new session)
@@ -88,52 +99,55 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
     answeredRef.current = false;
   }, [wordsKey]);
 
-  const handleJudge = useCallback((isCorrect) => {
-    if (answeredRef.current || !currentWord) return;
-    answeredRef.current = true;
-    setAnswered(true);
+  const handleJudge = useCallback(
+    (isCorrect) => {
+      if (answeredRef.current || !currentWord) return;
+      answeredRef.current = true;
+      setAnswered(true);
 
-    if (isCorrect) {
-      knownWordsRef.current.push(currentWord);
-    } else {
-      reviewWordsRef.current.push(currentWord);
-    }
+      if (isCorrect) {
+        knownWordsRef.current.push(currentWord);
+      } else {
+        reviewWordsRef.current.push(currentWord);
+      }
 
-    if (onAnswer) onAnswer(currentWord, isCorrect);
+      if (onAnswer) onAnswer(currentWord, isCorrect);
 
-    const confidence = inferConfidenceFromSpeed(revealElapsedRef.current, isCorrect);
-    if (onUpdateWord) {
-      onUpdateWord(currentWord.id, {
-        isCorrect,
-        confidence,
-        responseTime: revealElapsedRef.current,
-        retrievalType: 'passive_recall',
-      });
-    }
-
-    setResults(prev => {
-      const newResults = {
-        correctCount: prev.correctCount + (isCorrect ? 1 : 0),
-        incorrectCount: prev.incorrectCount + (isCorrect ? 0 : 1)
-      };
-      return newResults;
-    });
-
-    if (currentIndex < words.length - 1) {
-      setIsFlipped(false);
-      setTimeout(() => setCurrentIndex(c => c + 1), 180);
-    } else {
-      if (onComplete) {
-        onComplete({
-          totalWords: words.length,
-          correctCount: results.correctCount + (isCorrect ? 1 : 0),
-          incorrectCount: results.incorrectCount + (isCorrect ? 0 : 1),
-          knownWords: knownWordsRef.current,
-          reviewWords: reviewWordsRef.current,
+      const confidence = inferConfidenceFromSpeed(revealElapsedRef.current, isCorrect);
+      if (onUpdateWord) {
+        onUpdateWord(currentWord.id, {
+          isCorrect,
+          confidence,
+          responseTime: revealElapsedRef.current,
+          retrievalType: 'passive_recall',
         });
       }
-    }
-  }, [currentWord, currentIndex, words.length, results, onAnswer, onUpdateWord, onComplete]);
+
+      const newCorrect = results.correctCount + (isCorrect ? 1 : 0);
+      const newIncorrect = results.incorrectCount + (isCorrect ? 0 : 1);
+
+      setResults({
+        correctCount: newCorrect,
+        incorrectCount: newIncorrect,
+      });
+
+      if (currentIndex < words.length - 1) {
+        setIsFlipped(false);
+        setTimeout(() => setCurrentIndex((c) => c + 1), 180);
+      } else {
+        if (onComplete) {
+          onComplete({
+            totalWords: words.length,
+            correctCount: newCorrect,
+            incorrectCount: newIncorrect,
+            knownWords: knownWordsRef.current,
+            reviewWords: reviewWordsRef.current,
+          });
+        }
+      }
+    },
+    [currentWord, currentIndex, words.length, results, onAnswer, onUpdateWord, onComplete]
+  );
 
   // Keyboard navigation on PC: Space/Enter/Arrows to flip; 1 (Don't Know) & 2 (Know) to judge
   useEffect(() => {
@@ -149,7 +163,7 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
         if (!isFlipped) {
           revealElapsedRef.current = (Date.now() - cardStartRef.current) / 1000;
         }
-        setIsFlipped(prev => !prev);
+        setIsFlipped((prev) => !prev);
       } else if (key === '1' || code === 'Digit1' || code === 'Numpad1') {
         e.preventDefault();
         if (!isFlipped) {
@@ -171,70 +185,162 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isFlipped, answered, handleJudge]);
 
+  const safeT = (key, fallback) => {
+    const res = t(key);
+    if (!res || res === key || (typeof res === 'string' && res.startsWith('practice.'))) return fallback;
+    return res;
+  };
+
   if (!currentWord) return null;
 
-  return (
-    <div className="flashcard-container clean-theme">
-      <div className="flashcard-progress">
-        <span className="flashcard-progress-pill">{currentIndex + 1} / {words.length}</span>
-      </div>
+  const progressPct = ((currentIndex + 1) / words.length) * 100;
 
-      {/* Card scene */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentIndex}
-          initial={{ opacity: 0, x: 60 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -60 }}
-          transition={{ duration: 0.25 }}
-          className="flashcard-scene"
-          onClick={handleCardClick}
+  return (
+    <div className="duo-spelling-page duo-flashcard-page">
+      {/* Top Navigation Bar Header */}
+      <header className="duo-top-header">
+        <button
+          type="button"
+          className="duo-close-btn"
+          onClick={() => setShowQuitModal(true)}
+          title={safeT('practice.quit', 'Exit')}
         >
-          <div className={`flashcard ${isFlipped ? 'is-flipped' : ''}`}>
-            {/* Front */}
-            <div className="flashcard-face flashcard-front">
+          <X size={26} strokeWidth={2.5} />
+        </button>
+
+        <div className="duo-progress-track">
+          <motion.div
+            className="duo-progress-fill"
+            initial={{ width: 0 }}
+            animate={{ width: `${progressPct}%` }}
+            transition={{ duration: 0.3 }}
+          />
+        </div>
+      </header>
+
+      {/* Main Body */}
+      <main className="duo-spelling-body duo-flashcard-body">
+        <h1 className="duo-prompt-title">
+          {isFlipped
+            ? safeT('practice.chooseYourAnswer', 'Ushbu soʻzni bilasizmi?')
+            : safeT('practice.tapCardToFlip', 'Kartani agʻdarish uchun bosing')}
+        </h1>
+
+        {/* 3D Flip Card Scene */}
+        <div className="duo-flashcard-scene" onClick={handleCardClick}>
+          <div className={`duo-flashcard-card ${isFlipped ? 'is-flipped' : ''}`}>
+            {/* Front Face */}
+            <div className="duo-flashcard-face duo-flashcard-front">
               <button
-                className="btn-speak-card"
-                onClick={e => { e.stopPropagation(); speakWord(currentWord.word, language); }}
-                title={t('practice.listen')}
+                type="button"
+                className="duo-fc-speaker-btn"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  speakWord(currentWord.word, language);
+                }}
+                title={safeT('practice.listen', 'Listen')}
               >
-                <Volume2 size={18} strokeWidth={2.2} />
+                <Volume2 size={24} />
               </button>
+
               <PosBadge pos={currentWord.partOfSpeech} />
-              <div className="flashcard-word">{currentWord.word}</div>
-              <div className="flashcard-hint">{t('practice.tapToFlip')}</div>
+
+              <h2 className="duo-fc-word">{currentWord.word}</h2>
+
+              {currentWord.phonetic && (
+                <span className="duo-fc-phonetic">/{currentWord.phonetic}/</span>
+              )}
+
+              <div className="duo-fc-hint-row">
+                <RotateCw size={14} />
+                <span>{safeT('practice.tapToFlip', 'Agʻdarish uchun bosing')}</span>
+              </div>
             </div>
 
-            {/* Back */}
-            <div className="flashcard-face flashcard-back">
+            {/* Back Face */}
+            <div className="duo-flashcard-face duo-flashcard-back">
+              <button
+                type="button"
+                className="duo-fc-speaker-btn"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  speakWord(currentWord.word, language);
+                }}
+                title={safeT('practice.listen', 'Listen')}
+              >
+                <Volume2 size={24} />
+              </button>
+
               <PosBadge pos={currentWord.partOfSpeech} />
-              {currentWord.translation && <div className="flashcard-translation">{currentWord.translation}</div>}
-              {currentWord.definition && (
-                <div className={`flashcard-def ${isMonolingualCard ? 'flashcard-def-large' : ''}`}>{currentWord.definition}</div>
+
+              {isMonolingualCard ? (
+                <p className="duo-fc-def-large">{currentWord.definition || currentWord.word}</p>
+              ) : (
+                <h2 className="duo-fc-translation">{currentWord.translation}</h2>
               )}
+
+              {currentWord.definition && !isMonolingualCard && (
+                <p className="duo-fc-definition">{currentWord.definition}</p>
+              )}
+
               {currentWord.example && (
-                <div className="flashcard-example">"{currentWord.example}"</div>
+                <p className="duo-fc-example">"{currentWord.example}"</p>
               )}
+
               {currentWord.customSentence && (
-                <div className="flashcard-example flashcard-custom-sentence">
-                  <PenLine size={13} strokeWidth={2.3} className="fc-custom-sentence-icon" />
-                  {currentWord.customSentence}
+                <div className="duo-fc-custom-sentence">
+                  <PenLine size={14} className="duo-fc-sentence-icon" />
+                  <span>{currentWord.customSentence}</span>
                 </div>
               )}
             </div>
           </div>
-        </motion.div>
-      </AnimatePresence>
+        </div>
+      </main>
 
-      {/* Judgement buttons — visible only when flipped. Keyboard shortcuts 1 & 2 */}
-      <div className={`flashcard-actions ${isFlipped ? '' : 'hidden'}`}>
-        <button className="flashcard-rating-btn again" onClick={() => handleJudge(false)} disabled={answered}>
-          <span className="rating-label">{t('practice.dontKnow')}</span>
-        </button>
-        <button className="flashcard-rating-btn easy" onClick={() => handleJudge(true)} disabled={answered}>
-          <span className="rating-label">{t('practice.know')}</span>
-        </button>
-      </div>
+      {/* Fixed Bottom Action Bar */}
+      <footer className="duo-bottom-bar duo-flashcard-bottom-bar">
+        <div className="duo-bottom-content duo-flashcard-bottom-content">
+          {!isFlipped ? (
+            <button
+              type="button"
+              className="duo-btn duo-btn-results-continue duo-btn-flip-card"
+              onClick={handleCardClick}
+            >
+              <RotateCw size={18} />
+              <span>{safeT('practice.flipCard', "AG'DARISH").toUpperCase()}</span>
+            </button>
+          ) : (
+            <div className="duo-flashcard-judge-btns">
+              <button
+                type="button"
+                className="duo-btn duo-btn-dont-know"
+                onClick={() => handleJudge(false)}
+              >
+                ❌ {safeT('practice.dontKnow', 'BILMAYMAN').toUpperCase()} (1)
+              </button>
+              <button
+                type="button"
+                className="duo-btn duo-btn-know"
+                onClick={() => handleJudge(true)}
+              >
+                <Check size={20} strokeWidth={3} />
+                <span>{safeT('practice.know', 'BILAMAN').toUpperCase()} (2)</span>
+              </button>
+            </div>
+          )}
+        </div>
+      </footer>
+
+      {/* Quit Confirmation Modal */}
+      <PracticeQuitModal
+        isOpen={showQuitModal}
+        onClose={() => setShowQuitModal(false)}
+        onConfirm={() => {
+          setShowQuitModal(false);
+          if (onExit) onExit(true);
+        }}
+      />
     </div>
   );
 }

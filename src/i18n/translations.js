@@ -434,8 +434,11 @@ export const translations = {
       
       // Flashcard
       tapToFlip: 'Tap to flip card',
-      dontKnow: "✗ Don't know",
-      know: '✓ Know',
+      tapCardToFlip: 'Tap card to flip',
+      flipCard: 'Flip card',
+      chooseYourAnswer: 'Do you know this word?',
+      dontKnow: "Don't know",
+      know: 'Know',
       listen: 'Listen',
 
       // Inner practice trainers
@@ -510,8 +513,11 @@ export const translations = {
       switchToKeyboard: 'Switch to keyboard mode',
       quitTitle: "Wait, don't go!",
       quitMessage: "You'll lose your progress if you quit now",
+      quitDesc: "You'll lose your progress if you quit now",
       keepLearning: 'KEEP LEARNING',
+      cancel: 'KEEP LEARNING',
       endSession: 'END SESSION',
+      quit: 'END SESSION',
       lessonComplete: 'Lesson Complete!',
       lessonCompleteSub: 'You completed {count} words in this lesson',
       totalWordsBadge: 'TOTAL WORDS',
@@ -1453,8 +1459,11 @@ export const translations = {
       
       // Flashcard
       tapToFlip: 'Нажмите, чтобы перевернуть',
-      dontKnow: '✗ Не знаю',
-      know: '✓ Знаю',
+      tapCardToFlip: 'Нажмите на карточку, чтобы перевернуть',
+      flipCard: 'Перевернуть',
+      chooseYourAnswer: 'Знаете ли вы это слово?',
+      dontKnow: 'Не знаю',
+      know: 'Знаю',
       listen: 'Слушать',
 
       // Inner practice trainers
@@ -1529,8 +1538,11 @@ export const translations = {
       switchToKeyboard: 'Переключиться на клавиатуру',
       quitTitle: 'Подождите, не уходите!',
       quitMessage: 'Вы потеряете свой прогресс, если выйдете сейчас',
+      quitDesc: 'Вы потеряете свой прогресс, если выйдете сейчас',
       keepLearning: 'ПРОДОЛЖИТЬ ОБУЧЕНИЕ',
+      cancel: 'ПРОДОЛЖИТЬ ОБУЧЕНИЕ',
       endSession: 'ЗАВЕРШИТЬ СЕССИЮ',
+      quit: 'ЗАВЕРШИТЬ СЕССИЮ',
       lessonComplete: 'Урок завершен!',
       lessonCompleteSub: 'Вы прошли {count} слов(а) в этом уроке',
       totalWordsBadge: 'ВСЕГО СЛОВ',
@@ -2472,8 +2484,11 @@ export const translations = {
       
       // Flashcard
       tapToFlip: "Aylantirish uchun bosing",
-      dontKnow: "✗ Bilmayman",
-      know: "✓ Bilaman",
+      tapCardToFlip: "Kartani ag'darish uchun bosing",
+      flipCard: "Ag'darish",
+      chooseYourAnswer: "Ushbu so'zni bilasizmi?",
+      dontKnow: "Bilmayman",
+      know: "Bilaman",
       listen: "Eshitish",
 
       // Inner practice trainers
@@ -2548,8 +2563,11 @@ export const translations = {
       switchToKeyboard: "Klaviatura rejimiga o'tish",
       quitTitle: "Kuting, ketmang!",
       quitMessage: "Hozir chiqib ketsangiz, erishgan natijangiz saqlanmaydi",
+      quitDesc: "Hozir chiqib ketsangiz, erishgan natijangiz saqlanmaydi",
       keepLearning: "DAVOM ETISH",
+      cancel: "DAVOM ETISH",
       endSession: "SESSIYANI YAKUNLASH",
+      quit: "SESSIYANI YAKUNLASH",
       lessonComplete: "Dars yakunlandi!",
       lessonCompleteSub: "Siz ushbu darsda {count} ta so'zni bajarib chiqdingiz",
       totalWordsBadge: "JAMIKIZ SO'ZLAR",

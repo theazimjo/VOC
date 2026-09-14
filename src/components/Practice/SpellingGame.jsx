@@ -8,6 +8,7 @@ import { recordConfusionPair } from '../../experiment/experimentDB';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useKeyboardInset } from '../../hooks/useKeyboardInset';
+import PracticeQuitModal from './PracticeQuitModal';
 import './SpellingGame.css';
 
 const CONFUSION_THRESHOLD = 0.6;
@@ -658,19 +659,17 @@ export default function SpellingGame({
                   <h3 className={`duo-feedback-heading ${isCorrect ? 'text-correct' : 'text-wrong'}`}>
                     {isCorrect ? t('practice.nicelyDone') : t('practice.correctSolution')}
                   </h3>
-                  {!isCorrect && (
-                    <div className="duo-feedback-answer-line">
-                      <span className="duo-correct-word">{answeredWord || currentWord.targetSpelling}</span>
-                      <button
-                        type="button"
-                        className="duo-speak-ans-btn"
-                        onClick={() => speakWord(answeredWord || currentWord.targetSpelling, getTargetAnswerLang())}
-                        title={t('practice.listen') || "Listen"}
-                      >
-                        <Volume2 size={18} strokeWidth={2.5} />
-                      </button>
-                    </div>
-                  )}
+                  <div className="duo-feedback-answer-line">
+                    <span className="duo-correct-word">{answeredWord || currentWord.targetSpelling}</span>
+                    <button
+                      type="button"
+                      className="duo-speak-ans-btn"
+                      onClick={() => speakWord(answeredWord || currentWord.targetSpelling, getTargetAnswerLang())}
+                      title={t('practice.listen') || "Listen"}
+                    >
+                      <Volume2 size={18} strokeWidth={2.5} />
+                    </button>
+                  </div>
                 </div>
               </div>
 
@@ -686,54 +685,15 @@ export default function SpellingGame({
         </div>
       </footer>
 
-      {/* ── Quit Confirmation Modal (Duolingo Style) ── */}
-      <AnimatePresence>
-        {showQuitModal && (
-          <motion.div
-            className="duo-modal-overlay"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setShowQuitModal(false)}
-          >
-            <motion.div
-              className="duo-modal-card"
-              initial={{ scale: 0.85, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.85, opacity: 0, y: 20 }}
-              transition={{ type: 'spring', stiffness: 450, damping: 25 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <h3 className="duo-modal-title">
-                {t('practice.quitTitle') || "Wait, don't go!"}
-              </h3>
-              <p className="duo-modal-message">
-                {t('practice.quitMessage') || "You'll lose your progress if you quit now"}
-              </p>
-
-              <div className="duo-modal-actions">
-                <button
-                  type="button"
-                  className="duo-btn-keep-learning"
-                  onClick={() => setShowQuitModal(false)}
-                >
-                  {t('practice.keepLearning')?.toUpperCase() || 'KEEP LEARNING'}
-                </button>
-                <button
-                  type="button"
-                  className="duo-btn-end-session"
-                  onClick={() => {
-                    setShowQuitModal(false);
-                    if (onExit) onExit(true);
-                  }}
-                >
-                  {t('practice.endSession')?.toUpperCase() || 'END SESSION'}
-                </button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* ── Quit Confirmation Modal ── */}
+      <PracticeQuitModal
+        isOpen={showQuitModal}
+        onClose={() => setShowQuitModal(false)}
+        onConfirm={() => {
+          setShowQuitModal(false);
+          if (onExit) onExit(true);
+        }}
+      />
     </div>
   );
 }
