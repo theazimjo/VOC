@@ -601,29 +601,31 @@ export default function PracticePage({ embedded = false, initialSource = null, i
           {!pageLoading && step === 'practice' && (
             <motion.div
               key="practice"
-              className="practice-session"
+              className={`practice-session ${selectedMode === 'spelling' ? 'spelling-session-fullscreen' : ''}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
             >
-              <div className="practice-session-header clean-quiz-header">
-                <button className="clean-back-arrow" onClick={handleBack} title="Exit practice">
-                  <ChevronLeft size={22} strokeWidth={2.5} />
-                </button>
-                <h1 className="clean-quiz-title">
-                  {selectedMode === 'flashcard' ? `🧠 ${t('practice.flashcardsTitle')}` : selectedMode === 'spelling' ? `✍️ ${t('practice.spellingTitle')}` : selectedMode === 'match' ? `🔀 ${t('practice.matchTitle')}` : selectedMode === 'quiz' ? `📝 ${t('practice.quizTitle')}` : selectedMode === 'pronounce' ? `🎙️ ${t('practice.pronounceTitle')}` : selectedMode === 'sentence' ? '📓 Sentence Builder' : selectedMode === 'speed' ? `⏱️ ${t('practice.speedTitle')}` : selectedMode === 'gridmatch' ? `🧩 ${t('practice.gridmatchTitle')}` : selectedMode === 'irregular-verbs' ? `⚡ ${t('practice.irregularVerbsTitle')}` : selectedMode === 'ielts-trainer' ? `🎓 ${t('practice.ieltsTrainerTitle')}` : selectedMode === 'english-trainer' ? `🔤 ${t('practice.englishTrainerTitle')}` : t('practice.title')}
-                </h1>
-                <div style={{ width: '40px', opacity: 0 }}></div>
+              {selectedMode !== 'spelling' && (
+                <div className="practice-session-header clean-quiz-header">
+                  <button className="clean-back-arrow" onClick={handleBack} title="Exit practice">
+                    <ChevronLeft size={22} strokeWidth={2.5} />
+                  </button>
+                  <h1 className="clean-quiz-title">
+                    {selectedMode === 'flashcard' ? `🧠 ${t('practice.flashcardsTitle')}` : selectedMode === 'spelling' ? `✍️ ${t('practice.spellingTitle')}` : selectedMode === 'match' ? `🔀 ${t('practice.matchTitle')}` : selectedMode === 'quiz' ? `📝 ${t('practice.quizTitle')}` : selectedMode === 'pronounce' ? `🎙️ ${t('practice.pronounceTitle')}` : selectedMode === 'sentence' ? '📓 Sentence Builder' : selectedMode === 'speed' ? `⏱️ ${t('practice.speedTitle')}` : selectedMode === 'gridmatch' ? `🧩 ${t('practice.gridmatchTitle')}` : selectedMode === 'irregular-verbs' ? `⚡ ${t('practice.irregularVerbsTitle')}` : selectedMode === 'ielts-trainer' ? `🎓 ${t('practice.ieltsTrainerTitle')}` : selectedMode === 'english-trainer' ? `🔤 ${t('practice.englishTrainerTitle')}` : t('practice.title')}
+                  </h1>
+                  <div style={{ width: '40px', opacity: 0 }}></div>
 
-                {/* Clean Progress bar inside the header rectangle along the bottom edge */}
-                <div className="practice-header-progress-track">
-                  <div
-                    className="practice-header-progress-fill"
-                    style={{ width: `${progressPct}%` }}
-                  />
+                  {/* Clean Progress bar inside the header rectangle along the bottom edge */}
+                  <div className="practice-header-progress-track">
+                    <div
+                      className="practice-header-progress-fill"
+                      style={{ width: `${progressPct}%` }}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="practice-session-content">
+              )}
+              <div className={`practice-session-content ${selectedMode === 'spelling' ? 'spelling-content-fullscreen' : ''}`}>
                 {renderPracticeMode()}
               </div>
             </motion.div>
