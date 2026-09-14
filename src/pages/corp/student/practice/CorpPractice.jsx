@@ -309,8 +309,12 @@ export default function CorpPractice() {
     }
   };
 
-  const handleBack = () => {
+  const handleBack = (skipConfirm = false) => {
     if (step === 'practice' || step === 'intro') {
+      if (skipConfirm === true) {
+        setStep('mode');
+        return;
+      }
       setShowExitModal(true);
       return;
     }

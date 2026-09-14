@@ -50,14 +50,17 @@ export default function Layout() {
   const segments = location.pathname.split('/').filter(Boolean);
   const isTestMode = (segments.length === 4 && segments[0] === 'grammar') ||
                      (segments[0] === 'grammar-test' && segments[1] === 'run');
+  const isPracticeMode = segments[0] === 'practice';
+  const isFullscreenMode = isTestMode || isPracticeMode;
+
   // In individual mode, all pages use their own standardized max-width: 960px container
   // with uniform padding, so the layout wrapper provides zero main padding
   // and the shared decorative gradient background.
-  const isIndividualMode = appMode !== 'group' && !isTestMode;
+  const isIndividualMode = appMode !== 'group' && !isFullscreenMode;
 
   return (
-    <div className={`layout ${isTestMode ? 'layout--test-mode' : ''} ${isIndividualMode ? 'layout--personal' : ''}`}>
-      {!isTestMode && (
+    <div className={`layout ${isFullscreenMode ? 'layout--test-mode' : ''} ${isIndividualMode ? 'layout--personal' : ''}`}>
+      {!isFullscreenMode && (
         appMode === 'group' ? (
           <StudentSidebar />
         ) : (
@@ -70,7 +73,7 @@ export default function Layout() {
         )
       )}
 
-      {!isTestMode && (
+      {!isFullscreenMode && (
         <Navbar
           sidebarCollapsed={collapsed}
           onHamburgerClick={handleHamburgerClick}
@@ -80,7 +83,7 @@ export default function Layout() {
 
       <main
         className={`layout-content ${
-          isTestMode
+          isFullscreenMode
             ? 'layout-content--test-mode'
             : (appMode === 'group' ? 'layout-content--expanded' : (collapsed ? 'layout-content--collapsed' : 'layout-content--expanded'))
         } ${isIndividualMode ? 'layout-content--dashboard layout-content--themed-bg' : ''}`}
@@ -88,7 +91,7 @@ export default function Layout() {
         <Outlet />
       </main>
 
-      {!isTestMode && <BottomNav />}
+      {!isFullscreenMode && <BottomNav />}
     </div>
   );
 }

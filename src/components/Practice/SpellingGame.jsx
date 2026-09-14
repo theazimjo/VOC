@@ -38,12 +38,15 @@ export default function SpellingGame({
   const [placedTiles, setPlacedTiles] = useState([]); // [{ id, text }]
   const [tileBank, setTileBank] = useState([]); // [{ id, text, isDistractor }]
   const [isKeyboardMode, setIsKeyboardMode] = useState(false);
+  const [showQuitModal, setShowQuitModal] = useState(false);
 
   const [answered, setAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [answeredWord, setAnsweredWord] = useState('');
   const [correctCount, setCorrectCount] = useState(0);
   const [incorrectCount, setIncorrectCount] = useState(0);
+  const [isFinished, setIsFinished] = useState(false);
+  const [showMistakes, setShowMistakes] = useState(false);
 
   const inputRef = useRef(null);
   const startTimeRef = useRef(Date.now());
@@ -178,6 +181,16 @@ export default function SpellingGame({
     setAnsweredWord('');
     startTimeRef.current = Date.now();
   }, [currentIndex, currentWordKey, currentWord, allWords, language]);
+
+  // Auto-focus input when in keyboard mode or when moving to a new word card
+  useEffect(() => {
+    if (isKeyboardMode && !answered) {
+      const timer = setTimeout(() => {
+        inputRef.current?.focus();
+      }, 50);
+      return () => clearTimeout(timer);
+    }
+  }, [isKeyboardMode, currentIndex, answered]);
 
   // Handle Enter key for submit / next
   useEffect(() => {
@@ -331,13 +344,126 @@ export default function SpellingGame({
     setIncorrectCount(c => c + 1);
   };
 
+  const isNavigatingRef = useRef(false);
+
+  useEffect(() => {
+    isNavigatingRef.current = false;
+  }, [currentIndex]);
+
   const handleNext = () => {
+    if (isNavigatingRef.current) return;
+    isNavigatingRef.current = true;
+
     if (currentIndex < processedWords.length - 1) {
       setCurrentIndex(prev => prev + 1);
     } else {
-      onComplete({ totalWords: processedWords.length, correctCount, incorrectCount });
+      if (onComplete) {
+        onComplete(
+          {
+            totalWords: processedWords.length,
+            correctCount,
+            incorrectCount,
+            correctWords: correctCount,
+            incorrectWords: incorrectCount,
+          },
+          mistakesList
+        );
+      } else {
+        setIsFinished(true);
+      }
     }
   };
+
+  // ── Render Duolingo Style Lesson Completion Screen ──
+  if (isFinished) {
+    const accuracyPct = Math.round((correctCount / (correctCount + incorrectCount || 1)) * 100);
+
+    return (
+      <div className="duo-spelling-page duo-results-page">
+        <div className="duo-results-body">
+          {/* Celebratory Title & Subtitle */}
+          <h1 className="duo-results-title">
+            {t('practice.lessonComplete') || "Lesson Complete!"}
+          </h1>
+          <p className="duo-results-subtitle">
+            {t('practice.lessonCompleteSub', { count: processedWords.length }) || `You completed ${processedWords.length} words in this lesson`}
+          </p>
+
+          {/* Duolingo 3D Stat Cards Grid */}
+          <div className="duo-results-cards-row">
+            {/* Card 1: TOTAL WORDS */}
+            <div className="duo-stat-card card-total">
+              <div className="duo-stat-badge badge-gold">
+                {t('practice.totalWordsBadge') || 'TOTAL WORDS'}
+              </div>
+              <div className="duo-stat-content">
+                <span className="duo-stat-icon">⚡</span>
+                <span className="duo-stat-value">{processedWords.length}</span>
+              </div>
+            </div>
+
+            {/* Card 2: ACCURACY */}
+            <div className="duo-stat-card card-accuracy">
+              <div className="duo-stat-badge badge-green">
+                {t('practice.accuracyBadge') || 'ACCURACY'}
+              </div>
+              <div className="duo-stat-content">
+                <span className="duo-stat-icon">🎯</span>
+                <span className="duo-stat-value">{accuracyPct}%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Fixed Bottom Action Bar */}
+        <footer className="duo-bottom-bar duo-results-bottom-bar">
+          <div className="duo-results-bottom-content">
+            {/* Left: REVIEW MISTAKES (if there were mistakes) */}
+            {incorrectCount > 0 ? (
+              <button
+                type="button"
+                className="duo-btn duo-btn-review-mistakes"
+                onClick={() => setShowMistakes(!showMistakes)}
+              >
+                {t('practice.reviewLesson')?.toUpperCase() || 'REVIEW MISTAKES'}
+              </button>
+            ) : <div />}
+
+            {/* Right: PRACTICE AGAIN & CONTINUE */}
+            <div className="duo-results-right-btns">
+              <button
+                type="button"
+                className="duo-btn duo-btn-practice-again"
+                onClick={() => {
+                  setCurrentIndex(0);
+                  setCorrectCount(0);
+                  setIncorrectCount(0);
+                  setIsFinished(false);
+                }}
+              >
+                {t('practice.practiceAgain')?.toUpperCase() || 'PRACTICE AGAIN'}
+              </button>
+
+              <button
+                type="button"
+                className="duo-btn duo-btn-results-continue"
+                onClick={() => {
+                  if (onComplete) {
+                    onComplete({ totalWords: processedWords.length, correctCount, incorrectCount });
+                  }
+                  if (onExit) {
+                    onExit(true);
+                  }
+                }}
+              >
+                {t('practice.continueBtn')?.toUpperCase() || 'CONTINUE'}
+              </button>
+            </div>
+          </div>
+        </footer>
+      </div>
+    );
+  }
 
   if (!currentWord) return null;
 
@@ -352,7 +478,7 @@ export default function SpellingGame({
         <button
           type="button"
           className="duo-close-btn"
-          onClick={onExit}
+          onClick={() => setShowQuitModal(true)}
           title={t('practice.closePractice') || "Close practice"}
         >
           <X size={24} strokeWidth={2.8} />
@@ -389,7 +515,10 @@ export default function SpellingGame({
         </div>
 
         {/* ── Answer Slot Underline Area ── */}
-        <div className="duo-answer-area">
+        <div
+          className="duo-answer-area"
+          onClick={() => isKeyboardMode && inputRef.current?.focus()}
+        >
           <div className={`duo-answer-slots ${answered ? (isCorrect ? 'is-correct' : 'is-wrong') : ''}`}>
             {isKeyboardMode ? (
               <input
@@ -556,6 +685,55 @@ export default function SpellingGame({
           )}
         </div>
       </footer>
+
+      {/* ── Quit Confirmation Modal (Duolingo Style) ── */}
+      <AnimatePresence>
+        {showQuitModal && (
+          <motion.div
+            className="duo-modal-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowQuitModal(false)}
+          >
+            <motion.div
+              className="duo-modal-card"
+              initial={{ scale: 0.85, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.85, opacity: 0, y: 20 }}
+              transition={{ type: 'spring', stiffness: 450, damping: 25 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h3 className="duo-modal-title">
+                {t('practice.quitTitle') || "Wait, don't go!"}
+              </h3>
+              <p className="duo-modal-message">
+                {t('practice.quitMessage') || "You'll lose your progress if you quit now"}
+              </p>
+
+              <div className="duo-modal-actions">
+                <button
+                  type="button"
+                  className="duo-btn-keep-learning"
+                  onClick={() => setShowQuitModal(false)}
+                >
+                  {t('practice.keepLearning')?.toUpperCase() || 'KEEP LEARNING'}
+                </button>
+                <button
+                  type="button"
+                  className="duo-btn-end-session"
+                  onClick={() => {
+                    setShowQuitModal(false);
+                    if (onExit) onExit(true);
+                  }}
+                >
+                  {t('practice.endSession')?.toUpperCase() || 'END SESSION'}
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

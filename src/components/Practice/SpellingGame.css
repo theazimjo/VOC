@@ -730,3 +730,103 @@
     word-break: break-word;
   }
 }
+
+/* ─── Quit Confirmation Modal (Duolingo Style) ─── */
+.duo-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.duo-modal-card {
+  background-color: var(--bg-secondary);
+  border: 2px solid var(--border);
+  border-radius: 24px;
+  max-width: 380px;
+  width: 100%;
+  padding: 32px 28px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+}
+
+.duo-modal-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.25;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.015em;
+}
+
+.duo-modal-message {
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin: 0 0 24px 0;
+}
+
+.duo-modal-actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.duo-btn-keep-learning {
+  width: 100%;
+  padding: 14px 20px;
+  background-color: var(--accent-1);
+  border: 2px solid var(--accent-1);
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--accent-1) 75%, black);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 800;
+  border-radius: 16px;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  font-family: inherit;
+  transition: transform 0.1s ease, filter 0.15s ease;
+  box-sizing: border-box;
+}
+
+.duo-btn-keep-learning:hover {
+  filter: brightness(1.08);
+}
+
+.duo-btn-keep-learning:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--accent-1) 75%, black);
+}
+
+.duo-btn-end-session {
+  width: 100%;
+  padding: 12px 20px;
+  background-color: transparent;
+  border: none;
+  color: var(--error);
+  font-size: 0.9rem;
+  font-weight: 800;
+  border-radius: 14px;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  font-family: inherit;
+  transition: opacity 0.15s ease, background-color 0.15s ease;
+  box-sizing: border-box;
+}
+
+.duo-btn-end-session:hover {
+  opacity: 0.85;
+  background-color: var(--error-dim, rgba(255, 59, 48, 0.1));
+}

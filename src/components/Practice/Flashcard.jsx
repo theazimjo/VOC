@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2, PenLine } from 'lucide-react';
 import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
@@ -37,9 +37,10 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
   const [answered, setAnswered] = useState(false);
   const [results, setResults] = useState({ correctCount: 0, incorrectCount: 0 });
 
-  const currentWord = words[currentIndex];
   const cardStartRef = useRef(Date.now());
   const revealElapsedRef = useRef(4);
+  const answeredRef = useRef(false);
+  const currentWord = words[currentIndex];
   const isMonolingualCard = isEnglishPack || Boolean(!currentWord?.translation && currentWord?.definition);
 
   // Report progress
@@ -61,6 +62,7 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
   useEffect(() => {
     setIsFlipped(false);
     setAnswered(false);
+    answeredRef.current = false;
     cardStartRef.current = Date.now();
     revealElapsedRef.current = 4;
   }, [currentIndex]);
@@ -73,15 +75,22 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
   const knownWordsRef = useRef([]);
   const reviewWordsRef = useRef([]);
 
-  // Reset per-round state when words list changes
+  const wordsKey = useMemo(() => {
+    if (!words || !Array.isArray(words)) return '';
+    return words.map(w => w?.id || w?.word).join('_');
+  }, [words]);
+
+  // Reset per-round state ONLY when word IDs list actually changes (new session)
   useEffect(() => {
     knownWordsRef.current = [];
     reviewWordsRef.current = [];
     setCurrentIndex(0);
-  }, [words]);
+    answeredRef.current = false;
+  }, [wordsKey]);
 
   const handleJudge = useCallback((isCorrect) => {
-    if (answered || !currentWord) return;
+    if (answeredRef.current || !currentWord) return;
+    answeredRef.current = true;
     setAnswered(true);
 
     if (isCorrect) {
@@ -107,23 +116,24 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
         correctCount: prev.correctCount + (isCorrect ? 1 : 0),
         incorrectCount: prev.incorrectCount + (isCorrect ? 0 : 1)
       };
-
-      if (currentIndex < words.length - 1) {
-        setIsFlipped(false);
-        setTimeout(() => setCurrentIndex(c => c + 1), 180);
-      } else {
-        if (onComplete) {
-          onComplete({
-            totalWords: words.length,
-            ...newResults,
-            knownWords: knownWordsRef.current,
-            reviewWords: reviewWordsRef.current,
-          });
-        }
-      }
       return newResults;
     });
-  }, [answered, currentWord, currentIndex, words.length, onAnswer, onUpdateWord, onComplete]);
+
+    if (currentIndex < words.length - 1) {
+      setIsFlipped(false);
+      setTimeout(() => setCurrentIndex(c => c + 1), 180);
+    } else {
+      if (onComplete) {
+        onComplete({
+          totalWords: words.length,
+          correctCount: results.correctCount + (isCorrect ? 1 : 0),
+          incorrectCount: results.incorrectCount + (isCorrect ? 0 : 1),
+          knownWords: knownWordsRef.current,
+          reviewWords: reviewWordsRef.current,
+        });
+      }
+    }
+  }, [currentWord, currentIndex, words.length, results, onAnswer, onUpdateWord, onComplete]);
 
   // Keyboard navigation on PC: Space/Enter/Arrows to flip; 1 (Don't Know) & 2 (Know) to judge
   useEffect(() => {

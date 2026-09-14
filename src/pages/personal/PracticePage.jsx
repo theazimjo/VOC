@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Trophy, ThumbsUp, Dumbbell, TrendingDown, Sparkles, BookOpen, CheckCircle2, XCircle, Volume2, ChevronLeft } from 'lucide-react';
@@ -27,9 +27,11 @@ import EnglishTrainer from '../../components/Practice/EnglishTrainer';
 import SentenceBuilder from '../../components/Practice/SentenceBuilder';
 import SpeedGame, { getSpeedRecord } from '../../components/Practice/SpeedGame';
 import GridMatchGame from '../../components/Practice/GridMatchGame';
+import PracticeResultsView from '../../components/Practice/PracticeResultsView';
 import './PracticePage.css';
 
 export default function PracticePage({ embedded = false, initialSource = null, initialTopic = null, onExit = null }) {
+  const sessionStartRef = useRef(Date.now());
   const { sourceType: urlSourceType, sourceId: urlSourceIdParam, packId: routePackId } = useParams();
   const urlSourceId = initialSource?.id || urlSourceIdParam || routePackId;
   const navigate = useNavigate();
@@ -146,6 +148,25 @@ export default function PracticePage({ embedded = false, initialSource = null, i
           const queryCount = queryParams.get('count');
           const querySubStep = queryParams.get('subStep');
 
+          // Check if user refreshed (F5) while on results screen
+          if (querySubStep === 'results' && urlSourceId) {
+            try {
+              const savedRaw = sessionStorage.getItem(`voc_practice_results_${urlSourceId}`);
+              if (savedRaw) {
+                const saved = JSON.parse(savedRaw);
+                if (saved && saved.results) {
+                  if (saved.selectedMode) setSelectedMode(saved.selectedMode);
+                  if (saved.wrongWords) setWrongWords(saved.wrongWords);
+                  setResults(saved.results);
+                  setStep('results');
+                  return;
+                }
+              }
+            } catch (e) {
+              console.error('Failed to restore results from sessionStorage:', e);
+            }
+          }
+
           const mode = queryMode || (foundSource.name === 'Irregular Verbs' ? 'irregular-verbs' : null);
           const count = queryCount ? (queryCount === 'all' ? null : parseInt(queryCount, 10)) : (foundSource.name === 'Irregular Verbs' && mode === 'irregular-verbs' && querySubStep === 'practice' ? 10 : null);
 
@@ -248,6 +269,7 @@ export default function PracticePage({ embedded = false, initialSource = null, i
   };
 
   const handleStartPractice = async (mode) => {
+    sessionStartRef.current = Date.now();
     if (sourceWords.length === 0) {
       showAlert(t('practice.noWordsInPack'));
       return;
@@ -358,9 +380,32 @@ export default function PracticePage({ embedded = false, initialSource = null, i
   const handleComplete = (resultData) => {
     playSound('victory');
     triggerVibration('victory');
-    setResults(resultData);
+    const elapsedSec = Math.max(1, Math.round((Date.now() - sessionStartRef.current) / 1000));
+    const mins = Math.floor(elapsedSec / 60);
+    const secs = elapsedSec % 60;
+    const durationFormatted = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    const fullResults = { ...resultData, durationFormatted, durationSec: elapsedSec };
+    setResults(fullResults);
     setStep('results');
     incrementActivity(resultData.totalWords || 1);
+
+    if (urlSourceId) {
+      try {
+        sessionStorage.setItem(`voc_practice_results_${urlSourceId}`, JSON.stringify({
+          results: fullResults,
+          wrongWords: wrongWords || [],
+          selectedMode,
+          timestamp: Date.now()
+        }));
+      } catch (e) {
+        console.error('Error saving practice results to sessionStorage:', e);
+      }
+
+      const newParams = new URLSearchParams(window.location.search);
+      newParams.set('subStep', 'results');
+      if (selectedMode) newParams.set('mode', selectedMode);
+      navigate({ search: newParams.toString() }, { replace: true });
+    }
   };
 
   const exitSession = () => {
@@ -373,8 +418,16 @@ export default function PracticePage({ embedded = false, initialSource = null, i
     }
   };
 
-  const handleBack = () => {
+  const handleBack = (skipConfirm = false) => {
     if (step === 'practice' || step === 'intro') {
+      if (skipConfirm === true) {
+        if (selectedSource?.name === 'Irregular Verbs') {
+          exitSession();
+        } else {
+          setStep('mode');
+        }
+        return;
+      }
       showConfirm(t('practice.confirmLeave'), () => {
         if (selectedSource?.name === 'Irregular Verbs') {
           exitSession();
@@ -398,6 +451,17 @@ export default function PracticePage({ embedded = false, initialSource = null, i
   };
 
   const handleReset = () => {
+    if (urlSourceId) {
+      try {
+        sessionStorage.removeItem(`voc_practice_results_${urlSourceId}`);
+      } catch (e) {}
+
+      const newParams = new URLSearchParams(window.location.search);
+      newParams.delete('subStep');
+      navigate({ search: newParams.toString() }, { replace: true });
+    }
+
+    sessionStartRef.current = Date.now();
     setResults(null);
     setWrongWords([]);
     setProgressPct(0);
@@ -450,24 +514,57 @@ export default function PracticePage({ embedded = false, initialSource = null, i
   const pageLoading = packsLoading;
 
   const getResultTier = (r) => {
-    const ratio = r.totalWords > 0 ? r.correctCount / r.totalWords : 0;
-    if (ratio >= 0.8) return { Icon: Trophy, label: t('practice.greatJob'), color: 'var(--accent-3)', dim: 'var(--warning-dim)' };
-    if (ratio >= 0.5) return { Icon: ThumbsUp, label: t('practice.goodJob'), color: 'var(--accent-1)', dim: 'var(--accent-1-dim)' };
-    return { Icon: Dumbbell, label: t('practice.keepGoing'), color: 'var(--success)', dim: 'var(--success-dim)' };
+    const total = r.totalWords || 1;
+    const correct = r.correctCount || 0;
+    const ratio = total > 0 ? correct / total : 0;
+    const isPerfect = (r.incorrectCount === 0 && correct > 0) || (correct === total && total > 0);
+
+    if (isPerfect) {
+      return {
+        title: t('practice.perfectLesson') || 'Perfect lesson!',
+        subtitle: t('practice.takeABow') || 'Take a bow!',
+        color: 'var(--accent-1)',
+        isPerfect: true
+      };
+    }
+    if (ratio >= 0.8) {
+      return {
+        title: t('practice.greatJob') || 'Great job!',
+        subtitle: t('practice.practiceComplete') || 'Practice complete',
+        color: 'var(--accent-3)',
+        isPerfect: false
+      };
+    }
+    if (ratio >= 0.5) {
+      return {
+        title: t('practice.goodJob') || 'Good job!',
+        subtitle: t('practice.practiceComplete') || 'Practice complete',
+        color: 'var(--accent-1)',
+        isPerfect: false
+      };
+    }
+    return {
+      title: t('practice.keepGoing') || 'Keep going!',
+      subtitle: t('practice.dontGiveUp') || "Don't give up!",
+      color: 'var(--accent-2)',
+      isPerfect: false
+    };
   };
 
   return (
     <div className="practice-page">
-      <div className="practice-page-header">
-        {step !== 'source' && step !== 'results' && (
-          <button className="clean-back-arrow" onClick={handleBack} title="Back">
-            ←
-          </button>
-        )}
-        <h1>
-          {t('practice.title')} {selectedSource && `(${selectedSource.title || selectedSource.name})`}
-        </h1>
-      </div>
+      {step !== 'practice' && step !== 'results' && (
+        <div className="practice-page-header">
+          {step !== 'source' && (
+            <button className="clean-back-arrow" onClick={handleBack} title="Back">
+              ←
+            </button>
+          )}
+          <h1>
+            {t('practice.title')} {selectedSource && `(${selectedSource.title || selectedSource.name})`}
+          </h1>
+        </div>
+      )}
 
       <div className="practice-steps-container">
         {/* Step 0: Loading Indicator */}
@@ -632,81 +729,14 @@ export default function PracticePage({ embedded = false, initialSource = null, i
           )}
 
           {/* Step 4: Results */}
-          {!pageLoading && step === 'results' && results && (() => {
-            const tier = getResultTier(results);
-            return (
-            <motion.div
-              key="results"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              <div className="practice-results">
-                <div className="result-icon-circle" style={{ background: tier.dim, color: tier.color }}>
-                  <tier.Icon size={36} strokeWidth={2.2} />
-                </div>
-                <h2>{tier.label}</h2>
-                <p>{t('practice.practiceComplete')}</p>
-                <div className="result-stats">
-                  <div className="result-stat">
-                    <BookOpen className="result-stat-icon" size={18} strokeWidth={2.2} style={{ color: 'var(--accent-2)' }} />
-                    <div className="value" style={{ color: 'var(--accent-2)' }}>{results.totalWords}</div>
-                    <div className="label">{t('practice.totalWords')}</div>
-                  </div>
-                  <div className="result-stat">
-                    <CheckCircle2 className="result-stat-icon" size={18} strokeWidth={2.2} style={{ color: 'var(--success)' }} />
-                    <div className="value" style={{ color: 'var(--success)' }}>{results.correctCount}</div>
-                    <div className="label">{t('practice.correct')}</div>
-                  </div>
-                  <div className="result-stat">
-                    <XCircle className="result-stat-icon" size={18} strokeWidth={2.2} style={{ color: 'var(--error)' }} />
-                    <div className="value" style={{ color: 'var(--error)' }}>{results.incorrectCount}</div>
-                    <div className="label">{t('practice.incorrect')}</div>
-                  </div>
-                </div>
-
-                {/* Mistakes / weaknesses analysis */}
-                {wrongWords.length > 0 ? (
-                  <div className="results-mistakes-container">
-                    <div className="results-mistakes-title">
-                      <TrendingDown size={14} strokeWidth={2.4} />
-                      {t('practice.recommendedReview')}
-                    </div>
-                    <div className="results-mistake-list">
-                      {wrongWords.map(word => (
-                        <div key={word.id} className="results-mistake-item">
-                          <div className="results-mistake-info">
-                            <span className="results-mistake-word">{word.word}</span>
-                            <span className="results-mistake-translation">{word.translation}</span>
-                          </div>
-                          <button
-                            type="button"
-                            className="btn-speak-mistake"
-                            onClick={() => speakWord(word.word, selectedSource?.language)}
-                            title="Listen"
-                          >
-                            <Volume2 size={16} strokeWidth={2.3} />
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  <div className="perfect-score-banner">
-                    <Sparkles size={16} strokeWidth={2.3} />
-                    {t('practice.perfectScore')}
-                  </div>
-                )}
-
-                <div className="result-actions">
-                  <button className="btn-results-back" onClick={handleReset}>
-                    {t('practice.backToMenu')}
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-            );
-          })()}
+          {!pageLoading && step === 'results' && results && (
+            <PracticeResultsView
+              results={results}
+              wrongWords={wrongWords}
+              onReset={handleReset}
+              language={selectedSource?.language || 'en-US'}
+            />
+          )}
       </div>
       {customModal.show && (
         <div className="custom-alert-overlay">
