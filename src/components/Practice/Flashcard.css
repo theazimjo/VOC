@@ -1,6 +1,11 @@
 /* ==========================================================================
-   DUOLINGO-STYLE FLASHCARD PRACTICE MODE
+   STACKED FLASHCARD PRACTICE MODE
    ========================================================================== */
+
+:root {
+  --fc-card-h: 340px;    /* active card height */
+  --fc-peek-max: 36px;   /* tallest ghost peek */
+}
 
 .duo-flashcard-page {
   min-height: 100vh;
@@ -13,85 +18,193 @@
   box-sizing: border-box;
 }
 
+/* ── Body ── */
 .duo-flashcard-body {
   max-width: 580px;
   width: 100%;
   margin: 0 auto;
-  padding: 16px 24px 140px 24px;
+  padding: 16px 24px 148px 24px;
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  justify-content: center;   /* center the stack scene vertically */
   box-sizing: border-box;
 }
 
-/* ─── 3D Flashcard Container ─── */
-.duo-flashcard-scene {
+/* ─────────────────────────────────────────────────────────────
+   STACK SCENE
+   Height = card height + extra room for the deepest ghost to
+   peek above without being clipped.
+   overflow: visible is critical so ghosts are never clipped.
+───────────────────────────────────────────────────────────── */
+.fc-stack-scene {
+  position: relative;
   width: 100%;
-  height: 360px;
-  perspective: 1200px;
-  cursor: pointer;
-  user-select: none;
-  -webkit-user-select: none;
-  margin-top: 8px;
+  /* card height + deepest peek (32px) + a little breathing room */
+  height: calc(var(--fc-card-h) + var(--fc-peek-max) + 8px);
+  overflow: visible;
 }
 
-.duo-flashcard-card {
+/* ─────────────────────────────────────────────────────────────
+   STACK CARDS
+   All cards share the same absolute position (bottom:0).
+   Their y/scaleX is controlled by framer-motion animate.
+───────────────────────────────────────────────────────────── */
+.fc-stack-card {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--fc-card-h);
+  border-radius: 26px;
+  transform-origin: bottom center;
+}
+
+/* Top (active) card wrapper */
+.fc-stack-top {
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.fc-stack-top:active { cursor: grabbing; }
+
+/* Ghost (behind) cards */
+.fc-stack-ghost {
+  pointer-events: none;
+  overflow: hidden;
+  background-color: var(--bg-secondary);
+  border: 2.5px solid var(--border);
+  box-shadow:
+    0 6px 0 var(--border),
+    0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Ghost face: simple front face shown on non-top cards */
+.fc-ghost-face {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px 24px;
+  text-align: center;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+}
+
+/* Drag layer sits inside fc-stack-top and fills it */
+.fc-top-drag-layer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 26px;
+}
+
+/* ─── 3-D flip wrapper ─── */
+.fc-flip-inner {
   width: 100%;
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  border-radius: 26px;
 }
 
-.duo-flashcard-card.is-flipped {
+.fc-flip-inner.is-flipped {
   transform: rotateY(180deg);
 }
 
-.duo-flashcard-face {
+/* ─── Card faces ─── */
+.fc-face {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  inset: 0;
+  border-radius: 26px;
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px 24px;
+  text-align: center;
+  background-color: var(--bg-secondary);
+  border: 2.5px solid var(--border);
+  box-shadow:
+    0 6px 0 var(--border),
+    0 12px 32px rgba(0, 0, 0, 0.10);
+  box-sizing: border-box;
+  overflow-y: auto;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.fc-face:hover { border-color: var(--accent-1); }
+
+.fc-face-back { transform: rotateY(180deg); }
+
+/* ─── Drag overlays ─── */
+.fc-drag-overlay {
+  position: absolute;
+  inset: 0;
   border-radius: 26px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 32px 24px;
-  text-align: center;
-  background-color: var(--bg-secondary);
-  border: 2.5px solid var(--border);
-  box-shadow: 0 6px 0 var(--border);
-  box-sizing: border-box;
-  overflow-y: auto;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  gap: 10px;
+  font-size: 1.35rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  pointer-events: none;
+  z-index: 20;
+  border: 4px solid transparent;
 }
 
-.duo-flashcard-face:hover {
-  border-color: var(--accent-1);
+.fc-drag-know {
+  background: color-mix(in srgb, var(--success) 18%, transparent);
+  border-color: var(--success);
+  color: var(--success);
 }
 
-.duo-flashcard-front {
-  background-color: var(--bg-secondary);
+.fc-drag-dontknow {
+  background: color-mix(in srgb, var(--error) 18%, transparent);
+  border-color: var(--error);
+  color: var(--error);
 }
 
-.duo-flashcard-back {
-  background-color: var(--bg-secondary);
-  transform: rotateY(180deg);
+/* ─── Swipe hint row (shown on back face) ─── */
+.fc-swipe-hint {
+  position: absolute;
+  bottom: 18px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+  opacity: 0.55;
 }
 
-/* ─── Speaker Button ─── */
+/* ─── Speaker button ─── */
 .duo-fc-speaker-btn {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 14px;
+  right: 14px;
   background: var(--bg-tertiary);
   border: 1px solid var(--border-light);
   border-radius: 50%;
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -106,17 +219,15 @@
   background-color: color-mix(in srgb, var(--accent-1) 15%, transparent);
 }
 
-.duo-fc-speaker-btn:active {
-  transform: scale(0.95);
-}
+.duo-fc-speaker-btn:active { transform: scale(0.95); }
 
-/* ─── Card Typography ─── */
+/* ─── Typography ─── */
 .duo-fc-word {
   font-size: 2.4rem;
   font-weight: 900;
   color: var(--text-primary);
   letter-spacing: -0.02em;
-  margin: 12px 0 6px 0;
+  margin: 12px 0 6px;
   line-height: 1.25;
 }
 
@@ -132,7 +243,7 @@
   font-weight: 850;
   color: var(--accent-2, #A855F7);
   letter-spacing: -0.02em;
-  margin: 12px 0 8px 0;
+  margin: 12px 0 8px;
   line-height: 1.25;
 }
 
@@ -174,23 +285,24 @@
   margin-top: 10px;
 }
 
-.duo-fc-sentence-icon {
-  color: var(--accent-1);
-  flex-shrink: 0;
-}
+.duo-fc-sentence-icon { color: var(--accent-1); flex-shrink: 0; }
 
 .duo-fc-hint-row {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--text-muted);
-  margin-top: auto;
-  padding-top: 12px;
+  white-space: nowrap;
+  opacity: 0.65;
 }
 
-/* ─── Part of Speech Badge ─── */
+/* ─── POS badge ─── */
 .fc-pos-badge {
   display: inline-block;
   padding: 4px 10px;
@@ -204,7 +316,7 @@
   border: 1px solid var(--border-light);
 }
 
-/* ─── Bottom Bar & Judge Buttons ─── */
+/* ─── Bottom bar & judge buttons ─── */
 .duo-flashcard-bottom-bar {
   position: fixed;
   bottom: 0;
@@ -252,7 +364,7 @@
   background-color: var(--error);
   border: 2px solid var(--error);
   box-shadow: 0 4px 0 color-mix(in srgb, var(--error) 75%, black);
-  color: #ffffff;
+  color: #fff;
   font-size: 1rem;
   font-weight: 800;
   padding: 16px 20px;
@@ -266,10 +378,7 @@
   gap: 8px;
 }
 
-.duo-btn-dont-know:hover {
-  filter: brightness(1.08);
-}
-
+.duo-btn-dont-know:hover { filter: brightness(1.08); }
 .duo-btn-dont-know:active {
   transform: translateY(3px);
   box-shadow: 0 1px 0 color-mix(in srgb, var(--error) 75%, black);
@@ -280,7 +389,7 @@
   background-color: var(--success);
   border: 2px solid var(--success);
   box-shadow: 0 4px 0 color-mix(in srgb, var(--success) 75%, black);
-  color: #ffffff;
+  color: #fff;
   font-size: 1rem;
   font-weight: 800;
   padding: 16px 20px;
@@ -294,44 +403,32 @@
   gap: 8px;
 }
 
-.duo-btn-know:hover {
-  filter: brightness(1.08);
-}
-
+.duo-btn-know:hover { filter: brightness(1.08); }
 .duo-btn-know:active {
   transform: translateY(3px);
   box-shadow: 0 1px 0 color-mix(in srgb, var(--success) 75%, black);
 }
 
-/* ─── Responsive Adjustments ─── */
+/* ─── Responsive ─── */
 @media (max-width: 600px) {
+  :root {
+    --fc-card-h: 300px;
+    --fc-peek-max: 32px;
+  }
+
   .duo-flashcard-body {
-    padding: 12px 16px 130px 16px;
+    padding: 12px 16px 140px 16px;
   }
 
-  .duo-flashcard-scene {
-    height: 310px;
+  .fc-face {
+    padding: 24px 16px 20px;
   }
 
-  .duo-flashcard-face {
-    padding: 24px 16px;
-  }
+  .duo-fc-word      { font-size: 1.95rem; }
+  .duo-fc-translation { font-size: 1.7rem; }
+  .duo-fc-def-large { font-size: 1.3rem; }
 
-  .duo-fc-word {
-    font-size: 1.95rem;
-  }
-
-  .duo-fc-translation {
-    font-size: 1.7rem;
-  }
-
-  .duo-fc-def-large {
-    font-size: 1.3rem;
-  }
-
-  .duo-flashcard-judge-btns {
-    gap: 10px;
-  }
+  .duo-flashcard-judge-btns { gap: 10px; }
 
   .duo-btn-dont-know,
   .duo-btn-know {
