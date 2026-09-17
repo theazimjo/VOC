@@ -1,87 +1,123 @@
-/* ─── Match Game ─── */
-.match-game-container {
-  max-width: 620px;
+/* ==========================================================================
+   MATCH GAME — DUOLINGO / APPLE HIG 3D DESIGN SYSTEM
+   ========================================================================== */
+
+.duo-match-page {
+  min-height: 100vh;
   width: 100%;
-  /* The parent (.practice-session-content) is a column flex box that
-     top-aligns its content by default — with only 8 short rows, Match Game
-     was left stranded at the very top with empty space below. Auto
-     top/bottom margins center it vertically along that flex axis instead,
-     without touching the shared parent rule every other practice mode uses. */
-  margin: auto auto;
+  background-color: var(--bg-primary);
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
+  box-sizing: border-box;
 }
 
-.match-grid {
+.duo-match-body {
+  max-width: 680px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 12px 24px 40px 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.duo-match-title {
+  margin-bottom: 24px;
+}
+
+.duo-match-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--space-md);
-  align-items: start;
+  gap: 16px;
+  width: 100%;
+  align-items: stretch;
 }
 
-.match-column {
+.duo-match-column {
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: 12px;
 }
 
-.match-item {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: var(--space-sm) var(--space-md);
-  font-size: var(--font-sm);
-  font-weight: 600;
+/* 3D Interactive Card (Duolingo Style) */
+.duo-match-card {
+  background-color: var(--bg-secondary);
+  border: 2px solid var(--border);
+  box-shadow: 0 4px 0 var(--border);
+  border-radius: 16px;
   color: var(--text-primary);
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 14px 18px;
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   cursor: pointer;
-  transition: all var(--transition-base);
-  text-align: center;
   user-select: none;
+  font-family: inherit;
+  box-sizing: border-box;
+  text-align: left;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.1s ease, box-shadow 0.1s ease;
   position: relative;
   overflow: hidden;
-  backdrop-filter: blur(8px);
-  height: 70px; /* Equal height for perfect alignment */
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.match-item:hover:not(.matched):not(.error) {
+.duo-match-card-text {
+  flex: 1;
+  min-width: 0;
+  word-break: break-word;
+  line-height: 1.35;
+}
+
+/* Hover state */
+.duo-match-card:hover:not(:disabled):not(.is-selected):not(.is-matched):not(.is-error) {
+  background-color: var(--bg-tertiary);
   border-color: var(--accent-1);
-  background: var(--bg-glass-hover);
+  box-shadow: 0 4px 0 var(--border);
 }
 
-.match-item.selected {
+/* Active press */
+.duo-match-card:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--border);
+}
+
+/* Selected state (Blue highlight) */
+.duo-match-card.is-selected {
+  background-color: var(--accent-1-dim, rgba(0, 122, 255, 0.12));
   border-color: var(--accent-1);
-  background: var(--accent-1-dim);
-  font-weight: 700;
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--accent-1) 75%, black);
+  color: var(--accent-1);
 }
 
-.match-item.matched {
-  background: var(--success-dim);
+/* Matched state (Green success) */
+.duo-match-card.is-matched {
+  background-color: var(--success-dim, rgba(52, 199, 89, 0.12));
   border-color: var(--success);
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--success) 75%, black);
   color: var(--success);
-  cursor: default;
   opacity: 0.55;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
+  cursor: default;
 }
 
-.match-item-check {
+.duo-match-check-icon {
+  color: var(--success);
   flex-shrink: 0;
+  margin-left: 8px;
 }
 
-.match-item.error {
-  background: var(--error-dim);
+/* Error state (Red mismatch with shake) */
+.duo-match-card.is-error {
+  background-color: var(--error-dim, rgba(255, 59, 48, 0.15));
   border-color: var(--error);
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--error) 75%, black);
   color: var(--error);
-  animation: match-shake 0.35s ease;
+  animation: duo-match-shake 0.35s ease;
 }
 
-@keyframes match-shake {
+@keyframes duo-match-shake {
   0%, 100% { transform: translateX(0); }
   20%       { transform: translateX(-6px); }
   40%       { transform: translateX(6px); }
@@ -89,24 +125,29 @@
   80%       { transform: translateX(4px); }
 }
 
+/* Mobile Responsiveness (<= 600px) */
 @media (max-width: 600px) {
-  .match-game-container {
-    gap: var(--space-sm);
+  .duo-match-body {
+    padding: 8px 14px 24px 14px;
   }
 
-  .match-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-xs);
+  .duo-match-title {
+    font-size: 1.35rem;
+    margin-bottom: 16px;
   }
 
-  .match-column {
-    gap: var(--space-sm);
+  .duo-match-grid {
+    gap: 10px;
   }
 
-  .match-item {
-    padding: var(--space-xs);
-    font-size: 0.78rem;
-    height: 52px; /* Equal height on mobile — tighter to avoid page scroll */
-    line-height: 1.25;
+  .duo-match-column {
+    gap: 8px;
+  }
+
+  .duo-match-card {
+    padding: 10px 12px;
+    font-size: 0.88rem;
+    min-height: 48px;
+    border-radius: 12px;
   }
 }

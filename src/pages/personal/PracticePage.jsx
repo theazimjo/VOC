@@ -695,12 +695,12 @@ export default function PracticePage({ embedded = false, initialSource = null, i
           {!pageLoading && step === 'practice' && (
             <motion.div
               key="practice"
-              className={`practice-session ${selectedMode === 'spelling' || selectedMode === 'flashcard' ? 'spelling-session-fullscreen' : ''}`}
+              className={`practice-session ${selectedMode === 'spelling' || selectedMode === 'flashcard' || selectedMode === 'match' || selectedMode === 'quiz' || selectedMode === 'speed' ? 'spelling-session-fullscreen' : ''}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
             >
-              {selectedMode !== 'spelling' && selectedMode !== 'flashcard' && (
+              {selectedMode !== 'spelling' && selectedMode !== 'flashcard' && selectedMode !== 'match' && selectedMode !== 'quiz' && selectedMode !== 'speed' && (
                 <div className="practice-session-header clean-quiz-header">
                   <button className="clean-back-arrow" onClick={handleBack} title="Exit practice">
                     <ChevronLeft size={22} strokeWidth={2.5} />

@@ -1,21 +1,19 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Timer, Trophy, Check, X } from 'lucide-react';
-import { shuffleArray } from '../../utils/helpers';
+import { Trophy, Check, X, Volume2 } from 'lucide-react';
+import { shuffleArray, speakWord } from '../../utils/helpers';
 import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
+import { playSound, triggerVibration } from '../../utils/feedback';
+import { useLanguage } from '../../contexts/LanguageContext';
+import PracticeQuitModal from './PracticeQuitModal';
 import './SpeedGame.css';
 
 const ROUND_SECONDS = 60;
 
-// The personal-best record is kept per source (pack/book) in localStorage —
-// this is a fast, disposable arcade-style score, not spaced-repetition data,
-// so it doesn't need a Firebase round trip or a schema change to persist.
 function recordKeyFor(sourceName) {
   return `voc-speed-record-${(sourceName || 'default').toLowerCase().replace(/\s+/g, '_')}`;
 }
 
-// Exported so PracticePage can show the record on the intro screen, before
-// the game (which owns and updates this same value) has even mounted.
 export function getSpeedRecord(sourceName) {
   return Number(localStorage.getItem(recordKeyFor(sourceName))) || 0;
 }
@@ -52,7 +50,17 @@ function buildOptions(currentWord, words) {
   return shuffleArray([correctOption, ...wrongOptions]);
 }
 
-export default function SpeedGame({ words, sourceName, onComplete, onUpdateWord, onAnswer, onProgress }) {
+export default function SpeedGame({
+  words,
+  sourceName,
+  onComplete,
+  onUpdateWord,
+  onAnswer,
+  onProgress,
+  onExit,
+  language = 'en-US',
+}) {
+  const { t } = useLanguage();
   const [pool, setPool] = useState(() => shuffleArray(words));
   const [poolIndex, setPoolIndex] = useState(0);
   const [options, setOptions] = useState(() => buildOptions(pool[0], words));
@@ -63,15 +71,15 @@ export default function SpeedGame({ words, sourceName, onComplete, onUpdateWord,
   const [incorrectCount, setIncorrectCount] = useState(0);
   const [finished, setFinished] = useState(false);
   const [record, setRecord] = useState(() => getSpeedRecord(sourceName));
+  const [showQuitModal, setShowQuitModal] = useState(false);
+
   const questionStartRef = useRef(Date.now());
   const finishedRef = useRef(false);
 
   const currentWord = pool.length > 0 ? pool[poolIndex % pool.length] : null;
   const correctOption = currentWord ? ((currentWord.translation || '').trim() || (currentWord.word || '').trim()) : '';
 
-  // One global countdown, independent of per-question state — the whole
-  // point of "Speed" is answering as many as possible before it hits zero,
-  // not a fresh 15s clock per question like the regular Quiz.
+  // 60-second countdown
   useEffect(() => {
     if (finished) return;
     if (timeLeft <= 0) {
@@ -134,9 +142,13 @@ export default function SpeedGame({ words, sourceName, onComplete, onUpdateWord,
     });
 
     if (isCorrect) {
+      playSound('correct');
+      triggerVibration('correct');
       setCorrectCount(c => c + 1);
       setRecord(r => Math.max(r, correctCount + 1));
     } else {
+      playSound('wrong');
+      triggerVibration('wrong');
       setIncorrectCount(c => c + 1);
     }
     setTimeout(advance, 350);
@@ -144,69 +156,118 @@ export default function SpeedGame({ words, sourceName, onComplete, onUpdateWord,
 
   if (!currentWord) return null;
 
+  const progressPct = (timeLeft / ROUND_SECONDS) * 100;
+
   return (
-    <div className="speed-container">
-      <div className="speed-top-bar">
-        <div className={`speed-timer ${timeLeft <= 10 ? 'danger' : ''}`}>
-          <Timer size={16} strokeWidth={2.4} />
-          <span>{timeLeft}s</span>
-        </div>
-        <div className="speed-tally">
-          <span className="speed-tally-correct"><Check size={13} strokeWidth={2.8} />{correctCount}</span>
-          <span className="speed-tally-wrong"><X size={13} strokeWidth={2.8} />{incorrectCount}</span>
-        </div>
-        <div className="speed-record" title="Your best score in this pack">
-          <Trophy size={14} strokeWidth={2.3} />
-          <span>{record}</span>
-        </div>
-      </div>
+    <div className="duo-spelling-page duo-speed-page">
+      {/* Top Header (Duolingo Style: X button + Timer progress bar + Tally Badges) */}
+      <header className="duo-top-header">
+        <button
+          type="button"
+          className="duo-close-btn"
+          onClick={() => setShowQuitModal(true)}
+          title={t('practice.closePractice') || "Close practice"}
+        >
+          <X size={24} strokeWidth={2.8} />
+        </button>
 
-      <div className="speed-timer-track">
-        <div
-          className="speed-timer-fill"
-          style={{
-            width: `${(timeLeft / ROUND_SECONDS) * 100}%`,
-            background: timeLeft <= 10 ? 'var(--error)' : timeLeft <= 25 ? 'var(--warning)' : 'var(--accent-3)',
-          }}
-        />
-      </div>
-
-      <div className="speed-game-body">
-        <AnimatePresence mode="wait">
+        <div className="duo-progress-track">
           <motion.div
-            key={poolIndex}
-            className="speed-question"
-            initial={{ opacity: 0, scale: 0.94 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.96 }}
-            transition={{ duration: 0.16 }}
-          >
-            {currentWord.word}
-          </motion.div>
-        </AnimatePresence>
+            className={`duo-progress-fill ${timeLeft <= 10 ? 'fill-danger' : timeLeft <= 25 ? 'fill-warning' : ''}`}
+            animate={{ width: `${progressPct}%` }}
+            transition={{ duration: 0.95, ease: 'linear' }}
+          />
+        </div>
 
-        <div className="speed-options">
-          {options.map((opt, idx) => {
-            let state = 'idle';
-            if (answered) {
-              if (opt === correctOption || opt === currentWord.translation) state = 'correct';
-              else if (opt === selectedOption) state = 'wrong';
-              else state = 'dimmed';
-            }
-            return (
-              <button
-                key={`${poolIndex}-${idx}`}
-                type="button"
-                className={`speed-option ${state}`}
-                onClick={() => handleSelect(opt)}
-                disabled={answered}
-              >
-                {opt}
-              </button>
-            );
-          })}
+        {/* Tally & Record Badges */}
+        <div className="duo-speed-badges-row">
+          <div className="duo-speed-tally tally-correct">
+            <Check size={14} strokeWidth={3} />
+            <span>{correctCount}</span>
+          </div>
+          <div className="duo-speed-tally tally-wrong">
+            <X size={14} strokeWidth={3} />
+            <span>{incorrectCount}</span>
+          </div>
+          <div className="duo-speed-record-badge" title="Personal best">
+            <Trophy size={14} strokeWidth={2.5} />
+            <span>{record}</span>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Body */}
+      <div className="duo-spelling-body duo-speed-body">
+        {/* Instruction Title */}
+        <h2 className="duo-prompt-title">
+          {t('practice.speedTitle') || "Speed Round"}
+        </h2>
+
+        {/* Question Card */}
+        <div className="duo-prompt-card duo-speed-prompt-card">
+          <button
+            type="button"
+            className="duo-prompt-content"
+            onClick={() => speakWord(currentWord.word, language)}
+            title={t('practice.clickToListen') || "Click to listen"}
+          >
+            <Volume2 size={20} strokeWidth={2.5} className="duo-speaker-icon" />
+            <span className="duo-prompt-text">{currentWord.word}</span>
+          </button>
+
+          <div className={`duo-speed-timer-badge ${timeLeft <= 10 ? 'danger' : timeLeft <= 25 ? 'warning' : ''}`}>
+            ⏱ {timeLeft}s
+          </div>
+        </div>
+
+        {/* Options List */}
+        <div className="duo-speed-options-list">
+          <AnimatePresence mode="wait">
+            {options.map((opt, idx) => {
+              let stateClass = '';
+              if (answered) {
+                if (opt === correctOption || opt === currentWord.translation) stateClass = 'is-correct';
+                else if (opt === selectedOption) stateClass = 'is-wrong';
+                else stateClass = 'is-dimmed';
+              }
+
+              return (
+                <motion.button
+                  key={`${poolIndex}-${idx}`}
+                  type="button"
+                  className={`duo-speed-option-card ${stateClass}`}
+                  onClick={() => handleSelect(opt)}
+                  disabled={answered}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.04 }}
+                  whileHover={!answered ? { y: -2 } : {}}
+                  whileTap={!answered ? { y: 2 } : {}}
+                >
+                  <span className="duo-speed-badge">{['1', '2', '3', '4'][idx]}</span>
+                  <span className="duo-speed-option-text">{opt}</span>
+                  {answered && (opt === correctOption || opt === currentWord.translation) && (
+                    <Check className="duo-speed-check-icon" size={20} strokeWidth={3.5} />
+                  )}
+                  {answered && opt === selectedOption && opt !== correctOption && opt !== currentWord.translation && (
+                    <X className="duo-speed-x-icon" size={20} strokeWidth={3.5} />
+                  )}
+                </motion.button>
+              );
+            })}
+          </AnimatePresence>
         </div>
       </div>
+
+      {/* Quit Confirmation Modal */}
+      <PracticeQuitModal
+        isOpen={showQuitModal}
+        onClose={() => setShowQuitModal(false)}
+        onConfirm={() => {
+          setShowQuitModal(false);
+          if (onExit) onExit(true);
+        }}
+      />
     </div>
   );
 }

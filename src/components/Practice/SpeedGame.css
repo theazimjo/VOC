@@ -1,231 +1,275 @@
-.speed-container {
-  max-width: 640px;
+/* ==========================================================================
+   SPEED GAME — DUOLINGO / APPLE HIG 3D DESIGN SYSTEM
+   ========================================================================== */
+
+.duo-speed-page {
+  min-height: 100vh;
   width: 100%;
-  margin: 0 auto;
+  background-color: var(--bg-primary);
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
+  box-sizing: border-box;
 }
 
-.speed-top-bar {
+.duo-speed-body {
+  max-width: 680px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 12px 24px 40px 24px;
+  flex: 1;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-sm);
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
 }
 
-.speed-timer {
+/* Badges row in top header */
+.duo-speed-badges-row {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.duo-speed-tally {
+  display: flex;
+  align-items: center;
+  gap: 4px;
   font-weight: 800;
-  font-size: var(--font-lg);
-  font-variant-numeric: tabular-nums;
-  color: var(--text-primary);
-  transition: color 0.3s;
+  font-size: 0.88rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border);
 }
 
-.speed-timer.danger {
+.duo-speed-tally.tally-correct {
+  color: var(--success);
+  border-color: color-mix(in srgb, var(--success) 40%, transparent);
+}
+
+.duo-speed-tally.tally-wrong {
   color: var(--error);
-  animation: speed-pulse-danger 0.5s infinite alternate;
+  border-color: color-mix(in srgb, var(--error) 40%, transparent);
 }
 
-@keyframes speed-pulse-danger {
+.duo-speed-record-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--warning, #FF9500);
+  background-color: var(--warning-dim, rgba(255, 149, 0, 0.12));
+  border: 1px solid color-mix(in srgb, var(--warning) 40%, transparent);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+/* Progress Fill Colors */
+.duo-progress-fill.fill-warning {
+  background-color: var(--warning, #FF9500);
+}
+
+.duo-progress-fill.fill-danger {
+  background-color: var(--error, #FF3B30);
+  animation: duo-speed-pulse-fill 0.5s infinite alternate;
+}
+
+@keyframes duo-speed-pulse-fill {
   from { opacity: 1; }
   to   { opacity: 0.55; }
 }
 
-.speed-tally {
-  display: flex;
-  gap: var(--space-md);
-  font-weight: 700;
-  font-size: var(--font-sm);
-}
-
-.speed-tally-correct,
-.speed-tally-wrong {
+/* Prompt Card with Timer Badge */
+.duo-speed-prompt-card {
   display: flex;
   align-items: center;
-  gap: 4px;
-}
-
-.speed-tally-correct { color: var(--success); }
-.speed-tally-wrong { color: var(--error); }
-
-.speed-record {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: var(--font-sm);
-  font-weight: 700;
-  color: var(--warning);
-  background: var(--warning-dim);
-  padding: 4px 10px;
-  border-radius: var(--radius-full);
-}
-
-.speed-timer-track {
+  justify-content: space-between;
   width: 100%;
-  height: 6px;
-  background: var(--bg-tertiary);
-  border-radius: var(--radius-full);
-  overflow: hidden;
-  border: 1px solid var(--border);
+  box-sizing: border-box;
 }
 
-.speed-timer-fill {
-  height: 100%;
-  border-radius: var(--radius-full);
-  transition: width 0.95s linear, background 0.3s;
-}
-
-.speed-question {
-  background: var(--bg-glass-strong);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: var(--space-xl);
-  text-align: center;
-  box-shadow: var(--shadow-lg);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  font-size: 2.4rem;
+.duo-speed-timer-badge {
+  font-size: 0.95rem;
   font-weight: 800;
-  color: var(--text-primary);
-  line-height: 1.2;
+  color: var(--text-secondary);
+  background-color: var(--bg-tertiary);
+  border: 1.5px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-variant-numeric: tabular-nums;
+  margin-left: 12px;
+  flex-shrink: 0;
+  transition: color 0.3s ease, border-color 0.3s ease;
 }
 
-.speed-game-body {
+.duo-speed-timer-badge.warning {
+  color: var(--warning);
+  border-color: var(--warning);
+}
+
+.duo-speed-timer-badge.danger {
+  color: var(--error);
+  border-color: var(--error);
+  animation: duo-speed-pulse-fill 0.5s infinite alternate;
+}
+
+/* Options Stacked List */
+.duo-speed-options-list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
+  gap: 12px;
   width: 100%;
+  margin-top: 8px;
 }
 
-/* Always a single stacked column, not a 2-up grid — Speed's answers are
-   full translation words/phrases (often longer than Quiz's), and under a
-   timer, one wide, thumb-sized target per row beats two cramped ones. */
-.speed-options {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-}
-
-.speed-option {
-  background: var(--bg-glass);
+/* 3D Option Card (Duolingo Style) */
+.duo-speed-option-card {
+  background-color: var(--bg-secondary);
   border: 2px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-md) var(--space-lg);
-  font-size: var(--font-md);
-  font-weight: 600;
-  cursor: pointer;
+  box-shadow: 0 4px 0 var(--border);
+  border-radius: 16px;
   color: var(--text-primary);
-  font-family: var(--font-family);
-  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 14px 18px;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+  font-family: inherit;
+  box-sizing: border-box;
   text-align: left;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.1s ease, box-shadow 0.1s ease;
+  position: relative;
+  overflow: hidden;
   width: 100%;
 }
 
-.speed-option:hover:not(:disabled) {
+.duo-speed-badge {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  border-radius: 8px;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.duo-speed-option-text {
+  flex: 1;
+  min-width: 0;
+  word-break: break-word;
+  line-height: 1.35;
+}
+
+/* Hover state */
+.duo-speed-option-card:hover:not(:disabled):not(.is-correct):not(.is-wrong):not(.is-dimmed) {
+  background-color: var(--bg-tertiary);
   border-color: var(--accent-1);
-  background: var(--bg-glass-hover);
+  box-shadow: 0 4px 0 var(--border);
 }
 
-.speed-option:active:not(:disabled) {
-  transform: scale(0.97);
+.duo-speed-option-card:hover:not(:disabled) .duo-speed-badge {
+  border-color: var(--accent-1);
+  color: var(--accent-1);
 }
 
-.speed-option:disabled {
+/* Active press */
+.duo-speed-option-card:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--border);
+}
+
+/* Correct state (Green success) */
+.duo-speed-option-card.is-correct {
+  background-color: var(--success-dim, rgba(52, 199, 89, 0.15));
+  border-color: var(--success);
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--success) 75%, black);
+  color: var(--text-primary);
+}
+
+.duo-speed-option-card.is-correct .duo-speed-badge {
+  background-color: var(--success);
+  border-color: var(--success);
+  color: #ffffff;
+}
+
+.duo-speed-check-icon {
+  color: var(--success);
+  flex-shrink: 0;
+}
+
+/* Wrong state (Red mismatch with shake) */
+.duo-speed-option-card.is-wrong {
+  background-color: var(--error-dim, rgba(255, 59, 48, 0.15));
+  border-color: var(--error);
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--error) 75%, black);
+  color: var(--text-primary);
+  animation: duo-speed-shake 0.35s ease;
+}
+
+.duo-speed-option-card.is-wrong .duo-speed-badge {
+  background-color: var(--error);
+  border-color: var(--error);
+  color: #ffffff;
+}
+
+.duo-speed-x-icon {
+  color: var(--error);
+  flex-shrink: 0;
+}
+
+/* Dimmed state */
+.duo-speed-option-card.is-dimmed {
+  opacity: 0.4;
   cursor: default;
 }
 
-.speed-option.correct {
-  background: var(--success-dim);
-  border-color: var(--success);
-  color: var(--success);
+@keyframes duo-speed-shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-6px); }
+  40%       { transform: translateX(6px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
 }
 
-.speed-option.wrong {
-  background: var(--error-dim);
-  border-color: var(--error);
-  color: var(--error);
-}
-
-.speed-option.dimmed {
-  opacity: 0.45;
-}
-
-@media (max-width: 640px) {
-  .speed-container {
-    min-height: calc(100vh - 140px);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 0.85rem;
-    padding: 0.25rem 0;
+/* Mobile Responsiveness (<= 600px) */
+@media (max-width: 600px) {
+  .duo-speed-body {
+    padding: 8px 16px 24px 16px;
+    gap: 12px;
   }
 
-  .speed-top-bar {
-    padding: 0 2px;
+  .duo-speed-badges-row {
+    gap: 6px;
   }
 
-  .speed-game-body {
-    margin-top: auto;
-    margin-bottom: auto;
-    gap: 1.15rem;
+  .duo-speed-tally,
+  .duo-speed-record-badge {
+    font-size: 0.78rem;
+    padding: 3px 8px;
   }
 
-  .speed-timer {
-    font-size: 1.15rem;
-  }
-
-  .speed-tally {
-    gap: var(--space-sm);
-    font-size: 0.8rem;
-  }
-
-  .speed-record {
-    font-size: 0.8rem;
-    padding: 4px 10px;
-  }
-
-  .speed-question {
-    font-size: 2.2rem;
-    font-weight: 800;
-    padding: 1.75rem 1.25rem;
-    min-height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-radius: var(--radius-xl);
-    border-color: var(--accent-1-dim);
-    box-shadow: var(--shadow-md), 0 0 24px rgba(129, 140, 248, 0.15);
-  }
-
-  .speed-options {
+  .duo-speed-options-list {
     gap: 10px;
   }
 
-  .speed-option {
-    padding: 0.85rem 1rem;
+  .duo-speed-option-card {
+    padding: 12px 14px;
     font-size: 0.95rem;
-    font-weight: 600;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-@media (max-width: 380px) {
-  .speed-question {
-    font-size: 1.85rem;
-    padding: 1.25rem 1rem;
-    min-height: 100px;
-  }
-
-  .speed-option {
-    padding: 0.75rem 0.9rem;
-    font-size: 0.9rem;
+    min-height: 50px;
+    border-radius: 14px;
   }
 }
