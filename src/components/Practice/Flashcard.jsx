@@ -37,16 +37,18 @@ function PosBadge({ pos }) {
 /* ── Interactive draggable top card ── */
 function TopCard({ word, isFlipped, onFlip, onJudge, language, isMonolingual, safeT }) {
   const x = useMotionValue(0);
-  const rotate = useTransform(x, [-180, 180], [-14, 14]);
-  const knowAlpha = useTransform(x, [30, 110], [0, 1]);
-  const dontAlpha = useTransform(x, [-110, -30], [1, 0]);
+  const rotate = useTransform(x, [-200, 200], [-16, 16]);
+  const knowAlpha = useTransform(x, [20, 95], [0, 1]);
+  const dontAlpha = useTransform(x, [-95, -20], [1, 0]);
 
   const handleDragEnd = (_, info) => {
-    if (!isFlipped) {
-      if (Math.abs(info.offset.x) > 70) onFlip();
-    } else {
-      if (info.offset.x > 90)       onJudge(true);
-      else if (info.offset.x < -90) onJudge(false);
+    const offsetX = info.offset.x;
+    const velocityX = info.velocity.x;
+
+    if (offsetX > 75 || velocityX > 300) {
+      onJudge(true);
+    } else if (offsetX < -75 || velocityX < -300) {
+      onJudge(false);
     }
     x.set(0);
   };
@@ -55,31 +57,36 @@ function TopCard({ word, isFlipped, onFlip, onJudge, language, isMonolingual, sa
     <motion.div
       className="fc-top-drag-layer"
       style={{ x, rotate }}
-      drag={isFlipped ? 'x' : false}
+      drag="x"
       dragConstraints={{ left: 0, right: 0 }}
       dragElastic={0.85}
+      onTap={() => {
+        if (Math.abs(x.get()) < 8) {
+          onFlip();
+        }
+      }}
       onDragEnd={handleDragEnd}
       whileTap={{ scale: 0.99 }}
     >
-      {isFlipped && (
-        <>
-          <motion.div className="fc-drag-overlay fc-drag-know" style={{ opacity: knowAlpha }}>
-            <Check size={28} strokeWidth={3.5} />
-            <span>{safeT('practice.know', 'BILAMAN')}</span>
-          </motion.div>
-          <motion.div className="fc-drag-overlay fc-drag-dontknow" style={{ opacity: dontAlpha }}>
-            <X size={28} strokeWidth={3.5} />
-            <span>{safeT('practice.dontKnow', 'BILMAYMAN')}</span>
-          </motion.div>
-        </>
-      )}
+      {/* Swipe Feedback Overlay Badges (Work on both Front & Back) */}
+      <motion.div className="fc-drag-overlay fc-drag-know" style={{ opacity: knowAlpha }}>
+        <Check size={32} strokeWidth={3.5} />
+        <span>{safeT('practice.know', 'BILAMAN')}</span>
+      </motion.div>
+      <motion.div className="fc-drag-overlay fc-drag-dontknow" style={{ opacity: dontAlpha }}>
+        <X size={32} strokeWidth={3.5} />
+        <span>{safeT('practice.dontKnow', 'BILMAYMAN')}</span>
+      </motion.div>
 
-      <div className={`fc-flip-inner ${isFlipped ? 'is-flipped' : ''}`} onClick={onFlip}>
+      <div className={`fc-flip-inner ${isFlipped ? 'is-flipped' : ''}`}>
         {/* Front */}
         <div className="fc-face fc-face-front">
-          <button type="button" className="duo-fc-speaker-btn"
+          <button
+            type="button"
+            className="duo-fc-speaker-btn"
             onClick={e => { e.stopPropagation(); speakWord(word.word, language); }}
-            title={safeT('practice.listen', 'Listen')}>
+            title={safeT('practice.listen', 'Listen')}
+          >
             <Volume2 size={22} />
           </button>
           <PosBadge pos={word.partOfSpeech} />
@@ -93,9 +100,12 @@ function TopCard({ word, isFlipped, onFlip, onJudge, language, isMonolingual, sa
 
         {/* Back */}
         <div className="fc-face fc-face-back">
-          <button type="button" className="duo-fc-speaker-btn"
+          <button
+            type="button"
+            className="duo-fc-speaker-btn"
             onClick={e => { e.stopPropagation(); speakWord(word.word, language); }}
-            title={safeT('practice.listen', 'Listen')}>
+            title={safeT('practice.listen', 'Listen')}
+          >
             <Volume2 size={22} />
           </button>
           <PosBadge pos={word.partOfSpeech} />
@@ -110,12 +120,10 @@ function TopCard({ word, isFlipped, onFlip, onJudge, language, isMonolingual, sa
               <span>{word.customSentence}</span>
             </div>
           )}
-          {isFlipped && (
-            <div className="fc-swipe-hint">
-              <span>← {safeT('practice.dontKnow', 'BILMAYMAN')}</span>
-              <span>{safeT('practice.know', 'BILAMAN')} →</span>
-            </div>
-          )}
+          <div className="fc-swipe-hint">
+            <span>← {safeT('practice.dontKnow', 'BILMAYMAN')}</span>
+            <span>{safeT('practice.know', 'BILAMAN')} →</span>
+          </div>
         </div>
       </div>
     </motion.div>
