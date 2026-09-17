@@ -1,73 +1,65 @@
-.grid-match-container {
-  max-width: 620px;
+.duo-gridmatch-page {
+  /* Full screen layout inheriting from duo-spelling-page */
+}
+
+.duo-gridmatch-body {
+  max-width: 680px;
   width: 100%;
   margin: 0 auto;
+  padding: 0 var(--space-md) var(--space-xl);
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
-}
-
-.grid-match-top-bar {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--space-sm);
 }
 
-.grid-match-round {
-  font-weight: 800;
-  font-size: var(--font-md);
-  color: var(--text-primary);
-}
-
-.grid-match-round-size {
-  font-weight: 500;
+.duo-prompt-subtitle {
+  font-size: var(--font-sm);
+  font-weight: 600;
   color: var(--text-muted);
-  font-size: var(--font-sm);
+  margin-top: -8px;
+  margin-bottom: var(--space-md);
+  text-align: center;
 }
 
-.grid-match-tally {
-  display: flex;
-  gap: var(--space-md);
-  font-weight: 700;
-  font-size: var(--font-sm);
-}
-
-.grid-match-tally-correct,
-.grid-match-tally-wrong {
+.duo-gridmatch-badges-row {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
 }
 
-.grid-match-tally-correct { color: var(--success); }
-.grid-match-tally-wrong { color: var(--error); }
+.duo-gridmatch-round-badge {
+  background: var(--bg-tertiary, rgba(255, 255, 255, 0.08));
+  border: 1.5px solid var(--border-medium, rgba(255, 255, 255, 0.12));
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.5px;
+}
 
 .grid-match-level-banner {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  background: var(--accent-1-dim);
-  color: var(--accent-1);
-  font-size: var(--font-sm);
+  background: rgba(88, 204, 2, 0.12);
+  border: 1.5px solid rgba(88, 204, 2, 0.3);
+  color: #58cc02;
+  font-size: 0.85rem;
   font-weight: 700;
-  padding: 8px 14px;
+  padding: 8px 16px;
   border-radius: var(--radius-full);
-  align-self: center;
+  margin-bottom: var(--space-md);
 }
 
 .grid-match-board {
   display: grid;
-  gap: 10px;
+  gap: 12px;
+  width: 100%;
+  max-width: 580px;
   grid-template-columns: repeat(var(--grid-cols, 3), minmax(0, 1fr));
-}
-
-@media (max-width: 640px) {
-  .grid-match-board {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-  }
+  margin-top: var(--space-sm);
 }
 
 .grid-match-card {
@@ -76,26 +68,14 @@
   background: none;
   padding: 0;
   cursor: pointer;
-  transition: transform 0.15s ease;
-  /* Gives the flipper's rotateY an actual sense of depth instead of just
-     stretching the card sideways. */
-  perspective: 900px;
+  perspective: 1000px;
+  outline: none;
 }
 
 .grid-match-card:disabled {
   cursor: default;
 }
 
-/* Lifts the whole card on hover without touching .grid-match-card-flipper's
-   transform — that one is driven entirely by Framer Motion's rotateY, and a
-   competing CSS transform on it would fight the flip animation. */
-.grid-match-card:hover:not(:disabled) {
-  transform: translateY(-2px);
-}
-
-/* The two faces stack in the same 3D space; whichever one isn't rotated
-   toward the viewer this frame is hidden via backface-visibility, so the
-   flip reads as one card turning over, not two cards cross-fading. */
 .grid-match-card-flipper {
   position: relative;
   width: 100%;
@@ -106,106 +86,105 @@
 .grid-match-card-face {
   position: absolute;
   inset: 0;
-  border-radius: var(--radius-lg);
-  border: 2px solid var(--border);
+  border-radius: var(--radius-xl, 16px);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px;
+  padding: var(--space-xs);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  box-sizing: border-box;
 }
 
-/* Face-down back: a distinct, bold color (not a border-only recolor) so a
-   flipped-vs-unflipped card is unmistakable at a glance, not just texture. */
+/* Face-down (Back): 3D Duolingo Card Button Style */
 .grid-match-card-back {
-  background: linear-gradient(135deg, hsl(280, 75%, 58%), hsl(255, 80%, 52%));
-  border-color: transparent;
-  color: rgba(255, 255, 255, 0.85);
+  background: linear-gradient(145deg, #1cb0f6 0%, #1899d6 100%);
+  border: 2px solid #147dae;
+  border-bottom: 5px solid #147dae;
+  box-shadow: 0 4px 12px rgba(28, 176, 246, 0.25);
+  color: #ffffff;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
+.grid-match-card:hover:not(:disabled) .grid-match-card-back {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(28, 176, 246, 0.35);
+}
+
+.grid-match-card:active:not(:disabled) .grid-match-card-back {
+  transform: translateY(2px);
+  border-bottom-width: 2px;
+}
+
+.card-back-icon {
+  color: rgba(255, 255, 255, 0.9);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+/* Face-up (Front): Modern clean card */
 .grid-match-card-front {
-  background: var(--bg-glass-strong);
-  border-color: var(--accent-1);
+  background: var(--bg-card, #1e293b);
+  border: 2px solid var(--border-strong, #334155);
+  border-bottom: 5px solid var(--border-dark, #0f172a);
   transform: rotateY(180deg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .grid-match-card.matched .grid-match-card-front {
-  background: var(--success-dim);
-  border-color: var(--success);
+  background: rgba(88, 204, 2, 0.15);
+  border-color: #58cc02;
+  border-bottom: 5px solid #46a302;
+  box-shadow: 0 4px 14px rgba(88, 204, 2, 0.25);
 }
 
 .grid-match-card-inner {
-  font-size: var(--font-sm);
+  font-size: clamp(0.75rem, 2vw, 1.05rem);
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--text-primary, #f8fafc);
   text-align: center;
-  line-height: 1.2;
+  line-height: 1.25;
   word-break: break-word;
+  padding: 4px;
 }
 
 .grid-match-card.matched .grid-match-card-inner {
-  color: var(--success);
+  color: #58cc02;
 }
 
-@media (max-width: 480px) {
-  .grid-match-container {
-    gap: var(--space-sm);
+@media (max-width: 640px) {
+  .duo-gridmatch-body {
+    padding-left: var(--space-sm);
+    padding-right: var(--space-sm);
   }
 
-  .grid-match-top-bar {
-    flex-wrap: wrap;
-    row-gap: 4px;
+  .grid-match-board {
+    gap: 8px;
+    max-width: 100%;
   }
 
-  .grid-match-round {
-    font-size: var(--font-sm);
+  .grid-match-card-face {
+    border-radius: var(--radius-lg, 12px);
+    border-width: 2px;
+    border-bottom-width: 4px;
   }
 
-  .grid-match-round-size {
-    font-size: var(--font-xs);
+  .grid-match-card-inner {
+    font-size: 0.78rem;
   }
+}
 
-  .grid-match-tally {
-    gap: var(--space-sm);
-    font-size: var(--font-xs);
-  }
-
-  .grid-match-level-banner {
-    font-size: var(--font-xs);
-    padding: 6px 10px;
-    text-align: center;
-  }
-
+@media (max-width: 380px) {
   .grid-match-board {
     gap: 6px;
   }
 
   .grid-match-card-face {
-    border-width: 1.5px;
-    border-radius: var(--radius-md);
-    padding: 3px;
+    padding: 2px;
+    border-radius: 10px;
+    border-bottom-width: 3px;
   }
 
   .grid-match-card-inner {
     font-size: 0.68rem;
-    line-height: 1.15;
-  }
-}
-
-/* Small phones (iPhone SE and similar ~360px) - the 4-column 8-pair grid is
-   the tightest case, so this shrinks cards further rather than letting text
-   overflow or the board force horizontal scroll on the page. */
-@media (max-width: 360px) {
-  .grid-match-board {
-    gap: 4px;
-  }
-
-  .grid-match-card-face {
-    padding: 2px;
-  }
-
-  .grid-match-card-inner {
-    font-size: 0.6rem;
   }
 }

@@ -1,15 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, X, TrendingUp, Sparkles } from 'lucide-react';
-import { shuffleArray } from '../../utils/helpers';
+import { Check, X, TrendingUp, Brain } from 'lucide-react';
+import { shuffleArray, speakWord } from '../../utils/helpers';
 import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
+import { playSound, triggerVibration } from '../../utils/feedback';
 import { useLanguage } from '../../contexts/LanguageContext';
+import PracticeQuitModal from './PracticeQuitModal';
 import './GridMatchGame.css';
 
-// Pairs per round, in increasing order. How well the player just did decides
-// how far up this list the *next* round jumps: a near-perfect round skips
-// ahead two levels ("6 cards" -> a big "4x4" grid straight away), a decent
-// round moves up one, and a rough one repeats the same size.
 const LEVELS = [3, 6, 8];
 const MAX_ROUNDS = 3;
 
@@ -21,32 +19,41 @@ function buildRound(words, pairCount) {
   return shuffleArray([...wordCards, ...transCards]).map(c => ({ ...c, matched: false }));
 }
 
-export default function GridMatchGame({ words, onComplete, onUpdateWord, onAnswer, onProgress }) {
+export default function GridMatchGame({
+  words,
+  onComplete,
+  onUpdateWord,
+  onAnswer,
+  onProgress,
+  onExit,
+  language = 'en-US',
+}) {
   const { t } = useLanguage();
   const [levelIdx, setLevelIdx] = useState(0);
   const [round, setRound] = useState(1);
   const [cards, setCards] = useState(() => buildRound(words, LEVELS[0]));
-  const [flipped, setFlipped] = useState([]); // up to 2 card keys, face-up mid-check
+  const [flipped, setFlipped] = useState([]);
   const [locked, setLocked] = useState(false);
   const [roundMistakes, setRoundMistakes] = useState(0);
   const [totalCorrect, setTotalCorrect] = useState(0);
   const [totalMistakes, setTotalMistakes] = useState(0);
-  const [roundBanner, setRoundBanner] = useState(null); // 'grew' | 'new' | null
+  const [roundBanner, setRoundBanner] = useState(null);
+  const [showQuitModal, setShowQuitModal] = useState(false);
+
   const flipStartRef = useRef(Date.now());
   const finishedRef = useRef(false);
 
   const totalPairsThisRound = cards.length / 2;
+  const matchedPairs = cards.filter(c => c.matched).length / 2;
 
   useEffect(() => {
-    if (onProgress) onProgress(totalCorrect, totalCorrect + (cards.length - cards.filter(c => c.matched).length) / 2);
-  }, [totalCorrect, cards, onProgress]);
+    if (onProgress) onProgress(matchedPairs, totalPairsThisRound);
+  }, [matchedPairs, totalPairsThisRound, onProgress]);
 
-  // Banner is shown briefly at the start of round 2+, then cleared once the
-  // player makes their first move of the round.
   useEffect(() => {
     if (!roundBanner) return;
-    const t = setTimeout(() => setRoundBanner(null), 2200);
-    return () => clearTimeout(t);
+    const timeout = setTimeout(() => setRoundBanner(null), 2200);
+    return () => clearTimeout(timeout);
   }, [roundBanner]);
 
   const startRound = (nextLevelIdx) => {
@@ -59,6 +66,11 @@ export default function GridMatchGame({ words, onComplete, onUpdateWord, onAnswe
 
   const handleCardClick = (card) => {
     if (locked || card.matched || flipped.includes(card.key)) return;
+
+    // Pronounce ONLY target word when flipped face up
+    if (card.kind === 'word') {
+      speakWord(card.text, language);
+    }
 
     if (flipped.length === 0) {
       setFlipped([card.key]);
@@ -76,6 +88,8 @@ export default function GridMatchGame({ words, onComplete, onUpdateWord, onAnswe
 
     if (isMatch) {
       setLocked(true);
+      playSound('correct');
+      triggerVibration('correct');
       if (onAnswer && wordObj) onAnswer(wordObj, true);
       if (wordObj) {
         onUpdateWord(wordObj.id, {
@@ -90,9 +104,11 @@ export default function GridMatchGame({ words, onComplete, onUpdateWord, onAnswe
         setFlipped([]);
         setLocked(false);
         setTotalCorrect(c => c + 1);
-      }, 500);
+      }, 450);
     } else {
       setLocked(true);
+      playSound('wrong');
+      triggerVibration('wrong');
       setRoundMistakes(m => m + 1);
       setTotalMistakes(m => m + 1);
       if (onAnswer && wordObj) onAnswer(wordObj, false);
@@ -111,9 +127,6 @@ export default function GridMatchGame({ words, onComplete, onUpdateWord, onAnswe
     }
   };
 
-  // A round ends the moment every card on the board is matched. How well it
-  // went (mistakes per pair) decides how big the next one is - this is the
-  // "grows the grid based on how well you remember" behavior.
   useEffect(() => {
     if (cards.length === 0 || finishedRef.current) return;
     if (!cards.every(c => c.matched)) return;
@@ -130,25 +143,13 @@ export default function GridMatchGame({ words, onComplete, onUpdateWord, onAnswe
         return;
       }
 
-      // A blind flip-and-remember game naturally produces mismatches even
-      // when played well - on a 6-card board, 1-2 wrong guesses before
-      // you've seen every card once is normal, not "struggling". The old
-      // <=0.2 / <=0.6 thresholds effectively required a near-perfect round
-      // just to hold steady, so most players got stuck at 6 cards forever.
       let nextLevel = levelIdx;
-      if (mistakeRate === 0) nextLevel = Math.min(levelIdx + 2, LEVELS.length - 1);       // flawless round: reward with a big jump
-      else if (mistakeRate <= 1) nextLevel = Math.min(levelIdx + 1, LEVELS.length - 1);    // at most ~1 mistake per pair: still moves up
-      // else: a genuinely rough round - repeat the same grid size
+      if (mistakeRate === 0) nextLevel = Math.min(levelIdx + 2, LEVELS.length - 1);
+      else if (mistakeRate <= 1) nextLevel = Math.min(levelIdx + 1, LEVELS.length - 1);
 
-      // A reward jump can land on a level this pack doesn't have enough
-      // distinct words for - step back down to the biggest level it CAN
-      // support instead of ending the whole session over an ambitious jump.
       while (nextLevel > 0 && words.length < LEVELS[nextLevel]) nextLevel -= 1;
 
       if (words.length < LEVELS[nextLevel]) {
-        // Doesn't even fit the smallest level - shouldn't happen given this
-        // mode's minimum word count gate, but end gracefully rather than
-        // building a round that can't be filled.
         finishedRef.current = true;
         onComplete({
           totalWords: totalCorrect + totalMistakes,
@@ -160,73 +161,120 @@ export default function GridMatchGame({ words, onComplete, onUpdateWord, onAnswe
 
       setRound(r => r + 1);
       startRound(nextLevel);
-    }, 700);
+    }, 600);
     return () => clearTimeout(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cards]);
 
   const cols = Math.min(4, Math.ceil(Math.sqrt(cards.length)));
+  const progressPct = (matchedPairs / totalPairsThisRound) * 100;
 
   return (
-    <div className="grid-match-container">
-      <div className="grid-match-top-bar">
-        <div className="grid-match-round">
-          {t('practice.roundPairs', { round, pairs: totalPairsThisRound })}
-        </div>
-        <div className="grid-match-tally">
-          <span className="grid-match-tally-correct"><Check size={13} strokeWidth={2.8} />{totalCorrect}</span>
-          <span className="grid-match-tally-wrong"><X size={13} strokeWidth={2.8} />{totalMistakes}</span>
-        </div>
-      </div>
+    <div className="duo-spelling-page duo-gridmatch-page">
+      {/* Top Header (Duolingo Style: X button + Progress Bar + Tally) */}
+      <header className="duo-top-header">
+        <button
+          type="button"
+          className="duo-close-btn"
+          onClick={() => setShowQuitModal(true)}
+          title={t('practice.closePractice') || "Close practice"}
+        >
+          <X size={24} strokeWidth={2.8} />
+        </button>
 
-      <AnimatePresence>
-        {roundBanner && (
+        <div className="duo-progress-track">
           <motion.div
-            className="grid-match-level-banner"
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-          >
-            <TrendingUp size={14} strokeWidth={2.4} />
-            {roundBanner === 'grew' ? t('practice.gridGrew', { pairs: totalPairsThisRound }) : t('practice.newRound')}
-          </motion.div>
-        )}
-      </AnimatePresence>
+            className="duo-progress-fill"
+            animate={{ width: `${progressPct}%` }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+          />
+        </div>
 
-      <div
-        className="grid-match-board"
-        style={{ '--grid-cols': cols }}
-      >
-        {cards.map((card) => {
-          const isFaceUp = flipped.includes(card.key) || card.matched;
-          return (
-            <motion.button
-              key={card.key}
-              type="button"
-              className={['grid-match-card', card.matched ? 'matched' : ''].join(' ')}
-              onClick={() => handleCardClick(card)}
-              disabled={locked && !isFaceUp}
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
-              whileTap={!isFaceUp ? { scale: 0.95 } : {}}
+        {/* Tally & Round Badge */}
+        <div className="duo-gridmatch-badges-row">
+          <div className="duo-speed-tally tally-correct">
+            <Check size={14} strokeWidth={3} />
+            <span>{totalCorrect}</span>
+          </div>
+          <div className="duo-speed-tally tally-wrong">
+            <X size={14} strokeWidth={3} />
+            <span>{totalMistakes}</span>
+          </div>
+          <div className="duo-gridmatch-round-badge">
+            <span>R{round}/{MAX_ROUNDS}</span>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Body */}
+      <div className="duo-spelling-body duo-gridmatch-body">
+        <h2 className="duo-prompt-title">
+          {t('practice.gridmatchTitle') && !t('practice.gridmatchTitle').startsWith('practice.') ? t('practice.gridmatchTitle') : "Memory Grid"}
+        </h2>
+
+        <p className="duo-prompt-subtitle">
+          {t('practice.findMatchingPairs') && !t('practice.findMatchingPairs').startsWith('practice.') ? t('practice.findMatchingPairs') : "Tap cards to find matching pairs"}
+        </p>
+
+        <AnimatePresence>
+          {roundBanner && (
+            <motion.div
+              className="grid-match-level-banner"
+              initial={{ opacity: 0, y: -8, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
             >
-              <motion.div
-                className="grid-match-card-flipper"
-                initial={false}
-                animate={{ rotateY: isFaceUp ? 180 : 0 }}
-                transition={{ duration: 0.45, ease: [0.34, 1.15, 0.64, 1] }}
+              <TrendingUp size={15} strokeWidth={2.5} />
+              {roundBanner === 'grew'
+                ? (t('practice.gridGrew', { pairs: totalPairsThisRound }) || `Grid grew to ${totalPairsThisRound} pairs!`)
+                : (t('practice.newRound') || "New round!")}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* 3D Cards Grid */}
+        <div className="grid-match-board" style={{ '--grid-cols': cols }}>
+          {cards.map((card) => {
+            const isFaceUp = flipped.includes(card.key) || card.matched;
+            return (
+              <motion.button
+                key={card.key}
+                type="button"
+                className={`grid-match-card ${card.matched ? 'matched' : ''} ${isFaceUp ? 'is-face-up' : ''}`}
+                onClick={() => handleCardClick(card)}
+                disabled={locked && !isFaceUp}
+                initial={{ opacity: 0, scale: 0.85 }}
+                animate={{ opacity: 1, scale: 1 }}
+                whileTap={!isFaceUp ? { scale: 0.94 } : {}}
               >
-                <div className="grid-match-card-face grid-match-card-back">
-                  <Sparkles size={18} strokeWidth={2} />
-                </div>
-                <div className="grid-match-card-face grid-match-card-front">
-                  <span className="grid-match-card-inner">{card.text}</span>
-                </div>
-              </motion.div>
-            </motion.button>
-          );
-        })}
+                <motion.div
+                  className="grid-match-card-flipper"
+                  initial={false}
+                  animate={{ rotateY: isFaceUp ? 180 : 0 }}
+                  transition={{ duration: 0.4, ease: [0.34, 1.15, 0.64, 1] }}
+                >
+                  <div className="grid-match-card-face grid-match-card-back">
+                    <Brain size={22} strokeWidth={2.2} className="card-back-icon" />
+                  </div>
+                  <div className="grid-match-card-face grid-match-card-front">
+                    <span className="grid-match-card-inner">{card.text}</span>
+                  </div>
+                </motion.div>
+              </motion.button>
+            );
+          })}
+        </div>
       </div>
+
+      {/* Quit Modal */}
+      <PracticeQuitModal
+        isOpen={showQuitModal}
+        onClose={() => setShowQuitModal(false)}
+        onConfirm={() => {
+          setShowQuitModal(false);
+          if (onExit) onExit(true);
+        }}
+      />
     </div>
   );
 }
+

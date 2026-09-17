@@ -126,7 +126,7 @@ export default function SpeedGame({
     });
   }, [pool, words]);
 
-  const handleSelect = (option) => {
+  const handleSelect = useCallback((option) => {
     if (answered || finished || !currentWord) return;
     setSelectedOption(option);
     setAnswered(true);
@@ -144,15 +144,41 @@ export default function SpeedGame({
     if (isCorrect) {
       playSound('correct');
       triggerVibration('correct');
-      setCorrectCount(c => c + 1);
-      setRecord(r => Math.max(r, correctCount + 1));
+      setCorrectCount(c => {
+        const nextCorrect = c + 1;
+        setRecord(r => Math.max(r, nextCorrect));
+        return nextCorrect;
+      });
     } else {
       playSound('wrong');
       triggerVibration('wrong');
       setIncorrectCount(c => c + 1);
     }
     setTimeout(advance, 350);
-  };
+  }, [answered, finished, currentWord, correctOption, onAnswer, onUpdateWord, advance]);
+
+  // Keyboard listener: 1, 2, 3, 4 (A, B, C, D & Numpad 1-4)
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
+      if (answered || finished) return;
+
+      const key = e.key.toLowerCase();
+      let idx = -1;
+      if (key === '1' || key === 'a' || e.code === 'Numpad1') idx = 0;
+      else if (key === '2' || key === 'b' || e.code === 'Numpad2') idx = 1;
+      else if (key === '3' || key === 'c' || e.code === 'Numpad3') idx = 2;
+      else if (key === '4' || key === 'd' || e.code === 'Numpad4') idx = 3;
+
+      if (idx >= 0 && idx < options.length) {
+        e.preventDefault();
+        handleSelect(options[idx]);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [answered, finished, options, handleSelect]);
 
   if (!currentWord) return null;
 

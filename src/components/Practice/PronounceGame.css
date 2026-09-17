@@ -1,123 +1,36 @@
-.pronounce-container {
-  max-width: 500px;
+.duo-pronounce-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.duo-pronounce-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 620px;
   width: 100%;
   margin: 0 auto;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-  /* Room for the fixed bottom bar so the card never sits underneath it */
-  padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+  padding: var(--space-xl) var(--space-md) calc(100px + var(--space-md));
+  box-sizing: border-box;
 }
 
-/* Progress track matches spelling/quiz */
-.pronounce-progress-track {
+.duo-pronounce-prompt-card {
   width: 100%;
-  height: 6px;
-  background: var(--bg-glass);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  border: 1px solid var(--border);
-}
-
-.pronounce-progress-fill {
-  height: 100%;
-  background: var(--accent-1);
-  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.pronounce-progress-label {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: var(--font-sm);
-  color: var(--text-muted);
-  font-weight: 600;
-  margin-bottom: var(--space-xs);
-}
-
-.btn-pronounce-speak-target {
-  background: transparent;
-  border: none;
-  padding: 6px 4px;
-  font-size: var(--font-xs);
-  font-weight: 700;
-  color: var(--text-muted);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: color var(--transition-fast);
-}
-
-.btn-pronounce-speak-target:hover {
-  color: var(--accent-1);
-}
-
-/* Pronounce Card Design */
-.pronounce-card {
-  background: var(--bg-glass);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: var(--space-xl) var(--space-lg);
+  margin-top: var(--space-sm);
+  margin-bottom: var(--space-xl);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-md);
-  position: relative;
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(12px);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.pronounce-card.correct {
-  border-color: var(--success);
-}
-
-.pronounce-card.wrong {
-  border-color: var(--error);
-}
-
-.pronounce-card-label {
-  font-size: var(--font-xs);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
-  font-weight: 700;
-}
-
-.pronounce-target-word {
-  font-size: 3rem;
-  font-weight: 800;
-  color: var(--accent-1);
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-}
-
-.pronounce-translation {
-  font-size: var(--font-lg);
+.duo-pronounce-translation {
+  font-size: var(--font-md);
   color: var(--text-secondary);
   font-weight: 500;
-}
-
-.pronounce-definition {
-  font-size: var(--font-sm);
-  color: var(--text-muted);
-  font-style: italic;
-  max-width: 90%;
-  margin-top: -4px;
-}
-
-.pronounce-error {
-  color: var(--error);
-  font-size: var(--font-xs);
-  background: var(--error-dim);
-  border: 1px solid transparent;
-  padding: 8px 12px;
-  border-radius: var(--radius-md);
-  width: 100%;
-  max-width: 90%;
+  margin-top: var(--space-xs);
 }
 
 .recognition-state-wrapper {
@@ -126,267 +39,120 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-md);
-  width: 100%;
-  min-height: 150px;
+  margin-top: var(--space-md);
 }
 
-/* Mic button styles */
-.mic-button {
-  width: 76px;
-  height: 76px;
+.duo-mic-button {
+  width: 96px;
+  height: 96px;
   border-radius: 50%;
-  border: none;
-  background: var(--accent-1);
+  border: 3px solid #147dae;
+  border-bottom: 6px solid #147dae;
+  background: linear-gradient(145deg, #1cb0f6 0%, #1899d6 100%);
   color: white;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: filter var(--transition-fast), transform var(--transition-fast);
+  box-shadow: 0 6px 20px rgba(28, 176, 246, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  outline: none;
 }
 
-.mic-button:hover:not(:disabled) {
-  filter: brightness(1.08);
+.duo-mic-button:hover:not(:disabled) {
+  box-shadow: 0 8px 24px rgba(28, 176, 246, 0.45);
 }
 
-.mic-button:active:not(:disabled) {
-  transform: scale(0.96);
+.duo-mic-button.listening {
+  background: linear-gradient(145deg, #58cc02 0%, #46a302 100%);
+  border-color: #3b8a02;
+  border-bottom-color: #388002;
+  box-shadow: 0 0 0 10px rgba(88, 204, 2, 0.25);
+  animation: duo-mic-pulse 1.5s infinite;
 }
 
-.mic-button.listening {
-  background: var(--success);
-  animation: pulse-success 1.5s infinite;
+.duo-mic-button.disabled {
+  opacity: 0.6;
+  cursor: default;
 }
 
-@keyframes pulse-success {
+@keyframes duo-mic-pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.4);
+    box-shadow: 0 0 0 0 rgba(88, 204, 2, 0.4);
   }
   70% {
-    box-shadow: 0 0 0 15px rgba(52, 199, 89, 0);
+    box-shadow: 0 0 0 18px rgba(88, 204, 2, 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(52, 199, 89, 0);
+    box-shadow: 0 0 0 0 rgba(88, 204, 2, 0);
   }
 }
 
-.listening-status {
-  font-size: var(--font-sm);
-  font-weight: 600;
-  color: var(--text-secondary);
-}
-
-.listening-status.instruction {
-  color: var(--text-muted);
-  font-weight: normal;
-  max-width: 80%;
-}
-
-.text-pulse {
-  animation: text-pulse-anim 1.2s infinite ease-in-out alternate;
-}
-
-@keyframes text-pulse-anim {
-  from { opacity: 0.6; }
-  to { opacity: 1; }
-}
-
-.equalizer {
+.duo-attempt-hint {
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 3px;
-  height: 24px;
-}
-
-.equalizer .bar {
-  width: 4px;
-  height: 100%;
-  background-color: white;
-  border-radius: var(--radius-xs);
-  animation: bounce 0.8s ease-in-out infinite alternate;
-}
-
-.equalizer .bar:nth-child(1) { animation-delay: 0.1s; }
-.equalizer .bar:nth-child(2) { animation-delay: 0.3s; }
-.equalizer .bar:nth-child(3) { animation-delay: 0.2s; }
-.equalizer .bar:nth-child(4) { animation-delay: 0.4s; }
-
-@keyframes bounce {
-  from { height: 4px; }
-  to { height: 24px; }
-}
-
-/* Feedback banners matching spelling feedback banner */
-.pronounce-feedback-banner {
-  width: 100%;
-  padding: var(--space-md);
-  border-radius: var(--radius-lg);
-  font-size: var(--font-md);
+  align-items: center;
+  gap: 8px;
+  background: var(--warning-dim, rgba(255, 179, 0, 0.12));
+  border: 1.5px solid var(--warning, #ffb300);
+  color: var(--warning, #ffb300);
+  padding: 8px 16px;
+  border-radius: var(--radius-full, 999px);
+  font-size: 0.85rem;
   font-weight: 700;
   text-align: center;
+  margin-top: 6px;
+}
+
+.duo-feedback-actions-row {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.duo-btn-retry-icon {
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  box-sizing: border-box;
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  border-radius: var(--radius-lg, 14px);
+  background: var(--bg-card, #1e293b);
+  border: 2px solid var(--border-strong, #334155);
+  border-bottom: 4px solid var(--border-dark, #0f172a);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: transform 0.12s ease;
+  flex-shrink: 0;
 }
 
-.pronounce-feedback-banner.correct {
-  background: var(--success-dim);
-  border: 1px solid transparent;
-  color: var(--success);
-}
-
-.pronounce-feedback-banner.wrong {
-  background: var(--error-dim);
-  border: 1px solid transparent;
-  color: var(--error);
-}
-
-.pronounce-feedback-banner.unsupported {
+.duo-btn-retry-icon:hover {
   background: var(--bg-tertiary);
-  border: 1px solid var(--border-light);
+}
+
+.duo-btn-retry-icon:active {
+  transform: translateY(2px);
+  border-bottom-width: 2px;
+}
+
+.heard-label {
+  font-size: var(--font-sm);
   color: var(--text-secondary);
   font-weight: 500;
 }
 
-.heard-text {
-  font-size: var(--font-sm);
-  color: var(--text-secondary);
-  font-weight: normal;
-  margin-top: 4px;
-}
-
-/* Color matches the banner it's in - red when the attempt was wrong, but
-   the same green as "Great pronunciation!" when it was actually correct. */
-.pronounce-feedback-banner.wrong .heard-text strong {
-  color: var(--error);
-}
-
-.pronounce-feedback-banner.correct .heard-text strong {
-  color: var(--success);
-}
-
-/* Action button inside card (retry / skip) */
-.pronounce-action-buttons {
-  display: flex;
-  gap: var(--space-sm);
-  width: 100%;
-  justify-content: center;
-}
-
-.btn-secondary {
-  background: var(--bg-glass);
-  border: 1px solid var(--border);
-  color: var(--text-primary);
-  border-radius: var(--radius-lg);
-  padding: 10px 18px;
-  font-size: var(--font-sm);
-  font-weight: 600;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: all var(--transition-fast);
-}
-
-.btn-secondary:hover {
-  background: var(--border);
-}
-
-.btn-ghost {
-  background: transparent;
-  border: 1px solid transparent;
-  color: var(--text-muted);
-  border-radius: var(--radius-lg);
-  padding: 10px 18px;
-  font-size: var(--font-sm);
-  font-weight: 600;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.btn-ghost:hover {
-  color: var(--text-secondary);
-  background: var(--bg-tertiary);
-}
-
-/* ─── Fixed full-width bottom bar, consistent with the other practice modes ─── */
-.pronounce-bottom-bar {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 200;
-  background: var(--bg-glass-strong);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border-top: 1px solid var(--border);
-  padding: env(safe-area-inset-bottom, 0px) 0 0 0;
-}
-
-.pronounce-bottom-bar-inner {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: var(--space-md) var(--space-lg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-md);
-  min-height: 24px;
-}
-
-.pronounce-bottom-hint {
-  color: var(--text-muted);
-  font-size: var(--font-sm);
-  font-weight: 600;
-}
-
-.btn-pronounce-next {
-  width: 100%;
-  background: var(--accent-1);
-  color: white;
-  border: none;
-  border-radius: var(--radius-lg);
-  padding: 14px;
-  font-size: var(--font-md);
-  font-weight: 700;
-  cursor: pointer;
-  transition: filter var(--transition-fast), transform var(--transition-fast);
-}
-
-.btn-pronounce-next:hover {
-  filter: brightness(1.06);
-}
-
-.btn-pronounce-next:active {
-  transform: scale(0.98);
-}
-
-/* Sit above the mobile bottom tab bar instead of overlapping it */
-@media (max-width: 768px) {
-  .pronounce-bottom-bar {
-    bottom: calc(60px + env(safe-area-inset-bottom, 0px));
-    padding: 0;
-  }
-}
-
 @media (max-width: 600px) {
-  .pronounce-card {
-    padding: var(--space-lg) var(--space-md);
+  .duo-feedback-actions-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
   }
 
-  .pronounce-target-word {
-    font-size: 2.2rem;
+  .duo-feedback-actions-row .duo-btn-continue {
+    flex: 1 !important;
+    width: auto !important;
   }
-
-  .mic-button {
-    width: 64px;
-    height: 64px;
-    font-size: 1.8rem;
-  }
-
-  .pronounce-bottom-bar-inner { padding: var(--space-sm) var(--space-md); }
 }

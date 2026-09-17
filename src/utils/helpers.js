@@ -302,12 +302,16 @@ export function debounce(fn, delay = 300) {
  * the Greek track's pre-recorded audio clips instead — every other
  * language's behavior is completely unchanged.
  */
-export function speakWord(text, lang = 'en-US') {
-  if (!text) return;
+export function speakWord(text, lang = 'en-US', onEnd = null) {
+  if (!text) {
+    if (onEnd) onEnd();
+    return;
+  }
   if (lang?.toLowerCase().startsWith('el')) {
     const entry = GREEK_VOCABULARY.find((w) => w.greek === text);
     if (entry) {
       speakGreekVocab(entry.id, entry.translit);
+      if (onEnd) setTimeout(onEnd, 1000);
       return;
     }
   }
@@ -325,9 +329,14 @@ export function speakWord(text, lang = 'en-US') {
       utterance.voice = voice;
     }
     
+    if (onEnd) {
+      utterance.onend = () => onEnd();
+      utterance.onerror = () => onEnd();
+    }
+    
     window.speechSynthesis.speak(utterance);
   } else {
-    console.warn("Speech Synthesis not supported in this browser.");
+    if (onEnd) onEnd();
   }
 }
 
