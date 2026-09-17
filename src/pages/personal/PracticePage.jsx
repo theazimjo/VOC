@@ -41,10 +41,31 @@ export default function PracticePage({ embedded = false, initialSource = null, i
   const { packs, allWords, loading: packsLoading } = usePacks();
   const { incrementActivity } = useStreak();
 
+  const WORD_COUNT_STORAGE_KEY = 'voc_last_practice_word_count';
+
   const [step, setStep] = useState(urlSourceId ? 'loading' : 'source'); // 'loading' | 'source' | 'mode' | 'practice' | 'results'
   const [selectedSource, setSelectedSource] = useState(null);
   const [selectedMode, setSelectedMode] = useState(null);
-  const [wordCount, setWordCount] = useState(10);
+
+  const [wordCount, setWordCountState] = useState(() => {
+    try {
+      const saved = localStorage.getItem(WORD_COUNT_STORAGE_KEY);
+      if (!saved) return 10;
+      if (saved === 'all') return 'all';
+      const num = parseInt(saved, 10);
+      return [5, 10, 20].includes(num) ? num : 10;
+    } catch (e) {
+      return 10;
+    }
+  });
+
+  const setWordCount = (count) => {
+    setWordCountState(count);
+    try {
+      localStorage.setItem(WORD_COUNT_STORAGE_KEY, String(count));
+    } catch (e) {}
+  };
+
   const [practiceWords, setPracticeWords] = useState([]);
   const [results, setResults] = useState(null);
   const [sourceWords, setSourceWords] = useState([]);

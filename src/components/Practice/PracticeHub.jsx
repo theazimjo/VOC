@@ -141,14 +141,24 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularV
   }
 
   if (!irregularVerbsOnly) {
-    modes.push({
-      id: 'pronounce',
-      icon: Mic,
-      title: t('practice.pronounceTitle'),
-      desc: t('practice.pronounceDesc'),
-      badge: t('practice.minWordsBadge', { min: 1 }),
-      glowColor: 'hsl(340, 85%, 60%)'
-    });
+    modes.push(
+      {
+        id: 'pronounce',
+        icon: Mic,
+        title: t('practice.pronounceTitle'),
+        desc: t('practice.pronounceDesc'),
+        badge: t('practice.minWordsBadge', { min: 1 }),
+        glowColor: 'hsl(340, 85%, 60%)'
+      },
+      {
+        id: 'sentence',
+        icon: NotebookPen,
+        title: t('practice.sentenceTitle'),
+        desc: t('practice.sentenceDesc'),
+        badge: t('practice.minWordsBadge', { min: 1 }),
+        glowColor: 'hsl(175, 80%, 45%)'
+      }
+    );
   }
 
   return (
@@ -175,8 +185,10 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularV
               <div className="practice-mode-icon-wrap">
                 <mode.icon size={22} strokeWidth={2.1} className="practice-mode-icon" />
               </div>
-              <h3 className="practice-mode-title">{mode.title}</h3>
-              <p className="practice-mode-desc">{mode.desc}</p>
+              <div className="practice-mode-info">
+                <h3 className="practice-mode-title">{mode.title}</h3>
+                <p className="practice-mode-desc">{mode.desc}</p>
+              </div>
               <div className="practice-mode-footer">
                 {isDisabled ? (
                   <span className="practice-mode-badge practice-mode-badge-warning">

@@ -1,107 +1,98 @@
 /* ==========================================================================
-   PRACTICE HUB — DARK SAT/iOS DESIGN SYSTEM
+   PRACTICE HUB — DUOLINGO / APPLE HIG 3D DESIGN SYSTEM
    ========================================================================== */
 
 .practice-hub {
   width: 100%;
-  max-width: 900px;
+  max-width: 960px;
   margin: 0 auto;
-}
-
-.practice-hub > h2 {
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.015em;
-  margin-bottom: 4px;
-  text-align: left;
-}
-
-.practice-hub > p {
-  color: var(--text-secondary);
-  margin-bottom: 1.25rem;
-  font-size: 0.88rem;
-  text-align: left;
 }
 
 .practice-hub-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
 }
 
-/* Practice Mode Card */
+/* Practice Mode Card (3D Duolingo Style) */
 .practice-mode-card {
   position: relative;
   background: var(--bg-secondary);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-lg, 18px);
-  padding: 1.15rem 1.25rem;
+  border: 2px solid var(--border);
+  box-shadow: 0 5px 0 var(--border);
+  border-radius: 22px;
+  padding: 1.35rem 1.35rem;
   text-align: left;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.15s ease;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10px;
-  box-shadow: var(--shadow);
+  gap: 12px;
   overflow: hidden;
   box-sizing: border-box;
 }
 
-.practice-mode-card:hover {
-  border-color: var(--accent-1);
-  box-shadow: var(--shadow-lg);
+.practice-mode-card:hover:not(.disabled) {
+  border-color: var(--mode-glow-color, var(--accent-1));
+  box-shadow: 0 5px 0 var(--mode-glow-color, var(--accent-1));
   transform: translateY(-2px);
 }
 
-.practice-mode-card:active {
-  transform: scale(0.985);
+.practice-mode-card:active:not(.disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--border);
 }
 
 .practice-mode-card.disabled {
   cursor: not-allowed;
-  opacity: 0.5;
+  opacity: 0.55;
+  filter: grayscale(0.2);
 }
 
 .practice-mode-card.disabled:hover {
-  border-color: var(--border-light);
-  box-shadow: var(--shadow);
+  border-color: var(--border);
+  box-shadow: 0 5px 0 var(--border);
   transform: none;
 }
 
+/* 3D Mode Icon Badge */
 .practice-mode-icon-wrap {
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  min-height: 44px;
-  border-radius: var(--radius-md, 12px);
-  background: var(--accent-1-dim);
-  border: 1px solid var(--border-light);
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  min-height: 50px;
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--mode-glow-color, var(--accent-1)) 16%, var(--bg-tertiary));
+  border: 2px solid color-mix(in srgb, var(--mode-glow-color, var(--accent-1)) 35%, transparent);
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--mode-glow-color, var(--accent-1)) 25%, transparent);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--accent-1);
+  color: var(--mode-glow-color, var(--accent-1));
   transition: all 0.2s ease;
 }
 
-.practice-mode-card:hover .practice-mode-icon-wrap {
-  background: var(--accent-1);
+.practice-mode-card:hover:not(.disabled) .practice-mode-icon-wrap {
+  background: var(--mode-glow-color, var(--accent-1));
   color: #ffffff;
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--mode-glow-color, var(--accent-1)) 75%, black);
 }
 
 .practice-mode-title {
-  font-size: 1.05rem;
-  font-weight: 700;
+  font-size: 1.15rem;
+  font-weight: 850;
   color: var(--text-primary);
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
   margin: 0;
+  line-height: 1.3;
 }
 
 .practice-mode-desc {
   color: var(--text-secondary);
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   line-height: 1.45;
+  font-weight: 500;
   margin: 0;
   flex: 1;
 }
@@ -112,58 +103,114 @@
   justify-content: space-between;
   gap: 8px;
   width: 100%;
-  margin-top: 6px;
-  border-top: 1px solid var(--border-light);
-  padding-top: 10px;
+  margin-top: 8px;
+  border-top: 2px dashed var(--border-light);
+  padding-top: 12px;
 }
 
 .practice-mode-badge {
-  background: var(--accent-1-dim);
-  border: 1px solid var(--border-light);
-  padding: 3px 10px;
-  border-radius: var(--radius-full, 9999px);
-  font-size: 0.7rem;
-  color: var(--accent-1);
-  font-weight: 600;
+  background: color-mix(in srgb, var(--mode-glow-color, var(--accent-1)) 15%, var(--bg-tertiary));
+  border: 1.5px solid color-mix(in srgb, var(--mode-glow-color, var(--accent-1)) 40%, transparent);
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  color: var(--mode-glow-color, var(--accent-1));
+  font-weight: 800;
   white-space: nowrap;
 }
 
 .practice-mode-badge-warning {
-  background: var(--warning-dim, rgba(245, 158, 11, 0.15));
-  border-color: rgba(245, 158, 11, 0.25);
-  color: var(--warning, #f59e0b);
+  background: var(--warning-dim, rgba(255, 179, 0, 0.15));
+  border-color: var(--warning, #ffb300);
+  color: var(--warning, #ffb300);
+  font-weight: 800;
 }
 
 .practice-mode-arrow {
   color: var(--text-muted);
-  font-size: 0.95rem;
+  font-size: 1.1rem;
+  font-weight: 800;
   transition: transform 0.2s ease, color 0.2s ease;
 }
 
-.practice-mode-card:hover .practice-mode-arrow {
-  color: var(--accent-1);
-  transform: translateX(3px);
+.practice-mode-card:hover:not(.disabled) .practice-mode-arrow {
+  color: var(--mode-glow-color, var(--accent-1));
+  transform: translateX(4px);
 }
 
-/* Mobile responsive details */
-@media (max-width: 768px) {
+/* Tablet Layout (2 columns) */
+@media (max-width: 900px) {
+  .practice-hub-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+/* Mobile Layout (Sleek Horizontal 3D Card List System) */
+@media (max-width: 640px) {
   .practice-hub-grid {
     grid-template-columns: 1fr;
-    gap: 0.75rem;
+    gap: 8px;
   }
 
   .practice-mode-card {
-    padding: 1rem;
-    border-radius: var(--radius-md, 14px);
-    gap: 8px;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 14px;
+    gap: 12px;
+    border-radius: 16px;
+    border-width: 2px;
+    box-shadow: 0 4px 0 var(--border);
+  }
+
+  .practice-mode-icon-wrap {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+    border-radius: 12px;
+  }
+
+  .practice-mode-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
   }
 
   .practice-mode-title {
     font-size: 0.98rem;
+    font-weight: 850;
+    line-height: 1.25;
   }
 
   .practice-mode-desc {
     font-size: 0.78rem;
-    line-height: 1.4;
+    color: var(--text-secondary);
+    line-height: 1.35;
+    margin: 0;
+  }
+
+  .practice-mode-footer {
+    width: auto;
+    margin-top: 0;
+    border-top: none;
+    padding-top: 0;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .practice-mode-badge {
+    font-size: 0.68rem;
+    padding: 3px 8px;
+    border-radius: 8px;
+  }
+
+  .practice-mode-arrow {
+    font-size: 0.95rem;
   }
 }
