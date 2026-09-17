@@ -10,10 +10,10 @@
 
 /* PC Desktop Card Container (Default > 600px) */
 .practice-results.duo-results-card-container {
-  margin: 40px auto;
-  max-width: 760px;
-  width: 95%;
-  padding: 48px 40px;
+  margin: 28px auto;
+  max-width: 800px;
+  width: 96%;
+  padding: 40px 44px;
   background-color: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: 28px;
@@ -27,11 +27,11 @@
 
 /* Titles */
 .duo-results-title {
-  font-size: 2.3rem;
+  font-size: 2.1rem;
   font-weight: 900;
   color: var(--accent-3, #FF9500);
-  letter-spacing: -0.02em;
-  margin: 0 0 8px 0;
+  letter-spacing: -0.025em;
+  margin: 0 0 6px 0;
   word-break: break-word;
 }
 
@@ -40,10 +40,10 @@
 }
 
 .duo-results-subtitle {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 600;
   color: var(--text-secondary);
-  margin: 0 0 36px 0;
+  margin: 0 0 32px 0;
 }
 
 /* 3D Stat Cards Grid */
@@ -52,20 +52,21 @@
   gap: 16px;
   justify-content: center;
   width: 100%;
-  max-width: 680px;
+  max-width: 720px;
   margin: 0 auto 28px auto;
 }
 
 .duo-stat-card {
   flex: 1;
   min-width: 0;
-  min-height: 105px;
+  min-height: 110px;
   border-radius: 20px;
   padding: 0;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   box-sizing: border-box;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
 }
 
 /* Card 1: Purple / Accent-2 */
@@ -115,8 +116,8 @@
 
 .duo-stat-badge {
   width: 100%;
-  padding: 9px 4px 7px 4px;
-  font-size: 0.66rem;
+  padding: 10px 6px 8px 6px;
+  font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.04em;
   text-align: center;
@@ -130,8 +131,8 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 20px 6px 16px 6px;
-  min-height: 70px;
+  padding: 18px 8px 14px 8px;
+  min-height: 68px;
   width: auto;
   margin: 0 2px 2px 2px;
   border-radius: 14px 14px 17px 17px;
@@ -141,14 +142,14 @@
 }
 
 .duo-stat-icon {
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   flex-shrink: 0;
   display: flex;
   align-items: center;
 }
 
 .duo-stat-value {
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 900;
   white-space: nowrap;
 }
@@ -156,28 +157,29 @@
 /* Mistakes / Review List */
 .results-mistakes-container {
   margin-top: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   text-align: left;
   background: var(--bg-tertiary);
-  border-radius: 16px;
-  padding: 16px;
+  border-radius: 18px;
+  padding: 16px 20px;
   border: 1px solid var(--border-light);
-  max-height: 220px;
+  max-height: 260px;
   overflow-y: auto;
   width: 100%;
+  max-width: 720px;
   box-sizing: border-box;
 }
 
 .results-mistakes-title {
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-size: 0.76rem;
+  font-weight: 800;
   color: var(--error);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
   gap: 6px;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
 }
 
 .results-mistake-list {
@@ -190,27 +192,27 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 12px;
+  padding: 8px 14px;
   background: var(--bg-secondary);
   border: 1px solid var(--border-light);
   border-radius: 10px;
-  gap: 8px;
+  gap: 10px;
 }
 
 .results-mistake-info {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 2px;
 }
 
 .results-mistake-word {
-  font-weight: 700;
+  font-weight: 800;
   color: var(--text-primary);
-  font-size: 0.88rem;
+  font-size: 0.9rem;
 }
 
 .results-mistake-translation {
-  font-size: 0.75rem;
+  font-size: 0.76rem;
   color: var(--text-muted);
 }
 
@@ -223,28 +225,31 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 50%;
   transition: all 0.2s ease;
 }
 
 .btn-speak-mistake:hover {
   color: var(--accent-1);
+  background-color: var(--bg-tertiary);
 }
 
 .perfect-score-banner {
   background: var(--success-dim);
   border: 1px solid color-mix(in srgb, var(--success) 30%, transparent);
-  border-radius: 16px;
-  padding: 14px;
+  border-radius: 18px;
+  padding: 14px 20px;
   color: var(--success);
-  font-weight: 700;
+  font-weight: 800;
   font-size: 0.95rem;
   margin-top: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   width: 100%;
+  max-width: 720px;
   box-sizing: border-box;
 }
 
@@ -252,8 +257,8 @@
 .duo-results-action-desktop {
   display: block;
   width: 100%;
-  max-width: 560px;
-  margin-top: 24px;
+  max-width: 480px;
+  margin-top: 12px;
 }
 
 .duo-results-action-mobile {
@@ -267,8 +272,8 @@
   color: #ffffff;
   font-size: 0.95rem;
   font-weight: 800;
-  padding: 14px 26px;
-  letter-spacing: 0.05em;
+  padding: 14px 32px;
+  letter-spacing: 0.04em;
   border-radius: 16px;
   cursor: pointer;
   transition: all 0.15s ease;
