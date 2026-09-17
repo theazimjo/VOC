@@ -200,34 +200,30 @@
   display: none;
 }
 
-.duo-keyboard-input {
-  width: 100%;
-  background: transparent;
+.duo-hidden-keyboard-input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
   border: none;
-  border-bottom: 3px solid var(--accent-1);
-  color: var(--text-primary);
-  font-size: 1.4rem;
-  font-weight: 700;
-  padding: 10px 4px;
   outline: none;
-  font-family: inherit;
-  box-sizing: border-box;
-  transition: border-color 0.2s ease;
 }
 
-.duo-keyboard-input.is-wrong {
-  border-bottom-color: var(--error);
-  color: var(--error);
-}
-
-.duo-keyboard-input.is-correct {
-  border-bottom-color: var(--success);
-  color: var(--success);
-}
-
-.duo-keyboard-input::placeholder {
+.duo-answer-placeholder {
   color: var(--text-muted);
+  font-size: 1.1rem;
   font-weight: 500;
+  padding: 12px 6px;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.duo-placeholder-icon {
+  color: var(--text-muted);
+  flex-shrink: 0;
 }
 
 /* ─── Tile & Wrapper Styles (Duolingo 3D Box Shadow) ─── */

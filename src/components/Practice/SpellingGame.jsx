@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Volume2, Check, X, Keyboard, Grid } from 'lucide-react';
+import { Volume2, Check, X, Keyboard } from 'lucide-react';
 import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
 import { speakWord, shuffleArray } from '../../utils/helpers';
 import { findConfusableMatch } from '../../experiment/textSimilarity';
@@ -31,14 +31,13 @@ export default function SpellingGame({
   isEnglishPack = false,
 }) {
   const { user } = useAuth();
-  const { t } = useLanguage();
+  const { t, language: appLanguage } = useLanguage();
   const keyboardInset = useKeyboardInset();
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [input, setInput] = useState('');
-  const [placedTiles, setPlacedTiles] = useState([]); // [{ id, text }]
+  const [placedTiles, setPlacedTiles] = useState([]); // [{ id, text, isCustom? }]
   const [tileBank, setTileBank] = useState([]); // [{ id, text, isDistractor }]
-  const [isKeyboardMode, setIsKeyboardMode] = useState(false);
+  const [typedBuffer, setTypedBuffer] = useState('');
   const [showQuitModal, setShowQuitModal] = useState(false);
 
   const [answered, setAnswered] = useState(false);
@@ -104,8 +103,6 @@ export default function SpellingGame({
     return language || 'en-US';
   };
 
-  const { language: appLanguage } = useLanguage();
-
   const LANG_NAMES = useMemo(() => ({
     en: {
       en: 'English', ru: 'Russian', uz: 'Uzbek', de: 'German', fr: 'French', es: 'Spanish',
@@ -144,7 +141,6 @@ export default function SpellingGame({
   useEffect(() => {
     if (!currentWord) return;
 
-    // Prevent resetting answered state when allWords/sourceWords updates in parent
     if (prevWordKeyRef.current === currentWordKey) {
       return;
     }
@@ -157,16 +153,13 @@ export default function SpellingGame({
     let distractorTokens = [];
 
     if (isMultiWord) {
-      // Word-level tiles (only exact words of target phrase)
       correctTokens = targetSpelling.split(/\s+/).filter(Boolean);
       distractorTokens = [];
     } else {
-      // Letter-level tiles (only exact letters of target word)
       correctTokens = targetSpelling.split('');
       distractorTokens = [];
     }
 
-    // Combine & assign unique IDs
     const allTokens = [
       ...correctTokens.map((t, idx) => ({ id: `token-${idx}-${t}`, text: t, isDistractor: false })),
       ...distractorTokens.map((t, idx) => ({ id: `dis-${idx}-${t}`, text: t, isDistractor: true })),
@@ -176,42 +169,22 @@ export default function SpellingGame({
 
     setTileBank(shuffledBank);
     setPlacedTiles([]);
-    setInput('');
+    setTypedBuffer('');
     setAnswered(false);
     setIsCorrect(false);
     setAnsweredWord('');
     startTimeRef.current = Date.now();
   }, [currentIndex, currentWordKey, currentWord, allWords, language]);
 
-  // Auto-focus input when in keyboard mode or when moving to a new word card
+  // Auto-focus hidden input on load or card change
   useEffect(() => {
-    if (isKeyboardMode && !answered) {
+    if (!answered) {
       const timer = setTimeout(() => {
         inputRef.current?.focus();
       }, 50);
       return () => clearTimeout(timer);
     }
-  }, [isKeyboardMode, currentIndex, answered]);
-
-  // Handle Enter key for submit / next
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Enter') {
-        if (!answered) {
-          if (placedTiles.length > 0 || input.trim()) {
-            e.preventDefault();
-            submitAnswer();
-          }
-        } else {
-          e.preventDefault();
-          handleNext();
-        }
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [answered, input, placedTiles, currentIndex, processedWords]);
+  }, [currentIndex, answered]);
 
   const normalizeForComparison = (str) => {
     if (!str) return '';
@@ -229,12 +202,148 @@ export default function SpellingGame({
   };
 
   const currentAnswerString = useMemo(() => {
-    if (isKeyboardMode) {
-      return input;
-    }
     const isMultiWord = (currentWord?.targetSpelling || '').trim().includes(' ');
     return placedTiles.map(t => t.text).join(isMultiWord ? ' ' : '');
-  }, [isKeyboardMode, input, placedTiles, currentWord]);
+  }, [placedTiles, currentWord]);
+
+  const handleTileTap = (tile) => {
+    if (answered) return;
+
+    const targetLang = getTargetAnswerLang();
+    speakWord(tile.text, targetLang);
+
+    const isAlreadyPlaced = placedTiles.some(t => t.id === tile.id);
+
+    if (isAlreadyPlaced) {
+      setPlacedTiles(prev => prev.filter(t => t.id !== tile.id));
+    } else {
+      setPlacedTiles(prev => [...prev, tile]);
+    }
+  };
+
+  const [inputValue, setInputValue] = useState('');
+
+  const handleRemovePlacedTile = (tile) => {
+    if (answered) return;
+    setPlacedTiles(prev => prev.filter(t => t.id !== tile.id));
+  };
+
+  const handleBackspace = () => {
+    setPlacedTiles(prev => {
+      if (prev.length === 0) return prev;
+      return prev.slice(0, -1);
+    });
+    setTypedBuffer('');
+  };
+
+  const handleCharacterInput = (char) => {
+    if (answered || !char) return;
+
+    const targetSpelling = currentWord?.targetSpelling || '';
+    const isMultiWord = targetSpelling.trim().includes(' ');
+
+    const unplacedTiles = tileBank.filter(t => !placedTiles.some(pt => pt.id === t.id));
+    const exactMatch = unplacedTiles.find(
+      t => t.text.toLowerCase() === char.toLowerCase() ||
+           normalizeForComparison(t.text) === normalizeForComparison(char)
+    );
+
+    if (exactMatch) {
+      setPlacedTiles(prev => [...prev, exactMatch]);
+      speakWord(exactMatch.text, getTargetAnswerLang());
+      return;
+    }
+
+    if (isMultiWord) {
+      if (char === ' ') {
+        if (typedBuffer) {
+          const wordMatch = unplacedTiles.find(
+            t => t.text.toLowerCase() === typedBuffer.toLowerCase()
+          );
+          if (wordMatch) {
+            setPlacedTiles(prev => [...prev, wordMatch]);
+            speakWord(wordMatch.text, getTargetAnswerLang());
+            setTypedBuffer('');
+            return;
+          }
+        }
+      } else {
+        const nextBuf = typedBuffer + char;
+        const wordMatch = unplacedTiles.find(
+          t => t.text.toLowerCase() === nextBuf.toLowerCase()
+        );
+        if (wordMatch) {
+          setPlacedTiles(prev => [...prev, wordMatch]);
+          speakWord(wordMatch.text, getTargetAnswerLang());
+          setTypedBuffer('');
+          return;
+        } else {
+          setTypedBuffer(nextBuf);
+          return;
+        }
+      }
+    }
+
+    // Custom typed character fallback
+    setPlacedTiles(prev => [
+      ...prev,
+      { id: `custom-${Date.now()}-${Math.random()}`, text: char, isCustom: true },
+    ]);
+  };
+
+  const handleInputChange = (e) => {
+    if (answered) return;
+    const val = e.target.value;
+    if (!val) return;
+
+    for (const char of val) {
+      handleCharacterInput(char);
+    }
+    setInputValue('');
+  };
+
+  // Keyboard Event Listener
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (showQuitModal || isFinished) return;
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        if (!answered) {
+          if (currentAnswerString.trim()) {
+            submitAnswer();
+          }
+        } else {
+          handleNext();
+        }
+        return;
+      }
+
+      if (answered) return;
+
+      if (e.key === 'Backspace') {
+        e.preventDefault();
+        handleBackspace();
+        return;
+      }
+
+      if (e.key.length === 1) {
+        if (e.key === ' ') {
+          e.preventDefault();
+        }
+        // If input element is NOT focused, focus it and process character directly.
+        // If input element IS focused, do nothing here because onChange will process it!
+        if (document.activeElement !== inputRef.current) {
+          inputRef.current?.focus();
+          handleCharacterInput(e.key);
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [answered, currentAnswerString, showQuitModal, isFinished, placedTiles, tileBank, currentWord, typedBuffer]);
 
   const submitAnswer = async () => {
     if (answered) return;
@@ -284,30 +393,6 @@ export default function SpellingGame({
       setIncorrectCount(c => c + 1);
       detectConfusion(submittedInput);
     }
-  };
-
-  const handleTileTap = (tile) => {
-    if (answered) return;
-
-    // Speak the letter/word tile in the target language!
-    const targetLang = getTargetAnswerLang();
-    speakWord(tile.text, targetLang);
-
-    const isAlreadyPlaced = placedTiles.some(t => t.id === tile.id);
-
-    if (isAlreadyPlaced) {
-      // Remove from placed tiles
-      setPlacedTiles(prev => prev.filter(t => t.id !== tile.id));
-    } else {
-      // Add to placed tiles
-      setPlacedTiles(prev => [...prev, tile]);
-    }
-  };
-
-  const handleInputChange = (e) => {
-    if (answered) return;
-    const val = e.target.value;
-    setInput(val);
   };
 
   const detectConfusion = (typedText) => {
@@ -367,7 +452,7 @@ export default function SpellingGame({
             correctWords: correctCount,
             incorrectWords: incorrectCount,
           },
-          mistakesList
+          []
         );
       } else {
         setIsFinished(true);
@@ -375,14 +460,13 @@ export default function SpellingGame({
     }
   };
 
-  // ── Render Duolingo Style Lesson Completion Screen ──
+  // Render Duolingo Style Lesson Completion Screen
   if (isFinished) {
     const accuracyPct = Math.round((correctCount / (correctCount + incorrectCount || 1)) * 100);
 
     return (
       <div className="duo-spelling-page duo-results-page">
         <div className="duo-results-body">
-          {/* Celebratory Title & Subtitle */}
           <h1 className="duo-results-title">
             {t('practice.lessonComplete') || "Lesson Complete!"}
           </h1>
@@ -390,9 +474,7 @@ export default function SpellingGame({
             {t('practice.lessonCompleteSub', { count: processedWords.length }) || `You completed ${processedWords.length} words in this lesson`}
           </p>
 
-          {/* Duolingo 3D Stat Cards Grid */}
           <div className="duo-results-cards-row">
-            {/* Card 1: TOTAL WORDS */}
             <div className="duo-stat-card card-total">
               <div className="duo-stat-badge badge-gold">
                 {t('practice.totalWordsBadge') || 'TOTAL WORDS'}
@@ -403,7 +485,6 @@ export default function SpellingGame({
               </div>
             </div>
 
-            {/* Card 2: ACCURACY */}
             <div className="duo-stat-card card-accuracy">
               <div className="duo-stat-badge badge-green">
                 {t('practice.accuracyBadge') || 'ACCURACY'}
@@ -416,10 +497,8 @@ export default function SpellingGame({
           </div>
         </div>
 
-        {/* Fixed Bottom Action Bar */}
         <footer className="duo-bottom-bar duo-results-bottom-bar">
           <div className="duo-results-bottom-content">
-            {/* Left: REVIEW MISTAKES (if there were mistakes) */}
             {incorrectCount > 0 ? (
               <button
                 type="button"
@@ -430,7 +509,6 @@ export default function SpellingGame({
               </button>
             ) : <div />}
 
-            {/* Right: PRACTICE AGAIN & CONTINUE */}
             <div className="duo-results-right-btns">
               <button
                 type="button"
@@ -474,7 +552,7 @@ export default function SpellingGame({
 
   return (
     <div className="duo-spelling-page">
-      {/* ── Top Bar Header (Duolingo Style: X button + Capsule Progress Bar, NO HEARTS) ── */}
+      {/* Top Header */}
       <header className="duo-top-header">
         <button
           type="button"
@@ -495,14 +573,13 @@ export default function SpellingGame({
         </div>
       </header>
 
-      {/* ── Main Content Area ── */}
+      {/* Main Content Area */}
       <div className="duo-spelling-body">
-        {/* Instruction Title */}
         <h2 className="duo-prompt-title">
           {getLanguageHeaderTitle()}
         </h2>
 
-        {/* Prompt Phrase Card (Clean Card without character) */}
+        {/* Prompt Card */}
         <div className="duo-prompt-card">
           <button
             type="button"
@@ -515,27 +592,31 @@ export default function SpellingGame({
           </button>
         </div>
 
-        {/* ── Answer Slot Underline Area ── */}
+        {/* Unified Answer Area (Placed Tiles + Hidden Soft Input) */}
         <div
           className="duo-answer-area"
-          onClick={() => isKeyboardMode && inputRef.current?.focus()}
+          onClick={() => inputRef.current?.focus()}
         >
           <div className={`duo-answer-slots ${answered ? (isCorrect ? 'is-correct' : 'is-wrong') : ''}`}>
-            {isKeyboardMode ? (
-              <input
-                ref={inputRef}
-                type="text"
-                className={`duo-keyboard-input ${answered ? (isCorrect ? 'is-correct' : 'is-wrong') : ''}`}
-                value={input}
-                onChange={handleInputChange}
-                disabled={answered}
-                placeholder={t('practice.typeWordPlaceholder') || "Type your answer..."}
-                autoFocus
-                autoComplete="off"
-                autoCorrect="off"
-                autoCapitalize="none"
-                spellCheck={false}
-              />
+            {/* Hidden Input element to maintain mobile soft keyboard & browser focus */}
+            <input
+              ref={inputRef}
+              type="text"
+              className="duo-hidden-keyboard-input"
+              value={inputValue}
+              onChange={handleInputChange}
+              disabled={answered}
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="none"
+              spellCheck={false}
+            />
+
+            {placedTiles.length === 0 && !answered ? (
+              <div className="duo-answer-placeholder">
+                <Keyboard size={18} className="duo-placeholder-icon" />
+                <span>{t('practice.tapTilesOrType') || 'Tap tiles or type on keyboard...'}</span>
+              </div>
             ) : (
               <div className="duo-placed-tiles-row" ref={placedTilesRowRef}>
                 <AnimatePresence>
@@ -548,7 +629,7 @@ export default function SpellingGame({
                         className={`duo-tile ${isSingleLetter ? 'duo-tile-letter' : 'duo-tile-word'} duo-tile-placed ${
                           answered ? (isCorrect ? 'tile-correct' : 'tile-wrong') : ''
                         }`}
-                        onClick={() => handleTileTap(tile)}
+                        onClick={() => handleRemovePlacedTile(tile)}
                         layout
                         initial={{ scale: 0.8, opacity: 0, y: 15 }}
                         animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -566,40 +647,38 @@ export default function SpellingGame({
           </div>
         </div>
 
-        {/* ── Tile Bank ── */}
-        {!isKeyboardMode && (
-          <div className="duo-tile-bank">
-            {tileBank.map((tile) => {
-              const isUsed = placedTiles.some(t => t.id === tile.id);
-              const isSingleLetter = tile.text.length === 1;
+        {/* Tile Bank (ALWAYS Visible & Interactive) */}
+        <div className="duo-tile-bank">
+          {tileBank.map((tile) => {
+            const isUsed = placedTiles.some(t => t.id === tile.id);
+            const isSingleLetter = tile.text.length === 1;
 
-              return (
-                <div
-                  key={tile.id}
-                  className={`duo-tile-wrapper ${isSingleLetter ? 'wrapper-letter' : 'wrapper-word'}`}
-                >
-                  {isUsed ? (
-                    <div className={`duo-tile-slot ${isSingleLetter ? 'slot-letter' : 'slot-word'}`} />
-                  ) : (
-                    <motion.button
-                      type="button"
-                      className={`duo-tile ${isSingleLetter ? 'duo-tile-letter' : 'duo-tile-word'}`}
-                      onClick={() => handleTileTap(tile)}
-                      whileHover={{ y: -2 }}
-                      whileTap={{ y: 2 }}
-                      disabled={answered}
-                    >
-                      {tile.text}
-                    </motion.button>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        )}
+            return (
+              <div
+                key={tile.id}
+                className={`duo-tile-wrapper ${isSingleLetter ? 'wrapper-letter' : 'wrapper-word'}`}
+              >
+                {isUsed ? (
+                  <div className={`duo-tile-slot ${isSingleLetter ? 'slot-letter' : 'slot-word'}`} />
+                ) : (
+                  <motion.button
+                    type="button"
+                    className={`duo-tile ${isSingleLetter ? 'duo-tile-letter' : 'duo-tile-word'}`}
+                    onClick={() => handleTileTap(tile)}
+                    whileHover={{ y: -2 }}
+                    whileTap={{ y: 2 }}
+                    disabled={answered}
+                  >
+                    {tile.text}
+                  </motion.button>
+                )}
+              </div>
+            );
+          })}
+        </div>
       </div>
 
-      {/* ── Fixed Full-Width Bottom Bar & Feedback Drawer ── */}
+      {/* Fixed Bottom Action Bar */}
       <footer
         className={`duo-bottom-bar ${
           answered ? (isCorrect ? 'drawer-correct' : 'drawer-wrong') : ''
@@ -609,7 +688,6 @@ export default function SpellingGame({
         <div className="duo-bottom-bar-content">
           {!answered ? (
             <>
-              {/* SKIP Button */}
               <button
                 type="button"
                 className="duo-btn duo-btn-skip"
@@ -618,27 +696,6 @@ export default function SpellingGame({
                 {t('practice.skip')?.toUpperCase() || 'SKIP'}
               </button>
 
-              {/* Keyboard Mode Toggle */}
-              <button
-                type="button"
-                className="duo-btn duo-btn-toggle-input"
-                onClick={() => setIsKeyboardMode(!isKeyboardMode)}
-                title={isKeyboardMode ? (t('practice.switchToTiles') || "Switch to tile selection") : (t('practice.switchToKeyboard') || "Switch to keyboard mode")}
-              >
-                {isKeyboardMode ? (
-                  <>
-                    <Grid size={18} strokeWidth={2.4} />
-                    <span className="duo-btn-toggle-text">{t('practice.useTiles') || 'USE TILES'}</span>
-                  </>
-                ) : (
-                  <>
-                    <Keyboard size={18} strokeWidth={2.4} />
-                    <span className="duo-btn-toggle-text">{t('practice.useKeyboard') || 'USE KEYBOARD'}</span>
-                  </>
-                )}
-              </button>
-
-              {/* CHECK Button */}
               <button
                 type="button"
                 className="duo-btn duo-btn-check"
@@ -649,7 +706,6 @@ export default function SpellingGame({
               </button>
             </>
           ) : (
-            /* Post-Answer Feedback Bar */
             <div className="duo-feedback-container">
               <div className="duo-feedback-info">
                 <div className={`duo-feedback-icon-circle ${isCorrect ? 'icon-correct' : 'icon-wrong'}`}>
@@ -685,7 +741,7 @@ export default function SpellingGame({
         </div>
       </footer>
 
-      {/* ── Quit Confirmation Modal ── */}
+      {/* Quit Confirmation Modal */}
       <PracticeQuitModal
         isOpen={showQuitModal}
         onClose={() => setShowQuitModal(false)}
