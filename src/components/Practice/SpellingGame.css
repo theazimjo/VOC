@@ -9,7 +9,7 @@
   background-color: var(--bg-primary) !important;
   z-index: 99999 !important;
   padding: 0 !important;
-  overflow-y: auto !important;
+  overflow: hidden !important;
 }
 
 .spelling-content-fullscreen {

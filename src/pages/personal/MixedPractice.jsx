@@ -3,8 +3,8 @@ import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ref, update } from 'firebase/database';
 import {
-  Shuffle, Target, Volume2, X, CheckCircle2, XCircle,
-  Trophy, ThumbsUp, Dumbbell, RotateCcw
+  Shuffle, Target, Volume2, X, Check, CheckCircle2, XCircle,
+  Trophy, ThumbsUp, Dumbbell, RotateCcw, Sparkles
 } from 'lucide-react';
 import { db } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
@@ -18,6 +18,7 @@ import { inferConfidenceFromSpeed, computeClusterCalibration, getRecommendedRetr
 import { saveReviewEvent } from '../../experiment/experimentDB';
 import { getWordCluster } from '../../experiment/semanticClassifier';
 import IosSpinner from '../../components/common/IosSpinner';
+import PracticeQuitModal from '../../components/Practice/PracticeQuitModal';
 import './MixedPractice.css';
 
 const LEECH_THRESHOLD = 3;
@@ -28,13 +29,6 @@ function getResultTier(ratio, t) {
   return { Icon: Dumbbell, label: t ? t('mixedPractice.keepGoing') : "Keep going, you'll get there!", color: 'var(--success)', dim: 'var(--success-dim)' };
 }
 
-// Recognition-before-production sequencing: brand-new / weak words get the
-// easiest (multiple-choice) format; words the learner has seen more and is
-// getting right move to listening, then full spelling — the hardest,
-// most production-heavy format — once mastery is high. The passive-vs-active
-// split itself now comes from the same engine call Memory Lab uses
-// (getRecommendedRetrievalType), instead of a second, separately-tuned
-// mastery threshold that could silently drift out of sync with it.
 function pickQuestionType(wordObj, poolSize) {
   if (poolSize < 4) {
     return Math.random() > 0.5 ? 'spelling' : 'dictation';
@@ -51,7 +45,7 @@ function pickQuestionType(wordObj, poolSize) {
 
 export default function MixedPractice() {
   const { user } = useAuth();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { allWords, allWordsLoading } = usePacks();
   const { incrementActivity } = useStreak();
   const navigate = useNavigate();
@@ -60,6 +54,7 @@ export default function MixedPractice() {
   const isDueMode = searchParams.get('filter') === 'due';
 
   const [step, setStep] = useState('setup'); // 'setup' | 'practice' | 'results'
+  const [showQuitModal, setShowQuitModal] = useState(false);
   const [mixedWordsPool, setMixedWordsPool] = useState([]);
   const [questions, setQuestions] = useState([]);
   const [currentIdx, setCurrentIdx] = useState(0);
@@ -67,8 +62,15 @@ export default function MixedPractice() {
   const [hasAnswered, setHasAnswered] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [correctCount, setCorrectCount] = useState(0);
+  const [incorrectCount, setIncorrectCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const questionStartRef = useRef(Date.now());
+
+  // Safe translation helper
+  const getTrans = (key, fallback) => {
+    const val = t(key);
+    return val && val !== key ? val : fallback;
+  };
 
   // Word pool sourced from the shared allWords aggregator
   useEffect(() => {
@@ -89,8 +91,6 @@ export default function MixedPractice() {
   const startSession = (wordsPool) => {
     if (wordsPool.length === 0) return;
 
-    // Due mode prioritizes the most overdue words first (never-reviewed
-    // words count as most urgent); other modes just sample randomly.
     const selectedWords = isDueMode
       ? [...wordsPool]
           .sort((a, b) => new Date(a.nextReview || 0) - new Date(b.nextReview || 0))
@@ -103,7 +103,6 @@ export default function MixedPractice() {
       if (type === 'quiz') {
         const correctTranslation = (wordObj.translation || '').trim() || wordObj.word.trim();
 
-        // Gather all valid non-empty translations from pool and allWords
         const candidatePool = wordsPool.length >= 4 ? wordsPool : [...wordsPool, ...allWords];
         const validWrongTranslations = Array.from(
           new Set(
@@ -113,10 +112,8 @@ export default function MixedPractice() {
           )
         );
 
-        // Pick 3 random wrong options
         const wrongOptions = shuffleArray(validWrongTranslations).slice(0, 3);
 
-        // Guaranteed fallbacks if we didn't get 3 unique non-empty wrong options
         const fallbackDistractors = [
           "yashil o'simliklar", "asosiy manba", "hayotiy jarayon",
           "muhim vosita", "o'zaro ta'sir", "natijaviy bosqich",
@@ -148,6 +145,7 @@ export default function MixedPractice() {
     setQuestions(generated);
     setCurrentIdx(0);
     setCorrectCount(0);
+    setIncorrectCount(0);
     setTypedAnswer('');
     setHasAnswered(false);
     setSelectedOption(null);
@@ -179,33 +177,14 @@ export default function MixedPractice() {
     }
   }, [currentIdx, step, hasAnswered]);
 
-  // Warn before closing tab during active practice
-  useEffect(() => {
-    const handleBeforeUnload = (e) => {
-      if (step === 'practice') {
-        e.preventDefault();
-        e.returnValue = '';
-      }
-    };
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
-  }, [step]);
-
   const handleExit = () => {
     if (step === 'practice') {
-      if (window.confirm(t('mixedPractice.exitConfirm'))) {
-        navigate('/');
-      }
+      setShowQuitModal(true);
     } else {
       navigate('/');
     }
   };
 
-  // Routes through the exact same saveReviewEvent() pipeline every other
-  // practice mode now uses (Memory Lab, PracticePage's 7 games) — real
-  // response time + speed-inferred confidence, recallHistory recorded, and
-  // the same per-semantic-cluster self-calibration. Returns the persisted
-  // result so callers can keep their local question/word copies in sync.
   const handleUpdateWordStats = async (wordObj, isCorrect, responseTime, retrievalType, mode) => {
     if (!user) return null;
     try {
@@ -253,6 +232,8 @@ export default function MixedPractice() {
     setQuestions(prev => prev.map((q, i) => (i === currentIdx ? { ...q, isCorrect: isRight, userAnswer: option } : q)));
 
     if (isRight) setCorrectCount(prev => prev + 1);
+    else setIncorrectCount(prev => prev + 1);
+
     setHasAnswered(true);
     playSound(isRight ? 'correct' : 'wrong');
     triggerVibration(isRight ? 'correct' : 'wrong');
@@ -270,6 +251,8 @@ export default function MixedPractice() {
     setQuestions(prev => prev.map((q, i) => (i === currentIdx ? { ...q, isCorrect: isRight, userAnswer: typedAnswer } : q)));
 
     if (isRight) setCorrectCount(prev => prev + 1);
+    else setIncorrectCount(prev => prev + 1);
+
     setHasAnswered(true);
     playSound(isRight ? 'correct' : 'wrong');
     triggerVibration(isRight ? 'correct' : 'wrong');
@@ -305,302 +288,369 @@ export default function MixedPractice() {
   }, [step, hasAnswered, currentIdx, questions]);
 
   const pageLoading = loading || allWordsLoading;
+  const currentProgressPct = questions.length > 0 ? ((currentIdx + 1) / questions.length) * 100 : 0;
 
   return (
-    <div className="mixed-practice-page">
+    <div className="duo-spelling-page duo-mixed-page">
+      {/* Top Header Bar */}
+      {step === 'practice' && questions.length > 0 && (
+        <header className="duo-top-header">
+          <button
+            type="button"
+            className="duo-close-btn"
+            onClick={handleExit}
+            title={getTrans('mixedPractice.exitBtn', 'Close practice')}
+          >
+            <X size={24} strokeWidth={2.8} />
+          </button>
 
-
-      {pageLoading ? (
-        <div className="ios-activity-indicator" style={{ marginTop: '100px' }}>
-          <IosSpinner />
-          <span>{t('mixedPractice.loading')}</span>
-        </div>
-      ) : mixedWordsPool.length === 0 ? (
-        <div className="empty-state">
-          <div className="empty-state-icon">{isLeechMode ? '🎯' : isDueMode ? '✅' : '🎮'}</div>
-          <h3>{isLeechMode ? t('mixedPractice.noTrickyTitle') : isDueMode ? t('mixedPractice.noDueTitle') : t('mixedPractice.noWordsTitle')}</h3>
-          <p>
-            {isLeechMode
-              ? t('mixedPractice.noTrickyDesc')
-              : isDueMode
-                ? t('mixedPractice.noDueDesc')
-                : t('mixedPractice.noWordsDesc')}
-          </p>
-          <Link to={isLeechMode ? '/stats' : isDueMode ? '/' : '/library'} className="btn btn-primary" style={{ marginTop: 'var(--space-md)' }}>
-            {isLeechMode ? t('mixedPractice.backToStats') : isDueMode ? t('mixedPractice.backToDashboard') : t('mixedPractice.goToLibrary')}
-          </Link>
-        </div>
-      ) : (
-        <AnimatePresence mode="wait">
-          {/* Step 1: Practice Session */}
-          {step === 'practice' && questions.length > 0 && (
-            <div className="mixed-practice-container">
-              <div className="practice-session-header">
-                <span className="practice-session-title">
-                  {isLeechMode ? <Target size={17} strokeWidth={2.3} /> : isDueMode ? <RotateCcw size={17} strokeWidth={2.3} /> : <Shuffle size={17} strokeWidth={2.3} />}
-                  {isLeechMode ? t('mixedPractice.trickyPracticeTitle') : isDueMode ? t('mixedPractice.todaysReviewTitle') : t('mixedPractice.mixedPracticeTitle')}
-                </span>
-                <button className="btn-exit-practice" onClick={handleExit} title={t('mixedPractice.exitBtn')}>
-                  <X size={14} strokeWidth={2.4} /> {t('mixedPractice.exitBtn')}
-                </button>
-              </div>
-
-              <motion.div
-                key={currentIdx}
-                className="mixed-practice-card"
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{ duration: 0.25 }}
-              >
-              {/* Progress bar */}
-              <div className="practice-progress-bar-container">
-                <div className="progress-bar-label">
-                  {t('mixedPractice.questionProgress', { current: currentIdx + 1, total: questions.length })}
-                </div>
-                <div className="progress-bar-track">
-                  <div
-                    className="progress-bar-fill"
-                    style={{ width: `${((currentIdx + 1) / questions.length) * 100}%` }}
-                  ></div>
-                </div>
-              </div>
-
-              {/* Question area */}
-              <div className="question-content">
-                {questions[currentIdx].type === 'quiz' && (
-                  <div className="mp-quiz-question">
-                    <span className="question-prompt">{t('mixedPractice.chooseTranslation')}</span>
-                    <h2 className="question-word">{questions[currentIdx].word.word}</h2>
-
-                    <div className="quiz-options-grid">
-                      {questions[currentIdx].options.map((option, idx) => {
-                        const correctVal = questions[currentIdx].word.translation;
-                        let optionClass = 'quiz-option-btn';
-
-                        if (hasAnswered) {
-                          if (option === correctVal) {
-                            optionClass += ' correct';
-                          } else if (option === selectedOption) {
-                            optionClass += ' incorrect';
-                          } else {
-                            optionClass += ' disabled';
-                          }
-                        }
-
-                        return (
-                          <button
-                            key={idx}
-                            className={optionClass}
-                            onClick={() => handleQuizAnswer(option)}
-                            disabled={hasAnswered}
-                          >
-                            <span className="quiz-opt-letter">{['A', 'B', 'C', 'D'][idx]}</span>
-                            <span className="quiz-opt-text">{option}</span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
-
-                {questions[currentIdx].type === 'spelling' && (
-                  <div className="spelling-question">
-                    <span className="question-prompt">{t('mixedPractice.typeEnglishTranslation')}</span>
-                    <h2 className="question-word">{questions[currentIdx].word.translation}</h2>
-
-                    <form onSubmit={handleTextSubmit} className="mp-spelling-form" autoComplete="off" noValidate data-lpignore="true" data-1p-ignore="true">
-                      <input
-                        ref={(el) => {
-                          if (el && !hasAnswered) {
-                            requestAnimationFrame(() => el.focus());
-                          }
-                        }}
-                        type="text"
-                        name="practice_no_autofill_input"
-                        className="mp-spelling-input"
-                        placeholder={t('mixedPractice.typeEnglishWordPlaceholder')}
-                        value={typedAnswer}
-                        onChange={(e) => setTypedAnswer(e.target.value)}
-                        disabled={hasAnswered}
-                        autoFocus
-                        autoComplete="off"
-                        autoCorrect="off"
-                        autoCapitalize="none"
-                        spellCheck={false}
-                        inputMode="text"
-                        aria-autocomplete="none"
-                        data-lpignore="true"
-                        data-1p-ignore="true"
-                        data-form-type="other"
-                        data-gramm="false"
-                        data-enable-grammarly="false"
-                      />
-                      <button type="submit" style={{ display: 'none' }} />
-                    </form>
-                  </div>
-                )}
-
-                {questions[currentIdx].type === 'dictation' && (
-                  <div className="dictation-question">
-                    <span className="question-prompt">{t('mixedPractice.typeWordHear')}</span>
-                    <div className="audio-player-container">
-                      <button
-                        className="audio-play-btn"
-                        onClick={() => speakWord(questions[currentIdx].word.word, questions[currentIdx].word.language)}
-                        title="Listen again"
-                        type="button"
-                      >
-                        <Volume2 size={20} strokeWidth={2.2} />
-                      </button>
-                      <span className="audio-helper-text">{t('mixedPractice.tapHearAgain')}</span>
-                    </div>
-
-                    <form onSubmit={handleTextSubmit} className="mp-spelling-form" autoComplete="off" noValidate data-lpignore="true" data-1p-ignore="true">
-                      <input
-                        ref={(el) => {
-                          if (el && !hasAnswered) {
-                            requestAnimationFrame(() => el.focus());
-                          }
-                        }}
-                        type="text"
-                        name="practice_no_autofill_input"
-                        className="mp-spelling-input"
-                        placeholder={t('mixedPractice.typeWordHeardPlaceholder')}
-                        value={typedAnswer}
-                        onChange={(e) => setTypedAnswer(e.target.value)}
-                        disabled={hasAnswered}
-                        autoFocus
-                        autoComplete="off"
-                        autoCorrect="off"
-                        autoCapitalize="none"
-                        spellCheck={false}
-                        inputMode="text"
-                        aria-autocomplete="none"
-                        data-lpignore="true"
-                        data-1p-ignore="true"
-                        data-form-type="other"
-                        data-gramm="false"
-                        data-enable-grammarly="false"
-                      />
-                      <button type="submit" style={{ display: 'none' }} />
-                    </form>
-                  </div>
-                )}
-              </div>
-
-              {/* Feedback footer — always present to prevent layout shift */}
-              <div className={`feedback-footer ${hasAnswered ? (questions[currentIdx].isCorrect ? 'correct' : 'incorrect') : 'idle'}`}>
-                <div className="feedback-content">
-                  {!hasAnswered ? (
-                    questions[currentIdx].type === 'quiz' ? (
-                      <div className="feedback-hint-text">{t('mixedPractice.selectCorrectTranslationHint')}</div>
-                    ) : (
-                      <button
-                        type="button"
-                        className="btn btn-primary submit-btn"
-                        onClick={handleTextSubmit}
-                        disabled={!typedAnswer.trim()}
-                      >
-                        {t('mixedPractice.checkBtn')}
-                      </button>
-                    )
-                  ) : (
-                    <>
-                      <div className="feedback-text-wrapper">
-                        <span className="feedback-icon">
-                          {questions[currentIdx].isCorrect
-                            ? <CheckCircle2 size={22} strokeWidth={2.2} style={{ color: 'var(--success)' }} />
-                            : <XCircle size={22} strokeWidth={2.2} style={{ color: 'var(--error)' }} />}
-                        </span>
-                        <div className="feedback-text">
-                          <h4>{questions[currentIdx].isCorrect ? t('mixedPractice.correctTitle') : t('mixedPractice.incorrectTitle')}</h4>
-                          {!questions[currentIdx].isCorrect && (
-                            <p>
-                              {t('mixedPractice.answerLabel')} <strong>{questions[currentIdx].word.word}</strong>
-                              {questions[currentIdx].word.translation && ` — ${questions[currentIdx].word.translation}`}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                      <button className="btn btn-next" onClick={handleNext}>
-                        {currentIdx === questions.length - 1 ? t('mixedPractice.viewResultsBtn') : t('mixedPractice.nextBtn')}
-                      </button>
-                    </>
-                  )}
-                </div>
-              </div>
-            </motion.div>
-            </div>
-          )}
-
-          {/* Step 2: Results Summary */}
-          {step === 'results' && (() => {
-            const tier = getResultTier(questions.length > 0 ? correctCount / questions.length : 0, t);
-            return (
-            <div className="mixed-practice-container">
+          <div className="duo-progress-track">
             <motion.div
-              key="results"
-              className="practice-results-card practice-results-card-lg"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-            >
-              <div className="result-icon-circle" style={{ background: tier.dim, color: tier.color }}>
-                <tier.Icon size={44} strokeWidth={2.2} />
-              </div>
-              <h2>{tier.label}</h2>
-              <p className="results-subtitle">{isDueMode ? t('mixedPractice.reviewCompleteSub') : t('mixedPractice.mixedPracticeCompleteSub')}</p>
+              className="duo-progress-fill"
+              initial={{ width: 0 }}
+              animate={{ width: `${currentProgressPct}%` }}
+              transition={{ duration: 0.35, ease: 'easeOut' }}
+            />
+          </div>
 
-              <div className="results-score-badge">
-                <span className="score-value">{correctCount}</span>
-                <span className="score-slash">/</span>
-                <span className="score-total">{questions.length}</span>
-              </div>
-
-              <div className="results-label">{t('mixedPractice.wordsAnsweredCorrectly')}</div>
-
-              {/* Mistakes review */}
-              {questions.some(q => !q.isCorrect) && (
-                <div className="mistakes-review-container">
-                  <h3>{t('mixedPractice.reviewMistakesHeader')}</h3>
-                  <div className="mistakes-list">
-                    {questions.filter(q => !q.isCorrect).map((q, idx) => (
-                      <div key={idx} className="mistake-item">
-                        <div className="mistake-word-group">
-                          <span className="mistake-word">{q.word.word}</span>
-                          <span className="mistake-translation">{q.word.translation}</span>
-                        </div>
-                        <span className="mistake-your-answer">
-                          {t('mixedPractice.youAnswer')} <del>{q.userAnswer || t('mixedPractice.noAnswerGiven')}</del>
-                        </span>
-                        <button
-                          className="btn-speak-mistake"
-                          onClick={() => speakWord(q.word.word, q.word.language)}
-                          title="Listen to pronunciation"
-                          type="button"
-                        >
-                          <Volume2 size={14} strokeWidth={2.3} />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              <div className="result-actions">
-                <button className="btn btn-primary" onClick={() => startSession(mixedWordsPool)}>
-                  <RotateCcw size={16} strokeWidth={2.3} /> {t('mixedPractice.practiceAgainBtn')}
-                </button>
-                <button className="btn btn-secondary" onClick={() => navigate('/')}>
-                  {t('mixedPractice.backToDashboardBtn')}
-                </button>
-              </div>
-            </motion.div>
+          <div className="duo-speed-badges-row">
+            <div className="duo-speed-tally tally-correct">
+              <Check size={14} strokeWidth={3} />
+              <span>{correctCount}</span>
             </div>
-            );
-          })()}
-        </AnimatePresence>
+            <div className="duo-speed-tally tally-wrong">
+              <X size={14} strokeWidth={3} />
+              <span>{incorrectCount}</span>
+            </div>
+          </div>
+        </header>
       )}
+
+      <div className="duo-spelling-body duo-mixed-body">
+        {pageLoading ? (
+          <div className="ios-activity-indicator" style={{ marginTop: '100px' }}>
+            <IosSpinner />
+            <span>{getTrans('mixedPractice.loading', 'Loading practice...')}</span>
+          </div>
+        ) : mixedWordsPool.length === 0 ? (
+          <div className="empty-state duo-prompt-card">
+            <div className="empty-state-icon">{isLeechMode ? '🎯' : isDueMode ? '✅' : '🎮'}</div>
+            <h3>{isLeechMode ? getTrans('mixedPractice.noTrickyTitle', 'No tricky words found!') : isDueMode ? getTrans('mixedPractice.noDueTitle', 'No due words to review!') : getTrans('mixedPractice.noWordsTitle', 'No words available!')}</h3>
+            <p>
+              {isLeechMode
+                ? getTrans('mixedPractice.noTrickyDesc', 'Great job! You have no weak words left.')
+                : isDueMode
+                  ? getTrans('mixedPractice.noDueDesc', 'All caught up on scheduled reviews!')
+                  : getTrans('mixedPractice.noWordsDesc', 'Add words to your library first.')}
+            </p>
+            <Link to={isLeechMode ? '/stats' : isDueMode ? '/' : '/library'} className="duo-btn-3d duo-btn-primary" style={{ marginTop: '16px' }}>
+              <span>{isLeechMode ? getTrans('mixedPractice.backToStats', 'Back to Stats') : isDueMode ? getTrans('mixedPractice.backToDashboard', 'Back to Dashboard') : getTrans('mixedPractice.goToLibrary', 'Go to Library')}</span>
+            </Link>
+          </div>
+        ) : (
+          <AnimatePresence mode="wait">
+            {/* Step 1: Practice Session */}
+            {step === 'practice' && questions.length > 0 && (
+              <div className="mixed-practice-wrapper">
+                {/* Mode Pill */}
+                <div className="trainer-mode-pill">
+                  {isLeechMode
+                    ? `🎯 ${getTrans('mixedPractice.trickyPracticeTitle', 'Tricky Words Practice')}`
+                    : isDueMode
+                      ? `🔄 ${getTrans('mixedPractice.todaysReviewTitle', 'Today\'s Review')}`
+                      : `⚡ ${getTrans('mixedPractice.mixedPracticeTitle', 'Mixed Practice')}`}
+                </div>
+
+                <motion.div
+                  key={currentIdx}
+                  className="trainer-board"
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -16 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="game-type-wrap">
+                    {/* ── QUESTION TYPE: QUIZ ── */}
+                    {questions[currentIdx].type === 'quiz' && (
+                      <div className="mp-question-block">
+                        <span className="question-prompt">
+                          {getTrans('mixedPractice.chooseTranslation', language === 'uz' ? 'To\'g\'ri tarjimani tanlang' : 'Choose the correct translation')}
+                        </span>
+                        <h2 className="question-word">{questions[currentIdx].word.word}</h2>
+
+                        <div className="quiz-options-grid">
+                          {questions[currentIdx].options.map((option, idx) => {
+                            const correctVal = questions[currentIdx].word.translation;
+                            let optionClass = 'quiz-option-btn duo-btn-3d';
+
+                            if (hasAnswered) {
+                              if (option === correctVal) {
+                                optionClass += ' success';
+                              } else if (option === selectedOption) {
+                                optionClass += ' error';
+                              } else {
+                                optionClass += ' dimmed';
+                              }
+                            } else if (selectedOption === option) {
+                              optionClass += ' selected';
+                            }
+
+                            return (
+                              <button
+                                key={idx}
+                                type="button"
+                                className={optionClass}
+                                onClick={() => handleQuizAnswer(option)}
+                                disabled={hasAnswered}
+                              >
+                                <span className="quiz-opt-letter">{['A', 'B', 'C', 'D'][idx]}</span>
+                                <span className="quiz-opt-text">{option}</span>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* ── QUESTION TYPE: SPELLING ── */}
+                    {questions[currentIdx].type === 'spelling' && (
+                      <div className="mp-question-block">
+                        <span className="question-prompt">
+                          {getTrans('mixedPractice.typeEnglishTranslation', language === 'uz' ? 'Inglizcha so\'zni yozing' : 'Type the English word')}
+                        </span>
+                        <h2 className="question-word">{questions[currentIdx].word.translation}</h2>
+
+                        <form onSubmit={handleTextSubmit} className="mp-spelling-form" autoComplete="off" noValidate data-lpignore="true">
+                          <input
+                            ref={(el) => {
+                              if (el && !hasAnswered) {
+                                requestAnimationFrame(() => el.focus());
+                              }
+                            }}
+                            type="text"
+                            name="practice_no_autofill_input"
+                            className={[
+                              'trainer-input mp-spelling-input',
+                              hasAnswered && questions[currentIdx].isCorrect ? 'success' : '',
+                              hasAnswered && !questions[currentIdx].isCorrect ? 'error' : '',
+                            ].filter(Boolean).join(' ')}
+                            placeholder={getTrans('mixedPractice.typeEnglishWordPlaceholder', 'Type in English...')}
+                            value={typedAnswer}
+                            onChange={(e) => setTypedAnswer(e.target.value)}
+                            disabled={hasAnswered}
+                            autoFocus
+                            autoComplete="off" autoCorrect="off"
+                            autoCapitalize="none" spellCheck={false}
+                            data-lpignore="true" data-1p-ignore="true"
+                          />
+                          <button type="submit" style={{ display: 'none' }} />
+                        </form>
+                      </div>
+                    )}
+
+                    {/* ── QUESTION TYPE: DICTATION ── */}
+                    {questions[currentIdx].type === 'dictation' && (
+                      <div className="mp-question-block">
+                        <span className="question-prompt">
+                          {getTrans('mixedPractice.typeWordHear', language === 'uz' ? 'Eshitgan so\'zingizni yozing' : 'Type the word you hear')}
+                        </span>
+
+                        <div className="audio-player-container">
+                          <button
+                            className="audio-play-btn duo-listen-btn-lg"
+                            onClick={() => speakWord(questions[currentIdx].word.word, questions[currentIdx].word.language)}
+                            title="Listen again"
+                            type="button"
+                          >
+                            <Volume2 size={24} strokeWidth={2.5} />
+                          </button>
+                          <span className="audio-helper-text">
+                            {getTrans('mixedPractice.tapHearAgain', 'Tap speaker to hear again')}
+                          </span>
+                        </div>
+
+                        <form onSubmit={handleTextSubmit} className="mp-spelling-form" autoComplete="off" noValidate data-lpignore="true">
+                          <input
+                            ref={(el) => {
+                              if (el && !hasAnswered) {
+                                requestAnimationFrame(() => el.focus());
+                              }
+                            }}
+                            type="text"
+                            name="practice_no_autofill_input"
+                            className={[
+                              'trainer-input mp-spelling-input',
+                              hasAnswered && questions[currentIdx].isCorrect ? 'success' : '',
+                              hasAnswered && !questions[currentIdx].isCorrect ? 'error' : '',
+                            ].filter(Boolean).join(' ')}
+                            placeholder={getTrans('mixedPractice.typeWordHeardPlaceholder', 'Type what you hear...')}
+                            value={typedAnswer}
+                            onChange={(e) => setTypedAnswer(e.target.value)}
+                            disabled={hasAnswered}
+                            autoFocus
+                            autoComplete="off" autoCorrect="off"
+                            autoCapitalize="none" spellCheck={false}
+                            data-lpignore="true" data-1p-ignore="true"
+                          />
+                          <button type="submit" style={{ display: 'none' }} />
+                        </form>
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              </div>
+            )}
+
+            {/* Step 2: Results Summary */}
+            {step === 'results' && (() => {
+              const tier = getResultTier(questions.length > 0 ? correctCount / questions.length : 0, t);
+              return (
+                <div className="mixed-practice-wrapper">
+                  <motion.div
+                    key="results"
+                    className="duo-prompt-card practice-results-card-lg"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                  >
+                    <div className="result-icon-circle" style={{ background: tier.dim, color: tier.color }}>
+                      <tier.Icon size={48} strokeWidth={2.2} />
+                    </div>
+                    <h2>{tier.label}</h2>
+                    <p className="results-subtitle">
+                      {isDueMode ? getTrans('mixedPractice.reviewCompleteSub', 'Daily review complete!') : getTrans('mixedPractice.mixedPracticeCompleteSub', 'Session complete!')}
+                    </p>
+
+                    <div className="results-score-badge">
+                      <span className="score-value">{correctCount}</span>
+                      <span className="score-slash">/</span>
+                      <span className="score-total">{questions.length}</span>
+                    </div>
+
+                    <div className="results-label">{getTrans('mixedPractice.wordsAnsweredCorrectly', 'Words correct')}</div>
+
+                    {/* Mistakes review */}
+                    {questions.some(q => !q.isCorrect) && (
+                      <div className="mistakes-review-container">
+                        <h3>{getTrans('mixedPractice.reviewMistakesHeader', 'Review Mistakes')}</h3>
+                        <div className="mistakes-list">
+                          {questions.filter(q => !q.isCorrect).map((q, idx) => (
+                            <div key={idx} className="mistake-item">
+                              <div className="mistake-word-group">
+                                <span className="mistake-word">{q.word.word}</span>
+                                <span className="mistake-translation">{q.word.translation}</span>
+                              </div>
+                              <span className="mistake-your-answer">
+                                {getTrans('mixedPractice.youAnswer', 'You typed:')} <del>{q.userAnswer || getTrans('mixedPractice.noAnswerGiven', 'No answer')}</del>
+                              </span>
+                              <button
+                                className="btn-speak-mistake"
+                                onClick={() => speakWord(q.word.word, q.word.language)}
+                                title="Listen"
+                                type="button"
+                              >
+                                <Volume2 size={16} strokeWidth={2.3} />
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="result-actions">
+                      <button type="button" className="duo-btn-3d duo-btn-primary" onClick={() => startSession(mixedWordsPool)}>
+                        <RotateCcw size={18} strokeWidth={2.3} />
+                        <span>{getTrans('mixedPractice.practiceAgainBtn', 'Practice Again')}</span>
+                      </button>
+                      <button type="button" className="duo-btn-3d duo-btn-secondary" onClick={() => navigate('/')}>
+                        <span>{getTrans('mixedPractice.backToDashboardBtn', 'Dashboard')}</span>
+                      </button>
+                    </div>
+                  </motion.div>
+                </div>
+              );
+            })()}
+          </AnimatePresence>
+        )}
+      </div>
+
+      {/* ───────────────────────────────────────────────────────────────────── */}
+      {/* BOTTOM DRAWER (DUOLINGO 3D DRAWER)                                   */}
+      {/* ───────────────────────────────────────────────────────────────────── */}
+      {step === 'practice' && questions.length > 0 && (
+        <div className={`duo-drawer ${hasAnswered ? (questions[currentIdx].isCorrect ? 'correct' : 'wrong') : 'idle'}`}>
+          <div className="duo-drawer-content">
+            {hasAnswered ? (
+              <>
+                <div className="duo-feedback-header">
+                  <div className={`duo-feedback-icon ${questions[currentIdx].isCorrect ? 'icon-correct' : 'icon-wrong'}`}>
+                    {questions[currentIdx].isCorrect ? <Check size={28} strokeWidth={3} /> : <X size={28} strokeWidth={3} />}
+                  </div>
+                  <div className="duo-feedback-text">
+                    <span className="duo-feedback-title">
+                      {questions[currentIdx].isCorrect
+                        ? getTrans('mixedPractice.correctTitle', 'Awesome!')
+                        : getTrans('mixedPractice.incorrectTitle', 'Correct answer:')}
+                    </span>
+                    <div className="duo-feedback-forms">
+                      <span className="reveal-form-item">{questions[currentIdx].word.word}</span>
+                      {questions[currentIdx].word.translation && (
+                        <>
+                          <span className="reveal-divider">—</span>
+                          <span className="reveal-form-item">{questions[currentIdx].word.translation}</span>
+                        </>
+                      )}
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="duo-listen-btn"
+                    onClick={() => speakWord(questions[currentIdx].word.word, questions[currentIdx].word.language)}
+                  >
+                    <Volume2 size={20} strokeWidth={2.2} />
+                  </button>
+                </div>
+
+                <button
+                  type="button"
+                  className={`duo-btn-3d duo-drawer-action-btn ${questions[currentIdx].isCorrect ? 'duo-btn-success' : 'duo-btn-danger'}`}
+                  onClick={handleNext}
+                >
+                  <span>
+                    {currentIdx === questions.length - 1
+                      ? getTrans('mixedPractice.viewResultsBtn', 'Results')
+                      : getTrans('mixedPractice.nextBtn', 'Continue')}
+                  </span>
+                </button>
+              </>
+            ) : (
+              <div className="duo-idle-footer">
+                {questions[currentIdx].type === 'quiz' ? (
+                  <div className="feedback-hint-text">
+                    {getTrans('mixedPractice.selectCorrectTranslationHint', 'Choose the correct translation')}
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    className="duo-btn-3d duo-btn-primary duo-drawer-action-btn"
+                    onClick={handleTextSubmit}
+                    disabled={!typedAnswer.trim()}
+                  >
+                    <span>{getTrans('mixedPractice.checkBtn', 'Check')}</span>
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Exit Modal */}
+      <PracticeQuitModal
+        isOpen={showQuitModal}
+        onClose={() => setShowQuitModal(false)}
+        onConfirm={() => navigate('/')}
+      />
     </div>
   );
 }
