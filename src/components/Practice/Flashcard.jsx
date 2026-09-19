@@ -89,9 +89,11 @@ function TopCard({ word, isFlipped, onFlip, onJudge, language, isMonolingual, sa
           >
             <Volume2 size={22} />
           </button>
-          <PosBadge pos={word.partOfSpeech} />
-          <h2 className="duo-fc-word">{word.word}</h2>
-          {word.phonetic && <span className="duo-fc-phonetic">/{word.phonetic}/</span>}
+          <div className="fc-card-content">
+            <PosBadge pos={word.partOfSpeech} />
+            <h2 className="duo-fc-word" title={word.word}>{word.word}</h2>
+            {word.phonetic && <span className="duo-fc-phonetic">/{word.phonetic}/</span>}
+          </div>
           <div className="duo-fc-hint-row">
             <RotateCw size={14} />
             <span>{safeT('practice.tapToFlip', 'Agʻdarish uchun bosing')}</span>
@@ -108,18 +110,20 @@ function TopCard({ word, isFlipped, onFlip, onJudge, language, isMonolingual, sa
           >
             <Volume2 size={22} />
           </button>
-          <PosBadge pos={word.partOfSpeech} />
-          {isMonolingual
-            ? <p className="duo-fc-def-large">{word.definition || word.word}</p>
-            : <h2 className="duo-fc-translation">{word.translation}</h2>}
-          {word.definition && !isMonolingual && <p className="duo-fc-definition">{word.definition}</p>}
-          {word.example && <p className="duo-fc-example">"{word.example}"</p>}
-          {word.customSentence && (
-            <div className="duo-fc-custom-sentence">
-              <PenLine size={14} className="duo-fc-sentence-icon" />
-              <span>{word.customSentence}</span>
-            </div>
-          )}
+          <div className="fc-card-content">
+            <PosBadge pos={word.partOfSpeech} />
+            {isMonolingual
+              ? <p className="duo-fc-def-large" title={word.definition || word.word}>{word.definition || word.word}</p>
+              : <h2 className="duo-fc-translation" title={word.translation}>{word.translation}</h2>}
+            {word.definition && !isMonolingual && <p className="duo-fc-definition" title={word.definition}>{word.definition}</p>}
+            {word.example && <p className="duo-fc-example" title={word.example}>"{word.example}"</p>}
+            {word.customSentence && (
+              <div className="duo-fc-custom-sentence" title={word.customSentence}>
+                <PenLine size={14} className="duo-fc-sentence-icon" />
+                <span>{word.customSentence}</span>
+              </div>
+            )}
+          </div>
           <div className="fc-swipe-hint">
             <span>← {safeT('practice.dontKnow', 'BILMAYMAN')}</span>
             <span>{safeT('practice.know', 'BILAMAN')} →</span>
@@ -134,9 +138,11 @@ function TopCard({ word, isFlipped, onFlip, onJudge, language, isMonolingual, sa
 function GhostCard({ word }) {
   return (
     <div className="fc-ghost-face">
-      <PosBadge pos={word.partOfSpeech} />
-      <h2 className="duo-fc-word">{word.word}</h2>
-      {word.phonetic && <span className="duo-fc-phonetic">/{word.phonetic}/</span>}
+      <div className="fc-card-content">
+        <PosBadge pos={word.partOfSpeech} />
+        <h2 className="duo-fc-word" title={word.word}>{word.word}</h2>
+        {word.phonetic && <span className="duo-fc-phonetic">/{word.phonetic}/</span>}
+      </div>
     </div>
   );
 }
