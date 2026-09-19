@@ -31,6 +31,7 @@ const PracticePage = lazyWithRetry(() => import('./pages/personal/PracticePage')
 const StatsPage = lazyWithRetry(() => import('./pages/personal/StatsPage'));
 const ProfilePage = lazyWithRetry(() => import('./pages/personal/ProfilePage'));
 const LibraryPage = lazyWithRetry(() => import('./pages/personal/LibraryPage'));
+const MoviesPage = lazyWithRetry(() => import('./pages/personal/MoviesPage'));
 const MixedPractice = lazyWithRetry(() => import('./pages/personal/MixedPractice'));
 const Settings = lazyWithRetry(() => import('./pages/personal/Settings'));
 const GrammarPage = lazyWithRetry(() => import('./pages/grammar/GrammarPage'));
@@ -165,6 +166,7 @@ export default function App() {
                         <Route path="/grammar/:level/:topicId/:exerciseId" element={<GrammarTopic />} />
                         <Route path="/grammar-test" element={<GrammarTest />} />
                         <Route path="/grammar-test/run/:testId" element={<GrammarTest />} />
+                        <Route path="/movies" element={<MoviesPage />} />
                         <Route path="/experiment" element={<MemoryLab />} />
                         <Route path="/admin" element={<AdminDashboard />} />
                       </Route>

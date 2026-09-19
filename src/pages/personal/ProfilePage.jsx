@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   LogOut, ChevronRight, Mail, User, Pencil, X, Check,
-  Moon, Type, Volume2, Globe, Users, AlertCircle, CheckCircle2, Shield
+  Moon, Type, Volume2, Globe, Users, AlertCircle, CheckCircle2, Shield, Clapperboard
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
@@ -206,6 +206,22 @@ export default function ProfilePage() {
             <Users size={17} strokeWidth={2.2} />
           </div>
           <span className="corp-profile-tile-text">{t('profile.joinAGroup')}</span>
+        </div>
+      </div>
+
+      {/* ── Media Tracker ── */}
+      <div className="corp-profile-section-title">Kinolar & Seriallar</div>
+      <div className="corp-profile-tiles" style={{ marginBottom: '16px' }}>
+        <div 
+          className="corp-profile-tile" 
+          onClick={() => navigate('/movies')}
+          style={{ cursor: 'pointer' }}
+        >
+          <div className="corp-profile-tile-icon" style={{ background: '#e50914' }}>
+            <Clapperboard size={17} strokeWidth={2.2} />
+          </div>
+          <span className="corp-profile-tile-text">Kinolar & Seriallar Tracker</span>
+          <ChevronRight size={16} className="corp-profile-appearance-chevron" style={{ marginLeft: 'auto' }} />
         </div>
       </div>
 

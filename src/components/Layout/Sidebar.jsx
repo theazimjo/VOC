@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useAvatar } from '../../hooks/useAvatar';
-import { LayoutDashboard, BookOpen, GraduationCap, LogOut, Shield, FlaskConical, User } from 'lucide-react';
+import { LayoutDashboard, BookOpen, GraduationCap, Clapperboard, LogOut, Shield, FlaskConical, User } from 'lucide-react';
 import VocLogo from '../common/VocLogo';
 import './Sidebar.css';
 
@@ -19,6 +19,7 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
     { to: '/',         icon: LayoutDashboard, label: t('nav.dashboard') },
     { to: '/library',  icon: BookOpen,        label: t('nav.library') },
     { to: '/grammar',  icon: GraduationCap,   label: t('nav.grammar') },
+    { to: '/movies',   icon: Clapperboard,    label: t('nav.movies') },
     { to: '/experiment', icon: FlaskConical,   label: t('nav.lab') },
     { to: '/profile',  icon: User,            label: t('nav.profile') },
   ];
