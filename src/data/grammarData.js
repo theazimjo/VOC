@@ -9268,7 +9268,1564 @@ Bu modal fe'llar o'tmishdagi voqealar haqida xulosa, ehtimollik, afsus yoki tanq
             "explanation": "Yosh uchun: \"How old\"."
           }
         ]
+      },
+      {
+        "id": "tag-questions",
+        "title": "Tag Questions",
+        "icon": "🏷️",
+        "guide": "## Tag Questions (Ajratuvchi savollar / \"Shunday emasmi?\")\n\nTag Questions (Ajratuvchi savollar) — darak yoki inkor gapning oxiriga qo'shiladigan qisqa savollardir. Ular tinglovchidan fikrni tasdiqlashni (\"shunday emasmi?\", \"to'g'rimi?\") so'rash uchun ishlatiladi.\n\n## 1. Asosiy qoida (Main Rule)\n• **Tasdiq gap + Inkor tag?** (Positive statement → Negative tag)\n  - You like coffee, **don't you**? *(Qahvani yaxshi ko'rasiz, shunday emasmi?)*\n  - She is a doctor, **isn't she**?\n  - They went home, **didn't they**?\n\n• **Inkor gap + Tasdiq tag?** (Negative statement → Positive tag)\n  - You don't like coffee, **do you**? *(Qahvani yoqtirmaysiz, shundaymi?)*\n  - She isn't a doctor, **is she**?\n  - They didn't go home, **did they**?\n\n## 2. Zamonga qarab tag hosil qilish\n• **To be (am/is/are/was/were)**:\n  - He is rich, **isn't he**?\n  - They were late, **weren't they**?\n• **Present Simple (do/does)**:\n  - She works hard, **doesn't she**?\n  - You know him, **don't you**?\n• **Past Simple (did)**:\n  - He bought a car, **didn't he**?\n• **Present Perfect (have/has)**:\n  - You have finished, **haven't you**?\n• **Modal fe'llar (can/could/should/will)**:\n  - She can swim, **can't she**?\n  - You will help me, **won't you**?\n\n## 3. Maxsus va istisno holatlar (Special Cases)\n1. **I am** → **aren't I?**:\n   - I am late, **aren't I**? *(Men kechikdim, shunday emasmi?)*\n2. **Let's** → **shall we?**:\n   - Let's go to the beach, **shall we**?\n3. **Buyruq gaplar (Imperatives)** → **will you / would you?**:\n   - Open the window, **will you**?\n   - Don't be late, **will you**?\n4. **Inkor ma'noli so'zlar (Nobody, Nothing, Never, Hardly, Seldom)** → **Tasdiq tag**:\n   - Nobody called me, **did they**? *(Nobody → kishi olmoshi \"they\")*\n   - Nothing happened, **did it**? *(Nothing → narsa olmoshi \"it\")*\n   - She never lies, **does she**?",
+        "questions": [
+          {
+            "id": 1,
+            "text": "You are a student, ___?",
+            "options": [
+              "aren't you",
+              "don't you",
+              "isn't you",
+              "are you"
+            ],
+            "correct": 0,
+            "explanation": "Tasdiq gap (\"are\") -> inkor tag (\"aren't you\")."
+          },
+          {
+            "id": 2,
+            "text": "She works in a bank, ___?",
+            "options": [
+              "doesn't she",
+              "isn't she",
+              "don't she",
+              "does she"
+            ],
+            "correct": 0,
+            "explanation": "Present Simple tasdiq (\"works\") -> inkor tag (\"doesn't she\")."
+          },
+          {
+            "id": 3,
+            "text": "They went to Paris last summer, ___?",
+            "options": [
+              "didn't they",
+              "don't they",
+              "weren't they",
+              "did they"
+            ],
+            "correct": 0,
+            "explanation": "Past Simple tasdiq (\"went\") -> inkor tag (\"didn't they\")."
+          },
+          {
+            "id": 4,
+            "text": "He isn't coming to the meeting, ___?",
+            "options": [
+              "is he",
+              "isn't he",
+              "does he",
+              "doesn't he"
+            ],
+            "correct": 0,
+            "explanation": "Inkor gap (\"isn't\") -> tasdiq tag (\"is he\")."
+          },
+          {
+            "id": 5,
+            "text": "You don't like spicy food, ___?",
+            "options": [
+              "do you",
+              "don't you",
+              "are you",
+              "aren't you"
+            ],
+            "correct": 0,
+            "explanation": "Inkor gap (\"don't\") -> tasdiq tag (\"do you\")."
+          },
+          {
+            "id": 6,
+            "text": "I am right about this, ___?",
+            "options": [
+              "aren't I",
+              "am not I",
+              "amn't I",
+              "don't I"
+            ],
+            "correct": 0,
+            "explanation": "\"I am\" birikmasi uchun istisno tag: \"aren't I?\"."
+          },
+          {
+            "id": 7,
+            "text": "Let's go for a walk in the park, ___?",
+            "options": [
+              "shall we",
+              "will we",
+              "don't we",
+              "aren't we"
+            ],
+            "correct": 0,
+            "explanation": "\"Let's\" bilan boshlangan gaplarga \"shall we?\" tagi ishlatiladi."
+          },
+          {
+            "id": 8,
+            "text": "Open the door for me, ___?",
+            "options": [
+              "will you",
+              "do you",
+              "don't you",
+              "shall you"
+            ],
+            "correct": 0,
+            "explanation": "Buyruq gaplarga \"will you?\" tagi ishlatiladi."
+          },
+          {
+            "id": 9,
+            "text": "Nobody phoned while I was out, ___?",
+            "options": [
+              "did they",
+              "didn't they",
+              "did he",
+              "didn't he"
+            ],
+            "correct": 0,
+            "explanation": "\"Nobody\" inkor ma'no beradi va ular o'rniga \"they\" kelib, tag tasdiq bo'ladi (\"did they\")."
+          },
+          {
+            "id": 10,
+            "text": "Nothing can stop us now, ___?",
+            "options": [
+              "can it",
+              "can't it",
+              "can they",
+              "can't they"
+            ],
+            "correct": 0,
+            "explanation": "\"Nothing\" inkor so'z bo'lgani uchun tag tasdiq (\"can it\") bo'ladi."
+          },
+          {
+            "id": 11,
+            "text": "She has already finished her project, ___?",
+            "options": [
+              "hasn't she",
+              "doesn't she",
+              "isn't she",
+              "has she"
+            ],
+            "correct": 0,
+            "explanation": "Present Perfect tasdiq (\"has finished\") -> inkor tag (\"hasn't she\")."
+          },
+          {
+            "id": 12,
+            "text": "You can swim very fast, ___?",
+            "options": [
+              "can't you",
+              "don't you",
+              "can you",
+              "aren't you"
+            ],
+            "correct": 0,
+            "explanation": "Modal \"can\" tasdiq -> inkor tag (\"can't you\")."
+          },
+          {
+            "id": 13,
+            "text": "They won't be late tomorrow, ___?",
+            "options": [
+              "will they",
+              "won't they",
+              "are they",
+              "don't they"
+            ],
+            "correct": 0,
+            "explanation": "Inkor \"won't\" -> tasdiq tag (\"will they\")."
+          },
+          {
+            "id": 14,
+            "text": "He never eats meat, ___?",
+            "options": [
+              "does he",
+              "doesn't he",
+              "is he",
+              "isn't he"
+            ],
+            "correct": 0,
+            "explanation": "\"never\" gapni inkor qilgani uchun tag tasdiq (\"does he\") bo'ladi."
+          },
+          {
+            "id": 15,
+            "text": "Your father was born in Samarkand, ___?",
+            "options": [
+              "wasn't he",
+              "didn't he",
+              "isn't he",
+              "was he"
+            ],
+            "correct": 0,
+            "explanation": "Past Simple \"was\" tasdiq -> inkor tag (\"wasn't he\")."
+          },
+          {
+            "id": 16,
+            "text": "We should leave early tomorrow, ___?",
+            "options": [
+              "shouldn't we",
+              "don't we",
+              "aren't we",
+              "should we"
+            ],
+            "correct": 0,
+            "explanation": "Modal \"should\" tasdiq -> inkor tag (\"shouldn't we\")."
+          },
+          {
+            "id": 17,
+            "text": "Don't make any noise, ___?",
+            "options": [
+              "will you",
+              "do you",
+              "don't you",
+              "shall you"
+            ],
+            "correct": 0,
+            "explanation": "Inkor buyruq gapga ham \"will you?\" tagi ishlatiladi."
+          },
+          {
+            "id": 18,
+            "text": "She hardly ever complains, ___?",
+            "options": [
+              "does she",
+              "doesn't she",
+              "is she",
+              "isn't she"
+            ],
+            "correct": 0,
+            "explanation": "\"hardly ever\" inkor ma'no bergani uchun tag tasdiq (\"does she\") bo'ladi."
+          },
+          {
+            "id": 19,
+            "text": "You have got a new bicycle, ___?",
+            "options": [
+              "haven't you",
+              "don't you",
+              "aren't you",
+              "hasn't you"
+            ],
+            "correct": 0,
+            "explanation": "\"have got\" tasdiq -> inkor tag (\"haven't you\")."
+          },
+          {
+            "id": 20,
+            "text": "There is a computer on the table, ___?",
+            "options": [
+              "isn't there",
+              "isn't it",
+              "doesn't there",
+              "is there"
+            ],
+            "correct": 0,
+            "explanation": "\"There is...\" birikmasi uchun tag \"isn't there?\" bo'ladi."
+          }
+        ],
+        "fillBlanks": [
+          {
+            "id": 1,
+            "text": "You are coming with us, ___ (aren't you / don't you)?",
+            "options": [
+              "aren't you",
+              "don't you",
+              "are you",
+              "isn't you"
+            ],
+            "correct": 0,
+            "explanation": "\"are coming\" tasdiq -> \"aren't you\"."
+          },
+          {
+            "id": 2,
+            "text": "She doesn't speak Spanish, ___ (does she / doesn't she)?",
+            "options": [
+              "does she",
+              "doesn't she",
+              "is she",
+              "isn't she"
+            ],
+            "correct": 0,
+            "explanation": "\"doesn't\" inkor -> \"does she\"."
+          },
+          {
+            "id": 3,
+            "text": "He bought a new phone, ___ (didn't he / doesn't he)?",
+            "options": [
+              "didn't he",
+              "doesn't he",
+              "wasn't he",
+              "did he"
+            ],
+            "correct": 0,
+            "explanation": "Past Simple tasdiq -> \"didn't he\"."
+          },
+          {
+            "id": 4,
+            "text": "They aren't ready yet, ___ (are they / aren't they)?",
+            "options": [
+              "are they",
+              "aren't they",
+              "do they",
+              "don't they"
+            ],
+            "correct": 0,
+            "explanation": "\"aren't\" inkor -> \"are they\"."
+          },
+          {
+            "id": 5,
+            "text": "I am early today, ___ (aren't I / am not I)?",
+            "options": [
+              "aren't I",
+              "am not I",
+              "amn't I",
+              "don't I"
+            ],
+            "correct": 0,
+            "explanation": "\"I am\" uchun istisno: \"aren't I\"."
+          },
+          {
+            "id": 6,
+            "text": "Let's start the lesson, ___ (shall we / will we)?",
+            "options": [
+              "shall we",
+              "will we",
+              "don't we",
+              "aren't we"
+            ],
+            "correct": 0,
+            "explanation": "\"Let's\" uchun istisno: \"shall we\"."
+          },
+          {
+            "id": 7,
+            "text": "Close the window, ___ (will you / do you)?",
+            "options": [
+              "will you",
+              "do you",
+              "don't you",
+              "shall you"
+            ],
+            "correct": 0,
+            "explanation": "Buyruq gap uchun: \"will you\"."
+          },
+          {
+            "id": 8,
+            "text": "Nobody came to the party, ___ (did they / didn't they)?",
+            "options": [
+              "did they",
+              "didn't they",
+              "did he",
+              "didn't he"
+            ],
+            "correct": 0,
+            "explanation": "\"Nobody\" inkor so'z -> tasdiq tag \"did they\"."
+          },
+          {
+            "id": 9,
+            "text": "Nothing went wrong, ___ (did it / didn't it)?",
+            "options": [
+              "did it",
+              "didn't it",
+              "did they",
+              "didn't they"
+            ],
+            "correct": 0,
+            "explanation": "\"Nothing\" inkor so'z -> tasdiq tag \"did it\"."
+          },
+          {
+            "id": 10,
+            "text": "She has lived here for three years, ___ (hasn't she / doesn't she)?",
+            "options": [
+              "hasn't she",
+              "doesn't she",
+              "isn't she",
+              "has she"
+            ],
+            "correct": 0,
+            "explanation": "Present Perfect tasdiq -> \"hasn't she\"."
+          },
+          {
+            "id": 11,
+            "text": "You can play chess, ___ (can't you / don't you)?",
+            "options": [
+              "can't you",
+              "don't you",
+              "can you",
+              "aren't you"
+            ],
+            "correct": 0,
+            "explanation": "\"can\" modal tasdiq -> \"can't you\"."
+          },
+          {
+            "id": 12,
+            "text": "He won't mind if we stay, ___ (will he / won't he)?",
+            "options": [
+              "will he",
+              "won't he",
+              "does he",
+              "doesn't he"
+            ],
+            "correct": 0,
+            "explanation": "\"won't\" inkor -> \"will he\"."
+          },
+          {
+            "id": 13,
+            "text": "She never drinks coffee, ___ (does she / doesn't she)?",
+            "options": [
+              "does she",
+              "doesn't she",
+              "is she",
+              "isn't she"
+            ],
+            "correct": 0,
+            "explanation": "\"never\" inkor so'z -> \"does she\"."
+          },
+          {
+            "id": 14,
+            "text": "Your parents were pleased, ___ (weren't they / didn't they)?",
+            "options": [
+              "weren't they",
+              "didn't they",
+              "aren't they",
+              "were they"
+            ],
+            "correct": 0,
+            "explanation": "Past Simple \"were\" tasdiq -> \"weren't they\"."
+          },
+          {
+            "id": 15,
+            "text": "We should call them now, ___ (shouldn't we / don't we)?",
+            "options": [
+              "shouldn't we",
+              "don't we",
+              "aren't we",
+              "should we"
+            ],
+            "correct": 0,
+            "explanation": "\"should\" modal tasdiq -> \"shouldn't we\"."
+          },
+          {
+            "id": 16,
+            "text": "Don't forget to turn off the lights, ___ (will you / do you)?",
+            "options": [
+              "will you",
+              "do you",
+              "don't you",
+              "shall you"
+            ],
+            "correct": 0,
+            "explanation": "Inkor buyruq -> \"will you\"."
+          },
+          {
+            "id": 17,
+            "text": "He seldom visits us, ___ (does he / doesn't he)?",
+            "options": [
+              "does he",
+              "doesn't he",
+              "is he",
+              "isn't he"
+            ],
+            "correct": 0,
+            "explanation": "\"seldom\" inkor so'z -> \"does he\"."
+          },
+          {
+            "id": 18,
+            "text": "There were many people at the concert, ___ (weren't there / weren't they)?",
+            "options": [
+              "weren't there",
+              "weren't they",
+              "didn't there",
+              "were there"
+            ],
+            "correct": 0,
+            "explanation": "\"There were\" -> \"weren't there\"."
+          },
+          {
+            "id": 19,
+            "text": "You'd better take an umbrella, ___ (hadn't you / wouldn't you)?",
+            "options": [
+              "hadn't you",
+              "wouldn't you",
+              "didn't you",
+              "don't you"
+            ],
+            "correct": 0,
+            "explanation": "\"had better\" birikmasi uchun tag -> \"hadn't you\"."
+          },
+          {
+            "id": 20,
+            "text": "She'd rather stay at home, ___ (wouldn't she / hadn't she)?",
+            "options": [
+              "wouldn't she",
+              "hadn't she",
+              "doesn't she",
+              "isn't she"
+            ],
+            "correct": 0,
+            "explanation": "\"would rather\" birikmasi uchun tag -> \"wouldn't she\"."
+          }
+        ],
+        "scrambled": [
+          {
+            "id": 1,
+            "words": [
+              "you",
+              "are",
+              "tired",
+              ",",
+              "aren't",
+              "you",
+              "?"
+            ],
+            "answer": "you are tired aren't you",
+            "explanation": "Statement + aren't you?"
+          },
+          {
+            "id": 2,
+            "words": [
+              "she",
+              "likes",
+              "tea",
+              ",",
+              "doesn't",
+              "she",
+              "?"
+            ],
+            "answer": "she likes tea doesn't she",
+            "explanation": "Statement + doesn't she?"
+          },
+          {
+            "id": 3,
+            "words": [
+              "they",
+              "left",
+              "early",
+              ",",
+              "didn't",
+              "they",
+              "?"
+            ],
+            "answer": "they left early didn't they",
+            "explanation": "Statement + didn't they?"
+          },
+          {
+            "id": 4,
+            "words": [
+              "he",
+              "isn't",
+              "here",
+              ",",
+              "is",
+              "he",
+              "?"
+            ],
+            "answer": "he isn't here is he",
+            "explanation": "Negative statement + is he?"
+          },
+          {
+            "id": 5,
+            "words": [
+              "you",
+              "don't",
+              "know",
+              ",",
+              "do",
+              "you",
+              "?"
+            ],
+            "answer": "you don't know do you",
+            "explanation": "Negative statement + do you?"
+          },
+          {
+            "id": 6,
+            "words": [
+              "I",
+              "am",
+              "late",
+              ",",
+              "aren't",
+              "I",
+              "?"
+            ],
+            "answer": "I am late aren't I",
+            "explanation": "Special tag for I am -> aren't I?"
+          },
+          {
+            "id": 7,
+            "words": [
+              "let's",
+              "go",
+              "now",
+              ",",
+              "shall",
+              "we",
+              "?"
+            ],
+            "answer": "let's go now shall we",
+            "explanation": "Special tag for Let's -> shall we?"
+          },
+          {
+            "id": 8,
+            "words": [
+              "open",
+              "the",
+              "door",
+              ",",
+              "will",
+              "you",
+              "?"
+            ],
+            "answer": "open the door will you",
+            "explanation": "Imperative + will you?"
+          },
+          {
+            "id": 9,
+            "words": [
+              "nobody",
+              "came",
+              ",",
+              "did",
+              "they",
+              "?"
+            ],
+            "answer": "nobody came did they",
+            "explanation": "Nobody + positive tag with they."
+          },
+          {
+            "id": 10,
+            "words": [
+              "nothing",
+              "happened",
+              ",",
+              "did",
+              "it",
+              "?"
+            ],
+            "answer": "nothing happened did it",
+            "explanation": "Nothing + positive tag with it."
+          },
+          {
+            "id": 11,
+            "words": [
+              "she",
+              "can",
+              "sing",
+              ",",
+              "can't",
+              "she",
+              "?"
+            ],
+            "answer": "she can sing can't she",
+            "explanation": "Modal can + can't she?"
+          },
+          {
+            "id": 12,
+            "words": [
+              "you",
+              "have",
+              "finished",
+              ",",
+              "haven't",
+              "you",
+              "?"
+            ],
+            "answer": "you have finished haven't you",
+            "explanation": "Present perfect + haven't you?"
+          },
+          {
+            "id": 13,
+            "words": [
+              "he",
+              "won't",
+              "come",
+              ",",
+              "will",
+              "he",
+              "?"
+            ],
+            "answer": "he won't come will he",
+            "explanation": "Won't + will he?"
+          },
+          {
+            "id": 14,
+            "words": [
+              "they",
+              "were",
+              "happy",
+              ",",
+              "weren't",
+              "they",
+              "?"
+            ],
+            "answer": "they were happy weren't they",
+            "explanation": "Were + weren't they?"
+          },
+          {
+            "id": 15,
+            "words": [
+              "we",
+              "should",
+              "start",
+              ",",
+              "shouldn't",
+              "we",
+              "?"
+            ],
+            "answer": "we should start shouldn't we",
+            "explanation": "Should + shouldn't we?"
+          },
+          {
+            "id": 16,
+            "words": [
+              "don't",
+              "be",
+              "late",
+              ",",
+              "will",
+              "you",
+              "?"
+            ],
+            "answer": "don't be late will you",
+            "explanation": "Negative imperative + will you?"
+          },
+          {
+            "id": 17,
+            "words": [
+              "she",
+              "never",
+              "smiles",
+              ",",
+              "does",
+              "she",
+              "?"
+            ],
+            "answer": "she never smiles does she",
+            "explanation": "Never + positive tag does she?"
+          },
+          {
+            "id": 18,
+            "words": [
+              "there",
+              "is",
+              "time",
+              ",",
+              "isn't",
+              "there",
+              "?"
+            ],
+            "answer": "there is time isn't there",
+            "explanation": "There is + isn't there?"
+          },
+          {
+            "id": 19,
+            "words": [
+              "you'd",
+              "better",
+              "go",
+              ",",
+              "hadn't",
+              "you",
+              "?"
+            ],
+            "answer": "you'd better go hadn't you",
+            "explanation": "Had better + hadn't you?"
+          },
+          {
+            "id": 20,
+            "words": [
+              "she'd",
+              "rather",
+              "stay",
+              ",",
+              "wouldn't",
+              "she",
+              "?"
+            ],
+            "answer": "she'd rather stay wouldn't she",
+            "explanation": "Would rather + wouldn't she?"
+          }
+        ],
+        "errorCorrection": [
+          {
+            "id": 1,
+            "text": "You are a teacher, isn't you?",
+            "options": [
+              "You are",
+              "a teacher",
+              "isn't you",
+              "No error"
+            ],
+            "correct": 2,
+            "wrongPart": "isn't you",
+            "correction": "aren't you",
+            "explanation": "\"you\" kishilik olmoshi bilan \"aren't you\" ishlatiladi."
+          },
+          {
+            "id": 2,
+            "text": "She works hard, don't she?",
+            "options": [
+              "She works",
+              "hard",
+              "don't she",
+              "No error"
+            ],
+            "correct": 2,
+            "wrongPart": "don't she",
+            "correction": "doesn't she",
+            "explanation": "\"she\" egani uchun \"doesn't she\" bo'ladi."
+          },
+          {
+            "id": 3,
+            "text": "They went home, don't they?",
+            "options": [
+              "They went",
+              "home",
+              "don't they",
+              "No error"
+            ],
+            "correct": 2,
+            "wrongPart": "don't they",
+            "correction": "didn't they",
+            "explanation": "O'tgan zamon (\"went\") uchun tag \"didn't they\" bo'ladi."
+          },
+          {
+            "id": 4,
+            "text": "I am right, am not I?",
+            "options": [
+              "I am",
+              "right",
+              "am not I",
+              "No error"
+            ],
+            "correct": 2,
+            "wrongPart": "am not I",
+            "correction": "aren't I",
+            "explanation": "\"I am\" birikmasi uchun tag har doim \"aren't I?\"."
+          },
+          {
+            "id": 5,
+            "text": "Let's play football, will we?",
+            "options": [
+              "Let's play",
+              "football",
+              "will we",
+              "No error"
+            ],
+            "correct": 2,
+            "wrongPart": "will we",
+            "correction": "shall we",
+            "explanation": "\"Let's\" bilan boshlangan gaplar uchun tag \"shall we?\" bo'ladi."
+          },
+          {
+            "id": 6,
+            "text": "Nobody called me, didn't they?",
+            "options": [
+              "Nobody",
+              "called me",
+              "didn't they",
+              "No error"
+            ],
+            "correct": 2,
+            "wrongPart": "didn't they",
+            "correction": "did they",
+            "explanation": "\"Nobody\" inkor ma'no bergani uchun tag tasdiq (\"did they\") bo'lishi shart."
+          },
+          {
+            "id": 7,
+            "text": "Nothing happened, didn't it?",
+            "options": [
+              "Nothing",
+              "happened",
+              "didn't it",
+              "No error"
+            ],
+            "correct": 2,
+            "wrongPart": "didn't it",
+            "correction": "did it",
+            "explanation": "\"Nothing\" inkor so'z bo'lgani uchun tag tasdiq (\"did it\") bo'ladi."
+          },
+          {
+            "id": 8,
+            "text": "She can drive, doesn't she?",
+            "options": [
+              "She can",
+              "drive",
+              "doesn't she",
+              "No error"
+            ],
+            "correct": 2,
+            "wrongPart": "doesn't she",
+            "correction": "can't she",
+            "explanation": "Modal \"can\" bo'lsa, tag ham modal bo'ladi (\"can't she\")."
+          },
+          {
+            "id": 9,
+            "text": "You don't like coffee, don't you?",
+            "options": [
+              "You don't",
+              "like coffee",
+              "don't you",
+              "No error"
+            ],
+            "correct": 2,
+            "wrongPart": "don't you",
+            "correction": "do you",
+            "explanation": "Inkor gapga tasdiq tag (\"do you\") mos keladi."
+          },
+          {
+            "id": 10,
+            "text": "Open the door, don't you?",
+            "options": [
+              "Open",
+              "the door",
+              "don't you",
+              "No error"
+            ],
+            "correct": 2,
+            "wrongPart": "don't you",
+            "correction": "will you",
+            "explanation": "Buyruq gaplar uchun tag \"will you\" bo'ladi."
+          },
+          {
+            "id": 11,
+            "text": "She has finished, isn't she?",
+            "options": [
+              "She has",
+              "finished",
+              "isn't she",
+              "No error"
+            ],
+            "correct": 2,
+            "wrongPart": "isn't she",
+            "correction": "hasn't she",
+            "explanation": "Present Perfect gapda tag \"hasn't she\" bo'ladi."
+          },
+          {
+            "id": 12,
+            "text": "He never lies, doesn't he?",
+            "options": [
+              "He never",
+              "lies",
+              "doesn't he",
+              "No error"
+            ],
+            "correct": 2,
+            "wrongPart": "doesn't he",
+            "correction": "does he",
+            "explanation": "\"never\" gapni inkor qilgani uchun tag tasdiq (\"does he\") bo'ladi."
+          },
+          {
+            "id": 13,
+            "text": "Your father was a doctor, isn't he?",
+            "options": [
+              "Your father",
+              "was a doctor",
+              "isn't he",
+              "No error"
+            ],
+            "correct": 2,
+            "wrongPart": "isn't he",
+            "correction": "wasn't he",
+            "explanation": "O'tgan zamon \"was\" uchun tag \"wasn't he\" bo'ladi."
+          },
+          {
+            "id": 14,
+            "text": "Don't be late, do you?",
+            "options": [
+              "Don't be",
+              "late",
+              "do you",
+              "No error"
+            ],
+            "correct": 2,
+            "wrongPart": "do you",
+            "correction": "will you",
+            "explanation": "Inkor buyruq gaplar uchun ham tag \"will you\" bo'ladi."
+          },
+          {
+            "id": 15,
+            "text": "They won't leave, won't they?",
+            "options": [
+              "They won't",
+              "leave",
+              "won't they",
+              "No error"
+            ],
+            "correct": 2,
+            "wrongPart": "won't they",
+            "correction": "will they",
+            "explanation": "Inkor \"won't\" gapiga tasdiq tag \"will they\" keladi."
+          },
+          {
+            "id": 16,
+            "text": "She hardly speaks, doesn't she?",
+            "options": [
+              "She hardly",
+              "speaks",
+              "doesn't she",
+              "No error"
+            ],
+            "correct": 2,
+            "wrongPart": "doesn't she",
+            "correction": "does she",
+            "explanation": "\"hardly\" inkor ma'no beradi, shuning uchun tag tasdiq (\"does she\")."
+          },
+          {
+            "id": 17,
+            "text": "There is a cat here, isn't it?",
+            "options": [
+              "There is",
+              "a cat here",
+              "isn't it",
+              "No error"
+            ],
+            "correct": 2,
+            "wrongPart": "isn't it",
+            "correction": "isn't there",
+            "explanation": "\"There is...\" birikmasi uchun tag \"isn't there\" bo'ladi."
+          },
+          {
+            "id": 18,
+            "text": "You'd better stay, wouldn't you?",
+            "options": [
+              "You'd better",
+              "stay",
+              "wouldn't you",
+              "No error"
+            ],
+            "correct": 2,
+            "wrongPart": "wouldn't you",
+            "correction": "hadn't you",
+            "explanation": "\"had better\" (You'd better) uchun tag \"hadn't you\" bo'ladi."
+          },
+          {
+            "id": 19,
+            "text": "She'd rather leave, hadn't she?",
+            "options": [
+              "She'd rather",
+              "leave",
+              "hadn't she",
+              "No error"
+            ],
+            "correct": 2,
+            "wrongPart": "hadn't she",
+            "correction": "wouldn't she",
+            "explanation": "\"would rather\" (She'd rather) uchun tag \"wouldn't she\" bo'ladi."
+          },
+          {
+            "id": 20,
+            "text": "Everyone arrived on time, didn't he?",
+            "options": [
+              "Everyone",
+              "arrived on time",
+              "didn't he",
+              "No error"
+            ],
+            "correct": 2,
+            "wrongPart": "didn't he",
+            "correction": "didn't they",
+            "explanation": "\"Everyone\" olmoshi o'rniga tag qismida \"they\" ishlatiladi (\"didn't they\")."
+          }
+        ],
+        "transform": [
+          {
+            "id": 1,
+            "text": "Add a tag question: \"You are tired.\"",
+            "options": [
+              "You are tired, aren't you?",
+              "You are tired, don't you?",
+              "You are tired, is you?",
+              "You are tired, non?"
+            ],
+            "correct": 0,
+            "explanation": "Positive statement + aren't you?"
+          },
+          {
+            "id": 2,
+            "text": "Add a tag question: \"She doesn't know the secret.\"",
+            "options": [
+              "She doesn't know the secret, does she?",
+              "She doesn't know the secret, doesn't she?",
+              "She doesn't know the secret, is she?",
+              "She doesn't know the secret, do she?"
+            ],
+            "correct": 0,
+            "explanation": "Negative statement + does she?"
+          },
+          {
+            "id": 3,
+            "text": "Add a tag question: \"They went to the cinema.\"",
+            "options": [
+              "They went to the cinema, didn't they?",
+              "They went to the cinema, don't they?",
+              "They went to the cinema, weren't they?",
+              "They went to the cinema, did they?"
+            ],
+            "correct": 0,
+            "explanation": "Past Simple statement + didn't they?"
+          },
+          {
+            "id": 4,
+            "text": "Add a tag question: \"I am late.\"",
+            "options": [
+              "I am late, aren't I?",
+              "I am late, am not I?",
+              "I am late, don't I?",
+              "I am late, amn't I?"
+            ],
+            "correct": 0,
+            "explanation": "Special tag for I am -> aren't I?"
+          },
+          {
+            "id": 5,
+            "text": "Add a tag question: \"Let's have some lunch.\"",
+            "options": [
+              "Let's have some lunch, shall we?",
+              "Let's have some lunch, will we?",
+              "Let's have some lunch, don't we?",
+              "Let's have some lunch, aren't we?"
+            ],
+            "correct": 0,
+            "explanation": "Special tag for Let's -> shall we?"
+          },
+          {
+            "id": 6,
+            "text": "Add a tag question: \"Close the door.\"",
+            "options": [
+              "Close the door, will you?",
+              "Close the door, do you?",
+              "Close the door, don't you?",
+              "Close the door, shall you?"
+            ],
+            "correct": 0,
+            "explanation": "Imperative statement + will you?"
+          },
+          {
+            "id": 7,
+            "text": "Add a tag question: \"Nobody knows the answer.\"",
+            "options": [
+              "Nobody knows the answer, do they?",
+              "Nobody knows the answer, don't they?",
+              "Nobody knows the answer, does he?",
+              "Nobody knows the answer, doesn't he?"
+            ],
+            "correct": 0,
+            "explanation": "Nobody (negative) + positive tag with they: do they?"
+          },
+          {
+            "id": 8,
+            "text": "Add a tag question: \"Nothing is wrong.\"",
+            "options": [
+              "Nothing is wrong, is it?",
+              "Nothing is wrong, isn't it?",
+              "Nothing is wrong, are they?",
+              "Nothing is wrong, aren't they?"
+            ],
+            "correct": 0,
+            "explanation": "Nothing (negative) + positive tag with it: is it?"
+          },
+          {
+            "id": 9,
+            "text": "Add a tag question: \"She can play the violin.\"",
+            "options": [
+              "She can play the violin, can't she?",
+              "She can play the violin, doesn't she?",
+              "She can play the violin, can she?",
+              "She can play the violin, isn't she?"
+            ],
+            "correct": 0,
+            "explanation": "Modal can + can't she?"
+          },
+          {
+            "id": 10,
+            "text": "Add a tag question: \"He has finished his dinner.\"",
+            "options": [
+              "He has finished his dinner, hasn't he?",
+              "He has finished his dinner, doesn't he?",
+              "He has finished his dinner, isn't he?",
+              "He has finished his dinner, has he?"
+            ],
+            "correct": 0,
+            "explanation": "Present Perfect + hasn't he?"
+          },
+          {
+            "id": 11,
+            "text": "Add a tag question: \"You won't tell anyone.\"",
+            "options": [
+              "You won't tell anyone, will you?",
+              "You won't tell anyone, won't you?",
+              "You won't tell anyone, do you?",
+              "You won't tell anyone, don't you?"
+            ],
+            "correct": 0,
+            "explanation": "Won't + will you?"
+          },
+          {
+            "id": 12,
+            "text": "Add a tag question: \"She never eats meat.\"",
+            "options": [
+              "She never eats meat, does she?",
+              "She never eats meat, doesn't she?",
+              "She never eats meat, is she?",
+              "She never eats meat, isn't she?"
+            ],
+            "correct": 0,
+            "explanation": "Never (negative) + positive tag: does she?"
+          },
+          {
+            "id": 13,
+            "text": "Add a tag question: \"There are many books here.\"",
+            "options": [
+              "There are many books here, aren't there?",
+              "There are many books here, aren't they?",
+              "There are many books here, don't there?",
+              "There are many books here, are there?"
+            ],
+            "correct": 0,
+            "explanation": "There are + aren't there?"
+          },
+          {
+            "id": 14,
+            "text": "Add a tag question: \"Don't make a noise.\"",
+            "options": [
+              "Don't make a noise, will you?",
+              "Don't make a noise, do you?",
+              "Don't make a noise, don't you?",
+              "Don't make a noise, shall you?"
+            ],
+            "correct": 0,
+            "explanation": "Negative imperative + will you?"
+          },
+          {
+            "id": 15,
+            "text": "Add a tag question: \"We should start now.\"",
+            "options": [
+              "We should start now, shouldn't we?",
+              "We should start now, don't we?",
+              "We should start now, aren't we?",
+              "We should start now, should we?"
+            ],
+            "correct": 0,
+            "explanation": "Should + shouldn't we?"
+          },
+          {
+            "id": 16,
+            "text": "Add a tag question: \"You'd better leave now.\"",
+            "options": [
+              "You'd better leave now, hadn't you?",
+              "You'd better leave now, wouldn't you?",
+              "You'd better leave now, didn't you?",
+              "You'd better leave now, don't you?"
+            ],
+            "correct": 0,
+            "explanation": "Had better + hadn't you?"
+          },
+          {
+            "id": 17,
+            "text": "Add a tag question: \"She'd rather stay here.\"",
+            "options": [
+              "She'd rather stay here, wouldn't she?",
+              "She'd rather stay here, hadn't she?",
+              "She'd rather stay here, doesn't she?",
+              "She'd rather stay here, isn't she?"
+            ],
+            "correct": 0,
+            "explanation": "Would rather + wouldn't she?"
+          },
+          {
+            "id": 18,
+            "text": "Add a tag question: \"He seldom goes out.\"",
+            "options": [
+              "He seldom goes out, does he?",
+              "He seldom goes out, doesn't he?",
+              "He seldom goes out, is he?",
+              "He seldom goes out, isn't he?"
+            ],
+            "correct": 0,
+            "explanation": "Seldom (negative) + positive tag: does he?"
+          },
+          {
+            "id": 19,
+            "text": "Add a tag question: \"Everyone is ready.\"",
+            "options": [
+              "Everyone is ready, aren't they?",
+              "Everyone is ready, isn't he?",
+              "Everyone is ready, isn't it?",
+              "Everyone is ready, don't they?"
+            ],
+            "correct": 0,
+            "explanation": "Everyone + plural tag aren't they?"
+          },
+          {
+            "id": 20,
+            "text": "Add a tag question: \"You were watching TV.\"",
+            "options": [
+              "You were watching TV, weren't you?",
+              "You were watching TV, didn't you?",
+              "You were watching TV, don't you?",
+              "You were watching TV, were you?"
+            ],
+            "correct": 0,
+            "explanation": "Were + weren't you?"
+          }
+        ],
+        "dialogue": [
+          {
+            "id": 1,
+            "situation": "Confirming information.",
+            "dialogue": "A: You're from Tashkent, ___?\nB: Yes, that's right!",
+            "options": [
+              "aren't you",
+              "don't you",
+              "isn't you",
+              "are you"
+            ],
+            "correct": 0,
+            "explanation": "Darak gap \"You're\" -> \"aren't you?\"."
+          },
+          {
+            "id": 2,
+            "situation": "Checking workplace.",
+            "dialogue": "A: She works at the hospital, ___?\nB: Yes, she is a head nurse.",
+            "options": [
+              "doesn't she",
+              "isn't she",
+              "don't she",
+              "does she"
+            ],
+            "correct": 0,
+            "explanation": "Present Simple \"works\" -> \"doesn't she?\"."
+          },
+          {
+            "id": 3,
+            "situation": "Discussing yesterday's weather.",
+            "dialogue": "A: It didn't rain yesterday, ___?\nB: No, it was sunny all day.",
+            "options": [
+              "did it",
+              "didn't it",
+              "was it",
+              "wasn't it"
+            ],
+            "correct": 0,
+            "explanation": "Inkor gap \"didn't rain\" -> \"did it?\"."
+          },
+          {
+            "id": 4,
+            "situation": "Self-checking.",
+            "dialogue": "A: I'm the first person in line, ___?\nB: Yes, you got here very early!",
+            "options": [
+              "aren't I",
+              "am not I",
+              "amn't I",
+              "don't I"
+            ],
+            "correct": 0,
+            "explanation": "\"I am\" birikmasi uchun \"aren't I?\"."
+          },
+          {
+            "id": 5,
+            "situation": "Suggesting an outing.",
+            "dialogue": "A: Let's grab a cup of coffee, ___?\nB: Great idea, I'd love to!",
+            "options": [
+              "shall we",
+              "will we",
+              "don't we",
+              "aren't we"
+            ],
+            "correct": 0,
+            "explanation": "\"Let's\" bilan \"shall we?\"."
+          },
+          {
+            "id": 6,
+            "situation": "Asking for a small favor.",
+            "dialogue": "A: Pass me the salt, ___?\nB: Here you go.",
+            "options": [
+              "will you",
+              "do you",
+              "don't you",
+              "shall you"
+            ],
+            "correct": 0,
+            "explanation": "Buyruq gap uchun \"will you?\"."
+          },
+          {
+            "id": 7,
+            "situation": "Checking phone calls.",
+            "dialogue": "A: Nobody called while I was out, ___?\nB: No, the phone didn't ring once.",
+            "options": [
+              "did they",
+              "didn't they",
+              "did he",
+              "didn't he"
+            ],
+            "correct": 0,
+            "explanation": "\"Nobody\" -> tasdiq tag \"did they?\"."
+          },
+          {
+            "id": 8,
+            "situation": "Relieved after an exam.",
+            "dialogue": "A: Nothing went wrong during the test, ___?\nB: No, everything went smoothly!",
+            "options": [
+              "did it",
+              "didn't it",
+              "did they",
+              "didn't they"
+            ],
+            "correct": 0,
+            "explanation": "\"Nothing\" -> tasdiq tag \"did it?\"."
+          },
+          {
+            "id": 9,
+            "situation": "Checking skills.",
+            "dialogue": "A: You can drive a car, ___?\nB: Yes, I got my driving license last year.",
+            "options": [
+              "can't you",
+              "don't you",
+              "can you",
+              "aren't you"
+            ],
+            "correct": 0,
+            "explanation": "\"can drive\" -> \"can't you?\"."
+          },
+          {
+            "id": 10,
+            "situation": "Asking about a friend.",
+            "dialogue": "A: He hasn't arrived yet, ___?\nB: No, he is stuck in traffic.",
+            "options": [
+              "has he",
+              "hasn't he",
+              "does he",
+              "doesn't he"
+            ],
+            "correct": 0,
+            "explanation": "Inkor \"hasn't arrived\" -> \"has he?\"."
+          },
+          {
+            "id": 11,
+            "situation": "Checking event attendance.",
+            "dialogue": "A: They won't be late, ___?\nB: Don't worry, they are always punctual.",
+            "options": [
+              "will they",
+              "won't they",
+              "are they",
+              "don't they"
+            ],
+            "correct": 0,
+            "explanation": "Inkor \"won't\" -> \"will they?\"."
+          },
+          {
+            "id": 12,
+            "situation": "Observing habits.",
+            "dialogue": "A: She never drinks soda, ___?\nB: No, she only drinks water and fresh juice.",
+            "options": [
+              "does she",
+              "doesn't she",
+              "is she",
+              "isn't she"
+            ],
+            "correct": 0,
+            "explanation": "\"never\" -> tasdiq tag \"does she?\"."
+          },
+          {
+            "id": 13,
+            "situation": "Checking past location.",
+            "dialogue": "A: You were at home last night, ___?\nB: Yes, watching movies.",
+            "options": [
+              "weren't you",
+              "didn't you",
+              "aren't you",
+              "were you"
+            ],
+            "correct": 0,
+            "explanation": "\"were\" -> \"weren't you?\"."
+          },
+          {
+            "id": 14,
+            "situation": "Giving advice.",
+            "dialogue": "A: We should start studying early, ___?\nB: Definitely, the exam is next week.",
+            "options": [
+              "shouldn't we",
+              "don't we",
+              "aren't we",
+              "should we"
+            ],
+            "correct": 0,
+            "explanation": "\"should\" -> \"shouldn't we?\"."
+          },
+          {
+            "id": 15,
+            "situation": "Warning someone.",
+            "dialogue": "A: Don't forget to lock the door, ___?\nB: Don't worry, I won't!",
+            "options": [
+              "will you",
+              "do you",
+              "don't you",
+              "shall you"
+            ],
+            "correct": 0,
+            "explanation": "Inkor buyruq -> \"will you?\"."
+          },
+          {
+            "id": 16,
+            "situation": "Checking frequency.",
+            "dialogue": "A: He seldom goes to the cinema, ___?\nB: True, he prefers watching movies at home.",
+            "options": [
+              "does he",
+              "doesn't he",
+              "is he",
+              "isn't he"
+            ],
+            "correct": 0,
+            "explanation": "\"seldom\" -> tasdiq tag \"does he?\"."
+          },
+          {
+            "id": 17,
+            "situation": "Observing room setup.",
+            "dialogue": "A: There is enough room for everyone, ___?\nB: Yes, plenty of chairs!",
+            "options": [
+              "isn't there",
+              "isn't it",
+              "doesn't there",
+              "is there"
+            ],
+            "correct": 0,
+            "explanation": "\"There is\" -> \"isn't there?\"."
+          },
+          {
+            "id": 18,
+            "situation": "Strong recommendation.",
+            "dialogue": "A: You'd better consult a doctor, ___?\nB: You're right, I'll make an appointment.",
+            "options": [
+              "hadn't you",
+              "wouldn't you",
+              "didn't you",
+              "don't you"
+            ],
+            "correct": 0,
+            "explanation": "\"had better\" -> \"hadn't you?\"."
+          },
+          {
+            "id": 19,
+            "situation": "Expressing preference.",
+            "dialogue": "A: She'd rather stay at a hotel, ___?\nB: Yes, she finds camping uncomfortable.",
+            "options": [
+              "wouldn't she",
+              "hadn't she",
+              "doesn't she",
+              "isn't she"
+            ],
+            "correct": 0,
+            "explanation": "\"would rather\" -> \"wouldn't she?\"."
+          },
+          {
+            "id": 20,
+            "situation": "Checking group readiness.",
+            "dialogue": "A: Everyone has arrived, ___?\nB: Yes, we can start the meeting now.",
+            "options": [
+              "haven't they",
+              "hasn't he",
+              "don't they",
+              "haven't he"
+            ],
+            "correct": 0,
+            "explanation": "\"Everyone has arrived\" -> \"haven't they?\"."
+          }
+        ]
       }
+
 
     ]
   },
