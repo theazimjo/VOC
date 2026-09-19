@@ -6217,6 +6217,3064 @@ Bu modal fe'llar o'tmishdagi voqealar haqida xulosa, ehtimollik, afsus yoki tanq
         ]
       },
       {
+        "id": "general-questions",
+        "title": "General Questions",
+        "icon": "❓",
+        "guide": "## General Questions (Umumiy savollar / Yes-No Questions)\n\nUmumiy savollar (General Questions) — bu javobi **\"Ha (Yes)\"** yoki **\"Yo'q (No)\"** bo'lgan savollardir. Ular gapda Yordamchi fe'l (Auxiliary Verb) yoki Modal fe'l bilan boshlanadi.\n\n## 1. Savol tuzish formulasi (Formula)\n**Yordamchi/Modal fe'l + Ega (Subject) + Asosiy fe'l + ...?**\n\n• **Present Simple**: **Do / Does** + Subject + Base verb ...?\n  - **Do** you **live** here? — *Ha, yashayman / Yo'q.*\n  - **Does** she **work** on Saturdays?\n• **Past Simple**: **Did** + Subject + Base verb ...?\n  - **Did** they **arrive** yesterday?\n• **Present Continuous**: **Am / Is / Are** + Subject + V-ing ...?\n  - **Are** you **listening** to music?\n• **Present Perfect**: **Have / Has** + Subject + V3 ...?\n  - **Have** you **seen** this movie?\n• **Modallar**: **Can / Could / Should / Must / Will** + Subject + Base verb ...?\n  - **Can** you **swim**?\n  - **Will** you **come** tomorrow?\n\n## 2. Qisqa javoblar (Short Answers)\nJavob berishda shunchaki \"Yes\" yoki \"No\" deyish o'rniga yordamchi fe'ldan foydalaniladi:\n- *Do you like coffee?* → **Yes, I do.** / **No, I don't.**\n- *Is he sleeping?* → **Yes, he is.** / **No, he isn't.**\n- *Have they finished?* → **Yes, they have.** / **No, they haven't.**\n- *Can she drive?* → **Yes, she can.** / **No, she can't.**\n\n## 3. Asosiy qoidalar (Key Rules)\n1. **Yordamchi fe'l har doim egadan oldinga o'tadi**: *You are ready.* → ***Are you*** *ready?*\n2. **Do/Does/Did lardan keyin fe'l har doim bosh shaklda bo'ladi**: *Does she likes coffee?* ❌ → *Does she **like** coffee?* ✅\n3. **\"To be\" fe'lida yordamchi fe'l shart emas, \"to be\"ning o'zi oldinga o'tadi**: *Is he a teacher? Was it cold?*",
+        "questions": [
+          {
+            "id": 1,
+            "text": "___ you like chocolate ice cream?",
+            "options": [
+              "Do",
+              "Does",
+              "Are",
+              "Is"
+            ],
+            "correct": 0,
+            "explanation": "Present Simple savol: \"you\" egani uchun \"Do\" ishlatiladi."
+          },
+          {
+            "id": 2,
+            "text": "___ she live in Tashkent?",
+            "options": [
+              "Does",
+              "Do",
+              "Is",
+              "Are"
+            ],
+            "correct": 0,
+            "explanation": "Present Simple savol: \"she\" egani uchun \"Does\" ishlatiladi."
+          },
+          {
+            "id": 3,
+            "text": "___ they finish their homework yesterday?",
+            "options": [
+              "Did",
+              "Do",
+              "Have",
+              "Were"
+            ],
+            "correct": 0,
+            "explanation": "Past Simple oddiy savol: o'tgan zamonda \"Did\" ishlatiladi."
+          },
+          {
+            "id": 4,
+            "text": "___ he reading a book right now?",
+            "options": [
+              "Is",
+              "Does",
+              "Do",
+              "Are"
+            ],
+            "correct": 0,
+            "explanation": "Present Continuous savol: \"he\" uchun \"Is\" + V-ing."
+          },
+          {
+            "id": 5,
+            "text": "___ you ever been to London?",
+            "options": [
+              "Have",
+              "Has",
+              "Did",
+              "Do"
+            ],
+            "correct": 0,
+            "explanation": "Present Perfect savol: \"you\" bilan \"Have you ever...?\" ishlatiladi."
+          },
+          {
+            "id": 6,
+            "text": "___ I help you with your suitcase?",
+            "options": [
+              "Can",
+              "Does",
+              "Do",
+              "Has"
+            ],
+            "correct": 0,
+            "explanation": "Modal fe'l bilan umumiy savol: \"Can I help...?\""
+          },
+          {
+            "id": 7,
+            "text": "___ it raining outside at the moment?",
+            "options": [
+              "Is",
+              "Does",
+              "Has",
+              "Did"
+            ],
+            "correct": 0,
+            "explanation": "Hozirgi davomli zamon umumiy savoli: \"Is it raining...?\""
+          },
+          {
+            "id": 8,
+            "text": "___ your sister speak English fluently?",
+            "options": [
+              "Does",
+              "Do",
+              "Is",
+              "Are"
+            ],
+            "correct": 0,
+            "explanation": "\"your sister\" (she) bo'lgani uchun \"Does\" keladi."
+          },
+          {
+            "id": 9,
+            "text": "___ we go to the park this weekend?",
+            "options": [
+              "Shall",
+              "Does",
+              "Is",
+              "Has"
+            ],
+            "correct": 0,
+            "explanation": "Taklif bildirishda \"Shall we...?\" ishlatiladi."
+          },
+          {
+            "id": 10,
+            "text": "___ you buy a new laptop last week?",
+            "options": [
+              "Did",
+              "Do",
+              "Have",
+              "Are"
+            ],
+            "correct": 0,
+            "explanation": "O'tgan zamon (\"last week\") uchun \"Did\" keladi."
+          },
+          {
+            "id": 11,
+            "text": "___ she already cleaned her room?",
+            "options": [
+              "Has",
+              "Have",
+              "Is",
+              "Does"
+            ],
+            "correct": 0,
+            "explanation": "Present Perfect zamonida \"she\" bilan \"Has\" ishlatiladi."
+          },
+          {
+            "id": 12,
+            "text": "___ you speak German when you were young?",
+            "options": [
+              "Could",
+              "Does",
+              "Do",
+              "Have"
+            ],
+            "correct": 0,
+            "explanation": "O'tmishdagi qobiliyat so'ralganda \"Could\" ishlatiladi."
+          },
+          {
+            "id": 13,
+            "text": "___ the students ready for the examination?",
+            "options": [
+              "Are",
+              "Do",
+              "Is",
+              "Does"
+            ],
+            "correct": 0,
+            "explanation": "To be fe'li ko'plikdagi \"students\" bilan \"Are\" shaklida oldinga o'tadi."
+          },
+          {
+            "id": 14,
+            "text": "___ he have a car?",
+            "options": [
+              "Does",
+              "Do",
+              "Is",
+              "Has"
+            ],
+            "correct": 0,
+            "explanation": "Present Simple zamonida \"he\" uchun \"Does he have...?\" bo'ladi."
+          },
+          {
+            "id": 15,
+            "text": "___ you watch the news yesterday evening?",
+            "options": [
+              "Did",
+              "Do",
+              "Have",
+              "Were"
+            ],
+            "correct": 0,
+            "explanation": "O'tgan zamonda \"yesterday evening\" bo'lgani uchun \"Did\" keladi."
+          },
+          {
+            "id": 16,
+            "text": "___ we have to wear a uniform to school?",
+            "options": [
+              "Do",
+              "Are",
+              "Have",
+              "Is"
+            ],
+            "correct": 0,
+            "explanation": "Majburiyat so'ralganda \"Do we have to...?\" ishlatiladi."
+          },
+          {
+            "id": 17,
+            "text": "___ she coming to our party tonight?",
+            "options": [
+              "Is",
+              "Does",
+              "Has",
+              "Will to"
+            ],
+            "correct": 0,
+            "explanation": "Rejalashtirilgan kelajak (Present Continuous): \"Is she coming...?\""
+          },
+          {
+            "id": 18,
+            "text": "___ they already left for the station?",
+            "options": [
+              "Have",
+              "Do",
+              "Did",
+              "Are"
+            ],
+            "correct": 0,
+            "explanation": "Present Perfect zamonida \"they\" bilan \"Have\" ishlatiladi."
+          },
+          {
+            "id": 19,
+            "text": "___ you like to join us for dinner?",
+            "options": [
+              "Would",
+              "Should",
+              "Do",
+              "Does"
+            ],
+            "correct": 0,
+            "explanation": "Xushmuomala taklif uchun \"Would you like...?\" bo'ladi."
+          },
+          {
+            "id": 20,
+            "text": "___ your father work at a hospital?",
+            "options": [
+              "Does",
+              "Do",
+              "Is",
+              "Are"
+            ],
+            "correct": 0,
+            "explanation": "\"your father\" (he) birlikda bo'lgani uchun \"Does\" ishlatiladi."
+          }
+        ],
+        "fillBlanks": [
+          {
+            "id": 1,
+            "text": "___ (Do / Does) you play guitar?",
+            "options": [
+              "Do",
+              "Does",
+              "Is",
+              "Are"
+            ],
+            "correct": 0,
+            "explanation": "\"you\" bilan \"Do\" ishlatiladi."
+          },
+          {
+            "id": 2,
+            "text": "___ (Does / Do) she speak French?",
+            "options": [
+              "Does",
+              "Do",
+              "Is",
+              "Are"
+            ],
+            "correct": 0,
+            "explanation": "\"she\" bilan \"Does\" ishlatiladi."
+          },
+          {
+            "id": 3,
+            "text": "___ (Did / Do) you see him yesterday?",
+            "options": [
+              "Did",
+              "Do",
+              "Have",
+              "Were"
+            ],
+            "correct": 0,
+            "explanation": "O'tgan zamon uchun \"Did\" tanlanadi."
+          },
+          {
+            "id": 4,
+            "text": "___ (Is / Does) he sleeping right now?",
+            "options": [
+              "Is",
+              "Does",
+              "Do",
+              "Has"
+            ],
+            "correct": 0,
+            "explanation": "Continuous zamonda \"Is he sleeping\" bo'ladi."
+          },
+          {
+            "id": 5,
+            "text": "___ (Have / Has) you done your work?",
+            "options": [
+              "Have",
+              "Has",
+              "Did",
+              "Do"
+            ],
+            "correct": 0,
+            "explanation": "\"you\" uchun \"Have\" ishlatiladi."
+          },
+          {
+            "id": 6,
+            "text": "___ (Can / Does) you swim across the river?",
+            "options": [
+              "Can",
+              "Does",
+              "Is",
+              "Do"
+            ],
+            "correct": 0,
+            "explanation": "Qobiliyat so'ralganda \"Can\" ishlatiladi."
+          },
+          {
+            "id": 7,
+            "text": "___ (Are / Do) they coming with us?",
+            "options": [
+              "Are",
+              "Do",
+              "Have",
+              "Is"
+            ],
+            "correct": 0,
+            "explanation": "Hozirgi davomli zamon: \"Are they coming\" bo'ladi."
+          },
+          {
+            "id": 8,
+            "text": "___ (Does / Do) your phone work properly?",
+            "options": [
+              "Does",
+              "Do",
+              "Is",
+              "Has"
+            ],
+            "correct": 0,
+            "explanation": "\"your phone\" (it) uchun \"Does\" keladi."
+          },
+          {
+            "id": 9,
+            "text": "___ (Was / Did) the test difficult?",
+            "options": [
+              "Was",
+              "Did",
+              "Does",
+              "Were"
+            ],
+            "correct": 0,
+            "explanation": "Sifat (\"difficult\") oldidan \"Was\" to be fe'li keladi."
+          },
+          {
+            "id": 10,
+            "text": "___ (Did / Have) they visit their grandparents last weekend?",
+            "options": [
+              "Did",
+              "Have",
+              "Do",
+              "Were"
+            ],
+            "correct": 0,
+            "explanation": "\"last weekend\" o'tgan zamon ko'rsatkichi, shuning uchun \"Did\"."
+          },
+          {
+            "id": 11,
+            "text": "___ (Has / Have) the rain stopped yet?",
+            "options": [
+              "Has",
+              "Have",
+              "Is",
+              "Does"
+            ],
+            "correct": 0,
+            "explanation": "\"the rain\" (it) bo'lgani uchun \"Has\" keladi."
+          },
+          {
+            "id": 12,
+            "text": "___ (Should / Does) I close the window?",
+            "options": [
+              "Should",
+              "Does",
+              "Is",
+              "Has"
+            ],
+            "correct": 0,
+            "explanation": "Maslahat/so'rov uchun \"Should I...?\" ishlatiladi."
+          },
+          {
+            "id": 13,
+            "text": "___ (Are / Do) you ready to leave?",
+            "options": [
+              "Are",
+              "Do",
+              "Is",
+              "Have"
+            ],
+            "correct": 0,
+            "explanation": "\"ready\" sifat bo'lgani uchun \"Are you ready\" bo'ladi."
+          },
+          {
+            "id": 14,
+            "text": "___ (Does / Do) he know the answer?",
+            "options": [
+              "Does",
+              "Do",
+              "Is",
+              "Has"
+            ],
+            "correct": 0,
+            "explanation": "\"he\" eganing oldidan \"Does\" ishlatiladi."
+          },
+          {
+            "id": 15,
+            "text": "___ (Did / Were) you at home yesterday?",
+            "options": [
+              "Were",
+              "Did",
+              "Do",
+              "Was"
+            ],
+            "correct": 0,
+            "explanation": "O'tmishdagi o'rin-joy (to be) uchun \"Were you...?\" keladi."
+          },
+          {
+            "id": 16,
+            "text": "___ (Will / Does) you help me tomorrow?",
+            "options": [
+              "Will",
+              "Does",
+              "Is",
+              "Did"
+            ],
+            "correct": 0,
+            "explanation": "Kelasi zamon so'rovi uchun \"Will you...\" ishlatiladi."
+          },
+          {
+            "id": 17,
+            "text": "___ (Is / Does) she feeling better today?",
+            "options": [
+              "Is",
+              "Does",
+              "Has",
+              "Will"
+            ],
+            "correct": 0,
+            "explanation": "Sog'liq holati (V-ing) uchun \"Is she feeling...\" bo'ladi."
+          },
+          {
+            "id": 18,
+            "text": "___ (Have / Did) you ever eaten sushi?",
+            "options": [
+              "Have",
+              "Did",
+              "Do",
+              "Were"
+            ],
+            "correct": 0,
+            "explanation": "Tajriba so'ralganda \"Have you ever...\" ishlatiladi."
+          },
+          {
+            "id": 19,
+            "text": "___ (Would / Do) you mind helping me?",
+            "options": [
+              "Would",
+              "Do",
+              "Did",
+              "Is"
+            ],
+            "correct": 0,
+            "explanation": "Xushmuomala iltimos: \"Would you mind...?\""
+          },
+          {
+            "id": 20,
+            "text": "___ (Does / Is) your brother work here?",
+            "options": [
+              "Does",
+              "Is",
+              "Do",
+              "Has"
+            ],
+            "correct": 0,
+            "explanation": "Fe'l (work) bilan \"Does your brother work...\" bo'ladi."
+          }
+        ],
+        "scrambled": [
+          {
+            "id": 1,
+            "words": [
+              "you",
+              "do",
+              "like",
+              "music",
+              "?"
+            ],
+            "answer": "do you like music",
+            "explanation": "Do + subject + verb."
+          },
+          {
+            "id": 2,
+            "words": [
+              "she",
+              "does",
+              "live",
+              "here",
+              "?"
+            ],
+            "answer": "does she live here",
+            "explanation": "Does + subject + verb."
+          },
+          {
+            "id": 3,
+            "words": [
+              "did",
+              "they",
+              "come",
+              "yesterday",
+              "?"
+            ],
+            "answer": "did they come yesterday",
+            "explanation": "Did + subject + verb."
+          },
+          {
+            "id": 4,
+            "words": [
+              "is",
+              "he",
+              "reading",
+              "now",
+              "?"
+            ],
+            "answer": "is he reading now",
+            "explanation": "Is + subject + V-ing."
+          },
+          {
+            "id": 5,
+            "words": [
+              "have",
+              "you",
+              "finished",
+              "yet",
+              "?"
+            ],
+            "answer": "have you finished yet",
+            "explanation": "Have + subject + V3."
+          },
+          {
+            "id": 6,
+            "words": [
+              "can",
+              "you",
+              "speak",
+              "English",
+              "?"
+            ],
+            "answer": "can you speak English",
+            "explanation": "Modal + subject + verb."
+          },
+          {
+            "id": 7,
+            "words": [
+              "are",
+              "they",
+              "ready",
+              "now",
+              "?"
+            ],
+            "answer": "are they ready now",
+            "explanation": "Are + subject + adjective."
+          },
+          {
+            "id": 8,
+            "words": [
+              "does",
+              "it",
+              "rain",
+              "often",
+              "?"
+            ],
+            "answer": "does it rain often",
+            "explanation": "Does + subject + verb."
+          },
+          {
+            "id": 9,
+            "words": [
+              "was",
+              "the",
+              "movie",
+              "good",
+              "?"
+            ],
+            "answer": "was the movie good",
+            "explanation": "Was + subject + adjective."
+          },
+          {
+            "id": 10,
+            "words": [
+              "did",
+              "you",
+              "buy",
+              "the",
+              "car",
+              "?"
+            ],
+            "answer": "did you buy the car",
+            "explanation": "Did + subject + verb."
+          },
+          {
+            "id": 11,
+            "words": [
+              "has",
+              "she",
+              "called",
+              "you",
+              "?"
+            ],
+            "answer": "has she called you",
+            "explanation": "Has + subject + V3."
+          },
+          {
+            "id": 12,
+            "words": [
+              "should",
+              "we",
+              "start",
+              "now",
+              "?"
+            ],
+            "answer": "should we start now",
+            "explanation": "Should + subject + verb."
+          },
+          {
+            "id": 13,
+            "words": [
+              "will",
+              "you",
+              "come",
+              "tomorrow",
+              "?"
+            ],
+            "answer": "will you come tomorrow",
+            "explanation": "Will + subject + verb."
+          },
+          {
+            "id": 14,
+            "words": [
+              "is",
+              "she",
+              "at",
+              "home",
+              "?"
+            ],
+            "answer": "is she at home",
+            "explanation": "Is + subject + prepositional phrase."
+          },
+          {
+            "id": 15,
+            "words": [
+              "do",
+              "they",
+              "have",
+              "a",
+              "dog",
+              "?"
+            ],
+            "answer": "do they have a dog",
+            "explanation": "Do + subject + verb."
+          },
+          {
+            "id": 16,
+            "words": [
+              "were",
+              "you",
+              "busy",
+              "yesterday",
+              "?"
+            ],
+            "answer": "were you busy yesterday",
+            "explanation": "Were + subject + adjective."
+          },
+          {
+            "id": 17,
+            "words": [
+              "must",
+              "we",
+              "leave",
+              "so",
+              "soon",
+              "?"
+            ],
+            "answer": "must we leave so soon",
+            "explanation": "Must + subject + verb."
+          },
+          {
+            "id": 18,
+            "words": [
+              "could",
+              "you",
+              "help",
+              "me",
+              "?"
+            ],
+            "answer": "could you help me",
+            "explanation": "Could + subject + verb."
+          },
+          {
+            "id": 19,
+            "words": [
+              "is",
+              "it",
+              "cold",
+              "outside",
+              "?"
+            ],
+            "answer": "is it cold outside",
+            "explanation": "Is + subject + adjective."
+          },
+          {
+            "id": 20,
+            "words": [
+              "have",
+              "they",
+              "left",
+              "already",
+              "?"
+            ],
+            "answer": "have they left already",
+            "explanation": "Have + subject + V3."
+          }
+        ],
+        "errorCorrection": [
+          {
+            "id": 1,
+            "text": "Does you like apples?",
+            "options": [
+              "Does",
+              "you",
+              "like",
+              "apples"
+            ],
+            "correct": 0,
+            "wrongPart": "Does",
+            "correction": "Do",
+            "explanation": "\"you\" bilan \"Does\" emas, \"Do\" ishlatiladi."
+          },
+          {
+            "id": 2,
+            "text": "Do she work in a bank?",
+            "options": [
+              "Do",
+              "she",
+              "work",
+              "in a bank"
+            ],
+            "correct": 0,
+            "wrongPart": "Do",
+            "correction": "Does",
+            "explanation": "\"she\" bilan \"Do\" emas, \"Does\" ishlatiladi."
+          },
+          {
+            "id": 3,
+            "text": "Did you went to school yesterday?",
+            "options": [
+              "Did",
+              "you",
+              "went",
+              "to school"
+            ],
+            "correct": 2,
+            "wrongPart": "went",
+            "correction": "go",
+            "explanation": "\"Did\" dan keyin fe'l fe'lning bosh shaklida (go) keladi."
+          },
+          {
+            "id": 4,
+            "text": "Is he sleep right now?",
+            "options": [
+              "Is",
+              "he",
+              "sleep",
+              "right now"
+            ],
+            "correct": 2,
+            "wrongPart": "sleep",
+            "correction": "sleeping",
+            "explanation": "Present Continuous so'rovida fe'lga -ing qo'shiladi."
+          },
+          {
+            "id": 5,
+            "text": "Has you ever been to Rome?",
+            "options": [
+              "Has",
+              "you",
+              "ever",
+              "been"
+            ],
+            "correct": 0,
+            "wrongPart": "Has",
+            "correction": "Have",
+            "explanation": "\"you\" bilan \"Has\" emas, \"Have\" ishlatiladi."
+          },
+          {
+            "id": 6,
+            "text": "Does she likes coffee?",
+            "options": [
+              "Does",
+              "she",
+              "likes",
+              "coffee"
+            ],
+            "correct": 2,
+            "wrongPart": "likes",
+            "correction": "like",
+            "explanation": "\"Does\" so'roq shaklida fe'ldan -s tushib qoladi."
+          },
+          {
+            "id": 7,
+            "text": "Are you know his name?",
+            "options": [
+              "Are",
+              "you",
+              "know",
+              "his name"
+            ],
+            "correct": 0,
+            "wrongPart": "Are",
+            "correction": "Do",
+            "explanation": "Oddiy harakat fe'li (know) so'rovi uchun \"Do\" ishlatiladi."
+          },
+          {
+            "id": 8,
+            "text": "Did she called you last night?",
+            "options": [
+              "Did",
+              "she",
+              "called",
+              "you"
+            ],
+            "correct": 2,
+            "wrongPart": "called",
+            "correction": "call",
+            "explanation": "\"Did\" bilan o'tgan zamon qo'shimchasi -ed tushib qoladi."
+          },
+          {
+            "id": 9,
+            "text": "Is they coming to the meeting?",
+            "options": [
+              "Is",
+              "they",
+              "coming",
+              "to the meeting"
+            ],
+            "correct": 0,
+            "wrongPart": "Is",
+            "correction": "Are",
+            "explanation": "\"they\" ko'plik egani uchun \"Are\" ishlatiladi."
+          },
+          {
+            "id": 10,
+            "text": "Have he finished his project?",
+            "options": [
+              "Have",
+              "he",
+              "finished",
+              "his project"
+            ],
+            "correct": 0,
+            "wrongPart": "Have",
+            "correction": "Has",
+            "explanation": "\"he\" bilan \"Have\" emas, \"Has\" ishlatiladi."
+          },
+          {
+            "id": 11,
+            "text": "Do your brother live here?",
+            "options": [
+              "Do",
+              "your brother",
+              "live",
+              "here"
+            ],
+            "correct": 0,
+            "wrongPart": "Do",
+            "correction": "Does",
+            "explanation": "\"your brother\" (he) birlikda bo'lgani uchun \"Does\" ishlatiladi."
+          },
+          {
+            "id": 12,
+            "text": "Was you at home last night?",
+            "options": [
+              "Was",
+              "you",
+              "at home",
+              "last night"
+            ],
+            "correct": 0,
+            "wrongPart": "Was",
+            "correction": "Were",
+            "explanation": "\"you\" olmoshi bilan \"Were\" to be fe'li ishlatiladi."
+          },
+          {
+            "id": 13,
+            "text": "Can she to drive a car?",
+            "options": [
+              "Can",
+              "she",
+              "to drive",
+              "a car"
+            ],
+            "correct": 2,
+            "wrongPart": "to drive",
+            "correction": "drive",
+            "explanation": "Modal fe'llardan (can) keyin \"to\" ishlatilmaydi."
+          },
+          {
+            "id": 14,
+            "text": "Does they enjoy watching football?",
+            "options": [
+              "Does",
+              "they",
+              "enjoy",
+              "watching"
+            ],
+            "correct": 0,
+            "wrongPart": "Does",
+            "correction": "Do",
+            "explanation": "\"they\" uchun \"Does\" emas, \"Do\" ishlatiladi."
+          },
+          {
+            "id": 15,
+            "text": "Did he has breakfast this morning?",
+            "options": [
+              "Did",
+              "he",
+              "has",
+              "breakfast"
+            ],
+            "correct": 2,
+            "wrongPart": "has",
+            "correction": "have",
+            "explanation": "\"Did\" dan keyin \"has\" emas, bosh shakl \"have\" keladi."
+          },
+          {
+            "id": 16,
+            "text": "Is it rains outside?",
+            "options": [
+              "Is",
+              "it",
+              "rains",
+              "outside"
+            ],
+            "correct": 2,
+            "wrongPart": "rains",
+            "correction": "raining",
+            "explanation": "Hozirgi davomli zamon so'rovida \"raining\" bo'ladi."
+          },
+          {
+            "id": 17,
+            "text": "Have you see my keys?",
+            "options": [
+              "Have",
+              "you",
+              "see",
+              "my keys"
+            ],
+            "correct": 2,
+            "wrongPart": "see",
+            "correction": "seen",
+            "explanation": "Present Perfect zamonida V3 shakli (seen) ishlatiladi."
+          },
+          {
+            "id": 18,
+            "text": "Will you coming tomorrow?",
+            "options": [
+              "Will",
+              "you",
+              "coming",
+              "tomorrow"
+            ],
+            "correct": 2,
+            "wrongPart": "coming",
+            "correction": "come",
+            "explanation": "\"Will\" dan keyin fe'lning asosiy shakli (come) keladi."
+          },
+          {
+            "id": 19,
+            "text": "Does your parents live near here?",
+            "options": [
+              "Does",
+              "your parents",
+              "live",
+              "near here"
+            ],
+            "correct": 0,
+            "wrongPart": "Does",
+            "correction": "Do",
+            "explanation": "\"your parents\" (they) ko'plikda bo'lgani uchun \"Do\" ishlatiladi."
+          },
+          {
+            "id": 20,
+            "text": "Should we to call the police?",
+            "options": [
+              "Should",
+              "we",
+              "to call",
+              "the police"
+            ],
+            "correct": 2,
+            "wrongPart": "to call",
+            "correction": "call",
+            "explanation": "Modal fe'l (should) dan keyin \"to\" ishlatilmaydi."
+          }
+        ],
+        "transform": [
+          {
+            "id": 1,
+            "text": "Transform into a general question: \"You play football.\"",
+            "options": [
+              "Do you play football?",
+              "Are you play football?",
+              "Does you play football?",
+              "Did you playing football?"
+            ],
+            "correct": 0,
+            "explanation": "Present Simple bo'yicha: Do + subject + verb?"
+          },
+          {
+            "id": 2,
+            "text": "Transform into a general question: \"She works at a hospital.\"",
+            "options": [
+              "Does she work at a hospital?",
+              "Do she work at a hospital?",
+              "Is she work at a hospital?",
+              "Does she works at a hospital?"
+            ],
+            "correct": 0,
+            "explanation": "Does + subject + base verb?"
+          },
+          {
+            "id": 3,
+            "text": "Transform into a general question: \"They bought a new house.\"",
+            "options": [
+              "Did they buy a new house?",
+              "Do they buy a new house?",
+              "Have they bought a new house?",
+              "Were they buy a new house?"
+            ],
+            "correct": 0,
+            "explanation": "Past Simple oddiy savol: Did + subject + base verb?"
+          },
+          {
+            "id": 4,
+            "text": "Transform into a general question: \"He is sleeping now.\"",
+            "options": [
+              "Is he sleeping now?",
+              "Does he sleeping now?",
+              "Do he sleep now?",
+              "Has he sleeping now?"
+            ],
+            "correct": 0,
+            "explanation": "Present Continuous savol: Is + subject + V-ing?"
+          },
+          {
+            "id": 5,
+            "text": "Transform into a general question: \"You have finished your homework.\"",
+            "options": [
+              "Have you finished your homework?",
+              "Did you finished your homework?",
+              "Do you finish your homework?",
+              "Are you finished your homework?"
+            ],
+            "correct": 0,
+            "explanation": "Present Perfect savoli: Have + subject + V3?"
+          },
+          {
+            "id": 6,
+            "text": "Transform into a general question: \"She can speak Spanish.\"",
+            "options": [
+              "Can she speak Spanish?",
+              "Does she can speak Spanish?",
+              "Is she can speak Spanish?",
+              "Can she to speak Spanish?"
+            ],
+            "correct": 0,
+            "explanation": "Modal fe'l oldinga o'tadi: Can + subject + verb?"
+          },
+          {
+            "id": 7,
+            "text": "Transform into a general question: \"They are ready for the test.\"",
+            "options": [
+              "Are they ready for the test?",
+              "Do they ready for the test?",
+              "Did they ready for the test?",
+              "Is they ready for the test?"
+            ],
+            "correct": 0,
+            "explanation": "To be fe'li oldinga o'tadi: Are + subject + adjective?"
+          },
+          {
+            "id": 8,
+            "text": "Transform into a general question: \"It rains a lot in spring.\"",
+            "options": [
+              "Does it rain a lot in spring?",
+              "Is it rain a lot in spring?",
+              "Do it rain a lot in spring?",
+              "Does it rains a lot in spring?"
+            ],
+            "correct": 0,
+            "explanation": "Does + it + base verb?"
+          },
+          {
+            "id": 9,
+            "text": "Transform into a general question: \"He was absent yesterday.\"",
+            "options": [
+              "Was he absent yesterday?",
+              "Did he absent yesterday?",
+              "Does he absent yesterday?",
+              "Were he absent yesterday?"
+            ],
+            "correct": 0,
+            "explanation": "To be fe'li o'tgan zamonda: Was + subject + adjective?"
+          },
+          {
+            "id": 10,
+            "text": "Transform into a general question: \"She has a car.\"",
+            "options": [
+              "Does she have a car?",
+              "Has she a car?",
+              "Do she have a car?",
+              "Is she have a car?"
+            ],
+            "correct": 0,
+            "explanation": "Present Simple bo'yicha: Does she have...?"
+          },
+          {
+            "id": 11,
+            "text": "Transform into a general question: \"We will leave tomorrow.\"",
+            "options": [
+              "Will we leave tomorrow?",
+              "Do we leave tomorrow?",
+              "Shall we leaving tomorrow?",
+              "Are we leave tomorrow?"
+            ],
+            "correct": 0,
+            "explanation": "Will fe'li oldinga o'tadi: Will + subject + verb?"
+          },
+          {
+            "id": 12,
+            "text": "Transform into a general question: \"They have arrived.\"",
+            "options": [
+              "Have they arrived?",
+              "Did they arrived?",
+              "Do they arrive?",
+              "Are they arrived?"
+            ],
+            "correct": 0,
+            "explanation": "Have + subject + V3?"
+          },
+          {
+            "id": 13,
+            "text": "Transform into a general question: \"You should stay here.\"",
+            "options": [
+              "Should you stay here?",
+              "Do you should stay here?",
+              "Are you stay here?",
+              "Should you to stay here?"
+            ],
+            "correct": 0,
+            "explanation": "Should + subject + verb?"
+          },
+          {
+            "id": 14,
+            "text": "Transform into a general question: \"He teaches mathematics.\"",
+            "options": [
+              "Does he teach mathematics?",
+              "Do he teach mathematics?",
+              "Is he teach mathematics?",
+              "Does he teaches mathematics?"
+            ],
+            "correct": 0,
+            "explanation": "Does + he + base verb?"
+          },
+          {
+            "id": 15,
+            "text": "Transform into a general question: \"They were watching TV.\"",
+            "options": [
+              "Were they watching TV?",
+              "Did they watching TV?",
+              "Do they watch TV?",
+              "Are they watching TV?"
+            ],
+            "correct": 0,
+            "explanation": "Were + subject + V-ing?"
+          },
+          {
+            "id": 16,
+            "text": "Transform into a general question: \"She needs help.\"",
+            "options": [
+              "Does she need help?",
+              "Is she need help?",
+              "Do she need help?",
+              "Does she needs help?"
+            ],
+            "correct": 0,
+            "explanation": "Does + she + base verb?"
+          },
+          {
+            "id": 17,
+            "text": "Transform into a general question: \"You know the answer.\"",
+            "options": [
+              "Do you know the answer?",
+              "Are you know the answer?",
+              "Did you knowing the answer?",
+              "Does you know the answer?"
+            ],
+            "correct": 0,
+            "explanation": "Do + you + base verb?"
+          },
+          {
+            "id": 18,
+            "text": "Transform into a general question: \"He called you last night.\"",
+            "options": [
+              "Did he call you last night?",
+              "Does he call you last night?",
+              "Has he called you last night?",
+              "Did he called you last night?"
+            ],
+            "correct": 0,
+            "explanation": "Did + subject + base verb?"
+          },
+          {
+            "id": 19,
+            "text": "Transform into a general question: \"It is cold outside.\"",
+            "options": [
+              "Is it cold outside?",
+              "Does it cold outside?",
+              "Do it cold outside?",
+              "Was it cold outside?"
+            ],
+            "correct": 0,
+            "explanation": "Is + subject + adjective?"
+          },
+          {
+            "id": 20,
+            "text": "Transform into a general question: \"They can help us.\"",
+            "options": [
+              "Can they help us?",
+              "Do they can help us?",
+              "Are they help us?",
+              "Can they to help us?"
+            ],
+            "correct": 0,
+            "explanation": "Can + subject + base verb?"
+          }
+        ],
+        "dialogue": [
+          {
+            "id": 1,
+            "situation": "Meeting a stranger.",
+            "dialogue": "A: ___ you speak English?\nB: Yes, a little bit.",
+            "options": [
+              "Do",
+              "Does",
+              "Are",
+              "Is"
+            ],
+            "correct": 0,
+            "explanation": "Umumiy savol: Do you speak...?"
+          },
+          {
+            "id": 2,
+            "situation": "Asking about someone's residence.",
+            "dialogue": "A: ___ she live near here?\nB: Yes, just around the corner.",
+            "options": [
+              "Does",
+              "Do",
+              "Is",
+              "Has"
+            ],
+            "correct": 0,
+            "explanation": "Does she live...?"
+          },
+          {
+            "id": 3,
+            "situation": "Asking about past activity.",
+            "dialogue": "A: ___ you watch the football match yesterday?\nB: No, I was too busy.",
+            "options": [
+              "Did",
+              "Do",
+              "Have",
+              "Were"
+            ],
+            "correct": 0,
+            "explanation": "Past Simple: Did you watch...?"
+          },
+          {
+            "id": 4,
+            "situation": "Checking current activity.",
+            "dialogue": "A: ___ he listening to music?\nB: Yes, he has his headphones on.",
+            "options": [
+              "Is",
+              "Does",
+              "Has",
+              "Do"
+            ],
+            "correct": 0,
+            "explanation": "Present Continuous: Is he listening...?"
+          },
+          {
+            "id": 5,
+            "situation": "Asking about travel experience.",
+            "dialogue": "A: ___ you ever visited Paris?\nB: Yes, I went there two years ago.",
+            "options": [
+              "Have",
+              "Did",
+              "Do",
+              "Were"
+            ],
+            "correct": 0,
+            "explanation": "Present Perfect: Have you ever visited...?"
+          },
+          {
+            "id": 6,
+            "situation": "Asking for permission.",
+            "dialogue": "A: ___ I open the window?\nB: Yes, please do. It's warm in here.",
+            "options": [
+              "May",
+              "Does",
+              "Do",
+              "Has"
+            ],
+            "correct": 0,
+            "explanation": "Ruxsat so'rash: May I open...?"
+          },
+          {
+            "id": 7,
+            "situation": "Asking about current weather.",
+            "dialogue": "A: ___ it raining outside?\nB: No, the sun is shining.",
+            "options": [
+              "Is",
+              "Does",
+              "Has",
+              "Did"
+            ],
+            "correct": 0,
+            "explanation": "Is it raining...?"
+          },
+          {
+            "id": 8,
+            "situation": "Asking about family.",
+            "dialogue": "A: ___ your brother work at the university?\nB: No, he works at a bank.",
+            "options": [
+              "Does",
+              "Do",
+              "Is",
+              "Has"
+            ],
+            "correct": 0,
+            "explanation": "Does your brother work...?"
+          },
+          {
+            "id": 9,
+            "situation": "Checking readiness.",
+            "dialogue": "A: ___ you ready to order, sir?\nB: Yes, I'll have the grilled chicken.",
+            "options": [
+              "Are",
+              "Do",
+              "Is",
+              "Does"
+            ],
+            "correct": 0,
+            "explanation": "Are you ready...?"
+          },
+          {
+            "id": 10,
+            "situation": "Asking about past event.",
+            "dialogue": "A: ___ they enjoy the concert last night?\nB: Yes, they said it was amazing.",
+            "options": [
+              "Did",
+              "Do",
+              "Have",
+              "Were"
+            ],
+            "correct": 0,
+            "explanation": "Did they enjoy...?"
+          },
+          {
+            "id": 11,
+            "situation": "Checking completion.",
+            "dialogue": "A: ___ she already finished her assignment?\nB: Yes, she handed it in an hour ago.",
+            "options": [
+              "Has",
+              "Have",
+              "Is",
+              "Does"
+            ],
+            "correct": 0,
+            "explanation": "Has she already finished...?"
+          },
+          {
+            "id": 12,
+            "situation": "Offering help.",
+            "dialogue": "A: ___ I carry those heavy boxes for you?\nB: Oh, thank you so much!",
+            "options": [
+              "Shall",
+              "Does",
+              "Do",
+              "Has"
+            ],
+            "correct": 0,
+            "explanation": "Shall I carry...?"
+          },
+          {
+            "id": 13,
+            "situation": "Checking attendance.",
+            "dialogue": "A: ___ he at school yesterday?\nB: No, he was sick in bed.",
+            "options": [
+              "Was",
+              "Did",
+              "Does",
+              "Is"
+            ],
+            "correct": 0,
+            "explanation": "Was he at school...?"
+          },
+          {
+            "id": 14,
+            "situation": "Asking about habits.",
+            "dialogue": "A: ___ you usually drink coffee in the morning?\nB: Yes, I can't wake up without it.",
+            "options": [
+              "Do",
+              "Are",
+              "Have",
+              "Is"
+            ],
+            "correct": 0,
+            "explanation": "Do you usually drink...?"
+          },
+          {
+            "id": 15,
+            "situation": "Checking future plans.",
+            "dialogue": "A: ___ you be coming to the meeting tomorrow?\nB: Yes, I'll be there on time.",
+            "options": [
+              "Will",
+              "Do",
+              "Does",
+              "Are"
+            ],
+            "correct": 0,
+            "explanation": "Will you be coming...?"
+          },
+          {
+            "id": 16,
+            "situation": "Asking about obligation.",
+            "dialogue": "A: ___ we have to pay in advance?\nB: No, you can pay when you arrive.",
+            "options": [
+              "Do",
+              "Are",
+              "Have",
+              "Is"
+            ],
+            "correct": 0,
+            "explanation": "Do we have to pay...?"
+          },
+          {
+            "id": 17,
+            "situation": "Checking status.",
+            "dialogue": "A: ___ she still working on the report?\nB: Yes, she needs another twenty minutes.",
+            "options": [
+              "Is",
+              "Does",
+              "Has",
+              "Will"
+            ],
+            "correct": 0,
+            "explanation": "Is she still working...?"
+          },
+          {
+            "id": 18,
+            "situation": "Asking about a past state.",
+            "dialogue": "A: ___ you scared when the lights went out?\nB: A little bit, but it was fine.",
+            "options": [
+              "Were",
+              "Did",
+              "Do",
+              "Have"
+            ],
+            "correct": 0,
+            "explanation": "Were you scared...?"
+          },
+          {
+            "id": 19,
+            "situation": "Polite invitation.",
+            "dialogue": "A: ___ you like to come to our house for lunch?\nB: That sounds lovely, thank you!",
+            "options": [
+              "Would",
+              "Do",
+              "Should",
+              "Must"
+            ],
+            "correct": 0,
+            "explanation": "Would you like...?"
+          },
+          {
+            "id": 20,
+            "situation": "Checking ability.",
+            "dialogue": "A: ___ you drive a manual transmission car?\nB: Yes, I've driven one for years.",
+            "options": [
+              "Can",
+              "Do",
+              "Are",
+              "Have"
+            ],
+            "correct": 0,
+            "explanation": "Can you drive...?"
+          }
+        ]
+      },
+      {
+        "id": "special-questions",
+        "title": "Special Questions",
+        "icon": "🔍",
+        "guide": "## Special Questions (Maxsus savollar / Wh- Questions)\n\nMaxsus savollar (Special Questions) — aniq bir ma'lumotni (kim, nima, qaerda, qachon, nimaga, qanday va h.k.) so'rab beriladigan savollardir. Ular har doim **So'roq so'zi (Wh- word)** bilan boshlanadi.\n\n## 1. So'roq so'zlari (Question Words)\n• **What** — Nima / Qanday\n• **Where** — Qayerda / Qayerga\n• **When** — Qachon\n• **Why** — Nima uchun / Nimaga\n• **Who** — Kim / Kimni\n• **Whose** — Kimning\n• **Which** — Qaysi\n• **How** — Qanday / Qanaqa\n• **How much / How many** — Qancha / Nechta\n• **How often** — Qanchalik tez-tez\n• **How long** — Qancha vaqt / Qancha davomida\n\n## 2. Savol tuzish formulasi (Formula)\n**So'roq so'zi (Wh-) + Yordamchi/Modal fe'l + Ega + Asosiy fe'l + ...?**\n\n• **Present Simple**: **Where do** you **live**? / **What does** he **want**?\n• **Past Simple**: **When did** you **arrive**? / **Why did** she **leave**?\n• **Present Continuous**: **What are** you **doing**?\n• **Present Perfect**: **Where have** you **been**?\n• **Modallar**: **What should** I **do**? / **How can** I **help**?\n\n## 3. Ega uchun beriladigan savollar (Subject Questions: Who/What)\nEganing o'zini so'raganda yordamchi fe'l (do/does/did) ishlatilmaydi, fe'l darhol tasdiq shaklida keladi:\n- *Who **knows** the answer?* (Kim javobni biladi?) — *Who **does** know?* ❌ emas!\n- *What **happened** yesterday?* (Kecha nima bo'ldi?) — *What **did** happen?* ❌ emas!\n\n## 4. Asosiy qoidalar (Key Rules)\n1. **Wh- so'zi har doim eng birinchi turadi**.\n2. **Wh- so'zidan keyin albatta yordamchi fe'l kelishi shart** (Subject questions dan tashqari).\n3. **Do/Does/Did ishlatilganda fe'l zarrasi bosh shaklga qaytadi**: *Where did you went?* ❌ → *Where did you **go**?* ✅",
+        "questions": [
+          {
+            "id": 1,
+            "text": "___ do you live?",
+            "options": [
+              "Where",
+              "What",
+              "Who",
+              "Which"
+            ],
+            "correct": 0,
+            "explanation": "Joyni so'rash uchun \"Where\" (qayerda) ishlatiladi."
+          },
+          {
+            "id": 2,
+            "text": "___ is your birthday?",
+            "options": [
+              "When",
+              "Where",
+              "What",
+              "Why"
+            ],
+            "correct": 0,
+            "explanation": "Vaqtni so'rash uchun \"When\" (qachon) ishlatiladi."
+          },
+          {
+            "id": 3,
+            "text": "___ did you leave the party so early?",
+            "options": [
+              "Why",
+              "What",
+              "Where",
+              "Who"
+            ],
+            "correct": 0,
+            "explanation": "Sababni so'rash uchun \"Why\" (nimaga/nima uchun) ishlatiladi."
+          },
+          {
+            "id": 4,
+            "text": "___ is that young man standing near the door?",
+            "options": [
+              "Who",
+              "What",
+              "Where",
+              "Which"
+            ],
+            "correct": 0,
+            "explanation": "Shaxsni so'rash uchun \"Who\" (kim) ishlatiladi."
+          },
+          {
+            "id": 5,
+            "text": "___ color do you prefer, blue or green?",
+            "options": [
+              "Which",
+              "Where",
+              "Who",
+              "When"
+            ],
+            "correct": 0,
+            "explanation": "Cheklangan tanlov orasidan so'raganda \"Which\" (qaysi) ishlatiladi."
+          },
+          {
+            "id": 6,
+            "text": "___ book is this on the desk?",
+            "options": [
+              "Whose",
+              "Who",
+              "Where",
+              "Which"
+            ],
+            "correct": 0,
+            "explanation": "Egalikni so'rash uchun \"Whose\" (kimning) ishlatiladi."
+          },
+          {
+            "id": 7,
+            "text": "___ do you get to work every morning?",
+            "options": [
+              "How",
+              "What",
+              "Where",
+              "Who"
+            ],
+            "correct": 0,
+            "explanation": "Usul/tarzni so'rash uchun \"How\" (qanday) ishlatiladi."
+          },
+          {
+            "id": 8,
+            "text": "___ brothers and sisters do you have?",
+            "options": [
+              "How many",
+              "How much",
+              "How long",
+              "How often"
+            ],
+            "correct": 0,
+            "explanation": "Sanaladigan otlar uchun \"How many\" ishlatiladi."
+          },
+          {
+            "id": 9,
+            "text": "___ sugar do you take in your tea?",
+            "options": [
+              "How much",
+              "How many",
+              "How long",
+              "How often"
+            ],
+            "correct": 0,
+            "explanation": "Sanalmaydigan otlar uchun \"How much\" ishlatiladi."
+          },
+          {
+            "id": 10,
+            "text": "___ do you play basketball?",
+            "options": [
+              "How often",
+              "How much",
+              "How long",
+              "How many"
+            ],
+            "correct": 0,
+            "explanation": "Chastotani (takrorlanishni) so'rash uchun \"How often\" ishlatiladi."
+          },
+          {
+            "id": 11,
+            "text": "___ does it take to get to the airport?",
+            "options": [
+              "How long",
+              "How much",
+              "How many",
+              "How often"
+            ],
+            "correct": 0,
+            "explanation": "Vaqt davomiyligini so'rash uchun \"How long\" ishlatiladi."
+          },
+          {
+            "id": 12,
+            "text": "___ wrote this magnificent novel?",
+            "options": [
+              "Who",
+              "Whom",
+              "What",
+              "Where"
+            ],
+            "correct": 0,
+            "explanation": "Ega so'ralganda: \"Who wrote...?\""
+          },
+          {
+            "id": 13,
+            "text": "___ happened at the end of the film?",
+            "options": [
+              "What",
+              "Who",
+              "Where",
+              "Why"
+            ],
+            "correct": 0,
+            "explanation": "Voqea (ega) so'ralganda \"What happened...?\" ishlatiladi."
+          },
+          {
+            "id": 14,
+            "text": "What ___ you doing when I called you?",
+            "options": [
+              "were",
+              "did",
+              "are",
+              "was"
+            ],
+            "correct": 0,
+            "explanation": "Past Continuous so'rovida: What + were + subject + V-ing?"
+          },
+          {
+            "id": 15,
+            "text": "Where ___ she go for her holidays last year?",
+            "options": [
+              "did",
+              "does",
+              "was",
+              "has"
+            ],
+            "correct": 0,
+            "explanation": "Past Simple so'rovida \"Where did she go...?\" ishlatiladi."
+          },
+          {
+            "id": 16,
+            "text": "Why ___ they late for the train?",
+            "options": [
+              "were",
+              "did",
+              "do",
+              "was"
+            ],
+            "correct": 0,
+            "explanation": "To be fe'lining o'tgan zamoni: Why + were + subject + adjective?"
+          },
+          {
+            "id": 17,
+            "text": "What kind of music ___ your father like?",
+            "options": [
+              "does",
+              "do",
+              "is",
+              "has"
+            ],
+            "correct": 0,
+            "explanation": "\"your father\" (he) bo'lgani uchun \"does\" ishlatiladi."
+          },
+          {
+            "id": 18,
+            "text": "How much ___ these shoes cost?",
+            "options": [
+              "do",
+              "does",
+              "are",
+              "is"
+            ],
+            "correct": 0,
+            "explanation": "\"these shoes\" (they) ko'plikda bo'lgani uchun \"do\" ishlatiladi."
+          },
+          {
+            "id": 19,
+            "text": "Where ___ you been all this time?",
+            "options": [
+              "have",
+              "has",
+              "did",
+              "were"
+            ],
+            "correct": 0,
+            "explanation": "Present Perfect: Where + have + subject + been?"
+          },
+          {
+            "id": 20,
+            "text": "What time ___ the train leave tomorrow?",
+            "options": [
+              "does",
+              "do",
+              "is",
+              "has"
+            ],
+            "correct": 0,
+            "explanation": "Jadval bo'yicha kelajak (Present Simple): What time does...?"
+          }
+        ],
+        "fillBlanks": [
+          {
+            "id": 1,
+            "text": "___ (Where / What) do you live?",
+            "options": [
+              "Where",
+              "What",
+              "Who",
+              "Which"
+            ],
+            "correct": 0,
+            "explanation": "Joy uchun \"Where\" ishlatiladi."
+          },
+          {
+            "id": 2,
+            "text": "___ (When / Why) is the concert starting?",
+            "options": [
+              "When",
+              "Why",
+              "Who",
+              "Where"
+            ],
+            "correct": 0,
+            "explanation": "Vaqt uchun \"When\" ishlatiladi."
+          },
+          {
+            "id": 3,
+            "text": "___ (Why / What) are you crying?",
+            "options": [
+              "Why",
+              "What",
+              "Where",
+              "Who"
+            ],
+            "correct": 0,
+            "explanation": "Sabab uchun \"Why\" ishlatiladi."
+          },
+          {
+            "id": 4,
+            "text": "___ (Who / Whose) told you that secret?",
+            "options": [
+              "Who",
+              "Whose",
+              "Where",
+              "Which"
+            ],
+            "correct": 0,
+            "explanation": "Shaxs uchun \"Who\" ishlatiladi."
+          },
+          {
+            "id": 5,
+            "text": "___ (Which / Who) dress do you like better?",
+            "options": [
+              "Which",
+              "Who",
+              "Where",
+              "When"
+            ],
+            "correct": 0,
+            "explanation": "Tanlov uchun \"Which\" ishlatiladi."
+          },
+          {
+            "id": 6,
+            "text": "___ (Whose / Who) jacket is this?",
+            "options": [
+              "Whose",
+              "Who",
+              "Where",
+              "Which"
+            ],
+            "correct": 0,
+            "explanation": "Egalik uchun \"Whose\" ishlatiladi."
+          },
+          {
+            "id": 7,
+            "text": "___ (How / What) do you bake this cake?",
+            "options": [
+              "How",
+              "What",
+              "Where",
+              "Who"
+            ],
+            "correct": 0,
+            "explanation": "Retsept/usul uchun \"How\" ishlatiladi."
+          },
+          {
+            "id": 8,
+            "text": "___ (How many / How much) students are in your class?",
+            "options": [
+              "How many",
+              "How much",
+              "How long",
+              "How often"
+            ],
+            "correct": 0,
+            "explanation": "Sanaladigan otlar uchun \"How many\"."
+          },
+          {
+            "id": 9,
+            "text": "___ (How much / How many) money do you need?",
+            "options": [
+              "How much",
+              "How many",
+              "How long",
+              "How often"
+            ],
+            "correct": 0,
+            "explanation": "Sanalmaydigan ot uchun \"How much\"."
+          },
+          {
+            "id": 10,
+            "text": "___ (How often / How long) do you go to the gym?",
+            "options": [
+              "How often",
+              "How long",
+              "How much",
+              "How many"
+            ],
+            "correct": 0,
+            "explanation": "Takrorlanish uchun \"How often\"."
+          },
+          {
+            "id": 11,
+            "text": "___ (How long / How many) did the lesson last?",
+            "options": [
+              "How long",
+              "How many",
+              "How much",
+              "How often"
+            ],
+            "correct": 0,
+            "explanation": "Davomiylik uchun \"How long\"."
+          },
+          {
+            "id": 12,
+            "text": "___ (Who / What) discovered gravity?",
+            "options": [
+              "Who",
+              "What",
+              "Where",
+              "Which"
+            ],
+            "correct": 0,
+            "explanation": "Kashfiyotchi shaxs uchun \"Who\"."
+          },
+          {
+            "id": 13,
+            "text": "___ (What / Who) causes earthquakes?",
+            "options": [
+              "What",
+              "Who",
+              "Where",
+              "Which"
+            ],
+            "correct": 0,
+            "explanation": "Sababchi narsa uchun \"What\"."
+          },
+          {
+            "id": 14,
+            "text": "Where ___ (did / do) you go yesterday?",
+            "options": [
+              "did",
+              "do",
+              "were",
+              "have"
+            ],
+            "correct": 0,
+            "explanation": "O'tgan zamonda \"Where did you go...?\""
+          },
+          {
+            "id": 15,
+            "text": "What ___ (is / does) your father doing now?",
+            "options": [
+              "is",
+              "does",
+              "has",
+              "did"
+            ],
+            "correct": 0,
+            "explanation": "Hozirgi davomli zamon: What is your father doing...?"
+          },
+          {
+            "id": 16,
+            "text": "Why ___ (were / did) you absent yesterday?",
+            "options": [
+              "were",
+              "did",
+              "do",
+              "was"
+            ],
+            "correct": 0,
+            "explanation": "To be fe'li bilan \"Why were you absent...?\""
+          },
+          {
+            "id": 17,
+            "text": "What size ___ (do / does) you wear?",
+            "options": [
+              "do",
+              "does",
+              "are",
+              "is"
+            ],
+            "correct": 0,
+            "explanation": "\"you\" bilan \"do\" ishlatiladi."
+          },
+          {
+            "id": 18,
+            "text": "How much ___ (does / do) this shirt cost?",
+            "options": [
+              "does",
+              "do",
+              "is",
+              "are"
+            ],
+            "correct": 0,
+            "explanation": "\"this shirt\" (it) uchun \"does\" ishlatiladi."
+          },
+          {
+            "id": 19,
+            "text": "Where ___ (have / did) you put my glasses?",
+            "options": [
+              "have",
+              "did",
+              "do",
+              "were"
+            ],
+            "correct": 0,
+            "explanation": "Present Perfect: Where have you put...?"
+          },
+          {
+            "id": 20,
+            "text": "When ___ (will / does) the meeting start tomorrow?",
+            "options": [
+              "will",
+              "does",
+              "is",
+              "has"
+            ],
+            "correct": 0,
+            "explanation": "Kelasi zamon so'rovi uchun \"will\" yoki \"does\" ishlatiladi."
+          }
+        ],
+        "scrambled": [
+          {
+            "id": 1,
+            "words": [
+              "where",
+              "do",
+              "you",
+              "live",
+              "?"
+            ],
+            "answer": "where do you live",
+            "explanation": "Where + do + subject + verb."
+          },
+          {
+            "id": 2,
+            "words": [
+              "when",
+              "is",
+              "your",
+              "birthday",
+              "?"
+            ],
+            "answer": "when is your birthday",
+            "explanation": "When + is + subject."
+          },
+          {
+            "id": 3,
+            "words": [
+              "why",
+              "are",
+              "you",
+              "late",
+              "?"
+            ],
+            "answer": "why are you late",
+            "explanation": "Why + are + subject + adjective."
+          },
+          {
+            "id": 4,
+            "words": [
+              "who",
+              "is",
+              "that",
+              "man",
+              "?"
+            ],
+            "answer": "who is that man",
+            "explanation": "Who + is + subject."
+          },
+          {
+            "id": 5,
+            "words": [
+              "what",
+              "time",
+              "does",
+              "it",
+              "start",
+              "?"
+            ],
+            "answer": "what time does it start",
+            "explanation": "What time + does + subject + verb."
+          },
+          {
+            "id": 6,
+            "words": [
+              "whose",
+              "car",
+              "is",
+              "this",
+              "?"
+            ],
+            "answer": "whose car is this",
+            "explanation": "Whose car + is + subject."
+          },
+          {
+            "id": 7,
+            "words": [
+              "how",
+              "do",
+              "you",
+              "spell",
+              "it",
+              "?"
+            ],
+            "answer": "how do you spell it",
+            "explanation": "How + do + subject + verb."
+          },
+          {
+            "id": 8,
+            "words": [
+              "how",
+              "many",
+              "books",
+              "did",
+              "you",
+              "read",
+              "?"
+            ],
+            "answer": "how many books did you read",
+            "explanation": "How many + noun + did + subject + verb."
+          },
+          {
+            "id": 9,
+            "words": [
+              "how",
+              "much",
+              "does",
+              "it",
+              "cost",
+              "?"
+            ],
+            "answer": "how much does it cost",
+            "explanation": "How much + does + subject + verb."
+          },
+          {
+            "id": 10,
+            "words": [
+              "how",
+              "often",
+              "do",
+              "you",
+              "exercise",
+              "?"
+            ],
+            "answer": "how often do you exercise",
+            "explanation": "How often + do + subject + verb."
+          },
+          {
+            "id": 11,
+            "words": [
+              "how",
+              "long",
+              "have",
+              "you",
+              "been",
+              "here",
+              "?"
+            ],
+            "answer": "how long have you been here",
+            "explanation": "How long + have + subject + been."
+          },
+          {
+            "id": 12,
+            "words": [
+              "who",
+              "wrote",
+              "this",
+              "letter",
+              "?"
+            ],
+            "answer": "who wrote this letter",
+            "explanation": "Who + V2 + object (Subject Question)."
+          },
+          {
+            "id": 13,
+            "words": [
+              "what",
+              "happened",
+              "last",
+              "night",
+              "?"
+            ],
+            "answer": "what happened last night",
+            "explanation": "What + V2 + time (Subject Question)."
+          },
+          {
+            "id": 14,
+            "words": [
+              "where",
+              "did",
+              "you",
+              "go",
+              "yesterday",
+              "?"
+            ],
+            "answer": "where did you go yesterday",
+            "explanation": "Where + did + subject + verb."
+          },
+          {
+            "id": 15,
+            "words": [
+              "what",
+              "are",
+              "you",
+              "doing",
+              "now",
+              "?"
+            ],
+            "answer": "what are you doing now",
+            "explanation": "What + are + subject + V-ing."
+          },
+          {
+            "id": 16,
+            "words": [
+              "why",
+              "did",
+              "she",
+              "leave",
+              "early",
+              "?"
+            ],
+            "answer": "why did she leave early",
+            "explanation": "Why + did + subject + verb."
+          },
+          {
+            "id": 17,
+            "words": [
+              "which",
+              "color",
+              "do",
+              "you",
+              "like",
+              "?"
+            ],
+            "answer": "which color do you like",
+            "explanation": "Which + noun + do + subject + verb."
+          },
+          {
+            "id": 18,
+            "words": [
+              "where",
+              "has",
+              "he",
+              "gone",
+              "?"
+            ],
+            "answer": "where has he gone",
+            "explanation": "Where + has + subject + V3."
+          },
+          {
+            "id": 19,
+            "words": [
+              "what",
+              "should",
+              "I",
+              "do",
+              "next",
+              "?"
+            ],
+            "answer": "what should I do next",
+            "explanation": "What + modal + subject + verb."
+          },
+          {
+            "id": 20,
+            "words": [
+              "how",
+              "can",
+              "I",
+              "help",
+              "you",
+              "?"
+            ],
+            "answer": "how can I help you",
+            "explanation": "How + modal + subject + verb."
+          }
+        ],
+        "errorCorrection": [
+          {
+            "id": 1,
+            "text": "Where you live?",
+            "options": [
+              "Where",
+              "you",
+              "live",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "you live",
+            "correction": "do you live",
+            "explanation": "So'roq so'zi va ega orasida \"do\" yordamchi fe'li bo'lishi shart."
+          },
+          {
+            "id": 2,
+            "text": "When she will arrive?",
+            "options": [
+              "When",
+              "she will",
+              "arrive",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "she will",
+            "correction": "will she",
+            "explanation": "So'roq gapda yordamchi fe'l (will) egadan oldinga o'tadi."
+          },
+          {
+            "id": 3,
+            "text": "Why you are late?",
+            "options": [
+              "Why",
+              "you are",
+              "late",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "you are",
+            "correction": "are you",
+            "explanation": "So'roq gapda to be fe'li egadan oldinga o'tadi: \"are you\"."
+          },
+          {
+            "id": 4,
+            "text": "Who did wrote this poem?",
+            "options": [
+              "Who",
+              "did wrote",
+              "this poem",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "did wrote",
+            "correction": "wrote",
+            "explanation": "Ega so'ralganda \"did\" ishlatilmaydi: \"Who wrote...?\""
+          },
+          {
+            "id": 5,
+            "text": "Where did you went yesterday?",
+            "options": [
+              "Where",
+              "did you",
+              "went",
+              "yesterday"
+            ],
+            "correct": 2,
+            "wrongPart": "went",
+            "correction": "go",
+            "explanation": "\"Did\" ishlatilganda fe'l bosh shaklga (go) qaytadi."
+          },
+          {
+            "id": 6,
+            "text": "What he is doing right now?",
+            "options": [
+              "What",
+              "he is",
+              "doing",
+              "right now"
+            ],
+            "correct": 1,
+            "wrongPart": "he is",
+            "correction": "is he",
+            "explanation": "So'roq gapda \"is\" egadan oldinga o'tadi: \"is he doing\"."
+          },
+          {
+            "id": 7,
+            "text": "How many money do you have?",
+            "options": [
+              "How many",
+              "money",
+              "do you",
+              "have"
+            ],
+            "correct": 0,
+            "wrongPart": "How many",
+            "correction": "How much",
+            "explanation": "\"money\" sanalmaydi, shuning uchun \"How much\" ishlatiladi."
+          },
+          {
+            "id": 8,
+            "text": "How much books did you buy?",
+            "options": [
+              "How much",
+              "books",
+              "did you",
+              "buy"
+            ],
+            "correct": 0,
+            "wrongPart": "How much",
+            "correction": "How many",
+            "explanation": "\"books\" sanaladigan ot, shuning uchun \"How many\" bo'ladi."
+          },
+          {
+            "id": 9,
+            "text": "What did happened yesterday?",
+            "options": [
+              "What",
+              "did happened",
+              "yesterday",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "did happened",
+            "correction": "happened",
+            "explanation": "Ega uchun berilgan savolda \"did\" ishlatilmaydi: \"What happened...?\""
+          },
+          {
+            "id": 10,
+            "text": "Whose car is this car?",
+            "options": [
+              "Whose",
+              "car",
+              "is this car",
+              "No error"
+            ],
+            "correct": 2,
+            "wrongPart": "is this car",
+            "correction": "is this",
+            "explanation": "Takrorlanish oldini olish uchun \"Whose car is this?\" deyiladi."
+          },
+          {
+            "id": 11,
+            "text": "Why she doesn't like tea?",
+            "options": [
+              "Why",
+              "she doesn't",
+              "like",
+              "tea"
+            ],
+            "correct": 1,
+            "wrongPart": "she doesn't",
+            "correction": "doesn't she",
+            "explanation": "Inkor so'roqda ham yordamchi fe'l egadan oldinga o'tadi."
+          },
+          {
+            "id": 12,
+            "text": "How long you have lived here?",
+            "options": [
+              "How long",
+              "you have",
+              "lived",
+              "here"
+            ],
+            "correct": 1,
+            "wrongPart": "you have",
+            "correction": "have you",
+            "explanation": "So'roq gapda \"have\" egadan oldinga o'tishi shart."
+          },
+          {
+            "id": 13,
+            "text": "Which dress you prefer?",
+            "options": [
+              "Which dress",
+              "you prefer",
+              "No error",
+              "Check"
+            ],
+            "correct": 1,
+            "wrongPart": "you prefer",
+            "correction": "do you prefer",
+            "explanation": "So'roq gapda \"do\" yordamchi fe'li tushirib qoldirilmaydi."
+          },
+          {
+            "id": 14,
+            "text": "Where is she go every Sunday?",
+            "options": [
+              "Where",
+              "is she",
+              "go",
+              "every Sunday"
+            ],
+            "correct": 1,
+            "wrongPart": "is she",
+            "correction": "does she",
+            "explanation": "Harakat fe'li (go) bilan \"is\" emas, \"does\" ishlatiladi."
+          },
+          {
+            "id": 15,
+            "text": "What time the train leaves?",
+            "options": [
+              "What time",
+              "the train",
+              "leaves",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "the train leaves",
+            "correction": "does the train leave",
+            "explanation": "So'roq gapda \"does the train leave\" shakli bo'ladi."
+          },
+          {
+            "id": 16,
+            "text": "Who did broke the glass?",
+            "options": [
+              "Who",
+              "did broke",
+              "the glass",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "did broke",
+            "correction": "broke",
+            "explanation": "Ega so'ralganda \"did\" qo'llanilmaydi: \"Who broke...?\""
+          },
+          {
+            "id": 17,
+            "text": "How often you visit your grandparents?",
+            "options": [
+              "How often",
+              "you visit",
+              "your grandparents",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "you visit",
+            "correction": "do you visit",
+            "explanation": "So'roq gapda \"do\" yordamchi fe'li bo'lishi kerak."
+          },
+          {
+            "id": 18,
+            "text": "Why did you left so early?",
+            "options": [
+              "Why",
+              "did you",
+              "left",
+              "so early"
+            ],
+            "correct": 2,
+            "wrongPart": "left",
+            "correction": "leave",
+            "explanation": "\"Did\" dan keyin fe'l bosh shaklda (leave) kelishi kerak."
+          },
+          {
+            "id": 19,
+            "text": "What color is your car is?",
+            "options": [
+              "What color",
+              "is your car",
+              "is",
+              "No error"
+            ],
+            "correct": 2,
+            "wrongPart": "is",
+            "correction": "",
+            "explanation": "\"is\" fe'li ikkinchi marta takrorlanmaydi."
+          },
+          {
+            "id": 20,
+            "text": "Where have you putted my bag?",
+            "options": [
+              "Where",
+              "have you",
+              "putted",
+              "my bag"
+            ],
+            "correct": 2,
+            "wrongPart": "putted",
+            "correction": "put",
+            "explanation": "\"put\" fe'lining 3-shakli o'zgarmaydi: \"put\"."
+          }
+        ],
+        "transform": [
+          {
+            "id": 1,
+            "text": "Ask about the location: \"He lives in London.\"",
+            "options": [
+              "Where does he live?",
+              "Where do he live?",
+              "Where is he live?",
+              "Where he lives?"
+            ],
+            "correct": 0,
+            "explanation": "Where + does + he + base verb?"
+          },
+          {
+            "id": 2,
+            "text": "Ask about the time: \"The lesson starts at 9 AM.\"",
+            "options": [
+              "When does the lesson start?",
+              "When is the lesson start?",
+              "When do the lesson start?",
+              "When the lesson starts?"
+            ],
+            "correct": 0,
+            "explanation": "When + does + the lesson + base verb?"
+          },
+          {
+            "id": 3,
+            "text": "Ask about the reason: \"She is crying because she lost her keys.\"",
+            "options": [
+              "Why is she crying?",
+              "Why does she crying?",
+              "Why she is crying?",
+              "Why is she cry?"
+            ],
+            "correct": 0,
+            "explanation": "Why + is + she + V-ing?"
+          },
+          {
+            "id": 4,
+            "text": "Ask about the person (subject): \"Shakespeare wrote Hamlet.\"",
+            "options": [
+              "Who wrote Hamlet?",
+              "Who did write Hamlet?",
+              "Whom wrote Hamlet?",
+              "Who does write Hamlet?"
+            ],
+            "correct": 0,
+            "explanation": "Ega so'ralganda: Who + V2 + object?"
+          },
+          {
+            "id": 5,
+            "text": "Ask about the person (object): \"She called John.\"",
+            "options": [
+              "Who did she call?",
+              "Who she called?",
+              "Who called she?",
+              "Whom she call?"
+            ],
+            "correct": 0,
+            "explanation": "To'ldiruvchi so'ralganda: Who + did + she + base verb?"
+          },
+          {
+            "id": 6,
+            "text": "Ask about the manner/method: \"I came by bus.\"",
+            "options": [
+              "How did you come?",
+              "How do you come?",
+              "How was you come?",
+              "How you came?"
+            ],
+            "correct": 0,
+            "explanation": "How + did + you + base verb?"
+          },
+          {
+            "id": 7,
+            "text": "Ask about the quantity (countable): \"I bought five apples.\"",
+            "options": [
+              "How many apples did you buy?",
+              "How much apples did you buy?",
+              "How many apples you bought?",
+              "How much apples you buy?"
+            ],
+            "correct": 0,
+            "explanation": "How many + plural noun + did + subject + verb?"
+          },
+          {
+            "id": 8,
+            "text": "Ask about the quantity (uncountable): \"I need two liters of water.\"",
+            "options": [
+              "How much water do you need?",
+              "How many water do you need?",
+              "How much water you need?",
+              "How many water you need?"
+            ],
+            "correct": 0,
+            "explanation": "How much + uncountable noun + do + subject + verb?"
+          },
+          {
+            "id": 9,
+            "text": "Ask about the frequency: \"I go swimming twice a week.\"",
+            "options": [
+              "How often do you go swimming?",
+              "How many do you go swimming?",
+              "How long do you go swimming?",
+              "How much do you go swimming?"
+            ],
+            "correct": 0,
+            "explanation": "How often + do + subject + verb?"
+          },
+          {
+            "id": 10,
+            "text": "Ask about the duration: \"The flight took three hours.\"",
+            "options": [
+              "How long did the flight take?",
+              "How much did the flight take?",
+              "How many hours the flight take?",
+              "How long the flight took?"
+            ],
+            "correct": 0,
+            "explanation": "How long + did + subject + base verb?"
+          },
+          {
+            "id": 11,
+            "text": "Ask about the possession: \"This is Tom's hat.\"",
+            "options": [
+              "Whose hat is this?",
+              "Who hat is this?",
+              "Whose is this hat car?",
+              "Whose hat this is?"
+            ],
+            "correct": 0,
+            "explanation": "Whose + noun + is + this?"
+          },
+          {
+            "id": 12,
+            "text": "Ask about a choice: \"I prefer the blue jacket.\"",
+            "options": [
+              "Which jacket do you prefer?",
+              "What jacket you prefer?",
+              "Which jacket prefers you?",
+              "Whose jacket do you prefer?"
+            ],
+            "correct": 0,
+            "explanation": "Which + noun + do + subject + verb?"
+          },
+          {
+            "id": 13,
+            "text": "Ask about the event: \"An accident happened yesterday.\"",
+            "options": [
+              "What happened yesterday?",
+              "What did happen yesterday?",
+              "What was happened yesterday?",
+              "What did happened yesterday?"
+            ],
+            "correct": 0,
+            "explanation": "Ega so'ralganda: What + V2?"
+          },
+          {
+            "id": 14,
+            "text": "Ask about current action: \"He is fixing the car.\"",
+            "options": [
+              "What is he doing?",
+              "What does he do?",
+              "What he is doing?",
+              "What is he fixing car?"
+            ],
+            "correct": 0,
+            "explanation": "What + is + he + doing?"
+          },
+          {
+            "id": 15,
+            "text": "Ask about past location: \"They were at the beach yesterday.\"",
+            "options": [
+              "Where were they yesterday?",
+              "Where did they yesterday?",
+              "Where are they yesterday?",
+              "Where they were yesterday?"
+            ],
+            "correct": 0,
+            "explanation": "Where + were + subject?"
+          },
+          {
+            "id": 16,
+            "text": "Ask about price: \"The shirt costs twenty dollars.\"",
+            "options": [
+              "How much does the shirt cost?",
+              "How many does the shirt cost?",
+              "How much costs the shirt?",
+              "How much the shirt cost?"
+            ],
+            "correct": 0,
+            "explanation": "How much + does + subject + verb?"
+          },
+          {
+            "id": 17,
+            "text": "Ask about future plan: \"She is going to visit Paris next month.\"",
+            "options": [
+              "Where is she going to visit next month?",
+              "Where she is going to visit?",
+              "Where does she visit next month?",
+              "Where will she visit going to?"
+            ],
+            "correct": 0,
+            "explanation": "Where + is + she + going to visit...?"
+          },
+          {
+            "id": 18,
+            "text": "Ask about occupation: \"My father is an engineer.\"",
+            "options": [
+              "What does your father do?",
+              "Who is your father do?",
+              "What is your father doing?",
+              "How is your father?"
+            ],
+            "correct": 0,
+            "explanation": "Kasbni so'rash uchun: What does your father do?"
+          },
+          {
+            "id": 19,
+            "text": "Ask about distance: \"It is five kilometers from here.\"",
+            "options": [
+              "How far is it from here?",
+              "How long is it from here?",
+              "How much is it from here?",
+              "How many kilometers it is from here?"
+            ],
+            "correct": 0,
+            "explanation": "Masofani so'rash uchun: How far is it...?"
+          },
+          {
+            "id": 20,
+            "text": "Ask about age: \"My sister is twelve years old.\"",
+            "options": [
+              "How old is your sister?",
+              "How many years is your sister?",
+              "How old your sister is?",
+              "How much age is your sister?"
+            ],
+            "correct": 0,
+            "explanation": "Yoshni so'rash uchun: How old is...?"
+          }
+        ],
+        "dialogue": [
+          {
+            "id": 1,
+            "situation": "Asking for directions.",
+            "dialogue": "A: Excuse me, ___ is the train station?\nB: Go straight for two blocks, then turn left.",
+            "options": [
+              "where",
+              "what",
+              "when",
+              "why"
+            ],
+            "correct": 0,
+            "explanation": "Joy so'ralmoqda: \"where\"."
+          },
+          {
+            "id": 2,
+            "situation": "Asking about time.",
+            "dialogue": "A: ___ does the movie start?\nB: At 7:30 PM.",
+            "options": [
+              "What time",
+              "Where",
+              "Why",
+              "Who"
+            ],
+            "correct": 0,
+            "explanation": "Vaqt so'ralmoqda: \"What time\"."
+          },
+          {
+            "id": 3,
+            "situation": "Asking about reason for absence.",
+            "dialogue": "A: ___ were you absent yesterday?\nB: Because I had a high fever.",
+            "options": [
+              "Why",
+              "What",
+              "Where",
+              "Who"
+            ],
+            "correct": 0,
+            "explanation": "Sabab so'ralmoqda: \"Why\"."
+          },
+          {
+            "id": 4,
+            "situation": "Asking about identity.",
+            "dialogue": "A: ___ is that woman in the red coat?\nB: Oh, that's our new English teacher.",
+            "options": [
+              "Who",
+              "What",
+              "Which",
+              "Whose"
+            ],
+            "correct": 0,
+            "explanation": "Shaxs so'ralmoqda: \"Who\"."
+          },
+          {
+            "id": 5,
+            "situation": "Choosing a drink.",
+            "dialogue": "A: ___ tea would you like, Earl Grey or Green Tea?\nB: Earl Grey, please.",
+            "options": [
+              "Which",
+              "What",
+              "Where",
+              "Who"
+            ],
+            "correct": 0,
+            "explanation": "Tanlov berilganda: \"Which\"."
+          },
+          {
+            "id": 6,
+            "situation": "Finding a lost item owner.",
+            "dialogue": "A: ___ umbrella is this?\nB: It's mine! I left it here earlier.",
+            "options": [
+              "Whose",
+              "Who",
+              "Which",
+              "What"
+            ],
+            "correct": 0,
+            "explanation": "Egalik so'ralmoqda: \"Whose\"."
+          },
+          {
+            "id": 7,
+            "situation": "Asking about health/well-being.",
+            "dialogue": "A: ___ are you feeling today?\nB: Much better than yesterday, thanks!",
+            "options": [
+              "How",
+              "What",
+              "Where",
+              "Why"
+            ],
+            "correct": 0,
+            "explanation": "Holat so'ralmoqda: \"How\"."
+          },
+          {
+            "id": 8,
+            "situation": "Asking about count.",
+            "dialogue": "A: ___ siblings do you have?\nB: I have two brothers and one sister.",
+            "options": [
+              "How many",
+              "How much",
+              "How long",
+              "How often"
+            ],
+            "correct": 0,
+            "explanation": "Sanaladigan narsalar uchun: \"How many\"."
+          },
+          {
+            "id": 9,
+            "situation": "Shopping for food.",
+            "dialogue": "A: ___ milk should I buy?\nB: Just one carton is enough.",
+            "options": [
+              "How much",
+              "How many",
+              "How long",
+              "How often"
+            ],
+            "correct": 0,
+            "explanation": "Sanalmaydigan narsa uchun: \"How much\"."
+          },
+          {
+            "id": 10,
+            "situation": "Asking about exercise routine.",
+            "dialogue": "A: ___ do you go jogging?\nB: Three times a week.",
+            "options": [
+              "How often",
+              "How long",
+              "How much",
+              "How many"
+            ],
+            "correct": 0,
+            "explanation": "Takrorlanish uchun: \"How often\"."
+          },
+          {
+            "id": 11,
+            "situation": "Asking about flight duration.",
+            "dialogue": "A: ___ does the flight to London take?\nB: About six hours.",
+            "options": [
+              "How long",
+              "How many",
+              "How much",
+              "How often"
+            ],
+            "correct": 0,
+            "explanation": "Davomiylik uchun: \"How long\"."
+          },
+          {
+            "id": 12,
+            "situation": "Asking about an author.",
+            "dialogue": "A: ___ painted the Mona Lisa?\nB: Leonardo da Vinci.",
+            "options": [
+              "Who",
+              "What",
+              "Where",
+              "Which"
+            ],
+            "correct": 0,
+            "explanation": "Inson shaxsi so'ralmoqda: \"Who\"."
+          },
+          {
+            "id": 13,
+            "situation": "Asking about news.",
+            "dialogue": "A: ___ happened at the meeting today?\nB: We discussed the new budget plan.",
+            "options": [
+              "What",
+              "Who",
+              "Where",
+              "Why"
+            ],
+            "correct": 0,
+            "explanation": "Voqea/narsa so'ralmoqda: \"What\"."
+          },
+          {
+            "id": 14,
+            "situation": "Asking about past travel.",
+            "dialogue": "A: Where ___ you go on vacation last summer?\nB: We went to Turkey.",
+            "options": [
+              "did",
+              "do",
+              "were",
+              "have"
+            ],
+            "correct": 0,
+            "explanation": "Past Simple: Where did you go...?"
+          },
+          {
+            "id": 15,
+            "situation": "Asking about current activity.",
+            "dialogue": "A: What ___ she doing in the garden?\nB: She is watering the flowers.",
+            "options": [
+              "is",
+              "does",
+              "has",
+              "did"
+            ],
+            "correct": 0,
+            "explanation": "Present Continuous: What is she doing...?"
+          },
+          {
+            "id": 16,
+            "situation": "Asking about price.",
+            "dialogue": "A: How much ___ this phone cost?\nB: It costs around 300 dollars.",
+            "options": [
+              "does",
+              "do",
+              "is",
+              "are"
+            ],
+            "correct": 0,
+            "explanation": "How much does... cost?"
+          },
+          {
+            "id": 17,
+            "situation": "Asking about past location.",
+            "dialogue": "A: Where ___ they yesterday afternoon?\nB: They were at the cinema.",
+            "options": [
+              "were",
+              "did",
+              "are",
+              "was"
+            ],
+            "correct": 0,
+            "explanation": "Past Simple To Be: Where were they...?"
+          },
+          {
+            "id": 18,
+            "situation": "Asking about career.",
+            "dialogue": "A: What ___ your mother do for a living?\nB: She is a high school teacher.",
+            "options": [
+              "does",
+              "do",
+              "is",
+              "has"
+            ],
+            "correct": 0,
+            "explanation": "What does your mother do...?"
+          },
+          {
+            "id": 19,
+            "situation": "Asking about distance.",
+            "dialogue": "A: How ___ is the museum from here?\nB: It's about a 10-minute walk.",
+            "options": [
+              "far",
+              "long",
+              "much",
+              "many"
+            ],
+            "correct": 0,
+            "explanation": "Masofa uchun: \"How far\"."
+          },
+          {
+            "id": 20,
+            "situation": "Asking about age.",
+            "dialogue": "A: How ___ is your little brother?\nB: He turned seven last week.",
+            "options": [
+              "old",
+              "long",
+              "many",
+              "much"
+            ],
+            "correct": 0,
+            "explanation": "Yosh uchun: \"How old\"."
+          }
+        ]
+      }
+
+    ]
+  },
+  advanced: {
+    topics: [
+      {
         id: 'first-conditional',
         title: 'First Conditional',
         icon: '🌦️',
