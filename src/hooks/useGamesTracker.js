@@ -18,6 +18,40 @@ export const GAME_PLATFORMS = [
 
 export const DEFAULT_GAME_ITEMS = [
   {
+    id: 'black-myth-wukong',
+    title: 'Black Myth: Wukong',
+    platform: 'PC',
+    status: 'completed',
+    releaseYear: 2024,
+    genres: ['Action', 'RPG', 'Fantasy', 'Souls-like'],
+    coverUrl: 'https://cdn.akamai.steamstatic.com/steam/apps/2358720/header.jpg',
+    link: 'https://store.steampowered.com/app/2358720/Black_Myth_Wukong/',
+    playtimeHours: 48,
+    completionPct: 100,
+    description: "Xitoy mumtoz afsonasi 'G'arbga sayohat' asosida yaratilgan, Maymunlar qiroli Sun Vukong haqidagi muhtasham va jangovar ARPG.",
+    rating: 9.7,
+    createdAt: '2026-09-01T10:00:00Z',
+    updatedAt: '2026-09-20T10:00:00Z',
+    lastPlayedAt: '2026-09-20T10:00:00Z'
+  },
+  {
+    id: 'baldurs-gate-3',
+    title: "Baldur's Gate 3",
+    platform: 'PC',
+    status: 'completed',
+    releaseYear: 2023,
+    genres: ['RPG', 'Strategy', 'Story-Rich', 'Fantasy'],
+    coverUrl: 'https://cdn.akamai.steamstatic.com/steam/apps/1086940/header.jpg',
+    link: 'https://store.steampowered.com/app/1086940/Baldurs_Gate_3/',
+    playtimeHours: 115,
+    completionPct: 100,
+    description: "D&D olamida zehinni egallovchi ilroji simbiotidan qutulish va dunyoni qutqarish uchun yaratilgan taktik va erkin tanlovlarga boy afsonaviy RPG.",
+    rating: 9.9,
+    createdAt: '2026-09-01T11:00:00Z',
+    updatedAt: '2026-09-20T11:00:00Z',
+    lastPlayedAt: '2026-09-20T11:00:00Z'
+  },
+  {
     id: 'the-last-of-us-part-1',
     title: 'The Last of Us Part I',
     platform: 'PlayStation 5',
@@ -58,7 +92,7 @@ export const DEFAULT_GAME_ITEMS = [
     status: 'playing',
     releaseYear: 2022,
     genres: ['Action', 'Adventure', 'Fantasy'],
-    coverUrl: 'https://cdn.akamai.steamstatic.com/steam/apps/1593500/header.jpg',
+    coverUrl: 'https://cdn.akamai.steamstatic.com/steam/apps/2322010/header.jpg',
     link: 'https://store.playstation.com',
     playtimeHours: 45,
     completionPct: 65,
@@ -103,6 +137,74 @@ export const DEFAULT_GAME_ITEMS = [
     lastPlayedAt: '2026-09-19T14:00:00Z'
   },
   {
+    id: 'ghost-of-tsushima',
+    title: 'Ghost of Tsushima',
+    platform: 'PlayStation 5',
+    status: 'completed',
+    releaseYear: 2024,
+    genres: ['Action', 'Adventure', 'Open World', 'Stealth'],
+    coverUrl: 'https://cdn.akamai.steamstatic.com/steam/apps/2215430/header.jpg',
+    link: 'https://store.steampowered.com/app/2215430/Ghost_of_Tsushima_DIRECTORS_CUT/',
+    playtimeHours: 55,
+    completionPct: 100,
+    description: "13-asr Yaponiyasida samuray Jin Sakay o'z orolini mo'g'ullar bosqinidan ozod qilish uchun Arvoh yo'lini tanlaydi.",
+    rating: 9.6,
+    createdAt: '2026-09-05T10:00:00Z',
+    updatedAt: '2026-09-19T10:00:00Z',
+    lastPlayedAt: '2026-09-19T10:00:00Z'
+  },
+  {
+    id: 'sekiro-shadows-die-twice',
+    title: 'Sekiro: Shadows Die Twice',
+    platform: 'PC',
+    status: 'completed',
+    releaseYear: 2019,
+    genres: ['Souls-like', 'Action', 'Stealth', 'Fantasy'],
+    coverUrl: 'https://cdn.akamai.steamstatic.com/steam/apps/814380/header.jpg',
+    link: 'https://store.steampowered.com/app/814380/Sekiro_Shadows_Die_Twice__GOTY_Edition/',
+    playtimeHours: 50,
+    completionPct: 100,
+    description: "Sengoku davridagi Yaponiyada bir qo'lli Bo'ri ismli shinobining o'z xo'jayinini qutqarish va qasos olish uchun shiddatli qilichbozlik jangi.",
+    rating: 9.6,
+    createdAt: '2026-09-05T12:00:00Z',
+    updatedAt: '2026-09-18T12:00:00Z',
+    lastPlayedAt: '2026-09-18T12:00:00Z'
+  },
+  {
+    id: 'spiderman-remastered',
+    title: "Marvel's Spider-Man Remastered",
+    platform: 'PC',
+    status: 'completed',
+    releaseYear: 2022,
+    genres: ['Action', 'Open World', 'Adventure'],
+    coverUrl: 'https://cdn.akamai.steamstatic.com/steam/apps/1817070/header.jpg',
+    link: 'https://store.steampowered.com/app/1817070/Marvels_SpiderMan_Remastered/',
+    playtimeHours: 32,
+    completionPct: 100,
+    description: "Nyu-York shahrida Piter Parker o'zining shaxsiy hayoti va O'rgimchak-odam sifatidagi burchi o'rtasidagi muvozanatni saqlaydi.",
+    rating: 9.4,
+    createdAt: '2026-09-06T10:00:00Z',
+    updatedAt: '2026-09-17T10:00:00Z',
+    lastPlayedAt: '2026-09-17T10:00:00Z'
+  },
+  {
+    id: 'resident-evil-4-remake',
+    title: 'Resident Evil 4',
+    platform: 'PC',
+    status: 'completed',
+    releaseYear: 2023,
+    genres: ['Horror', 'Action', 'Survival'],
+    coverUrl: 'https://cdn.akamai.steamstatic.com/steam/apps/2050650/header.jpg',
+    link: 'https://store.steampowered.com/app/2050650/Resident_Evil_4/',
+    playtimeHours: 24,
+    completionPct: 100,
+    description: "Leon S. Kennedi AQSh prezidentining qizini Yevropadagi sirli va dahshatli kult changalidan qutqarish uchun yo'l oladi.",
+    rating: 9.6,
+    createdAt: '2026-09-06T14:00:00Z',
+    updatedAt: '2026-09-16T14:00:00Z',
+    lastPlayedAt: '2026-09-16T14:00:00Z'
+  },
+  {
     id: 'cyberpunk-2077',
     title: 'Cyberpunk 2077',
     platform: 'PC',
@@ -127,7 +229,7 @@ export const DEFAULT_GAME_ITEMS = [
     releaseYear: 2013,
     genres: ['Action', 'Open World', 'Crime'],
     coverUrl: 'https://cdn.akamai.steamstatic.com/steam/apps/271590/header.jpg',
-    link: 'https://store.steampowered.com',
+    link: 'https://store.steampowered.com/app/271590/Grand_Theft_Auto_V/',
     playtimeHours: 110,
     completionPct: 100,
     description: "Maykl, Trevor va Franklin ismli uch jinoyatchi Los-Santos shahrida yirik va xatarli o'g'rilik operatsiyalarini amalga oshiradilar.",
@@ -135,6 +237,23 @@ export const DEFAULT_GAME_ITEMS = [
     createdAt: '2026-09-07T10:00:00Z',
     updatedAt: '2026-09-16T10:00:00Z',
     lastPlayedAt: '2026-09-16T10:00:00Z'
+  },
+  {
+    id: 'forza-horizon-5',
+    title: 'Forza Horizon 5',
+    platform: 'Xbox Series X/S',
+    status: 'playing',
+    releaseYear: 2021,
+    genres: ['Racing', 'Open World', 'Simulation', 'Sports'],
+    coverUrl: 'https://cdn.akamai.steamstatic.com/steam/apps/1551360/header.jpg',
+    link: 'https://store.steampowered.com/app/1551360/Forza_Horizon_5/',
+    playtimeHours: 40,
+    completionPct: 60,
+    description: "Meksikaning rang-barang va ochiq dunyosida yuzlab afsonaviy avtomobillar bilan tezkor poyga va erkin sayohat festivali.",
+    rating: 9.3,
+    createdAt: '2026-09-07T12:00:00Z',
+    updatedAt: '2026-09-15T12:00:00Z',
+    lastPlayedAt: '2026-09-15T12:00:00Z'
   },
   {
     id: 'hollow-knight',
@@ -213,11 +332,14 @@ export function useGamesTracker() {
 
   useEffect(() => {
     if (!user) {
-      const localData = localStorage.getItem('voc_games_tracker_v3');
+      const localData = localStorage.getItem('voc_games_tracker_v4');
       if (localData) {
         try {
           const parsed = JSON.parse(localData);
-          setGameItems(Array.isArray(parsed) ? parsed.map(sanitizeGameItem) : DEFAULT_GAME_ITEMS);
+          const existingIds = new Set(parsed.map(i => i.id));
+          const missingDefaults = DEFAULT_GAME_ITEMS.filter(d => !existingIds.has(d.id));
+          const merged = [...parsed.map(sanitizeGameItem), ...missingDefaults];
+          setGameItems(merged);
         } catch {
           setGameItems(DEFAULT_GAME_ITEMS);
         }
@@ -236,7 +358,16 @@ export function useGamesTracker() {
           id: key,
           ...val[key],
         }));
-        setGameItems(itemsArray);
+        const existingIds = new Set(itemsArray.map(i => i.id));
+        const missingDefaults = DEFAULT_GAME_ITEMS.filter(d => !existingIds.has(d.id));
+        if (missingDefaults.length > 0) {
+          const updates = {};
+          missingDefaults.forEach(d => {
+            updates[d.id] = { ...d, createdAt: new Date().toISOString() };
+          });
+          update(ref(db, `users/${user.uid}/gamesTracker`), updates);
+        }
+        setGameItems([...itemsArray, ...missingDefaults]);
       } else {
         const seedPayload = {};
         DEFAULT_GAME_ITEMS.forEach((item) => {
@@ -260,7 +391,7 @@ export function useGamesTracker() {
 
   const saveLocal = (items) => {
     try {
-      localStorage.setItem('voc_games_tracker_v3', JSON.stringify(items));
+      localStorage.setItem('voc_games_tracker_v4', JSON.stringify(items));
     } catch {
       // ignore
     }
