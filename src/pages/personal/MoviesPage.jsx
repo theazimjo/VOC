@@ -49,6 +49,10 @@ export default function MoviesPage() {
 
   // Detail View State synced with URL query param `?id=...` (F5 refresh persistence)
   const activeItemId = searchParams.get('id') || null;
+  const actionParam = searchParams.get('action') || null;
+  const editIdParam = searchParams.get('editId') || null;
+
+  const isFormOpen = actionParam === 'add' || actionParam === 'edit';
 
   const setActiveItemId = (id) => {
     if (id) {
@@ -58,8 +62,6 @@ export default function MoviesPage() {
     }
   };
 
-  // Add / Edit Modal State
-  const [showAddModal, setShowAddModal] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
 
   // 3-Step Delete Confirmation Modal State (Media Item)
@@ -85,8 +87,55 @@ export default function MoviesPage() {
     duration: '',
     description: '',
     rating: 8.5,
+    releaseYear: '',
     watchCount: 1,
   });
+
+  // Restore Add / Edit state & draft when URL actionParam changes (F5 refresh persistence)
+  useEffect(() => {
+    if (actionParam === 'add') {
+      setEditingItem(null);
+      const savedDraft = sessionStorage.getItem('voc_movies_add_draft');
+      if (savedDraft) {
+        try {
+          const parsed = JSON.parse(savedDraft);
+          if (parsed && typeof parsed === 'object') {
+            setFormData(parsed);
+          }
+        } catch {
+          // fallback
+        }
+      }
+    } else if (actionParam === 'edit' && editIdParam && mediaItems.length > 0) {
+      const itemToEdit = mediaItems.find(i => i.id === editIdParam);
+      if (itemToEdit) {
+        setEditingItem(itemToEdit);
+        setFormData({
+          title: itemToEdit.title || '',
+          format: itemToEdit.format || (itemToEdit.type === 'movie' ? 'single' : 'multi'),
+          type: itemToEdit.type || 'movie',
+          status: itemToEdit.status || 'plan_to_watch',
+          genres: itemToEdit.genres || [],
+          posterUrl: itemToEdit.posterUrl || '',
+          link: itemToEdit.link || '',
+          duration: itemToEdit.duration || '',
+          description: itemToEdit.description || '',
+          rating: itemToEdit.rating || 8.0,
+          releaseYear: itemToEdit.releaseYear || '',
+          watchCount: typeof itemToEdit.watchCount === 'number'
+            ? itemToEdit.watchCount
+            : (itemToEdit.status === 'plan_to_watch' ? 0 : 1),
+        });
+      }
+    }
+  }, [actionParam, editIdParam, mediaItems]);
+
+  // Persist Add Form draft to sessionStorage automatically
+  useEffect(() => {
+    if (actionParam === 'add' && formData.title) {
+      sessionStorage.setItem('voc_movies_add_draft', JSON.stringify(formData));
+    }
+  }, [formData, actionParam]);
 
   // Episode Form & Edit Modal State
   const [newEpNum, setNewEpNum] = useState('');
@@ -215,13 +264,26 @@ export default function MoviesPage() {
     return computeGlobalMediaStats(mediaItems, language);
   }, [mediaItems, language]);
 
-  // Featured Item for Netflix Top Hero Banner
+  // Featured Item for Netflix Top Hero Banner (Last active watching item)
   const featuredMedia = useMemo(() => {
     if (mediaItems.length === 0) return null;
-    return mediaItems.find(i => i.status === 'watching') || mediaItems[0];
+    const watchingItems = mediaItems.filter(i => i.status === 'watching');
+    if (watchingItems.length > 0) {
+      return [...watchingItems].sort((a, b) => {
+        const timeA = new Date(a.lastWatchedAt || a.updatedAt || a.createdAt || 0).getTime();
+        const timeB = new Date(b.lastWatchedAt || b.updatedAt || b.createdAt || 0).getTime();
+        return timeB - timeA;
+      })[0];
+    }
+    return [...mediaItems].sort((a, b) => {
+      const timeA = new Date(a.lastWatchedAt || a.updatedAt || a.createdAt || 0).getTime();
+      const timeB = new Date(b.lastWatchedAt || b.updatedAt || b.createdAt || 0).getTime();
+      return timeB - timeA;
+    })[0];
   }, [mediaItems]);
 
   const handleOpenAdd = () => {
+    sessionStorage.removeItem('voc_movies_add_draft');
     setEditingItem(null);
     setFormData({
       title: '',
@@ -234,9 +296,10 @@ export default function MoviesPage() {
       duration: '2h 00m',
       description: '',
       rating: 8.5,
+      releaseYear: '',
       watchCount: 1,
     });
-    setShowAddModal(true);
+    setSearchParams({ action: 'add' });
   };
 
   const handleOpenEdit = (item, e) => {
@@ -253,11 +316,24 @@ export default function MoviesPage() {
       duration: item.duration || '',
       description: item.description || '',
       rating: item.rating || 8.0,
+      releaseYear: item.releaseYear || '',
       watchCount: typeof item.watchCount === 'number' 
         ? item.watchCount 
         : (item.status === 'plan_to_watch' ? 0 : 1),
     });
-    setShowAddModal(true);
+    setSearchParams({ action: 'edit', editId: item.id });
+  };
+
+  const handleCloseForm = () => {
+    sessionStorage.removeItem('voc_movies_add_draft');
+    setEditingItem(null);
+    if (editIdParam) {
+      setSearchParams({ id: editIdParam });
+    } else if (activeItemId) {
+      setSearchParams({ id: activeItemId });
+    } else {
+      setSearchParams({});
+    }
   };
 
   const handleStartDelete = (item, e) => {
@@ -340,8 +416,7 @@ export default function MoviesPage() {
     }
 
     playSound('correct');
-    setShowAddModal(false);
-    setEditingItem(null);
+    handleCloseForm();
   };
 
   const handleAddEpisodeSubmit = async (e) => {
@@ -422,6 +497,33 @@ export default function MoviesPage() {
     }
   };
 
+  const renderStatusBadge = (status) => {
+    switch (status) {
+      case 'watching':
+        return (
+          <span className="card-status-badge-static watching">
+            <Eye size={11} />
+            <span>{t('movies.watching')}</span>
+          </span>
+        );
+      case 'completed':
+        return (
+          <span className="card-status-badge-static completed">
+            <Check size={11} />
+            <span>{t('movies.completed')}</span>
+          </span>
+        );
+      case 'plan_to_watch':
+      default:
+        return (
+          <span className="card-status-badge-static plan">
+            <Bookmark size={11} />
+            <span>{t('movies.plan_to_watch')}</span>
+          </span>
+        );
+    }
+  };
+
   return (
     <motion.div
       className="netflix-media-page"
@@ -429,7 +531,7 @@ export default function MoviesPage() {
       animate={{ opacity: 1 }}
     >
       {/* 1. FULL PAGE DEDICATED ADD / EDIT FORM VIEW */}
-      {showAddModal ? (
+      {isFormOpen ? (
         <motion.div
           className="netflix-form-page"
           initial={{ opacity: 0, y: 15 }}
@@ -440,7 +542,7 @@ export default function MoviesPage() {
           <div className="form-page-header">
             <button
               className="netflix-back-btn"
-              onClick={() => { setShowAddModal(false); setEditingItem(null); }}
+              onClick={handleCloseForm}
             >
               <ArrowLeft size={18} />
               <span>{t('movies.backToCatalog')}</span>
@@ -713,7 +815,7 @@ export default function MoviesPage() {
                 <button
                   type="button"
                   className="btn-form-cancel"
-                  onClick={() => { setShowAddModal(false); setEditingItem(null); }}
+                  onClick={handleCloseForm}
                 >
                   {t('movies.cancelBtn')}
                 </button>
@@ -1135,7 +1237,7 @@ export default function MoviesPage() {
           </div>
 
           {/* NETFLIX FEATURED HERO BANNER */}
-          {featuredMedia && !searchQuery && selectedType === 'all' && selectedStatus === 'all' && (
+          {featuredMedia && !searchQuery && (
             <div className="netflix-hero-card">
               <img
                 src={featuredMedia.posterUrl || 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800&auto=format&fit=crop&q=80'}
@@ -1240,16 +1342,31 @@ export default function MoviesPage() {
                 </button>
               </div>
 
-              {/* Search Box */}
-              <div className="netflix-search-box">
-                <Search size={16} className="search-icon" />
-                <input
-                  type="text"
-                  placeholder={t('movies.searchPlaceholder')}
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="netflix-search-input"
-                />
+              {/* Right Side Actions: Status Filter Dropdown & Search Box */}
+              <div className="netflix-controls-right">
+                <div className="netflix-status-select-wrapper">
+                  <select
+                    className="netflix-status-select-filter"
+                    value={selectedStatus}
+                    onChange={(e) => setSelectedStatus(e.target.value)}
+                  >
+                    <option value="all">{t('movies.allStatuses')}</option>
+                    <option value="watching">{t('movies.watching')}</option>
+                    <option value="completed">{t('movies.completed')}</option>
+                    <option value="plan_to_watch">{t('movies.plan_to_watch')}</option>
+                  </select>
+                </div>
+
+                <div className="netflix-search-box">
+                  <Search size={16} className="search-icon" />
+                  <input
+                    type="text"
+                    placeholder={t('movies.searchPlaceholder')}
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="netflix-search-input"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -1315,11 +1432,16 @@ export default function MoviesPage() {
                         </div>
                       )}
 
-                      {/* Progress Indicator */}
+                      {/* Progress Indicator & Time + Status Row */}
                       <div className="card-netflix-progress">
                         <div className="progress-info-row">
-                          <span>{item.format === 'multi' ? t('movies.episodesProgress', { watched: stats.watchedEpisodes, total: stats.totalEpisodes }) : (item.duration || t('movies.single'))}</span>
-                          {item.format === 'multi' && <span className="pct-red">{pct}%</span>}
+                          <span className="card-duration-text">
+                            {item.format === 'multi' ? t('movies.episodesProgress', { watched: stats.watchedEpisodes, total: stats.totalEpisodes }) : (item.duration || t('movies.single'))}
+                          </span>
+                          <div className="card-status-wrapper">
+                            {item.format === 'multi' && <span className="pct-red">{pct}%</span>}
+                            {renderStatusBadge(item.status)}
+                          </div>
                         </div>
 
                         {item.format === 'multi' && (
@@ -1327,14 +1449,6 @@ export default function MoviesPage() {
                             <div className="netflix-progress-bar" style={{ width: `${pct}%` }} />
                           </div>
                         )}
-                      </div>
-
-                      {/* Card Hover Footer */}
-                      <div className="card-hover-footer">
-                        <span className="watch-hint-text">
-                          <span>{t('movies.info')}</span>
-                          <ChevronRight size={14} />
-                        </span>
                       </div>
                     </div>
                   </motion.div>
@@ -1547,7 +1661,7 @@ export default function MoviesPage() {
       </AnimatePresence>
 
       {/* Floating Action Button (FAB) */}
-      {!currentDetailItem && !showAddModal && (
+      {!currentDetailItem && !isFormOpen && (
         <motion.button
           className="netflix-fab-add-btn"
           onClick={handleOpenAdd}

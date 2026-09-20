@@ -489,17 +489,16 @@ export function useMediaTracker() {
 
   // Update Item
   const updateMediaItem = useCallback(async (itemId, updates) => {
+    const timestamp = new Date().toISOString();
+    const fullUpdates = { ...updates, updatedAt: timestamp, lastWatchedAt: timestamp };
     setMediaItems(prev => {
-      const updated = prev.map(item => item.id === itemId ? { ...item, ...updates } : item);
+      const updated = prev.map(item => item.id === itemId ? { ...item, ...fullUpdates } : item);
       saveLocal(updated);
       return updated;
     });
 
     if (user) {
-      await update(ref(db, `users/${user.uid}/mediaTracker/${itemId}`), {
-        ...updates,
-        updatedAt: new Date().toISOString(),
-      });
+      await update(ref(db, `users/${user.uid}/mediaTracker/${itemId}`), fullUpdates);
     }
   }, [user]);
 

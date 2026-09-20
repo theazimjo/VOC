@@ -360,6 +360,50 @@
   border-color: #e50914;
 }
 
+.netflix-controls-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.netflix-status-select-wrapper {
+  position: relative;
+}
+
+.netflix-status-select-filter {
+  appearance: none;
+  -webkit-appearance: none;
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 9px 36px 9px 14px;
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23a3a3a3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+}
+
+.netflix-status-select-filter:focus,
+.netflix-status-select-filter:hover {
+  border-color: #e50914;
+  box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.3);
+}
+
+.netflix-status-select-filter option {
+  background: #181818;
+  color: #ffffff;
+  font-size: 0.88rem;
+  padding: 8px;
+}
+
 .netflix-search-box {
   position: relative;
   min-width: 260px;
@@ -450,6 +494,11 @@
   justify-content: space-between;
   gap: 6px;
   pointer-events: none;
+  z-index: 5;
+}
+
+.card-top-badges > * {
+  pointer-events: auto;
 }
 
 .badge-rating-netflix {
@@ -465,19 +514,6 @@
   backdrop-filter: blur(4px);
 }
 
-.badge-watch-count {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  background: rgba(229, 9, 20, 0.9);
-  color: #ffffff;
-  font-size: 0.75rem;
-  font-weight: 800;
-  padding: 3px 8px;
-  border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-}
-
 .card-type-chip {
   position: absolute;
   bottom: 10px;
@@ -488,8 +524,40 @@
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
-  padding: 2px 8px;
+  padding: 3px 8px;
   border-radius: 4px;
+  backdrop-filter: blur(4px);
+}
+
+.card-status-badge-static {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  letter-spacing: 0.01em;
+  line-height: 1;
+}
+
+.card-status-badge-static.completed {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #34d399;
+}
+
+.card-status-badge-static.watching {
+  background: rgba(14, 165, 233, 0.12);
+  border: 1px solid rgba(14, 165, 233, 0.35);
+  color: #38bdf8;
+}
+
+.card-status-badge-static.plan {
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  color: #a78bfa;
 }
 
 /* Card Body Content */
@@ -567,9 +635,22 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 0.78rem;
+  gap: 8px;
+  font-size: 0.82rem;
   color: #a3a3a3;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
+}
+
+.card-duration-text {
+  font-size: 0.82rem;
+  color: #a3a3a3;
+  font-weight: 500;
+}
+
+.card-status-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .pct-red {
