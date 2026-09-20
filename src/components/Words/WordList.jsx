@@ -1,12 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Search, CheckSquare, X, Trash2, Check } from 'lucide-react';
+import { Search, CheckSquare, X, Trash2, Check, FolderInput } from 'lucide-react';
 import WordCard from './WordCard';
 import IosSpinner from '../common/IosSpinner';
 import { useLanguage } from '../../contexts/LanguageContext';
 import './WordList.css';
 
-export default function WordList({ words, onEdit, onDelete, onBulkDelete, loading, readOnly, groupFn, language = 'en-US' }) {
+export default function WordList({ words, onEdit, onDelete, onBulkDelete, onBulkMove, loading, readOnly, groupFn, language = 'en-US' }) {
   const [search, setSearch] = useState('');
   const [sortBy, setSortBy] = useState(groupFn ? 'group' : 'date-desc');
   const { t } = useLanguage();
@@ -223,6 +223,18 @@ export default function WordList({ words, onEdit, onDelete, onBulkDelete, loadin
               <Check size={14} />
               <span>{isAllVisibleSelected ? t('wordList.deselectAll') : t('wordList.selectAll')}</span>
             </button>
+
+            {onBulkMove && (
+              <button
+                type="button"
+                className="btn-bulk-move"
+                disabled={selectedWordIds.size === 0}
+                onClick={() => onBulkMove(Array.from(selectedWordIds))}
+              >
+                <FolderInput size={15} />
+                <span>{t('wordList.moveSelected', { count: selectedWordIds.size })}</span>
+              </button>
+            )}
 
             <button
               type="button"

@@ -15,6 +15,7 @@ import { getConfusionPairs } from '../../experiment/experimentDB';
 import { formatPageRange } from '../../utils/chapterPageRanges';
 import WordList from '../../components/Words/WordList';
 import PhotoWordExtractorModal from '../../components/Words/PhotoWordExtractorModal';
+import MoveWordsModal from '../../components/Words/MoveWordsModal';
 import SpeedDialFAB from '../../components/Words/SpeedDialFAB';
 import IosSpinner from '../../components/common/IosSpinner';
 import './PackDetail.css';
@@ -25,7 +26,7 @@ export default function PackDetail() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { user } = useAuth();
   const { t, language } = useLanguage();
-  const { getPack, updatePack } = usePacks();
+  const { getPack, updatePack, packs } = usePacks();
   const { words, loading, addWord, updateWord, deleteWord, bulkAddWords, bulkDeleteWords } = useWords('packs', packId);
   const { limit: dailyWordLimit, todayCount } = useDailyNewWordLimit();
 
@@ -33,6 +34,9 @@ export default function PackDetail() {
   const [showWordForm, setShowWordForm] = useState(false);
   const [showBulkImportForm, setShowBulkImportForm] = useState(false);
   const [showPhotoExtractorModal, setShowPhotoExtractorModal] = useState(false);
+  const [showMoveModal, setShowMoveModal] = useState(false);
+  const [selectedWordIdsToMove, setSelectedWordIdsToMove] = useState([]);
+  const [moveSuccessMsg, setMoveSuccessMsg] = useState(null);
   const [editingWord, setEditingWord] = useState(null);
   const [newWordsAddedCount, setNewWordsAddedCount] = useState(null);
   const [showAddChapterModal, setShowAddChapterModal] = useState(false);
@@ -403,6 +407,12 @@ export default function PackDetail() {
     await bulkDeleteWords(wordIds);
   };
 
+  const handleBulkMoveWords = (wordIds) => {
+    if (pack?.name === 'Irregular Verbs') return;
+    setSelectedWordIdsToMove(wordIds);
+    setShowMoveModal(true);
+  };
+
   if (!pack) {
     return (
       <div className="ios-activity-indicator" style={{ marginTop: '100px' }}>
@@ -602,6 +612,7 @@ export default function PackDetail() {
         onEdit={handleEditWord}
         onDelete={handleDeleteWord}
         onBulkDelete={handleBulkDeleteWords}
+        onBulkMove={handleBulkMoveWords}
         loading={loading}
         readOnly={pack.name === 'Irregular Verbs'}
         groupFn={pack.name === 'Irregular Verbs' ? getIrregularVerbGroup : undefined}
@@ -671,6 +682,34 @@ export default function PackDetail() {
                 {t('packDetail.addChapterCreate')}
               </button>
             </div>
+          </motion.div>
+        </div>
+      )}
+
+      <MoveWordsModal
+        isOpen={showMoveModal}
+        onClose={() => setShowMoveModal(false)}
+        selectedWordIds={selectedWordIdsToMove}
+        sourcePackId={packId}
+        sourceWords={words}
+        packs={packs}
+        updatePack={updatePack}
+        onSuccess={(count) => setMoveSuccessMsg(t('wordList.wordsMovedSuccess', { count }))}
+      />
+
+      {moveSuccessMsg !== null && (
+        <div className="ios-alert-overlay" onClick={() => setMoveSuccessMsg(null)}>
+          <motion.div
+            className="ios-alert-card"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.2 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="ios-alert-icon">✨</div>
+            <h3>{t('wordList.moveTitle')}</h3>
+            <p>{moveSuccessMsg}</p>
+            <button className="ios-alert-btn" onClick={() => setMoveSuccessMsg(null)}>{t('packDetail.ok')}</button>
           </motion.div>
         </div>
       )}
