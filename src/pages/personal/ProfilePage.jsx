@@ -56,6 +56,7 @@ export default function ProfilePage() {
   const displayName = customName || user?.displayName || user?.email?.split('@')[0] || 'User';
   const initial = displayName[0]?.toUpperCase() || '?';
   const isSuperAdmin = user?.email && SUPER_ADMINS.includes(user.email.toLowerCase());
+  const isGamesUser = user?.email && user.email.toLowerCase() === 'azimjonxolmirzayev30@gmail.com';
 
   const openEditor = () => {
     setDraftName(displayName);
@@ -224,17 +225,19 @@ export default function ProfilePage() {
           <ChevronRight size={16} className="corp-profile-appearance-chevron" style={{ marginLeft: 'auto' }} />
         </div>
 
-        <div 
-          className="corp-profile-tile" 
-          onClick={() => navigate('/games')}
-          style={{ cursor: 'pointer' }}
-        >
-          <div className="corp-profile-tile-icon" style={{ background: '#2563eb' }}>
-            <Gamepad2 size={17} strokeWidth={2.2} />
+        {isGamesUser && (
+          <div 
+            className="corp-profile-tile" 
+            onClick={() => navigate('/games')}
+            style={{ cursor: 'pointer' }}
+          >
+            <div className="corp-profile-tile-icon" style={{ background: '#2563eb' }}>
+              <Gamepad2 size={17} strokeWidth={2.2} />
+            </div>
+            <span className="corp-profile-tile-text">{t('nav.games')}</span>
+            <ChevronRight size={16} className="corp-profile-appearance-chevron" style={{ marginLeft: 'auto' }} />
           </div>
-          <span className="corp-profile-tile-text">{t('nav.games')}</span>
-          <ChevronRight size={16} className="corp-profile-appearance-chevron" style={{ marginLeft: 'auto' }} />
-        </div>
+        )}
       </div>
 
       {/* ── Admin Panel (Super Admin only) ── */}
