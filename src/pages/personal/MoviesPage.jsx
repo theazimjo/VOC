@@ -1497,76 +1497,108 @@ export default function MoviesPage() {
                       key={item.id}
                       className="netflix-list-row"
                       layout
-                      whileHover={{ scale: 1.006 }}
+                      whileHover={{ scale: 1.004 }}
                       transition={{ duration: 0.15 }}
                       onClick={() => setActiveItemId(item.id)}
                     >
-                      {/* Rank Badge & Poster */}
+                      {/* Poster Box with + Quick Add Badge */}
                       <div className="list-row-poster-box">
                         <img
                           src={item.posterUrl || 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80'}
                           alt={item.title}
                           className="list-row-poster"
                         />
-                        <span className="list-rank-badge">#{index + 1}</span>
+                        <button
+                          className="list-poster-add-btn"
+                          title="Quick Edit / Update"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleOpenEdit(item);
+                          }}
+                        >
+                          <Plus size={14} />
+                        </button>
                       </div>
 
                       {/* Content Info */}
                       <div className="list-row-content">
-                        <div className="list-row-header">
+                        {/* Rank Badge & Title */}
+                        <div className="list-row-header-box">
+                          <span className="list-rank-badge">#{index + 1}</span>
                           <h3 className="list-row-title">{item.title}</h3>
-                          <span className="list-row-type">{getTypeLabel(item.type)}</span>
                         </div>
 
+                        {/* Sub Metadata line: Year · Duration · Type */}
                         <div className="list-row-meta">
-                          <span className="meta-item rating">
-                            <Star size={13} fill="#fbbf24" stroke="#fbbf24" />
-                            <span>{item.rating || 8.0}</span>
+                          {item.releaseYear && <span>{item.releaseYear}</span>}
+                          {item.releaseYear && <span className="meta-dot">·</span>}
+                          <span>
+                            {item.format === 'multi'
+                              ? t('movies.episodesProgress', { watched: stats.watchedEpisodes, total: stats.totalEpisodes })
+                              : (item.duration || t('movies.single'))}
                           </span>
-
-                          {item.releaseYear && (
-                            <>
-                              <span className="meta-dot">•</span>
-                              <span className="meta-item">{item.releaseYear}</span>
-                            </>
-                          )}
-
-                          <span className="meta-dot">•</span>
-                          <span className="meta-item duration">
-                            <Clock size={13} />
-                            <span>
-                              {item.format === 'multi'
-                                ? t('movies.episodesProgress', { watched: stats.watchedEpisodes, total: stats.totalEpisodes })
-                                : (item.duration || t('movies.single'))}
-                            </span>
-                            {item.format === 'multi' && <span className="pct-red">({pct}%)</span>}
-                          </span>
+                          <span className="meta-dot">·</span>
+                          <span className="list-meta-type">{getTypeLabel(item.type)}</span>
                         </div>
 
-                        {/* Genres */}
-                        {item.genres && item.genres.length > 0 && (
-                          <div className="list-row-genres">
-                            {item.genres.slice(0, 4).map(g => (
-                              <span key={g} className="genre-badge">{g}</span>
-                            ))}
+                        {/* Rating Row & Quick Actions */}
+                        <div className="list-row-actions-row">
+                          <div className="list-rating-box">
+                            <Star size={14} fill="#fbbf24" stroke="#fbbf24" />
+                            <span className="rating-score">{item.rating || 8.0}</span>
+                            <span className="rating-votes">(1.5M)</span>
                           </div>
-                        )}
+
+                          <button
+                            className="list-action-btn rate-btn"
+                            title="Rate item"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleOpenEdit(item);
+                            }}
+                          >
+                            <Star size={13} />
+                            <span>Rate</span>
+                          </button>
+
+                          <button
+                            className={`list-action-btn status-btn status-${item.status}`}
+                            title="Toggle status"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const nextStatus =
+                                item.status === 'completed'
+                                  ? 'watching'
+                                  : item.status === 'watching'
+                                  ? 'plan_to_watch'
+                                  : 'completed';
+                              setWatchStatus(item.id, nextStatus);
+                              playSound('click');
+                            }}
+                          >
+                            <Eye size={14} />
+                            <span>
+                              {item.status === 'completed'
+                                ? 'Marked as watched'
+                                : item.status === 'watching'
+                                ? 'Watching'
+                                : 'Mark as watched'}
+                            </span>
+                          </button>
+                        </div>
                       </div>
 
-                      {/* Right Side Actions: Status Badge & Info button */}
-                      <div className="list-row-actions">
-                        {renderStatusBadge(item.status)}
-                        <button
-                          className="list-info-btn"
-                          title={t('movies.info')}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setActiveItemId(item.id);
-                          }}
-                        >
-                          <Info size={18} />
-                        </button>
-                      </div>
+                      {/* Right Side Info Circle Button */}
+                      <button
+                        className="list-row-right-info"
+                        title={t('movies.info')}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setActiveItemId(item.id);
+                        }}
+                      >
+                        <Info size={20} />
+                      </button>
                     </motion.div>
                   );
                 })}

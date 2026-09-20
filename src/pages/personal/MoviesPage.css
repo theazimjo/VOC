@@ -469,38 +469,41 @@
   box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.3);
 }
 
-/* Netflix List View Layout */
+/* Netflix / IMDb List View Layout */
 .netflix-list-container {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  width: 100%;
 }
 
 .netflix-list-row {
   display: flex;
   align-items: center;
   gap: 1.25rem;
-  padding: 1rem;
+  padding: 1rem 1.25rem;
   background: #181818;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   cursor: pointer;
-  transition: border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 .netflix-list-row:hover {
-  border-color: rgba(229, 9, 20, 0.4);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  border-color: rgba(229, 9, 20, 0.5);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), 0 0 20px rgba(229, 9, 20, 0.2);
 }
 
 .list-row-poster-box {
   position: relative;
-  width: 68px;
-  height: 96px;
-  border-radius: 8px;
+  width: 72px;
+  height: 104px;
+  border-radius: 6px;
   overflow: hidden;
   flex-shrink: 0;
   background: #000000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
 .list-row-poster {
@@ -509,110 +512,167 @@
   object-fit: cover;
 }
 
-.list-rank-badge {
+.list-poster-add-btn {
   position: absolute;
-  top: 4px;
-  left: 4px;
+  top: 0;
+  left: 0;
+  width: 26px;
+  height: 28px;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-bottom-right-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.list-poster-add-btn:hover {
   background: #e50914;
   color: #ffffff;
-  font-size: 0.68rem;
-  font-weight: 900;
-  padding: 1px 6px;
-  border-radius: 4px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
-  letter-spacing: 0.04em;
+  transform: scale(1.05);
 }
 
 .list-row-content {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
   flex: 1;
   min-width: 0;
 }
 
-.list-row-header {
+.list-row-header-box {
   display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.list-rank-badge {
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
+  justify-content: center;
+  background: #1d4ed8;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 4px;
+  width: fit-content;
+  line-height: 1.2;
 }
 
 .list-row-title {
-  font-size: 1.15rem;
+  font-size: 1.18rem;
   font-weight: 800;
   color: #ffffff;
   margin: 0;
   line-height: 1.25;
-}
-
-.list-row-type {
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: #a3a3a3;
-  background: rgba(255, 255, 255, 0.08);
-  padding: 2px 7px;
-  border-radius: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .list-row-meta {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.82rem;
-  color: #d1d5db;
-}
-
-.meta-item.rating {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  color: #fbbf24;
-  font-weight: 800;
-}
-
-.meta-item.duration {
-  display: flex;
-  align-items: center;
-  gap: 4px;
+  gap: 6px;
+  font-size: 0.88rem;
+  color: #a3a3a3;
+  font-weight: 500;
 }
 
 .meta-dot {
-  color: #6b7280;
+  color: #525252;
+  font-weight: 700;
 }
 
-.list-row-genres {
+.list-meta-type {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #a3a3a3;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.list-row-actions-row {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 16px;
+  margin-top: 6px;
   flex-wrap: wrap;
 }
 
-.list-row-actions {
+.list-rating-box {
   display: flex;
   align-items: center;
-  gap: 14px;
-  flex-shrink: 0;
+  gap: 4px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ffffff;
 }
 
-.list-info-btn {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+.rating-votes {
+  font-size: 0.82rem;
+  font-weight: 500;
   color: #a3a3a3;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
+}
+
+.list-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  color: #3b82f6;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.list-action-btn:hover {
+  background: rgba(59, 130, 246, 0.12);
+  color: #60a5fa;
+}
+
+.list-action-btn.status-btn.status-completed {
+  color: #34d399;
+}
+
+.list-action-btn.status-btn.status-watching {
+  color: #38bdf8;
+}
+
+.list-action-btn.status-btn.status-plan_to_watch {
+  color: #a78bfa;
+}
+
+.list-row-right-info {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  color: #3b82f6;
   cursor: pointer;
+  flex-shrink: 0;
   transition: all 0.2s ease;
 }
 
-.list-info-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
+.list-row-right-info:hover {
+  background: #3b82f6;
   color: #ffffff;
+  border-color: #3b82f6;
   transform: scale(1.08);
 }
 
@@ -3078,6 +3138,60 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
+[data-theme="ios"] .netflix-list-row {
+  background: #ffffff;
+  border-color: #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="ios"] .netflix-list-row:hover {
+  border-color: #2563eb;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.12);
+}
+
+[data-theme="ios"] .list-row-title {
+  color: #0f172a;
+}
+
+[data-theme="ios"] .list-row-meta {
+  color: #64748b;
+}
+
+[data-theme="ios"] .meta-dot {
+  color: #cbd5e1;
+}
+
+[data-theme="ios"] .list-meta-type {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+[data-theme="ios"] .list-rating-box {
+  color: #0f172a;
+}
+
+[data-theme="ios"] .rating-votes {
+  color: #64748b;
+}
+
+[data-theme="ios"] .list-row-right-info {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #2563eb;
+}
+
+[data-theme="ios"] .list-action-btn.status-btn.status-completed {
+  color: #059669;
+}
+
+[data-theme="ios"] .list-action-btn.status-btn.status-watching {
+  color: #0284c7;
+}
+
+[data-theme="ios"] .list-action-btn.status-btn.status-plan_to_watch {
+  color: #7c3aed;
+}
+
 [data-theme="ios"] .card-title-text {
   color: #0f172a;
 }
@@ -3426,6 +3540,48 @@
   background: #f5e7c8;
   border-color: #e5d4b0;
   box-shadow: 0 4px 12px rgba(67, 52, 34, 0.08);
+}
+
+[data-theme="sepia"] .netflix-list-row {
+  background: #f5e7c8;
+  border-color: #e5d4b0;
+  box-shadow: 0 2px 8px rgba(67, 52, 34, 0.08);
+}
+
+[data-theme="sepia"] .netflix-list-row:hover {
+  border-color: #9a3412;
+  box-shadow: 0 8px 24px rgba(154, 52, 18, 0.12);
+}
+
+[data-theme="sepia"] .list-row-title {
+  color: #433422;
+}
+
+[data-theme="sepia"] .list-row-meta {
+  color: #786246;
+}
+
+[data-theme="sepia"] .meta-dot {
+  color: #c4b49c;
+}
+
+[data-theme="sepia"] .list-meta-type {
+  background: #ebdcb9;
+  color: #5c472e;
+}
+
+[data-theme="sepia"] .list-rating-box {
+  color: #433422;
+}
+
+[data-theme="sepia"] .rating-votes {
+  color: #786246;
+}
+
+[data-theme="sepia"] .list-row-right-info {
+  background: #ebdcb9;
+  border-color: #dccaa5;
+  color: #9a3412;
 }
 
 [data-theme="sepia"] .card-title-text {
