@@ -1046,6 +1046,7 @@ export const translations = {
     },
     movies: {
       title: 'Movies & Series',
+      trackerTitle: 'Movies & Series Tracker',
       subtitle: 'Track your watched movies, series, episodes and watch time',
       addMedia: 'Add',
       searchPlaceholder: 'Search by title or genre...',
@@ -2173,6 +2174,7 @@ export const translations = {
     },
     movies: {
       title: 'Фильмы и Сериалы',
+      trackerTitle: 'Трекер фильмов и сериалов',
       subtitle: 'Отслеживайте просмотренные фильмы, сериалы, серии и время просмотра',
       addMedia: 'Добавить',
       searchPlaceholder: 'Поиск по названию или жанру...',
@@ -3300,6 +3302,7 @@ export const translations = {
     },
     movies: {
       title: 'Kinolar va Seriallar',
+      trackerTitle: 'Kinolar & Seriallar Tracker',
       subtitle: "Ko'rgan film va seriallaringiz vaqti hamda qismlarini kuzatib boring",
       addMedia: "Qo'shish",
       searchPlaceholder: "Nomi yoki janri bo'yicha izlash...",

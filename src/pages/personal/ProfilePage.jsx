@@ -210,7 +210,7 @@ export default function ProfilePage() {
       </div>
 
       {/* ── Media Tracker ── */}
-      <div className="corp-profile-section-title">Kinolar & Seriallar</div>
+      <div className="corp-profile-section-title">{t('movies.title')}</div>
       <div className="corp-profile-tiles" style={{ marginBottom: '16px' }}>
         <div 
           className="corp-profile-tile" 
@@ -220,7 +220,7 @@ export default function ProfilePage() {
           <div className="corp-profile-tile-icon" style={{ background: '#e50914' }}>
             <Clapperboard size={17} strokeWidth={2.2} />
           </div>
-          <span className="corp-profile-tile-text">Kinolar & Seriallar Tracker</span>
+          <span className="corp-profile-tile-text">{t('movies.trackerTitle')}</span>
           <ChevronRight size={16} className="corp-profile-appearance-chevron" style={{ marginLeft: 'auto' }} />
         </div>
       </div>
