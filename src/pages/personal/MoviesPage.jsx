@@ -7,7 +7,7 @@ import {
   Search, RefreshCw, AlertCircle, Edit3, ArrowLeft,
   Tv, Sparkles, ChevronRight, Repeat, Play, Info,
   Minus, Layers, AlertTriangle, Calendar, MoreVertical,
-  GripVertical
+  GripVertical, LayoutGrid, List
 } from 'lucide-react';
 import {
   useMediaTracker,
@@ -46,6 +46,16 @@ export default function MoviesPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedStatus, setSelectedStatus] = useState('all');
   const [selectedType, setSelectedType] = useState('all');
+
+  // View Mode: 'grid' | 'list'
+  const [viewMode, setViewMode] = useState(() => {
+    return localStorage.getItem('voc_movies_view_mode') || 'grid';
+  });
+
+  const handleSetViewMode = (mode) => {
+    setViewMode(mode);
+    localStorage.setItem('voc_movies_view_mode', mode);
+  };
 
   // Detail View State synced with URL query param `?id=...` (F5 refresh persistence)
   const activeItemId = searchParams.get('id') || null;
@@ -1342,8 +1352,27 @@ export default function MoviesPage() {
                 </button>
               </div>
 
-              {/* Right Side Actions: Status Filter Dropdown & Search Box */}
+              {/* Right Side Actions: View Mode Toggle, Status Filter Dropdown & Search Box */}
               <div className="netflix-controls-right">
+                <div className="view-mode-toggle">
+                  <button
+                    type="button"
+                    className={`view-mode-btn ${viewMode === 'grid' ? 'active' : ''}`}
+                    onClick={() => handleSetViewMode('grid')}
+                    title={t('movies.gridView') || 'Setka'}
+                  >
+                    <LayoutGrid size={16} />
+                  </button>
+                  <button
+                    type="button"
+                    className={`view-mode-btn ${viewMode === 'list' ? 'active' : ''}`}
+                    onClick={() => handleSetViewMode('list')}
+                    title={t('movies.listView') || 'Ro\'yxat'}
+                  >
+                    <List size={16} />
+                  </button>
+                </div>
+
                 <div className="netflix-status-select-wrapper">
                   <select
                     className="netflix-status-select-filter"
@@ -1371,90 +1400,178 @@ export default function MoviesPage() {
             </div>
           </div>
 
-          {/* Grid of Media Items */}
+          {/* Grid vs List View of Media Items */}
           {loading ? (
             <div className="netflix-loading-box">
               <RefreshCw size={24} className="spin" />
               <span>{t('read.loading')}</span>
             </div>
           ) : filteredItems.length > 0 ? (
-            <div className="netflix-cards-grid">
-              {filteredItems.map((item) => {
-                const stats = computeMediaStats(item);
-                const pct = stats.totalEpisodes > 0 ? Math.round((stats.watchedEpisodes / stats.totalEpisodes) * 100) : 0;
-                const watchCount = typeof item.watchCount === 'number' ? item.watchCount : (item.status === 'completed' ? 1 : 0);
+            viewMode === 'grid' ? (
+              <div className="netflix-cards-grid">
+                {filteredItems.map((item) => {
+                  const stats = computeMediaStats(item);
+                  const pct = stats.totalEpisodes > 0 ? Math.round((stats.watchedEpisodes / stats.totalEpisodes) * 100) : 0;
+                  const watchCount = typeof item.watchCount === 'number' ? item.watchCount : (item.status === 'completed' ? 1 : 0);
 
-                return (
-                  <motion.div
-                    key={item.id}
-                    className="netflix-card"
-                    layout
-                    whileHover={{ y: -6, scale: 1.02 }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 380,
-                      damping: 22
-                    }}
-                    onClick={() => setActiveItemId(item.id)}
-                  >
-                    {/* Poster & Overlay */}
-                    <div className="card-image-box">
-                      <img
-                        src={item.posterUrl || 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80'}
-                        alt={item.title}
-                        className="card-poster"
-                      />
-                      <div className="card-dark-gradient" />
+                  return (
+                    <motion.div
+                      key={item.id}
+                      className="netflix-card"
+                      layout
+                      whileHover={{ y: -6, scale: 1.02 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 380,
+                        damping: 22
+                      }}
+                      onClick={() => setActiveItemId(item.id)}
+                    >
+                      {/* Poster & Overlay */}
+                      <div className="card-image-box">
+                        <img
+                          src={item.posterUrl || 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80'}
+                          alt={item.title}
+                          className="card-poster"
+                        />
+                        <div className="card-dark-gradient" />
 
-                      <div className="card-top-badges">
-                        <div className="badge-rating-netflix">
-                          <Star size={11} fill="#fbbf24" stroke="#fbbf24" />
-                          <span>{item.rating || 8.0}</span>
-                          {item.releaseYear && <span className="card-year-text">• {item.releaseYear}</span>}
-                        </div>
-                      </div>
-
-                      <span className="card-type-chip">{getTypeLabel(item.type)}</span>
-                    </div>
-
-                    {/* Card Body */}
-                    <div className="card-body">
-                      <div className="card-title-row">
-                        <h3 className="card-title-text">{item.title}</h3>
-                      </div>
-
-                      {/* Genres */}
-                      {item.genres && item.genres.length > 0 && (
-                        <div className="card-genres-list">
-                          {item.genres.slice(0, 3).map(g => (
-                            <span key={g} className="genre-badge">{g}</span>
-                          ))}
-                        </div>
-                      )}
-
-                      {/* Progress Indicator & Time + Status Row */}
-                      <div className="card-netflix-progress">
-                        <div className="progress-info-row">
-                          <span className="card-duration-text">
-                            {item.format === 'multi' ? t('movies.episodesProgress', { watched: stats.watchedEpisodes, total: stats.totalEpisodes }) : (item.duration || t('movies.single'))}
-                          </span>
-                          <div className="card-status-wrapper">
-                            {item.format === 'multi' && <span className="pct-red">{pct}%</span>}
-                            {renderStatusBadge(item.status)}
+                        <div className="card-top-badges">
+                          <div className="badge-rating-netflix">
+                            <Star size={11} fill="#fbbf24" stroke="#fbbf24" />
+                            <span>{item.rating || 8.0}</span>
+                            {item.releaseYear && <span className="card-year-text">• {item.releaseYear}</span>}
                           </div>
                         </div>
 
-                        {item.format === 'multi' && (
-                          <div className="netflix-progress-track">
-                            <div className="netflix-progress-bar" style={{ width: `${pct}%` }} />
+                        <span className="card-type-chip">{getTypeLabel(item.type)}</span>
+                      </div>
+
+                      {/* Card Body */}
+                      <div className="card-body">
+                        <div className="card-title-row">
+                          <h3 className="card-title-text">{item.title}</h3>
+                        </div>
+
+                        {/* Genres */}
+                        {item.genres && item.genres.length > 0 && (
+                          <div className="card-genres-list">
+                            {item.genres.slice(0, 3).map(g => (
+                              <span key={g} className="genre-badge">{g}</span>
+                            ))}
+                          </div>
+                        )}
+
+                        {/* Progress Indicator & Time + Status Row */}
+                        <div className="card-netflix-progress">
+                          <div className="progress-info-row">
+                            <span className="card-duration-text">
+                              {item.format === 'multi' ? t('movies.episodesProgress', { watched: stats.watchedEpisodes, total: stats.totalEpisodes }) : (item.duration || t('movies.single'))}
+                            </span>
+                            <div className="card-status-wrapper">
+                              {item.format === 'multi' && <span className="pct-red">{pct}%</span>}
+                              {renderStatusBadge(item.status)}
+                            </div>
+                          </div>
+
+                          {item.format === 'multi' && (
+                            <div className="netflix-progress-track">
+                              <div className="netflix-progress-bar" style={{ width: `${pct}%` }} />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            ) : (
+              /* LIST VIEW */
+              <div className="netflix-list-container">
+                {filteredItems.map((item, index) => {
+                  const stats = computeMediaStats(item);
+                  const pct = stats.totalEpisodes > 0 ? Math.round((stats.watchedEpisodes / stats.totalEpisodes) * 100) : 0;
+
+                  return (
+                    <motion.div
+                      key={item.id}
+                      className="netflix-list-row"
+                      layout
+                      whileHover={{ scale: 1.006 }}
+                      transition={{ duration: 0.15 }}
+                      onClick={() => setActiveItemId(item.id)}
+                    >
+                      {/* Rank Badge & Poster */}
+                      <div className="list-row-poster-box">
+                        <img
+                          src={item.posterUrl || 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80'}
+                          alt={item.title}
+                          className="list-row-poster"
+                        />
+                        <span className="list-rank-badge">#{index + 1}</span>
+                      </div>
+
+                      {/* Content Info */}
+                      <div className="list-row-content">
+                        <div className="list-row-header">
+                          <h3 className="list-row-title">{item.title}</h3>
+                          <span className="list-row-type">{getTypeLabel(item.type)}</span>
+                        </div>
+
+                        <div className="list-row-meta">
+                          <span className="meta-item rating">
+                            <Star size={13} fill="#fbbf24" stroke="#fbbf24" />
+                            <span>{item.rating || 8.0}</span>
+                          </span>
+
+                          {item.releaseYear && (
+                            <>
+                              <span className="meta-dot">•</span>
+                              <span className="meta-item">{item.releaseYear}</span>
+                            </>
+                          )}
+
+                          <span className="meta-dot">•</span>
+                          <span className="meta-item duration">
+                            <Clock size={13} />
+                            <span>
+                              {item.format === 'multi'
+                                ? t('movies.episodesProgress', { watched: stats.watchedEpisodes, total: stats.totalEpisodes })
+                                : (item.duration || t('movies.single'))}
+                            </span>
+                            {item.format === 'multi' && <span className="pct-red">({pct}%)</span>}
+                          </span>
+                        </div>
+
+                        {/* Genres */}
+                        {item.genres && item.genres.length > 0 && (
+                          <div className="list-row-genres">
+                            {item.genres.slice(0, 4).map(g => (
+                              <span key={g} className="genre-badge">{g}</span>
+                            ))}
                           </div>
                         )}
                       </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
+
+                      {/* Right Side Actions: Status Badge & Info button */}
+                      <div className="list-row-actions">
+                        {renderStatusBadge(item.status)}
+                        <button
+                          className="list-info-btn"
+                          title={t('movies.info')}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setActiveItemId(item.id);
+                          }}
+                        >
+                          <Info size={18} />
+                        </button>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            )
           ) : (
             <div className="netflix-empty-box">
               <AlertCircle size={36} />
