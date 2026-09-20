@@ -42,10 +42,84 @@ export default function MoviesPage() {
     deleteMediaItem
   } = useMediaTracker();
 
-  // Filters
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedStatus, setSelectedStatus] = useState('all');
-  const [selectedType, setSelectedType] = useState('all');
+  // Filters synced with URL searchParams & localStorage (F5 & Detail View navigation persistence)
+  const [selectedType, setSelectedType] = useState(() => {
+    return searchParams.get('type') || localStorage.getItem('voc_movies_type_filter') || 'all';
+  });
+
+  const [selectedStatus, setSelectedStatus] = useState(() => {
+    return searchParams.get('status') || localStorage.getItem('voc_movies_status_filter') || 'all';
+  });
+
+  const [searchQuery, setSearchQuery] = useState(() => {
+    return searchParams.get('search') || '';
+  });
+
+  // Keep filter state synchronized with URL searchParams
+  useEffect(() => {
+    const typeFromUrl = searchParams.get('type');
+    if (typeFromUrl && typeFromUrl !== selectedType) {
+      setSelectedType(typeFromUrl);
+      localStorage.setItem('voc_movies_type_filter', typeFromUrl);
+    } else if (!typeFromUrl && localStorage.getItem('voc_movies_type_filter')) {
+      const savedType = localStorage.getItem('voc_movies_type_filter');
+      if (savedType !== 'all') {
+        setSelectedType(savedType);
+      }
+    }
+
+    const statusFromUrl = searchParams.get('status');
+    if (statusFromUrl && statusFromUrl !== selectedStatus) {
+      setSelectedStatus(statusFromUrl);
+      localStorage.setItem('voc_movies_status_filter', statusFromUrl);
+    } else if (!statusFromUrl && localStorage.getItem('voc_movies_status_filter')) {
+      const savedStatus = localStorage.getItem('voc_movies_status_filter');
+      if (savedStatus !== 'all') {
+        setSelectedStatus(savedStatus);
+      }
+    }
+
+    const searchFromUrl = searchParams.get('search');
+    if (searchFromUrl !== null && searchFromUrl !== searchQuery) {
+      setSearchQuery(searchFromUrl);
+    }
+  }, [searchParams]);
+
+  // Handlers for filter changes
+  const handleSelectType = (type) => {
+    setSelectedType(type);
+    localStorage.setItem('voc_movies_type_filter', type);
+    const newParams = new URLSearchParams(searchParams);
+    if (type && type !== 'all') {
+      newParams.set('type', type);
+    } else {
+      newParams.delete('type');
+    }
+    setSearchParams(newParams);
+  };
+
+  const handleSelectStatus = (status) => {
+    setSelectedStatus(status);
+    localStorage.setItem('voc_movies_status_filter', status);
+    const newParams = new URLSearchParams(searchParams);
+    if (status && status !== 'all') {
+      newParams.set('status', status);
+    } else {
+      newParams.delete('status');
+    }
+    setSearchParams(newParams);
+  };
+
+  const handleSearchChange = (query) => {
+    setSearchQuery(query);
+    const newParams = new URLSearchParams(searchParams);
+    if (query) {
+      newParams.set('search', query);
+    } else {
+      newParams.delete('search');
+    }
+    setSearchParams(newParams);
+  };
 
   // View Mode: 'grid' | 'list'
   const [viewMode, setViewMode] = useState(() => {
@@ -65,12 +139,42 @@ export default function MoviesPage() {
   const isFormOpen = actionParam === 'add' || actionParam === 'edit';
 
   const setActiveItemId = (id) => {
+    const newParams = new URLSearchParams(searchParams);
     if (id) {
-      setSearchParams({ id });
+      // Save current Y scroll position & target ID before opening detail view
+      const currentY = window.scrollY || document.documentElement.scrollTop || 0;
+      sessionStorage.setItem('voc_movies_catalog_scroll_y', String(currentY));
+      sessionStorage.setItem('voc_movies_last_opened_id', id);
+      newParams.set('id', id);
     } else {
-      setSearchParams({});
+      newParams.delete('id');
     }
+    setSearchParams(newParams);
   };
+
+  // Restore scroll position & bring clicked card back into view upon returning to catalog
+  useEffect(() => {
+    if (!activeItemId && !isFormOpen) {
+      const savedYStr = sessionStorage.getItem('voc_movies_catalog_scroll_y');
+      const lastId = sessionStorage.getItem('voc_movies_last_opened_id');
+
+      if (savedYStr !== null) {
+        const targetY = parseInt(savedYStr, 10);
+        const timer = setTimeout(() => {
+          window.scrollTo({ top: targetY, behavior: 'auto' });
+
+          if (lastId) {
+            const cardEl = document.getElementById(`media-card-${lastId}`);
+            if (cardEl) {
+              cardEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+            }
+          }
+        }, 50);
+
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [activeItemId, isFormOpen]);
 
   const [editingItem, setEditingItem] = useState(null);
 
@@ -1322,31 +1426,31 @@ export default function MoviesPage() {
               <div className="netflix-tab-group">
                 <button
                   className={`netflix-tab-btn ${selectedType === 'all' ? 'active' : ''}`}
-                  onClick={() => setSelectedType('all')}
+                  onClick={() => handleSelectType('all')}
                 >
                   {t('movies.allArcs')}
                 </button>
                 <button
                   className={`netflix-tab-btn ${selectedType === 'movie' ? 'active' : ''}`}
-                  onClick={() => setSelectedType('movie')}
+                  onClick={() => handleSelectType('movie')}
                 >
                   {t('movies.movie')}
                 </button>
                 <button
                   className={`netflix-tab-btn ${selectedType === 'series' ? 'active' : ''}`}
-                  onClick={() => setSelectedType('series')}
+                  onClick={() => handleSelectType('series')}
                 >
                   {t('movies.series')}
                 </button>
                 <button
                   className={`netflix-tab-btn ${selectedType === 'anime' ? 'active' : ''}`}
-                  onClick={() => setSelectedType('anime')}
+                  onClick={() => handleSelectType('anime')}
                 >
                   {t('movies.anime')}
                 </button>
                 <button
                   className={`netflix-tab-btn ${selectedType === 'cartoon' ? 'active' : ''}`}
-                  onClick={() => setSelectedType('cartoon')}
+                  onClick={() => handleSelectType('cartoon')}
                 >
                   {t('movies.cartoon')}
                 </button>
@@ -1377,7 +1481,7 @@ export default function MoviesPage() {
                   <select
                     className="netflix-status-select-filter"
                     value={selectedStatus}
-                    onChange={(e) => setSelectedStatus(e.target.value)}
+                    onChange={(e) => handleSelectStatus(e.target.value)}
                   >
                     <option value="all">{t('movies.allStatuses')}</option>
                     <option value="watching">{t('movies.watching')}</option>
@@ -1392,7 +1496,7 @@ export default function MoviesPage() {
                     type="text"
                     placeholder={t('movies.searchPlaceholder')}
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onChange={(e) => handleSearchChange(e.target.value)}
                     className="netflix-search-input"
                   />
                 </div>
@@ -1417,6 +1521,7 @@ export default function MoviesPage() {
                   return (
                     <motion.div
                       key={item.id}
+                      id={`media-card-${item.id}`}
                       className="netflix-card"
                       layout
                       whileHover={{ y: -6, scale: 1.02 }}
@@ -1495,6 +1600,7 @@ export default function MoviesPage() {
                   return (
                     <motion.div
                       key={item.id}
+                      id={`media-card-${item.id}`}
                       className="netflix-list-row"
                       layout
                       whileHover={{ scale: 1.004 }}
