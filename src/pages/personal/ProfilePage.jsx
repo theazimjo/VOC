@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   LogOut, ChevronRight, Mail, User, Pencil, X, Check,
-  Moon, Type, Volume2, Globe, Users, AlertCircle, CheckCircle2, Shield, Clapperboard
+  Moon, Type, Volume2, Globe, Users, AlertCircle, CheckCircle2, Shield, Clapperboard, Gamepad2
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
@@ -209,9 +209,9 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      {/* ── Media Tracker ── */}
+      {/* ── Media & Games Trackers ── */}
       <div className="corp-profile-section-title">{t('movies.title')}</div>
-      <div className="corp-profile-tiles" style={{ marginBottom: '16px' }}>
+      <div className="corp-profile-tiles" style={{ marginBottom: '16px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
         <div 
           className="corp-profile-tile" 
           onClick={() => navigate('/movies')}
@@ -221,6 +221,18 @@ export default function ProfilePage() {
             <Clapperboard size={17} strokeWidth={2.2} />
           </div>
           <span className="corp-profile-tile-text">{t('movies.trackerTitle')}</span>
+          <ChevronRight size={16} className="corp-profile-appearance-chevron" style={{ marginLeft: 'auto' }} />
+        </div>
+
+        <div 
+          className="corp-profile-tile" 
+          onClick={() => navigate('/games')}
+          style={{ cursor: 'pointer' }}
+        >
+          <div className="corp-profile-tile-icon" style={{ background: '#2563eb' }}>
+            <Gamepad2 size={17} strokeWidth={2.2} />
+          </div>
+          <span className="corp-profile-tile-text">{t('nav.games')}</span>
           <ChevronRight size={16} className="corp-profile-appearance-chevron" style={{ marginLeft: 'auto' }} />
         </div>
       </div>
