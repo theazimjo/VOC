@@ -223,7 +223,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
   const getGroupBadgeText = (m) => {
     if (!m) return 'G';
     const text = m.level || m.groupName || 'G';
-    return text.substring(0, 2).toUpperCase();
+    return String(text).substring(0, 2).toUpperCase();
   };
 
   // Cmd/Ctrl+K opens global search

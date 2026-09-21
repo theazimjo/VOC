@@ -1,5 +1,5 @@
-const STATIC_CACHE_NAME = 'voc-static-v4';
-const DYNAMIC_CACHE_NAME = 'voc-dynamic-v4';
+const STATIC_CACHE_NAME = 'voc-static-v5';
+const DYNAMIC_CACHE_NAME = 'voc-dynamic-v5';
 
 const STATIC_ASSETS = [
   '/',
@@ -55,10 +55,13 @@ self.addEventListener('fetch', (event) => {
       fetch(event.request)
         .then((response) => {
           // Cache the latest page index
-          return caches.open(DYNAMIC_CACHE_NAME).then((cache) => {
-            cache.put('/', response.clone());
-            return response;
-          });
+          if (response && response.status === 200) {
+            const clone = response.clone();
+            caches.open(DYNAMIC_CACHE_NAME).then((cache) => {
+              cache.put('/', clone);
+            });
+          }
+          return response;
         })
         .catch(() => {
           // If offline, return the cached app shell index
@@ -84,9 +87,14 @@ self.addEventListener('fetch', (event) => {
         if (cachedResponse) {
           // Fetch in background to update cache (Stale-While-Revalidate)
           fetch(event.request).then((networkResponse) => {
-            if (networkResponse.status === 200) {
+            if (networkResponse && networkResponse.status === 200) {
               caches.open(DYNAMIC_CACHE_NAME).then((cache) => {
                 cache.put(event.request, networkResponse.clone());
+              });
+            } else if (networkResponse && networkResponse.status === 404) {
+              // Asset no longer exists on server (new deploy) — purge stale copy from cache
+              caches.open(DYNAMIC_CACHE_NAME).then((cache) => {
+                cache.delete(event.request);
               });
             }
           }).catch(() => {/* Ignore background fetch failures */});
@@ -96,12 +104,15 @@ self.addEventListener('fetch', (event) => {
 
         return fetch(event.request).then((networkResponse) => {
           if (!networkResponse || networkResponse.status !== 200) {
-            return networkResponse;
+            return networkResponse || new Response('', { status: 404, statusText: 'Not Found' });
           }
           return caches.open(DYNAMIC_CACHE_NAME).then((cache) => {
             cache.put(event.request, networkResponse.clone());
             return networkResponse;
           });
+        }).catch((err) => {
+          console.warn('[Service Worker] Failed to fetch static asset:', event.request.url, err);
+          return new Response('', { status: 404, statusText: 'Not Found' });
         });
       })
     );
@@ -112,7 +123,7 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     fetch(event.request)
       .then((response) => {
-        if (response.status === 200) {
+        if (response && response.status === 200) {
           const responseClone = response.clone();
           caches.open(DYNAMIC_CACHE_NAME).then((cache) => {
             cache.put(event.request, responseClone);
@@ -121,7 +132,9 @@ self.addEventListener('fetch', (event) => {
         return response;
       })
       .catch(() => {
-        return caches.match(event.request);
+        return caches.match(event.request).then((cached) => {
+          return cached || new Response('', { status: 504, statusText: 'Gateway Timeout' });
+        });
       })
   );
 });

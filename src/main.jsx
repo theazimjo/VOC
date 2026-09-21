@@ -3,6 +3,24 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 
+// Catch Vite chunk/CSS preload errors (happens when a new build is deployed and
+// the user's browser requests old asset hashes) — purge SW caches and reload.
+window.addEventListener('vite:preloadError', (event) => {
+  console.warn('[Vite] Preload error detected. Purging SW caches and reloading...', event);
+  event.preventDefault();
+  const reloadKey = 'voc-preload-reload-attempted';
+  if (!sessionStorage.getItem(reloadKey)) {
+    sessionStorage.setItem(reloadKey, '1');
+    if ('caches' in window) {
+      caches.keys().then((keys) => Promise.all(keys.map((k) => caches.delete(k)))).finally(() => {
+        window.location.reload();
+      });
+    } else {
+      window.location.reload();
+    }
+  }
+});
+
 // Register Service Worker for offline PWA support — production only. In dev,
 // the SW's cache-first strategy for .js files fights Vite's HMR: a stale
 // cached chunk served alongside a freshly recompiled one can load two copies
@@ -72,3 +90,4 @@ createRoot(document.getElementById('root')).render(
     <App />
   </StrictMode>,
 )
+

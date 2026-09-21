@@ -2,11 +2,9 @@ import { lazy } from 'react';
 
 /**
  * Wraps React.lazy() so that a failed chunk fetch (the classic
- * "ChunkLoadError" — happens when a stale cached page tries to load a
- * route bundle that no longer exists after a new deploy) triggers exactly
- * one full page reload instead of leaving the user stuck on a spinner
- * forever. The reload fetches a fresh index.html with correct chunk
- * references, which resolves the mismatch.
+ * "ChunkLoadError" or CSS preload error — happens when a stale cached page tries
+ * to load a route bundle that no longer exists after a new deploy) triggers
+ * a cache cleanup and page reload.
  */
 export function lazyWithRetry(importFn) {
   return lazy(async () => {
@@ -20,6 +18,14 @@ export function lazyWithRetry(importFn) {
       const alreadyReloaded = sessionStorage.getItem(storageKey);
       if (!alreadyReloaded) {
         sessionStorage.setItem(storageKey, '1');
+        if ('caches' in window) {
+          try {
+            const keys = await caches.keys();
+            await Promise.all(keys.map((key) => caches.delete(key)));
+          } catch {
+            // Ignore cache clear error
+          }
+        }
         window.location.reload();
         // Never resolves — the reload takes over before this matters.
         return new Promise(() => {});
@@ -28,3 +34,4 @@ export function lazyWithRetry(importFn) {
     }
   });
 }
+

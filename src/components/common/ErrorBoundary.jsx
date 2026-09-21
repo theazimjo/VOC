@@ -18,7 +18,15 @@ export default class ErrorBoundary extends Component {
   }
 
   handleReload = () => {
-    window.location.reload();
+    if ('caches' in window) {
+      caches.keys().then((keys) => {
+        return Promise.all(keys.map((key) => caches.delete(key)));
+      }).catch(() => {}).finally(() => {
+        window.location.href = window.location.origin + window.location.pathname + '?reload=' + Date.now();
+      });
+    } else {
+      window.location.reload();
+    }
   };
 
   render() {
@@ -38,3 +46,4 @@ export default class ErrorBoundary extends Component {
     return this.props.children;
   }
 }
+
