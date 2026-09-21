@@ -50,13 +50,30 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
   const [showAddModal, setShowAddModal] = useState(false);
   const [startingCourseId, setStartingCourseId] = useState(null);
 
-  const myCourses = packs.filter((p) => p.courseId);
+  const isExcludedCourse = (pack) => {
+    if (!pack) return false;
+    if (pack.courseId && ['sicilian-a1', 'greek-a1', 'science', 'essential-3000'].includes(pack.courseId)) return true;
+    const name = (pack.name || pack.title || '').toLowerCase();
+    if (
+      name.includes('sitsiliya') ||
+      name.includes('yunon') ||
+      name.includes('sicilian') ||
+      name.includes('greek') ||
+      name.includes('science') ||
+      name.includes('essential')
+    ) {
+      return true;
+    }
+    return false;
+  };
+
+  const myCourses = packs.filter((p) => p.courseId && !isExcludedCourse(p));
   // Whichever course pack the URL is currently inside — drives the switcher
   // button's own icon/label the same way group mode drives it for a group,
   // instead of it staying stuck on "Personal" while you're in a course.
   const activeCourse = myCourses.find((c) => location.pathname.startsWith(`${getCourseBasePath(c.courseId)}/${c.id}`));
   const selectableCourses = SELECTABLE_COURSES.filter(
-    (c) => !myCourses.some((p) => p.courseId === c.id)
+    (c) => !isExcludedCourse(c) && !myCourses.some((p) => p.courseId === c.id)
   );
 
   const handleStartCourse = async (course) => {
