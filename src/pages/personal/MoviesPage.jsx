@@ -1347,6 +1347,10 @@ export default function MoviesPage() {
                   <span className="time-badge-value">{globalStats.formattedWatchedTime} ({globalStats.totalWatchedMinutes.toLocaleString()} min)</span>
                 </div>
               </div>
+              <button className="netflix-add-btn" onClick={handleOpenAdd}>
+                <Plus size={16} />
+                <span>{t('movies.addMedia')}</span>
+              </button>
             </div>
           </div>
 
