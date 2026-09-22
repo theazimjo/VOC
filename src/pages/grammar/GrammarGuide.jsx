@@ -53,6 +53,23 @@ export default function GrammarGuide() {
     activeGuideText = topic.guideRu || russianGuidesData[topicId] || topic.guide;
   }
 
+  if (!activeGuideText && topic.studyGuide) {
+    if (typeof topic.studyGuide === 'string') {
+      activeGuideText = topic.studyGuide;
+    } else if (typeof topic.studyGuide === 'object') {
+      const { title, summary, sections } = topic.studyGuide;
+      const parts = [];
+      if (title) parts.push(`## ${title}`);
+      if (summary) parts.push(`*${summary}*`);
+      if (sections && Array.isArray(sections)) {
+        sections.forEach((sec) => {
+          parts.push(`## ${sec.title}\n${sec.content}`);
+        });
+      }
+      activeGuideText = parts.join('\n\n');
+    }
+  }
+
   const blocks = parseGuide(activeGuideText);
 
   // Which language the example sentences should be read aloud in — inferred

@@ -560,14 +560,14 @@ export default function GrammarTopic() {
   // Early return must come AFTER all hooks — a params change from a valid
   // topic to a missing one would otherwise change the hook count between
   // renders and crash React.
-  if (!topic) {
+  if (!topic || (!finished && !question)) {
     return (
       <div className="grammar-topic-error">
         <div className="error-icon">🔍</div>
-        <h2>{t('grammar.topicNotFound')}</h2>
-        <p>{t('grammar.topicNotFoundDesc')}</p>
-        <button className="btn btn-primary" onClick={() => navigate('/grammar')}>
-          {t('grammar.backToGrammar')}
+        <h2>{!topic ? t('grammar.topicNotFound') : (t('grammar.noQuestionsFound') || 'No questions available')}</h2>
+        <p>{!topic ? t('grammar.topicNotFoundDesc') : 'This exercise currently has no questions.'}</p>
+        <button className="btn btn-primary" onClick={() => navigate(topic ? `/grammar/${level}/${topicId}` : '/grammar')}>
+          {topic ? t('grammar.back') : t('grammar.backToGrammar')}
         </button>
       </div>
     );

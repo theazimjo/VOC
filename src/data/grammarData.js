@@ -93987,6 +93987,1308 @@ export const grammarData = {
           }
         ]
       }
+    ,
+      {
+      "id": "infinitive-advanced-continuation",
+      "title": "The Infinitive: Advanced Structures & Continuation",
+      "icon": "\u26a1",
+      "description": "Starred verbs with that-clauses, question words + infinitive, object + infinitive, split infinitives, nouns + prepositions, causative make/let/help, and but/except + bare infinitive.",
+      "studyGuide": {
+            "title": "The Infinitive: Continuation & Complex Structures (Nazariy Qo'llanma)",
+            "summary": "Ushbu darsda infinitive ning murakkab qurilmalari: yulduzcha qo'yilgan fe'llar va that-clause, so'roq so'zlari va whether bilan kelishi, Object + Infinitive strukturasi, split infinitives, otlardan keyin predlogli infinitivlar, causative (make, let, help) va but/except bilan bare infinitive qo'llanilishi o'rganiladi.",
+            "sections": [
+                  {
+                        "title": "1. Starred Verbs & That-Clause Equivalents",
+                        "content": "Ba'zi fe'llar (yulduzcha bilan ko'rsatilgan fe'llar: promise, pretend, agree, refuse, claim) to-infinitive o'rniga bir xil ma'noda that-clause qabul qila oladi.\n\n\u2022 I promise to wait. = I promise that I will wait.\n\u2022 He pretended to be angry. = He pretended that he was angry.\n\u2022 She agreed to help. = She agreed that she would help.\n\u2022 They refused to leave. = They refused that they would not leave.\n\u2022 He claimed to know her. = He claimed that he knew her."
+                  },
+                  {
+                        "title": "2. learn, forget, remember \u2014 Infinitive vs That-Clause Farqi",
+                        "content": "Ushbu uchta fe'l to-infinitive yoki that-clause bilan kelishiga qarab ma'nosini o'zgartiradi:\n\n\u2022 LEARN + to-inf: Biror skill/ko'nikmani egallash. (He learnt to look after himself - U o'ziga qarashni o'rgandi)\n\u2022 LEARN + that: Fakt yoki yangilikdan xabardor bo'lish. (He learnt that he passed the exam - U imtihondan o'tganini bildi)\n\n\u2022 FORGET + to-inf: Bajarilishi kerak bo'lgan amal esdan chiqib bajarilmadi. (He forgot to lock the door - U eshikni qulflashni unutdi)\n\u2022 FORGET + that: Fakt esdan chiqdi. (He forgot that today was a holiday - U bugun bayram ekanligini unutdi)\n\n\u2022 REMEMBER + to-inf: Esga tushib amal bajarildi. (She remembered to post the letter - U xatni yuborishni esladi va yubordi)\n\u2022 REMEMBER + that: Fakt yodga tushdi. (She remembered that her keys were inside - U kalitlari ichkarida ekanini esladi)."
+                  },
+                  {
+                        "title": "3. Question Words & Whether + Infinitive",
+                        "content": "A) QUESTION WORDS + INFINITIVE:\nask, decide, explain, forget, know, show, tell, understand kabi fe'llardan keyin how / what / when / where / who / which + to-infinitive keladi.\n\u2022 He discovered how to open the safe.\n\u2022 I didn't know when to switch off the machine.\n\u2022 Can you explain what to do next?\n\u2022 She forgot where to put the spare key.\n\nB) WHETHER + INFINITIVE:\nIkkita muqobil tanlov yoki ikkilanayotgan holatni ifodalash uchun ishlatiladi.\n\u2022 Structure 1: S + wonder / want to know + whether + to-infinitive (I wondered whether to phone or not).\n\u2022 Structure 2: S + not + decide / know / remember + whether + to-infinitive (I didn't know whether to stay or leave)."
+                  },
+                  {
+                        "title": "4. Object + Infinitive Structure & Negation",
+                        "content": "Boshqa bir shaxsga maslahat berish, buyurish, ko'ndirish yoki ruxsat berishda ushbu struktura ishlatiladi:\nS + Verb + Object + (NOT) to-infinitive\n\nFe'llar: advise, allow, bribe, command, compel, enable, encourage, forbid, force, implore, induce, instruct, invite, oblige, order, permit, persuade, remind, request, teach, tempt, train, urge, warn.\n\n\u2022 Active: The doctor advised all children to have vaccinations.\n\u2022 Negative: Inkor shaklida NOT so'zi to-infinitive OLDIDAN qo'yiladi (S + V + Object + NOT + to-infinitive).\n  - The doctor warned us NOT to eat the fish.\n  - Sarah implored her parents NOT to send her to boarding school.\n  - Visitors are requested NOT to walk on the grass. (Passive)"
+                  },
+                  {
+                        "title": "5. SHOW va TELL Fe'llarining Maxsus Qo'llanilishi",
+                        "content": "\u2022 SHOW + Object + HOW + Infinitive (harakat qanday bajarilishini ko'rsatish):\n  He showed me HOW to change a fuse. (He showed me to change - XATO!)\n\u2022 TELL + Object + To-Infinitive (to'g'ri buyruq/ko'rsatma berish):\n  He told me to change the fuse. (= He said, 'Change the fuse.')\n\u2022 TELL + Object + HOW + Infinitive (jarayon haqida ma'lumot/ko'rsatma berish):\n  He told me HOW to replace a fuse."
+                  },
+                  {
+                        "title": "6. Split Infinitives & Nouns + Infinitive (+ Prepositions)",
+                        "content": "A) SPLIT INFINITIVE:\nTO va fe'l birinchi shakli (V1) o'rtasiga ravish qo'yilishi: to [adverb] V1\n\u2022 Formal (unsplit): to master this subject completely\n\u2022 Informal/Colloquial (split): to completely master this subject (Zamonaviy ingliz tilida juda keng qo'llaniladi).\n\nB) NOUN + INFINITIVE (+ PREPOSITION):\n1. Noun + Infinitive: ability, ambition, anxiety, decision, desire, effort, failure, offer, plan, promise, refusal, wish + to-infinitive. (His ambition to run his own business).\n2. Noun + Infinitive + Preposition (nisbiy ergash gap ma'nosida):\n\u2022 cushions to sit on (= cushions that we sit on)\n\u2022 someone to talk to (= someone whom I want to talk to)\n\u2022 a glass to drink out of\n\u2022 a table to write on\n\u2022 a tool to open with."
+                  },
+                  {
+                        "title": "7. Causatives (MAKE, LET, HELP) va BUT / EXCEPT + Bare Infinitive",
+                        "content": "A) MAKE, LET, HELP:\n\u2022 MAKE (faol: bare inf / majhul: BE MADE + TO-infinitive):\n  Active: He made me move his car. -> Passive: I WAS MADE TO MOVE his car.\n\u2022 LET (faol: bare inf / majhul: BE ALLOWED TO):\n  Active: They let him see the documents. (Majhulda let ishlatilmaydi: He was allowed to see...).\n\u2022 HELP (to-infinitive ham, bare infinitive ham to'g'ri):\n  He helped us (to) push the car.\n\nB) DO ANYTHING / NOTHING / EVERYTHING + BUT / EXCEPT + BARE INFINITIVE:\ndo + anything/nothing/everything + BUT / EXCEPT + Bare Infinitive (to-siz fe'l):\n\u2022 He does nothing BUT complain.\n\u2022 My dog does everything BUT speak.\n\u2022 She did everything EXCEPT apologize.\n\u2022 There is nothing to do BUT wait."
+                  }
+            ]
+      },
+      "exercises": [
+            {
+                  "id": "mcq-infinitive-continuation",
+                  "title": "Multiple Choice Questions",
+                  "type": "multiple-choice",
+                  "instructions": "Choose the correct form of the infinitive or clause for each sentence.",
+                  "questions": [
+                        {
+                              "id": 1,
+                              "question": "He promised _______ for us near the station.",
+                              "options": [
+                                    "to wait",
+                                    "waiting",
+                                    "that wait",
+                                    "wait"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Promise is a starred verb followed by a to-infinitive (or a that-clause: that he would wait)."
+                        },
+                        {
+                              "id": 2,
+                              "question": "Which of the following is equivalent in meaning to \"He pretended to be angry\"?",
+                              "options": [
+                                    "He pretended that he was angry.",
+                                    "He pretended that to be angry.",
+                                    "He pretended being angry.",
+                                    "He pretended how to be angry."
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Starred verbs like pretend can be rewritten with a that-clause: He pretended that he was angry."
+                        },
+                        {
+                              "id": 3,
+                              "question": "She learnt _______ after herself when she moved abroad.",
+                              "options": [
+                                    "to look",
+                                    "that looking",
+                                    "look",
+                                    "for looking"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Learn + to-infinitive means acquiring a skill."
+                        },
+                        {
+                              "id": 4,
+                              "question": "He learnt _______ his exam results had been published online.",
+                              "options": [
+                                    "that",
+                                    "to",
+                                    "how to",
+                                    "whether"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Learn + that means finding out a fact or news."
+                        },
+                        {
+                              "id": 5,
+                              "question": "I forgot _______ the front door before leaving, so the house was unlocked!",
+                              "options": [
+                                    "to lock",
+                                    "that I lock",
+                                    "locking",
+                                    "lock"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Forget + to-infinitive means the intended action was NOT performed."
+                        },
+                        {
+                              "id": 6,
+                              "question": "She forgot _______ her keys were already inside her purse.",
+                              "options": [
+                                    "that",
+                                    "to",
+                                    "whether to",
+                                    "how"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Forget + that means forgetting a fact or piece of information."
+                        },
+                        {
+                              "id": 7,
+                              "question": "He remembered _______ his wife some flowers on his way home.",
+                              "options": [
+                                    "to buy",
+                                    "buying",
+                                    "that buy",
+                                    "for buying"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Remember + to-infinitive means remembering a duty/action and then performing it."
+                        },
+                        {
+                              "id": 8,
+                              "question": "The technician showed me _______ to operate the new computer.",
+                              "options": [
+                                    "how",
+                                    "that",
+                                    "to",
+                                    "whether"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Show + object + HOW + infinitive is used to demonstrate how an action is done."
+                        },
+                        {
+                              "id": 9,
+                              "question": "Select the INCORRECT sentence:",
+                              "options": [
+                                    "He showed me to change a fuse.",
+                                    "He showed me how to change a fuse.",
+                                    "He told me to change the fuse.",
+                                    "He told me how to change a fuse."
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "\"Show + sb + to-infinitive\" without \"how\" is incorrect. It must be \"show somebody HOW to do something\"."
+                        },
+                        {
+                              "id": 10,
+                              "question": "I couldn't decide _______ to accept the offer or stay at my current job.",
+                              "options": [
+                                    "whether",
+                                    "that",
+                                    "how",
+                                    "which"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Whether + infinitive is used when expressing a choice or uncertainty between alternatives."
+                        },
+                        {
+                              "id": 11,
+                              "question": "The doctor warned the patient _______ smoke after the surgery.",
+                              "options": [
+                                    "not to",
+                                    "to not",
+                                    "don't",
+                                    "not"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "For negative object + infinitive structures, place NOT before to-infinitive: S + V + Object + NOT + to-infinitive."
+                        },
+                        {
+                              "id": 12,
+                              "question": "These new night-vision glasses will _______ you to see in complete darkness.",
+                              "options": [
+                                    "enable",
+                                    "make",
+                                    "let",
+                                    "suggest"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Enable takes the Object + to-infinitive pattern: enable somebody to do something."
+                        },
+                        {
+                              "id": 13,
+                              "question": "Nothing would _______ me to do business with such dishonest partners.",
+                              "options": [
+                                    "induce",
+                                    "make to",
+                                    "let",
+                                    "suggest"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Induce + object + to-infinitive means persuade or force someone to do something."
+                        },
+                        {
+                              "id": 14,
+                              "question": "Visitors are requested _______ on the grass.",
+                              "options": [
+                                    "not to walk",
+                                    "to not walk",
+                                    "don't walk",
+                                    "not walking"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Passive structure: be requested NOT to do something."
+                        },
+                        {
+                              "id": 15,
+                              "question": "\"To completely master this language takes years.\" What structure is \"to completely master\"?",
+                              "options": [
+                                    "Split infinitive",
+                                    "Continuous infinitive",
+                                    "Perfect infinitive",
+                                    "Bare infinitive"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Placing an adverb (completely) between \"to\" and the verb (master) is called a split infinitive."
+                        },
+                        {
+                              "id": 16,
+                              "question": "We need to find a comfortable cushion to _______ during the long ceremony.",
+                              "options": [
+                                    "sit on",
+                                    "sit",
+                                    "sit in",
+                                    "sitting on"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Noun + Infinitive + Preposition: cushions to sit ON."
+                        },
+                        {
+                              "id": 17,
+                              "question": "She brought a large glass to _______ fresh orange juice.",
+                              "options": [
+                                    "drink out of",
+                                    "drink",
+                                    "drink out",
+                                    "drink with"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Prepositional infinitive after noun: a glass to drink out of."
+                        },
+                        {
+                              "id": 18,
+                              "question": "His ambition _______ his own tech start-up kept him motivated.",
+                              "options": [
+                                    "to run",
+                                    "running",
+                                    "that run",
+                                    "run"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Nouns like ambition, decision, desire take a direct to-infinitive."
+                        },
+                        {
+                              "id": 19,
+                              "question": "The guard made the intruder _______ on the floor.",
+                              "options": [
+                                    "lie",
+                                    "to lie",
+                                    "lying",
+                                    "lay"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Active causative MAKE takes a bare infinitive (without to): make + somebody + bare infinitive."
+                        },
+                        {
+                              "id": 20,
+                              "question": "In the passive voice, \"He made me move his car\" becomes:",
+                              "options": [
+                                    "I was made to move his car.",
+                                    "I was made move his car.",
+                                    "His car was made move by me.",
+                                    "I was let move his car."
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Passive of MAKE requires \"to-infinitive\": S + be made + TO-infinitive."
+                        },
+                        {
+                              "id": 21,
+                              "question": "My supervisor did not _______ me leave the office early.",
+                              "options": [
+                                    "let",
+                                    "allow to",
+                                    "make to",
+                                    "force"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "LET takes a bare infinitive without \"to\" in active voice."
+                        },
+                        {
+                              "id": 22,
+                              "question": "The team member helped us _______ the heavy equipment into the lab.",
+                              "options": [
+                                    "carry",
+                                    "to carry",
+                                    "both carry and to carry are correct",
+                                    "carrying"
+                              ],
+                              "correctAnswer": 2,
+                              "explanation": "HELP can be followed by either a bare infinitive or a to-infinitive."
+                        },
+                        {
+                              "id": 23,
+                              "question": "He does nothing all day _______ complain about the weather.",
+                              "options": [
+                                    "but",
+                                    "that",
+                                    "to",
+                                    "for"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Structure: do + nothing + BUT + bare infinitive."
+                        },
+                        {
+                              "id": 24,
+                              "question": "She did everything _______ apologize for her mistake.",
+                              "options": [
+                                    "except",
+                                    "to",
+                                    "that",
+                                    "for"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Structure: do + everything + EXCEPT + bare infinitive."
+                        },
+                        {
+                              "id": 25,
+                              "question": "There is nothing to do now _______ for the official test results.",
+                              "options": [
+                                    "but wait",
+                                    "but to wait",
+                                    "except waiting",
+                                    "that wait"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "do + nothing + BUT + bare infinitive (wait)."
+                        },
+                        {
+                              "id": 26,
+                              "question": "I didn't know whether _______ the train or take a taxi.",
+                              "options": [
+                                    "to catch",
+                                    "catching",
+                                    "caught",
+                                    "that catch"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Whether + to-infinitive expresses a choice between two actions."
+                        },
+                        {
+                              "id": 27,
+                              "question": "The officer told the driver _______ off the engine immediately.",
+                              "options": [
+                                    "to turn",
+                                    "turn",
+                                    "turning",
+                                    "that turn"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Tell + somebody + to-infinitive gives a direct command."
+                        },
+                        {
+                              "id": 28,
+                              "question": "Do you have any important documents _______ before 5 PM?",
+                              "options": [
+                                    "to sign",
+                                    "signing",
+                                    "for sign",
+                                    "that sign"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Noun + Infinitive: documents to sign (= documents that must be signed)."
+                        },
+                        {
+                              "id": 29,
+                              "question": "The teacher forbade her pupils _______ in the exam hall.",
+                              "options": [
+                                    "to talk",
+                                    "talking",
+                                    "talk",
+                                    "that talk"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Forbid + object + to-infinitive."
+                        },
+                        {
+                              "id": 30,
+                              "question": "They bribed the official _______ them a fast-track passport.",
+                              "options": [
+                                    "to issue",
+                                    "issuing",
+                                    "issue",
+                                    "that issue"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Bribe + object + to-infinitive."
+                        }
+                  ]
+            },
+            {
+                  "id": "fill-in-blanks-infinitive-continuation",
+                  "title": "Fill in the Blanks",
+                  "type": "fill-in-blanks",
+                  "instructions": "Complete the sentences using the correct infinitive form or clause pattern.",
+                  "questions": [
+                        {
+                              "id": 1,
+                              "sentence": "He promised _______ (wait) for us outside the theatre.",
+                              "correctAnswer": "to wait",
+                              "explanation": "Promise + to-infinitive."
+                        },
+                        {
+                              "id": 2,
+                              "sentence": "She demonstrated _______ (how / use) the new software step by step.",
+                              "correctAnswer": "how to use",
+                              "explanation": "Question word + to-infinitive pattern."
+                        },
+                        {
+                              "id": 3,
+                              "sentence": "I wasn't sure whether _______ (stay) at home or go out.",
+                              "correctAnswer": "to stay",
+                              "explanation": "Whether + to-infinitive."
+                        },
+                        {
+                              "id": 4,
+                              "sentence": "The doctor warned him _______ (not / drink) cold water after exercise.",
+                              "correctAnswer": "not to drink",
+                              "explanation": "Object + NOT + to-infinitive."
+                        },
+                        {
+                              "id": 5,
+                              "sentence": "Mother compelled the boy _______ (wear) a heavy coat in winter.",
+                              "correctAnswer": "to wear",
+                              "explanation": "Compel + object + to-infinitive."
+                        },
+                        {
+                              "id": 6,
+                              "sentence": "He did nothing all afternoon but _______ (stare) out of the window.",
+                              "correctAnswer": "stare",
+                              "explanation": "do nothing BUT + bare infinitive."
+                        },
+                        {
+                              "id": 7,
+                              "sentence": "She was made _______ (clean) the whole room by her supervisor.",
+                              "correctAnswer": "to clean",
+                              "explanation": "Passive of make requires TO-infinitive (be made to do)."
+                        },
+                        {
+                              "id": 8,
+                              "sentence": "They didn't let him _______ (enter) the Restricted area.",
+                              "correctAnswer": "enter",
+                              "explanation": "Active LET takes bare infinitive."
+                        },
+                        {
+                              "id": 9,
+                              "sentence": "We need a wooden table _______ (write) on.",
+                              "correctAnswer": "to write",
+                              "explanation": "Noun + Infinitive + Preposition: a table to write on."
+                        },
+                        {
+                              "id": 10,
+                              "sentence": "He remembered _______ (lock) the door when he left, so everything was safe.",
+                              "correctAnswer": "to lock",
+                              "explanation": "Remember + to-infinitive means remembering a duty and doing it."
+                        },
+                        {
+                              "id": 11,
+                              "sentence": "She forgot that her passport _______ (be) in her desk drawer.",
+                              "correctAnswer": "was",
+                              "explanation": "Forget + that-clause (forgetting a fact in past tense)."
+                        },
+                        {
+                              "id": 12,
+                              "sentence": "Can you show me _______ (which / button) to press?",
+                              "correctAnswer": "which button",
+                              "explanation": "Show + sb + question word phrase + to-infinitive."
+                        },
+                        {
+                              "id": 13,
+                              "sentence": "The police officer told the driver _______ (pull) over immediately.",
+                              "correctAnswer": "to pull",
+                              "explanation": "Tell + object + to-infinitive for command."
+                        },
+                        {
+                              "id": 14,
+                              "sentence": "I have several emails _______ (reply) to before the end of the day.",
+                              "correctAnswer": "to reply",
+                              "explanation": "Noun + Infinitive + Preposition."
+                        },
+                        {
+                              "id": 15,
+                              "sentence": "She did everything except _______ (apologize) for her rudeness.",
+                              "correctAnswer": "apologize",
+                              "explanation": "do everything EXCEPT + bare infinitive."
+                        },
+                        {
+                              "id": 16,
+                              "sentence": "His ambition _______ (become) a world-class pilot inspired everyone.",
+                              "correctAnswer": "to become",
+                              "explanation": "Ambition + to-infinitive."
+                        },
+                        {
+                              "id": 17,
+                              "sentence": "The glasses enabled the soldier _______ (see) clearly in the dark.",
+                              "correctAnswer": "to see",
+                              "explanation": "Enable + object + to-infinitive."
+                        },
+                        {
+                              "id": 18,
+                              "sentence": "Nothing will persuade me _______ (sign) this unfair contract.",
+                              "correctAnswer": "to sign",
+                              "explanation": "Persuade + object + to-infinitive."
+                        },
+                        {
+                              "id": 19,
+                              "sentence": "Visitors are requested not _______ (touch) the exhibits.",
+                              "correctAnswer": "to touch",
+                              "explanation": "be requested NOT to-infinitive."
+                        },
+                        {
+                              "id": 20,
+                              "sentence": "He gave me a sturdy tool _______ (open) the crate with.",
+                              "correctAnswer": "to open",
+                              "explanation": "Noun + Infinitive + Preposition: tool to open with."
+                        }
+                  ]
+            },
+            {
+                  "id": "scrambled-infinitive-continuation",
+                  "title": "Scrambled Sentences",
+                  "type": "scrambled-sentences",
+                  "instructions": "Reorder the scrambled words to form correct sentences containing advanced infinitive structures.",
+                  "questions": [
+                        {
+                              "id": 1,
+                              "words": [
+                                    "promised",
+                                    "he",
+                                    "wait",
+                                    "to",
+                                    "for",
+                                    "us",
+                                    "the",
+                                    "outside",
+                                    "station"
+                              ],
+                              "correctSentence": "He promised to wait for us outside the station.",
+                              "explanation": "Promise + to-infinitive structure."
+                        },
+                        {
+                              "id": 2,
+                              "words": [
+                                    "showed",
+                                    "she",
+                                    "me",
+                                    "how",
+                                    "operate",
+                                    "to",
+                                    "machine",
+                                    "the"
+                              ],
+                              "correctSentence": "She showed me how to operate the machine.",
+                              "explanation": "Show + object + how + to-infinitive."
+                        },
+                        {
+                              "id": 3,
+                              "words": [
+                                    "couldn't",
+                                    "decide",
+                                    "i",
+                                    "whether",
+                                    "leave",
+                                    "to",
+                                    "stay",
+                                    "or"
+                              ],
+                              "correctSentence": "I couldn't decide whether to stay or leave.",
+                              "explanation": "Whether + to-infinitive."
+                        },
+                        {
+                              "id": 4,
+                              "words": [
+                                    "warned",
+                                    "doctor",
+                                    "the",
+                                    "us",
+                                    "not",
+                                    "eat",
+                                    "to",
+                                    "raw",
+                                    "fish"
+                              ],
+                              "correctSentence": "The doctor warned us not to eat raw fish.",
+                              "explanation": "Warn + object + NOT + to-infinitive."
+                        },
+                        {
+                              "id": 5,
+                              "words": [
+                                    "was",
+                                    "he",
+                                    "made",
+                                    "clean",
+                                    "to",
+                                    "the",
+                                    "laboratory"
+                              ],
+                              "correctSentence": "He was made to clean the laboratory.",
+                              "explanation": "Passive causative: be made TO do."
+                        },
+                        {
+                              "id": 6,
+                              "words": [
+                                    "does",
+                                    "he",
+                                    "nothing",
+                                    "complain",
+                                    "but",
+                                    "all",
+                                    "day"
+                              ],
+                              "correctSentence": "He does nothing but complain all day.",
+                              "explanation": "do nothing BUT + bare infinitive."
+                        },
+                        {
+                              "id": 7,
+                              "words": [
+                                    "have",
+                                    "we",
+                                    "letters",
+                                    "many",
+                                    "send",
+                                    "to"
+                              ],
+                              "correctSentence": "We have many letters to send.",
+                              "explanation": "Noun + Infinitive."
+                        },
+                        {
+                              "id": 8,
+                              "words": [
+                                    "need",
+                                    "a",
+                                    "cushion",
+                                    "we",
+                                    "sit",
+                                    "to",
+                                    "on"
+                              ],
+                              "correctSentence": "We need a cushion to sit on.",
+                              "explanation": "Noun + Infinitive + Preposition."
+                        },
+                        {
+                              "id": 9,
+                              "words": [
+                                    "told",
+                                    "the",
+                                    "captain",
+                                    "soldiers",
+                                    "the",
+                                    "assemble",
+                                    "to"
+                              ],
+                              "correctSentence": "The captain told the soldiers to assemble.",
+                              "explanation": "Tell + object + to-infinitive command."
+                        },
+                        {
+                              "id": 10,
+                              "words": [
+                                    "did",
+                                    "she",
+                                    "everything",
+                                    "apologize",
+                                    "except",
+                                    "for",
+                                    "lateness",
+                                    "her"
+                              ],
+                              "correctSentence": "She did everything except apologize for her lateness.",
+                              "explanation": "do everything EXCEPT + bare infinitive."
+                        },
+                        {
+                              "id": 11,
+                              "words": [
+                                    "remembered",
+                                    "she",
+                                    "turn",
+                                    "to",
+                                    "off",
+                                    "lights",
+                                    "the"
+                              ],
+                              "correctSentence": "She remembered to turn off the lights.",
+                              "explanation": "Remember + to-infinitive."
+                        },
+                        {
+                              "id": 12,
+                              "words": [
+                                    "completely",
+                                    "to",
+                                    "master",
+                                    "takes",
+                                    "subject",
+                                    "this",
+                                    "time"
+                              ],
+                              "correctSentence": "To completely master this subject takes time.",
+                              "explanation": "Split infinitive structure."
+                        },
+                        {
+                              "id": 13,
+                              "words": [
+                                    "obliges",
+                                    "the",
+                                    "law",
+                                    "companies",
+                                    "to",
+                                    "pay",
+                                    "fair",
+                                    "wages"
+                              ],
+                              "correctSentence": "The law obliges companies to pay fair wages.",
+                              "explanation": "Oblige + object + to-infinitive."
+                        },
+                        {
+                              "id": 14,
+                              "words": [
+                                    "gave",
+                                    "me",
+                                    "she",
+                                    "glass",
+                                    "a",
+                                    "drink",
+                                    "to",
+                                    "out",
+                                    "of"
+                              ],
+                              "correctSentence": "She gave me a glass to drink out of.",
+                              "explanation": "Noun + Infinitive + Preposition."
+                        },
+                        {
+                              "id": 15,
+                              "words": [
+                                    "implored",
+                                    "parents",
+                                    "her",
+                                    "she",
+                                    "not",
+                                    "send",
+                                    "to",
+                                    "her",
+                                    "away"
+                              ],
+                              "correctSentence": "She implored her parents not to send her away.",
+                              "explanation": "Implore + object + NOT + to-infinitive."
+                        }
+                  ]
+            },
+            {
+                  "id": "error-correction-infinitive-continuation",
+                  "title": "Error Correction",
+                  "type": "error-correction",
+                  "instructions": "Identify the grammatically incorrect part in each sentence and provide the correct form.",
+                  "questions": [
+                        {
+                              "id": 1,
+                              "sentence": "He showed me to change a fuse.",
+                              "correction": "He showed me how to change a fuse.",
+                              "explanation": "Show requires \"how\" before the infinitive when demonstrating a method (show somebody HOW to do something)."
+                        },
+                        {
+                              "id": 2,
+                              "sentence": "The doctor warned us to not drink contaminated water.",
+                              "correction": "The doctor warned us not to drink contaminated water.",
+                              "explanation": "Negation in object + infinitive structures places NOT before \"to\" (not to drink)."
+                        },
+                        {
+                              "id": 3,
+                              "sentence": "He was made clean the entire floor by the manager.",
+                              "correction": "He was made to clean the entire floor by the manager.",
+                              "explanation": "The passive of causative MAKE requires \"to\" (be made TO do)."
+                        },
+                        {
+                              "id": 4,
+                              "sentence": "He does nothing but to complain about his workload.",
+                              "correction": "He does nothing but complain about his workload.",
+                              "explanation": "do nothing BUT takes a bare infinitive (without to)."
+                        },
+                        {
+                              "id": 5,
+                              "sentence": "We found a comfortable table to write.",
+                              "correction": "We found a comfortable table to write on.",
+                              "explanation": "Prepositional infinitive requires the appropriate preposition at the end (a table to write ON)."
+                        },
+                        {
+                              "id": 6,
+                              "sentence": "They don't let him to drive the company truck.",
+                              "correction": "They don't let him drive the company truck.",
+                              "explanation": "Active LET is followed by a bare infinitive (let + object + V1 without to)."
+                        },
+                        {
+                              "id": 7,
+                              "sentence": "She did everything except to apologize for her behavior.",
+                              "correction": "She did everything except apologize for her behavior.",
+                              "explanation": "do everything EXCEPT is followed by a bare infinitive."
+                        },
+                        {
+                              "id": 8,
+                              "sentence": "I couldn't decide whether stay or leave the event.",
+                              "correction": "I couldn't decide whether to stay or leave the event.",
+                              "explanation": "Whether requires a to-infinitive (whether TO stay)."
+                        },
+                        {
+                              "id": 9,
+                              "sentence": "He pretended that to be sick to avoid the test.",
+                              "correction": "He pretended that he was sick to avoid the test.",
+                              "explanation": "That-clause requires a full finite clause (subject + verb), not an infinitive."
+                        },
+                        {
+                              "id": 10,
+                              "sentence": "She remembered to lock the door, but she forgot that she did it.",
+                              "correction": "She remembered to lock the door.",
+                              "explanation": "Standard usage: remembered to lock = remembered and did it."
+                        },
+                        {
+                              "id": 11,
+                              "sentence": "He gave me a sturdy tool to open with it.",
+                              "correction": "He gave me a sturdy tool to open with.",
+                              "explanation": "In noun + infinitive + preposition structures, the object pronoun \"it\" is omitted."
+                        },
+                        {
+                              "id": 12,
+                              "sentence": "The law compels employers paying minimum wage.",
+                              "correction": "The law compels employers to pay minimum wage.",
+                              "explanation": "Compel takes an object + to-infinitive."
+                        },
+                        {
+                              "id": 13,
+                              "sentence": "He showed the students to solve the equation.",
+                              "correction": "He showed the students how to solve the equation.",
+                              "explanation": "Show + object + HOW + infinitive."
+                        },
+                        {
+                              "id": 14,
+                              "sentence": "I didn't know where to put spare key.",
+                              "correction": "I didn't know where to put the spare key.",
+                              "explanation": "Missing definite article \"the\"."
+                        },
+                        {
+                              "id": 15,
+                              "sentence": "She implored her brother to not quit his job.",
+                              "correction": "She implored her brother not to quit his job.",
+                              "explanation": "Inkor shakli NOT to-infinitive shaklida keladi."
+                        }
+                  ]
+            },
+            {
+                  "id": "sentence-transformation-infinitive-continuation",
+                  "title": "Sentence Transformation",
+                  "type": "sentence-transformation",
+                  "instructions": "Rewrite each sentence using the prompt word so that it has the same meaning.",
+                  "questions": [
+                        {
+                              "id": 1,
+                              "original": "He promised: \"I will wait for you at the airport.\"",
+                              "prompt": "promised",
+                              "correctAnswer": "He promised to wait for me at the airport.",
+                              "explanation": "Starred verb promise + to-infinitive."
+                        },
+                        {
+                              "id": 2,
+                              "original": "He pretended that he was angry with the team.",
+                              "prompt": "pretended to",
+                              "correctAnswer": "He pretended to be angry with the team.",
+                              "explanation": "Transforming a that-clause into a to-infinitive."
+                        },
+                        {
+                              "id": 3,
+                              "original": "The instructor demonstrated the method of starting the engine.",
+                              "prompt": "how",
+                              "correctAnswer": "The instructor showed us how to start the engine.",
+                              "explanation": "Show + object + how + to-infinitive."
+                        },
+                        {
+                              "id": 4,
+                              "original": "I didn't know if I should stay or leave.",
+                              "prompt": "whether",
+                              "correctAnswer": "I didn't know whether to stay or leave.",
+                              "explanation": "Whether + to-infinitive transformation."
+                        },
+                        {
+                              "id": 5,
+                              "original": "The officer forced us to move our vehicle.",
+                              "prompt": "made",
+                              "correctAnswer": "The officer made us move our vehicle.",
+                              "explanation": "Active causative MAKE + bare infinitive."
+                        },
+                        {
+                              "id": 6,
+                              "original": "The supervisor forced me to rewrite the whole report.",
+                              "prompt": "was made",
+                              "correctAnswer": "I was made to rewrite the whole report.",
+                              "explanation": "Passive causative: be made TO rewrite."
+                        },
+                        {
+                              "id": 7,
+                              "original": "He only complains all day and does nothing else.",
+                              "prompt": "but",
+                              "correctAnswer": "He does nothing but complain all day.",
+                              "explanation": "do nothing BUT + bare infinitive."
+                        },
+                        {
+                              "id": 8,
+                              "original": "The manager gave us permission to leave early.",
+                              "prompt": "let",
+                              "correctAnswer": "The manager let us leave early.",
+                              "explanation": "LET + object + bare infinitive."
+                        },
+                        {
+                              "id": 9,
+                              "original": "We need a chair so that we can sit on it.",
+                              "prompt": "sit on",
+                              "correctAnswer": "We need a chair to sit on.",
+                              "explanation": "Noun + Infinitive + Preposition."
+                        },
+                        {
+                              "id": 10,
+                              "original": "The physician advised us strongly: \"Do not eat raw seafood.\"",
+                              "prompt": "warned",
+                              "correctAnswer": "The physician warned us not to eat raw seafood.",
+                              "explanation": "Warn + object + NOT + to-infinitive."
+                        },
+                        {
+                              "id": 11,
+                              "original": "She has many letters that she must post today.",
+                              "prompt": "to post",
+                              "correctAnswer": "She has many letters to post today.",
+                              "explanation": "Noun + Infinitive."
+                        },
+                        {
+                              "id": 12,
+                              "original": "The guard forbade visitors from entering the park after dark.",
+                              "prompt": "forbade",
+                              "correctAnswer": "The guard forbade visitors to enter the park after dark.",
+                              "explanation": "Forbid + object + to-infinitive."
+                        },
+                        {
+                              "id": 13,
+                              "original": "She apologized for everything except arriving late.",
+                              "prompt": "except",
+                              "correctAnswer": "She did everything except apologize for arriving late.",
+                              "explanation": "do everything EXCEPT + bare infinitive."
+                        },
+                        {
+                              "id": 14,
+                              "original": "I remembered that I had to call my doctor.",
+                              "prompt": "remembered to",
+                              "correctAnswer": "I remembered to call my doctor.",
+                              "explanation": "Remember + to-infinitive."
+                        },
+                        {
+                              "id": 15,
+                              "original": "Can you explain the way to open this safe lock?",
+                              "prompt": "how",
+                              "correctAnswer": "Can you explain how to open this safe lock?",
+                              "explanation": "Explain + how + to-infinitive."
+                        }
+                  ]
+            },
+            {
+                  "id": "dialogue-completion-infinitive-continuation",
+                  "title": "Dialogue Completion",
+                  "type": "dialogue-completion",
+                  "instructions": "Choose the most natural and grammatically correct infinitive form to complete each conversation.",
+                  "questions": [
+                        {
+                              "id": 1,
+                              "dialogue": [
+                                    {
+                                          "speaker": "A",
+                                          "text": "Do you know how to operate this machine?"
+                                    },
+                                    {
+                                          "speaker": "B",
+                                          "text": "No, but the technician showed me _______."
+                                    }
+                              ],
+                              "options": [
+                                    "how to start it",
+                                    "to start it",
+                                    "that starting it",
+                                    "for start it"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Show + object + how + to-infinitive."
+                        },
+                        {
+                              "id": 2,
+                              "dialogue": [
+                                    {
+                                          "speaker": "A",
+                                          "text": "Did your boss allow you to take a break?"
+                                    },
+                                    {
+                                          "speaker": "B",
+                                          "text": "No, he made me _______ until 8 PM!"
+                                    }
+                              ],
+                              "options": [
+                                    "work",
+                                    "to work",
+                                    "working",
+                                    "worked"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Active MAKE takes a bare infinitive (work)."
+                        },
+                        {
+                              "id": 3,
+                              "dialogue": [
+                                    {
+                                          "speaker": "A",
+                                          "text": "Why were you so late for the meeting?"
+                                    },
+                                    {
+                                          "speaker": "B",
+                                          "text": "I was made _______ for security checks at the gate."
+                                    }
+                              ],
+                              "options": [
+                                    "to wait",
+                                    "wait",
+                                    "waiting",
+                                    "that wait"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Passive BE MADE takes a to-infinitive (to wait)."
+                        },
+                        {
+                              "id": 4,
+                              "dialogue": [
+                                    {
+                                          "speaker": "A",
+                                          "text": "Have you decided where to spend your holiday?"
+                                    },
+                                    {
+                                          "speaker": "B",
+                                          "text": "I'm still wondering whether _______ abroad or stay local."
+                                    }
+                              ],
+                              "options": [
+                                    "to go",
+                                    "going",
+                                    "go",
+                                    "that go"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Whether + to-infinitive."
+                        },
+                        {
+                              "id": 5,
+                              "dialogue": [
+                                    {
+                                          "speaker": "A",
+                                          "text": "Why is Tom sitting so quietly in the corner?"
+                                    },
+                                    {
+                                          "speaker": "B",
+                                          "text": "He does nothing but _______ all day."
+                                    }
+                              ],
+                              "options": [
+                                    "sulky",
+                                    "sulk",
+                                    "to sulk",
+                                    "sulking"
+                              ],
+                              "correctAnswer": 1,
+                              "explanation": "do nothing BUT + bare infinitive (sulk)."
+                        },
+                        {
+                              "id": 6,
+                              "dialogue": [
+                                    {
+                                          "speaker": "A",
+                                          "text": "What did the doctor advise you about your diet?"
+                                    },
+                                    {
+                                          "speaker": "B",
+                                          "text": "He warned me _______ sugary drinks."
+                                    }
+                              ],
+                              "options": [
+                                    "not to drink",
+                                    "to not drink",
+                                    "don't drink",
+                                    "not drinking"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Warn + object + NOT + to-infinitive."
+                        },
+                        {
+                              "id": 7,
+                              "dialogue": [
+                                    {
+                                          "speaker": "A",
+                                          "text": "Where shall we sit for lunch?"
+                                    },
+                                    {
+                                          "speaker": "B",
+                                          "text": "Let's find a clean bench _______."
+                                    }
+                              ],
+                              "options": [
+                                    "to sit on",
+                                    "to sit",
+                                    "sitting on",
+                                    "to sit in"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Noun + Infinitive + Preposition: bench to sit ON."
+                        },
+                        {
+                              "id": 8,
+                              "dialogue": [
+                                    {
+                                          "speaker": "A",
+                                          "text": "Did you remember to post my letter?"
+                                    },
+                                    {
+                                          "speaker": "B",
+                                          "text": "Oh, I forgot that I _______ it in my car!"
+                                    }
+                              ],
+                              "options": [
+                                    "left",
+                                    "to leave",
+                                    "leaving",
+                                    "leave"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Forget + that + finite past clause."
+                        },
+                        {
+                              "id": 9,
+                              "dialogue": [
+                                    {
+                                          "speaker": "A",
+                                          "text": "Why did you buy such a huge glass?"
+                                    },
+                                    {
+                                          "speaker": "B",
+                                          "text": "I needed a large container _______ iced tea out of."
+                                    }
+                              ],
+                              "options": [
+                                    "to drink",
+                                    "drinking",
+                                    "drink",
+                                    "to drink with"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "container to drink iced tea out of."
+                        },
+                        {
+                              "id": 10,
+                              "dialogue": [
+                                    {
+                                          "speaker": "A",
+                                          "text": "Will your parents let you join the trip?"
+                                    },
+                                    {
+                                          "speaker": "B",
+                                          "text": "Yes, they let me _______ after I finished my homework."
+                                    }
+                              ],
+                              "options": [
+                                    "go",
+                                    "to go",
+                                    "going",
+                                    "went"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Active LET + object + bare infinitive."
+                        },
+                        {
+                              "id": 11,
+                              "dialogue": [
+                                    {
+                                          "speaker": "A",
+                                          "text": "Can anyone help me move this heavy cabinet?"
+                                    },
+                                    {
+                                          "speaker": "B",
+                                          "text": "I can help you _______ it into the next room."
+                                    }
+                              ],
+                              "options": [
+                                    "move",
+                                    "to move",
+                                    "both move and to move",
+                                    "moving"
+                              ],
+                              "correctAnswer": 2,
+                              "explanation": "HELP can take either bare infinitive or to-infinitive."
+                        },
+                        {
+                              "id": 12,
+                              "dialogue": [
+                                    {
+                                          "speaker": "A",
+                                          "text": "What did the manager say about the deadline?"
+                                    },
+                                    {
+                                          "speaker": "B",
+                                          "text": "She urged us _______ the report before 5 PM."
+                                    }
+                              ],
+                              "options": [
+                                    "to submit",
+                                    "submitting",
+                                    "submit",
+                                    "that submit"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Urge + object + to-infinitive."
+                        },
+                        {
+                              "id": 13,
+                              "dialogue": [
+                                    {
+                                          "speaker": "A",
+                                          "text": "Did he apologize for breaking the vase?"
+                                    },
+                                    {
+                                          "speaker": "B",
+                                          "text": "No, he did everything except _______!"
+                                    }
+                              ],
+                              "options": [
+                                    "apologize",
+                                    "to apologize",
+                                    "apologizing",
+                                    "apologized"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "do everything EXCEPT + bare infinitive."
+                        },
+                        {
+                              "id": 14,
+                              "dialogue": [
+                                    {
+                                          "speaker": "A",
+                                          "text": "Did she agree to join our research team?"
+                                    },
+                                    {
+                                          "speaker": "B",
+                                          "text": "Yes, she agreed that she _______ help us."
+                                    }
+                              ],
+                              "options": [
+                                    "would",
+                                    "will to",
+                                    "to",
+                                    "for"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Agree + that + subject + modal verb (would)."
+                        },
+                        {
+                              "id": 15,
+                              "dialogue": [
+                                    {
+                                          "speaker": "A",
+                                          "text": "Do you have anything to open this jar with?"
+                                    },
+                                    {
+                                          "speaker": "B",
+                                          "text": "Here is a special opener _______."
+                                    }
+                              ],
+                              "options": [
+                                    "to use",
+                                    "using",
+                                    "used",
+                                    "use"
+                              ],
+                              "correctAnswer": 0,
+                              "explanation": "Noun + Infinitive."
+                        }
+                  ]
+            }
+      ]
+}
     ]
   }
 };

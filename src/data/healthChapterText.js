@@ -1564,84 +1564,661 @@ export const healthChapterText = {
     ]
 },
   "H.Ch.03 · Managing Stress": {
-    title: "Managing Stress",
-    pages: [
-      [
-        { type: 'heading', text: 'Chapter 3 · Managing Stress' },
-        { type: 'activity', text: "As You Read, Think About — what stress is and how you react to stressors in your life. How your body responds to stressful situations. How your personality and coping strategies affect the way you experience stress. How you can manage stress in a healthful way." },
-        { type: 'p', text: "Imagine crouching on a starting platform, every muscle tense, waiting for the gun to sound — but what if it never does? What happens to all that stored energy and tension? There are many occasions when you're primed to act and can't, whether because you're anxious too far in advance, don't know what action to take, or simply can't change the situation. The result is stress — a normal part of everyday living, growing, and changing. In this chapter you'll learn about stress and how it affects you, and how to cope with it and redirect it in positive ways. You can use stress to channel your energies in positive ways." }
-      ],
-      [
-        { type: 'heading', text: '1. What Is Stress?' },
-        { type: 'p', text: "Stress is a reaction of the body and mind to something in everyday life — you experience it whenever situations, events, or people make demands on your body and mind, often as part of your daily routine. Even the sound of an alarm clock counts, since it forces you to wake up and start the day. The causes of stress are called stressors — an alarm clock, an upcoming test, an argument with a friend — and they make demands on your body and mind that cause you to react." },
-        { type: 'p', text: "Stress is a necessary part of living. Without stressors and the challenges they bring, you might not accomplish nearly as much — stress that produces positive effects is called eustress. Not all stress is eustress, though; whether a stressor ends up positive or negative for you often depends on your ability to manage, or cope with, it. Constructive coping strategies — like setting aside time to study for a big test each day — are healthy and lasting only a short time, appropriate to the situation. Unconstructive ones, like ignoring the test until the night before, tend to make things worse." }
-      ],
-      [
-        { type: 'activity', text: "Check Your Wellness — stress is a normal part of life; how well do you cope with it? See if you can answer yes to questions like these. (1) Are you aware of the things that cause you stress? (2) Do you plan your time to avoid last-minute rushes? (3) Do you take time every day to relax and do things you enjoy? (4) Do you get eight hours of sleep a night, eat a balanced diet, and get regular exercise? (5) Do you avoid tobacco, alcohol, caffeine, and other drugs? (6) Can you laugh, cry, and express your emotions freely? (7) When you feel stress, do you use relaxation techniques, such as meditation or deep breathing? (8) Can you share your problems with close friends or relatives? (9) Do you know where to get help if the stresses in your life seem overwhelming?" }
-      ],
-      [
-        { type: 'p', text: "People who complain about being under too much stress are usually talking about distress, or negative stress, which can come from unconstructive coping strategies, from too many stressors piling up at once, or from situations that are simply distressful and unavoidable, like the death of someone you love. Even changes for the better, if there are too many in a short time, can add up to distress — researchers rank major life events by \"life-change units,\" from getting married or a parent's death at the high end down to smaller shifts like beginning to date or a change in a parent's work schedule, and the total a person accumulates in a year is one rough measure of how much stress they've experienced." }
-      ],
-      [
-        { type: 'heading', text: '2. How Stress Affects Your Body' },
-        { type: 'p', text: "When you encounter a stressor, physical changes take place in your body that let you react quickly and use your body's resources to cope — whether those changes end up helpful or harmful depends on your response, how long they last, and the coping strategies you use. As your body copes with stress it must adapt, in a three-stage process called the general adaptation syndrome: the alarm stage, the resistance stage, and the exhaustion stage." },
-        { type: 'p', text: "Imagine walking through a forest when a bear suddenly appears. As soon as you become aware of danger, you enter the alarm stage: your body releases adrenaline, your heart beats faster and breathing quickens, your muscles tighten, less blood flows to your stomach so your arms and legs get what they need, and your pupils widen. Within seconds your body is ready to either stand and fight or run away — the fight or flight response. The same reactions occur, to some degree, with any stressor, even a difficult test or a stage performance — you become more alert, take in information better, and experience heightened anxiety, which can lead to either constructive or unconstructive coping." }
-      ],
-      [
-        { type: 'p', text: "The resistance stage is the body's attempt to recover from the alarm: heart rate and breathing slow, pupils return to normal, muscles relax, and blood returns to the digestive system. This balanced internal state is called homeostasis — your body's internal functions staying steady even as the outside world changes. If your coping strategies are constructive and short-lived, the stress response ends here and your body regains homeostasis quickly." },
-        { type: 'p', text: "The exhaustion stage, the third and most serious stage, doesn't occur with every stress response — if it did, your body would wear out. It only sets in when distress continues for a long time, usually weeks, months, or years, often when someone faces stress beyond their control, like a divorce or serious family problems. In this stage a person becomes less able to resist new stressors, has more trouble regaining homeostasis, and finds it harder to make judgments, interact with people, or maintain their health — in extreme cases, exhaustion can lead to unhealthy behavior, serious illness, or even death." }
-      ],
-      [
-        { type: 'heading', text: 'Stress and Illness' },
-        { type: 'p', text: "Once you understand the fight or flight response, you can recognize some of your own physical stress symptoms: muscle tension, \"butterflies\" in your stomach, a flushed face, a pounding head. Physical symptoms caused by prolonged stress — indigestion, skin rashes, backaches, headaches — are sometimes called psychosomatic symptoms, evidence of the ways the mind affects the body. By itself, stress doesn't usually cause serious illness, since most people regain homeostasis fairly quickly, but severe or prolonged distress can lower the body's resistance to illness by interfering with the immune system, the body's disease-fighting network — and scientists have found many infections, and even some cancers, more common among people under prolonged stress or distress." }
-      ],
-      [
-        { type: 'sidebar', text: "Understanding Headaches — what actually causes a headache? Anxiety over a test, skipped meals, a particular food, bright lights: daily stresses like these can trigger one. For years, headache sufferers simply relied on painkillers, but scientists have begun studying the chemical and electrical changes that happen in the brain during a headache — the level of neurotransmitters, the brain's chemical messengers, tends to drop just before a headache starts, and the brain's electrical activity dulls, limiting blood flow throughout the brain. With this understanding, doctors can now treat headaches more directly: prescribing medication that restores the brain's chemical balance and improves blood flow for people with severe, frequent headaches, or teaching others biofeedback and relaxation techniques to ease the pain." }
-      ],
-      [
-        { type: 'p', text: "The physical changes stress causes can lead directly to illness too. In some people, stress increases stomach acid until it produces an ulcer, an open sore in the stomach lining — and further stress, even just worry about the ulcer, can make it worse. People with asthma may react to stress with an asthmatic attack, and people with diabetes, whose bodies already struggle to keep blood sugar balanced, find that the energy shifts caused by stress make that balance harder to maintain. Stress also raises blood pressure, which over time can contribute to heart attacks, and it contributes to accidents and injuries, since people who are tired, distracted, or careless under stress are more likely to hurt themselves or others." }
-      ],
-      [
-        { type: 'heading', text: '3. Stress and Behavior' },
-        { type: 'p', text: "No two people experience stress the same way — each person reacts with a different personality and their own set of coping strategies, in ways ranging across anger, anxiety, boredom, forgetfulness, irritability, loss of appetite, nervousness, overeating, teeth grinding, and withdrawal, among many others." },
-        { type: 'p', text: "One influential theory, first proposed by researchers studying heart disease, describes two basic personality types and how they relate to stress. Type A personalities tend to be rushed and competitive, driving themselves hard toward high personal standards — they may experience stressors as challenges, but they're also prone to becoming angry and frustrated when they fall short, and can easily slide into distress. Type B personalities are calmer, less rushed, and less concerned with accomplishment, and are less likely to experience distress over unmet standards or to develop stress-related illness — but some struggle to face challenges at all, coping by ignoring stressors and missing out on opportunities for growth as a result. In reality, few people are purely type A or type B; most are some mix of both, but the distinction is a useful way to think about how you personally respond to stress." }
-      ],
-      [
-        { type: 'heading', text: 'Common Coping Strategies for Stress' },
-        { type: 'p', text: "The coping strategies people use for stress are closely tied to their self-concept, personality, and emotions — many of the same strategies used to express emotions come up again when dealing with stress. A coping strategy counts as constructive when it fits the situation and is used only for a short time." },
-        { type: 'p', text: "Denial — ignoring a stressor by acting as if it didn't exist — can be constructive when you're juggling several stressors at once, letting you focus on one at a time instead of feeling overwhelmed by all of them together; used to avoid ever preparing for the exams at all, though, it becomes unconstructive and leaves you unready when the moment actually arrives." },
-        { type: 'p', text: "Sublimation means shifting your attention and energy from a stressor onto something else — working off anger at your parents by playing football with friends until you're too tired to stay upset, for instance. Physical activity is a common constructive form; taking that same energy out on something destructive, like breaking windows, only adds a new stressor on top of the old one." }
-      ],
-      [
-        { type: 'p', text: "Daydreaming, escaping a stressor briefly through imagination, can be constructive if it helps you concentrate or feel less anxious — imagining yourself succeeding at an upcoming competition, for example, may genuinely calm your nerves and improve your performance. Used to avoid a task altogether, though, or during a time when you should be paying attention to something else, it becomes unconstructive." },
-        { type: 'p', text: "Humor can be an effective way to handle stress — laughing at yourself after an embarrassing moment helps quickly reestablish homeostasis. It becomes unconstructive when it's used to mask your true reactions to something serious, or when laughter shows up inappropriately in a situation that calls for something else." }
-      ],
-      [
-        { type: 'heading', text: '4. Managing Stress' },
-        { type: 'p', text: "Because stress affects health in so many ways, managing it well is essential — in a sense, everything you do to maintain your overall health, from eating right and exercising to expressing your feelings, managing your time, and saying no to drugs and alcohol, is also a way of managing stress." },
-        { type: 'p', text: "Relaxation is a state in which your body and mind are resting — you may be awake and alert, but not actively responding to stressors. A hot shower or bath, stretching, or a massage can relax tense muscles, especially in the neck, shoulders, and upper back, which tighten easily from long periods of sitting. Progressive relaxation is a technique of relaxing by concentrating on each muscle group in turn, from your forehead down to your toes — tensing each group for about ten seconds and then releasing it. Deep breathing, expanding your abdomen as well as your chest as you inhale, is a good option for short-term stress when there's no time for a full relaxation routine." }
-      ],
-      [
-        { type: 'p', text: "Creative visualization is a way of using your imagination to cope with stressors, by picturing them as objects you can act on — imagining your problems as pieces of clothing you're picking up off the floor and hanging in a closet, for instance, watching the closet fill as the problems seem to disappear. Like most stress-management methods, it takes practice before it starts to feel natural." },
-        { type: 'p', text: "Biofeedback is a method, usually taught by a trained health professional using special equipment, of learning to control physical functions by recognizing your body's own signals — a device attached to the muscles in your back, for example, can alert you the moment you begin to tense them, so you learn over time to control that tension by changing your thoughts. With practice, many people learn to do this without any equipment at all, and biofeedback has proven especially useful for people with stress-related conditions like headaches, high blood pressure, or asthma." }
-      ],
-      [
-        { type: 'p', text: "Learning to manage stress matters, but most people also need extra help at some point — recognizing when the stresses in your life are becoming overwhelming is itself an important skill. Sometimes all you need is someone to talk to: describing your concerns to a friend, parent, teacher, school counselor, school nurse, or member of the clergy often helps you understand them better, and any of these people can point you toward someone else if your question calls for more specialized help. At other times, longer-term counseling may be the right step — some specialists are trained to treat mental illnesses, and others specifically help people identify stressors and build constructive coping strategies." }
-      ],
-      [
-        { type: 'activity', text: "Health Skills — A Relaxation Technique (Progressive Relaxation). Getting Ready: find a quiet spot with few distractions, sit or lie down comfortably with arms and legs uncrossed, close your eyes, take several deep breaths, and imagine a peaceful setting. Relaxing Your Muscles: working from your forehead down to your toes, tighten each muscle group for about ten seconds and then release it — wrinkle your forehead, close your eyes tightly, frown, raise your shoulders to your ears, tense your upper arms and clench your fists, arch your back gently, tighten your stomach, hips, and thighs, bend your ankles back, and curl your toes — then tense your whole body at once before releasing everything and simply resting in the feeling of deep relaxation for a few moments. The Final Step: count backward from ten while slowly moving your toes, fingers, and limbs, then open your eyes and stand up slowly — your whole body should feel rested and alert. Like any stress-management method, the full 15-minute version works best with regular practice, but a quick version — tensing your whole body for ten seconds, releasing, and repeating three times — can also help in the moment, such as right before a test or a competition." }
-      ],
-      [
-        { type: 'summary', text: "Stress is a reaction of the mind and body to a stressor — a situation, event, or person — that makes a demand on the individual." },
-        { type: 'summary', text: "Stress can be positive or negative. Positive stress is eustress; negative stress is distress." },
-        { type: 'summary', text: "People undergo a three-stage reaction to stress, called the general adaptation syndrome: the alarm stage, the resistance stage, and the exhaustion stage." },
-        { type: 'summary', text: "During the alarm stage, the body prepares to deal with the stressor — the fight or flight response. During resistance, the body tries to regain homeostasis. If stress continues, the body enters the exhaustion stage." },
-        { type: 'summary', text: "Stress can lower the body's resistance to illness and make some diseases worse." },
-        { type: 'summary', text: "Personality affects the response to stressors. Type A personalities view stressors as challenges but may experience distress; type B personalities tend to ignore stressors and may miss opportunities." },
-        { type: 'summary', text: "Methods for managing stress include relaxation, creative visualization, and biofeedback. Many people need help managing stress from time to time, from friends, family, teachers, clergy, counselors, and other specialists." }
-      ]
+    "title": "Managing Stress",
+    "pages": [
+        [
+            {
+                "type": "heading",
+                "text": "Chapter 3 \u00b7 Managing Stress"
+            },
+            {
+                "type": "activity",
+                "text": "As You Read, Think About \u2014 what stress is and how you react to stressors in your life. How your body responds to stressful situations. How your personality and coping strategies affect the way you experience stress. How you can manage stress in a healthful way."
+            },
+            {
+                "type": "p",
+                "text": "You crouch on the starting platform, gripping the edge with your fingertips. Every muscle in your body is tense as you wait to dive into the pool. All your physical and mental energy will be channeled into this race. You listen for the starting gun."
+            },
+            {
+                "type": "p",
+                "text": "But what if the gun never sounds? What happens to the energy and tension stored in your body? How does it get released?"
+            },
+            {
+                "type": "p",
+                "text": "There are many occasions when you are prepared to take action and can't. Sometimes, it's because you are worried or excited too far in advance. Sometimes, it's because you don't know what action to take. There are some things you cannot change no matter what you do."
+            },
+            {
+                "type": "p",
+                "text": "The result of situations like these is stress. The stresses of living, growing, and changing are part of your everyday life. In this chapter, you will learn about stress and how it affects you. You will also learn how to cope with stress and how to redirect it in positive ways. You can use stress to channel your energies in positive ways."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "1. What Is Stress?"
+            },
+            {
+                "type": "p",
+                "text": "Suppose you were asked to define the word stress. You might say that stress is a feeling of pressure, tension, or worry. Psychologists define stress as the reaction of your body and mind to threatening or challenging events in your life. You experience stress when you face a stressor \u2014 a situation, event, or person that places demands on your body and mind."
+            },
+            {
+                "type": "p",
+                "text": "Causes of Stress \u2014 Stressors are part of everyday life. They can range from major life-changing events to minor daily hassles. Some common sources of stress include:"
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Major Life Changes \u2014 Moving to a new town, starting high school, experiencing a divorce in the family, or coping with the death of a loved one."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Everyday Problems \u2014 Misplacing your keys, missing the bus, having too much homework, or arguing with a friend."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Physical Surroundings \u2014 Noise, overcrowding, weather extremes, or unsafe conditions."
+            },
+            {
+                "type": "activity",
+                "text": "Check Your Wellness \u2014 Are you managing stress effectively? See if you can answer yes to the questions below. 1. Do you recognize the physical and emotional signs of stress in yourself? 2. Do you set aside time each day to relax? 3. Do you get regular exercise and sufficient sleep? 4. Do you talk to friends or family members when you feel overwhelmed? 5. Can you laugh at yourself when things go wrong? 6. Do you manage your time effectively to avoid last-minute rushing? 7. Do you break large tasks into smaller, manageable steps? 8. Are you able to accept things you cannot change?"
+            }
+        ],
+        [
+            {
+                "type": "p",
+                "text": "What's Bad About Stress? \u2014 People who complain about being under too much stress are usually talking about distress \u2014 negative stress. Distress can take the fun out of life, impair performance, and lead to physical illness."
+            },
+            {
+                "type": "p",
+                "text": "Eustress \u2014 Not all stress is negative. Positive stress is known as eustress. Eustress helps you concentrate, perform at your best, and reach your goals. For example, the stress you feel before an athletic competition or a musical performance can sharpen your focus and energize your efforts."
+            },
+            {
+                "type": "p",
+                "text": "Stress and Life Changes \u2014 Major life changes are significant stressors because they require adjustment. Experiencing several major life changes in a single year raises the risk of illness or injury."
+            }
+        ],
+        [
+            {
+                "type": "p",
+                "text": "Catastrophes \u2014 A catastrophe is an event that threatens lives and destroys property. Natural disasters like tornadoes, hurricanes, and earthquakes are catastrophes, as are violent crimes and wars. A catastrophe places severe emotional demands on individuals and communities."
+            },
+            {
+                "type": "p",
+                "text": "Daily Hassles \u2014 While major life changes and catastrophes are dramatic, daily hassles \u2014 small, frequent irritations \u2014 occur constantly. Examples include losing items, dealing with traffic, waiting in lines, or having conflicting schedules. Over time, accumulated daily hassles can cause as much distress as a major life event."
+            },
+            {
+                "type": "p",
+                "text": "Environmental Stressors \u2014 Your physical surroundings can create stress. Noise, air pollution, crowded living spaces, and extreme temperatures all place physical and psychological demands on your body."
+            }
+        ],
+        [
+            {
+                "type": "review",
+                "title": "Section 1 Review",
+                "sections": [
+                    {
+                        "heading": "Section Review",
+                        "items": [
+                            {
+                                "prompt": "1. What is stress? What is a stressor?",
+                                "answer": "Stress is the reaction of body and mind to threatening or challenging events. A stressor is a situation, event, or person that places demands on body and mind."
+                            },
+                            {
+                                "prompt": "2. Explain the difference between eustress and distress.",
+                                "answer": "Eustress is positive stress that helps you concentrate and perform; distress is negative stress that causes worry, impairs performance, and can harm health."
+                            },
+                            {
+                                "prompt": "3. List four general categories of stressors.",
+                                "answer": "Major life changes, daily hassles, catastrophes, and environmental stressors."
+                            },
+                            {
+                                "prompt": "4. Why can daily hassles be just as stressful as major life changes?",
+                                "answer": "Because daily hassles occur constantly and accumulate over time, building up continuous tension."
+                            }
+                        ]
+                    },
+                    {
+                        "heading": "What Do You Think?",
+                        "items": [
+                            {
+                                "prompt": "5. Identify two stressors in your life. Classify each as eustress or distress, and explain how each affects your daily routine.",
+                                "answer": "Example: studying for an upcoming exam (eustress, sharpens focus) vs. arguing with a friend (distress, causes distraction and sadness)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "2. How Stress Affects the Body"
+            },
+            {
+                "type": "p",
+                "text": "How does your body respond when you face a stressor? Whether the stressor is a charging dog, a sudden pop quiz, or a stage performance, your body undergoes immediate physical changes. This automatic response is called the general adaptation syndrome."
+            },
+            {
+                "type": "p",
+                "text": "The General Adaptation Syndrome \u2014 Developed by Canadian scientist Hans Selye, the general adaptation syndrome describes how the body reacts to stress in three stages: the alarm stage, the resistance stage, and the exhaustion stage."
+            },
+            {
+                "type": "p",
+                "text": "Stage 1: The Alarm Stage \u2014 In the alarm stage, your body releases adrenaline, a hormone that causes an immediate burst of energy. Your heart rate speeds up, breathing quickens, muscles tense, and blood flow to the brain increases. This sequence of physical changes is known as the fight or flight response \u2014 preparing you either to fight the stressor or flee from danger."
+            }
+        ],
+        [
+            {
+                "type": "p",
+                "text": "Stage 2: The Resistance Stage \u2014 If the stressor continues, your body enters the resistance stage. During this stage, your body tries to recover from the alarm stage and regain homeostasis \u2014 a balanced internal state. Your body uses up stored energy as it works to maintain normal function under stress."
+            },
+            {
+                "type": "p",
+                "text": "Stage 3: The Exhaustion Stage \u2014 If stress continues for a long time, the body enters the exhaustion stage. Energy reserves become depleted, and the body can no longer fight back against the stressor. Prolonged exhaustion leads to severe fatigue and raises the risk of physical illness."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Stress and Illness"
+            },
+            {
+                "type": "p",
+                "text": "Severe or prolonged stress can harm your physical health. When your body remains in a state of exhaustion, your immune system becomes weakened, making it harder for your body to ward off disease."
+            },
+            {
+                "type": "p",
+                "text": "Stress-Related Conditions:"
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Stomach Ulcers \u2014 Prolonged distress increases stomach acid production, which can irritate the stomach lining and cause ulcers."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Asthma \u2014 Stress can trigger asthma attacks in individuals with the condition, causing airways to narrow and making breathing difficult."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 High Blood Pressure and Heart Disease \u2014 Repeated adrenaline releases cause blood vessels to constrict and blood pressure to rise, increasing long-term strain on the heart."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Headaches \u2014 Tension in muscles of the neck and scalp causes tension headaches during times of stress."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Stress and Personality"
+            },
+            {
+                "type": "p",
+                "text": "Your personality plays an important role in how you experience and respond to stress. Psychologists divide personalities into two main types regarding stress response: Type A and Type B."
+            },
+            {
+                "type": "p",
+                "text": "Type A Personality \u2014 Type A individuals tend to be rush-oriented, highly competitive, driven, and perfectionistic. They set high standards for themselves and feel constant time pressure. Type A personalities are more likely to experience high levels of stress and stress-related illnesses."
+            },
+            {
+                "type": "p",
+                "text": "Type B Personality \u2014 Type B individuals tend to be calmer, less competitive, and more patient. They adapt easily to changes and are less likely to feel overwhelmed by stress."
+            },
+            {
+                "type": "p",
+                "text": "Perfectionism \u2014 A perfectionist is a person who accepts nothing less than flawlessness. Perfectionists often set unreachable goals, leading to constant distress and fear of failure."
+            },
+            {
+                "type": "p",
+                "text": "Optimism vs. Pessimism \u2014 An optimist focuses on positive aspects and expects good outcomes, viewing stressors as temporary challenges. A pessimist expects negative outcomes, increasing distress."
+            }
+        ],
+        [
+            {
+                "type": "review",
+                "title": "Section 2 Review",
+                "sections": [
+                    {
+                        "heading": "Section Review",
+                        "items": [
+                            {
+                                "prompt": "1. Describe the three stages of the general adaptation syndrome.",
+                                "answer": "1. Alarm stage (fight or flight response, adrenaline burst). 2. Resistance stage (body tries to regain homeostasis). 3. Exhaustion stage (energy depleted, increased illness risk)."
+                            },
+                            {
+                                "prompt": "2. What is the fight or flight response? What changes occur in the body during this response?",
+                                "answer": "An automatic response preparing you to fight or flee danger. Adrenaline releases, heart rate speeds up, breathing quickens, muscles tense, and blood flow to brain increases."
+                            },
+                            {
+                                "prompt": "3. Define homeostasis.",
+                                "answer": "A balanced, normal internal physical state of the body."
+                            },
+                            {
+                                "prompt": "4. How can stress contribute to physical illnesses such as ulcers and heart disease?",
+                                "answer": "Prolonged stress weakens immune function, increases stomach acid (ulcers), and repeatedly raises blood pressure and heart strain (heart disease)."
+                            }
+                        ]
+                    },
+                    {
+                        "heading": "What Do You Think?",
+                        "items": [
+                            {
+                                "prompt": "5. Are you more of a Type A or Type B personality? Give two examples of how your personality style affects your reaction to stress.",
+                                "answer": "Type A (driven, perfectionist, impatient under deadlines) vs. Type B (relaxed, patient, adaptable to schedule changes)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "3. Managing Stress"
+            },
+            {
+                "type": "p",
+                "text": "Because stress affects your physical, mental, and social well-being, stress management is essential to maintaining optimum health. Managing stress does not mean eliminating all stress \u2014 it means learning to control your reactions to stressors."
+            },
+            {
+                "type": "p",
+                "text": "Coping Strategies for Stress \u2014 Coping strategies can be constructive (healthful) or unconstructive (harmful). Constructive strategies address the stressor or help you relax without causing harm."
+            },
+            {
+                "type": "p",
+                "text": "Unconstructive Coping Strategies \u2014 Overeating, skipping meals, turning to alcohol or drugs, smoking, or withdrawing from friends are unconstructive ways to handle stress that create new health problems."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Stress Management Techniques"
+            },
+            {
+                "type": "p",
+                "text": "1. Time Management \u2014 Poor time management is a major source of distress. Learning to prioritize tasks, set realistic deadlines, and make daily to-do lists helps you regain control."
+            },
+            {
+                "type": "p",
+                "text": "2. Physical Activity \u2014 Regular exercise (running, swimming, biking) burns off excess adrenaline and releases endorphins, natural chemicals that elevate mood."
+            },
+            {
+                "type": "p",
+                "text": "3. Relaxation Techniques \u2014 Deep breathing exercises, progressive muscle relaxation, and meditation calm the nervous system and lower heart rate."
+            },
+            {
+                "type": "p",
+                "text": "4. Humor \u2014 Laughter reduces muscle tension and releases tension-relieving chemicals in the brain. Being able to laugh at yourself eases stress."
+            },
+            {
+                "type": "p",
+                "text": "5. Mental Rehearsal \u2014 Practicing an event in your mind before doing it (like a speech or sports event) builds confidence and reduces anxiety."
+            }
+        ],
+        [
+            {
+                "type": "p",
+                "text": "6. Creative Visualization \u2014 Using your imagination to picture a peaceful, relaxing scene helps calm your mind and body during times of high tension."
+            },
+            {
+                "type": "p",
+                "text": "7. Biofeedback \u2014 A technique where you monitor physical signals (heart rate, muscle tension) using specialized equipment to learn voluntary control over body stress reactions."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Getting Help When You Need It"
+            },
+            {
+                "type": "p",
+                "text": "Sometimes self-help techniques are not enough. When stress becomes overwhelming, talking to someone you trust \u2014 a parent, teacher, school counselor, friend, or clergy member \u2014 is an important step."
+            },
+            {
+                "type": "p",
+                "text": "Friend to Friend Dialogue:\nGeorge: I'm so worried about this big paper due next week, I don't even know where to begin.\nLarry: I know what you mean. I feel like that at times, too.\nGeorge: Well, what helps you when you feel that way?\nLarry: When I have a big project to do, I think of all the steps I have to follow to get it done. Then, I make a list of all the steps and figure out how long each step will take me.\nGeorge: That sounds like a good approach. Do you think you can help me plan the steps involved in doing this paper?\nLarry: Sure. Why don't we meet in the library after school and talk about it then?"
+            }
+        ],
+        [
+            {
+                "type": "review",
+                "title": "Section 3 Review",
+                "sections": [
+                    {
+                        "heading": "Section Review",
+                        "items": [
+                            {
+                                "prompt": "1. Name four constructive stress management techniques.",
+                                "answer": "Time management, physical activity, relaxation exercises, humor, mental rehearsal, creative visualization."
+                            },
+                            {
+                                "prompt": "2. What is creative visualization?",
+                                "answer": "Using your imagination to picture a peaceful, relaxing scene to calm mind and body."
+                            },
+                            {
+                                "prompt": "3. How does biofeedback help a person manage stress?",
+                                "answer": "By monitoring physical signals (muscle tension/heart rate) with equipment so you learn to voluntarily relax those body functions."
+                            },
+                            {
+                                "prompt": "4. Name three people you could talk to if you felt overwhelmed by stress.",
+                                "answer": "Parents, school counselors, teachers, close friends, doctors, or clergy."
+                            }
+                        ]
+                    },
+                    {
+                        "heading": "What Do You Think?",
+                        "items": [
+                            {
+                                "prompt": "5. Suppose you have an exam tomorrow and feel very anxious. Which stress management techniques would you use to prepare and stay calm?",
+                                "answer": "Mental rehearsal, progressive muscle relaxation, deep breathing, and breaking study material into small steps."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Health Skills \u2014 A Relaxation Technique"
+            },
+            {
+                "type": "activity",
+                "text": "It is nine o'clock at night, and Pam is busy studying for the three exams she has this week. Although she has a lot of work ahead of her, Pam feels calm and relaxed. Her mind is alert and focused on her studies.\n\nHow does Pam stay in control while faced with this workload? She uses progressive relaxation to help her relax. Pam has found that this 15-minute technique relieves fatigue, reduces anxiety, and helps her feel more alert.\n\nDuring progressive relaxation, you focus on relaxing each part of your body, from your head down to your toes. This helps you release any tension that has been building up in your body.\n\n1. Getting Ready \u2014 Find a quiet environment where there will be few distractions. Choose a comfortable position, sitting or lying down, with arms and legs uncrossed. Close your eyes and take several deep breaths, releasing tension each time you exhale. Imagine a peaceful environment, like a mountain stream or a meadow.\n\n2. Relaxing Your Muscles \u2014 Begin with your forehead and work down to your toes. Tighten each muscle group, hold for 10 seconds, then relax before moving to the next group."
+            }
+        ],
+        [
+            {
+                "type": "activity",
+                "text": "Sequence: Forehead (wrinkle forehead), Eyes (close tightly), Mouth (frown), Shoulders (raise to ears), Upper arms (bend elbows/tense), Hands/forearms (clench fists), Back (arch gently), Stomach (tighten), Hips (tighten buttocks), Thighs (squeeze legs), Feet (bend ankles back), Toes (curl under), Whole body (tense all muscles). Relax, breathe deeply, and enjoy deep relaxation.\n\n3. The Final Step \u2014 Count backwards from ten while gradually moving toes, fingers, and limbs. Open your eyes and stand up slowly. Your whole body should feel rested and alert."
+            },
+            {
+                "type": "review",
+                "title": "Apply the Skill \u2014 Progressive Relaxation",
+                "sections": [
+                    {
+                        "heading": "Apply the Skill",
+                        "items": [
+                            {
+                                "prompt": "1. Choose a time when you are feeling tense or tired and try the progressive relaxation method for 15-20 minutes. Record how you feel before and after.",
+                                "answer": "Before: tense, racing thoughts. After: relaxed muscles, calm mind, steady breathing."
+                            },
+                            {
+                                "prompt": "2. Teach the progressive relaxation technique to a friend or relative. Discuss their reactions.",
+                                "answer": "Share steps 1\u20133 and note how muscle tension release helped reduce anxiety."
+                            },
+                            {
+                                "prompt": "3. For a quick relaxation technique, tense all muscles for 10 seconds and release. Repeat 3 times before an exam or speech.",
+                                "answer": "Quick tension-release reduces immediate physical jitters before high-stakes events."
+                            },
+                            {
+                                "prompt": "4. Practice progressive relaxation twice a day for one week and record progress.",
+                                "answer": "Regular daily practice builds automatic relaxation skills during stressful moments."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Chapter 3 Review"
+            },
+            {
+                "type": "summary",
+                "text": "Stress is a reaction of the mind and body to a stressor \u2014 a situation, event, or person \u2014 that makes a demand on the individual."
+            },
+            {
+                "type": "summary",
+                "text": "Stress can be positive or negative. Positive stress is eustress; negative stress is distress."
+            },
+            {
+                "type": "summary",
+                "text": "People manage stress with coping strategies."
+            },
+            {
+                "type": "summary",
+                "text": "A number of life changes over a short time can lead to distress."
+            },
+            {
+                "type": "summary",
+                "text": "People undergo a three-stage reaction to stress, called the general adaptation syndrome: alarm, resistance, and exhaustion."
+            },
+            {
+                "type": "summary",
+                "text": "During the alarm stage, the body prepares to deal with the stressor (fight or flight response). During resistance, the body tries to regain homeostasis. If stress continues, the body enters exhaustion."
+            },
+            {
+                "type": "summary",
+                "text": "Stress can lower the body's resistance to illness and make some diseases worse."
+            },
+            {
+                "type": "summary",
+                "text": "Personality affects the response to stressors. Type A personalities view stressors as challenges but may experience distress. Type B personalities tend to ignore stressors."
+            },
+            {
+                "type": "summary",
+                "text": "The coping strategies used to handle stress can be either constructive or unconstructive."
+            },
+            {
+                "type": "summary",
+                "text": "Common coping strategies include denial, sublimation, daydreaming, and humor."
+            },
+            {
+                "type": "summary",
+                "text": "Most of the skills used to maintain health are also ways to manage stress."
+            },
+            {
+                "type": "summary",
+                "text": "Methods for managing stress include relaxation, creative visualization, and biofeedback."
+            },
+            {
+                "type": "summary",
+                "text": "Many people need help in managing stress from time to time."
+            },
+            {
+                "type": "review",
+                "title": "Chapter 3 Exercises (Part 1)",
+                "sections": [
+                    {
+                        "heading": "Vocabulary Review",
+                        "instructions": "Listed below are key terms from this chapter. Match each term to the phrase that best describes it.",
+                        "items": [
+                            {
+                                "prompt": "1. stress that produces positive effects",
+                                "answer": "eustress"
+                            },
+                            {
+                                "prompt": "2. reaction of the body and mind to something in everyday life",
+                                "answer": "stress"
+                            },
+                            {
+                                "prompt": "3. series of stages by which the body reacts to a stressor",
+                                "answer": "general adaptation syndrome"
+                            },
+                            {
+                                "prompt": "4. ways in which the mind affects the body",
+                                "answer": "psychosomatic"
+                            },
+                            {
+                                "prompt": "5. state in which internal functions remain balanced despite external changes",
+                                "answer": "homeostasis"
+                            },
+                            {
+                                "prompt": "6. personality that is competitive, driven to achieve, and likely to create stressors",
+                                "answer": "type A personality"
+                            },
+                            {
+                                "prompt": "7. state in which mind and body are at rest",
+                                "answer": "relaxation"
+                            },
+                            {
+                                "prompt": "8. method of using imagination to cope with stressors",
+                                "answer": "creative visualization"
+                            },
+                            {
+                                "prompt": "9. open sore in the lining of the stomach",
+                                "answer": "ulcer"
+                            },
+                            {
+                                "prompt": "10. substance that produces a burst of energy in the body",
+                                "answer": "adrenaline"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "review",
+                "title": "Chapter 3 Exercises (Part 2)",
+                "sections": [
+                    {
+                        "heading": "What Have You Learned? (Questions 1\u201312)",
+                        "items": [
+                            {
+                                "prompt": "1. What is stress? What is a stressor?",
+                                "answer": "Stress: body/mind reaction to demands. Stressor: situation, event, or person placing demands on you."
+                            },
+                            {
+                                "prompt": "2. Explain how eustress and distress differ.",
+                                "answer": "Eustress improves focus and performance; distress causes anxiety, fatigue, and health issues."
+                            },
+                            {
+                                "prompt": "3. What are coping strategies?",
+                                "answer": "Conscious or unconscious ways of dealing with uncomfortable feelings or stressful situations."
+                            },
+                            {
+                                "prompt": "4. What happens to your body during the fight or flight response?",
+                                "answer": "Adrenaline releases, heart rate and breathing quicken, muscles tense, blood flow to brain increases."
+                            },
+                            {
+                                "prompt": "5. How can you use physical changes of fight or flight to help cope with stress?",
+                                "answer": "Channel the extra energy into exercise, athletic performance, or focused study."
+                            },
+                            {
+                                "prompt": "6. Describe the general adaptation syndrome.",
+                                "answer": "Three stages: Alarm (fight or flight), Resistance (regain homeostasis), Exhaustion (energy depleted)."
+                            },
+                            {
+                                "prompt": "7. Why does the body need to regain homeostasis after facing a stressor?",
+                                "answer": "To prevent physical exhaustion and allow organ systems to return to normal balanced function."
+                            },
+                            {
+                                "prompt": "8. In what ways can stress lead to illness?",
+                                "answer": "Weakens immune system, elevates blood pressure, increases stomach acid (ulcers), triggers asthma, and causes tension headaches."
+                            },
+                            {
+                                "prompt": "9. How does your personality affect your experience of stress?",
+                                "answer": "Type A (driven, perfectionist) experiences higher time pressure/distress; Type B (calmer, patient) handles changes more easily."
+                            },
+                            {
+                                "prompt": "10. What is the difference between a constructive and unconstructive coping strategy?",
+                                "answer": "Constructive solves problems or relaxes safely; unconstructive (overeating, drugs, withdrawal) creates new harm."
+                            },
+                            {
+                                "prompt": "11. Why is good stress management healthy?",
+                                "answer": "Protects physical health, maintains emotional balance, and improves quality of life."
+                            },
+                            {
+                                "prompt": "12. Describe some relaxation techniques.",
+                                "answer": "Progressive muscle relaxation, deep breathing, creative visualization, and biofeedback."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "review",
+                "title": "Chapter 3 Exercises (Part 3)",
+                "sections": [
+                    {
+                        "heading": "What Do You Think? (Questions 1\u20136)",
+                        "items": [
+                            {
+                                "prompt": "1. Name three things your school could do to help reduce student stress.",
+                                "answer": "Coordinate major test schedules, offer stress management workshops, and provide accessible counseling."
+                            },
+                            {
+                                "prompt": "2. Many people who experience serious distress do not seek help. Why is this so?",
+                                "answer": "Fear of stigma, believing they can handle it alone, or lack of awareness about available help."
+                            },
+                            {
+                                "prompt": "3. What might life be like if there were no stress at all?",
+                                "answer": "Without eustress, people might lack motivation, focus, drive to achieve goals, or excitement in challenges."
+                            },
+                            {
+                                "prompt": "4. Why do you think distress is linked to changes in a person's life?",
+                                "answer": "Because changes require adapting to new routines and uncertainty, placing demands on mental energy."
+                            },
+                            {
+                                "prompt": "5. How would the fight or flight response help you if you were in a car accident?",
+                                "answer": "Quickened reflexes, alertness, and sudden burst of energy help react instantly to avoid collision."
+                            },
+                            {
+                                "prompt": "6. What special stress management methods would be most useful to you? Why?",
+                                "answer": "Example: physical exercise and progressive relaxation to release daily tension before studying."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "review",
+                "title": "Chapter 3 Exercises (Part 4)",
+                "sections": [
+                    {
+                        "heading": "What Would You Do? (Questions 1\u20136)",
+                        "items": [
+                            {
+                                "prompt": "1. Last year you experienced distress at exam time. In four weeks, exams come again. What could you do to cope better?",
+                                "answer": "Start early with time management schedules, practice mental rehearsal, and do daily relaxation exercises."
+                            },
+                            {
+                                "prompt": "2. Your best friend complains of stiff, cramped muscles since her parents separated. How would you help her?",
+                                "answer": "Listen supportively, suggest progressive relaxation, and encourage her to talk to a trusted adult or counselor."
+                            },
+                            {
+                                "prompt": "3. You run for class president and must make a speech. What can you do to perform better?",
+                                "answer": "Use mental rehearsal, practice deep breathing before speaking, and view butterflies as positive eustress energy."
+                            },
+                            {
+                                "prompt": "4. A friend is involved in too many activities and \"can't think straight anymore.\" What advice would you give?",
+                                "answer": "Help them prioritize activities, drop less important commitments, and schedule daily downtime."
+                            },
+                            {
+                                "prompt": "5. You become overwhelmed during a test and have difficulty concentrating. What can you do to regain control?",
+                                "answer": "Pause for 10 seconds, close your eyes, take 3 deep breaths, tense and release your muscles, then resume."
+                            },
+                            {
+                                "prompt": "6. Review life event ratings affecting your stress level. If stress is high, how might you reduce it?",
+                                "answer": "Focus on daily routines, talk to family, use relaxation skills, and break major challenges into step-by-step goals."
+                            }
+                        ]
+                    },
+                    {
+                        "heading": "For Further Study",
+                        "items": [
+                            {
+                                "prompt": "1. Keep a stress journal for one week. Note stressors, mind/body reactions, and coping strategies used. Evaluate if strategies were constructive.",
+                                "answer": "Reflect on weekly stressors and replace unconstructive reactions with relaxation or time management."
+                            },
+                            {
+                                "prompt": "2. Research Hans Selye, the scientist who first identified general adaptation syndrome. Write a report on his stress research.",
+                                "answer": "Hans Selye (1907\u20131982) demonstrated how chronic stress affects physiological systems and introduced eustress vs. distress."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     ]
-  },
+},
   "H.Ch.04 · Understanding Mental Disorders": {
     title: "Understanding Mental Disorders",
     pages: [
