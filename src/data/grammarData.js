@@ -86118,13 +86118,13 @@ export const grammarData = {
       {
         "id": "quantifiers-all-most-some-any-no",
         "title": "Quantifiers 1: All, Most, Some, Any & No",
-        "icon": "\ud83d\udcca",
+        "icon": "📊",
         "description": "Master quantifiers with countable and uncountable nouns, 'of' structures, 'some' with singular nouns, and 'any' vs 'no'.",
-        "guide": "## Quantifiers (Miqdor Ko'rsatkichlari) 1: All, Most, Some, Any & No\n\nQuantifiers otlarning miqdorini ko'rsatuvchi so'zlardir. Ular sanaladigan va sanalmaydigan otlar bilan turli qoidalar bo'yicha ishlatiladi.\n\n---\n\n### 1. ALL (100% — Barchasi, Barcha)\n\n* **Ma'nosi**: Barcha, hammasi.\n* **Sanaladigan otlar bilan**: Ko'plikdagi otlar bilan keladi. Fe'l ko'plikda bo'ladi.\n  * *Formula*: `All + plural noun + plural verb`\n  * *Misol*: **All animals** need food to survive. (Barcha hayvonlarga yashash uchun yemak kerak.)\n* **Sanalmaydigan otlar bilan**: Birlik fe'l bilan keladi.\n  * *Formula*: `All + uncountable noun + singular verb`\n  * *Misol*: **All information** is accurate. (Barcha ma'lumotlar aniq.)\n* **All of structure**: `All of the / my / these + noun`\n  * *Misol*: **All of the students** passed the exam.\n\n---\n\n### 2. MOST (>50% — Aksariyat, Ko'pchilik)\n\n* **Ma'nosi**: Ko'pchiligi, aksariyati (lekin 100% emas).\n* **Qoidasi**: Undan keyin to'g'ridan-to'g'ri ko'plikdagi ot yoki sanalmaydigan ot keladi.\n  * *Formula*: `Most + plural/uncountable noun`\n  * *Misol*: **Most people** enjoy music. (Ko'pchilik odamlar musiqani yoqtiradi.)\n  * *Misol*: **Most of the time** was spent on research.\n\n---\n\n### 3. SOME (Ba'zi, Biroz / Qandaydir bir)\n\n* **Tasdiq gaplarda (+)**: `Some + plural noun` (ba'zi) yoki `Some + uncountable noun` (biroz).\n  * *Misol*: I bought **some apples**. (Men bir nechta olma sotib oldim.)\n  * *Misol*: There is **some water** in the fridge.\n* **Savol gaplarda (?) — Taklif va Iltimoslar uchun**:\n  * *Misol*: Would you like **some coffee**? (Biroz kofe xohlaysizmi?) — Taklif\n  * *Misol*: Can I have **some water**, please? — Iltimos\n* **Birlik ot bilan (+)**: \"Qandaydir bir\" ma'nosida keladi.\n  * *Misol*: **Some guy** left his jacket here. (Qandaydir bir yigit ko'ylagini qoldiribdi.)\n\n---\n\n### 4. ANY (Birorta, Hech qanday / Istalgan biri)\n\n* **Inkor (-) va Savol (?) gaplarda**:\n  * *Misol*: Do you have **any questions**? (Birorta savolingiz bormi?)\n  * *Misol*: I don't have **any money**. (Menda hech qanday pul yo'q.)\n* **Tasdiq gaplarda (+)**: \"Istalgan biri / Qaysi biri bo'lsada\" ma'nosida keladi.\n  * *Misol*: You can choose **any book** you like. (O'zingizga yoqqan istalgan kitobni tanlashingiz mumkin.)\n\n---\n\n### 5. NO vs NOT ANY (Hech qanday / Yo'q)\n\n* **Formulalar**:\n  * `Positive Verb + NO + Noun` = `Negative Verb + ANY + Noun`\n  * *Misol*: I have **no money**. = I don't have **any money**.\n* **Muhim Qoida (Double Negative taqiqi)**:\n  * Ingliz tilida bir gapda ikkita inkor ishlatish **NOTO'G'RI**:\n  * ❌ *I don't have no money.*\n  * ✅ *I have no money.* / *I don't have any money.*",
+        "guide": "## Quantifiers 1: All, Most, Some, Any & No (Mukammal Qo'llanma)\n\n**Quantifiers (Miqdor ko'rsatkichlari)** — otlarning miqdorini, qanchaligini yoki nisbiy ulushini ko'rsatuvchi maxsus determiner va olmoshlardir. Ular ingliz tilida sanaladigan (countable) va sanalmaydigan (uncountable) otlar bilan maxsus qoidalar bo'yicha ishlatiladi.\n\n---\n\n### 📊 1. Miqdor Skalasi va Umumiy Jadval\n\nQuyidagi jadval orqali har bir quantifier necha foiz miqdorni anglatishini va fe'l bilan qanday moslashishini ko'rishingiz mumkin:\n\n| Quantifier | Ma'nosi (Uzbek) | Miqdor (%) | Qaysi otlar bilan | Fe'l moslashuvi (Verb Agreement) |\n| :--- | :--- | :--- | :--- | :--- |\n| **ALL** | Barchasi, hammasi, barcha | **100%** | Plural Countable / Uncountable | Plural (ko'plik) / Singular (birlik) |\n| **MOST** | Aksariyat, ko'pchilik | **>50%** | Plural Countable / Uncountable | Plural (ko'plik) / Singular (birlik) |\n| **SOME** | Ba'zi, biroz / qandaydir | **Nomahsul (15–40%)** | Plural / Uncountable / Singular | Contextga mos keladi |\n| **ANY** | Birorta, hech qanday / istalgan | **Noaniq / Istalgan biri** | Plural / Uncountable / Singular | Contextga mos keladi |\n| **NO** | Umuman yo'q, hech ham | **0%** | Plural / Uncountable / Singular | Tasdiq fe'l (Positive Verb) |\n\n---\n\n### 🔵 2. ALL (100% — Barchasi, Hamma, Barcha)\n\n`All` so'zi guruhdagi narsa yoki shaxslarning **100% to'liqligini** bildiradi.\n\n#### 1. Sanaladigan ko'plik otlar bilan:\n* **Formula:** `All + plural noun + plural verb`\n* **Qoida:** Sanaladigan ko'plikdagi otlar bilan kelganda fe'l har doim **ko'plikda** bo'ladi.\n* ▸ *All animals need water to survive.* (Barcha hayvonlarga yashash uchun suv kerak.)\n* ▸ *All students must wear uniforms.* (Barcha talabalar forma kiyishlari shart.)\n\n#### 2. Sanalmaydigan otlar bilan:\n* **Formula:** `All + uncountable noun + singular verb`\n* **Qoida:** Sanalmaydigan otlar har doim **birlik fe'l** oladi.\n* ▸ *All the information is accurate.* (Barcha ma'lumotlar aniq.) — *(Information sanalmaydi!)*\n* ▸ *All money was spent.* (Barcha pul sarflandi.)\n\n#### 3. \"All\" vs \"All of\" iborasi:\n* Umumiy otlar oldidan `of` shart emas: **All people**, **All children**.\n* Aniq aniqlovchilar (`the`, `my`, `these`, `those`) bo'lsa `of` qo'shish ixtiyoriy:\n  * ✅ *All the students passed.* = ✅ *All of the students passed.*\n  * ✅ *All my friends came.* = ✅ *All of my friends came.*\n* **⚠️ DIQQAT! Kishilik olmoshlari (`them`, `us`, `you`) bilan `OF` ISHLATILISHI SHART:**\n  * ✅ **All of them** came to the party. (*All them* ❌ NOTO'G'RI)\n  * ✅ **All of us** are ready. (*All us* ❌ NOTO'G'RI)\n\n---\n\n### 🟢 3. MOST (>50% — Aksariyat, Ko'pchilik)\n\n`Most` so'zi umumiy miqdorning **yarimidan ko'pini (50% dan yuqori)** ifodalash uchun ishlatiladi.\n\n#### 1. Umumiy otlar bilan (General statements):\n* **Formula:** `Most + plural / uncountable noun`\n* ▸ *Most people enjoy listening to music.* (Ko'pchilik odamlar muzika eshitishni yoqtiradi.)\n* ▸ *Most water on Earth is salty.* (Yerdagi aksariyat suv tuzlidir.)\n\n#### 2. \"Most of\" iborasi (Specific groups):\n* Aniq guruhlar yoki aniqlovchilar (`the`, `my`, `these`, `those`) va olmoshlar (`them`, `us`) oldidan **`Most of`** ishlatiladi:\n* **Formula:** `Most of + the / my / these / them / us + noun/pronoun`\n* ▸ *Most of the students in my class passed the exam.* (Sinfimdagi talabalarning ko'pchiligi imtihondan o'tdi.)\n* ▸ *Most of my relatives live in Tashkent.* (Qarindoshlarimning aksariyati Toshkentda yashaydi.)\n* ▸ *Most of them are engineers.* (Ularning ko'pchiligi muhandis.)\n\n#### ⚠️ JUDA MUHIM XATO (Critical Error):\n* ❌ *Most of students came.* (**NOTO'G'RI**) — `of` va ot o'rtasida `the` yoki egalik olmoshi yo'q!\n* ✅ **Most students came.** (Umumiy talabalar haqida)\n* ✅ **Most of the students came.** (Aniq ma'lum talabalar haqida)\n\n---\n\n### 🟡 4. SOME (Ba'zi, Biroz, Bir necha / Qandaydir bir)\n\n`Some` asosan **tasdiq gaplarda** ishlatiladi va bir necha muhim grammatik nozikliklarga ega:\n\n#### 1. Tasdiq gaplarda (+):\n* **Sanaladigan ko'plik otlar bilan:** `Some + plural noun`\n  * ▸ *I bought **some apples** at the market.* (Bozordan bir nechta olma sotib oldim.)\n* **Sanalmaydigan otlar bilan:** `Some + uncountable noun`\n  * ▸ *There is **some milk** in the fridge.* (Muzlatgichda biroz sut bor.)\n\n#### 2. Savol gaplarda (?) — Istisno: Taklif (Offer) va Iltimoslar (Request):\nStandard savollarda `any` keladi, lekin quyidagi **2 ta holatda savolda `SOME` ishlatiladi**:\n1. **Taklif qilish (Offering something):**\n   * ▸ *Would you like **some coffee**?* (Biroz kofe xohlaysizmi?)\n   * ▸ *Do you want **some cake**?* (Biroz tort yeysizmi?)\n2. **Iltimos qilish (Requesting something):**\n   * ▸ *Can I have **some water**, please?* (Biroz suv olsam bo'ladimi?)\n   * ▸ *Could you lend me **some money**?* (Menga biroz pul berib tura olasizmi?)\n\n#### 3. Birlik sanaladigan ot bilan (+): \"Qandaydir bir / Notanish\" ma'nosida:\n`Some` birlikdagi sanaladigan ot oldida kelsa, u \"bir necha\" emas, **\"qandaydir bir / shaxsi noaniq\"** degan ma'noni beradi:\n* ▸ ***Some guy** left his jacket on the chair.* (Qandaydir bir yigit ko'ylagini stulda qoldiribdi.)\n* ▸ *There must be **some mistake**.* (Qandaydir bir xatolik bo'lsa kerak.)\n* ▸ ***Some girl** asked for your phone number outside.* (Tashqarida qandaydir qiz telefon raqamingizni so'radi.)\n\n#### 4. \"Some of\" iborasi:\n* `Some of + the / my / these / them / us`\n* ▸ *Some of the books are damaged.* (Kitoblarning ba'zilari shikastlangan.)\n* ▸ *Some of us decided to leave early.* (Bizdan ba'zilarimiz barvaqt ketishga qaror qildik.)\n\n---\n\n### 🟣 5. ANY (Birorta, Hech qanday / Istalgan biri, Xohlagan)\n\n`Any` so'zi asosan savol va inkor gaplarda qo'llanadi, lekin tasdiq gapda kelganda maxsus ma'no anglatadi.\n\n#### 1. Savol (?) va Inkor (-) gaplarda:\n* **Savolda:** `Any + plural / uncountable noun`\n  * ▸ *Do you have **any questions**?* (Birorta savolingiz bormi?)\n  * ▸ *Is there **any sugar** left?* (Shakar qoldimi?)\n* **Inkorda:** `Negative verb + ANY + noun`\n  * ▸ *I don't have **any free time** today.* (Bugun menda hech qanday bo'sh vaqt yo'q.)\n  * ▸ *There aren't **any chairs** in the room.* (Xonada hech qanday stul yo'q.)\n\n#### 2. Tasdiq gaplarda (+): \"Istalgan, Xohlagan biri\" (Any = It doesn't matter which):\nTasdiq gapda `Any` kelganda u \"xohlagan / istalgan biri\" ma'nosini beradi hamda birlik ot oladi:\n* ▸ *You can choose **any book** you like.* (O'zingizga yoqqan istalgan kitobni tanlashingiz mumkin.)\n* ▸ ***Any student** can solve this easy puzzle.* (Istalgan talaba bu oson topishmoqni yecha oladi.)\n* ▸ *Call me **any time**.* (Menga istalgan vaqtda qo'ng'iroq qiling.)\n\n#### 3. Inkor ma'noli so'zlar bilan (Hardly, Without, Refuse):\nIngliz tilida ba'zi so'zlar inkor ma'nosini tashigani uchun ulardan keyin **`any`** ishlatiladi:\n* **hardly any** = deyarli yo'q (*He has **hardly any** friends.* — Unda deyarli do'st yo'q.)\n* **without any** = hech qanday ...siz (*She finished the project **without any** help.*)\n* **refuse / deny + any** (*He refused to give **any** information.*)\n\n#### 4. \"Any of\" iborasi:\n* `Any of + the / these / my / them / us`\n* ▸ *You can take **any of these** pens.* (Ushbu ruchkalarning istalgan birini olishingiz mumkin.)\n* ▸ *Has **any of you** seen my keys?* (Sizlardan birortangiz kalitimni ko'rdingizmi?)\n\n---\n\n### 🔴 6. NO vs NOT ANY (Umuman yo'q — 0%)\n\nNarsa yoki hodisaning **yo'qligini (0%)** ko'rsatish uchun `NO` yoki `NOT ANY` ishlatiladi.\n\n#### 1. Formulalar va Tenglik:\n* `Positive Verb + NO + Noun`  ≡  `Negative Verb + ANY + Noun`\n* ▸ *I have **no money**.*  ≡  *I don't have **any money**.*\n* ▸ *There are **no problems**.*  ≡  *There aren't **any problems**.*\n* ▸ *She has **no idea**.*  ≡  *She doesn't have **any idea**.*\n\n#### 2. NO qo'llanish tartibi:\n* `No` sifat (determiner) hisoblanib, undan keyin **ALBATTA OT** keladi (birlik, ko'plik yoki sanalmaydigan).\n* ▸ *There is **no water**.* (Suv yo'q.)\n* ▸ ***No student** failed the test.* (Hech bir talaba imtihondan yiqilmadi.)\n\n#### ⚠️ IKKALASI UCHUN MUHIM TAQIQLAR:\n1. **Double Negative (Ikkilangan inkor) xatosi:**\n   * ❌ *I don't have no money.* (**NOTO'G'RI**)\n   * ✅ **I don't have any money.** (**TO'G'RI**)\n   * ✅ **I have no money.** (**TO'G'RI**)\n2. **\"NO OF\" konstruksiyasi MAVJUD EMAS:**\n   * ❌ *No of the students knew the answer.* (**NOTO'G'RI**)\n   * ✅ **None of the students knew the answer.** (**TO'G'RI**)\n\n---\n\n### 📋 7. Tez-tez Uchraydigan Xatolar va Ularning Tuzatilishi\n\n| Noto'g'ri (Incorrect) ❌ | To'g'ri (Correct) ✅ | Sabab / Grammatik qoida |\n| :--- | :--- | :--- |\n| *Most of students arrived.* | **Most students** / **Most of the students** arrived. | `of` bo'lsa, ot oldida `the` yoki egalik olmoshi shart. |\n| *No of the answers are correct.* | **None of the answers** are correct. | `No of` birikmasi yo'q, `None of` ishlatiladi. |\n| *All the informations are true.* | **All the information is** true. | *Information* sanalmaydi (birlik fe'l `is` oladi). |\n| *I don't have no time.* | **I don't have any time** / **I have no time**. | Ikkilangan inkor (double negative) ingliz tilida taqiqlangan. |\n| *Would you like any coffee?* | Would you like **some** coffee? | Taklif (offer) bildirilganda savolda `some` ishlatiladi. |\n| *Some guy left their bags.* | **Some guy** left **his** bag. | `Some + singular noun` = \"qandaydir bir kishi\" (birlikda). |\n| *All of them is ready.* | **All of them are** ready. | `them` ko'plikdagi shaxslarni bildiradi (ko'plik fe'l `are`). |\n\n---\n\n### 💡 Xulosa: Fe'l va Ot Moslashuvi Chek-Varag'i (Quick Reference Checklist)\n\n* **Plural Noun + Plural Verb:** *All students are...* / *Most people are...* / *Some books are...*\n* **Uncountable Noun + Singular Verb:** *All water is...* / *Most information is...* / *Some money is...*\n* **Of + Pronoun (Shart!):** *All of them*, *Most of us*, *Some of you*, *Any of them*.\n* **Savolda Some:** Faqat Taklif (`Would you like...`) va Iltimos (`Can I have...`) uchun.\n* **Tasdiqda Any:** Faqat \"Istalgan / Xohlagan biri\" ma'nosida.",
         "questions": [
           {
                     "id": 1,
-                    "text": "_______ animals need food to survive.",
+                    "text": "_______ animals need water to survive.",
                     "options": [
                               "All",
                               "Any",
@@ -86132,7 +86132,7 @@ export const grammarData = {
                               "No of"
                     ],
                     "correct": 0,
-                    "explanation": "'All' refers to 100% of a group with a plural noun ('animals')."
+                    "explanation": "'All' refers to 100% of a group with a plural countable noun ('animals')."
           },
           {
                     "id": 2,
@@ -86144,11 +86144,11 @@ export const grammarData = {
                               "all"
                     ],
                     "correct": 1,
-                    "explanation": "In general questions, 'any' is used with plural countable nouns."
+                    "explanation": "In standard general questions, 'any' is used with plural nouns."
           },
           {
                     "id": 3,
-                    "text": "Would you like _______ tea?",
+                    "text": "Would you like _______ coffee before we start?",
                     "options": [
                               "any",
                               "some",
@@ -86156,11 +86156,11 @@ export const grammarData = {
                               "every"
                     ],
                     "correct": 1,
-                    "explanation": "'Some' is used in questions when making an offer or request."
+                    "explanation": "'Some' is used in questions when offering or requesting something politely."
           },
           {
                     "id": 4,
-                    "text": "I have _______ money left in my account.",
+                    "text": "I have _______ money left with me today.",
                     "options": [
                               "not",
                               "no",
@@ -86168,11 +86168,11 @@ export const grammarData = {
                               "none of"
                     ],
                     "correct": 1,
-                    "explanation": "'No' is used directly before a noun with a positive verb: 'have no money'."
+                    "explanation": "'No' is used with positive verbs directly before nouns: 'have no money'."
           },
           {
                     "id": 5,
-                    "text": "_______ students passed the test, but a few failed.",
+                    "text": "_______ students in our class passed the final exam.",
                     "options": [
                               "Most",
                               "Any",
@@ -86180,35 +86180,35 @@ export const grammarData = {
                               "Every"
                     ],
                     "correct": 0,
-                    "explanation": "'Most' means the majority (>50%) of the group."
+                    "explanation": "'Most' directly modifies the plural noun 'students' (>50%)."
           },
           {
                     "id": 6,
                     "text": "Which sentence is grammatically CORRECT?",
                     "options": [
-                              "I don't have no time.",
-                              "I have no time.",
-                              "I don't have none time.",
-                              "I have not any time."
+                              "I don't have no money.",
+                              "I don't have any money.",
+                              "I have no any money.",
+                              "I don't have none money."
                     ],
                     "correct": 1,
-                    "explanation": "English avoids double negatives. 'I have no time' is correct."
+                    "explanation": "Avoid double negatives. 'I don't have any money' is correct."
           },
           {
                     "id": 7,
-                    "text": "You can pick _______ fruit from the basket; they are all fresh.",
+                    "text": "_______ book can help you learn English if you read it attentively.",
                     "options": [
-                              "some",
-                              "no",
-                              "any",
-                              "none"
+                              "Some",
+                              "No",
+                              "Any",
+                              "None"
                     ],
                     "correct": 2,
-                    "explanation": "'Any' in an affirmative sentence means 'it doesn't matter which one'."
+                    "explanation": "'Any' in positive sentences means 'istalgan / xohlagan biri'."
           },
           {
                     "id": 8,
-                    "text": "_______ of the information you sent was very helpful.",
+                    "text": "_______ of the information in this report is accurate.",
                     "options": [
                               "All",
                               "Every",
@@ -86216,11 +86216,11 @@ export const grammarData = {
                               "Many"
                     ],
                     "correct": 0,
-                    "explanation": "'All of' works with uncountable nouns ('information')."
+                    "explanation": "'All of + the + uncountable noun ('information') takes a singular verb 'is'."
           },
           {
                     "id": 9,
-                    "text": "She didn't buy _______ fresh vegetables at the market.",
+                    "text": "He solved the difficult problem without _______ help.",
                     "options": [
                               "some",
                               "any",
@@ -86228,11 +86228,11 @@ export const grammarData = {
                               "none"
                     ],
                     "correct": 1,
-                    "explanation": "'Any' is used after negative verbs ('didn't buy')."
+                    "explanation": "'Without any' means 'hech qanday yordamsiz'."
           },
           {
                     "id": 10,
-                    "text": "_______ guy called and left a message for you.",
+                    "text": "_______ guy asked for your phone number outside.",
                     "options": [
                               "Some",
                               "Any",
@@ -86240,55 +86240,55 @@ export const grammarData = {
                               "Every"
                     ],
                     "correct": 0,
-                    "explanation": "'Some' + singular noun means 'a certain / unknown person'."
+                    "explanation": "'Some' + singular countable noun means 'qandaydir bir / notanish person'."
           },
           {
                     "id": 11,
-                    "text": "_______ of the cake was eaten by the children.",
+                    "text": "_______ of them are ready for the competition.",
                     "options": [
                               "Most",
                               "Every",
                               "Each",
-                              "Many"
+                              "Any of"
                     ],
                     "correct": 0,
-                    "explanation": "'Most of' is used before 'the + uncountable/singular noun'."
+                    "explanation": "'Most of them' followed by plural verb 'are'."
           },
           {
                     "id": 12,
-                    "text": "Can I borrow _______ money until tomorrow?",
+                    "text": "I have hardly _______ free time these days.",
                     "options": [
                               "any",
                               "some",
                               "no",
                               "every"
                     ],
-                    "correct": 1,
-                    "explanation": "'Some' is used in polite requests."
+                    "correct": 0,
+                    "explanation": "'Hardly any' means 'deyarli yo'q'."
           },
           {
                     "id": 13,
-                    "text": "There are _______ cars parked on our street today.",
+                    "text": "Which sentence is INCORRECT?",
                     "options": [
-                              "no",
-                              "not",
-                              "any",
-                              "none of"
+                              "Most students passed the exam.",
+                              "Most of the students passed the exam.",
+                              "Most of students passed the exam.",
+                              "Most of them passed the exam."
                     ],
-                    "correct": 0,
-                    "explanation": "'No' + plural noun indicates zero quantity."
+                    "correct": 2,
+                    "explanation": "'Most of students' is wrong because 'of' requires 'the' or a possessive."
           },
           {
                     "id": 14,
-                    "text": "_______ of my friends live near my apartment.",
+                    "text": "_______ of the answers are correct.",
                     "options": [
-                              "All",
-                              "Every",
-                              "Each",
-                              "No"
+                              "None",
+                              "No",
+                              "Not",
+                              "Any of"
                     ],
                     "correct": 0,
-                    "explanation": "'All of my friends' followed by plural verb 'live'."
+                    "explanation": "'None of' is used before 'the + plural noun'. 'No of' is incorrect."
           },
           {
                     "id": 15,
@@ -86300,35 +86300,35 @@ export const grammarData = {
                               "all"
                     ],
                     "correct": 1,
-                    "explanation": "'Any' is standard in questions asking about existence/quantity."
+                    "explanation": "'Any' is standard in general questions asking about quantity."
           },
           {
                     "id": 16,
-                    "text": "He answered _______ question correctly.",
+                    "text": "All of the water in this river _______ polluted.",
                     "options": [
-                              "all",
-                              "every",
-                              "most of",
-                              "some of"
+                              "is",
+                              "are",
+                              "were",
+                              "have been"
                     ],
-                    "correct": 1,
-                    "explanation": "'Every' is followed by a singular countable noun ('question')."
+                    "correct": 0,
+                    "explanation": "'Water' is uncountable, so 'All of the water' takes singular verb 'is'."
           },
           {
                     "id": 17,
-                    "text": "I can do this job _______ day of the week.",
+                    "text": "Can I have _______ water, please?",
                     "options": [
-                              "some",
                               "any",
+                              "some",
                               "no",
                               "all of"
                     ],
                     "correct": 1,
-                    "explanation": "'Any' + singular noun means 'whichever day'."
+                    "explanation": "'Some' is used in polite requests."
           },
           {
                     "id": 18,
-                    "text": "We have _______ reason to doubt his honesty.",
+                    "text": "There are _______ students in the classroom right now.",
                     "options": [
                               "no",
                               "not",
@@ -86336,173 +86336,803 @@ export const grammarData = {
                               "any"
                     ],
                     "correct": 0,
-                    "explanation": "'No' + singular noun ('reason')."
+                    "explanation": "'No' + plural noun ('students')."
           },
           {
                     "id": 19,
-                    "text": "_______ people prefer working from home nowadays.",
+                    "text": "_______ of those books belong to the library.",
                     "options": [
-                              "Most",
+                              "Some",
                               "Every",
                               "Each",
                               "Any of"
                     ],
                     "correct": 0,
-                    "explanation": "'Most' directly modifies the plural noun 'people'."
+                    "explanation": "'Some of those books'."
           },
           {
                     "id": 20,
-                    "text": "She has _______ interest in computer games.",
+                    "text": "She doesn't have _______ close friends in this city.",
                     "options": [
-                              "no",
-                              "not",
-                              "none",
-                              "any"
-                    ],
-                    "correct": 0,
-                    "explanation": "'No' + uncountable noun ('interest')."
-          }
-],
-        "fillBlanks": [
-          {
-                    "id": 1,
-                    "sentence": "There is _____ water left in the jug.",
-                    "answer": "no",
-                    "hint": "infinitive/negative without not"
-          },
-          {
-                    "id": 2,
-                    "sentence": "Did you see _____ good movies recently?",
-                    "answer": "any",
-                    "hint": "question form"
-          },
-          {
-                    "id": 3,
-                    "sentence": "I bought _____ fresh apples from the store.",
-                    "answer": "some",
-                    "hint": "affirmative plural"
-          },
-          {
-                    "id": 4,
-                    "sentence": "_____ of the students passed the final exam.",
-                    "answer": "All",
-                    "hint": "100% of students"
-          },
-          {
-                    "id": 5,
-                    "sentence": "Would you like _____ tea before we start?",
-                    "answer": "some",
-                    "hint": "polite offer"
-          }
-],
-        "scrambled": [
-          {
-                    "id": 1,
-                    "answer": "All students passed the exam",
-                    "hint": "Start with All"
-          },
-          {
-                    "id": 2,
-                    "answer": "I have no money left",
-                    "hint": "Start with I"
-          },
-          {
-                    "id": 3,
-                    "answer": "Would you like some coffee",
-                    "hint": "Offer format"
-          },
-          {
-                    "id": 4,
-                    "answer": "Most people enjoy summer holidays",
-                    "hint": "Start with Most"
-          },
-          {
-                    "id": 5,
-                    "answer": "You can choose any book",
-                    "hint": "Affirmative any"
-          }
-],
-        "errorCorrection": [
-          {
-                    "id": 1,
-                    "text": "I don't have no money in my wallet.",
-                    "correction": "I don't have any money in my wallet.",
-                    "explanation": "Double negative is incorrect. Use 'any' with negative verbs."
-          },
-          {
-                    "id": 2,
-                    "text": "All of student passed the test.",
-                    "correction": "All of the students passed the test.",
-                    "explanation": "'All of' requires a determiner and plural noun."
-          },
-          {
-                    "id": 3,
-                    "text": "Do you want any tea? (offering)",
-                    "correction": "Do you want some tea?",
-                    "explanation": "Use 'some' when making an offer."
-          },
-          {
-                    "id": 4,
-                    "text": "Most of people like ice cream.",
-                    "correction": "Most people like ice cream.",
-                    "explanation": "Use 'Most people' or 'Most of the people'."
-          },
-          {
-                    "id": 5,
-                    "text": "There aren't no cars on the street.",
-                    "correction": "There aren't any cars on the street.",
-                    "explanation": "Avoid double negatives."
-          }
-],
-        "transform": [
-          {
-                    "id": 1,
-                    "original": "I don't have any books.",
-                    "target": "I have _____ books.",
-                    "answer": "no",
-                    "explanation": "Negative verb + any = positive verb + no."
-          },
-          {
-                    "id": 2,
-                    "original": "There isn't any milk left.",
-                    "target": "There is _____ milk left.",
-                    "answer": "no",
-                    "explanation": "Isn't any = is no."
-          },
-          {
-                    "id": 3,
-                    "original": "100% of the team members arrived.",
-                    "target": "_____ of the team members arrived.",
-                    "answer": "All",
-                    "explanation": "100% = All."
-          }
-],
-        "dialogue": [
-          {
-                    "id": 1,
-                    "dialogue": "A: Are there any apples left?\nB: No, we have _____ apples.",
-                    "options": [
-                              "no",
                               "any",
-                              "all",
-                              "some"
-                    ],
-                    "correct": 0,
-                    "explanation": "Positive verb 'have' + 'no' = zero quantity."
-          },
-          {
-                    "id": 2,
-                    "dialogue": "A: Can I offer you something to drink?\nB: Yes, I would love _____ juice.",
-                    "options": [
                               "some",
-                              "any",
                               "no",
                               "none"
                     ],
                     "correct": 0,
-                    "explanation": "Accepting an offer using 'some'."
+                    "explanation": "'Doesn't have' is negative, so use 'any'."
+          },
+          {
+                    "id": 21,
+                    "text": "_______ of the students speak English fluently.",
+                    "options": [
+                              "Most",
+                              "Every",
+                              "Each",
+                              "No"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Most of the students' with plural verb 'speak'."
+          },
+          {
+                    "id": 22,
+                    "text": "Which sentence expresses ZERO quantity correctly?",
+                    "options": [
+                              "There isn't no water in the bottle.",
+                              "There is no water in the bottle.",
+                              "There is not no water in the bottle.",
+                              "There isn't none water in the bottle."
+                    ],
+                    "correct": 1,
+                    "explanation": "'There is no water in the bottle' correctly expresses zero quantity."
+          },
+          {
+                    "id": 23,
+                    "text": "_______ of those answers is acceptable.",
+                    "options": [
+                              "Any",
+                              "All",
+                              "Every",
+                              "No"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Any of those answers' can take a singular verb ('is')."
+          },
+          {
+                    "id": 24,
+                    "text": "We don't have _______ homework today.",
+                    "options": [
+                              "any",
+                              "no",
+                              "some",
+                              "none"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Don't have' pairs with 'any'."
+          },
+          {
+                    "id": 25,
+                    "text": "_______ people were very friendly when we arrived.",
+                    "options": [
+                              "Some",
+                              "Some of",
+                              "Any of",
+                              "Every"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Some people' (without 'of' when no article is present)."
           }
-]
+],
+        "fillBlanks": [
+          {
+            "id": 1,
+            "text": "I don't have _____ money with me today.",
+            "options": ["some", "any", "no", "every"],
+            "correct": 1,
+            "explanation": "In negative sentences with negative verbs ('don't have'), use 'any'."
+          },
+          {
+            "id": 2,
+            "text": "_____ animals need water to survive.",
+            "options": ["All", "Any", "None", "No of"],
+            "correct": 0,
+            "explanation": "'All' refers to 100% of a group with plural countable nouns."
+          },
+          {
+            "id": 3,
+            "text": "There is _____ milk left in the fridge.",
+            "options": ["any", "some", "no of", "every"],
+            "correct": 1,
+            "explanation": "Use 'some' in affirmative sentences with uncountable nouns."
+          },
+          {
+            "id": 4,
+            "text": "He solved the difficult math problem without _____ help.",
+            "options": ["some", "any", "no", "none"],
+            "correct": 1,
+            "explanation": "Preposition 'without' has negative meaning, so it pairs with 'any'."
+          },
+          {
+            "id": 5,
+            "text": "_____ of the books belong to the school library.",
+            "options": ["Some", "Every", "Each", "No"],
+            "correct": 0,
+            "explanation": "'Some of + the + plural noun' means a portion of those specific books."
+          },
+          {
+            "id": 6,
+            "text": "She has hardly _____ free time these days.",
+            "options": ["any", "some", "no", "every"],
+            "correct": 0,
+            "explanation": "'Hardly any' means almost none."
+          },
+          {
+            "id": 7,
+            "text": "_____ of them are ready for the final exam.",
+            "options": ["Most", "Every", "Each", "No"],
+            "correct": 0,
+            "explanation": "'Most of + pronoun (them)' takes a plural verb ('are')."
+          },
+          {
+            "id": 8,
+            "text": "Would you like _____ coffee before we start the meeting?",
+            "options": ["any", "some", "no", "every"],
+            "correct": 1,
+            "explanation": "Use 'some' in questions when offering something politely."
+          },
+          {
+            "id": 9,
+            "text": "You can pick _____ book you want from this shelf.",
+            "options": ["some", "no", "any", "none"],
+            "correct": 2,
+            "explanation": "In positive statements, 'any' means 'it doesn't matter which / istalgan biri'."
+          },
+          {
+            "id": 10,
+            "text": "There are _____ cars parked in front of our house today.",
+            "options": ["no", "not", "none", "any"],
+            "correct": 0,
+            "explanation": "'No' is a determiner directly modifying the plural noun 'cars' with a positive verb."
+          },
+          {
+            "id": 11,
+            "text": "Can I have _____ water, please?",
+            "options": ["any", "some", "no", "none of"],
+            "correct": 1,
+            "explanation": "Use 'some' in questions when making a request."
+          },
+          {
+            "id": 12,
+            "text": "_____ student who breaks the rules will be punished.",
+            "options": ["Some", "Any", "All", "Most of"],
+            "correct": 1,
+            "explanation": "'Any' + singular noun in positive sentences means 'whichever student / istalgan'."
+          },
+          {
+            "id": 13,
+            "text": "All of the information in this report _____ accurate.",
+            "options": ["is", "are", "were", "have been"],
+            "correct": 0,
+            "explanation": "'Information' is uncountable, so 'All of the information' takes singular verb 'is'."
+          },
+          {
+            "id": 14,
+            "text": "_____ of my friends live near the university campus.",
+            "options": ["Most of", "Most", "Every", "Each"],
+            "correct": 0,
+            "explanation": "Before possessive determiner 'my', use 'Most of' (Most of my friends)."
+          },
+          {
+            "id": 15,
+            "text": "_____ guy left his bag on the bench outside.",
+            "options": ["Some", "Any", "All", "Every"],
+            "correct": 0,
+            "explanation": "'Some' + singular countable noun means 'an unspecified / unknown person (qandaydir bir)'."
+          },
+          {
+            "id": 16,
+            "text": "We don't have _____ bread left for breakfast.",
+            "options": ["some", "any", "no", "none"],
+            "correct": 1,
+            "explanation": "Negative verb 'don't have' pairs with 'any'."
+          },
+          {
+            "id": 17,
+            "text": "_____ of the students answered the question correctly.",
+            "options": ["All", "Every", "Each", "No"],
+            "correct": 0,
+            "explanation": "'All of the students' is correct before 'the + plural noun'."
+          },
+          {
+            "id": 18,
+            "text": "He refused to give _____ details about the incident.",
+            "options": ["some", "any", "no", "none"],
+            "correct": 1,
+            "explanation": "The verb 'refuse' has negative force, so use 'any'."
+          },
+          {
+            "id": 19,
+            "text": "There is _____ reason to worry about the test.",
+            "options": ["no", "not", "none", "any of"],
+            "correct": 0,
+            "explanation": "'There is no reason...' uses 'no' + singular noun."
+          },
+          {
+            "id": 20,
+            "text": "_____ of us are going to the concert tonight.",
+            "options": ["Some", "Every", "Each", "No"],
+            "correct": 0,
+            "explanation": "'Some of us' is used with pronoun 'us'."
+          }
+        ],
+        "scrambled": [
+          { "id": 1, "answer": "I don't have any money", "hint": "Start with I" },
+          { "id": 2, "answer": "Most students passed the exam", "hint": "Start with Most" },
+          { "id": 3, "answer": "There is no milk left in the fridge", "hint": "Start with There" },
+          { "id": 4, "answer": "Some of the books are very interesting", "hint": "Start with Some" },
+          { "id": 5, "answer": "All animals need water to survive", "hint": "Start with All" },
+          { "id": 6, "answer": "Would you like some coffee", "hint": "Start with Would" },
+          { "id": 7, "answer": "Can I have some water please", "hint": "Start with Can" },
+          { "id": 8, "answer": "You can choose any book you like", "hint": "Start with You" },
+          { "id": 9, "answer": "He solved the problem without any help", "hint": "Start with He" },
+          { "id": 10, "answer": "She has hardly any free time today", "hint": "Start with She" },
+          { "id": 11, "answer": "Most of the people agreed with us", "hint": "Start with Most" },
+          { "id": 12, "answer": "All of the information is correct", "hint": "Start with All" },
+          { "id": 13, "answer": "Some guy left his coat on the chair", "hint": "Start with Some" },
+          { "id": 14, "answer": "Any student can answer this question", "hint": "Start with Any" },
+          { "id": 15, "answer": "There are no cars in the parking lot", "hint": "Start with There" },
+          { "id": 16, "answer": "None of the answers were correct", "hint": "Start with None" },
+          { "id": 17, "answer": "All of them came to the party", "hint": "Start with All" },
+          { "id": 18, "answer": "Most of my relatives live in Tashkent", "hint": "Start with Most" },
+          { "id": 19, "answer": "Do you have any questions for me", "hint": "Start with Do" },
+          { "id": 20, "answer": "Some of us decided to leave early", "hint": "Start with Some" }
+        ],
+        "errorCorrection": [
+          {
+            "id": 1,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "I don't have any money.",
+              "I don't have no money.",
+              "I have no money.",
+              "I have some money."
+            ],
+            "correct": 1,
+            "explanation": "Double negatives ('don't have no') are grammatically incorrect."
+          },
+          {
+            "id": 2,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "Most of students were absent.",
+              "Most of the students were absent.",
+              "Most of student were absent.",
+              "Most the students were absent."
+            ],
+            "correct": 1,
+            "explanation": "'Most of' requires 'the' or a possessive before a noun."
+          },
+          {
+            "id": 3,
+            "text": "Which sentence contains a grammatical error?",
+            "options": [
+              "None of the answers are correct.",
+              "No of the answers are correct.",
+              "All of the answers are correct.",
+              "Some of the answers are correct."
+            ],
+            "correct": 1,
+            "explanation": "'No of' does not exist in English; use 'None of'."
+          },
+          {
+            "id": 4,
+            "text": "Select the sentence with CORRECT subject-verb agreement:",
+            "options": [
+              "All the informations are useful.",
+              "All the information is useful.",
+              "All the informations is useful.",
+              "All information are useful."
+            ],
+            "correct": 1,
+            "explanation": "'Information' is uncountable and takes singular verb 'is'."
+          },
+          {
+            "id": 5,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "Most of them is ready.",
+              "Most of them are ready.",
+              "Most of them be ready.",
+              "Most of them being ready."
+            ],
+            "correct": 1,
+            "explanation": "'Them' refers to plural items, so use 'are'."
+          },
+          {
+            "id": 6,
+            "text": "Which question is phrased INCORRECTLY for a polite offer?",
+            "options": [
+              "Would you like some tea?",
+              "Would you like any tea?",
+              "Do you want some cake?",
+              "Can I have some water?"
+            ],
+            "correct": 1,
+            "explanation": "Polite offers should use 'some', not 'any'."
+          },
+          {
+            "id": 7,
+            "text": "Which sentence has an INCORRECT pronoun structure?",
+            "options": [
+              "All of them came to the party.",
+              "All of us are ready.",
+              "All them came to the party.",
+              "All of you passed."
+            ],
+            "correct": 2,
+            "explanation": "'All of' is mandatory before object pronouns ('All of them', not 'All them')."
+          },
+          {
+            "id": 8,
+            "text": "Which sentence is INCORRECT in expressing total absence?",
+            "options": [
+              "There is no water in the bottle.",
+              "There isn't any water in the bottle.",
+              "There is not no water in the bottle.",
+              "There is zero water in the bottle."
+            ],
+            "correct": 2,
+            "explanation": "'is not no' creates an ungrammatical double negative."
+          },
+          {
+            "id": 9,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "Most people like chocolate.",
+              "Most of people like chocolate.",
+              "Most of the people in my town like chocolate.",
+              "Most of us like chocolate."
+            ],
+            "correct": 1,
+            "explanation": "'Most of people' is wrong; drop 'of' for general statements ('Most people')."
+          },
+          {
+            "id": 10,
+            "text": "Which sentence uses 'any' INCORRECTLY in a positive statement?",
+            "options": [
+              "Any child can do this task.",
+              "You can take any bus from here.",
+              "I have any books on my desk.",
+              "Call me at any time."
+            ],
+            "correct": 2,
+            "explanation": "'I have any books' is wrong in a standard positive sentence; use 'some'."
+          },
+          {
+            "id": 11,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "She didn't give me no answers.",
+              "She didn't give me any answers.",
+              "She gave me not any answers.",
+              "She didn't give me none answers."
+            ],
+            "correct": 1,
+            "explanation": "'didn't give me any answers' avoids double negatives."
+          },
+          {
+            "id": 12,
+            "text": "Which sentence has an error with uncountable nouns?",
+            "options": [
+              "All of the money was spent.",
+              "All of the money were spent.",
+              "Some of the money was stolen.",
+              "Most of the money is safe."
+            ],
+            "correct": 1,
+            "explanation": "'Money' is uncountable, so it takes singular verb 'was'."
+          },
+          {
+            "id": 13,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "Some guy called you earlier.",
+              "Some girl left her phone here.",
+              "Some students is waiting outside.",
+              "Some students are waiting outside."
+            ],
+            "correct": 2,
+            "explanation": "'Some students' is plural, so it requires 'are waiting'."
+          },
+          {
+            "id": 14,
+            "text": "Which sentence correctly uses 'hardly'?",
+            "options": [
+              "He has hardly no time.",
+              "He has hardly any time.",
+              "He has hardly not time.",
+              "He doesn't have hardly any time."
+            ],
+            "correct": 1,
+            "explanation": "'Hardly' already has negative meaning, so pair it with 'any' ('hardly any time')."
+          },
+          {
+            "id": 15,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "She solved the problem without any help.",
+              "She solved the problem without no help.",
+              "She solved the problem with no help.",
+              "She solved the problem without help."
+            ],
+            "correct": 1,
+            "explanation": "'without no' is a double negative."
+          },
+          {
+            "id": 16,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "All the children is playing outside.",
+              "All the children are playing outside.",
+              "All of children are playing outside.",
+              "All child are playing outside."
+            ],
+            "correct": 1,
+            "explanation": "'Children' is plural, requiring 'are'."
+          },
+          {
+            "id": 17,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "None of the milk is fresh.",
+              "None of the milk are fresh.",
+              "All of the milk is fresh.",
+              "Some of the milk is fresh."
+            ],
+            "correct": 1,
+            "explanation": "'Milk' is uncountable, so 'None of the milk' takes singular verb 'is'."
+          },
+          {
+            "id": 18,
+            "text": "Which sentence uses 'some' INCORRECTLY?",
+            "options": [
+              "Can I have some water?",
+              "Would you like some cake?",
+              "Do you have some questions? (standard general question)",
+              "I bought some apples."
+            ],
+            "correct": 2,
+            "explanation": "Standard general questions without offers/requests use 'any'."
+          },
+          {
+            "id": 19,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "Most of my friends are doctors.",
+              "Most my friends are doctors.",
+              "Most of my friends is doctors.",
+              "Most my friend are doctors."
+            ],
+            "correct": 0,
+            "explanation": "'Most of my friends' is correct before possessive determiners."
+          },
+          {
+            "id": 20,
+            "text": "Which sentence contains a grammatical error?",
+            "options": [
+              "Any student can join the club.",
+              "No students failed the test.",
+              "No of the students failed the test.",
+              "None of the students failed the test."
+            ],
+            "correct": 2,
+            "explanation": "'No of' is invalid English."
+          }
+        ],
+        "transform": [
+          {
+            "id": 1,
+            "text": "Transform: \"I don't have any money.\" = \"I have _____ money.\"",
+            "options": ["no", "none", "not", "any"],
+            "correct": 0,
+            "explanation": "'don't have any' is equivalent to 'have no'."
+          },
+          {
+            "id": 2,
+            "text": "Transform: \"There are no students here.\" = \"There aren't _____ students here.\"",
+            "options": ["any", "no", "some", "none"],
+            "correct": 0,
+            "explanation": "'are no' is equivalent to 'aren't any'."
+          },
+          {
+            "id": 3,
+            "text": "Transform: \"None of the water was wasted.\" = \"All of the water _____ saved.\"",
+            "options": ["was", "were", "are", "have been"],
+            "correct": 0,
+            "explanation": "Uncountable noun 'water' takes singular verb 'was'."
+          },
+          {
+            "id": 4,
+            "text": "Transform: \"He has almost no friends.\" = \"He has hardly _____ friends.\"",
+            "options": ["any", "some", "no", "none"],
+            "correct": 0,
+            "explanation": "'Hardly any' means almost no / almost none."
+          },
+          {
+            "id": 5,
+            "text": "Transform: \"She solved it without help.\" = \"She solved it without _____ help.\"",
+            "options": ["any", "some", "no", "none"],
+            "correct": 0,
+            "explanation": "'Without' pairs with 'any'."
+          },
+          {
+            "id": 6,
+            "text": "Transform: \"There isn't any milk left.\" = \"There is _____ milk left.\"",
+            "options": ["no", "none", "not", "any"],
+            "correct": 0,
+            "explanation": "'isn't any' is equivalent to 'is no'."
+          },
+          {
+            "id": 7,
+            "text": "Transform: \"Almost all people agree with this.\" = \"_____ people agree with this.\"",
+            "options": ["Most", "All", "Some", "Any"],
+            "correct": 0,
+            "explanation": "'Most' (>50%) means the majority / almost all."
+          },
+          {
+            "id": 8,
+            "text": "Transform: \"Every single student passed.\" = \"_____ of the students passed.\"",
+            "options": ["All", "Most", "Some", "No"],
+            "correct": 0,
+            "explanation": "100% of students = All of the students."
+          },
+          {
+            "id": 9,
+            "text": "Transform: \"It doesn't matter which bus you take.\" = \"You can take _____ bus.\"",
+            "options": ["any", "some", "no", "all"],
+            "correct": 0,
+            "explanation": "'Any' in positive sentences means 'it doesn't matter which'."
+          },
+          {
+            "id": 10,
+            "text": "Transform: \"No person in the room spoke.\" = \"_____ of the people in the room spoke.\"",
+            "options": ["None", "No", "Any", "Every"],
+            "correct": 0,
+            "explanation": "Use 'None of the people' before 'of + the + plural noun'."
+          },
+          {
+            "id": 11,
+            "text": "Transform: \"Do you want me to give you some tea?\" = \"Would you like _____ tea?\"",
+            "options": ["some", "any", "no", "none"],
+            "correct": 0,
+            "explanation": "Polite offers use 'some'."
+          },
+          {
+            "id": 12,
+            "text": "Transform: \"He has zero mistakes in his essay.\" = \"He has _____ mistakes in his essay.\"",
+            "options": ["no", "any", "some", "not"],
+            "correct": 0,
+            "explanation": "Zero quantity with positive verb = 'has no mistakes'."
+          },
+          {
+            "id": 13,
+            "text": "Transform: \"100% of my friends are invited.\" = \"_____ of my friends are invited.\"",
+            "options": ["All", "Most", "Some", "Any"],
+            "correct": 0,
+            "explanation": "100% = All of my friends."
+          },
+          {
+            "id": 14,
+            "text": "Transform: \"A majority of people love travel.\" = \"_____ people love travel.\"",
+            "options": ["Most", "All", "Some", "Any"],
+            "correct": 0,
+            "explanation": "A majority = Most people."
+          },
+          {
+            "id": 15,
+            "text": "Transform: \"She refused to answer any questions.\" = \"She answered _____ questions.\"",
+            "options": ["no", "any", "some", "none"],
+            "correct": 0,
+            "explanation": "Refused to answer any = answered no questions."
+          },
+          {
+            "id": 16,
+            "text": "Transform: \"Is there a single person inside?\" = \"Is there _____ inside?\"",
+            "options": ["anyone", "someone", "no one", "everyone"],
+            "correct": 0,
+            "explanation": "General question asking if there's a single person = 'anyone'."
+          },
+          {
+            "id": 17,
+            "text": "Transform: \"Not a single answer was right.\" = \"_____ of the answers were right.\"",
+            "options": ["None", "No", "Not", "Any"],
+            "correct": 0,
+            "explanation": "Not a single one = None of the answers."
+          },
+          {
+            "id": 18,
+            "text": "Transform: \"I haven't got any time today.\" = \"I have _____ time today.\"",
+            "options": ["no", "any", "none", "not"],
+            "correct": 0,
+            "explanation": "haven't got any = have no time."
+          },
+          {
+            "id": 19,
+            "text": "Transform: \"An unknown man left this note.\" = \"_____ man left this note.\"",
+            "options": ["Some", "Any", "All", "Every"],
+            "correct": 0,
+            "explanation": "'Some' + singular countable noun = an unknown / unspecified person."
+          },
+          {
+            "id": 20,
+            "text": "Transform: \"Whichever seat you choose is fine.\" = \"You can sit in _____ seat.\"",
+            "options": ["any", "some", "no", "every"],
+            "correct": 0,
+            "explanation": "Whichever one = any seat."
+          }
+        ],
+        "dialogue": [
+          {
+            "id": 1,
+            "situation": "In a classroom asking the teacher.",
+            "dialogue": "A: Do you have any questions about today's lesson?\nB: No, I have _____ questions.",
+            "options": ["no", "any", "all", "some"],
+            "correct": 0,
+            "explanation": "With a positive verb ('have'), use 'no'."
+          },
+          {
+            "id": 2,
+            "situation": "Offering a beverage to a guest.",
+            "dialogue": "A: Can I get you something to drink?\nB: Yes, please give me _____ water.",
+            "options": ["some", "any", "no", "none"],
+            "correct": 0,
+            "explanation": "When offering or requesting polite items, use 'some'."
+          },
+          {
+            "id": 3,
+            "situation": "At a restaurant ordering food.",
+            "dialogue": "A: Would you like _____ dessert?\nB: Yes, I would love some cake.",
+            "options": ["some", "any", "no", "none"],
+            "correct": 0,
+            "explanation": "Polite offers use 'some'."
+          },
+          {
+            "id": 4,
+            "situation": "Looking for missing car keys.",
+            "dialogue": "A: Have you seen my keys anywhere?\nB: No, I haven't seen them _____.",
+            "options": ["anywhere", "somewhere", "nowhere", "everywhere"],
+            "correct": 0,
+            "explanation": "Negative verb 'haven't seen' pairs with 'anywhere'."
+          },
+          {
+            "id": 5,
+            "situation": "Checking flight seat availability.",
+            "dialogue": "A: Are there any seats left on this flight?\nB: Sorry, there are _____ seats left.",
+            "options": ["no", "any", "none", "not"],
+            "correct": 0,
+            "explanation": "Positive verb 'there are' + 'no' + plural noun 'seats'."
+          },
+          {
+            "id": 6,
+            "situation": "Asking a librarian for assistance.",
+            "dialogue": "A: Can I borrow _____ of these books?\nB: Yes, you can take any of them.",
+            "options": ["some", "every", "no", "each"],
+            "correct": 0,
+            "explanation": "Requesting items polite: 'some of these books'."
+          },
+          {
+            "id": 7,
+            "situation": "Talking about exam results with a friend.",
+            "dialogue": "A: Did everyone pass the test?\nB: Yes, _____ student in our class passed!",
+            "options": ["every", "all", "most of", "some of"],
+            "correct": 0,
+            "explanation": "'Every' is followed by a singular countable noun 'student'."
+          },
+          {
+            "id": 8,
+            "situation": "Discussing company employees.",
+            "dialogue": "A: How many employees speak French?\nB: _____ of them speak French fluently.",
+            "options": ["Most", "Every", "Each", "No"],
+            "correct": 0,
+            "explanation": "'Most of them' takes plural verb 'speak'."
+          },
+          {
+            "id": 9,
+            "situation": "Shopping for clothes.",
+            "dialogue": "A: Which shirt should I buy?\nB: You look great in both! Take _____ shirt you like.",
+            "options": ["any", "some", "no", "none"],
+            "correct": 0,
+            "explanation": "'Any' in positive statements means 'it doesn't matter which'."
+          },
+          {
+            "id": 10,
+            "situation": "Meeting a stranger at an event.",
+            "dialogue": "A: Who was that person talking to you?\nB: I don't know, it was just _____ guy asking for directions.",
+            "options": ["some", "any", "no", "all"],
+            "correct": 0,
+            "explanation": "'Some guy' refers to an unknown / unspecified individual."
+          },
+          {
+            "id": 11,
+            "situation": "Preparing dinner at home.",
+            "dialogue": "A: Do we have any sugar left?\nB: No, we don't have _____ sugar at all.",
+            "options": ["any", "some", "no", "none"],
+            "correct": 0,
+            "explanation": "Negative verb 'don't have' + 'any'."
+          },
+          {
+            "id": 12,
+            "situation": "Talking about a movie review.",
+            "dialogue": "A: Did the audience like the movie?\nB: Yes, _____ of the audience loved it!",
+            "options": ["most", "every", "each", "any"],
+            "correct": 0,
+            "explanation": "'Most of the audience' refers to the majority."
+          },
+          {
+            "id": 13,
+            "situation": "At the bank asking for information.",
+            "dialogue": "A: Can someone explain the process to me?\nB: Of course, _____ of our staff members can help you.",
+            "options": ["any", "no", "none", "every"],
+            "correct": 0,
+            "explanation": "'Any of our staff members' = whichever staff member is available."
+          },
+          {
+            "id": 14,
+            "situation": "Checking fridge contents.",
+            "dialogue": "A: How much juice is left?\nB: _____! We need to buy more.",
+            "options": ["None", "No", "Not", "Any"],
+            "correct": 0,
+            "explanation": "Short answer pronoun for zero quantity without a noun = 'None'."
+          },
+          {
+            "id": 15,
+            "situation": "Organizing a sports team.",
+            "dialogue": "A: Are all players present today?\nB: Yes, _____ of them arrived on time.",
+            "options": ["all", "every", "each", "no"],
+            "correct": 0,
+            "explanation": "'All of them' with plural verb 'arrived'."
+          },
+          {
+            "id": 16,
+            "situation": "Asking for money loan.",
+            "dialogue": "A: Could you lend me _____ cash for taxi?\nB: Sure, here is $20.",
+            "options": ["some", "any", "no", "none"],
+            "correct": 0,
+            "explanation": "Polite request uses 'some'."
+          },
+          {
+            "id": 17,
+            "situation": "Solving a complex riddle.",
+            "dialogue": "A: Was this puzzle difficult?\nB: Not at all! He solved it without _____ trouble.",
+            "options": ["any", "some", "no", "none"],
+            "correct": 0,
+            "explanation": "'Without any' means without any difficulty."
+          },
+          {
+            "id": 18,
+            "situation": "Talking about smartphone battery life.",
+            "dialogue": "A: Is your phone battery full?\nB: No, I have hardly _____ battery left.",
+            "options": ["any", "some", "no", "every"],
+            "correct": 0,
+            "explanation": "'Hardly any' = almost none."
+          },
+          {
+            "id": 19,
+            "situation": "Discussing room temperature.",
+            "dialogue": "A: Is there any heat in this room?\nB: No, there is _____ heater here.",
+            "options": ["no", "any", "none", "not"],
+            "correct": 0,
+            "explanation": "Positive verb 'there is' + 'no'."
+          },
+          {
+            "id": 20,
+            "situation": "At the airport security checkpoint.",
+            "dialogue": "A: Do you have liquids in your bag?\nB: No, I don't have _____ liquids.",
+            "options": ["any", "some", "no", "none"],
+            "correct": 0,
+            "explanation": "Negative verb 'don't have' + 'any'."
+          }
+        ]
       },
       {
         "id": "quantifiers-no-none-not-any",
@@ -86754,125 +87384,714 @@ export const grammarData = {
 ],
         "fillBlanks": [
           {
-                    "id": 1,
-                    "sentence": "How much water is left? — _____.",
-                    "answer": "None",
-                    "hint": "short answer"
+            "id": 1,
+            "text": "How much water is left in the bottle? — _____.",
+            "options": ["None", "No", "Not any of", "Nothing"],
+            "correct": 0,
+            "explanation": "'None' is used as a standalone pronoun in short answers."
           },
           {
-                    "id": 2,
-                    "sentence": "There are _____ cars in the parking lot.",
-                    "answer": "no",
-                    "hint": "modifier before noun"
+            "id": 2,
+            "text": "There are _____ cars parked outside today.",
+            "options": ["no", "none", "not", "any"],
+            "correct": 0,
+            "explanation": "'No' directly modifies the plural noun 'cars'."
           },
           {
-                    "id": 3,
-                    "sentence": "_____ of the students failed the test.",
-                    "answer": "None",
-                    "hint": "None of structure"
+            "id": 3,
+            "text": "_____ of the students failed the exam.",
+            "options": ["None", "No", "Not", "Any"],
+            "correct": 0,
+            "explanation": "'None of + the + plural noun' takes plural verb 'failed'."
           },
           {
-                    "id": 4,
-                    "sentence": "I have _____ idea what happened.",
-                    "answer": "no",
-                    "hint": "no + idea"
+            "id": 4,
+            "text": "I have _____ idea what time the meeting starts.",
+            "options": ["no", "none", "not", "any"],
+            "correct": 0,
+            "explanation": "'No' + noun ('idea')."
           },
           {
-                    "id": 5,
-                    "sentence": "I asked for help, but _____ came.",
-                    "answer": "none",
-                    "hint": "standalone pronoun"
+            "id": 5,
+            "text": "I asked for volunteers, but _____ stepped forward.",
+            "options": ["none", "no", "not any of", "no one of"],
+            "correct": 0,
+            "explanation": "'None' acts as a standalone subject pronoun."
+          },
+          {
+            "id": 6,
+            "text": "There was _____ food remaining after the party.",
+            "options": ["no", "none", "not", "none of"],
+            "correct": 0,
+            "explanation": "'No' + uncountable noun ('food')."
+          },
+          {
+            "id": 7,
+            "text": "None of the money _____ recovered by the police.",
+            "options": ["was", "were", "are", "have been"],
+            "correct": 0,
+            "explanation": "'Money' is uncountable, so 'None of the money' takes singular verb 'was'."
+          },
+          {
+            "id": 8,
+            "text": "None of my brothers _____ cigarettes.",
+            "options": ["smoke", "smokes", "is smoking", "has smoked"],
+            "correct": 0,
+            "explanation": "'None of my brothers' takes plural verb 'smoke'."
+          },
+          {
+            "id": 9,
+            "text": "I searched for my keys, but I found _____.",
+            "options": ["none", "no", "not any of", "no one"],
+            "correct": 0,
+            "explanation": "'None' stands alone replacing 'no keys'."
+          },
+          {
+            "id": 10,
+            "text": "She didn't buy _____ fruits at the market.",
+            "options": ["any", "no", "none", "some of"],
+            "correct": 0,
+            "explanation": "Negative verb 'didn't buy' pairs with 'any'."
+          },
+          {
+            "id": 11,
+            "text": "How many books did you read? — _____.",
+            "options": ["None", "No", "Not", "Any"],
+            "correct": 0,
+            "explanation": "Short answer pronoun for zero quantity = 'None'."
+          },
+          {
+            "id": 12,
+            "text": "There is _____ milk in the glass.",
+            "options": ["no", "none", "not", "none of"],
+            "correct": 0,
+            "explanation": "'No' + uncountable noun ('milk')."
+          },
+          {
+            "id": 13,
+            "text": "_____ of the apples in the basket were fresh.",
+            "options": ["None", "No", "Not", "Any of"],
+            "correct": 0,
+            "explanation": "'None of the apples' before plural noun."
+          },
+          {
+            "id": 14,
+            "text": "He has _____ interest in computer games.",
+            "options": ["no", "none", "not", "none of"],
+            "correct": 0,
+            "explanation": "'No' + noun ('interest')."
+          },
+          {
+            "id": 15,
+            "text": "We expected visitors, but _____ came.",
+            "options": ["none", "no", "not any of", "no one of"],
+            "correct": 0,
+            "explanation": "'None' acts as subject pronoun."
+          },
+          {
+            "id": 16,
+            "text": "None of the information _____ helpful.",
+            "options": ["was", "were", "are", "have been"],
+            "correct": 0,
+            "explanation": "'Information' is uncountable, so use singular verb 'was'."
+          },
+          {
+            "id": 17,
+            "text": "She has _____ friends in her new town yet.",
+            "options": ["no", "none", "not", "none of"],
+            "correct": 0,
+            "explanation": "'No' + plural noun ('friends')."
+          },
+          {
+            "id": 18,
+            "text": "How much coffee did you drink? — _____.",
+            "options": ["None", "No", "Not", "Any"],
+            "correct": 0,
+            "explanation": "Short answer pronoun = 'None'."
+          },
+          {
+            "id": 19,
+            "text": "None of the players _____ ready for the match.",
+            "options": ["were", "was not", "were not", "is not"],
+            "correct": 0,
+            "explanation": "'None of the players' takes plural verb 'were'."
+          },
+          {
+            "id": 20,
+            "text": "There are _____ reasons to doubt his honesty.",
+            "options": ["no", "none", "not", "none of"],
+            "correct": 0,
+            "explanation": "'No' + plural noun ('reasons')."
           }
-],
+        ],
         "scrambled": [
-          {
-                    "id": 1,
-                    "answer": "None of the students were late",
-                    "hint": "Start with None"
-          },
-          {
-                    "id": 2,
-                    "answer": "There is no food left",
-                    "hint": "Start with There"
-          },
-          {
-                    "id": 3,
-                    "answer": "I have no idea about this",
-                    "hint": "Start with I"
-          },
-          {
-                    "id": 4,
-                    "answer": "None of my friends smoke",
-                    "hint": "Start with None"
-          },
-          {
-                    "id": 5,
-                    "answer": "She answered none of my calls",
-                    "hint": "Start with She"
-          }
-],
+          { "id": 1, "answer": "None of the students were late", "hint": "Start with None" },
+          { "id": 2, "answer": "There is no food left in the fridge", "hint": "Start with There" },
+          { "id": 3, "answer": "I have no idea about this problem", "hint": "Start with I" },
+          { "id": 4, "answer": "None of my friends smoke cigarettes", "hint": "Start with None" },
+          { "id": 5, "answer": "She answered none of my calls", "hint": "Start with She" },
+          { "id": 6, "answer": "There are no cars in the parking lot", "hint": "Start with There" },
+          { "id": 7, "answer": "None of the money was recovered", "hint": "Start with None" },
+          { "id": 8, "answer": "I have no time to lose today", "hint": "Start with I" },
+          { "id": 9, "answer": "None of these books belong to me", "hint": "Start with None" },
+          { "id": 10, "answer": "We found no answers to our questions", "hint": "Start with We" },
+          { "id": 11, "answer": "None of the apples were ripe", "hint": "Start with None" },
+          { "id": 12, "answer": "She gave me no choices at all", "hint": "Start with She" },
+          { "id": 13, "answer": "None of us knew the correct answer", "hint": "Start with None" },
+          { "id": 14, "answer": "There is no water in the pitcher", "hint": "Start with There" },
+          { "id": 15, "answer": "None of the workers arrived on time", "hint": "Start with None" },
+          { "id": 16, "answer": "He has no interest in sports", "hint": "Start with He" },
+          { "id": 17, "answer": "None of the information was verified", "hint": "Start with None" },
+          { "id": 18, "answer": "They made no mistakes in the test", "hint": "Start with They" },
+          { "id": 19, "answer": "None of them wanted to stay late", "hint": "Start with None" },
+          { "id": 20, "answer": "There are no excuses for this mistake", "hint": "Start with There" }
+        ],
         "errorCorrection": [
           {
-                    "id": 1,
-                    "text": "I don't like none of these options.",
-                    "correction": "I don't like any of these options.",
-                    "explanation": "Double negative taqiqi: don't + any."
+            "id": 1,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "I don't like any of these options.",
+              "I don't like none of these options.",
+              "I like none of these options.",
+              "I don't like any option."
+            ],
+            "correct": 1,
+            "explanation": "Double negative error: 'don't like none'."
           },
           {
-                    "id": 2,
-                    "text": "How many books do you have? - No.",
-                    "correction": "How many books do you have? - None.",
-                    "explanation": "Use 'None' in short answers without nouns."
+            "id": 2,
+            "text": "Which short answer is CORRECT for \"How many books do you have?\"?",
+            "options": [
+              "No.",
+              "None.",
+              "Not any book.",
+              "No one."
+            ],
+            "correct": 1,
+            "explanation": "'None' is used in short answers without nouns."
           },
           {
-                    "id": 3,
-                    "text": "None of student knew the answer.",
-                    "correction": "None of the students knew the answer.",
-                    "explanation": "'None of' requires 'the' and plural noun."
+            "id": 3,
+            "text": "Which sentence contains a grammatical error?",
+            "options": [
+              "None of the students knew the answer.",
+              "None of student knew the answer.",
+              "No student knew the answer.",
+              "Not any student knew the answer."
+            ],
+            "correct": 1,
+            "explanation": "'None of' requires 'the' and a plural noun ('the students')."
           },
           {
-                    "id": 4,
-                    "text": "None of the money were found.",
-                    "correction": "None of the money was found.",
-                    "explanation": "Uncountable noun with 'None of' takes singular verb."
+            "id": 4,
+            "text": "Select the sentence with CORRECT subject-verb agreement:",
+            "options": [
+              "None of the money were found.",
+              "None of the money was found.",
+              "None of the moneys were found.",
+              "None of money was found."
+            ],
+            "correct": 1,
+            "explanation": "Uncountable noun 'money' with 'None of' takes singular verb 'was'."
           },
           {
-                    "id": 5,
-                    "text": "There is none hope left.",
-                    "correction": "There is no hope left.",
-                    "explanation": "Use 'no' before noun."
+            "id": 5,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "There is no hope left.",
+              "There is none hope left.",
+              "There isn't any hope left.",
+              "There remains no hope."
+            ],
+            "correct": 1,
+            "explanation": "'None' cannot be used directly as a modifier before a noun; use 'no hope'."
+          },
+          {
+            "id": 6,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "None of them are coming.",
+              "No of them are coming.",
+              "Not any of them are coming.",
+              "None of us are coming."
+            ],
+            "correct": 1,
+            "explanation": "'No of' is invalid English."
+          },
+          {
+            "id": 7,
+            "text": "Which sentence has a double negative error?",
+            "options": [
+              "She didn't see anyone.",
+              "She saw no one.",
+              "She didn't see no one.",
+              "She saw nobody."
+            ],
+            "correct": 2,
+            "explanation": "'didn't see no one' is a double negative."
+          },
+          {
+            "id": 8,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "None of the advice were helpful.",
+              "None of the advice was helpful.",
+              "No of the advice was helpful.",
+              "None advice was helpful."
+            ],
+            "correct": 1,
+            "explanation": "'Advice' is uncountable, so 'None of the advice was...'."
+          },
+          {
+            "id": 9,
+            "text": "Which sentence uses 'none' INCORRECTLY?",
+            "options": [
+              "None of the cars were damaged.",
+              "I looked for apples, but there were none.",
+              "None student came today.",
+              "None of us knew."
+            ],
+            "correct": 2,
+            "explanation": "'None student' is wrong; use 'No student'."
+          },
+          {
+            "id": 10,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "We have no time.",
+              "We have none time.",
+              "We don't have no time.",
+              "We haven't no time."
+            ],
+            "correct": 0,
+            "explanation": "'have no time' is correct."
+          },
+          {
+            "id": 11,
+            "text": "Which sentence contains a grammatical error?",
+            "options": [
+              "None of the water was drank.",
+              "None of the children were hurt.",
+              "There is no milk in the fridge.",
+              "I don't want no sugar."
+            ],
+            "correct": 3,
+            "explanation": "Double negative: 'don't want no sugar'."
+          },
+          {
+            "id": 12,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "How much water? - None.",
+              "How much water? - No.",
+              "How much water? - Not any.",
+              "How much water? - Zero."
+            ],
+            "correct": 1,
+            "explanation": "In standalone short answers, 'None' is required, not 'No'."
+          },
+          {
+            "id": 13,
+            "text": "Which sentence has correct verb agreement?",
+            "options": [
+              "None of the news are good.",
+              "None of the news is good.",
+              "None of the news were good.",
+              "None news is good."
+            ],
+            "correct": 1,
+            "explanation": "'News' is uncountable, so 'None of the news is good'."
+          },
+          {
+            "id": 14,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "I have no questions.",
+              "I don't have any questions.",
+              "I have none questions.",
+              "I have no questions left."
+            ],
+            "correct": 2,
+            "explanation": "'none questions' is invalid; use 'no questions'."
+          },
+          {
+            "id": 15,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "None of the candidates was selected.",
+              "None candidate was selected.",
+              "No of the candidates was selected.",
+              "Not any candidates was selected."
+            ],
+            "correct": 0,
+            "explanation": "'None of the candidates...' is correct."
+          },
+          {
+            "id": 16,
+            "text": "Which sentence has a double negative?",
+            "options": [
+              "Nobody said anything.",
+              "Nobody said nothing.",
+              "No one spoke.",
+              "They said nothing."
+            ],
+            "correct": 1,
+            "explanation": "'Nobody said nothing' is a double negative."
+          },
+          {
+            "id": 17,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "I searched for mistakes, but found none.",
+              "I searched for mistakes, but found no.",
+              "I searched for mistakes, but found not any.",
+              "I searched for mistakes, but found none of."
+            ],
+            "correct": 0,
+            "explanation": "'found none' uses 'none' as standalone pronoun."
+          },
+          {
+            "id": 18,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "None of the answers are right.",
+              "No answer is right.",
+              "No of answers are right.",
+              "Not any answer is right."
+            ],
+            "correct": 2,
+            "explanation": "'No of answers' is invalid."
+          },
+          {
+            "id": 19,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "There are no reason to complain.",
+              "There is no reason to complain.",
+              "There are none reason to complain.",
+              "There is none reason to complain."
+            ],
+            "correct": 1,
+            "explanation": "'reason' is singular countable, so 'There is no reason'."
+          },
+          {
+            "id": 20,
+            "text": "Which sentence contains a grammatical error?",
+            "options": [
+              "None of my friends smoke.",
+              "None of my friend smokes.",
+              "No friend of mine smokes.",
+              "Neither of my friends smokes."
+            ],
+            "correct": 1,
+            "explanation": "'None of my friend' is wrong; 'friend' must be plural ('friends')."
           }
-],
+        ],
         "transform": [
           {
-                    "id": 1,
-                    "original": "I don't know any of them.",
-                    "target": "I know _____ of them.",
-                    "answer": "none",
-                    "explanation": "Don't know any = know none."
+            "id": 1,
+            "text": "Transform: \"I don't know any of them.\" = \"I know _____ of them.\"",
+            "options": ["none", "no", "not", "any"],
+            "correct": 0,
+            "explanation": "'don't know any of' = 'know none of'."
           },
           {
-                    "id": 2,
-                    "original": "How many apples? - Zero.",
-                    "target": "How many apples? - _____.",
-                    "answer": "None",
-                    "explanation": "Zero in short answer = None."
+            "id": 2,
+            "text": "Transform: \"How many apples? - Zero.\" = \"How many apples? - _____.\"",
+            "options": ["None", "No", "Not any of", "Nothing"],
+            "correct": 0,
+            "explanation": "Zero in short answer = None."
+          },
+          {
+            "id": 3,
+            "text": "Transform: \"There isn't any food left.\" = \"There is _____ food left.\"",
+            "options": ["no", "none", "not", "any"],
+            "correct": 0,
+            "explanation": "'isn't any' = 'is no'."
+          },
+          {
+            "id": 4,
+            "text": "Transform: \"Not one student passed.\" = \"_____ of the students passed.\"",
+            "options": ["None", "No", "Not", "Any"],
+            "correct": 0,
+            "explanation": "Not one = None of the students."
+          },
+          {
+            "id": 5,
+            "text": "Transform: \"She doesn't have any money.\" = \"She has _____ money.\"",
+            "options": ["no", "none", "not", "any"],
+            "correct": 0,
+            "explanation": "doesn't have any = has no."
+          },
+          {
+            "id": 6,
+            "text": "Transform: \"Not a single answer was correct.\" = \"_____ of the answers were correct.\"",
+            "options": ["None", "No", "Not", "Any"],
+            "correct": 0,
+            "explanation": "Not a single answer = None of the answers."
+          },
+          {
+            "id": 7,
+            "text": "Transform: \"I haven't got any time.\" = \"I have _____ time.\"",
+            "options": ["no", "none", "not", "any"],
+            "correct": 0,
+            "explanation": "haven't got any = have no."
+          },
+          {
+            "id": 8,
+            "text": "Transform: \"How much sugar? - Zero.\" = \"How much sugar? - _____.\"",
+            "options": ["None", "No", "Not", "Nothing"],
+            "correct": 0,
+            "explanation": "Short answer pronoun = None."
+          },
+          {
+            "id": 9,
+            "text": "Transform: \"There aren't any excuses.\" = \"There are _____ excuses.\"",
+            "options": ["no", "none", "not", "any"],
+            "correct": 0,
+            "explanation": "aren't any = are no."
+          },
+          {
+            "id": 10,
+            "text": "Transform: \"0% of the information was true.\" = \"_____ of the information was true.\"",
+            "options": ["None", "No", "Not", "Any"],
+            "correct": 0,
+            "explanation": "0% = None of the information."
+          },
+          {
+            "id": 11,
+            "text": "Transform: \"She answered zero calls.\" = \"She answered _____ of my calls.\"",
+            "options": ["none", "no", "not", "any"],
+            "correct": 0,
+            "explanation": "answered zero = answered none of."
+          },
+          {
+            "id": 12,
+            "text": "Transform: \"He has zero interest in art.\" = \"He has _____ interest in art.\"",
+            "options": ["no", "none", "not", "any"],
+            "correct": 0,
+            "explanation": "zero interest = no interest."
+          },
+          {
+            "id": 13,
+            "text": "Transform: \"They didn't find any clues.\" = \"They found _____ clues.\"",
+            "options": ["no", "none", "not", "any"],
+            "correct": 0,
+            "explanation": "didn't find any = found no."
+          },
+          {
+            "id": 14,
+            "text": "Transform: \"How many people arrived? - Zero.\" = \"How many people arrived? - _____.\"",
+            "options": ["None", "No", "Not", "No one of"],
+            "correct": 0,
+            "explanation": "Short answer pronoun = None."
+          },
+          {
+            "id": 15,
+            "text": "Transform: \"Not one of my friends smoked.\" = \"_____ of my friends smoked.\"",
+            "options": ["None", "No", "Not", "Any"],
+            "correct": 0,
+            "explanation": "Not one of = None of."
+          },
+          {
+            "id": 16,
+            "text": "Transform: \"There isn't any water left.\" = \"There is _____ water left.\"",
+            "options": ["no", "none", "not", "any"],
+            "correct": 0,
+            "explanation": "isn't any = is no."
+          },
+          {
+            "id": 17,
+            "text": "Transform: \"We made zero progress.\" = \"We made _____ progress.\"",
+            "options": ["no", "none", "not", "any"],
+            "correct": 0,
+            "explanation": "made zero = made no."
+          },
+          {
+            "id": 18,
+            "text": "Transform: \"She gave zero explanations.\" = \"She gave _____ explanations.\"",
+            "options": ["no", "none", "not", "any"],
+            "correct": 0,
+            "explanation": "gave zero = gave no."
+          },
+          {
+            "id": 19,
+            "text": "Transform: \"Not a single player complained.\" = \"_____ of the players complained.\"",
+            "options": ["None", "No", "Not", "Any"],
+            "correct": 0,
+            "explanation": "Not a single player = None of the players."
+          },
+          {
+            "id": 20,
+            "text": "Transform: \"I don't have any questions.\" = \"I have _____ questions.\"",
+            "options": ["no", "none", "not", "any"],
+            "correct": 0,
+            "explanation": "don't have any = have no."
           }
-],
+        ],
         "dialogue": [
           {
-                    "id": 1,
-                    "dialogue": "A: How many passengers were injured?\nB: _____, luckily.",
-                    "options": [
-                              "None",
-                              "No",
-                              "Not any",
-                              "Nothing"
-                    ],
-                    "correct": 0,
-                    "explanation": "Short answer 'None'."
+            "id": 1,
+            "situation": "At the bus stop inquiring about passengers.",
+            "dialogue": "A: How many passengers were injured in the accident?\nB: _____, luckily. Everyone was fine.",
+            "options": ["None", "No", "Not any", "Nothing"],
+            "correct": 0,
+            "explanation": "Short answer pronoun 'None'."
+          },
+          {
+            "id": 2,
+            "situation": "In a bakery asking about fresh rolls.",
+            "dialogue": "A: Do you have any fresh rolls left?\nB: Sorry, there are _____ left today.",
+            "options": ["none", "no", "not any of", "no one"],
+            "correct": 0,
+            "explanation": "'None' as pronoun at end of sentence."
+          },
+          {
+            "id": 3,
+            "situation": "Teacher checking student submissions.",
+            "dialogue": "A: Did any students fail the exam?\nB: No, _____ of the students failed!",
+            "options": ["none", "no", "not", "any"],
+            "correct": 0,
+            "explanation": "'None of the students'."
+          },
+          {
+            "id": 4,
+            "situation": "Asking a colleague about free time.",
+            "dialogue": "A: Do you have time for a quick break?\nB: No, I have _____ free time right now.",
+            "options": ["no", "none", "not", "any"],
+            "correct": 0,
+            "explanation": "'No' + uncountable noun ('free time')."
+          },
+          {
+            "id": 5,
+            "situation": "Checking fridge for eggs.",
+            "dialogue": "A: How many eggs do we have?\nB: _____! I need to buy a box.",
+            "options": ["None", "No", "Not", "Nothing"],
+            "correct": 0,
+            "explanation": "Standalone short answer 'None'."
+          },
+          {
+            "id": 6,
+            "situation": "Discussing lost luggage at the airport.",
+            "dialogue": "A: Did they recover any of your lost bags?\nB: No, _____ of my bags were found.",
+            "options": ["none", "no", "not", "any"],
+            "correct": 0,
+            "explanation": "'None of my bags'."
+          },
+          {
+            "id": 7,
+            "situation": "At a ticket counter.",
+            "dialogue": "A: Are there any seats left for tonight's show?\nB: I'm sorry, there are _____ seats left.",
+            "options": ["no", "none", "not", "any"],
+            "correct": 0,
+            "explanation": "'No' + plural noun ('seats')."
+          },
+          {
+            "id": 8,
+            "situation": "Talking about financial budget.",
+            "dialogue": "A: How much money is left in the account?\nB: _____. We spent it all.",
+            "options": ["None", "No", "Not", "Nothing"],
+            "correct": 0,
+            "explanation": "Standalone short answer 'None'."
+          },
+          {
+            "id": 9,
+            "situation": "In a job interview.",
+            "dialogue": "A: Do you have any previous experience in sales?\nB: No, I have _____ experience in sales.",
+            "options": ["no", "none", "not", "any"],
+            "correct": 0,
+            "explanation": "'No' + uncountable noun ('experience')."
+          },
+          {
+            "id": 10,
+            "situation": "Asking a friend about party guests.",
+            "dialogue": "A: Did any of our old school friends attend?\nB: _____ of them attended, unfortunately.",
+            "options": ["None", "No", "Not", "Any"],
+            "correct": 0,
+            "explanation": "'None of them'."
+          },
+          {
+            "id": 11,
+            "situation": "Checking phone notifications.",
+            "dialogue": "A: How many missed calls do you have?\nB: _____! My phone was on silent.",
+            "options": ["None", "No", "Not", "Any"],
+            "correct": 0,
+            "explanation": "Standalone short answer 'None'."
+          },
+          {
+            "id": 12,
+            "situation": "At a restaurant asking for milk.",
+            "dialogue": "A: Is there any milk for the coffee?\nB: No, there is _____ milk left.",
+            "options": ["no", "none", "not", "any"],
+            "correct": 0,
+            "explanation": "'No' + uncountable noun ('milk')."
+          },
+          {
+            "id": 13,
+            "situation": "Discussing sports team performance.",
+            "dialogue": "A: How many games did your team win this season?\nB: _____. We lost every single match!",
+            "options": ["None", "No", "Not", "Nothing"],
+            "correct": 0,
+            "explanation": "Standalone short answer 'None'."
+          },
+          {
+            "id": 14,
+            "situation": "Checking room availability at a hotel.",
+            "dialogue": "A: Do you have any vacant rooms?\nB: Sorry, we have _____ vacancies tonight.",
+            "options": ["no", "none", "not", "any"],
+            "correct": 0,
+            "explanation": "'No' + plural noun ('vacancies')."
+          },
+          {
+            "id": 15,
+            "situation": "Talking about homework completion.",
+            "dialogue": "A: How much of your assignment is finished?\nB: _____ of it is finished yet.",
+            "options": ["None", "No", "Not", "Any"],
+            "correct": 0,
+            "explanation": "'None of it'."
+          },
+          {
+            "id": 16,
+            "situation": "Asking a doctor about test results.",
+            "dialogue": "A: Are there any complications from the surgery?\nB: No, there are _____ complications.",
+            "options": ["no", "none", "not", "any"],
+            "correct": 0,
+            "explanation": "'No' + plural noun ('complications')."
+          },
+          {
+            "id": 17,
+            "situation": "Buying raffle tickets.",
+            "dialogue": "A: Did any of your tickets win a prize?\nB: _____ of my tickets won anything.",
+            "options": ["None", "No", "Not", "Any"],
+            "correct": 0,
+            "explanation": "'None of my tickets'."
+          },
+          {
+            "id": 18,
+            "situation": "In a clothing store.",
+            "dialogue": "A: Do you have this jacket in size medium?\nB: No, we have _____ left in that size.",
+            "options": ["none", "no", "not any of", "no one"],
+            "correct": 0,
+            "explanation": "'None' pronoun replacing 'no jackets'."
+          },
+          {
+            "id": 19,
+            "situation": "Asking a chef about ingredients.",
+            "dialogue": "A: Is there any salt in this soup?\nB: No, I put _____ salt in it.",
+            "options": ["no", "none", "not", "any"],
+            "correct": 0,
+            "explanation": "'No' + uncountable noun ('salt')."
+          },
+          {
+            "id": 20,
+            "situation": "Discussing meeting attendance.",
+            "dialogue": "A: Did any managers attend the workshop?\nB: No, _____ of the managers were present.",
+            "options": ["none", "no", "not", "any"],
+            "correct": 0,
+            "explanation": "'None of the managers'."
           }
-]
+        ]
       },
       {
         "id": "both-either-neither-basics",
