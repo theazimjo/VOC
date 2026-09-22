@@ -94462,512 +94462,509 @@ export const grammarData = {
           }
         ],
         "scrambled": [
-          {
-            "id": 1,
-            "words": [
-              "the",
-              "woman",
-              "newspaper",
-              "reading",
-              "the",
-              "is",
-              "a",
-              "journalist"
-            ],
-            "answer": "The woman reading the newspaper is a journalist.",
-            "explanation": "Active reduction: The woman reading..."
-          },
-          {
-            "id": 2,
-            "words": [
-              "the",
-              "car",
-              "yesterday",
-              "stolen",
-              "was",
-              "found"
-            ],
-            "answer": "The car stolen yesterday was found.",
-            "explanation": "Passive reduction: The car stolen..."
-          },
-          {
-            "id": 3,
-            "words": [
-              "she",
-              "was",
-              "first",
-              "the",
-              "person",
-              "to",
-              "arrive"
-            ],
-            "answer": "She was the first person to arrive.",
-            "explanation": "Infinitive reduction: ...first person to arrive."
-          },
-          {
-            "id": 4,
-            "words": [
-              "the",
-              "book",
-              "Tolstoy",
-              "written",
-              "by",
-              "is",
-              "famous"
-            ],
-            "answer": "The book written by Tolstoy is famous.",
-            "explanation": "Passive reduction: The book written by..."
-          },
-          {
-            "id": 5,
-            "words": [
-              "the",
-              "man",
-              "by",
-              "standing",
-              "the",
-              "door",
-              "is",
-              "my",
-              "teacher"
-            ],
-            "answer": "The man standing by the door is my teacher.",
-            "explanation": "Active reduction: The man standing..."
-          },
-          {
-            "id": 6,
-            "words": [
-              "food",
-              "prepared",
-              "by",
-              "chefs",
-              "tastes",
-              "better"
-            ],
-            "answer": "Food prepared by chefs tastes better.",
-            "explanation": "Passive reduction: Food prepared..."
-          },
-          {
-            "id": 7,
-            "words": [
-              "the",
-              "children",
-              "in",
-              "playing",
-              "the",
-              "park",
-              "are",
-              "happy"
-            ],
-            "answer": "The children playing in the park are happy.",
-            "explanation": "Active reduction: The children playing..."
-          },
-          {
-            "id": 8,
-            "words": [
-              "the",
-              "bridge",
-              "built",
-              "in",
-              "1900",
-              "still",
-              "stands"
-            ],
-            "answer": "The bridge built in 1900 still stands.",
-            "explanation": "Passive reduction: The bridge built..."
-          },
-          {
-            "id": 9,
-            "words": [
-              "he",
-              "is",
-              "the",
-              "only",
-              "student",
-              "to",
-              "score",
-              "100%"
-            ],
-            "answer": "He is the only student to score 100%.",
-            "explanation": "Infinitive reduction: ...only student to score..."
-          },
-          {
-            "id": 10,
-            "words": [
-              "the",
-              "laptop",
-              "repaired",
-              "by",
-              "tech",
-              "works",
-              "well"
-            ],
-            "answer": "The laptop repaired by tech works well.",
-            "explanation": "Passive reduction: The laptop repaired..."
-          },
-          {
-            "id": 11,
-            "words": [
-              "letters",
-              "written",
-              "in",
-              "ink",
-              "faded",
-              "quickly"
-            ],
-            "answer": "Letters written in ink faded quickly.",
-            "explanation": "Passive reduction: Letters written..."
-          },
-          {
-            "id": 12,
-            "words": [
-              "the",
-              "girl",
-              "sitting",
-              "next",
-              "to",
-              "me",
-              "is",
-              "kind"
-            ],
-            "answer": "The girl sitting next to me is kind.",
-            "explanation": "Active reduction: The girl sitting..."
-          },
-          {
-            "id": 13,
-            "words": [
-              "the",
-              "window",
-              "broken",
-              "by",
-              "Tom",
-              "was",
-              "fixed"
-            ],
-            "answer": "The window broken by Tom was fixed.",
-            "explanation": "Passive reduction: The window broken..."
-          },
-          {
-            "id": 14,
-            "words": [
-              "people",
-              "waiting",
-              "outside",
-              "look",
-              "cold"
-            ],
-            "answer": "People waiting outside look cold.",
-            "explanation": "Active reduction: People waiting..."
-          },
-          {
-            "id": 15,
-            "words": [
-              "packages",
-              "delivered",
-              "this",
-              "morning",
-              "are",
-              "here"
-            ],
-            "answer": "Packages delivered this morning are here.",
-            "explanation": "Passive reduction: Packages delivered..."
-          }
+          { "id": 1, "answer": "The woman reading the newspaper is a journalist", "hint": "Start with The woman" },
+          { "id": 2, "answer": "The car stolen yesterday was found", "hint": "Start with The car" },
+          { "id": 3, "answer": "She was the first person to arrive", "hint": "Start with She" },
+          { "id": 4, "answer": "The book written by Tolstoy is famous", "hint": "Start with The book" },
+          { "id": 5, "answer": "The man standing by the door is my teacher", "hint": "Start with The man" },
+          { "id": 6, "answer": "Food prepared by chefs tastes better", "hint": "Start with Food" },
+          { "id": 7, "answer": "The children playing in the park are happy", "hint": "Start with The children" },
+          { "id": 8, "answer": "The bridge built in 1900 still stands", "hint": "Start with The bridge" },
+          { "id": 9, "answer": "He is the only student to score 100%", "hint": "Start with He" },
+          { "id": 10, "answer": "The laptop repaired by tech works well", "hint": "Start with The laptop" },
+          { "id": 11, "answer": "Letters written in ink faded quickly", "hint": "Start with Letters" },
+          { "id": 12, "answer": "The girl sitting next to me is kind", "hint": "Start with The girl" },
+          { "id": 13, "answer": "The window broken by Tom was fixed", "hint": "Start with The window" },
+          { "id": 14, "answer": "People waiting outside look cold", "hint": "Start with People" },
+          { "id": 15, "answer": "Packages delivered this morning are here", "hint": "Start with Packages" },
+          { "id": 16, "answer": "Students studying hard will succeed", "hint": "Start with Students" },
+          { "id": 17, "answer": "The dog barking at night belongs to Mark", "hint": "Start with The dog" },
+          { "id": 18, "answer": "She was the last student to leave class", "hint": "Start with She" },
+          { "id": 19, "answer": "The documents signed by manager are ready", "hint": "Start with The documents" },
+          { "id": 20, "answer": "This is the only restaurant to satisfy my taste", "hint": "Start with This" }
         ],
         "errorCorrection": [
           {
             "id": 1,
-            "words": [
-              "The",
-              "book",
-              "reading",
-              "by",
-              "students",
-              "is",
-              "long."
+            "text": "Which sentence contains a REDUCED CLAUSE error?",
+            "options": [
+              "The book written by Tolstoy is famous.",
+              "The book reading by students was long.",
+              "The woman reading the newspaper is a journalist.",
+              "The car stolen yesterday was found."
             ],
-            "answer": "The book written by students is long.",
-            "explanation": "Majhul nisbatda V3 (written) bo'lishi kerak, active -ing emas."
+            "correct": 1,
+            "explanation": "Passive reduction requires Past Participle V3 ('written by students'), not active V-ing ('reading')."
           },
           {
             "id": 2,
-            "words": [
-              "She",
-              "is",
-              "girl",
-              "who",
-              "sleeping",
-              "in",
-              "class."
+            "text": "Which sentence is INCORRECTLY reduced?",
+            "options": [
+              "She is the girl sleeping in class.",
+              "She is the girl who sleeping in class.",
+              "She is the girl who is sleeping in class.",
+              "The girl sleeping in class is lazy."
             ],
-            "answer": "She is the girl sleeping in class.",
-            "explanation": "'who' olmoshi olib tashlanishi kerak."
+            "correct": 1,
+            "explanation": "In reduced clauses, relative pronoun 'who' must be dropped along with 'is'."
           },
           {
             "id": 3,
-            "words": [
-              "The",
-              "car",
-              "breaking",
-              "down",
-              "was",
-              "towed."
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "The car broken down was towed away.",
+              "The car breaking down on the highway was towed.",
+              "The car that broke down was towed away.",
+              "The car broken on the highway was towed."
             ],
-            "answer": "The car broken down was towed.",
-            "explanation": "Buzilgan mashina — V3 (broken down) ishlatiladi."
+            "correct": 1,
+            "explanation": "Use V3 'broken down' for passive state/result."
           },
           {
             "id": 4,
-            "words": [
-              "He",
-              "is",
-              "only",
-              "student",
-              "passing",
-              "who",
-              "scored."
+            "text": "Which sentence contains a reduction error?",
+            "options": [
+              "He is the only student to score 100%.",
+              "He is the only student passing that scored 100%.",
+              "He was the first person to arrive.",
+              "She was the last candidate to be interviewed."
             ],
-            "answer": "He is the only student to score 100%.",
-            "explanation": "'Only' birikmasidan keyin Infinitive (to+V) ishlatiladi."
+            "correct": 1,
+            "explanation": "After 'only/first/last', use Infinitive (to + verb), not '-ing'."
           },
           {
             "id": 5,
-            "words": [
-              "The",
-              "letters",
-              "writing",
-              "by",
-              "hand",
-              "felt",
-              "personal."
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "The letters written by hand felt personal.",
+              "The letters writing by hand felt personal.",
+              "The letters that were written by hand felt personal.",
+              "Letters written in ink faded over time."
             ],
-            "answer": "The letters written by hand felt personal.",
-            "explanation": "Qo'lda yozilgan maktublar — V3 (written) ishlatiladi."
+            "correct": 1,
+            "explanation": "Letters were written (passive V3), not writing."
           },
           {
             "id": 6,
-            "words": [
-              "The",
-              "man",
-              "who",
-              "standing",
-              "there",
-              "is",
-              "my",
-              "father."
+            "text": "Which sentence is INCORRECTLY reduced?",
+            "options": [
+              "The man standing there is my father.",
+              "The man who standing there is my father.",
+              "The man who is standing there is my father.",
+              "The man standing by the entrance is my father."
             ],
-            "answer": "The man standing there is my father.",
-            "explanation": "'who' olmoshi olib tashlanishi shart."
+            "correct": 1,
+            "explanation": "Relative pronoun 'who' must be omitted in reduced active clauses."
           },
           {
             "id": 7,
-            "words": [
-              "The",
-              "car",
-              "that",
-              "stolen",
-              "was",
-              "red."
+            "text": "Which sentence contains a reduction error?",
+            "options": [
+              "The car stolen yesterday was red.",
+              "The car that stolen yesterday was red.",
+              "The stolen car was red.",
+              "The car that was stolen yesterday was red."
             ],
-            "answer": "The car stolen was red.",
-            "explanation": "'that' olmoshi tushirib qoldiriladi."
+            "correct": 1,
+            "explanation": "Cannot keep 'that' while omitting 'was'."
           },
           {
             "id": 8,
-            "words": [
-              "She",
-              "was",
-              "first",
-              "girl",
-              "passing",
-              "the",
-              "test."
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "She was the first girl to pass the test.",
+              "She was the first girl passing the test.",
+              "She was the first student to finish.",
+              "She was the first to arrive."
             ],
-            "answer": "She was the first girl to pass the test.",
-            "explanation": "Tartib son (first) dan keyin to+V ishlatiladi."
+            "correct": 1,
+            "explanation": "Ordinals (first/second) take infinitive 'to pass'."
           },
           {
             "id": 9,
-            "words": [
-              "The",
-              "man",
-              "seeming",
-              "tired",
-              "went",
-              "home."
+            "text": "Which sentence CANNOT be reduced using -ing?",
+            "options": [
+              "The man who is standing by the door.",
+              "The man who seems tired went home.",
+              "The woman who is reading a book.",
+              "The children who are playing outside."
             ],
-            "answer": "The man who seems tired went home.",
-            "explanation": "'seem' kabi holat fe'llari V-ing deb qisqartirilmaydi."
+            "correct": 1,
+            "explanation": "Stative verbs like 'seem' cannot be reduced to 'seeming tired'."
           },
           {
             "id": 10,
-            "words": [
-              "The",
-              "house",
-              "cleaning",
-              "by",
-              "Mary",
-              "looks",
-              "nice."
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "The house cleaned by Mary looks nice.",
+              "The house cleaning by Mary looks nice.",
+              "The house that was cleaned by Mary looks nice.",
+              "The cleaned house looks nice."
             ],
-            "answer": "The house cleaned by Mary looks nice.",
-            "explanation": "Majhul nisbatda V3 (cleaned) bo'ladi."
+            "correct": 1,
+            "explanation": "Passive action requires V3 'cleaned'."
           },
           {
             "id": 11,
-            "words": [
-              "Food",
-              "preparing",
-              "by",
-              "chefs",
-              "is",
-              "tasty."
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "Food prepared by chefs is tasty.",
+              "Food preparing by chefs is tasty.",
+              "Food that is prepared by chefs is tasty.",
+              "Prepared food tastes better."
             ],
-            "answer": "Food prepared by chefs is tasty.",
-            "explanation": "Oshpazlar tayyorlagan ovqat — V3 (prepared)."
+            "correct": 1,
+            "explanation": "Food is prepared by chefs (passive V3)."
           },
           {
             "id": 12,
-            "words": [
-              "The",
-              "dog",
-              "which",
-              "barking",
-              "is",
-              "mine."
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "The dog barking at night is mine.",
+              "The dog which barking is mine.",
+              "The dog that is barking is mine.",
+              "The barking dog is mine."
             ],
-            "answer": "The dog barking is mine.",
-            "explanation": "'which' olmoshi tushirib qoldiriladi."
+            "correct": 1,
+            "explanation": "Omit 'which' when reducing."
           },
           {
             "id": 13,
-            "words": [
-              "He",
-              "was",
-              "last",
-              "man",
-              "leaving."
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "He was the last man to leave.",
+              "He was the last man leaving.",
+              "He was the last person to arrive.",
+              "He was the last to finish."
             ],
-            "answer": "He was the last man to leave.",
-            "explanation": "'last' dan keyin Infinitive (to leave) ishlatiladi."
+            "correct": 1,
+            "explanation": "After 'last', use infinitive 'to leave'."
           },
           {
             "id": 14,
-            "words": [
-              "The",
-              "documents",
-              "signing",
-              "by",
-              "boss",
-              "are",
-              "here."
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "The documents signed by the boss are here.",
+              "The documents signing by the boss are here.",
+              "The documents that were signed are here.",
+              "The signed documents are on the table."
             ],
-            "answer": "The documents signed by boss are here.",
-            "explanation": "Hujjatlar imzolangan — V3 (signed)."
+            "correct": 1,
+            "explanation": "Documents are signed (passive V3)."
           },
           {
             "id": 15,
-            "words": [
-              "Students",
-              "who",
-              "studying",
-              "hard",
-              "get",
-              "grades."
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "Students studying hard get good grades.",
+              "Students who studying hard get good grades.",
+              "Students who study hard get good grades.",
+              "Students studying regularly succeed."
             ],
-            "answer": "Students studying hard get grades.",
-            "explanation": "'who' olmoshi olib tashlanishi kerak."
+            "correct": 1,
+            "explanation": "Omit 'who' when reducing active clauses."
+          },
+          {
+            "id": 16,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "The window broken by Tom was fixed.",
+              "The window breaking by Tom was fixed.",
+              "The window that was broken was fixed.",
+              "The broken window was replaced."
+            ],
+            "correct": 1,
+            "explanation": "Window was broken (passive V3)."
+          },
+          {
+            "id": 17,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "She has a house to rent.",
+              "She has a house renting.",
+              "I need someone to help me.",
+              "This is the best place to visit."
+            ],
+            "correct": 1,
+            "explanation": "Expressing purpose/modality requires 'to rent'."
+          },
+          {
+            "id": 18,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "Packages delivered this morning are ready.",
+              "Packages delivering this morning are ready.",
+              "Packages that were delivered are ready.",
+              "The delivered packages are here."
+            ],
+            "correct": 1,
+            "explanation": "Packages were delivered (passive V3)."
+          },
+          {
+            "id": 19,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "The girl sitting next to me is friendly.",
+              "The girl who sitting next to me is friendly.",
+              "The girl who is sitting next to me is friendly.",
+              "The girl sitting in front of me is quiet."
+            ],
+            "correct": 1,
+            "explanation": "Omit relative pronoun 'who'."
+          },
+          {
+            "id": 20,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "The bridge built in 1900 still stands.",
+              "The bridge building in 1900 still stands.",
+              "The bridge that was built in 1900 still stands.",
+              "The ancient bridge built long ago is safe."
+            ],
+            "correct": 1,
+            "explanation": "Bridge was built (passive V3)."
           }
         ],
         "transform": [
           {
             "id": 1,
-            "original": "The woman who is reading the newspaper is a journalist.",
-            "answer": "The woman reading the newspaper is a journalist.",
-            "explanation": "Active reduction: 'who is reading' -> 'reading'"
+            "text": "Reduce: \"The woman who is reading the newspaper is a journalist.\"",
+            "options": [
+              "The woman reading the newspaper is a journalist.",
+              "The woman read the newspaper is a journalist.",
+              "The woman who reading the newspaper is a journalist.",
+              "The woman is reading the newspaper is a journalist."
+            ],
+            "correct": 0,
+            "explanation": "Active reduction: 'who is reading' -> 'reading'."
           },
           {
             "id": 2,
-            "original": "The laptop that was repaired by the technician works perfectly.",
-            "answer": "The laptop repaired by the technician works perfectly.",
-            "explanation": "Passive reduction: 'that was repaired' -> 'repaired'"
+            "text": "Reduce: \"The laptop that was repaired by the technician works perfectly.\"",
+            "options": [
+              "The laptop repaired by the technician works perfectly.",
+              "The laptop repairing by the technician works perfectly.",
+              "The laptop that repaired works perfectly.",
+              "The laptop was repaired works perfectly."
+            ],
+            "correct": 0,
+            "explanation": "Passive reduction: 'that was repaired' -> 'repaired'."
           },
           {
             "id": 3,
-            "original": "He is the best athlete who has ever competed in this tournament.",
-            "answer": "He is the best athlete ever to have competed in this tournament.",
-            "explanation": "Infinitive reduction after superlative: 'who has ever competed' -> 'ever to have competed'"
+            "text": "Reduce: \"He is the best athlete who has ever competed in this tournament.\"",
+            "options": [
+              "He is the best athlete ever to have competed in this tournament.",
+              "He is the best athlete competing in this tournament.",
+              "He is the best athlete who competed in this tournament.",
+              "He is the best athlete competed in this tournament."
+            ],
+            "correct": 0,
+            "explanation": "Superlative 'best' takes infinitive reduction: 'to have competed'."
           },
           {
             "id": 4,
-            "original": "The children who were playing in the garden are my cousins.",
-            "answer": "The children playing in the garden are my cousins.",
-            "explanation": "Active reduction: 'who were playing' -> 'playing'"
+            "text": "Reduce: \"The children who were playing in the garden are my cousins.\"",
+            "options": [
+              "The children playing in the garden are my cousins.",
+              "The children played in the garden are my cousins.",
+              "The children who playing are my cousins.",
+              "The children to play in the garden are my cousins."
+            ],
+            "correct": 0,
+            "explanation": "Active reduction: 'who were playing' -> 'playing'."
           },
           {
             "id": 5,
-            "original": "This is the only restaurant that can satisfy my taste.",
-            "answer": "This is the only restaurant to satisfy my taste.",
-            "explanation": "Infinitive reduction after 'only': 'that can satisfy' -> 'to satisfy'"
+            "text": "Reduce: \"This is the only restaurant that can satisfy my taste.\"",
+            "options": [
+              "This is the only restaurant to satisfy my taste.",
+              "This is the only restaurant satisfying my taste.",
+              "This is the only restaurant satisfied my taste.",
+              "This is the only restaurant satisfy my taste."
+            ],
+            "correct": 0,
+            "explanation": "Infinitive reduction after 'only': 'to satisfy'."
           },
           {
             "id": 6,
-            "original": "The man who is standing by the door is my teacher.",
-            "answer": "The man standing by the door is my teacher.",
-            "explanation": "Active reduction: 'who is standing' -> 'standing'"
+            "text": "Reduce: \"The man who is standing by the door is my teacher.\"",
+            "options": [
+              "The man standing by the door is my teacher.",
+              "The man stood by the door is my teacher.",
+              "The man who standing is my teacher.",
+              "The man to stand by the door is my teacher."
+            ],
+            "correct": 0,
+            "explanation": "Active reduction: 'standing'."
           },
           {
             "id": 7,
-            "original": "The book which was written by Tolstoy is amazing.",
-            "answer": "The book written by Tolstoy is amazing.",
-            "explanation": "Passive reduction: 'which was written' -> 'written'"
+            "text": "Reduce: \"The book which was written by Tolstoy is amazing.\"",
+            "options": [
+              "The book written by Tolstoy is amazing.",
+              "The book writing by Tolstoy is amazing.",
+              "The book wrote by Tolstoy is amazing.",
+              "The book which written by Tolstoy is amazing."
+            ],
+            "correct": 0,
+            "explanation": "Passive reduction: 'written'."
           },
           {
             "id": 8,
-            "original": "She was the first student who passed the exam.",
-            "answer": "She was the first student to pass the exam.",
-            "explanation": "Infinitive reduction after ordinal 'first': 'who passed' -> 'to pass'"
+            "text": "Reduce: \"She was the first student who passed the exam.\"",
+            "options": [
+              "She was the first student to pass the exam.",
+              "She was the first student passing the exam.",
+              "She was the first student passed the exam.",
+              "She was the first student who pass the exam."
+            ],
+            "correct": 0,
+            "explanation": "Ordinal 'first' takes infinitive reduction: 'to pass'."
           },
           {
             "id": 9,
-            "original": "Food that was prepared by chefs tastes better.",
-            "answer": "Food prepared by chefs tastes better.",
-            "explanation": "Passive reduction: 'that was prepared' -> 'prepared'"
+            "text": "Reduce: \"Food that was prepared by chefs tastes better.\"",
+            "options": [
+              "Food prepared by chefs tastes better.",
+              "Food preparing by chefs tastes better.",
+              "Food prepares by chefs tastes better.",
+              "Food that prepared tastes better."
+            ],
+            "correct": 0,
+            "explanation": "Passive reduction: 'prepared'."
           },
           {
             "id": 10,
-            "original": "People who are waiting outside look cold.",
-            "answer": "People waiting outside look cold.",
-            "explanation": "Active reduction: 'who are waiting' -> 'waiting'"
+            "text": "Reduce: \"People who are waiting outside look cold.\"",
+            "options": [
+              "People waiting outside look cold.",
+              "People waited outside look cold.",
+              "People who waiting look cold.",
+              "People to wait outside look cold."
+            ],
+            "correct": 0,
+            "explanation": "Active reduction: 'waiting'."
           },
           {
             "id": 11,
-            "original": "The car that was stolen yesterday was found.",
-            "answer": "The car stolen yesterday was found.",
-            "explanation": "Passive reduction: 'that was stolen' -> 'stolen'"
+            "text": "Reduce: \"The car that was stolen yesterday was found.\"",
+            "options": [
+              "The car stolen yesterday was found.",
+              "The car stealing yesterday was found.",
+              "The car stole yesterday was found.",
+              "The car that stolen was found."
+            ],
+            "correct": 0,
+            "explanation": "Passive reduction: 'stolen'."
           },
           {
             "id": 12,
-            "original": "Letters which were written in ink faded.",
-            "answer": "Letters written in ink faded.",
-            "explanation": "Passive reduction: 'which were written' -> 'written'"
+            "text": "Reduce: \"Letters which were written in ink faded.\"",
+            "options": [
+              "Letters written in ink faded.",
+              "Letters writing in ink faded.",
+              "Letters wrote in ink faded.",
+              "Letters which written faded."
+            ],
+            "correct": 0,
+            "explanation": "Passive reduction: 'written'."
           },
           {
             "id": 13,
-            "original": "I need someone who can help me.",
-            "answer": "I need someone to help me.",
-            "explanation": "Infinitive reduction after modal verb: 'who can help' -> 'to help'"
+            "text": "Reduce: \"I need someone who can help me.\"",
+            "options": [
+              "I need someone to help me.",
+              "I need someone helping me.",
+              "I need someone helped me.",
+              "I need someone help me."
+            ],
+            "correct": 0,
+            "explanation": "Modal reduction: 'to help'."
           },
           {
             "id": 14,
-            "original": "The window that was broken by Tom was fixed.",
-            "answer": "The window broken by Tom was fixed.",
-            "explanation": "Passive reduction: 'that was broken' -> 'broken'"
+            "text": "Reduce: \"The window that was broken by Tom was fixed.\"",
+            "options": [
+              "The window broken by Tom was fixed.",
+              "The window breaking by Tom was fixed.",
+              "The window broke by Tom was fixed.",
+              "The window that broken was fixed."
+            ],
+            "correct": 0,
+            "explanation": "Passive reduction: 'broken'."
           },
           {
             "id": 15,
-            "original": "The girl who is sitting next to me is from Turkey.",
-            "answer": "The girl sitting next to me is from Turkey.",
-            "explanation": "Active reduction: 'who is sitting' -> 'sitting'"
+            "text": "Reduce: \"The girl who is sitting next to me is from Turkey.\"",
+            "options": [
+              "The girl sitting next to me is from Turkey.",
+              "The girl sat next to me is from Turkey.",
+              "The girl who sitting is from Turkey.",
+              "The girl to sit next to me is from Turkey."
+            ],
+            "correct": 0,
+            "explanation": "Active reduction: 'sitting'."
+          },
+          {
+            "id": 16,
+            "text": "Reduce: \"The bridge which was built in 1900 still stands.\"",
+            "options": [
+              "The bridge built in 1900 still stands.",
+              "The bridge building in 1900 still stands.",
+              "The bridge builds in 1900 still stands.",
+              "The bridge which built still stands."
+            ],
+            "correct": 0,
+            "explanation": "Passive reduction: 'built'."
+          },
+          {
+            "id": 17,
+            "text": "Reduce: \"She was the last candidate who was interviewed.\"",
+            "options": [
+              "She was the last candidate to be interviewed.",
+              "She was the last candidate interviewing.",
+              "She was the last candidate interviewed.",
+              "She was the last candidate who interviewed."
+            ],
+            "correct": 0,
+            "explanation": "'last' takes passive infinitive reduction: 'to be interviewed'."
+          },
+          {
+            "id": 18,
+            "text": "Reduce: \"Students who study hard will succeed.\"",
+            "options": [
+              "Students studying hard will succeed.",
+              "Students studied hard will succeed.",
+              "Students to study hard will succeed.",
+              "Students who studying will succeed."
+            ],
+            "correct": 0,
+            "explanation": "Active reduction: 'studying'."
+          },
+          {
+            "id": 19,
+            "text": "Reduce: \"The packages which were delivered this morning are here.\"",
+            "options": [
+              "The packages delivered this morning are here.",
+              "The packages delivering this morning are here.",
+              "The packages deliver this morning are here.",
+              "The packages that delivered are here."
+            ],
+            "correct": 0,
+            "explanation": "Passive reduction: 'delivered'."
+          },
+          {
+            "id": 20,
+            "text": "Reduce: \"The dog that is barking at night belongs to Mark.\"",
+            "options": [
+              "The dog barking at night belongs to Mark.",
+              "The dog barked at night belongs to Mark.",
+              "The dog to bark at night belongs to Mark.",
+              "The dog that barking belongs to Mark."
+            ],
+            "correct": 0,
+            "explanation": "Active reduction: 'barking'."
           }
         ],
         "dialogue": [
@@ -94975,196 +94972,161 @@ export const grammarData = {
             "id": 1,
             "situation": "Identifying a person standing near the door.",
             "dialogue": "A: Who is that man near the entrance?\nB: The man ___ by the door is my new teacher.",
-            "options": [
-              "standing",
-              "who standing",
-              "is standing",
-              "stood"
-            ],
+            "options": ["standing", "who standing", "is standing", "stood"],
             "correct": 0,
-            "explanation": "Active reduction: 'standing'"
+            "explanation": "Active reduction: 'standing'."
           },
           {
             "id": 2,
             "situation": "Discussing a famous book.",
             "dialogue": "A: Have you read War and Peace?\nB: Yes, the book ___ by Tolstoy is a masterpiece.",
-            "options": [
-              "written",
-              "writing",
-              "was written",
-              "wrote"
-            ],
+            "options": ["written", "writing", "was written", "wrote"],
             "correct": 0,
-            "explanation": "Passive reduction: 'written'"
+            "explanation": "Passive reduction: 'written'."
           },
           {
             "id": 3,
             "situation": "Asking about the winner of a race.",
             "dialogue": "A: Who won the gold medal?\nB: She was the first athlete ___ the finish line.",
-            "options": [
-              "to cross",
-              "crossing",
-              "crossed",
-              "crosses"
-            ],
+            "options": ["to cross", "crossing", "crossed", "crosses"],
             "correct": 0,
-            "explanation": "Infinitive reduction after ordinal 'first': 'to cross'"
+            "explanation": "Infinitive reduction after ordinal 'first': 'to cross'."
           },
           {
             "id": 4,
             "situation": "Looking for help with homework.",
             "dialogue": "A: I am stuck on this math problem.\nB: You need someone ___ you with advanced algebra.",
-            "options": [
-              "to help",
-              "helping",
-              "helped",
-              "helps"
-            ],
+            "options": ["to help", "helping", "helped", "helps"],
             "correct": 0,
-            "explanation": "Infinitive reduction: 'to help'"
+            "explanation": "Infinitive reduction: 'to help'."
           },
           {
             "id": 5,
             "situation": "Checking on a stolen item.",
             "dialogue": "A: Did the police find your car?\nB: Yes, the car ___ yesterday was recovered.",
-            "options": [
-              "stolen",
-              "stealing",
-              "that stolen",
-              "was stolen"
-            ],
+            "options": ["stolen", "stealing", "that stolen", "was stolen"],
             "correct": 0,
-            "explanation": "Passive reduction: 'stolen'"
+            "explanation": "Passive reduction: 'stolen'."
           },
           {
             "id": 6,
             "situation": "Ordering food at a restaurant.",
             "dialogue": "A: Why is this soup so delicious?\nB: Food ___ by professional chefs always tastes better.",
-            "options": [
-              "prepared",
-              "preparing",
-              "prepares",
-              "was prepared"
-            ],
+            "options": ["prepared", "preparing", "prepares", "was prepared"],
             "correct": 0,
-            "explanation": "Passive reduction: 'prepared'"
+            "explanation": "Passive reduction: 'prepared'."
           },
           {
             "id": 7,
             "situation": "Talking about noisy neighbors.",
             "dialogue": "A: Why is it so loud outside?\nB: The children ___ in the yard are playing football.",
-            "options": [
-              "playing",
-              "played",
-              "were playing",
-              "plays"
-            ],
+            "options": ["playing", "played", "were playing", "plays"],
             "correct": 0,
-            "explanation": "Active reduction: 'playing'"
+            "explanation": "Active reduction: 'playing'."
           },
           {
             "id": 8,
             "situation": "Describing an old historical monument.",
             "dialogue": "A: Is that castle very old?\nB: Yes, the bridge ___ in 1500 is still standing.",
-            "options": [
-              "built",
-              "building",
-              "which built",
-              "was built"
-            ],
+            "options": ["built", "building", "which built", "was built"],
             "correct": 0,
-            "explanation": "Passive reduction: 'built'"
+            "explanation": "Passive reduction: 'built'."
           },
           {
             "id": 9,
             "situation": "Selecting the best restaurant in town.",
             "dialogue": "A: Where should we have dinner tonight?\nB: This is the only place ___ your appetite.",
-            "options": [
-              "to satisfy",
-              "satisfying",
-              "satisfied",
-              "satisfies"
-            ],
+            "options": ["to satisfy", "satisfying", "satisfied", "satisfies"],
             "correct": 0,
-            "explanation": "Infinitive reduction after 'only': 'to satisfy'"
+            "explanation": "Infinitive reduction after 'only': 'to satisfy'."
           },
           {
             "id": 10,
             "situation": "Receiving mail.",
             "dialogue": "A: Are those letters important?\nB: Yes, the documents ___ by the manager need to be sent.",
-            "options": [
-              "signed",
-              "signing",
-              "were signed",
-              "sign"
-            ],
+            "options": ["signed", "signing", "were signed", "sign"],
             "correct": 0,
-            "explanation": "Passive reduction: 'signed'"
+            "explanation": "Passive reduction: 'signed'."
           },
           {
             "id": 11,
             "situation": "Commiserating about bad weather.",
             "dialogue": "A: Look at those people waiting for the bus!\nB: Yes, people ___ outside look completely frozen.",
-            "options": [
-              "waiting",
-              "waited",
-              "were waiting",
-              "wait"
-            ],
+            "options": ["waiting", "waited", "were waiting", "wait"],
             "correct": 0,
-            "explanation": "Active reduction: 'waiting'"
+            "explanation": "Active reduction: 'waiting'."
           },
           {
             "id": 12,
             "situation": "Explaining a broken item.",
             "dialogue": "A: What happened to the living room window?\nB: The window ___ by the football was replaced.",
-            "options": [
-              "broken",
-              "breaking",
-              "broke",
-              "was broken"
-            ],
+            "options": ["broken", "breaking", "broke", "was broken"],
             "correct": 0,
-            "explanation": "Passive reduction: 'broken'"
+            "explanation": "Passive reduction: 'broken'."
           },
           {
             "id": 13,
             "situation": "Introducing a new colleague.",
             "dialogue": "A: Who is the girl sitting at the front desk?\nB: The girl ___ next to the window is our new accountant.",
-            "options": [
-              "sitting",
-              "sat",
-              "is sitting",
-              "sits"
-            ],
+            "options": ["sitting", "sat", "is sitting", "sits"],
             "correct": 0,
-            "explanation": "Active reduction: 'sitting'"
+            "explanation": "Active reduction: 'sitting'."
           },
           {
             "id": 14,
             "situation": "Talking about a historical document.",
             "dialogue": "A: Why are these letters hard to read?\nB: Letters ___ in ink hundreds of years ago have faded.",
-            "options": [
-              "written",
-              "writing",
-              "wrote",
-              "were writing"
-            ],
+            "options": ["written", "writing", "wrote", "were writing"],
             "correct": 0,
-            "explanation": "Passive reduction: 'written'"
+            "explanation": "Passive reduction: 'written'."
           },
           {
             "id": 15,
             "situation": "Leaving an event.",
             "dialogue": "A: Did everyone leave the party already?\nB: Yes, she was the last person ___ the venue.",
-            "options": [
-              "to leave",
-              "leaving",
-              "left",
-              "leaves"
-            ],
+            "options": ["to leave", "leaving", "left", "leaves"],
             "correct": 0,
-            "explanation": "Infinitive reduction after 'last': 'to leave'"
+            "explanation": "Infinitive reduction after 'last': 'to leave'."
+          },
+          {
+            "id": 16,
+            "situation": "In an electronics store.",
+            "dialogue": "A: Is your new computer working well?\nB: Yes, the laptop ___ by the technician works fast.",
+            "options": ["repaired", "repairing", "repairs", "was repaired"],
+            "correct": 0,
+            "explanation": "Passive reduction: 'repaired'."
+          },
+          {
+            "id": 17,
+            "situation": "At a sports tournament.",
+            "dialogue": "A: Who is that famous player?\nB: He is the best athlete ever ___ in this league.",
+            "options": ["to have competed", "competing", "competed", "compete"],
+            "correct": 0,
+            "explanation": "Infinitive reduction after superlative: 'to have competed'."
+          },
+          {
+            "id": 18,
+            "situation": "Discussing exam preparation.",
+            "dialogue": "A: Will all students pass the test?\nB: Students ___ hard every day will definitely succeed.",
+            "options": ["studying", "studied", "study", "are studying"],
+            "correct": 0,
+            "explanation": "Active reduction: 'studying'."
+          },
+          {
+            "id": 19,
+            "situation": "Checking mail delivery.",
+            "dialogue": "A: Did the morning mail arrive?\nB: Yes, packages ___ this morning are on your desk.",
+            "options": ["delivered", "delivering", "deliver", "were delivered"],
+            "correct": 0,
+            "explanation": "Passive reduction: 'delivered'."
+          },
+          {
+            "id": 20,
+            "situation": "Complaining about dog barking.",
+            "dialogue": "A: Which dog is keeping you awake?\nB: The dog ___ in the backyard all night is so loud!",
+            "options": ["barking", "barked", "barks", "was barking"],
+            "correct": 0,
+            "explanation": "Active reduction: 'barking'."
           }
         ]
       },
