@@ -2925,87 +2925,659 @@ export const healthChapterText = {
     ]
 },
   "H.Ch.05 · Developing Relationships": {
-    title: "Developing Relationships",
-    pages: [
-      [
-        { type: 'heading', text: 'Chapter 5 · Developing Relationships' },
-        { type: 'activity', text: "As You Read, Think About — why relationships are important to your health. How communication skills affect relationships. How you can develop close, lasting friendships. Why emotional intimacy is important in close relationships." },
-        { type: 'p', text: "Getting along with people isn't always easy. In this chapter you'll find out about the various ways people relate to each other — at home, at school, at work, and within their communities. You'll also learn about the different kinds of communication that help shape relationships, and look at the types of relationships especially important during the teen years. Coping with the ups and downs of friendship helps you learn about yourself and others." }
-      ],
-      [
-        { type: 'heading', text: '1. You in Your Relationships' },
-        { type: 'p', text: "A relationship is an association that develops between people who share similar interests or goals and exchange information, feelings, or ideas over time. Relationships often begin by chance — you happen to meet the person across the hall, the classmate at the next desk, a lab partner — but not every chance encounter grows into something close. The person across the hall might remain only an acquaintance, someone you're familiar with but not close to, for years, while a lab partner you've known only months can become a close friend." },
-        { type: 'p', text: "What determines whether a relationship stays casual or grows close? Social scientists have found that people tend to form close relationships with others who are similar to them in some important way — shared goals, shared interests — and it's reassuring to discover someone else agrees with you or wants the same things. Personalities that complement each other matter too: a friend's boldness might appeal to your caution, your organization might appeal to their spontaneity. For a relationship to stay healthy, it also has to change as the people in it change — being able to argue with a friend without it feeling like the end, or go weeks without seeing them and still feel close, are both signs of a relationship that's growing rather than stuck." }
-      ],
-      [
-        { type: 'activity', text: "Check Your Wellness — are the relationships you have with others healthful and satisfying? See if you can answer yes to questions like these. (1) Are you friendly with a variety of people, including boys and girls? (2) Do you have close friends with whom you feel you can be yourself? (3) Are you able to show your friends that you care about them? Can your friends show caring toward you? (4) Can you work out problems that arise between you and your friends? (5) Are you able to express your feelings without feeling anxious or hurting others? (6) Can you carry on conversations with people you would like to get to know? (7) Do you stick to your limits for expressing affection on dates? Do you respect the limits set by others?" }
-      ],
-      [
-        { type: 'heading', text: 'The Importance of Relationships' },
-        { type: 'p', text: "Relationships with others matter to your health — as you learned in Chapter 1, your social health affects your overall wellness and where you fall on the Illness-Wellness continuum. The need for relationships runs so deep that some social scientists consider it as basic as the need for food and sleep — people deprived of human company for too long may become depressed, lose interest in eating and caring for themselves, and even die. Family groups usually provide love and guidance, teaching young children social skills like cooperation, while social groups provide a sense of belonging and independence." },
-        { type: 'p', text: "Most teenagers find it important to belong to one or more groups outside their families — school groups, religious groups, sports teams, hobby clubs — and the support of people you trust helps build your confidence and self-esteem, feeling good about yourself and proud of who you are. Activities of all kinds tend to be more enjoyable shared with others than done alone. And as you build a more adult relationship with your own parents, based more on shared responsibility and decision-making, some tension is normal — working together through the conflicts that come up is how the relationship, and the people in it, grow." }
-      ],
-      [
-        { type: 'heading', text: '2. Communication in Relationships' },
-        { type: 'p', text: "Communication is the process of sharing information, thoughts, ideas, or feelings, and it happens whenever you use words, sounds, gestures, or body movements to interact with others. Learning to communicate effectively helps you make friends, get along with people, and build a trusting atmosphere with your parents." },
-        { type: 'p', text: "Communication tends to move through levels as a relationship deepens. Small talk — chatting about the weather or a bus schedule with someone at the bus stop — is casual and trivial. As a relationship grows, conversation shifts to sharing ideas — opinions, preferences, what you think about something. The deepest level is self-disclosure: expressing personal feelings and revealing information about yourself. Social scientists have found, for instance, that college roommates make few self-disclosures early in a semester, but the number grows as the relationship becomes closer and more trusting. Disclosing something too early in a relationship, before trust is built, can make the other person feel threatened and withdraw — but later on, sharing something private often deepens the other person's liking and acceptance." }
-      ],
-      [
-        { type: 'p', text: "Communication is more than the words you say — you communicate in your own personal style, made up of behaviors like body language, eye contact, and tone of voice. Body language communicates information, mood, or attitude through movement, posture, gestures, and facial expression — a slouch can signal ease, standing tall can signal confidence — and most of it is learned behavior, picked up by watching others from an early age: a kiss means affection, a wave means greeting, a scowl means anger." },
-        { type: 'p', text: "Eye contact, meeting someone's gaze, is another channel — it helps a teacher gauge whether a student is following along, and small sounds like \"uh-huh\" paired with eye contact let a friend know you're listening; avoiding eye contact, on the other hand, can read as shyness, shame, or indifference. Tone of voice changes meaning too — the same sentence whispered can sound secretive, while barked in sharp tones it can sound like an angry order." }
-      ],
-      [
-        { type: 'sidebar', text: "Helping the Speech-Impaired — for people whose physical disabilities make communication difficult, recent technology has begun to change that. A computer system called an Assistive Communication Device (ACD) lets people who can't speak \"talk\" through a voice generated by a built-in speech synthesizer. An ACD's design depends on its user's needs — some have a standard keyboard that simply speaks whatever is typed, while others use a keyboard of pictures instead of letters, each picture standing in for a whole word, which works well for someone with limited use of their hands. Despite how complex a typical ACD is, many are lap-sized and portable, letting users carry their own \"voice\" wherever they go." }
-      ],
-      [
-        { type: 'p', text: "Communicating effectively is a learned skill, much like riding a bicycle — clumsy at first, more natural with practice. Part of learning it is knowing what to avoid: a mixed message occurs when one part of a message contradicts another, whether between two spoken statements or between spoken words and body language — like someone warning you about the dangers of smoking while lighting a cigarette. People's actions often speak louder than their words, even when they don't realize it." },
-        { type: 'p', text: "One of the most useful tools for communicating feelings honestly is the \"I\" message — a statement of your own feelings and expectations that doesn't blame or judge the other person. Saying \"Can't you remember anything?\" tends to put a friend on the defensive; saying \"I'm upset because we didn't talk on the phone last night\" opens the conversation instead of shutting it down." }
-      ],
-      [
-        { type: 'p', text: "Active listening means focusing your full attention on what someone is saying while letting them know you understand and care — it takes real effort, since listening is more than just hearing words, but it makes the other person feel comfortable opening up." },
-        { type: 'p', text: "Assertiveness is another key communication style. When you're assertive, you express your true feelings in a way that doesn't threaten the other person or make you feel anxious — different from being passive, holding back your feelings and going along with others, or aggressive, communicating in a way that feels threatening or disrespectful. People who are assertive tend to have healthier, more satisfying relationships than those who lean passive or aggressive, because assertive behavior communicates respect for both yourself and the other person — using \"I\" messages, actively listening, seeking compromise, speaking clearly and making eye contact, rather than mumbling and looking away, or yelling and pointing fingers. Like any skill, it takes practice to master." }
-      ],
-      [
-        { type: 'heading', text: '3. Friendships' },
-        { type: 'p', text: "Friendship is a give-and-take relationship based on mutual trust, acceptance, and common interests or values. Friendships give you room to try out different roles — leader, helper, advice-seeker, supporter — and that experimenting teaches you about yourself in ways that matter throughout adult life." },
-        { type: 'p', text: "Friendships range widely. Casual friendships — of convenience, like mowing lawns with a neighbor, or built around a shared class project or hobby — often don't go beyond sharing ideas, though some grow deeper over time. A close friend is someone you feel you can be yourself with, who is honest without trying to hurt you, and who is there for you in both hard times and good ones. During adolescence, close friendships offer a way to pull away from the family while still feeling part of a small, trusted group." }
-      ],
-      [
-        { type: 'p', text: "Traditionally, boys and girls were socialized differently — boys encouraged toward competitive group friendships, girls toward nurturing, one-to-one closeness — a pattern reflected in what are called sex roles, behaviors and attitudes accepted as either masculine or feminine. Today those roles are far less rigid, and opposite-sex friendships — close and satisfying without being romantic — are much more common than in the past, helping people feel comfortable with the other sex and develop more fully as individuals, whether or not the friendship ever turns romantic." },
-        { type: 'p', text: "Making a friend and keeping a friend are two different skills. In looking for friends, trustworthiness and loyalty matter more than surface appeal, and compatibility — the ability to exist in harmony, even through occasional disagreement — matters more than never disagreeing at all. It also helps to look for empathy, the ability to understand how someone else feels, in the people you choose to spend time with. Once you've found someone worth approaching, sincerity works better than any line — a genuine compliment, a direct \"I'd like to be friends,\" or simply following up a first conversation with another one." }
-      ],
-      [
-        { type: 'p', text: "Keeping a friendship is at least as hard as starting one. Lasting friendships are built on sharing — experiences, feelings, responsibility — and it's the quality of time together, not the quantity, that matters most; friends don't need to see each other daily to stay close. Trust and understanding grow through self-disclosure, and both people need to take equal responsibility for the relationship — a friendship where one person is always the \"giver\" and the other always the \"taker\" rarely lasts." },
-        { type: 'p', text: "Even strong friendships run into problems — jealousy, for instance, when a friend's success, or their wish to grow other close relationships, feels like a threat. The way through is communication: getting your feelings out in the open, in person if possible, and genuinely listening to your friend's side too. Talking through what each of you expects and needs from the friendship often clears up misunderstandings that built up without either of you noticing. And if a friend is ever cruel to you — sometimes people take out pain from elsewhere in their life on the people closest to them — confronting them honestly shows both that you won't be mistreated and that you still care enough to want to work it out." }
-      ],
-      [
-        { type: 'heading', text: '4. Intimate Relationships' },
-        { type: 'p', text: "As teenagers become aware of their sexuality, tough questions naturally arise — how to show physical affection without it leading further than you intend, whether your feelings are normal, whether you and a partner are really ready for a sexual relationship. There are no easy answers; family values, religious teaching, personal experience, and friends all shape your thinking, and the important thing is to think it through, gather real information, and make decisions that feel genuinely right for you." },
-        { type: 'p', text: "The teenage years bring intense feelings of attraction — a crush on a rock star or a teacher is a common example of infatuation, an intense, sometimes overwhelming interest in another person, and these normal feelings are part of how you develop the ability to form strong attachments as an adult. Most teenagers develop attraction to the other sex, called heterosexuality; some are attracted to their own sex, called homosexuality, which is not determined by appearance, dress, hobbies, or having close same-sex friendships — those things don't indicate anything about sexual preference." }
-      ],
-      [
-        { type: 'p', text: "Dating often grows naturally out of mixed-group activities — skating together, going to games — where you may notice you especially enjoy one particular person's company, whether for shared interests, humor, or physical attraction. Dating gives you a chance to learn about the other sex, build communication skills, and figure out what qualities you actually want in a future partner. Most teenagers date casually at first before some couples decide to go steady, agreeing to see each other regularly — which offers real security and the chance to know someone well, but also narrows your chances of meeting other people and can make a breakup, if it comes, much harder." }
-      ],
-      [
-        { type: 'p', text: "It's normal to have strong feelings for someone you're attracted to, and normal to feel confused about how to handle them — most teenagers try to think ahead and set limits for physical intimacy before a situation arises, since it's far easier to hold to standards you've already decided on than to decide in the moment. One serious consequence of not thinking it through is teenage pregnancy: at least a million girls aged 15 to 19 become pregnant each year in this country, roughly 40,000 of them under 15, and the rate among the youngest teens has been rising. Babies born to teenage mothers tend to be smaller and less healthy, teenage mothers themselves face more pregnancy complications, and teenage parents often report feeling trapped and overwhelmed — many drop out of school, and many end up depending on public assistance as a result." },
-      ],
-      [
-        { type: 'p', text: "Emotional intimacy — a kind of communication built on sharing innermost feelings and being supportive of each other — doesn't require physical intimacy at all. Couples can build real closeness through trust: sharing feelings or fantasies told to no one else, private jokes, studying or rehearsing together without embarrassment even when mistakes happen, simply feeling like best friends. This kind of intimacy depends entirely on trust — each person trusting the other to listen and accept what's said without judgment." },
-        { type: 'p', text: "Sexual feelings can become strong and confusing enough that experimenting feels hard to resist, but mistakes in sexual activity can be far more serious than most mistakes, especially if they lead to pregnancy, sexually transmitted disease, or damaged self-esteem. Despite appearances, not every teenager is sexually active — those who talk about it loudest are often exaggerating — and millions of young people choose to postpone sexual activity for good reasons of their own; saying \"no\" remains the single most effective form of birth control there is. A partner who tries to make you feel guilty for wanting to build the relationship around emotional closeness instead isn't really interested in respecting your feelings." }
-      ],
-      [
-        { type: 'activity', text: "Health Skills — Being an Effective Listener. Start with passive listening: show you're paying attention without necessarily speaking — eye contact, nodding, leaning forward, short responses like \"uh-huh\" or \"oh?\" Move to active listening to show real understanding: respond with phrases like \"I see\" or \"Then what happened?\", restate the speaker's ideas in your own words rather than telling them what to do, and listen for the emotion behind the words, not just the words themselves — try restating (\"Do you mean...?\"), comparing (\"Was it like...?\"), or inviting more (\"Tell me more about...\"). Use door openers when someone seems to need encouragement to keep going, or to start a conversation: \"Do you want to talk about it?\" or \"You seem upset about...\" Above all, be natural — effective listening means responding from the heart, not reciting a script; you're the best judge of what to say to a friend who needs to be heard." }
-      ],
-      [
-        { type: 'summary', text: "Relationships develop over time when people who share similar interests or goals exchange ideas, thoughts, and feelings." },
-        { type: 'summary', text: "Being part of a group provides a sense of belonging, an opportunity to learn social skills, and a way to have fun." },
-        { type: 'summary', text: "Communication is central to relationships. In a close friendship, both people must be able to self-disclose, actively listen, and take responsibility for their own feelings." },
-        { type: 'summary', text: "Desirable qualities in friends include honesty, loyalty, trustworthiness, compatibility, and empathy. Keeping a friend means sharing experiences, feelings, and responsibilities, and working out problems as they arise." },
-        { type: 'summary', text: "Dating provides an opportunity to understand the other sex, develop communication skills, and learn what you want in a partner. Going steady offers security but can limit other relationships and make a breakup harder." },
-        { type: 'summary', text: "Millions of teenagers maintain emotionally intimate relationships while postponing sexual activity, avoiding the serious risks of teenage pregnancy and sexually transmitted disease." }
-      ]
+    "title": "Developing Relationships",
+    "pages": [
+        [
+            {
+                "type": "heading",
+                "text": "Chapter 5 \u00b7 Developing Relationships"
+            },
+            {
+                "type": "activity",
+                "text": "As You Read, Think About \u2014 how relationships develop. How you communicate with others. The benefits and qualities of friendships. How to make and keep friends. The benefits and drawbacks of dating and going steady. Why emotional intimacy is important in relationships."
+            },
+            {
+                "type": "p",
+                "text": "Imagine being completely alone on a deserted island with no one to talk to, laugh with, or share your thoughts. For a short time, solitude might be peaceful, but over time, human beings need companionship."
+            },
+            {
+                "type": "p",
+                "text": "Relationships are essential to human well-being. From early childhood through adulthood, your connections with family, friends, classmates, and others shape your self-concept and enrich your life."
+            },
+            {
+                "type": "p",
+                "text": "In this chapter, you will learn how relationships develop, how to communicate effectively, how to build and maintain strong friendships, and how to handle dating and emotional intimacy responsibly."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "1. Relationships and Groups"
+            },
+            {
+                "type": "p",
+                "text": "A relationship is a bond or connection you have with other people. Relationships exist on many levels \u2014 from casual acquaintances to close friends and family members."
+            },
+            {
+                "type": "p",
+                "text": "How Relationships Form \u2014 Relationships develop over time when people share similar interests, goals, or experiences and exchange thoughts, ideas, and feelings."
+            },
+            {
+                "type": "p",
+                "text": "Being Part of a Group \u2014 Group membership (like sports teams, clubs, or peer groups) offers several benefits:"
+            },
+            {
+                "type": "p",
+                "text": "\u2022 A sense of belonging and acceptance."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Opportunities to practice social skills and teamwork."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Reassurance that others share similar doubts and feelings."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Shared fun and recreational activities."
+            },
+            {
+                "type": "activity",
+                "text": "Check Your Wellness \u2014 Are your relationship skills strong? See if you can answer yes to the questions below. 1. Do you listen actively when others are speaking to you? 2. Are you able to express your thoughts and feelings honestly using \"I\" messages? 3. Do you treat others with respect, empathy, and fairness? 4. Are you able to handle conflicts peacefully without resorting to insults? 5. Do you respect the privacy and boundaries of your friends? 6. Are you able to give and receive constructive feedback? 7. Do you support your friends during difficult times?"
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Benefits of Friendship"
+            },
+            {
+                "type": "p",
+                "text": "A friendship is a give-and-take relationship based on mutual trust, acceptance, and common interests or values."
+            },
+            {
+                "type": "p",
+                "text": "Friendships provide many emotional and social benefits:"
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Opportunities to try out different social roles and test new ideas."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Boosted self-esteem through mutual encouragement."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 A realistic mirror of how others view your behavior."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Practice in communication, compromise, and conflict resolution."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "2. Communication in Relationships"
+            },
+            {
+                "type": "p",
+                "text": "Communication is the process of sharing information, thoughts, ideas, or feelings. Clear communication is the foundation of every healthy relationship."
+            },
+            {
+                "type": "p",
+                "text": "Types of Communication:"
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Verbal Communication \u2014 The words you choose, your tone of voice, and how clearly you express your thoughts."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Nonverbal Communication \u2014 Communication without words. Body language includes posture, gestures, facial expressions, and eye contact."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Body Language \u2014 Standing tall signals confidence; slouching or crossing arms may signal defensiveness or disinterest. Eye contact shows attentiveness and sincerity."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Mixed Messages \u2014 A mixed message occurs when your words say one thing, but your body language or tone of voice says another (e.g., saying \"I'm not mad\" while slamming a door)."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Expressing Feelings Constructively"
+            },
+            {
+                "type": "p",
+                "text": "\u2022 \"I\" Messages \u2014 An \"I\" message is a statement that expresses your feelings and needs without judging, blaming, or attacking the other person. Example: \"I feel hurt when you cancel our plans at the last minute\" vs. \"You never keep your promises.\""
+            },
+            {
+                "type": "p",
+                "text": "Communication Styles:"
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Passive \u2014 Holding back your feelings, yielding to others, and allowing your rights to be violated."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Aggressive \u2014 Expressing feelings forcefully, disrespectfully, or violently, violating others' rights."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Assertive \u2014 Standing up for yourself and expressing feelings honestly and directly in a respectful, nonthreatening way."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Listening Skills"
+            },
+            {
+                "type": "p",
+                "text": "Active Listening \u2014 Active listening is paying full attention to what the speaker is saying, showing empathy, and confirming your understanding."
+            },
+            {
+                "type": "p",
+                "text": "Active listening techniques include making eye contact, nodding, asking clarifying questions, and restating the speaker's points in your own words without interrupting or judging."
+            }
+        ],
+        [
+            {
+                "type": "review",
+                "title": "Section 1 & 2 Review",
+                "sections": [
+                    {
+                        "heading": "Section Review",
+                        "items": [
+                            {
+                                "prompt": "1. Define relationship. How do relationships develop?",
+                                "answer": "A bond or connection between people. Develops over time through shared interests, goals, and open communication."
+                            },
+                            {
+                                "prompt": "2. What is body language? Give an example of a mixed message.",
+                                "answer": "Nonverbal posture, gestures, and expressions. Mixed message: saying \"I am fine\" while frowning and crossing arms."
+                            },
+                            {
+                                "prompt": "3. Explain the difference between passive, aggressive, and assertive communication styles.",
+                                "answer": "Passive: holding back feelings. Aggressive: forceful/disrespectful. Assertive: direct, honest, and respectful."
+                            },
+                            {
+                                "prompt": "4. What is an \"I\" message? Why is it useful in resolving conflicts?",
+                                "answer": "A statement expressing feelings without blaming (\"I feel... when...\"). Avoids putting the other person on the defensive."
+                            }
+                        ]
+                    },
+                    {
+                        "heading": "What Do You Think?",
+                        "items": [
+                            {
+                                "prompt": "5. Describe a situation where active listening prevented a misunderstanding between friends.",
+                                "answer": "Restating a friend's point allowed clarifying that a missed meeting was due to an emergency, not neglect."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "3. Making and Keeping Friends"
+            },
+            {
+                "type": "p",
+                "text": "Qualities of a Good Friend \u2014 Friendships thrive on key qualities:"
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Honesty \u2014 Being truthful and genuine with each other."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Loyalty \u2014 Standing by your friend in difficult times."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Trustworthiness \u2014 Keeping confidences and fulfilling commitments."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Compatibility \u2014 Ability to exist in harmony and enjoy shared interests."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Empathy \u2014 The ability to understand and share another person's feelings."
+            },
+            {
+                "type": "p",
+                "text": "Making New Friends \u2014 To make new friends, join clubs or groups, be open-minded, smile, start conversations with small talk, and most importantly, be yourself."
+            }
+        ],
+        [
+            {
+                "type": "p",
+                "text": "Keeping Friends \u2014 Maintaining long-term friendships requires effort, forgiveness, and mutual support. Work through conflicts promptly, respect each other's independence, and celebrate each other's successes."
+            },
+            {
+                "type": "p",
+                "text": "Friendships Between Boys and Girls \u2014 As traditional sex roles become less rigid, nonromantic friendships between boys and girls have become increasingly common and valuable, offering diverse perspectives."
+            }
+        ],
+        [
+            {
+                "type": "review",
+                "title": "Section 3 Review",
+                "sections": [
+                    {
+                        "heading": "Section Review",
+                        "items": [
+                            {
+                                "prompt": "1. List five desirable qualities in a friend.",
+                                "answer": "Honesty, loyalty, trustworthiness, compatibility, and empathy."
+                            },
+                            {
+                                "prompt": "2. Define empathy and compatibility.",
+                                "answer": "Empathy: understanding another's feelings. Compatibility: ability to live/work together in harmony."
+                            },
+                            {
+                                "prompt": "3. What is small talk? How does it help in making friends?",
+                                "answer": "Casual conversation about everyday topics; breaks the ice and helps find common interests."
+                            },
+                            {
+                                "prompt": "4. Describe three ways to keep a friendship strong.",
+                                "answer": "Share feelings, communicate through conflicts, and respect your friend's independence."
+                            }
+                        ]
+                    },
+                    {
+                        "heading": "What Do You Think?",
+                        "items": [
+                            {
+                                "prompt": "5. Why are nonromantic friendships between boys and girls important during adolescence?",
+                                "answer": "They provide diverse viewpoints, build communication skills with the opposite sex, and reduce rigid stereotypes."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "4. Dating and Emotional Intimacy"
+            },
+            {
+                "type": "p",
+                "text": "Dating \u2014 Dating allows teenagers to learn about members of the opposite sex, develop social and communication skills, and discover what qualities they value in a potential marriage partner."
+            },
+            {
+                "type": "p",
+                "text": "Going Steady \u2014 Going steady means agreeing to date only one person. Benefits include security and deep mutual understanding. Drawbacks include limiting opportunities to meet other people and potential pressure for physical intimacy."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Emotional Intimacy and Decisions About Sex"
+            },
+            {
+                "type": "p",
+                "text": "Emotional Intimacy \u2014 Emotional intimacy is a form of communication involving the sharing of innermost feelings, goals, and vulnerabilities in an atmosphere of mutual trust and acceptance."
+            },
+            {
+                "type": "p",
+                "text": "Postponing Sexual Activity \u2014 Millions of teenagers choose to postpone sexual activity to avoid unwanted consequences like teenage pregnancy, sexually transmitted diseases, and emotional regret. Saying \"no\" is the safest choice and allows partners to build a solid foundation of emotional intimacy."
+            }
+        ],
+        [
+            {
+                "type": "review",
+                "title": "Section 4 Review",
+                "sections": [
+                    {
+                        "heading": "Section Review",
+                        "items": [
+                            {
+                                "prompt": "1. What are the benefits and drawbacks of going steady?",
+                                "answer": "Benefits: emotional security, knowing someone well. Drawbacks: limiting other friendships, pressure for physical intimacy."
+                            },
+                            {
+                                "prompt": "2. Define emotional intimacy.",
+                                "answer": "Sharing innermost thoughts and feelings in an environment of mutual trust and acceptance."
+                            },
+                            {
+                                "prompt": "3. Why do many teenagers choose to postpone sexual activity?",
+                                "answer": "To focus on personal goals, avoid pregnancy and STDs, and build strong emotional bonds first."
+                            },
+                            {
+                                "prompt": "4. How can a couple build emotional intimacy without physical intimacy?",
+                                "answer": "Through honest conversations, shared hobbies, active listening, and mutual emotional support."
+                            }
+                        ]
+                    },
+                    {
+                        "heading": "What Do You Think?",
+                        "items": [
+                            {
+                                "prompt": "5. How does dating help a person learn what traits are important in a future life partner?",
+                                "answer": "By experiencing different personalities, communication styles, and values in varied social situations."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Health Skills \u2014 Being an Effective Listener"
+            },
+            {
+                "type": "activity",
+                "text": "Meg ran up to Tom in the hall, grabbed his arm, and whispered, \"I really need to talk! Can you come over after school? You won't believe what happened!\" Tom is willing to listen, but Meg often gets embarrassed or mad when talking about her problems. How can Tom be a better listener?\n\n1. Start with Passive Listening \u2014 Show attentiveness through body language (eye contact, nodding, leaning forward) and brief verbal prompts (\"uh-huh\", \"oh?\").\n\n2. Emphasize Active Listening \u2014 Show active acceptance by restating ideas (\"Do you mean...\", \"Was it like...\"), encouraging unexpressed feelings, and offering supportive comments without judging or offering unsolicited advice."
+            }
+        ],
+        [
+            {
+                "type": "activity",
+                "text": "3. Use Door Openers \u2014 Help the speaker begin or continue speaking with open-ended invitations (\"Do you want to talk about it?\", \"You seem upset about...\", \"How can I help?\").\n\n4. Be Natural \u2014 Respond sincerely from the heart rather than following rigid scripts."
+            },
+            {
+                "type": "review",
+                "title": "Apply the Skill \u2014 Effective Listening",
+                "sections": [
+                    {
+                        "heading": "Apply the Skill",
+                        "items": [
+                            {
+                                "prompt": "1. Review Tom's situation. What might he have done to make Meg embarrassed? How can he improve?",
+                                "answer": "Interpreting or offering unsolicited advice too quickly. Improve by practicing active listening and using door openers."
+                            },
+                            {
+                                "prompt": "2. Respond to a friend saying \"My teacher gives too much homework\" using active listening.",
+                                "answer": "\"It sounds like you're feeling overwhelmed by the workload. Do you want to map out a study plan together?\""
+                            },
+                            {
+                                "prompt": "3. Observe a conversation and note examples of active vs. passive listening.",
+                                "answer": "Active listening uses eye contact and restating; negative listening includes looking at phones or interrupting."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Chapter 5 Review"
+            },
+            {
+                "type": "summary",
+                "text": "Relationships develop over time when people who share similar interests or goals exchange ideas, thoughts, and feelings."
+            },
+            {
+                "type": "summary",
+                "text": "Being part of a group provides a sense of belonging, an opportunity to learn social skills, and reassurance."
+            },
+            {
+                "type": "summary",
+                "text": "Friendships provide an opportunity to try out roles, build self-esteem, and practice communication skills."
+            },
+            {
+                "type": "summary",
+                "text": "Communication is vital. Close friendships require self-disclosure, active listening, and taking responsibility for feelings using \"I\" messages."
+            },
+            {
+                "type": "summary",
+                "text": "As sex roles become less rigid, more boys and girls form close, nonromantic friendships."
+            },
+            {
+                "type": "summary",
+                "text": "Desirable qualities in friends include honesty, loyalty, trustworthiness, compatibility, and empathy. Be sincere and natural."
+            },
+            {
+                "type": "summary",
+                "text": "To keep a friend, share experiences, feelings, and responsibilities, and resolve problems constructively."
+            },
+            {
+                "type": "summary",
+                "text": "Dating offers opportunities to understand the other sex, develop social skills, and learn mate preferences."
+            },
+            {
+                "type": "summary",
+                "text": "Millions of teenagers maintain emotionally intimate relationships while postponing sexual activity."
+            }
+        ],
+        [
+            {
+                "type": "review",
+                "title": "Chapter 5 Exercises (Part 1)",
+                "sections": [
+                    {
+                        "heading": "Vocabulary Review",
+                        "instructions": "Listed below are key terms from this chapter. Match each term to the phrase that best describes it.",
+                        "items": [
+                            {
+                                "prompt": "1. process of sharing information, thoughts, ideas, or feelings",
+                                "answer": "communication"
+                            },
+                            {
+                                "prompt": "2. the ability to exist in harmony with another person",
+                                "answer": "compatibility"
+                            },
+                            {
+                                "prompt": "3. one part of a message contradicts another",
+                                "answer": "mixed message"
+                            },
+                            {
+                                "prompt": "4. revealing information about yourself",
+                                "answer": "self-disclosure"
+                            },
+                            {
+                                "prompt": "5. expressing one's true feelings in a way that does not threaten others",
+                                "answer": "assertive"
+                            },
+                            {
+                                "prompt": "6. communicating mood or attitude through body movements and posture",
+                                "answer": "body language"
+                            },
+                            {
+                                "prompt": "7. a give-and-take relationship based on mutual trust and common interests",
+                                "answer": "friendship"
+                            },
+                            {
+                                "prompt": "8. the ability to understand how someone else feels",
+                                "answer": "empathy"
+                            },
+                            {
+                                "prompt": "9. behaviors and attitudes accepted as masculine or feminine",
+                                "answer": "sex roles"
+                            },
+                            {
+                                "prompt": "10. causal conversation about light topics",
+                                "answer": "small talk"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "review",
+                "title": "Chapter 5 Exercises (Part 2)",
+                "sections": [
+                    {
+                        "heading": "What Have You Learned? (Questions 1\u201312)",
+                        "items": [
+                            {
+                                "prompt": "1. Describe what happens when people are deprived of human company for too long.",
+                                "answer": "They experience loneliness, depression, anxiety, and impaired mental health."
+                            },
+                            {
+                                "prompt": "2. How do families help children acquire skills to interact with others?",
+                                "answer": "Through early socialization, teaching communication, sharing, and modeling social behavior."
+                            },
+                            {
+                                "prompt": "3. Give an example of how a person might send a mixed message.",
+                                "answer": "Saying \"I'm happy for you\" while turning away and frowning."
+                            },
+                            {
+                                "prompt": "4. Of what value is eye contact? How does tone of voice give meaning?",
+                                "answer": "Eye contact shows interest and honesty; tone conveys underlying emotion (sarcasm, warmth, anger)."
+                            },
+                            {
+                                "prompt": "5. What is active listening? Why is it important in relationships?",
+                                "answer": "Fully focusing on and clarifying the speaker's message; builds trust and prevents misunderstandings."
+                            },
+                            {
+                                "prompt": "6. Give examples of passive, aggressive, and assertive communication behaviors.",
+                                "answer": "Passive: staying silent when hurt. Aggressive: shouting insults. Assertive: calmly stating \"I felt upset when...\""
+                            },
+                            {
+                                "prompt": "7. Describe benefits close friends provide.",
+                                "answer": "Emotional support, honest feedback, high self-esteem, and shared experiences."
+                            },
+                            {
+                                "prompt": "8. Why are friendships between opposite sexes more common today?",
+                                "answer": "Decreasing rigidity in traditional sex roles and shared school/work activities."
+                            },
+                            {
+                                "prompt": "9. How can lack of self-disclosure make it difficult to form a lasting friendship?",
+                                "answer": "Without sharing inner thoughts and trust, relationships remain surface-level."
+                            },
+                            {
+                                "prompt": "10. Why are communication skills important when problems arise in a friendship?",
+                                "answer": "They allow partners to resolve conflicts constructively without damaging trust."
+                            },
+                            {
+                                "prompt": "11. Why do some couples go steady?",
+                                "answer": "For emotional security, companionship, and knowing one person deeply."
+                            },
+                            {
+                                "prompt": "12. How can emotional intimacy strengthen an intimate relationship between teens?",
+                                "answer": "By building mutual respect, trust, and deep understanding without physical pressure."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "review",
+                "title": "Chapter 5 Exercises (Part 3)",
+                "sections": [
+                    {
+                        "heading": "What Do You Think? (Questions 1\u20135)",
+                        "items": [
+                            {
+                                "prompt": "1. How might communication skills help improve your relationships with others?",
+                                "answer": "Clear communication prevents misunderstandings, builds trust, and resolves conflicts peacefully."
+                            },
+                            {
+                                "prompt": "2. What are some common barriers to good communication between adults and teens?",
+                                "answer": "Differences in perspectives, fear of judgment, interrupting, and not listening actively."
+                            },
+                            {
+                                "prompt": "3. Why do you think that some people find it difficult to make or to keep friends?",
+                                "answer": "Shyness, low self-esteem, lack of communication skills, or difficulty with trust."
+                            },
+                            {
+                                "prompt": "4. Do you think mixed-group activities are important in developing relationships?",
+                                "answer": "Yes, they allow teens to interact comfortably in low-pressure social settings."
+                            },
+                            {
+                                "prompt": "5. What do you think can be done to control the number of teenage pregnancies?",
+                                "answer": "Provide comprehensive sex education, encourage emotional intimacy, and support abstinence education."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "review",
+                "title": "Chapter 5 Exercises (Part 4)",
+                "sections": [
+                    {
+                        "heading": "What Would You Do? (Questions 1\u20135)",
+                        "items": [
+                            {
+                                "prompt": "1. You are visiting another country and cannot speak the language. How do you communicate?",
+                                "answer": "Use body language, gestures, facial expressions, and translation tools."
+                            },
+                            {
+                                "prompt": "2. Your friend is shy and has low self-esteem. How could you help?",
+                                "answer": "Include them in activities, listen actively, and offer genuine compliments."
+                            },
+                            {
+                                "prompt": "3. At a party where you know only two people, how would you get acquainted with others?",
+                                "answer": "Smile, use door openers, ask open-ended questions, and practice small talk."
+                            },
+                            {
+                                "prompt": "4. Friends tease a classmate with disabilities. How would you handle it?",
+                                "answer": "Stand up assertively against teasing, report bullying, and offer friendship to the classmate."
+                            },
+                            {
+                                "prompt": "5. As a parent of a dating teen, what advice would you give about intimacy?",
+                                "answer": "Emphasize respect, setting personal boundaries, emotional intimacy, and responsible decision-making."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "review",
+                "title": "Chapter 5 Exercises (Part 5)",
+                "sections": [
+                    {
+                        "heading": "For Further Study",
+                        "items": [
+                            {
+                                "prompt": "1. Watch a TV program with sound off and note body language messages.",
+                                "answer": "Observe posture, facial expressions, and eye contact to interpret nonverbal communication."
+                            },
+                            {
+                                "prompt": "2. Select advice column letters on teen relationships and write your own responses.",
+                                "answer": "Apply assertive communication and active listening principles to provide relationship advice."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Unit 2 Overview \u2014 Social Health"
+            },
+            {
+                "type": "p",
+                "text": "Developing healthy relationships is a lifelong journey. By practicing active listening, assertive communication, and empathy, you build strong bonds with family, friends, and community."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Chapter 5 Wrap-Up"
+            },
+            {
+                "type": "p",
+                "text": "Understanding the dynamics of friendship and dating prepares you for future adult relationships and marriage, ensuring social and emotional well-being."
+            }
+        ]
     ]
-  },
+},
   "H.Ch.06 · Marriage and Family": {
     title: "Marriage and Family",
     pages: [

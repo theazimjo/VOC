@@ -86113,7 +86113,1285 @@ export const grammarData = {
     ]
   },
   "advanced": {
-    "topics": []
+    "topics": [
+    {
+    "id": "quantifiers-all-most-some-any-no",
+    "title": "Quantifiers: All, Most, Some, Any & No",
+    "icon": "\ud83d\udcca",
+    "description": "Master quantifiers with countable and uncountable nouns, 'of' structures, 'some' with singular nouns, and 'any' vs 'no'.",
+    "studyGuide": {
+        "title": "Quantifiers (Miqdor Ko'rsatkichlari): All, Most, Some, Any, No (Nazariy Qo'llanma)",
+        "summary": "Quantifiers - otlarning miqdorini (qancha/nechta) ko'rsatuvchi so'zlardir. Ushbu darsda All, Most, Some, Any, No miqdor ko'rsatkichlarining sanoqli hamda sanalmas otlar bilan kelishi, 'of' predlogli strukturalari va maxsus ma'nolari o'rganiladi.",
+        "sections": [
+            {
+                "title": "1. Quantifiers (Miqdor Ko'rsatkichlari) Nima?",
+                "content": "Quantifiers otlarning aniq yoki noaniq miqdorini ko'rsatadi.\n\n\u2022 Sanoqli otlar bilan: all students, many books, some friends\n\u2022 Sanalmas otlar bilan: some water, all money, no time\n\nStruktura: Quantifier + Noun\n\u2022 all students (barcha talabalar)\n\u2022 some water (bir oz suv)\n\u2022 any books (birorta kitob)\n\u2022 most people (ko'pchilik odamlar)\n\u2022 no time (vaqt umuman yo'q)"
+            },
+            {
+                "title": "2. ALL (100% - Hamma / Barcha)",
+                "content": "A) Struktura:\n\u2022 All + ko'plikdagi sanoqli ot / sanalmas ot\n\u2022 All of + the/my/this/those + ot (yoki olmosh: all of them/us/you)\n\nB) Ma'nosi: Hamma, barcha (100%). Umumiy haqiqat yoki butun guruhni anglatadi.\n\u2022 All animals need food. (= Dunyodagi har bir hayvon)\n\u2022 All those students are here.\n\u2022 All of the water in this region is toxic.\n\u2022 Can you eat all of it?\n\nEslatma: 'all of the/this/that' iborasida 'of' tushirib qoldirilishi mumkin: all of the students = all the students."
+            },
+            {
+                "title": "3. MOST (>50% - Ko'pchilik / Aksariyat)",
+                "content": "A) Struktura:\n\u2022 Most + ko'plikdagi sanoqli ot / sanalmas ot\n\u2022 Most of + the/my/these/them/us/you + ot\n\nB) Ma'nosi: 50% dan ortiq qismi (ko'pchilik, aksariyat).\n\u2022 Most students passed the entry exams. (Ko'pchilik talabalar kirdi)\n\u2022 Most of them were from Uchkurgan.\n\u2022 Most water in this bottle is safe to drink.\n\u2022 Most of these children are happy."
+            },
+            {
+                "title": "4. SOME (Ba'zi / Bir oz / Qandaydir bir)",
+                "content": "A) Struktura va Muqobil Ma'nolari:\n1. Darak gaplarda (+): Some + ko'plikdagi sanoqli ot / sanalmas ot (Ba'zi, bir oz)\n   \u2022 I have some friends here. (Mening ba'zi do'stlarim bor)\n   \u2022 Some of the books in our library are brand new.\n\n2. Birlikdagi sanoqli ot bilan: Some + singular countable noun = 'Qandaydir bir', 'notanish' ma'nosida keladi!\n   \u2022 Some idiot parked his car in my spot! (Qandaydir bir ahmoq mashinasini joyimga qo'yibdi)\n   \u2022 Some girl asked for Bobur's phone number. (Qandaydir bir qiz Boburning raqamini so'radi)"
+            },
+            {
+                "title": "5. ANY (Umuman yo'q / Birorta / Istalgan biri)",
+                "content": "A) Struktura va Qo'llanilishi:\n1. Savol (?) va Inkor (-) gaplarda: Any + plural / singular / uncountable noun\n   \u2022 Do you have any money? (? - Birorta puling bormi?)\n   \u2022 I don't have any friends here. (- Birorta ham do'stim yo'q)\n\n2. Darak gaplarda (+): 'Istalgan / Xohlagan biri' ma'nosida keladi!\n   \u2022 Any book can help you improve your English. (+ Istalgan kitob yordam bera oladi)\n\n3. Inkor ma'noli so'zlar bilan:\n   \u2022 hardly any = deyarli yo'q (I have hardly any time)\n   \u2022 scarcely any = deyarli yo'q\n   \u2022 without any = birorsiz/siz (She came without any help)"
+            },
+            {
+                "title": "6. NO vs NOT ANY (Umuman yo'q - 0)",
+                "content": "No + ot (birlik, ko'plik, sanalmas) = 0 (Umuman yo'q).\nNo grammatik jihatdan darak gapda kelib, inkor ma'no beradi. Gapda ikkita inkor ishlatilmaydi!\n\n\u2022 I have NO money. = I don't have ANY money. (Ikkala gap ham: Pulum umuman yo'q)\n\u2022 There are NO students in the room. = There aren't ANY students in the room.\n\u2022 There is NO milk left."
+            },
+            {
+                "title": "7. Quantifier + OF + Determiner / Pronoun",
+                "content": "Muayyan (aniq) otlar yoki olmoshlar oldida OF ishlatiladi:\nQuantifier + OF + the / my / your / these / those / us / them / you\n\n\u2022 All of the students passed.\n\u2022 Some of the water is cold.\n\u2022 Most of the people agreed.\n\u2022 None of the answers are correct.\n\u2022 Any of those books is fine."
+            }
+        ]
+    },
+    "exercises": [
+        {
+            "id": "mcq-quantifiers-pi1",
+            "title": "Multiple Choice Questions",
+            "type": "multiple-choice",
+            "instructions": "Choose the correct quantifier for each sentence.",
+            "questions": [
+                {
+                    "id": 1,
+                    "question": "_______ animals need water to survive.",
+                    "options": [
+                        "All",
+                        "Any",
+                        "None",
+                        "No of"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "'All + plural noun' expresses a general truth about every animal."
+                },
+                {
+                    "id": 2,
+                    "question": "I don't have _______ money left in my bank account.",
+                    "options": [
+                        "any",
+                        "no",
+                        "some of",
+                        "some"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "Any is used in negative sentences (don't have any money)."
+                },
+                {
+                    "id": 3,
+                    "question": "_______ student can solve this riddle if they read it carefully.",
+                    "options": [
+                        "Any",
+                        "All of",
+                        "No of",
+                        "None"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "'Any' in a positive sentence means 'whichever/any single' (istalgan talaba)."
+                },
+                {
+                    "id": 4,
+                    "question": "There are _______ students in the classroom; it is completely empty.",
+                    "options": [
+                        "no",
+                        "any",
+                        "some of",
+                        "most of"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "'No + noun' indicates zero quantity."
+                },
+                {
+                    "id": 5,
+                    "question": "_______ of the water in this bottle is safe for drinking.",
+                    "options": [
+                        "Most",
+                        "Most of",
+                        "No of",
+                        "Any of"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "'Most + uncountable noun' without 'of' when no determiner is present (most water)."
+                },
+                {
+                    "id": 6,
+                    "question": "_______ of those students passed the entry exam with high scores.",
+                    "options": [
+                        "Most",
+                        "Any",
+                        "No",
+                        "Hardly"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "Most of + demonstrative (those) + noun."
+                },
+                {
+                    "id": 7,
+                    "question": "_______ stranger left a letter for you at the front reception desk.",
+                    "options": [
+                        "Some",
+                        "Any",
+                        "No",
+                        "All of"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "'Some' + singular countable noun means 'a certain unknown/unspecified person' (qandaydir bir)."
+                },
+                {
+                    "id": 8,
+                    "question": "She completed the whole marathon without _______ assistance.",
+                    "options": [
+                        "any",
+                        "some",
+                        "no",
+                        "all of"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "Without + ANY means 'without even a single bit of'."
+                },
+                {
+                    "id": 9,
+                    "question": "He has _______ free time because he works two jobs.",
+                    "options": [
+                        "hardly any",
+                        "hardly no",
+                        "some of",
+                        "most of"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "'Hardly any' means 'almost none' (deyarli yo'q)."
+                },
+                {
+                    "id": 10,
+                    "question": "Select the sentence with the same meaning as 'I have no money':",
+                    "options": [
+                        "I don't have any money.",
+                        "I have some money.",
+                        "I don't have no money.",
+                        "I have any money."
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "'I have no money' is equivalent to 'I don't have any money'."
+                },
+                {
+                    "id": 11,
+                    "question": "Can you eat all _______ this pizza by yourself?",
+                    "options": [
+                        "of",
+                        "for",
+                        "with",
+                        "at"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "All of + pronoun/determiner (all of this pizza)."
+                },
+                {
+                    "id": 12,
+                    "question": "_______ girl was asking for your phone number outside.",
+                    "options": [
+                        "Some",
+                        "Any",
+                        "No of",
+                        "All"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "'Some' + singular noun indicates an unknown female (qandaydir bir qiz)."
+                },
+                {
+                    "id": 13,
+                    "question": "Are there _______ apples left in the basket?",
+                    "options": [
+                        "any",
+                        "no",
+                        "some of",
+                        "hardly"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "Any is standard in questions seeking quantity information."
+                },
+                {
+                    "id": 14,
+                    "question": "_______ of my friends came to the party because it rained heavily.",
+                    "options": [
+                        "None",
+                        "No",
+                        "Any",
+                        "Hardly"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "None of + pronoun/determiner means not one of them."
+                },
+                {
+                    "id": 15,
+                    "question": "There is _______ reason to worry about the test results.",
+                    "options": [
+                        "no",
+                        "any",
+                        "some of",
+                        "hardly"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "'No reason' = zero reason."
+                },
+                {
+                    "id": 16,
+                    "question": "_______ of the information you provided was inaccurate.",
+                    "options": [
+                        "Some",
+                        "Any",
+                        "No",
+                        "Hardly"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "Some of + determiner (the) + uncountable noun."
+                },
+                {
+                    "id": 17,
+                    "question": "You can pick _______ book you like from the bookshelf.",
+                    "options": [
+                        "any",
+                        "some of",
+                        "no",
+                        "hardly"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "Any + singular noun in affirmative = whichever one you choose."
+                },
+                {
+                    "id": 18,
+                    "question": "_______ people prefer summer over winter.",
+                    "options": [
+                        "Most",
+                        "Most of",
+                        "No of",
+                        "Any of"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "Most + plural noun (without determiner) = general majority."
+                },
+                {
+                    "id": 19,
+                    "question": "All _______ the children in the hall were laughing.",
+                    "options": [
+                        "of",
+                        "from",
+                        "by",
+                        "with"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "All of the / all the are both correct."
+                },
+                {
+                    "id": 20,
+                    "question": "There was _______ traffic on the highway this morning.",
+                    "options": [
+                        "scarcely any",
+                        "scarcely no",
+                        "any of",
+                        "no of"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "'Scarcely any' = almost zero."
+                },
+                {
+                    "id": 21,
+                    "question": "_______ idiot blocked the driveway with his truck!",
+                    "options": [
+                        "Some",
+                        "Any",
+                        "No",
+                        "All of"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "'Some' + singular noun conveys an unspecified/annoying person."
+                },
+                {
+                    "id": 22,
+                    "question": "Do you have _______ questions regarding the lesson?",
+                    "options": [
+                        "any",
+                        "no",
+                        "some of",
+                        "hardly"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "Any + plural noun in question."
+                },
+                {
+                    "id": 23,
+                    "question": "_______ of us knew the correct answer to the riddle.",
+                    "options": [
+                        "None",
+                        "No",
+                        "Any",
+                        "Hardly"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "None of + us."
+                },
+                {
+                    "id": 24,
+                    "question": "She bought _______ fresh vegetables from the market.",
+                    "options": [
+                        "some",
+                        "any",
+                        "no of",
+                        "hardly"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "Some in affirmative statement with plural countable noun."
+                },
+                {
+                    "id": 25,
+                    "question": "There are _______ seats available; all of them are occupied.",
+                    "options": [
+                        "no",
+                        "any",
+                        "some",
+                        "most of"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "No + seats = zero seats."
+                },
+                {
+                    "id": 26,
+                    "question": "_______ of these options will work for our project.",
+                    "options": [
+                        "Any",
+                        "No",
+                        "Hardly",
+                        "Scarcely"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "Any of + demonstrative (these) + noun."
+                },
+                {
+                    "id": 27,
+                    "question": "We have _______ time to catch the train; hurry up!",
+                    "options": [
+                        "hardly any",
+                        "hardly no",
+                        "some of",
+                        "any of"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "Hardly any time = almost no time."
+                },
+                {
+                    "id": 28,
+                    "question": "_______ of the food was wasted after the banquet.",
+                    "options": [
+                        "Most",
+                        "Most of",
+                        "No",
+                        "Any"
+                    ],
+                    "correctAnswer": 1,
+                    "explanation": "Most of + the + food."
+                },
+                {
+                    "id": 29,
+                    "question": "He entered the dark room without _______ fear.",
+                    "options": [
+                        "any",
+                        "some",
+                        "no",
+                        "all of"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "Without + any."
+                },
+                {
+                    "id": 30,
+                    "question": "I have _______ idea where my car keys are.",
+                    "options": [
+                        "no",
+                        "any",
+                        "some of",
+                        "hardly"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "'I have no idea' = I don't know at all."
+                }
+            ]
+        },
+        {
+            "id": "fill-in-blanks-quantifiers-pi1",
+            "title": "Fill in the Blanks",
+            "type": "fill-in-blanks",
+            "instructions": "Fill in each blank with the correct quantifier (all, most, some, any, no, none).",
+            "questions": [
+                {
+                    "id": 1,
+                    "sentence": "I don't have _______ (any / no) money in my pocket.",
+                    "correctAnswer": "any",
+                    "explanation": "In negative sentences with 'don't', use 'any'."
+                },
+                {
+                    "id": 2,
+                    "sentence": "_______ (Most / Most of) students passed the entry exam.",
+                    "correctAnswer": "Most",
+                    "explanation": "Most + plural noun (without 'of' when no determiner is present)."
+                },
+                {
+                    "id": 3,
+                    "sentence": "There are _______ (no / any) apples left on the tree.",
+                    "correctAnswer": "no",
+                    "explanation": "No + noun in affirmative verb clause."
+                },
+                {
+                    "id": 4,
+                    "sentence": "_______ (All / All of) animals require oxygen to live.",
+                    "correctAnswer": "All",
+                    "explanation": "All + plural noun for general statements."
+                },
+                {
+                    "id": 5,
+                    "sentence": "_______ (Some / Any) guy called asking for you while you were away.",
+                    "correctAnswer": "Some",
+                    "explanation": "Some + singular countable noun = an unknown person."
+                },
+                {
+                    "id": 6,
+                    "sentence": "She managed to finish the task without _______ (any / no) help.",
+                    "correctAnswer": "any",
+                    "explanation": "Without + any."
+                },
+                {
+                    "id": 7,
+                    "sentence": "I have _______ (hardly any / hardly no) free time this week.",
+                    "correctAnswer": "hardly any",
+                    "explanation": "Hardly any = almost none."
+                },
+                {
+                    "id": 8,
+                    "sentence": "_______ (None / No) of the candidates met the required qualifications.",
+                    "correctAnswer": "None",
+                    "explanation": "None of + determiner + noun."
+                },
+                {
+                    "id": 9,
+                    "sentence": "You can pick _______ (any / some) seat you prefer.",
+                    "correctAnswer": "any",
+                    "explanation": "Any + singular noun = whichever one."
+                },
+                {
+                    "id": 10,
+                    "sentence": "There is _______ (no / any) milk left in the fridge.",
+                    "correctAnswer": "no",
+                    "explanation": "No + uncountable noun."
+                },
+                {
+                    "id": 11,
+                    "sentence": "_______ (Most of / Most) the water in this lake is polluted.",
+                    "correctAnswer": "Most of",
+                    "explanation": "Most of + the + noun."
+                },
+                {
+                    "id": 12,
+                    "sentence": "Did you buy _______ (any / no) fresh fruit at the store?",
+                    "correctAnswer": "any",
+                    "explanation": "Any in questions."
+                },
+                {
+                    "id": 13,
+                    "sentence": "_______ (All of / All) these books belong to the city library.",
+                    "correctAnswer": "All of",
+                    "explanation": "All of + these + noun."
+                },
+                {
+                    "id": 14,
+                    "sentence": "He gave me _______ (some / any) useful advice regarding my career.",
+                    "correctAnswer": "some",
+                    "explanation": "Some + uncountable noun in affirmative sentence."
+                },
+                {
+                    "id": 15,
+                    "sentence": "There are _______ (no / any) mistakes in your essay.",
+                    "correctAnswer": "no",
+                    "explanation": "No + plural noun."
+                },
+                {
+                    "id": 16,
+                    "sentence": "_______ (Some / Any) student who finishes early may leave the room.",
+                    "correctAnswer": "Any",
+                    "explanation": "Any student = any person who."
+                },
+                {
+                    "id": 17,
+                    "sentence": "I have _______ (hardly any / no any) energy left after the workout.",
+                    "correctAnswer": "hardly any",
+                    "explanation": "Hardly any = almost no."
+                },
+                {
+                    "id": 18,
+                    "sentence": "_______ (Most / Most of) people agree with the new policy.",
+                    "correctAnswer": "Most",
+                    "explanation": "Most + plural noun."
+                },
+                {
+                    "id": 19,
+                    "sentence": "_______ (None / No) of the money was recovered after the robbery.",
+                    "correctAnswer": "None",
+                    "explanation": "None of + the + noun."
+                },
+                {
+                    "id": 20,
+                    "sentence": "Do you have _______ (any / some) spare pens I could borrow?",
+                    "correctAnswer": "any",
+                    "explanation": "Any in question."
+                }
+            ]
+        },
+        {
+            "id": "scrambled-quantifiers-pi1",
+            "title": "Scrambled Sentences",
+            "type": "scrambled-sentences",
+            "instructions": "Arrange the words in the correct order to form grammatically correct sentences.",
+            "questions": [
+                {
+                    "id": 1,
+                    "words": [
+                        "all",
+                        "need",
+                        "food",
+                        "animals",
+                        "to",
+                        "survive"
+                    ],
+                    "correctSentence": "All animals need food to survive.",
+                    "explanation": "All + plural noun."
+                },
+                {
+                    "id": 2,
+                    "words": [
+                        "don't",
+                        "i",
+                        "have",
+                        "any",
+                        "money",
+                        "left"
+                    ],
+                    "correctSentence": "I don't have any money left.",
+                    "explanation": "Inkor gapda don't have any."
+                },
+                {
+                    "id": 3,
+                    "words": [
+                        "most",
+                        "passed",
+                        "students",
+                        "the",
+                        "exam",
+                        "entry"
+                    ],
+                    "correctSentence": "Most students passed the entry exam.",
+                    "explanation": "Most + plural noun."
+                },
+                {
+                    "id": 4,
+                    "words": [
+                        "some",
+                        "parked",
+                        "idiot",
+                        "car",
+                        "his",
+                        "here"
+                    ],
+                    "correctSentence": "Some idiot parked his car here.",
+                    "explanation": "Some + birlik ot (qandaydir bir)."
+                },
+                {
+                    "id": 5,
+                    "words": [
+                        "she",
+                        "came",
+                        "without",
+                        "any",
+                        "help"
+                    ],
+                    "correctSentence": "She came without any help.",
+                    "explanation": "Without + any."
+                },
+                {
+                    "id": 6,
+                    "words": [
+                        "there",
+                        "are",
+                        "no",
+                        "students",
+                        "in",
+                        "classroom",
+                        "the"
+                    ],
+                    "correctSentence": "There are no students in the classroom.",
+                    "explanation": "There are no + plural noun."
+                },
+                {
+                    "id": 7,
+                    "words": [
+                        "have",
+                        "i",
+                        "hardly",
+                        "any",
+                        "time",
+                        "today"
+                    ],
+                    "correctSentence": "I have hardly any time today.",
+                    "explanation": "Hardly any + uncountable noun."
+                },
+                {
+                    "id": 8,
+                    "words": [
+                        "most",
+                        "of",
+                        "these",
+                        "children",
+                        "are",
+                        "happy"
+                    ],
+                    "correctSentence": "Most of these children are happy.",
+                    "explanation": "Most of + demonstrative + noun."
+                },
+                {
+                    "id": 9,
+                    "words": [
+                        "any",
+                        "can",
+                        "book",
+                        "improve",
+                        "your",
+                        "vocabulary"
+                    ],
+                    "correctSentence": "Any book can improve your vocabulary.",
+                    "explanation": "Any + singular noun in affirmative (istalgan)."
+                },
+                {
+                    "id": 10,
+                    "words": [
+                        "none",
+                        "of",
+                        "the",
+                        "answers",
+                        "were",
+                        "correct"
+                    ],
+                    "correctSentence": "None of the answers were correct.",
+                    "explanation": "None of the + plural noun."
+                },
+                {
+                    "id": 11,
+                    "words": [
+                        "some",
+                        "girl",
+                        "asked",
+                        "for",
+                        "your",
+                        "number"
+                    ],
+                    "correctSentence": "Some girl asked for your number.",
+                    "explanation": "Some + singular noun."
+                },
+                {
+                    "id": 12,
+                    "words": [
+                        "all",
+                        "of",
+                        "the",
+                        "water",
+                        "is",
+                        "toxic"
+                    ],
+                    "correctSentence": "All of the water is toxic.",
+                    "explanation": "All of the + uncountable noun."
+                },
+                {
+                    "id": 13,
+                    "words": [
+                        "there",
+                        "is",
+                        "no",
+                        "milk",
+                        "in",
+                        "fridge",
+                        "the"
+                    ],
+                    "correctSentence": "There is no milk in the fridge.",
+                    "explanation": "There is no + uncountable noun."
+                },
+                {
+                    "id": 14,
+                    "words": [
+                        "do",
+                        "you",
+                        "have",
+                        "any",
+                        "friends",
+                        "here"
+                    ],
+                    "correctSentence": "Do you have any friends here?",
+                    "explanation": "Do you have any + noun?"
+                },
+                {
+                    "id": 15,
+                    "words": [
+                        "most",
+                        "water",
+                        "in",
+                        "bottle",
+                        "this",
+                        "is",
+                        "pure"
+                    ],
+                    "correctSentence": "Most water in this bottle is pure.",
+                    "explanation": "Most + uncountable noun."
+                }
+            ]
+        },
+        {
+            "id": "error-correction-quantifiers-pi1",
+            "title": "Error Correction",
+            "type": "error-correction",
+            "instructions": "Identify the error in each sentence and provide the corrected version.",
+            "questions": [
+                {
+                    "id": 1,
+                    "sentence": "I don't have no money in my wallet.",
+                    "correction": "I don't have any money in my wallet.",
+                    "explanation": "Double negation is incorrect. Use 'don't have any' or 'have no'."
+                },
+                {
+                    "id": 2,
+                    "sentence": "Most of students passed the entry exam.",
+                    "correction": "Most students passed the entry exam.",
+                    "explanation": "'Most of' requires a determiner (the/these/my) before the noun. Otherwise use 'Most students'."
+                },
+                {
+                    "id": 3,
+                    "sentence": "We need any volunteers for the project.",
+                    "correction": "We need some volunteers for the project.",
+                    "explanation": "In standard affirmative sentences expecting a quantity, use 'some', not 'any'."
+                },
+                {
+                    "id": 4,
+                    "sentence": "She arrived without no luggage.",
+                    "correction": "She arrived without any luggage.",
+                    "explanation": "'Without' is already negative; use 'any' after it."
+                },
+                {
+                    "id": 5,
+                    "sentence": "I have hardly no time to complete this assignment.",
+                    "correction": "I have hardly any time to complete this assignment.",
+                    "explanation": "Use 'hardly any', not 'hardly no'."
+                },
+                {
+                    "id": 6,
+                    "sentence": "All of students were present today.",
+                    "correction": "All of the students were present today.",
+                    "explanation": "'All of' requires a determiner like 'the'."
+                },
+                {
+                    "id": 7,
+                    "sentence": "Some of books in the library are old.",
+                    "correction": "Some of the books in the library are old.",
+                    "explanation": "'Some of' must be followed by a determiner (the/these/my)."
+                },
+                {
+                    "id": 8,
+                    "sentence": "There isn't no milk left in the bottle.",
+                    "correction": "There isn't any milk left in the bottle.",
+                    "explanation": "Double negation: use 'isn't any' or 'is no'."
+                },
+                {
+                    "id": 9,
+                    "sentence": "None of the answer is correct.",
+                    "correction": "None of the answers is correct.",
+                    "explanation": "'None of the' is followed by a plural noun (answers)."
+                },
+                {
+                    "id": 10,
+                    "sentence": "Most of people like sunny weather.",
+                    "correction": "Most people like sunny weather.",
+                    "explanation": "Without a determiner, use 'Most people' instead of 'Most of people'."
+                },
+                {
+                    "id": 11,
+                    "sentence": "Some idiot person parked in my spot.",
+                    "correction": "Some idiot parked in my spot.",
+                    "explanation": "'Some' + singular noun ('idiot' acts as the noun directly)."
+                },
+                {
+                    "id": 12,
+                    "sentence": "Do you have some questions for me?",
+                    "correction": "Do you have any questions for me?",
+                    "explanation": "Standard questions use 'any'."
+                },
+                {
+                    "id": 13,
+                    "sentence": "Any of of these pens will work.",
+                    "correction": "Any of these pens will work.",
+                    "explanation": "Duplicate word 'of'."
+                },
+                {
+                    "id": 14,
+                    "sentence": "He has scarcely no money left.",
+                    "correction": "He has scarcely any money left.",
+                    "explanation": "Use 'scarcely any', not 'scarcely no'."
+                },
+                {
+                    "id": 15,
+                    "sentence": "All of water was spilled.",
+                    "correction": "All of the water was spilled.",
+                    "explanation": "'All of' requires a determiner (the)."
+                }
+            ]
+        },
+        {
+            "id": "sentence-transformation-quantifiers-pi1",
+            "title": "Sentence Transformation",
+            "type": "sentence-transformation",
+            "instructions": "Rewrite each sentence using the prompt word so that the meaning stays the same.",
+            "questions": [
+                {
+                    "id": 1,
+                    "original": "I don't have any money.",
+                    "prompt": "no",
+                    "correctAnswer": "I have no money.",
+                    "explanation": "'don't have any' = 'have no'."
+                },
+                {
+                    "id": 2,
+                    "original": "Every single animal needs water.",
+                    "prompt": "All",
+                    "correctAnswer": "All animals need water.",
+                    "explanation": "All + plural noun."
+                },
+                {
+                    "id": 3,
+                    "original": "More than 50% of the students passed.",
+                    "prompt": "Most of",
+                    "correctAnswer": "Most of the students passed.",
+                    "explanation": "Most of the = >50%."
+                },
+                {
+                    "id": 4,
+                    "original": "An unknown girl was looking for you.",
+                    "prompt": "Some",
+                    "correctAnswer": "Some girl was looking for you.",
+                    "explanation": "Some + singular noun = unknown person."
+                },
+                {
+                    "id": 5,
+                    "original": "She arrived with zero assistance.",
+                    "prompt": "without any",
+                    "correctAnswer": "She arrived without any assistance.",
+                    "explanation": "without any = zero."
+                },
+                {
+                    "id": 6,
+                    "original": "I have almost no free time today.",
+                    "prompt": "hardly any",
+                    "correctAnswer": "I have hardly any free time today.",
+                    "explanation": "hardly any = almost no."
+                },
+                {
+                    "id": 7,
+                    "original": "There aren't any mistakes in your work.",
+                    "prompt": "no",
+                    "correctAnswer": "There are no mistakes in your work.",
+                    "explanation": "aren't any = are no."
+                },
+                {
+                    "id": 8,
+                    "original": "Pick whichever book you want.",
+                    "prompt": "Any",
+                    "correctAnswer": "Pick any book you want.",
+                    "explanation": "Any + singular noun = whichever."
+                },
+                {
+                    "id": 9,
+                    "original": "Not one of the solutions worked.",
+                    "prompt": "None of",
+                    "correctAnswer": "None of the solutions worked.",
+                    "explanation": "None of the."
+                },
+                {
+                    "id": 10,
+                    "original": "A majority of people enjoy music.",
+                    "prompt": "Most",
+                    "correctAnswer": "Most people enjoy music.",
+                    "explanation": "Most + plural noun."
+                },
+                {
+                    "id": 11,
+                    "original": "There is zero milk in the fridge.",
+                    "prompt": "no",
+                    "correctAnswer": "There is no milk in the fridge.",
+                    "explanation": "There is no + uncountable."
+                },
+                {
+                    "id": 12,
+                    "original": "Do you possess any spare keys?",
+                    "prompt": "have any",
+                    "correctAnswer": "Do you have any spare keys?",
+                    "explanation": "Do you have any."
+                },
+                {
+                    "id": 13,
+                    "original": "An unfamiliar man parked his car in front of our house.",
+                    "prompt": "Some",
+                    "correctAnswer": "Some man parked his car in front of our house.",
+                    "explanation": "Some + singular noun."
+                },
+                {
+                    "id": 14,
+                    "original": "The entire group of students is present.",
+                    "prompt": "All of the",
+                    "correctAnswer": "All of the students are present.",
+                    "explanation": "All of the + plural noun."
+                },
+                {
+                    "id": 15,
+                    "original": "He has almost no friends in this city.",
+                    "prompt": "scarcely any",
+                    "correctAnswer": "He has scarcely any friends in this city.",
+                    "explanation": "scarcely any = almost no."
+                }
+            ]
+        },
+        {
+            "id": "dialogue-completion-quantifiers-pi1",
+            "title": "Dialogue Completion",
+            "type": "dialogue-completion",
+            "instructions": "Select the correct quantifier phrase to complete each conversation.",
+            "questions": [
+                {
+                    "id": 1,
+                    "dialogue": [
+                        {
+                            "speaker": "A",
+                            "text": "Do you have any cash on you?"
+                        },
+                        {
+                            "speaker": "B",
+                            "text": "No, I have _______ money with me today."
+                        }
+                    ],
+                    "options": [
+                        "no",
+                        "any",
+                        "some of",
+                        "hardly"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "I have no money."
+                },
+                {
+                    "id": 2,
+                    "dialogue": [
+                        {
+                            "speaker": "A",
+                            "text": "Who was that at the door?"
+                        },
+                        {
+                            "speaker": "B",
+                            "text": "Just _______ salesman trying to sell solar panels."
+                        }
+                    ],
+                    "options": [
+                        "some",
+                        "any",
+                        "no",
+                        "all of"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "Some + singular noun = an unknown person."
+                },
+                {
+                    "id": 3,
+                    "dialogue": [
+                        {
+                            "speaker": "A",
+                            "text": "Did the students pass the exam?"
+                        },
+                        {
+                            "speaker": "B",
+                            "text": "Yes, _______ of them got excellent marks!"
+                        }
+                    ],
+                    "options": [
+                        "most",
+                        "any",
+                        "no",
+                        "hardly"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "Most of them."
+                },
+                {
+                    "id": 4,
+                    "dialogue": [
+                        {
+                            "speaker": "A",
+                            "text": "Can I read any of these magazines?"
+                        },
+                        {
+                            "speaker": "B",
+                            "text": "Sure, _______ magazine here is available for readers."
+                        }
+                    ],
+                    "options": [
+                        "any",
+                        "no",
+                        "none",
+                        "some of"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "Any magazine = whichever one."
+                },
+                {
+                    "id": 5,
+                    "dialogue": [
+                        {
+                            "speaker": "A",
+                            "text": "Why are you running so fast?"
+                        },
+                        {
+                            "speaker": "B",
+                            "text": "Because I have _______ time before the train leaves!"
+                        }
+                    ],
+                    "options": [
+                        "hardly any",
+                        "hardly no",
+                        "some of",
+                        "any of"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "Hardly any time = almost no time."
+                },
+                {
+                    "id": 6,
+                    "dialogue": [
+                        {
+                            "speaker": "A",
+                            "text": "Were there any seats left in the cinema?"
+                        },
+                        {
+                            "speaker": "B",
+                            "text": "No, there were _______ seats available."
+                        }
+                    ],
+                    "options": [
+                        "no",
+                        "any",
+                        "some of",
+                        "most of"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "There were no seats."
+                },
+                {
+                    "id": 7,
+                    "dialogue": [
+                        {
+                            "speaker": "A",
+                            "text": "Did she finish the project on time?"
+                        },
+                        {
+                            "speaker": "B",
+                            "text": "Yes, and she did it without _______ help!"
+                        }
+                    ],
+                    "options": [
+                        "any",
+                        "some",
+                        "no",
+                        "none"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "Without any help."
+                },
+                {
+                    "id": 8,
+                    "dialogue": [
+                        {
+                            "speaker": "A",
+                            "text": "Is the water in this pitcher clean?"
+                        },
+                        {
+                            "speaker": "B",
+                            "text": "Yes, _______ of the water is fresh."
+                        }
+                    ],
+                    "options": [
+                        "all",
+                        "any",
+                        "no",
+                        "hardly"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "All of the water."
+                },
+                {
+                    "id": 9,
+                    "dialogue": [
+                        {
+                            "speaker": "A",
+                            "text": "Which of these shirts should I wear?"
+                        },
+                        {
+                            "speaker": "B",
+                            "text": "_______ of those shirts looks great on you."
+                        }
+                    ],
+                    "options": [
+                        "Any",
+                        "No",
+                        "Hardly",
+                        "None"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "Any of those shirts."
+                },
+                {
+                    "id": 10,
+                    "dialogue": [
+                        {
+                            "speaker": "A",
+                            "text": "Did any of the applicants get hired?"
+                        },
+                        {
+                            "speaker": "B",
+                            "text": "Unfortunately, _______ of them met our standards."
+                        }
+                    ],
+                    "options": [
+                        "none",
+                        "no",
+                        "any",
+                        "some"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "None of them."
+                },
+                {
+                    "id": 11,
+                    "dialogue": [
+                        {
+                            "speaker": "A",
+                            "text": "Why is the road closed?"
+                        },
+                        {
+                            "speaker": "B",
+                            "text": "_______ idiot parked his truck right across the bridge!"
+                        }
+                    ],
+                    "options": [
+                        "Some",
+                        "Any",
+                        "No",
+                        "All of"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "Some + singular noun."
+                },
+                {
+                    "id": 12,
+                    "dialogue": [
+                        {
+                            "speaker": "A",
+                            "text": "Do you need help with your homework?"
+                        },
+                        {
+                            "speaker": "B",
+                            "text": "No thanks, I have _______ questions right now."
+                        }
+                    ],
+                    "options": [
+                        "no",
+                        "any",
+                        "some of",
+                        "hardly"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "I have no questions."
+                },
+                {
+                    "id": 13,
+                    "dialogue": [
+                        {
+                            "speaker": "A",
+                            "text": "How many of the guests have arrived?"
+                        },
+                        {
+                            "speaker": "B",
+                            "text": "_______ of them are already in the dining hall."
+                        }
+                    ],
+                    "options": [
+                        "Most",
+                        "Any",
+                        "No",
+                        "Hardly"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "Most of them."
+                },
+                {
+                    "id": 14,
+                    "dialogue": [
+                        {
+                            "speaker": "A",
+                            "text": "Is there any bread left for breakfast?"
+                        },
+                        {
+                            "speaker": "B",
+                            "text": "There is _______ bread left, so we need to buy more."
+                        }
+                    ],
+                    "options": [
+                        "no",
+                        "any",
+                        "some of",
+                        "most of"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "There is no bread."
+                },
+                {
+                    "id": 15,
+                    "dialogue": [
+                        {
+                            "speaker": "A",
+                            "text": "Can I ask you a question?"
+                        },
+                        {
+                            "speaker": "B",
+                            "text": "Sure, you can ask _______ question you want!"
+                        }
+                    ],
+                    "options": [
+                        "any",
+                        "no",
+                        "none",
+                        "some of"
+                    ],
+                    "correctAnswer": 0,
+                    "explanation": "Any question = whichever question."
+                }
+            ]
+        }
+    ]
+}
+  ]
   },
   "upper": {
     "label": "Intermediate",
