@@ -86113,1285 +86113,2946 @@ export const grammarData = {
     ]
   },
   "advanced": {
+    "label": "Pre-Intermediate",
     "topics": [
-    {
-    "id": "quantifiers-all-most-some-any-no",
-    "title": "Quantifiers: All, Most, Some, Any & No",
-    "icon": "\ud83d\udcca",
-    "description": "Master quantifiers with countable and uncountable nouns, 'of' structures, 'some' with singular nouns, and 'any' vs 'no'.",
-    "studyGuide": {
-        "title": "Quantifiers (Miqdor Ko'rsatkichlari): All, Most, Some, Any, No (Nazariy Qo'llanma)",
-        "summary": "Quantifiers - otlarning miqdorini (qancha/nechta) ko'rsatuvchi so'zlardir. Ushbu darsda All, Most, Some, Any, No miqdor ko'rsatkichlarining sanoqli hamda sanalmas otlar bilan kelishi, 'of' predlogli strukturalari va maxsus ma'nolari o'rganiladi.",
-        "sections": [
-            {
-                "title": "1. Quantifiers (Miqdor Ko'rsatkichlari) Nima?",
-                "content": "Quantifiers otlarning aniq yoki noaniq miqdorini ko'rsatadi.\n\n\u2022 Sanoqli otlar bilan: all students, many books, some friends\n\u2022 Sanalmas otlar bilan: some water, all money, no time\n\nStruktura: Quantifier + Noun\n\u2022 all students (barcha talabalar)\n\u2022 some water (bir oz suv)\n\u2022 any books (birorta kitob)\n\u2022 most people (ko'pchilik odamlar)\n\u2022 no time (vaqt umuman yo'q)"
-            },
-            {
-                "title": "2. ALL (100% - Hamma / Barcha)",
-                "content": "A) Struktura:\n\u2022 All + ko'plikdagi sanoqli ot / sanalmas ot\n\u2022 All of + the/my/this/those + ot (yoki olmosh: all of them/us/you)\n\nB) Ma'nosi: Hamma, barcha (100%). Umumiy haqiqat yoki butun guruhni anglatadi.\n\u2022 All animals need food. (= Dunyodagi har bir hayvon)\n\u2022 All those students are here.\n\u2022 All of the water in this region is toxic.\n\u2022 Can you eat all of it?\n\nEslatma: 'all of the/this/that' iborasida 'of' tushirib qoldirilishi mumkin: all of the students = all the students."
-            },
-            {
-                "title": "3. MOST (>50% - Ko'pchilik / Aksariyat)",
-                "content": "A) Struktura:\n\u2022 Most + ko'plikdagi sanoqli ot / sanalmas ot\n\u2022 Most of + the/my/these/them/us/you + ot\n\nB) Ma'nosi: 50% dan ortiq qismi (ko'pchilik, aksariyat).\n\u2022 Most students passed the entry exams. (Ko'pchilik talabalar kirdi)\n\u2022 Most of them were from Uchkurgan.\n\u2022 Most water in this bottle is safe to drink.\n\u2022 Most of these children are happy."
-            },
-            {
-                "title": "4. SOME (Ba'zi / Bir oz / Qandaydir bir)",
-                "content": "A) Struktura va Muqobil Ma'nolari:\n1. Darak gaplarda (+): Some + ko'plikdagi sanoqli ot / sanalmas ot (Ba'zi, bir oz)\n   \u2022 I have some friends here. (Mening ba'zi do'stlarim bor)\n   \u2022 Some of the books in our library are brand new.\n\n2. Birlikdagi sanoqli ot bilan: Some + singular countable noun = 'Qandaydir bir', 'notanish' ma'nosida keladi!\n   \u2022 Some idiot parked his car in my spot! (Qandaydir bir ahmoq mashinasini joyimga qo'yibdi)\n   \u2022 Some girl asked for Bobur's phone number. (Qandaydir bir qiz Boburning raqamini so'radi)"
-            },
-            {
-                "title": "5. ANY (Umuman yo'q / Birorta / Istalgan biri)",
-                "content": "A) Struktura va Qo'llanilishi:\n1. Savol (?) va Inkor (-) gaplarda: Any + plural / singular / uncountable noun\n   \u2022 Do you have any money? (? - Birorta puling bormi?)\n   \u2022 I don't have any friends here. (- Birorta ham do'stim yo'q)\n\n2. Darak gaplarda (+): 'Istalgan / Xohlagan biri' ma'nosida keladi!\n   \u2022 Any book can help you improve your English. (+ Istalgan kitob yordam bera oladi)\n\n3. Inkor ma'noli so'zlar bilan:\n   \u2022 hardly any = deyarli yo'q (I have hardly any time)\n   \u2022 scarcely any = deyarli yo'q\n   \u2022 without any = birorsiz/siz (She came without any help)"
-            },
-            {
-                "title": "6. NO vs NOT ANY (Umuman yo'q - 0)",
-                "content": "No + ot (birlik, ko'plik, sanalmas) = 0 (Umuman yo'q).\nNo grammatik jihatdan darak gapda kelib, inkor ma'no beradi. Gapda ikkita inkor ishlatilmaydi!\n\n\u2022 I have NO money. = I don't have ANY money. (Ikkala gap ham: Pulum umuman yo'q)\n\u2022 There are NO students in the room. = There aren't ANY students in the room.\n\u2022 There is NO milk left."
-            },
-            {
-                "title": "7. Quantifier + OF + Determiner / Pronoun",
-                "content": "Muayyan (aniq) otlar yoki olmoshlar oldida OF ishlatiladi:\nQuantifier + OF + the / my / your / these / those / us / them / you\n\n\u2022 All of the students passed.\n\u2022 Some of the water is cold.\n\u2022 Most of the people agreed.\n\u2022 None of the answers are correct.\n\u2022 Any of those books is fine."
-            }
-        ]
-    },
-    "exercises": [
-        {
-            "id": "mcq-quantifiers-pi1",
-            "title": "Multiple Choice Questions",
-            "type": "multiple-choice",
-            "instructions": "Choose the correct quantifier for each sentence.",
-            "questions": [
-                {
+      {
+        "id": "quantifiers-all-most-some-any-no",
+        "title": "Quantifiers 1: All, Most, Some, Any & No",
+        "icon": "\ud83d\udcca",
+        "description": "Master quantifiers with countable and uncountable nouns, 'of' structures, 'some' with singular nouns, and 'any' vs 'no'.",
+        "guide": "## Quantifiers (Miqdor Ko'rsatkichlari) 1: All, Most, Some, Any & No\n\nQuantifiers otlarning miqdorini ko'rsatuvchi so'zlardir. Ular sanaladigan va sanalmaydigan otlar bilan turli qoidalar bo'yicha ishlatiladi.\n\n---\n\n### 1. ALL (100% — Barchasi, Barcha)\n\n* **Ma'nosi**: Barcha, hammasi.\n* **Sanaladigan otlar bilan**: Ko'plikdagi otlar bilan keladi. Fe'l ko'plikda bo'ladi.\n  * *Formula*: `All + plural noun + plural verb`\n  * *Misol*: **All animals** need food to survive. (Barcha hayvonlarga yashash uchun yemak kerak.)\n* **Sanalmaydigan otlar bilan**: Birlik fe'l bilan keladi.\n  * *Formula*: `All + uncountable noun + singular verb`\n  * *Misol*: **All information** is accurate. (Barcha ma'lumotlar aniq.)\n* **All of structure**: `All of the / my / these + noun`\n  * *Misol*: **All of the students** passed the exam.\n\n---\n\n### 2. MOST (>50% — Aksariyat, Ko'pchilik)\n\n* **Ma'nosi**: Ko'pchiligi, aksariyati (lekin 100% emas).\n* **Qoidasi**: Undan keyin to'g'ridan-to'g'ri ko'plikdagi ot yoki sanalmaydigan ot keladi.\n  * *Formula*: `Most + plural/uncountable noun`\n  * *Misol*: **Most people** enjoy music. (Ko'pchilik odamlar musiqani yoqtiradi.)\n  * *Misol*: **Most of the time** was spent on research.\n\n---\n\n### 3. SOME (Ba'zi, Biroz / Qandaydir bir)\n\n* **Tasdiq gaplarda (+)**: `Some + plural noun` (ba'zi) yoki `Some + uncountable noun` (biroz).\n  * *Misol*: I bought **some apples**. (Men bir nechta olma sotib oldim.)\n  * *Misol*: There is **some water** in the fridge.\n* **Savol gaplarda (?) — Taklif va Iltimoslar uchun**:\n  * *Misol*: Would you like **some coffee**? (Biroz kofe xohlaysizmi?) — Taklif\n  * *Misol*: Can I have **some water**, please? — Iltimos\n* **Birlik ot bilan (+)**: \"Qandaydir bir\" ma'nosida keladi.\n  * *Misol*: **Some guy** left his jacket here. (Qandaydir bir yigit ko'ylagini qoldiribdi.)\n\n---\n\n### 4. ANY (Birorta, Hech qanday / Istalgan biri)\n\n* **Inkor (-) va Savol (?) gaplarda**:\n  * *Misol*: Do you have **any questions**? (Birorta savolingiz bormi?)\n  * *Misol*: I don't have **any money**. (Menda hech qanday pul yo'q.)\n* **Tasdiq gaplarda (+)**: \"Istalgan biri / Qaysi biri bo'lsada\" ma'nosida keladi.\n  * *Misol*: You can choose **any book** you like. (O'zingizga yoqqan istalgan kitobni tanlashingiz mumkin.)\n\n---\n\n### 5. NO vs NOT ANY (Hech qanday / Yo'q)\n\n* **Formulalar**:\n  * `Positive Verb + NO + Noun` = `Negative Verb + ANY + Noun`\n  * *Misol*: I have **no money**. = I don't have **any money**.\n* **Muhim Qoida (Double Negative taqiqi)**:\n  * Ingliz tilida bir gapda ikkita inkor ishlatish **NOTO'G'RI**:\n  * ❌ *I don't have no money.*\n  * ✅ *I have no money.* / *I don't have any money.*",
+        "questions": [
+          {
                     "id": 1,
-                    "question": "_______ animals need water to survive.",
+                    "text": "_______ animals need food to survive.",
                     "options": [
-                        "All",
-                        "Any",
-                        "None",
-                        "No of"
+                              "All",
+                              "Any",
+                              "None",
+                              "No of"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "'All + plural noun' expresses a general truth about every animal."
-                },
-                {
+                    "correct": 0,
+                    "explanation": "'All' refers to 100% of a group with a plural noun ('animals')."
+          },
+          {
                     "id": 2,
-                    "question": "I don't have _______ money left in my bank account.",
+                    "text": "Do you have _______ questions about the lesson?",
                     "options": [
-                        "any",
-                        "no",
-                        "some of",
-                        "some"
+                              "some",
+                              "any",
+                              "no",
+                              "all"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "Any is used in negative sentences (don't have any money)."
-                },
-                {
+                    "correct": 1,
+                    "explanation": "In general questions, 'any' is used with plural countable nouns."
+          },
+          {
                     "id": 3,
-                    "question": "_______ student can solve this riddle if they read it carefully.",
+                    "text": "Would you like _______ tea?",
                     "options": [
-                        "Any",
-                        "All of",
-                        "No of",
-                        "None"
+                              "any",
+                              "some",
+                              "no",
+                              "every"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "'Any' in a positive sentence means 'whichever/any single' (istalgan talaba)."
-                },
-                {
+                    "correct": 1,
+                    "explanation": "'Some' is used in questions when making an offer or request."
+          },
+          {
                     "id": 4,
-                    "question": "There are _______ students in the classroom; it is completely empty.",
+                    "text": "I have _______ money left in my account.",
                     "options": [
-                        "no",
-                        "any",
-                        "some of",
-                        "most of"
+                              "not",
+                              "no",
+                              "any",
+                              "none of"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "'No + noun' indicates zero quantity."
-                },
-                {
+                    "correct": 1,
+                    "explanation": "'No' is used directly before a noun with a positive verb: 'have no money'."
+          },
+          {
                     "id": 5,
-                    "question": "_______ of the water in this bottle is safe for drinking.",
+                    "text": "_______ students passed the test, but a few failed.",
                     "options": [
-                        "Most",
-                        "Most of",
-                        "No of",
-                        "Any of"
+                              "Most",
+                              "Any",
+                              "No",
+                              "Every"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "'Most + uncountable noun' without 'of' when no determiner is present (most water)."
-                },
-                {
+                    "correct": 0,
+                    "explanation": "'Most' means the majority (>50%) of the group."
+          },
+          {
                     "id": 6,
-                    "question": "_______ of those students passed the entry exam with high scores.",
+                    "text": "Which sentence is grammatically CORRECT?",
                     "options": [
-                        "Most",
-                        "Any",
-                        "No",
-                        "Hardly"
+                              "I don't have no time.",
+                              "I have no time.",
+                              "I don't have none time.",
+                              "I have not any time."
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "Most of + demonstrative (those) + noun."
-                },
-                {
+                    "correct": 1,
+                    "explanation": "English avoids double negatives. 'I have no time' is correct."
+          },
+          {
                     "id": 7,
-                    "question": "_______ stranger left a letter for you at the front reception desk.",
+                    "text": "You can pick _______ fruit from the basket; they are all fresh.",
                     "options": [
-                        "Some",
-                        "Any",
-                        "No",
-                        "All of"
+                              "some",
+                              "no",
+                              "any",
+                              "none"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "'Some' + singular countable noun means 'a certain unknown/unspecified person' (qandaydir bir)."
-                },
-                {
+                    "correct": 2,
+                    "explanation": "'Any' in an affirmative sentence means 'it doesn't matter which one'."
+          },
+          {
                     "id": 8,
-                    "question": "She completed the whole marathon without _______ assistance.",
+                    "text": "_______ of the information you sent was very helpful.",
                     "options": [
-                        "any",
-                        "some",
-                        "no",
-                        "all of"
+                              "All",
+                              "Every",
+                              "Each",
+                              "Many"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "Without + ANY means 'without even a single bit of'."
-                },
-                {
+                    "correct": 0,
+                    "explanation": "'All of' works with uncountable nouns ('information')."
+          },
+          {
                     "id": 9,
-                    "question": "He has _______ free time because he works two jobs.",
+                    "text": "She didn't buy _______ fresh vegetables at the market.",
                     "options": [
-                        "hardly any",
-                        "hardly no",
-                        "some of",
-                        "most of"
+                              "some",
+                              "any",
+                              "no",
+                              "none"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "'Hardly any' means 'almost none' (deyarli yo'q)."
-                },
-                {
+                    "correct": 1,
+                    "explanation": "'Any' is used after negative verbs ('didn't buy')."
+          },
+          {
                     "id": 10,
-                    "question": "Select the sentence with the same meaning as 'I have no money':",
+                    "text": "_______ guy called and left a message for you.",
                     "options": [
-                        "I don't have any money.",
-                        "I have some money.",
-                        "I don't have no money.",
-                        "I have any money."
+                              "Some",
+                              "Any",
+                              "All",
+                              "Every"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "'I have no money' is equivalent to 'I don't have any money'."
-                },
-                {
+                    "correct": 0,
+                    "explanation": "'Some' + singular noun means 'a certain / unknown person'."
+          },
+          {
                     "id": 11,
-                    "question": "Can you eat all _______ this pizza by yourself?",
+                    "text": "_______ of the cake was eaten by the children.",
                     "options": [
-                        "of",
-                        "for",
-                        "with",
-                        "at"
+                              "Most",
+                              "Every",
+                              "Each",
+                              "Many"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "All of + pronoun/determiner (all of this pizza)."
-                },
-                {
+                    "correct": 0,
+                    "explanation": "'Most of' is used before 'the + uncountable/singular noun'."
+          },
+          {
                     "id": 12,
-                    "question": "_______ girl was asking for your phone number outside.",
+                    "text": "Can I borrow _______ money until tomorrow?",
                     "options": [
-                        "Some",
-                        "Any",
-                        "No of",
-                        "All"
+                              "any",
+                              "some",
+                              "no",
+                              "every"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "'Some' + singular noun indicates an unknown female (qandaydir bir qiz)."
-                },
-                {
+                    "correct": 1,
+                    "explanation": "'Some' is used in polite requests."
+          },
+          {
                     "id": 13,
-                    "question": "Are there _______ apples left in the basket?",
+                    "text": "There are _______ cars parked on our street today.",
                     "options": [
-                        "any",
-                        "no",
-                        "some of",
-                        "hardly"
+                              "no",
+                              "not",
+                              "any",
+                              "none of"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "Any is standard in questions seeking quantity information."
-                },
-                {
+                    "correct": 0,
+                    "explanation": "'No' + plural noun indicates zero quantity."
+          },
+          {
                     "id": 14,
-                    "question": "_______ of my friends came to the party because it rained heavily.",
+                    "text": "_______ of my friends live near my apartment.",
                     "options": [
-                        "None",
-                        "No",
-                        "Any",
-                        "Hardly"
+                              "All",
+                              "Every",
+                              "Each",
+                              "No"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "None of + pronoun/determiner means not one of them."
-                },
-                {
+                    "correct": 0,
+                    "explanation": "'All of my friends' followed by plural verb 'live'."
+          },
+          {
                     "id": 15,
-                    "question": "There is _______ reason to worry about the test results.",
+                    "text": "Is there _______ milk left in the bottle?",
                     "options": [
-                        "no",
-                        "any",
-                        "some of",
-                        "hardly"
+                              "some",
+                              "any",
+                              "no",
+                              "all"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "'No reason' = zero reason."
-                },
-                {
+                    "correct": 1,
+                    "explanation": "'Any' is standard in questions asking about existence/quantity."
+          },
+          {
                     "id": 16,
-                    "question": "_______ of the information you provided was inaccurate.",
+                    "text": "He answered _______ question correctly.",
                     "options": [
-                        "Some",
-                        "Any",
-                        "No",
-                        "Hardly"
+                              "all",
+                              "every",
+                              "most of",
+                              "some of"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "Some of + determiner (the) + uncountable noun."
-                },
-                {
+                    "correct": 1,
+                    "explanation": "'Every' is followed by a singular countable noun ('question')."
+          },
+          {
                     "id": 17,
-                    "question": "You can pick _______ book you like from the bookshelf.",
+                    "text": "I can do this job _______ day of the week.",
                     "options": [
-                        "any",
-                        "some of",
-                        "no",
-                        "hardly"
+                              "some",
+                              "any",
+                              "no",
+                              "all of"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "Any + singular noun in affirmative = whichever one you choose."
-                },
-                {
+                    "correct": 1,
+                    "explanation": "'Any' + singular noun means 'whichever day'."
+          },
+          {
                     "id": 18,
-                    "question": "_______ people prefer summer over winter.",
+                    "text": "We have _______ reason to doubt his honesty.",
                     "options": [
-                        "Most",
-                        "Most of",
-                        "No of",
-                        "Any of"
+                              "no",
+                              "not",
+                              "none",
+                              "any"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "Most + plural noun (without determiner) = general majority."
-                },
-                {
+                    "correct": 0,
+                    "explanation": "'No' + singular noun ('reason')."
+          },
+          {
                     "id": 19,
-                    "question": "All _______ the children in the hall were laughing.",
+                    "text": "_______ people prefer working from home nowadays.",
                     "options": [
-                        "of",
-                        "from",
-                        "by",
-                        "with"
+                              "Most",
+                              "Every",
+                              "Each",
+                              "Any of"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "All of the / all the are both correct."
-                },
-                {
+                    "correct": 0,
+                    "explanation": "'Most' directly modifies the plural noun 'people'."
+          },
+          {
                     "id": 20,
-                    "question": "There was _______ traffic on the highway this morning.",
+                    "text": "She has _______ interest in computer games.",
                     "options": [
-                        "scarcely any",
-                        "scarcely no",
-                        "any of",
-                        "no of"
+                              "no",
+                              "not",
+                              "none",
+                              "any"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "'Scarcely any' = almost zero."
-                },
-                {
-                    "id": 21,
-                    "question": "_______ idiot blocked the driveway with his truck!",
-                    "options": [
-                        "Some",
-                        "Any",
-                        "No",
-                        "All of"
-                    ],
-                    "correctAnswer": 0,
-                    "explanation": "'Some' + singular noun conveys an unspecified/annoying person."
-                },
-                {
-                    "id": 22,
-                    "question": "Do you have _______ questions regarding the lesson?",
-                    "options": [
-                        "any",
-                        "no",
-                        "some of",
-                        "hardly"
-                    ],
-                    "correctAnswer": 0,
-                    "explanation": "Any + plural noun in question."
-                },
-                {
-                    "id": 23,
-                    "question": "_______ of us knew the correct answer to the riddle.",
-                    "options": [
-                        "None",
-                        "No",
-                        "Any",
-                        "Hardly"
-                    ],
-                    "correctAnswer": 0,
-                    "explanation": "None of + us."
-                },
-                {
-                    "id": 24,
-                    "question": "She bought _______ fresh vegetables from the market.",
-                    "options": [
-                        "some",
-                        "any",
-                        "no of",
-                        "hardly"
-                    ],
-                    "correctAnswer": 0,
-                    "explanation": "Some in affirmative statement with plural countable noun."
-                },
-                {
-                    "id": 25,
-                    "question": "There are _______ seats available; all of them are occupied.",
-                    "options": [
-                        "no",
-                        "any",
-                        "some",
-                        "most of"
-                    ],
-                    "correctAnswer": 0,
-                    "explanation": "No + seats = zero seats."
-                },
-                {
-                    "id": 26,
-                    "question": "_______ of these options will work for our project.",
-                    "options": [
-                        "Any",
-                        "No",
-                        "Hardly",
-                        "Scarcely"
-                    ],
-                    "correctAnswer": 0,
-                    "explanation": "Any of + demonstrative (these) + noun."
-                },
-                {
-                    "id": 27,
-                    "question": "We have _______ time to catch the train; hurry up!",
-                    "options": [
-                        "hardly any",
-                        "hardly no",
-                        "some of",
-                        "any of"
-                    ],
-                    "correctAnswer": 0,
-                    "explanation": "Hardly any time = almost no time."
-                },
-                {
-                    "id": 28,
-                    "question": "_______ of the food was wasted after the banquet.",
-                    "options": [
-                        "Most",
-                        "Most of",
-                        "No",
-                        "Any"
-                    ],
-                    "correctAnswer": 1,
-                    "explanation": "Most of + the + food."
-                },
-                {
-                    "id": 29,
-                    "question": "He entered the dark room without _______ fear.",
-                    "options": [
-                        "any",
-                        "some",
-                        "no",
-                        "all of"
-                    ],
-                    "correctAnswer": 0,
-                    "explanation": "Without + any."
-                },
-                {
-                    "id": 30,
-                    "question": "I have _______ idea where my car keys are.",
-                    "options": [
-                        "no",
-                        "any",
-                        "some of",
-                        "hardly"
-                    ],
-                    "correctAnswer": 0,
-                    "explanation": "'I have no idea' = I don't know at all."
-                }
-            ]
-        },
-        {
-            "id": "fill-in-blanks-quantifiers-pi1",
-            "title": "Fill in the Blanks",
-            "type": "fill-in-blanks",
-            "instructions": "Fill in each blank with the correct quantifier (all, most, some, any, no, none).",
-            "questions": [
-                {
+                    "correct": 0,
+                    "explanation": "'No' + uncountable noun ('interest')."
+          }
+],
+        "fillBlanks": [
+          {
                     "id": 1,
-                    "sentence": "I don't have _______ (any / no) money in my pocket.",
-                    "correctAnswer": "any",
-                    "explanation": "In negative sentences with 'don't', use 'any'."
-                },
-                {
+                    "sentence": "There is _____ water left in the jug.",
+                    "answer": "no",
+                    "hint": "infinitive/negative without not"
+          },
+          {
                     "id": 2,
-                    "sentence": "_______ (Most / Most of) students passed the entry exam.",
-                    "correctAnswer": "Most",
-                    "explanation": "Most + plural noun (without 'of' when no determiner is present)."
-                },
-                {
+                    "sentence": "Did you see _____ good movies recently?",
+                    "answer": "any",
+                    "hint": "question form"
+          },
+          {
                     "id": 3,
-                    "sentence": "There are _______ (no / any) apples left on the tree.",
-                    "correctAnswer": "no",
-                    "explanation": "No + noun in affirmative verb clause."
-                },
-                {
+                    "sentence": "I bought _____ fresh apples from the store.",
+                    "answer": "some",
+                    "hint": "affirmative plural"
+          },
+          {
                     "id": 4,
-                    "sentence": "_______ (All / All of) animals require oxygen to live.",
-                    "correctAnswer": "All",
-                    "explanation": "All + plural noun for general statements."
-                },
-                {
+                    "sentence": "_____ of the students passed the final exam.",
+                    "answer": "All",
+                    "hint": "100% of students"
+          },
+          {
                     "id": 5,
-                    "sentence": "_______ (Some / Any) guy called asking for you while you were away.",
-                    "correctAnswer": "Some",
-                    "explanation": "Some + singular countable noun = an unknown person."
-                },
-                {
-                    "id": 6,
-                    "sentence": "She managed to finish the task without _______ (any / no) help.",
-                    "correctAnswer": "any",
-                    "explanation": "Without + any."
-                },
-                {
-                    "id": 7,
-                    "sentence": "I have _______ (hardly any / hardly no) free time this week.",
-                    "correctAnswer": "hardly any",
-                    "explanation": "Hardly any = almost none."
-                },
-                {
-                    "id": 8,
-                    "sentence": "_______ (None / No) of the candidates met the required qualifications.",
-                    "correctAnswer": "None",
-                    "explanation": "None of + determiner + noun."
-                },
-                {
-                    "id": 9,
-                    "sentence": "You can pick _______ (any / some) seat you prefer.",
-                    "correctAnswer": "any",
-                    "explanation": "Any + singular noun = whichever one."
-                },
-                {
-                    "id": 10,
-                    "sentence": "There is _______ (no / any) milk left in the fridge.",
-                    "correctAnswer": "no",
-                    "explanation": "No + uncountable noun."
-                },
-                {
-                    "id": 11,
-                    "sentence": "_______ (Most of / Most) the water in this lake is polluted.",
-                    "correctAnswer": "Most of",
-                    "explanation": "Most of + the + noun."
-                },
-                {
-                    "id": 12,
-                    "sentence": "Did you buy _______ (any / no) fresh fruit at the store?",
-                    "correctAnswer": "any",
-                    "explanation": "Any in questions."
-                },
-                {
-                    "id": 13,
-                    "sentence": "_______ (All of / All) these books belong to the city library.",
-                    "correctAnswer": "All of",
-                    "explanation": "All of + these + noun."
-                },
-                {
-                    "id": 14,
-                    "sentence": "He gave me _______ (some / any) useful advice regarding my career.",
-                    "correctAnswer": "some",
-                    "explanation": "Some + uncountable noun in affirmative sentence."
-                },
-                {
-                    "id": 15,
-                    "sentence": "There are _______ (no / any) mistakes in your essay.",
-                    "correctAnswer": "no",
-                    "explanation": "No + plural noun."
-                },
-                {
-                    "id": 16,
-                    "sentence": "_______ (Some / Any) student who finishes early may leave the room.",
-                    "correctAnswer": "Any",
-                    "explanation": "Any student = any person who."
-                },
-                {
-                    "id": 17,
-                    "sentence": "I have _______ (hardly any / no any) energy left after the workout.",
-                    "correctAnswer": "hardly any",
-                    "explanation": "Hardly any = almost no."
-                },
-                {
-                    "id": 18,
-                    "sentence": "_______ (Most / Most of) people agree with the new policy.",
-                    "correctAnswer": "Most",
-                    "explanation": "Most + plural noun."
-                },
-                {
-                    "id": 19,
-                    "sentence": "_______ (None / No) of the money was recovered after the robbery.",
-                    "correctAnswer": "None",
-                    "explanation": "None of + the + noun."
-                },
-                {
-                    "id": 20,
-                    "sentence": "Do you have _______ (any / some) spare pens I could borrow?",
-                    "correctAnswer": "any",
-                    "explanation": "Any in question."
-                }
-            ]
-        },
-        {
-            "id": "scrambled-quantifiers-pi1",
-            "title": "Scrambled Sentences",
-            "type": "scrambled-sentences",
-            "instructions": "Arrange the words in the correct order to form grammatically correct sentences.",
-            "questions": [
-                {
+                    "sentence": "Would you like _____ tea before we start?",
+                    "answer": "some",
+                    "hint": "polite offer"
+          }
+],
+        "scrambled": [
+          {
                     "id": 1,
-                    "words": [
-                        "all",
-                        "need",
-                        "food",
-                        "animals",
-                        "to",
-                        "survive"
-                    ],
-                    "correctSentence": "All animals need food to survive.",
-                    "explanation": "All + plural noun."
-                },
-                {
+                    "answer": "All students passed the exam",
+                    "hint": "Start with All"
+          },
+          {
                     "id": 2,
-                    "words": [
-                        "don't",
-                        "i",
-                        "have",
-                        "any",
-                        "money",
-                        "left"
-                    ],
-                    "correctSentence": "I don't have any money left.",
-                    "explanation": "Inkor gapda don't have any."
-                },
-                {
+                    "answer": "I have no money left",
+                    "hint": "Start with I"
+          },
+          {
                     "id": 3,
-                    "words": [
-                        "most",
-                        "passed",
-                        "students",
-                        "the",
-                        "exam",
-                        "entry"
-                    ],
-                    "correctSentence": "Most students passed the entry exam.",
-                    "explanation": "Most + plural noun."
-                },
-                {
+                    "answer": "Would you like some coffee",
+                    "hint": "Offer format"
+          },
+          {
                     "id": 4,
-                    "words": [
-                        "some",
-                        "parked",
-                        "idiot",
-                        "car",
-                        "his",
-                        "here"
-                    ],
-                    "correctSentence": "Some idiot parked his car here.",
-                    "explanation": "Some + birlik ot (qandaydir bir)."
-                },
-                {
+                    "answer": "Most people enjoy summer holidays",
+                    "hint": "Start with Most"
+          },
+          {
                     "id": 5,
-                    "words": [
-                        "she",
-                        "came",
-                        "without",
-                        "any",
-                        "help"
-                    ],
-                    "correctSentence": "She came without any help.",
-                    "explanation": "Without + any."
-                },
-                {
-                    "id": 6,
-                    "words": [
-                        "there",
-                        "are",
-                        "no",
-                        "students",
-                        "in",
-                        "classroom",
-                        "the"
-                    ],
-                    "correctSentence": "There are no students in the classroom.",
-                    "explanation": "There are no + plural noun."
-                },
-                {
-                    "id": 7,
-                    "words": [
-                        "have",
-                        "i",
-                        "hardly",
-                        "any",
-                        "time",
-                        "today"
-                    ],
-                    "correctSentence": "I have hardly any time today.",
-                    "explanation": "Hardly any + uncountable noun."
-                },
-                {
-                    "id": 8,
-                    "words": [
-                        "most",
-                        "of",
-                        "these",
-                        "children",
-                        "are",
-                        "happy"
-                    ],
-                    "correctSentence": "Most of these children are happy.",
-                    "explanation": "Most of + demonstrative + noun."
-                },
-                {
-                    "id": 9,
-                    "words": [
-                        "any",
-                        "can",
-                        "book",
-                        "improve",
-                        "your",
-                        "vocabulary"
-                    ],
-                    "correctSentence": "Any book can improve your vocabulary.",
-                    "explanation": "Any + singular noun in affirmative (istalgan)."
-                },
-                {
-                    "id": 10,
-                    "words": [
-                        "none",
-                        "of",
-                        "the",
-                        "answers",
-                        "were",
-                        "correct"
-                    ],
-                    "correctSentence": "None of the answers were correct.",
-                    "explanation": "None of the + plural noun."
-                },
-                {
-                    "id": 11,
-                    "words": [
-                        "some",
-                        "girl",
-                        "asked",
-                        "for",
-                        "your",
-                        "number"
-                    ],
-                    "correctSentence": "Some girl asked for your number.",
-                    "explanation": "Some + singular noun."
-                },
-                {
-                    "id": 12,
-                    "words": [
-                        "all",
-                        "of",
-                        "the",
-                        "water",
-                        "is",
-                        "toxic"
-                    ],
-                    "correctSentence": "All of the water is toxic.",
-                    "explanation": "All of the + uncountable noun."
-                },
-                {
-                    "id": 13,
-                    "words": [
-                        "there",
-                        "is",
-                        "no",
-                        "milk",
-                        "in",
-                        "fridge",
-                        "the"
-                    ],
-                    "correctSentence": "There is no milk in the fridge.",
-                    "explanation": "There is no + uncountable noun."
-                },
-                {
-                    "id": 14,
-                    "words": [
-                        "do",
-                        "you",
-                        "have",
-                        "any",
-                        "friends",
-                        "here"
-                    ],
-                    "correctSentence": "Do you have any friends here?",
-                    "explanation": "Do you have any + noun?"
-                },
-                {
-                    "id": 15,
-                    "words": [
-                        "most",
-                        "water",
-                        "in",
-                        "bottle",
-                        "this",
-                        "is",
-                        "pure"
-                    ],
-                    "correctSentence": "Most water in this bottle is pure.",
-                    "explanation": "Most + uncountable noun."
-                }
-            ]
-        },
-        {
-            "id": "error-correction-quantifiers-pi1",
-            "title": "Error Correction",
-            "type": "error-correction",
-            "instructions": "Identify the error in each sentence and provide the corrected version.",
-            "questions": [
-                {
+                    "answer": "You can choose any book",
+                    "hint": "Affirmative any"
+          }
+],
+        "errorCorrection": [
+          {
                     "id": 1,
-                    "sentence": "I don't have no money in my wallet.",
+                    "text": "I don't have no money in my wallet.",
                     "correction": "I don't have any money in my wallet.",
-                    "explanation": "Double negation is incorrect. Use 'don't have any' or 'have no'."
-                },
-                {
+                    "explanation": "Double negative is incorrect. Use 'any' with negative verbs."
+          },
+          {
                     "id": 2,
-                    "sentence": "Most of students passed the entry exam.",
-                    "correction": "Most students passed the entry exam.",
-                    "explanation": "'Most of' requires a determiner (the/these/my) before the noun. Otherwise use 'Most students'."
-                },
-                {
+                    "text": "All of student passed the test.",
+                    "correction": "All of the students passed the test.",
+                    "explanation": "'All of' requires a determiner and plural noun."
+          },
+          {
                     "id": 3,
-                    "sentence": "We need any volunteers for the project.",
-                    "correction": "We need some volunteers for the project.",
-                    "explanation": "In standard affirmative sentences expecting a quantity, use 'some', not 'any'."
-                },
-                {
+                    "text": "Do you want any tea? (offering)",
+                    "correction": "Do you want some tea?",
+                    "explanation": "Use 'some' when making an offer."
+          },
+          {
                     "id": 4,
-                    "sentence": "She arrived without no luggage.",
-                    "correction": "She arrived without any luggage.",
-                    "explanation": "'Without' is already negative; use 'any' after it."
-                },
-                {
+                    "text": "Most of people like ice cream.",
+                    "correction": "Most people like ice cream.",
+                    "explanation": "Use 'Most people' or 'Most of the people'."
+          },
+          {
                     "id": 5,
-                    "sentence": "I have hardly no time to complete this assignment.",
-                    "correction": "I have hardly any time to complete this assignment.",
-                    "explanation": "Use 'hardly any', not 'hardly no'."
-                },
-                {
-                    "id": 6,
-                    "sentence": "All of students were present today.",
-                    "correction": "All of the students were present today.",
-                    "explanation": "'All of' requires a determiner like 'the'."
-                },
-                {
-                    "id": 7,
-                    "sentence": "Some of books in the library are old.",
-                    "correction": "Some of the books in the library are old.",
-                    "explanation": "'Some of' must be followed by a determiner (the/these/my)."
-                },
-                {
-                    "id": 8,
-                    "sentence": "There isn't no milk left in the bottle.",
-                    "correction": "There isn't any milk left in the bottle.",
-                    "explanation": "Double negation: use 'isn't any' or 'is no'."
-                },
-                {
-                    "id": 9,
-                    "sentence": "None of the answer is correct.",
-                    "correction": "None of the answers is correct.",
-                    "explanation": "'None of the' is followed by a plural noun (answers)."
-                },
-                {
-                    "id": 10,
-                    "sentence": "Most of people like sunny weather.",
-                    "correction": "Most people like sunny weather.",
-                    "explanation": "Without a determiner, use 'Most people' instead of 'Most of people'."
-                },
-                {
-                    "id": 11,
-                    "sentence": "Some idiot person parked in my spot.",
-                    "correction": "Some idiot parked in my spot.",
-                    "explanation": "'Some' + singular noun ('idiot' acts as the noun directly)."
-                },
-                {
-                    "id": 12,
-                    "sentence": "Do you have some questions for me?",
-                    "correction": "Do you have any questions for me?",
-                    "explanation": "Standard questions use 'any'."
-                },
-                {
-                    "id": 13,
-                    "sentence": "Any of of these pens will work.",
-                    "correction": "Any of these pens will work.",
-                    "explanation": "Duplicate word 'of'."
-                },
-                {
-                    "id": 14,
-                    "sentence": "He has scarcely no money left.",
-                    "correction": "He has scarcely any money left.",
-                    "explanation": "Use 'scarcely any', not 'scarcely no'."
-                },
-                {
-                    "id": 15,
-                    "sentence": "All of water was spilled.",
-                    "correction": "All of the water was spilled.",
-                    "explanation": "'All of' requires a determiner (the)."
-                }
-            ]
-        },
-        {
-            "id": "sentence-transformation-quantifiers-pi1",
-            "title": "Sentence Transformation",
-            "type": "sentence-transformation",
-            "instructions": "Rewrite each sentence using the prompt word so that the meaning stays the same.",
-            "questions": [
-                {
+                    "text": "There aren't no cars on the street.",
+                    "correction": "There aren't any cars on the street.",
+                    "explanation": "Avoid double negatives."
+          }
+],
+        "transform": [
+          {
                     "id": 1,
-                    "original": "I don't have any money.",
-                    "prompt": "no",
-                    "correctAnswer": "I have no money.",
-                    "explanation": "'don't have any' = 'have no'."
-                },
-                {
+                    "original": "I don't have any books.",
+                    "target": "I have _____ books.",
+                    "answer": "no",
+                    "explanation": "Negative verb + any = positive verb + no."
+          },
+          {
                     "id": 2,
-                    "original": "Every single animal needs water.",
-                    "prompt": "All",
-                    "correctAnswer": "All animals need water.",
-                    "explanation": "All + plural noun."
-                },
-                {
+                    "original": "There isn't any milk left.",
+                    "target": "There is _____ milk left.",
+                    "answer": "no",
+                    "explanation": "Isn't any = is no."
+          },
+          {
                     "id": 3,
-                    "original": "More than 50% of the students passed.",
-                    "prompt": "Most of",
-                    "correctAnswer": "Most of the students passed.",
-                    "explanation": "Most of the = >50%."
-                },
-                {
-                    "id": 4,
-                    "original": "An unknown girl was looking for you.",
-                    "prompt": "Some",
-                    "correctAnswer": "Some girl was looking for you.",
-                    "explanation": "Some + singular noun = unknown person."
-                },
-                {
-                    "id": 5,
-                    "original": "She arrived with zero assistance.",
-                    "prompt": "without any",
-                    "correctAnswer": "She arrived without any assistance.",
-                    "explanation": "without any = zero."
-                },
-                {
-                    "id": 6,
-                    "original": "I have almost no free time today.",
-                    "prompt": "hardly any",
-                    "correctAnswer": "I have hardly any free time today.",
-                    "explanation": "hardly any = almost no."
-                },
-                {
-                    "id": 7,
-                    "original": "There aren't any mistakes in your work.",
-                    "prompt": "no",
-                    "correctAnswer": "There are no mistakes in your work.",
-                    "explanation": "aren't any = are no."
-                },
-                {
-                    "id": 8,
-                    "original": "Pick whichever book you want.",
-                    "prompt": "Any",
-                    "correctAnswer": "Pick any book you want.",
-                    "explanation": "Any + singular noun = whichever."
-                },
-                {
-                    "id": 9,
-                    "original": "Not one of the solutions worked.",
-                    "prompt": "None of",
-                    "correctAnswer": "None of the solutions worked.",
-                    "explanation": "None of the."
-                },
-                {
-                    "id": 10,
-                    "original": "A majority of people enjoy music.",
-                    "prompt": "Most",
-                    "correctAnswer": "Most people enjoy music.",
-                    "explanation": "Most + plural noun."
-                },
-                {
-                    "id": 11,
-                    "original": "There is zero milk in the fridge.",
-                    "prompt": "no",
-                    "correctAnswer": "There is no milk in the fridge.",
-                    "explanation": "There is no + uncountable."
-                },
-                {
-                    "id": 12,
-                    "original": "Do you possess any spare keys?",
-                    "prompt": "have any",
-                    "correctAnswer": "Do you have any spare keys?",
-                    "explanation": "Do you have any."
-                },
-                {
-                    "id": 13,
-                    "original": "An unfamiliar man parked his car in front of our house.",
-                    "prompt": "Some",
-                    "correctAnswer": "Some man parked his car in front of our house.",
-                    "explanation": "Some + singular noun."
-                },
-                {
-                    "id": 14,
-                    "original": "The entire group of students is present.",
-                    "prompt": "All of the",
-                    "correctAnswer": "All of the students are present.",
-                    "explanation": "All of the + plural noun."
-                },
-                {
-                    "id": 15,
-                    "original": "He has almost no friends in this city.",
-                    "prompt": "scarcely any",
-                    "correctAnswer": "He has scarcely any friends in this city.",
-                    "explanation": "scarcely any = almost no."
-                }
-            ]
-        },
-        {
-            "id": "dialogue-completion-quantifiers-pi1",
-            "title": "Dialogue Completion",
-            "type": "dialogue-completion",
-            "instructions": "Select the correct quantifier phrase to complete each conversation.",
-            "questions": [
-                {
+                    "original": "100% of the team members arrived.",
+                    "target": "_____ of the team members arrived.",
+                    "answer": "All",
+                    "explanation": "100% = All."
+          }
+],
+        "dialogue": [
+          {
                     "id": 1,
-                    "dialogue": [
-                        {
-                            "speaker": "A",
-                            "text": "Do you have any cash on you?"
-                        },
-                        {
-                            "speaker": "B",
-                            "text": "No, I have _______ money with me today."
-                        }
-                    ],
+                    "dialogue": "A: Are there any apples left?\nB: No, we have _____ apples.",
                     "options": [
-                        "no",
-                        "any",
-                        "some of",
-                        "hardly"
+                              "no",
+                              "any",
+                              "all",
+                              "some"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "I have no money."
-                },
-                {
+                    "correct": 0,
+                    "explanation": "Positive verb 'have' + 'no' = zero quantity."
+          },
+          {
                     "id": 2,
-                    "dialogue": [
-                        {
-                            "speaker": "A",
-                            "text": "Who was that at the door?"
-                        },
-                        {
-                            "speaker": "B",
-                            "text": "Just _______ salesman trying to sell solar panels."
-                        }
-                    ],
+                    "dialogue": "A: Can I offer you something to drink?\nB: Yes, I would love _____ juice.",
                     "options": [
-                        "some",
-                        "any",
-                        "no",
-                        "all of"
+                              "some",
+                              "any",
+                              "no",
+                              "none"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "Some + singular noun = an unknown person."
-                },
-                {
+                    "correct": 0,
+                    "explanation": "Accepting an offer using 'some'."
+          }
+]
+      },
+      {
+        "id": "quantifiers-no-none-not-any",
+        "title": "Quantifiers 2: No, None & Not Any",
+        "icon": "\u274c",
+        "description": "Learn the difference between 'no' (adjective), 'none' (pronoun), 'none of', and how to avoid double negatives.",
+        "guide": "## Quantifiers 2: No, None & Not Any\n\nUshbu darsda `No`, `None` va `Not Any` inkor ko'rsatkichlarining farqlari hamda ularni to'g'ri qo'llash qoidalari o'rganiladi.\n\n---\n\n### 1. NO (Sifat / Determiner)\n\n* **Qoidasi**: Undan keyin **ALBATTA OT** keladi (sanaladigan yoki sanalmaydigan).\n* **Formulasi**: `Positive Verb + NO + Noun`\n* **Misollar**:\n  * I have **no apples**. (Menda olma yo'q.)\n  * There is **no water** in the glass.\n  * **No student** knew the answer.\n\n---\n\n### 2. NONE (Olmosh / Pronoun)\n\n* **Qoidasi**: Standalone (mustaqil) olmosh hisoblanadi. Undan keyin **HECH QACHON OT KELMAYDI**.\n* **Ishlatilishi**: Qisqa javoblarda va avval tilga olingan ot o'rnida keladi.\n* **Misollar**:\n  * \"How many apples do you have?\" — \"**None**.\" (Hech qancha.)\n  * We expected letters, but **none** arrived. (Xatlar kutgan edik, lekin hech biri kelmadi.)\n  * I bought some books, but my brother has **none**.\n\n---\n\n### 3. NONE OF (Struktura)\n\n* **Formulasi**: `None of + the / my / these / us / them + noun/pronoun`\n* **Fe'l bilan moslashuvi**:\n  1. **Sanaladigan ko'plik ot bilan**: Ko'plik fe'li keladi.\n     * *Formula*: `None of + plural noun + plural verb`\n     * *Misol*: **None of the students** were late. (Talabalarning hech biri kechikmadi.)\n  2. **Sanalmaydigan ot bilan**: Birlik fe'li keladi.\n     * *Formula*: `None of + uncountable noun + singular verb`\n     * *Misol*: **None of the money** was stolen. (Pulning hech bir qismi o'g'irlanmadi.)\n\n---\n\n### 4. NOT ANY vs NO / NONE (Taqqoslash)\n\n| Struktura | Misol | Izoh |\n| :--- | :--- | :--- |\n| **Negative Verb + ANY** | I **don't have any** money. | Inkor fe'l + any |\n| **Positive Verb + NO** | I **have no** money. | Tasdiq fe'l + no |\n| **NONE (Short Answer)** | \"How much money?\" — \"**None**.\" | Ot ishlatilmaydi |\n\n---\n\n### 5. Double Negative taqiqi (Ikkilangan inkor xatosi)\n\n❌ *I don't know none of them.* (NOTO'G'RI)  \n✅ *I don't know **any** of them.* (TO'G'RI)  \n✅ *I know **none** of them.* (TO'G'RI)",
+        "questions": [
+          {
+                    "id": 1,
+                    "text": "How many mistakes did you make on the test? — _______.",
+                    "options": [
+                              "No",
+                              "None",
+                              "Not any",
+                              "Nothing"
+                    ],
+                    "correct": 1,
+                    "explanation": "'None' is used as a standalone pronoun in short answers."
+          },
+          {
+                    "id": 2,
+                    "text": "There was _______ food left when we arrived at the party.",
+                    "options": [
+                              "no",
+                              "none",
+                              "not",
+                              "any"
+                    ],
+                    "correct": 0,
+                    "explanation": "'No' directly modifies the noun 'food'."
+          },
+          {
                     "id": 3,
-                    "dialogue": [
-                        {
-                            "speaker": "A",
-                            "text": "Did the students pass the exam?"
-                        },
-                        {
-                            "speaker": "B",
-                            "text": "Yes, _______ of them got excellent marks!"
-                        }
-                    ],
+                    "text": "_______ of the students were able to answer the final question.",
                     "options": [
-                        "most",
-                        "any",
-                        "no",
-                        "hardly"
+                              "No",
+                              "None",
+                              "Not",
+                              "Any"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "Most of them."
-                },
-                {
+                    "correct": 1,
+                    "explanation": "Use 'None of' before 'the + plural noun'."
+          },
+          {
                     "id": 4,
-                    "dialogue": [
-                        {
-                            "speaker": "A",
-                            "text": "Can I read any of these magazines?"
-                        },
-                        {
-                            "speaker": "B",
-                            "text": "Sure, _______ magazine here is available for readers."
-                        }
-                    ],
+                    "text": "I searched for my keys, but I found _______.",
                     "options": [
-                        "any",
-                        "no",
-                        "none",
-                        "some of"
+                              "no",
+                              "none",
+                              "not any of",
+                              "any"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "Any magazine = whichever one."
-                },
-                {
+                    "correct": 1,
+                    "explanation": "'None' stands alone at the end of a clause replacing 'no keys'."
+          },
+          {
                     "id": 5,
-                    "dialogue": [
-                        {
-                            "speaker": "A",
-                            "text": "Why are you running so fast?"
-                        },
-                        {
-                            "speaker": "B",
-                            "text": "Because I have _______ time before the train leaves!"
-                        }
-                    ],
+                    "text": "She has made _______ progress in her studies this month.",
                     "options": [
-                        "hardly any",
-                        "hardly no",
-                        "some of",
-                        "any of"
+                              "no",
+                              "none",
+                              "not",
+                              "no of"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "Hardly any time = almost no time."
-                },
-                {
+                    "correct": 0,
+                    "explanation": "'No' + uncountable noun ('progress')."
+          },
+          {
                     "id": 6,
-                    "dialogue": [
-                        {
-                            "speaker": "A",
-                            "text": "Were there any seats left in the cinema?"
-                        },
-                        {
-                            "speaker": "B",
-                            "text": "No, there were _______ seats available."
-                        }
-                    ],
+                    "text": "None of the money _______ recovered after the robbery.",
                     "options": [
-                        "no",
-                        "any",
-                        "some of",
-                        "most of"
+                              "was",
+                              "were",
+                              "are",
+                              "have been"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "There were no seats."
-                },
-                {
+                    "correct": 0,
+                    "explanation": "'None of + uncountable noun' takes a singular verb ('was')."
+          },
+          {
                     "id": 7,
-                    "dialogue": [
-                        {
-                            "speaker": "A",
-                            "text": "Did she finish the project on time?"
-                        },
-                        {
-                            "speaker": "B",
-                            "text": "Yes, and she did it without _______ help!"
-                        }
-                    ],
+                    "text": "None of my friends _______ smoking.",
                     "options": [
-                        "any",
-                        "some",
-                        "no",
-                        "none"
+                              "smoke",
+                              "smokes",
+                              "is smoking",
+                              "has smoked"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "Without any help."
-                },
-                {
+                    "correct": 0,
+                    "explanation": "'None of + plural noun' takes a plural verb ('smoke')."
+          },
+          {
                     "id": 8,
-                    "dialogue": [
-                        {
-                            "speaker": "A",
-                            "text": "Is the water in this pitcher clean?"
-                        },
-                        {
-                            "speaker": "B",
-                            "text": "Yes, _______ of the water is fresh."
-                        }
-                    ],
+                    "text": "I didn't see _______ of my classmates at the stadium.",
                     "options": [
-                        "all",
-                        "any",
-                        "no",
-                        "hardly"
+                              "any",
+                              "no",
+                              "none",
+                              "some"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "All of the water."
-                },
-                {
+                    "correct": 0,
+                    "explanation": "'Didn't see' is negative, so use 'any of'."
+          },
+          {
                     "id": 9,
-                    "dialogue": [
-                        {
-                            "speaker": "A",
-                            "text": "Which of these shirts should I wear?"
-                        },
-                        {
-                            "speaker": "B",
-                            "text": "_______ of those shirts looks great on you."
-                        }
-                    ],
+                    "text": "We wanted to buy tickets, but there were _______ left.",
                     "options": [
-                        "Any",
-                        "No",
-                        "Hardly",
-                        "None"
+                              "none",
+                              "no",
+                              "not any of",
+                              "any"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "Any of those shirts."
-                },
-                {
+                    "correct": 0,
+                    "explanation": "'None' acts as a pronoun meaning 'no tickets'."
+          },
+          {
                     "id": 10,
-                    "dialogue": [
-                        {
-                            "speaker": "A",
-                            "text": "Did any of the applicants get hired?"
-                        },
-                        {
-                            "speaker": "B",
-                            "text": "Unfortunately, _______ of them met our standards."
-                        }
-                    ],
+                    "text": "She has _______ interest in history.",
                     "options": [
-                        "none",
-                        "no",
-                        "any",
-                        "some"
+                              "no",
+                              "none",
+                              "not",
+                              "none of"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "None of them."
-                },
-                {
+                    "correct": 0,
+                    "explanation": "'No' + noun ('interest')."
+          },
+          {
                     "id": 11,
-                    "dialogue": [
-                        {
-                            "speaker": "A",
-                            "text": "Why is the road closed?"
-                        },
-                        {
-                            "speaker": "B",
-                            "text": "_______ idiot parked his truck right across the bridge!"
-                        }
-                    ],
+                    "text": "Which sentence contains NO grammatical error?",
                     "options": [
-                        "Some",
-                        "Any",
-                        "No",
-                        "All of"
+                              "I don't know none of them.",
+                              "I know none of them.",
+                              "I don't know no one.",
+                              "None of student arrived."
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "Some + singular noun."
-                },
-                {
+                    "correct": 1,
+                    "explanation": "'I know none of them' avoids double negatives."
+          },
+          {
                     "id": 12,
-                    "dialogue": [
-                        {
-                            "speaker": "A",
-                            "text": "Do you need help with your homework?"
-                        },
-                        {
-                            "speaker": "B",
-                            "text": "No thanks, I have _______ questions right now."
-                        }
-                    ],
+                    "text": "How much sugar is in the bowl? — _______.",
                     "options": [
-                        "no",
-                        "any",
-                        "some of",
-                        "hardly"
+                              "No",
+                              "None",
+                              "Any",
+                              "Not"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "I have no questions."
-                },
-                {
+                    "correct": 1,
+                    "explanation": "Short answer response with 'None'."
+          },
+          {
                     "id": 13,
-                    "dialogue": [
-                        {
-                            "speaker": "A",
-                            "text": "How many of the guests have arrived?"
-                        },
-                        {
-                            "speaker": "B",
-                            "text": "_______ of them are already in the dining hall."
-                        }
-                    ],
+                    "text": "_______ of the information in the article was verified.",
                     "options": [
-                        "Most",
-                        "Any",
-                        "No",
-                        "Hardly"
+                              "None",
+                              "No",
+                              "Not",
+                              "Any"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "Most of them."
-                },
-                {
+                    "correct": 0,
+                    "explanation": "'None of + the + uncountable noun'."
+          },
+          {
                     "id": 14,
-                    "dialogue": [
-                        {
-                            "speaker": "A",
-                            "text": "Is there any bread left for breakfast?"
-                        },
-                        {
-                            "speaker": "B",
-                            "text": "There is _______ bread left, so we need to buy more."
-                        }
-                    ],
+                    "text": "He offered me some cake, but I wanted _______.",
                     "options": [
-                        "no",
-                        "any",
-                        "some of",
-                        "most of"
+                              "none",
+                              "no",
+                              "not any of",
+                              "no one"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "There is no bread."
-                },
-                {
+                    "correct": 0,
+                    "explanation": "'None' stands alone replacing 'no cake'."
+          },
+          {
                     "id": 15,
-                    "dialogue": [
-                        {
-                            "speaker": "A",
-                            "text": "Can I ask you a question?"
-                        },
-                        {
-                            "speaker": "B",
-                            "text": "Sure, you can ask _______ question you want!"
-                        }
-                    ],
+                    "text": "There are _______ excuses for being so late.",
                     "options": [
-                        "any",
-                        "no",
-                        "none",
-                        "some of"
+                              "no",
+                              "none",
+                              "not",
+                              "none of"
                     ],
-                    "correctAnswer": 0,
-                    "explanation": "Any question = whichever question."
-                }
-            ]
-        }
+                    "correct": 0,
+                    "explanation": "'No' + plural noun ('excuses')."
+          },
+          {
+                    "id": 16,
+                    "text": "None of the players _______ happy with the decision.",
+                    "options": [
+                              "were",
+                              "was not",
+                              "were not",
+                              "is not"
+                    ],
+                    "correct": 0,
+                    "explanation": "'None of the players' takes plural verb 'were'."
+          },
+          {
+                    "id": 17,
+                    "text": "I have _______ time to waste today.",
+                    "options": [
+                              "no",
+                              "none",
+                              "not",
+                              "none of"
+                    ],
+                    "correct": 0,
+                    "explanation": "'No' + uncountable noun ('time')."
+          },
+          {
+                    "id": 18,
+                    "text": "Did any of your plans succeed? — _______ of them did.",
+                    "options": [
+                              "None",
+                              "No",
+                              "Not",
+                              "Any"
+                    ],
+                    "correct": 0,
+                    "explanation": "'None of them did' is correct."
+          },
+          {
+                    "id": 19,
+                    "text": "She wrote three letters, but _______ were sent.",
+                    "options": [
+                              "none",
+                              "no",
+                              "not",
+                              "any"
+                    ],
+                    "correct": 0,
+                    "explanation": "'None' acts as subject pronoun."
+          },
+          {
+                    "id": 20,
+                    "text": "There is _______ reason to worry about the results.",
+                    "options": [
+                              "no",
+                              "none",
+                              "not",
+                              "none of"
+                    ],
+                    "correct": 0,
+                    "explanation": "'No' + singular noun ('reason')."
+          }
+],
+        "fillBlanks": [
+          {
+                    "id": 1,
+                    "sentence": "How much water is left? — _____.",
+                    "answer": "None",
+                    "hint": "short answer"
+          },
+          {
+                    "id": 2,
+                    "sentence": "There are _____ cars in the parking lot.",
+                    "answer": "no",
+                    "hint": "modifier before noun"
+          },
+          {
+                    "id": 3,
+                    "sentence": "_____ of the students failed the test.",
+                    "answer": "None",
+                    "hint": "None of structure"
+          },
+          {
+                    "id": 4,
+                    "sentence": "I have _____ idea what happened.",
+                    "answer": "no",
+                    "hint": "no + idea"
+          },
+          {
+                    "id": 5,
+                    "sentence": "I asked for help, but _____ came.",
+                    "answer": "none",
+                    "hint": "standalone pronoun"
+          }
+],
+        "scrambled": [
+          {
+                    "id": 1,
+                    "answer": "None of the students were late",
+                    "hint": "Start with None"
+          },
+          {
+                    "id": 2,
+                    "answer": "There is no food left",
+                    "hint": "Start with There"
+          },
+          {
+                    "id": 3,
+                    "answer": "I have no idea about this",
+                    "hint": "Start with I"
+          },
+          {
+                    "id": 4,
+                    "answer": "None of my friends smoke",
+                    "hint": "Start with None"
+          },
+          {
+                    "id": 5,
+                    "answer": "She answered none of my calls",
+                    "hint": "Start with She"
+          }
+],
+        "errorCorrection": [
+          {
+                    "id": 1,
+                    "text": "I don't like none of these options.",
+                    "correction": "I don't like any of these options.",
+                    "explanation": "Double negative taqiqi: don't + any."
+          },
+          {
+                    "id": 2,
+                    "text": "How many books do you have? - No.",
+                    "correction": "How many books do you have? - None.",
+                    "explanation": "Use 'None' in short answers without nouns."
+          },
+          {
+                    "id": 3,
+                    "text": "None of student knew the answer.",
+                    "correction": "None of the students knew the answer.",
+                    "explanation": "'None of' requires 'the' and plural noun."
+          },
+          {
+                    "id": 4,
+                    "text": "None of the money were found.",
+                    "correction": "None of the money was found.",
+                    "explanation": "Uncountable noun with 'None of' takes singular verb."
+          },
+          {
+                    "id": 5,
+                    "text": "There is none hope left.",
+                    "correction": "There is no hope left.",
+                    "explanation": "Use 'no' before noun."
+          }
+],
+        "transform": [
+          {
+                    "id": 1,
+                    "original": "I don't know any of them.",
+                    "target": "I know _____ of them.",
+                    "answer": "none",
+                    "explanation": "Don't know any = know none."
+          },
+          {
+                    "id": 2,
+                    "original": "How many apples? - Zero.",
+                    "target": "How many apples? - _____.",
+                    "answer": "None",
+                    "explanation": "Zero in short answer = None."
+          }
+],
+        "dialogue": [
+          {
+                    "id": 1,
+                    "dialogue": "A: How many passengers were injured?\nB: _____, luckily.",
+                    "options": [
+                              "None",
+                              "No",
+                              "Not any",
+                              "Nothing"
+                    ],
+                    "correct": 0,
+                    "explanation": "Short answer 'None'."
+          }
+]
+      },
+      {
+        "id": "both-either-neither-basics",
+        "title": "Both, Either & Neither (Part 1: Basics & Prepositions)",
+        "icon": "\u2696\ufe0f",
+        "description": "Learn how to use 'both', 'either', and 'neither' when talking about two people or objects.",
+        "guide": "## Both, Either & Neither (Part 1: Asosiy Qo'llanishi)\n\n`Both`, `Either` va `Neither` so'zlari har doim **IKKITA** odam yoki narsa haqida gapirilganda ishlatiladi.\n\n---\n\n### 1. Asosiy Solishtirish Jadvali\n\n| So'z | Ma'nosi | Fe'l Shakli | Misol |\n| :--- | :--- | :--- | :--- |\n| **BOTH** | Ikkalasi ham | Ko'plik (Plural) | **Both** students are smart. |\n| **EITHER** | Bittasi (u yoki bu) | Birlik (Singular) | **Either** answer is correct. |\n| **NEITHER** | Hech qaysisi (na u, na bu) | Birlik (Singular) | **Neither** team won. |\n\n---\n\n### 2. BOTH (Ikkalasi Ham)\n\n* **Qoidasi**: Undan keyin har doim ko'plik ot va ko'plik fe'li keladi.\n* **Formulasi**: `Both + plural noun + plural verb`\n* **Misollar**:\n  * **Both books** are interesting. (Ikkala kitob ham qiziqarli.)\n  * **Both of my parents** speak English.\n  * **Both girls** passed the exam. (❌ *Both girls is happy* — NOTO'G'RI)\n\n---\n\n### 3. EITHER (Bittasi / Biri Yoki Boshqasi)\n\n* **Qoidasi**: Ikkitadan qaysi biridir. Undan keyin birlik ot va birlik fe'li keladi.\n* **Formulasi**: `Either + singular noun + singular verb`\n* **Misollar**:\n  * You can take **either road**. (Ikkala yo'ldan birini tanlashingiz mumkin.)\n  * **Either day** is fine for me. (U yoki bu kun menga ma'qul.)\n  * **Either of the answers** is acceptable.\n\n---\n\n### 4. NEITHER (Hech Qaysisi / Na Unisi, Na Bunisi)\n\n* **Qoidasi**: Ikkitadan hech qaysisi emas (inkor ma'no beradi). Undan keyin birlik ot va birlik fe'li keladi.\n* **Formulasi**: `Neither + singular noun + singular verb`\n* **Misollar**:\n  * **Neither student** failed the exam. (Ikkala talabadan hech biri yiqilmadi.)\n  * **Neither key** opens the door.\n  * **Neither of us** was late.\n\n---\n\n### 5. OF Strukturalari (`Both of`, `Either of`, `Neither of`)\n\n* **Formulalar**:\n  * `Both of + the / my / these / us / them` + **PLURAL VERB**\n  * `Either of + the / my / these / us / them` + **SINGULAR VERB**\n  * `Neither of + the / my / these / us / them` + **SINGULAR VERB**\n* **Misollar**:\n  * **Both of them** are doctors.\n  * **Either of these options** is good.\n  * **Neither of us** wants to leave.",
+        "questions": [
+          {
+                    "id": 1,
+                    "text": "_______ of my parents are teachers.",
+                    "options": [
+                              "Both",
+                              "Either",
+                              "Neither",
+                              "All"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Both of' is used with plural verb 'are'."
+          },
+          {
+                    "id": 2,
+                    "text": "You can take _______ of the two buses; both go downtown.",
+                    "options": [
+                              "either",
+                              "both",
+                              "neither",
+                              "all"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Either of' means 'one or the other of the two'."
+          },
+          {
+                    "id": 3,
+                    "text": "_______ student passed the test because it was too hard.",
+                    "options": [
+                              "Neither",
+                              "Either",
+                              "Both",
+                              "All"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Neither' + singular noun means 'not one and not the other'."
+          },
+          {
+                    "id": 4,
+                    "text": "Both of the cars _______ brand new.",
+                    "options": [
+                              "are",
+                              "is",
+                              "was",
+                              "be"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Both of' always takes a plural verb ('are')."
+          },
+          {
+                    "id": 5,
+                    "text": "Either of the answers _______ correct.",
+                    "options": [
+                              "is",
+                              "are",
+                              "were",
+                              "be"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Either of' takes a singular verb in standard grammar ('is')."
+          },
+          {
+                    "id": 6,
+                    "text": "Neither of us _______ ready to take the exam yesterday.",
+                    "options": [
+                              "was",
+                              "were",
+                              "are",
+                              "have been"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Neither of us' takes a singular verb in past tense ('was')."
+          },
+          {
+                    "id": 7,
+                    "text": "_______ sisters have long blonde hair.",
+                    "options": [
+                              "Both",
+                              "Either",
+                              "Neither",
+                              "Every"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Both' + plural noun ('sisters') + plural verb ('have')."
+          },
+          {
+                    "id": 8,
+                    "text": "Which sentence is grammatically INCORRECT?",
+                    "options": [
+                              "Both girls are happy.",
+                              "Both girls is happy.",
+                              "Either option is good.",
+                              "Neither boy was late."
+                    ],
+                    "correct": 1,
+                    "explanation": "'Both' requires a plural verb ('are', not 'is')."
+          },
+          {
+                    "id": 9,
+                    "text": "Do you want tea or coffee? — _______ is fine, I don't mind.",
+                    "options": [
+                              "Either",
+                              "Neither",
+                              "Both",
+                              "None"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Either' means 'whichever of the two'."
+          },
+          {
+                    "id": 10,
+                    "text": "_______ restaurant served good food, so we went home hungry.",
+                    "options": [
+                              "Neither",
+                              "Either",
+                              "Both",
+                              "All"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Neither' indicates both options failed."
+          },
+          {
+                    "id": 11,
+                    "text": "_______ of them knows the answer to your question.",
+                    "options": [
+                              "Neither",
+                              "Both",
+                              "All",
+                              "Many"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Neither of them' takes a singular verb ('knows')."
+          },
+          {
+                    "id": 12,
+                    "text": "We can meet on _______ Monday or Tuesday.",
+                    "options": [
+                              "either",
+                              "neither",
+                              "both",
+                              "all"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Either... or' pairing."
+          },
+          {
+                    "id": 13,
+                    "text": "Both of these coats _______ very expensive.",
+                    "options": [
+                              "look",
+                              "looks",
+                              "is looking",
+                              "has looked"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Both of' takes plural verb ('look')."
+          },
+          {
+                    "id": 14,
+                    "text": "_______ side of the street was lined with trees.",
+                    "options": [
+                              "Either",
+                              "Both",
+                              "All",
+                              "None"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Either side' = one or each side (singular noun)."
+          },
+          {
+                    "id": 15,
+                    "text": "Neither of the keys _______ the front gate.",
+                    "options": [
+                              "fits",
+                              "fit",
+                              "are fitting",
+                              "have fitted"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Neither of' takes singular verb ('fits')."
+          },
+          {
+                    "id": 16,
+                    "text": "_______ teams played well, but one had to win.",
+                    "options": [
+                              "Both",
+                              "Either",
+                              "Neither",
+                              "Every"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Both' + plural noun 'teams'."
+          },
+          {
+                    "id": 17,
+                    "text": "I tried two keys, but _______ worked.",
+                    "options": [
+                              "neither",
+                              "either",
+                              "both",
+                              "none"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Neither' means 'not one of the two'."
+          },
+          {
+                    "id": 18,
+                    "text": "_______ of my brothers is married.",
+                    "options": [
+                              "Neither",
+                              "Both",
+                              "All",
+                              "Many"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Neither of my brothers is' (singular verb)."
+          },
+          {
+                    "id": 19,
+                    "text": "You may take _______ chair; they are both comfortable.",
+                    "options": [
+                              "either",
+                              "neither",
+                              "both",
+                              "all"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Either chair' (singular noun)."
+          },
+          {
+                    "id": 20,
+                    "text": "_______ of us was invited to the party.",
+                    "options": [
+                              "Neither",
+                              "Both",
+                              "All",
+                              "Many"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Neither of us was' (singular verb)."
+          }
+],
+        "fillBlanks": [
+          {
+                    "id": 1,
+                    "sentence": "_____ of my parents are doctors.",
+                    "answer": "Both",
+                    "hint": "Plural verb 'are'"
+          },
+          {
+                    "id": 2,
+                    "sentence": "You can take _____ road; both lead to town.",
+                    "answer": "either",
+                    "hint": "one of two"
+          },
+          {
+                    "id": 3,
+                    "sentence": "_____ student failed the test.",
+                    "answer": "Neither",
+                    "hint": "zero of two"
+          },
+          {
+                    "id": 4,
+                    "sentence": "Both of them _____ cars.",
+                    "answer": "have",
+                    "hint": "plural verb"
+          },
+          {
+                    "id": 5,
+                    "sentence": "Neither of us _____ ready.",
+                    "answer": "was",
+                    "hint": "singular verb"
+          }
+],
+        "scrambled": [
+          {
+                    "id": 1,
+                    "answer": "Both of my friends are doctors",
+                    "hint": "Start with Both"
+          },
+          {
+                    "id": 2,
+                    "answer": "Neither of us knows the answer",
+                    "hint": "Start with Neither"
+          },
+          {
+                    "id": 3,
+                    "answer": "Either option is good for me",
+                    "hint": "Start with Either"
+          },
+          {
+                    "id": 4,
+                    "answer": "Both students passed the exam",
+                    "hint": "Start with Both"
+          },
+          {
+                    "id": 5,
+                    "answer": "Neither key opens this door",
+                    "hint": "Start with Neither"
+          }
+],
+        "errorCorrection": [
+          {
+                    "id": 1,
+                    "text": "Both girls is happy.",
+                    "correction": "Both girls are happy.",
+                    "explanation": "'Both' always takes plural verb 'are'."
+          },
+          {
+                    "id": 2,
+                    "text": "Neither of them are ready.",
+                    "correction": "Neither of them is ready.",
+                    "explanation": "'Neither of' takes singular verb 'is'."
+          },
+          {
+                    "id": 3,
+                    "text": "Either roads lead to the city.",
+                    "correction": "Either road leads to the city.",
+                    "explanation": "'Either' is followed by a singular noun."
+          },
+          {
+                    "id": 4,
+                    "text": "Neither students passed.",
+                    "correction": "Neither student passed.",
+                    "explanation": "'Neither' + singular noun."
+          },
+          {
+                    "id": 5,
+                    "text": "Both of boy played football.",
+                    "correction": "Both of the boys played football.",
+                    "explanation": "'Both of' requires plural noun."
+          }
+],
+        "transform": [
+          {
+                    "id": 1,
+                    "original": "Not one of the two boys came.",
+                    "target": "_____ of the boys came.",
+                    "answer": "Neither",
+                    "explanation": "Not one of two = Neither."
+          }
+],
+        "dialogue": [
+          {
+                    "id": 1,
+                    "dialogue": "A: Tea or coffee?\nB: _____ is fine, I like both.",
+                    "options": [
+                              "Either",
+                              "Neither",
+                              "Both",
+                              "All"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Either' means any of the two."
+          }
+]
+      },
+      {
+        "id": "both-either-neither-advanced",
+        "title": "Both, Either & Neither (Part 2: Advanced Usage & Verb Agreement)",
+        "icon": "\ud83d\udd00",
+        "description": "Master paired conjunctions: 'both...and', 'either...or', 'neither...nor', and closest subject verb agreement rules.",
+        "guide": "## Both, Either & Neither (Part 2: Mukammal Qo'llanilishi)\n\nUshbu darsda juft bog'lovchilar (`Both...and`, `Either...or`, `Neither...nor`) va ularning fe'l bilan moslashuvi (Closest Noun Rule) o'rganiladi.\n\n---\n\n### 1. Juft Bog'lovchilar Formulalari\n\n#### A. BOTH ... AND ... (Ham ..., Ham ...)\n* **Qoidasi**: Ikki narsa yoki shaxsni birlashtiradi. **Fe'l har doim KO'PLIKda bo'ladi**.\n* **Formulasi**: `Both + A + and + B + plural verb`\n* **Misollar**:\n  * **Both Ali and Hasan** are coming to class.\n  * She speaks **both English and Korean**.\n  * He is **both a teacher and an author**.\n\n#### B. EITHER ... OR ... (Yo ..., Yo ...)\n* **Qoidasi**: Ikki variantdan birini tanlash.\n* **Formulasi**: `Either + A + or + B`\n* **Misollar**:\n  * You can have **either tea or coffee**.\n  * **Either Ali or Karim** will help you.\n\n#### C. NEITHER ... NOR ... (Na ..., Na ...)\n* **Qoidasi**: Ikki variantni ham inkor qilish (not A and not B).\n* **Formulasi**: `Neither + A + nor + B`\n* **Misollar**:\n  * **Neither Ali nor John** came to school.\n  * She likes **neither tea nor coffee**.\n\n---\n\n### 2. FE'L BILAN MOSLASHUV QOIDASI (Closest Subject Rule)\n\n`Either...or` va `Neither...nor` birikmalarida fe'l me'yori **O'ZIGA ENG YAQIN BO'LGAN OT (B)** ga qarab aniqlanadi!\n\n* **Birlik ot yaqin bo'lsa -> Birlik fe'l**:\n  * Neither Tom nor **his brother IS** ready.\n* **Ko'plik ot yaqin bo'lsa -> Ko'plik fe'l**:\n  * Neither Tom nor **his friends ARE** ready.\n\n---\n\n### 3. Eng Ko'p Yo'l Qo'yiladigan Xatolar\n\n❌ *He neither wrote **or** phoned.* (NOTO'G'RI)  \n✅ *He neither wrote **nor** phoned.* (TO'G'RI)\n\n❌ *I don't like **neither** options.* (NOTO'G'RI - ikkilangan inkor)  \n✅ *I don't like **either** option.* / *I like **neither** option.* (TO'G'RI)",
+        "questions": [
+          {
+                    "id": 1,
+                    "text": "Neither Tom nor his brothers _______ coming to the party tonight.",
+                    "options": [
+                              "are",
+                              "is",
+                              "was",
+                              "has been"
+                    ],
+                    "correct": 0,
+                    "explanation": "With 'neither...nor', the verb agrees with the closer subject ('his brothers' -> 'are')."
+          },
+          {
+                    "id": 2,
+                    "text": "Neither Tom nor his brother _______ ready yet.",
+                    "options": [
+                              "is",
+                              "are",
+                              "were",
+                              "have been"
+                    ],
+                    "correct": 0,
+                    "explanation": "The closer subject is singular ('his brother' -> 'is')."
+          },
+          {
+                    "id": 3,
+                    "text": "She speaks _______ English and Korean fluently.",
+                    "options": [
+                              "both",
+                              "either",
+                              "neither",
+                              "also"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Both...and' pairs together."
+          },
+          {
+                    "id": 4,
+                    "text": "You can choose _______ tea or coffee.",
+                    "options": [
+                              "either",
+                              "neither",
+                              "both",
+                              "nor"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Either...or' pairs together."
+          },
+          {
+                    "id": 5,
+                    "text": "He _______ wrote nor phoned after he arrived.",
+                    "options": [
+                              "neither",
+                              "either",
+                              "both",
+                              "not"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Neither...nor' pairs together."
+          },
+          {
+                    "id": 6,
+                    "text": "Which sentence is grammatically CORRECT?",
+                    "options": [
+                              "He neither wrote or called.",
+                              "He neither wrote nor called.",
+                              "He didn't neither write nor call.",
+                              "Neither he wrote or called."
+                    ],
+                    "correct": 1,
+                    "explanation": "'Neither' must pair with 'nor'."
+          },
+          {
+                    "id": 7,
+                    "text": "Either my parents or my sister _______ going to visit us.",
+                    "options": [
+                              "is",
+                              "are",
+                              "were",
+                              "have been"
+                    ],
+                    "correct": 0,
+                    "explanation": "Verb agrees with closest subject 'my sister' (singular -> 'is')."
+          },
+          {
+                    "id": 8,
+                    "text": "Either my sister or my parents _______ going to visit us.",
+                    "options": [
+                              "are",
+                              "is",
+                              "was",
+                              "has been"
+                    ],
+                    "correct": 0,
+                    "explanation": "Verb agrees with closest subject 'my parents' (plural -> 'are')."
+          },
+          {
+                    "id": 9,
+                    "text": "The hotel was _______ clean and comfortable.",
+                    "options": [
+                              "both",
+                              "either",
+                              "neither",
+                              "nor"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Both clean and comfortable'."
+          },
+          {
+                    "id": 10,
+                    "text": "She likes neither milk _______ sugar in her coffee.",
+                    "options": [
+                              "nor",
+                              "or",
+                              "and",
+                              "but"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Neither' pairs with 'nor'."
+          },
+          {
+                    "id": 11,
+                    "text": "We didn't enjoy _______ the movie or the concert.",
+                    "options": [
+                              "either",
+                              "neither",
+                              "both",
+                              "nor"
+                    ],
+                    "correct": 0,
+                    "explanation": "Negative verb 'didn't enjoy' pairs with 'either...or'."
+          },
+          {
+                    "id": 12,
+                    "text": "Both the manager and the employees _______ present at the meeting.",
+                    "options": [
+                              "were",
+                              "was",
+                              "is",
+                              "has been"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Both...and' always takes a plural verb ('were')."
+          },
+          {
+                    "id": 13,
+                    "text": "He is _______ talented and hardworking.",
+                    "options": [
+                              "both",
+                              "either",
+                              "neither",
+                              "also"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Both...and'."
+          },
+          {
+                    "id": 14,
+                    "text": "I have _______ time nor energy to debate this.",
+                    "options": [
+                              "neither",
+                              "either",
+                              "both",
+                              "not"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Neither...nor'."
+          },
+          {
+                    "id": 15,
+                    "text": "Either you apologise now _______ I will leave.",
+                    "options": [
+                              "or",
+                              "nor",
+                              "and",
+                              "but"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Either...or'."
+          },
+          {
+                    "id": 16,
+                    "text": "Neither the teacher nor the students _______ the answer.",
+                    "options": [
+                              "knew",
+                              "knows",
+                              "is knowing",
+                              "has known"
+                    ],
+                    "correct": 0,
+                    "explanation": "Past tense verb 'knew'."
+          },
+          {
+                    "id": 17,
+                    "text": "You can _______ stay here or come with us.",
+                    "options": [
+                              "either",
+                              "neither",
+                              "both",
+                              "nor"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Either...or'."
+          },
+          {
+                    "id": 18,
+                    "text": "She neither smiled _______ spoke during the interview.",
+                    "options": [
+                              "nor",
+                              "or",
+                              "and",
+                              "but"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Neither' pairs with 'nor'."
+          },
+          {
+                    "id": 19,
+                    "text": "Both Mark and John _______ playing football now.",
+                    "options": [
+                              "are",
+                              "is",
+                              "was",
+                              "be"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Both...and' requires plural verb ('are')."
+          },
+          {
+                    "id": 20,
+                    "text": "Neither the driver nor the passengers _______ injured.",
+                    "options": [
+                              "were",
+                              "was",
+                              "is",
+                              "has been"
+                    ],
+                    "correct": 0,
+                    "explanation": "Agrees with plural closest noun 'passengers' -> 'were'."
+          }
+],
+        "fillBlanks": [
+          {
+                    "id": 1,
+                    "sentence": "She speaks _____ English and French.",
+                    "answer": "both",
+                    "hint": "pairs with and"
+          },
+          {
+                    "id": 2,
+                    "sentence": "You can choose _____ Monday or Tuesday.",
+                    "answer": "either",
+                    "hint": "pairs with or"
+          },
+          {
+                    "id": 3,
+                    "sentence": "Neither Ali _____ Hasan came.",
+                    "answer": "nor",
+                    "hint": "pairs with neither"
+          },
+          {
+                    "id": 4,
+                    "sentence": "Neither Tom nor his friends _____ ready.",
+                    "answer": "are",
+                    "hint": "plural closest subject"
+          },
+          {
+                    "id": 5,
+                    "sentence": "Either you pay now _____ leave.",
+                    "answer": "or",
+                    "hint": "pairs with either"
+          }
+],
+        "scrambled": [
+          {
+                    "id": 1,
+                    "answer": "Neither Ali nor Hasan came to class",
+                    "hint": "Start with Neither"
+          },
+          {
+                    "id": 2,
+                    "answer": "She speaks both English and French",
+                    "hint": "Start with She"
+          },
+          {
+                    "id": 3,
+                    "answer": "You can have either tea or coffee",
+                    "hint": "Start with You"
+          },
+          {
+                    "id": 4,
+                    "answer": "Neither Tom nor his brother is ready",
+                    "hint": "Closest subject is brother"
+          },
+          {
+                    "id": 5,
+                    "answer": "He is both smart and hardworking",
+                    "hint": "Start with He"
+          }
+],
+        "errorCorrection": [
+          {
+                    "id": 1,
+                    "text": "He neither called or emailed.",
+                    "correction": "He neither called nor emailed.",
+                    "explanation": "'Neither' pairs with 'nor', not 'or'."
+          },
+          {
+                    "id": 2,
+                    "text": "Neither Tom nor his friends is ready.",
+                    "correction": "Neither Tom nor his friends are ready.",
+                    "explanation": "Verb agrees with closest subject 'friends' (plural)."
+          },
+          {
+                    "id": 3,
+                    "text": "Both Ali and Karim is student.",
+                    "correction": "Both Ali and Karim are students.",
+                    "explanation": "'Both...and' takes plural verb and plural noun."
+          },
+          {
+                    "id": 4,
+                    "text": "I don't like neither option.",
+                    "correction": "I don't like either option.",
+                    "explanation": "Don't use double negative."
+          },
+          {
+                    "id": 5,
+                    "text": "Either tea nor coffee is fine.",
+                    "correction": "Either tea or coffee is fine.",
+                    "explanation": "'Either' pairs with 'or'."
+          }
+],
+        "transform": [
+          {
+                    "id": 1,
+                    "original": "Ali didn't come, and Hasan didn't come either.",
+                    "target": "_____ Ali nor Hasan came.",
+                    "answer": "Neither",
+                    "explanation": "Neither A nor B."
+          }
+],
+        "dialogue": [
+          {
+                    "id": 1,
+                    "dialogue": "A: Did Ali or Bob phone you?\nB: ____ Ali nor Bob phoned me.",
+                    "options": [
+                              "Neither",
+                              "Either",
+                              "Both",
+                              "Not"
+                    ],
+                    "correct": 0,
+                    "explanation": "Pairing with 'nor'."
+          }
+]
+      },
+      {
+        "id": "each-every-distributives",
+        "title": "Each & Every: Distributives",
+        "icon": "\ud83d\udd22",
+        "description": "Understand the differences between 'each' (individual) and 'every' (group members), and their strict singular rules.",
+        "guide": "## Each & Every (Tarqatuvchi Olmoshlar)\n\n`Each` va `Every` so'zlari o'zbek tiliga \"har bir\" deb tarjima qilinsada, ularning grammatik ishlatilishida muhim farqlar mavjud.\n\n---\n\n### 1. HAR DOIM BIRLIKDA (Strictly Singular)\n\nUshbu eng muhim qoidani eslab qoling: `Each` va `Every` dan keyin kelgan ot va fe'l **HAR DOIM BIRLIKDA** bo'ladi!\n\n❌ *Each students are happy.*  \n✅ **Each student is happy.**\n\n❌ *Every students are here.*  \n✅ **Every student is here.**\n\n---\n\n### 2. EACH vs EVERY FARQI\n\n| Xususiyati | EACH | EVERY |\n| :--- | :--- | :--- |\n| **E'tibor qaratilishi** | Har bir individga alohida (One by one) | Guruhni tashkil etuvchi barchaga (All together) |\n| **Elementlar soni** | 2 yoki undan ortiq narsaga nisbatan | 3 yoki undan ortiq narsaga nisbatan |\n| **'OF' bilan kelishi** | `Each of the + plural noun` bo'la oladi | `Every of` bo'la olmaydi! (`Every one of...` bo'lishi shart) |\n\n---\n\n### 3. EACH Strukturalari\n\n1. `Each + singular noun + singular verb`\n   * **Each student** has a book.\n2. `Each of the / my / these + plural noun + SINGULAR VERB`\n   * **Each of the students** has a unique goal.\n3. `We / They / Plural Noun + EACH + Plural Verb`\n   * We **each received** a gift. (Har birimiz bittadan sovg'a oldik.)\n   * They have **each signed** the contract.\n\n---\n\n### 4. EVERY Strukturalari\n\n1. `Every + singular noun + singular verb`\n   * **Every child** likes sweets.\n   * **Every room** has a window.\n2. `Every one of + plural noun + singular verb`\n   * **Every one of the applicants** was interviewed.\n\n---\n\n### 5. Yodda Saqlash Usuli (Memory Trick)\n\n💡 **EACH → ONE BY ONE** (Birma-bir)  \n💡 **EVERY → ALL TOGETHER** (Barchasi birgalikda)\n\n* *Each student has an excuse.* (Har bir o'quvchining o'z bahonasi bor.)\n* *Every student passed the exam.* (Barcha o'quvchilar imtihondan o'tdi.)",
+        "questions": [
+          {
+                    "id": 1,
+                    "text": "_______ student in the class received a certificate.",
+                    "options": [
+                              "Each",
+                              "All",
+                              "Both",
+                              "Many"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Each' takes a singular noun ('student')."
+          },
+          {
+                    "id": 2,
+                    "text": "Every child _______ to play games.",
+                    "options": [
+                              "likes",
+                              "like",
+                              "are liking",
+                              "have liked"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Every' takes a singular verb ('likes')."
+          },
+          {
+                    "id": 3,
+                    "text": "Each of the buildings _______ a security guard.",
+                    "options": [
+                              "has",
+                              "have",
+                              "are having",
+                              "were having"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Each of + plural noun' takes a singular verb ('has')."
+          },
+          {
+                    "id": 4,
+                    "text": "Which sentence is grammatically CORRECT?",
+                    "options": [
+                              "Every students are present.",
+                              "Each students is present.",
+                              "Every student is present.",
+                              "Every of students is present."
+                    ],
+                    "correct": 2,
+                    "explanation": "'Every student is present' correctly uses singular noun and verb."
+          },
+          {
+                    "id": 5,
+                    "text": "We _______ received a copy of the new handbook.",
+                    "options": [
+                              "each",
+                              "every",
+                              "all of",
+                              "every one"
+                    ],
+                    "correct": 0,
+                    "explanation": "'We each received' (pronoun + each + verb)."
+          },
+          {
+                    "id": 6,
+                    "text": "_______ room in the hotel has an ocean view.",
+                    "options": [
+                              "Every",
+                              "All",
+                              "Both",
+                              "Many"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Every' modifies singular noun 'room'."
+          },
+          {
+                    "id": 7,
+                    "text": "Each of my two brothers _______ a car.",
+                    "options": [
+                              "owns",
+                              "own",
+                              "are owning",
+                              "have owned"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Each of' takes a singular verb ('owns')."
+          },
+          {
+                    "id": 8,
+                    "text": "_______ applicant was asked to fill in a questionnaire.",
+                    "options": [
+                              "Every",
+                              "All",
+                              "Both",
+                              "Many"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Every' + singular noun 'applicant'."
+          },
+          {
+                    "id": 9,
+                    "text": "The contestants have _______ prepared a short presentation.",
+                    "options": [
+                              "each",
+                              "every",
+                              "all of",
+                              "every of"
+                    ],
+                    "correct": 0,
+                    "explanation": "'have each prepared' (auxiliary + each + main verb)."
+          },
+          {
+                    "id": 10,
+                    "text": "He visits his grandparents _______ Sunday.",
+                    "options": [
+                              "every",
+                              "all",
+                              "each of",
+                              "both"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Every Sunday' (regular occurrence)."
+          },
+          {
+                    "id": 11,
+                    "text": "Each of the answers _______ worth ten points.",
+                    "options": [
+                              "is",
+                              "are",
+                              "were",
+                              "be"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Each of + plural noun' requires singular verb 'is'."
+          },
+          {
+                    "id": 12,
+                    "text": "I checked _______ page of the document carefully.",
+                    "options": [
+                              "every",
+                              "all",
+                              "both",
+                              "many"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Every page' (singular noun)."
+          },
+          {
+                    "id": 13,
+                    "text": "They each _______ a different role in the project.",
+                    "options": [
+                              "have",
+                              "has",
+                              "is having",
+                              "was having"
+                    ],
+                    "correct": 0,
+                    "explanation": "Subject 'They' with 'each' takes plural verb 'have'."
+          },
+          {
+                    "id": 14,
+                    "text": "Every single employee _______ required to attend.",
+                    "options": [
+                              "is",
+                              "are",
+                              "were",
+                              "be"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Every single employee is' (singular verb)."
+          },
+          {
+                    "id": 15,
+                    "text": "She bought a gift for _______ of her grandchildren.",
+                    "options": [
+                              "each",
+                              "every",
+                              "all",
+                              "both"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Each of' works with 'her grandchildren'."
+          },
+          {
+                    "id": 16,
+                    "text": "_______ student must sign their name on the list.",
+                    "options": [
+                              "Every",
+                              "All",
+                              "Both",
+                              "Many"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Every student'."
+          },
+          {
+                    "id": 17,
+                    "text": "There are four chairs, and _______ chair is painted differently.",
+                    "options": [
+                              "each",
+                              "all",
+                              "both",
+                              "every of"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Each chair' emphasizes individual items in a set."
+          },
+          {
+                    "id": 18,
+                    "text": "Every one of the cars _______ thoroughly inspected.",
+                    "options": [
+                              "was",
+                              "were",
+                              "are",
+                              "have been"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Every one of + plural noun' takes singular verb 'was'."
+          },
+          {
+                    "id": 19,
+                    "text": "The tickets cost $20 _______.",
+                    "options": [
+                              "each",
+                              "every",
+                              "all",
+                              "both"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Each' at the end of a sentence indicates price per unit."
+          },
+          {
+                    "id": 20,
+                    "text": "_______ of us has a responsibility to protect the environment.",
+                    "options": [
+                              "Each",
+                              "Every",
+                              "All",
+                              "Both"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Each of us has'."
+          }
+],
+        "fillBlanks": [
+          {
+                    "id": 1,
+                    "sentence": "_____ student is present today.",
+                    "answer": "Every",
+                    "hint": "Every + singular noun"
+          },
+          {
+                    "id": 2,
+                    "sentence": "Each of the boys _____ a bike.",
+                    "answer": "has",
+                    "hint": "singular verb"
+          },
+          {
+                    "id": 3,
+                    "sentence": "We _____ received a certificate.",
+                    "answer": "each",
+                    "hint": "We each"
+          },
+          {
+                    "id": 4,
+                    "sentence": "Every room _____ a window.",
+                    "answer": "has",
+                    "hint": "singular verb"
+          },
+          {
+                    "id": 5,
+                    "sentence": "The apples cost $1 _____.",
+                    "answer": "each",
+                    "hint": "price per item"
+          }
+],
+        "scrambled": [
+          {
+                    "id": 1,
+                    "answer": "Every student is happy",
+                    "hint": "Start with Every"
+          },
+          {
+                    "id": 2,
+                    "answer": "Each of the boys has a car",
+                    "hint": "Start with Each"
+          },
+          {
+                    "id": 3,
+                    "answer": "We each signed the contract",
+                    "hint": "Start with We"
+          },
+          {
+                    "id": 4,
+                    "answer": "Every child likes ice cream",
+                    "hint": "Start with Every"
+          },
+          {
+                    "id": 5,
+                    "answer": "Each student answered the question",
+                    "hint": "Start with Each"
+          }
+],
+        "errorCorrection": [
+          {
+                    "id": 1,
+                    "text": "Every students are here.",
+                    "correction": "Every student is here.",
+                    "explanation": "'Every' requires a singular noun and singular verb."
+          },
+          {
+                    "id": 2,
+                    "text": "Every of the students passed.",
+                    "correction": "Each of the students passed.",
+                    "explanation": "Use 'Each of', not 'Every of'."
+          },
+          {
+                    "id": 3,
+                    "text": "Each children received a gift.",
+                    "correction": "Each child received a gift.",
+                    "explanation": "'Each' requires singular noun 'child'."
+          },
+          {
+                    "id": 4,
+                    "text": "Each of my friends have a car.",
+                    "correction": "Each of my friends has a car.",
+                    "explanation": "'Each of' takes a singular verb."
+          },
+          {
+                    "id": 5,
+                    "text": "They every got a prize.",
+                    "correction": "They each got a prize.",
+                    "explanation": "Use 'each' after subject pronouns."
+          }
+],
+        "transform": [
+          {
+                    "id": 1,
+                    "original": "All the students have a book.",
+                    "target": "_____ student has a book.",
+                    "answer": "Every",
+                    "explanation": "Every + singular noun."
+          }
+],
+        "dialogue": [
+          {
+                    "id": 1,
+                    "dialogue": "A: How much are these apples?\nB: They are $1 _____.",
+                    "options": [
+                              "each",
+                              "every",
+                              "all",
+                              "both"
+                    ],
+                    "correct": 0,
+                    "explanation": "'each' specifies per-item price."
+          }
+]
+      },
+      {
+        "id": "other-others-another",
+        "title": "Other, Others, The Other & Another",
+        "icon": "\ud83d\udd04",
+        "description": "Distinguish between 'other' (determiner), 'others' (pronoun), 'the other' (remaining), and 'another' (one more).",
+        "guide": "## Other, Others, The Other & Another\n\nIngliz tilida ushbu 4 ta so'z bir-biriga o'xshash bo'lsada, ularning har biri o'ziga xos grammatik vazifaga ega.\n\n---\n\n### 1. OTHER (Sifat / Determiner)\n\n* **Ma'nosi**: Boshqa, qo'shimcha.\n* **Qoidasi**: Undan keyin **ALBATTA OT** (ko'plikda yoki sanalmaydigan) keladi.\n* **Formulasi**: `Other + plural / uncountable noun`\n* **Misollar**:\n  * **Other students** arrived later. (Boshqa talabalar keyinroq kelishdi.)\n  * Do you have **other questions**?\n* **Birlik ot bilan kelishi**: Undan oldin `the`, `my`, `this`, `no` bo'lishi shart!\n  * **the other** option, **my other** brother. (❌ *I prefer other color* -> ✅ *I prefer the other color*).\n\n---\n\n### 2. OTHERS (Olmosh / Pronoun)\n\n* **Ma'nosi**: Boshqalar.\n* **Qoidasi**: Bu olmosh hisoblanadi. Undan keyin **HECH QACHON OT KELMAYDI**!\n* **Formulasi**: `Others + verb`\n* **Misollar**:\n  * Some students passed, but **others failed**. (Ba'zilar o'tdi, boshqalari yiqildi.)\n  * Some people like coffee; **others prefer tea**.\n  * (❌ *Others students* — NOTO'G'RI).\n\n---\n\n### 3. THE OTHER (Ikkinchisi / Qolganlari)\n\n* **1. Ikkitadan ikkinchisi (One ... the other)**:\n  * I have two dogs. **One** is black and **the other** is white. (Biri qora, ikkinchisi oq.)\n  * She held a phone in **one hand** and a bag in **the other**.\n* **2. Qolganlari (The other + plural noun / The others)**:\n  * Where are **the other students**? (Qolgan talabalar qayerda?)\n\n---\n\n### 4. ANOTHER (Yana bitta / Boshqa biri)\n\n* **Ma'nosi**: Yana bitta, qo'shimcha, boshqa bir.\n* **Qoidasi**: `An + Other` birikmasi. Undan keyin **BIRLIKDAGI SANALADIGAN OT** keladi.\n* **Formulasi**: `Another + singular noun`\n* **Misollar**:\n  * Would you like **another cup** of tea? (Yana bir piyola choy xohlaysizmi?)\n  * I need **another pen**.\n* **Olmosh sifatida (ot-siz)**:\n  * This cake is delicious. Can I have **another**? (= another cake).",
+        "questions": [
+          {
+                    "id": 1,
+                    "text": "Would you like _______ cup of coffee?",
+                    "options": [
+                              "another",
+                              "other",
+                              "others",
+                              "the other"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Another' is used with singular countable nouns ('cup')."
+          },
+          {
+                    "id": 2,
+                    "text": "Some people like hot weather, while _______ prefer cold weather.",
+                    "options": [
+                              "others",
+                              "other",
+                              "another",
+                              "the other"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Others' is a standalone pronoun replacing 'other people'."
+          },
+          {
+                    "id": 3,
+                    "text": "I have two brothers. One is a doctor, and _______ is an engineer.",
+                    "options": [
+                              "the other",
+                              "another",
+                              "others",
+                              "other"
+                    ],
+                    "correct": 0,
+                    "explanation": "'The other' refers to the second of two items/people."
+          },
+          {
+                    "id": 4,
+                    "text": "Are there any _______ questions before we finish?",
+                    "options": [
+                              "other",
+                              "others",
+                              "another",
+                              "the other"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Other' modifies the plural noun 'questions'."
+          },
+          {
+                    "id": 5,
+                    "text": "This pen doesn't work. Can you give me _______ one?",
+                    "options": [
+                              "another",
+                              "other",
+                              "others",
+                              "the others"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Another one' means 'an additional singular item'."
+          },
+          {
+                    "id": 6,
+                    "text": "Which sentence is grammatically INCORRECT?",
+                    "options": [
+                              "Others students arrived late.",
+                              "Other students arrived late.",
+                              "Some people agreed, others disagreed.",
+                              "Can I have another cup of tea?"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Others' cannot be followed by a noun ('Others students' is wrong)."
+          },
+          {
+                    "id": 7,
+                    "text": "Where are _______ books I borrowed from you?",
+                    "options": [
+                              "the other",
+                              "another",
+                              "others",
+                              "other"
+                    ],
+                    "correct": 0,
+                    "explanation": "'The other' + plural noun ('the other books')."
+          },
+          {
+                    "id": 8,
+                    "text": "She held a bag in one hand and a suitcase in _______.",
+                    "options": [
+                              "the other",
+                              "another",
+                              "others",
+                              "other"
+                    ],
+                    "correct": 0,
+                    "explanation": "'In the other' refers to the remaining hand of two."
+          },
+          {
+                    "id": 9,
+                    "text": "We need to find _______ solution to this problem.",
+                    "options": [
+                              "another",
+                              "other",
+                              "others",
+                              "the others"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Another' + singular noun 'solution'."
+          },
+          {
+                    "id": 10,
+                    "text": "Don't judge _______ by their appearance.",
+                    "options": [
+                              "others",
+                              "other",
+                              "another",
+                              "the other"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Others' as an object pronoun meaning 'other people'."
+          },
+          {
+                    "id": 11,
+                    "text": "My _______ brother lives in Canada.",
+                    "options": [
+                              "other",
+                              "another",
+                              "others",
+                              "the other"
+                    ],
+                    "correct": 0,
+                    "explanation": "'My other brother' (possessive + other + singular noun)."
+          },
+          {
+                    "id": 12,
+                    "text": "I ate one apple, and then I ate _______.",
+                    "options": [
+                              "another",
+                              "other",
+                              "others",
+                              "the other"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Another' used as a pronoun meaning 'one more apple'."
+          },
+          {
+                    "id": 13,
+                    "text": "There are many _______ options to consider.",
+                    "options": [
+                              "other",
+                              "others",
+                              "another",
+                              "the other"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Other' + plural noun ('options')."
+          },
+          {
+                    "id": 14,
+                    "text": "I tried on two pairs of shoes; one fit well, but _______ was too tight.",
+                    "options": [
+                              "the other",
+                              "another",
+                              "others",
+                              "other"
+                    ],
+                    "correct": 0,
+                    "explanation": "'The other' (the second pair of two)."
+          },
+          {
+                    "id": 15,
+                    "text": "Let's meet _______ day when you are free.",
+                    "options": [
+                              "another",
+                              "other",
+                              "others",
+                              "the other"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Another day' means 'a different day'."
+          },
+          {
+                    "id": 16,
+                    "text": "Some boys played football, and _______ went swimming.",
+                    "options": [
+                              "others",
+                              "other",
+                              "another",
+                              "the other"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Others' replacing 'other boys'."
+          },
+          {
+                    "id": 17,
+                    "text": "He lost his phone, so he had to buy _______.",
+                    "options": [
+                              "another",
+                              "other",
+                              "others",
+                              "the other"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Another' pronoun replacing 'another phone'."
+          },
+          {
+                    "id": 18,
+                    "text": "Three of the five students passed; _______ two failed.",
+                    "options": [
+                              "the other",
+                              "another",
+                              "others",
+                              "other"
+                    ],
+                    "correct": 0,
+                    "explanation": "'The other two' (specific remaining ones)."
+          },
+          {
+                    "id": 19,
+                    "text": "I don't like this shirt; show me _______ one.",
+                    "options": [
+                              "another",
+                              "other",
+                              "others",
+                              "the others"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Another one'."
+          },
+          {
+                    "id": 20,
+                    "text": "Do you have any _______ news about the project?",
+                    "options": [
+                              "other",
+                              "others",
+                              "another",
+                              "the other"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Other' + uncountable noun 'news'."
+          }
+],
+        "fillBlanks": [
+          {
+                    "id": 1,
+                    "sentence": "Would you like _____ cup of tea?",
+                    "answer": "another",
+                    "hint": "another + singular noun"
+          },
+          {
+                    "id": 2,
+                    "sentence": "Some like tea, _____ prefer coffee.",
+                    "answer": "others",
+                    "hint": "standalone pronoun"
+          },
+          {
+                    "id": 3,
+                    "sentence": "I have two dogs. One is brown, _____ is white.",
+                    "answer": "the other",
+                    "hint": "second of two"
+          },
+          {
+                    "id": 4,
+                    "sentence": "Do you have _____ questions?",
+                    "answer": "other",
+                    "hint": "other + plural noun"
+          },
+          {
+                    "id": 5,
+                    "sentence": "Let's try _____ restaurant tonight.",
+                    "answer": "another",
+                    "hint": "a different one"
+          }
+],
+        "scrambled": [
+          {
+                    "id": 1,
+                    "answer": "Would you like another cup of tea",
+                    "hint": "Start with Would"
+          },
+          {
+                    "id": 2,
+                    "answer": "One is black and the other is white",
+                    "hint": "Start with One"
+          },
+          {
+                    "id": 3,
+                    "answer": "Some people agreed while others disagreed",
+                    "hint": "Start with Some"
+          },
+          {
+                    "id": 4,
+                    "answer": "We have other options to consider",
+                    "hint": "Start with We"
+          },
+          {
+                    "id": 5,
+                    "answer": "Can you give me another pen",
+                    "hint": "Start with Can"
+          }
+],
+        "errorCorrection": [
+          {
+                    "id": 1,
+                    "text": "Others students arrived later.",
+                    "correction": "Other students arrived later.",
+                    "explanation": "'Others' cannot modify a noun directly."
+          },
+          {
+                    "id": 2,
+                    "text": "I prefer other shirt.",
+                    "correction": "I prefer the other shirt.",
+                    "explanation": "Singular noun with 'other' needs a determiner like 'the'."
+          },
+          {
+                    "id": 3,
+                    "text": "Can I have other cup of coffee?",
+                    "correction": "Can I have another cup of coffee?",
+                    "explanation": "Use 'another' before singular countable noun."
+          },
+          {
+                    "id": 4,
+                    "text": "I have two cars. One is blue, another is red.",
+                    "correction": "I have two cars. One is blue, the other is red.",
+                    "explanation": "Use 'the other' for the second of two."
+          },
+          {
+                    "id": 5,
+                    "text": "Some books are easy, others books are hard.",
+                    "correction": "Some books are easy, others are hard.",
+                    "explanation": "'Others' acts as pronoun without noun."
+          }
+],
+        "transform": [
+          {
+                    "id": 1,
+                    "original": "I need one more cup of tea.",
+                    "target": "I need _____ cup of tea.",
+                    "answer": "another",
+                    "explanation": "One more = another."
+          }
+],
+        "dialogue": [
+          {
+                    "id": 1,
+                    "dialogue": "A: Can I have one more slice of pizza?\nB: Sure, here is _____ slice.",
+                    "options": [
+                              "another",
+                              "other",
+                              "others",
+                              "the other"
+                    ],
+                    "correct": 0,
+                    "explanation": "One more slice = another slice."
+          }
+]
+      },
+      {
+        "id": "a-little-little-a-few-few",
+        "title": "A Little / Little & A Few / Few",
+        "icon": "\ud83d\udca7",
+        "description": "Master quantity expressions for countable (few/a few) and uncountable (little/a little) nouns.",
+        "guide": "## A Little / Little & A Few / Few\n\nIngliz tilida kichik miqdorlarni ifodalashda otning sanalishi va gapning ijbiylik/salbiylik darajasiga qarab 4 xil ibora ishlatiladi.\n\n---\n\n### 1. SANALMAYDIGAN OTLAR BILAN (`A Little` / `Little`)\n\n* **Otlar**: *water, money, time, sugar, milk, coffee, advice...*\n\n#### A. A LITTLE (Ozgina, Biroz — Positive Meaning)\n* **Ma'nosi**: Kam bo'lsada, yetarli darajada **BOR**.\n* **Formulasi**: `A little + uncountable noun`\n* **Misollar**:\n  * I have **a little money**, enough for lunch. (Menda ozgina pul bor, tushlikka yetadi.)\n  * There is **a little water** in the bottle.\n\n#### B. LITTLE (Juda kam, Deyarli yo'q — Negative Meaning)\n* **Ma'nosi**: Juda kam, yetarli emas (deyarli nolga teng).\n* **Formulasi**: `Little + uncountable noun`\n* **Misollar**:\n  * I have **little money**, so I can't buy anything. (Menda deyarli pul yo'q.)\n  * We have **little time** left; hurry up!\n\n---\n\n### 2. KO'PLIKDAGI SANALADIGAN OTLAR BILAN (`A Few` / `Few`)\n\n* **Otlar**: *books, friends, students, cars, days, mistakes...*\n\n#### A. A FEW (Bir nechta, Bir oz — Positive Meaning)\n* **Ma'nosi**: Bir nechta bor, yetarli.\n* **Formulasi**: `A few + plural noun`\n* **Misollar**:\n  * I have **a few friends** in this city. (Mening bu shaharda bir nechta do'stlarim bor.)\n  * She bought **a few books**.\n\n#### B. FEW (Juda kam, Deyarli yo'q — Negative Meaning)\n* **Ma'nosi**: Juda kam, deyarli yo'q.\n* **Formulasi**: `Few + plural noun`\n* **Misollar**:\n  * **Few students** passed the difficult exam. (Juda kam talaba imtihondan o'tdi.)\n  * He has **few friends**, so he feels lonely.\n\n---\n\n### 3. A LITTLE RAVISH SIFATIDA (As an Adverb)\n\n1. `Verb + a little`: Harakatni yumshatadi (*biroz*).\n   * It rained **a little** during the night.\n   * She hesitated **a little**.\n2. `A little + Adjective / Adverb`: Biroz (*a little nervous, a little disappointed*).\n   * I am **a little tired**.\n3. `A little + Comparative`: Biroz ...roq.\n   * Can you walk **a little faster**? (Biroz tezroq yura olasanmi?)\n   * This book is **a little more expensive**.",
+        "questions": [
+          {
+                    "id": 1,
+                    "text": "I have _______ money, so I can buy us some coffee.",
+                    "options": [
+                              "a little",
+                              "little",
+                              "a few",
+                              "few"
+                    ],
+                    "correct": 0,
+                    "explanation": "'A little' + uncountable noun ('money') in a positive context."
+          },
+          {
+                    "id": 2,
+                    "text": "Unfortunately, _______ students passed the difficult test.",
+                    "options": [
+                              "few",
+                              "a few",
+                              "a little",
+                              "little"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Few' + plural noun ('students') in a negative context (almost none)."
+          },
+          {
+                    "id": 3,
+                    "text": "She has _______ friends in London, so she never feels lonely.",
+                    "options": [
+                              "a few",
+                              "few",
+                              "a little",
+                              "little"
+                    ],
+                    "correct": 0,
+                    "explanation": "'A few' + plural noun ('friends') indicates a positive sufficient number."
+          },
+          {
+                    "id": 4,
+                    "text": "Hurry up! We have _______ time left before the train leaves.",
+                    "options": [
+                              "little",
+                              "a little",
+                              "few",
+                              "a few"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Little' + uncountable noun ('time') indicates almost no time."
+          },
+          {
+                    "id": 5,
+                    "text": "Can you speak _______ louder? I can't hear you clearly.",
+                    "options": [
+                              "a little",
+                              "little",
+                              "a few",
+                              "few"
+                    ],
+                    "correct": 0,
+                    "explanation": "'A little' modifies comparative adverb 'louder'."
+          },
+          {
+                    "id": 6,
+                    "text": "Which sentence means 'I have ALMOST NO money'?",
+                    "options": [
+                              "I have little money.",
+                              "I have a little money.",
+                              "I have a few money.",
+                              "I have few money."
+                    ],
+                    "correct": 0,
+                    "explanation": "'Little money' means almost no money."
+          },
+          {
+                    "id": 7,
+                    "text": "There is _______ sugar left in the bowl, enough for your tea.",
+                    "options": [
+                              "a little",
+                              "little",
+                              "a few",
+                              "few"
+                    ],
+                    "correct": 0,
+                    "explanation": "'A little' + uncountable noun ('sugar') in a positive sense."
+          },
+          {
+                    "id": 8,
+                    "text": "He made _______ mistakes in his essay, so he got an A grade.",
+                    "options": [
+                              "few",
+                              "a few",
+                              "little",
+                              "a little"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Few mistakes' (very few errors -> positive grade)."
+          },
+          {
+                    "id": 9,
+                    "text": "I felt _______ nervous before giving the speech.",
+                    "options": [
+                              "a little",
+                              "little",
+                              "a few",
+                              "few"
+                    ],
+                    "correct": 0,
+                    "explanation": "'A little' + adjective ('nervous')."
+          },
+          {
+                    "id": 10,
+                    "text": "There were _______ people at the stadium because of the bad weather.",
+                    "options": [
+                              "few",
+                              "a few",
+                              "a little",
+                              "little"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Few' + plural countable noun ('people')."
+          },
+          {
+                    "id": 11,
+                    "text": "Could you add _______ milk to my coffee, please?",
+                    "options": [
+                              "a little",
+                              "little",
+                              "a few",
+                              "few"
+                    ],
+                    "correct": 0,
+                    "explanation": "'A little' + uncountable noun ('milk')."
+          },
+          {
+                    "id": 12,
+                    "text": "She has _______ interest in sports; she never watches any games.",
+                    "options": [
+                              "little",
+                              "a little",
+                              "few",
+                              "a few"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Little' + uncountable noun ('interest') means almost none."
+          },
+          {
+                    "id": 13,
+                    "text": "We stayed in Paris for _______ days before heading to Rome.",
+                    "options": [
+                              "a few",
+                              "few",
+                              "a little",
+                              "little"
+                    ],
+                    "correct": 0,
+                    "explanation": "'A few' + plural countable noun ('days')."
+          },
+          {
+                    "id": 14,
+                    "text": "Can you walk _______ faster?",
+                    "options": [
+                              "a little",
+                              "little",
+                              "a few",
+                              "few"
+                    ],
+                    "correct": 0,
+                    "explanation": "'A little' + comparative ('faster')."
+          },
+          {
+                    "id": 15,
+                    "text": "He has _______ chance of winning without practice.",
+                    "options": [
+                              "little",
+                              "a little",
+                              "few",
+                              "a few"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Little chance' (almost no chance)."
+          },
+          {
+                    "id": 16,
+                    "text": "Only _______ people attended the seminar yesterday.",
+                    "options": [
+                              "a few",
+                              "few",
+                              "a little",
+                              "little"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Only a few' + plural noun ('people')."
+          },
+          {
+                    "id": 17,
+                    "text": "She slept _______ during the long flight.",
+                    "options": [
+                              "a little",
+                              "little",
+                              "a few",
+                              "few"
+                    ],
+                    "correct": 0,
+                    "explanation": "'A little' as an adverb following the verb 'slept'."
+          },
+          {
+                    "id": 18,
+                    "text": "I need _______ more minutes to finish this report.",
+                    "options": [
+                              "a few",
+                              "few",
+                              "a little",
+                              "little"
+                    ],
+                    "correct": 0,
+                    "explanation": "'A few' + plural countable noun ('minutes')."
+          },
+          {
+                    "id": 19,
+                    "text": "There was _______ hope of finding the lost phone.",
+                    "options": [
+                              "little",
+                              "a little",
+                              "few",
+                              "a few"
+                    ],
+                    "correct": 0,
+                    "explanation": "'Little hope' (negative context)."
+          },
+          {
+                    "id": 20,
+                    "text": "I have _______ questions about the homework assignment.",
+                    "options": [
+                              "a few",
+                              "few",
+                              "a little",
+                              "little"
+                    ],
+                    "correct": 0,
+                    "explanation": "'A few' + plural noun ('questions')."
+          }
+],
+        "fillBlanks": [
+          {
+                    "id": 1,
+                    "sentence": "I have _____ money left, enough for coffee.",
+                    "answer": "a little",
+                    "hint": "uncountable positive"
+          },
+          {
+                    "id": 2,
+                    "sentence": "She has _____ friends in the city.",
+                    "answer": "a few",
+                    "hint": "countable positive"
+          },
+          {
+                    "id": 3,
+                    "sentence": "Hurry up! We have _____ time.",
+                    "answer": "little",
+                    "hint": "uncountable negative"
+          },
+          {
+                    "id": 4,
+                    "sentence": "_____ students passed the hard exam.",
+                    "answer": "Few",
+                    "hint": "countable negative"
+          },
+          {
+                    "id": 5,
+                    "sentence": "Can you drive a _____ faster?",
+                    "answer": "little",
+                    "hint": "modifies comparative"
+          }
+],
+        "scrambled": [
+          {
+                    "id": 1,
+                    "answer": "I have a little money left",
+                    "hint": "Start with I"
+          },
+          {
+                    "id": 2,
+                    "answer": "Few students passed the exam",
+                    "hint": "Start with Few"
+          },
+          {
+                    "id": 3,
+                    "answer": "She bought a few books yesterday",
+                    "hint": "Start with She"
+          },
+          {
+                    "id": 4,
+                    "answer": "There is little hope left",
+                    "hint": "Start with There"
+          },
+          {
+                    "id": 5,
+                    "answer": "Can you speak a little louder",
+                    "hint": "Start with Can"
+          }
+],
+        "errorCorrection": [
+          {
+                    "id": 1,
+                    "text": "I have a few money.",
+                    "correction": "I have a little money.",
+                    "explanation": "'Money' is uncountable; use 'a little'."
+          },
+          {
+                    "id": 2,
+                    "text": "She has little friends.",
+                    "correction": "She has few friends.",
+                    "explanation": "'Friends' is countable plural; use 'few'."
+          },
+          {
+                    "id": 3,
+                    "text": "Can you walk a few faster?",
+                    "correction": "Can you walk a little faster?",
+                    "explanation": "Use 'a little' with comparatives."
+          },
+          {
+                    "id": 4,
+                    "text": "There is a few water in bottle.",
+                    "correction": "There is a little water in the bottle.",
+                    "explanation": "'Water' is uncountable."
+          },
+          {
+                    "id": 5,
+                    "text": "Few students passed because it was easy.",
+                    "correction": "A few students passed because it was easy.",
+                    "explanation": "Use 'a few' for positive context."
+          }
+],
+        "transform": [
+          {
+                    "id": 1,
+                    "original": "I don't have much money.",
+                    "target": "I have _____ money.",
+                    "answer": "little",
+                    "explanation": "Not much = little."
+          }
+],
+        "dialogue": [
+          {
+                    "id": 1,
+                    "dialogue": "A: Do you have time for a chat?\nB: Yes, I have _____ time before my next meeting.",
+                    "options": [
+                              "a little",
+                              "little",
+                              "a few",
+                              "few"
+                    ],
+                    "correct": 0,
+                    "explanation": "'a little' uncountable positive."
+          }
+]
+      },
+      {
+        "id": "adjectives-types-order-forms",
+        "title": "Adjectives: Types, Forms, Suffixes & Order",
+        "icon": "\ud83c\udfa8",
+        "description": "Learn adjective formation via suffixes (-ful, -less, -ive, -ous), negative prefixes (un-, in-, im-, ir-), and the strict OSASCOMP word order.",
+        "guide": "## Adjectives (Sifatlar): Turlari, Qo'shimchalar va Tartibi\n\nSifatlar otlarning belgi, xususiyati va holatini ko'rsatadi. Ushbu darsda sifat yasovchi qo'shimchalar, inkor old qo'shimchalari va sifatlar tartibi (Adjective Order) o'rganiladi.\n\n---\n\n### 1. Sifat Yasovchi Qo'shimchalar (Suffixes)\n\n| Qo'shimcha | Ma'nosi | Misollar |\n| :--- | :--- | :--- |\n| **-ful** | \"...li\", \"... bilan to'la\" | help → **helpful**, care → **careful**, beauty → **beautiful** |\n| **-less** | \"...siz\", \"... mavjud emas\" | help → **helpless**, care → **careless**, home → **homeless** |\n| **-able / -ible** | \"... qilsa bo'ladigan\" | comfort → **comfortable**, rely → **reliable** |\n| **-al** | tegishlilik, sohaga oid | music → **musical**, logic → **logical**, nature → **natural** |\n| **-ish** | \"...ga o'xshash\", biroz | child → **childish**, fool → **foolish**, yellow → **yellowish** |\n| **-ive / -ative** | \"... xususiyatga ega\" | act → **active**, create → **creative**, talk → **talkative** |\n| **-ous / -ious** | \"... bilan to'la\" | danger → **dangerous**, fame → **famous**, mystery → **mysterious** |\n| **-y** | \"...li\", \"...ga to'la\" | wind → **windy**, cloud → **cloudy**, taste → **tasty**, dirt → **dirty** |\n\n---\n\n### 2. Inkor Old Qo'shimchalari (Negative Prefixes)\n\n* **un-**: happy → **unhappy**, kind → **unkind**, fair → **unfair**\n* **in-**: correct → **incorrect**, complete → **incomplete**, active → **inactive**\n* **im-** (p, m oldidan): polite → **impolite**, possible → **impossible**, patient → **impatient**\n* **ir-** (r oldidan): regular → **irregular**, responsible → **irresponsible**\n\n---\n\n### 3. Sifatlarning Tartibi (Adjective Order — OSASCOMP Formula)\n\nAgar bir ot oldida bir nechta sifat keladigan bo'lsa, ular quyidagi qat'iy tartibda joylashadi:\n\n1. **Opinion (Fikr / Baho)**: *beautiful, amazing, terrible*\n2. **Size (O'lcham)**: *big, small, tall, huge*\n3. **Physical Quality (Jismoniy xususiyat)**: *clean, rough, soft*\n4. **Shape (Shakl)**: *round, square, oval*\n5. **Age (Yosh / Eskilik)**: *new, old, ancient, modern*\n6. **Colour (Rang)**: *red, blue, green, black*\n7. **Origin (Kelib chiqishi)**: *Uzbek, English, Italian, Japanese*\n8. **Material (Material)**: *wooden, plastic, cotton, golden*\n9. **Purpose (Maqsad)**: *sleeping (bag), cooking (pot)* + **NOUN**\n\n* **Misollar**:\n  * A **beautiful** (1) **small** (2) **old** (5) **black** (6) **Italian** (7) **leather** (8) jacket.\n  * An **expensive** (1) **modern** (5) **Japanese** (7) phone.\n\n---\n\n### 4. Fe'ldan Keyin Keladigan Sifatlar (Linking Verbs)\n\nSifatlar `be, look, seem, feel, become` fe'llaridan keyin kelganda, oxirgi ikki sifat orasiga **and** qo'yiladi:\n* The room was **large, bright and comfortable**. (Xona katta, yorug' va qulay edi.)",
+        "questions": [
+          {
+                    "id": 1,
+                    "text": "Which option presents the CORRECT adjective order?",
+                    "options": [
+                              "a beautiful small wooden table",
+                              "a wooden small beautiful table",
+                              "a small wooden beautiful table",
+                              "a table beautiful small wooden"
+                    ],
+                    "correct": 0,
+                    "explanation": "Order: Opinion ('beautiful') -> Size ('small') -> Material ('wooden')."
+          },
+          {
+                    "id": 2,
+                    "text": "He is a very _______ person; he always helps everyone.",
+                    "options": [
+                              "helpful",
+                              "helpless",
+                              "helping",
+                              "helped"
+                    ],
+                    "correct": 0,
+                    "explanation": "Suffix '-ful' means full of help."
+          },
+          {
+                    "id": 3,
+                    "text": "It was completely _______ of him to leave the door unlocked.",
+                    "options": [
+                              "careless",
+                              "careful",
+                              "caring",
+                              "carefully"
+                    ],
+                    "correct": 0,
+                    "explanation": "Suffix '-less' means without care."
+          },
+          {
+                    "id": 4,
+                    "text": "What is the opposite of 'polite'?",
+                    "options": [
+                              "impolite",
+                              "unpolite",
+                              "inpolite",
+                              "dispolite"
+                    ],
+                    "correct": 0,
+                    "explanation": "Prefix 'im-' is used before 'p'."
+          },
+          {
+                    "id": 5,
+                    "text": "They bought a _______ house in the countryside.",
+                    "options": [
+                              "big modern expensive",
+                              "expensive big modern",
+                              "modern big expensive",
+                              "big expensive modern"
+                    ],
+                    "correct": 1,
+                    "explanation": "Order: Opinion ('expensive') -> Size ('big') -> Age ('modern')."
+          },
+          {
+                    "id": 6,
+                    "text": "That snake is extremely _______; one bite can be fatal.",
+                    "options": [
+                              "poisonous",
+                              "poisoned",
+                              "poisoning",
+                              "poisoner"
+                    ],
+                    "correct": 0,
+                    "explanation": "Suffix '-ous' creates the adjective 'poisonous'."
+          },
+          {
+                    "id": 7,
+                    "text": "She wore a _______ dress to the gala dinner.",
+                    "options": [
+                              "lovely long red silk",
+                              "red long lovely silk",
+                              "silk lovely long red",
+                              "long red lovely silk"
+                    ],
+                    "correct": 0,
+                    "explanation": "Opinion ('lovely') -> Size ('long') -> Colour ('red') -> Material ('silk')."
+          },
+          {
+                    "id": 8,
+                    "text": "His behavior was very _______ for an adult.",
+                    "options": [
+                              "childish",
+                              "childlike",
+                              "childless",
+                              "childed"
+                    ],
+                    "correct": 0,
+                    "explanation": "Suffix '-ish' means behaving like a child in an immature way."
+          },
+          {
+                    "id": 9,
+                    "text": "What is the negative form of 'regular'?",
+                    "options": [
+                              "irregular",
+                              "unregular",
+                              "inregular",
+                              "imregular"
+                    ],
+                    "correct": 0,
+                    "explanation": "Prefix 'ir-' is used before 'r'."
+          },
+          {
+                    "id": 10,
+                    "text": "The lecture was very _______; I learned a lot of new things.",
+                    "options": [
+                              "informative",
+                              "information",
+                              "informed",
+                              "informing"
+                    ],
+                    "correct": 0,
+                    "explanation": "Suffix '-ative' forms adjective 'informative'."
+          },
+          {
+                    "id": 11,
+                    "text": "She bought an _______ vase at the auction.",
+                    "options": [
+                              "expensive old Chinese",
+                              "old Chinese expensive",
+                              "Chinese expensive old",
+                              "expensive Chinese old"
+                    ],
+                    "correct": 0,
+                    "explanation": "Opinion ('expensive') -> Age ('old') -> Origin ('Chinese')."
+          },
+          {
+                    "id": 12,
+                    "text": "The weather today is very _______.",
+                    "options": [
+                              "windy",
+                              "wind",
+                              "winding",
+                              "winded"
+                    ],
+                    "correct": 0,
+                    "explanation": "Suffix '-y' forms adjective 'windy'."
+          },
+          {
+                    "id": 13,
+                    "text": "He gave an _______ answer to the teacher's question.",
+                    "options": [
+                              "incorrect",
+                              "uncorrect",
+                              "imcorrect",
+                              "discorrect"
+                    ],
+                    "correct": 0,
+                    "explanation": "Prefix 'in-' forms opposite of 'correct'."
+          },
+          {
+                    "id": 14,
+                    "text": "This old sofa is surprisingly _______.",
+                    "options": [
+                              "comfortable",
+                              "comfort",
+                              "comforting",
+                              "comforted"
+                    ],
+                    "correct": 0,
+                    "explanation": "Suffix '-able' forms 'comfortable'."
+          },
+          {
+                    "id": 15,
+                    "text": "She drives a _______ car.",
+                    "options": [
+                              "fast new Italian",
+                              "Italian new fast",
+                              "new fast Italian",
+                              "fast Italian new"
+                    ],
+                    "correct": 0,
+                    "explanation": "Opinion/Quality ('fast') -> Age ('new') -> Origin ('Italian')."
+          },
+          {
+                    "id": 16,
+                    "text": "It was an _______ situation for everyone involved.",
+                    "options": [
+                              "unpleasant",
+                              "impleasant",
+                              "inpleasant",
+                              "displeasant"
+                    ],
+                    "correct": 0,
+                    "explanation": "Prefix 'un-' forms opposite of 'pleasant'."
+          },
+          {
+                    "id": 17,
+                    "text": "The ocean water looked _______ under the sunlight.",
+                    "options": [
+                              "greenish",
+                              "greenly",
+                              "greenness",
+                              "greened"
+                    ],
+                    "correct": 0,
+                    "explanation": "Suffix '-ish' means slightly green."
+          },
+          {
+                    "id": 18,
+                    "text": "He is a _______ designer with many innovative ideas.",
+                    "options": [
+                              "creative",
+                              "creation",
+                              "create",
+                              "creatively"
+                    ],
+                    "correct": 0,
+                    "explanation": "Suffix '-ive' forms 'creative'."
+          },
+          {
+                    "id": 19,
+                    "text": "Look at that _______ box over there.",
+                    "options": [
+                              "small round wooden",
+                              "wooden small round",
+                              "round wooden small",
+                              "small wooden round"
+                    ],
+                    "correct": 0,
+                    "explanation": "Size ('small') -> Shape ('round') -> Material ('wooden')."
+          },
+          {
+                    "id": 20,
+                    "text": "The hotel room was clean, quiet _______ comfortable.",
+                    "options": [
+                              "and",
+                              "or",
+                              "but",
+                              "so"
+                    ],
+                    "correct": 0,
+                    "explanation": "After linking verbs: adj, adj and adj."
+          }
+],
+        "fillBlanks": [
+          {
+                    "id": 1,
+                    "sentence": "She bought a beautiful _____ wooden table.",
+                    "answer": "small",
+                    "hint": "adjective order"
+          },
+          {
+                    "id": 2,
+                    "sentence": "He is a very _____ teacher.",
+                    "answer": "helpful",
+                    "hint": "-ful suffix"
+          },
+          {
+                    "id": 3,
+                    "sentence": "Your answer is _____.",
+                    "answer": "incorrect",
+                    "hint": "in- prefix"
+          },
+          {
+                    "id": 4,
+                    "sentence": "It is _____ to drive without a license.",
+                    "answer": "illegal",
+                    "hint": "il- prefix"
+          },
+          {
+                    "id": 5,
+                    "sentence": "The movie was very _____.",
+                    "answer": "funny",
+                    "hint": "-y suffix"
+          }
+],
+        "scrambled": [
+          {
+                    "id": 1,
+                    "answer": "She bought a beautiful small wooden table",
+                    "hint": "Follow adjective order"
+          },
+          {
+                    "id": 2,
+                    "answer": "He is a very helpful person",
+                    "hint": "Start with He"
+          },
+          {
+                    "id": 3,
+                    "answer": "The weather is cold windy and rainy",
+                    "hint": "Linking verb order"
+          },
+          {
+                    "id": 4,
+                    "answer": "This answer is completely incorrect",
+                    "hint": "Start with This"
+          },
+          {
+                    "id": 5,
+                    "answer": "She wore an expensive silk dress",
+                    "hint": "Start with She"
+          }
+],
+        "errorCorrection": [
+          {
+                    "id": 1,
+                    "text": "She is a very beauty girl.",
+                    "correction": "She is a very beautiful girl.",
+                    "explanation": "Use adjective form 'beautiful' instead of noun 'beauty'."
+          },
+          {
+                    "id": 2,
+                    "text": "She bought a wooden small table.",
+                    "correction": "She bought a small wooden table.",
+                    "explanation": "Size comes before material."
+          },
+          {
+                    "id": 3,
+                    "text": "His answer was uncorrect.",
+                    "correction": "His answer was incorrect.",
+                    "explanation": "Prefix for 'correct' is 'in-'."
+          },
+          {
+                    "id": 4,
+                    "text": "He gave an unpolite response.",
+                    "correction": "He gave an impolite response.",
+                    "explanation": "Prefix for 'polite' is 'im-'."
+          },
+          {
+                    "id": 5,
+                    "text": "The weather is very hotly today.",
+                    "correction": "The weather is very hot today.",
+                    "explanation": "Use adjective 'hot' after linking verb 'is'."
+          }
+],
+        "transform": [
+          {
+                    "id": 1,
+                    "original": "The solution is not practical.",
+                    "target": "The solution is _____.",
+                    "answer": "impractical",
+                    "explanation": "Not practical = impractical."
+          }
+],
+        "dialogue": [
+          {
+                    "id": 1,
+                    "dialogue": "A: What kind of jacket did you buy?\nB: I bought a _____ black leather jacket.",
+                    "options": [
+                              "nice new",
+                              "leather new",
+                              "black nice",
+                              "new leather"
+                    ],
+                    "correct": 0,
+                    "explanation": "Opinion ('nice') -> Age ('new') -> Colour ('black') -> Material ('leather')."
+          }
+]
+      }
     ]
-}
-  ]
   },
   "upper": {
     "label": "Intermediate",
