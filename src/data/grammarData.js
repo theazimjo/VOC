@@ -55937,6 +55937,4886 @@ export const grammarData = {
         ]
       },
       {
+        "id": "deduction-and-assumption",
+        "title": "Deduction and Assumption",
+        "icon": "🕵️",
+        "guide": "## Deduction and Assumption (Xulosa chiqarish va taxmin qilish) — Hozirgi va o'tgan zamon\n\nBu mavzu ilgari o'rgangan **hozirgi zamon xulosalari** (must be, might be, could be, can't be) va **o'tgan zamon xulosalari** (must have + V3, might have + V3, could have + V3, can't have + V3) ni BITTA tizimga birlashtiradi — dalillarga asoslanib xulosa chiqarish va taxmin qilishni mustahkamlaydi.\n\n## 1. Ishonch darajalari jadvali (hozirgi va o'tgan)\n• 100% ishonch (ijobiy): **must be** / **must have + V3**\n• Ehtimollik (kam-ko'p ishonch): **may / might / could be** / **may / might / could have + V3**\n• 100% ishonch (salbiy): **can't be** / **can't have + V3**\n• Kutilgan natija: **should be** / **should have + V3**\n\n## 2. Hozirgi zamon xulosasi (Present Deduction)\nFormula: Subject + modal + bosh fe'l (yoki modal + be + V-ing — davom etayotgan harakat uchun)\n• The lights are off — they **must be** out.\n• Someone **must be cooking** dinner. (davomiy: modal + be + V-ing)\n• She **might be** busy.\n• This key **could be** for the garage.\n• You **can't be** hungry already.\n\n## 3. O'tgan zamon xulosasi (Past Deduction)\nFormula: Subject + modal + have + V3 (Past Participle) — **have** hech qachon **has/had** ga aylanmaydi!\n• It **must have escaped**.\n• They **might have gone** home.\n• We **could have caught** the train.\n• That **can't have happened**.\n\n## 4. Kutilgan natija: should / should have\n• It **should be** here by tomorrow. (hozirgi/kelasi kutish)\n• Everyone **should have arrived** by now. (o'tmishga nisbatan kutish)\n\n## 5. Eng ko'p uchraydigan xatolar\n• Modal fe'ldan keyin \"to\" ishlatilmaydi: ~~could to be~~ → **could be**\n• \"have\" hech qachon \"has\" ga aylanmaydi: ~~must has been~~ → **must have been**\n• \"have\"dan keyin fe'l V3 (Past Participle) shaklda bo'lishi kerak: ~~must have find~~ → **must have found**, ~~might have went~~ → **might have gone**\n\n## 6. Signal so'zlar\n• must, must have (kuchli ijobiy xulosa)\n• might, may, could, might have, may have, could have (ehtimollik)\n• can't, can't have (kuchli salbiy xulosa)\n• should, should have (kutilgan natija)",
+        "questions": [
+          {
+            "id": 1,
+            "text": "All the lights are off and the car isn't in the driveway — they ___ be out.",
+            "options": [
+              "must",
+              "might",
+              "should",
+              "would"
+            ],
+            "correct": 0,
+            "explanation": "\"must\" — hozirgi holat haqida kuchli ijobiy xulosa.",
+            "explanationRu": "\"must\" — уверенный положительный вывод о настоящем."
+          },
+          {
+            "id": 2,
+            "text": "He says he ran ten kilometers in twenty minutes — that ___ happened; it's simply impossible.",
+            "options": [
+              "can't have",
+              "must have",
+              "might have",
+              "should have"
+            ],
+            "correct": 0,
+            "explanation": "\"can't have\" — o'tmish haqida kuchli salbiy xulosa.",
+            "explanationRu": "\"can't have\" — уверенный отрицательный вывод о прошлом."
+          },
+          {
+            "id": 3,
+            "text": "I haven't heard from Maria all day; she ___ be busy with work.",
+            "options": [
+              "might",
+              "must",
+              "can't",
+              "should"
+            ],
+            "correct": 0,
+            "explanation": "\"might\" — hozirgi holat haqida noaniq ehtimollik.",
+            "explanationRu": "\"might\" — неуверенное предположение о настоящем."
+          },
+          {
+            "id": 4,
+            "text": "The gate is open and the dog is gone — it ___ escaped.",
+            "options": [
+              "must have",
+              "can't have",
+              "might have",
+              "should have"
+            ],
+            "correct": 0,
+            "explanation": "\"must have\" — o'tmish haqida kuchli ijobiy xulosa.",
+            "explanationRu": "\"must have\" — уверенный положительный вывод о прошлом."
+          },
+          {
+            "id": 5,
+            "text": "This letter ___ be from the bank, but I'm honestly not certain.",
+            "options": [
+              "could",
+              "must",
+              "can't",
+              "should"
+            ],
+            "correct": 0,
+            "explanation": "\"could\" — hozirgi holat haqida ehtimollik.",
+            "explanationRu": "\"could\" — предположение о настоящем."
+          },
+          {
+            "id": 6,
+            "text": "No one answered the door, so they ___ gone out for a walk.",
+            "options": [
+              "might have",
+              "must have",
+              "can't have",
+              "should have"
+            ],
+            "correct": 0,
+            "explanation": "\"might have\" — o'tmish haqida noaniq ehtimollik.",
+            "explanationRu": "\"might have\" — неуверенное предположение о прошлом."
+          },
+          {
+            "id": 7,
+            "text": "You've only just woken up — you ___ be hungry already.",
+            "options": [
+              "can't",
+              "must",
+              "might",
+              "should"
+            ],
+            "correct": 0,
+            "explanation": "\"can't\" — hozirgi holat haqida kuchli salbiy xulosa.",
+            "explanationRu": "\"can't\" — уверенный отрицательный вывод о настоящем."
+          },
+          {
+            "id": 8,
+            "text": "We ___ caught the earlier train, but we decided to have breakfast first.",
+            "options": [
+              "could have",
+              "must have",
+              "can't have",
+              "should have"
+            ],
+            "correct": 0,
+            "explanation": "\"could have\" — o'tmishda bajarilmagan imkoniyat.",
+            "explanationRu": "\"could have\" — неиспользованная возможность в прошлом."
+          },
+          {
+            "id": 9,
+            "text": "The kitchen smells amazing — someone ___ be cooking dinner.",
+            "options": [
+              "must",
+              "might",
+              "could",
+              "should"
+            ],
+            "correct": 0,
+            "explanation": "\"must\" — hozirgi holat haqida kuchli ijobiy xulosa.",
+            "explanationRu": "\"must\" — уверенный положительный вывод о настоящем."
+          },
+          {
+            "id": 10,
+            "text": "She says she saw him at the concert, but he ___ been there — he was abroad all week.",
+            "options": [
+              "can't have",
+              "must have",
+              "might have",
+              "should have"
+            ],
+            "correct": 0,
+            "explanation": "\"can't have\" — o'tmish haqida kuchli salbiy xulosa.",
+            "explanationRu": "\"can't have\" — уверенный отрицательный вывод о прошлом."
+          },
+          {
+            "id": 11,
+            "text": "That strange noise outside ___ be the wind, or it could be an animal.",
+            "options": [
+              "might",
+              "must",
+              "can't",
+              "should"
+            ],
+            "correct": 0,
+            "explanation": "\"might\" — hozirgi holat haqida noaniq ehtimollik.",
+            "explanationRu": "\"might\" — неуверенное предположение о настоящем."
+          },
+          {
+            "id": 12,
+            "text": "The cookie jar is empty and there are crumbs on the table — my little brother ___ found it.",
+            "options": [
+              "must have",
+              "might have",
+              "can't have",
+              "should have"
+            ],
+            "correct": 0,
+            "explanation": "\"must have\" — o'tmish haqida kuchli ijobiy xulosa.",
+            "explanationRu": "\"must have\" — уверенный положительный вывод о прошлом."
+          },
+          {
+            "id": 13,
+            "text": "This key ___ be for the garage, or maybe it opens the shed.",
+            "options": [
+              "could",
+              "must",
+              "can't",
+              "should"
+            ],
+            "correct": 0,
+            "explanation": "\"could\" — hozirgi holat haqida ehtimollik.",
+            "explanationRu": "\"could\" — предположение о настоящем."
+          },
+          {
+            "id": 14,
+            "text": "The office was completely empty when we arrived — everyone ___ gone home early.",
+            "options": [
+              "might have",
+              "must have",
+              "can't have",
+              "should have"
+            ],
+            "correct": 0,
+            "explanation": "\"might have\" — o'tmish haqida noaniq ehtimollik.",
+            "explanationRu": "\"might have\" — неуверенное предположение о прошлом."
+          },
+          {
+            "id": 15,
+            "text": "The shops ___ be open yet — it's only six in the morning.",
+            "options": [
+              "can't",
+              "must",
+              "might",
+              "should"
+            ],
+            "correct": 0,
+            "explanation": "\"can't\" — hozirgi holat haqida kuchli salbiy xulosa.",
+            "explanationRu": "\"can't\" — уверенный отрицательный вывод о настоящем."
+          },
+          {
+            "id": 16,
+            "text": "The grass is wet but there isn't a cloud in the sky — the sprinklers ___ turned on automatically.",
+            "options": [
+              "must have",
+              "might have",
+              "can't have",
+              "should have"
+            ],
+            "correct": 0,
+            "explanation": "\"must have\" — o'tmish haqida kuchli ijobiy xulosa.",
+            "explanationRu": "\"must have\" — уверенный положительный вывод о прошлом."
+          },
+          {
+            "id": 17,
+            "text": "The package was sent three days ago, so it ___ be here by tomorrow.",
+            "options": [
+              "should",
+              "must",
+              "can't",
+              "might"
+            ],
+            "correct": 0,
+            "explanation": "\"should\" — kutilgan natija (hozirgi/kelasi holat).",
+            "explanationRu": "\"should\" — ожидаемый результат (настоящее/будущее)."
+          },
+          {
+            "id": 18,
+            "text": "The meeting started at nine, so everyone ___ arrived by now.",
+            "options": [
+              "should have",
+              "must have",
+              "can't have",
+              "might have"
+            ],
+            "correct": 0,
+            "explanation": "\"should have\" — kutilgan natija (o'tmishga nisbatan).",
+            "explanationRu": "\"should have\" — ожидаемый результат (по отношению к прошлому)."
+          },
+          {
+            "id": 19,
+            "text": "He's wearing a thick coat and gloves — it ___ be freezing outside.",
+            "options": [
+              "must",
+              "might",
+              "could",
+              "should"
+            ],
+            "correct": 0,
+            "explanation": "\"must\" — hozirgi holat haqida kuchli ijobiy xulosa.",
+            "explanationRu": "\"must\" — уверенный положительный вывод о настоящем."
+          },
+          {
+            "id": 20,
+            "text": "They claim they walked to the top of the mountain and back in one hour — that ___ been possible.",
+            "options": [
+              "can't have",
+              "must have",
+              "might have",
+              "should have"
+            ],
+            "correct": 0,
+            "explanation": "\"can't have\" — o'tmish haqida kuchli salbiy xulosa.",
+            "explanationRu": "\"can't have\" — уверенный отрицательный вывод о прошлом."
+          }
+        ],
+        "fillBlanks": [
+          {
+            "id": 1,
+            "text": "All the lights are off and the car isn't in the driveway — they ___ (must / be) out.",
+            "options": [
+              "must be",
+              "must being",
+              "must to be",
+              "musts be"
+            ],
+            "correct": 0,
+            "explanation": "\"must\" + bosh fe'l (be).",
+            "explanationRu": "\"must\" + начальная форма глагола (be)."
+          },
+          {
+            "id": 2,
+            "text": "He says he ran ten kilometers in twenty minutes — that ___ (can't have / happen).",
+            "options": [
+              "can't have happened",
+              "can't have happen",
+              "can't has happened",
+              "can't having happened"
+            ],
+            "correct": 0,
+            "explanation": "\"can't have\" + V3 (happen → happened).",
+            "explanationRu": "\"can't have\" + V3 (happen → happened)."
+          },
+          {
+            "id": 3,
+            "text": "I haven't heard from Maria all day; she ___ (might / be) busy with work.",
+            "options": [
+              "might be",
+              "might being",
+              "might to be",
+              "mights be"
+            ],
+            "correct": 0,
+            "explanation": "\"might\" + bosh fe'l (be).",
+            "explanationRu": "\"might\" + начальная форма глагола (be)."
+          },
+          {
+            "id": 4,
+            "text": "The gate is open and the dog is gone — it ___ (must have / escape).",
+            "options": [
+              "must have escaped",
+              "must have escape",
+              "must has escaped",
+              "must having escaped"
+            ],
+            "correct": 0,
+            "explanation": "\"must have\" + V3 (escape → escaped).",
+            "explanationRu": "\"must have\" + V3 (escape → escaped)."
+          },
+          {
+            "id": 5,
+            "text": "This letter ___ (could / be) from the bank, but I'm not certain.",
+            "options": [
+              "could be",
+              "could being",
+              "could to be",
+              "coulds be"
+            ],
+            "correct": 0,
+            "explanation": "\"could\" + bosh fe'l (be).",
+            "explanationRu": "\"could\" + начальная форма глагола (be)."
+          },
+          {
+            "id": 6,
+            "text": "No one answered the door, so they ___ (might have / go) out for a walk.",
+            "options": [
+              "might have gone",
+              "might have go",
+              "might has gone",
+              "might having gone"
+            ],
+            "correct": 0,
+            "explanation": "\"might have\" + V3 (go → gone).",
+            "explanationRu": "\"might have\" + V3 (go → gone)."
+          },
+          {
+            "id": 7,
+            "text": "You've only just woken up — you ___ (can't / be) hungry already.",
+            "options": [
+              "can't be",
+              "can't being",
+              "can't to be",
+              "cants be"
+            ],
+            "correct": 0,
+            "explanation": "\"can't\" + bosh fe'l (be).",
+            "explanationRu": "\"can't\" + начальная форма глагола (be)."
+          },
+          {
+            "id": 8,
+            "text": "We ___ (could have / catch) the earlier train, but we had breakfast first.",
+            "options": [
+              "could have caught",
+              "could have catch",
+              "could has caught",
+              "could having caught"
+            ],
+            "correct": 0,
+            "explanation": "\"could have\" + V3 (catch → caught).",
+            "explanationRu": "\"could have\" + V3 (catch → caught)."
+          },
+          {
+            "id": 9,
+            "text": "The kitchen smells amazing — someone ___ (must / cook) dinner.",
+            "options": [
+              "must be cooking",
+              "must cooking",
+              "must to be cooking",
+              "musts be cooking"
+            ],
+            "correct": 0,
+            "explanation": "\"must be\" + V-ing — davomiy harakat haqida kuchli xulosa (cook → cooking).",
+            "explanationRu": "\"must be\" + V-ing — уверенный вывод о происходящем сейчас действии (cook → cooking)."
+          },
+          {
+            "id": 10,
+            "text": "She says she saw him at the concert, but he ___ (can't have / be) there.",
+            "options": [
+              "can't have been",
+              "can't have be",
+              "can't has been",
+              "can't having been"
+            ],
+            "correct": 0,
+            "explanation": "\"can't have\" + V3 (be → been).",
+            "explanationRu": "\"can't have\" + V3 (be → been)."
+          },
+          {
+            "id": 11,
+            "text": "That strange noise outside ___ (might / be) the wind.",
+            "options": [
+              "might be",
+              "might being",
+              "might to be",
+              "mights be"
+            ],
+            "correct": 0,
+            "explanation": "\"might\" + bosh fe'l (be).",
+            "explanationRu": "\"might\" + начальная форма глагола (be)."
+          },
+          {
+            "id": 12,
+            "text": "The cookie jar is empty and there are crumbs on the table — my little brother ___ (must have / find) it.",
+            "options": [
+              "must have found",
+              "must have find",
+              "must has found",
+              "must having found"
+            ],
+            "correct": 0,
+            "explanation": "\"must have\" + V3 (find → found).",
+            "explanationRu": "\"must have\" + V3 (find → found)."
+          },
+          {
+            "id": 13,
+            "text": "This key ___ (could / be) for the garage.",
+            "options": [
+              "could be",
+              "could being",
+              "could to be",
+              "coulds be"
+            ],
+            "correct": 0,
+            "explanation": "\"could\" + bosh fe'l (be).",
+            "explanationRu": "\"could\" + начальная форма глагола (be)."
+          },
+          {
+            "id": 14,
+            "text": "The office was completely empty when we arrived — everyone ___ (might have / go) home early.",
+            "options": [
+              "might have gone",
+              "might have go",
+              "might has gone",
+              "might having gone"
+            ],
+            "correct": 0,
+            "explanation": "\"might have\" + V3 (go → gone).",
+            "explanationRu": "\"might have\" + V3 (go → gone)."
+          },
+          {
+            "id": 15,
+            "text": "The shops ___ (can't / be) open yet — it's only six in the morning.",
+            "options": [
+              "can't be",
+              "can't being",
+              "can't to be",
+              "cants be"
+            ],
+            "correct": 0,
+            "explanation": "\"can't\" + bosh fe'l (be).",
+            "explanationRu": "\"can't\" + начальная форма глагола (be)."
+          },
+          {
+            "id": 16,
+            "text": "The grass is wet but there isn't a cloud in the sky — the sprinklers ___ (must have / turn) on automatically.",
+            "options": [
+              "must have turned",
+              "must have turn",
+              "must has turned",
+              "must having turned"
+            ],
+            "correct": 0,
+            "explanation": "\"must have\" + V3 (turn → turned).",
+            "explanationRu": "\"must have\" + V3 (turn → turned)."
+          },
+          {
+            "id": 17,
+            "text": "The package was sent three days ago, so it ___ (should / be) here by tomorrow.",
+            "options": [
+              "should be",
+              "should being",
+              "should to be",
+              "shoulds be"
+            ],
+            "correct": 0,
+            "explanation": "\"should\" + bosh fe'l (be) — kutilgan natija.",
+            "explanationRu": "\"should\" + начальная форма глагола (be) — ожидаемый результат."
+          },
+          {
+            "id": 18,
+            "text": "The meeting started at nine, so everyone ___ (should have / arrive) by now.",
+            "options": [
+              "should have arrived",
+              "should have arrive",
+              "should has arrived",
+              "should having arrived"
+            ],
+            "correct": 0,
+            "explanation": "\"should have\" + V3 (arrive → arrived) — kutilgan natija (o'tmish).",
+            "explanationRu": "\"should have\" + V3 (arrive → arrived) — ожидаемый результат (прошлое)."
+          },
+          {
+            "id": 19,
+            "text": "He's wearing a thick coat and gloves — it ___ (must / be) freezing outside.",
+            "options": [
+              "must be",
+              "must being",
+              "must to be",
+              "musts be"
+            ],
+            "correct": 0,
+            "explanation": "\"must\" + bosh fe'l (be).",
+            "explanationRu": "\"must\" + начальная форма глагола (be)."
+          },
+          {
+            "id": 20,
+            "text": "They claim they walked to the mountain top and back in one hour — that ___ (can't have / be) possible.",
+            "options": [
+              "can't have been",
+              "can't have be",
+              "can't has been",
+              "can't having been"
+            ],
+            "correct": 0,
+            "explanation": "\"can't have\" + V3 (be → been).",
+            "explanationRu": "\"can't have\" + V3 (be → been)."
+          }
+        ],
+        "scrambled": [
+          {
+            "id": 1,
+            "words": [
+              "out",
+              "they",
+              "must",
+              "be"
+            ],
+            "answer": "they must be out",
+            "explanation": "Subject + must + bosh fe'l.",
+            "explanationRu": "Подлежащее + must + начальная форма глагола."
+          },
+          {
+            "id": 2,
+            "words": [
+              "happened",
+              "that",
+              "can't",
+              "have"
+            ],
+            "answer": "that can't have happened",
+            "explanation": "Subject + can't have + V3.",
+            "explanationRu": "Подлежащее + can't have + V3."
+          },
+          {
+            "id": 3,
+            "words": [
+              "busy",
+              "she",
+              "might",
+              "be"
+            ],
+            "answer": "she might be busy",
+            "explanation": "Subject + might + bosh fe'l.",
+            "explanationRu": "Подлежащее + might + начальная форма глагола."
+          },
+          {
+            "id": 4,
+            "words": [
+              "escaped",
+              "it",
+              "must",
+              "have"
+            ],
+            "answer": "it must have escaped",
+            "explanation": "Subject + must have + V3.",
+            "explanationRu": "Подлежащее + must have + V3."
+          },
+          {
+            "id": 5,
+            "words": [
+              "bank",
+              "this",
+              "letter",
+              "could",
+              "be",
+              "from",
+              "the"
+            ],
+            "answer": "this letter could be from the bank",
+            "explanation": "Subject + could + bosh fe'l.",
+            "explanationRu": "Подлежащее + could + начальная форма глагола."
+          },
+          {
+            "id": 6,
+            "words": [
+              "out",
+              "they",
+              "might",
+              "have",
+              "gone"
+            ],
+            "answer": "they might have gone out",
+            "explanation": "Subject + might have + V3.",
+            "explanationRu": "Подлежащее + might have + V3."
+          },
+          {
+            "id": 7,
+            "words": [
+              "already",
+              "you",
+              "can't",
+              "be",
+              "hungry"
+            ],
+            "answer": "you can't be hungry already",
+            "explanation": "Subject + can't + bosh fe'l.",
+            "explanationRu": "Подлежащее + can't + начальная форма глагола."
+          },
+          {
+            "id": 8,
+            "words": [
+              "train",
+              "we",
+              "could",
+              "have",
+              "caught",
+              "the",
+              "earlier"
+            ],
+            "answer": "we could have caught the earlier train",
+            "explanation": "Subject + could have + V3.",
+            "explanationRu": "Подлежащее + could have + V3."
+          },
+          {
+            "id": 9,
+            "words": [
+              "dinner",
+              "someone",
+              "must",
+              "be",
+              "cooking"
+            ],
+            "answer": "someone must be cooking dinner",
+            "explanation": "Subject + must be + V-ing (davomiy xulosa).",
+            "explanationRu": "Подлежащее + must be + V-ing (вывод о длящемся действии)."
+          },
+          {
+            "id": 10,
+            "words": [
+              "there",
+              "he",
+              "can't",
+              "have",
+              "been"
+            ],
+            "answer": "he can't have been there",
+            "explanation": "Subject + can't have + V3 (be → been).",
+            "explanationRu": "Подлежащее + can't have + V3 (be → been)."
+          },
+          {
+            "id": 11,
+            "words": [
+              "wind",
+              "that",
+              "might",
+              "be",
+              "the"
+            ],
+            "answer": "that might be the wind",
+            "explanation": "Subject + might + bosh fe'l.",
+            "explanationRu": "Подлежащее + might + начальная форма глагола."
+          },
+          {
+            "id": 12,
+            "words": [
+              "it",
+              "my",
+              "brother",
+              "must",
+              "have",
+              "found"
+            ],
+            "answer": "my brother must have found it",
+            "explanation": "Subject + must have + V3.",
+            "explanationRu": "Подлежащее + must have + V3."
+          },
+          {
+            "id": 13,
+            "words": [
+              "garage",
+              "this",
+              "key",
+              "could",
+              "be",
+              "for",
+              "the"
+            ],
+            "answer": "this key could be for the garage",
+            "explanation": "Subject + could + bosh fe'l.",
+            "explanationRu": "Подлежащее + could + начальная форма глагола."
+          },
+          {
+            "id": 14,
+            "words": [
+              "home",
+              "everyone",
+              "might",
+              "have",
+              "gone"
+            ],
+            "answer": "everyone might have gone home",
+            "explanation": "Subject + might have + V3.",
+            "explanationRu": "Подлежащее + might have + V3."
+          },
+          {
+            "id": 15,
+            "words": [
+              "yet",
+              "the",
+              "shops",
+              "can't",
+              "be",
+              "open"
+            ],
+            "answer": "the shops can't be open yet",
+            "explanation": "Subject + can't + bosh fe'l.",
+            "explanationRu": "Подлежащее + can't + начальная форма глагола."
+          },
+          {
+            "id": 16,
+            "words": [
+              "on",
+              "the",
+              "sprinklers",
+              "must",
+              "have",
+              "turned"
+            ],
+            "answer": "the sprinklers must have turned on",
+            "explanation": "Subject + must have + V3.",
+            "explanationRu": "Подлежащее + must have + V3."
+          },
+          {
+            "id": 17,
+            "words": [
+              "tomorrow",
+              "it",
+              "should",
+              "be",
+              "here",
+              "by"
+            ],
+            "answer": "it should be here by tomorrow",
+            "explanation": "Subject + should + bosh fe'l (kutilgan natija).",
+            "explanationRu": "Подлежащее + should + начальная форма глагола (ожидаемый результат)."
+          },
+          {
+            "id": 18,
+            "words": [
+              "now",
+              "everyone",
+              "should",
+              "have",
+              "arrived",
+              "by"
+            ],
+            "answer": "everyone should have arrived by now",
+            "explanation": "Subject + should have + V3 (kutilgan natija).",
+            "explanationRu": "Подлежащее + should have + V3 (ожидаемый результат)."
+          },
+          {
+            "id": 19,
+            "words": [
+              "outside",
+              "it",
+              "must",
+              "be",
+              "freezing"
+            ],
+            "answer": "it must be freezing outside",
+            "explanation": "Subject + must be + V-ing (davomiy xulosa).",
+            "explanationRu": "Подлежащее + must be + V-ing (вывод о длящемся действии)."
+          },
+          {
+            "id": 20,
+            "words": [
+              "possible",
+              "that",
+              "can't",
+              "have",
+              "been"
+            ],
+            "answer": "that can't have been possible",
+            "explanation": "Subject + can't have + V3 (be → been).",
+            "explanationRu": "Подлежащее + can't have + V3 (be → been)."
+          }
+        ],
+        "errorCorrection": [
+          {
+            "id": 1,
+            "text": "They must is out of town this week.",
+            "options": [
+              "They",
+              "must is",
+              "out of town this week",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "must is",
+            "correction": "must be",
+            "explanation": "After \"must\", use the base verb: \"be\", not \"is\".",
+            "explanationRu": "После \"must\" используется начальная форма глагола: \"be\", а не \"is\"."
+          },
+          {
+            "id": 2,
+            "text": "That can't have happen so quickly.",
+            "options": [
+              "That",
+              "can't have happen",
+              "so quickly",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "can't have happen",
+            "correction": "can't have happened",
+            "explanation": "After \"can't have\", use V3 (Past Participle): \"happened\", not the base form \"happen\".",
+            "explanationRu": "После \"can't have\" используется V3 (причастие прошедшего времени): \"happened\", а не начальная форма \"happen\"."
+          },
+          {
+            "id": 3,
+            "text": "She might is busy with her new job.",
+            "options": [
+              "She",
+              "might is",
+              "busy with her new job",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "might is",
+            "correction": "might be",
+            "explanation": "After \"might\", use the base verb: \"be\", not \"is\".",
+            "explanationRu": "После \"might\" используется начальная форма глагола: \"be\", а не \"is\"."
+          },
+          {
+            "id": 4,
+            "text": "The dog must have escape through the gate.",
+            "options": [
+              "The dog",
+              "must have escape",
+              "through the gate",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "must have escape",
+            "correction": "must have escaped",
+            "explanation": "After \"must have\", use V3: \"escaped\", not \"escape\".",
+            "explanationRu": "После \"must have\" используется V3: \"escaped\", а не \"escape\"."
+          },
+          {
+            "id": 5,
+            "text": "This letter could to be from the bank.",
+            "options": [
+              "This letter",
+              "could to be",
+              "from the bank",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "could to be",
+            "correction": "could be",
+            "explanation": "Modal verbs are followed directly by the base verb, no \"to\": \"could be\".",
+            "explanationRu": "После модальных глаголов сразу идёт начальная форма глагола, без \"to\": \"could be\"."
+          },
+          {
+            "id": 6,
+            "text": "They might have went out for a walk.",
+            "options": [
+              "They",
+              "might have went",
+              "out for a walk",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "might have went",
+            "correction": "might have gone",
+            "explanation": "After \"might have\", use V3: \"gone\", not \"went\" (the simple past form).",
+            "explanationRu": "После \"might have\" используется V3: \"gone\", а не \"went\" (форма Past Simple)."
+          },
+          {
+            "id": 7,
+            "text": "You can't being hungry already.",
+            "options": [
+              "You",
+              "can't being",
+              "hungry already",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "can't being",
+            "correction": "can't be",
+            "explanation": "After \"can't\", use the base verb: \"be\", not \"being\".",
+            "explanationRu": "После \"can't\" используется начальная форма глагола: \"be\", а не \"being\"."
+          },
+          {
+            "id": 8,
+            "text": "We could have catch the earlier train.",
+            "options": [
+              "We",
+              "could have catch",
+              "the earlier train",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "could have catch",
+            "correction": "could have caught",
+            "explanation": "After \"could have\", use V3: \"caught\", not \"catch\".",
+            "explanationRu": "После \"could have\" используется V3: \"caught\", а не \"catch\"."
+          },
+          {
+            "id": 9,
+            "text": "Someone must cooking dinner in the kitchen.",
+            "options": [
+              "Someone",
+              "must cooking",
+              "dinner in the kitchen",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "must cooking",
+            "correction": "must be cooking",
+            "explanation": "The continuous deduction form needs \"be\": \"must be cooking\", not \"must cooking\".",
+            "explanationRu": "Длительная форма вывода требует \"be\": \"must be cooking\", а не \"must cooking\"."
+          },
+          {
+            "id": 10,
+            "text": "He can't has been there all week.",
+            "options": [
+              "He",
+              "can't has been",
+              "there all week",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "can't has been",
+            "correction": "can't have been",
+            "explanation": "\"have\" never changes to \"has\" after a modal verb: \"can't have been\".",
+            "explanationRu": "\"have\" никогда не меняется на \"has\" после модального глагола: \"can't have been\"."
+          },
+          {
+            "id": 11,
+            "text": "That might to be the wind.",
+            "options": [
+              "That",
+              "might to be",
+              "the wind",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "might to be",
+            "correction": "might be",
+            "explanation": "Modal verbs are followed directly by the base verb, no \"to\": \"might be\".",
+            "explanationRu": "После модальных глаголов сразу идёт начальная форма глагола, без \"to\": \"might be\"."
+          },
+          {
+            "id": 12,
+            "text": "My brother must have find the cookies.",
+            "options": [
+              "My brother",
+              "must have find",
+              "the cookies",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "must have find",
+            "correction": "must have found",
+            "explanation": "After \"must have\", use V3: \"found\", not \"find\".",
+            "explanationRu": "После \"must have\" используется V3: \"found\", а не \"find\"."
+          },
+          {
+            "id": 13,
+            "text": "This key could being for the garage.",
+            "options": [
+              "This key",
+              "could being",
+              "for the garage",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "could being",
+            "correction": "could be",
+            "explanation": "After \"could\", use the base verb: \"be\", not \"being\".",
+            "explanationRu": "После \"could\" используется начальная форма глагола: \"be\", а не \"being\"."
+          },
+          {
+            "id": 14,
+            "text": "Everyone might have went home early.",
+            "options": [
+              "Everyone",
+              "might have went",
+              "home early",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "might have went",
+            "correction": "might have gone",
+            "explanation": "After \"might have\", use V3: \"gone\", not \"went\".",
+            "explanationRu": "После \"might have\" используется V3: \"gone\", а не \"went\"."
+          },
+          {
+            "id": 15,
+            "text": "The shops can't opened yet.",
+            "options": [
+              "The shops",
+              "can't opened",
+              "yet",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "can't opened",
+            "correction": "can't be open",
+            "explanation": "\"can't\" needs the base verb \"be\" before the adjective \"open\": \"can't be open\".",
+            "explanationRu": "\"can't\" требует начальной формы глагола \"be\" перед прилагательным \"open\": \"can't be open\"."
+          },
+          {
+            "id": 16,
+            "text": "The sprinklers must has turned on automatically.",
+            "options": [
+              "The sprinklers",
+              "must has turned",
+              "on automatically",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "must has turned",
+            "correction": "must have turned",
+            "explanation": "\"have\" never changes to \"has\" after a modal verb: \"must have turned\".",
+            "explanationRu": "\"have\" никогда не меняется на \"has\" после модального глагола: \"must have turned\"."
+          },
+          {
+            "id": 17,
+            "text": "It should being here by tomorrow.",
+            "options": [
+              "It",
+              "should being",
+              "here by tomorrow",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "should being",
+            "correction": "should be",
+            "explanation": "After \"should\", use the base verb: \"be\", not \"being\".",
+            "explanationRu": "После \"should\" используется начальная форма глагола: \"be\", а не \"being\"."
+          },
+          {
+            "id": 18,
+            "text": "Everyone should has arrived by now.",
+            "options": [
+              "Everyone",
+              "should has arrived",
+              "by now",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "should has arrived",
+            "correction": "should have arrived",
+            "explanation": "\"have\" never changes to \"has\" after a modal verb: \"should have arrived\".",
+            "explanationRu": "\"have\" никогда не меняется на \"has\" после модального глагола: \"should have arrived\"."
+          },
+          {
+            "id": 19,
+            "text": "It must freezing outside tonight.",
+            "options": [
+              "It",
+              "must freezing",
+              "outside tonight",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "must freezing",
+            "correction": "must be freezing",
+            "explanation": "The continuous deduction form needs \"be\": \"must be freezing\", not \"must freezing\".",
+            "explanationRu": "Длительная форма вывода требует \"be\": \"must be freezing\", а не \"must freezing\"."
+          },
+          {
+            "id": 20,
+            "text": "That can't have being possible.",
+            "options": [
+              "That",
+              "can't have being",
+              "possible",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "can't have being",
+            "correction": "can't have been",
+            "explanation": "After \"can't have\", use V3: \"been\", not \"being\".",
+            "explanationRu": "После \"can't have\" используется V3: \"been\", а не \"being\"."
+          }
+        ],
+        "transform": [
+          {
+            "id": 1,
+            "text": "Express a confident conclusion about the present: \"I'm sure they are out — all the lights are off and the car is gone.\"",
+            "options": [
+              "They must be out.",
+              "They might be out.",
+              "They should be out.",
+              "They would be out."
+            ],
+            "correct": 0,
+            "explanation": "\"must\" expresses a confident conclusion about the present.",
+            "explanationRu": "\"must\" выражает уверенный вывод о настоящем."
+          },
+          {
+            "id": 2,
+            "text": "Express a confident negative conclusion about the past: \"I'm sure it didn't happen — running that distance in twenty minutes is impossible.\"",
+            "options": [
+              "That can't have happened.",
+              "That mustn't have happened.",
+              "That may not have happened.",
+              "That shouldn't have happened."
+            ],
+            "correct": 0,
+            "explanation": "\"can't have\" expresses a confident negative conclusion about the past.",
+            "explanationRu": "\"can't have\" выражает уверенный отрицательный вывод о прошлом."
+          },
+          {
+            "id": 3,
+            "text": "Express an uncertain guess about the present: \"It's possible, but I'm not sure, that Maria is busy with work.\"",
+            "options": [
+              "She might be busy with work.",
+              "She must be busy with work.",
+              "She can't be busy with work.",
+              "She should be busy with work."
+            ],
+            "correct": 0,
+            "explanation": "\"might\" expresses an uncertain possibility about the present.",
+            "explanationRu": "\"might\" выражает неуверенное предположение о настоящем."
+          },
+          {
+            "id": 4,
+            "text": "Express a confident conclusion about the past: \"I'm sure the dog escaped — the gate is open and it's gone.\"",
+            "options": [
+              "It must have escaped.",
+              "It might have escaped.",
+              "It can't have escaped.",
+              "It should have escaped."
+            ],
+            "correct": 0,
+            "explanation": "\"must have\" expresses a confident conclusion about the past.",
+            "explanationRu": "\"must have\" выражает уверенный вывод о прошлом."
+          },
+          {
+            "id": 5,
+            "text": "Express a possibility about the present: \"It's possible that this letter is from the bank.\"",
+            "options": [
+              "This letter could be from the bank.",
+              "This letter must be from the bank.",
+              "This letter can't be from the bank.",
+              "This letter should be from the bank."
+            ],
+            "correct": 0,
+            "explanation": "\"could\" expresses a simple possibility.",
+            "explanationRu": "\"could\" выражает простую возможность."
+          },
+          {
+            "id": 6,
+            "text": "Express an uncertain guess about the past: \"It's possible, but I'm not sure, that they went out for a walk.\"",
+            "options": [
+              "They might have gone out for a walk.",
+              "They must have gone out for a walk.",
+              "They can't have gone out for a walk.",
+              "They should have gone out for a walk."
+            ],
+            "correct": 0,
+            "explanation": "\"might have\" expresses an uncertain possibility about the past.",
+            "explanationRu": "\"might have\" выражает неуверенное предположение о прошлом."
+          },
+          {
+            "id": 7,
+            "text": "Express a confident negative conclusion about the present: \"I'm sure you aren't hungry — you only just woke up.\"",
+            "options": [
+              "You can't be hungry already.",
+              "You mustn't be hungry already.",
+              "You may not be hungry already.",
+              "You shouldn't be hungry already."
+            ],
+            "correct": 0,
+            "explanation": "\"can't\" expresses a confident negative conclusion about the present.",
+            "explanationRu": "\"can't\" выражает уверенный отрицательный вывод о настоящем."
+          },
+          {
+            "id": 8,
+            "text": "Describe an unfulfilled possibility in the past: \"It was possible for us to catch the earlier train, but we chose not to.\"",
+            "options": [
+              "We could have caught the earlier train.",
+              "We must have caught the earlier train.",
+              "We can't have caught the earlier train.",
+              "We should have caught the earlier train."
+            ],
+            "correct": 0,
+            "explanation": "\"could have\" describes a possibility that existed in the past but wasn't used.",
+            "explanationRu": "\"could have\" описывает возможность, которая была в прошлом, но не была использована."
+          },
+          {
+            "id": 9,
+            "text": "Express a confident conclusion about a present action in progress: \"I'm sure someone is cooking dinner — the kitchen smells amazing.\"",
+            "options": [
+              "Someone must be cooking dinner.",
+              "Someone might be cooking dinner.",
+              "Someone can't be cooking dinner.",
+              "Someone should be cooking dinner."
+            ],
+            "correct": 0,
+            "explanation": "\"must be + V-ing\" expresses a confident conclusion about an action happening right now.",
+            "explanationRu": "\"must be + V-ing\" выражает уверенный вывод о действии, происходящем прямо сейчас."
+          },
+          {
+            "id": 10,
+            "text": "Express a confident negative conclusion about the past: \"I'm sure he wasn't there — he was abroad all week.\"",
+            "options": [
+              "He can't have been there.",
+              "He mustn't have been there.",
+              "He may not have been there.",
+              "He shouldn't have been there."
+            ],
+            "correct": 0,
+            "explanation": "\"can't have\" expresses a confident negative conclusion about the past.",
+            "explanationRu": "\"can't have\" выражает уверенный отрицательный вывод о прошлом."
+          },
+          {
+            "id": 11,
+            "text": "Express an uncertain guess about the present: \"It's possible that the noise is just the wind.\"",
+            "options": [
+              "That might be the wind.",
+              "That must be the wind.",
+              "That can't be the wind.",
+              "That should be the wind."
+            ],
+            "correct": 0,
+            "explanation": "\"might\" expresses an uncertain possibility.",
+            "explanationRu": "\"might\" выражает неуверенное предположение."
+          },
+          {
+            "id": 12,
+            "text": "Express a confident conclusion about the past: \"I'm sure my brother found the cookies — the jar is empty and there are crumbs everywhere.\"",
+            "options": [
+              "My brother must have found it.",
+              "My brother might have found it.",
+              "My brother can't have found it.",
+              "My brother should have found it."
+            ],
+            "correct": 0,
+            "explanation": "\"must have\" expresses a confident conclusion about the past.",
+            "explanationRu": "\"must have\" выражает уверенный вывод о прошлом."
+          },
+          {
+            "id": 13,
+            "text": "Express a possibility about the present: \"It's possible that this key is for the garage.\"",
+            "options": [
+              "This key could be for the garage.",
+              "This key must be for the garage.",
+              "This key can't be for the garage.",
+              "This key should be for the garage."
+            ],
+            "correct": 0,
+            "explanation": "\"could\" expresses a simple possibility.",
+            "explanationRu": "\"could\" выражает простую возможность."
+          },
+          {
+            "id": 14,
+            "text": "Express an uncertain guess about the past: \"It's possible, but I'm not sure, that everyone went home early.\"",
+            "options": [
+              "Everyone might have gone home early.",
+              "Everyone must have gone home early.",
+              "Everyone can't have gone home early.",
+              "Everyone should have gone home early."
+            ],
+            "correct": 0,
+            "explanation": "\"might have\" expresses an uncertain possibility about the past.",
+            "explanationRu": "\"might have\" выражает неуверенное предположение о прошлом."
+          },
+          {
+            "id": 15,
+            "text": "Express a confident negative conclusion about the present: \"I'm sure the shops aren't open yet — it's only six in the morning.\"",
+            "options": [
+              "The shops can't be open yet.",
+              "The shops mustn't be open yet.",
+              "The shops may not be open yet.",
+              "The shops shouldn't be open yet."
+            ],
+            "correct": 0,
+            "explanation": "\"can't\" expresses a confident negative conclusion about the present.",
+            "explanationRu": "\"can't\" выражает уверенный отрицательный вывод о настоящем."
+          },
+          {
+            "id": 16,
+            "text": "Express a confident conclusion about the past: \"I'm sure the sprinklers turned on — the grass is wet but there isn't a cloud in the sky.\"",
+            "options": [
+              "The sprinklers must have turned on.",
+              "The sprinklers might have turned on.",
+              "The sprinklers can't have turned on.",
+              "The sprinklers should have turned on."
+            ],
+            "correct": 0,
+            "explanation": "\"must have\" expresses a confident conclusion about the past.",
+            "explanationRu": "\"must have\" выражает уверенный вывод о прошлом."
+          },
+          {
+            "id": 17,
+            "text": "Express an expected outcome in the future: \"Based on when it was sent, I expect the package to arrive by tomorrow.\"",
+            "options": [
+              "It should be here by tomorrow.",
+              "It must be here by tomorrow.",
+              "It can't be here by tomorrow.",
+              "It might be here by tomorrow."
+            ],
+            "correct": 0,
+            "explanation": "\"should\" expresses an expected outcome, based on logic or evidence.",
+            "explanationRu": "\"should\" выражает ожидаемый результат, основанный на логике или фактах."
+          },
+          {
+            "id": 18,
+            "text": "Express an expected outcome about the past: \"Based on the meeting start time, I expect everyone to have arrived by now.\"",
+            "options": [
+              "Everyone should have arrived by now.",
+              "Everyone must have arrived by now.",
+              "Everyone can't have arrived by now.",
+              "Everyone might have arrived by now."
+            ],
+            "correct": 0,
+            "explanation": "\"should have\" expresses an expected outcome about the past.",
+            "explanationRu": "\"should have\" выражает ожидаемый результат о прошлом."
+          },
+          {
+            "id": 19,
+            "text": "Express a confident conclusion about the present: \"I'm sure it's freezing outside — he's wearing a thick coat and gloves.\"",
+            "options": [
+              "It must be freezing outside.",
+              "It might be freezing outside.",
+              "It can't be freezing outside.",
+              "It should be freezing outside."
+            ],
+            "correct": 0,
+            "explanation": "\"must be\" expresses a confident conclusion about the present.",
+            "explanationRu": "\"must be\" выражает уверенный вывод о настоящем."
+          },
+          {
+            "id": 20,
+            "text": "Express a confident negative conclusion about the past: \"I'm sure it wasn't possible — they say they did it in one hour, which seems impossible.\"",
+            "options": [
+              "That can't have been possible.",
+              "That mustn't have been possible.",
+              "That may not have been possible.",
+              "That shouldn't have been possible."
+            ],
+            "correct": 0,
+            "explanation": "\"can't have\" expresses a confident negative conclusion about the past.",
+            "explanationRu": "\"can't have\" выражает уверенный отрицательный вывод о прошлом."
+          }
+        ],
+        "dialogue": [
+          {
+            "id": 1,
+            "situation": "Coming home to a dark house.",
+            "dialogue": "A: Is anyone home?\nB: All the lights are off and the car is gone — they ___ be out.",
+            "options": [
+              "must",
+              "might",
+              "should",
+              "would"
+            ],
+            "correct": 0,
+            "explanation": "\"must\" — kuchli ijobiy xulosa.",
+            "explanationRu": "\"must\" — уверенный положительный вывод."
+          },
+          {
+            "id": 2,
+            "situation": "Hearing about someone's claimed run.",
+            "dialogue": "A: He says he ran ten kilometers in twenty minutes!\nB: That ___ happened — it's simply impossible.",
+            "options": [
+              "can't have",
+              "must have",
+              "might have",
+              "should have"
+            ],
+            "correct": 0,
+            "explanation": "\"can't have\" — kuchli salbiy xulosa (o'tmish).",
+            "explanationRu": "\"can't have\" — уверенный отрицательный вывод (прошлое)."
+          },
+          {
+            "id": 3,
+            "situation": "Wondering about a friend's silence.",
+            "dialogue": "A: Have you heard from Maria today?\nB: No, she ___ be busy with work.",
+            "options": [
+              "might",
+              "must",
+              "can't",
+              "should"
+            ],
+            "correct": 0,
+            "explanation": "\"might\" — noaniq ehtimollik.",
+            "explanationRu": "\"might\" — неуверенное предположение."
+          },
+          {
+            "id": 4,
+            "situation": "Finding the dog missing.",
+            "dialogue": "A: Where's the dog?\nB: The gate is open — it ___ escaped.",
+            "options": [
+              "must have",
+              "might have",
+              "can't have",
+              "should have"
+            ],
+            "correct": 0,
+            "explanation": "\"must have\" — kuchli ijobiy xulosa.",
+            "explanationRu": "\"must have\" — уверенный положительный вывод."
+          },
+          {
+            "id": 5,
+            "situation": "Guessing about a letter.",
+            "dialogue": "A: Who is this letter from?\nB: It ___ be from the bank, but I'm not certain.",
+            "options": [
+              "could",
+              "must",
+              "can't",
+              "should"
+            ],
+            "correct": 0,
+            "explanation": "\"could\" — ehtimollik.",
+            "explanationRu": "\"could\" — предположение."
+          },
+          {
+            "id": 6,
+            "situation": "No answer at the door.",
+            "dialogue": "A: No one answered!\nB: They ___ gone out for a walk.",
+            "options": [
+              "might have",
+              "must have",
+              "can't have",
+              "should have"
+            ],
+            "correct": 0,
+            "explanation": "\"might have\" — noaniq ehtimollik (o'tmish).",
+            "explanationRu": "\"might have\" — неуверенное предположение (прошлое)."
+          },
+          {
+            "id": 7,
+            "situation": "Someone just woke up.",
+            "dialogue": "A: Do you want breakfast already?\nB: You've only just woken up — you ___ be hungry already!",
+            "options": [
+              "can't",
+              "must",
+              "might",
+              "should"
+            ],
+            "correct": 0,
+            "explanation": "\"can't\" — kuchli salbiy xulosa.",
+            "explanationRu": "\"can't\" — уверенный отрицательный вывод."
+          },
+          {
+            "id": 8,
+            "situation": "Talking about a missed train.",
+            "dialogue": "A: Why were you late?\nB: We ___ caught the earlier train, but we had breakfast first.",
+            "options": [
+              "could have",
+              "must have",
+              "can't have",
+              "should have"
+            ],
+            "correct": 0,
+            "explanation": "\"could have\" — bajarilmagan imkoniyat.",
+            "explanationRu": "\"could have\" — неиспользованная возможность."
+          },
+          {
+            "id": 9,
+            "situation": "Smelling dinner cooking.",
+            "dialogue": "A: What's that amazing smell?\nB: Someone ___ be cooking dinner.",
+            "options": [
+              "must",
+              "might",
+              "could",
+              "should"
+            ],
+            "correct": 0,
+            "explanation": "\"must be\" + V-ing — kuchli ijobiy xulosa (davomiy).",
+            "explanationRu": "\"must be\" + V-ing — уверенный положительный вывод (длящееся действие)."
+          },
+          {
+            "id": 10,
+            "situation": "Doubting an alibi.",
+            "dialogue": "A: He says he saw you at the concert.\nB: He ___ been there — I was abroad all week.",
+            "options": [
+              "can't have",
+              "must have",
+              "might have",
+              "should have"
+            ],
+            "correct": 0,
+            "explanation": "\"can't have\" — kuchli salbiy xulosa.",
+            "explanationRu": "\"can't have\" — уверенный отрицательный вывод."
+          },
+          {
+            "id": 11,
+            "situation": "Hearing a strange sound.",
+            "dialogue": "A: What was that noise?\nB: It ___ be the wind, or maybe an animal.",
+            "options": [
+              "might",
+              "must",
+              "can't",
+              "should"
+            ],
+            "correct": 0,
+            "explanation": "\"might\" — noaniq ehtimollik.",
+            "explanationRu": "\"might\" — неуверенное предположение."
+          },
+          {
+            "id": 12,
+            "situation": "Missing cookies.",
+            "dialogue": "A: Where did all the cookies go?\nB: My little brother ___ found them — look at these crumbs!",
+            "options": [
+              "must have",
+              "might have",
+              "can't have",
+              "should have"
+            ],
+            "correct": 0,
+            "explanation": "\"must have\" — kuchli ijobiy xulosa.",
+            "explanationRu": "\"must have\" — уверенный положительный вывод."
+          },
+          {
+            "id": 13,
+            "situation": "An unknown key.",
+            "dialogue": "A: What is this key for?\nB: It ___ be for the garage, or maybe the shed.",
+            "options": [
+              "could",
+              "must",
+              "can't",
+              "should"
+            ],
+            "correct": 0,
+            "explanation": "\"could\" — ehtimollik.",
+            "explanationRu": "\"could\" — предположение."
+          },
+          {
+            "id": 14,
+            "situation": "Arriving at an empty office.",
+            "dialogue": "A: Where is everyone?\nB: They ___ gone home early.",
+            "options": [
+              "might have",
+              "must have",
+              "can't have",
+              "should have"
+            ],
+            "correct": 0,
+            "explanation": "\"might have\" — noaniq ehtimollik.",
+            "explanationRu": "\"might have\" — неуверенное предположение."
+          },
+          {
+            "id": 15,
+            "situation": "Checking shop hours early morning.",
+            "dialogue": "A: Let's go shopping!\nB: The shops ___ be open yet — it's only six.",
+            "options": [
+              "can't",
+              "must",
+              "might",
+              "should"
+            ],
+            "correct": 0,
+            "explanation": "\"can't\" — kuchli salbiy xulosa.",
+            "explanationRu": "\"can't\" — уверенный отрицательный вывод."
+          },
+          {
+            "id": 16,
+            "situation": "Wet grass, clear sky.",
+            "dialogue": "A: Why is the grass wet? It didn't rain.\nB: The sprinklers ___ turned on automatically.",
+            "options": [
+              "must have",
+              "might have",
+              "can't have",
+              "should have"
+            ],
+            "correct": 0,
+            "explanation": "\"must have\" — kuchli ijobiy xulosa.",
+            "explanationRu": "\"must have\" — уверенный положительный вывод."
+          },
+          {
+            "id": 17,
+            "situation": "Waiting for a package.",
+            "dialogue": "A: When will the package arrive?\nB: It was sent three days ago, so it ___ be here by tomorrow.",
+            "options": [
+              "should",
+              "must",
+              "can't",
+              "might"
+            ],
+            "correct": 0,
+            "explanation": "\"should\" — kutilgan natija.",
+            "explanationRu": "\"should\" — ожидаемый результат."
+          },
+          {
+            "id": 18,
+            "situation": "Waiting at a meeting.",
+            "dialogue": "A: Is everyone here yet?\nB: The meeting started at nine, so everyone ___ arrived by now.",
+            "options": [
+              "should have",
+              "must have",
+              "can't have",
+              "might have"
+            ],
+            "correct": 0,
+            "explanation": "\"should have\" — kutilgan natija (o'tmish).",
+            "explanationRu": "\"should have\" — ожидаемый результат (прошлое)."
+          },
+          {
+            "id": 19,
+            "situation": "Seeing someone bundled up.",
+            "dialogue": "A: Why is he wearing such a thick coat?\nB: It ___ be freezing outside.",
+            "options": [
+              "must",
+              "might",
+              "could",
+              "should"
+            ],
+            "correct": 0,
+            "explanation": "\"must\" — kuchli ijobiy xulosa.",
+            "explanationRu": "\"must\" — уверенный положительный вывод."
+          },
+          {
+            "id": 20,
+            "situation": "Doubting a hiking claim.",
+            "dialogue": "A: They say they climbed the mountain and back in an hour!\nB: That ___ been possible.",
+            "options": [
+              "can't have",
+              "must have",
+              "might have",
+              "should have"
+            ],
+            "correct": 0,
+            "explanation": "\"can't have\" — kuchli salbiy xulosa.",
+            "explanationRu": "\"can't have\" — уверенный отрицательный вывод."
+          }
+        ]
+      },
+      {
+        "id": "used-to-would",
+        "title": "Used to & Would",
+        "icon": "🕰️",
+        "guide": "## Used to & Would (O'tmishdagi odatlar)\n\n\"Used to\" va \"would\" o'tmishda muntazam sodir bo'lgan, lekin hozir tugagan odat yoki holatlarni ifodalash uchun ishlatiladi.\n\n## 1. Shakllanishi (Form)\n• **used to + base verb**: barcha o'tmishdagi odatlar VA holatlar (be, have, like, know kabi) uchun\n  - I **used to play** football every weekend.\n  - She **used to live** in Paris.\n• **would + base verb**: faqat o'tmishdagi TAKRORLANUVCHI harakatlar uchun, HOLAT fe'llari bilan ishlatilmaydi\n  - When I was young, I **would visit** my grandma every summer.\n  - *(would live — NOTO'G'RI, chunki \"live\" holat fe'li)*\n• **Negative**: didn't use to + base verb\n  - I **didn't use to like** coffee.\n• **Question**: Did + Subject + use to + base verb?\n  - **Did** you **use to play** football?\n\n*(\"use to\" — asosiy fe'l shakli; \"used to\" faqat tasdiq gapda ishlatiladi, savol/inkorda \"did\" bilan \"use to\" qo'llanadi)*\n\n## 2. Ishlatilishi (Usage)\n1. **Hozir to'xtagan o'tmishdagi odat**: used to / would\n   - I **used to smoke**, but I quit. / My father **would tell** us stories every night.\n2. **O'tmishdagi holat (be, have, like, know, believe, want)** — faqat used to:\n   - I **used to believe** in ghosts.\n3. **Hozirgi holat bilan taqqoslash**:\n   - I **used to hate** vegetables, but now I love them.\n\n## 3. Muhim eslatma: \"be used to\" bilan farqi\n\"Used to + infinitive\" (odat) bilan \"be/get used to + -ing\" (biror narsaga o'rganib qolish) ikki xil narsa:\n  - I **used to live** alone. (avval yolg'iz yashaganman — odat)\n  - I **am used to living** alone. (yolg'iz yashashga o'rganib qolganman — hozirgi holat)\n\n## 4. Umumiy xatolar\n• \"I use to...\" — NOTO'G'RI tasdiq gapda; to'g'risi \"I used to...\".\n• \"Did you used to...?\" — NOTO'G'RI; to'g'risi \"Did you use to...?\".\n• \"would\" holat fe'llari (be, have, like, know) bilan ishlatilmaydi.",
+        "questions": [
+          {
+            "id": 1,
+            "text": "I ___ play football every weekend when I was a child.",
+            "options": [
+              "used to",
+              "use to",
+              "would played",
+              "was used to"
+            ],
+            "correct": 0,
+            "explanation": "Past habit: used to + base verb."
+          },
+          {
+            "id": 2,
+            "text": "She ___ live in Paris before she moved to London.",
+            "options": [
+              "used to",
+              "would",
+              "use to",
+              "was"
+            ],
+            "correct": 0,
+            "explanation": "State verb: only used to is possible, not would."
+          },
+          {
+            "id": 3,
+            "text": "When I was young, I ___ visit my grandma every summer.",
+            "options": [
+              "would",
+              "used",
+              "use",
+              "was"
+            ],
+            "correct": 0,
+            "explanation": "Repeated past action: would + base verb."
+          },
+          {
+            "id": 4,
+            "text": "I ___ not use to like vegetables, but now I love them.",
+            "options": [
+              "did",
+              "was",
+              "used",
+              "have"
+            ],
+            "correct": 0,
+            "explanation": "Negative form: didn't use to + base verb."
+          },
+          {
+            "id": 5,
+            "text": "___ you use to play the piano when you were a kid?",
+            "options": [
+              "Did",
+              "Were",
+              "Have",
+              "Used"
+            ],
+            "correct": 0,
+            "explanation": "Question form: Did + subject + use to + base verb?"
+          },
+          {
+            "id": 6,
+            "text": "He ___ smoke, but he quit five years ago.",
+            "options": [
+              "used to",
+              "would",
+              "uses to",
+              "is used to"
+            ],
+            "correct": 0,
+            "explanation": "Past habit: used to + base verb."
+          },
+          {
+            "id": 7,
+            "text": "We ___ have a dog when I was little.",
+            "options": [
+              "used to",
+              "would",
+              "use to",
+              "were"
+            ],
+            "correct": 0,
+            "explanation": "State verb (possession): only used to is possible."
+          },
+          {
+            "id": 8,
+            "text": "They ___ walk to school together every morning.",
+            "options": [
+              "would",
+              "used",
+              "use",
+              "was"
+            ],
+            "correct": 0,
+            "explanation": "Repeated past action: would + base verb."
+          },
+          {
+            "id": 9,
+            "text": "I ___ believe in ghosts when I was a kid.",
+            "options": [
+              "used to",
+              "would",
+              "use to",
+              "was"
+            ],
+            "correct": 0,
+            "explanation": "State verb: only used to is possible."
+          },
+          {
+            "id": 10,
+            "text": "She didn't ___ eat meat, but now she does.",
+            "options": [
+              "use to",
+              "used to",
+              "using to",
+              "use"
+            ],
+            "correct": 0,
+            "explanation": "After didn't, use the base form: use to."
+          },
+          {
+            "id": 11,
+            "text": "My father ___ tell us stories every night before bed.",
+            "options": [
+              "would",
+              "used",
+              "use",
+              "was"
+            ],
+            "correct": 0,
+            "explanation": "Repeated past action: would + base verb."
+          },
+          {
+            "id": 12,
+            "text": "___ she used to work here?",
+            "options": [
+              "Did",
+              "Was",
+              "Has",
+              "Is"
+            ],
+            "correct": 0,
+            "explanation": "Question form: Did + subject + use to + base verb?"
+          },
+          {
+            "id": 13,
+            "text": "I ___ hate mathematics, but now I enjoy it.",
+            "options": [
+              "used to",
+              "would",
+              "use to",
+              "was"
+            ],
+            "correct": 0,
+            "explanation": "State verb: only used to is possible."
+          },
+          {
+            "id": 14,
+            "text": "When we were kids, we ___ build sandcastles at the beach.",
+            "options": [
+              "would",
+              "used",
+              "use",
+              "was"
+            ],
+            "correct": 0,
+            "explanation": "Repeated past action: would + base verb."
+          },
+          {
+            "id": 15,
+            "text": "He ___ have long hair, but he cut it.",
+            "options": [
+              "used to",
+              "would",
+              "use to",
+              "was"
+            ],
+            "correct": 0,
+            "explanation": "State verb (possession): only used to is possible."
+          },
+          {
+            "id": 16,
+            "text": "They ___ not use to travel much before they got rich.",
+            "options": [
+              "did",
+              "were",
+              "used",
+              "have"
+            ],
+            "correct": 0,
+            "explanation": "Negative form: didn't use to + base verb."
+          },
+          {
+            "id": 17,
+            "text": "I ___ afraid of the dark when I was young.",
+            "options": [
+              "used to be",
+              "would be",
+              "use to be",
+              "was used"
+            ],
+            "correct": 0,
+            "explanation": "State verb (be): only used to is possible."
+          },
+          {
+            "id": 18,
+            "text": "She ___ knock on my door every morning to wake me up.",
+            "options": [
+              "would",
+              "used",
+              "use",
+              "was"
+            ],
+            "correct": 0,
+            "explanation": "Repeated past action: would + base verb."
+          },
+          {
+            "id": 19,
+            "text": "Did you ___ live in a small village?",
+            "options": [
+              "use to",
+              "used to",
+              "using to",
+              "use"
+            ],
+            "correct": 0,
+            "explanation": "After did, use the base form: use to."
+          },
+          {
+            "id": 20,
+            "text": "We ___ go camping every summer as a family.",
+            "options": [
+              "used to",
+              "would",
+              "use to",
+              "was"
+            ],
+            "correct": 0,
+            "explanation": "Past habit: used to + base verb."
+          }
+        ],
+        "fillBlanks": [
+          {
+            "id": 1,
+            "text": "I ___ (play) football every weekend as a child.",
+            "options": [
+              "used to play",
+              "use to play",
+              "would played",
+              "was used to play"
+            ],
+            "correct": 0,
+            "explanation": "Past habit: used to + base verb (play)."
+          },
+          {
+            "id": 2,
+            "text": "She ___ (live) in Paris before moving to London.",
+            "options": [
+              "used to live",
+              "would live",
+              "use to live",
+              "was living"
+            ],
+            "correct": 0,
+            "explanation": "State verb: only used to is possible (live)."
+          },
+          {
+            "id": 3,
+            "text": "When I was young, I ___ (visit) my grandma every summer.",
+            "options": [
+              "would visit",
+              "used visit",
+              "use to visited",
+              "was visited"
+            ],
+            "correct": 0,
+            "explanation": "Repeated past action: would + base verb (visit)."
+          },
+          {
+            "id": 4,
+            "text": "I ___ (not / like) vegetables, but now I love them.",
+            "options": [
+              "didn't use to like",
+              "don't used to like",
+              "wasn't used to like",
+              "haven't used to like"
+            ],
+            "correct": 0,
+            "explanation": "Negative form: didn't use to + base verb (like)."
+          },
+          {
+            "id": 5,
+            "text": "___ (you / play) the piano when you were a kid?",
+            "options": [
+              "Did you use to play",
+              "Were you use to play",
+              "Have you used to play",
+              "Used you to play"
+            ],
+            "correct": 0,
+            "explanation": "Question form: Did + subject + use to + base verb."
+          },
+          {
+            "id": 6,
+            "text": "He ___ (smoke), but he quit five years ago.",
+            "options": [
+              "used to smoke",
+              "would smoke",
+              "uses to smoke",
+              "is used to smoking"
+            ],
+            "correct": 0,
+            "explanation": "Past habit: used to + base verb (smoke)."
+          },
+          {
+            "id": 7,
+            "text": "We ___ (have) a dog when I was little.",
+            "options": [
+              "used to have",
+              "would have",
+              "use to have",
+              "were having"
+            ],
+            "correct": 0,
+            "explanation": "State verb (possession): only used to is possible (have)."
+          },
+          {
+            "id": 8,
+            "text": "They ___ (walk) to school together every morning.",
+            "options": [
+              "would walk",
+              "used walk",
+              "use to walked",
+              "were walk"
+            ],
+            "correct": 0,
+            "explanation": "Repeated past action: would + base verb (walk)."
+          },
+          {
+            "id": 9,
+            "text": "I ___ (believe) in ghosts when I was a kid.",
+            "options": [
+              "used to believe",
+              "would believe",
+              "use to believed",
+              "was believing"
+            ],
+            "correct": 0,
+            "explanation": "State verb: only used to is possible (believe)."
+          },
+          {
+            "id": 10,
+            "text": "She ___ (not / eat) meat, but now she does.",
+            "options": [
+              "didn't use to eat",
+              "don't used to eat",
+              "wasn't used to eat",
+              "hasn't used to eat"
+            ],
+            "correct": 0,
+            "explanation": "Negative form: didn't use to + base verb (eat)."
+          },
+          {
+            "id": 11,
+            "text": "My father ___ (tell) us stories every night before bed.",
+            "options": [
+              "would tell",
+              "used tell",
+              "use to told",
+              "was tell"
+            ],
+            "correct": 0,
+            "explanation": "Repeated past action: would + base verb (tell)."
+          },
+          {
+            "id": 12,
+            "text": "___ (she / work) here?",
+            "options": [
+              "Did she use to work",
+              "Was she use to work",
+              "Has she used to work",
+              "Used she to work"
+            ],
+            "correct": 0,
+            "explanation": "Question form: Did + subject + use to + base verb."
+          },
+          {
+            "id": 13,
+            "text": "I ___ (hate) mathematics, but now I enjoy it.",
+            "options": [
+              "used to hate",
+              "would hate",
+              "use to hated",
+              "was hating"
+            ],
+            "correct": 0,
+            "explanation": "State verb: only used to is possible (hate)."
+          },
+          {
+            "id": 14,
+            "text": "When we were kids, we ___ (build) sandcastles at the beach.",
+            "options": [
+              "would build",
+              "used build",
+              "use to built",
+              "were build"
+            ],
+            "correct": 0,
+            "explanation": "Repeated past action: would + base verb (build)."
+          },
+          {
+            "id": 15,
+            "text": "He ___ (have) long hair, but he cut it.",
+            "options": [
+              "used to have",
+              "would have",
+              "use to have",
+              "was having"
+            ],
+            "correct": 0,
+            "explanation": "State verb (possession): only used to is possible (have)."
+          },
+          {
+            "id": 16,
+            "text": "They ___ (not / travel) much before they got rich.",
+            "options": [
+              "didn't use to travel",
+              "don't used to travel",
+              "weren't used to travel",
+              "haven't used to travel"
+            ],
+            "correct": 0,
+            "explanation": "Negative form: didn't use to + base verb (travel)."
+          },
+          {
+            "id": 17,
+            "text": "I ___ (be) afraid of the dark when I was young.",
+            "options": [
+              "used to be",
+              "would be",
+              "use to be",
+              "was used"
+            ],
+            "correct": 0,
+            "explanation": "State verb (be): only used to is possible."
+          },
+          {
+            "id": 18,
+            "text": "She ___ (knock) on my door every morning to wake me up.",
+            "options": [
+              "would knock",
+              "used knock",
+              "use to knocked",
+              "was knock"
+            ],
+            "correct": 0,
+            "explanation": "Repeated past action: would + base verb (knock)."
+          },
+          {
+            "id": 19,
+            "text": "___ (you / live) in a small village?",
+            "options": [
+              "Did you use to live",
+              "Were you use to live",
+              "Have you used to live",
+              "Used you to live"
+            ],
+            "correct": 0,
+            "explanation": "Question form: Did + subject + use to + base verb."
+          },
+          {
+            "id": 20,
+            "text": "We ___ (go) camping every summer as a family.",
+            "options": [
+              "used to go",
+              "would go",
+              "use to went",
+              "was going"
+            ],
+            "correct": 0,
+            "explanation": "Past habit: used to + base verb (go)."
+          }
+        ],
+        "scrambled": [
+          {
+            "id": 1,
+            "words": [
+              "football",
+              "I",
+              "used",
+              "to",
+              "play",
+              "every",
+              "weekend"
+            ],
+            "answer": "I used to play football every weekend",
+            "explanation": "Subject + used to + base verb + object."
+          },
+          {
+            "id": 2,
+            "words": [
+              "Paris",
+              "she",
+              "used",
+              "to",
+              "live",
+              "in"
+            ],
+            "answer": "she used to live in Paris",
+            "explanation": "State verb: only used to is possible, not would."
+          },
+          {
+            "id": 3,
+            "words": [
+              "grandma",
+              "I",
+              "would",
+              "visit",
+              "my",
+              "every",
+              "summer"
+            ],
+            "answer": "I would visit my grandma every summer",
+            "explanation": "would for a repeated past action/habit."
+          },
+          {
+            "id": 4,
+            "words": [
+              "vegetables",
+              "I",
+              "didn't",
+              "use",
+              "to",
+              "like"
+            ],
+            "answer": "I didn't use to like vegetables",
+            "explanation": "Negative form: didn't use to + base verb."
+          },
+          {
+            "id": 5,
+            "words": [
+              "piano",
+              "did",
+              "you",
+              "use",
+              "to",
+              "play",
+              "the",
+              "?"
+            ],
+            "answer": "did you use to play the piano",
+            "explanation": "Question form: Did + subject + use to + base verb?"
+          },
+          {
+            "id": 6,
+            "words": [
+              "smoke",
+              "he",
+              "used",
+              "to"
+            ],
+            "answer": "he used to smoke",
+            "explanation": "Subject + used to + base verb."
+          },
+          {
+            "id": 7,
+            "words": [
+              "dog",
+              "we",
+              "used",
+              "to",
+              "have",
+              "a"
+            ],
+            "answer": "we used to have a dog",
+            "explanation": "State verb (possession): only used to."
+          },
+          {
+            "id": 8,
+            "words": [
+              "school",
+              "they",
+              "would",
+              "walk",
+              "to",
+              "together"
+            ],
+            "answer": "they would walk to school together",
+            "explanation": "would for a repeated past action."
+          },
+          {
+            "id": 9,
+            "words": [
+              "ghosts",
+              "I",
+              "used",
+              "to",
+              "believe",
+              "in"
+            ],
+            "answer": "I used to believe in ghosts",
+            "explanation": "State verb: only used to."
+          },
+          {
+            "id": 10,
+            "words": [
+              "meat",
+              "she",
+              "didn't",
+              "use",
+              "to",
+              "eat"
+            ],
+            "answer": "she didn't use to eat meat",
+            "explanation": "Negative form: didn't use to + base verb."
+          },
+          {
+            "id": 11,
+            "words": [
+              "stories",
+              "my",
+              "father",
+              "would",
+              "tell",
+              "us",
+              "every",
+              "night"
+            ],
+            "answer": "my father would tell us stories every night",
+            "explanation": "would for a repeated past action."
+          },
+          {
+            "id": 12,
+            "words": [
+              "here",
+              "did",
+              "she",
+              "use",
+              "to",
+              "work",
+              "?"
+            ],
+            "answer": "did she use to work here",
+            "explanation": "Question form: Did + subject + use to + base verb?"
+          },
+          {
+            "id": 13,
+            "words": [
+              "mathematics",
+              "I",
+              "used",
+              "to",
+              "hate"
+            ],
+            "answer": "I used to hate mathematics",
+            "explanation": "State verb: only used to."
+          },
+          {
+            "id": 14,
+            "words": [
+              "sandcastles",
+              "we",
+              "would",
+              "build",
+              "at",
+              "the",
+              "beach"
+            ],
+            "answer": "we would build sandcastles at the beach",
+            "explanation": "would for a repeated past action."
+          },
+          {
+            "id": 15,
+            "words": [
+              "hair",
+              "he",
+              "used",
+              "to",
+              "have",
+              "long"
+            ],
+            "answer": "he used to have long hair",
+            "explanation": "State verb (possession): only used to."
+          },
+          {
+            "id": 16,
+            "words": [
+              "much",
+              "they",
+              "didn't",
+              "use",
+              "to",
+              "travel"
+            ],
+            "answer": "they didn't use to travel much",
+            "explanation": "Negative form: didn't use to + base verb."
+          },
+          {
+            "id": 17,
+            "words": [
+              "dark",
+              "I",
+              "used",
+              "to",
+              "be",
+              "afraid",
+              "of",
+              "the"
+            ],
+            "answer": "I used to be afraid of the dark",
+            "explanation": "State verb: only used to."
+          },
+          {
+            "id": 18,
+            "words": [
+              "door",
+              "she",
+              "would",
+              "knock",
+              "on",
+              "my"
+            ],
+            "answer": "she would knock on my door",
+            "explanation": "would for a repeated past action."
+          },
+          {
+            "id": 19,
+            "words": [
+              "village",
+              "did",
+              "you",
+              "use",
+              "to",
+              "live",
+              "in",
+              "a",
+              "small"
+            ],
+            "answer": "did you use to live in a small village",
+            "explanation": "Question form: Did + subject + use to + base verb?"
+          },
+          {
+            "id": 20,
+            "words": [
+              "camping",
+              "we",
+              "used",
+              "to",
+              "go",
+              "every",
+              "summer"
+            ],
+            "answer": "we used to go camping every summer",
+            "explanation": "Subject + used to + base verb."
+          }
+        ],
+        "errorCorrection": [
+          {
+            "id": 1,
+            "text": "I use to play football every weekend when I was a child.",
+            "options": [
+              "I",
+              "use to",
+              "play football",
+              "every weekend when I was a child"
+            ],
+            "correct": 1,
+            "wrongPart": "use to",
+            "correction": "used to",
+            "explanation": "The past form is used to, not use to (except after did/didn't)."
+          },
+          {
+            "id": 2,
+            "text": "She would live in Paris before she moved to London.",
+            "options": [
+              "She",
+              "would live",
+              "in Paris",
+              "before she moved to London"
+            ],
+            "correct": 1,
+            "wrongPart": "would live",
+            "correction": "used to live",
+            "explanation": "would cannot be used with state verbs like live; use used to."
+          },
+          {
+            "id": 3,
+            "text": "When I was young, I use to visit my grandma every summer.",
+            "options": [
+              "When I was young",
+              "I",
+              "use to visit",
+              "my grandma every summer"
+            ],
+            "correct": 2,
+            "wrongPart": "use to visit",
+            "correction": "used to visit",
+            "explanation": "The past form is used to, not use to."
+          },
+          {
+            "id": 4,
+            "text": "I didn't used to like vegetables, but now I love them.",
+            "options": [
+              "I",
+              "didn't used to like",
+              "vegetables",
+              "but now I love them"
+            ],
+            "correct": 1,
+            "wrongPart": "didn't used to like",
+            "correction": "didn't use to like",
+            "explanation": "After didn't, use the base form use to, not used to."
+          },
+          {
+            "id": 5,
+            "text": "Did you used to play the piano?",
+            "options": [
+              "Did",
+              "you",
+              "used to play",
+              "the piano?"
+            ],
+            "correct": 2,
+            "wrongPart": "used to play",
+            "correction": "use to play",
+            "explanation": "After Did, use the base form use to, not used to."
+          },
+          {
+            "id": 6,
+            "text": "He use to smoke, but he quit five years ago.",
+            "options": [
+              "He",
+              "use to smoke",
+              "but he quit",
+              "five years ago"
+            ],
+            "correct": 1,
+            "wrongPart": "use to smoke",
+            "correction": "used to smoke",
+            "explanation": "The past form is used to, not use to."
+          },
+          {
+            "id": 7,
+            "text": "We would have a dog when I was little.",
+            "options": [
+              "We",
+              "would have",
+              "a dog",
+              "when I was little"
+            ],
+            "correct": 1,
+            "wrongPart": "would have",
+            "correction": "used to have",
+            "explanation": "would cannot be used with state verbs like have (possession); use used to."
+          },
+          {
+            "id": 8,
+            "text": "They use to walk to school together every morning.",
+            "options": [
+              "They",
+              "use to walk",
+              "to school together",
+              "every morning"
+            ],
+            "correct": 1,
+            "wrongPart": "use to walk",
+            "correction": "used to walk",
+            "explanation": "The past form is used to, not use to."
+          },
+          {
+            "id": 9,
+            "text": "I would believe in ghosts when I was a kid.",
+            "options": [
+              "I",
+              "would believe",
+              "in ghosts",
+              "when I was a kid"
+            ],
+            "correct": 1,
+            "wrongPart": "would believe",
+            "correction": "used to believe",
+            "explanation": "would cannot be used with state verbs like believe; use used to."
+          },
+          {
+            "id": 10,
+            "text": "She didn't use to ate meat, but now she does.",
+            "options": [
+              "She",
+              "didn't use to",
+              "ate meat",
+              "but now she does"
+            ],
+            "correct": 2,
+            "wrongPart": "ate meat",
+            "correction": "eat meat",
+            "explanation": "After use to, use the base form of the verb: eat, not ate."
+          },
+          {
+            "id": 11,
+            "text": "My father use to tell us stories every night.",
+            "options": [
+              "My father",
+              "use to tell",
+              "us stories",
+              "every night"
+            ],
+            "correct": 1,
+            "wrongPart": "use to tell",
+            "correction": "used to tell",
+            "explanation": "The past form is used to, not use to."
+          },
+          {
+            "id": 12,
+            "text": "Was she used to work here?",
+            "options": [
+              "Was",
+              "she",
+              "used to work",
+              "here?"
+            ],
+            "correct": 0,
+            "wrongPart": "Was",
+            "correction": "Did",
+            "explanation": "Questions about past habits use Did, not Was: Did she use to work here?"
+          },
+          {
+            "id": 13,
+            "text": "I use to hate mathematics, but now I enjoy it.",
+            "options": [
+              "I",
+              "use to hate",
+              "mathematics",
+              "but now I enjoy it"
+            ],
+            "correct": 1,
+            "wrongPart": "use to hate",
+            "correction": "used to hate",
+            "explanation": "The past form is used to, not use to."
+          },
+          {
+            "id": 14,
+            "text": "When we were kids, we would built sandcastles at the beach.",
+            "options": [
+              "When we were kids",
+              "we",
+              "would built",
+              "sandcastles at the beach"
+            ],
+            "correct": 2,
+            "wrongPart": "would built",
+            "correction": "would build",
+            "explanation": "After would, use the base form of the verb: build, not built."
+          },
+          {
+            "id": 15,
+            "text": "He would have long hair, but he cut it.",
+            "options": [
+              "He",
+              "would have",
+              "long hair",
+              "but he cut it"
+            ],
+            "correct": 1,
+            "wrongPart": "would have",
+            "correction": "used to have",
+            "explanation": "would cannot be used with state verbs like have (possession); use used to."
+          },
+          {
+            "id": 16,
+            "text": "They didn't used to travel much before they got rich.",
+            "options": [
+              "They",
+              "didn't used to travel",
+              "much",
+              "before they got rich"
+            ],
+            "correct": 1,
+            "wrongPart": "didn't used to travel",
+            "correction": "didn't use to travel",
+            "explanation": "After didn't, use the base form use to, not used to."
+          },
+          {
+            "id": 17,
+            "text": "I would be afraid of the dark when I was young.",
+            "options": [
+              "I",
+              "would be",
+              "afraid of the dark",
+              "when I was young"
+            ],
+            "correct": 1,
+            "wrongPart": "would be",
+            "correction": "used to be",
+            "explanation": "would cannot be used with the state verb be; use used to."
+          },
+          {
+            "id": 18,
+            "text": "She use to knock on my door every morning.",
+            "options": [
+              "She",
+              "use to knock",
+              "on my door",
+              "every morning"
+            ],
+            "correct": 1,
+            "wrongPart": "use to knock",
+            "correction": "used to knock",
+            "explanation": "The past form is used to, not use to."
+          },
+          {
+            "id": 19,
+            "text": "Did you use to lived in a small village?",
+            "options": [
+              "Did",
+              "you use to",
+              "lived",
+              "in a small village?"
+            ],
+            "correct": 2,
+            "wrongPart": "lived",
+            "correction": "live",
+            "explanation": "After use to, use the base form of the verb: live, not lived."
+          },
+          {
+            "id": 20,
+            "text": "We use to go camping every summer.",
+            "options": [
+              "We",
+              "use to go",
+              "camping",
+              "every summer"
+            ],
+            "correct": 1,
+            "wrongPart": "use to go",
+            "correction": "used to go",
+            "explanation": "The past form is used to, not use to."
+          }
+        ],
+        "transform": [
+          {
+            "id": 1,
+            "text": "Rewrite using \"used to\": \"I played football every weekend when I was a child, but I don't anymore.\"",
+            "options": [
+              "I used to play football every weekend.",
+              "I would played football every weekend.",
+              "I use to play football every weekend.",
+              "I am used to playing football every weekend."
+            ],
+            "correct": 0,
+            "explanation": "Past habit that stopped: used to + base verb."
+          },
+          {
+            "id": 2,
+            "text": "Rewrite using \"used to\": \"She lived in Paris, but now she lives in London.\"",
+            "options": [
+              "She used to live in Paris.",
+              "She would live in Paris.",
+              "She use to live in Paris.",
+              "She is used to living in Paris."
+            ],
+            "correct": 0,
+            "explanation": "Past state: only used to is possible."
+          },
+          {
+            "id": 3,
+            "text": "Make negative: \"I used to like vegetables.\"",
+            "options": [
+              "I didn't use to like vegetables.",
+              "I didn't used to like vegetables.",
+              "I don't used to like vegetables.",
+              "I wasn't used to like vegetables."
+            ],
+            "correct": 0,
+            "explanation": "Negative form: didn't use to + base verb."
+          },
+          {
+            "id": 4,
+            "text": "Make a question: \"You used to play the piano.\"",
+            "options": [
+              "Did you use to play the piano?",
+              "Did you used to play the piano?",
+              "Were you use to play the piano?",
+              "Have you used to play the piano?"
+            ],
+            "correct": 0,
+            "explanation": "Question form: Did + subject + use to + base verb?"
+          },
+          {
+            "id": 5,
+            "text": "Rewrite using \"would\": \"As a child, I visited my grandma every summer.\"",
+            "options": [
+              "As a child, I would visit my grandma every summer.",
+              "As a child, I would visited my grandma every summer.",
+              "As a child, I used to visited my grandma every summer.",
+              "As a child, I was visiting my grandma every summer."
+            ],
+            "correct": 0,
+            "explanation": "Repeated past action: would + base verb."
+          },
+          {
+            "id": 6,
+            "text": "Make negative: \"He used to smoke.\"",
+            "options": [
+              "He didn't use to smoke.",
+              "He didn't used to smoke.",
+              "He don't used to smoke.",
+              "He wasn't used to smoke."
+            ],
+            "correct": 0,
+            "explanation": "Negative form: didn't use to + base verb."
+          },
+          {
+            "id": 7,
+            "text": "Rewrite using \"used to\": \"We had a dog when I was little, but we don't have one now.\"",
+            "options": [
+              "We used to have a dog when I was little.",
+              "We would have a dog when I was little.",
+              "We use to have a dog when I was little.",
+              "We are used to having a dog."
+            ],
+            "correct": 0,
+            "explanation": "Past state (possession): only used to is possible."
+          },
+          {
+            "id": 8,
+            "text": "Rewrite using \"would\": \"They walked to school together every morning.\"",
+            "options": [
+              "They would walk to school together every morning.",
+              "They would walked to school together every morning.",
+              "They used to walked to school together every morning.",
+              "They were walking to school together every morning."
+            ],
+            "correct": 0,
+            "explanation": "Repeated past action: would + base verb."
+          },
+          {
+            "id": 9,
+            "text": "Make a question: \"She used to work here.\"",
+            "options": [
+              "Did she use to work here?",
+              "Did she used to work here?",
+              "Was she use to work here?",
+              "Has she used to work here?"
+            ],
+            "correct": 0,
+            "explanation": "Question form: Did + subject + use to + base verb?"
+          },
+          {
+            "id": 10,
+            "text": "Rewrite using \"used to\": \"I hated mathematics, but now I enjoy it.\"",
+            "options": [
+              "I used to hate mathematics.",
+              "I would hated mathematics.",
+              "I use to hate mathematics.",
+              "I am used to hating mathematics."
+            ],
+            "correct": 0,
+            "explanation": "Past state: only used to is possible."
+          },
+          {
+            "id": 11,
+            "text": "Rewrite using \"would\": \"As kids, we built sandcastles at the beach.\"",
+            "options": [
+              "As kids, we would build sandcastles at the beach.",
+              "As kids, we would built sandcastles at the beach.",
+              "As kids, we used to built sandcastles at the beach.",
+              "As kids, we were building sandcastles at the beach."
+            ],
+            "correct": 0,
+            "explanation": "Repeated past action: would + base verb."
+          },
+          {
+            "id": 12,
+            "text": "Make negative: \"They traveled much before they got rich.\"",
+            "options": [
+              "They didn't use to travel much before they got rich.",
+              "They didn't used to travel much before they got rich.",
+              "They don't used to travel much before they got rich.",
+              "They weren't used to travel much before they got rich."
+            ],
+            "correct": 0,
+            "explanation": "Negative form: didn't use to + base verb."
+          },
+          {
+            "id": 13,
+            "text": "Rewrite using \"used to\": \"I was afraid of the dark when I was young.\"",
+            "options": [
+              "I used to be afraid of the dark.",
+              "I would afraid of the dark.",
+              "I use to be afraid of the dark.",
+              "I am used to be afraid of the dark."
+            ],
+            "correct": 0,
+            "explanation": "Past state: only used to is possible."
+          },
+          {
+            "id": 14,
+            "text": "Rewrite using \"would\": \"She knocked on my door every morning.\"",
+            "options": [
+              "She would knock on my door every morning.",
+              "She would knocked on my door every morning.",
+              "She used to knocked on my door every morning.",
+              "She was knocking on my door every morning."
+            ],
+            "correct": 0,
+            "explanation": "Repeated past action: would + base verb."
+          },
+          {
+            "id": 15,
+            "text": "Make a question: \"You used to live in a small village.\"",
+            "options": [
+              "Did you use to live in a small village?",
+              "Did you used to live in a small village?",
+              "Were you use to live in a small village?",
+              "Have you used to live in a small village?"
+            ],
+            "correct": 0,
+            "explanation": "Question form: Did + subject + use to + base verb?"
+          },
+          {
+            "id": 16,
+            "text": "Rewrite using \"used to\": \"We went camping every summer as a family.\"",
+            "options": [
+              "We used to go camping every summer as a family.",
+              "We would went camping every summer as a family.",
+              "We use to go camping every summer as a family.",
+              "We are used to going camping every summer."
+            ],
+            "correct": 0,
+            "explanation": "Past habit: used to + base verb."
+          },
+          {
+            "id": 17,
+            "text": "Make negative: \"He had long hair.\"",
+            "options": [
+              "He didn't use to have long hair.",
+              "He didn't used to have long hair.",
+              "He don't used to have long hair.",
+              "He wasn't used to have long hair."
+            ],
+            "correct": 0,
+            "explanation": "Negative form: didn't use to + base verb."
+          },
+          {
+            "id": 18,
+            "text": "Rewrite using \"used to\": \"I believed in ghosts when I was a kid.\"",
+            "options": [
+              "I used to believe in ghosts.",
+              "I would believed in ghosts.",
+              "I use to believe in ghosts.",
+              "I am used to believing in ghosts."
+            ],
+            "correct": 0,
+            "explanation": "Past state: only used to is possible."
+          },
+          {
+            "id": 19,
+            "text": "Make a question: \"My father used to tell you stories.\"",
+            "options": [
+              "Did your father use to tell you stories?",
+              "Did your father used to tell you stories?",
+              "Was your father use to tell you stories?",
+              "Has your father used to tell you stories?"
+            ],
+            "correct": 0,
+            "explanation": "Question form: Did + subject + use to + base verb?"
+          },
+          {
+            "id": 20,
+            "text": "Rewrite using \"would\": \"Every night, my father told us a story.\"",
+            "options": [
+              "Every night, my father would tell us a story.",
+              "Every night, my father would told us a story.",
+              "Every night, my father used to told us a story.",
+              "Every night, my father was telling us a story."
+            ],
+            "correct": 0,
+            "explanation": "Repeated past action: would + base verb."
+          }
+        ],
+        "dialogue": [
+          {
+            "id": 1,
+            "situation": "Talking about childhood hobbies.",
+            "dialogue": "A: Did you play any sports as a kid?\nB: Yes, I ___ play football every weekend.",
+            "options": [
+              "used to",
+              "use to",
+              "would played",
+              "was used to"
+            ],
+            "correct": 0,
+            "explanation": "Past habit: used to + base verb."
+          },
+          {
+            "id": 2,
+            "situation": "Talking about where someone lived.",
+            "dialogue": "A: Has she always lived in London?\nB: No, she ___ live in Paris before.",
+            "options": [
+              "used to",
+              "would",
+              "use to",
+              "was"
+            ],
+            "correct": 0,
+            "explanation": "State verb: only used to is possible."
+          },
+          {
+            "id": 3,
+            "situation": "Talking about summer visits.",
+            "dialogue": "A: Did you see your grandma often?\nB: Yes, I ___ visit her every summer.",
+            "options": [
+              "would",
+              "used",
+              "use",
+              "was"
+            ],
+            "correct": 0,
+            "explanation": "Repeated past action: would + base verb."
+          },
+          {
+            "id": 4,
+            "situation": "Talking about food preferences.",
+            "dialogue": "A: Have you always liked vegetables?\nB: No, I ___ like them, but now I love them.",
+            "options": [
+              "didn't use to",
+              "didn't used to",
+              "don't used to",
+              "wasn't used to"
+            ],
+            "correct": 0,
+            "explanation": "Negative form: didn't use to + base verb."
+          },
+          {
+            "id": 5,
+            "situation": "Asking about musical instruments.",
+            "dialogue": "A: ___ you use to play any instruments?\nB: Yes, the piano.",
+            "options": [
+              "Did",
+              "Were",
+              "Have",
+              "Was"
+            ],
+            "correct": 0,
+            "explanation": "Question form: Did + subject + use to + base verb?"
+          },
+          {
+            "id": 6,
+            "situation": "Talking about smoking habits.",
+            "dialogue": "A: Does he still smoke?\nB: No, he ___ smoke, but he quit.",
+            "options": [
+              "used to",
+              "use to",
+              "would smoked",
+              "is used to"
+            ],
+            "correct": 0,
+            "explanation": "Past habit: used to + base verb."
+          },
+          {
+            "id": 7,
+            "situation": "Talking about pets.",
+            "dialogue": "A: Do you have any pets now?\nB: No, but we ___ have a dog.",
+            "options": [
+              "used to",
+              "would",
+              "use to",
+              "were"
+            ],
+            "correct": 0,
+            "explanation": "State verb (possession): only used to is possible."
+          },
+          {
+            "id": 8,
+            "situation": "Talking about a school routine.",
+            "dialogue": "A: How did you get to school?\nB: We ___ walk together every morning.",
+            "options": [
+              "would",
+              "used",
+              "use",
+              "was"
+            ],
+            "correct": 0,
+            "explanation": "Repeated past action: would + base verb."
+          },
+          {
+            "id": 9,
+            "situation": "Talking about childhood beliefs.",
+            "dialogue": "A: Were you scared of anything as a kid?\nB: Yes, I ___ believe in ghosts.",
+            "options": [
+              "used to",
+              "would",
+              "use to",
+              "was"
+            ],
+            "correct": 0,
+            "explanation": "State verb: only used to is possible."
+          },
+          {
+            "id": 10,
+            "situation": "Talking about diet changes.",
+            "dialogue": "A: Has she always eaten meat?\nB: No, she ___ eat it, but now she does.",
+            "options": [
+              "didn't use to",
+              "didn't used to",
+              "don't used to",
+              "wasn't used to"
+            ],
+            "correct": 0,
+            "explanation": "Negative form: didn't use to + base verb."
+          },
+          {
+            "id": 11,
+            "situation": "Talking about bedtime stories.",
+            "dialogue": "A: Did your father tell you stories?\nB: Yes, he ___ tell us stories every night.",
+            "options": [
+              "would",
+              "used",
+              "use",
+              "was"
+            ],
+            "correct": 0,
+            "explanation": "Repeated past action: would + base verb."
+          },
+          {
+            "id": 12,
+            "situation": "Asking about past jobs.",
+            "dialogue": "A: ___ she used to work here?\nB: Yes, a few years ago.",
+            "options": [
+              "Did",
+              "Was",
+              "Has",
+              "Is"
+            ],
+            "correct": 0,
+            "explanation": "Question form: Did + subject + use to + base verb?"
+          },
+          {
+            "id": 13,
+            "situation": "Talking about school subjects.",
+            "dialogue": "A: Do you like math now?\nB: Yes, but I ___ hate it.",
+            "options": [
+              "used to",
+              "would",
+              "use to",
+              "was"
+            ],
+            "correct": 0,
+            "explanation": "State verb: only used to is possible."
+          },
+          {
+            "id": 14,
+            "situation": "Talking about beach memories.",
+            "dialogue": "A: What did you do at the beach as kids?\nB: We ___ build sandcastles.",
+            "options": [
+              "would",
+              "used",
+              "use",
+              "was"
+            ],
+            "correct": 0,
+            "explanation": "Repeated past action: would + base verb."
+          },
+          {
+            "id": 15,
+            "situation": "Talking about appearance.",
+            "dialogue": "A: Did he always have short hair?\nB: No, he ___ have long hair.",
+            "options": [
+              "used to",
+              "would",
+              "use to",
+              "was"
+            ],
+            "correct": 0,
+            "explanation": "State verb (possession): only used to is possible."
+          },
+          {
+            "id": 16,
+            "situation": "Talking about travel habits.",
+            "dialogue": "A: Did they travel a lot before?\nB: No, they ___ travel much before they got rich.",
+            "options": [
+              "didn't use to",
+              "didn't used to",
+              "don't used to",
+              "weren't used to"
+            ],
+            "correct": 0,
+            "explanation": "Negative form: didn't use to + base verb."
+          },
+          {
+            "id": 17,
+            "situation": "Talking about childhood fears.",
+            "dialogue": "A: Were you afraid of the dark?\nB: Yes, I ___ afraid of the dark when I was young.",
+            "options": [
+              "used to be",
+              "would be",
+              "use to be",
+              "was used"
+            ],
+            "correct": 0,
+            "explanation": "State verb (be): only used to is possible."
+          },
+          {
+            "id": 18,
+            "situation": "Talking about morning routines.",
+            "dialogue": "A: How did she wake you up?\nB: She ___ knock on my door every morning.",
+            "options": [
+              "would",
+              "used",
+              "use",
+              "was"
+            ],
+            "correct": 0,
+            "explanation": "Repeated past action: would + base verb."
+          },
+          {
+            "id": 19,
+            "situation": "Asking about hometown.",
+            "dialogue": "A: ___ you use to live in a small village?\nB: Yes, until I was ten.",
+            "options": [
+              "Did",
+              "Were",
+              "Have",
+              "Was"
+            ],
+            "correct": 0,
+            "explanation": "Question form: Did + subject + use to + base verb?"
+          },
+          {
+            "id": 20,
+            "situation": "Talking about family trips.",
+            "dialogue": "A: Did you travel much as a family?\nB: Yes, we ___ go camping every summer.",
+            "options": [
+              "used to",
+              "would",
+              "use to",
+              "was"
+            ],
+            "correct": 0,
+            "explanation": "Past habit: used to + base verb."
+          }
+        ]
+      },
+      {
+        "id": "be-get-used-to",
+        "title": "Be Used To, Get Used To & Would",
+        "icon": "🔄",
+        "guide": "## Be Used To, Get Used To, Become Used To & Would (Odatlanish va o'tmishdagi odatlar)\n\nBu mavzu \"used to\" / \"would\" bilan ifodalangan **o'tmishdagi odatlarni**, \"be used to\" / \"get used to\" / \"become used to\" bilan ifodalanadigan **biror narsaga o'rganib qolish / moslashish** tushunchasidan aniq ajratishga qaratilgan — bular tashqi ko'rinishidan o'xshash, lekin butunlay boshqa ma'noni bildiradi!\n\n## 1. Eng muhim farq\n• **used to + V1** — o'tmishda muntazam sodir bo'lgan, hozir tugagan ODAT (harakat o'zgargan):\n  - I **used to smoke**. (ilgari chekar edim, hozir chekmayman)\n• **be used to + V-ing / noun** — biror narsaga O'RGANIB QOLGANLIK, qulaylik holati (harakat emas, HOLAT):\n  - I **am used to** the cold weather. (sovuq ob-havoga o'rganib qolganman)\n\n## 2. be used to (hozirgi holat — o'rganib qolganlik)\nFormula: **be (am/is/are/was/were) + used to + noun / V-ing**\n• She **is used to** working long hours. (ishlashga o'rganib qolgan)\n• We **are used to** the noise now.\n• He **isn't used to** cold weather — he grew up in the tropics.\n• **Are** you **used to** the new schedule yet?\n\n## 3. get used to (jarayon — o'rganib qolish jarayoni)\nFormula: **get + used to + noun / V-ing** — \"o'rganib QOLMOQDA / QOLDI\" (jarayon)\n• I **am getting used to** the new software. (hozir o'rganib bormoqda)\n• It took months, but he finally **got used to** the cold winters.\n• You'll need time **to get used to** the new system.\n\n## 4. become used to (get used to bilan bir xil, rasmiyroq)\nFormula: **become + used to + noun / V-ing**\n• Over time, employees usually **become used to** the strict rules.\n• She **became used to** the noise from the airport.\n\n## 5. used to vs would (qisqacha eslatma)\n• **used to** — ham ODAT, ham HOLAT (be, have, like, know) uchun ishlatiladi.\n• **would** — FAQAT takrorlanuvchi ODAT (harakat) uchun, holat fe'llari bilan ishlatilmaydi.\n  - I **used to have** little money. (have — holat fe'li, would bo'lmaydi!)\n  - Every Friday, he **would take** us fishing. (harakat — would yoki used to ikkalasi ham to'g'ri)\n\n## 6. Eng ko'p uchraydigan xatolar\n• \"I am used to smoke\" — NOTO'G'RI; to'g'risi \"I am used to smoking\" (V-ing kerak, V1 emas).\n• \"I used to living here\" — NOTO'G'RI; to'g'risi \"I used to live here\" (used to + V1, be used to + V-ing farqini aralashtirmang).\n• \"would have / like / know\" — holat fe'llari bilan would ishlatilmaydi; faqat used to.\n\n## 7. Signal so'zlar\n• used to + V1 (o'tmishdagi odat)\n• would + V1 (o'tmishdagi takroriy harakat)\n• be used to + V-ing / noun (o'rganib qolganlik)\n• get / become used to + V-ing / noun (o'rganib qolish jarayoni)",
+        "questions": [
+          {
+            "id": 1,
+            "text": "I've lived here for ten years, so I ___ the traffic noise now.",
+            "options": [
+              "am used to",
+              "used to",
+              "get used to",
+              "would"
+            ],
+            "correct": 0,
+            "explanation": "\"be used to\" — biror narsaga o'rganib qolganlik (hozirgi holat).",
+            "explanationRu": "\"be used to\" — привыкание к чему-либо (текущее состояние)."
+          },
+          {
+            "id": 2,
+            "text": "She has worked night shifts for years, so she ___ staying up late.",
+            "options": [
+              "is used to",
+              "uses to",
+              "gets used to",
+              "would"
+            ],
+            "correct": 0,
+            "explanation": "\"be used to\" — o'rganib qolganlik holati.",
+            "explanationRu": "\"be used to\" — состояние привыкания."
+          },
+          {
+            "id": 3,
+            "text": "It's only my first week at the new job, but I ___ the routine already.",
+            "options": [
+              "am getting used to",
+              "get used to",
+              "am used to",
+              "would get used to"
+            ],
+            "correct": 0,
+            "explanation": "\"get used to\" — o'rganib qolish jarayoni (hozir davom etmoqda).",
+            "explanationRu": "\"get used to\" — процесс привыкания (происходит сейчас)."
+          },
+          {
+            "id": 4,
+            "text": "It took a few months, but he finally ___ the cold winters here.",
+            "options": [
+              "got used to",
+              "used to get",
+              "was used to",
+              "would get used to"
+            ],
+            "correct": 0,
+            "explanation": "\"get used to\" — o'tgan zamonda tugallangan o'rganib qolish jarayoni.",
+            "explanationRu": "\"get used to\" — завершённый в прошлом процесс привыкания."
+          },
+          {
+            "id": 5,
+            "text": "After living abroad for years, she ___ eating spicy food.",
+            "options": [
+              "has become used to",
+              "has became used to",
+              "is become used to",
+              "became use to"
+            ],
+            "correct": 0,
+            "explanation": "\"become used to\" — o'rganib qolish, rasmiyroq shakl.",
+            "explanationRu": "\"become used to\" — привыкание, более формальная форма."
+          },
+          {
+            "id": 6,
+            "text": "I ___ play the guitar every day, but I stopped after university.",
+            "options": [
+              "used to",
+              "use to",
+              "was used to",
+              "would used to"
+            ],
+            "correct": 0,
+            "explanation": "\"used to\" — o'tmishda muntazam bo'lgan, hozir tugagan odat.",
+            "explanationRu": "\"used to\" — регулярная привычка в прошлом, которая сейчас прекратилась."
+          },
+          {
+            "id": 7,
+            "text": "Every Friday, my grandfather ___ take us fishing at the lake.",
+            "options": [
+              "would",
+              "used to",
+              "use to",
+              "was used to"
+            ],
+            "correct": 0,
+            "explanation": "\"would\" — o'tmishdagi takrorlanuvchi harakat.",
+            "explanationRu": "\"would\" — повторяющееся действие в прошлом."
+          },
+          {
+            "id": 8,
+            "text": "He grew up in a hot country, so he ___ cold weather.",
+            "options": [
+              "isn't used to",
+              "doesn't used to",
+              "wasn't use to",
+              "not used to"
+            ],
+            "correct": 0,
+            "explanation": "\"be used to\" ning inkor shakli: isn't used to.",
+            "explanationRu": "Отрицательная форма \"be used to\": isn't used to."
+          },
+          {
+            "id": 9,
+            "text": "How long did it take you ___ living in such a big city?",
+            "options": [
+              "to get used to",
+              "getting used to",
+              "to used to get",
+              "get use to"
+            ],
+            "correct": 0,
+            "explanation": "\"to get used to\" — fe'ldan keyingi infinitiv shakl.",
+            "explanationRu": "\"to get used to\" — форма инфинитива после глагола."
+          },
+          {
+            "id": 10,
+            "text": "As a chef, she ___ working long hours on her feet.",
+            "options": [
+              "is used to",
+              "used to",
+              "gets used to",
+              "would"
+            ],
+            "correct": 0,
+            "explanation": "\"be used to\" — o'rganib qolganlik holati.",
+            "explanationRu": "\"be used to\" — состояние привыкания."
+          },
+          {
+            "id": 11,
+            "text": "The new employees ___ the software slowly but surely.",
+            "options": [
+              "are getting used to",
+              "get used to",
+              "are used to get",
+              "would get used to"
+            ],
+            "correct": 0,
+            "explanation": "\"get used to\" — hozir davom etayotgan o'rganib qolish jarayoni.",
+            "explanationRu": "\"get used to\" — процесс привыкания, происходящий сейчас."
+          },
+          {
+            "id": 12,
+            "text": "I ___ eat fast food a lot, but I've completely changed my diet.",
+            "options": [
+              "used to",
+              "use to",
+              "was used to",
+              "would used to"
+            ],
+            "correct": 0,
+            "explanation": "\"used to\" — hozir tugagan o'tmishdagi odat.",
+            "explanationRu": "\"used to\" — прошлая привычка, которая уже прекратилась."
+          },
+          {
+            "id": 13,
+            "text": "It took him months, but he eventually ___ the noise from the airport.",
+            "options": [
+              "became used to",
+              "become used to",
+              "was become used to",
+              "became use to"
+            ],
+            "correct": 0,
+            "explanation": "\"become used to\" — o'tgan zamonda tugallangan o'rganib qolish.",
+            "explanationRu": "\"become used to\" — привыкание, завершённое в прошлом."
+          },
+          {
+            "id": 14,
+            "text": "Are you ___ the cold winters here yet?",
+            "options": [
+              "used to",
+              "use to",
+              "get used to",
+              "would"
+            ],
+            "correct": 0,
+            "explanation": "\"be used to\" savol shaklida: Are you used to...?",
+            "explanationRu": "\"be used to\" в вопросительной форме: Are you used to...?"
+          },
+          {
+            "id": 15,
+            "text": "As a child, I ___ spend every summer at my grandparents' farm.",
+            "options": [
+              "would",
+              "used to",
+              "use to",
+              "was used to"
+            ],
+            "correct": 0,
+            "explanation": "\"would\" — o'tmishdagi takrorlanuvchi harakat.",
+            "explanationRu": "\"would\" — повторяющееся действие в прошлом."
+          },
+          {
+            "id": 16,
+            "text": "I was slowly ___ the idea of moving abroad when the plan suddenly changed.",
+            "options": [
+              "getting used to",
+              "get used to",
+              "used to get",
+              "become used to"
+            ],
+            "correct": 0,
+            "explanation": "\"get used to\" — o'tgan davomli zamonda davom etayotgan jarayon.",
+            "explanationRu": "\"get used to\" — процесс, длившийся в прошлом (Past Continuous)."
+          },
+          {
+            "id": 17,
+            "text": "We've traveled so much for work that we ___ long flights.",
+            "options": [
+              "are used to",
+              "used to",
+              "get used to",
+              "would"
+            ],
+            "correct": 0,
+            "explanation": "\"be used to\" — o'rganib qolganlik holati.",
+            "explanationRu": "\"be used to\" — состояние привыкания."
+          },
+          {
+            "id": 18,
+            "text": "You'll need some time ___ the new system, but it gets easier.",
+            "options": [
+              "to get used to",
+              "getting used to",
+              "to used to",
+              "get use to"
+            ],
+            "correct": 0,
+            "explanation": "\"to get used to\" — fe'ldan keyingi infinitiv shakl.",
+            "explanationRu": "\"to get used to\" — форма инфинитива после глагола."
+          },
+          {
+            "id": 19,
+            "text": "Over time, employees usually ___ the company's strict rules.",
+            "options": [
+              "become used to",
+              "became used to",
+              "are become used to",
+              "become use to"
+            ],
+            "correct": 0,
+            "explanation": "\"become\" — ko'plik ega bilan bosh shaklda (Present Simple).",
+            "explanationRu": "\"become\" — в начальной форме с подлежащим во мн. числе (Present Simple)."
+          },
+          {
+            "id": 20,
+            "text": "When I was a student, I ___ very little money, so I would cook cheap meals every night.",
+            "options": [
+              "used to have",
+              "would have",
+              "use to have",
+              "was having"
+            ],
+            "correct": 0,
+            "explanation": "\"have\" — holat fe'li, shuning uchun would emas, used to ishlatiladi.",
+            "explanationRu": "\"have\" — глагол состояния, поэтому используется used to, а не would."
+          }
+        ],
+        "fillBlanks": [
+          {
+            "id": 1,
+            "text": "I've lived here for ten years, so I ___ (be used to / traffic noise) now.",
+            "options": [
+              "am used to the traffic noise",
+              "used to the traffic noise",
+              "get used to the traffic noise",
+              "would the traffic noise"
+            ],
+            "correct": 0,
+            "explanation": "\"am used to\" + noun (traffic noise).",
+            "explanationRu": "\"am used to\" + существительное (traffic noise)."
+          },
+          {
+            "id": 2,
+            "text": "She has worked night shifts for years, so she ___ (be used to / stay) up late.",
+            "options": [
+              "is used to staying",
+              "is used to stay",
+              "used to staying",
+              "gets used to stay"
+            ],
+            "correct": 0,
+            "explanation": "\"is used to\" + V-ing (stay → staying).",
+            "explanationRu": "\"is used to\" + V-ing (stay → staying)."
+          },
+          {
+            "id": 3,
+            "text": "It's only my first week, but I ___ (get used to / the routine) already.",
+            "options": [
+              "am getting used to the routine",
+              "get used to the routine",
+              "am used to get the routine",
+              "would get used to the routine"
+            ],
+            "correct": 0,
+            "explanation": "\"am getting used to\" + noun — davom etayotgan jarayon.",
+            "explanationRu": "\"am getting used to\" + существительное — длящийся процесс."
+          },
+          {
+            "id": 4,
+            "text": "It took a few months, but he finally ___ (get used to / the cold winters).",
+            "options": [
+              "got used to the cold winters",
+              "used to get the cold winters",
+              "was used to the cold winters",
+              "would get used to the cold winters"
+            ],
+            "correct": 0,
+            "explanation": "\"got used to\" + noun — tugallangan jarayon.",
+            "explanationRu": "\"got used to\" + существительное — завершённый процесс."
+          },
+          {
+            "id": 5,
+            "text": "After living abroad for years, she ___ (become used to / eat) spicy food.",
+            "options": [
+              "has become used to eating",
+              "has became used to eating",
+              "is become used to eating",
+              "became use to eating"
+            ],
+            "correct": 0,
+            "explanation": "\"has become used to\" + V-ing (eat → eating).",
+            "explanationRu": "\"has become used to\" + V-ing (eat → eating)."
+          },
+          {
+            "id": 6,
+            "text": "I ___ (used to / play) the guitar every day, but I stopped.",
+            "options": [
+              "used to play",
+              "use to play",
+              "was used to play",
+              "would used to play"
+            ],
+            "correct": 0,
+            "explanation": "\"used to\" + V1 (play).",
+            "explanationRu": "\"used to\" + V1 (play)."
+          },
+          {
+            "id": 7,
+            "text": "Every Friday, my grandfather ___ (would / take) us fishing at the lake.",
+            "options": [
+              "would take",
+              "used take",
+              "use to took",
+              "was take"
+            ],
+            "correct": 0,
+            "explanation": "\"would\" + V1 (take) — takrorlanuvchi harakat.",
+            "explanationRu": "\"would\" + V1 (take) — повторяющееся действие."
+          },
+          {
+            "id": 8,
+            "text": "He grew up in a hot country, so he ___ (not / be used to / cold weather).",
+            "options": [
+              "isn't used to cold weather",
+              "doesn't used to cold weather",
+              "wasn't use to cold weather",
+              "not used to cold weather"
+            ],
+            "correct": 0,
+            "explanation": "\"isn't used to\" + noun (cold weather).",
+            "explanationRu": "\"isn't used to\" + существительное (cold weather)."
+          },
+          {
+            "id": 9,
+            "text": "How long did it take you ___ (get used to / live) in such a big city?",
+            "options": [
+              "to get used to living",
+              "getting used to living",
+              "to used to get living",
+              "get use to living"
+            ],
+            "correct": 0,
+            "explanation": "\"to get used to\" + V-ing (live → living).",
+            "explanationRu": "\"to get used to\" + V-ing (live → living)."
+          },
+          {
+            "id": 10,
+            "text": "As a chef, she ___ (be used to / work) long hours.",
+            "options": [
+              "is used to working",
+              "is used to work",
+              "used to working",
+              "gets used to working"
+            ],
+            "correct": 0,
+            "explanation": "\"is used to\" + V-ing (work → working).",
+            "explanationRu": "\"is used to\" + V-ing (work → working)."
+          },
+          {
+            "id": 11,
+            "text": "The new employees ___ (get used to / use) the software slowly.",
+            "options": [
+              "are getting used to using",
+              "get used to using",
+              "are used to get using",
+              "would get used to using"
+            ],
+            "correct": 0,
+            "explanation": "\"are getting used to\" + V-ing (use → using).",
+            "explanationRu": "\"are getting used to\" + V-ing (use → using)."
+          },
+          {
+            "id": 12,
+            "text": "I ___ (used to / eat) fast food a lot, but I've changed my diet.",
+            "options": [
+              "used to eat",
+              "use to eat",
+              "was used to eat",
+              "would used to eat"
+            ],
+            "correct": 0,
+            "explanation": "\"used to\" + V1 (eat).",
+            "explanationRu": "\"used to\" + V1 (eat)."
+          },
+          {
+            "id": 13,
+            "text": "It took him months, but he eventually ___ (become used to / hear) the airport noise.",
+            "options": [
+              "became used to hearing",
+              "become used to hearing",
+              "was become used to hearing",
+              "became use to hearing"
+            ],
+            "correct": 0,
+            "explanation": "\"became used to\" + V-ing (hear → hearing).",
+            "explanationRu": "\"became used to\" + V-ing (hear → hearing)."
+          },
+          {
+            "id": 14,
+            "text": "___ (be used to / cold winters) yet?",
+            "options": [
+              "Are you used to the cold winters",
+              "Do you use to the cold winters",
+              "Have you used to the cold winters",
+              "Would you the cold winters"
+            ],
+            "correct": 0,
+            "explanation": "\"Are you used to\" + noun — savol shakli.",
+            "explanationRu": "\"Are you used to\" + существительное — вопросительная форма."
+          },
+          {
+            "id": 15,
+            "text": "As a child, I ___ (would / spend) every summer at my grandparents' farm.",
+            "options": [
+              "would spend",
+              "used spend",
+              "use to spent",
+              "was spend"
+            ],
+            "correct": 0,
+            "explanation": "\"would\" + V1 (spend) — takrorlanuvchi harakat.",
+            "explanationRu": "\"would\" + V1 (spend) — повторяющееся действие."
+          },
+          {
+            "id": 16,
+            "text": "I was slowly ___ (get used to / the idea) of moving abroad.",
+            "options": [
+              "getting used to the idea",
+              "get used to the idea",
+              "used to get the idea",
+              "become used to the idea"
+            ],
+            "correct": 0,
+            "explanation": "\"getting used to\" + noun — Past Continuous jarayon.",
+            "explanationRu": "\"getting used to\" + существительное — процесс в Past Continuous."
+          },
+          {
+            "id": 17,
+            "text": "We've traveled so much that we ___ (be used to / long flights).",
+            "options": [
+              "are used to long flights",
+              "used to long flights",
+              "get used to long flights",
+              "would long flights"
+            ],
+            "correct": 0,
+            "explanation": "\"are used to\" + noun (long flights).",
+            "explanationRu": "\"are used to\" + существительное (long flights)."
+          },
+          {
+            "id": 18,
+            "text": "You'll need time ___ (get used to / the new system).",
+            "options": [
+              "to get used to the new system",
+              "getting used to the new system",
+              "to used to the new system",
+              "get use to the new system"
+            ],
+            "correct": 0,
+            "explanation": "\"to get used to\" + noun — infinitiv shakl.",
+            "explanationRu": "\"to get used to\" + существительное — форма инфинитива."
+          },
+          {
+            "id": 19,
+            "text": "Over time, employees usually ___ (become used to / the strict rules).",
+            "options": [
+              "become used to the strict rules",
+              "became used to the strict rules",
+              "are become used to the strict rules",
+              "become use to the strict rules"
+            ],
+            "correct": 0,
+            "explanation": "\"become\" — ko'plik ega bilan bosh shaklda (Present Simple).",
+            "explanationRu": "\"become\" — в начальной форме с подлежащим во мн. числе (Present Simple)."
+          },
+          {
+            "id": 20,
+            "text": "When I was a student, I ___ (used to / have) very little money.",
+            "options": [
+              "used to have",
+              "would have",
+              "use to have",
+              "was having"
+            ],
+            "correct": 0,
+            "explanation": "\"have\" — holat fe'li, shuning uchun used to ishlatiladi, would emas.",
+            "explanationRu": "\"have\" — глагол состояния, поэтому используется used to, а не would."
+          }
+        ],
+        "scrambled": [
+          {
+            "id": 1,
+            "words": [
+              "now",
+              "I",
+              "am",
+              "used",
+              "to",
+              "the",
+              "traffic",
+              "noise"
+            ],
+            "answer": "I am used to the traffic noise now",
+            "explanation": "\"be used to\" + noun — o'rganib qolganlik.",
+            "explanationRu": "\"be used to\" + существительное — привыкание."
+          },
+          {
+            "id": 2,
+            "words": [
+              "late",
+              "she",
+              "is",
+              "used",
+              "to",
+              "staying",
+              "up"
+            ],
+            "answer": "she is used to staying up late",
+            "explanation": "\"be used to\" + V-ing.",
+            "explanationRu": "\"be used to\" + V-ing."
+          },
+          {
+            "id": 3,
+            "words": [
+              "already",
+              "I",
+              "am",
+              "getting",
+              "used",
+              "to",
+              "the",
+              "routine"
+            ],
+            "answer": "I am getting used to the routine already",
+            "explanation": "\"get used to\" — davom etayotgan jarayon.",
+            "explanationRu": "\"get used to\" — длящийся процесс."
+          },
+          {
+            "id": 4,
+            "words": [
+              "winters",
+              "he",
+              "got",
+              "used",
+              "to",
+              "the",
+              "cold"
+            ],
+            "answer": "he got used to the cold winters",
+            "explanation": "\"get used to\" — tugallangan jarayon.",
+            "explanationRu": "\"get used to\" — завершённый процесс."
+          },
+          {
+            "id": 5,
+            "words": [
+              "food",
+              "she",
+              "has",
+              "become",
+              "used",
+              "to",
+              "eating",
+              "spicy"
+            ],
+            "answer": "she has become used to eating spicy food",
+            "explanation": "\"become used to\" + V-ing.",
+            "explanationRu": "\"become used to\" + V-ing."
+          },
+          {
+            "id": 6,
+            "words": [
+              "guitar",
+              "I",
+              "used",
+              "to",
+              "play",
+              "the"
+            ],
+            "answer": "I used to play the guitar",
+            "explanation": "\"used to\" + V1 — o'tmishdagi odat.",
+            "explanationRu": "\"used to\" + V1 — привычка в прошлом."
+          },
+          {
+            "id": 7,
+            "words": [
+              "lake",
+              "my",
+              "grandfather",
+              "would",
+              "take",
+              "us",
+              "fishing",
+              "at",
+              "the"
+            ],
+            "answer": "my grandfather would take us fishing at the lake",
+            "explanation": "\"would\" + V1 — takrorlanuvchi harakat.",
+            "explanationRu": "\"would\" + V1 — повторяющееся действие."
+          },
+          {
+            "id": 8,
+            "words": [
+              "weather",
+              "he",
+              "isn't",
+              "used",
+              "to",
+              "cold"
+            ],
+            "answer": "he isn't used to cold weather",
+            "explanation": "\"be used to\" ning inkor shakli.",
+            "explanationRu": "Отрицательная форма \"be used to\"."
+          },
+          {
+            "id": 9,
+            "words": [
+              "city",
+              "you",
+              "used",
+              "to",
+              "get",
+              "living",
+              "in",
+              "the",
+              "big"
+            ],
+            "answer": "you get used to living in the big city",
+            "explanation": "\"get used to\" + V-ing.",
+            "explanationRu": "\"get used to\" + V-ing."
+          },
+          {
+            "id": 10,
+            "words": [
+              "hours",
+              "she",
+              "is",
+              "used",
+              "to",
+              "working",
+              "long"
+            ],
+            "answer": "she is used to working long hours",
+            "explanation": "\"be used to\" + V-ing.",
+            "explanationRu": "\"be used to\" + V-ing."
+          },
+          {
+            "id": 11,
+            "words": [
+              "software",
+              "the",
+              "employees",
+              "are",
+              "getting",
+              "used",
+              "to",
+              "the"
+            ],
+            "answer": "the employees are getting used to the software",
+            "explanation": "\"get used to\" — davom etayotgan jarayon.",
+            "explanationRu": "\"get used to\" — длящийся процесс."
+          },
+          {
+            "id": 12,
+            "words": [
+              "food",
+              "I",
+              "used",
+              "to",
+              "eat",
+              "fast"
+            ],
+            "answer": "I used to eat fast food",
+            "explanation": "\"used to\" + V1 — o'tmishdagi odat.",
+            "explanationRu": "\"used to\" + V1 — привычка в прошлом."
+          },
+          {
+            "id": 13,
+            "words": [
+              "noise",
+              "he",
+              "became",
+              "used",
+              "to",
+              "the",
+              "airport"
+            ],
+            "answer": "he became used to the airport noise",
+            "explanation": "\"become used to\" — tugallangan jarayon.",
+            "explanationRu": "\"become used to\" — завершённый процесс."
+          },
+          {
+            "id": 14,
+            "words": [
+              "winters",
+              "are",
+              "you",
+              "used",
+              "to",
+              "the",
+              "cold",
+              "?"
+            ],
+            "answer": "are you used to the cold winters",
+            "explanation": "\"be used to\" savol shaklida.",
+            "explanationRu": "\"be used to\" в вопросительной форме."
+          },
+          {
+            "id": 15,
+            "words": [
+              "farm",
+              "I",
+              "would",
+              "spend",
+              "every",
+              "summer",
+              "at",
+              "the"
+            ],
+            "answer": "I would spend every summer at the farm",
+            "explanation": "\"would\" + V1 — takrorlanuvchi harakat.",
+            "explanationRu": "\"would\" + V1 — повторяющееся действие."
+          },
+          {
+            "id": 16,
+            "words": [
+              "abroad",
+              "I",
+              "was",
+              "getting",
+              "used",
+              "to",
+              "moving"
+            ],
+            "answer": "I was getting used to moving abroad",
+            "explanation": "\"get used to\" — Past Continuous jarayon.",
+            "explanationRu": "\"get used to\" — процесс в Past Continuous."
+          },
+          {
+            "id": 17,
+            "words": [
+              "flights",
+              "we",
+              "are",
+              "used",
+              "to",
+              "long"
+            ],
+            "answer": "we are used to long flights",
+            "explanation": "\"be used to\" + noun.",
+            "explanationRu": "\"be used to\" + существительное."
+          },
+          {
+            "id": 18,
+            "words": [
+              "system",
+              "you",
+              "need",
+              "time",
+              "to",
+              "get",
+              "used",
+              "to",
+              "the",
+              "new"
+            ],
+            "answer": "you need time to get used to the new system",
+            "explanation": "\"to get used to\" — infinitiv shakl.",
+            "explanationRu": "\"to get used to\" — форма инфинитива."
+          },
+          {
+            "id": 19,
+            "words": [
+              "rules",
+              "employees",
+              "become",
+              "used",
+              "to",
+              "the",
+              "strict"
+            ],
+            "answer": "employees become used to the strict rules",
+            "explanation": "\"become used to\" — ko'plik ega, bosh shakl.",
+            "explanationRu": "\"become used to\" — подлежащее во мн. числе, начальная форма."
+          },
+          {
+            "id": 20,
+            "words": [
+              "money",
+              "I",
+              "used",
+              "to",
+              "have",
+              "little"
+            ],
+            "answer": "I used to have little money",
+            "explanation": "\"used to\" + holat fe'li (have).",
+            "explanationRu": "\"used to\" + глагол состояния (have)."
+          }
+        ],
+        "errorCorrection": [
+          {
+            "id": 1,
+            "text": "I am used to smoke every evening.",
+            "options": [
+              "I",
+              "am used to smoke",
+              "every evening",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "am used to smoke",
+            "correction": "am used to smoking",
+            "explanation": "After \"be used to\", use V-ing, not the base verb: \"smoking\", not \"smoke\".",
+            "explanationRu": "После \"be used to\" используется V-ing, а не начальная форма: \"smoking\", а не \"smoke\"."
+          },
+          {
+            "id": 2,
+            "text": "She is used to work long hours.",
+            "options": [
+              "She",
+              "is used to work",
+              "long hours",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "is used to work",
+            "correction": "is used to working",
+            "explanation": "After \"be used to\", use V-ing: \"working\", not \"work\".",
+            "explanationRu": "После \"be used to\" используется V-ing: \"working\", а не \"work\"."
+          },
+          {
+            "id": 3,
+            "text": "I am getting use to the new routine.",
+            "options": [
+              "I",
+              "am getting use to",
+              "the new routine",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "am getting use to",
+            "correction": "am getting used to",
+            "explanation": "The correct phrase is \"used to\" (with -d), not \"use to\", after \"get/be/become\".",
+            "explanationRu": "Правильная фраза — \"used to\" (с -d), а не \"use to\", после \"get/be/become\"."
+          },
+          {
+            "id": 4,
+            "text": "He got used to live in a cold climate.",
+            "options": [
+              "He",
+              "got used to live",
+              "in a cold climate",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "got used to live",
+            "correction": "got used to living",
+            "explanation": "After \"get used to\", use V-ing: \"living\", not \"live\".",
+            "explanationRu": "После \"get used to\" используется V-ing: \"living\", а не \"live\"."
+          },
+          {
+            "id": 5,
+            "text": "She has became used to the noise.",
+            "options": [
+              "She",
+              "has became used to",
+              "the noise",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "has became used to",
+            "correction": "has become used to",
+            "explanation": "After \"has\", use V3 (Past Participle): \"become\", not \"became\" (the simple past form).",
+            "explanationRu": "После \"has\" используется V3 (причастие прошедшего времени): \"become\", а не \"became\" (форма Past Simple)."
+          },
+          {
+            "id": 6,
+            "text": "I use to play the guitar every day.",
+            "options": [
+              "I",
+              "use to play",
+              "the guitar every day",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "use to play",
+            "correction": "used to play",
+            "explanation": "In an affirmative statement, the correct form is \"used to\" (with -d), not \"use to\".",
+            "explanationRu": "В утвердительном предложении правильная форма — \"used to\" (с -d), а не \"use to\"."
+          },
+          {
+            "id": 7,
+            "text": "My grandfather would liked fishing when he was young.",
+            "options": [
+              "My grandfather",
+              "would liked",
+              "fishing when he was young",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "would liked",
+            "correction": "used to like",
+            "explanation": "\"like\" is a state verb — \"would\" cannot be used with it; use \"used to like\" instead.",
+            "explanationRu": "\"like\" — глагол состояния, с ним нельзя использовать \"would\"; вместо этого используется \"used to like\"."
+          },
+          {
+            "id": 8,
+            "text": "He isn't use to cold weather.",
+            "options": [
+              "He",
+              "isn't use to",
+              "cold weather",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "isn't use to",
+            "correction": "isn't used to",
+            "explanation": "The correct phrase is \"used to\" (with -d) even in the negative: \"isn't used to\".",
+            "explanationRu": "Правильная фраза — \"used to\" (с -d) даже в отрицании: \"isn't used to\"."
+          },
+          {
+            "id": 9,
+            "text": "How long did it take you to get used to live here?",
+            "options": [
+              "How long did it take you",
+              "to get used to live",
+              "here",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "to get used to live",
+            "correction": "to get used to living",
+            "explanation": "After \"get used to\", use V-ing: \"living\", not \"live\".",
+            "explanationRu": "После \"get used to\" используется V-ing: \"living\", а не \"live\"."
+          },
+          {
+            "id": 10,
+            "text": "Did you used to play the piano as a child?",
+            "options": [
+              "Did you",
+              "used to play",
+              "the piano as a child",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "used to play",
+            "correction": "use to play",
+            "explanation": "After \"Did\", the base form \"use to\" is needed, not \"used to\".",
+            "explanationRu": "После \"Did\" нужна начальная форма \"use to\", а не \"used to\"."
+          },
+          {
+            "id": 11,
+            "text": "The employees are used to get the new software slowly.",
+            "options": [
+              "The employees",
+              "are used to get",
+              "the new software slowly",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "are used to get",
+            "correction": "are getting used to",
+            "explanation": "\"be used to\" describes a finished state; a current process needs \"are getting used to\".",
+            "explanationRu": "\"be used to\" описывает уже сложившееся состояние; для текущего процесса нужно \"are getting used to\"."
+          },
+          {
+            "id": 12,
+            "text": "I didn't used to like vegetables as a child.",
+            "options": [
+              "I didn't",
+              "used to like",
+              "vegetables as a child",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "used to like",
+            "correction": "use to like",
+            "explanation": "After \"didn't\", the base form \"use to\" is needed, not \"used to\".",
+            "explanationRu": "После \"didn't\" нужна начальная форма \"use to\", а не \"used to\"."
+          },
+          {
+            "id": 13,
+            "text": "It took him months, but he eventually become used to the noise.",
+            "options": [
+              "It took him months, but",
+              "he eventually become used to",
+              "the noise",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "he eventually become used to",
+            "correction": "he eventually became used to",
+            "explanation": "A finished past action needs the simple past: \"became\", not the base form \"become\".",
+            "explanationRu": "Завершённое прошедшее действие требует Past Simple: \"became\", а не начальную форму \"become\"."
+          },
+          {
+            "id": 14,
+            "text": "Are you use to the cold winters here yet?",
+            "options": [
+              "Are you",
+              "use to",
+              "the cold winters here yet",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "use to",
+            "correction": "used to",
+            "explanation": "The correct phrase after \"be\" is always \"used to\" (with -d): \"Are you used to...?\".",
+            "explanationRu": "После \"be\" всегда правильна фраза \"used to\" (с -d): \"Are you used to...?\"."
+          },
+          {
+            "id": 15,
+            "text": "As a child, I would had very little money.",
+            "options": [
+              "As a child, I",
+              "would had",
+              "very little money",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "would had",
+            "correction": "used to have",
+            "explanation": "\"have\" is a state verb — \"would\" cannot be used with it; use \"used to have\" instead.",
+            "explanationRu": "\"have\" — глагол состояния, с ним нельзя использовать \"would\"; вместо этого используется \"used to have\"."
+          },
+          {
+            "id": 16,
+            "text": "I was slowly getting use to the idea of moving abroad.",
+            "options": [
+              "I was slowly",
+              "getting use to",
+              "the idea of moving abroad",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "getting use to",
+            "correction": "getting used to",
+            "explanation": "The correct phrase is \"used to\" (with -d), not \"use to\", after \"get\".",
+            "explanationRu": "Правильная фраза — \"used to\" (с -d), а не \"use to\", после \"get\"."
+          },
+          {
+            "id": 17,
+            "text": "We've traveled so much that we used to long flights.",
+            "options": [
+              "We've traveled so much that we",
+              "used to long flights",
+              ".",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "used to long flights",
+            "correction": "are used to long flights",
+            "explanation": "A permanent, current state needs \"be used to\": \"are used to\", not \"used to\" alone.",
+            "explanationRu": "Постоянное текущее состояние требует \"be used to\": \"are used to\", а не просто \"used to\"."
+          },
+          {
+            "id": 18,
+            "text": "You'll need time to getting used to the new system.",
+            "options": [
+              "You'll need time",
+              "to getting used to",
+              "the new system",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "to getting used to",
+            "correction": "to get used to",
+            "explanation": "After \"to\" (infinitive), use the base verb: \"to get used to\", not \"to getting used to\".",
+            "explanationRu": "После \"to\" (инфинитив) используется начальная форма глагола: \"to get used to\", а не \"to getting used to\"."
+          },
+          {
+            "id": 19,
+            "text": "Over time, employees usually becomes used to the strict rules.",
+            "options": [
+              "Over time,",
+              "employees usually becomes used to",
+              "the strict rules",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "employees usually becomes used to",
+            "correction": "employees usually become used to",
+            "explanation": "The plural subject \"employees\" needs the base form: \"become\", not \"becomes\".",
+            "explanationRu": "Подлежащее во мн. числе \"employees\" требует начальной формы: \"become\", а не \"becomes\"."
+          },
+          {
+            "id": 20,
+            "text": "When I was a student, I would have very little money.",
+            "options": [
+              "When I was a student,",
+              "I would have",
+              "very little money",
+              "No error"
+            ],
+            "correct": 1,
+            "wrongPart": "I would have",
+            "correction": "I used to have",
+            "explanation": "\"have\" is a state verb — \"would\" cannot be used with it; use \"used to have\" instead.",
+            "explanationRu": "\"have\" — глагол состояния, с ним нельзя использовать \"would\"; вместо этого используется \"used to have\"."
+          }
+        ],
+        "transform": [
+          {
+            "id": 1,
+            "text": "Describe a habit of being comfortable with something now: \"After ten years here, the traffic noise doesn't bother me anymore.\"",
+            "options": [
+              "I am used to the traffic noise now.",
+              "I used to the traffic noise now.",
+              "I get used to the traffic noise now.",
+              "I would the traffic noise now."
+            ],
+            "correct": 0,
+            "explanation": "\"be used to\" describes a current state of being accustomed to something.",
+            "explanationRu": "\"be used to\" описывает текущее состояние привыкания к чему-либо."
+          },
+          {
+            "id": 2,
+            "text": "Describe a current state after years of experience: \"Working night shifts for years means staying up late no longer bothers her.\"",
+            "options": [
+              "She is used to staying up late.",
+              "She used to stay up late.",
+              "She would stay up late.",
+              "She gets used to stay up late."
+            ],
+            "correct": 0,
+            "explanation": "\"be used to\" + V-ing describes a comfortable, current state.",
+            "explanationRu": "\"be used to\" + V-ing описывает комфортное текущее состояние."
+          },
+          {
+            "id": 3,
+            "text": "Describe an ongoing process of adaptation: \"It's my first week, and the routine is slowly starting to feel normal.\"",
+            "options": [
+              "I am getting used to the routine already.",
+              "I am used to the routine already.",
+              "I used to the routine already.",
+              "I would get used to the routine."
+            ],
+            "correct": 0,
+            "explanation": "\"get used to\" in the continuous form describes an adaptation happening right now.",
+            "explanationRu": "\"get used to\" в длительной форме описывает адаптацию, происходящую прямо сейчас."
+          },
+          {
+            "id": 4,
+            "text": "Describe a completed process of adaptation: \"After a few months, the cold winters stopped bothering him.\"",
+            "options": [
+              "He got used to the cold winters.",
+              "He used to the cold winters.",
+              "He was used to get the cold winters.",
+              "He would get used to the cold winters."
+            ],
+            "correct": 0,
+            "explanation": "\"got used to\" describes a completed process of adaptation in the past.",
+            "explanationRu": "\"got used to\" описывает завершённый процесс адаптации в прошлом."
+          },
+          {
+            "id": 5,
+            "text": "Describe a formal, completed adaptation: \"After years abroad, spicy food no longer feels unusual to her.\"",
+            "options": [
+              "She has become used to eating spicy food.",
+              "She has became used to eating spicy food.",
+              "She is become used to eating spicy food.",
+              "She became use to eating spicy food."
+            ],
+            "correct": 0,
+            "explanation": "\"become used to\" is a more formal synonym for \"get used to\".",
+            "explanationRu": "\"become used to\" — более формальный синоним \"get used to\"."
+          },
+          {
+            "id": 6,
+            "text": "Describe a past habit that has since stopped: \"Playing the guitar every day was something I did before university, but not now.\"",
+            "options": [
+              "I used to play the guitar every day.",
+              "I would play the guitar every day.",
+              "I am used to playing the guitar every day.",
+              "I get used to playing the guitar every day."
+            ],
+            "correct": 0,
+            "explanation": "\"used to\" describes a past habit that has now stopped.",
+            "explanationRu": "\"used to\" описывает прошлую привычку, которая уже прекратилась."
+          },
+          {
+            "id": 7,
+            "text": "Describe a repeated past action: \"Every Friday, without fail, my grandfather took us fishing.\"",
+            "options": [
+              "Every Friday, my grandfather would take us fishing.",
+              "Every Friday, my grandfather is used to take us fishing.",
+              "Every Friday, my grandfather gets used to taking us fishing.",
+              "Every Friday, my grandfather is used to taking us fishing."
+            ],
+            "correct": 0,
+            "explanation": "\"would\" describes a repeated action in the past.",
+            "explanationRu": "\"would\" описывает повторяющееся действие в прошлом."
+          },
+          {
+            "id": 8,
+            "text": "Describe someone unaccustomed to a climate: \"Growing up in a hot country means cold weather still feels strange to him.\"",
+            "options": [
+              "He isn't used to cold weather.",
+              "He doesn't used to cold weather.",
+              "He wasn't use to cold weather.",
+              "He is not use to cold weather."
+            ],
+            "correct": 0,
+            "explanation": "The negative of \"be used to\" is \"isn't / aren't / wasn't used to\".",
+            "explanationRu": "Отрицание \"be used to\" — \"isn't / aren't / wasn't used to\"."
+          },
+          {
+            "id": 9,
+            "text": "Ask about the duration of an adaptation process: \"I want to know the length of time your adaptation to city life took.\"",
+            "options": [
+              "How long did it take you to get used to living in the city?",
+              "How long did it take you getting used to living in the city?",
+              "How long were you used to live in the city?",
+              "How long would you get used to living in the city?"
+            ],
+            "correct": 0,
+            "explanation": "\"to get used to\" is the infinitive form used after expressions like \"take time\".",
+            "explanationRu": "\"to get used to\" — форма инфинитива, используемая после выражений типа \"take time\"."
+          },
+          {
+            "id": 10,
+            "text": "Describe a comfortable, current professional state: \"As a chef, long hours on her feet no longer tire her out.\"",
+            "options": [
+              "As a chef, she is used to working long hours.",
+              "As a chef, she used to work long hours.",
+              "As a chef, she would work long hours.",
+              "As a chef, she gets used to work long hours."
+            ],
+            "correct": 0,
+            "explanation": "\"be used to\" + V-ing describes a current, comfortable state.",
+            "explanationRu": "\"be used to\" + V-ing описывает текущее, комфортное состояние."
+          },
+          {
+            "id": 11,
+            "text": "Describe an ongoing workplace adaptation: \"The new employees are slowly starting to feel comfortable with the software.\"",
+            "options": [
+              "The new employees are getting used to the software.",
+              "The new employees are used to the software.",
+              "The new employees used to the software.",
+              "The new employees would get used to the software."
+            ],
+            "correct": 0,
+            "explanation": "\"get used to\" in the continuous form describes an adaptation in progress.",
+            "explanationRu": "\"get used to\" в длительной форме описывает адаптацию в процессе."
+          },
+          {
+            "id": 12,
+            "text": "Describe a past habit that has since changed: \"Eating a lot of fast food was something I did before, but I've completely changed my diet.\"",
+            "options": [
+              "I used to eat fast food a lot.",
+              "I would eat fast food a lot.",
+              "I am used to eating fast food a lot.",
+              "I get used to eating fast food a lot."
+            ],
+            "correct": 0,
+            "explanation": "\"used to\" describes a past habit that has now changed.",
+            "explanationRu": "\"used to\" описывает прошлую привычку, которая теперь изменилась."
+          },
+          {
+            "id": 13,
+            "text": "Describe a completed adaptation, more formally: \"After months, the airport noise eventually stopped bothering him.\"",
+            "options": [
+              "He became used to the noise from the airport.",
+              "He got use to the noise from the airport.",
+              "He was become used to the noise from the airport.",
+              "He would become used to the noise from the airport."
+            ],
+            "correct": 0,
+            "explanation": "\"became used to\" is the past form of the more formal \"become used to\".",
+            "explanationRu": "\"became used to\" — форма прошедшего времени более формального \"become used to\"."
+          },
+          {
+            "id": 14,
+            "text": "Ask whether someone is now comfortable with the local winters: \"I want to know if the cold winters here still feel strange to you.\"",
+            "options": [
+              "Are you used to the cold winters here yet?",
+              "Do you use to the cold winters here yet?",
+              "Have you used to the cold winters here yet?",
+              "Would you the cold winters here yet?"
+            ],
+            "correct": 0,
+            "explanation": "The question form of \"be used to\" is \"Are/Is/Was + subject + used to...?\".",
+            "explanationRu": "Вопросительная форма \"be used to\": \"Are/Is/Was + подлежащее + used to...?\"."
+          },
+          {
+            "id": 15,
+            "text": "Describe a repeated childhood habit: \"Every summer, without fail, I spent time at my grandparents' farm.\"",
+            "options": [
+              "As a child, I would spend every summer at my grandparents' farm.",
+              "As a child, I am used to spending every summer at my grandparents' farm.",
+              "As a child, I get used to spending every summer at my grandparents' farm.",
+              "As a child, I am used to spend every summer at my grandparents' farm."
+            ],
+            "correct": 0,
+            "explanation": "\"would\" describes a repeated action in the past.",
+            "explanationRu": "\"would\" описывает повторяющееся действие в прошлом."
+          },
+          {
+            "id": 16,
+            "text": "Describe an adaptation process interrupted midway: \"I was slowly starting to feel comfortable with the idea of moving abroad when everything changed.\"",
+            "options": [
+              "I was slowly getting used to the idea of moving abroad.",
+              "I was slowly used to the idea of moving abroad.",
+              "I was slowly used to get the idea of moving abroad.",
+              "I would slowly get used to the idea of moving abroad."
+            ],
+            "correct": 0,
+            "explanation": "\"getting used to\" in the past continuous describes a process interrupted or in progress.",
+            "explanationRu": "\"getting used to\" в Past Continuous описывает прерванный или продолжающийся процесс."
+          },
+          {
+            "id": 17,
+            "text": "Describe a current comfortable state from experience: \"After so much travel for work, long flights no longer bother us.\"",
+            "options": [
+              "We are used to long flights.",
+              "We used to long flights.",
+              "We get used to long flights.",
+              "We would long flights."
+            ],
+            "correct": 0,
+            "explanation": "\"be used to\" + noun describes a current, comfortable state.",
+            "explanationRu": "\"be used to\" + существительное описывает текущее, комфортное состояние."
+          },
+          {
+            "id": 18,
+            "text": "Advise that adaptation takes time: \"Adjusting to the new system requires some time at first, then it becomes easier.\"",
+            "options": [
+              "You'll need some time to get used to the new system.",
+              "You'll need some time getting used to the new system.",
+              "You'll need some time to used to the new system.",
+              "You'll need some time to be used to the new system."
+            ],
+            "correct": 0,
+            "explanation": "\"to get used to\" is the infinitive form used after \"need time\".",
+            "explanationRu": "\"to get used to\" — форма инфинитива, используемая после \"need time\"."
+          },
+          {
+            "id": 19,
+            "text": "Describe a general workplace pattern: \"Given enough time, employees typically stop finding the strict rules unusual.\"",
+            "options": [
+              "Over time, employees usually become used to the company's strict rules.",
+              "Over time, employees usually became used to the company's strict rules.",
+              "Over time, employees usually are become used to the company's strict rules.",
+              "Over time, employees usually become use to the company's strict rules."
+            ],
+            "correct": 0,
+            "explanation": "A general, repeated pattern needs Present Simple: \"become\", not the past form \"became\".",
+            "explanationRu": "Общая повторяющаяся закономерность требует Present Simple: \"become\", а не форму прошедшего времени \"became\"."
+          },
+          {
+            "id": 20,
+            "text": "Describe a past state combined with a repeated action: \"Having very little money as a student meant I regularly cooked cheap meals.\"",
+            "options": [
+              "When I was a student, I used to have very little money.",
+              "When I was a student, I would have very little money.",
+              "When I was a student, I use to have very little money.",
+              "When I was a student, I was having very little money."
+            ],
+            "correct": 0,
+            "explanation": "\"have\" is a state verb, so \"used to have\" is correct, not \"would have\".",
+            "explanationRu": "\"have\" — глагол состояния, поэтому правильно \"used to have\", а не \"would have\"."
+          }
+        ],
+        "dialogue": [
+          {
+            "id": 1,
+            "situation": "Talking about living in a busy city.",
+            "dialogue": "A: Doesn't all this traffic noise bother you?\nB: Not anymore — I ___ the traffic noise now.",
+            "options": [
+              "am used to",
+              "used to",
+              "get used to",
+              "would"
+            ],
+            "correct": 0,
+            "explanation": "\"be used to\" — o'rganib qolganlik.",
+            "explanationRu": "\"be used to\" — привыкание."
+          },
+          {
+            "id": 2,
+            "situation": "Discussing a friend's work schedule.",
+            "dialogue": "A: How does she manage those night shifts?\nB: She ___ staying up late after all these years.",
+            "options": [
+              "is used to",
+              "uses to",
+              "gets used to",
+              "would"
+            ],
+            "correct": 0,
+            "explanation": "\"be used to\" — o'rganib qolganlik holati.",
+            "explanationRu": "\"be used to\" — состояние привыкания."
+          },
+          {
+            "id": 3,
+            "situation": "Starting a new job.",
+            "dialogue": "A: How's the new job going?\nB: It's only my first week, but I ___ the routine already.",
+            "options": [
+              "am getting used to",
+              "get used to",
+              "am used to",
+              "would get used to"
+            ],
+            "correct": 0,
+            "explanation": "\"get used to\" — o'rganib qolish jarayoni.",
+            "explanationRu": "\"get used to\" — процесс привыкания."
+          },
+          {
+            "id": 4,
+            "situation": "Talking about moving to a colder country.",
+            "dialogue": "A: Was it hard adjusting to the winters there?\nB: At first, yes, but he finally ___ the cold winters.",
+            "options": [
+              "got used to",
+              "used to get",
+              "was used to",
+              "would get used to"
+            ],
+            "correct": 0,
+            "explanation": "\"get used to\" — tugallangan jarayon.",
+            "explanationRu": "\"get used to\" — завершённый процесс."
+          },
+          {
+            "id": 5,
+            "situation": "Discussing life abroad.",
+            "dialogue": "A: Does she still find spicy food strange?\nB: Not at all — she ___ eating spicy food.",
+            "options": [
+              "has become used to",
+              "has became used to",
+              "is become used to",
+              "became use to"
+            ],
+            "correct": 0,
+            "explanation": "\"become used to\" — o'rganib qolish, rasmiyroq shakl.",
+            "explanationRu": "\"become used to\" — привыкание, более формальная форма."
+          },
+          {
+            "id": 6,
+            "situation": "Talking about a childhood hobby.",
+            "dialogue": "A: Do you still play the guitar?\nB: No, I ___ play every day, but I stopped after university.",
+            "options": [
+              "used to",
+              "use to",
+              "was used to",
+              "would used to"
+            ],
+            "correct": 0,
+            "explanation": "\"used to\" — hozir tugagan o'tmishdagi odat.",
+            "explanationRu": "\"used to\" — прошлая привычка, которая уже прекратилась."
+          },
+          {
+            "id": 7,
+            "situation": "Remembering family traditions.",
+            "dialogue": "A: Did you do anything special with your grandfather?\nB: Every Friday, he ___ take us fishing at the lake.",
+            "options": [
+              "would",
+              "used to",
+              "use to",
+              "was used to"
+            ],
+            "correct": 0,
+            "explanation": "\"would\" — o'tmishdagi takrorlanuvchi harakat.",
+            "explanationRu": "\"would\" — повторяющееся действие в прошлом."
+          },
+          {
+            "id": 8,
+            "situation": "Discussing someone's discomfort with the weather.",
+            "dialogue": "A: Why does he complain so much about winter?\nB: He grew up somewhere hot, so he ___ cold weather.",
+            "options": [
+              "isn't used to",
+              "doesn't used to",
+              "wasn't use to",
+              "not used to"
+            ],
+            "correct": 0,
+            "explanation": "\"be used to\" ning inkor shakli.",
+            "explanationRu": "Отрицательная форма \"be used to\"."
+          },
+          {
+            "id": 9,
+            "situation": "Talking about moving to a big city.",
+            "dialogue": "A: Was it a big adjustment for you?\nB: How long did it take you ___ living in such a big city?",
+            "options": [
+              "to get used to",
+              "getting used to",
+              "to used to get",
+              "get use to"
+            ],
+            "correct": 0,
+            "explanation": "\"to get used to\" — infinitiv shakl.",
+            "explanationRu": "\"to get used to\" — форма инфинитива."
+          },
+          {
+            "id": 10,
+            "situation": "Discussing a chef's work.",
+            "dialogue": "A: Doesn't standing all day exhaust her?\nB: Not really — as a chef, she ___ working long hours on her feet.",
+            "options": [
+              "is used to",
+              "used to",
+              "gets used to",
+              "would"
+            ],
+            "correct": 0,
+            "explanation": "\"be used to\" — o'rganib qolganlik holati.",
+            "explanationRu": "\"be used to\" — состояние привыкания."
+          },
+          {
+            "id": 11,
+            "situation": "Talking about a new work tool.",
+            "dialogue": "A: How is everyone adapting to the new software?\nB: The new employees ___ it slowly but surely.",
+            "options": [
+              "are getting used to",
+              "get used to",
+              "are used to get",
+              "would get used to"
+            ],
+            "correct": 0,
+            "explanation": "\"get used to\" — hozir davom etayotgan jarayon.",
+            "explanationRu": "\"get used to\" — процесс, происходящий сейчас."
+          },
+          {
+            "id": 12,
+            "situation": "Talking about changing eating habits.",
+            "dialogue": "A: Do you still eat a lot of fast food?\nB: No, I ___ eat it a lot, but I've completely changed my diet.",
+            "options": [
+              "used to",
+              "use to",
+              "was used to",
+              "would used to"
+            ],
+            "correct": 0,
+            "explanation": "\"used to\" — hozir tugagan o'tmishdagi odat.",
+            "explanationRu": "\"used to\" — прошлая привычка, которая уже прекратилась."
+          },
+          {
+            "id": 13,
+            "situation": "Talking about living near an airport.",
+            "dialogue": "A: Doesn't the airport noise drive you crazy?\nB: It took him months, but he eventually ___ the noise.",
+            "options": [
+              "became used to",
+              "become used to",
+              "was become used to",
+              "became use to"
+            ],
+            "correct": 0,
+            "explanation": "\"become used to\" — tugallangan jarayon.",
+            "explanationRu": "\"become used to\" — завершённый процесс."
+          },
+          {
+            "id": 14,
+            "situation": "Checking in with a newcomer.",
+            "dialogue": "A: How are you finding the winters here?\nB: Are you ___ the cold winters yet?",
+            "options": [
+              "used to",
+              "use to",
+              "get used to",
+              "would"
+            ],
+            "correct": 0,
+            "explanation": "\"be used to\" savol shaklida.",
+            "explanationRu": "\"be used to\" в вопросительной форме."
+          },
+          {
+            "id": 15,
+            "situation": "Sharing childhood memories.",
+            "dialogue": "A: What did you do in the summer as a kid?\nB: I ___ spend every summer at my grandparents' farm.",
+            "options": [
+              "would",
+              "used to",
+              "use to",
+              "was used to"
+            ],
+            "correct": 0,
+            "explanation": "\"would\" — o'tmishdagi takrorlanuvchi harakat.",
+            "explanationRu": "\"would\" — повторяющееся действие в прошлом."
+          },
+          {
+            "id": 16,
+            "situation": "Talking about a plan that changed.",
+            "dialogue": "A: Were you excited about moving abroad?\nB: I was slowly ___ the idea when the plan suddenly changed.",
+            "options": [
+              "getting used to",
+              "get used to",
+              "used to get",
+              "become used to"
+            ],
+            "correct": 0,
+            "explanation": "\"get used to\" — o'tgan davomli zamonda davom etayotgan jarayon.",
+            "explanationRu": "\"get used to\" — процесс, длившийся в прошлом (Past Continuous)."
+          },
+          {
+            "id": 17,
+            "situation": "Talking about frequent business travel.",
+            "dialogue": "A: Doesn't all that flying tire you out?\nB: Not really — we've traveled so much that we ___ long flights.",
+            "options": [
+              "are used to",
+              "used to",
+              "get used to",
+              "would"
+            ],
+            "correct": 0,
+            "explanation": "\"be used to\" — o'rganib qolganlik holati.",
+            "explanationRu": "\"be used to\" — состояние привыкания."
+          },
+          {
+            "id": 18,
+            "situation": "Onboarding a new employee.",
+            "dialogue": "A: This new system looks complicated.\nB: You'll need some time ___ it, but it gets easier.",
+            "options": [
+              "to get used to",
+              "getting used to",
+              "to used to",
+              "get use to"
+            ],
+            "correct": 0,
+            "explanation": "\"to get used to\" — infinitiv shakl.",
+            "explanationRu": "\"to get used to\" — форма инфинитива."
+          },
+          {
+            "id": 19,
+            "situation": "Discussing workplace culture.",
+            "dialogue": "A: Do new hires ever complain about the strict rules?\nB: Over time, employees usually ___ them.",
+            "options": [
+              "become used to",
+              "became used to",
+              "are become used to",
+              "become use to"
+            ],
+            "correct": 0,
+            "explanation": "\"become\" — ko'plik ega bilan bosh shaklda.",
+            "explanationRu": "\"become\" — в начальной форме с подлежащим во мн. числе."
+          },
+          {
+            "id": 20,
+            "situation": "Reminiscing about student life.",
+            "dialogue": "A: Was it hard being a student with no money?\nB: I ___ very little money, so I would cook cheap meals every night.",
+            "options": [
+              "used to have",
+              "would have",
+              "use to have",
+              "was having"
+            ],
+            "correct": 0,
+            "explanation": "\"have\" — holat fe'li, shuning uchun used to ishlatiladi.",
+            "explanationRu": "\"have\" — глагол состояния, поэтому используется used to."
+          }
+        ]
+      },
+      {
         "id": "general-questions",
         "title": "General Questions",
         "icon": "❓",
@@ -66633,11 +71513,7 @@ export const grammarData = {
             "explanation": "\"in the morning\" iborasi to'g'ri."
           }
         ]
-      }
-    ]
-  },
-  "advanced": {
-    "topics": [
+      },
       {
         "id": "first-conditional",
         "title": "First Conditional",
@@ -72669,1555 +77545,6 @@ export const grammarData = {
             ],
             "correct": 0,
             "explanation": "Reason: why."
-          }
-        ]
-      },
-      {
-        "id": "used-to-would",
-        "title": "Used to & Would",
-        "icon": "🕰️",
-        "guide": "## Used to & Would (O'tmishdagi odatlar)\n\n\"Used to\" va \"would\" o'tmishda muntazam sodir bo'lgan, lekin hozir tugagan odat yoki holatlarni ifodalash uchun ishlatiladi.\n\n## 1. Shakllanishi (Form)\n• **used to + base verb**: barcha o'tmishdagi odatlar VA holatlar (be, have, like, know kabi) uchun\n  - I **used to play** football every weekend.\n  - She **used to live** in Paris.\n• **would + base verb**: faqat o'tmishdagi TAKRORLANUVCHI harakatlar uchun, HOLAT fe'llari bilan ishlatilmaydi\n  - When I was young, I **would visit** my grandma every summer.\n  - *(would live — NOTO'G'RI, chunki \"live\" holat fe'li)*\n• **Negative**: didn't use to + base verb\n  - I **didn't use to like** coffee.\n• **Question**: Did + Subject + use to + base verb?\n  - **Did** you **use to play** football?\n\n*(\"use to\" — asosiy fe'l shakli; \"used to\" faqat tasdiq gapda ishlatiladi, savol/inkorda \"did\" bilan \"use to\" qo'llanadi)*\n\n## 2. Ishlatilishi (Usage)\n1. **Hozir to'xtagan o'tmishdagi odat**: used to / would\n   - I **used to smoke**, but I quit. / My father **would tell** us stories every night.\n2. **O'tmishdagi holat (be, have, like, know, believe, want)** — faqat used to:\n   - I **used to believe** in ghosts.\n3. **Hozirgi holat bilan taqqoslash**:\n   - I **used to hate** vegetables, but now I love them.\n\n## 3. Muhim eslatma: \"be used to\" bilan farqi\n\"Used to + infinitive\" (odat) bilan \"be/get used to + -ing\" (biror narsaga o'rganib qolish) ikki xil narsa:\n  - I **used to live** alone. (avval yolg'iz yashaganman — odat)\n  - I **am used to living** alone. (yolg'iz yashashga o'rganib qolganman — hozirgi holat)\n\n## 4. Umumiy xatolar\n• \"I use to...\" — NOTO'G'RI tasdiq gapda; to'g'risi \"I used to...\".\n• \"Did you used to...?\" — NOTO'G'RI; to'g'risi \"Did you use to...?\".\n• \"would\" holat fe'llari (be, have, like, know) bilan ishlatilmaydi.",
-        "questions": [
-          {
-            "id": 1,
-            "text": "I ___ play football every weekend when I was a child.",
-            "options": [
-              "used to",
-              "use to",
-              "would played",
-              "was used to"
-            ],
-            "correct": 0,
-            "explanation": "Past habit: used to + base verb."
-          },
-          {
-            "id": 2,
-            "text": "She ___ live in Paris before she moved to London.",
-            "options": [
-              "used to",
-              "would",
-              "use to",
-              "was"
-            ],
-            "correct": 0,
-            "explanation": "State verb: only used to is possible, not would."
-          },
-          {
-            "id": 3,
-            "text": "When I was young, I ___ visit my grandma every summer.",
-            "options": [
-              "would",
-              "used",
-              "use",
-              "was"
-            ],
-            "correct": 0,
-            "explanation": "Repeated past action: would + base verb."
-          },
-          {
-            "id": 4,
-            "text": "I ___ not use to like vegetables, but now I love them.",
-            "options": [
-              "did",
-              "was",
-              "used",
-              "have"
-            ],
-            "correct": 0,
-            "explanation": "Negative form: didn't use to + base verb."
-          },
-          {
-            "id": 5,
-            "text": "___ you use to play the piano when you were a kid?",
-            "options": [
-              "Did",
-              "Were",
-              "Have",
-              "Used"
-            ],
-            "correct": 0,
-            "explanation": "Question form: Did + subject + use to + base verb?"
-          },
-          {
-            "id": 6,
-            "text": "He ___ smoke, but he quit five years ago.",
-            "options": [
-              "used to",
-              "would",
-              "uses to",
-              "is used to"
-            ],
-            "correct": 0,
-            "explanation": "Past habit: used to + base verb."
-          },
-          {
-            "id": 7,
-            "text": "We ___ have a dog when I was little.",
-            "options": [
-              "used to",
-              "would",
-              "use to",
-              "were"
-            ],
-            "correct": 0,
-            "explanation": "State verb (possession): only used to is possible."
-          },
-          {
-            "id": 8,
-            "text": "They ___ walk to school together every morning.",
-            "options": [
-              "would",
-              "used",
-              "use",
-              "was"
-            ],
-            "correct": 0,
-            "explanation": "Repeated past action: would + base verb."
-          },
-          {
-            "id": 9,
-            "text": "I ___ believe in ghosts when I was a kid.",
-            "options": [
-              "used to",
-              "would",
-              "use to",
-              "was"
-            ],
-            "correct": 0,
-            "explanation": "State verb: only used to is possible."
-          },
-          {
-            "id": 10,
-            "text": "She didn't ___ eat meat, but now she does.",
-            "options": [
-              "use to",
-              "used to",
-              "using to",
-              "use"
-            ],
-            "correct": 0,
-            "explanation": "After didn't, use the base form: use to."
-          },
-          {
-            "id": 11,
-            "text": "My father ___ tell us stories every night before bed.",
-            "options": [
-              "would",
-              "used",
-              "use",
-              "was"
-            ],
-            "correct": 0,
-            "explanation": "Repeated past action: would + base verb."
-          },
-          {
-            "id": 12,
-            "text": "___ she used to work here?",
-            "options": [
-              "Did",
-              "Was",
-              "Has",
-              "Is"
-            ],
-            "correct": 0,
-            "explanation": "Question form: Did + subject + use to + base verb?"
-          },
-          {
-            "id": 13,
-            "text": "I ___ hate mathematics, but now I enjoy it.",
-            "options": [
-              "used to",
-              "would",
-              "use to",
-              "was"
-            ],
-            "correct": 0,
-            "explanation": "State verb: only used to is possible."
-          },
-          {
-            "id": 14,
-            "text": "When we were kids, we ___ build sandcastles at the beach.",
-            "options": [
-              "would",
-              "used",
-              "use",
-              "was"
-            ],
-            "correct": 0,
-            "explanation": "Repeated past action: would + base verb."
-          },
-          {
-            "id": 15,
-            "text": "He ___ have long hair, but he cut it.",
-            "options": [
-              "used to",
-              "would",
-              "use to",
-              "was"
-            ],
-            "correct": 0,
-            "explanation": "State verb (possession): only used to is possible."
-          },
-          {
-            "id": 16,
-            "text": "They ___ not use to travel much before they got rich.",
-            "options": [
-              "did",
-              "were",
-              "used",
-              "have"
-            ],
-            "correct": 0,
-            "explanation": "Negative form: didn't use to + base verb."
-          },
-          {
-            "id": 17,
-            "text": "I ___ afraid of the dark when I was young.",
-            "options": [
-              "used to be",
-              "would be",
-              "use to be",
-              "was used"
-            ],
-            "correct": 0,
-            "explanation": "State verb (be): only used to is possible."
-          },
-          {
-            "id": 18,
-            "text": "She ___ knock on my door every morning to wake me up.",
-            "options": [
-              "would",
-              "used",
-              "use",
-              "was"
-            ],
-            "correct": 0,
-            "explanation": "Repeated past action: would + base verb."
-          },
-          {
-            "id": 19,
-            "text": "Did you ___ live in a small village?",
-            "options": [
-              "use to",
-              "used to",
-              "using to",
-              "use"
-            ],
-            "correct": 0,
-            "explanation": "After did, use the base form: use to."
-          },
-          {
-            "id": 20,
-            "text": "We ___ go camping every summer as a family.",
-            "options": [
-              "used to",
-              "would",
-              "use to",
-              "was"
-            ],
-            "correct": 0,
-            "explanation": "Past habit: used to + base verb."
-          }
-        ],
-        "fillBlanks": [
-          {
-            "id": 1,
-            "text": "I ___ (play) football every weekend as a child.",
-            "options": [
-              "used to play",
-              "use to play",
-              "would played",
-              "was used to play"
-            ],
-            "correct": 0,
-            "explanation": "Past habit: used to + base verb (play)."
-          },
-          {
-            "id": 2,
-            "text": "She ___ (live) in Paris before moving to London.",
-            "options": [
-              "used to live",
-              "would live",
-              "use to live",
-              "was living"
-            ],
-            "correct": 0,
-            "explanation": "State verb: only used to is possible (live)."
-          },
-          {
-            "id": 3,
-            "text": "When I was young, I ___ (visit) my grandma every summer.",
-            "options": [
-              "would visit",
-              "used visit",
-              "use to visited",
-              "was visited"
-            ],
-            "correct": 0,
-            "explanation": "Repeated past action: would + base verb (visit)."
-          },
-          {
-            "id": 4,
-            "text": "I ___ (not / like) vegetables, but now I love them.",
-            "options": [
-              "didn't use to like",
-              "don't used to like",
-              "wasn't used to like",
-              "haven't used to like"
-            ],
-            "correct": 0,
-            "explanation": "Negative form: didn't use to + base verb (like)."
-          },
-          {
-            "id": 5,
-            "text": "___ (you / play) the piano when you were a kid?",
-            "options": [
-              "Did you use to play",
-              "Were you use to play",
-              "Have you used to play",
-              "Used you to play"
-            ],
-            "correct": 0,
-            "explanation": "Question form: Did + subject + use to + base verb."
-          },
-          {
-            "id": 6,
-            "text": "He ___ (smoke), but he quit five years ago.",
-            "options": [
-              "used to smoke",
-              "would smoke",
-              "uses to smoke",
-              "is used to smoking"
-            ],
-            "correct": 0,
-            "explanation": "Past habit: used to + base verb (smoke)."
-          },
-          {
-            "id": 7,
-            "text": "We ___ (have) a dog when I was little.",
-            "options": [
-              "used to have",
-              "would have",
-              "use to have",
-              "were having"
-            ],
-            "correct": 0,
-            "explanation": "State verb (possession): only used to is possible (have)."
-          },
-          {
-            "id": 8,
-            "text": "They ___ (walk) to school together every morning.",
-            "options": [
-              "would walk",
-              "used walk",
-              "use to walked",
-              "were walk"
-            ],
-            "correct": 0,
-            "explanation": "Repeated past action: would + base verb (walk)."
-          },
-          {
-            "id": 9,
-            "text": "I ___ (believe) in ghosts when I was a kid.",
-            "options": [
-              "used to believe",
-              "would believe",
-              "use to believed",
-              "was believing"
-            ],
-            "correct": 0,
-            "explanation": "State verb: only used to is possible (believe)."
-          },
-          {
-            "id": 10,
-            "text": "She ___ (not / eat) meat, but now she does.",
-            "options": [
-              "didn't use to eat",
-              "don't used to eat",
-              "wasn't used to eat",
-              "hasn't used to eat"
-            ],
-            "correct": 0,
-            "explanation": "Negative form: didn't use to + base verb (eat)."
-          },
-          {
-            "id": 11,
-            "text": "My father ___ (tell) us stories every night before bed.",
-            "options": [
-              "would tell",
-              "used tell",
-              "use to told",
-              "was tell"
-            ],
-            "correct": 0,
-            "explanation": "Repeated past action: would + base verb (tell)."
-          },
-          {
-            "id": 12,
-            "text": "___ (she / work) here?",
-            "options": [
-              "Did she use to work",
-              "Was she use to work",
-              "Has she used to work",
-              "Used she to work"
-            ],
-            "correct": 0,
-            "explanation": "Question form: Did + subject + use to + base verb."
-          },
-          {
-            "id": 13,
-            "text": "I ___ (hate) mathematics, but now I enjoy it.",
-            "options": [
-              "used to hate",
-              "would hate",
-              "use to hated",
-              "was hating"
-            ],
-            "correct": 0,
-            "explanation": "State verb: only used to is possible (hate)."
-          },
-          {
-            "id": 14,
-            "text": "When we were kids, we ___ (build) sandcastles at the beach.",
-            "options": [
-              "would build",
-              "used build",
-              "use to built",
-              "were build"
-            ],
-            "correct": 0,
-            "explanation": "Repeated past action: would + base verb (build)."
-          },
-          {
-            "id": 15,
-            "text": "He ___ (have) long hair, but he cut it.",
-            "options": [
-              "used to have",
-              "would have",
-              "use to have",
-              "was having"
-            ],
-            "correct": 0,
-            "explanation": "State verb (possession): only used to is possible (have)."
-          },
-          {
-            "id": 16,
-            "text": "They ___ (not / travel) much before they got rich.",
-            "options": [
-              "didn't use to travel",
-              "don't used to travel",
-              "weren't used to travel",
-              "haven't used to travel"
-            ],
-            "correct": 0,
-            "explanation": "Negative form: didn't use to + base verb (travel)."
-          },
-          {
-            "id": 17,
-            "text": "I ___ (be) afraid of the dark when I was young.",
-            "options": [
-              "used to be",
-              "would be",
-              "use to be",
-              "was used"
-            ],
-            "correct": 0,
-            "explanation": "State verb (be): only used to is possible."
-          },
-          {
-            "id": 18,
-            "text": "She ___ (knock) on my door every morning to wake me up.",
-            "options": [
-              "would knock",
-              "used knock",
-              "use to knocked",
-              "was knock"
-            ],
-            "correct": 0,
-            "explanation": "Repeated past action: would + base verb (knock)."
-          },
-          {
-            "id": 19,
-            "text": "___ (you / live) in a small village?",
-            "options": [
-              "Did you use to live",
-              "Were you use to live",
-              "Have you used to live",
-              "Used you to live"
-            ],
-            "correct": 0,
-            "explanation": "Question form: Did + subject + use to + base verb."
-          },
-          {
-            "id": 20,
-            "text": "We ___ (go) camping every summer as a family.",
-            "options": [
-              "used to go",
-              "would go",
-              "use to went",
-              "was going"
-            ],
-            "correct": 0,
-            "explanation": "Past habit: used to + base verb (go)."
-          }
-        ],
-        "scrambled": [
-          {
-            "id": 1,
-            "words": [
-              "football",
-              "I",
-              "used",
-              "to",
-              "play",
-              "every",
-              "weekend"
-            ],
-            "answer": "I used to play football every weekend",
-            "explanation": "Subject + used to + base verb + object."
-          },
-          {
-            "id": 2,
-            "words": [
-              "Paris",
-              "she",
-              "used",
-              "to",
-              "live",
-              "in"
-            ],
-            "answer": "she used to live in Paris",
-            "explanation": "State verb: only used to is possible, not would."
-          },
-          {
-            "id": 3,
-            "words": [
-              "grandma",
-              "I",
-              "would",
-              "visit",
-              "my",
-              "every",
-              "summer"
-            ],
-            "answer": "I would visit my grandma every summer",
-            "explanation": "would for a repeated past action/habit."
-          },
-          {
-            "id": 4,
-            "words": [
-              "vegetables",
-              "I",
-              "didn't",
-              "use",
-              "to",
-              "like"
-            ],
-            "answer": "I didn't use to like vegetables",
-            "explanation": "Negative form: didn't use to + base verb."
-          },
-          {
-            "id": 5,
-            "words": [
-              "piano",
-              "did",
-              "you",
-              "use",
-              "to",
-              "play",
-              "the",
-              "?"
-            ],
-            "answer": "did you use to play the piano",
-            "explanation": "Question form: Did + subject + use to + base verb?"
-          },
-          {
-            "id": 6,
-            "words": [
-              "smoke",
-              "he",
-              "used",
-              "to"
-            ],
-            "answer": "he used to smoke",
-            "explanation": "Subject + used to + base verb."
-          },
-          {
-            "id": 7,
-            "words": [
-              "dog",
-              "we",
-              "used",
-              "to",
-              "have",
-              "a"
-            ],
-            "answer": "we used to have a dog",
-            "explanation": "State verb (possession): only used to."
-          },
-          {
-            "id": 8,
-            "words": [
-              "school",
-              "they",
-              "would",
-              "walk",
-              "to",
-              "together"
-            ],
-            "answer": "they would walk to school together",
-            "explanation": "would for a repeated past action."
-          },
-          {
-            "id": 9,
-            "words": [
-              "ghosts",
-              "I",
-              "used",
-              "to",
-              "believe",
-              "in"
-            ],
-            "answer": "I used to believe in ghosts",
-            "explanation": "State verb: only used to."
-          },
-          {
-            "id": 10,
-            "words": [
-              "meat",
-              "she",
-              "didn't",
-              "use",
-              "to",
-              "eat"
-            ],
-            "answer": "she didn't use to eat meat",
-            "explanation": "Negative form: didn't use to + base verb."
-          },
-          {
-            "id": 11,
-            "words": [
-              "stories",
-              "my",
-              "father",
-              "would",
-              "tell",
-              "us",
-              "every",
-              "night"
-            ],
-            "answer": "my father would tell us stories every night",
-            "explanation": "would for a repeated past action."
-          },
-          {
-            "id": 12,
-            "words": [
-              "here",
-              "did",
-              "she",
-              "use",
-              "to",
-              "work",
-              "?"
-            ],
-            "answer": "did she use to work here",
-            "explanation": "Question form: Did + subject + use to + base verb?"
-          },
-          {
-            "id": 13,
-            "words": [
-              "mathematics",
-              "I",
-              "used",
-              "to",
-              "hate"
-            ],
-            "answer": "I used to hate mathematics",
-            "explanation": "State verb: only used to."
-          },
-          {
-            "id": 14,
-            "words": [
-              "sandcastles",
-              "we",
-              "would",
-              "build",
-              "at",
-              "the",
-              "beach"
-            ],
-            "answer": "we would build sandcastles at the beach",
-            "explanation": "would for a repeated past action."
-          },
-          {
-            "id": 15,
-            "words": [
-              "hair",
-              "he",
-              "used",
-              "to",
-              "have",
-              "long"
-            ],
-            "answer": "he used to have long hair",
-            "explanation": "State verb (possession): only used to."
-          },
-          {
-            "id": 16,
-            "words": [
-              "much",
-              "they",
-              "didn't",
-              "use",
-              "to",
-              "travel"
-            ],
-            "answer": "they didn't use to travel much",
-            "explanation": "Negative form: didn't use to + base verb."
-          },
-          {
-            "id": 17,
-            "words": [
-              "dark",
-              "I",
-              "used",
-              "to",
-              "be",
-              "afraid",
-              "of",
-              "the"
-            ],
-            "answer": "I used to be afraid of the dark",
-            "explanation": "State verb: only used to."
-          },
-          {
-            "id": 18,
-            "words": [
-              "door",
-              "she",
-              "would",
-              "knock",
-              "on",
-              "my"
-            ],
-            "answer": "she would knock on my door",
-            "explanation": "would for a repeated past action."
-          },
-          {
-            "id": 19,
-            "words": [
-              "village",
-              "did",
-              "you",
-              "use",
-              "to",
-              "live",
-              "in",
-              "a",
-              "small"
-            ],
-            "answer": "did you use to live in a small village",
-            "explanation": "Question form: Did + subject + use to + base verb?"
-          },
-          {
-            "id": 20,
-            "words": [
-              "camping",
-              "we",
-              "used",
-              "to",
-              "go",
-              "every",
-              "summer"
-            ],
-            "answer": "we used to go camping every summer",
-            "explanation": "Subject + used to + base verb."
-          }
-        ],
-        "errorCorrection": [
-          {
-            "id": 1,
-            "text": "I use to play football every weekend when I was a child.",
-            "options": [
-              "I",
-              "use to",
-              "play football",
-              "every weekend when I was a child"
-            ],
-            "correct": 1,
-            "wrongPart": "use to",
-            "correction": "used to",
-            "explanation": "The past form is used to, not use to (except after did/didn't)."
-          },
-          {
-            "id": 2,
-            "text": "She would live in Paris before she moved to London.",
-            "options": [
-              "She",
-              "would live",
-              "in Paris",
-              "before she moved to London"
-            ],
-            "correct": 1,
-            "wrongPart": "would live",
-            "correction": "used to live",
-            "explanation": "would cannot be used with state verbs like live; use used to."
-          },
-          {
-            "id": 3,
-            "text": "When I was young, I use to visit my grandma every summer.",
-            "options": [
-              "When I was young",
-              "I",
-              "use to visit",
-              "my grandma every summer"
-            ],
-            "correct": 2,
-            "wrongPart": "use to visit",
-            "correction": "used to visit",
-            "explanation": "The past form is used to, not use to."
-          },
-          {
-            "id": 4,
-            "text": "I didn't used to like vegetables, but now I love them.",
-            "options": [
-              "I",
-              "didn't used to like",
-              "vegetables",
-              "but now I love them"
-            ],
-            "correct": 1,
-            "wrongPart": "didn't used to like",
-            "correction": "didn't use to like",
-            "explanation": "After didn't, use the base form use to, not used to."
-          },
-          {
-            "id": 5,
-            "text": "Did you used to play the piano?",
-            "options": [
-              "Did",
-              "you",
-              "used to play",
-              "the piano?"
-            ],
-            "correct": 2,
-            "wrongPart": "used to play",
-            "correction": "use to play",
-            "explanation": "After Did, use the base form use to, not used to."
-          },
-          {
-            "id": 6,
-            "text": "He use to smoke, but he quit five years ago.",
-            "options": [
-              "He",
-              "use to smoke",
-              "but he quit",
-              "five years ago"
-            ],
-            "correct": 1,
-            "wrongPart": "use to smoke",
-            "correction": "used to smoke",
-            "explanation": "The past form is used to, not use to."
-          },
-          {
-            "id": 7,
-            "text": "We would have a dog when I was little.",
-            "options": [
-              "We",
-              "would have",
-              "a dog",
-              "when I was little"
-            ],
-            "correct": 1,
-            "wrongPart": "would have",
-            "correction": "used to have",
-            "explanation": "would cannot be used with state verbs like have (possession); use used to."
-          },
-          {
-            "id": 8,
-            "text": "They use to walk to school together every morning.",
-            "options": [
-              "They",
-              "use to walk",
-              "to school together",
-              "every morning"
-            ],
-            "correct": 1,
-            "wrongPart": "use to walk",
-            "correction": "used to walk",
-            "explanation": "The past form is used to, not use to."
-          },
-          {
-            "id": 9,
-            "text": "I would believe in ghosts when I was a kid.",
-            "options": [
-              "I",
-              "would believe",
-              "in ghosts",
-              "when I was a kid"
-            ],
-            "correct": 1,
-            "wrongPart": "would believe",
-            "correction": "used to believe",
-            "explanation": "would cannot be used with state verbs like believe; use used to."
-          },
-          {
-            "id": 10,
-            "text": "She didn't use to ate meat, but now she does.",
-            "options": [
-              "She",
-              "didn't use to",
-              "ate meat",
-              "but now she does"
-            ],
-            "correct": 2,
-            "wrongPart": "ate meat",
-            "correction": "eat meat",
-            "explanation": "After use to, use the base form of the verb: eat, not ate."
-          },
-          {
-            "id": 11,
-            "text": "My father use to tell us stories every night.",
-            "options": [
-              "My father",
-              "use to tell",
-              "us stories",
-              "every night"
-            ],
-            "correct": 1,
-            "wrongPart": "use to tell",
-            "correction": "used to tell",
-            "explanation": "The past form is used to, not use to."
-          },
-          {
-            "id": 12,
-            "text": "Was she used to work here?",
-            "options": [
-              "Was",
-              "she",
-              "used to work",
-              "here?"
-            ],
-            "correct": 0,
-            "wrongPart": "Was",
-            "correction": "Did",
-            "explanation": "Questions about past habits use Did, not Was: Did she use to work here?"
-          },
-          {
-            "id": 13,
-            "text": "I use to hate mathematics, but now I enjoy it.",
-            "options": [
-              "I",
-              "use to hate",
-              "mathematics",
-              "but now I enjoy it"
-            ],
-            "correct": 1,
-            "wrongPart": "use to hate",
-            "correction": "used to hate",
-            "explanation": "The past form is used to, not use to."
-          },
-          {
-            "id": 14,
-            "text": "When we were kids, we would built sandcastles at the beach.",
-            "options": [
-              "When we were kids",
-              "we",
-              "would built",
-              "sandcastles at the beach"
-            ],
-            "correct": 2,
-            "wrongPart": "would built",
-            "correction": "would build",
-            "explanation": "After would, use the base form of the verb: build, not built."
-          },
-          {
-            "id": 15,
-            "text": "He would have long hair, but he cut it.",
-            "options": [
-              "He",
-              "would have",
-              "long hair",
-              "but he cut it"
-            ],
-            "correct": 1,
-            "wrongPart": "would have",
-            "correction": "used to have",
-            "explanation": "would cannot be used with state verbs like have (possession); use used to."
-          },
-          {
-            "id": 16,
-            "text": "They didn't used to travel much before they got rich.",
-            "options": [
-              "They",
-              "didn't used to travel",
-              "much",
-              "before they got rich"
-            ],
-            "correct": 1,
-            "wrongPart": "didn't used to travel",
-            "correction": "didn't use to travel",
-            "explanation": "After didn't, use the base form use to, not used to."
-          },
-          {
-            "id": 17,
-            "text": "I would be afraid of the dark when I was young.",
-            "options": [
-              "I",
-              "would be",
-              "afraid of the dark",
-              "when I was young"
-            ],
-            "correct": 1,
-            "wrongPart": "would be",
-            "correction": "used to be",
-            "explanation": "would cannot be used with the state verb be; use used to."
-          },
-          {
-            "id": 18,
-            "text": "She use to knock on my door every morning.",
-            "options": [
-              "She",
-              "use to knock",
-              "on my door",
-              "every morning"
-            ],
-            "correct": 1,
-            "wrongPart": "use to knock",
-            "correction": "used to knock",
-            "explanation": "The past form is used to, not use to."
-          },
-          {
-            "id": 19,
-            "text": "Did you use to lived in a small village?",
-            "options": [
-              "Did",
-              "you use to",
-              "lived",
-              "in a small village?"
-            ],
-            "correct": 2,
-            "wrongPart": "lived",
-            "correction": "live",
-            "explanation": "After use to, use the base form of the verb: live, not lived."
-          },
-          {
-            "id": 20,
-            "text": "We use to go camping every summer.",
-            "options": [
-              "We",
-              "use to go",
-              "camping",
-              "every summer"
-            ],
-            "correct": 1,
-            "wrongPart": "use to go",
-            "correction": "used to go",
-            "explanation": "The past form is used to, not use to."
-          }
-        ],
-        "transform": [
-          {
-            "id": 1,
-            "text": "Rewrite using \"used to\": \"I played football every weekend when I was a child, but I don't anymore.\"",
-            "options": [
-              "I used to play football every weekend.",
-              "I would played football every weekend.",
-              "I use to play football every weekend.",
-              "I am used to playing football every weekend."
-            ],
-            "correct": 0,
-            "explanation": "Past habit that stopped: used to + base verb."
-          },
-          {
-            "id": 2,
-            "text": "Rewrite using \"used to\": \"She lived in Paris, but now she lives in London.\"",
-            "options": [
-              "She used to live in Paris.",
-              "She would live in Paris.",
-              "She use to live in Paris.",
-              "She is used to living in Paris."
-            ],
-            "correct": 0,
-            "explanation": "Past state: only used to is possible."
-          },
-          {
-            "id": 3,
-            "text": "Make negative: \"I used to like vegetables.\"",
-            "options": [
-              "I didn't use to like vegetables.",
-              "I didn't used to like vegetables.",
-              "I don't used to like vegetables.",
-              "I wasn't used to like vegetables."
-            ],
-            "correct": 0,
-            "explanation": "Negative form: didn't use to + base verb."
-          },
-          {
-            "id": 4,
-            "text": "Make a question: \"You used to play the piano.\"",
-            "options": [
-              "Did you use to play the piano?",
-              "Did you used to play the piano?",
-              "Were you use to play the piano?",
-              "Have you used to play the piano?"
-            ],
-            "correct": 0,
-            "explanation": "Question form: Did + subject + use to + base verb?"
-          },
-          {
-            "id": 5,
-            "text": "Rewrite using \"would\": \"As a child, I visited my grandma every summer.\"",
-            "options": [
-              "As a child, I would visit my grandma every summer.",
-              "As a child, I would visited my grandma every summer.",
-              "As a child, I used to visited my grandma every summer.",
-              "As a child, I was visiting my grandma every summer."
-            ],
-            "correct": 0,
-            "explanation": "Repeated past action: would + base verb."
-          },
-          {
-            "id": 6,
-            "text": "Make negative: \"He used to smoke.\"",
-            "options": [
-              "He didn't use to smoke.",
-              "He didn't used to smoke.",
-              "He don't used to smoke.",
-              "He wasn't used to smoke."
-            ],
-            "correct": 0,
-            "explanation": "Negative form: didn't use to + base verb."
-          },
-          {
-            "id": 7,
-            "text": "Rewrite using \"used to\": \"We had a dog when I was little, but we don't have one now.\"",
-            "options": [
-              "We used to have a dog when I was little.",
-              "We would have a dog when I was little.",
-              "We use to have a dog when I was little.",
-              "We are used to having a dog."
-            ],
-            "correct": 0,
-            "explanation": "Past state (possession): only used to is possible."
-          },
-          {
-            "id": 8,
-            "text": "Rewrite using \"would\": \"They walked to school together every morning.\"",
-            "options": [
-              "They would walk to school together every morning.",
-              "They would walked to school together every morning.",
-              "They used to walked to school together every morning.",
-              "They were walking to school together every morning."
-            ],
-            "correct": 0,
-            "explanation": "Repeated past action: would + base verb."
-          },
-          {
-            "id": 9,
-            "text": "Make a question: \"She used to work here.\"",
-            "options": [
-              "Did she use to work here?",
-              "Did she used to work here?",
-              "Was she use to work here?",
-              "Has she used to work here?"
-            ],
-            "correct": 0,
-            "explanation": "Question form: Did + subject + use to + base verb?"
-          },
-          {
-            "id": 10,
-            "text": "Rewrite using \"used to\": \"I hated mathematics, but now I enjoy it.\"",
-            "options": [
-              "I used to hate mathematics.",
-              "I would hated mathematics.",
-              "I use to hate mathematics.",
-              "I am used to hating mathematics."
-            ],
-            "correct": 0,
-            "explanation": "Past state: only used to is possible."
-          },
-          {
-            "id": 11,
-            "text": "Rewrite using \"would\": \"As kids, we built sandcastles at the beach.\"",
-            "options": [
-              "As kids, we would build sandcastles at the beach.",
-              "As kids, we would built sandcastles at the beach.",
-              "As kids, we used to built sandcastles at the beach.",
-              "As kids, we were building sandcastles at the beach."
-            ],
-            "correct": 0,
-            "explanation": "Repeated past action: would + base verb."
-          },
-          {
-            "id": 12,
-            "text": "Make negative: \"They traveled much before they got rich.\"",
-            "options": [
-              "They didn't use to travel much before they got rich.",
-              "They didn't used to travel much before they got rich.",
-              "They don't used to travel much before they got rich.",
-              "They weren't used to travel much before they got rich."
-            ],
-            "correct": 0,
-            "explanation": "Negative form: didn't use to + base verb."
-          },
-          {
-            "id": 13,
-            "text": "Rewrite using \"used to\": \"I was afraid of the dark when I was young.\"",
-            "options": [
-              "I used to be afraid of the dark.",
-              "I would afraid of the dark.",
-              "I use to be afraid of the dark.",
-              "I am used to be afraid of the dark."
-            ],
-            "correct": 0,
-            "explanation": "Past state: only used to is possible."
-          },
-          {
-            "id": 14,
-            "text": "Rewrite using \"would\": \"She knocked on my door every morning.\"",
-            "options": [
-              "She would knock on my door every morning.",
-              "She would knocked on my door every morning.",
-              "She used to knocked on my door every morning.",
-              "She was knocking on my door every morning."
-            ],
-            "correct": 0,
-            "explanation": "Repeated past action: would + base verb."
-          },
-          {
-            "id": 15,
-            "text": "Make a question: \"You used to live in a small village.\"",
-            "options": [
-              "Did you use to live in a small village?",
-              "Did you used to live in a small village?",
-              "Were you use to live in a small village?",
-              "Have you used to live in a small village?"
-            ],
-            "correct": 0,
-            "explanation": "Question form: Did + subject + use to + base verb?"
-          },
-          {
-            "id": 16,
-            "text": "Rewrite using \"used to\": \"We went camping every summer as a family.\"",
-            "options": [
-              "We used to go camping every summer as a family.",
-              "We would went camping every summer as a family.",
-              "We use to go camping every summer as a family.",
-              "We are used to going camping every summer."
-            ],
-            "correct": 0,
-            "explanation": "Past habit: used to + base verb."
-          },
-          {
-            "id": 17,
-            "text": "Make negative: \"He had long hair.\"",
-            "options": [
-              "He didn't use to have long hair.",
-              "He didn't used to have long hair.",
-              "He don't used to have long hair.",
-              "He wasn't used to have long hair."
-            ],
-            "correct": 0,
-            "explanation": "Negative form: didn't use to + base verb."
-          },
-          {
-            "id": 18,
-            "text": "Rewrite using \"used to\": \"I believed in ghosts when I was a kid.\"",
-            "options": [
-              "I used to believe in ghosts.",
-              "I would believed in ghosts.",
-              "I use to believe in ghosts.",
-              "I am used to believing in ghosts."
-            ],
-            "correct": 0,
-            "explanation": "Past state: only used to is possible."
-          },
-          {
-            "id": 19,
-            "text": "Make a question: \"My father used to tell you stories.\"",
-            "options": [
-              "Did your father use to tell you stories?",
-              "Did your father used to tell you stories?",
-              "Was your father use to tell you stories?",
-              "Has your father used to tell you stories?"
-            ],
-            "correct": 0,
-            "explanation": "Question form: Did + subject + use to + base verb?"
-          },
-          {
-            "id": 20,
-            "text": "Rewrite using \"would\": \"Every night, my father told us a story.\"",
-            "options": [
-              "Every night, my father would tell us a story.",
-              "Every night, my father would told us a story.",
-              "Every night, my father used to told us a story.",
-              "Every night, my father was telling us a story."
-            ],
-            "correct": 0,
-            "explanation": "Repeated past action: would + base verb."
-          }
-        ],
-        "dialogue": [
-          {
-            "id": 1,
-            "situation": "Talking about childhood hobbies.",
-            "dialogue": "A: Did you play any sports as a kid?\nB: Yes, I ___ play football every weekend.",
-            "options": [
-              "used to",
-              "use to",
-              "would played",
-              "was used to"
-            ],
-            "correct": 0,
-            "explanation": "Past habit: used to + base verb."
-          },
-          {
-            "id": 2,
-            "situation": "Talking about where someone lived.",
-            "dialogue": "A: Has she always lived in London?\nB: No, she ___ live in Paris before.",
-            "options": [
-              "used to",
-              "would",
-              "use to",
-              "was"
-            ],
-            "correct": 0,
-            "explanation": "State verb: only used to is possible."
-          },
-          {
-            "id": 3,
-            "situation": "Talking about summer visits.",
-            "dialogue": "A: Did you see your grandma often?\nB: Yes, I ___ visit her every summer.",
-            "options": [
-              "would",
-              "used",
-              "use",
-              "was"
-            ],
-            "correct": 0,
-            "explanation": "Repeated past action: would + base verb."
-          },
-          {
-            "id": 4,
-            "situation": "Talking about food preferences.",
-            "dialogue": "A: Have you always liked vegetables?\nB: No, I ___ like them, but now I love them.",
-            "options": [
-              "didn't use to",
-              "didn't used to",
-              "don't used to",
-              "wasn't used to"
-            ],
-            "correct": 0,
-            "explanation": "Negative form: didn't use to + base verb."
-          },
-          {
-            "id": 5,
-            "situation": "Asking about musical instruments.",
-            "dialogue": "A: ___ you use to play any instruments?\nB: Yes, the piano.",
-            "options": [
-              "Did",
-              "Were",
-              "Have",
-              "Was"
-            ],
-            "correct": 0,
-            "explanation": "Question form: Did + subject + use to + base verb?"
-          },
-          {
-            "id": 6,
-            "situation": "Talking about smoking habits.",
-            "dialogue": "A: Does he still smoke?\nB: No, he ___ smoke, but he quit.",
-            "options": [
-              "used to",
-              "use to",
-              "would smoked",
-              "is used to"
-            ],
-            "correct": 0,
-            "explanation": "Past habit: used to + base verb."
-          },
-          {
-            "id": 7,
-            "situation": "Talking about pets.",
-            "dialogue": "A: Do you have any pets now?\nB: No, but we ___ have a dog.",
-            "options": [
-              "used to",
-              "would",
-              "use to",
-              "were"
-            ],
-            "correct": 0,
-            "explanation": "State verb (possession): only used to is possible."
-          },
-          {
-            "id": 8,
-            "situation": "Talking about a school routine.",
-            "dialogue": "A: How did you get to school?\nB: We ___ walk together every morning.",
-            "options": [
-              "would",
-              "used",
-              "use",
-              "was"
-            ],
-            "correct": 0,
-            "explanation": "Repeated past action: would + base verb."
-          },
-          {
-            "id": 9,
-            "situation": "Talking about childhood beliefs.",
-            "dialogue": "A: Were you scared of anything as a kid?\nB: Yes, I ___ believe in ghosts.",
-            "options": [
-              "used to",
-              "would",
-              "use to",
-              "was"
-            ],
-            "correct": 0,
-            "explanation": "State verb: only used to is possible."
-          },
-          {
-            "id": 10,
-            "situation": "Talking about diet changes.",
-            "dialogue": "A: Has she always eaten meat?\nB: No, she ___ eat it, but now she does.",
-            "options": [
-              "didn't use to",
-              "didn't used to",
-              "don't used to",
-              "wasn't used to"
-            ],
-            "correct": 0,
-            "explanation": "Negative form: didn't use to + base verb."
-          },
-          {
-            "id": 11,
-            "situation": "Talking about bedtime stories.",
-            "dialogue": "A: Did your father tell you stories?\nB: Yes, he ___ tell us stories every night.",
-            "options": [
-              "would",
-              "used",
-              "use",
-              "was"
-            ],
-            "correct": 0,
-            "explanation": "Repeated past action: would + base verb."
-          },
-          {
-            "id": 12,
-            "situation": "Asking about past jobs.",
-            "dialogue": "A: ___ she used to work here?\nB: Yes, a few years ago.",
-            "options": [
-              "Did",
-              "Was",
-              "Has",
-              "Is"
-            ],
-            "correct": 0,
-            "explanation": "Question form: Did + subject + use to + base verb?"
-          },
-          {
-            "id": 13,
-            "situation": "Talking about school subjects.",
-            "dialogue": "A: Do you like math now?\nB: Yes, but I ___ hate it.",
-            "options": [
-              "used to",
-              "would",
-              "use to",
-              "was"
-            ],
-            "correct": 0,
-            "explanation": "State verb: only used to is possible."
-          },
-          {
-            "id": 14,
-            "situation": "Talking about beach memories.",
-            "dialogue": "A: What did you do at the beach as kids?\nB: We ___ build sandcastles.",
-            "options": [
-              "would",
-              "used",
-              "use",
-              "was"
-            ],
-            "correct": 0,
-            "explanation": "Repeated past action: would + base verb."
-          },
-          {
-            "id": 15,
-            "situation": "Talking about appearance.",
-            "dialogue": "A: Did he always have short hair?\nB: No, he ___ have long hair.",
-            "options": [
-              "used to",
-              "would",
-              "use to",
-              "was"
-            ],
-            "correct": 0,
-            "explanation": "State verb (possession): only used to is possible."
-          },
-          {
-            "id": 16,
-            "situation": "Talking about travel habits.",
-            "dialogue": "A: Did they travel a lot before?\nB: No, they ___ travel much before they got rich.",
-            "options": [
-              "didn't use to",
-              "didn't used to",
-              "don't used to",
-              "weren't used to"
-            ],
-            "correct": 0,
-            "explanation": "Negative form: didn't use to + base verb."
-          },
-          {
-            "id": 17,
-            "situation": "Talking about childhood fears.",
-            "dialogue": "A: Were you afraid of the dark?\nB: Yes, I ___ afraid of the dark when I was young.",
-            "options": [
-              "used to be",
-              "would be",
-              "use to be",
-              "was used"
-            ],
-            "correct": 0,
-            "explanation": "State verb (be): only used to is possible."
-          },
-          {
-            "id": 18,
-            "situation": "Talking about morning routines.",
-            "dialogue": "A: How did she wake you up?\nB: She ___ knock on my door every morning.",
-            "options": [
-              "would",
-              "used",
-              "use",
-              "was"
-            ],
-            "correct": 0,
-            "explanation": "Repeated past action: would + base verb."
-          },
-          {
-            "id": 19,
-            "situation": "Asking about hometown.",
-            "dialogue": "A: ___ you use to live in a small village?\nB: Yes, until I was ten.",
-            "options": [
-              "Did",
-              "Were",
-              "Have",
-              "Was"
-            ],
-            "correct": 0,
-            "explanation": "Question form: Did + subject + use to + base verb?"
-          },
-          {
-            "id": 20,
-            "situation": "Talking about family trips.",
-            "dialogue": "A: Did you travel much as a family?\nB: Yes, we ___ go camping every summer.",
-            "options": [
-              "used to",
-              "would",
-              "use to",
-              "was"
-            ],
-            "correct": 0,
-            "explanation": "Past habit: used to + base verb."
           }
         ]
       },
@@ -82782,3339 +86109,11 @@ export const grammarData = {
             "explanation": "Structure: explained to us why."
           }
         ]
-      },
-      {
-        "id": "deduction-and-assumption",
-        "title": "Deduction and Assumption",
-        "icon": "🕵️",
-        "guide": "## Deduction and Assumption (Xulosa chiqarish va taxmin qilish) — Hozirgi va o'tgan zamon\n\nBu mavzu ilgari o'rgangan **hozirgi zamon xulosalari** (must be, might be, could be, can't be) va **o'tgan zamon xulosalari** (must have + V3, might have + V3, could have + V3, can't have + V3) ni BITTA tizimga birlashtiradi — dalillarga asoslanib xulosa chiqarish va taxmin qilishni mustahkamlaydi.\n\n## 1. Ishonch darajalari jadvali (hozirgi va o'tgan)\n• 100% ishonch (ijobiy): **must be** / **must have + V3**\n• Ehtimollik (kam-ko'p ishonch): **may / might / could be** / **may / might / could have + V3**\n• 100% ishonch (salbiy): **can't be** / **can't have + V3**\n• Kutilgan natija: **should be** / **should have + V3**\n\n## 2. Hozirgi zamon xulosasi (Present Deduction)\nFormula: Subject + modal + bosh fe'l (yoki modal + be + V-ing — davom etayotgan harakat uchun)\n• The lights are off — they **must be** out.\n• Someone **must be cooking** dinner. (davomiy: modal + be + V-ing)\n• She **might be** busy.\n• This key **could be** for the garage.\n• You **can't be** hungry already.\n\n## 3. O'tgan zamon xulosasi (Past Deduction)\nFormula: Subject + modal + have + V3 (Past Participle) — **have** hech qachon **has/had** ga aylanmaydi!\n• It **must have escaped**.\n• They **might have gone** home.\n• We **could have caught** the train.\n• That **can't have happened**.\n\n## 4. Kutilgan natija: should / should have\n• It **should be** here by tomorrow. (hozirgi/kelasi kutish)\n• Everyone **should have arrived** by now. (o'tmishga nisbatan kutish)\n\n## 5. Eng ko'p uchraydigan xatolar\n• Modal fe'ldan keyin \"to\" ishlatilmaydi: ~~could to be~~ → **could be**\n• \"have\" hech qachon \"has\" ga aylanmaydi: ~~must has been~~ → **must have been**\n• \"have\"dan keyin fe'l V3 (Past Participle) shaklda bo'lishi kerak: ~~must have find~~ → **must have found**, ~~might have went~~ → **might have gone**\n\n## 6. Signal so'zlar\n• must, must have (kuchli ijobiy xulosa)\n• might, may, could, might have, may have, could have (ehtimollik)\n• can't, can't have (kuchli salbiy xulosa)\n• should, should have (kutilgan natija)",
-        "questions": [
-          {
-            "id": 1,
-            "text": "All the lights are off and the car isn't in the driveway — they ___ be out.",
-            "options": [
-              "must",
-              "might",
-              "should",
-              "would"
-            ],
-            "correct": 0,
-            "explanation": "\"must\" — hozirgi holat haqida kuchli ijobiy xulosa.",
-            "explanationRu": "\"must\" — уверенный положительный вывод о настоящем."
-          },
-          {
-            "id": 2,
-            "text": "He says he ran ten kilometers in twenty minutes — that ___ happened; it's simply impossible.",
-            "options": [
-              "can't have",
-              "must have",
-              "might have",
-              "should have"
-            ],
-            "correct": 0,
-            "explanation": "\"can't have\" — o'tmish haqida kuchli salbiy xulosa.",
-            "explanationRu": "\"can't have\" — уверенный отрицательный вывод о прошлом."
-          },
-          {
-            "id": 3,
-            "text": "I haven't heard from Maria all day; she ___ be busy with work.",
-            "options": [
-              "might",
-              "must",
-              "can't",
-              "should"
-            ],
-            "correct": 0,
-            "explanation": "\"might\" — hozirgi holat haqida noaniq ehtimollik.",
-            "explanationRu": "\"might\" — неуверенное предположение о настоящем."
-          },
-          {
-            "id": 4,
-            "text": "The gate is open and the dog is gone — it ___ escaped.",
-            "options": [
-              "must have",
-              "can't have",
-              "might have",
-              "should have"
-            ],
-            "correct": 0,
-            "explanation": "\"must have\" — o'tmish haqida kuchli ijobiy xulosa.",
-            "explanationRu": "\"must have\" — уверенный положительный вывод о прошлом."
-          },
-          {
-            "id": 5,
-            "text": "This letter ___ be from the bank, but I'm honestly not certain.",
-            "options": [
-              "could",
-              "must",
-              "can't",
-              "should"
-            ],
-            "correct": 0,
-            "explanation": "\"could\" — hozirgi holat haqida ehtimollik.",
-            "explanationRu": "\"could\" — предположение о настоящем."
-          },
-          {
-            "id": 6,
-            "text": "No one answered the door, so they ___ gone out for a walk.",
-            "options": [
-              "might have",
-              "must have",
-              "can't have",
-              "should have"
-            ],
-            "correct": 0,
-            "explanation": "\"might have\" — o'tmish haqida noaniq ehtimollik.",
-            "explanationRu": "\"might have\" — неуверенное предположение о прошлом."
-          },
-          {
-            "id": 7,
-            "text": "You've only just woken up — you ___ be hungry already.",
-            "options": [
-              "can't",
-              "must",
-              "might",
-              "should"
-            ],
-            "correct": 0,
-            "explanation": "\"can't\" — hozirgi holat haqida kuchli salbiy xulosa.",
-            "explanationRu": "\"can't\" — уверенный отрицательный вывод о настоящем."
-          },
-          {
-            "id": 8,
-            "text": "We ___ caught the earlier train, but we decided to have breakfast first.",
-            "options": [
-              "could have",
-              "must have",
-              "can't have",
-              "should have"
-            ],
-            "correct": 0,
-            "explanation": "\"could have\" — o'tmishda bajarilmagan imkoniyat.",
-            "explanationRu": "\"could have\" — неиспользованная возможность в прошлом."
-          },
-          {
-            "id": 9,
-            "text": "The kitchen smells amazing — someone ___ be cooking dinner.",
-            "options": [
-              "must",
-              "might",
-              "could",
-              "should"
-            ],
-            "correct": 0,
-            "explanation": "\"must\" — hozirgi holat haqida kuchli ijobiy xulosa.",
-            "explanationRu": "\"must\" — уверенный положительный вывод о настоящем."
-          },
-          {
-            "id": 10,
-            "text": "She says she saw him at the concert, but he ___ been there — he was abroad all week.",
-            "options": [
-              "can't have",
-              "must have",
-              "might have",
-              "should have"
-            ],
-            "correct": 0,
-            "explanation": "\"can't have\" — o'tmish haqida kuchli salbiy xulosa.",
-            "explanationRu": "\"can't have\" — уверенный отрицательный вывод о прошлом."
-          },
-          {
-            "id": 11,
-            "text": "That strange noise outside ___ be the wind, or it could be an animal.",
-            "options": [
-              "might",
-              "must",
-              "can't",
-              "should"
-            ],
-            "correct": 0,
-            "explanation": "\"might\" — hozirgi holat haqida noaniq ehtimollik.",
-            "explanationRu": "\"might\" — неуверенное предположение о настоящем."
-          },
-          {
-            "id": 12,
-            "text": "The cookie jar is empty and there are crumbs on the table — my little brother ___ found it.",
-            "options": [
-              "must have",
-              "might have",
-              "can't have",
-              "should have"
-            ],
-            "correct": 0,
-            "explanation": "\"must have\" — o'tmish haqida kuchli ijobiy xulosa.",
-            "explanationRu": "\"must have\" — уверенный положительный вывод о прошлом."
-          },
-          {
-            "id": 13,
-            "text": "This key ___ be for the garage, or maybe it opens the shed.",
-            "options": [
-              "could",
-              "must",
-              "can't",
-              "should"
-            ],
-            "correct": 0,
-            "explanation": "\"could\" — hozirgi holat haqida ehtimollik.",
-            "explanationRu": "\"could\" — предположение о настоящем."
-          },
-          {
-            "id": 14,
-            "text": "The office was completely empty when we arrived — everyone ___ gone home early.",
-            "options": [
-              "might have",
-              "must have",
-              "can't have",
-              "should have"
-            ],
-            "correct": 0,
-            "explanation": "\"might have\" — o'tmish haqida noaniq ehtimollik.",
-            "explanationRu": "\"might have\" — неуверенное предположение о прошлом."
-          },
-          {
-            "id": 15,
-            "text": "The shops ___ be open yet — it's only six in the morning.",
-            "options": [
-              "can't",
-              "must",
-              "might",
-              "should"
-            ],
-            "correct": 0,
-            "explanation": "\"can't\" — hozirgi holat haqida kuchli salbiy xulosa.",
-            "explanationRu": "\"can't\" — уверенный отрицательный вывод о настоящем."
-          },
-          {
-            "id": 16,
-            "text": "The grass is wet but there isn't a cloud in the sky — the sprinklers ___ turned on automatically.",
-            "options": [
-              "must have",
-              "might have",
-              "can't have",
-              "should have"
-            ],
-            "correct": 0,
-            "explanation": "\"must have\" — o'tmish haqida kuchli ijobiy xulosa.",
-            "explanationRu": "\"must have\" — уверенный положительный вывод о прошлом."
-          },
-          {
-            "id": 17,
-            "text": "The package was sent three days ago, so it ___ be here by tomorrow.",
-            "options": [
-              "should",
-              "must",
-              "can't",
-              "might"
-            ],
-            "correct": 0,
-            "explanation": "\"should\" — kutilgan natija (hozirgi/kelasi holat).",
-            "explanationRu": "\"should\" — ожидаемый результат (настоящее/будущее)."
-          },
-          {
-            "id": 18,
-            "text": "The meeting started at nine, so everyone ___ arrived by now.",
-            "options": [
-              "should have",
-              "must have",
-              "can't have",
-              "might have"
-            ],
-            "correct": 0,
-            "explanation": "\"should have\" — kutilgan natija (o'tmishga nisbatan).",
-            "explanationRu": "\"should have\" — ожидаемый результат (по отношению к прошлому)."
-          },
-          {
-            "id": 19,
-            "text": "He's wearing a thick coat and gloves — it ___ be freezing outside.",
-            "options": [
-              "must",
-              "might",
-              "could",
-              "should"
-            ],
-            "correct": 0,
-            "explanation": "\"must\" — hozirgi holat haqida kuchli ijobiy xulosa.",
-            "explanationRu": "\"must\" — уверенный положительный вывод о настоящем."
-          },
-          {
-            "id": 20,
-            "text": "They claim they walked to the top of the mountain and back in one hour — that ___ been possible.",
-            "options": [
-              "can't have",
-              "must have",
-              "might have",
-              "should have"
-            ],
-            "correct": 0,
-            "explanation": "\"can't have\" — o'tmish haqida kuchli salbiy xulosa.",
-            "explanationRu": "\"can't have\" — уверенный отрицательный вывод о прошлом."
-          }
-        ],
-        "fillBlanks": [
-          {
-            "id": 1,
-            "text": "All the lights are off and the car isn't in the driveway — they ___ (must / be) out.",
-            "options": [
-              "must be",
-              "must being",
-              "must to be",
-              "musts be"
-            ],
-            "correct": 0,
-            "explanation": "\"must\" + bosh fe'l (be).",
-            "explanationRu": "\"must\" + начальная форма глагола (be)."
-          },
-          {
-            "id": 2,
-            "text": "He says he ran ten kilometers in twenty minutes — that ___ (can't have / happen).",
-            "options": [
-              "can't have happened",
-              "can't have happen",
-              "can't has happened",
-              "can't having happened"
-            ],
-            "correct": 0,
-            "explanation": "\"can't have\" + V3 (happen → happened).",
-            "explanationRu": "\"can't have\" + V3 (happen → happened)."
-          },
-          {
-            "id": 3,
-            "text": "I haven't heard from Maria all day; she ___ (might / be) busy with work.",
-            "options": [
-              "might be",
-              "might being",
-              "might to be",
-              "mights be"
-            ],
-            "correct": 0,
-            "explanation": "\"might\" + bosh fe'l (be).",
-            "explanationRu": "\"might\" + начальная форма глагола (be)."
-          },
-          {
-            "id": 4,
-            "text": "The gate is open and the dog is gone — it ___ (must have / escape).",
-            "options": [
-              "must have escaped",
-              "must have escape",
-              "must has escaped",
-              "must having escaped"
-            ],
-            "correct": 0,
-            "explanation": "\"must have\" + V3 (escape → escaped).",
-            "explanationRu": "\"must have\" + V3 (escape → escaped)."
-          },
-          {
-            "id": 5,
-            "text": "This letter ___ (could / be) from the bank, but I'm not certain.",
-            "options": [
-              "could be",
-              "could being",
-              "could to be",
-              "coulds be"
-            ],
-            "correct": 0,
-            "explanation": "\"could\" + bosh fe'l (be).",
-            "explanationRu": "\"could\" + начальная форма глагола (be)."
-          },
-          {
-            "id": 6,
-            "text": "No one answered the door, so they ___ (might have / go) out for a walk.",
-            "options": [
-              "might have gone",
-              "might have go",
-              "might has gone",
-              "might having gone"
-            ],
-            "correct": 0,
-            "explanation": "\"might have\" + V3 (go → gone).",
-            "explanationRu": "\"might have\" + V3 (go → gone)."
-          },
-          {
-            "id": 7,
-            "text": "You've only just woken up — you ___ (can't / be) hungry already.",
-            "options": [
-              "can't be",
-              "can't being",
-              "can't to be",
-              "cants be"
-            ],
-            "correct": 0,
-            "explanation": "\"can't\" + bosh fe'l (be).",
-            "explanationRu": "\"can't\" + начальная форма глагола (be)."
-          },
-          {
-            "id": 8,
-            "text": "We ___ (could have / catch) the earlier train, but we had breakfast first.",
-            "options": [
-              "could have caught",
-              "could have catch",
-              "could has caught",
-              "could having caught"
-            ],
-            "correct": 0,
-            "explanation": "\"could have\" + V3 (catch → caught).",
-            "explanationRu": "\"could have\" + V3 (catch → caught)."
-          },
-          {
-            "id": 9,
-            "text": "The kitchen smells amazing — someone ___ (must / cook) dinner.",
-            "options": [
-              "must be cooking",
-              "must cooking",
-              "must to be cooking",
-              "musts be cooking"
-            ],
-            "correct": 0,
-            "explanation": "\"must be\" + V-ing — davomiy harakat haqida kuchli xulosa (cook → cooking).",
-            "explanationRu": "\"must be\" + V-ing — уверенный вывод о происходящем сейчас действии (cook → cooking)."
-          },
-          {
-            "id": 10,
-            "text": "She says she saw him at the concert, but he ___ (can't have / be) there.",
-            "options": [
-              "can't have been",
-              "can't have be",
-              "can't has been",
-              "can't having been"
-            ],
-            "correct": 0,
-            "explanation": "\"can't have\" + V3 (be → been).",
-            "explanationRu": "\"can't have\" + V3 (be → been)."
-          },
-          {
-            "id": 11,
-            "text": "That strange noise outside ___ (might / be) the wind.",
-            "options": [
-              "might be",
-              "might being",
-              "might to be",
-              "mights be"
-            ],
-            "correct": 0,
-            "explanation": "\"might\" + bosh fe'l (be).",
-            "explanationRu": "\"might\" + начальная форма глагола (be)."
-          },
-          {
-            "id": 12,
-            "text": "The cookie jar is empty and there are crumbs on the table — my little brother ___ (must have / find) it.",
-            "options": [
-              "must have found",
-              "must have find",
-              "must has found",
-              "must having found"
-            ],
-            "correct": 0,
-            "explanation": "\"must have\" + V3 (find → found).",
-            "explanationRu": "\"must have\" + V3 (find → found)."
-          },
-          {
-            "id": 13,
-            "text": "This key ___ (could / be) for the garage.",
-            "options": [
-              "could be",
-              "could being",
-              "could to be",
-              "coulds be"
-            ],
-            "correct": 0,
-            "explanation": "\"could\" + bosh fe'l (be).",
-            "explanationRu": "\"could\" + начальная форма глагола (be)."
-          },
-          {
-            "id": 14,
-            "text": "The office was completely empty when we arrived — everyone ___ (might have / go) home early.",
-            "options": [
-              "might have gone",
-              "might have go",
-              "might has gone",
-              "might having gone"
-            ],
-            "correct": 0,
-            "explanation": "\"might have\" + V3 (go → gone).",
-            "explanationRu": "\"might have\" + V3 (go → gone)."
-          },
-          {
-            "id": 15,
-            "text": "The shops ___ (can't / be) open yet — it's only six in the morning.",
-            "options": [
-              "can't be",
-              "can't being",
-              "can't to be",
-              "cants be"
-            ],
-            "correct": 0,
-            "explanation": "\"can't\" + bosh fe'l (be).",
-            "explanationRu": "\"can't\" + начальная форма глагола (be)."
-          },
-          {
-            "id": 16,
-            "text": "The grass is wet but there isn't a cloud in the sky — the sprinklers ___ (must have / turn) on automatically.",
-            "options": [
-              "must have turned",
-              "must have turn",
-              "must has turned",
-              "must having turned"
-            ],
-            "correct": 0,
-            "explanation": "\"must have\" + V3 (turn → turned).",
-            "explanationRu": "\"must have\" + V3 (turn → turned)."
-          },
-          {
-            "id": 17,
-            "text": "The package was sent three days ago, so it ___ (should / be) here by tomorrow.",
-            "options": [
-              "should be",
-              "should being",
-              "should to be",
-              "shoulds be"
-            ],
-            "correct": 0,
-            "explanation": "\"should\" + bosh fe'l (be) — kutilgan natija.",
-            "explanationRu": "\"should\" + начальная форма глагола (be) — ожидаемый результат."
-          },
-          {
-            "id": 18,
-            "text": "The meeting started at nine, so everyone ___ (should have / arrive) by now.",
-            "options": [
-              "should have arrived",
-              "should have arrive",
-              "should has arrived",
-              "should having arrived"
-            ],
-            "correct": 0,
-            "explanation": "\"should have\" + V3 (arrive → arrived) — kutilgan natija (o'tmish).",
-            "explanationRu": "\"should have\" + V3 (arrive → arrived) — ожидаемый результат (прошлое)."
-          },
-          {
-            "id": 19,
-            "text": "He's wearing a thick coat and gloves — it ___ (must / be) freezing outside.",
-            "options": [
-              "must be",
-              "must being",
-              "must to be",
-              "musts be"
-            ],
-            "correct": 0,
-            "explanation": "\"must\" + bosh fe'l (be).",
-            "explanationRu": "\"must\" + начальная форма глагола (be)."
-          },
-          {
-            "id": 20,
-            "text": "They claim they walked to the mountain top and back in one hour — that ___ (can't have / be) possible.",
-            "options": [
-              "can't have been",
-              "can't have be",
-              "can't has been",
-              "can't having been"
-            ],
-            "correct": 0,
-            "explanation": "\"can't have\" + V3 (be → been).",
-            "explanationRu": "\"can't have\" + V3 (be → been)."
-          }
-        ],
-        "scrambled": [
-          {
-            "id": 1,
-            "words": [
-              "out",
-              "they",
-              "must",
-              "be"
-            ],
-            "answer": "they must be out",
-            "explanation": "Subject + must + bosh fe'l.",
-            "explanationRu": "Подлежащее + must + начальная форма глагола."
-          },
-          {
-            "id": 2,
-            "words": [
-              "happened",
-              "that",
-              "can't",
-              "have"
-            ],
-            "answer": "that can't have happened",
-            "explanation": "Subject + can't have + V3.",
-            "explanationRu": "Подлежащее + can't have + V3."
-          },
-          {
-            "id": 3,
-            "words": [
-              "busy",
-              "she",
-              "might",
-              "be"
-            ],
-            "answer": "she might be busy",
-            "explanation": "Subject + might + bosh fe'l.",
-            "explanationRu": "Подлежащее + might + начальная форма глагола."
-          },
-          {
-            "id": 4,
-            "words": [
-              "escaped",
-              "it",
-              "must",
-              "have"
-            ],
-            "answer": "it must have escaped",
-            "explanation": "Subject + must have + V3.",
-            "explanationRu": "Подлежащее + must have + V3."
-          },
-          {
-            "id": 5,
-            "words": [
-              "bank",
-              "this",
-              "letter",
-              "could",
-              "be",
-              "from",
-              "the"
-            ],
-            "answer": "this letter could be from the bank",
-            "explanation": "Subject + could + bosh fe'l.",
-            "explanationRu": "Подлежащее + could + начальная форма глагола."
-          },
-          {
-            "id": 6,
-            "words": [
-              "out",
-              "they",
-              "might",
-              "have",
-              "gone"
-            ],
-            "answer": "they might have gone out",
-            "explanation": "Subject + might have + V3.",
-            "explanationRu": "Подлежащее + might have + V3."
-          },
-          {
-            "id": 7,
-            "words": [
-              "already",
-              "you",
-              "can't",
-              "be",
-              "hungry"
-            ],
-            "answer": "you can't be hungry already",
-            "explanation": "Subject + can't + bosh fe'l.",
-            "explanationRu": "Подлежащее + can't + начальная форма глагола."
-          },
-          {
-            "id": 8,
-            "words": [
-              "train",
-              "we",
-              "could",
-              "have",
-              "caught",
-              "the",
-              "earlier"
-            ],
-            "answer": "we could have caught the earlier train",
-            "explanation": "Subject + could have + V3.",
-            "explanationRu": "Подлежащее + could have + V3."
-          },
-          {
-            "id": 9,
-            "words": [
-              "dinner",
-              "someone",
-              "must",
-              "be",
-              "cooking"
-            ],
-            "answer": "someone must be cooking dinner",
-            "explanation": "Subject + must be + V-ing (davomiy xulosa).",
-            "explanationRu": "Подлежащее + must be + V-ing (вывод о длящемся действии)."
-          },
-          {
-            "id": 10,
-            "words": [
-              "there",
-              "he",
-              "can't",
-              "have",
-              "been"
-            ],
-            "answer": "he can't have been there",
-            "explanation": "Subject + can't have + V3 (be → been).",
-            "explanationRu": "Подлежащее + can't have + V3 (be → been)."
-          },
-          {
-            "id": 11,
-            "words": [
-              "wind",
-              "that",
-              "might",
-              "be",
-              "the"
-            ],
-            "answer": "that might be the wind",
-            "explanation": "Subject + might + bosh fe'l.",
-            "explanationRu": "Подлежащее + might + начальная форма глагола."
-          },
-          {
-            "id": 12,
-            "words": [
-              "it",
-              "my",
-              "brother",
-              "must",
-              "have",
-              "found"
-            ],
-            "answer": "my brother must have found it",
-            "explanation": "Subject + must have + V3.",
-            "explanationRu": "Подлежащее + must have + V3."
-          },
-          {
-            "id": 13,
-            "words": [
-              "garage",
-              "this",
-              "key",
-              "could",
-              "be",
-              "for",
-              "the"
-            ],
-            "answer": "this key could be for the garage",
-            "explanation": "Subject + could + bosh fe'l.",
-            "explanationRu": "Подлежащее + could + начальная форма глагола."
-          },
-          {
-            "id": 14,
-            "words": [
-              "home",
-              "everyone",
-              "might",
-              "have",
-              "gone"
-            ],
-            "answer": "everyone might have gone home",
-            "explanation": "Subject + might have + V3.",
-            "explanationRu": "Подлежащее + might have + V3."
-          },
-          {
-            "id": 15,
-            "words": [
-              "yet",
-              "the",
-              "shops",
-              "can't",
-              "be",
-              "open"
-            ],
-            "answer": "the shops can't be open yet",
-            "explanation": "Subject + can't + bosh fe'l.",
-            "explanationRu": "Подлежащее + can't + начальная форма глагола."
-          },
-          {
-            "id": 16,
-            "words": [
-              "on",
-              "the",
-              "sprinklers",
-              "must",
-              "have",
-              "turned"
-            ],
-            "answer": "the sprinklers must have turned on",
-            "explanation": "Subject + must have + V3.",
-            "explanationRu": "Подлежащее + must have + V3."
-          },
-          {
-            "id": 17,
-            "words": [
-              "tomorrow",
-              "it",
-              "should",
-              "be",
-              "here",
-              "by"
-            ],
-            "answer": "it should be here by tomorrow",
-            "explanation": "Subject + should + bosh fe'l (kutilgan natija).",
-            "explanationRu": "Подлежащее + should + начальная форма глагола (ожидаемый результат)."
-          },
-          {
-            "id": 18,
-            "words": [
-              "now",
-              "everyone",
-              "should",
-              "have",
-              "arrived",
-              "by"
-            ],
-            "answer": "everyone should have arrived by now",
-            "explanation": "Subject + should have + V3 (kutilgan natija).",
-            "explanationRu": "Подлежащее + should have + V3 (ожидаемый результат)."
-          },
-          {
-            "id": 19,
-            "words": [
-              "outside",
-              "it",
-              "must",
-              "be",
-              "freezing"
-            ],
-            "answer": "it must be freezing outside",
-            "explanation": "Subject + must be + V-ing (davomiy xulosa).",
-            "explanationRu": "Подлежащее + must be + V-ing (вывод о длящемся действии)."
-          },
-          {
-            "id": 20,
-            "words": [
-              "possible",
-              "that",
-              "can't",
-              "have",
-              "been"
-            ],
-            "answer": "that can't have been possible",
-            "explanation": "Subject + can't have + V3 (be → been).",
-            "explanationRu": "Подлежащее + can't have + V3 (be → been)."
-          }
-        ],
-        "errorCorrection": [
-          {
-            "id": 1,
-            "text": "They must is out of town this week.",
-            "options": [
-              "They",
-              "must is",
-              "out of town this week",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "must is",
-            "correction": "must be",
-            "explanation": "After \"must\", use the base verb: \"be\", not \"is\".",
-            "explanationRu": "После \"must\" используется начальная форма глагола: \"be\", а не \"is\"."
-          },
-          {
-            "id": 2,
-            "text": "That can't have happen so quickly.",
-            "options": [
-              "That",
-              "can't have happen",
-              "so quickly",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "can't have happen",
-            "correction": "can't have happened",
-            "explanation": "After \"can't have\", use V3 (Past Participle): \"happened\", not the base form \"happen\".",
-            "explanationRu": "После \"can't have\" используется V3 (причастие прошедшего времени): \"happened\", а не начальная форма \"happen\"."
-          },
-          {
-            "id": 3,
-            "text": "She might is busy with her new job.",
-            "options": [
-              "She",
-              "might is",
-              "busy with her new job",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "might is",
-            "correction": "might be",
-            "explanation": "After \"might\", use the base verb: \"be\", not \"is\".",
-            "explanationRu": "После \"might\" используется начальная форма глагола: \"be\", а не \"is\"."
-          },
-          {
-            "id": 4,
-            "text": "The dog must have escape through the gate.",
-            "options": [
-              "The dog",
-              "must have escape",
-              "through the gate",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "must have escape",
-            "correction": "must have escaped",
-            "explanation": "After \"must have\", use V3: \"escaped\", not \"escape\".",
-            "explanationRu": "После \"must have\" используется V3: \"escaped\", а не \"escape\"."
-          },
-          {
-            "id": 5,
-            "text": "This letter could to be from the bank.",
-            "options": [
-              "This letter",
-              "could to be",
-              "from the bank",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "could to be",
-            "correction": "could be",
-            "explanation": "Modal verbs are followed directly by the base verb, no \"to\": \"could be\".",
-            "explanationRu": "После модальных глаголов сразу идёт начальная форма глагола, без \"to\": \"could be\"."
-          },
-          {
-            "id": 6,
-            "text": "They might have went out for a walk.",
-            "options": [
-              "They",
-              "might have went",
-              "out for a walk",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "might have went",
-            "correction": "might have gone",
-            "explanation": "After \"might have\", use V3: \"gone\", not \"went\" (the simple past form).",
-            "explanationRu": "После \"might have\" используется V3: \"gone\", а не \"went\" (форма Past Simple)."
-          },
-          {
-            "id": 7,
-            "text": "You can't being hungry already.",
-            "options": [
-              "You",
-              "can't being",
-              "hungry already",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "can't being",
-            "correction": "can't be",
-            "explanation": "After \"can't\", use the base verb: \"be\", not \"being\".",
-            "explanationRu": "После \"can't\" используется начальная форма глагола: \"be\", а не \"being\"."
-          },
-          {
-            "id": 8,
-            "text": "We could have catch the earlier train.",
-            "options": [
-              "We",
-              "could have catch",
-              "the earlier train",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "could have catch",
-            "correction": "could have caught",
-            "explanation": "After \"could have\", use V3: \"caught\", not \"catch\".",
-            "explanationRu": "После \"could have\" используется V3: \"caught\", а не \"catch\"."
-          },
-          {
-            "id": 9,
-            "text": "Someone must cooking dinner in the kitchen.",
-            "options": [
-              "Someone",
-              "must cooking",
-              "dinner in the kitchen",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "must cooking",
-            "correction": "must be cooking",
-            "explanation": "The continuous deduction form needs \"be\": \"must be cooking\", not \"must cooking\".",
-            "explanationRu": "Длительная форма вывода требует \"be\": \"must be cooking\", а не \"must cooking\"."
-          },
-          {
-            "id": 10,
-            "text": "He can't has been there all week.",
-            "options": [
-              "He",
-              "can't has been",
-              "there all week",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "can't has been",
-            "correction": "can't have been",
-            "explanation": "\"have\" never changes to \"has\" after a modal verb: \"can't have been\".",
-            "explanationRu": "\"have\" никогда не меняется на \"has\" после модального глагола: \"can't have been\"."
-          },
-          {
-            "id": 11,
-            "text": "That might to be the wind.",
-            "options": [
-              "That",
-              "might to be",
-              "the wind",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "might to be",
-            "correction": "might be",
-            "explanation": "Modal verbs are followed directly by the base verb, no \"to\": \"might be\".",
-            "explanationRu": "После модальных глаголов сразу идёт начальная форма глагола, без \"to\": \"might be\"."
-          },
-          {
-            "id": 12,
-            "text": "My brother must have find the cookies.",
-            "options": [
-              "My brother",
-              "must have find",
-              "the cookies",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "must have find",
-            "correction": "must have found",
-            "explanation": "After \"must have\", use V3: \"found\", not \"find\".",
-            "explanationRu": "После \"must have\" используется V3: \"found\", а не \"find\"."
-          },
-          {
-            "id": 13,
-            "text": "This key could being for the garage.",
-            "options": [
-              "This key",
-              "could being",
-              "for the garage",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "could being",
-            "correction": "could be",
-            "explanation": "After \"could\", use the base verb: \"be\", not \"being\".",
-            "explanationRu": "После \"could\" используется начальная форма глагола: \"be\", а не \"being\"."
-          },
-          {
-            "id": 14,
-            "text": "Everyone might have went home early.",
-            "options": [
-              "Everyone",
-              "might have went",
-              "home early",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "might have went",
-            "correction": "might have gone",
-            "explanation": "After \"might have\", use V3: \"gone\", not \"went\".",
-            "explanationRu": "После \"might have\" используется V3: \"gone\", а не \"went\"."
-          },
-          {
-            "id": 15,
-            "text": "The shops can't opened yet.",
-            "options": [
-              "The shops",
-              "can't opened",
-              "yet",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "can't opened",
-            "correction": "can't be open",
-            "explanation": "\"can't\" needs the base verb \"be\" before the adjective \"open\": \"can't be open\".",
-            "explanationRu": "\"can't\" требует начальной формы глагола \"be\" перед прилагательным \"open\": \"can't be open\"."
-          },
-          {
-            "id": 16,
-            "text": "The sprinklers must has turned on automatically.",
-            "options": [
-              "The sprinklers",
-              "must has turned",
-              "on automatically",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "must has turned",
-            "correction": "must have turned",
-            "explanation": "\"have\" never changes to \"has\" after a modal verb: \"must have turned\".",
-            "explanationRu": "\"have\" никогда не меняется на \"has\" после модального глагола: \"must have turned\"."
-          },
-          {
-            "id": 17,
-            "text": "It should being here by tomorrow.",
-            "options": [
-              "It",
-              "should being",
-              "here by tomorrow",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "should being",
-            "correction": "should be",
-            "explanation": "After \"should\", use the base verb: \"be\", not \"being\".",
-            "explanationRu": "После \"should\" используется начальная форма глагола: \"be\", а не \"being\"."
-          },
-          {
-            "id": 18,
-            "text": "Everyone should has arrived by now.",
-            "options": [
-              "Everyone",
-              "should has arrived",
-              "by now",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "should has arrived",
-            "correction": "should have arrived",
-            "explanation": "\"have\" never changes to \"has\" after a modal verb: \"should have arrived\".",
-            "explanationRu": "\"have\" никогда не меняется на \"has\" после модального глагола: \"should have arrived\"."
-          },
-          {
-            "id": 19,
-            "text": "It must freezing outside tonight.",
-            "options": [
-              "It",
-              "must freezing",
-              "outside tonight",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "must freezing",
-            "correction": "must be freezing",
-            "explanation": "The continuous deduction form needs \"be\": \"must be freezing\", not \"must freezing\".",
-            "explanationRu": "Длительная форма вывода требует \"be\": \"must be freezing\", а не \"must freezing\"."
-          },
-          {
-            "id": 20,
-            "text": "That can't have being possible.",
-            "options": [
-              "That",
-              "can't have being",
-              "possible",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "can't have being",
-            "correction": "can't have been",
-            "explanation": "After \"can't have\", use V3: \"been\", not \"being\".",
-            "explanationRu": "После \"can't have\" используется V3: \"been\", а не \"being\"."
-          }
-        ],
-        "transform": [
-          {
-            "id": 1,
-            "text": "Express a confident conclusion about the present: \"I'm sure they are out — all the lights are off and the car is gone.\"",
-            "options": [
-              "They must be out.",
-              "They might be out.",
-              "They should be out.",
-              "They would be out."
-            ],
-            "correct": 0,
-            "explanation": "\"must\" expresses a confident conclusion about the present.",
-            "explanationRu": "\"must\" выражает уверенный вывод о настоящем."
-          },
-          {
-            "id": 2,
-            "text": "Express a confident negative conclusion about the past: \"I'm sure it didn't happen — running that distance in twenty minutes is impossible.\"",
-            "options": [
-              "That can't have happened.",
-              "That mustn't have happened.",
-              "That may not have happened.",
-              "That shouldn't have happened."
-            ],
-            "correct": 0,
-            "explanation": "\"can't have\" expresses a confident negative conclusion about the past.",
-            "explanationRu": "\"can't have\" выражает уверенный отрицательный вывод о прошлом."
-          },
-          {
-            "id": 3,
-            "text": "Express an uncertain guess about the present: \"It's possible, but I'm not sure, that Maria is busy with work.\"",
-            "options": [
-              "She might be busy with work.",
-              "She must be busy with work.",
-              "She can't be busy with work.",
-              "She should be busy with work."
-            ],
-            "correct": 0,
-            "explanation": "\"might\" expresses an uncertain possibility about the present.",
-            "explanationRu": "\"might\" выражает неуверенное предположение о настоящем."
-          },
-          {
-            "id": 4,
-            "text": "Express a confident conclusion about the past: \"I'm sure the dog escaped — the gate is open and it's gone.\"",
-            "options": [
-              "It must have escaped.",
-              "It might have escaped.",
-              "It can't have escaped.",
-              "It should have escaped."
-            ],
-            "correct": 0,
-            "explanation": "\"must have\" expresses a confident conclusion about the past.",
-            "explanationRu": "\"must have\" выражает уверенный вывод о прошлом."
-          },
-          {
-            "id": 5,
-            "text": "Express a possibility about the present: \"It's possible that this letter is from the bank.\"",
-            "options": [
-              "This letter could be from the bank.",
-              "This letter must be from the bank.",
-              "This letter can't be from the bank.",
-              "This letter should be from the bank."
-            ],
-            "correct": 0,
-            "explanation": "\"could\" expresses a simple possibility.",
-            "explanationRu": "\"could\" выражает простую возможность."
-          },
-          {
-            "id": 6,
-            "text": "Express an uncertain guess about the past: \"It's possible, but I'm not sure, that they went out for a walk.\"",
-            "options": [
-              "They might have gone out for a walk.",
-              "They must have gone out for a walk.",
-              "They can't have gone out for a walk.",
-              "They should have gone out for a walk."
-            ],
-            "correct": 0,
-            "explanation": "\"might have\" expresses an uncertain possibility about the past.",
-            "explanationRu": "\"might have\" выражает неуверенное предположение о прошлом."
-          },
-          {
-            "id": 7,
-            "text": "Express a confident negative conclusion about the present: \"I'm sure you aren't hungry — you only just woke up.\"",
-            "options": [
-              "You can't be hungry already.",
-              "You mustn't be hungry already.",
-              "You may not be hungry already.",
-              "You shouldn't be hungry already."
-            ],
-            "correct": 0,
-            "explanation": "\"can't\" expresses a confident negative conclusion about the present.",
-            "explanationRu": "\"can't\" выражает уверенный отрицательный вывод о настоящем."
-          },
-          {
-            "id": 8,
-            "text": "Describe an unfulfilled possibility in the past: \"It was possible for us to catch the earlier train, but we chose not to.\"",
-            "options": [
-              "We could have caught the earlier train.",
-              "We must have caught the earlier train.",
-              "We can't have caught the earlier train.",
-              "We should have caught the earlier train."
-            ],
-            "correct": 0,
-            "explanation": "\"could have\" describes a possibility that existed in the past but wasn't used.",
-            "explanationRu": "\"could have\" описывает возможность, которая была в прошлом, но не была использована."
-          },
-          {
-            "id": 9,
-            "text": "Express a confident conclusion about a present action in progress: \"I'm sure someone is cooking dinner — the kitchen smells amazing.\"",
-            "options": [
-              "Someone must be cooking dinner.",
-              "Someone might be cooking dinner.",
-              "Someone can't be cooking dinner.",
-              "Someone should be cooking dinner."
-            ],
-            "correct": 0,
-            "explanation": "\"must be + V-ing\" expresses a confident conclusion about an action happening right now.",
-            "explanationRu": "\"must be + V-ing\" выражает уверенный вывод о действии, происходящем прямо сейчас."
-          },
-          {
-            "id": 10,
-            "text": "Express a confident negative conclusion about the past: \"I'm sure he wasn't there — he was abroad all week.\"",
-            "options": [
-              "He can't have been there.",
-              "He mustn't have been there.",
-              "He may not have been there.",
-              "He shouldn't have been there."
-            ],
-            "correct": 0,
-            "explanation": "\"can't have\" expresses a confident negative conclusion about the past.",
-            "explanationRu": "\"can't have\" выражает уверенный отрицательный вывод о прошлом."
-          },
-          {
-            "id": 11,
-            "text": "Express an uncertain guess about the present: \"It's possible that the noise is just the wind.\"",
-            "options": [
-              "That might be the wind.",
-              "That must be the wind.",
-              "That can't be the wind.",
-              "That should be the wind."
-            ],
-            "correct": 0,
-            "explanation": "\"might\" expresses an uncertain possibility.",
-            "explanationRu": "\"might\" выражает неуверенное предположение."
-          },
-          {
-            "id": 12,
-            "text": "Express a confident conclusion about the past: \"I'm sure my brother found the cookies — the jar is empty and there are crumbs everywhere.\"",
-            "options": [
-              "My brother must have found it.",
-              "My brother might have found it.",
-              "My brother can't have found it.",
-              "My brother should have found it."
-            ],
-            "correct": 0,
-            "explanation": "\"must have\" expresses a confident conclusion about the past.",
-            "explanationRu": "\"must have\" выражает уверенный вывод о прошлом."
-          },
-          {
-            "id": 13,
-            "text": "Express a possibility about the present: \"It's possible that this key is for the garage.\"",
-            "options": [
-              "This key could be for the garage.",
-              "This key must be for the garage.",
-              "This key can't be for the garage.",
-              "This key should be for the garage."
-            ],
-            "correct": 0,
-            "explanation": "\"could\" expresses a simple possibility.",
-            "explanationRu": "\"could\" выражает простую возможность."
-          },
-          {
-            "id": 14,
-            "text": "Express an uncertain guess about the past: \"It's possible, but I'm not sure, that everyone went home early.\"",
-            "options": [
-              "Everyone might have gone home early.",
-              "Everyone must have gone home early.",
-              "Everyone can't have gone home early.",
-              "Everyone should have gone home early."
-            ],
-            "correct": 0,
-            "explanation": "\"might have\" expresses an uncertain possibility about the past.",
-            "explanationRu": "\"might have\" выражает неуверенное предположение о прошлом."
-          },
-          {
-            "id": 15,
-            "text": "Express a confident negative conclusion about the present: \"I'm sure the shops aren't open yet — it's only six in the morning.\"",
-            "options": [
-              "The shops can't be open yet.",
-              "The shops mustn't be open yet.",
-              "The shops may not be open yet.",
-              "The shops shouldn't be open yet."
-            ],
-            "correct": 0,
-            "explanation": "\"can't\" expresses a confident negative conclusion about the present.",
-            "explanationRu": "\"can't\" выражает уверенный отрицательный вывод о настоящем."
-          },
-          {
-            "id": 16,
-            "text": "Express a confident conclusion about the past: \"I'm sure the sprinklers turned on — the grass is wet but there isn't a cloud in the sky.\"",
-            "options": [
-              "The sprinklers must have turned on.",
-              "The sprinklers might have turned on.",
-              "The sprinklers can't have turned on.",
-              "The sprinklers should have turned on."
-            ],
-            "correct": 0,
-            "explanation": "\"must have\" expresses a confident conclusion about the past.",
-            "explanationRu": "\"must have\" выражает уверенный вывод о прошлом."
-          },
-          {
-            "id": 17,
-            "text": "Express an expected outcome in the future: \"Based on when it was sent, I expect the package to arrive by tomorrow.\"",
-            "options": [
-              "It should be here by tomorrow.",
-              "It must be here by tomorrow.",
-              "It can't be here by tomorrow.",
-              "It might be here by tomorrow."
-            ],
-            "correct": 0,
-            "explanation": "\"should\" expresses an expected outcome, based on logic or evidence.",
-            "explanationRu": "\"should\" выражает ожидаемый результат, основанный на логике или фактах."
-          },
-          {
-            "id": 18,
-            "text": "Express an expected outcome about the past: \"Based on the meeting start time, I expect everyone to have arrived by now.\"",
-            "options": [
-              "Everyone should have arrived by now.",
-              "Everyone must have arrived by now.",
-              "Everyone can't have arrived by now.",
-              "Everyone might have arrived by now."
-            ],
-            "correct": 0,
-            "explanation": "\"should have\" expresses an expected outcome about the past.",
-            "explanationRu": "\"should have\" выражает ожидаемый результат о прошлом."
-          },
-          {
-            "id": 19,
-            "text": "Express a confident conclusion about the present: \"I'm sure it's freezing outside — he's wearing a thick coat and gloves.\"",
-            "options": [
-              "It must be freezing outside.",
-              "It might be freezing outside.",
-              "It can't be freezing outside.",
-              "It should be freezing outside."
-            ],
-            "correct": 0,
-            "explanation": "\"must be\" expresses a confident conclusion about the present.",
-            "explanationRu": "\"must be\" выражает уверенный вывод о настоящем."
-          },
-          {
-            "id": 20,
-            "text": "Express a confident negative conclusion about the past: \"I'm sure it wasn't possible — they say they did it in one hour, which seems impossible.\"",
-            "options": [
-              "That can't have been possible.",
-              "That mustn't have been possible.",
-              "That may not have been possible.",
-              "That shouldn't have been possible."
-            ],
-            "correct": 0,
-            "explanation": "\"can't have\" expresses a confident negative conclusion about the past.",
-            "explanationRu": "\"can't have\" выражает уверенный отрицательный вывод о прошлом."
-          }
-        ],
-        "dialogue": [
-          {
-            "id": 1,
-            "situation": "Coming home to a dark house.",
-            "dialogue": "A: Is anyone home?\nB: All the lights are off and the car is gone — they ___ be out.",
-            "options": [
-              "must",
-              "might",
-              "should",
-              "would"
-            ],
-            "correct": 0,
-            "explanation": "\"must\" — kuchli ijobiy xulosa.",
-            "explanationRu": "\"must\" — уверенный положительный вывод."
-          },
-          {
-            "id": 2,
-            "situation": "Hearing about someone's claimed run.",
-            "dialogue": "A: He says he ran ten kilometers in twenty minutes!\nB: That ___ happened — it's simply impossible.",
-            "options": [
-              "can't have",
-              "must have",
-              "might have",
-              "should have"
-            ],
-            "correct": 0,
-            "explanation": "\"can't have\" — kuchli salbiy xulosa (o'tmish).",
-            "explanationRu": "\"can't have\" — уверенный отрицательный вывод (прошлое)."
-          },
-          {
-            "id": 3,
-            "situation": "Wondering about a friend's silence.",
-            "dialogue": "A: Have you heard from Maria today?\nB: No, she ___ be busy with work.",
-            "options": [
-              "might",
-              "must",
-              "can't",
-              "should"
-            ],
-            "correct": 0,
-            "explanation": "\"might\" — noaniq ehtimollik.",
-            "explanationRu": "\"might\" — неуверенное предположение."
-          },
-          {
-            "id": 4,
-            "situation": "Finding the dog missing.",
-            "dialogue": "A: Where's the dog?\nB: The gate is open — it ___ escaped.",
-            "options": [
-              "must have",
-              "might have",
-              "can't have",
-              "should have"
-            ],
-            "correct": 0,
-            "explanation": "\"must have\" — kuchli ijobiy xulosa.",
-            "explanationRu": "\"must have\" — уверенный положительный вывод."
-          },
-          {
-            "id": 5,
-            "situation": "Guessing about a letter.",
-            "dialogue": "A: Who is this letter from?\nB: It ___ be from the bank, but I'm not certain.",
-            "options": [
-              "could",
-              "must",
-              "can't",
-              "should"
-            ],
-            "correct": 0,
-            "explanation": "\"could\" — ehtimollik.",
-            "explanationRu": "\"could\" — предположение."
-          },
-          {
-            "id": 6,
-            "situation": "No answer at the door.",
-            "dialogue": "A: No one answered!\nB: They ___ gone out for a walk.",
-            "options": [
-              "might have",
-              "must have",
-              "can't have",
-              "should have"
-            ],
-            "correct": 0,
-            "explanation": "\"might have\" — noaniq ehtimollik (o'tmish).",
-            "explanationRu": "\"might have\" — неуверенное предположение (прошлое)."
-          },
-          {
-            "id": 7,
-            "situation": "Someone just woke up.",
-            "dialogue": "A: Do you want breakfast already?\nB: You've only just woken up — you ___ be hungry already!",
-            "options": [
-              "can't",
-              "must",
-              "might",
-              "should"
-            ],
-            "correct": 0,
-            "explanation": "\"can't\" — kuchli salbiy xulosa.",
-            "explanationRu": "\"can't\" — уверенный отрицательный вывод."
-          },
-          {
-            "id": 8,
-            "situation": "Talking about a missed train.",
-            "dialogue": "A: Why were you late?\nB: We ___ caught the earlier train, but we had breakfast first.",
-            "options": [
-              "could have",
-              "must have",
-              "can't have",
-              "should have"
-            ],
-            "correct": 0,
-            "explanation": "\"could have\" — bajarilmagan imkoniyat.",
-            "explanationRu": "\"could have\" — неиспользованная возможность."
-          },
-          {
-            "id": 9,
-            "situation": "Smelling dinner cooking.",
-            "dialogue": "A: What's that amazing smell?\nB: Someone ___ be cooking dinner.",
-            "options": [
-              "must",
-              "might",
-              "could",
-              "should"
-            ],
-            "correct": 0,
-            "explanation": "\"must be\" + V-ing — kuchli ijobiy xulosa (davomiy).",
-            "explanationRu": "\"must be\" + V-ing — уверенный положительный вывод (длящееся действие)."
-          },
-          {
-            "id": 10,
-            "situation": "Doubting an alibi.",
-            "dialogue": "A: He says he saw you at the concert.\nB: He ___ been there — I was abroad all week.",
-            "options": [
-              "can't have",
-              "must have",
-              "might have",
-              "should have"
-            ],
-            "correct": 0,
-            "explanation": "\"can't have\" — kuchli salbiy xulosa.",
-            "explanationRu": "\"can't have\" — уверенный отрицательный вывод."
-          },
-          {
-            "id": 11,
-            "situation": "Hearing a strange sound.",
-            "dialogue": "A: What was that noise?\nB: It ___ be the wind, or maybe an animal.",
-            "options": [
-              "might",
-              "must",
-              "can't",
-              "should"
-            ],
-            "correct": 0,
-            "explanation": "\"might\" — noaniq ehtimollik.",
-            "explanationRu": "\"might\" — неуверенное предположение."
-          },
-          {
-            "id": 12,
-            "situation": "Missing cookies.",
-            "dialogue": "A: Where did all the cookies go?\nB: My little brother ___ found them — look at these crumbs!",
-            "options": [
-              "must have",
-              "might have",
-              "can't have",
-              "should have"
-            ],
-            "correct": 0,
-            "explanation": "\"must have\" — kuchli ijobiy xulosa.",
-            "explanationRu": "\"must have\" — уверенный положительный вывод."
-          },
-          {
-            "id": 13,
-            "situation": "An unknown key.",
-            "dialogue": "A: What is this key for?\nB: It ___ be for the garage, or maybe the shed.",
-            "options": [
-              "could",
-              "must",
-              "can't",
-              "should"
-            ],
-            "correct": 0,
-            "explanation": "\"could\" — ehtimollik.",
-            "explanationRu": "\"could\" — предположение."
-          },
-          {
-            "id": 14,
-            "situation": "Arriving at an empty office.",
-            "dialogue": "A: Where is everyone?\nB: They ___ gone home early.",
-            "options": [
-              "might have",
-              "must have",
-              "can't have",
-              "should have"
-            ],
-            "correct": 0,
-            "explanation": "\"might have\" — noaniq ehtimollik.",
-            "explanationRu": "\"might have\" — неуверенное предположение."
-          },
-          {
-            "id": 15,
-            "situation": "Checking shop hours early morning.",
-            "dialogue": "A: Let's go shopping!\nB: The shops ___ be open yet — it's only six.",
-            "options": [
-              "can't",
-              "must",
-              "might",
-              "should"
-            ],
-            "correct": 0,
-            "explanation": "\"can't\" — kuchli salbiy xulosa.",
-            "explanationRu": "\"can't\" — уверенный отрицательный вывод."
-          },
-          {
-            "id": 16,
-            "situation": "Wet grass, clear sky.",
-            "dialogue": "A: Why is the grass wet? It didn't rain.\nB: The sprinklers ___ turned on automatically.",
-            "options": [
-              "must have",
-              "might have",
-              "can't have",
-              "should have"
-            ],
-            "correct": 0,
-            "explanation": "\"must have\" — kuchli ijobiy xulosa.",
-            "explanationRu": "\"must have\" — уверенный положительный вывод."
-          },
-          {
-            "id": 17,
-            "situation": "Waiting for a package.",
-            "dialogue": "A: When will the package arrive?\nB: It was sent three days ago, so it ___ be here by tomorrow.",
-            "options": [
-              "should",
-              "must",
-              "can't",
-              "might"
-            ],
-            "correct": 0,
-            "explanation": "\"should\" — kutilgan natija.",
-            "explanationRu": "\"should\" — ожидаемый результат."
-          },
-          {
-            "id": 18,
-            "situation": "Waiting at a meeting.",
-            "dialogue": "A: Is everyone here yet?\nB: The meeting started at nine, so everyone ___ arrived by now.",
-            "options": [
-              "should have",
-              "must have",
-              "can't have",
-              "might have"
-            ],
-            "correct": 0,
-            "explanation": "\"should have\" — kutilgan natija (o'tmish).",
-            "explanationRu": "\"should have\" — ожидаемый результат (прошлое)."
-          },
-          {
-            "id": 19,
-            "situation": "Seeing someone bundled up.",
-            "dialogue": "A: Why is he wearing such a thick coat?\nB: It ___ be freezing outside.",
-            "options": [
-              "must",
-              "might",
-              "could",
-              "should"
-            ],
-            "correct": 0,
-            "explanation": "\"must\" — kuchli ijobiy xulosa.",
-            "explanationRu": "\"must\" — уверенный положительный вывод."
-          },
-          {
-            "id": 20,
-            "situation": "Doubting a hiking claim.",
-            "dialogue": "A: They say they climbed the mountain and back in an hour!\nB: That ___ been possible.",
-            "options": [
-              "can't have",
-              "must have",
-              "might have",
-              "should have"
-            ],
-            "correct": 0,
-            "explanation": "\"can't have\" — kuchli salbiy xulosa.",
-            "explanationRu": "\"can't have\" — уверенный отрицательный вывод."
-          }
-        ]
-      },
-      {
-        "id": "be-get-used-to",
-        "title": "Be Used To, Get Used To & Would",
-        "icon": "🔄",
-        "guide": "## Be Used To, Get Used To, Become Used To & Would (Odatlanish va o'tmishdagi odatlar)\n\nBu mavzu \"used to\" / \"would\" bilan ifodalangan **o'tmishdagi odatlarni**, \"be used to\" / \"get used to\" / \"become used to\" bilan ifodalanadigan **biror narsaga o'rganib qolish / moslashish** tushunchasidan aniq ajratishga qaratilgan — bular tashqi ko'rinishidan o'xshash, lekin butunlay boshqa ma'noni bildiradi!\n\n## 1. Eng muhim farq\n• **used to + V1** — o'tmishda muntazam sodir bo'lgan, hozir tugagan ODAT (harakat o'zgargan):\n  - I **used to smoke**. (ilgari chekar edim, hozir chekmayman)\n• **be used to + V-ing / noun** — biror narsaga O'RGANIB QOLGANLIK, qulaylik holati (harakat emas, HOLAT):\n  - I **am used to** the cold weather. (sovuq ob-havoga o'rganib qolganman)\n\n## 2. be used to (hozirgi holat — o'rganib qolganlik)\nFormula: **be (am/is/are/was/were) + used to + noun / V-ing**\n• She **is used to** working long hours. (ishlashga o'rganib qolgan)\n• We **are used to** the noise now.\n• He **isn't used to** cold weather — he grew up in the tropics.\n• **Are** you **used to** the new schedule yet?\n\n## 3. get used to (jarayon — o'rganib qolish jarayoni)\nFormula: **get + used to + noun / V-ing** — \"o'rganib QOLMOQDA / QOLDI\" (jarayon)\n• I **am getting used to** the new software. (hozir o'rganib bormoqda)\n• It took months, but he finally **got used to** the cold winters.\n• You'll need time **to get used to** the new system.\n\n## 4. become used to (get used to bilan bir xil, rasmiyroq)\nFormula: **become + used to + noun / V-ing**\n• Over time, employees usually **become used to** the strict rules.\n• She **became used to** the noise from the airport.\n\n## 5. used to vs would (qisqacha eslatma)\n• **used to** — ham ODAT, ham HOLAT (be, have, like, know) uchun ishlatiladi.\n• **would** — FAQAT takrorlanuvchi ODAT (harakat) uchun, holat fe'llari bilan ishlatilmaydi.\n  - I **used to have** little money. (have — holat fe'li, would bo'lmaydi!)\n  - Every Friday, he **would take** us fishing. (harakat — would yoki used to ikkalasi ham to'g'ri)\n\n## 6. Eng ko'p uchraydigan xatolar\n• \"I am used to smoke\" — NOTO'G'RI; to'g'risi \"I am used to smoking\" (V-ing kerak, V1 emas).\n• \"I used to living here\" — NOTO'G'RI; to'g'risi \"I used to live here\" (used to + V1, be used to + V-ing farqini aralashtirmang).\n• \"would have / like / know\" — holat fe'llari bilan would ishlatilmaydi; faqat used to.\n\n## 7. Signal so'zlar\n• used to + V1 (o'tmishdagi odat)\n• would + V1 (o'tmishdagi takroriy harakat)\n• be used to + V-ing / noun (o'rganib qolganlik)\n• get / become used to + V-ing / noun (o'rganib qolish jarayoni)",
-        "questions": [
-          {
-            "id": 1,
-            "text": "I've lived here for ten years, so I ___ the traffic noise now.",
-            "options": [
-              "am used to",
-              "used to",
-              "get used to",
-              "would"
-            ],
-            "correct": 0,
-            "explanation": "\"be used to\" — biror narsaga o'rganib qolganlik (hozirgi holat).",
-            "explanationRu": "\"be used to\" — привыкание к чему-либо (текущее состояние)."
-          },
-          {
-            "id": 2,
-            "text": "She has worked night shifts for years, so she ___ staying up late.",
-            "options": [
-              "is used to",
-              "uses to",
-              "gets used to",
-              "would"
-            ],
-            "correct": 0,
-            "explanation": "\"be used to\" — o'rganib qolganlik holati.",
-            "explanationRu": "\"be used to\" — состояние привыкания."
-          },
-          {
-            "id": 3,
-            "text": "It's only my first week at the new job, but I ___ the routine already.",
-            "options": [
-              "am getting used to",
-              "get used to",
-              "am used to",
-              "would get used to"
-            ],
-            "correct": 0,
-            "explanation": "\"get used to\" — o'rganib qolish jarayoni (hozir davom etmoqda).",
-            "explanationRu": "\"get used to\" — процесс привыкания (происходит сейчас)."
-          },
-          {
-            "id": 4,
-            "text": "It took a few months, but he finally ___ the cold winters here.",
-            "options": [
-              "got used to",
-              "used to get",
-              "was used to",
-              "would get used to"
-            ],
-            "correct": 0,
-            "explanation": "\"get used to\" — o'tgan zamonda tugallangan o'rganib qolish jarayoni.",
-            "explanationRu": "\"get used to\" — завершённый в прошлом процесс привыкания."
-          },
-          {
-            "id": 5,
-            "text": "After living abroad for years, she ___ eating spicy food.",
-            "options": [
-              "has become used to",
-              "has became used to",
-              "is become used to",
-              "became use to"
-            ],
-            "correct": 0,
-            "explanation": "\"become used to\" — o'rganib qolish, rasmiyroq shakl.",
-            "explanationRu": "\"become used to\" — привыкание, более формальная форма."
-          },
-          {
-            "id": 6,
-            "text": "I ___ play the guitar every day, but I stopped after university.",
-            "options": [
-              "used to",
-              "use to",
-              "was used to",
-              "would used to"
-            ],
-            "correct": 0,
-            "explanation": "\"used to\" — o'tmishda muntazam bo'lgan, hozir tugagan odat.",
-            "explanationRu": "\"used to\" — регулярная привычка в прошлом, которая сейчас прекратилась."
-          },
-          {
-            "id": 7,
-            "text": "Every Friday, my grandfather ___ take us fishing at the lake.",
-            "options": [
-              "would",
-              "used to",
-              "use to",
-              "was used to"
-            ],
-            "correct": 0,
-            "explanation": "\"would\" — o'tmishdagi takrorlanuvchi harakat.",
-            "explanationRu": "\"would\" — повторяющееся действие в прошлом."
-          },
-          {
-            "id": 8,
-            "text": "He grew up in a hot country, so he ___ cold weather.",
-            "options": [
-              "isn't used to",
-              "doesn't used to",
-              "wasn't use to",
-              "not used to"
-            ],
-            "correct": 0,
-            "explanation": "\"be used to\" ning inkor shakli: isn't used to.",
-            "explanationRu": "Отрицательная форма \"be used to\": isn't used to."
-          },
-          {
-            "id": 9,
-            "text": "How long did it take you ___ living in such a big city?",
-            "options": [
-              "to get used to",
-              "getting used to",
-              "to used to get",
-              "get use to"
-            ],
-            "correct": 0,
-            "explanation": "\"to get used to\" — fe'ldan keyingi infinitiv shakl.",
-            "explanationRu": "\"to get used to\" — форма инфинитива после глагола."
-          },
-          {
-            "id": 10,
-            "text": "As a chef, she ___ working long hours on her feet.",
-            "options": [
-              "is used to",
-              "used to",
-              "gets used to",
-              "would"
-            ],
-            "correct": 0,
-            "explanation": "\"be used to\" — o'rganib qolganlik holati.",
-            "explanationRu": "\"be used to\" — состояние привыкания."
-          },
-          {
-            "id": 11,
-            "text": "The new employees ___ the software slowly but surely.",
-            "options": [
-              "are getting used to",
-              "get used to",
-              "are used to get",
-              "would get used to"
-            ],
-            "correct": 0,
-            "explanation": "\"get used to\" — hozir davom etayotgan o'rganib qolish jarayoni.",
-            "explanationRu": "\"get used to\" — процесс привыкания, происходящий сейчас."
-          },
-          {
-            "id": 12,
-            "text": "I ___ eat fast food a lot, but I've completely changed my diet.",
-            "options": [
-              "used to",
-              "use to",
-              "was used to",
-              "would used to"
-            ],
-            "correct": 0,
-            "explanation": "\"used to\" — hozir tugagan o'tmishdagi odat.",
-            "explanationRu": "\"used to\" — прошлая привычка, которая уже прекратилась."
-          },
-          {
-            "id": 13,
-            "text": "It took him months, but he eventually ___ the noise from the airport.",
-            "options": [
-              "became used to",
-              "become used to",
-              "was become used to",
-              "became use to"
-            ],
-            "correct": 0,
-            "explanation": "\"become used to\" — o'tgan zamonda tugallangan o'rganib qolish.",
-            "explanationRu": "\"become used to\" — привыкание, завершённое в прошлом."
-          },
-          {
-            "id": 14,
-            "text": "Are you ___ the cold winters here yet?",
-            "options": [
-              "used to",
-              "use to",
-              "get used to",
-              "would"
-            ],
-            "correct": 0,
-            "explanation": "\"be used to\" savol shaklida: Are you used to...?",
-            "explanationRu": "\"be used to\" в вопросительной форме: Are you used to...?"
-          },
-          {
-            "id": 15,
-            "text": "As a child, I ___ spend every summer at my grandparents' farm.",
-            "options": [
-              "would",
-              "used to",
-              "use to",
-              "was used to"
-            ],
-            "correct": 0,
-            "explanation": "\"would\" — o'tmishdagi takrorlanuvchi harakat.",
-            "explanationRu": "\"would\" — повторяющееся действие в прошлом."
-          },
-          {
-            "id": 16,
-            "text": "I was slowly ___ the idea of moving abroad when the plan suddenly changed.",
-            "options": [
-              "getting used to",
-              "get used to",
-              "used to get",
-              "become used to"
-            ],
-            "correct": 0,
-            "explanation": "\"get used to\" — o'tgan davomli zamonda davom etayotgan jarayon.",
-            "explanationRu": "\"get used to\" — процесс, длившийся в прошлом (Past Continuous)."
-          },
-          {
-            "id": 17,
-            "text": "We've traveled so much for work that we ___ long flights.",
-            "options": [
-              "are used to",
-              "used to",
-              "get used to",
-              "would"
-            ],
-            "correct": 0,
-            "explanation": "\"be used to\" — o'rganib qolganlik holati.",
-            "explanationRu": "\"be used to\" — состояние привыкания."
-          },
-          {
-            "id": 18,
-            "text": "You'll need some time ___ the new system, but it gets easier.",
-            "options": [
-              "to get used to",
-              "getting used to",
-              "to used to",
-              "get use to"
-            ],
-            "correct": 0,
-            "explanation": "\"to get used to\" — fe'ldan keyingi infinitiv shakl.",
-            "explanationRu": "\"to get used to\" — форма инфинитива после глагола."
-          },
-          {
-            "id": 19,
-            "text": "Over time, employees usually ___ the company's strict rules.",
-            "options": [
-              "become used to",
-              "became used to",
-              "are become used to",
-              "become use to"
-            ],
-            "correct": 0,
-            "explanation": "\"become\" — ko'plik ega bilan bosh shaklda (Present Simple).",
-            "explanationRu": "\"become\" — в начальной форме с подлежащим во мн. числе (Present Simple)."
-          },
-          {
-            "id": 20,
-            "text": "When I was a student, I ___ very little money, so I would cook cheap meals every night.",
-            "options": [
-              "used to have",
-              "would have",
-              "use to have",
-              "was having"
-            ],
-            "correct": 0,
-            "explanation": "\"have\" — holat fe'li, shuning uchun would emas, used to ishlatiladi.",
-            "explanationRu": "\"have\" — глагол состояния, поэтому используется used to, а не would."
-          }
-        ],
-        "fillBlanks": [
-          {
-            "id": 1,
-            "text": "I've lived here for ten years, so I ___ (be used to / traffic noise) now.",
-            "options": [
-              "am used to the traffic noise",
-              "used to the traffic noise",
-              "get used to the traffic noise",
-              "would the traffic noise"
-            ],
-            "correct": 0,
-            "explanation": "\"am used to\" + noun (traffic noise).",
-            "explanationRu": "\"am used to\" + существительное (traffic noise)."
-          },
-          {
-            "id": 2,
-            "text": "She has worked night shifts for years, so she ___ (be used to / stay) up late.",
-            "options": [
-              "is used to staying",
-              "is used to stay",
-              "used to staying",
-              "gets used to stay"
-            ],
-            "correct": 0,
-            "explanation": "\"is used to\" + V-ing (stay → staying).",
-            "explanationRu": "\"is used to\" + V-ing (stay → staying)."
-          },
-          {
-            "id": 3,
-            "text": "It's only my first week, but I ___ (get used to / the routine) already.",
-            "options": [
-              "am getting used to the routine",
-              "get used to the routine",
-              "am used to get the routine",
-              "would get used to the routine"
-            ],
-            "correct": 0,
-            "explanation": "\"am getting used to\" + noun — davom etayotgan jarayon.",
-            "explanationRu": "\"am getting used to\" + существительное — длящийся процесс."
-          },
-          {
-            "id": 4,
-            "text": "It took a few months, but he finally ___ (get used to / the cold winters).",
-            "options": [
-              "got used to the cold winters",
-              "used to get the cold winters",
-              "was used to the cold winters",
-              "would get used to the cold winters"
-            ],
-            "correct": 0,
-            "explanation": "\"got used to\" + noun — tugallangan jarayon.",
-            "explanationRu": "\"got used to\" + существительное — завершённый процесс."
-          },
-          {
-            "id": 5,
-            "text": "After living abroad for years, she ___ (become used to / eat) spicy food.",
-            "options": [
-              "has become used to eating",
-              "has became used to eating",
-              "is become used to eating",
-              "became use to eating"
-            ],
-            "correct": 0,
-            "explanation": "\"has become used to\" + V-ing (eat → eating).",
-            "explanationRu": "\"has become used to\" + V-ing (eat → eating)."
-          },
-          {
-            "id": 6,
-            "text": "I ___ (used to / play) the guitar every day, but I stopped.",
-            "options": [
-              "used to play",
-              "use to play",
-              "was used to play",
-              "would used to play"
-            ],
-            "correct": 0,
-            "explanation": "\"used to\" + V1 (play).",
-            "explanationRu": "\"used to\" + V1 (play)."
-          },
-          {
-            "id": 7,
-            "text": "Every Friday, my grandfather ___ (would / take) us fishing at the lake.",
-            "options": [
-              "would take",
-              "used take",
-              "use to took",
-              "was take"
-            ],
-            "correct": 0,
-            "explanation": "\"would\" + V1 (take) — takrorlanuvchi harakat.",
-            "explanationRu": "\"would\" + V1 (take) — повторяющееся действие."
-          },
-          {
-            "id": 8,
-            "text": "He grew up in a hot country, so he ___ (not / be used to / cold weather).",
-            "options": [
-              "isn't used to cold weather",
-              "doesn't used to cold weather",
-              "wasn't use to cold weather",
-              "not used to cold weather"
-            ],
-            "correct": 0,
-            "explanation": "\"isn't used to\" + noun (cold weather).",
-            "explanationRu": "\"isn't used to\" + существительное (cold weather)."
-          },
-          {
-            "id": 9,
-            "text": "How long did it take you ___ (get used to / live) in such a big city?",
-            "options": [
-              "to get used to living",
-              "getting used to living",
-              "to used to get living",
-              "get use to living"
-            ],
-            "correct": 0,
-            "explanation": "\"to get used to\" + V-ing (live → living).",
-            "explanationRu": "\"to get used to\" + V-ing (live → living)."
-          },
-          {
-            "id": 10,
-            "text": "As a chef, she ___ (be used to / work) long hours.",
-            "options": [
-              "is used to working",
-              "is used to work",
-              "used to working",
-              "gets used to working"
-            ],
-            "correct": 0,
-            "explanation": "\"is used to\" + V-ing (work → working).",
-            "explanationRu": "\"is used to\" + V-ing (work → working)."
-          },
-          {
-            "id": 11,
-            "text": "The new employees ___ (get used to / use) the software slowly.",
-            "options": [
-              "are getting used to using",
-              "get used to using",
-              "are used to get using",
-              "would get used to using"
-            ],
-            "correct": 0,
-            "explanation": "\"are getting used to\" + V-ing (use → using).",
-            "explanationRu": "\"are getting used to\" + V-ing (use → using)."
-          },
-          {
-            "id": 12,
-            "text": "I ___ (used to / eat) fast food a lot, but I've changed my diet.",
-            "options": [
-              "used to eat",
-              "use to eat",
-              "was used to eat",
-              "would used to eat"
-            ],
-            "correct": 0,
-            "explanation": "\"used to\" + V1 (eat).",
-            "explanationRu": "\"used to\" + V1 (eat)."
-          },
-          {
-            "id": 13,
-            "text": "It took him months, but he eventually ___ (become used to / hear) the airport noise.",
-            "options": [
-              "became used to hearing",
-              "become used to hearing",
-              "was become used to hearing",
-              "became use to hearing"
-            ],
-            "correct": 0,
-            "explanation": "\"became used to\" + V-ing (hear → hearing).",
-            "explanationRu": "\"became used to\" + V-ing (hear → hearing)."
-          },
-          {
-            "id": 14,
-            "text": "___ (be used to / cold winters) yet?",
-            "options": [
-              "Are you used to the cold winters",
-              "Do you use to the cold winters",
-              "Have you used to the cold winters",
-              "Would you the cold winters"
-            ],
-            "correct": 0,
-            "explanation": "\"Are you used to\" + noun — savol shakli.",
-            "explanationRu": "\"Are you used to\" + существительное — вопросительная форма."
-          },
-          {
-            "id": 15,
-            "text": "As a child, I ___ (would / spend) every summer at my grandparents' farm.",
-            "options": [
-              "would spend",
-              "used spend",
-              "use to spent",
-              "was spend"
-            ],
-            "correct": 0,
-            "explanation": "\"would\" + V1 (spend) — takrorlanuvchi harakat.",
-            "explanationRu": "\"would\" + V1 (spend) — повторяющееся действие."
-          },
-          {
-            "id": 16,
-            "text": "I was slowly ___ (get used to / the idea) of moving abroad.",
-            "options": [
-              "getting used to the idea",
-              "get used to the idea",
-              "used to get the idea",
-              "become used to the idea"
-            ],
-            "correct": 0,
-            "explanation": "\"getting used to\" + noun — Past Continuous jarayon.",
-            "explanationRu": "\"getting used to\" + существительное — процесс в Past Continuous."
-          },
-          {
-            "id": 17,
-            "text": "We've traveled so much that we ___ (be used to / long flights).",
-            "options": [
-              "are used to long flights",
-              "used to long flights",
-              "get used to long flights",
-              "would long flights"
-            ],
-            "correct": 0,
-            "explanation": "\"are used to\" + noun (long flights).",
-            "explanationRu": "\"are used to\" + существительное (long flights)."
-          },
-          {
-            "id": 18,
-            "text": "You'll need time ___ (get used to / the new system).",
-            "options": [
-              "to get used to the new system",
-              "getting used to the new system",
-              "to used to the new system",
-              "get use to the new system"
-            ],
-            "correct": 0,
-            "explanation": "\"to get used to\" + noun — infinitiv shakl.",
-            "explanationRu": "\"to get used to\" + существительное — форма инфинитива."
-          },
-          {
-            "id": 19,
-            "text": "Over time, employees usually ___ (become used to / the strict rules).",
-            "options": [
-              "become used to the strict rules",
-              "became used to the strict rules",
-              "are become used to the strict rules",
-              "become use to the strict rules"
-            ],
-            "correct": 0,
-            "explanation": "\"become\" — ko'plik ega bilan bosh shaklda (Present Simple).",
-            "explanationRu": "\"become\" — в начальной форме с подлежащим во мн. числе (Present Simple)."
-          },
-          {
-            "id": 20,
-            "text": "When I was a student, I ___ (used to / have) very little money.",
-            "options": [
-              "used to have",
-              "would have",
-              "use to have",
-              "was having"
-            ],
-            "correct": 0,
-            "explanation": "\"have\" — holat fe'li, shuning uchun used to ishlatiladi, would emas.",
-            "explanationRu": "\"have\" — глагол состояния, поэтому используется used to, а не would."
-          }
-        ],
-        "scrambled": [
-          {
-            "id": 1,
-            "words": [
-              "now",
-              "I",
-              "am",
-              "used",
-              "to",
-              "the",
-              "traffic",
-              "noise"
-            ],
-            "answer": "I am used to the traffic noise now",
-            "explanation": "\"be used to\" + noun — o'rganib qolganlik.",
-            "explanationRu": "\"be used to\" + существительное — привыкание."
-          },
-          {
-            "id": 2,
-            "words": [
-              "late",
-              "she",
-              "is",
-              "used",
-              "to",
-              "staying",
-              "up"
-            ],
-            "answer": "she is used to staying up late",
-            "explanation": "\"be used to\" + V-ing.",
-            "explanationRu": "\"be used to\" + V-ing."
-          },
-          {
-            "id": 3,
-            "words": [
-              "already",
-              "I",
-              "am",
-              "getting",
-              "used",
-              "to",
-              "the",
-              "routine"
-            ],
-            "answer": "I am getting used to the routine already",
-            "explanation": "\"get used to\" — davom etayotgan jarayon.",
-            "explanationRu": "\"get used to\" — длящийся процесс."
-          },
-          {
-            "id": 4,
-            "words": [
-              "winters",
-              "he",
-              "got",
-              "used",
-              "to",
-              "the",
-              "cold"
-            ],
-            "answer": "he got used to the cold winters",
-            "explanation": "\"get used to\" — tugallangan jarayon.",
-            "explanationRu": "\"get used to\" — завершённый процесс."
-          },
-          {
-            "id": 5,
-            "words": [
-              "food",
-              "she",
-              "has",
-              "become",
-              "used",
-              "to",
-              "eating",
-              "spicy"
-            ],
-            "answer": "she has become used to eating spicy food",
-            "explanation": "\"become used to\" + V-ing.",
-            "explanationRu": "\"become used to\" + V-ing."
-          },
-          {
-            "id": 6,
-            "words": [
-              "guitar",
-              "I",
-              "used",
-              "to",
-              "play",
-              "the"
-            ],
-            "answer": "I used to play the guitar",
-            "explanation": "\"used to\" + V1 — o'tmishdagi odat.",
-            "explanationRu": "\"used to\" + V1 — привычка в прошлом."
-          },
-          {
-            "id": 7,
-            "words": [
-              "lake",
-              "my",
-              "grandfather",
-              "would",
-              "take",
-              "us",
-              "fishing",
-              "at",
-              "the"
-            ],
-            "answer": "my grandfather would take us fishing at the lake",
-            "explanation": "\"would\" + V1 — takrorlanuvchi harakat.",
-            "explanationRu": "\"would\" + V1 — повторяющееся действие."
-          },
-          {
-            "id": 8,
-            "words": [
-              "weather",
-              "he",
-              "isn't",
-              "used",
-              "to",
-              "cold"
-            ],
-            "answer": "he isn't used to cold weather",
-            "explanation": "\"be used to\" ning inkor shakli.",
-            "explanationRu": "Отрицательная форма \"be used to\"."
-          },
-          {
-            "id": 9,
-            "words": [
-              "city",
-              "you",
-              "used",
-              "to",
-              "get",
-              "living",
-              "in",
-              "the",
-              "big"
-            ],
-            "answer": "you get used to living in the big city",
-            "explanation": "\"get used to\" + V-ing.",
-            "explanationRu": "\"get used to\" + V-ing."
-          },
-          {
-            "id": 10,
-            "words": [
-              "hours",
-              "she",
-              "is",
-              "used",
-              "to",
-              "working",
-              "long"
-            ],
-            "answer": "she is used to working long hours",
-            "explanation": "\"be used to\" + V-ing.",
-            "explanationRu": "\"be used to\" + V-ing."
-          },
-          {
-            "id": 11,
-            "words": [
-              "software",
-              "the",
-              "employees",
-              "are",
-              "getting",
-              "used",
-              "to",
-              "the"
-            ],
-            "answer": "the employees are getting used to the software",
-            "explanation": "\"get used to\" — davom etayotgan jarayon.",
-            "explanationRu": "\"get used to\" — длящийся процесс."
-          },
-          {
-            "id": 12,
-            "words": [
-              "food",
-              "I",
-              "used",
-              "to",
-              "eat",
-              "fast"
-            ],
-            "answer": "I used to eat fast food",
-            "explanation": "\"used to\" + V1 — o'tmishdagi odat.",
-            "explanationRu": "\"used to\" + V1 — привычка в прошлом."
-          },
-          {
-            "id": 13,
-            "words": [
-              "noise",
-              "he",
-              "became",
-              "used",
-              "to",
-              "the",
-              "airport"
-            ],
-            "answer": "he became used to the airport noise",
-            "explanation": "\"become used to\" — tugallangan jarayon.",
-            "explanationRu": "\"become used to\" — завершённый процесс."
-          },
-          {
-            "id": 14,
-            "words": [
-              "winters",
-              "are",
-              "you",
-              "used",
-              "to",
-              "the",
-              "cold",
-              "?"
-            ],
-            "answer": "are you used to the cold winters",
-            "explanation": "\"be used to\" savol shaklida.",
-            "explanationRu": "\"be used to\" в вопросительной форме."
-          },
-          {
-            "id": 15,
-            "words": [
-              "farm",
-              "I",
-              "would",
-              "spend",
-              "every",
-              "summer",
-              "at",
-              "the"
-            ],
-            "answer": "I would spend every summer at the farm",
-            "explanation": "\"would\" + V1 — takrorlanuvchi harakat.",
-            "explanationRu": "\"would\" + V1 — повторяющееся действие."
-          },
-          {
-            "id": 16,
-            "words": [
-              "abroad",
-              "I",
-              "was",
-              "getting",
-              "used",
-              "to",
-              "moving"
-            ],
-            "answer": "I was getting used to moving abroad",
-            "explanation": "\"get used to\" — Past Continuous jarayon.",
-            "explanationRu": "\"get used to\" — процесс в Past Continuous."
-          },
-          {
-            "id": 17,
-            "words": [
-              "flights",
-              "we",
-              "are",
-              "used",
-              "to",
-              "long"
-            ],
-            "answer": "we are used to long flights",
-            "explanation": "\"be used to\" + noun.",
-            "explanationRu": "\"be used to\" + существительное."
-          },
-          {
-            "id": 18,
-            "words": [
-              "system",
-              "you",
-              "need",
-              "time",
-              "to",
-              "get",
-              "used",
-              "to",
-              "the",
-              "new"
-            ],
-            "answer": "you need time to get used to the new system",
-            "explanation": "\"to get used to\" — infinitiv shakl.",
-            "explanationRu": "\"to get used to\" — форма инфинитива."
-          },
-          {
-            "id": 19,
-            "words": [
-              "rules",
-              "employees",
-              "become",
-              "used",
-              "to",
-              "the",
-              "strict"
-            ],
-            "answer": "employees become used to the strict rules",
-            "explanation": "\"become used to\" — ko'plik ega, bosh shakl.",
-            "explanationRu": "\"become used to\" — подлежащее во мн. числе, начальная форма."
-          },
-          {
-            "id": 20,
-            "words": [
-              "money",
-              "I",
-              "used",
-              "to",
-              "have",
-              "little"
-            ],
-            "answer": "I used to have little money",
-            "explanation": "\"used to\" + holat fe'li (have).",
-            "explanationRu": "\"used to\" + глагол состояния (have)."
-          }
-        ],
-        "errorCorrection": [
-          {
-            "id": 1,
-            "text": "I am used to smoke every evening.",
-            "options": [
-              "I",
-              "am used to smoke",
-              "every evening",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "am used to smoke",
-            "correction": "am used to smoking",
-            "explanation": "After \"be used to\", use V-ing, not the base verb: \"smoking\", not \"smoke\".",
-            "explanationRu": "После \"be used to\" используется V-ing, а не начальная форма: \"smoking\", а не \"smoke\"."
-          },
-          {
-            "id": 2,
-            "text": "She is used to work long hours.",
-            "options": [
-              "She",
-              "is used to work",
-              "long hours",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "is used to work",
-            "correction": "is used to working",
-            "explanation": "After \"be used to\", use V-ing: \"working\", not \"work\".",
-            "explanationRu": "После \"be used to\" используется V-ing: \"working\", а не \"work\"."
-          },
-          {
-            "id": 3,
-            "text": "I am getting use to the new routine.",
-            "options": [
-              "I",
-              "am getting use to",
-              "the new routine",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "am getting use to",
-            "correction": "am getting used to",
-            "explanation": "The correct phrase is \"used to\" (with -d), not \"use to\", after \"get/be/become\".",
-            "explanationRu": "Правильная фраза — \"used to\" (с -d), а не \"use to\", после \"get/be/become\"."
-          },
-          {
-            "id": 4,
-            "text": "He got used to live in a cold climate.",
-            "options": [
-              "He",
-              "got used to live",
-              "in a cold climate",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "got used to live",
-            "correction": "got used to living",
-            "explanation": "After \"get used to\", use V-ing: \"living\", not \"live\".",
-            "explanationRu": "После \"get used to\" используется V-ing: \"living\", а не \"live\"."
-          },
-          {
-            "id": 5,
-            "text": "She has became used to the noise.",
-            "options": [
-              "She",
-              "has became used to",
-              "the noise",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "has became used to",
-            "correction": "has become used to",
-            "explanation": "After \"has\", use V3 (Past Participle): \"become\", not \"became\" (the simple past form).",
-            "explanationRu": "После \"has\" используется V3 (причастие прошедшего времени): \"become\", а не \"became\" (форма Past Simple)."
-          },
-          {
-            "id": 6,
-            "text": "I use to play the guitar every day.",
-            "options": [
-              "I",
-              "use to play",
-              "the guitar every day",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "use to play",
-            "correction": "used to play",
-            "explanation": "In an affirmative statement, the correct form is \"used to\" (with -d), not \"use to\".",
-            "explanationRu": "В утвердительном предложении правильная форма — \"used to\" (с -d), а не \"use to\"."
-          },
-          {
-            "id": 7,
-            "text": "My grandfather would liked fishing when he was young.",
-            "options": [
-              "My grandfather",
-              "would liked",
-              "fishing when he was young",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "would liked",
-            "correction": "used to like",
-            "explanation": "\"like\" is a state verb — \"would\" cannot be used with it; use \"used to like\" instead.",
-            "explanationRu": "\"like\" — глагол состояния, с ним нельзя использовать \"would\"; вместо этого используется \"used to like\"."
-          },
-          {
-            "id": 8,
-            "text": "He isn't use to cold weather.",
-            "options": [
-              "He",
-              "isn't use to",
-              "cold weather",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "isn't use to",
-            "correction": "isn't used to",
-            "explanation": "The correct phrase is \"used to\" (with -d) even in the negative: \"isn't used to\".",
-            "explanationRu": "Правильная фраза — \"used to\" (с -d) даже в отрицании: \"isn't used to\"."
-          },
-          {
-            "id": 9,
-            "text": "How long did it take you to get used to live here?",
-            "options": [
-              "How long did it take you",
-              "to get used to live",
-              "here",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "to get used to live",
-            "correction": "to get used to living",
-            "explanation": "After \"get used to\", use V-ing: \"living\", not \"live\".",
-            "explanationRu": "После \"get used to\" используется V-ing: \"living\", а не \"live\"."
-          },
-          {
-            "id": 10,
-            "text": "Did you used to play the piano as a child?",
-            "options": [
-              "Did you",
-              "used to play",
-              "the piano as a child",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "used to play",
-            "correction": "use to play",
-            "explanation": "After \"Did\", the base form \"use to\" is needed, not \"used to\".",
-            "explanationRu": "После \"Did\" нужна начальная форма \"use to\", а не \"used to\"."
-          },
-          {
-            "id": 11,
-            "text": "The employees are used to get the new software slowly.",
-            "options": [
-              "The employees",
-              "are used to get",
-              "the new software slowly",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "are used to get",
-            "correction": "are getting used to",
-            "explanation": "\"be used to\" describes a finished state; a current process needs \"are getting used to\".",
-            "explanationRu": "\"be used to\" описывает уже сложившееся состояние; для текущего процесса нужно \"are getting used to\"."
-          },
-          {
-            "id": 12,
-            "text": "I didn't used to like vegetables as a child.",
-            "options": [
-              "I didn't",
-              "used to like",
-              "vegetables as a child",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "used to like",
-            "correction": "use to like",
-            "explanation": "After \"didn't\", the base form \"use to\" is needed, not \"used to\".",
-            "explanationRu": "После \"didn't\" нужна начальная форма \"use to\", а не \"used to\"."
-          },
-          {
-            "id": 13,
-            "text": "It took him months, but he eventually become used to the noise.",
-            "options": [
-              "It took him months, but",
-              "he eventually become used to",
-              "the noise",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "he eventually become used to",
-            "correction": "he eventually became used to",
-            "explanation": "A finished past action needs the simple past: \"became\", not the base form \"become\".",
-            "explanationRu": "Завершённое прошедшее действие требует Past Simple: \"became\", а не начальную форму \"become\"."
-          },
-          {
-            "id": 14,
-            "text": "Are you use to the cold winters here yet?",
-            "options": [
-              "Are you",
-              "use to",
-              "the cold winters here yet",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "use to",
-            "correction": "used to",
-            "explanation": "The correct phrase after \"be\" is always \"used to\" (with -d): \"Are you used to...?\".",
-            "explanationRu": "После \"be\" всегда правильна фраза \"used to\" (с -d): \"Are you used to...?\"."
-          },
-          {
-            "id": 15,
-            "text": "As a child, I would had very little money.",
-            "options": [
-              "As a child, I",
-              "would had",
-              "very little money",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "would had",
-            "correction": "used to have",
-            "explanation": "\"have\" is a state verb — \"would\" cannot be used with it; use \"used to have\" instead.",
-            "explanationRu": "\"have\" — глагол состояния, с ним нельзя использовать \"would\"; вместо этого используется \"used to have\"."
-          },
-          {
-            "id": 16,
-            "text": "I was slowly getting use to the idea of moving abroad.",
-            "options": [
-              "I was slowly",
-              "getting use to",
-              "the idea of moving abroad",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "getting use to",
-            "correction": "getting used to",
-            "explanation": "The correct phrase is \"used to\" (with -d), not \"use to\", after \"get\".",
-            "explanationRu": "Правильная фраза — \"used to\" (с -d), а не \"use to\", после \"get\"."
-          },
-          {
-            "id": 17,
-            "text": "We've traveled so much that we used to long flights.",
-            "options": [
-              "We've traveled so much that we",
-              "used to long flights",
-              ".",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "used to long flights",
-            "correction": "are used to long flights",
-            "explanation": "A permanent, current state needs \"be used to\": \"are used to\", not \"used to\" alone.",
-            "explanationRu": "Постоянное текущее состояние требует \"be used to\": \"are used to\", а не просто \"used to\"."
-          },
-          {
-            "id": 18,
-            "text": "You'll need time to getting used to the new system.",
-            "options": [
-              "You'll need time",
-              "to getting used to",
-              "the new system",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "to getting used to",
-            "correction": "to get used to",
-            "explanation": "After \"to\" (infinitive), use the base verb: \"to get used to\", not \"to getting used to\".",
-            "explanationRu": "После \"to\" (инфинитив) используется начальная форма глагола: \"to get used to\", а не \"to getting used to\"."
-          },
-          {
-            "id": 19,
-            "text": "Over time, employees usually becomes used to the strict rules.",
-            "options": [
-              "Over time,",
-              "employees usually becomes used to",
-              "the strict rules",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "employees usually becomes used to",
-            "correction": "employees usually become used to",
-            "explanation": "The plural subject \"employees\" needs the base form: \"become\", not \"becomes\".",
-            "explanationRu": "Подлежащее во мн. числе \"employees\" требует начальной формы: \"become\", а не \"becomes\"."
-          },
-          {
-            "id": 20,
-            "text": "When I was a student, I would have very little money.",
-            "options": [
-              "When I was a student,",
-              "I would have",
-              "very little money",
-              "No error"
-            ],
-            "correct": 1,
-            "wrongPart": "I would have",
-            "correction": "I used to have",
-            "explanation": "\"have\" is a state verb — \"would\" cannot be used with it; use \"used to have\" instead.",
-            "explanationRu": "\"have\" — глагол состояния, с ним нельзя использовать \"would\"; вместо этого используется \"used to have\"."
-          }
-        ],
-        "transform": [
-          {
-            "id": 1,
-            "text": "Describe a habit of being comfortable with something now: \"After ten years here, the traffic noise doesn't bother me anymore.\"",
-            "options": [
-              "I am used to the traffic noise now.",
-              "I used to the traffic noise now.",
-              "I get used to the traffic noise now.",
-              "I would the traffic noise now."
-            ],
-            "correct": 0,
-            "explanation": "\"be used to\" describes a current state of being accustomed to something.",
-            "explanationRu": "\"be used to\" описывает текущее состояние привыкания к чему-либо."
-          },
-          {
-            "id": 2,
-            "text": "Describe a current state after years of experience: \"Working night shifts for years means staying up late no longer bothers her.\"",
-            "options": [
-              "She is used to staying up late.",
-              "She used to stay up late.",
-              "She would stay up late.",
-              "She gets used to stay up late."
-            ],
-            "correct": 0,
-            "explanation": "\"be used to\" + V-ing describes a comfortable, current state.",
-            "explanationRu": "\"be used to\" + V-ing описывает комфортное текущее состояние."
-          },
-          {
-            "id": 3,
-            "text": "Describe an ongoing process of adaptation: \"It's my first week, and the routine is slowly starting to feel normal.\"",
-            "options": [
-              "I am getting used to the routine already.",
-              "I am used to the routine already.",
-              "I used to the routine already.",
-              "I would get used to the routine."
-            ],
-            "correct": 0,
-            "explanation": "\"get used to\" in the continuous form describes an adaptation happening right now.",
-            "explanationRu": "\"get used to\" в длительной форме описывает адаптацию, происходящую прямо сейчас."
-          },
-          {
-            "id": 4,
-            "text": "Describe a completed process of adaptation: \"After a few months, the cold winters stopped bothering him.\"",
-            "options": [
-              "He got used to the cold winters.",
-              "He used to the cold winters.",
-              "He was used to get the cold winters.",
-              "He would get used to the cold winters."
-            ],
-            "correct": 0,
-            "explanation": "\"got used to\" describes a completed process of adaptation in the past.",
-            "explanationRu": "\"got used to\" описывает завершённый процесс адаптации в прошлом."
-          },
-          {
-            "id": 5,
-            "text": "Describe a formal, completed adaptation: \"After years abroad, spicy food no longer feels unusual to her.\"",
-            "options": [
-              "She has become used to eating spicy food.",
-              "She has became used to eating spicy food.",
-              "She is become used to eating spicy food.",
-              "She became use to eating spicy food."
-            ],
-            "correct": 0,
-            "explanation": "\"become used to\" is a more formal synonym for \"get used to\".",
-            "explanationRu": "\"become used to\" — более формальный синоним \"get used to\"."
-          },
-          {
-            "id": 6,
-            "text": "Describe a past habit that has since stopped: \"Playing the guitar every day was something I did before university, but not now.\"",
-            "options": [
-              "I used to play the guitar every day.",
-              "I would play the guitar every day.",
-              "I am used to playing the guitar every day.",
-              "I get used to playing the guitar every day."
-            ],
-            "correct": 0,
-            "explanation": "\"used to\" describes a past habit that has now stopped.",
-            "explanationRu": "\"used to\" описывает прошлую привычку, которая уже прекратилась."
-          },
-          {
-            "id": 7,
-            "text": "Describe a repeated past action: \"Every Friday, without fail, my grandfather took us fishing.\"",
-            "options": [
-              "Every Friday, my grandfather would take us fishing.",
-              "Every Friday, my grandfather is used to take us fishing.",
-              "Every Friday, my grandfather gets used to taking us fishing.",
-              "Every Friday, my grandfather is used to taking us fishing."
-            ],
-            "correct": 0,
-            "explanation": "\"would\" describes a repeated action in the past.",
-            "explanationRu": "\"would\" описывает повторяющееся действие в прошлом."
-          },
-          {
-            "id": 8,
-            "text": "Describe someone unaccustomed to a climate: \"Growing up in a hot country means cold weather still feels strange to him.\"",
-            "options": [
-              "He isn't used to cold weather.",
-              "He doesn't used to cold weather.",
-              "He wasn't use to cold weather.",
-              "He is not use to cold weather."
-            ],
-            "correct": 0,
-            "explanation": "The negative of \"be used to\" is \"isn't / aren't / wasn't used to\".",
-            "explanationRu": "Отрицание \"be used to\" — \"isn't / aren't / wasn't used to\"."
-          },
-          {
-            "id": 9,
-            "text": "Ask about the duration of an adaptation process: \"I want to know the length of time your adaptation to city life took.\"",
-            "options": [
-              "How long did it take you to get used to living in the city?",
-              "How long did it take you getting used to living in the city?",
-              "How long were you used to live in the city?",
-              "How long would you get used to living in the city?"
-            ],
-            "correct": 0,
-            "explanation": "\"to get used to\" is the infinitive form used after expressions like \"take time\".",
-            "explanationRu": "\"to get used to\" — форма инфинитива, используемая после выражений типа \"take time\"."
-          },
-          {
-            "id": 10,
-            "text": "Describe a comfortable, current professional state: \"As a chef, long hours on her feet no longer tire her out.\"",
-            "options": [
-              "As a chef, she is used to working long hours.",
-              "As a chef, she used to work long hours.",
-              "As a chef, she would work long hours.",
-              "As a chef, she gets used to work long hours."
-            ],
-            "correct": 0,
-            "explanation": "\"be used to\" + V-ing describes a current, comfortable state.",
-            "explanationRu": "\"be used to\" + V-ing описывает текущее, комфортное состояние."
-          },
-          {
-            "id": 11,
-            "text": "Describe an ongoing workplace adaptation: \"The new employees are slowly starting to feel comfortable with the software.\"",
-            "options": [
-              "The new employees are getting used to the software.",
-              "The new employees are used to the software.",
-              "The new employees used to the software.",
-              "The new employees would get used to the software."
-            ],
-            "correct": 0,
-            "explanation": "\"get used to\" in the continuous form describes an adaptation in progress.",
-            "explanationRu": "\"get used to\" в длительной форме описывает адаптацию в процессе."
-          },
-          {
-            "id": 12,
-            "text": "Describe a past habit that has since changed: \"Eating a lot of fast food was something I did before, but I've completely changed my diet.\"",
-            "options": [
-              "I used to eat fast food a lot.",
-              "I would eat fast food a lot.",
-              "I am used to eating fast food a lot.",
-              "I get used to eating fast food a lot."
-            ],
-            "correct": 0,
-            "explanation": "\"used to\" describes a past habit that has now changed.",
-            "explanationRu": "\"used to\" описывает прошлую привычку, которая теперь изменилась."
-          },
-          {
-            "id": 13,
-            "text": "Describe a completed adaptation, more formally: \"After months, the airport noise eventually stopped bothering him.\"",
-            "options": [
-              "He became used to the noise from the airport.",
-              "He got use to the noise from the airport.",
-              "He was become used to the noise from the airport.",
-              "He would become used to the noise from the airport."
-            ],
-            "correct": 0,
-            "explanation": "\"became used to\" is the past form of the more formal \"become used to\".",
-            "explanationRu": "\"became used to\" — форма прошедшего времени более формального \"become used to\"."
-          },
-          {
-            "id": 14,
-            "text": "Ask whether someone is now comfortable with the local winters: \"I want to know if the cold winters here still feel strange to you.\"",
-            "options": [
-              "Are you used to the cold winters here yet?",
-              "Do you use to the cold winters here yet?",
-              "Have you used to the cold winters here yet?",
-              "Would you the cold winters here yet?"
-            ],
-            "correct": 0,
-            "explanation": "The question form of \"be used to\" is \"Are/Is/Was + subject + used to...?\".",
-            "explanationRu": "Вопросительная форма \"be used to\": \"Are/Is/Was + подлежащее + used to...?\"."
-          },
-          {
-            "id": 15,
-            "text": "Describe a repeated childhood habit: \"Every summer, without fail, I spent time at my grandparents' farm.\"",
-            "options": [
-              "As a child, I would spend every summer at my grandparents' farm.",
-              "As a child, I am used to spending every summer at my grandparents' farm.",
-              "As a child, I get used to spending every summer at my grandparents' farm.",
-              "As a child, I am used to spend every summer at my grandparents' farm."
-            ],
-            "correct": 0,
-            "explanation": "\"would\" describes a repeated action in the past.",
-            "explanationRu": "\"would\" описывает повторяющееся действие в прошлом."
-          },
-          {
-            "id": 16,
-            "text": "Describe an adaptation process interrupted midway: \"I was slowly starting to feel comfortable with the idea of moving abroad when everything changed.\"",
-            "options": [
-              "I was slowly getting used to the idea of moving abroad.",
-              "I was slowly used to the idea of moving abroad.",
-              "I was slowly used to get the idea of moving abroad.",
-              "I would slowly get used to the idea of moving abroad."
-            ],
-            "correct": 0,
-            "explanation": "\"getting used to\" in the past continuous describes a process interrupted or in progress.",
-            "explanationRu": "\"getting used to\" в Past Continuous описывает прерванный или продолжающийся процесс."
-          },
-          {
-            "id": 17,
-            "text": "Describe a current comfortable state from experience: \"After so much travel for work, long flights no longer bother us.\"",
-            "options": [
-              "We are used to long flights.",
-              "We used to long flights.",
-              "We get used to long flights.",
-              "We would long flights."
-            ],
-            "correct": 0,
-            "explanation": "\"be used to\" + noun describes a current, comfortable state.",
-            "explanationRu": "\"be used to\" + существительное описывает текущее, комфортное состояние."
-          },
-          {
-            "id": 18,
-            "text": "Advise that adaptation takes time: \"Adjusting to the new system requires some time at first, then it becomes easier.\"",
-            "options": [
-              "You'll need some time to get used to the new system.",
-              "You'll need some time getting used to the new system.",
-              "You'll need some time to used to the new system.",
-              "You'll need some time to be used to the new system."
-            ],
-            "correct": 0,
-            "explanation": "\"to get used to\" is the infinitive form used after \"need time\".",
-            "explanationRu": "\"to get used to\" — форма инфинитива, используемая после \"need time\"."
-          },
-          {
-            "id": 19,
-            "text": "Describe a general workplace pattern: \"Given enough time, employees typically stop finding the strict rules unusual.\"",
-            "options": [
-              "Over time, employees usually become used to the company's strict rules.",
-              "Over time, employees usually became used to the company's strict rules.",
-              "Over time, employees usually are become used to the company's strict rules.",
-              "Over time, employees usually become use to the company's strict rules."
-            ],
-            "correct": 0,
-            "explanation": "A general, repeated pattern needs Present Simple: \"become\", not the past form \"became\".",
-            "explanationRu": "Общая повторяющаяся закономерность требует Present Simple: \"become\", а не форму прошедшего времени \"became\"."
-          },
-          {
-            "id": 20,
-            "text": "Describe a past state combined with a repeated action: \"Having very little money as a student meant I regularly cooked cheap meals.\"",
-            "options": [
-              "When I was a student, I used to have very little money.",
-              "When I was a student, I would have very little money.",
-              "When I was a student, I use to have very little money.",
-              "When I was a student, I was having very little money."
-            ],
-            "correct": 0,
-            "explanation": "\"have\" is a state verb, so \"used to have\" is correct, not \"would have\".",
-            "explanationRu": "\"have\" — глагол состояния, поэтому правильно \"used to have\", а не \"would have\"."
-          }
-        ],
-        "dialogue": [
-          {
-            "id": 1,
-            "situation": "Talking about living in a busy city.",
-            "dialogue": "A: Doesn't all this traffic noise bother you?\nB: Not anymore — I ___ the traffic noise now.",
-            "options": [
-              "am used to",
-              "used to",
-              "get used to",
-              "would"
-            ],
-            "correct": 0,
-            "explanation": "\"be used to\" — o'rganib qolganlik.",
-            "explanationRu": "\"be used to\" — привыкание."
-          },
-          {
-            "id": 2,
-            "situation": "Discussing a friend's work schedule.",
-            "dialogue": "A: How does she manage those night shifts?\nB: She ___ staying up late after all these years.",
-            "options": [
-              "is used to",
-              "uses to",
-              "gets used to",
-              "would"
-            ],
-            "correct": 0,
-            "explanation": "\"be used to\" — o'rganib qolganlik holati.",
-            "explanationRu": "\"be used to\" — состояние привыкания."
-          },
-          {
-            "id": 3,
-            "situation": "Starting a new job.",
-            "dialogue": "A: How's the new job going?\nB: It's only my first week, but I ___ the routine already.",
-            "options": [
-              "am getting used to",
-              "get used to",
-              "am used to",
-              "would get used to"
-            ],
-            "correct": 0,
-            "explanation": "\"get used to\" — o'rganib qolish jarayoni.",
-            "explanationRu": "\"get used to\" — процесс привыкания."
-          },
-          {
-            "id": 4,
-            "situation": "Talking about moving to a colder country.",
-            "dialogue": "A: Was it hard adjusting to the winters there?\nB: At first, yes, but he finally ___ the cold winters.",
-            "options": [
-              "got used to",
-              "used to get",
-              "was used to",
-              "would get used to"
-            ],
-            "correct": 0,
-            "explanation": "\"get used to\" — tugallangan jarayon.",
-            "explanationRu": "\"get used to\" — завершённый процесс."
-          },
-          {
-            "id": 5,
-            "situation": "Discussing life abroad.",
-            "dialogue": "A: Does she still find spicy food strange?\nB: Not at all — she ___ eating spicy food.",
-            "options": [
-              "has become used to",
-              "has became used to",
-              "is become used to",
-              "became use to"
-            ],
-            "correct": 0,
-            "explanation": "\"become used to\" — o'rganib qolish, rasmiyroq shakl.",
-            "explanationRu": "\"become used to\" — привыкание, более формальная форма."
-          },
-          {
-            "id": 6,
-            "situation": "Talking about a childhood hobby.",
-            "dialogue": "A: Do you still play the guitar?\nB: No, I ___ play every day, but I stopped after university.",
-            "options": [
-              "used to",
-              "use to",
-              "was used to",
-              "would used to"
-            ],
-            "correct": 0,
-            "explanation": "\"used to\" — hozir tugagan o'tmishdagi odat.",
-            "explanationRu": "\"used to\" — прошлая привычка, которая уже прекратилась."
-          },
-          {
-            "id": 7,
-            "situation": "Remembering family traditions.",
-            "dialogue": "A: Did you do anything special with your grandfather?\nB: Every Friday, he ___ take us fishing at the lake.",
-            "options": [
-              "would",
-              "used to",
-              "use to",
-              "was used to"
-            ],
-            "correct": 0,
-            "explanation": "\"would\" — o'tmishdagi takrorlanuvchi harakat.",
-            "explanationRu": "\"would\" — повторяющееся действие в прошлом."
-          },
-          {
-            "id": 8,
-            "situation": "Discussing someone's discomfort with the weather.",
-            "dialogue": "A: Why does he complain so much about winter?\nB: He grew up somewhere hot, so he ___ cold weather.",
-            "options": [
-              "isn't used to",
-              "doesn't used to",
-              "wasn't use to",
-              "not used to"
-            ],
-            "correct": 0,
-            "explanation": "\"be used to\" ning inkor shakli.",
-            "explanationRu": "Отрицательная форма \"be used to\"."
-          },
-          {
-            "id": 9,
-            "situation": "Talking about moving to a big city.",
-            "dialogue": "A: Was it a big adjustment for you?\nB: How long did it take you ___ living in such a big city?",
-            "options": [
-              "to get used to",
-              "getting used to",
-              "to used to get",
-              "get use to"
-            ],
-            "correct": 0,
-            "explanation": "\"to get used to\" — infinitiv shakl.",
-            "explanationRu": "\"to get used to\" — форма инфинитива."
-          },
-          {
-            "id": 10,
-            "situation": "Discussing a chef's work.",
-            "dialogue": "A: Doesn't standing all day exhaust her?\nB: Not really — as a chef, she ___ working long hours on her feet.",
-            "options": [
-              "is used to",
-              "used to",
-              "gets used to",
-              "would"
-            ],
-            "correct": 0,
-            "explanation": "\"be used to\" — o'rganib qolganlik holati.",
-            "explanationRu": "\"be used to\" — состояние привыкания."
-          },
-          {
-            "id": 11,
-            "situation": "Talking about a new work tool.",
-            "dialogue": "A: How is everyone adapting to the new software?\nB: The new employees ___ it slowly but surely.",
-            "options": [
-              "are getting used to",
-              "get used to",
-              "are used to get",
-              "would get used to"
-            ],
-            "correct": 0,
-            "explanation": "\"get used to\" — hozir davom etayotgan jarayon.",
-            "explanationRu": "\"get used to\" — процесс, происходящий сейчас."
-          },
-          {
-            "id": 12,
-            "situation": "Talking about changing eating habits.",
-            "dialogue": "A: Do you still eat a lot of fast food?\nB: No, I ___ eat it a lot, but I've completely changed my diet.",
-            "options": [
-              "used to",
-              "use to",
-              "was used to",
-              "would used to"
-            ],
-            "correct": 0,
-            "explanation": "\"used to\" — hozir tugagan o'tmishdagi odat.",
-            "explanationRu": "\"used to\" — прошлая привычка, которая уже прекратилась."
-          },
-          {
-            "id": 13,
-            "situation": "Talking about living near an airport.",
-            "dialogue": "A: Doesn't the airport noise drive you crazy?\nB: It took him months, but he eventually ___ the noise.",
-            "options": [
-              "became used to",
-              "become used to",
-              "was become used to",
-              "became use to"
-            ],
-            "correct": 0,
-            "explanation": "\"become used to\" — tugallangan jarayon.",
-            "explanationRu": "\"become used to\" — завершённый процесс."
-          },
-          {
-            "id": 14,
-            "situation": "Checking in with a newcomer.",
-            "dialogue": "A: How are you finding the winters here?\nB: Are you ___ the cold winters yet?",
-            "options": [
-              "used to",
-              "use to",
-              "get used to",
-              "would"
-            ],
-            "correct": 0,
-            "explanation": "\"be used to\" savol shaklida.",
-            "explanationRu": "\"be used to\" в вопросительной форме."
-          },
-          {
-            "id": 15,
-            "situation": "Sharing childhood memories.",
-            "dialogue": "A: What did you do in the summer as a kid?\nB: I ___ spend every summer at my grandparents' farm.",
-            "options": [
-              "would",
-              "used to",
-              "use to",
-              "was used to"
-            ],
-            "correct": 0,
-            "explanation": "\"would\" — o'tmishdagi takrorlanuvchi harakat.",
-            "explanationRu": "\"would\" — повторяющееся действие в прошлом."
-          },
-          {
-            "id": 16,
-            "situation": "Talking about a plan that changed.",
-            "dialogue": "A: Were you excited about moving abroad?\nB: I was slowly ___ the idea when the plan suddenly changed.",
-            "options": [
-              "getting used to",
-              "get used to",
-              "used to get",
-              "become used to"
-            ],
-            "correct": 0,
-            "explanation": "\"get used to\" — o'tgan davomli zamonda davom etayotgan jarayon.",
-            "explanationRu": "\"get used to\" — процесс, длившийся в прошлом (Past Continuous)."
-          },
-          {
-            "id": 17,
-            "situation": "Talking about frequent business travel.",
-            "dialogue": "A: Doesn't all that flying tire you out?\nB: Not really — we've traveled so much that we ___ long flights.",
-            "options": [
-              "are used to",
-              "used to",
-              "get used to",
-              "would"
-            ],
-            "correct": 0,
-            "explanation": "\"be used to\" — o'rganib qolganlik holati.",
-            "explanationRu": "\"be used to\" — состояние привыкания."
-          },
-          {
-            "id": 18,
-            "situation": "Onboarding a new employee.",
-            "dialogue": "A: This new system looks complicated.\nB: You'll need some time ___ it, but it gets easier.",
-            "options": [
-              "to get used to",
-              "getting used to",
-              "to used to",
-              "get use to"
-            ],
-            "correct": 0,
-            "explanation": "\"to get used to\" — infinitiv shakl.",
-            "explanationRu": "\"to get used to\" — форма инфинитива."
-          },
-          {
-            "id": 19,
-            "situation": "Discussing workplace culture.",
-            "dialogue": "A: Do new hires ever complain about the strict rules?\nB: Over time, employees usually ___ them.",
-            "options": [
-              "become used to",
-              "became used to",
-              "are become used to",
-              "become use to"
-            ],
-            "correct": 0,
-            "explanation": "\"become\" — ko'plik ega bilan bosh shaklda.",
-            "explanationRu": "\"become\" — в начальной форме с подлежащим во мн. числе."
-          },
-          {
-            "id": 20,
-            "situation": "Reminiscing about student life.",
-            "dialogue": "A: Was it hard being a student with no money?\nB: I ___ very little money, so I would cook cheap meals every night.",
-            "options": [
-              "used to have",
-              "would have",
-              "use to have",
-              "was having"
-            ],
-            "correct": 0,
-            "explanation": "\"have\" — holat fe'li, shuning uchun used to ishlatiladi.",
-            "explanationRu": "\"have\" — глагол состояния, поэтому используется used to."
-          }
-        ]
       }
     ]
+  },
+  "advanced": {
+    "topics": []
   },
   "upper": {
     "label": "Intermediate",
@@ -93986,1309 +93985,1308 @@ export const grammarData = {
             "explanation": "is just about to leave."
           }
         ]
-      }
-    ,
-      {
-      "id": "infinitive-advanced-continuation",
-      "title": "The Infinitive: Advanced Structures & Continuation",
-      "icon": "\u26a1",
-      "description": "Starred verbs with that-clauses, question words + infinitive, object + infinitive, split infinitives, nouns + prepositions, causative make/let/help, and but/except + bare infinitive.",
-      "studyGuide": {
-            "title": "The Infinitive: Continuation & Complex Structures (Nazariy Qo'llanma)",
-            "summary": "Ushbu darsda infinitive ning murakkab qurilmalari: yulduzcha qo'yilgan fe'llar va that-clause, so'roq so'zlari va whether bilan kelishi, Object + Infinitive strukturasi, split infinitives, otlardan keyin predlogli infinitivlar, causative (make, let, help) va but/except bilan bare infinitive qo'llanilishi o'rganiladi.",
-            "sections": [
-                  {
-                        "title": "1. Starred Verbs & That-Clause Equivalents",
-                        "content": "Ba'zi fe'llar (yulduzcha bilan ko'rsatilgan fe'llar: promise, pretend, agree, refuse, claim) to-infinitive o'rniga bir xil ma'noda that-clause qabul qila oladi.\n\n\u2022 I promise to wait. = I promise that I will wait.\n\u2022 He pretended to be angry. = He pretended that he was angry.\n\u2022 She agreed to help. = She agreed that she would help.\n\u2022 They refused to leave. = They refused that they would not leave.\n\u2022 He claimed to know her. = He claimed that he knew her."
-                  },
-                  {
-                        "title": "2. learn, forget, remember \u2014 Infinitive vs That-Clause Farqi",
-                        "content": "Ushbu uchta fe'l to-infinitive yoki that-clause bilan kelishiga qarab ma'nosini o'zgartiradi:\n\n\u2022 LEARN + to-inf: Biror skill/ko'nikmani egallash. (He learnt to look after himself - U o'ziga qarashni o'rgandi)\n\u2022 LEARN + that: Fakt yoki yangilikdan xabardor bo'lish. (He learnt that he passed the exam - U imtihondan o'tganini bildi)\n\n\u2022 FORGET + to-inf: Bajarilishi kerak bo'lgan amal esdan chiqib bajarilmadi. (He forgot to lock the door - U eshikni qulflashni unutdi)\n\u2022 FORGET + that: Fakt esdan chiqdi. (He forgot that today was a holiday - U bugun bayram ekanligini unutdi)\n\n\u2022 REMEMBER + to-inf: Esga tushib amal bajarildi. (She remembered to post the letter - U xatni yuborishni esladi va yubordi)\n\u2022 REMEMBER + that: Fakt yodga tushdi. (She remembered that her keys were inside - U kalitlari ichkarida ekanini esladi)."
-                  },
-                  {
-                        "title": "3. Question Words & Whether + Infinitive",
-                        "content": "A) QUESTION WORDS + INFINITIVE:\nask, decide, explain, forget, know, show, tell, understand kabi fe'llardan keyin how / what / when / where / who / which + to-infinitive keladi.\n\u2022 He discovered how to open the safe.\n\u2022 I didn't know when to switch off the machine.\n\u2022 Can you explain what to do next?\n\u2022 She forgot where to put the spare key.\n\nB) WHETHER + INFINITIVE:\nIkkita muqobil tanlov yoki ikkilanayotgan holatni ifodalash uchun ishlatiladi.\n\u2022 Structure 1: S + wonder / want to know + whether + to-infinitive (I wondered whether to phone or not).\n\u2022 Structure 2: S + not + decide / know / remember + whether + to-infinitive (I didn't know whether to stay or leave)."
-                  },
-                  {
-                        "title": "4. Object + Infinitive Structure & Negation",
-                        "content": "Boshqa bir shaxsga maslahat berish, buyurish, ko'ndirish yoki ruxsat berishda ushbu struktura ishlatiladi:\nS + Verb + Object + (NOT) to-infinitive\n\nFe'llar: advise, allow, bribe, command, compel, enable, encourage, forbid, force, implore, induce, instruct, invite, oblige, order, permit, persuade, remind, request, teach, tempt, train, urge, warn.\n\n\u2022 Active: The doctor advised all children to have vaccinations.\n\u2022 Negative: Inkor shaklida NOT so'zi to-infinitive OLDIDAN qo'yiladi (S + V + Object + NOT + to-infinitive).\n  - The doctor warned us NOT to eat the fish.\n  - Sarah implored her parents NOT to send her to boarding school.\n  - Visitors are requested NOT to walk on the grass. (Passive)"
-                  },
-                  {
-                        "title": "5. SHOW va TELL Fe'llarining Maxsus Qo'llanilishi",
-                        "content": "\u2022 SHOW + Object + HOW + Infinitive (harakat qanday bajarilishini ko'rsatish):\n  He showed me HOW to change a fuse. (He showed me to change - XATO!)\n\u2022 TELL + Object + To-Infinitive (to'g'ri buyruq/ko'rsatma berish):\n  He told me to change the fuse. (= He said, 'Change the fuse.')\n\u2022 TELL + Object + HOW + Infinitive (jarayon haqida ma'lumot/ko'rsatma berish):\n  He told me HOW to replace a fuse."
-                  },
-                  {
-                        "title": "6. Split Infinitives & Nouns + Infinitive (+ Prepositions)",
-                        "content": "A) SPLIT INFINITIVE:\nTO va fe'l birinchi shakli (V1) o'rtasiga ravish qo'yilishi: to [adverb] V1\n\u2022 Formal (unsplit): to master this subject completely\n\u2022 Informal/Colloquial (split): to completely master this subject (Zamonaviy ingliz tilida juda keng qo'llaniladi).\n\nB) NOUN + INFINITIVE (+ PREPOSITION):\n1. Noun + Infinitive: ability, ambition, anxiety, decision, desire, effort, failure, offer, plan, promise, refusal, wish + to-infinitive. (His ambition to run his own business).\n2. Noun + Infinitive + Preposition (nisbiy ergash gap ma'nosida):\n\u2022 cushions to sit on (= cushions that we sit on)\n\u2022 someone to talk to (= someone whom I want to talk to)\n\u2022 a glass to drink out of\n\u2022 a table to write on\n\u2022 a tool to open with."
-                  },
-                  {
-                        "title": "7. Causatives (MAKE, LET, HELP) va BUT / EXCEPT + Bare Infinitive",
-                        "content": "A) MAKE, LET, HELP:\n\u2022 MAKE (faol: bare inf / majhul: BE MADE + TO-infinitive):\n  Active: He made me move his car. -> Passive: I WAS MADE TO MOVE his car.\n\u2022 LET (faol: bare inf / majhul: BE ALLOWED TO):\n  Active: They let him see the documents. (Majhulda let ishlatilmaydi: He was allowed to see...).\n\u2022 HELP (to-infinitive ham, bare infinitive ham to'g'ri):\n  He helped us (to) push the car.\n\nB) DO ANYTHING / NOTHING / EVERYTHING + BUT / EXCEPT + BARE INFINITIVE:\ndo + anything/nothing/everything + BUT / EXCEPT + Bare Infinitive (to-siz fe'l):\n\u2022 He does nothing BUT complain.\n\u2022 My dog does everything BUT speak.\n\u2022 She did everything EXCEPT apologize.\n\u2022 There is nothing to do BUT wait."
-                  }
-            ]
       },
-      "exercises": [
+      {
+        "id": "infinitive-advanced-continuation",
+        "title": "The Infinitive: Advanced Structures & Continuation",
+        "icon": "⚡",
+        "description": "Starred verbs with that-clauses, question words + infinitive, object + infinitive, split infinitives, nouns + prepositions, causative make/let/help, and but/except + bare infinitive.",
+        "studyGuide": {
+          "title": "The Infinitive: Continuation & Complex Structures (Nazariy Qo'llanma)",
+          "summary": "Ushbu darsda infinitive ning murakkab qurilmalari: yulduzcha qo'yilgan fe'llar va that-clause, so'roq so'zlari va whether bilan kelishi, Object + Infinitive strukturasi, split infinitives, otlardan keyin predlogli infinitivlar, causative (make, let, help) va but/except bilan bare infinitive qo'llanilishi o'rganiladi.",
+          "sections": [
             {
-                  "id": "mcq-infinitive-continuation",
-                  "title": "Multiple Choice Questions",
-                  "type": "multiple-choice",
-                  "instructions": "Choose the correct form of the infinitive or clause for each sentence.",
-                  "questions": [
-                        {
-                              "id": 1,
-                              "question": "He promised _______ for us near the station.",
-                              "options": [
-                                    "to wait",
-                                    "waiting",
-                                    "that wait",
-                                    "wait"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Promise is a starred verb followed by a to-infinitive (or a that-clause: that he would wait)."
-                        },
-                        {
-                              "id": 2,
-                              "question": "Which of the following is equivalent in meaning to \"He pretended to be angry\"?",
-                              "options": [
-                                    "He pretended that he was angry.",
-                                    "He pretended that to be angry.",
-                                    "He pretended being angry.",
-                                    "He pretended how to be angry."
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Starred verbs like pretend can be rewritten with a that-clause: He pretended that he was angry."
-                        },
-                        {
-                              "id": 3,
-                              "question": "She learnt _______ after herself when she moved abroad.",
-                              "options": [
-                                    "to look",
-                                    "that looking",
-                                    "look",
-                                    "for looking"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Learn + to-infinitive means acquiring a skill."
-                        },
-                        {
-                              "id": 4,
-                              "question": "He learnt _______ his exam results had been published online.",
-                              "options": [
-                                    "that",
-                                    "to",
-                                    "how to",
-                                    "whether"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Learn + that means finding out a fact or news."
-                        },
-                        {
-                              "id": 5,
-                              "question": "I forgot _______ the front door before leaving, so the house was unlocked!",
-                              "options": [
-                                    "to lock",
-                                    "that I lock",
-                                    "locking",
-                                    "lock"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Forget + to-infinitive means the intended action was NOT performed."
-                        },
-                        {
-                              "id": 6,
-                              "question": "She forgot _______ her keys were already inside her purse.",
-                              "options": [
-                                    "that",
-                                    "to",
-                                    "whether to",
-                                    "how"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Forget + that means forgetting a fact or piece of information."
-                        },
-                        {
-                              "id": 7,
-                              "question": "He remembered _______ his wife some flowers on his way home.",
-                              "options": [
-                                    "to buy",
-                                    "buying",
-                                    "that buy",
-                                    "for buying"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Remember + to-infinitive means remembering a duty/action and then performing it."
-                        },
-                        {
-                              "id": 8,
-                              "question": "The technician showed me _______ to operate the new computer.",
-                              "options": [
-                                    "how",
-                                    "that",
-                                    "to",
-                                    "whether"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Show + object + HOW + infinitive is used to demonstrate how an action is done."
-                        },
-                        {
-                              "id": 9,
-                              "question": "Select the INCORRECT sentence:",
-                              "options": [
-                                    "He showed me to change a fuse.",
-                                    "He showed me how to change a fuse.",
-                                    "He told me to change the fuse.",
-                                    "He told me how to change a fuse."
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "\"Show + sb + to-infinitive\" without \"how\" is incorrect. It must be \"show somebody HOW to do something\"."
-                        },
-                        {
-                              "id": 10,
-                              "question": "I couldn't decide _______ to accept the offer or stay at my current job.",
-                              "options": [
-                                    "whether",
-                                    "that",
-                                    "how",
-                                    "which"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Whether + infinitive is used when expressing a choice or uncertainty between alternatives."
-                        },
-                        {
-                              "id": 11,
-                              "question": "The doctor warned the patient _______ smoke after the surgery.",
-                              "options": [
-                                    "not to",
-                                    "to not",
-                                    "don't",
-                                    "not"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "For negative object + infinitive structures, place NOT before to-infinitive: S + V + Object + NOT + to-infinitive."
-                        },
-                        {
-                              "id": 12,
-                              "question": "These new night-vision glasses will _______ you to see in complete darkness.",
-                              "options": [
-                                    "enable",
-                                    "make",
-                                    "let",
-                                    "suggest"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Enable takes the Object + to-infinitive pattern: enable somebody to do something."
-                        },
-                        {
-                              "id": 13,
-                              "question": "Nothing would _______ me to do business with such dishonest partners.",
-                              "options": [
-                                    "induce",
-                                    "make to",
-                                    "let",
-                                    "suggest"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Induce + object + to-infinitive means persuade or force someone to do something."
-                        },
-                        {
-                              "id": 14,
-                              "question": "Visitors are requested _______ on the grass.",
-                              "options": [
-                                    "not to walk",
-                                    "to not walk",
-                                    "don't walk",
-                                    "not walking"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Passive structure: be requested NOT to do something."
-                        },
-                        {
-                              "id": 15,
-                              "question": "\"To completely master this language takes years.\" What structure is \"to completely master\"?",
-                              "options": [
-                                    "Split infinitive",
-                                    "Continuous infinitive",
-                                    "Perfect infinitive",
-                                    "Bare infinitive"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Placing an adverb (completely) between \"to\" and the verb (master) is called a split infinitive."
-                        },
-                        {
-                              "id": 16,
-                              "question": "We need to find a comfortable cushion to _______ during the long ceremony.",
-                              "options": [
-                                    "sit on",
-                                    "sit",
-                                    "sit in",
-                                    "sitting on"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Noun + Infinitive + Preposition: cushions to sit ON."
-                        },
-                        {
-                              "id": 17,
-                              "question": "She brought a large glass to _______ fresh orange juice.",
-                              "options": [
-                                    "drink out of",
-                                    "drink",
-                                    "drink out",
-                                    "drink with"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Prepositional infinitive after noun: a glass to drink out of."
-                        },
-                        {
-                              "id": 18,
-                              "question": "His ambition _______ his own tech start-up kept him motivated.",
-                              "options": [
-                                    "to run",
-                                    "running",
-                                    "that run",
-                                    "run"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Nouns like ambition, decision, desire take a direct to-infinitive."
-                        },
-                        {
-                              "id": 19,
-                              "question": "The guard made the intruder _______ on the floor.",
-                              "options": [
-                                    "lie",
-                                    "to lie",
-                                    "lying",
-                                    "lay"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Active causative MAKE takes a bare infinitive (without to): make + somebody + bare infinitive."
-                        },
-                        {
-                              "id": 20,
-                              "question": "In the passive voice, \"He made me move his car\" becomes:",
-                              "options": [
-                                    "I was made to move his car.",
-                                    "I was made move his car.",
-                                    "His car was made move by me.",
-                                    "I was let move his car."
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Passive of MAKE requires \"to-infinitive\": S + be made + TO-infinitive."
-                        },
-                        {
-                              "id": 21,
-                              "question": "My supervisor did not _______ me leave the office early.",
-                              "options": [
-                                    "let",
-                                    "allow to",
-                                    "make to",
-                                    "force"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "LET takes a bare infinitive without \"to\" in active voice."
-                        },
-                        {
-                              "id": 22,
-                              "question": "The team member helped us _______ the heavy equipment into the lab.",
-                              "options": [
-                                    "carry",
-                                    "to carry",
-                                    "both carry and to carry are correct",
-                                    "carrying"
-                              ],
-                              "correctAnswer": 2,
-                              "explanation": "HELP can be followed by either a bare infinitive or a to-infinitive."
-                        },
-                        {
-                              "id": 23,
-                              "question": "He does nothing all day _______ complain about the weather.",
-                              "options": [
-                                    "but",
-                                    "that",
-                                    "to",
-                                    "for"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Structure: do + nothing + BUT + bare infinitive."
-                        },
-                        {
-                              "id": 24,
-                              "question": "She did everything _______ apologize for her mistake.",
-                              "options": [
-                                    "except",
-                                    "to",
-                                    "that",
-                                    "for"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Structure: do + everything + EXCEPT + bare infinitive."
-                        },
-                        {
-                              "id": 25,
-                              "question": "There is nothing to do now _______ for the official test results.",
-                              "options": [
-                                    "but wait",
-                                    "but to wait",
-                                    "except waiting",
-                                    "that wait"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "do + nothing + BUT + bare infinitive (wait)."
-                        },
-                        {
-                              "id": 26,
-                              "question": "I didn't know whether _______ the train or take a taxi.",
-                              "options": [
-                                    "to catch",
-                                    "catching",
-                                    "caught",
-                                    "that catch"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Whether + to-infinitive expresses a choice between two actions."
-                        },
-                        {
-                              "id": 27,
-                              "question": "The officer told the driver _______ off the engine immediately.",
-                              "options": [
-                                    "to turn",
-                                    "turn",
-                                    "turning",
-                                    "that turn"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Tell + somebody + to-infinitive gives a direct command."
-                        },
-                        {
-                              "id": 28,
-                              "question": "Do you have any important documents _______ before 5 PM?",
-                              "options": [
-                                    "to sign",
-                                    "signing",
-                                    "for sign",
-                                    "that sign"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Noun + Infinitive: documents to sign (= documents that must be signed)."
-                        },
-                        {
-                              "id": 29,
-                              "question": "The teacher forbade her pupils _______ in the exam hall.",
-                              "options": [
-                                    "to talk",
-                                    "talking",
-                                    "talk",
-                                    "that talk"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Forbid + object + to-infinitive."
-                        },
-                        {
-                              "id": 30,
-                              "question": "They bribed the official _______ them a fast-track passport.",
-                              "options": [
-                                    "to issue",
-                                    "issuing",
-                                    "issue",
-                                    "that issue"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Bribe + object + to-infinitive."
-                        }
-                  ]
+              "title": "1. Starred Verbs & That-Clause Equivalents",
+              "content": "Ba'zi fe'llar (yulduzcha bilan ko'rsatilgan fe'llar: promise, pretend, agree, refuse, claim) to-infinitive o'rniga bir xil ma'noda that-clause qabul qila oladi.\n\n• I promise to wait. = I promise that I will wait.\n• He pretended to be angry. = He pretended that he was angry.\n• She agreed to help. = She agreed that she would help.\n• They refused to leave. = They refused that they would not leave.\n• He claimed to know her. = He claimed that he knew her."
             },
             {
-                  "id": "fill-in-blanks-infinitive-continuation",
-                  "title": "Fill in the Blanks",
-                  "type": "fill-in-blanks",
-                  "instructions": "Complete the sentences using the correct infinitive form or clause pattern.",
-                  "questions": [
-                        {
-                              "id": 1,
-                              "sentence": "He promised _______ (wait) for us outside the theatre.",
-                              "correctAnswer": "to wait",
-                              "explanation": "Promise + to-infinitive."
-                        },
-                        {
-                              "id": 2,
-                              "sentence": "She demonstrated _______ (how / use) the new software step by step.",
-                              "correctAnswer": "how to use",
-                              "explanation": "Question word + to-infinitive pattern."
-                        },
-                        {
-                              "id": 3,
-                              "sentence": "I wasn't sure whether _______ (stay) at home or go out.",
-                              "correctAnswer": "to stay",
-                              "explanation": "Whether + to-infinitive."
-                        },
-                        {
-                              "id": 4,
-                              "sentence": "The doctor warned him _______ (not / drink) cold water after exercise.",
-                              "correctAnswer": "not to drink",
-                              "explanation": "Object + NOT + to-infinitive."
-                        },
-                        {
-                              "id": 5,
-                              "sentence": "Mother compelled the boy _______ (wear) a heavy coat in winter.",
-                              "correctAnswer": "to wear",
-                              "explanation": "Compel + object + to-infinitive."
-                        },
-                        {
-                              "id": 6,
-                              "sentence": "He did nothing all afternoon but _______ (stare) out of the window.",
-                              "correctAnswer": "stare",
-                              "explanation": "do nothing BUT + bare infinitive."
-                        },
-                        {
-                              "id": 7,
-                              "sentence": "She was made _______ (clean) the whole room by her supervisor.",
-                              "correctAnswer": "to clean",
-                              "explanation": "Passive of make requires TO-infinitive (be made to do)."
-                        },
-                        {
-                              "id": 8,
-                              "sentence": "They didn't let him _______ (enter) the Restricted area.",
-                              "correctAnswer": "enter",
-                              "explanation": "Active LET takes bare infinitive."
-                        },
-                        {
-                              "id": 9,
-                              "sentence": "We need a wooden table _______ (write) on.",
-                              "correctAnswer": "to write",
-                              "explanation": "Noun + Infinitive + Preposition: a table to write on."
-                        },
-                        {
-                              "id": 10,
-                              "sentence": "He remembered _______ (lock) the door when he left, so everything was safe.",
-                              "correctAnswer": "to lock",
-                              "explanation": "Remember + to-infinitive means remembering a duty and doing it."
-                        },
-                        {
-                              "id": 11,
-                              "sentence": "She forgot that her passport _______ (be) in her desk drawer.",
-                              "correctAnswer": "was",
-                              "explanation": "Forget + that-clause (forgetting a fact in past tense)."
-                        },
-                        {
-                              "id": 12,
-                              "sentence": "Can you show me _______ (which / button) to press?",
-                              "correctAnswer": "which button",
-                              "explanation": "Show + sb + question word phrase + to-infinitive."
-                        },
-                        {
-                              "id": 13,
-                              "sentence": "The police officer told the driver _______ (pull) over immediately.",
-                              "correctAnswer": "to pull",
-                              "explanation": "Tell + object + to-infinitive for command."
-                        },
-                        {
-                              "id": 14,
-                              "sentence": "I have several emails _______ (reply) to before the end of the day.",
-                              "correctAnswer": "to reply",
-                              "explanation": "Noun + Infinitive + Preposition."
-                        },
-                        {
-                              "id": 15,
-                              "sentence": "She did everything except _______ (apologize) for her rudeness.",
-                              "correctAnswer": "apologize",
-                              "explanation": "do everything EXCEPT + bare infinitive."
-                        },
-                        {
-                              "id": 16,
-                              "sentence": "His ambition _______ (become) a world-class pilot inspired everyone.",
-                              "correctAnswer": "to become",
-                              "explanation": "Ambition + to-infinitive."
-                        },
-                        {
-                              "id": 17,
-                              "sentence": "The glasses enabled the soldier _______ (see) clearly in the dark.",
-                              "correctAnswer": "to see",
-                              "explanation": "Enable + object + to-infinitive."
-                        },
-                        {
-                              "id": 18,
-                              "sentence": "Nothing will persuade me _______ (sign) this unfair contract.",
-                              "correctAnswer": "to sign",
-                              "explanation": "Persuade + object + to-infinitive."
-                        },
-                        {
-                              "id": 19,
-                              "sentence": "Visitors are requested not _______ (touch) the exhibits.",
-                              "correctAnswer": "to touch",
-                              "explanation": "be requested NOT to-infinitive."
-                        },
-                        {
-                              "id": 20,
-                              "sentence": "He gave me a sturdy tool _______ (open) the crate with.",
-                              "correctAnswer": "to open",
-                              "explanation": "Noun + Infinitive + Preposition: tool to open with."
-                        }
-                  ]
+              "title": "2. learn, forget, remember — Infinitive vs That-Clause Farqi",
+              "content": "Ushbu uchta fe'l to-infinitive yoki that-clause bilan kelishiga qarab ma'nosini o'zgartiradi:\n\n• LEARN + to-inf: Biror skill/ko'nikmani egallash. (He learnt to look after himself - U o'ziga qarashni o'rgandi)\n• LEARN + that: Fakt yoki yangilikdan xabardor bo'lish. (He learnt that he passed the exam - U imtihondan o'tganini bildi)\n\n• FORGET + to-inf: Bajarilishi kerak bo'lgan amal esdan chiqib bajarilmadi. (He forgot to lock the door - U eshikni qulflashni unutdi)\n• FORGET + that: Fakt esdan chiqdi. (He forgot that today was a holiday - U bugun bayram ekanligini unutdi)\n\n• REMEMBER + to-inf: Esga tushib amal bajarildi. (She remembered to post the letter - U xatni yuborishni esladi va yubordi)\n• REMEMBER + that: Fakt yodga tushdi. (She remembered that her keys were inside - U kalitlari ichkarida ekanini esladi)."
             },
             {
-                  "id": "scrambled-infinitive-continuation",
-                  "title": "Scrambled Sentences",
-                  "type": "scrambled-sentences",
-                  "instructions": "Reorder the scrambled words to form correct sentences containing advanced infinitive structures.",
-                  "questions": [
-                        {
-                              "id": 1,
-                              "words": [
-                                    "promised",
-                                    "he",
-                                    "wait",
-                                    "to",
-                                    "for",
-                                    "us",
-                                    "the",
-                                    "outside",
-                                    "station"
-                              ],
-                              "correctSentence": "He promised to wait for us outside the station.",
-                              "explanation": "Promise + to-infinitive structure."
-                        },
-                        {
-                              "id": 2,
-                              "words": [
-                                    "showed",
-                                    "she",
-                                    "me",
-                                    "how",
-                                    "operate",
-                                    "to",
-                                    "machine",
-                                    "the"
-                              ],
-                              "correctSentence": "She showed me how to operate the machine.",
-                              "explanation": "Show + object + how + to-infinitive."
-                        },
-                        {
-                              "id": 3,
-                              "words": [
-                                    "couldn't",
-                                    "decide",
-                                    "i",
-                                    "whether",
-                                    "leave",
-                                    "to",
-                                    "stay",
-                                    "or"
-                              ],
-                              "correctSentence": "I couldn't decide whether to stay or leave.",
-                              "explanation": "Whether + to-infinitive."
-                        },
-                        {
-                              "id": 4,
-                              "words": [
-                                    "warned",
-                                    "doctor",
-                                    "the",
-                                    "us",
-                                    "not",
-                                    "eat",
-                                    "to",
-                                    "raw",
-                                    "fish"
-                              ],
-                              "correctSentence": "The doctor warned us not to eat raw fish.",
-                              "explanation": "Warn + object + NOT + to-infinitive."
-                        },
-                        {
-                              "id": 5,
-                              "words": [
-                                    "was",
-                                    "he",
-                                    "made",
-                                    "clean",
-                                    "to",
-                                    "the",
-                                    "laboratory"
-                              ],
-                              "correctSentence": "He was made to clean the laboratory.",
-                              "explanation": "Passive causative: be made TO do."
-                        },
-                        {
-                              "id": 6,
-                              "words": [
-                                    "does",
-                                    "he",
-                                    "nothing",
-                                    "complain",
-                                    "but",
-                                    "all",
-                                    "day"
-                              ],
-                              "correctSentence": "He does nothing but complain all day.",
-                              "explanation": "do nothing BUT + bare infinitive."
-                        },
-                        {
-                              "id": 7,
-                              "words": [
-                                    "have",
-                                    "we",
-                                    "letters",
-                                    "many",
-                                    "send",
-                                    "to"
-                              ],
-                              "correctSentence": "We have many letters to send.",
-                              "explanation": "Noun + Infinitive."
-                        },
-                        {
-                              "id": 8,
-                              "words": [
-                                    "need",
-                                    "a",
-                                    "cushion",
-                                    "we",
-                                    "sit",
-                                    "to",
-                                    "on"
-                              ],
-                              "correctSentence": "We need a cushion to sit on.",
-                              "explanation": "Noun + Infinitive + Preposition."
-                        },
-                        {
-                              "id": 9,
-                              "words": [
-                                    "told",
-                                    "the",
-                                    "captain",
-                                    "soldiers",
-                                    "the",
-                                    "assemble",
-                                    "to"
-                              ],
-                              "correctSentence": "The captain told the soldiers to assemble.",
-                              "explanation": "Tell + object + to-infinitive command."
-                        },
-                        {
-                              "id": 10,
-                              "words": [
-                                    "did",
-                                    "she",
-                                    "everything",
-                                    "apologize",
-                                    "except",
-                                    "for",
-                                    "lateness",
-                                    "her"
-                              ],
-                              "correctSentence": "She did everything except apologize for her lateness.",
-                              "explanation": "do everything EXCEPT + bare infinitive."
-                        },
-                        {
-                              "id": 11,
-                              "words": [
-                                    "remembered",
-                                    "she",
-                                    "turn",
-                                    "to",
-                                    "off",
-                                    "lights",
-                                    "the"
-                              ],
-                              "correctSentence": "She remembered to turn off the lights.",
-                              "explanation": "Remember + to-infinitive."
-                        },
-                        {
-                              "id": 12,
-                              "words": [
-                                    "completely",
-                                    "to",
-                                    "master",
-                                    "takes",
-                                    "subject",
-                                    "this",
-                                    "time"
-                              ],
-                              "correctSentence": "To completely master this subject takes time.",
-                              "explanation": "Split infinitive structure."
-                        },
-                        {
-                              "id": 13,
-                              "words": [
-                                    "obliges",
-                                    "the",
-                                    "law",
-                                    "companies",
-                                    "to",
-                                    "pay",
-                                    "fair",
-                                    "wages"
-                              ],
-                              "correctSentence": "The law obliges companies to pay fair wages.",
-                              "explanation": "Oblige + object + to-infinitive."
-                        },
-                        {
-                              "id": 14,
-                              "words": [
-                                    "gave",
-                                    "me",
-                                    "she",
-                                    "glass",
-                                    "a",
-                                    "drink",
-                                    "to",
-                                    "out",
-                                    "of"
-                              ],
-                              "correctSentence": "She gave me a glass to drink out of.",
-                              "explanation": "Noun + Infinitive + Preposition."
-                        },
-                        {
-                              "id": 15,
-                              "words": [
-                                    "implored",
-                                    "parents",
-                                    "her",
-                                    "she",
-                                    "not",
-                                    "send",
-                                    "to",
-                                    "her",
-                                    "away"
-                              ],
-                              "correctSentence": "She implored her parents not to send her away.",
-                              "explanation": "Implore + object + NOT + to-infinitive."
-                        }
-                  ]
+              "title": "3. Question Words & Whether + Infinitive",
+              "content": "A) QUESTION WORDS + INFINITIVE:\nask, decide, explain, forget, know, show, tell, understand kabi fe'llardan keyin how / what / when / where / who / which + to-infinitive keladi.\n• He discovered how to open the safe.\n• I didn't know when to switch off the machine.\n• Can you explain what to do next?\n• She forgot where to put the spare key.\n\nB) WHETHER + INFINITIVE:\nIkkita muqobil tanlov yoki ikkilanayotgan holatni ifodalash uchun ishlatiladi.\n• Structure 1: S + wonder / want to know + whether + to-infinitive (I wondered whether to phone or not).\n• Structure 2: S + not + decide / know / remember + whether + to-infinitive (I didn't know whether to stay or leave)."
             },
             {
-                  "id": "error-correction-infinitive-continuation",
-                  "title": "Error Correction",
-                  "type": "error-correction",
-                  "instructions": "Identify the grammatically incorrect part in each sentence and provide the correct form.",
-                  "questions": [
-                        {
-                              "id": 1,
-                              "sentence": "He showed me to change a fuse.",
-                              "correction": "He showed me how to change a fuse.",
-                              "explanation": "Show requires \"how\" before the infinitive when demonstrating a method (show somebody HOW to do something)."
-                        },
-                        {
-                              "id": 2,
-                              "sentence": "The doctor warned us to not drink contaminated water.",
-                              "correction": "The doctor warned us not to drink contaminated water.",
-                              "explanation": "Negation in object + infinitive structures places NOT before \"to\" (not to drink)."
-                        },
-                        {
-                              "id": 3,
-                              "sentence": "He was made clean the entire floor by the manager.",
-                              "correction": "He was made to clean the entire floor by the manager.",
-                              "explanation": "The passive of causative MAKE requires \"to\" (be made TO do)."
-                        },
-                        {
-                              "id": 4,
-                              "sentence": "He does nothing but to complain about his workload.",
-                              "correction": "He does nothing but complain about his workload.",
-                              "explanation": "do nothing BUT takes a bare infinitive (without to)."
-                        },
-                        {
-                              "id": 5,
-                              "sentence": "We found a comfortable table to write.",
-                              "correction": "We found a comfortable table to write on.",
-                              "explanation": "Prepositional infinitive requires the appropriate preposition at the end (a table to write ON)."
-                        },
-                        {
-                              "id": 6,
-                              "sentence": "They don't let him to drive the company truck.",
-                              "correction": "They don't let him drive the company truck.",
-                              "explanation": "Active LET is followed by a bare infinitive (let + object + V1 without to)."
-                        },
-                        {
-                              "id": 7,
-                              "sentence": "She did everything except to apologize for her behavior.",
-                              "correction": "She did everything except apologize for her behavior.",
-                              "explanation": "do everything EXCEPT is followed by a bare infinitive."
-                        },
-                        {
-                              "id": 8,
-                              "sentence": "I couldn't decide whether stay or leave the event.",
-                              "correction": "I couldn't decide whether to stay or leave the event.",
-                              "explanation": "Whether requires a to-infinitive (whether TO stay)."
-                        },
-                        {
-                              "id": 9,
-                              "sentence": "He pretended that to be sick to avoid the test.",
-                              "correction": "He pretended that he was sick to avoid the test.",
-                              "explanation": "That-clause requires a full finite clause (subject + verb), not an infinitive."
-                        },
-                        {
-                              "id": 10,
-                              "sentence": "She remembered to lock the door, but she forgot that she did it.",
-                              "correction": "She remembered to lock the door.",
-                              "explanation": "Standard usage: remembered to lock = remembered and did it."
-                        },
-                        {
-                              "id": 11,
-                              "sentence": "He gave me a sturdy tool to open with it.",
-                              "correction": "He gave me a sturdy tool to open with.",
-                              "explanation": "In noun + infinitive + preposition structures, the object pronoun \"it\" is omitted."
-                        },
-                        {
-                              "id": 12,
-                              "sentence": "The law compels employers paying minimum wage.",
-                              "correction": "The law compels employers to pay minimum wage.",
-                              "explanation": "Compel takes an object + to-infinitive."
-                        },
-                        {
-                              "id": 13,
-                              "sentence": "He showed the students to solve the equation.",
-                              "correction": "He showed the students how to solve the equation.",
-                              "explanation": "Show + object + HOW + infinitive."
-                        },
-                        {
-                              "id": 14,
-                              "sentence": "I didn't know where to put spare key.",
-                              "correction": "I didn't know where to put the spare key.",
-                              "explanation": "Missing definite article \"the\"."
-                        },
-                        {
-                              "id": 15,
-                              "sentence": "She implored her brother to not quit his job.",
-                              "correction": "She implored her brother not to quit his job.",
-                              "explanation": "Inkor shakli NOT to-infinitive shaklida keladi."
-                        }
-                  ]
+              "title": "4. Object + Infinitive Structure & Negation",
+              "content": "Boshqa bir shaxsga maslahat berish, buyurish, ko'ndirish yoki ruxsat berishda ushbu struktura ishlatiladi:\nS + Verb + Object + (NOT) to-infinitive\n\nFe'llar: advise, allow, bribe, command, compel, enable, encourage, forbid, force, implore, induce, instruct, invite, oblige, order, permit, persuade, remind, request, teach, tempt, train, urge, warn.\n\n• Active: The doctor advised all children to have vaccinations.\n• Negative: Inkor shaklida NOT so'zi to-infinitive OLDIDAN qo'yiladi (S + V + Object + NOT + to-infinitive).\n  - The doctor warned us NOT to eat the fish.\n  - Sarah implored her parents NOT to send her to boarding school.\n  - Visitors are requested NOT to walk on the grass. (Passive)"
             },
             {
-                  "id": "sentence-transformation-infinitive-continuation",
-                  "title": "Sentence Transformation",
-                  "type": "sentence-transformation",
-                  "instructions": "Rewrite each sentence using the prompt word so that it has the same meaning.",
-                  "questions": [
-                        {
-                              "id": 1,
-                              "original": "He promised: \"I will wait for you at the airport.\"",
-                              "prompt": "promised",
-                              "correctAnswer": "He promised to wait for me at the airport.",
-                              "explanation": "Starred verb promise + to-infinitive."
-                        },
-                        {
-                              "id": 2,
-                              "original": "He pretended that he was angry with the team.",
-                              "prompt": "pretended to",
-                              "correctAnswer": "He pretended to be angry with the team.",
-                              "explanation": "Transforming a that-clause into a to-infinitive."
-                        },
-                        {
-                              "id": 3,
-                              "original": "The instructor demonstrated the method of starting the engine.",
-                              "prompt": "how",
-                              "correctAnswer": "The instructor showed us how to start the engine.",
-                              "explanation": "Show + object + how + to-infinitive."
-                        },
-                        {
-                              "id": 4,
-                              "original": "I didn't know if I should stay or leave.",
-                              "prompt": "whether",
-                              "correctAnswer": "I didn't know whether to stay or leave.",
-                              "explanation": "Whether + to-infinitive transformation."
-                        },
-                        {
-                              "id": 5,
-                              "original": "The officer forced us to move our vehicle.",
-                              "prompt": "made",
-                              "correctAnswer": "The officer made us move our vehicle.",
-                              "explanation": "Active causative MAKE + bare infinitive."
-                        },
-                        {
-                              "id": 6,
-                              "original": "The supervisor forced me to rewrite the whole report.",
-                              "prompt": "was made",
-                              "correctAnswer": "I was made to rewrite the whole report.",
-                              "explanation": "Passive causative: be made TO rewrite."
-                        },
-                        {
-                              "id": 7,
-                              "original": "He only complains all day and does nothing else.",
-                              "prompt": "but",
-                              "correctAnswer": "He does nothing but complain all day.",
-                              "explanation": "do nothing BUT + bare infinitive."
-                        },
-                        {
-                              "id": 8,
-                              "original": "The manager gave us permission to leave early.",
-                              "prompt": "let",
-                              "correctAnswer": "The manager let us leave early.",
-                              "explanation": "LET + object + bare infinitive."
-                        },
-                        {
-                              "id": 9,
-                              "original": "We need a chair so that we can sit on it.",
-                              "prompt": "sit on",
-                              "correctAnswer": "We need a chair to sit on.",
-                              "explanation": "Noun + Infinitive + Preposition."
-                        },
-                        {
-                              "id": 10,
-                              "original": "The physician advised us strongly: \"Do not eat raw seafood.\"",
-                              "prompt": "warned",
-                              "correctAnswer": "The physician warned us not to eat raw seafood.",
-                              "explanation": "Warn + object + NOT + to-infinitive."
-                        },
-                        {
-                              "id": 11,
-                              "original": "She has many letters that she must post today.",
-                              "prompt": "to post",
-                              "correctAnswer": "She has many letters to post today.",
-                              "explanation": "Noun + Infinitive."
-                        },
-                        {
-                              "id": 12,
-                              "original": "The guard forbade visitors from entering the park after dark.",
-                              "prompt": "forbade",
-                              "correctAnswer": "The guard forbade visitors to enter the park after dark.",
-                              "explanation": "Forbid + object + to-infinitive."
-                        },
-                        {
-                              "id": 13,
-                              "original": "She apologized for everything except arriving late.",
-                              "prompt": "except",
-                              "correctAnswer": "She did everything except apologize for arriving late.",
-                              "explanation": "do everything EXCEPT + bare infinitive."
-                        },
-                        {
-                              "id": 14,
-                              "original": "I remembered that I had to call my doctor.",
-                              "prompt": "remembered to",
-                              "correctAnswer": "I remembered to call my doctor.",
-                              "explanation": "Remember + to-infinitive."
-                        },
-                        {
-                              "id": 15,
-                              "original": "Can you explain the way to open this safe lock?",
-                              "prompt": "how",
-                              "correctAnswer": "Can you explain how to open this safe lock?",
-                              "explanation": "Explain + how + to-infinitive."
-                        }
-                  ]
+              "title": "5. SHOW va TELL Fe'llarining Maxsus Qo'llanilishi",
+              "content": "• SHOW + Object + HOW + Infinitive (harakat qanday bajarilishini ko'rsatish):\n  He showed me HOW to change a fuse. (He showed me to change - XATO!)\n• TELL + Object + To-Infinitive (to'g'ri buyruq/ko'rsatma berish):\n  He told me to change the fuse. (= He said, 'Change the fuse.')\n• TELL + Object + HOW + Infinitive (jarayon haqida ma'lumot/ko'rsatma berish):\n  He told me HOW to replace a fuse."
             },
             {
-                  "id": "dialogue-completion-infinitive-continuation",
-                  "title": "Dialogue Completion",
-                  "type": "dialogue-completion",
-                  "instructions": "Choose the most natural and grammatically correct infinitive form to complete each conversation.",
-                  "questions": [
-                        {
-                              "id": 1,
-                              "dialogue": [
-                                    {
-                                          "speaker": "A",
-                                          "text": "Do you know how to operate this machine?"
-                                    },
-                                    {
-                                          "speaker": "B",
-                                          "text": "No, but the technician showed me _______."
-                                    }
-                              ],
-                              "options": [
-                                    "how to start it",
-                                    "to start it",
-                                    "that starting it",
-                                    "for start it"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Show + object + how + to-infinitive."
-                        },
-                        {
-                              "id": 2,
-                              "dialogue": [
-                                    {
-                                          "speaker": "A",
-                                          "text": "Did your boss allow you to take a break?"
-                                    },
-                                    {
-                                          "speaker": "B",
-                                          "text": "No, he made me _______ until 8 PM!"
-                                    }
-                              ],
-                              "options": [
-                                    "work",
-                                    "to work",
-                                    "working",
-                                    "worked"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Active MAKE takes a bare infinitive (work)."
-                        },
-                        {
-                              "id": 3,
-                              "dialogue": [
-                                    {
-                                          "speaker": "A",
-                                          "text": "Why were you so late for the meeting?"
-                                    },
-                                    {
-                                          "speaker": "B",
-                                          "text": "I was made _______ for security checks at the gate."
-                                    }
-                              ],
-                              "options": [
-                                    "to wait",
-                                    "wait",
-                                    "waiting",
-                                    "that wait"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Passive BE MADE takes a to-infinitive (to wait)."
-                        },
-                        {
-                              "id": 4,
-                              "dialogue": [
-                                    {
-                                          "speaker": "A",
-                                          "text": "Have you decided where to spend your holiday?"
-                                    },
-                                    {
-                                          "speaker": "B",
-                                          "text": "I'm still wondering whether _______ abroad or stay local."
-                                    }
-                              ],
-                              "options": [
-                                    "to go",
-                                    "going",
-                                    "go",
-                                    "that go"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Whether + to-infinitive."
-                        },
-                        {
-                              "id": 5,
-                              "dialogue": [
-                                    {
-                                          "speaker": "A",
-                                          "text": "Why is Tom sitting so quietly in the corner?"
-                                    },
-                                    {
-                                          "speaker": "B",
-                                          "text": "He does nothing but _______ all day."
-                                    }
-                              ],
-                              "options": [
-                                    "sulky",
-                                    "sulk",
-                                    "to sulk",
-                                    "sulking"
-                              ],
-                              "correctAnswer": 1,
-                              "explanation": "do nothing BUT + bare infinitive (sulk)."
-                        },
-                        {
-                              "id": 6,
-                              "dialogue": [
-                                    {
-                                          "speaker": "A",
-                                          "text": "What did the doctor advise you about your diet?"
-                                    },
-                                    {
-                                          "speaker": "B",
-                                          "text": "He warned me _______ sugary drinks."
-                                    }
-                              ],
-                              "options": [
-                                    "not to drink",
-                                    "to not drink",
-                                    "don't drink",
-                                    "not drinking"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Warn + object + NOT + to-infinitive."
-                        },
-                        {
-                              "id": 7,
-                              "dialogue": [
-                                    {
-                                          "speaker": "A",
-                                          "text": "Where shall we sit for lunch?"
-                                    },
-                                    {
-                                          "speaker": "B",
-                                          "text": "Let's find a clean bench _______."
-                                    }
-                              ],
-                              "options": [
-                                    "to sit on",
-                                    "to sit",
-                                    "sitting on",
-                                    "to sit in"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Noun + Infinitive + Preposition: bench to sit ON."
-                        },
-                        {
-                              "id": 8,
-                              "dialogue": [
-                                    {
-                                          "speaker": "A",
-                                          "text": "Did you remember to post my letter?"
-                                    },
-                                    {
-                                          "speaker": "B",
-                                          "text": "Oh, I forgot that I _______ it in my car!"
-                                    }
-                              ],
-                              "options": [
-                                    "left",
-                                    "to leave",
-                                    "leaving",
-                                    "leave"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Forget + that + finite past clause."
-                        },
-                        {
-                              "id": 9,
-                              "dialogue": [
-                                    {
-                                          "speaker": "A",
-                                          "text": "Why did you buy such a huge glass?"
-                                    },
-                                    {
-                                          "speaker": "B",
-                                          "text": "I needed a large container _______ iced tea out of."
-                                    }
-                              ],
-                              "options": [
-                                    "to drink",
-                                    "drinking",
-                                    "drink",
-                                    "to drink with"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "container to drink iced tea out of."
-                        },
-                        {
-                              "id": 10,
-                              "dialogue": [
-                                    {
-                                          "speaker": "A",
-                                          "text": "Will your parents let you join the trip?"
-                                    },
-                                    {
-                                          "speaker": "B",
-                                          "text": "Yes, they let me _______ after I finished my homework."
-                                    }
-                              ],
-                              "options": [
-                                    "go",
-                                    "to go",
-                                    "going",
-                                    "went"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Active LET + object + bare infinitive."
-                        },
-                        {
-                              "id": 11,
-                              "dialogue": [
-                                    {
-                                          "speaker": "A",
-                                          "text": "Can anyone help me move this heavy cabinet?"
-                                    },
-                                    {
-                                          "speaker": "B",
-                                          "text": "I can help you _______ it into the next room."
-                                    }
-                              ],
-                              "options": [
-                                    "move",
-                                    "to move",
-                                    "both move and to move",
-                                    "moving"
-                              ],
-                              "correctAnswer": 2,
-                              "explanation": "HELP can take either bare infinitive or to-infinitive."
-                        },
-                        {
-                              "id": 12,
-                              "dialogue": [
-                                    {
-                                          "speaker": "A",
-                                          "text": "What did the manager say about the deadline?"
-                                    },
-                                    {
-                                          "speaker": "B",
-                                          "text": "She urged us _______ the report before 5 PM."
-                                    }
-                              ],
-                              "options": [
-                                    "to submit",
-                                    "submitting",
-                                    "submit",
-                                    "that submit"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Urge + object + to-infinitive."
-                        },
-                        {
-                              "id": 13,
-                              "dialogue": [
-                                    {
-                                          "speaker": "A",
-                                          "text": "Did he apologize for breaking the vase?"
-                                    },
-                                    {
-                                          "speaker": "B",
-                                          "text": "No, he did everything except _______!"
-                                    }
-                              ],
-                              "options": [
-                                    "apologize",
-                                    "to apologize",
-                                    "apologizing",
-                                    "apologized"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "do everything EXCEPT + bare infinitive."
-                        },
-                        {
-                              "id": 14,
-                              "dialogue": [
-                                    {
-                                          "speaker": "A",
-                                          "text": "Did she agree to join our research team?"
-                                    },
-                                    {
-                                          "speaker": "B",
-                                          "text": "Yes, she agreed that she _______ help us."
-                                    }
-                              ],
-                              "options": [
-                                    "would",
-                                    "will to",
-                                    "to",
-                                    "for"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Agree + that + subject + modal verb (would)."
-                        },
-                        {
-                              "id": 15,
-                              "dialogue": [
-                                    {
-                                          "speaker": "A",
-                                          "text": "Do you have anything to open this jar with?"
-                                    },
-                                    {
-                                          "speaker": "B",
-                                          "text": "Here is a special opener _______."
-                                    }
-                              ],
-                              "options": [
-                                    "to use",
-                                    "using",
-                                    "used",
-                                    "use"
-                              ],
-                              "correctAnswer": 0,
-                              "explanation": "Noun + Infinitive."
-                        }
-                  ]
+              "title": "6. Split Infinitives & Nouns + Infinitive (+ Prepositions)",
+              "content": "A) SPLIT INFINITIVE:\nTO va fe'l birinchi shakli (V1) o'rtasiga ravish qo'yilishi: to [adverb] V1\n• Formal (unsplit): to master this subject completely\n• Informal/Colloquial (split): to completely master this subject (Zamonaviy ingliz tilida juda keng qo'llaniladi).\n\nB) NOUN + INFINITIVE (+ PREPOSITION):\n1. Noun + Infinitive: ability, ambition, anxiety, decision, desire, effort, failure, offer, plan, promise, refusal, wish + to-infinitive. (His ambition to run his own business).\n2. Noun + Infinitive + Preposition (nisbiy ergash gap ma'nosida):\n• cushions to sit on (= cushions that we sit on)\n• someone to talk to (= someone whom I want to talk to)\n• a glass to drink out of\n• a table to write on\n• a tool to open with."
+            },
+            {
+              "title": "7. Causatives (MAKE, LET, HELP) va BUT / EXCEPT + Bare Infinitive",
+              "content": "A) MAKE, LET, HELP:\n• MAKE (faol: bare inf / majhul: BE MADE + TO-infinitive):\n  Active: He made me move his car. -> Passive: I WAS MADE TO MOVE his car.\n• LET (faol: bare inf / majhul: BE ALLOWED TO):\n  Active: They let him see the documents. (Majhulda let ishlatilmaydi: He was allowed to see...).\n• HELP (to-infinitive ham, bare infinitive ham to'g'ri):\n  He helped us (to) push the car.\n\nB) DO ANYTHING / NOTHING / EVERYTHING + BUT / EXCEPT + BARE INFINITIVE:\ndo + anything/nothing/everything + BUT / EXCEPT + Bare Infinitive (to-siz fe'l):\n• He does nothing BUT complain.\n• My dog does everything BUT speak.\n• She did everything EXCEPT apologize.\n• There is nothing to do BUT wait."
             }
-      ]
-}
+          ]
+        },
+        "exercises": [
+          {
+            "id": "mcq-infinitive-continuation",
+            "title": "Multiple Choice Questions",
+            "type": "multiple-choice",
+            "instructions": "Choose the correct form of the infinitive or clause for each sentence.",
+            "questions": [
+              {
+                "id": 1,
+                "question": "He promised _______ for us near the station.",
+                "options": [
+                  "to wait",
+                  "waiting",
+                  "that wait",
+                  "wait"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Promise is a starred verb followed by a to-infinitive (or a that-clause: that he would wait)."
+              },
+              {
+                "id": 2,
+                "question": "Which of the following is equivalent in meaning to \"He pretended to be angry\"?",
+                "options": [
+                  "He pretended that he was angry.",
+                  "He pretended that to be angry.",
+                  "He pretended being angry.",
+                  "He pretended how to be angry."
+                ],
+                "correctAnswer": 0,
+                "explanation": "Starred verbs like pretend can be rewritten with a that-clause: He pretended that he was angry."
+              },
+              {
+                "id": 3,
+                "question": "She learnt _______ after herself when she moved abroad.",
+                "options": [
+                  "to look",
+                  "that looking",
+                  "look",
+                  "for looking"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Learn + to-infinitive means acquiring a skill."
+              },
+              {
+                "id": 4,
+                "question": "He learnt _______ his exam results had been published online.",
+                "options": [
+                  "that",
+                  "to",
+                  "how to",
+                  "whether"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Learn + that means finding out a fact or news."
+              },
+              {
+                "id": 5,
+                "question": "I forgot _______ the front door before leaving, so the house was unlocked!",
+                "options": [
+                  "to lock",
+                  "that I lock",
+                  "locking",
+                  "lock"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Forget + to-infinitive means the intended action was NOT performed."
+              },
+              {
+                "id": 6,
+                "question": "She forgot _______ her keys were already inside her purse.",
+                "options": [
+                  "that",
+                  "to",
+                  "whether to",
+                  "how"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Forget + that means forgetting a fact or piece of information."
+              },
+              {
+                "id": 7,
+                "question": "He remembered _______ his wife some flowers on his way home.",
+                "options": [
+                  "to buy",
+                  "buying",
+                  "that buy",
+                  "for buying"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Remember + to-infinitive means remembering a duty/action and then performing it."
+              },
+              {
+                "id": 8,
+                "question": "The technician showed me _______ to operate the new computer.",
+                "options": [
+                  "how",
+                  "that",
+                  "to",
+                  "whether"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Show + object + HOW + infinitive is used to demonstrate how an action is done."
+              },
+              {
+                "id": 9,
+                "question": "Select the INCORRECT sentence:",
+                "options": [
+                  "He showed me to change a fuse.",
+                  "He showed me how to change a fuse.",
+                  "He told me to change the fuse.",
+                  "He told me how to change a fuse."
+                ],
+                "correctAnswer": 0,
+                "explanation": "\"Show + sb + to-infinitive\" without \"how\" is incorrect. It must be \"show somebody HOW to do something\"."
+              },
+              {
+                "id": 10,
+                "question": "I couldn't decide _______ to accept the offer or stay at my current job.",
+                "options": [
+                  "whether",
+                  "that",
+                  "how",
+                  "which"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Whether + infinitive is used when expressing a choice or uncertainty between alternatives."
+              },
+              {
+                "id": 11,
+                "question": "The doctor warned the patient _______ smoke after the surgery.",
+                "options": [
+                  "not to",
+                  "to not",
+                  "don't",
+                  "not"
+                ],
+                "correctAnswer": 0,
+                "explanation": "For negative object + infinitive structures, place NOT before to-infinitive: S + V + Object + NOT + to-infinitive."
+              },
+              {
+                "id": 12,
+                "question": "These new night-vision glasses will _______ you to see in complete darkness.",
+                "options": [
+                  "enable",
+                  "make",
+                  "let",
+                  "suggest"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Enable takes the Object + to-infinitive pattern: enable somebody to do something."
+              },
+              {
+                "id": 13,
+                "question": "Nothing would _______ me to do business with such dishonest partners.",
+                "options": [
+                  "induce",
+                  "make to",
+                  "let",
+                  "suggest"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Induce + object + to-infinitive means persuade or force someone to do something."
+              },
+              {
+                "id": 14,
+                "question": "Visitors are requested _______ on the grass.",
+                "options": [
+                  "not to walk",
+                  "to not walk",
+                  "don't walk",
+                  "not walking"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Passive structure: be requested NOT to do something."
+              },
+              {
+                "id": 15,
+                "question": "\"To completely master this language takes years.\" What structure is \"to completely master\"?",
+                "options": [
+                  "Split infinitive",
+                  "Continuous infinitive",
+                  "Perfect infinitive",
+                  "Bare infinitive"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Placing an adverb (completely) between \"to\" and the verb (master) is called a split infinitive."
+              },
+              {
+                "id": 16,
+                "question": "We need to find a comfortable cushion to _______ during the long ceremony.",
+                "options": [
+                  "sit on",
+                  "sit",
+                  "sit in",
+                  "sitting on"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Noun + Infinitive + Preposition: cushions to sit ON."
+              },
+              {
+                "id": 17,
+                "question": "She brought a large glass to _______ fresh orange juice.",
+                "options": [
+                  "drink out of",
+                  "drink",
+                  "drink out",
+                  "drink with"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Prepositional infinitive after noun: a glass to drink out of."
+              },
+              {
+                "id": 18,
+                "question": "His ambition _______ his own tech start-up kept him motivated.",
+                "options": [
+                  "to run",
+                  "running",
+                  "that run",
+                  "run"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Nouns like ambition, decision, desire take a direct to-infinitive."
+              },
+              {
+                "id": 19,
+                "question": "The guard made the intruder _______ on the floor.",
+                "options": [
+                  "lie",
+                  "to lie",
+                  "lying",
+                  "lay"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Active causative MAKE takes a bare infinitive (without to): make + somebody + bare infinitive."
+              },
+              {
+                "id": 20,
+                "question": "In the passive voice, \"He made me move his car\" becomes:",
+                "options": [
+                  "I was made to move his car.",
+                  "I was made move his car.",
+                  "His car was made move by me.",
+                  "I was let move his car."
+                ],
+                "correctAnswer": 0,
+                "explanation": "Passive of MAKE requires \"to-infinitive\": S + be made + TO-infinitive."
+              },
+              {
+                "id": 21,
+                "question": "My supervisor did not _______ me leave the office early.",
+                "options": [
+                  "let",
+                  "allow to",
+                  "make to",
+                  "force"
+                ],
+                "correctAnswer": 0,
+                "explanation": "LET takes a bare infinitive without \"to\" in active voice."
+              },
+              {
+                "id": 22,
+                "question": "The team member helped us _______ the heavy equipment into the lab.",
+                "options": [
+                  "carry",
+                  "to carry",
+                  "both carry and to carry are correct",
+                  "carrying"
+                ],
+                "correctAnswer": 2,
+                "explanation": "HELP can be followed by either a bare infinitive or a to-infinitive."
+              },
+              {
+                "id": 23,
+                "question": "He does nothing all day _______ complain about the weather.",
+                "options": [
+                  "but",
+                  "that",
+                  "to",
+                  "for"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Structure: do + nothing + BUT + bare infinitive."
+              },
+              {
+                "id": 24,
+                "question": "She did everything _______ apologize for her mistake.",
+                "options": [
+                  "except",
+                  "to",
+                  "that",
+                  "for"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Structure: do + everything + EXCEPT + bare infinitive."
+              },
+              {
+                "id": 25,
+                "question": "There is nothing to do now _______ for the official test results.",
+                "options": [
+                  "but wait",
+                  "but to wait",
+                  "except waiting",
+                  "that wait"
+                ],
+                "correctAnswer": 0,
+                "explanation": "do + nothing + BUT + bare infinitive (wait)."
+              },
+              {
+                "id": 26,
+                "question": "I didn't know whether _______ the train or take a taxi.",
+                "options": [
+                  "to catch",
+                  "catching",
+                  "caught",
+                  "that catch"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Whether + to-infinitive expresses a choice between two actions."
+              },
+              {
+                "id": 27,
+                "question": "The officer told the driver _______ off the engine immediately.",
+                "options": [
+                  "to turn",
+                  "turn",
+                  "turning",
+                  "that turn"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Tell + somebody + to-infinitive gives a direct command."
+              },
+              {
+                "id": 28,
+                "question": "Do you have any important documents _______ before 5 PM?",
+                "options": [
+                  "to sign",
+                  "signing",
+                  "for sign",
+                  "that sign"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Noun + Infinitive: documents to sign (= documents that must be signed)."
+              },
+              {
+                "id": 29,
+                "question": "The teacher forbade her pupils _______ in the exam hall.",
+                "options": [
+                  "to talk",
+                  "talking",
+                  "talk",
+                  "that talk"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Forbid + object + to-infinitive."
+              },
+              {
+                "id": 30,
+                "question": "They bribed the official _______ them a fast-track passport.",
+                "options": [
+                  "to issue",
+                  "issuing",
+                  "issue",
+                  "that issue"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Bribe + object + to-infinitive."
+              }
+            ]
+          },
+          {
+            "id": "fill-in-blanks-infinitive-continuation",
+            "title": "Fill in the Blanks",
+            "type": "fill-in-blanks",
+            "instructions": "Complete the sentences using the correct infinitive form or clause pattern.",
+            "questions": [
+              {
+                "id": 1,
+                "sentence": "He promised _______ (wait) for us outside the theatre.",
+                "correctAnswer": "to wait",
+                "explanation": "Promise + to-infinitive."
+              },
+              {
+                "id": 2,
+                "sentence": "She demonstrated _______ (how / use) the new software step by step.",
+                "correctAnswer": "how to use",
+                "explanation": "Question word + to-infinitive pattern."
+              },
+              {
+                "id": 3,
+                "sentence": "I wasn't sure whether _______ (stay) at home or go out.",
+                "correctAnswer": "to stay",
+                "explanation": "Whether + to-infinitive."
+              },
+              {
+                "id": 4,
+                "sentence": "The doctor warned him _______ (not / drink) cold water after exercise.",
+                "correctAnswer": "not to drink",
+                "explanation": "Object + NOT + to-infinitive."
+              },
+              {
+                "id": 5,
+                "sentence": "Mother compelled the boy _______ (wear) a heavy coat in winter.",
+                "correctAnswer": "to wear",
+                "explanation": "Compel + object + to-infinitive."
+              },
+              {
+                "id": 6,
+                "sentence": "He did nothing all afternoon but _______ (stare) out of the window.",
+                "correctAnswer": "stare",
+                "explanation": "do nothing BUT + bare infinitive."
+              },
+              {
+                "id": 7,
+                "sentence": "She was made _______ (clean) the whole room by her supervisor.",
+                "correctAnswer": "to clean",
+                "explanation": "Passive of make requires TO-infinitive (be made to do)."
+              },
+              {
+                "id": 8,
+                "sentence": "They didn't let him _______ (enter) the Restricted area.",
+                "correctAnswer": "enter",
+                "explanation": "Active LET takes bare infinitive."
+              },
+              {
+                "id": 9,
+                "sentence": "We need a wooden table _______ (write) on.",
+                "correctAnswer": "to write",
+                "explanation": "Noun + Infinitive + Preposition: a table to write on."
+              },
+              {
+                "id": 10,
+                "sentence": "He remembered _______ (lock) the door when he left, so everything was safe.",
+                "correctAnswer": "to lock",
+                "explanation": "Remember + to-infinitive means remembering a duty and doing it."
+              },
+              {
+                "id": 11,
+                "sentence": "She forgot that her passport _______ (be) in her desk drawer.",
+                "correctAnswer": "was",
+                "explanation": "Forget + that-clause (forgetting a fact in past tense)."
+              },
+              {
+                "id": 12,
+                "sentence": "Can you show me _______ (which / button) to press?",
+                "correctAnswer": "which button",
+                "explanation": "Show + sb + question word phrase + to-infinitive."
+              },
+              {
+                "id": 13,
+                "sentence": "The police officer told the driver _______ (pull) over immediately.",
+                "correctAnswer": "to pull",
+                "explanation": "Tell + object + to-infinitive for command."
+              },
+              {
+                "id": 14,
+                "sentence": "I have several emails _______ (reply) to before the end of the day.",
+                "correctAnswer": "to reply",
+                "explanation": "Noun + Infinitive + Preposition."
+              },
+              {
+                "id": 15,
+                "sentence": "She did everything except _______ (apologize) for her rudeness.",
+                "correctAnswer": "apologize",
+                "explanation": "do everything EXCEPT + bare infinitive."
+              },
+              {
+                "id": 16,
+                "sentence": "His ambition _______ (become) a world-class pilot inspired everyone.",
+                "correctAnswer": "to become",
+                "explanation": "Ambition + to-infinitive."
+              },
+              {
+                "id": 17,
+                "sentence": "The glasses enabled the soldier _______ (see) clearly in the dark.",
+                "correctAnswer": "to see",
+                "explanation": "Enable + object + to-infinitive."
+              },
+              {
+                "id": 18,
+                "sentence": "Nothing will persuade me _______ (sign) this unfair contract.",
+                "correctAnswer": "to sign",
+                "explanation": "Persuade + object + to-infinitive."
+              },
+              {
+                "id": 19,
+                "sentence": "Visitors are requested not _______ (touch) the exhibits.",
+                "correctAnswer": "to touch",
+                "explanation": "be requested NOT to-infinitive."
+              },
+              {
+                "id": 20,
+                "sentence": "He gave me a sturdy tool _______ (open) the crate with.",
+                "correctAnswer": "to open",
+                "explanation": "Noun + Infinitive + Preposition: tool to open with."
+              }
+            ]
+          },
+          {
+            "id": "scrambled-infinitive-continuation",
+            "title": "Scrambled Sentences",
+            "type": "scrambled-sentences",
+            "instructions": "Reorder the scrambled words to form correct sentences containing advanced infinitive structures.",
+            "questions": [
+              {
+                "id": 1,
+                "words": [
+                  "promised",
+                  "he",
+                  "wait",
+                  "to",
+                  "for",
+                  "us",
+                  "the",
+                  "outside",
+                  "station"
+                ],
+                "correctSentence": "He promised to wait for us outside the station.",
+                "explanation": "Promise + to-infinitive structure."
+              },
+              {
+                "id": 2,
+                "words": [
+                  "showed",
+                  "she",
+                  "me",
+                  "how",
+                  "operate",
+                  "to",
+                  "machine",
+                  "the"
+                ],
+                "correctSentence": "She showed me how to operate the machine.",
+                "explanation": "Show + object + how + to-infinitive."
+              },
+              {
+                "id": 3,
+                "words": [
+                  "couldn't",
+                  "decide",
+                  "i",
+                  "whether",
+                  "leave",
+                  "to",
+                  "stay",
+                  "or"
+                ],
+                "correctSentence": "I couldn't decide whether to stay or leave.",
+                "explanation": "Whether + to-infinitive."
+              },
+              {
+                "id": 4,
+                "words": [
+                  "warned",
+                  "doctor",
+                  "the",
+                  "us",
+                  "not",
+                  "eat",
+                  "to",
+                  "raw",
+                  "fish"
+                ],
+                "correctSentence": "The doctor warned us not to eat raw fish.",
+                "explanation": "Warn + object + NOT + to-infinitive."
+              },
+              {
+                "id": 5,
+                "words": [
+                  "was",
+                  "he",
+                  "made",
+                  "clean",
+                  "to",
+                  "the",
+                  "laboratory"
+                ],
+                "correctSentence": "He was made to clean the laboratory.",
+                "explanation": "Passive causative: be made TO do."
+              },
+              {
+                "id": 6,
+                "words": [
+                  "does",
+                  "he",
+                  "nothing",
+                  "complain",
+                  "but",
+                  "all",
+                  "day"
+                ],
+                "correctSentence": "He does nothing but complain all day.",
+                "explanation": "do nothing BUT + bare infinitive."
+              },
+              {
+                "id": 7,
+                "words": [
+                  "have",
+                  "we",
+                  "letters",
+                  "many",
+                  "send",
+                  "to"
+                ],
+                "correctSentence": "We have many letters to send.",
+                "explanation": "Noun + Infinitive."
+              },
+              {
+                "id": 8,
+                "words": [
+                  "need",
+                  "a",
+                  "cushion",
+                  "we",
+                  "sit",
+                  "to",
+                  "on"
+                ],
+                "correctSentence": "We need a cushion to sit on.",
+                "explanation": "Noun + Infinitive + Preposition."
+              },
+              {
+                "id": 9,
+                "words": [
+                  "told",
+                  "the",
+                  "captain",
+                  "soldiers",
+                  "the",
+                  "assemble",
+                  "to"
+                ],
+                "correctSentence": "The captain told the soldiers to assemble.",
+                "explanation": "Tell + object + to-infinitive command."
+              },
+              {
+                "id": 10,
+                "words": [
+                  "did",
+                  "she",
+                  "everything",
+                  "apologize",
+                  "except",
+                  "for",
+                  "lateness",
+                  "her"
+                ],
+                "correctSentence": "She did everything except apologize for her lateness.",
+                "explanation": "do everything EXCEPT + bare infinitive."
+              },
+              {
+                "id": 11,
+                "words": [
+                  "remembered",
+                  "she",
+                  "turn",
+                  "to",
+                  "off",
+                  "lights",
+                  "the"
+                ],
+                "correctSentence": "She remembered to turn off the lights.",
+                "explanation": "Remember + to-infinitive."
+              },
+              {
+                "id": 12,
+                "words": [
+                  "completely",
+                  "to",
+                  "master",
+                  "takes",
+                  "subject",
+                  "this",
+                  "time"
+                ],
+                "correctSentence": "To completely master this subject takes time.",
+                "explanation": "Split infinitive structure."
+              },
+              {
+                "id": 13,
+                "words": [
+                  "obliges",
+                  "the",
+                  "law",
+                  "companies",
+                  "to",
+                  "pay",
+                  "fair",
+                  "wages"
+                ],
+                "correctSentence": "The law obliges companies to pay fair wages.",
+                "explanation": "Oblige + object + to-infinitive."
+              },
+              {
+                "id": 14,
+                "words": [
+                  "gave",
+                  "me",
+                  "she",
+                  "glass",
+                  "a",
+                  "drink",
+                  "to",
+                  "out",
+                  "of"
+                ],
+                "correctSentence": "She gave me a glass to drink out of.",
+                "explanation": "Noun + Infinitive + Preposition."
+              },
+              {
+                "id": 15,
+                "words": [
+                  "implored",
+                  "parents",
+                  "her",
+                  "she",
+                  "not",
+                  "send",
+                  "to",
+                  "her",
+                  "away"
+                ],
+                "correctSentence": "She implored her parents not to send her away.",
+                "explanation": "Implore + object + NOT + to-infinitive."
+              }
+            ]
+          },
+          {
+            "id": "error-correction-infinitive-continuation",
+            "title": "Error Correction",
+            "type": "error-correction",
+            "instructions": "Identify the grammatically incorrect part in each sentence and provide the correct form.",
+            "questions": [
+              {
+                "id": 1,
+                "sentence": "He showed me to change a fuse.",
+                "correction": "He showed me how to change a fuse.",
+                "explanation": "Show requires \"how\" before the infinitive when demonstrating a method (show somebody HOW to do something)."
+              },
+              {
+                "id": 2,
+                "sentence": "The doctor warned us to not drink contaminated water.",
+                "correction": "The doctor warned us not to drink contaminated water.",
+                "explanation": "Negation in object + infinitive structures places NOT before \"to\" (not to drink)."
+              },
+              {
+                "id": 3,
+                "sentence": "He was made clean the entire floor by the manager.",
+                "correction": "He was made to clean the entire floor by the manager.",
+                "explanation": "The passive of causative MAKE requires \"to\" (be made TO do)."
+              },
+              {
+                "id": 4,
+                "sentence": "He does nothing but to complain about his workload.",
+                "correction": "He does nothing but complain about his workload.",
+                "explanation": "do nothing BUT takes a bare infinitive (without to)."
+              },
+              {
+                "id": 5,
+                "sentence": "We found a comfortable table to write.",
+                "correction": "We found a comfortable table to write on.",
+                "explanation": "Prepositional infinitive requires the appropriate preposition at the end (a table to write ON)."
+              },
+              {
+                "id": 6,
+                "sentence": "They don't let him to drive the company truck.",
+                "correction": "They don't let him drive the company truck.",
+                "explanation": "Active LET is followed by a bare infinitive (let + object + V1 without to)."
+              },
+              {
+                "id": 7,
+                "sentence": "She did everything except to apologize for her behavior.",
+                "correction": "She did everything except apologize for her behavior.",
+                "explanation": "do everything EXCEPT is followed by a bare infinitive."
+              },
+              {
+                "id": 8,
+                "sentence": "I couldn't decide whether stay or leave the event.",
+                "correction": "I couldn't decide whether to stay or leave the event.",
+                "explanation": "Whether requires a to-infinitive (whether TO stay)."
+              },
+              {
+                "id": 9,
+                "sentence": "He pretended that to be sick to avoid the test.",
+                "correction": "He pretended that he was sick to avoid the test.",
+                "explanation": "That-clause requires a full finite clause (subject + verb), not an infinitive."
+              },
+              {
+                "id": 10,
+                "sentence": "She remembered to lock the door, but she forgot that she did it.",
+                "correction": "She remembered to lock the door.",
+                "explanation": "Standard usage: remembered to lock = remembered and did it."
+              },
+              {
+                "id": 11,
+                "sentence": "He gave me a sturdy tool to open with it.",
+                "correction": "He gave me a sturdy tool to open with.",
+                "explanation": "In noun + infinitive + preposition structures, the object pronoun \"it\" is omitted."
+              },
+              {
+                "id": 12,
+                "sentence": "The law compels employers paying minimum wage.",
+                "correction": "The law compels employers to pay minimum wage.",
+                "explanation": "Compel takes an object + to-infinitive."
+              },
+              {
+                "id": 13,
+                "sentence": "He showed the students to solve the equation.",
+                "correction": "He showed the students how to solve the equation.",
+                "explanation": "Show + object + HOW + infinitive."
+              },
+              {
+                "id": 14,
+                "sentence": "I didn't know where to put spare key.",
+                "correction": "I didn't know where to put the spare key.",
+                "explanation": "Missing definite article \"the\"."
+              },
+              {
+                "id": 15,
+                "sentence": "She implored her brother to not quit his job.",
+                "correction": "She implored her brother not to quit his job.",
+                "explanation": "Inkor shakli NOT to-infinitive shaklida keladi."
+              }
+            ]
+          },
+          {
+            "id": "sentence-transformation-infinitive-continuation",
+            "title": "Sentence Transformation",
+            "type": "sentence-transformation",
+            "instructions": "Rewrite each sentence using the prompt word so that it has the same meaning.",
+            "questions": [
+              {
+                "id": 1,
+                "original": "He promised: \"I will wait for you at the airport.\"",
+                "prompt": "promised",
+                "correctAnswer": "He promised to wait for me at the airport.",
+                "explanation": "Starred verb promise + to-infinitive."
+              },
+              {
+                "id": 2,
+                "original": "He pretended that he was angry with the team.",
+                "prompt": "pretended to",
+                "correctAnswer": "He pretended to be angry with the team.",
+                "explanation": "Transforming a that-clause into a to-infinitive."
+              },
+              {
+                "id": 3,
+                "original": "The instructor demonstrated the method of starting the engine.",
+                "prompt": "how",
+                "correctAnswer": "The instructor showed us how to start the engine.",
+                "explanation": "Show + object + how + to-infinitive."
+              },
+              {
+                "id": 4,
+                "original": "I didn't know if I should stay or leave.",
+                "prompt": "whether",
+                "correctAnswer": "I didn't know whether to stay or leave.",
+                "explanation": "Whether + to-infinitive transformation."
+              },
+              {
+                "id": 5,
+                "original": "The officer forced us to move our vehicle.",
+                "prompt": "made",
+                "correctAnswer": "The officer made us move our vehicle.",
+                "explanation": "Active causative MAKE + bare infinitive."
+              },
+              {
+                "id": 6,
+                "original": "The supervisor forced me to rewrite the whole report.",
+                "prompt": "was made",
+                "correctAnswer": "I was made to rewrite the whole report.",
+                "explanation": "Passive causative: be made TO rewrite."
+              },
+              {
+                "id": 7,
+                "original": "He only complains all day and does nothing else.",
+                "prompt": "but",
+                "correctAnswer": "He does nothing but complain all day.",
+                "explanation": "do nothing BUT + bare infinitive."
+              },
+              {
+                "id": 8,
+                "original": "The manager gave us permission to leave early.",
+                "prompt": "let",
+                "correctAnswer": "The manager let us leave early.",
+                "explanation": "LET + object + bare infinitive."
+              },
+              {
+                "id": 9,
+                "original": "We need a chair so that we can sit on it.",
+                "prompt": "sit on",
+                "correctAnswer": "We need a chair to sit on.",
+                "explanation": "Noun + Infinitive + Preposition."
+              },
+              {
+                "id": 10,
+                "original": "The physician advised us strongly: \"Do not eat raw seafood.\"",
+                "prompt": "warned",
+                "correctAnswer": "The physician warned us not to eat raw seafood.",
+                "explanation": "Warn + object + NOT + to-infinitive."
+              },
+              {
+                "id": 11,
+                "original": "She has many letters that she must post today.",
+                "prompt": "to post",
+                "correctAnswer": "She has many letters to post today.",
+                "explanation": "Noun + Infinitive."
+              },
+              {
+                "id": 12,
+                "original": "The guard forbade visitors from entering the park after dark.",
+                "prompt": "forbade",
+                "correctAnswer": "The guard forbade visitors to enter the park after dark.",
+                "explanation": "Forbid + object + to-infinitive."
+              },
+              {
+                "id": 13,
+                "original": "She apologized for everything except arriving late.",
+                "prompt": "except",
+                "correctAnswer": "She did everything except apologize for arriving late.",
+                "explanation": "do everything EXCEPT + bare infinitive."
+              },
+              {
+                "id": 14,
+                "original": "I remembered that I had to call my doctor.",
+                "prompt": "remembered to",
+                "correctAnswer": "I remembered to call my doctor.",
+                "explanation": "Remember + to-infinitive."
+              },
+              {
+                "id": 15,
+                "original": "Can you explain the way to open this safe lock?",
+                "prompt": "how",
+                "correctAnswer": "Can you explain how to open this safe lock?",
+                "explanation": "Explain + how + to-infinitive."
+              }
+            ]
+          },
+          {
+            "id": "dialogue-completion-infinitive-continuation",
+            "title": "Dialogue Completion",
+            "type": "dialogue-completion",
+            "instructions": "Choose the most natural and grammatically correct infinitive form to complete each conversation.",
+            "questions": [
+              {
+                "id": 1,
+                "dialogue": [
+                  {
+                    "speaker": "A",
+                    "text": "Do you know how to operate this machine?"
+                  },
+                  {
+                    "speaker": "B",
+                    "text": "No, but the technician showed me _______."
+                  }
+                ],
+                "options": [
+                  "how to start it",
+                  "to start it",
+                  "that starting it",
+                  "for start it"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Show + object + how + to-infinitive."
+              },
+              {
+                "id": 2,
+                "dialogue": [
+                  {
+                    "speaker": "A",
+                    "text": "Did your boss allow you to take a break?"
+                  },
+                  {
+                    "speaker": "B",
+                    "text": "No, he made me _______ until 8 PM!"
+                  }
+                ],
+                "options": [
+                  "work",
+                  "to work",
+                  "working",
+                  "worked"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Active MAKE takes a bare infinitive (work)."
+              },
+              {
+                "id": 3,
+                "dialogue": [
+                  {
+                    "speaker": "A",
+                    "text": "Why were you so late for the meeting?"
+                  },
+                  {
+                    "speaker": "B",
+                    "text": "I was made _______ for security checks at the gate."
+                  }
+                ],
+                "options": [
+                  "to wait",
+                  "wait",
+                  "waiting",
+                  "that wait"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Passive BE MADE takes a to-infinitive (to wait)."
+              },
+              {
+                "id": 4,
+                "dialogue": [
+                  {
+                    "speaker": "A",
+                    "text": "Have you decided where to spend your holiday?"
+                  },
+                  {
+                    "speaker": "B",
+                    "text": "I'm still wondering whether _______ abroad or stay local."
+                  }
+                ],
+                "options": [
+                  "to go",
+                  "going",
+                  "go",
+                  "that go"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Whether + to-infinitive."
+              },
+              {
+                "id": 5,
+                "dialogue": [
+                  {
+                    "speaker": "A",
+                    "text": "Why is Tom sitting so quietly in the corner?"
+                  },
+                  {
+                    "speaker": "B",
+                    "text": "He does nothing but _______ all day."
+                  }
+                ],
+                "options": [
+                  "sulky",
+                  "sulk",
+                  "to sulk",
+                  "sulking"
+                ],
+                "correctAnswer": 1,
+                "explanation": "do nothing BUT + bare infinitive (sulk)."
+              },
+              {
+                "id": 6,
+                "dialogue": [
+                  {
+                    "speaker": "A",
+                    "text": "What did the doctor advise you about your diet?"
+                  },
+                  {
+                    "speaker": "B",
+                    "text": "He warned me _______ sugary drinks."
+                  }
+                ],
+                "options": [
+                  "not to drink",
+                  "to not drink",
+                  "don't drink",
+                  "not drinking"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Warn + object + NOT + to-infinitive."
+              },
+              {
+                "id": 7,
+                "dialogue": [
+                  {
+                    "speaker": "A",
+                    "text": "Where shall we sit for lunch?"
+                  },
+                  {
+                    "speaker": "B",
+                    "text": "Let's find a clean bench _______."
+                  }
+                ],
+                "options": [
+                  "to sit on",
+                  "to sit",
+                  "sitting on",
+                  "to sit in"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Noun + Infinitive + Preposition: bench to sit ON."
+              },
+              {
+                "id": 8,
+                "dialogue": [
+                  {
+                    "speaker": "A",
+                    "text": "Did you remember to post my letter?"
+                  },
+                  {
+                    "speaker": "B",
+                    "text": "Oh, I forgot that I _______ it in my car!"
+                  }
+                ],
+                "options": [
+                  "left",
+                  "to leave",
+                  "leaving",
+                  "leave"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Forget + that + finite past clause."
+              },
+              {
+                "id": 9,
+                "dialogue": [
+                  {
+                    "speaker": "A",
+                    "text": "Why did you buy such a huge glass?"
+                  },
+                  {
+                    "speaker": "B",
+                    "text": "I needed a large container _______ iced tea out of."
+                  }
+                ],
+                "options": [
+                  "to drink",
+                  "drinking",
+                  "drink",
+                  "to drink with"
+                ],
+                "correctAnswer": 0,
+                "explanation": "container to drink iced tea out of."
+              },
+              {
+                "id": 10,
+                "dialogue": [
+                  {
+                    "speaker": "A",
+                    "text": "Will your parents let you join the trip?"
+                  },
+                  {
+                    "speaker": "B",
+                    "text": "Yes, they let me _______ after I finished my homework."
+                  }
+                ],
+                "options": [
+                  "go",
+                  "to go",
+                  "going",
+                  "went"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Active LET + object + bare infinitive."
+              },
+              {
+                "id": 11,
+                "dialogue": [
+                  {
+                    "speaker": "A",
+                    "text": "Can anyone help me move this heavy cabinet?"
+                  },
+                  {
+                    "speaker": "B",
+                    "text": "I can help you _______ it into the next room."
+                  }
+                ],
+                "options": [
+                  "move",
+                  "to move",
+                  "both move and to move",
+                  "moving"
+                ],
+                "correctAnswer": 2,
+                "explanation": "HELP can take either bare infinitive or to-infinitive."
+              },
+              {
+                "id": 12,
+                "dialogue": [
+                  {
+                    "speaker": "A",
+                    "text": "What did the manager say about the deadline?"
+                  },
+                  {
+                    "speaker": "B",
+                    "text": "She urged us _______ the report before 5 PM."
+                  }
+                ],
+                "options": [
+                  "to submit",
+                  "submitting",
+                  "submit",
+                  "that submit"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Urge + object + to-infinitive."
+              },
+              {
+                "id": 13,
+                "dialogue": [
+                  {
+                    "speaker": "A",
+                    "text": "Did he apologize for breaking the vase?"
+                  },
+                  {
+                    "speaker": "B",
+                    "text": "No, he did everything except _______!"
+                  }
+                ],
+                "options": [
+                  "apologize",
+                  "to apologize",
+                  "apologizing",
+                  "apologized"
+                ],
+                "correctAnswer": 0,
+                "explanation": "do everything EXCEPT + bare infinitive."
+              },
+              {
+                "id": 14,
+                "dialogue": [
+                  {
+                    "speaker": "A",
+                    "text": "Did she agree to join our research team?"
+                  },
+                  {
+                    "speaker": "B",
+                    "text": "Yes, she agreed that she _______ help us."
+                  }
+                ],
+                "options": [
+                  "would",
+                  "will to",
+                  "to",
+                  "for"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Agree + that + subject + modal verb (would)."
+              },
+              {
+                "id": 15,
+                "dialogue": [
+                  {
+                    "speaker": "A",
+                    "text": "Do you have anything to open this jar with?"
+                  },
+                  {
+                    "speaker": "B",
+                    "text": "Here is a special opener _______."
+                  }
+                ],
+                "options": [
+                  "to use",
+                  "using",
+                  "used",
+                  "use"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Noun + Infinitive."
+              }
+            ]
+          }
+        ]
+      }
     ]
   }
 };

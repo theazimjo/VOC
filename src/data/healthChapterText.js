@@ -2220,90 +2220,710 @@ export const healthChapterText = {
     ]
 },
   "H.Ch.04 · Understanding Mental Disorders": {
-    title: "Understanding Mental Disorders",
-    pages: [
-      [
-        { type: 'heading', text: 'Chapter 4 · Understanding Mental Disorders' },
-        { type: 'activity', text: "As You Read, Think About — what mental disorders are and what may cause them. How mental disorders are recognized and classified. How to recognize signs of suicide and how to help prevent it. How mental disorders can be prevented and treated." },
-        { type: 'p', text: "Expressing your feelings through some art form, or by talking with another person, can often relieve feelings of depression. Sometimes, though, emotions get out of control, and special help is needed. In this chapter you'll learn about various mental disorders, how they develop, and what can be done to control them, along with the services available for help in times of emotional crisis. Everyone is depressed now and then — having an outlet helps when you feel \"down.\"" }
-      ],
-      [
-        { type: 'heading', text: '1. What Are Mental Disorders?' },
-        { type: 'p', text: "A mental disorder is an illness that affects the mind and prevents a person from being productive, adjusting to life situations, and getting along with others. Most are characterized by abnormal thoughts, feelings, or behaviors — highly unusual and inappropriate for the situation — that make people uncomfortable with themselves or at odds with others, and that occur frequently over a long period of time. Washing your hands before eating is normal; washing them a hundred times a day is not." },
-        { type: 'p', text: "Labeling someone as mentally ill is difficult, since it involves a judgment call, and each person's notion of what's normal is shaped by their culture as well as their family and community — a behavior considered abnormal here might be considered normal elsewhere. Mental health specialists periodically meet to define and classify mental disorders by their symptoms, the signs or evidence of an illness; today, over 230 types are recognized, though experts still disagree about many of their causes." }
-      ],
-      [
-        { type: 'activity', text: "Check Your Wellness — how much do you know about mental disorders? Decide whether each of these statements is true or false. (1) Some physical diseases, such as brain tumors, may lead to mental disorders. (2) If feelings of depression are long-lasting and interfere with everyday activities, a person should seek professional help. (3) Some mental disorders, such as clinical depression, tend to run in families. (4) Eating disorders, such as anorexia nervosa and bulimia, are really mental disorders. (5) Many suicide victims talk about committing suicide before they actually do it. (6) Some warning signs of mental illness are: a sudden personality change, inability to concentrate, risky behaviors, and persistent feelings of hopelessness. (7) Help for mental problems is available from many sources, including school counselors, hotlines, crisis centers, clergy, local hospitals, and mental health clinics." }
-      ],
-      [
-        { type: 'p', text: "When the cause of a mental disorder is physical — brain damage from alcohol or drug misuse, or the confusion and loss of brain function caused by a tumor (a condition called dementia) — it's classified as an organic disorder. Disorders not caused by alcohol, drugs, or physical disease are called functional disorders, and can stem from personal experiences like a painful childhood or a run of stressful events, known as environmental factors." },
-        { type: 'p', text: "The exact cause of many mental disorders isn't fully understood, and often several factors combine: some disorders may be inherited, like other physical traits, sometimes only becoming apparent when an inherited tendency is triggered by an environmental factor such as repeated abuse. Others are traced to unresolved conflicts from childhood or early life, the focus of psychoanalysis; still others are explained by mental health specialists who emphasize current environmental influences — the significant people currently in a person's life — over childhood experience." }
-      ],
-      [
-        { type: 'heading', text: '2. Kinds of Mental Disorders' },
-        { type: 'p', text: "Because every mental disorder shows up differently from person to person, only a trained mental health professional can actually diagnose one — but case histories, brief descriptions of someone with a disorder, help give a general picture. Anxiety is fear without an identifiable source, or fear caused by a danger that no longer really exists. Everyone experiences some anxiety — before a final exam, a big date — and it's normal and short-lived; when it persists and interferes with everyday functioning, it may be a sign of an anxiety disorder." },
-        { type: 'p', text: "When anxiety attaches to a specific situation or object, it's called a phobia — agoraphobia, the fear of going out alone, and claustrophobia, the fear of small closed places, are both common examples. When a person feels anxious without being able to name a cause, it's a general anxiety disorder; when extreme anxiety attacks come and go with no apparent reason, it's a panic disorder. An obsession is an idea or thought that takes over the mind and can't be shaken; when it drives a compulsion, an unreasonable need to behave a certain way — like washing your hands constantly — the result is an obsessive-compulsive disorder." }
-      ],
-      [
-        { type: 'heading', text: 'Affective and Eating Disorders' },
-        { type: 'p', text: "An affective disorder occurs when a person's moods or emotions become extreme and interfere with daily life. Everyone feels depressed now and then — after a breakup, a move, a failed tryout — and usually the feeling lifts within days or weeks. Clinical depression is different: it's when a person is overwhelmed by sad feelings for months and loses the ability to carry out everyday activities. It can be triggered by a stressor, can be a symptom of another condition like alcoholism, and tends to run in families. Warning signs include a significant change in appetite or sleep, loss of interest in usual activities, constant tiredness, feelings of worthlessness, trouble concentrating, and recurrent thoughts of death — anyone showing several of these for two weeks or more should seek help. Group therapy, in which people with similar problems talk together under a therapist's guidance, is one effective form of support." },
-        { type: 'p', text: "A manic-depressive disorder involves shifting between emotional extremes for no apparent reason: during a manic episode a person may become overly excited and restless, talk so rapidly they're hard to follow, and show poor judgment — overspending, driving recklessly — before swinging into a period of deep depression. It's usually treated with a combination of psychotherapy, conversation with a trained therapist, and drug therapy, medications that relieve some or all of a disorder's symptoms." },
-      ],
-      [
-        { type: 'sidebar', text: "Manic Depression: An Inherited Defect? Recent studies suggest that some forms of manic depression may be inherited through the body's chromosomes. Scientists studying three Amish families in Pennsylvania linked manic depression to a defect on the tip of chromosome 11 — though a similar study of non-Amish families in the United States found no evidence of that same defect, which supports the theory that manic depression may result from more than one kind of genetic defect. A separate study of five families in Israel suggested a link to a defect on the X chromosome, one that scientists think may account for as much as a third of all manic-depression cases. Once these chromosome defects are fully identified, researchers hope to study people who've inherited one or more of them, working toward a fuller understanding of what causes the disorder." }
-      ],
-      [
-        { type: 'p', text: "Eating disorders are especially common among teenage girls. Anorexia nervosa is a refusal to eat normally or to retain food in the body, with extreme weight loss as its main symptom — severe enough, untreated, to be fatal — but with prompt psychotherapy for the patient and often the whole family, it can be treated successfully. Bulimia involves eating binges followed by purging, often through self-induced vomiting, and beyond the mental toll it can cause serious physical damage to the kidneys, teeth, gums, stomach, and heart." },
-        { type: 'p', text: "A somatoform disorder is one in which a person complains of physical symptoms, like pain, with no underlying physical cause — hypochondria, constant conviction that one is seriously ill despite a doctor's reassurance, is a common example, and it's often rooted in underlying anxiety or depression. It's easy to confuse with the genuine stress-related physical symptoms described in Chapter 3, but the distinction is real: stress-related conditions involve actual physical effects on the body, while somatoform disorders involve symptoms with no physical cause a doctor can find." }
-      ],
-      [
-        { type: 'heading', text: 'Personality Disorders' },
-        { type: 'p', text: "A personality disorder is characterized by behavior that is inflexible and interferes with a person's pursuit of a happy, healthy life — and because personality traits are usually well established by young adulthood, these disorders often call for long-term treatment. A compulsive personality disorder centers on a rigid need to do everything in a fixed, unvarying routine. A passive-aggressive personality disorder shows up in someone who depends on others for direction yet resents being told what to do, venting that anger indirectly — through chronic lateness, forgetfulness, or sloppiness rather than open conflict; a related pattern in children and teens, marked by constant stubborn conflict with others, is called an oppositional disorder. A schizoid personality disorder describes someone totally withdrawn from others, showing no warmth, who tends to withdraw even further at any criticism." }
-      ],
-      [
-        { type: 'sidebar', text: "Some Common Personality Disorders — Antisocial: disregard for the rights of others, an inability to hold a job or stay in school, impulsive with no regard for the consequences; early signs often include lying, stealing, and fighting. Dependent: seeks out others to take responsibility for one's actions, lacks self-confidence, cannot function independently, usually gives in to the wishes of others. Histrionic: overly dramatic, needs to always be the center of attention, seeks excitement, overreacts. Narcissistic: an exaggerated sense of self-importance, fantasies of unlimited success, a constant need for attention and admiration. Paranoid: suspicious for no reason, envies and mistrusts others, overly sensitive, limited emotional reactions, rarely seeks help." }
-      ],
-      [
-        { type: 'p', text: "A dissociative disorder occurs when a person becomes disconnected, or dissociated, from their former identity — amnesia, sudden memory loss often triggered by a severe trauma, is one form; multiple personality disorder, in which a person shifts between two or more separate personalities they're not aware of or able to control, is another, though genuinely rare in real life despite its popularity in movies and books." }
-      ],
-      [
-        { type: 'p', text: "Schizophrenia is among the most severe mental disorders, marked by unpredictable disturbances in thinking, mood, awareness, and behavior — the name means \"split mind,\" reflecting how a person's thinking becomes split off from reality. Schizophrenics are rarely harmful to others; as the disorder progresses they tend to become more withdrawn and seem to lack emotion. Paranoid schizophrenic disorders add the false belief that others are trying to harm or control the person, sometimes in elaborate ways. Drug therapy, alone or combined with other treatments, has helped many people with schizophrenia manage the disorder." }
-      ],
-      [
-        { type: 'heading', text: '3. Suicide' },
-        { type: 'p', text: "Suicide affects all kinds of people, and in this country it is one of the leading causes of death among teenagers — over the last 25 years, the number of suicides has roughly tripled among people between the ages of 15 and 24. Suicides can often be prevented if people know how to recognize the warning signs and help potential victims." },
-        { type: 'p', text: "Some common myths get in the way: people who talk about suicide actually do attempt it more often, not less, so any talk of it should be taken seriously rather than dismissed. Daring a suicidal person to go through with it can strengthen their resolve rather than discourage them. A person who has attempted suicide before, or whose family has a history of it, is at higher risk, not lower. And a depressed person who suddenly seems calm and happy hasn't necessarily gotten better — it can mean they've made a final decision and feel relieved by it." }
-      ],
-      [
-        { type: 'p', text: "Beyond a previous attempt, other warning signs include a radical change in personality — an outgoing person suddenly withdrawing, or a quiet person becoming aggressive or overly active; giving away favorite belongings and losing interest in things once enjoyed; and, especially among depressed teenagers, a sudden increase in risky, accident-prone behavior. A major loss or trauma — a move, a breakup, a serious illness, a death in the family, a divorce — can also bring someone to the brink. When one suicide or attempt in a school or social group triggers others in a short span of time, it's called cluster suicide, and prevention calls for counseling everyone in that community, not just those closest to the person involved." },
-        { type: 'p', text: "If you believe a friend may be suicidal: trust your feelings and take any threat seriously; tell them clearly how much you care; listen and talk calmly with them; and get them professional help, staying with them until it arrives. Don't dare them to go through with it, judge them, argue them out of their feelings, or agree to keep their plan secret — even if a friend swears you to secrecy, telling a responsible adult is the way to actually help them, not betray them. Suicide prevention hotlines and crisis centers, staffed by trained counselors, exist in most communities for exactly this kind of emergency." }
-      ],
-      [
-        { type: 'heading', text: '4. Treating Mental Disorders' },
-        { type: 'p', text: "Working constantly to improve your own mental health is the surest way to help prevent mental disorders: express your feelings to others, set realistic goals, recognize both your strengths and weaknesses, maintain friendships, take care of your body with rest and good food, handle problems as they arise instead of avoiding them, and seek help from a physician or mental health professional if you feel you need it." },
-        { type: 'p', text: "About one in five adults in this country will experience a mental disorder at some point in life, and recognizing the need for help is the first step toward recovery. Warning signs worth taking seriously include a sudden radical change in personality, self-destructive behavior, violent mood swings, persistent feelings of worthlessness, sleep disturbances, an inability to concentrate, trouble getting along with others, and obsessive thoughts or compulsive actions. In most communities, a parent, teacher, school counselor, physician, or religious leader can point you toward local mental health resources, and many communities have hospital-based mental health centers, clinics, or drop-in centers specifically for teenagers." }
-      ],
-      [
-        { type: 'p', text: "Several kinds of professionals treat mental disorders. Psychiatrists are medical doctors with advanced training in mental illness — because they're M.D.s, they can prescribe medication, and they look for both physical and nonphysical causes of a patient's symptoms. Clinical psychologists usually hold a Ph.D. in psychology plus practical training in a psychiatric hospital, and specialize in recognizing and treating abnormal behavior through psychotherapy, though as non-physicians they can't prescribe medication. Psychiatric social workers, after four years of college and two years in a school of social work, specialize in helping the mentally ill and their families adjust. Other specialists include psychiatric nurses, occupational therapists who teach practical skills, pastoral counselors trained within a religious community, and counselors who focus on specific issues like substance abuse or school adjustment." }
-      ],
-      [
-        { type: 'sidebar', text: "Issues in Health — Should Criminals Be Allowed to Plead Insanity? In 1981, John Hinckley Jr. shot President Ronald Reagan and two other men, and was found not guilty by reason of insanity — a legal phrase, not a psychological one, meaning a jury decided the person was mentally ill at the time of the crime and could not understand that the actions were wrong, so they're sent to a mental institution instead of jail. Some people argue the insanity defense protects citizens whose mental state genuinely prevents them from telling right from wrong — that they're mentally ill, not criminals, and belong somewhere they can get treatment. Others argue it should be eliminated because it's been misused: the key witnesses in these trials are psychiatrists testifying to opinions rather than facts, and there have been cases of people acting mentally ill during a trial only to be declared sane again soon after being institutionalized, sometimes going on to repeat their crimes, while in other cases people have stayed in mental institutions far longer than they would have spent in jail. Do you think the insanity defense should be eliminated? Why or why not?" }
-      ],
-      [
-        { type: 'p', text: "Treatment usually involves drug therapy, psychotherapy, or a combination of the two, sometimes alongside hospitalization. Drug therapy can relieve the symptoms of many mental disorders — anxiety disorders, affective disorders, schizophrenia — even when it doesn't cure the underlying condition, though it can carry side effects or the risk of dependency. Psychotherapy takes several forms: analytic therapy, built on the idea that disorders stem from unresolved inner conflicts (Freudian psychoanalysis is the classic example); behavioral therapy, which works by rewarding healthful behaviors and discouraging unhealthful ones; cognitive therapy, which works to change how a patient thinks about their situation, for instance by keeping a daily record of things that make them feel hopeful or worthwhile; and client-centered therapy, in which the patient sets the pace and goals while the therapist provides a supportive space to work through problems. Role-playing lets a patient practice a difficult situation, like saying no to a friend, in a safe setting, and play therapy serves the same purpose for younger children, using toys to act out problems." },
-        { type: 'p', text: "People who need constant attention, or who are at risk of harming themselves, are usually hospitalized, where they may receive drug therapy, psychotherapy, or both; in some cases of severe depression that resist other treatment, doctors may use electroconvulsive therapy (ECT), which has been found to relieve symptoms even though it isn't fully understood why. During and after hospitalization, occupational therapists and psychiatric social workers help patients build the practical skills and support they need to return to everyday life." }
-      ],
-      [
-        { type: 'summary', text: "Mental disorders are illnesses that affect the mind. They prevent a person from being productive, adjusting to life situations, and getting along with others." },
-        { type: 'summary', text: "Mental disorders may be caused by organic (physical) factors, functional (environmental) factors, or a combination of both." },
-        { type: 'summary', text: "In anxiety disorders, a person's fears interfere with normal, everyday functioning. Phobias are fears related to specific objects or situations." },
-        { type: 'summary', text: "Affective disorders, such as clinical depression, result when moods or negative emotions persist over time and interfere with normal activities." },
-        { type: 'summary', text: "Eating disorders, such as anorexia nervosa and bulimia, are mental disorders found mainly in teenage girls, for which prompt professional help is crucial." },
-        { type: 'summary', text: "Suicide can frequently be prevented if people recognize the warning signs and know how to help potential victims." },
-        { type: 'summary', text: "Mental disorders can be treated with drug therapy, psychotherapy, role-playing, group therapy, play therapy, and hospitalization." }
-      ]
+    "title": "Understanding Mental Disorders",
+    "pages": [
+        [
+            {
+                "type": "heading",
+                "text": "Chapter 4 \u00b7 Understanding Mental Disorders"
+            },
+            {
+                "type": "activity",
+                "text": "As You Read, Think About \u2014 how mental disorders are classified and what causes them. The characteristics of anxiety, affective, eating, somatoform, personality, and dissociative disorders, as well as schizophrenia. The warning signs of suicide and how to help a suicidal person. Where and how to get help for a mental disorder."
+            },
+            {
+                "type": "p",
+                "text": "Linda is a high-school sophomore who spends up to three hours every morning getting ready for school. She washes her face exactly five times, checks the lock on her front door ten times, and arranges her books in a precise alphabetical order. If any part of her routine is interrupted, Linda feels overwhelming panic and has to start the entire process over again."
+            },
+            {
+                "type": "p",
+                "text": "Linda's behavior is an example of an obsessive-compulsive disorder. Behaviors like Linda's interfere with daily life, cause severe emotional distress, and prevent a person from carrying out normal activities."
+            },
+            {
+                "type": "p",
+                "text": "In this chapter, you will learn about mental disorders \u2014 what they are, what causes them, how they are classified, and how they can be treated. You will also learn about suicide prevention and how to find help for yourself or a friend."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "1. What Are Mental Disorders?"
+            },
+            {
+                "type": "p",
+                "text": "A mental disorder is an illness that affects the mind and prevents a person from being productive, adjusting to life situations, or getting along with others. Mental disorders are recognized by abnormal thoughts, feelings, or behaviors that are frequent, long-lasting, or severe."
+            },
+            {
+                "type": "p",
+                "text": "Causes of Mental Disorders \u2014 Mental disorders can be caused by physical factors, environmental factors, or a combination of both."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Organic Disorders \u2014 A mental disorder caused by a physical illness or injury that affects the brain is called an organic disorder. Causes include brain tumors, strokes, infections, severe head injuries, or prolonged exposure to toxic substances like alcohol or lead."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Functional Disorders \u2014 A mental disorder caused by environmental or psychological factors rather than physical damage to the brain is called a functional disorder. Causes include severe emotional shock, prolonged stress, traumatic childhood experiences, or dysfunctional family relationships."
+            },
+            {
+                "type": "activity",
+                "text": "Check Your Wellness \u2014 Are you aware of mental health warning signs? See if you can answer yes to the questions below. 1. Do you recognize when feelings of sadness or anxiety persist for more than two weeks? 2. Are you aware that sudden, extreme changes in mood or personality can signal a problem? 3. Do you know where to seek help if you or a friend experience emotional distress? 4. Can you distinguish between normal temporary stress and a persistent mental health problem? 5. Do you offer support rather than judgment when a friend is struggling emotionally?"
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Anxiety Disorders"
+            },
+            {
+                "type": "p",
+                "text": "Anxiety is a feeling of fear, dread, or apprehension. When anxiety persists for a long time or interferes with daily living, it is classified as an anxiety disorder."
+            },
+            {
+                "type": "p",
+                "text": "Types of Anxiety Disorders:"
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Phobias \u2014 A phobia is anxiety that is related to a specific situation or object. Examples include claustrophobia (fear of closed spaces), agoraphobia (fear of open or public places), and acrophobia (fear of heights)."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 General Anxiety Disorder \u2014 Persistent, unrealistic worry about everyday life events without any obvious cause."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Panic Disorder \u2014 Sudden, unexplained attacks of intense fear accompanied by physical symptoms like rapid heart rate and shortness of breath."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Obsessive-Compulsive Disorder (OCD) \u2014 An obsession is an unwanted thought or image that takes control of the mind. A compulsion is an unreasonable need to behave in a certain way to prevent a feared outcome. People with OCD repeat rituals constantly."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Affective Disorders"
+            },
+            {
+                "type": "p",
+                "text": "An affective disorder (or mood disorder) is a mental disorder in which a person experiences extreme emotions that interfere with daily life."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Clinical Depression \u2014 A mental disorder in which a person feels overwhelmed by sadness, hopelessness, and helplessness for weeks or months. Clinical depression can impair physical health, sleep, appetite, and concentration."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Manic-Depressive Disorder (Bipolar Disorder) \u2014 A disorder marked by extreme mood swings between high-energy manic phases (hyperactivity, reckless behavior) and deep depressive phases."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Eating Disorders"
+            },
+            {
+                "type": "p",
+                "text": "An eating disorder is a mental disorder characterized by severe disturbances in eating behaviors. Eating disorders are most common among teenage girls and young women."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Anorexia Nervosa \u2014 A disorder in which a person refuses to eat enough food to maintain a normal body weight due to an intense fear of gaining weight and a distorted body image. Anorexia can lead to severe malnutrition, heart failure, and death."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Bulimia \u2014 A disorder in which a person engages in uncontrollable eating binges followed by purging (self-induced vomiting, laxative use, or excessive exercise). Bulimia damages the digestive system, teeth, and heart."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Somatoform Disorders"
+            },
+            {
+                "type": "p",
+                "text": "A somatoform disorder is a mental disorder in which a person complains of physical symptoms (such as pain, paralysis, or blindness) when there is no underlying physical cause."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Hypochondria \u2014 A somatoform disorder in which a person is constantly preoccupied with fear of having a serious medical illness despite medical reassurance."
+            }
+        ],
+        [
+            {
+                "type": "review",
+                "title": "Section 1 Review",
+                "sections": [
+                    {
+                        "heading": "Section Review",
+                        "items": [
+                            {
+                                "prompt": "1. What is a mental disorder? Distinguish between organic and functional disorders.",
+                                "answer": "Illness affecting the mind preventing normal productivity. Organic disorders have physical brain causes (tumors, stroke); functional disorders have environmental/psychological causes (trauma, shock)."
+                            },
+                            {
+                                "prompt": "2. Describe three types of anxiety disorders.",
+                                "answer": "Phobias (fear of specific objects), General Anxiety Disorder (unrealistic daily worry), and OCD (obsessive thoughts and compulsive rituals)."
+                            },
+                            {
+                                "prompt": "3. Compare anorexia nervosa and bulimia.",
+                                "answer": "Anorexia is extreme self-starvation due to fear of weight gain; bulimia involves binging on food followed by purging."
+                            },
+                            {
+                                "prompt": "4. What is a somatoform disorder?",
+                                "answer": "A disorder where physical symptoms are experienced without any physical cause (e.g. hypochondria)."
+                            }
+                        ]
+                    },
+                    {
+                        "heading": "What Do You Think?",
+                        "items": [
+                            {
+                                "prompt": "5. Why do you think eating disorders are more common among teenagers today? How can society help prevent eating disorders?",
+                                "answer": "Driven by media pressure and distorted body images; prevented by promoting self-esteem and healthy body diversity."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "2. Personality Disorders, Dissociative Disorders, and Schizophrenia"
+            },
+            {
+                "type": "p",
+                "text": "Personality Disorders \u2014 A personality disorder is a pattern of inner experience and behavior that differs markedly from expectations, causing distress or impaired functioning in relationships."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Passive-Aggressive Personality Disorder \u2014 Unconsciously expressing anger through indirect actions like chronic lateness, slowness, or forgetfulness."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Compulsive Personality Disorder \u2014 Rigid need for orderliness, control, and perfectionism."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Schizoid Personality Disorder \u2014 Withdrawal from social relationships and lack of emotional expression."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Dissociative Disorders"
+            },
+            {
+                "type": "p",
+                "text": "A dissociative disorder is a mental disorder in which a person becomes disconnected from reality or loses track of their identity."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Amnesia \u2014 Sudden loss of memory caused by emotional trauma."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Multiple Personality Disorder (Dissociative Identity Disorder) \u2014 Rare condition where two or more distinct personalities control a person's behavior."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Schizophrenia"
+            },
+            {
+                "type": "p",
+                "text": "Schizophrenia (\"split mind\") is one of the most severe mental disorders, characterized by unpredictable disturbances in thinking, mood, awareness, and behavior. Individuals may experience hallucinations (hearing voices), delusions (false beliefs), and social withdrawal."
+            }
+        ],
+        [
+            {
+                "type": "review",
+                "title": "Section 2 Review",
+                "sections": [
+                    {
+                        "heading": "Section Review",
+                        "items": [
+                            {
+                                "prompt": "1. Describe passive-aggressive personality disorder.",
+                                "answer": "Unconsciously expressing anger through indirect behaviors like chronic lateness, forgetfulness, and slowness."
+                            },
+                            {
+                                "prompt": "2. What is a dissociative disorder? Give an example.",
+                                "answer": "A disorder where a person loses touch with identity or reality (e.g. amnesia after severe emotional trauma)."
+                            },
+                            {
+                                "prompt": "3. What is schizophrenia? List three symptoms.",
+                                "answer": "A severe disorder characterized by split from reality. Symptoms: hallucinations, delusions, unpredictable mood/behavior."
+                            }
+                        ]
+                    },
+                    {
+                        "heading": "What Do You Think?",
+                        "items": [
+                            {
+                                "prompt": "4. How might a person's family be affected when a family member develops schizophrenia?",
+                                "answer": "Family members experience severe emotional stress, financial burden, and require counseling to learn how to support their loved one."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "3. Suicide"
+            },
+            {
+                "type": "p",
+                "text": "Suicide is the intentional taking of one's own life. It is the second leading cause of death among teenagers today. Most suicides can be prevented if warning signs are recognized and immediate help is provided."
+            },
+            {
+                "type": "p",
+                "text": "Warning Signs of Suicide:"
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Radical changes in personality, eating, or sleeping habits."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Withdrawal from family, friends, and usual activities."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Expressing feelings of hopelessness or worthlessness."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Giving away prized possessions."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Direct or indirect statements about wanting to die (\"I wish I were dead\", \"You won't have to worry about me much longer\")."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Myths and Facts About Suicide"
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Myth: People who talk about suicide rarely commit it.\nFact: Most people who attempt suicide give verbal warnings first."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Myth: Talking about suicide to a depressed person will give them the idea.\nFact: Talking openly about suicide lowers anxiety and shows caring."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Myth: Suicidal people fully want to die.\nFact: Suicidal people are ambivalent; they want an end to pain, not life."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Myth: Once a person recovers from a suicidal crisis, the danger is over.\nFact: Most suicides occur within three months of initial improvement."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "How to Help a Suicidal Person"
+            },
+            {
+                "type": "p",
+                "text": "1. Trust your instincts \u2014 Take any threat or warning sign seriously."
+            },
+            {
+                "type": "p",
+                "text": "2. Talk openly and directly \u2014 Ask \"Are you thinking about suicide?\""
+            },
+            {
+                "type": "p",
+                "text": "3. Listen without judgment \u2014 Show compassion and stay calm."
+            },
+            {
+                "type": "p",
+                "text": "4. Do not keep secrets \u2014 Inform a trusted adult immediately."
+            },
+            {
+                "type": "p",
+                "text": "5. Seek immediate professional help \u2014 Call a crisis line, counselor, or emergency service."
+            }
+        ],
+        [
+            {
+                "type": "review",
+                "title": "Section 3 Review",
+                "sections": [
+                    {
+                        "heading": "Section Review",
+                        "items": [
+                            {
+                                "prompt": "1. What is suicide? Name three warning signs.",
+                                "answer": "Intentional taking of one's life. Warning signs: giving away possessions, withdrawal, talking about dying."
+                            },
+                            {
+                                "prompt": "2. List two myths and two facts about suicide.",
+                                "answer": "Myth: talkers don't do it (Fact: warning signs occur). Myth: asking gives ideas (Fact: open talk reduces anxiety)."
+                            },
+                            {
+                                "prompt": "3. Describe three steps you should take to help someone who is suicidal.",
+                                "answer": "Talk directly/listen, do not keep secrets, and get adult/professional help immediately."
+                            }
+                        ]
+                    },
+                    {
+                        "heading": "What Do You Think?",
+                        "items": [
+                            {
+                                "prompt": "4. Why do you think some teenagers feel reluctant to seek help when feeling suicidal? How can schools overcome this barrier?",
+                                "answer": "Fear of stigma or embarrassment; overcome by confidential helplines and peer support programs."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "4. Treating Mental Disorders"
+            },
+            {
+                "type": "p",
+                "text": "Mental disorders are medical conditions that can be treated. Early detection and treatment significantly improve recovery."
+            },
+            {
+                "type": "p",
+                "text": "Mental Health Professionals:"
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Psychiatrists \u2014 Medical doctors (MD) specializing in diagnosing and treating mental disorders; licensed to prescribe medications."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Clinical Psychologists \u2014 Professionals with doctoral degrees (PhD/PsyD) trained in psychological testing, therapy, and research."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Psychiatric Social Workers \u2014 Social workers with master's degrees (MSW) trained to help patients and families adjust to mental illness."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Mental Health Counselors \u2014 Counselors specializing in specific issues like substance abuse, family, or school guidance."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Treatment Methods"
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Psychotherapy \u2014 Conversations between a trained therapist and a patient to identify and resolve emotional problems."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Drug Therapy \u2014 Medications (antidepressants, anti-anxiety drugs, antipsychotics, lithium) used to treat chemical imbalances in the brain."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Group Therapy \u2014 People with similar disorders meet with a therapist to share experiences and mutual support."
+            },
+            {
+                "type": "p",
+                "text": "\u2022 Hospitalization \u2014 Inpatient care for severe cases requiring round-the-clock supervision, medical treatment, and skills training."
+            }
+        ],
+        [
+            {
+                "type": "review",
+                "title": "Section 4 Review",
+                "sections": [
+                    {
+                        "heading": "Section Review",
+                        "items": [
+                            {
+                                "prompt": "1. Name four types of mental health professionals and describe their training.",
+                                "answer": "Psychiatrists (MD, prescribe drugs), Clinical Psychologists (PhD/PsyD), Psychiatric Social Workers (MSW), Mental Health Counselors."
+                            },
+                            {
+                                "prompt": "2. Describe three treatments for mental disorders.",
+                                "answer": "Psychotherapy (talk therapy), Drug therapy (medications), and Group therapy (peer support)."
+                            },
+                            {
+                                "prompt": "3. When is hospitalization necessary for a mental disorder?",
+                                "answer": "When a person poses a danger to self or others or requires round-the-clock medical supervision."
+                            }
+                        ]
+                    },
+                    {
+                        "heading": "What Do You Think?",
+                        "items": [
+                            {
+                                "prompt": "4. Suppose a friend has been acting strangely for six months and needs help. What steps would you take to assist your friend?",
+                                "answer": "Talk to them privately with empathy, share your concern, and offer to help them contact a school counselor or professional."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Health Skills \u2014 Finding Mental Health Resources"
+            },
+            {
+                "type": "activity",
+                "text": "Identifying and accessing community mental health resources is an important skill. Resources include school guidance offices, hospital clinics, community mental health centers, crisis hotlines, and support groups."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Chapter 4 Review"
+            },
+            {
+                "type": "summary",
+                "text": "Mental disorders are illnesses that affect the mind and prevent normal productivity and relationships."
+            },
+            {
+                "type": "summary",
+                "text": "Mental disorders may be organic (physical cause), functional (environmental cause), or both."
+            },
+            {
+                "type": "summary",
+                "text": "In anxiety disorders, fears interfere with daily functioning. Phobias relate to specific objects/situations."
+            },
+            {
+                "type": "summary",
+                "text": "Affective disorders (clinical depression, manic-depressive disorder) involve persistent extreme mood states."
+            },
+            {
+                "type": "summary",
+                "text": "Eating disorders (anorexia, bulimia) involve severe eating disturbances mainly in teenage girls."
+            },
+            {
+                "type": "summary",
+                "text": "Somatoform disorders involve physical symptoms with no organic cause (hypochondria)."
+            },
+            {
+                "type": "summary",
+                "text": "Personality disorders involve rigid personality traits preventing normal relationships."
+            },
+            {
+                "type": "summary",
+                "text": "In dissociative disorders and schizophrenia, a person loses touch with reality or identity."
+            },
+            {
+                "type": "summary",
+                "text": "Suicide can frequently be prevented by recognizing warning signs and acting quickly."
+            },
+            {
+                "type": "summary",
+                "text": "Mental health professionals treat disorders using psychotherapy, drug therapy, group therapy, and hospitalization."
+            },
+            {
+                "type": "review",
+                "title": "Chapter 4 Exercises (Part 1)",
+                "sections": [
+                    {
+                        "heading": "Vocabulary Review",
+                        "instructions": "Listed below are key terms from this chapter. Match each term to the phrase that best describes it.",
+                        "items": [
+                            {
+                                "prompt": "1. mental disorder marked by mood swings",
+                                "answer": "manic-depressive disorder"
+                            },
+                            {
+                                "prompt": "2. a mental disorder with a physical cause",
+                                "answer": "organic disorder"
+                            },
+                            {
+                                "prompt": "3. anxiety about a specific situation or object",
+                                "answer": "phobia"
+                            },
+                            {
+                                "prompt": "4. doctors who specialize in the diagnosis and treatment of mental disorders",
+                                "answer": "psychiatrists"
+                            },
+                            {
+                                "prompt": "5. severe mental disorders characterized by unpredictable disturbances in thinking, mood, awareness, and behavior",
+                                "answer": "schizophrenia"
+                            },
+                            {
+                                "prompt": "6. a mental disorder marked by a person forgetting or changing his or her identity",
+                                "answer": "dissociative disorder"
+                            },
+                            {
+                                "prompt": "7. interactions between a trained therapist and a patient",
+                                "answer": "psychotherapy"
+                            },
+                            {
+                                "prompt": "8. a mental disorder in which a person is overwhelmed by sad feelings",
+                                "answer": "clinical depression"
+                            },
+                            {
+                                "prompt": "9. a mental disorder characterized by severe weight loss due to refusal to eat",
+                                "answer": "anorexia nervosa"
+                            },
+                            {
+                                "prompt": "10. a mental disorder in which patients suffer from physical symptoms with no physical cause",
+                                "answer": "somatoform disorder"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "review",
+                "title": "Chapter 4 Exercises (Part 2)",
+                "sections": [
+                    {
+                        "heading": "What Have You Learned? (Questions 1\u201311)",
+                        "items": [
+                            {
+                                "prompt": "1. Define mental disorder. Give one example.",
+                                "answer": "Illness affecting the mind preventing productivity (e.g., clinical depression)."
+                            },
+                            {
+                                "prompt": "2. What are some causes of organic disorders?",
+                                "answer": "Brain tumors, strokes, head injuries, infections, or toxins like alcohol/lead."
+                            },
+                            {
+                                "prompt": "3. Give an example of how a mental disorder might be caused by an environmental factor.",
+                                "answer": "Severe childhood trauma leading to a functional anxiety disorder."
+                            },
+                            {
+                                "prompt": "4. Explain how an anxiety disorder might be treated by a mental health professional.",
+                                "answer": "With psychotherapy (cognitive behavioral therapy) and anti-anxiety medications."
+                            },
+                            {
+                                "prompt": "5. How are anorexia nervosa and bulimia similar? How do they differ?",
+                                "answer": "Both involve distorted body image. Anorexia is refusal to eat; bulimia involves binge eating followed by purging."
+                            },
+                            {
+                                "prompt": "6. Distinguish between compulsive, passive-aggressive, and schizoid personality disorders.",
+                                "answer": "Compulsive: rigid orderliness; Passive-aggressive: indirect anger expression; Schizoid: social withdrawal."
+                            },
+                            {
+                                "prompt": "7. Why is schizophrenia one of the most severe mental disorders? What is an effective treatment?",
+                                "answer": "Causes total break from reality (hallucinations/delusions); treated with antipsychotic drug therapy and support."
+                            },
+                            {
+                                "prompt": "8. Why is depression linked to suicide?",
+                                "answer": "Overwhelming feelings of hopelessness and despair can lead individuals to view suicide as an escape from pain."
+                            },
+                            {
+                                "prompt": "9. List four common myths and facts about suicide.",
+                                "answer": "Myth: talkers don't do it (Fact: warning signs given). Myth: asking gives ideas (Fact: reduces anxiety)."
+                            },
+                            {
+                                "prompt": "10. How can you promote your mental health?",
+                                "answer": "Express emotions constructively, build supportive friendships, manage stress, and seek help early."
+                            },
+                            {
+                                "prompt": "11. Which mental health specialist is qualified to give drug therapy?",
+                                "answer": "Psychiatrists (medical doctors, MD)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "review",
+                "title": "Chapter 4 Exercises (Part 3)",
+                "sections": [
+                    {
+                        "heading": "What Do You Think? (Questions 1\u20135)",
+                        "items": [
+                            {
+                                "prompt": "1. In some states, mentally ill people live on streets without help. What should be done?",
+                                "answer": "Provide accessible community mental health housing, outpatient treatment, and social support services."
+                            },
+                            {
+                                "prompt": "2. People recovering from mental disorders live in \"halfway houses\". How do you feel about it?",
+                                "answer": "Halfway houses provide essential supportive environments for successful community reintegration."
+                            },
+                            {
+                                "prompt": "3. Why do families of the mentally ill need support and counseling?",
+                                "answer": "Because caring for a mentally ill relative creates emotional strain and requires specialized guidance."
+                            },
+                            {
+                                "prompt": "4. Give four examples of a healthy parent-child interaction.",
+                                "answer": "Open communication, praise for efforts, respectful listening, and clear supportive boundaries."
+                            },
+                            {
+                                "prompt": "5. Why are eating disorders classified as mental disorders?",
+                                "answer": "Because they stem from severe psychological distress and distorted self-concept, not physical digestive illness."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "review",
+                "title": "Chapter 4 Exercises (Part 4)",
+                "sections": [
+                    {
+                        "heading": "What Would You Do? (Questions 1\u20135)",
+                        "items": [
+                            {
+                                "prompt": "1. A friend dieted down to 75 lbs. What would you do?",
+                                "answer": "Express concern directly and immediately notify a trusted adult, parent, or school counselor."
+                            },
+                            {
+                                "prompt": "2. Parents divorcing and you can't sleep/concentrate. What steps could you take?",
+                                "answer": "Talk to a counselor or trusted relative, join a support group, and practice relaxation techniques."
+                            },
+                            {
+                                "prompt": "3. You feel really anxious before big exams. What could ease anxiety?",
+                                "answer": "Use progressive relaxation, time management study plans, and positive self-talk."
+                            },
+                            {
+                                "prompt": "4. Feel down in dumps but snap out quickly. Should you seek help?",
+                                "answer": "Not necessarily; brief temporary sadness is normal unless it persists past 2 weeks."
+                            },
+                            {
+                                "prompt": "5. List five ways to improve your mental health.",
+                                "answer": "Set realistic goals, exercise regularly, stay connected with friends, practice relaxation, and ask for help when needed."
+                            }
+                        ]
+                    },
+                    {
+                        "heading": "For Further Study",
+                        "items": [
+                            {
+                                "prompt": "1. Look up mental health facilities in phone book. Call 5 facilities to find out services provided.",
+                                "answer": "Identify community clinics, crisis helplines, hospital psychiatric units, and family counseling centers."
+                            },
+                            {
+                                "prompt": "2. Research post-traumatic stress syndrome (PTSD). How is it treated?",
+                                "answer": "PTSD is triggered by severe traumatic events; treated with specialized psychotherapy (EMDR/CBT) and medications."
+                            },
+                            {
+                                "prompt": "3. Research lithium. What mental disorder is it used to treat?",
+                                "answer": "Lithium is a mood stabilizer used to treat manic-depressive disorder (bipolar disorder)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     ]
-  },
+},
   "H.Ch.05 · Developing Relationships": {
     title: "Developing Relationships",
     pages: [
