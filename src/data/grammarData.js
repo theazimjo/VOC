@@ -90054,6 +90054,3938 @@ export const grammarData = {
             "explanation": "Active perfect: Having been."
           }
         ]
+      },
+      {
+        "id": "prepositional-phrases-ever-no-matter",
+        "title": "Prepositional Phrases & -ever / No Matter",
+        "icon": "🌐",
+        "guide": "## 🌐 Prepositional Phrases & -ever / No Matter Expressions (Otbargichli iboralar va -ever / No Matter iboralari)\n\nUshbu darsda gaplarni yanada ixcham, rasmiy va akademik ko'rinishga keltiruvchi **Prepositional Phrases (Otbargichli iboralar: because of, due to, despite, in spite of)** hamda **-ever va No Matter** iboralari chuqur o'rganiladi.\n\n---\n\n## 1. Prepositional Phrase nima? (Otbargichli ibora)\n\nOtbargichli ibora (`Preposition + Noun / Noun Phrase / V-ing`) hol ergash gaplarni (`Conjunction + Subject + Verb`) almashtira oladi. Ma'no bir xil qoladi, lekin gap qisqaroq va rasmiyroq ko'rinadi:\n\n• **Hol ergash gap**: He chose that university **because it has a high reputation**.\n• **Otbargichli ibora**: He chose that university **because of its fine reputation**.\n\n---\n\n## 2. Sabab ifodalovchi iboralar (because of, due to, on account of)\n\nUshbu uchta ibora ham **\"tufayli, sababli\"** degan ma'noni anglatadi va ulardan keyin to'liq gap emas, faqat **OT** yoki **OTLI BIRIKMA** keladi:\n\n| Ibora | Tengma-teng bog'lovchi | Misol |\n|---|---|---|\n| **because of** | because / since | Owls hunt in darkness **because of their keen sense of smell**. |\n| **due to** | because / since | We stayed home **due to the bad weather**. |\n| **on account of** | because / since | Dinner was delayed **on account of David's tardy arrival**. |\n\n---\n\n## 3. Ziddiyat ifodalovchi iboralar (in spite of, despite)\n\nUshbu iboralar **\"qaramay, qaramasdan\"** degan ma'noni beradi va ulardan keyin ham to'liq gap emas, **OT** yoki **GERUND (V-ing)** keladi:\n\n• **in spite of**:\n  - Natural silk is prized **in spite of the availability of artificial fabrics**.\n  - They finished the match **in spite of the terrible weather**.\n• **despite**:\n  - **Despite its loss**, the team is still in first place.\n  - **Despite repeated assurance**, many stopped buying the product.\n\n> ⚠️ **MUHIM QOIDA**: *despite* iborasidan keyin *of* ishlatilmaydi! (❌ *despite of* — noto'g'ri!)\n\n---\n\n## 4. Oltin qoida: Preposition + Gerund (V-ing)\n\nPredlogdan (`because of, due to, in spite of, despite`) keyin fe'l (ish-harakat) kelsa, u albatta **Gerund (V-ing)** shakliga o'tishi shart:\n\n• **despite + V-ing**: Jack ate lunch **despite having eaten** breakfast.\n• **in spite of + V-ing**: She passed **in spite of not having studied** much.\n• **due to + V-ing**: We were late **due to the driver driving** slowly.\n• **on account of + V-ing**: He missed the meeting **on account of arriving** late.\n\n---\n\n## 5. -ever so'zlari (whoever, whatever, wherever, etc.)\n\n**-ever** qo'shimchali so'zlar ikkita ma'noga ega: (1) **\"xohlagan / har qanday\"** (`any`), (2) **\"qanday / qayerda / kim bo'lishidan qat'i nazar\"** (`no matter...`).\n\n• **whoever** (*any person / no matter who*): **Whoever** calls me, I will answer. (Kim qo'ng'iroq qilishidan qat'i nazar...)\n• **whatever** (*anything / no matter what*): You can eat **whatever** you like. (Nimani xohlasangiz...)\n• **wherever** (*any place / no matter where*): Go **wherever** you want. (Qayerga xohlasangiz...)\n• **whichever** (*any one from a group*): **Whichever** road we take, we'll arrive. (Qaysi yo'lni tanlamaylik...)\n• **whenever** (*any time / no matter when*): Visit us **whenever** you want. (Qachon xohlasangiz...)\n• **however** (*any way/degree / no matter how*): **However** hard you try, don't give up. (Qanchalik qiyin bo'lmasin...)\n\n---\n\n## 6. No Matter iboralari (No matter who / what / where / how)\n\n**No matter + WH-word** birikmasi natija shartga yoki tanlovga bog'liq emasligini ta'kidlaydi:\n\n• **No matter who**: **No matter who** wins the election, life will go on.\n• **No matter which**: **No matter which** book you choose, return it tomorrow.\n• **No matter what**: **No matter what** happens, stay calm.\n• **No matter where**: He feels confident **no matter where** he is.\n• **No matter how**: **No matter how** hard the task is, we will finish it.\n\n---\n\n## 7. Tenglashtirish jadvali (-ever vs No Matter vs any)\n\n| -ever word | No matter... | Ma'nosi (any...) | Misol |\n|---|---|---|---|\n| **whoever** | no matter who | any person | Whoever wins, congratulate them. |\n| **whichever** | no matter which | any one (group) | Whichever you choose, enjoy it. |\n| **whatever** | no matter what | anything | Whatever you decide, I'll support you. |\n| **whenever** | no matter when | any time | Whenever she calls, I'll answer. |\n| **wherever** | no matter where | any place | Wherever you go, I'll find you. |\n| **however** | no matter how | any way/degree | However hard it is, don't give up. |",
+        "questions": [
+          {
+            "id": 1,
+            "text": "Rewrite: 'He chose that university because it has a high reputation' using a prepositional phrase.",
+            "options": [
+              "He chose that university because of its fine reputation.",
+              "He chose that university due to it has a high reputation.",
+              "He chose that university despite its reputation.",
+              "He chose that university in spite of having reputation."
+            ],
+            "correct": 0,
+            "explanation": "'because of' is followed by a noun phrase 'its fine reputation'."
+          },
+          {
+            "id": 2,
+            "text": "Which of the following is INCORRECT?",
+            "options": [
+              "despite of the rain",
+              "despite the rain",
+              "in spite of the rain",
+              "because of the rain"
+            ],
+            "correct": 0,
+            "explanation": "'despite' NEVER takes 'of'. Correct: despite the rain."
+          },
+          {
+            "id": 3,
+            "text": "Complete: 'Owls hunt in darkness ___ their keen sense of smell.'",
+            "options": [
+              "because of",
+              "because",
+              "although",
+              "despite of"
+            ],
+            "correct": 0,
+            "explanation": "Followed by a noun phrase 'their keen sense of smell' -> because of."
+          },
+          {
+            "id": 4,
+            "text": "Rewrite: 'Although the team lost the last game, it is still in first place.'",
+            "options": [
+              "Despite its loss, the team is still in first place.",
+              "Because of its loss, the team is in first place.",
+              "Due to its loss, the team is in first place.",
+              "In spite the loss, the team is in first place."
+            ],
+            "correct": 0,
+            "explanation": "Contrast + noun -> Despite its loss..."
+          },
+          {
+            "id": 5,
+            "text": "What does 'whoever' mean?",
+            "options": [
+              "any person / no matter who",
+              "any thing / no matter what",
+              "any place / no matter where",
+              "any time / no matter when"
+            ],
+            "correct": 0,
+            "explanation": "whoever = any person / no matter who."
+          },
+          {
+            "id": 6,
+            "text": "Complete: '___ calls me, I will answer the phone.'",
+            "options": [
+              "Whoever",
+              "Whatever",
+              "Wherever",
+              "However"
+            ],
+            "correct": 0,
+            "explanation": "Person reference -> Whoever."
+          },
+          {
+            "id": 7,
+            "text": "Complete: 'You can watch ___ program you like on Friday nights.'",
+            "options": [
+              "whatever",
+              "whoever",
+              "wherever",
+              "however"
+            ],
+            "correct": 0,
+            "explanation": "Thing/program reference -> whatever."
+          },
+          {
+            "id": 8,
+            "text": "Complete: '___ hard I try, I can't solve this puzzle.'",
+            "options": [
+              "However",
+              "Whatever",
+              "Whoever",
+              "Whichever"
+            ],
+            "correct": 0,
+            "explanation": "Degree/manner before adjective 'hard' -> However."
+          },
+          {
+            "id": 9,
+            "text": "Complete: '___ she goes, she always makes new friends.'",
+            "options": [
+              "Wherever",
+              "Whatever",
+              "Whoever",
+              "Whichever"
+            ],
+            "correct": 0,
+            "explanation": "Place reference -> Wherever."
+          },
+          {
+            "id": 10,
+            "text": "Rewrite using gerund: 'She passed the exam although she hadn't studied much.'",
+            "options": [
+              "She passed the exam in spite of not having studied much.",
+              "She passed the exam despite of not studying.",
+              "She passed the exam because of not studying.",
+              "She passed the exam due to not study."
+            ],
+            "correct": 0,
+            "explanation": "in spite of + gerund (not having studied)."
+          },
+          {
+            "id": 11,
+            "text": "Complete: 'All buses were delayed ___ the flooded road.'",
+            "options": [
+              "due to",
+              "because",
+              "although",
+              "despite of"
+            ],
+            "correct": 0,
+            "explanation": "Followed by noun phrase 'the flooded road' -> due to."
+          },
+          {
+            "id": 12,
+            "text": "Complete: 'I'll stand by you ___ happens.'",
+            "options": [
+              "no matter what",
+              "no matter who",
+              "no matter where",
+              "no matter how"
+            ],
+            "correct": 0,
+            "explanation": "Situation/thing -> no matter what."
+          },
+          {
+            "id": 13,
+            "text": "Complete: '___ wins this match will play in the final.'",
+            "options": [
+              "Whoever",
+              "Whatever",
+              "Wherever",
+              "However"
+            ],
+            "correct": 0,
+            "explanation": "Person reference -> Whoever."
+          },
+          {
+            "id": 14,
+            "text": "Complete: '___ book you choose, read the first chapter tonight.'",
+            "options": [
+              "Whichever",
+              "Whoever",
+              "Wherever",
+              "However"
+            ],
+            "correct": 0,
+            "explanation": "Choice from a group -> Whichever."
+          },
+          {
+            "id": 15,
+            "text": "Rewrite: 'We were late because the driver drove slowly.'",
+            "options": [
+              "We were late due to the driver driving slowly.",
+              "We were late despite the driver driving slowly.",
+              "We were late in spite of driver drove slowly.",
+              "We were late on account the driver."
+            ],
+            "correct": 0,
+            "explanation": "due to + noun/gerund phrase: due to the driver driving slowly."
+          },
+          {
+            "id": 16,
+            "text": "What is the equivalent of 'no matter where'?",
+            "options": [
+              "wherever",
+              "whatever",
+              "whoever",
+              "however"
+            ],
+            "correct": 0,
+            "explanation": "no matter where = wherever."
+          },
+          {
+            "id": 17,
+            "text": "What is the equivalent of 'no matter how'?",
+            "options": [
+              "however",
+              "whatever",
+              "wherever",
+              "whichever"
+            ],
+            "correct": 0,
+            "explanation": "no matter how = however."
+          },
+          {
+            "id": 18,
+            "text": "Complete: 'Dinner was late ___ David's tardy arrival.'",
+            "options": [
+              "on account of",
+              "because",
+              "although",
+              "despite of"
+            ],
+            "correct": 0,
+            "explanation": "Followed by noun phrase -> on account of."
+          },
+          {
+            "id": 19,
+            "text": "Complete: 'Jack managed to eat lunch ___ having eaten a big breakfast.'",
+            "options": [
+              "despite",
+              "because of",
+              "due to",
+              "on account of"
+            ],
+            "correct": 0,
+            "explanation": "Contrast + V-ing -> despite."
+          },
+          {
+            "id": 20,
+            "text": "Correct: 'We were late because of the road was flooded.'",
+            "options": [
+              "We were late because of the flooded road.",
+              "We were late because of road flooded.",
+              "We were late due to road was flooded.",
+              "We were late in spite of flooded road."
+            ],
+            "correct": 0,
+            "explanation": "'because of' must be followed by a noun phrase, not a clause."
+          },
+          {
+            "id": 21,
+            "text": "Correct: 'Go whichever you like — all roads lead there.'",
+            "options": [
+              "Go wherever you like — all roads lead there.",
+              "Go whatever you like.",
+              "Go whoever you like.",
+              "Go however you like."
+            ],
+            "correct": 0,
+            "explanation": "Place reference -> wherever."
+          },
+          {
+            "id": 22,
+            "text": "Correct: 'In spite of to having no money, he paid the bill.'",
+            "options": [
+              "In spite of having no money, he paid the bill.",
+              "In spite to having no money, he paid.",
+              "In spite of have no money, he paid.",
+              "In spite having no money, he paid."
+            ],
+            "correct": 0,
+            "explanation": "After 'in spite of', use V-ing directly (no 'to')."
+          },
+          {
+            "id": 23,
+            "text": "Correct: 'However hard you will try, she won't listen.'",
+            "options": [
+              "However hard you try, she won't listen.",
+              "However hard you will trying, she won't listen.",
+              "Whatever hard you try, she won't listen.",
+              "No matter hard you try, she won't listen."
+            ],
+            "correct": 0,
+            "explanation": "Use present tense (try) after 'however/no matter how' for future reference."
+          },
+          {
+            "id": 24,
+            "text": "Complete: 'He missed the meeting ___ arriving late.'",
+            "options": [
+              "on account of",
+              "because",
+              "although",
+              "even though"
+            ],
+            "correct": 0,
+            "explanation": "on account of + V-ing."
+          },
+          {
+            "id": 25,
+            "text": "Complete: '___ someone spoke to her, she smiled warmly.'",
+            "options": [
+              "Whenever",
+              "Whatever",
+              "Whichever",
+              "Whoever"
+            ],
+            "correct": 0,
+            "explanation": "Time reference -> Whenever."
+          },
+          {
+            "id": 26,
+            "text": "Complete: 'Natural silk is prized ___ similar artificial fabrics.'",
+            "options": [
+              "in spite of",
+              "because",
+              "since",
+              "due"
+            ],
+            "correct": 0,
+            "explanation": "in spite of + noun phrase."
+          },
+          {
+            "id": 27,
+            "text": "What follows 'because of', 'due to', and 'despite'?",
+            "options": [
+              "A noun, noun phrase, or gerund (V-ing)",
+              "A full subject + verb clause",
+              "An infinitive (to + V)",
+              "An auxiliary verb"
+            ],
+            "correct": 0,
+            "explanation": "Prepositional phrases take nouns or gerunds."
+          },
+          {
+            "id": 28,
+            "text": "Complete: '___ wins, congratulate them.'",
+            "options": [
+              "Whoever",
+              "Whatever",
+              "Wherever",
+              "However"
+            ],
+            "correct": 0,
+            "explanation": "Person reference -> Whoever."
+          },
+          {
+            "id": 29,
+            "text": "Complete: '___ you decide, I'll support you.'",
+            "options": [
+              "Whatever",
+              "Whoever",
+              "Wherever",
+              "Whichever"
+            ],
+            "correct": 0,
+            "explanation": "Thing/decision reference -> Whatever."
+          },
+          {
+            "id": 30,
+            "text": "Complete: '___ hard it is, don't give up.'",
+            "options": [
+              "However",
+              "Whatever",
+              "Wherever",
+              "Whoever"
+            ],
+            "correct": 0,
+            "explanation": "Degree before adjective -> However."
+          }
+        ],
+        "fillBlanks": [
+          {
+            "id": 1,
+            "text": "We stayed home ___ (due to) the bad weather.",
+            "options": [
+              "due to",
+              "because",
+              "although",
+              "since"
+            ],
+            "correct": 0,
+            "explanation": "due to + noun."
+          },
+          {
+            "id": 2,
+            "text": "___ (wherever) you go, I will follow you.",
+            "options": [
+              "Wherever",
+              "Whatever",
+              "Whoever",
+              "However"
+            ],
+            "correct": 0,
+            "explanation": "Wherever = any place."
+          },
+          {
+            "id": 3,
+            "text": "___ (however) hard I try, I can't solve this.",
+            "options": [
+              "However",
+              "Whatever",
+              "Whoever",
+              "Whichever"
+            ],
+            "correct": 0,
+            "explanation": "However + adjective."
+          },
+          {
+            "id": 4,
+            "text": "She continued working ___ (in spite of) her tiredness.",
+            "options": [
+              "in spite of",
+              "because of",
+              "due",
+              "although"
+            ],
+            "correct": 0,
+            "explanation": "in spite of + noun."
+          },
+          {
+            "id": 5,
+            "text": "The school was closed ___ (because of) heavy snow.",
+            "options": [
+              "because of",
+              "because",
+              "since",
+              "despite of"
+            ],
+            "correct": 0,
+            "explanation": "because of + noun phrase."
+          },
+          {
+            "id": 6,
+            "text": "___ (whoever) wins this match will play in the final.",
+            "options": [
+              "Whoever",
+              "Whatever",
+              "Wherever",
+              "However"
+            ],
+            "correct": 0,
+            "explanation": "Whoever = any person."
+          },
+          {
+            "id": 7,
+            "text": "___ (whatever) happens, stay calm.",
+            "options": [
+              "Whatever",
+              "Whoever",
+              "Wherever",
+              "However"
+            ],
+            "correct": 0,
+            "explanation": "Whatever = anything."
+          },
+          {
+            "id": 8,
+            "text": "Dinner was late ___ (on account of) David's late arrival.",
+            "options": [
+              "on account of",
+              "because",
+              "since",
+              "due"
+            ],
+            "correct": 0,
+            "explanation": "on account of + noun phrase."
+          },
+          {
+            "id": 9,
+            "text": "___ (whichever) book you choose, read chapter 1.",
+            "options": [
+              "Whichever",
+              "Whoever",
+              "Wherever",
+              "However"
+            ],
+            "correct": 0,
+            "explanation": "Whichever = choice from group."
+          },
+          {
+            "id": 10,
+            "text": "___ (whenever) someone spoke to her, she smiled.",
+            "options": [
+              "Whenever",
+              "Whatever",
+              "Whoever",
+              "Wherever"
+            ],
+            "correct": 0,
+            "explanation": "Whenever = any time."
+          },
+          {
+            "id": 11,
+            "text": "He passed the test ___ (despite) not having studied.",
+            "options": [
+              "despite",
+              "because of",
+              "due to",
+              "on account of"
+            ],
+            "correct": 0,
+            "explanation": "despite + negative gerund."
+          },
+          {
+            "id": 12,
+            "text": "No matter ___ (what) you say, I have made my decision.",
+            "options": [
+              "what",
+              "who",
+              "where",
+              "how"
+            ],
+            "correct": 0,
+            "explanation": "No matter what."
+          },
+          {
+            "id": 13,
+            "text": "No matter ___ (where) you go, remember your family.",
+            "options": [
+              "where",
+              "what",
+              "who",
+              "how"
+            ],
+            "correct": 0,
+            "explanation": "No matter where."
+          },
+          {
+            "id": 14,
+            "text": "No matter ___ (how) hard the task is, we will finish.",
+            "options": [
+              "how",
+              "what",
+              "who",
+              "where"
+            ],
+            "correct": 0,
+            "explanation": "No matter how + adjective."
+          },
+          {
+            "id": 15,
+            "text": "Owls hunt in darkness ___ (because of) their keen smell.",
+            "options": [
+              "because of",
+              "because",
+              "since",
+              "due"
+            ],
+            "correct": 0,
+            "explanation": "because of + noun phrase."
+          },
+          {
+            "id": 16,
+            "text": "___ (despite) its loss, the team is in first place.",
+            "options": [
+              "Despite",
+              "Because of",
+              "Due to",
+              "On account of"
+            ],
+            "correct": 0,
+            "explanation": "Despite + noun."
+          },
+          {
+            "id": 17,
+            "text": "Jack ate a big lunch ___ (despite) having eaten breakfast.",
+            "options": [
+              "despite",
+              "because of",
+              "due to",
+              "on account of"
+            ],
+            "correct": 0,
+            "explanation": "despite + V-ing."
+          },
+          {
+            "id": 18,
+            "text": "No matter ___ (who) wins the election, life goes on.",
+            "options": [
+              "who",
+              "what",
+              "where",
+              "how"
+            ],
+            "correct": 0,
+            "explanation": "No matter who."
+          },
+          {
+            "id": 19,
+            "text": "He feels confident no matter ___ (where) he is.",
+            "options": [
+              "where",
+              "what",
+              "who",
+              "how"
+            ],
+            "correct": 0,
+            "explanation": "no matter where."
+          },
+          {
+            "id": 20,
+            "text": "We were late ___ (due to) the driver driving slowly.",
+            "options": [
+              "due to",
+              "because",
+              "since",
+              "although"
+            ],
+            "correct": 0,
+            "explanation": "due to + gerund phrase."
+          }
+        ],
+        "scrambled": [
+          {
+            "id": 1,
+            "words": [
+              "all",
+              "buses",
+              "were",
+              "delayed",
+              "due",
+              "to",
+              "flooded",
+              "road"
+            ],
+            "answer": "All buses were delayed due to flooded road.",
+            "explanation": "due to + noun phrase."
+          },
+          {
+            "id": 2,
+            "words": [
+              "she",
+              "continued",
+              "working",
+              "in",
+              "spite",
+              "of",
+              "her",
+              "tiredness"
+            ],
+            "answer": "She continued working in spite of her tiredness.",
+            "explanation": "in spite of + noun."
+          },
+          {
+            "id": 3,
+            "words": [
+              "school",
+              "was",
+              "closed",
+              "because",
+              "of",
+              "heavy",
+              "snow"
+            ],
+            "answer": "School was closed because of heavy snow.",
+            "explanation": "because of + noun phrase."
+          },
+          {
+            "id": 4,
+            "words": [
+              "despite",
+              "having",
+              "failed",
+              "twice",
+              "he",
+              "tried",
+              "again"
+            ],
+            "answer": "Despite having failed twice, he tried again.",
+            "explanation": "despite + gerund phrase."
+          },
+          {
+            "id": 5,
+            "words": [
+              "wherever",
+              "you",
+              "go",
+              "I",
+              "will",
+              "follow",
+              "you"
+            ],
+            "answer": "Wherever you go, I will follow you.",
+            "explanation": "Wherever = any place."
+          },
+          {
+            "id": 6,
+            "words": [
+              "however",
+              "hard",
+              "I",
+              "try",
+              "I",
+              "cannot",
+              "solve",
+              "this"
+            ],
+            "answer": "However hard I try, I cannot solve this.",
+            "explanation": "However + adjective..."
+          },
+          {
+            "id": 7,
+            "words": [
+              "you",
+              "can",
+              "watch",
+              "whatever",
+              "program",
+              "you",
+              "like"
+            ],
+            "answer": "You can watch whatever program you like.",
+            "explanation": "whatever + noun..."
+          },
+          {
+            "id": 8,
+            "words": [
+              "whoever",
+              "wins",
+              "this",
+              "match",
+              "will",
+              "play",
+              "final"
+            ],
+            "answer": "Whoever wins this match will play final.",
+            "explanation": "Whoever = any person."
+          },
+          {
+            "id": 9,
+            "words": [
+              "I",
+              "will",
+              "stand",
+              "by",
+              "you",
+              "no",
+              "matter",
+              "what"
+            ],
+            "answer": "I will stand by you no matter what.",
+            "explanation": "no matter what = anything."
+          },
+          {
+            "id": 10,
+            "words": [
+              "dinner",
+              "was",
+              "late",
+              "on",
+              "account",
+              "of",
+              "late",
+              "arrival"
+            ],
+            "answer": "Dinner was late on account of late arrival.",
+            "explanation": "on account of + noun phrase."
+          },
+          {
+            "id": 11,
+            "words": [
+              "owls",
+              "hunt",
+              "in",
+              "darkness",
+              "because",
+              "of",
+              "keen",
+              "smell"
+            ],
+            "answer": "Owls hunt in darkness because of keen smell.",
+            "explanation": "because of + noun phrase."
+          },
+          {
+            "id": 12,
+            "words": [
+              "no",
+              "matter",
+              "where",
+              "you",
+              "go",
+              "remember",
+              "family"
+            ],
+            "answer": "No matter where you go, remember family.",
+            "explanation": "No matter where..."
+          },
+          {
+            "id": 13,
+            "words": [
+              "no",
+              "matter",
+              "how",
+              "hard",
+              "task",
+              "is",
+              "we",
+              "finish"
+            ],
+            "answer": "No matter how hard task is, we finish.",
+            "explanation": "No matter how + adj..."
+          },
+          {
+            "id": 14,
+            "words": [
+              "she",
+              "passed",
+              "test",
+              "despite",
+              "not",
+              "having",
+              "studied"
+            ],
+            "answer": "She passed test despite not having studied.",
+            "explanation": "despite + negative gerund."
+          },
+          {
+            "id": 15,
+            "words": [
+              "whichever",
+              "road",
+              "we",
+              "take",
+              "we",
+              "will",
+              "arrive"
+            ],
+            "answer": "Whichever road we take, we will arrive.",
+            "explanation": "Whichever + noun..."
+          }
+        ],
+        "errorCorrection": [
+          {
+            "id": 1,
+            "words": [
+              "We",
+              "were",
+              "late",
+              "because",
+              "of",
+              "road",
+              "was",
+              "flooded."
+            ],
+            "answer": "We were late because of the flooded road.",
+            "explanation": "'because of' ga to'liq gap emas, faqat otli birikma ulanadi."
+          },
+          {
+            "id": 2,
+            "words": [
+              "Despite",
+              "she",
+              "was",
+              "tired",
+              "she",
+              "kept",
+              "working."
+            ],
+            "answer": "Despite being tired, she kept working.",
+            "explanation": "'despite' dan keyin to'liq gap kelmaydi, V-ing yoki ot keladi."
+          },
+          {
+            "id": 3,
+            "words": [
+              "Go",
+              "whichever",
+              "you",
+              "like",
+              "all",
+              "roads",
+              "lead."
+            ],
+            "answer": "Go wherever you like, all roads lead there.",
+            "explanation": "Joy uchun 'wherever' ishlatiladi."
+          },
+          {
+            "id": 4,
+            "words": [
+              "In",
+              "spite",
+              "of",
+              "to",
+              "having",
+              "no",
+              "money",
+              "he",
+              "paid."
+            ],
+            "answer": "In spite of having no money, he paid.",
+            "explanation": "'in spite of' dan keyin to'g'ridan-to'g'ri V-ing keladi."
+          },
+          {
+            "id": 5,
+            "words": [
+              "However",
+              "hard",
+              "you",
+              "will",
+              "try",
+              "she",
+              "won't",
+              "listen."
+            ],
+            "answer": "However hard you try, she won't listen.",
+            "explanation": "'however/no matter how' dan keyin kelajak ma'nosida Present Simple ishlatiladi."
+          },
+          {
+            "id": 6,
+            "words": [
+              "Despite",
+              "of",
+              "the",
+              "rain",
+              "we",
+              "went",
+              "out."
+            ],
+            "answer": "Despite the rain, we went out.",
+            "explanation": "'despite' hech qachon 'of' olmasdi."
+          },
+          {
+            "id": 7,
+            "words": [
+              "We",
+              "stayed",
+              "home",
+              "because",
+              "the",
+              "bad",
+              "weather."
+            ],
+            "answer": "We stayed home because of the bad weather.",
+            "explanation": "Otli birikma bo'lgani uchun 'because of' ishlatiladi."
+          },
+          {
+            "id": 8,
+            "words": [
+              "No",
+              "matter",
+              "whatever",
+              "happens",
+              "stay",
+              "calm."
+            ],
+            "answer": "No matter what happens, stay calm.",
+            "explanation": "'No matter what' yoki shunchaki 'Whatever' bo'lib keladi."
+          },
+          {
+            "id": 9,
+            "words": [
+              "She",
+              "passed",
+              "due",
+              "to",
+              "she",
+              "studied",
+              "hard."
+            ],
+            "answer": "She passed due to studying hard.",
+            "explanation": "'due to' dan keyin V-ing keladi."
+          },
+          {
+            "id": 10,
+            "words": [
+              "He",
+              "came",
+              "in",
+              "spite",
+              "he",
+              "was",
+              "sick."
+            ],
+            "answer": "He came in spite of being sick.",
+            "explanation": "'in spite of' deb ishlatiladi."
+          },
+          {
+            "id": 11,
+            "words": [
+              "Whoever",
+              "you",
+              "go",
+              "I",
+              "will",
+              "follow."
+            ],
+            "answer": "Wherever you go, I will follow.",
+            "explanation": "Joy uchun 'wherever' bo'ladi."
+          },
+          {
+            "id": 12,
+            "words": [
+              "However",
+              "you",
+              "want",
+              "take",
+              "any",
+              "book."
+            ],
+            "answer": "Whichever you want, take any book.",
+            "explanation": "Narsa/tanlov uchun 'whichever' bo'ladi."
+          },
+          {
+            "id": 13,
+            "words": [
+              "Dinner",
+              "delayed",
+              "on",
+              "account",
+              "David",
+              "was",
+              "late."
+            ],
+            "answer": "Dinner was delayed on account of David's late arrival.",
+            "explanation": "'on account of' otli birikma oladi."
+          },
+          {
+            "id": 14,
+            "words": [
+              "No",
+              "matter",
+              "how",
+              "you",
+              "say",
+              "I",
+              "disagree."
+            ],
+            "answer": "No matter what you say, I disagree.",
+            "explanation": "Gapirilgan gap/fikr uchun 'No matter what' bo'ladi."
+          },
+          {
+            "id": 15,
+            "words": [
+              "Jack",
+              "ate",
+              "despite",
+              "of",
+              "having",
+              "eaten",
+              "breakfast."
+            ],
+            "answer": "Jack ate despite having eaten breakfast.",
+            "explanation": "'despite' iborasida 'of' bo'lmaydi."
+          }
+        ],
+        "transform": [
+          {
+            "id": 1,
+            "original": "Since the road was flooded, all buses were delayed.",
+            "answer": "All buses were delayed due to the flooded road.",
+            "explanation": "Adverb clause -> due to + noun phrase"
+          },
+          {
+            "id": 2,
+            "original": "Although she was tired, she continued working.",
+            "answer": "She continued working in spite of her tiredness.",
+            "explanation": "Concession clause -> in spite of + noun"
+          },
+          {
+            "id": 3,
+            "original": "Because there was heavy snow, the school was closed.",
+            "answer": "The school was closed because of the heavy snow.",
+            "explanation": "Cause clause -> because of + noun phrase"
+          },
+          {
+            "id": 4,
+            "original": "Even though he had failed twice before, he tried again.",
+            "answer": "Despite having failed twice before, he tried again.",
+            "explanation": "Concession clause -> despite + gerund phrase"
+          },
+          {
+            "id": 5,
+            "original": "Dinner was late because David arrived late.",
+            "answer": "Dinner was late on account of David's late arrival.",
+            "explanation": "Cause clause -> on account of + noun phrase"
+          },
+          {
+            "id": 6,
+            "original": "Although she hadn't studied, she passed the test.",
+            "answer": "She passed the test despite not having studied.",
+            "explanation": "Concession clause -> despite + negative gerund"
+          },
+          {
+            "id": 7,
+            "original": "He chose that university because it has a high reputation.",
+            "answer": "He chose that university because of its fine reputation.",
+            "explanation": "Cause clause -> because of + noun phrase"
+          },
+          {
+            "id": 8,
+            "original": "Although similar artificial fabrics exist, natural silk is prized.",
+            "answer": "Natural silk is prized in spite of similar artificial fabrics.",
+            "explanation": "Concession clause -> in spite of + noun phrase"
+          },
+          {
+            "id": 9,
+            "original": "Because he didn't know her number, he couldn't call her.",
+            "answer": "Because of not knowing her phone number, he couldn't call her.",
+            "explanation": "Cause clause -> because of + gerund"
+          },
+          {
+            "id": 10,
+            "original": "We were late because the driver drove slowly.",
+            "answer": "We were late due to the driver driving slowly.",
+            "explanation": "Cause clause -> due to + gerund phrase"
+          },
+          {
+            "id": 11,
+            "original": "He missed the meeting because he arrived late.",
+            "answer": "He missed the meeting on account of arriving late.",
+            "explanation": "Cause clause -> on account of + gerund"
+          },
+          {
+            "id": 12,
+            "original": "Jack ate a big lunch although he had eaten a big breakfast.",
+            "answer": "Jack ate a big lunch despite having eaten a big breakfast.",
+            "explanation": "Concession clause -> despite + gerund phrase"
+          },
+          {
+            "id": 13,
+            "original": "Owls can hunt in darkness because they have keen smell.",
+            "answer": "Owls can hunt in darkness because of their keen sense of smell.",
+            "explanation": "Cause clause -> because of + noun phrase"
+          },
+          {
+            "id": 14,
+            "original": "Since it was cold outside, we stayed home.",
+            "answer": "We stayed home due to the cold weather.",
+            "explanation": "Cause clause -> due to + noun phrase"
+          },
+          {
+            "id": 15,
+            "original": "Although the weather was terrible, they finished the match.",
+            "answer": "They finished the match in spite of the terrible weather.",
+            "explanation": "Concession clause -> in spite of + noun phrase"
+          }
+        ],
+        "dialogue": [
+          {
+            "id": 1,
+            "situation": "Explaining why buses are delayed.",
+            "dialogue": "A: Why are the buses not running?\nB: All buses were delayed ___ the flooded road.",
+            "options": [
+              "due to",
+              "because",
+              "since",
+              "although"
+            ],
+            "correct": 0,
+            "explanation": "due to + noun phrase."
+          },
+          {
+            "id": 2,
+            "situation": "Talking about an energetic friend.",
+            "dialogue": "A: Did she stop working after that long shift?\nB: No, she kept working ___ her extreme tiredness.",
+            "options": [
+              "in spite of",
+              "because of",
+              "due",
+              "since"
+            ],
+            "correct": 0,
+            "explanation": "in spite of + noun."
+          },
+          {
+            "id": 3,
+            "situation": "Explaining school cancellation.",
+            "dialogue": "A: Why is school closed today?\nB: It was closed ___ heavy snow.",
+            "options": [
+              "because of",
+              "because",
+              "since",
+              "despite of"
+            ],
+            "correct": 0,
+            "explanation": "because of + noun phrase."
+          },
+          {
+            "id": 4,
+            "situation": "Talking about travel plans.",
+            "dialogue": "A: Which country should I visit?\nB: ___ you go, you will have a wonderful time!",
+            "options": [
+              "Wherever",
+              "Whatever",
+              "Whoever",
+              "However"
+            ],
+            "correct": 0,
+            "explanation": "Wherever = any place."
+          },
+          {
+            "id": 5,
+            "situation": "Struggling with a puzzle.",
+            "dialogue": "A: Can you solve this puzzle?\nB: No, ___ hard I try, I can't solve it.",
+            "options": [
+              "However",
+              "Whatever",
+              "Whoever",
+              "Whichever"
+            ],
+            "correct": 0,
+            "explanation": "However + adjective."
+          },
+          {
+            "id": 6,
+            "situation": "Picking a TV show.",
+            "dialogue": "A: What should we watch on TV?\nB: You can watch ___ program you like tonight.",
+            "options": [
+              "whatever",
+              "whoever",
+              "wherever",
+              "however"
+            ],
+            "correct": 0,
+            "explanation": "whatever + noun."
+          },
+          {
+            "id": 7,
+            "situation": "Cheering for sports tournament.",
+            "dialogue": "A: Who will play in the final?\nB: ___ wins this match will play in the final.",
+            "options": [
+              "Whoever",
+              "Whatever",
+              "Wherever",
+              "However"
+            ],
+            "correct": 0,
+            "explanation": "Whoever = any person."
+          },
+          {
+            "id": 8,
+            "situation": "Offering unconditional support.",
+            "dialogue": "A: What if I fail this exam?\nB: Don't worry, I'll stand by you ___ happens.",
+            "options": [
+              "no matter what",
+              "no matter who",
+              "no matter where",
+              "no matter how"
+            ],
+            "correct": 0,
+            "explanation": "no matter what."
+          },
+          {
+            "id": 9,
+            "situation": "Explaining delayed dinner.",
+            "dialogue": "A: Why was dinner so late?\nB: It was late ___ David's tardy arrival.",
+            "options": [
+              "on account of",
+              "because",
+              "since",
+              "due"
+            ],
+            "correct": 0,
+            "explanation": "on account of + noun phrase."
+          },
+          {
+            "id": 10,
+            "situation": "Talking about an owl's hunting ability.",
+            "dialogue": "A: How do owls hunt at night?\nB: They hunt in total darkness ___ their keen sense of smell.",
+            "options": [
+              "because of",
+              "because",
+              "since",
+              "due"
+            ],
+            "correct": 0,
+            "explanation": "because of + noun phrase."
+          },
+          {
+            "id": 11,
+            "situation": "Choosing a book to read.",
+            "dialogue": "A: There are so many books here!\nB: ___ book you choose, read chapter one tonight.",
+            "options": [
+              "Whichever",
+              "Whoever",
+              "Wherever",
+              "However"
+            ],
+            "correct": 0,
+            "explanation": "Whichever + noun."
+          },
+          {
+            "id": 12,
+            "situation": "Talking about a friendly traveler.",
+            "dialogue": "A: Does she like moving to new places?\nB: Yes, ___ she goes, she always makes new friends.",
+            "options": [
+              "Wherever",
+              "Whatever",
+              "Whoever",
+              "However"
+            ],
+            "correct": 0,
+            "explanation": "Wherever = any place."
+          },
+          {
+            "id": 13,
+            "situation": "Discussing exam success despite lack of study.",
+            "dialogue": "A: Did she pass the test?\nB: Yes, she passed ___ not having studied much.",
+            "options": [
+              "despite",
+              "because of",
+              "due to",
+              "on account of"
+            ],
+            "correct": 0,
+            "explanation": "despite + gerund phrase."
+          },
+          {
+            "id": 14,
+            "situation": "Encouraging someone through difficulty.",
+            "dialogue": "A: This task is so difficult!\nB: ___ hard it is, don't give up!",
+            "options": [
+              "However",
+              "Whatever",
+              "Wherever",
+              "Whoever"
+            ],
+            "correct": 0,
+            "explanation": "However + adjective."
+          },
+          {
+            "id": 15,
+            "situation": "Greeting someone warmly.",
+            "dialogue": "A: When should I visit you?\nB: Come visit ___ you want, my door is always open!",
+            "options": [
+              "whenever",
+              "whatever",
+              "whoever",
+              "wherever"
+            ],
+            "correct": 0,
+            "explanation": "whenever = any time."
+          }
+        ]
+      },
+      {
+        "id": "verbs-types-infinitives-gerunds",
+        "title": "Verbs: Types, Infinitives & Gerunds",
+        "icon": "📖",
+        "guide": "## 📖 Verbs: Types, Infinitives, Bare Infinitives & Gerunds (Fe'llar: Turlari, Infinitive va Gerund)\n\nFe'l (Verb) — gapning yuragi hisoblanadi. Usiz hech qanday tugallangan fikrni ifodalab bo'lmaydi. Ushbu darsda fe'llarning 5 ta turi, **Infinitive (to + V)**, **Bare Infinitive (to'sioqsiz fe'l)** hamda **Gerund (V-ing)** chuqur o'rganiladi.\n\n---\n\n## 1. Fe'l nima va ularning 5 ta turi (5 Main Types of Verbs)\n\nFe'l — harakat, holat yoki sodir bo'lishni ifodalaydi.\n\n1. **Action Verbs (Harakat fe'llari)**: Jismoniy yoki aqliy harakatni ko'rsatadi (*run, dance, study, think, write*).\n   - *She runs every morning.* / *I think about my future.*\n2. **Linking Verbs (Bog'lovchi fe'llar)**: Harakat ko'rsatmaydi, egaga ta'rif/holat biriktiradi (*be, become, seem, appear, feel, look, remain, stay, taste*).\n   - *She is a doctor.* / *The soup tastes delicious.* / *They seem tired.*\n3. **Helping (Auxiliary) Verbs (Yordamchi fe'llar)**: Asosiy fe'lga zamon, inkor, so'roq va majhul nisbat hosil qilishda yordam beradi (*be, have, do* hamda *can, could, may, might, shall, should, will, would, must*).\n   - *She is studying now.* / *Do you like coffee?*\n4. **Transitive Verbs (O'timli fe'llar)**: O'zidan keyin **to'g'ri to'ldiruvchi (direct object)** talab qiladi. To'ldiruvchisiz ma'no chala qoladi.\n   - *She reads a book.* / *They bought a new car.*\n5. **Intransitive Verbs (O'timsiz fe'llar)**: To'ldiruvchiga muhtoj emas (*sleep, laugh, cry, fly*).\n   - *The baby cried.* / *Birds fly.* / *She laughed loudly.*\n\n---\n\n## 2. Infinitives (to + Verb)\n\n**Infinitive** — fe'lning *to* yuklamasi bilan keladigan asosiy shaklidir (*to study, to work, to play*).\n\n### Infinitive vazifalari:\n• **Ot vazifasida (Subject/Object)**: **To travel** is exciting. / His dream is **to become** a doctor.\n• **Sifat vazifasida (Noun modifier)**: I have homework **to finish**. / She needs a book **to read**.\n• **Ravish vazifasida (Purpose/Reason)**: She studies hard **to pass**. / He saved money **to buy** a house.\n\n---\n\n## 3. Bare Infinitives (to'siz Infinitive)\n\n**Bare Infinitive** — *to* yuklamasisiz ishlatiladigan fe'l shaklidir.\n\n1. **Modal fe'llardan keyin** (*can, could, may, might, shall, should, will, would, must*):\n   - I can **swim**. (❌ *I can to swim.*)\n   - She will **come**.\n   - You should **study**.\n2. **Sababchi (Causative) fe'llardan keyin** (*make, let, help*):\n   - She made me **apologize**. (❌ *She made me to cry.* → ✓ *She made me cry.*)\n   - My parents let me **drive**.\n   - He helped me **carry** the bag. (yoki *helped me to carry* — ikkalasi ham to'g'ri).\n\n---\n\n## 4. Gerunds (V-ing)\n\n**Gerund** — fe'lga **-ing** qo'shimchasi qo'shilishi natijasida **OT** vazifasini bajaradigan shakldir (*reading, swimming, cooking*).\n\n### Gerund vazifalari:\n• **Ega (Subject)**: **Reading** improves vocabulary. / **Swimming** is healthy.\n• **To'ldiruvchi (Object)**: She enjoys **reading**. / They avoid **driving** at night.\n• **Predlogdan keyin (Object of Preposition)**: She is interested in **learning**. / Thank you for **helping**. / They left without **saying** goodbye.\n• **Ega to'ldiruvchisi (Subject Complement)**: His favorite hobby is **reading**.\n\n---\n\n## 5. Gerund va Infinitive taqqoslashi (Gerund vs Infinitive)\n\n### A. Faqat GERUND oladigan fe'llar:\n*enjoy, avoid, consider, suggest, keep, finish, mind, practice, miss, imagine*\n- She enjoys **swimming**.\n- He suggested **leaving** early.\n\n### B. Faqat INFINITIVE oladigan fe'llar:\n*decide, plan, hope, expect, want, need, promise, agree, refuse, learn*\n- She decided **to study**.\n- They hope **to win**.\n\n### C. Har ikkalasini oladigan (ma'nosi o'zgarmaydigan) fe'llar:\n*begin, start, continue, like, love, hate, prefer*\n- I started **running** = I started **to run**.\n\n### D. Formaga qarab MA'NOSI O'ZGARADIGAN fe'llar:\n\n| Fe'l | + Gerund (V-ing) | + Infinitive (to + V) |\n|---|---|---|\n| **stop** | Harakatni butunlay to'xtatish (*I stopped smoking* = tashladim) | Maqsad uchun to'xtash (*I stopped to smoke* = chekish uchun to'xtadim) |\n| **remember** | O'tgan voqeani eslash (*I remember locking the door*) | Bajarilishi kerak bo'lgan ishni eslash (*Remember to lock the door*) |\n| **forget** | O'tmishda bo'lgan voqeani unutish (*I forgot meeting him*) | Qilinishi kerak bo'lgan ishni unutish (*Don't forget to buy milk*) |\n| **try** | Tajriba qilib ko'rish (*Try restarting the computer*) | Harakat qilish, urinish (*Try to restart the computer*) |\n\n---\n\n## 6. Eng ko'p yo'l qo'yiladigan xatolar (Common Mistakes)\n\n1. ❌ *I enjoy to swim.* → ✓ **I enjoy swimming.**\n2. ❌ *She decided going.* → ✓ **She decided to go.**\n3. ❌ *He is interested to learn.* → ✓ **He is interested in learning.**\n4. ❌ *She made me to cry.* → ✓ **She made me cry.**\n5. ❌ *I can to swim.* → ✓ **I can swim.**",
+        "questions": [
+          {
+            "id": 1,
+            "text": "Which sentence contains a LINKING verb?",
+            "options": [
+              "The soup tastes delicious.",
+              "She runs every morning.",
+              "They bought a new car.",
+              "He writes novels."
+            ],
+            "correct": 0,
+            "explanation": "'tastes' connects the subject with an adjective, acting as a linking verb."
+          },
+          {
+            "id": 2,
+            "text": "Which sentence contains an INTRANSITIVE verb?",
+            "options": [
+              "The baby slept peacefully.",
+              "She reads a book.",
+              "They bought a new car.",
+              "He opened the window."
+            ],
+            "correct": 0,
+            "explanation": "'slept' does not take a direct object, making it intransitive."
+          },
+          {
+            "id": 3,
+            "text": "Identify the function of infinitive: 'To travel is exciting.'",
+            "options": [
+              "Subject (Noun)",
+              "Adjective",
+              "Adverb of purpose",
+              "Object of preposition"
+            ],
+            "correct": 0,
+            "explanation": "'To travel' acts as the subject of the sentence."
+          },
+          {
+            "id": 4,
+            "text": "Which verb MUST be followed by a BARE INFINITIVE?",
+            "options": [
+              "can",
+              "decide",
+              "hope",
+              "enjoy"
+            ],
+            "correct": 0,
+            "explanation": "Modal verbs like 'can' are followed by a bare infinitive (can swim)."
+          },
+          {
+            "id": 5,
+            "text": "Correct this sentence: 'She made me to cry.'",
+            "options": [
+              "She made me cry.",
+              "She made me crying.",
+              "She made me to crying.",
+              "She made I cry."
+            ],
+            "correct": 0,
+            "explanation": "Causative verb 'make' takes a bare infinitive: made me cry."
+          },
+          {
+            "id": 6,
+            "text": "Which verb is followed ONLY by a gerund?",
+            "options": [
+              "enjoy",
+              "decide",
+              "hope",
+              "promise"
+            ],
+            "correct": 0,
+            "explanation": "'enjoy' is followed by gerund: enjoy swimming."
+          },
+          {
+            "id": 7,
+            "text": "Which verb is followed ONLY by an infinitive?",
+            "options": [
+              "decide",
+              "enjoy",
+              "avoid",
+              "suggest"
+            ],
+            "correct": 0,
+            "explanation": "'decide' is followed by infinitive: decided to go."
+          },
+          {
+            "id": 8,
+            "text": "What does 'I stopped smoking' mean?",
+            "options": [
+              "I quit smoking permanently.",
+              "I paused what I was doing in order to smoke.",
+              "I tried smoking for the first time.",
+              "I forgot to smoke."
+            ],
+            "correct": 0,
+            "explanation": "stop + V-ing means finishing/quitting the activity."
+          },
+          {
+            "id": 9,
+            "text": "What does 'I stopped to smoke' mean?",
+            "options": [
+              "I paused an activity in order to smoke.",
+              "I quit smoking permanently.",
+              "I hate smoking.",
+              "I remembered smoking in the past."
+            ],
+            "correct": 0,
+            "explanation": "stop + to V means pausing an activity in order to do something."
+          },
+          {
+            "id": 10,
+            "text": "Complete: 'He is interested in ___ new languages.'",
+            "options": [
+              "learning",
+              "to learn",
+              "learn",
+              "learned"
+            ],
+            "correct": 0,
+            "explanation": "After preposition 'in', use gerund: learning."
+          },
+          {
+            "id": 11,
+            "text": "Complete: 'They avoid ___ at night.'",
+            "options": [
+              "driving",
+              "to drive",
+              "drive",
+              "drove"
+            ],
+            "correct": 0,
+            "explanation": "'avoid' is followed by a gerund: driving."
+          },
+          {
+            "id": 12,
+            "text": "Complete: 'She decided ___ abroad for her master's degree.'",
+            "options": [
+              "to study",
+              "studying",
+              "study",
+              "studied"
+            ],
+            "correct": 0,
+            "explanation": "'decide' is followed by an infinitive: to study."
+          },
+          {
+            "id": 13,
+            "text": "Complete: 'My parents let me ___ their car.'",
+            "options": [
+              "drive",
+              "to drive",
+              "driving",
+              "drove"
+            ],
+            "correct": 0,
+            "explanation": "Causative verb 'let' takes a bare infinitive: let me drive."
+          },
+          {
+            "id": 14,
+            "text": "Identify gerund as subject: '___ improves vocabulary.'",
+            "options": [
+              "Reading",
+              "To reading",
+              "Read",
+              "Reads"
+            ],
+            "correct": 0,
+            "explanation": "Gerund 'Reading' acts as subject."
+          },
+          {
+            "id": 15,
+            "text": "Identify bare infinitive after modal: 'You should ___ every day.'",
+            "options": [
+              "study",
+              "to study",
+              "studying",
+              "studied"
+            ],
+            "correct": 0,
+            "explanation": "Modal 'should' takes bare infinitive: study."
+          },
+          {
+            "id": 16,
+            "text": "What does 'Remember to lock the door' mean?",
+            "options": [
+              "Don't forget to do it before leaving.",
+              "Recall the past event of locking the door.",
+              "Try locking the door as an experiment.",
+              "Stop locking the door."
+            ],
+            "correct": 0,
+            "explanation": "remember + to V = remember a task to be performed."
+          },
+          {
+            "id": 17,
+            "text": "What does 'I remember locking the door' mean?",
+            "options": [
+              "I have a memory of doing it in the past.",
+              "Don't forget to lock it.",
+              "I paused in order to lock it.",
+              "I tried locking it."
+            ],
+            "correct": 0,
+            "explanation": "remember + V-ing = recall a past action."
+          },
+          {
+            "id": 18,
+            "text": "Complete: 'I have homework ___ tonight.'",
+            "options": [
+              "to finish",
+              "finishing",
+              "finish",
+              "finished"
+            ],
+            "correct": 0,
+            "explanation": "Infinitive acting as adjective modifying 'homework': to finish."
+          },
+          {
+            "id": 19,
+            "text": "Complete: 'She went outside ___ after work.'",
+            "options": [
+              "to exercise",
+              "exercising",
+              "exercise",
+              "exercised"
+            ],
+            "correct": 0,
+            "explanation": "Infinitive showing purpose: to exercise."
+          },
+          {
+            "id": 20,
+            "text": "Which verb accepts BOTH gerund and infinitive with NO change in meaning?",
+            "options": [
+              "start",
+              "stop",
+              "remember",
+              "forget"
+            ],
+            "correct": 0,
+            "explanation": "'start' accepts both (start running = start to run)."
+          },
+          {
+            "id": 21,
+            "text": "Correct: 'I enjoy to swim in the pool.'",
+            "options": [
+              "I enjoy swimming in the pool.",
+              "I enjoy swim in the pool.",
+              "I enjoy to swimming in the pool.",
+              "I am enjoy swimming."
+            ],
+            "correct": 0,
+            "explanation": "'enjoy' takes gerund: swimming."
+          },
+          {
+            "id": 22,
+            "text": "Correct: 'She decided going to Paris.'",
+            "options": [
+              "She decided to go to Paris.",
+              "She decided go to Paris.",
+              "She decided to going to Paris.",
+              "She decided for going to Paris."
+            ],
+            "correct": 0,
+            "explanation": "'decide' takes infinitive: decided to go."
+          },
+          {
+            "id": 23,
+            "text": "Correct: 'I can to swim across the river.'",
+            "options": [
+              "I can swim across the river.",
+              "I can swimming across the river.",
+              "I can to swimming across.",
+              "I am can swim."
+            ],
+            "correct": 0,
+            "explanation": "Modal 'can' takes bare infinitive: can swim."
+          },
+          {
+            "id": 24,
+            "text": "What type of verb is 'became' in 'He became famous'?",
+            "options": [
+              "Linking Verb",
+              "Action Verb",
+              "Helping Verb",
+              "Intransitive Action Verb"
+            ],
+            "correct": 0,
+            "explanation": "'became' links subject to adjective 'famous'."
+          },
+          {
+            "id": 25,
+            "text": "What type of verb is 'bought' in 'They bought a new car'?",
+            "options": [
+              "Transitive Verb",
+              "Intransitive Verb",
+              "Linking Verb",
+              "Modal Verb"
+            ],
+            "correct": 0,
+            "explanation": "'bought' requires a direct object 'a new car' -> Transitive."
+          },
+          {
+            "id": 26,
+            "text": "Complete: 'Try ___ the computer if it freezes.'",
+            "options": [
+              "restarting",
+              "to restart",
+              "restart",
+              "restarted"
+            ],
+            "correct": 0,
+            "explanation": "try + V-ing means experiment to see if it works."
+          },
+          {
+            "id": 27,
+            "text": "Complete: 'Thank you for ___ me with my bags.'",
+            "options": [
+              "helping",
+              "to help",
+              "help",
+              "helped"
+            ],
+            "correct": 0,
+            "explanation": "After preposition 'for', use gerund: helping."
+          },
+          {
+            "id": 28,
+            "text": "Complete: 'He promised ___ me tomorrow.'",
+            "options": [
+              "to call",
+              "calling",
+              "call",
+              "called"
+            ],
+            "correct": 0,
+            "explanation": "'promise' takes infinitive: promised to call."
+          },
+          {
+            "id": 29,
+            "text": "Complete: 'They suggested ___ early to avoid traffic.'",
+            "options": [
+              "leaving",
+              "to leave",
+              "leave",
+              "left"
+            ],
+            "correct": 0,
+            "explanation": "'suggest' takes gerund: suggested leaving."
+          },
+          {
+            "id": 30,
+            "text": "Which sentence uses an infinitive as an adverb of purpose?",
+            "options": [
+              "She studies hard to pass.",
+              "To travel is my dream.",
+              "I have books to read.",
+              "His job is teaching."
+            ],
+            "correct": 0,
+            "explanation": "'to pass' explains the purpose of studying hard."
+          }
+        ],
+        "fillBlanks": [
+          {
+            "id": 1,
+            "text": "She enjoys ___ (swim) in the sea.",
+            "options": [
+              "swimming",
+              "to swim",
+              "swim",
+              "swam"
+            ],
+            "correct": 0,
+            "explanation": "enjoy + gerund."
+          },
+          {
+            "id": 2,
+            "text": "He decided ___ (buy) a new computer.",
+            "options": [
+              "to buy",
+              "buying",
+              "buy",
+              "bought"
+            ],
+            "correct": 0,
+            "explanation": "decide + infinitive."
+          },
+          {
+            "id": 3,
+            "text": "I can ___ (speak) three languages.",
+            "options": [
+              "speak",
+              "to speak",
+              "speaking",
+              "spoke"
+            ],
+            "correct": 0,
+            "explanation": "modal can + bare infinitive."
+          },
+          {
+            "id": 4,
+            "text": "She made me ___ (apologize) for being late.",
+            "options": [
+              "apologize",
+              "to apologize",
+              "apologizing",
+              "apologized"
+            ],
+            "correct": 0,
+            "explanation": "causative make + bare infinitive."
+          },
+          {
+            "id": 5,
+            "text": "He is interested in ___ (learn) Spanish.",
+            "options": [
+              "learning",
+              "to learn",
+              "learn",
+              "learned"
+            ],
+            "correct": 0,
+            "explanation": "preposition in + gerund."
+          },
+          {
+            "id": 6,
+            "text": "They avoid ___ (drive) during peak hours.",
+            "options": [
+              "driving",
+              "to drive",
+              "drive",
+              "drove"
+            ],
+            "correct": 0,
+            "explanation": "avoid + gerund."
+          },
+          {
+            "id": 7,
+            "text": "She hopes ___ (win) the competition.",
+            "options": [
+              "to win",
+              "winning",
+              "win",
+              "won"
+            ],
+            "correct": 0,
+            "explanation": "hope + infinitive."
+          },
+          {
+            "id": 8,
+            "text": "My parents let me ___ (stay) out late.",
+            "options": [
+              "stay",
+              "to stay",
+              "staying",
+              "stayed"
+            ],
+            "correct": 0,
+            "explanation": "causative let + bare infinitive."
+          },
+          {
+            "id": 9,
+            "text": "___ (swim) is good exercise.",
+            "options": [
+              "Swimming",
+              "To swim",
+              "Swim",
+              "Swam"
+            ],
+            "correct": 0,
+            "explanation": "Gerund as subject."
+          },
+          {
+            "id": 10,
+            "text": "He stopped ___ (smoke) two years ago.",
+            "options": [
+              "smoking",
+              "to smoke",
+              "smoke",
+              "smoked"
+            ],
+            "correct": 0,
+            "explanation": "stop + V-ing = quit activity."
+          },
+          {
+            "id": 11,
+            "text": "Remember ___ (lock) the door before leaving.",
+            "options": [
+              "to lock",
+              "locking",
+              "lock",
+              "locked"
+            ],
+            "correct": 0,
+            "explanation": "remember + to V = task to do."
+          },
+          {
+            "id": 12,
+            "text": "I have a lot of work ___ (do).",
+            "options": [
+              "to do",
+              "doing",
+              "do",
+              "done"
+            ],
+            "correct": 0,
+            "explanation": "Infinitive modifying noun."
+          },
+          {
+            "id": 13,
+            "text": "She studies hard ___ (pass) her exams.",
+            "options": [
+              "to pass",
+              "passing",
+              "pass",
+              "passed"
+            ],
+            "correct": 0,
+            "explanation": "Infinitive of purpose."
+          },
+          {
+            "id": 14,
+            "text": "They promised ___ (help) us move.",
+            "options": [
+              "to help",
+              "helping",
+              "help",
+              "helped"
+            ],
+            "correct": 0,
+            "explanation": "promise + infinitive."
+          },
+          {
+            "id": 15,
+            "text": "He suggested ___ (go) to the cinema.",
+            "options": [
+              "going",
+              "to go",
+              "go",
+              "went"
+            ],
+            "correct": 0,
+            "explanation": "suggest + gerund."
+          },
+          {
+            "id": 16,
+            "text": "Thank you for ___ (invite) me.",
+            "options": [
+              "inviting",
+              "to invite",
+              "invite",
+              "invited"
+            ],
+            "correct": 0,
+            "explanation": "preposition for + gerund."
+          },
+          {
+            "id": 17,
+            "text": "Try ___ (restart) the phone to see if it fixes the bug.",
+            "options": [
+              "restarting",
+              "to restart",
+              "restart",
+              "restarted"
+            ],
+            "correct": 0,
+            "explanation": "try + V-ing = experiment."
+          },
+          {
+            "id": 18,
+            "text": "The soup tastes ___ (delicious).",
+            "options": [
+              "delicious",
+              "deliciously",
+              "to delicious",
+              "being delicious"
+            ],
+            "correct": 0,
+            "explanation": "Linking verb + adjective."
+          },
+          {
+            "id": 19,
+            "text": "They bought a new ___ (car).",
+            "options": [
+              "car",
+              "driving",
+              "to drive",
+              "fast"
+            ],
+            "correct": 0,
+            "explanation": "Transitive verb + direct object."
+          },
+          {
+            "id": 20,
+            "text": "She started ___ (cry) when she heard the news.",
+            "options": [
+              "crying",
+              "to cry",
+              "cry",
+              "cried"
+            ],
+            "correct": 0,
+            "explanation": "start accepts both crying / to cry."
+          }
+        ],
+        "scrambled": [
+          {
+            "id": 1,
+            "words": [
+              "she",
+              "enjoys",
+              "swimming",
+              "in",
+              "the",
+              "pool"
+            ],
+            "answer": "She enjoys swimming in the pool.",
+            "explanation": "enjoy + gerund."
+          },
+          {
+            "id": 2,
+            "words": [
+              "he",
+              "decided",
+              "to",
+              "study",
+              "abroad"
+            ],
+            "answer": "He decided to study abroad.",
+            "explanation": "decide + infinitive."
+          },
+          {
+            "id": 3,
+            "words": [
+              "she",
+              "made",
+              "me",
+              "apologize",
+              "for",
+              "it"
+            ],
+            "answer": "She made me apologize for it.",
+            "explanation": "causative make + bare infinitive."
+          },
+          {
+            "id": 4,
+            "words": [
+              "reading",
+              "improves",
+              "your",
+              "vocabulary",
+              "a",
+              "lot"
+            ],
+            "answer": "Reading improves your vocabulary a lot.",
+            "explanation": "Gerund as subject."
+          },
+          {
+            "id": 5,
+            "words": [
+              "they",
+              "avoid",
+              "driving",
+              "at",
+              "night"
+            ],
+            "answer": "They avoid driving at night.",
+            "explanation": "avoid + gerund."
+          },
+          {
+            "id": 6,
+            "words": [
+              "she",
+              "studies",
+              "hard",
+              "to",
+              "pass",
+              "exams"
+            ],
+            "answer": "She studies hard to pass exams.",
+            "explanation": "Infinitive of purpose."
+          },
+          {
+            "id": 7,
+            "words": [
+              "he",
+              "stopped",
+              "smoking",
+              "two",
+              "years",
+              "ago"
+            ],
+            "answer": "He stopped smoking two years ago.",
+            "explanation": "stop + V-ing."
+          },
+          {
+            "id": 8,
+            "words": [
+              "remember",
+              "to",
+              "lock",
+              "the",
+              "front",
+              "door"
+            ],
+            "answer": "Remember to lock the front door.",
+            "explanation": "remember + to V."
+          },
+          {
+            "id": 9,
+            "words": [
+              "my",
+              "parents",
+              "let",
+              "me",
+              "drive",
+              "car"
+            ],
+            "answer": "My parents let me drive car.",
+            "explanation": "let + bare infinitive."
+          },
+          {
+            "id": 10,
+            "words": [
+              "he",
+              "is",
+              "interested",
+              "in",
+              "learning",
+              "languages"
+            ],
+            "answer": "He is interested in learning languages.",
+            "explanation": "preposition + gerund."
+          },
+          {
+            "id": 11,
+            "words": [
+              "they",
+              "hope",
+              "to",
+              "win",
+              "the",
+              "match"
+            ],
+            "answer": "They hope to win the match.",
+            "explanation": "hope + infinitive."
+          },
+          {
+            "id": 12,
+            "words": [
+              "she",
+              "suggested",
+              "leaving",
+              "early",
+              "today"
+            ],
+            "answer": "She suggested leaving early today.",
+            "explanation": "suggest + gerund."
+          },
+          {
+            "id": 13,
+            "words": [
+              "the",
+              "soup",
+              "tastes",
+              "very",
+              "delicious",
+              "tonight"
+            ],
+            "answer": "The soup tastes very delicious tonight.",
+            "explanation": "Linking verb + adjective."
+          },
+          {
+            "id": 14,
+            "words": [
+              "he",
+              "promised",
+              "to",
+              "call",
+              "me",
+              "later"
+            ],
+            "answer": "He promised to call me later.",
+            "explanation": "promise + infinitive."
+          },
+          {
+            "id": 15,
+            "words": [
+              "thank",
+              "you",
+              "for",
+              "helping",
+              "us",
+              "today"
+            ],
+            "answer": "Thank you for helping us today.",
+            "explanation": "for + gerund."
+          }
+        ],
+        "errorCorrection": [
+          {
+            "id": 1,
+            "words": [
+              "I",
+              "enjoy",
+              "to",
+              "swim",
+              "in",
+              "sea."
+            ],
+            "answer": "I enjoy swimming in the sea.",
+            "explanation": "'enjoy' fe'lidan keyin Gerund (swimming) ishlatiladi."
+          },
+          {
+            "id": 2,
+            "words": [
+              "She",
+              "decided",
+              "going",
+              "to",
+              "college."
+            ],
+            "answer": "She decided to go to college.",
+            "explanation": "'decide' fe'lidan keyin Infinitive (to go) keladi."
+          },
+          {
+            "id": 3,
+            "words": [
+              "He",
+              "is",
+              "interested",
+              "to",
+              "learn",
+              "English."
+            ],
+            "answer": "He is interested in learning English.",
+            "explanation": "'interested in' predlogidan keyin Gerund (learning) keladi."
+          },
+          {
+            "id": 4,
+            "words": [
+              "She",
+              "made",
+              "me",
+              "to",
+              "cry",
+              "yesterday."
+            ],
+            "answer": "She made me cry yesterday.",
+            "explanation": "'make' majburlovchi fe'lidan keyin Bare Infinitive (cry) ishlatiladi."
+          },
+          {
+            "id": 5,
+            "words": [
+              "I",
+              "can",
+              "to",
+              "swim",
+              "very",
+              "fast."
+            ],
+            "answer": "I can swim very fast.",
+            "explanation": "Modal 'can' dan keyin Bare Infinitive (swim) keladi."
+          },
+          {
+            "id": 6,
+            "words": [
+              "They",
+              "avoid",
+              "to",
+              "drive",
+              "at",
+              "night."
+            ],
+            "answer": "They avoid driving at night.",
+            "explanation": "'avoid' fe'li gerund (driving) oladi."
+          },
+          {
+            "id": 7,
+            "words": [
+              "He",
+              "stopped",
+              "to",
+              "smoke",
+              "two",
+              "years",
+              "ago."
+            ],
+            "answer": "He stopped smoking two years ago.",
+            "explanation": "Chekishni tashladi ma'nosida 'stopped smoking' bo'ladi."
+          },
+          {
+            "id": 8,
+            "words": [
+              "She",
+              "suggested",
+              "to",
+              "leave",
+              "early."
+            ],
+            "answer": "She suggested leaving early.",
+            "explanation": "'suggest' fe'lidan keyin gerund (leaving) ishlatiladi."
+          },
+          {
+            "id": 9,
+            "words": [
+              "My",
+              "father",
+              "let",
+              "me",
+              "to",
+              "drive."
+            ],
+            "answer": "My father let me drive.",
+            "explanation": "'let' fe'lidan keyin to'sioqsiz bare infinitive (drive) keladi."
+          },
+          {
+            "id": 10,
+            "words": [
+              "The",
+              "soup",
+              "tastes",
+              "deliciously",
+              "today."
+            ],
+            "answer": "The soup tastes delicious today.",
+            "explanation": "Linking verb 'tastes' sifat (delicious) oladi, ravish emas."
+          },
+          {
+            "id": 11,
+            "words": [
+              "They",
+              "promised",
+              "calling",
+              "me",
+              "back."
+            ],
+            "answer": "They promised to call me back.",
+            "explanation": "'promise' infinitive (to call) oladi."
+          },
+          {
+            "id": 12,
+            "words": [
+              "Thank",
+              "you",
+              "for",
+              "to",
+              "help",
+              "me."
+            ],
+            "answer": "Thank you for helping me.",
+            "explanation": "Predlog 'for' dan keyin gerund (helping) keladi."
+          },
+          {
+            "id": 13,
+            "words": [
+              "To",
+              "read",
+              "improves",
+              "vocabulary",
+              "a",
+              "lot."
+            ],
+            "answer": "Reading improves vocabulary a lot.",
+            "explanation": "Ega o'rnida gerund (Reading) ishlatilishi odatiyroq."
+          },
+          {
+            "id": 14,
+            "words": [
+              "She",
+              "hopes",
+              "winning",
+              "the",
+              "match."
+            ],
+            "answer": "She hopes to win the match.",
+            "explanation": "'hope' infinitive (to win) oladi."
+          },
+          {
+            "id": 15,
+            "words": [
+              "He",
+              "helped",
+              "me",
+              "to",
+              "carries",
+              "bag."
+            ],
+            "answer": "He helped me carry the bag.",
+            "explanation": "'help' bare infinitive (carry) oladi."
+          }
+        ],
+        "transform": [
+          {
+            "id": 1,
+            "original": "She likes to swim in the sea.",
+            "answer": "She enjoys swimming in the sea.",
+            "explanation": "enjoy + gerund"
+          },
+          {
+            "id": 2,
+            "original": "She made a decision that she would go to university.",
+            "answer": "She decided to go to university.",
+            "explanation": "decide + infinitive"
+          },
+          {
+            "id": 3,
+            "original": "He has an interest in learning new skills.",
+            "answer": "He is interested in learning new skills.",
+            "explanation": "interested in + gerund"
+          },
+          {
+            "id": 4,
+            "original": "She forced me to apologize.",
+            "answer": "She made me apologize.",
+            "explanation": "made me + bare infinitive"
+          },
+          {
+            "id": 5,
+            "original": "My father gave me permission to drive his car.",
+            "answer": "My father let me drive his car.",
+            "explanation": "let me + bare infinitive"
+          },
+          {
+            "id": 6,
+            "original": "I quit smoking two years ago.",
+            "answer": "I stopped smoking two years ago.",
+            "explanation": "stopped + gerund"
+          },
+          {
+            "id": 7,
+            "original": "I paused my work in order to smoke a cigarette.",
+            "answer": "I stopped to smoke a cigarette.",
+            "explanation": "stopped + to V"
+          },
+          {
+            "id": 8,
+            "original": "Do not forget to lock the door before leaving.",
+            "answer": "Remember to lock the door before leaving.",
+            "explanation": "remember + to V"
+          },
+          {
+            "id": 9,
+            "original": "I have a memory of meeting him years ago.",
+            "answer": "I remember meeting him years ago.",
+            "explanation": "remember + gerund"
+          },
+          {
+            "id": 10,
+            "original": "They proposed leaving early to avoid traffic.",
+            "answer": "They suggested leaving early to avoid traffic.",
+            "explanation": "suggested + gerund"
+          },
+          {
+            "id": 11,
+            "original": "She studies hard because she wants to pass.",
+            "answer": "She studies hard to pass.",
+            "explanation": "Infinitive of purpose"
+          },
+          {
+            "id": 12,
+            "original": "He gave a promise that he would help us.",
+            "answer": "He promised to help us.",
+            "explanation": "promised + infinitive"
+          },
+          {
+            "id": 13,
+            "original": "They have a wish to win the championship.",
+            "answer": "They hope to win the championship.",
+            "explanation": "hope + infinitive"
+          },
+          {
+            "id": 14,
+            "original": "Try restarting the router to fix the internet.",
+            "answer": "Try to restart the router to fix the internet.",
+            "explanation": "try + gerund / infinitive"
+          },
+          {
+            "id": 15,
+            "original": "She left the room without telling anyone goodbye.",
+            "answer": "She left without saying goodbye.",
+            "explanation": "without + gerund"
+          }
+        ],
+        "dialogue": [
+          {
+            "id": 1,
+            "situation": "Talking about favorite hobbies.",
+            "dialogue": "A: What do you like doing in your free time?\nB: I really enjoy ___ in the ocean.",
+            "options": [
+              "swimming",
+              "to swim",
+              "swim",
+              "swam"
+            ],
+            "correct": 0,
+            "explanation": "enjoy + gerund."
+          },
+          {
+            "id": 2,
+            "situation": "Discussing future plans.",
+            "dialogue": "A: What are your plans for next year?\nB: I decided ___ computer science.",
+            "options": [
+              "to study",
+              "studying",
+              "study",
+              "studied"
+            ],
+            "correct": 0,
+            "explanation": "decided + infinitive."
+          },
+          {
+            "id": 3,
+            "situation": "Talking about strict parents.",
+            "dialogue": "A: Did your mom get angry?\nB: Yes, she made me ___ for breaking the vase.",
+            "options": [
+              "apologize",
+              "to apologize",
+              "apologizing",
+              "apologized"
+            ],
+            "correct": 0,
+            "explanation": "make + bare infinitive."
+          },
+          {
+            "id": 4,
+            "situation": "Talking about driving permission.",
+            "dialogue": "A: Can you drive to the store?\nB: Yes, my dad let me ___ his car today.",
+            "options": [
+              "drive",
+              "to drive",
+              "driving",
+              "drove"
+            ],
+            "correct": 0,
+            "explanation": "let + bare infinitive."
+          },
+          {
+            "id": 5,
+            "situation": "Asking about language skills.",
+            "dialogue": "A: Do you speak French?\nB: I am very interested in ___ it soon.",
+            "options": [
+              "learning",
+              "to learn",
+              "learn",
+              "learned"
+            ],
+            "correct": 0,
+            "explanation": "preposition in + gerund."
+          },
+          {
+            "id": 6,
+            "situation": "Asking about health habits.",
+            "dialogue": "A: Did your uncle quit smoking?\nB: Yes, he stopped ___ two years ago.",
+            "options": [
+              "smoking",
+              "to smoke",
+              "smoke",
+              "smoked"
+            ],
+            "correct": 0,
+            "explanation": "stopped smoking = quit."
+          },
+          {
+            "id": 7,
+            "situation": "Leaving the house reminder.",
+            "dialogue": "A: Don't forget the keys!\nB: Yes, remember ___ the door behind you.",
+            "options": [
+              "to lock",
+              "locking",
+              "lock",
+              "locked"
+            ],
+            "correct": 0,
+            "explanation": "remember + to lock."
+          },
+          {
+            "id": 8,
+            "situation": "Talking about a trip goal.",
+            "dialogue": "A: Why are you saving money?\nB: We hope ___ abroad next summer.",
+            "options": [
+              "to travel",
+              "traveling",
+              "travel",
+              "traveled"
+            ],
+            "correct": 0,
+            "explanation": "hope + infinitive."
+          },
+          {
+            "id": 9,
+            "situation": "Suggesting a restaurant.",
+            "dialogue": "A: Where should we eat?\nB: She suggested ___ that new Italian place.",
+            "options": [
+              "trying",
+              "to try",
+              "try",
+              "tried"
+            ],
+            "correct": 0,
+            "explanation": "suggested + gerund."
+          },
+          {
+            "id": 10,
+            "situation": "Saying thank you.",
+            "dialogue": "A: Thank you for coming!\nB: Thank you for ___ me to your party.",
+            "options": [
+              "inviting",
+              "to invite",
+              "invite",
+              "invited"
+            ],
+            "correct": 0,
+            "explanation": "for + gerund."
+          },
+          {
+            "id": 11,
+            "situation": "Troubleshooting a computer issue.",
+            "dialogue": "A: My screen is frozen.\nB: Try ___ the laptop first.",
+            "options": [
+              "restarting",
+              "to restart",
+              "restart",
+              "restarted"
+            ],
+            "correct": 0,
+            "explanation": "try + gerund."
+          },
+          {
+            "id": 12,
+            "situation": "Complimenting dinner.",
+            "dialogue": "A: How is the steak?\nB: It tastes absolutely ___ !",
+            "options": [
+              "delicious",
+              "deliciously",
+              "to delicious",
+              "being delicious"
+            ],
+            "correct": 0,
+            "explanation": "Linking verb tastes + adjective."
+          },
+          {
+            "id": 13,
+            "situation": "Asking about study motivation.",
+            "dialogue": "A: Why do you stay up late studying?\nB: I study hard ___ my final exams.",
+            "options": [
+              "to pass",
+              "passing",
+              "pass",
+              "passed"
+            ],
+            "correct": 0,
+            "explanation": "Infinitive of purpose."
+          },
+          {
+            "id": 14,
+            "situation": "Asking about traffic avoidance.",
+            "dialogue": "A: How can we avoid traffic?\nB: We should avoid ___ during peak hours.",
+            "options": [
+              "driving",
+              "to drive",
+              "drive",
+              "drove"
+            ],
+            "correct": 0,
+            "explanation": "avoid + gerund."
+          },
+          {
+            "id": 15,
+            "situation": "Talking about a promised favor.",
+            "dialogue": "A: Will he help us move furniture?\nB: Yes, he promised ___ us tomorrow morning.",
+            "options": [
+              "to help",
+              "helping",
+              "help",
+              "helped"
+            ],
+            "correct": 0,
+            "explanation": "promised + infinitive."
+          }
+        ]
+      },
+      {
+        "id": "infinitive-forms-structures-gerund",
+        "title": "The Infinitive & Gerund: Advanced Forms",
+        "icon": "🎯",
+        "guide": "## 🎯 The Infinitive & The Gerund: Advanced Structures & Forms (Infinitive va Gerund: Murakkab Shakllar va Iboralar)\n\nUshbu darsda **Infinitive (to + V)** va **Gerund (V-ing)** ning 6 ta zamon/nisbat shakli, **Infinitive as Subject (It-structure)**, **Special Phrases + Infinitive**, **Bare Infinitive (Causative & Perception verbs)** hamda **Infinitive Negation & Timing** qoidalari chuqur o'rganiladi.\n\n---\n\n## 1. Infinitive ning 6 ta shakli (6 Forms of the Infinitive)\n\nInfinitive faqat oddiy `to + V` emas, balki zamon va nisbatga qarab 6 xil ko'rinishga ega:\n\n| Shakli | Formula | Misol |\n|---|---|---|\n| **Present Infinitive** | `to + V` | I want **to learn** English. |\n| **Present Continuous Inf.** | `to be + V-ing` | She seems **to be enjoying** the party right now. |\n| **Perfect Infinitive** | `to have + V3` | He claims **to have met** the President. *(asosiy fe'ldan avval bajarilgan)* |\n| **Perfect Continuous Inf.** | `to have been + V-ing` | They appeared **to have been waiting** for hours. |\n| **Present Passive Inf.** | `to be + V3` | This task needs **to be completed** today. |\n| **Perfect Passive Inf.** | `to have been + V3` | The work appears **to have been done**. |\n\n---\n\n## 2. Infinitive ega vazifasida: Direct Structure vs It-Structure\n\nInfinitive gapning EGASI bo'lib kelganda har doim **BIRLIK FE'L (singular verb: is, seems, appears)** oladi. Modern ingliz tilida **It-Structure** ko'proq ishlatiladi:\n\n• **Direct Structure**: **To compromise** appears advisable.\n• **It-Structure (Ma'qulroq shakli)**: **It appears advisable to compromise.**\n\n• **Direct**: **To go overseas alone** is very brave.\n• **It-Structure**: **It is very brave to go overseas alone.**\n\n• **Direct**: **To lean out of the window** is dangerous.\n• **It-Structure**: **It is dangerous to lean out of the window.**\n\n• **Direct**: **To have made the same mistake** was unforgivable.\n• **It-Structure**: **It was unforgivable to have made the same mistake.**\n\n---\n\n## 3. Infinitive bilan keladigan maxsus iboralar (Special Phrases + Infinitive)\n\nQuyidagi iboralardan keyin har doim **to-infinitive** ishlatiladi:\n\n• **be about to** (*...gani turmoq, arafasida bo'lmoq*): He is just **about to leave**.\n• **be able to** (*...da olmoq*): Are you **able to drive** in the dark?\n• **can't afford to** (*...ga qurbi yetmaslik*): We can't **afford to live** in the centre.\n• **take the trouble to** (*zahmat chekmoq, urinib ko'rmoq*): He took the **trouble to answer** personally.\n• **do one's best to** (*qo'lidan kelgancha harakat qilmoq*): She did her **best to pass** the exam.\n• **make every effort to** (*barcha imkoniyatni ishga solmoq*): The police make every **effort to reduce** crime.\n• **make up one's mind to** (*bir qarorga kelmoq*): He hasn't **made up his mind to wait**.\n• **set out to** (*maqsad qilib yo'lga chiqmoq*): They **set out to discover** a cure.\n• **turn out to** (*bo'lib chiqmoq*): She **turned out to know** him from childhood.\n• **it occurs to sb to** (*xayoliga kelmoq*): It **occurred to me to call** her first.\n\n---\n\n## 4. Inkor va Vaqt nisbati (Negation & Timing with Infinitives)\n\n### A. Infinitive inkori (Negation):\nInkor yuklamasi **NOT** har doim *to* dan **OLDIN** qo'yiladi:\n- Joe pretended **not to notice**. (❌ *to not notice* — stilistik xato)\n- I decided **not to go** to the party.\n- She asked us **not to be late**.\n\n### B. Timing (Perfect Infinitive: `to have + V3`):\nIsh-harakat asosiy fe'ldan **OLDINROQ** sodir bo'lganini ko'rsatish uchun ishlatiladi:\n- He claims **to have met** the President. *(Avval ko'rishgan, keyin aytmoqda)*\n- She appears **to have left** already. *(Avval ketgan, hozir shunday ko'rinmoqda)*\n- They proved **to have known** the truth.\n\n---\n\n## 5. Bare Infinitive: Causative & Perception Verbs\n\n*to* yuklamasisiz ishlatiladigan Bare Infinitive 2 ta asosiy guruhda keladi:\n\n1. **Causative Verbs (Sababchi fe'llar: make, let, have)**:\n   - *make*: She made us **wait** for half an hour.\n   - *let*: John lets the dog **sleep** on the sofa.\n   - *have*: I'll have them **fix** the car by noon.\n2. **Perception Verbs (Hissiyot/Payqash fe'llari: see, hear, watch, feel, notice)**:\n   - *see*: I saw him **leave** the building.\n   - *hear*: She heard the baby **cry** at night.\n   - *watch*: We watched the sun **rise** over the hills.\n\n> 💡 **HELP FE'LI**: *help* fe'lidan keyin *to* ni qoldirish ham, olib tashlash ham to'g'ri: *She helped me (to) carry the bags.*",
+        "questions": [
+          {
+            "id": 1,
+            "text": "Which is the preferred modern structure for 'To lean out of the window is dangerous'?",
+            "options": [
+              "It is dangerous to lean out of the window.",
+              "Leaning out of window is dangerous.",
+              "To lean out of window is being dangerous.",
+              "It is dangerous leaning out."
+            ],
+            "correct": 0,
+            "explanation": "It-structure (It is + adj + to-infinitive) is preferred in modern English."
+          },
+          {
+            "id": 2,
+            "text": "Which form of infinitive is used in: 'She seems to be enjoying the party'?",
+            "options": [
+              "Present Continuous Infinitive",
+              "Present Infinitive Passive",
+              "Perfect Infinitive",
+              "Perfect Continuous Infinitive"
+            ],
+            "correct": 0,
+            "explanation": "'to be + V-ing' is the Present Continuous Infinitive."
+          },
+          {
+            "id": 3,
+            "text": "What does 'He claims to have met the President' mean?",
+            "options": [
+              "He claims that he met the President in the past (before claiming).",
+              "He wants to meet the President now.",
+              "He will meet the President soon.",
+              "He is meeting the President right now."
+            ],
+            "correct": 0,
+            "explanation": "Perfect Infinitive 'to have V3' indicates action happened before the main verb."
+          },
+          {
+            "id": 4,
+            "text": "Where must 'NOT' be placed when negating an infinitive?",
+            "options": [
+              "Directly BEFORE the infinitive (not to + V)",
+              "Between 'to' and the verb (to not + V)",
+              "After the verb",
+              "At the end of sentence"
+            ],
+            "correct": 0,
+            "explanation": "'not' is placed before the infinitive: not to go."
+          },
+          {
+            "id": 5,
+            "text": "Complete: 'She made us ___ for half an hour.'",
+            "options": [
+              "wait",
+              "to wait",
+              "waiting",
+              "waited"
+            ],
+            "correct": 0,
+            "explanation": "Causative verb 'make' takes bare infinitive: made us wait."
+          },
+          {
+            "id": 6,
+            "text": "Complete: 'John lets the dog ___ on the sofa.'",
+            "options": [
+              "sleep",
+              "to sleep",
+              "sleeping",
+              "slept"
+            ],
+            "correct": 0,
+            "explanation": "Causative verb 'let' takes bare infinitive: lets the dog sleep."
+          },
+          {
+            "id": 7,
+            "text": "Complete: 'I saw him ___ the building at 9 PM.'",
+            "options": [
+              "leave",
+              "to leave",
+              "left",
+              "to be left"
+            ],
+            "correct": 0,
+            "explanation": "Perception verb 'see' takes bare infinitive (or V-ing): saw him leave."
+          },
+          {
+            "id": 8,
+            "text": "Complete: 'We watched the sun ___ over the hills.'",
+            "options": [
+              "rise",
+              "to rise",
+              "rose",
+              "risen"
+            ],
+            "correct": 0,
+            "explanation": "Perception verb 'watch' takes bare infinitive: watched the sun rise."
+          },
+          {
+            "id": 9,
+            "text": "Complete: 'He is just about ___ the office.'",
+            "options": [
+              "to leave",
+              "leaving",
+              "leave",
+              "left"
+            ],
+            "correct": 0,
+            "explanation": "'be about to' expression takes to-infinitive."
+          },
+          {
+            "id": 10,
+            "text": "Complete: 'We can't afford ___ in the city centre.'",
+            "options": [
+              "to live",
+              "living",
+              "live",
+              "lived"
+            ],
+            "correct": 0,
+            "explanation": "'can't afford to' takes to-infinitive."
+          },
+          {
+            "id": 11,
+            "text": "Complete: 'The police make every effort ___ crime.'",
+            "options": [
+              "to reduce",
+              "reducing",
+              "reduce",
+              "reduced"
+            ],
+            "correct": 0,
+            "explanation": "'make every effort to' takes to-infinitive."
+          },
+          {
+            "id": 12,
+            "text": "Complete: 'He hasn't made up his mind ___ for them.'",
+            "options": [
+              "to wait",
+              "waiting",
+              "wait",
+              "waited"
+            ],
+            "correct": 0,
+            "explanation": "'make up one's mind to' takes to-infinitive."
+          },
+          {
+            "id": 13,
+            "text": "Complete: 'They set out ___ a cure for cancer.'",
+            "options": [
+              "to discover",
+              "discovering",
+              "discover",
+              "discovered"
+            ],
+            "correct": 0,
+            "explanation": "'set out to' takes to-infinitive."
+          },
+          {
+            "id": 14,
+            "text": "Complete: 'She turned out ___ him from childhood.'",
+            "options": [
+              "to know",
+              "knowing",
+              "know",
+              "known"
+            ],
+            "correct": 0,
+            "explanation": "'turn out to' takes to-infinitive."
+          },
+          {
+            "id": 15,
+            "text": "Complete: 'It occurred to me ___ her first.'",
+            "options": [
+              "to call",
+              "calling",
+              "call",
+              "called"
+            ],
+            "correct": 0,
+            "explanation": "'it occurs to sb to' takes to-infinitive."
+          },
+          {
+            "id": 16,
+            "text": "Identify passive infinitive: 'This task needs ___ today.'",
+            "options": [
+              "to be completed",
+              "to complete",
+              "completing",
+              "completed"
+            ],
+            "correct": 0,
+            "explanation": "Present Passive Infinitive: to be completed."
+          },
+          {
+            "id": 17,
+            "text": "Identify perfect passive infinitive: 'The work appears ___ already.'",
+            "options": [
+              "to have been done",
+              "to be done",
+              "doing",
+              "to have done"
+            ],
+            "correct": 0,
+            "explanation": "Perfect Passive Infinitive: to have been done."
+          },
+          {
+            "id": 18,
+            "text": "Correct: 'To arrive late are rude.'",
+            "options": [
+              "To arrive late IS rude.",
+              "To arrive late be rude.",
+              "To arriving late is rude.",
+              "To arrive late were rude."
+            ],
+            "correct": 0,
+            "explanation": "Infinitive as subject always takes a SINGULAR verb (is)."
+          },
+          {
+            "id": 19,
+            "text": "Correct: 'Joe pretended to not notice the mistake.'",
+            "options": [
+              "Joe pretended not to notice the mistake.",
+              "Joe pretended not notice.",
+              "Joe pretended to notice not.",
+              "Joe pretended don't notice."
+            ],
+            "correct": 0,
+            "explanation": "'not' comes BEFORE the infinitive: not to notice."
+          },
+          {
+            "id": 20,
+            "text": "Complete: 'They appeared ___ for hours.'",
+            "options": [
+              "to have been waiting",
+              "to wait",
+              "waiting",
+              "to be wait"
+            ],
+            "correct": 0,
+            "explanation": "Perfect Continuous Infinitive: to have been waiting."
+          },
+          {
+            "id": 21,
+            "text": "Which verb allows BOTH bare infinitive and to-infinitive?",
+            "options": [
+              "help",
+              "make",
+              "let",
+              "see"
+            ],
+            "correct": 0,
+            "explanation": "'help' accepts both: help me carry / help me to carry."
+          },
+          {
+            "id": 22,
+            "text": "Rewrite: 'To save money seems impossible these days.'",
+            "options": [
+              "It seems impossible to save money these days.",
+              "It is save money impossible.",
+              "To saving money seems impossible.",
+              "It seems impossible saving money."
+            ],
+            "correct": 0,
+            "explanation": "It-structure: It seems impossible to save..."
+          },
+          {
+            "id": 23,
+            "text": "Complete: 'She asked us ___ late for the meeting.'",
+            "options": [
+              "not to be",
+              "to not be",
+              "not being",
+              "no to be"
+            ],
+            "correct": 0,
+            "explanation": "Negation: not to be late."
+          },
+          {
+            "id": 24,
+            "text": "Complete: 'The treatment proved ___ a mistake.'",
+            "options": [
+              "to have been",
+              "to be being",
+              "having been",
+              "to been"
+            ],
+            "correct": 0,
+            "explanation": "Perfect Infinitive: to have been a mistake."
+          },
+          {
+            "id": 25,
+            "text": "Complete: 'She did her best ___ the final exam.'",
+            "options": [
+              "to pass",
+              "passing",
+              "pass",
+              "passed"
+            ],
+            "correct": 0,
+            "explanation": "'do one's best to' takes to-infinitive."
+          },
+          {
+            "id": 26,
+            "text": "Complete: 'I'll have them ___ the car by noon.'",
+            "options": [
+              "fix",
+              "to fix",
+              "fixing",
+              "fixed"
+            ],
+            "correct": 0,
+            "explanation": "Causative 'have' + object + bare infinitive: fix."
+          },
+          {
+            "id": 27,
+            "text": "Complete: 'She heard the baby ___ at night.'",
+            "options": [
+              "cry",
+              "to cry",
+              "cried",
+              "to be crying"
+            ],
+            "correct": 0,
+            "explanation": "Perception verb 'hear' + bare infinitive: cry."
+          },
+          {
+            "id": 28,
+            "text": "Complete: 'He took the trouble ___ personally.'",
+            "options": [
+              "to answer",
+              "answering",
+              "answer",
+              "answered"
+            ],
+            "correct": 0,
+            "explanation": "'take the trouble to' takes to-infinitive."
+          },
+          {
+            "id": 29,
+            "text": "Rewrite: 'To compromise appears advisable.'",
+            "options": [
+              "It appears advisable to compromise.",
+              "To compromising appears advisable.",
+              "It appears to compromise advisable.",
+              "Advisable to compromise it is."
+            ],
+            "correct": 0,
+            "explanation": "It-structure: It appears advisable to compromise."
+          },
+          {
+            "id": 30,
+            "text": "What form is 'to have been V-ing'?",
+            "options": [
+              "Perfect Continuous Infinitive",
+              "Present Continuous Infinitive",
+              "Perfect Passive Infinitive",
+              "Bare Infinitive"
+            ],
+            "correct": 0,
+            "explanation": "to have been V-ing = Perfect Continuous Infinitive."
+          }
+        ],
+        "fillBlanks": [
+          {
+            "id": 1,
+            "text": "It is dangerous ___ (lean) out of the window.",
+            "options": [
+              "to lean",
+              "leaning",
+              "lean",
+              "leaned"
+            ],
+            "correct": 0,
+            "explanation": "It is + adj + to-infinitive."
+          },
+          {
+            "id": 2,
+            "text": "She seems ___ (enjoy) the party right now.",
+            "options": [
+              "to be enjoying",
+              "to enjoy",
+              "enjoying",
+              "enjoyed"
+            ],
+            "correct": 0,
+            "explanation": "Present Continuous Infinitive: to be enjoying."
+          },
+          {
+            "id": 3,
+            "text": "He claims ___ (meet) the President years ago.",
+            "options": [
+              "to have met",
+              "to meet",
+              "meeting",
+              "met"
+            ],
+            "correct": 0,
+            "explanation": "Perfect Infinitive: to have met."
+          },
+          {
+            "id": 4,
+            "text": "Joe pretended ___ (not notice) the mistake.",
+            "options": [
+              "not to notice",
+              "to not notice",
+              "not noticing",
+              "no notice"
+            ],
+            "correct": 0,
+            "explanation": "Negation: not to notice."
+          },
+          {
+            "id": 5,
+            "text": "She made us ___ (wait) for half an hour.",
+            "options": [
+              "wait",
+              "to wait",
+              "waiting",
+              "waited"
+            ],
+            "correct": 0,
+            "explanation": "make + bare infinitive."
+          },
+          {
+            "id": 6,
+            "text": "John lets the dog ___ (sleep) on the sofa.",
+            "options": [
+              "sleep",
+              "to sleep",
+              "sleeping",
+              "slept"
+            ],
+            "correct": 0,
+            "explanation": "let + bare infinitive."
+          },
+          {
+            "id": 7,
+            "text": "I saw him ___ (leave) the building.",
+            "options": [
+              "leave",
+              "to leave",
+              "left",
+              "to leaving"
+            ],
+            "correct": 0,
+            "explanation": "see + bare infinitive."
+          },
+          {
+            "id": 8,
+            "text": "We watched the sun ___ (rise) over the hills.",
+            "options": [
+              "rise",
+              "to rise",
+              "rose",
+              "risen"
+            ],
+            "correct": 0,
+            "explanation": "watch + bare infinitive."
+          },
+          {
+            "id": 9,
+            "text": "He is just about ___ (leave) the office.",
+            "options": [
+              "to leave",
+              "leaving",
+              "leave",
+              "left"
+            ],
+            "correct": 0,
+            "explanation": "be about to + infinitive."
+          },
+          {
+            "id": 10,
+            "text": "We can't afford ___ (live) in the city centre.",
+            "options": [
+              "to live",
+              "living",
+              "live",
+              "lived"
+            ],
+            "correct": 0,
+            "explanation": "can't afford to + infinitive."
+          },
+          {
+            "id": 11,
+            "text": "She did her best ___ (pass) the exam.",
+            "options": [
+              "to pass",
+              "passing",
+              "pass",
+              "passed"
+            ],
+            "correct": 0,
+            "explanation": "do one's best to + infinitive."
+          },
+          {
+            "id": 12,
+            "text": "The police make every effort ___ (reduce) crime.",
+            "options": [
+              "to reduce",
+              "reducing",
+              "reduce",
+              "reduced"
+            ],
+            "correct": 0,
+            "explanation": "make every effort to + infinitive."
+          },
+          {
+            "id": 13,
+            "text": "He hasn't made up his mind ___ (wait).",
+            "options": [
+              "to wait",
+              "waiting",
+              "wait",
+              "waited"
+            ],
+            "correct": 0,
+            "explanation": "make up one's mind to + infinitive."
+          },
+          {
+            "id": 14,
+            "text": "They set out ___ (discover) a cure.",
+            "options": [
+              "to discover",
+              "discovering",
+              "discover",
+              "discovered"
+            ],
+            "correct": 0,
+            "explanation": "set out to + infinitive."
+          },
+          {
+            "id": 15,
+            "text": "She turned out ___ (know) him from childhood.",
+            "options": [
+              "to know",
+              "knowing",
+              "know",
+              "known"
+            ],
+            "correct": 0,
+            "explanation": "turn out to + infinitive."
+          },
+          {
+            "id": 16,
+            "text": "This task needs ___ (complete) today.",
+            "options": [
+              "to be completed",
+              "to complete",
+              "completing",
+              "completed"
+            ],
+            "correct": 0,
+            "explanation": "Present Passive Infinitive: to be completed."
+          },
+          {
+            "id": 17,
+            "text": "The work appears ___ (do) already.",
+            "options": [
+              "to have been done",
+              "to be done",
+              "doing",
+              "done"
+            ],
+            "correct": 0,
+            "explanation": "Perfect Passive Infinitive: to have been done."
+          },
+          {
+            "id": 18,
+            "text": "She asked us ___ (not be) late.",
+            "options": [
+              "not to be",
+              "to not be",
+              "not being",
+              "no to be"
+            ],
+            "correct": 0,
+            "explanation": "not to be late."
+          },
+          {
+            "id": 19,
+            "text": "She helped me ___ (carry) the heavy bags.",
+            "options": [
+              "carry",
+              "carrying",
+              "carried",
+              "carries"
+            ],
+            "correct": 0,
+            "explanation": "help + bare infinitive (or to-infinitive)."
+          },
+          {
+            "id": 20,
+            "text": "They appeared ___ (wait) for hours.",
+            "options": [
+              "to have been waiting",
+              "to wait",
+              "waiting",
+              "wait"
+            ],
+            "correct": 0,
+            "explanation": "Perfect Continuous Infinitive: to have been waiting."
+          }
+        ],
+        "scrambled": [
+          {
+            "id": 1,
+            "words": [
+              "it",
+              "is",
+              "dangerous",
+              "to",
+              "lean",
+              "out",
+              "window"
+            ],
+            "answer": "It is dangerous to lean out window.",
+            "explanation": "It-structure: It is dangerous to lean..."
+          },
+          {
+            "id": 2,
+            "words": [
+              "she",
+              "made",
+              "us",
+              "wait",
+              "half",
+              "an",
+              "hour"
+            ],
+            "answer": "She made us wait half an hour.",
+            "explanation": "make + bare infinitive."
+          },
+          {
+            "id": 3,
+            "words": [
+              "he",
+              "claims",
+              "to",
+              "have",
+              "met",
+              "the",
+              "President"
+            ],
+            "answer": "He claims to have met the President.",
+            "explanation": "Perfect Infinitive: to have met."
+          },
+          {
+            "id": 4,
+            "words": [
+              "Joe",
+              "pretended",
+              "not",
+              "to",
+              "notice",
+              "the",
+              "mistake"
+            ],
+            "answer": "Joe pretended not to notice the mistake.",
+            "explanation": "Negation: pretended not to notice."
+          },
+          {
+            "id": 5,
+            "words": [
+              "John",
+              "lets",
+              "the",
+              "dog",
+              "sleep",
+              "on",
+              "sofa"
+            ],
+            "answer": "John lets the dog sleep on sofa.",
+            "explanation": "let + bare infinitive."
+          },
+          {
+            "id": 6,
+            "words": [
+              "I",
+              "saw",
+              "him",
+              "leave",
+              "the",
+              "building",
+              "yesterday"
+            ],
+            "answer": "I saw him leave the building yesterday.",
+            "explanation": "Perception see + bare infinitive."
+          },
+          {
+            "id": 7,
+            "words": [
+              "we",
+              "watched",
+              "the",
+              "sun",
+              "rise",
+              "over",
+              "hills"
+            ],
+            "answer": "We watched the sun rise over hills.",
+            "explanation": "Perception watch + bare infinitive."
+          },
+          {
+            "id": 8,
+            "words": [
+              "he",
+              "is",
+              "just",
+              "about",
+              "to",
+              "leave",
+              "office"
+            ],
+            "answer": "He is just about to leave office.",
+            "explanation": "be about to + infinitive."
+          },
+          {
+            "id": 9,
+            "words": [
+              "we",
+              "cannot",
+              "afford",
+              "to",
+              "live",
+              "in",
+              "centre"
+            ],
+            "answer": "We cannot afford to live in centre.",
+            "explanation": "can't afford to + infinitive."
+          },
+          {
+            "id": 10,
+            "words": [
+              "she",
+              "did",
+              "her",
+              "best",
+              "to",
+              "pass",
+              "exam"
+            ],
+            "answer": "She did her best to pass exam.",
+            "explanation": "do one's best to + infinitive."
+          },
+          {
+            "id": 11,
+            "words": [
+              "they",
+              "set",
+              "out",
+              "to",
+              "discover",
+              "a",
+              "cure"
+            ],
+            "answer": "They set out to discover a cure.",
+            "explanation": "set out to + infinitive."
+          },
+          {
+            "id": 12,
+            "words": [
+              "she",
+              "turned",
+              "out",
+              "to",
+              "know",
+              "him",
+              "well"
+            ],
+            "answer": "She turned out to know him well.",
+            "explanation": "turn out to + infinitive."
+          },
+          {
+            "id": 13,
+            "words": [
+              "task",
+              "needs",
+              "to",
+              "be",
+              "completed",
+              "today"
+            ],
+            "answer": "Task needs to be completed today.",
+            "explanation": "Passive infinitive: to be completed."
+          },
+          {
+            "id": 14,
+            "words": [
+              "she",
+              "asked",
+              "us",
+              "not",
+              "to",
+              "be",
+              "late"
+            ],
+            "answer": "She asked us not to be late.",
+            "explanation": "Negation: asked us not to be late."
+          },
+          {
+            "id": 15,
+            "words": [
+              "he",
+              "helped",
+              "me",
+              "carry",
+              "the",
+              "heavy",
+              "bags"
+            ],
+            "answer": "He helped me carry the heavy bags.",
+            "explanation": "help + bare infinitive."
+          }
+        ],
+        "errorCorrection": [
+          {
+            "id": 1,
+            "words": [
+              "To",
+              "arrive",
+              "late",
+              "are",
+              "very",
+              "rude."
+            ],
+            "answer": "To arrive late is very rude.",
+            "explanation": "Infinitive ega vazifasida har doim birlik fe'li (is) oladi."
+          },
+          {
+            "id": 2,
+            "words": [
+              "Joe",
+              "pretended",
+              "to",
+              "not",
+              "notice",
+              "the",
+              "error."
+            ],
+            "answer": "Joe pretended not to notice the error.",
+            "explanation": "'not' har doim 'to' dan OLDIN keladi."
+          },
+          {
+            "id": 3,
+            "words": [
+              "She",
+              "made",
+              "us",
+              "to",
+              "wait",
+              "for",
+              "hours."
+            ],
+            "answer": "She made us wait for hours.",
+            "explanation": "'make' fe'lidan keyin to'sioqsiz bare infinitive (wait) keladi."
+          },
+          {
+            "id": 4,
+            "words": [
+              "John",
+              "lets",
+              "dog",
+              "to",
+              "sleep",
+              "on",
+              "bed."
+            ],
+            "answer": "John lets dog sleep on bed.",
+            "explanation": "'let' fe'lidan keyin bare infinitive (sleep) keladi."
+          },
+          {
+            "id": 5,
+            "words": [
+              "I",
+              "saw",
+              "him",
+              "to",
+              "leave",
+              "the",
+              "house."
+            ],
+            "answer": "I saw him leave the house.",
+            "explanation": "Perception fe'li 'see' bare infinitive (leave) oladi."
+          },
+          {
+            "id": 6,
+            "words": [
+              "We",
+              "can't",
+              "afford",
+              "living",
+              "in",
+              "the",
+              "centre."
+            ],
+            "answer": "We can't afford to live in the centre.",
+            "explanation": "'afford' to-infinitive (to live) oladi."
+          },
+          {
+            "id": 7,
+            "words": [
+              "She",
+              "did",
+              "her",
+              "best",
+              "passing",
+              "the",
+              "test."
+            ],
+            "answer": "She did her best to pass the test.",
+            "explanation": "'do one's best to' to-infinitive oladi."
+          },
+          {
+            "id": 8,
+            "words": [
+              "They",
+              "set",
+              "out",
+              "discovering",
+              "a",
+              "new",
+              "land."
+            ],
+            "answer": "They set out to discover a new land.",
+            "explanation": "'set out to' to-infinitive oladi."
+          },
+          {
+            "id": 9,
+            "words": [
+              "She",
+              "turned",
+              "out",
+              "knowing",
+              "the",
+              "truth."
+            ],
+            "answer": "She turned out to know the truth.",
+            "explanation": "'turn out to' to-infinitive oladi."
+          },
+          {
+            "id": 10,
+            "words": [
+              "This",
+              "job",
+              "needs",
+              "to",
+              "complete",
+              "today."
+            ],
+            "answer": "This job needs to be completed today.",
+            "explanation": "Ish bajarilishi kerak (Passive): to be completed."
+          },
+          {
+            "id": 11,
+            "words": [
+              "She",
+              "asked",
+              "us",
+              "to",
+              "not",
+              "be",
+              "late."
+            ],
+            "answer": "She asked us not to be late.",
+            "explanation": "Inkor: not to be late."
+          },
+          {
+            "id": 12,
+            "words": [
+              "He",
+              "claims",
+              "to",
+              "met",
+              "the",
+              "president."
+            ],
+            "answer": "He claims to have met the president.",
+            "explanation": "O'tgan voqea uchun Perfect Infinitive: to have met."
+          },
+          {
+            "id": 13,
+            "words": [
+              "It",
+              "occurred",
+              "to",
+              "me",
+              "calling",
+              "her."
+            ],
+            "answer": "It occurred to me to call her.",
+            "explanation": "'it occurred to sb' to-infinitive (to call) oladi."
+          },
+          {
+            "id": 14,
+            "words": [
+              "We",
+              "watched",
+              "the",
+              "sun",
+              "to",
+              "rise."
+            ],
+            "answer": "We watched the sun rise.",
+            "explanation": "'watch' bare infinitive (rise) oladi."
+          },
+          {
+            "id": 15,
+            "words": [
+              "He",
+              "is",
+              "about",
+              "leaving",
+              "the",
+              "office."
+            ],
+            "answer": "He is about to leave the office.",
+            "explanation": "'be about to' to-infinitive (to leave) oladi."
+          }
+        ],
+        "transform": [
+          {
+            "id": 1,
+            "original": "To lean out of the window is dangerous.",
+            "answer": "It is dangerous to lean out of the window.",
+            "explanation": "Transform direct structure to It-structure"
+          },
+          {
+            "id": 2,
+            "original": "To go overseas alone is very brave.",
+            "answer": "It is very brave to go overseas alone.",
+            "explanation": "Transform direct structure to It-structure"
+          },
+          {
+            "id": 3,
+            "original": "To save money seems impossible these days.",
+            "answer": "It seems impossible to save money these days.",
+            "explanation": "Transform direct structure to It-structure"
+          },
+          {
+            "id": 4,
+            "original": "She forced us to wait for half an hour.",
+            "answer": "She made us wait for half an hour.",
+            "explanation": "made us + bare infinitive"
+          },
+          {
+            "id": 5,
+            "original": "John gives permission for the dog to sleep on the sofa.",
+            "answer": "John lets the dog sleep on the sofa.",
+            "explanation": "lets + bare infinitive"
+          },
+          {
+            "id": 6,
+            "original": "Joe pretended that he did not notice the mistake.",
+            "answer": "Joe pretended not to notice the mistake.",
+            "explanation": "pretended not to + V"
+          },
+          {
+            "id": 7,
+            "original": "He claims that he met the President in the past.",
+            "answer": "He claims to have met the President.",
+            "explanation": "claims + perfect infinitive"
+          },
+          {
+            "id": 8,
+            "original": "She appears that she has left already.",
+            "answer": "She appears to have left already.",
+            "explanation": "appears + perfect infinitive"
+          },
+          {
+            "id": 9,
+            "original": "We do not have enough money to live in the centre.",
+            "answer": "We can't afford to live in the centre.",
+            "explanation": "can't afford to + V"
+          },
+          {
+            "id": 10,
+            "original": "She tried as hard as she could to pass the exam.",
+            "answer": "She did her best to pass the exam.",
+            "explanation": "did her best to + V"
+          },
+          {
+            "id": 11,
+            "original": "The police try with all effort to reduce crime.",
+            "answer": "The police make every effort to reduce crime.",
+            "explanation": "make every effort to + V"
+          },
+          {
+            "id": 12,
+            "original": "He hasn't decided yet whether to wait for them.",
+            "answer": "He hasn't made up his mind to wait for them.",
+            "explanation": "made up his mind to + V"
+          },
+          {
+            "id": 13,
+            "original": "They started their journey to discover a cure.",
+            "answer": "They set out to discover a cure.",
+            "explanation": "set out to + V"
+          },
+          {
+            "id": 14,
+            "original": "It was discovered that she knew him from childhood.",
+            "answer": "She turned out to know him from childhood.",
+            "explanation": "turned out to + V"
+          },
+          {
+            "id": 15,
+            "original": "I suddenly thought of calling her first.",
+            "answer": "It occurred to me to call her first.",
+            "explanation": "occurred to me to + V"
+          }
+        ],
+        "dialogue": [
+          {
+            "id": 1,
+            "situation": "Warning someone about window safety.",
+            "dialogue": "A: Is it safe to lean out?\nB: No, ___ out of the window.",
+            "options": [
+              "it is dangerous to lean",
+              "to lean is dangerous it",
+              "is dangerous leaning",
+              "lean is dangerous"
+            ],
+            "correct": 0,
+            "explanation": "It is + adj + to-infinitive."
+          },
+          {
+            "id": 2,
+            "situation": "Complaining about a long wait.",
+            "dialogue": "A: Why are you so upset?\nB: The manager made us ___ for over an hour!",
+            "options": [
+              "wait",
+              "to wait",
+              "waiting",
+              "waited"
+            ],
+            "correct": 0,
+            "explanation": "made us + bare infinitive."
+          },
+          {
+            "id": 3,
+            "situation": "Talking about a celebrity encounter.",
+            "dialogue": "A: Did he really meet the President?\nB: Well, he claims ___ him last year.",
+            "options": [
+              "to have met",
+              "to meet",
+              "meeting",
+              "met"
+            ],
+            "correct": 0,
+            "explanation": "claims + perfect infinitive."
+          },
+          {
+            "id": 4,
+            "situation": "Describing someone ignoring an error.",
+            "dialogue": "A: Did Joe see the error on the board?\nB: No, he pretended ___ it.",
+            "options": [
+              "not to notice",
+              "to not notice",
+              "not noticing",
+              "no notice"
+            ],
+            "correct": 0,
+            "explanation": "pretended not to notice."
+          },
+          {
+            "id": 5,
+            "situation": "Talking about pet rules.",
+            "dialogue": "A: Does John allow his dog inside?\nB: Yes, he lets the dog ___ on the sofa.",
+            "options": [
+              "sleep",
+              "to sleep",
+              "sleeping",
+              "slept"
+            ],
+            "correct": 0,
+            "explanation": "lets + bare infinitive."
+          },
+          {
+            "id": 6,
+            "situation": "Describing an observation.",
+            "dialogue": "A: Did you see him leaving?\nB: Yes, I saw him ___ the building at 9 PM.",
+            "options": [
+              "leave",
+              "to leave",
+              "left",
+              "leaving to"
+            ],
+            "correct": 0,
+            "explanation": "saw him + bare infinitive."
+          },
+          {
+            "id": 7,
+            "situation": "Talking about budget constraints.",
+            "dialogue": "A: Why don't you rent an apartment downtown?\nB: We can't afford ___ in the city centre.",
+            "options": [
+              "to live",
+              "living",
+              "live",
+              "lived"
+            ],
+            "correct": 0,
+            "explanation": "can't afford to live."
+          },
+          {
+            "id": 8,
+            "situation": "Praising student effort.",
+            "dialogue": "A: Did she pass her final exam?\nB: Yes, she did her best ___ it with high score.",
+            "options": [
+              "to pass",
+              "passing",
+              "pass",
+              "passed"
+            ],
+            "correct": 0,
+            "explanation": "did her best to pass."
+          },
+          {
+            "id": 9,
+            "situation": "Talking about research goals.",
+            "dialogue": "A: What is the goal of this lab?\nB: They set out ___ a cure for rare diseases.",
+            "options": [
+              "to discover",
+              "discovering",
+              "discover",
+              "discovered"
+            ],
+            "correct": 0,
+            "explanation": "set out to discover."
+          },
+          {
+            "id": 10,
+            "situation": "Discovering a surprising fact.",
+            "dialogue": "A: Did she know the CEO?\nB: Yes! She turned out ___ him since school days.",
+            "options": [
+              "to know",
+              "knowing",
+              "know",
+              "known"
+            ],
+            "correct": 0,
+            "explanation": "turned out to know."
+          },
+          {
+            "id": 11,
+            "situation": "Talking about task urgency.",
+            "dialogue": "A: When should this report be finished?\nB: This task needs ___ by 5 PM today.",
+            "options": [
+              "to be completed",
+              "to complete",
+              "completing",
+              "completed"
+            ],
+            "correct": 0,
+            "explanation": "needs to be completed (passive)."
+          },
+          {
+            "id": 12,
+            "situation": "Talking about a sudden idea.",
+            "dialogue": "A: Why did you call her so late?\nB: It occurred to me ___ her about tomorrow's schedule.",
+            "options": [
+              "to call",
+              "calling",
+              "call",
+              "called"
+            ],
+            "correct": 0,
+            "explanation": "occurred to me to call."
+          },
+          {
+            "id": 13,
+            "situation": "Asking someone not to be late.",
+            "dialogue": "A: What time is the flight?\nB: 6 AM! Please try ___ late.",
+            "options": [
+              "not to be",
+              "to not be",
+              "not being",
+              "no to be"
+            ],
+            "correct": 0,
+            "explanation": "try not to be late."
+          },
+          {
+            "id": 14,
+            "situation": "Talking about sunset.",
+            "dialogue": "A: Did you see the sunset?\nB: Yes, we watched the sun ___ over the hills.",
+            "options": [
+              "set",
+              "to set",
+              "setting to",
+              "was set"
+            ],
+            "correct": 0,
+            "explanation": "watched the sun set (bare infinitive)."
+          },
+          {
+            "id": 15,
+            "situation": "Talking about departure.",
+            "dialogue": "A: Is the bus leaving soon?\nB: Yes, it is just about ___ right now.",
+            "options": [
+              "to leave",
+              "leaving",
+              "leave",
+              "left"
+            ],
+            "correct": 0,
+            "explanation": "is just about to leave."
+          }
+        ]
       }
     ]
   }

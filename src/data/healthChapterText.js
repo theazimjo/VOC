@@ -748,104 +748,821 @@ export const healthChapterText = {
     ]
 },
   "H.Ch.02 · Your Personality": {
-    title: "Your Personality",
-    pages: [
-      [
-        { type: 'heading', text: 'Chapter 2 · Your Personality' },
-        { type: 'activity', text: "As You Read, Think About — the ways in which your personality contributes to your mental health. How personality is formed. Why it's important to learn to express your emotions in healthful ways." },
-        { type: 'p', text: "Everyone is a bit nervous before a party, though most people won't admit it — everyone feels shy and unsure sometimes. These are normal feelings you can't get rid of entirely, but you can learn to keep them in perspective and deal with them positively. In this chapter you'll learn about ways to build your self-image so you'll feel better about yourself, and how to improve the way you reveal your personality to others. You express your unique personality in everything you do." }
-      ],
-      [
-        { type: 'heading', text: '1. Personality and Mental Health' },
-        { type: 'p', text: "Think about a party you've been to recently, and the different ways people were acting — one person the \"life of the party,\" others dancing, another group in quiet conversation, someone sitting alone watching it all. Why do people act so differently in the same situation? Because each person has a unique personality. An individual's personality consists of the traits — behaviors, attitudes, feelings, and ways of thinking — that make them different from everyone else and characteristic of them in a given situation." },
-        { type: 'p', text: "Do you tend to be friendly and outgoing? This is called being an extrovert. Are you more of an introvert, someone less outgoing whose thoughts are directed inward? Are you assertive, able to stand up for yourself and express your feelings in a nonthreatening way — or more passive, holding back your thoughts and yielding to others, or even aggressive, communicating forcefully or in a threatening way?" }
-      ],
-      [
-        { type: 'p', text: "When psychologists — people who study the human mind and behavior — describe a healthy personality, they often speak of mental health: the state of being comfortable with yourself, with others, and with your surroundings. Mentally healthy people also tend to be realistic about their strengths and weaknesses, able to take on the responsibilities of daily living, caring toward themselves and others, able to handle disappointments and learn from them, and able to feel enjoyment and a sense of achievement." },
-        { type: 'p', text: "Psychologists like to think of mental health as a continuum, much like the Illness-Wellness continuum from Chapter 1 — people can move toward the wellness end by developing the characteristics above. Mentally healthy people tend to be friendly, optimistic, and loving; they can be assertive, laugh at themselves, try new experiences, and strive to do their best." }
-      ],
-      [
-        { type: 'activity', text: "Check Your Wellness — do your attitudes and behaviors contribute to your mental health? See if you can answer yes to questions like these. (1) Do you usually feel good about yourself and your life? (2) Are you aware of your strengths and your weaknesses? (3) Are you able to give love and receive it? (4) Do you enjoy spending time alone? (5) Can you handle your disappointments and learn from them? (6) When you feel sad or angry, do you express your feelings in appropriate ways? (7) Can you share your feelings with close friends and family members? (8) Are you open to new ideas and experiences?" }
-      ],
-      [
-        { type: 'heading', text: 'How Is Personality Formed?' },
-        { type: 'p', text: "Some personality traits appear to be inborn, acquired through heredity, the transmission of traits biologically from parent to offspring — even before birth, some babies kick and move a lot while others stay relatively calm, and after birth some are cheerful while others cry more, some hate new surroundings while others thrive on change. Scientists believe basic intellect, and perhaps talents like musical or artistic ability, may also be at least partly inherited." },
-        { type: 'p', text: "Most personality traits, though, are shaped by a combination of heredity and a person's environment — friends, family, home, school, even climate. Experiences during childhood strongly influence personality development: a baby who is lovingly cared for learns to trust and love others. Children learn feelings and appropriate behavior from people close to them through socialization, and they copy others' behavior through modeling — a child may learn table manners just by watching parents at the table. Children also learn through conditioning: being rewarded for desirable behaviors and, ideally, encouraged rather than punished, which helps them grow self-reliant and willing to try new things." }
-      ],
-      [
-        { type: 'p', text: "Starting in childhood and through the teenage years, friends, school, and community become increasingly important influences — American teenagers spend more than half their time with other teens. Friends who are about the same age and share similar interests are known as a peer group; being part of one teaches you to get along with others and gives you a chance to learn about yourself and make decisions on your own. By young adulthood your personality traits are fairly well established, though this doesn't mean you can't work on ones you're unhappy with — recognizing weaknesses and working to improve them is itself a sign of mental health." }
-      ],
-      [
-        { type: 'heading', text: 'Your Self-Concept' },
-        { type: 'p', text: "If you asked a psychologist about the single most important influence on mental health, the answer would be self-concept: the physical and mental picture you have of yourself and your place in the world, including all the beliefs you hold about yourself. People with a positive self-concept feel good about themselves, have a realistic view of their strengths and weaknesses, maintain a positive attitude even after failing at a task, and take the opportunity to learn about themselves. They show they value themselves by taking care of their health and appearance and by forming close friendships." }
-      ],
-      [
-        { type: 'sidebar', text: "Health Careers — Art, Dance, and Music Therapists. Sometimes an effective way to help people understand themselves and their problems is through creative expression. Art, dance, and music therapists combine artistic talents with therapy programs to help improve a person's self-concept — an art therapist might teach painting or handicrafts, a dance therapist might teach graceful movement, a music therapist might teach an instrument or singing. These therapists work with a wide range of people, from the mentally ill to the physically handicapped, sometimes at summer camps or in nursing homes with the elderly. The careers require a bachelor's degree in psychology or in art, dance, or music therapy, along with a solid background in the art form itself." }
-      ],
-      [
-        { type: 'p', text: "Your self-concept begins to form when you are young and depends on how others respond to your behavior and appearance — young children need support and encouragement from family to develop a positive self-concept and become confident. As you grow older, teachers, friends, other people, and life events all shape your self-concept further; doing well in school or excelling at a sport, and the encouragement that follows, can influence it in a positive way." },
-        { type: 'p', text: "You're not always the same person in every situation — your public self, the way you want others to see you, may be cheery and outgoing, while your private self, the real you when you're alone, may often feel shy and insecure. It's normal to have these two \"selves,\" but it's best when they blend into one. People with a positive self-concept aren't afraid to reveal their true nature, faults included, because that shows they feel good about themselves and about others. Improving a shaky self-concept takes work: take an inventory of your strengths and weaknesses, focus on and build on what you do well, choose friends who support and encourage you, and when you do experience defeat, avoid dwelling on it — try to learn something positive and move on." }
-      ],
-      [
-        { type: 'heading', text: '2. Theories of Personality' },
-        { type: 'p', text: "People's personalities change as they grow and are exposed to new ideas, attitudes, and behaviors, though some basic traits stay the same throughout life. Psychologists have proposed theories — organized sets of ideas — to explain how and why personality develops." },
-        { type: 'p', text: "In the late 1800s, the Austrian physician Sigmund Freud, working with the mentally ill, concluded that personality is made up of three parts: the id (biological urges like hunger and thirst), the ego (the thoughtful, decision-making part that finds a way to satisfy those urges), and the superego (the sense of right and wrong, or conscience, that keeps the id in check). Freud believed the mind operates at two levels: conscious thought, of which a person is aware, and unconscious thought, of which they are not — a forgotten childhood event, for instance." }
-      ],
-      [
-        { type: 'p', text: "Freud believed people often push unpleasant or frightening thoughts into their unconscious, where they still influence personality even though the person isn't aware of it — a child who felt unloved by a parent might grow into an adult constantly seeking the approval of teachers or bosses, without realizing why. To Freud's way of thinking, adult personalities are shaped mainly by early childhood experiences and conflicts stored in the unconscious, and psychoanalysis — a form of therapy that unlocks these memories and brings them into conscious awareness — can ease the pain and resolve the inner conflicts." }
-      ],
-      [
-        { type: 'heading', text: 'Erikson and Maslow' },
-        { type: 'p', text: "Erik Erikson, a follower of Freud, devised an eight-stage theory of personality development spanning a person's entire life. Unlike Freud, Erikson believed personality keeps being shaped by experience well beyond childhood — each stage of life brings its own crisis to work through, and how it's resolved shapes personality either positively or negatively. The first four stages, which you've already lived through, are: trust versus mistrust (birth to 18 months, built through being fed and cared for); autonomy versus shame and doubt (18 months to 3 years, built through gaining bodily control); initiative versus guilt (ages 3 to 6, built through taking charge of play and developing a sense of right and wrong); and industry versus inferiority (ages 7 to 12, built through accomplishing tasks, especially at school)." },
-      ],
-      [
-        { type: 'p', text: "The fifth stage, identity versus role confusion, covers the teenage years, when a person's main task is figuring out who they are — what Erikson called the search for identity. The remaining three stages continue into adulthood: intimacy versus isolation in young adulthood (ages 20-40), built around developing close bonds with others; generativity versus stagnation in middle adulthood (41-64), built around finding self-worth in helping younger people; and ego integrity versus despair in late adulthood (65 and on), in which an older adult reflects on and accepts the life they've lived, or approaches death with regret." }
-      ],
-      [
-        { type: 'p', text: "The American psychologist Abraham Maslow theorized that everyone has a basic drive to reach their fullest potential, a process he named self-actualization. Studying people he considered self-actualized — Abraham Lincoln, Eleanor Roosevelt, and others — Maslow arrived at a list of traits typical of such people: realistic, accepting, spontaneous, problem-centered, independent and self-sufficient, appreciative of life, concerned about humankind, capable of loving others, fair and unprejudiced, creative, hardworking, and not afraid to be different." },
-        { type: 'p', text: "Maslow found that few people ever reach their full potential, and proposed why: before people can pursue self-actualization, more basic needs must be met first, arranged in an ascending order known as Maslow's hierarchy of needs. At the base are basic physical needs (sleep, exercise, hunger, thirst) — without these met, a person has little energy for anything higher. Next comes the need for safety (shelter, income, protection from danger), then social needs, then self-esteem — how much a person likes and feels good about themselves, built through experiencing competence and independence. Only once esteem needs are met can a person pursue creativity, acceptance, caring, and the other qualities of self-actualization. A well-fed person with adequate shelter is generally more likely to be friendly and perform well than someone lacking food and shelter, though it's possible to be highly creative — as Mozart and van Gogh were — even when some basic needs go unmet." }
-      ],
-      [
-        { type: 'heading', text: '3. Expressing Emotions' },
-        { type: 'p', text: "Psychologists define an emotion as a reaction to a situation that involves a person's mind, body, and ways of behaving. The ability to recognize and appropriately express emotions is an important part of a healthy personality." },
-        { type: 'p', text: "Many people think of love mainly as romance, but love of self is the basis for all other kinds of love — a person who feels self-love has the capacity to love others too. Love may be directed toward friends, characterized by mutual respect and caring; toward a spouse, including a caring commitment to support and respect each other; or toward family, including caring enough to set and enforce reasonable limits. Love is perhaps the most positive emotion people are capable of, and the capacity to give and receive it is essential to mental health." }
-      ],
-      [
-        { type: 'p', text: "It's normal to feel angry sometimes, and anger can be either helpful or harmful. It can be a strong motivating force, providing the energy to change something that's wrong — but if directed destructively, at others or at yourself, it can make a bad situation worse. The best way to handle anger: don't deny or ignore the feeling; find a healthful outlet, like jogging or hitting a punching bag; once you've calmed down, think through exactly what made you angry, writing it down or talking it over with a friend; then consider what constructive action could improve the situation or prevent it from happening again." },
-        { type: 'p', text: "Everyone is afraid of something. Fear can be a helpful emotion — it prepares your body to fight or flee a genuinely dangerous situation, quickening your heartbeat and breathing — but it can also be harmful, leading someone to avoid a situation rather than confront it, or causing indigestion, lost sleep, and headaches if it drags on. Admitting you're afraid and talking about it with someone usually makes fear more manageable." }
-      ],
-      [
-        { type: 'p', text: "You feel guilty when you think you've done something wrong, and guilt can be helpful — it can stop you from doing something you know is wrong, or push you to correct something you've already done. Too much guilt, though, can make you doubt yourself. The best way to deal with it is to correct the situation if you can, and to talk about your feelings." },
-        { type: 'p', text: "Happiness, like love, is a strong positive emotion — a normal response to pleasant events, and sometimes to no particular reason at all. When you feel happy, you also feel satisfied with life. It helps to notice what makes you happy and build more of it into your daily routine." },
-        { type: 'p', text: "Sadness is a normal response to disappointing events — a bad day, a poor grade, the death of a loved one — but if it lingers too long, it can turn into depression, an emotional state of feeling hopeless and worthless that may call for a psychologist's help. Grief after a loved one's death often moves through numbness and denial, anger, guilt over that anger, and finally a period of depression — all normal reactions. The best response to sadness is to admit the emotion, share it with someone close, and avoid withdrawing or isolating yourself, since that can let the feeling become overwhelming." }
-      ],
-      [
-        { type: 'heading', text: 'Coping Strategies' },
-        { type: 'p', text: "Sometimes emotions become too much to handle, and people turn — consciously or unconsciously — to coping strategies, ways of dealing with an unbearable feeling or situation (Freud called these defense mechanisms, since they defend against negative emotions). Used in moderation, coping strategies can protect you from painful situations and buy time to think with a clearer mind. Overused, they can stunt emotional growth, since relying on them too much keeps you from learning to express your true feelings or develop the skills mental health requires." },
-        { type: 'p', text: "Denial, refusing to recognize an emotion or problem, can be a necessary first step after something extremely painful, like a death — but if it becomes a permanent way of avoiding a problem, like hiding a failing grade from your parents indefinitely, it stops you from ever taking corrective action." }
-      ],
-      [
-        { type: 'p', text: "Displacement means transferring an emotion from its real source onto another person or object — venting anger at your boyfriend by slamming a locker door instead of talking to him. It's better than taking anger out on an innocent person, and it can buy time to calm down, but it's best used only briefly before you actually confront the person who caused the feeling." },
-        { type: 'p', text: "Rationalization means making excuses for your actions or feelings, usually to avoid risking your self-concept or feeling guilty — telling yourself you're \"too busy\" to ask someone out, when you're really just afraid of rejection. Overused, it keeps you from ever dealing with problems effectively." },
-      ],
-      [
-        { type: 'p', text: "Regression means acting in a way characteristic of young children — think of adults leaning on car horns in a traffic jam. It rarely solves anything and often makes a situation worse; a better response, when you feel a tantrum coming on, is to take an emotional break — call a friend, take a walk, count to ten — before reacting." },
-        { type: 'p', text: "Other common coping strategies include compensation (making up for a weakness in one area by excelling in another), daydreaming (escaping into fantasy), identification (taking on the qualities of someone you admire), projection (blaming your own faults on someone else), reaction formation (acting the opposite of how you actually feel), and sublimation (channeling energy into an acceptable goal instead of an unacceptable one, like joining the debate team instead of picking fights). Used occasionally and honestly, any of these can help; relied on constantly, none of them solve the underlying problem." }
-      ],
-      [
-        { type: 'activity', text: "Health Skills — Expressing Feelings in a Positive Way. (1) Accept Your Feelings: strong emotions, even unpleasant ones, are normal — denying them just risks having them erupt later in destructive behavior. (2) Inventory Your Current Behavior: think honestly about how you usually react to anger, fear, sadness, and love, and which of your past responses actually led to a good outcome. (3) Seek Constructive Alternatives: communicate your feelings to someone you trust rather than lashing out or withdrawing; let off steam through exercise or a creative outlet rather than by breaking things; once you've calmed down, confront the actual cause of the feeling honestly, without blaming; and avoid \"drowning your sorrows\" in overeating, drinking, smoking, or other destructive habits that only mask the problem. (4) Evaluate Your Progress: if your current way of expressing emotions is working, keep it up — if not, pause and think before you act, drawing on what's worked for you before. It takes self-control to change how you respond to strong emotions, but the more you practice constructive responses, the more automatic they become. If persistence alone doesn't help, it's time to ask a trusted adult for support." }
-      ],
-      [
-        { type: 'summary', text: "An individual's personality consists of all the traits that make the person unique." },
-        { type: 'summary', text: "People with good mental health are comfortable with themselves and the world around them, realistic about their strengths and weaknesses, and able to handle the responsibilities of daily living." },
-        { type: 'summary', text: "Some personality traits are thought to be inherited, while others are shaped by a person's environment. Most traits are influenced by both heredity and environment." },
-        { type: 'summary', text: "Self-concept, the view a person has of him- or herself, is the most important influence on mental health." },
-        { type: 'summary', text: "Freud believed personality is shaped by early childhood experiences and conflicts a person may not even remember; Erikson described an eight-stage theory of crises across the whole lifespan; Maslow theorized that everyone has a drive toward self-actualization, blocked until more basic needs are met." },
-        { type: 'summary', text: "The ability to recognize and appropriately express emotions, such as love, anger, fear, guilt, happiness, and sadness, is an important component of mental health." },
-        { type: 'summary', text: "Coping strategies are ways of temporarily dealing with overwhelming feelings or situations. When overused, a person may not learn to solve problems or express his or her true feelings." }
-      ]
+    "title": "Your Personality",
+    "pages": [
+        [
+            {
+                "type": "heading",
+                "text": "Chapter 2 \u00b7 Your Personality"
+            },
+            {
+                "type": "activity",
+                "text": "As You Read, Think About \u2014 the ways in which your personality contributes to your mental health. How personality is formed. Why it is important to learn to express your emotions in healthful ways."
+            },
+            {
+                "type": "p",
+                "text": "Your party guests will be arriving shortly. You check the table again to be sure everything is in order. You rearrange the fruit bowl, and count the dishes for the third time. You've been looking forward to your party for weeks, but now you're feeling nervous. You take a look at yourself in the mirror and try out your best party smile. You step back and . . . there goes the doorbell!"
+            },
+            {
+                "type": "p",
+                "text": "Everyone is a bit nervous before a party, although most people aren't likely to admit it. Everyone feels shy and unsure sometimes. These are normal feelings that you cannot get rid of entirely. However, you can learn how to keep them in perspective and how to deal with them positively."
+            },
+            {
+                "type": "p",
+                "text": "In this chapter, you'll learn about ways to build your self-image so that you'll feel better about yourself. You'll also learn how to improve the way you reveal your personality to others. You express your unique personality in everything you do."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "1. Personality and Mental Health"
+            },
+            {
+                "type": "p",
+                "text": "Think about a party you have been to recently. Remember the different ways people were acting. One person may have been the \"life of the party.\" Perhaps some others enjoyed dancing, while yet another group of people held a quiet conversation. There might have been another person sitting quietly on the couch, watching the dancing and appearing not to have a care in the world."
+            },
+            {
+                "type": "p",
+                "text": "Did you ever wonder why people act so differently in the same situation? It is because each person has a unique personality. An individual's personality consists of the traits that make him or her different from everyone else. These traits include behaviors, attitudes, feelings, and ways of thinking that are characteristic of an individual in a given situation. For example, when you are introduced to a new group of people, you may be characteristically outgoing or you may be shy. At school you may be the first to raise your hand, or you may be daydreaming. You may cry frequently or hardly ever. These traits are all part of your personality."
+            },
+            {
+                "type": "heading",
+                "text": "Describing Personality"
+            },
+            {
+                "type": "p",
+                "text": "How do you describe someone's personality? Here is how four teenagers described their own personalities:"
+            },
+            {
+                "type": "p",
+                "text": "Yoon: I have a lot of energy and make friends easily. I love sports and am very competitive. But if things don't go my way, I get extremely upset and even throw tantrums."
+            },
+            {
+                "type": "p",
+                "text": "Richard: School doesn't interest me all that much, but I study enough to get by. Sometimes I just don't feel like talking to people and prefer to be by myself. I like to stick to doing the things that I am used to."
+            },
+            {
+                "type": "p",
+                "text": "Cory: I'm usually in a pretty good mood. Things just don't bother me the way they do some people. If a problem comes up, I can usually figure out how to solve it."
+            },
+            {
+                "type": "p",
+                "text": "Sally: People call me the class clown. Sometimes I like to liven things up with jokes. There are a few subjects in school that really interest me, so I devote a lot of time to them. After school I enjoy spending time with my friends."
+            },
+            {
+                "type": "activity",
+                "text": "Check Your Wellness \u2014 Do your attitudes and behaviors contribute to your mental health? See if you can answer yes to the questions below. 1. Do you usually feel good about yourself and your life? 2. Are you aware of your strengths and your weaknesses? 3. Are you able to give love and receive it? 4. Do you enjoy spending time alone? 5. Can you handle your disappointments and learn from them? 6. When you feel sad or angry, do you express your feelings in appropriate ways? 7. Can you share your feelings with close friends and family members? 8. Are you open to new ideas and experiences?"
+            }
+        ],
+        [
+            {
+                "type": "p",
+                "text": "In describing their personalities, these teenagers chose the behaviors, feelings, and thoughts that best defined the way they are. How would you describe your own personality? Think about the things you like to do and how you normally act. Do you tend to be friendly and outgoing? This is called being an extrovert. Are you an introvert, someone who is less outgoing and whose thoughts are directed inward? Are you moody or even-tempered? Driven or relaxed? Would you say you are assertive, able to stand up for yourself and express your feelings in a nonthreatening way? Perhaps you are more passive, holding back your thoughts and feelings and yielding to others, or aggressive, communicating your ideas and feelings in a forceful or threatening way. Are you satisfied with the way you are? Are there any characteristics of your personality that you would like to change?"
+            },
+            {
+                "type": "heading",
+                "text": "The Healthy Personality"
+            },
+            {
+                "type": "p",
+                "text": "Look back at the descriptions of Yoon, Richard, Cory, and Sally. Which of these teenagers would you say has a healthy personality? Which would you consider an unhealthy personality? Why?"
+            },
+            {
+                "type": "p",
+                "text": "When psychologists, people who study the human mind and behavior, are asked to describe characteristics of a healthy personality, they often speak of mental health. Mental health is the state of being comfortable with yourself, with others, and with your surroundings. People who are mentally healthy are also:"
+            },
+            {
+                "type": "p",
+                "text": "\u2022 realistic about their strengths and weaknesses.\n\u2022 able to take on the responsibilities of daily living.\n\u2022 caring toward themselves and others.\n\u2022 able to handle disappointments and learn from them.\n\u2022 able to feel enjoyment and a sense of achievement."
+            }
+        ],
+        [
+            {
+                "type": "p",
+                "text": "Psychologists like to think of mental health as a continuum, much like the Illness-Wellness continuum discussed in Chapter 1. People with healthy personalities fall toward the wellness end of the mental health continuum. The traits of a healthy personality can be thought of as signs of wellness on the mental health continuum. Some of these signs of wellness include being friendly, optimistic, and loving. Other signs are being assertive, laughing at yourself, trying new experiences, and striving to do your best."
+            },
+            {
+                "type": "heading",
+                "text": "How Is Personality Formed?"
+            },
+            {
+                "type": "p",
+                "text": "Consider these descriptions of newborn infants:"
+            },
+            {
+                "type": "p",
+                "text": "Maria is a quiet baby. When she is awake, she lies in her crib, staring peacefully at the bright colors of the mobile hanging above her head. Even when she is hungry, Maria whimpers softly instead of crying loudly."
+            },
+            {
+                "type": "p",
+                "text": "Todd is active and noisy. He kicks his blanket off almost as soon as his mother puts it on. Todd cries loudly when he wants attention, and he smiles broadly when he gets it."
+            },
+            {
+                "type": "p",
+                "text": "As these descriptions show, babies are different from the day they are born. Some kick and move a lot even before birth. Others remain relatively calm. Some babies are cheerful, while others cry a great deal. Some babies hate new surroundings, while others thrive on a change of scene. These differences indicate that each person is born with definite personality traits."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Heredity"
+            },
+            {
+                "type": "p",
+                "text": "Psychologists believe that many personality traits are inherited, passed inborn from parent to child biologically. In addition to physical traits, such as eye color and hair color, basic intellect and artistic and musical abilities may be inherited traits. A baby's temperament, or infant personality, also appears to be determined largely by heredity."
+            },
+            {
+                "type": "heading",
+                "text": "Environment"
+            },
+            {
+                "type": "p",
+                "text": "Although you are born with certain personality traits, your personality is also shaped by your environment, most notably your family, friends, and school. Most personality traits are influenced by a combination of heredity and environment."
+            },
+            {
+                "type": "p",
+                "text": "Father: Did you finish your homework?\nChild: Most of it. Can I go to Tommy's house now?\nFather: No, not until all your homework is done.\nChild: Ah, Dad. It's only a few math problems.\nFather: Finish the problems now, and then you can go.\nChild: Okay."
+            },
+            {
+                "type": "p",
+                "text": "In this conversation, the father is teaching his child a pattern of behavior. As the child grows up, he will probably adopt this pattern as part of his personality. He will complete a task before turning to a leisure activity."
+            },
+            {
+                "type": "p",
+                "text": "Most of a person's personality traits are shaped by childhood experiences. When a baby's basic needs for food, warmth, and affection are met, the baby learns to trust others. If a baby is ignored or treated unkindly, the baby learns to be suspicious of others. As children grow, they learn how to express their feelings and how to act in ways that are acceptable to their families and to their culture. This process, by which children learn feelings and behaviors, is called socialization."
+            }
+        ],
+        [
+            {
+                "type": "p",
+                "text": "Children learn feelings and behaviors through modeling and conditioning. When children copy the behavior of others, they are modeling. A young child may model a parent's table manners by holding a fork a certain way or by saying \"please\" and \"thank you.\""
+            },
+            {
+                "type": "p",
+                "text": "In conditioning, behaviors are rewarded or punished. Children are conditioned to repeat behaviors that bring rewards, such as praise, affection, or approval. They learn to avoid behaviors that bring punishments, such as scolding or loss of privileges."
+            },
+            {
+                "type": "p",
+                "text": "As a child grows older, other environmental influences become important. Friends, school, and teachers begin to shape personality. The environment of a teenager expands to include neighbors, community members, and society as a whole."
+            },
+            {
+                "type": "p",
+                "text": "Teenagers spend more than half of their time with other teenagers. Friends who are about the same age and share similar interests are known as a peer group. By being part of a group, you learn how to get along with others. A peer group gives you a chance to learn about yourself, to solve problems, and to make decisions on your own."
+            },
+            {
+                "type": "p",
+                "text": "By the time you reach young adulthood, your personality traits are fairly well established. This does not mean, however, that you cannot change traits with which you are unhappy. Recognizing a trait you dislike in yourself is the first step toward changing it."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Your Self-Concept"
+            },
+            {
+                "type": "p",
+                "text": "If you were to ask a psychologist to name the single most important influence on a person's mental health, the answer would probably be self-concept. Your self-concept is the mental and physical picture you have of yourself. It includes all the beliefs you hold about who you are and what you are like."
+            },
+            {
+                "type": "p",
+                "text": "People with a positive self-concept feel good about themselves. They have a realistic view of their strengths and weaknesses. When they fail at a task, they maintain a positive attitude. They view failure as an opportunity to learn more about themselves. They show that they value themselves by taking care of their health and appearance and by forming close friendships."
+            },
+            {
+                "type": "p",
+                "text": "In contrast, people with a negative self-concept do not feel good about themselves. They tend to be overly critical of themselves and others. When they fail at a task, they may blame others or feel useless. They may neglect their physical health and appearance. They may have difficulty making friends."
+            },
+            {
+                "type": "sidebar",
+                "text": "Health Careers \u2014 Art, Dance, and Music Therapists. Sometimes an effective way to help people understand themselves and their problems is through creative expression. Art, dance, and music therapists combine artistic talents with therapy programs to help improve a person's self-concept. An art therapist might teach painting or handicrafts, a dance therapist might teach graceful movement, a music therapist might teach an instrument or singing. These therapists work with a wide range of people, from the mentally ill to the physically handicapped, sometimes at summer camps or in nursing homes with the elderly. The careers require a bachelor's degree in psychology or in art, dance, or music therapy, along with a solid background in the art form itself."
+            }
+        ],
+        [
+            {
+                "type": "p",
+                "text": "How is self-concept formed? Like personality, your self-concept begins to take shape when you are very young. It is formed mostly by the responses of other people to your behavior and appearance. Young children need love, encouragement, and support from their families to develop a positive self-concept and to feel confident about themselves. As you grow older, teachers, friends, and life events shape your self-concept further. Success in school or sports, and the praise that follows, can boost your self-concept."
+            },
+            {
+                "type": "p",
+                "text": "Your Public and Private Self \u2014 Your self-concept consists of two parts: your public self and your private self. Your public self is the way you show yourself to others. It is the face you turn to the world. Your private self is the real you. It includes the thoughts and feelings you keep to yourself. It is normal to have a public self and a private self, but it is best when the two selves are similar. People with a positive self-concept are not afraid to show their private self to others. They are willing to reveal their true feelings and opinions, including their faults and weaknesses, because they feel secure in themselves."
+            },
+            {
+                "type": "p",
+                "text": "Improving Your Self-Concept \u2014 Improving a negative self-concept takes effort and practice, but it can be done. Here are four steps you can take to improve your self-concept: 1. Take an inventory of your strengths and weaknesses. Focus on your strengths, and work to improve your weaknesses. 2. Set realistic goals for yourself. Break long-term goals into small, achievable steps. 3. Choose friends who support and encourage you. Avoid people who constantly put you down. 4. Learn from your mistakes instead of dwelling on them. Treat setbacks as learning experiences."
+            }
+        ],
+        [
+            {
+                "type": "review",
+                "title": "Section 1 Review",
+                "sections": [
+                    {
+                        "heading": "Section Review",
+                        "items": [
+                            {
+                                "prompt": "1. What is personality?",
+                                "answer": "An individual's unique traits \u2014 behaviors, attitudes, feelings, and ways of thinking \u2014 characteristic of them in a given situation."
+                            },
+                            {
+                                "prompt": "2. Define mental health and list three characteristics of a mentally healthy person.",
+                                "answer": "Mental health is being comfortable with yourself, others, and surroundings. Mentally healthy people are realistic about strengths/weaknesses, handle responsibilities, and learn from disappointments."
+                            },
+                            {
+                                "prompt": "3. How do heredity and environment influence personality development?",
+                                "answer": "Heredity provides inborn traits like temperament and talent; environment (family, peers, school) shapes habits, socialization, modeling, and self-concept."
+                            },
+                            {
+                                "prompt": "4. What is self-concept? Explain the difference between the public self and the private self.",
+                                "answer": "Self-concept is the mental/physical picture you have of yourself. Public self is how you show yourself to others; private self is your real inner thoughts and feelings."
+                            }
+                        ]
+                    },
+                    {
+                        "heading": "What Do You Think?",
+                        "items": [
+                            {
+                                "prompt": "5. What steps could a teenager with a negative self-concept take to build a more positive self-image?",
+                                "answer": "Inventory strengths, set realistic goals, choose supportive friends, and view setbacks as learning experiences."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "2. Theories of Personality"
+            },
+            {
+                "type": "p",
+                "text": "Why do people behave the way they do? What causes personalities to develop in different ways? Over the years, psychologists have proposed theories \u2014 organized sets of ideas \u2014 to explain personality development. Three of the most influential personality theorists are Sigmund Freud, Erik Erikson, and Abraham Maslow."
+            },
+            {
+                "type": "heading",
+                "text": "Sigmund Freud"
+            },
+            {
+                "type": "p",
+                "text": "Sigmund Freud (1856\u20131939), an Austrian physician, developed one of the earliest and most detailed theories of personality. Freud believed that personality is formed primarily during early childhood and is driven by unconscious forces \u2014 feelings, thoughts, and memories of which a person is unaware."
+            },
+            {
+                "type": "p",
+                "text": "Structure of Personality \u2014 Freud divided personality into three parts: the id, the ego, and the superego."
+            },
+            {
+                "type": "p",
+                "text": "1. The id consists of biological urges and drives, such as hunger, thirst, and aggression. The id operates on the pleasure principle, demanding immediate satisfaction."
+            },
+            {
+                "type": "p",
+                "text": "2. The ego is the realistic, decision-making part of personality. It operates on the reality principle, seeking to satisfy the id's demands in safe and socially acceptable ways."
+            },
+            {
+                "type": "p",
+                "text": "3. The superego is the moral part of personality, representing a person's conscience and internalized values of right and wrong."
+            },
+            {
+                "type": "p",
+                "text": "According to Freud, the ego constantly balances the demands of the id and the superego. When conflicts arise among these three parts, anxiety results."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Psychoanalysis"
+            },
+            {
+                "type": "p",
+                "text": "Freud developed a form of therapy called psychoanalysis to help patients bring unconscious thoughts and memories into conscious awareness. By bringing buried conflicts to light, patients can understand the causes of their behaviors and resolve their psychological problems."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Erik Erikson"
+            },
+            {
+                "type": "p",
+                "text": "Erik Erikson (1902\u20131994), a follower of Freud, modified Freud's ideas and developed an eight-stage theory of personality development that spans an entire lifetime."
+            },
+            {
+                "type": "p",
+                "text": "According to Erikson, a person faces a central challenge or conflict at each stage of life. Resolving each crisis successfully leads to healthy personality growth, while failing to resolve a crisis can lead to psychological difficulties later."
+            },
+            {
+                "type": "p",
+                "text": "The Eight Stages of Development:"
+            },
+            {
+                "type": "p",
+                "text": "Stage 1: Trust vs. Mistrust (Infancy, 0\u201318 months) \u2014 Infants learn to trust their caregivers when their basic physical and emotional needs are met consistently."
+            },
+            {
+                "type": "p",
+                "text": "Stage 2: Autonomy vs. Shame and Doubt (Early Childhood, 18 months\u20133 years) \u2014 Young children learn to gain control over their bodies and make independent choices. Encouragement fosters autonomy."
+            },
+            {
+                "type": "p",
+                "text": "Stage 3: Initiative vs. Guilt (Play Age, 3\u20136 years) \u2014 Children take initiative in planning activities and playing games. Support from adults builds confidence."
+            },
+            {
+                "type": "p",
+                "text": "Stage 4: Industry vs. Inferiority (School Age, 6\u201312 years) \u2014 Children learn new skills at school and home. Praise for accomplishments creates a sense of pride and competence."
+            }
+        ],
+        [
+            {
+                "type": "p",
+                "text": "Stage 5: Identity vs. Role Confusion (Adolescence, 12\u201319 years) \u2014 Teenagers search for a sense of identity \u2014 a clear picture of who they are and what values and goals guide their lives. Resolving this identity crisis is the central task of adolescence."
+            },
+            {
+                "type": "p",
+                "text": "Stage 6: Intimacy vs. Isolation (Young Adulthood, 20\u201340 years) \u2014 Young adults form close, loving relationships with others. Success leads to deep emotional connections."
+            },
+            {
+                "type": "p",
+                "text": "Stage 7: Generativity vs. Stagnation (Middle Adulthood, 40\u201365 years) \u2014 Adults focus on contributing to society and helping the next generation through work, parenting, or community service."
+            },
+            {
+                "type": "p",
+                "text": "Stage 8: Integrity vs. Despair (Late Adulthood, 65+ years) \u2014 Older adults reflect on their lives. Looking back with satisfaction produces a sense of wisdom and integrity."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Abraham Maslow"
+            },
+            {
+                "type": "p",
+                "text": "Abraham Maslow (1908\u20131970), an American psychologist, proposed a humanistic theory of personality centered on human potential and growth. Maslow believed that all people possess a drive toward self-actualization \u2014 the process by which a person strives to achieve his or her highest potential."
+            },
+            {
+                "type": "p",
+                "text": "Maslow's Hierarchy of Needs \u2014 Maslow organized human needs into a pyramid or hierarchy with five levels:"
+            },
+            {
+                "type": "p",
+                "text": "1. Physical Needs \u2014 Basic survival needs for food, water, sleep, and shelter."
+            },
+            {
+                "type": "p",
+                "text": "2. Safety Needs \u2014 Need for security, protection from danger, physical safety, and financial stability."
+            },
+            {
+                "type": "p",
+                "text": "3. Social Needs \u2014 Need for love, affection, belonging, friendship, and acceptance by others."
+            },
+            {
+                "type": "p",
+                "text": "4. Esteem Needs \u2014 Need for self-respect, approval, recognition, status, and respect from others."
+            },
+            {
+                "type": "p",
+                "text": "5. Self-Actualization \u2014 Need for personal growth, self-fulfillment, creativity, and reaching one's full potential."
+            },
+            {
+                "type": "p",
+                "text": "According to Maslow, basic needs at lower levels must be satisfied before a person can focus on higher-level needs."
+            }
+        ],
+        [
+            {
+                "type": "review",
+                "title": "Section 2 Review",
+                "sections": [
+                    {
+                        "heading": "Section Review",
+                        "items": [
+                            {
+                                "prompt": "1. Contrast Freud's view of personality development with Erikson's view.",
+                                "answer": "Freud believed personality is formed mainly in early childhood driven by unconscious urges; Erikson saw personality developing across eight stages throughout a entire lifetime."
+                            },
+                            {
+                                "prompt": "2. What are the id, ego, and superego in Freud's theory?",
+                                "answer": "Id: biological urges seeking immediate pleasure. Ego: realistic decision-maker. Superego: moral conscience and values."
+                            },
+                            {
+                                "prompt": "3. According to Erikson, what main conflict must adolescents resolve?",
+                                "answer": "Identity vs. Role Confusion \u2014 forming a clear sense of personal identity."
+                            },
+                            {
+                                "prompt": "4. Describe Maslow's hierarchy of needs. What is self-actualization?",
+                                "answer": "A 5-level pyramid of needs (Physical, Safety, Social, Esteem, Self-Actualization). Self-actualization is achieving one's full potential."
+                            }
+                        ]
+                    },
+                    {
+                        "heading": "What Do You Think?",
+                        "items": [
+                            {
+                                "prompt": "5. Which personality theory (Freud, Erikson, or Maslow) do you find most useful for understanding your own development? Explain why.",
+                                "answer": "Answers vary; many choose Erikson's identity stage or Maslow's hierarchy of needs as most relevant to teenage life."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "3. Expressing Emotions"
+            },
+            {
+                "type": "p",
+                "text": "An emotion is a reaction to a situation that involves your mind, body, and behavior. Emotions are a natural part of being human. Expressing emotions in healthy ways is essential for good mental and social health."
+            },
+            {
+                "type": "p",
+                "text": "Common Emotions:"
+            },
+            {
+                "type": "p",
+                "text": "1. Love \u2014 A deep feeling of affection and concern for another person. Expressed through words, caring actions, and support."
+            },
+            {
+                "type": "p",
+                "text": "2. Anger \u2014 A normal response to feeling hurt, frustrated, or treated unfairly. Can be constructive when expressed calmly to solve problems, or destructive when expressed with violence."
+            },
+            {
+                "type": "p",
+                "text": "3. Fear \u2014 A response to real or perceived danger. Keeps you safe from harm, but can be harmful if it turns into irrational anxiety."
+            },
+            {
+                "type": "p",
+                "text": "4. Guilt \u2014 A feeling of remorse when you believe you have done something wrong. Helps stop harmful behavior, but excessive guilt can harm self-esteem."
+            },
+            {
+                "type": "p",
+                "text": "5. Sadness \u2014 A feeling of grief or sorrow in response to loss or disappointment. Expressing sadness helps you heal."
+            },
+            {
+                "type": "p",
+                "text": "6. Happiness \u2014 A feeling of joy, contentment, and satisfaction with life."
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Coping Strategies"
+            },
+            {
+                "type": "p",
+                "text": "A coping strategy (or defense mechanism) is a way of dealing with uncomfortable or overwhelming feelings or situations. Coping strategies can be conscious or unconscious."
+            },
+            {
+                "type": "p",
+                "text": "Common Coping Strategies:"
+            },
+            {
+                "type": "p",
+                "text": "1. Denial \u2014 Refusing to recognize an unpleasant reality or emotion."
+            },
+            {
+                "type": "p",
+                "text": "2. Rationalization \u2014 Making excuses or giving acceptable reasons to justify unhealthful behavior or failure."
+            },
+            {
+                "type": "p",
+                "text": "3. Compensation \u2014 Making up for a weakness in one area by excelling in another area."
+            },
+            {
+                "type": "p",
+                "text": "4. Daydreaming \u2014 Escaping reality by imagining pleasant situations."
+            },
+            {
+                "type": "p",
+                "text": "5. Projection \u2014 Blaming someone else for your own faults or feelings."
+            },
+            {
+                "type": "p",
+                "text": "6. Reaction Formation \u2014 Behaving in a way opposite to how you truly feel."
+            },
+            {
+                "type": "p",
+                "text": "7. Sublimation \u2014 Directing unacceptable urges into socially acceptable activities."
+            },
+            {
+                "type": "p",
+                "text": "8. Displacement \u2014 Transferring strong emotions from the true source to an innocent target."
+            },
+            {
+                "type": "p",
+                "text": "9. Regression \u2014 Returning to childlike behaviors when facing stress."
+            }
+        ],
+        [
+            {
+                "type": "p",
+                "text": "Using Coping Strategies Wisely \u2014 Coping strategies can help you get through tough moments, but overusing them prevents you from addressing real problems directly. Relying on denial or rationalization continuously can harm your mental health and relationships."
+            },
+            {
+                "type": "p",
+                "text": "When to Seek Help \u2014 If strong emotions like sadness, anxiety, or anger persist and interfere with your daily life, talking to a trusted adult, school counselor, or mental health professional is an important step."
+            }
+        ],
+        [
+            {
+                "type": "review",
+                "title": "Section 3 Review",
+                "sections": [
+                    {
+                        "heading": "Section Review",
+                        "items": [
+                            {
+                                "prompt": "1. How do psychologists define emotion?",
+                                "answer": "A reaction to a situation that involves your mind, body, and behavior."
+                            },
+                            {
+                                "prompt": "2. Name five common emotions.",
+                                "answer": "Love, anger, fear, guilt, sadness (and happiness)."
+                            },
+                            {
+                                "prompt": "3. Give an example of a coping strategy.",
+                                "answer": "Denial (refusing to admit a problem exists) or compensation (excelling in sports to make up for poor grades)."
+                            },
+                            {
+                                "prompt": "4. Why should you avoid using coping strategies too frequently?",
+                                "answer": "Overusing coping strategies avoids solving underlying problems and can harm long-term mental health."
+                            }
+                        ]
+                    },
+                    {
+                        "heading": "What Do You Think?",
+                        "items": [
+                            {
+                                "prompt": "5. Describe a situation in which you or a friend expressed an emotion in an unhealthful way. How could the emotion have been expressed in a healthful way?",
+                                "answer": "Example: yelling in anger during an argument vs. taking a walk to cool off and then speaking calmly."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Health Skills \u2014 Expressing Feelings in a Positive Way"
+            },
+            {
+                "type": "activity",
+                "text": "Matthew had been dating Joan for a year, and he thought things were great between them. Joan felt differently. She wanted to start dating other boys. Matthew was so stunned he couldn't even describe his feelings.\n\nHow would you react if you were in Matthew's situation? Yell? Cry? Pound a pillow? Act as if you didn't care? Pick a fight with your little sister? Talk to Joan? All of these behaviors are possible responses to strong feelings. They are ways of trying to cope with emotions that can seem overwhelming. While you cannot control what you feel, you can control what you do, or your behavior.\n\nSome responses to strong feelings improve the situation or at least make you feel better. Others can make a bad situation worse. The following guidelines will help you learn to express your feelings constructively.\n\n1. Accept Your Feelings \u2014 Strong emotions, even unpleasant ones, are normal. Denying them will not make them go away, and it may cause them to erupt later in destructive behaviors. It is important to identify and accept your feelings; then you can start to work on expressing them constructively.\n\n2. Inventory Your Current Behavior \u2014 Everyone experiences emotions, such as love, fear, sadness, and anger. Are you aware of how you usually react to these feelings? On index cards, inventory your recent responses to each of these emotions. Briefly describe when and how you expressed each feeling in the recent past and how the situation was resolved. Circle those responses that led to a positive outcome."
+            }
+        ],
+        [
+            {
+                "type": "activity",
+                "text": "3. Seek Constructive Alternatives \u2014 Your inventory will show what has worked well for you in the past. Here are some other tips to help you deal with your emotions in a positive way:\n\u2022 Share your feelings: Find someone trusted to talk to or \"a shoulder to cry on.\" Don't lash out and hurt people's feelings. Try not to withdraw from those who care about you.\n\u2022 Get off steam: Do something you enjoy that requires physical or creative energy (running, painting, music, walking). Smashing things does not help.\n\u2022 Confront the cause of the feeling: Once calm, talk to the person without blaming them.\n\u2022 Avoid \"drowning your sorrows\": Do not turn to overeating, alcohol, tobacco, drugs, or extreme risk-taking.\n\n4. Evaluate Your Progress \u2014 If your current emotional responses work, keep it up. If not, stop and think before acting. Practice constructive behaviors until they become automatic, or ask a trusted adult for help."
+            },
+            {
+                "type": "review",
+                "title": "Apply the Skill \u2014 Expressing Feelings",
+                "sections": [
+                    {
+                        "heading": "Apply the Skill",
+                        "items": [
+                            {
+                                "prompt": "1. Review Matthew's situation. What do you think his feelings were? List two positive and two negative ways he could have expressed those emotions.",
+                                "answer": "Feelings: shock, sadness, rejection. Positive: talking to a friend or parent, speaking calmly with Joan. Negative: yelling at Joan, engaging in reckless driving."
+                            },
+                            {
+                                "prompt": "2. Make a response inventory for fear, love, sadness, and anger. Describe three times in the recent past when you experienced each feeling.",
+                                "answer": "Reflect on personal recent events and identify which responses produced constructive outcomes."
+                            },
+                            {
+                                "prompt": "3. Look over your inventories. Make a new card for the emotion that gave you the most trouble. For a week, record each time you express that emotion.",
+                                "answer": "Track responses for a week to build constructive emotional habits."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "heading",
+                "text": "Chapter 2 Review"
+            },
+            {
+                "type": "summary",
+                "text": "An individual's personality consists of all the traits that make the person unique."
+            },
+            {
+                "type": "summary",
+                "text": "People with good mental health are comfortable with themselves and the world around them, realistic about their strengths and weaknesses, and able to handle the responsibilities of daily living."
+            },
+            {
+                "type": "summary",
+                "text": "Some personality traits are thought to be inherited, while others are shaped by a person's environment. Most traits are influenced by both heredity and environment."
+            },
+            {
+                "type": "summary",
+                "text": "Self-concept, the view a person has of him- or herself, is the most important influence on mental health. Self-concept is mostly influenced by people and events in an individual's early years."
+            },
+            {
+                "type": "summary",
+                "text": "Freud believed that personality is shaped by early childhood experiences and conflicts that the individual may not even remember."
+            },
+            {
+                "type": "summary",
+                "text": "Erikson developed an eight-stage theory of personality development. Each stage is characterized by different crises."
+            },
+            {
+                "type": "summary",
+                "text": "Maslow theorized that every individual has a basic drive to live up to his or her potential and achieve self-actualization."
+            },
+            {
+                "type": "summary",
+                "text": "The ability to recognize and appropriately express emotions, such as love, anger, fear, guilt, happiness, and sadness is an important component of mental health."
+            },
+            {
+                "type": "summary",
+                "text": "Coping strategies are ways of temporarily dealing with overwhelming feelings or situations. When coping strategies are overused, a person may not learn to solve problems or express his or her true feelings."
+            },
+            {
+                "type": "review",
+                "title": "Chapter 2 Exercises (Part 1)",
+                "sections": [
+                    {
+                        "heading": "Vocabulary Review",
+                        "instructions": "Listed below are key terms from this chapter. Match each term to the phrase that best describes it.",
+                        "items": [
+                            {
+                                "prompt": "1. all the traits that make each person different from everyone else",
+                                "answer": "personality"
+                            },
+                            {
+                                "prompt": "2. the part of an individual's personality that distinguishes between right and wrong",
+                                "answer": "superego"
+                            },
+                            {
+                                "prompt": "3. a thought of which a person is not aware, but which affects behavior",
+                                "answer": "unconscious thought"
+                            },
+                            {
+                                "prompt": "4. the mental and physical picture one has of oneself",
+                                "answer": "self-concept"
+                            },
+                            {
+                                "prompt": "5. an ordering of a person's needs from most basic to self-fulfillment",
+                                "answer": "Maslow's hierarchy of needs"
+                            },
+                            {
+                                "prompt": "6. reaching one's full potential",
+                                "answer": "self-actualization"
+                            },
+                            {
+                                "prompt": "7. the degree to which one likes oneself or feels good about oneself",
+                                "answer": "self-esteem"
+                            },
+                            {
+                                "prompt": "8. a reaction to a situation or event that involves a person's mind, body, and behavior",
+                                "answer": "emotion"
+                            },
+                            {
+                                "prompt": "9. transferring an emotion, such as anger, to an innocent person or object",
+                                "answer": "displacement"
+                            },
+                            {
+                                "prompt": "10. a conscious or unconscious way of dealing with a strong feeling or difficult situation",
+                                "answer": "coping strategy"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "type": "review",
+                "title": "Chapter 2 Exercises (Part 2)",
+                "sections": [
+                    {
+                        "heading": "What Have You Learned? (Questions 1\u201312)",
+                        "items": [
+                            {
+                                "prompt": "1. Describe a mentally healthy person.",
+                                "answer": "Comfortable with self/others/surroundings, realistic about strengths/weaknesses, able to handle daily responsibilities and learn from disappointments."
+                            },
+                            {
+                                "prompt": "2. Explain how heredity and environment interact to shape personality.",
+                                "answer": "Heredity provides inborn temperament and talent; environment (family, peers, school) conditions habits, values, and socialization."
+                            },
+                            {
+                                "prompt": "3. Why are peer groups an important influence on a teenager's personality?",
+                                "answer": "They provide social experience, help teens learn to solve problems independently, and shape identity during adolescence."
+                            },
+                            {
+                                "prompt": "4. What factors affect self-concept?",
+                                "answer": "Encouragement from family, feedback from peers/teachers, success in activities, and how one responds to personal setbacks."
+                            },
+                            {
+                                "prompt": "5. What did Freud believe to be the most important influence on personality?",
+                                "answer": "Unconscious forces and early childhood experiences and conflicts."
+                            },
+                            {
+                                "prompt": "6. Compare and contrast the personality theories of Freud, Erikson, and Maslow.",
+                                "answer": "Freud: early childhood unconscious drives (id/ego/superego). Erikson: 8 lifetime stages of social crises. Maslow: hierarchy of needs leading to self-actualization."
+                            },
+                            {
+                                "prompt": "7. According to Erikson, what crisis must teenagers resolve?",
+                                "answer": "Identity vs. Role Confusion \u2014 achieving a clear sense of self and personal values."
+                            },
+                            {
+                                "prompt": "8. Explain why love is such a positive and important emotion.",
+                                "answer": "It fosters deep emotional security, trust, caring relationships, and positive self-concept."
+                            },
+                            {
+                                "prompt": "9. How can guilt and fear be positive emotions? How can they be negative emotions?",
+                                "answer": "Positive: fear protects from physical harm; guilt prevents harmful actions. Negative: excessive fear/anxiety paralyzes; lingering guilt hurts self-esteem."
+                            },
+                            {
+                                "prompt": "10. Describe some of the emotions that a person who has experienced the death of a loved one might be feeling.",
+                                "answer": "Sadness, grief, shock, loneliness, anger, and numbness."
+                            },
+                            {
+                                "prompt": "11. How can frequent long-term use of coping strategies be harmful?",
+                                "answer": "It prevents facing and solving real problems directly and can lead to emotional detachment or distorted self-awareness."
+                            },
+                            {
+                                "prompt": "12. Give an example of how a coping strategy can be beneficial.",
+                                "answer": "Temporary compensation or exercise to blow off steam can restore calm before addressing a difficult situation."
+                            }
+                        ]
+                    },
+                    {
+                        "heading": "What Do You Think?",
+                        "items": [
+                            {
+                                "prompt": "1. How do you think emotions add to the enjoyment of life?",
+                                "answer": "Emotions provide depth, passion, joy in accomplishments, and deep connections with others."
+                            },
+                            {
+                                "prompt": "2. Which do you think has the most impact on personality: heredity or environment? Explain your answer.",
+                                "answer": "Answers vary; most psychologists agree both interact continuously, with environment shaping how inherited potential is expressed."
+                            },
+                            {
+                                "prompt": "3. Why is a loving home so important to the development of a healthy personality?",
+                                "answer": "It provides early trust, emotional security, positive reinforcement, and healthy socialization."
+                            },
+                            {
+                                "prompt": "4. Explain how school affects self-concept.",
+                                "answer": "Successes in academics and sports boost confidence and self-concept; peer reactions shape social identity."
+                            },
+                            {
+                                "prompt": "5. Describe a person you know who you would say has achieved self-actualization.",
+                                "answer": "Examples include independent, creative, compassionate leaders or mentors who pursue growth and help others."
+                            }
+                        ]
+                    },
+                    {
+                        "heading": "What Would You Do?",
+                        "items": [
+                            {
+                                "prompt": "1. You are feeling angry because your friend broke one of your favorite records and refuses to pay for it. What would you do to work out your anger in a healthful way?",
+                                "answer": "Take time to cool off (exercise or walk), then talk calmly with the friend about how to resolve the issue without yelling."
+                            },
+                            {
+                                "prompt": "2. Imagine you have been grounded for poor grades. Your parents say you cannot go out with your friends until you bring your grades up to a C average. How would you feel and what would a healthful response be?",
+                                "answer": "Accept feelings of disappointment, set a study schedule, ask for help from teachers, and work to improve grades."
+                            },
+                            {
+                                "prompt": "3. If a good friend moved far away, what would you do to ease your sadness?",
+                                "answer": "Express sadness to family, stay in touch via calls/letters, and stay active in current friendships."
+                            },
+                            {
+                                "prompt": "4. Describe what you are doing or hope to do to resolve your identity crisis. How will these actions help you develop a secure identity?",
+                                "answer": "Explore interests, clarify personal values, set goals, and participate in positive community/school groups."
+                            },
+                            {
+                                "prompt": "5. Imagine that every time you fail at something, you rationalize your failure. How might this behavior be harmful? Think of a way that the habit of rationalizing could be broken.",
+                                "answer": "Harmful because it stops learning from mistakes. Break it by writing honest self-evaluations and focusing on controllable actions."
+                            }
+                        ]
+                    },
+                    {
+                        "heading": "For Further Study",
+                        "items": [
+                            {
+                                "prompt": "1. Research Jean Piaget's theory of cognitive development. Explain his theory in a written report.",
+                                "answer": "Piaget identified 4 stages of cognitive development: Sensorimotor, Preoperational, Concrete Operational, and Formal Operational."
+                            },
+                            {
+                                "prompt": "2. At the library, find out the name of one person Maslow considered to have achieved self-actualization (e.g. Abraham Lincoln, Eleanor Roosevelt). Write a report describing their positive personality traits.",
+                                "answer": "Research figures like Eleanor Roosevelt or Albert Einstein who demonstrated self-acceptance, creativity, and concern for humanity."
+                            },
+                            {
+                                "prompt": "3. Interview five teenagers to find out how they are resolving their identity crises. Develop a list of healthful ways to resolve an identity crisis.",
+                                "answer": "List includes trying new extracurricular activities, discussing goals with mentors, and practicing self-reflection."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     ]
-  },
+},
   "H.Ch.03 · Managing Stress": {
     title: "Managing Stress",
     pages: [
