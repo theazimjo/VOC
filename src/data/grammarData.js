@@ -88343,118 +88343,714 @@ export const grammarData = {
 ],
         "fillBlanks": [
           {
-                    "id": 1,
-                    "sentence": "_____ of my parents are doctors.",
-                    "answer": "Both",
-                    "hint": "Plural verb 'are'"
+            "id": 1,
+            "text": "_____ of my parents are teachers.",
+            "options": ["Both", "Either", "Neither", "All"],
+            "correct": 0,
+            "explanation": "'Both of' is used with plural verb 'are'."
           },
           {
-                    "id": 2,
-                    "sentence": "You can take _____ road; both lead to town.",
-                    "answer": "either",
-                    "hint": "one of two"
+            "id": 2,
+            "text": "You can take _____ road; both lead to the station.",
+            "options": ["either", "neither", "both", "all"],
+            "correct": 0,
+            "explanation": "'Either' + singular noun ('road')."
           },
           {
-                    "id": 3,
-                    "sentence": "_____ student failed the test.",
-                    "answer": "Neither",
-                    "hint": "zero of two"
+            "id": 3,
+            "text": "_____ student failed the exam because they studied hard.",
+            "options": ["Neither", "Either", "Both", "All"],
+            "correct": 0,
+            "explanation": "'Neither' + singular noun ('student')."
           },
           {
-                    "id": 4,
-                    "sentence": "Both of them _____ cars.",
-                    "answer": "have",
-                    "hint": "plural verb"
+            "id": 4,
+            "text": "Both of them _____ cars.",
+            "options": ["have", "has", "is having", "was having"],
+            "correct": 0,
+            "explanation": "'Both of' requires a plural verb ('have')."
           },
           {
-                    "id": 5,
-                    "sentence": "Neither of us _____ ready.",
-                    "answer": "was",
-                    "hint": "singular verb"
+            "id": 5,
+            "text": "Neither of us _____ ready for the interview yesterday.",
+            "options": ["was", "were", "are", "have been"],
+            "correct": 0,
+            "explanation": "'Neither of us' takes singular verb ('was')."
+          },
+          {
+            "id": 6,
+            "text": "Either of the answers _____ acceptable.",
+            "options": ["is", "are", "were", "be"],
+            "correct": 0,
+            "explanation": "'Either of' takes singular verb 'is'."
+          },
+          {
+            "id": 7,
+            "text": "_____ of these shirts fit me properly.",
+            "options": ["Neither", "Both", "Either", "Every"],
+            "correct": 0,
+            "explanation": "'Neither of these shirts'."
+          },
+          {
+            "id": 8,
+            "text": "Do you want tea or coffee? — _____ is fine, I like both.",
+            "options": ["Either", "Neither", "Both", "None"],
+            "correct": 0,
+            "explanation": "'Either' means any of the two options."
+          },
+          {
+            "id": 9,
+            "text": "_____ key opens the backdoor lock.",
+            "options": ["Neither", "Either", "Both", "All"],
+            "correct": 0,
+            "explanation": "'Neither key' + singular verb 'opens'."
+          },
+          {
+            "id": 10,
+            "text": "Both of my brothers _____ in London.",
+            "options": ["live", "lives", "is living", "has lived"],
+            "correct": 0,
+            "explanation": "'Both of' takes plural verb 'live'."
+          },
+          {
+            "id": 11,
+            "text": "You can park on _____ side of the street today.",
+            "options": ["either", "both", "neither", "all"],
+            "correct": 0,
+            "explanation": "'Either side' = one or the other side."
+          },
+          {
+            "id": 12,
+            "text": "_____ of the two movies was interesting.",
+            "options": ["Neither", "Both", "Either of", "All"],
+            "correct": 0,
+            "explanation": "'Neither of the two movies was'."
+          },
+          {
+            "id": 13,
+            "text": "I tried on two pairs of shoes, but _____ fitted me.",
+            "options": ["neither", "either", "both", "none"],
+            "correct": 0,
+            "explanation": "'Neither' for two items with zero success."
+          },
+          {
+            "id": 14,
+            "text": "_____ of the candidates were interviewed.",
+            "options": ["Both", "Either", "Neither", "Each"],
+            "correct": 0,
+            "explanation": "'Both of the candidates were'."
+          },
+          {
+            "id": 15,
+            "text": "Either of those dates _____ convenient for me.",
+            "options": ["is", "are", "were", "have been"],
+            "correct": 0,
+            "explanation": "'Either of' takes singular verb 'is'."
+          },
+          {
+            "id": 16,
+            "text": "_____ team managed to score a goal during the match.",
+            "options": ["Neither", "Either", "Both", "All"],
+            "correct": 0,
+            "explanation": "'Neither team' = neither of the two."
+          },
+          {
+            "id": 17,
+            "text": "Which day suits you, Saturday or Sunday? — _____ day is fine.",
+            "options": ["Either", "Neither", "Both", "All"],
+            "correct": 0,
+            "explanation": "'Either day' (whichever of the two)."
+          },
+          {
+            "id": 18,
+            "text": "_____ of us knew how to operate the machinery.",
+            "options": ["Neither", "Both", "Either", "All"],
+            "correct": 0,
+            "explanation": "'Neither of us knew'."
+          },
+          {
+            "id": 19,
+            "text": "Both of the girls _____ very talented musicians.",
+            "options": ["are", "is", "was", "be"],
+            "correct": 0,
+            "explanation": "'Both of' + plural verb 'are'."
+          },
+          {
+            "id": 20,
+            "text": "He offered me tea or coffee, but I drank _____.",
+            "options": ["neither", "either", "both", "none"],
+            "correct": 0,
+            "explanation": "'neither' pronoun at end of clause."
           }
-],
+        ],
         "scrambled": [
-          {
-                    "id": 1,
-                    "answer": "Both of my friends are doctors",
-                    "hint": "Start with Both"
-          },
-          {
-                    "id": 2,
-                    "answer": "Neither of us knows the answer",
-                    "hint": "Start with Neither"
-          },
-          {
-                    "id": 3,
-                    "answer": "Either option is good for me",
-                    "hint": "Start with Either"
-          },
-          {
-                    "id": 4,
-                    "answer": "Both students passed the exam",
-                    "hint": "Start with Both"
-          },
-          {
-                    "id": 5,
-                    "answer": "Neither key opens this door",
-                    "hint": "Start with Neither"
-          }
-],
+          { "id": 1, "answer": "Both of my friends are doctors", "hint": "Start with Both" },
+          { "id": 2, "answer": "Neither of us knows the answer", "hint": "Start with Neither" },
+          { "id": 3, "answer": "Either option is good for me", "hint": "Start with Either" },
+          { "id": 4, "answer": "Both students passed the exam", "hint": "Start with Both" },
+          { "id": 5, "answer": "Neither key opens this door", "hint": "Start with Neither" },
+          { "id": 6, "answer": "You can take either bus to downtown", "hint": "Start with You" },
+          { "id": 7, "answer": "Both of the coats are expensive", "hint": "Start with Both" },
+          { "id": 8, "answer": "Neither team scored a goal today", "hint": "Start with Neither" },
+          { "id": 9, "answer": "Either day is fine for the meeting", "hint": "Start with Either" },
+          { "id": 10, "answer": "Both of my sisters live in Rome", "hint": "Start with Both" },
+          { "id": 11, "answer": "Neither of the answers is correct", "hint": "Start with Neither" },
+          { "id": 12, "answer": "You may park on either side of the road", "hint": "Start with You" },
+          { "id": 13, "answer": "Both girls are very smart", "hint": "Start with Both" },
+          { "id": 14, "answer": "Neither of us was late for class", "hint": "Start with Neither" },
+          { "id": 15, "answer": "Either option leads to success", "hint": "Start with Either" },
+          { "id": 16, "answer": "Both of these books are useful", "hint": "Start with Both" },
+          { "id": 17, "answer": "Neither candidate was selected", "hint": "Start with Neither" },
+          { "id": 18, "answer": "Either restaurant is fine with me", "hint": "Start with Either" },
+          { "id": 19, "answer": "Both of them were very happy", "hint": "Start with Both" },
+          { "id": 20, "answer": "Neither road goes to the beach", "hint": "Start with Neither" }
+        ],
         "errorCorrection": [
           {
-                    "id": 1,
-                    "text": "Both girls is happy.",
-                    "correction": "Both girls are happy.",
-                    "explanation": "'Both' always takes plural verb 'are'."
+            "id": 1,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "Both girls are happy.",
+              "Both girls is happy.",
+              "Either option is good.",
+              "Neither boy was late."
+            ],
+            "correct": 1,
+            "explanation": "'Both' always takes plural verb 'are'."
           },
           {
-                    "id": 2,
-                    "text": "Neither of them are ready.",
-                    "correction": "Neither of them is ready.",
-                    "explanation": "'Neither of' takes singular verb 'is'."
+            "id": 2,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "Neither of them are ready.",
+              "Neither of them is ready.",
+              "Neither of them be ready.",
+              "Neither of them being ready."
+            ],
+            "correct": 1,
+            "explanation": "'Neither of' takes singular verb 'is'."
           },
           {
-                    "id": 3,
-                    "text": "Either roads lead to the city.",
-                    "correction": "Either road leads to the city.",
-                    "explanation": "'Either' is followed by a singular noun."
+            "id": 3,
+            "text": "Which sentence contains a grammatical error?",
+            "options": [
+              "Either road leads to the city.",
+              "Either roads lead to the city.",
+              "Either of the roads leads to the city.",
+              "Both roads lead to the city."
+            ],
+            "correct": 1,
+            "explanation": "'Either' is followed by singular noun ('Either road')."
           },
           {
-                    "id": 4,
-                    "text": "Neither students passed.",
-                    "correction": "Neither student passed.",
-                    "explanation": "'Neither' + singular noun."
+            "id": 4,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "Neither student passed.",
+              "Neither students passed.",
+              "Neither of the students passed.",
+              "Both students passed."
+            ],
+            "correct": 1,
+            "explanation": "'Neither' + singular noun ('student')."
           },
           {
-                    "id": 5,
-                    "text": "Both of boy played football.",
-                    "correction": "Both of the boys played football.",
-                    "explanation": "'Both of' requires plural noun."
+            "id": 5,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "Both of boy played football.",
+              "Both of the boys played football.",
+              "Both of boys played football.",
+              "Both the boy played football."
+            ],
+            "correct": 1,
+            "explanation": "'Both of' requires 'the' and a plural noun ('the boys')."
+          },
+          {
+            "id": 6,
+            "text": "Which sentence uses 'either' INCORRECTLY?",
+            "options": [
+              "You can choose either coat.",
+              "Either of the coats are nice.",
+              "Either of the coats is nice.",
+              "You can take either bus."
+            ],
+            "correct": 1,
+            "explanation": "'Either of' takes a singular verb ('is nice')."
+          },
+          {
+            "id": 7,
+            "text": "Which sentence has correct verb agreement?",
+            "options": [
+              "Both of my parents is doctors.",
+              "Both of my parents are doctors.",
+              "Both my parent are doctors.",
+              "Both of my parent is doctor."
+            ],
+            "correct": 1,
+            "explanation": "'Both of my parents' takes plural verb 'are'."
+          },
+          {
+            "id": 8,
+            "text": "Which sentence contains an error?",
+            "options": [
+              "Neither key opens the lock.",
+              "Neither keys opens the lock.",
+              "Neither of the keys opens the lock.",
+              "Both keys open the lock."
+            ],
+            "correct": 1,
+            "explanation": "'Neither keys' is wrong; use 'Neither key'."
+          },
+          {
+            "id": 9,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "Either day is suitable.",
+              "Either days is suitable.",
+              "Either days are suitable.",
+              "Either of day is suitable."
+            ],
+            "correct": 0,
+            "explanation": "'Either day' singular."
+          },
+          {
+            "id": 10,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "Neither of us was invited.",
+              "Neither of us were invited. (informal)",
+              "Neither of we were invited.",
+              "Both of us were invited."
+            ],
+            "correct": 2,
+            "explanation": "'Neither of' requires object pronoun ('us', not 'we')."
+          },
+          {
+            "id": 11,
+            "text": "Which sentence uses 'both' INCORRECTLY?",
+            "options": [
+              "Both books are interesting.",
+              "Both of the books are interesting.",
+              "Both book is interesting.",
+              "Both of them are interesting."
+            ],
+            "correct": 2,
+            "explanation": "'Both' requires plural noun ('books') and plural verb ('are')."
+          },
+          {
+            "id": 12,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "Neither side of the river was flooded.",
+              "Neither sides of the river was flooded.",
+              "Neither side of the river were flooded.",
+              "Neither of sides was flooded."
+            ],
+            "correct": 0,
+            "explanation": "'Neither side... was'."
+          },
+          {
+            "id": 13,
+            "text": "Which sentence contains a grammatical error?",
+            "options": [
+              "Either restaurant serves seafood.",
+              "Either of the restaurants serve seafood.",
+              "Either of the restaurants serves seafood.",
+              "Both restaurants serve seafood."
+            ],
+            "correct": 1,
+            "explanation": "'Either of the restaurants' takes singular verb ('serves')."
+          },
+          {
+            "id": 14,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "Both of my brother live here.",
+              "Both of my brothers live here.",
+              "Both my brother lives here.",
+              "Both of my brothers lives here."
+            ],
+            "correct": 1,
+            "explanation": "'Both of my brothers live'."
+          },
+          {
+            "id": 15,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "I don't like either coat.",
+              "I like neither coat.",
+              "I don't like neither coat.",
+              "I like both coats."
+            ],
+            "correct": 2,
+            "explanation": "Double negative error: 'don't like neither'."
+          },
+          {
+            "id": 16,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "Neither of the answers is wrong.",
+              "Neither of the answers are wrong.",
+              "Neither answers is wrong.",
+              "Neither answer are wrong."
+            ],
+            "correct": 0,
+            "explanation": "'Neither of the answers is'."
+          },
+          {
+            "id": 17,
+            "text": "Which sentence contains a grammar error?",
+            "options": [
+              "Either answer is acceptable.",
+              "Either of the answers is acceptable.",
+              "Either of answers is acceptable.",
+              "Both answers are acceptable."
+            ],
+            "correct": 2,
+            "explanation": "'Either of answers' missing 'the'."
+          },
+          {
+            "id": 18,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "Neither team was victorious.",
+              "Neither teams was victorious.",
+              "Neither team were victorious.",
+              "Neither of team was victorious."
+            ],
+            "correct": 0,
+            "explanation": "'Neither team was'."
+          },
+          {
+            "id": 19,
+            "text": "Which sentence uses 'both' INCORRECTLY?",
+            "options": [
+              "Both options are good.",
+              "Both of the options are good.",
+              "Both option are good.",
+              "Both of them are good."
+            ],
+            "correct": 2,
+            "explanation": "'Both option' missing plural 's'."
+          },
+          {
+            "id": 20,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "You can take either bus.",
+              "You can take either of the buses.",
+              "You can take either of buses.",
+              "You can take both buses."
+            ],
+            "correct": 2,
+            "explanation": "'either of buses' missing 'the'."
           }
-],
+        ],
         "transform": [
           {
-                    "id": 1,
-                    "original": "Not one of the two boys came.",
-                    "target": "_____ of the boys came.",
-                    "answer": "Neither",
-                    "explanation": "Not one of two = Neither."
+            "id": 1,
+            "text": "Transform: \"Not one of the two boys came.\" = \"_____ of the boys came.\"",
+            "options": ["Neither", "Both", "Either", "None"],
+            "correct": 0,
+            "explanation": "Not one of two = Neither of."
+          },
+          {
+            "id": 2,
+            "text": "Transform: \"Tom is a doctor and Jerry is a doctor.\" = \"_____ of them are doctors.\"",
+            "options": ["Both", "Either", "Neither", "All"],
+            "correct": 0,
+            "explanation": "Two people = Both of them."
+          },
+          {
+            "id": 3,
+            "text": "Transform: \"Option A is good and Option B is good.\" = \"_____ option is good.\"",
+            "options": ["Either", "Neither", "Both", "All"],
+            "correct": 0,
+            "explanation": "Whichever of two = Either option."
+          },
+          {
+            "id": 4,
+            "text": "Transform: \"Key A didn't work and key B didn't work.\" = \"_____ key worked.\"",
+            "options": ["Neither", "Either", "Both", "None"],
+            "correct": 0,
+            "explanation": "Zero of two = Neither key."
+          },
+          {
+            "id": 5,
+            "text": "Transform: \"I don't like coat A and I don't like coat B.\" = \"I like _____ coat.\"",
+            "options": ["neither", "either", "both", "none"],
+            "correct": 0,
+            "explanation": "I like neither coat."
+          },
+          {
+            "id": 6,
+            "text": "Transform: \"Both girls passed.\" = \"_____ of the girls failed.\"",
+            "options": ["Neither", "Either", "Both", "None"],
+            "correct": 0,
+            "explanation": "If both passed, neither failed."
+          },
+          {
+            "id": 7,
+            "text": "Transform: \"Bus 1 goes downtown and Bus 2 goes downtown.\" = \"You can take _____ bus.\"",
+            "options": ["either", "neither", "both", "all"],
+            "correct": 0,
+            "explanation": "You can take either bus."
+          },
+          {
+            "id": 8,
+            "text": "Transform: \"My father is a teacher and my mother is a teacher.\" = \"_____ of my parents are teachers.\"",
+            "options": ["Both", "Either", "Neither", "All"],
+            "correct": 0,
+            "explanation": "Both of my parents."
+          },
+          {
+            "id": 9,
+            "text": "Transform: \"I haven't seen team A or team B.\" = \"I have seen _____ team.\"",
+            "options": ["neither", "either", "both", "none"],
+            "correct": 0,
+            "explanation": "have seen neither team."
+          },
+          {
+            "id": 10,
+            "text": "Transform: \"Saturday works for me and Sunday works for me.\" = \"_____ day works for me.\"",
+            "options": ["Either", "Neither", "Both", "All"],
+            "correct": 0,
+            "explanation": "Either day works."
+          },
+          {
+            "id": 11,
+            "text": "Transform: \"Restaurant 1 was bad and restaurant 2 was bad.\" = \"_____ restaurant was good.\"",
+            "options": ["Neither", "Either", "Both", "None"],
+            "correct": 0,
+            "explanation": "Neither restaurant was good."
+          },
+          {
+            "id": 12,
+            "text": "Transform: \"Ali speaks English and Bob speaks English.\" = \"_____ of them speak English.\"",
+            "options": ["Both", "Either", "Neither", "All"],
+            "correct": 0,
+            "explanation": "Both of them."
+          },
+          {
+            "id": 13,
+            "text": "Transform: \"I didn't answer question 1 or question 2.\" = \"I answered _____ of the questions.\"",
+            "options": ["neither", "either", "both", "none"],
+            "correct": 0,
+            "explanation": "answered neither of the questions."
+          },
+          {
+            "id": 14,
+            "text": "Transform: \"You can wear shirt A or shirt B.\" = \"You can wear _____ shirt.\"",
+            "options": ["either", "neither", "both", "all"],
+            "correct": 0,
+            "explanation": "wear either shirt."
+          },
+          {
+            "id": 15,
+            "text": "Transform: \"Not one of my two brothers lives here.\" = \"_____ of my brothers lives here.\"",
+            "options": ["Neither", "Either", "Both", "None"],
+            "correct": 0,
+            "explanation": "Neither of my brothers."
+          },
+          {
+            "id": 16,
+            "text": "Transform: \"Both candidates failed.\" = \"_____ candidate passed.\"",
+            "options": ["Neither", "Either", "Both", "None"],
+            "correct": 0,
+            "explanation": "Neither candidate passed."
+          },
+          {
+            "id": 17,
+            "text": "Transform: \"Do you prefer coffee or tea? - It doesn't matter.\" = \"_____ is fine.\"",
+            "options": ["Either", "Neither", "Both", "None"],
+            "correct": 0,
+            "explanation": "Either is fine."
+          },
+          {
+            "id": 18,
+            "text": "Transform: \"Car 1 is fast and car 2 is fast.\" = \"_____ of the cars are fast.\"",
+            "options": ["Both", "Either", "Neither", "All"],
+            "correct": 0,
+            "explanation": "Both of the cars."
+          },
+          {
+            "id": 19,
+            "text": "Transform: \"Neither of the two students was late.\" = \"_____ of the students were on time.\"",
+            "options": ["Both", "Either", "Neither", "All"],
+            "correct": 0,
+            "explanation": "Both of the students."
+          },
+          {
+            "id": 20,
+            "text": "Transform: \"I didn't buy book 1 or book 2.\" = \"I bought _____ book.\"",
+            "options": ["neither", "either", "both", "none"],
+            "correct": 0,
+            "explanation": "bought neither book."
           }
-],
+        ],
         "dialogue": [
           {
-                    "id": 1,
-                    "dialogue": "A: Tea or coffee?\nB: _____ is fine, I like both.",
-                    "options": [
-                              "Either",
-                              "Neither",
-                              "Both",
-                              "All"
-                    ],
-                    "correct": 0,
-                    "explanation": "'Either' means any of the two."
+            "id": 1,
+            "situation": "Ordering tea or coffee.",
+            "dialogue": "A: Tea or coffee?\nB: _____ is fine, I like both.",
+            "options": ["Either", "Neither", "Both", "All"],
+            "correct": 0,
+            "explanation": "'Either' means whichever of the two."
+          },
+          {
+            "id": 2,
+            "situation": "Asking about two job applicants.",
+            "dialogue": "A: Did either applicant pass the interview?\nB: No, _____ applicant passed.",
+            "options": ["neither", "either", "both", "none"],
+            "correct": 0,
+            "explanation": "'Neither' indicates zero of two."
+          },
+          {
+            "id": 3,
+            "situation": "Talking about two sisters.",
+            "dialogue": "A: Are your sisters studying abroad?\nB: Yes, _____ of them are in London.",
+            "options": ["both", "either", "neither", "all"],
+            "correct": 0,
+            "explanation": "'Both of them' for two sisters."
+          },
+          {
+            "id": 4,
+            "situation": "Choosing a meeting date.",
+            "dialogue": "A: Can we meet on Monday or Tuesday?\nB: _____ day works for me.",
+            "options": ["Either", "Neither", "Both", "All"],
+            "correct": 0,
+            "explanation": "'Either day' (whichever of the two)."
+          },
+          {
+            "id": 5,
+            "situation": "Checking two car keys.",
+            "dialogue": "A: Did any of these keys open the door?\nB: No, _____ key worked.",
+            "options": ["neither", "either", "both", "none"],
+            "correct": 0,
+            "explanation": "'Neither key'."
+          },
+          {
+            "id": 6,
+            "situation": "Inviting two friends.",
+            "dialogue": "A: Are John and Mark coming?\nB: Yes, _____ of them agreed to come.",
+            "options": ["both", "either", "neither", "all"],
+            "correct": 0,
+            "explanation": "'Both of them'."
+          },
+          {
+            "id": 7,
+            "situation": "Comparing two laptops.",
+            "dialogue": "A: Which laptop should I buy?\nB: _____ laptop is a good choice.",
+            "options": ["Either", "Neither", "Both", "All"],
+            "correct": 0,
+            "explanation": "'Either laptop'."
+          },
+          {
+            "id": 8,
+            "situation": "Asking about two test scores.",
+            "dialogue": "A: How did you do on your two exams?\nB: _____ of my scores were high!",
+            "options": ["Both", "Either", "Neither", "All"],
+            "correct": 0,
+            "explanation": "'Both of my scores'."
+          },
+          {
+            "id": 9,
+            "situation": "Discussing two restaurants.",
+            "dialogue": "A: Which restaurant did you choose?\nB: _____ of them looked good, so we went home.",
+            "options": ["Neither", "Both", "Either", "None"],
+            "correct": 0,
+            "explanation": "'Neither of them'."
+          },
+          {
+            "id": 10,
+            "situation": "Selecting a coat.",
+            "dialogue": "A: Which coat do you prefer?\nB: I like _____, they are both stylish!",
+            "options": ["both", "either", "neither", "all"],
+            "correct": 0,
+            "explanation": "'I like both'."
+          },
+          {
+            "id": 11,
+            "situation": "Deciding on travel routes.",
+            "dialogue": "A: Which road should we take?\nB: You can take _____ road; both lead to the highway.",
+            "options": ["either", "neither", "both", "all"],
+            "correct": 0,
+            "explanation": "'Either road'."
+          },
+          {
+            "id": 12,
+            "situation": "Inquiring about twin brothers.",
+            "dialogue": "A: Do your twin brothers play football?\nB: Yes, _____ of them play in the team.",
+            "options": ["both", "either", "neither", "all"],
+            "correct": 0,
+            "explanation": "'Both of them'."
+          },
+          {
+            "id": 13,
+            "situation": "Evaluating two business offers.",
+            "dialogue": "A: Did you accept offer A or offer B?\nB: _____ offer was satisfactory.",
+            "options": ["Neither", "Either", "Both", "None"],
+            "correct": 0,
+            "explanation": "'Neither offer'."
+          },
+          {
+            "id": 14,
+            "situation": "Asking about movie options.",
+            "dialogue": "A: Shall we watch horror or comedy?\nB: _____ is fine with me, you pick!",
+            "options": ["Either", "Neither", "Both", "All"],
+            "correct": 0,
+            "explanation": "'Either is fine'."
+          },
+          {
+            "id": 15,
+            "situation": "Checking two hotel rooms.",
+            "dialogue": "A: Were the rooms comfortable?\nB: Yes, _____ of the rooms had great views.",
+            "options": ["both", "either", "neither", "all"],
+            "correct": 0,
+            "explanation": "'Both of the rooms'."
+          },
+          {
+            "id": 16,
+            "situation": "Asking about two flight times.",
+            "dialogue": "A: Are you flying morning or evening?\nB: _____ flight works for my schedule.",
+            "options": ["Either", "Neither", "Both", "All"],
+            "correct": 0,
+            "explanation": "'Either flight'."
+          },
+          {
+            "id": 17,
+            "situation": "Asking about parents' languages.",
+            "dialogue": "A: Do your parents speak French?\nB: No, _____ of them speaks French.",
+            "options": ["neither", "both", "either", "none"],
+            "correct": 0,
+            "explanation": "'Neither of them'."
+          },
+          {
+            "id": 18,
+            "situation": "Buying shoes.",
+            "dialogue": "A: Which pair of shoes are you buying?\nB: I am buying _____ pairs!",
+            "options": ["both", "either", "neither", "all"],
+            "correct": 0,
+            "explanation": "'both pairs'."
+          },
+          {
+            "id": 19,
+            "situation": "Discussing two phone brands.",
+            "dialogue": "A: Is Apple or Samsung better?\nB: _____ phone has great features.",
+            "options": ["Either", "Neither", "Both", "All"],
+            "correct": 0,
+            "explanation": "'Either phone'."
+          },
+          {
+            "id": 20,
+            "situation": "Asking about missing keys.",
+            "dialogue": "A: Did you find your house key or car key?\nB: _____ key was found, unfortunately.",
+            "options": ["Neither", "Either", "Both", "None"],
+            "correct": 0,
+            "explanation": "'Neither key'."
           }
-]
+        ]
       },
       {
         "id": "both-either-neither-advanced",
@@ -88706,118 +89302,714 @@ export const grammarData = {
 ],
         "fillBlanks": [
           {
-                    "id": 1,
-                    "sentence": "She speaks _____ English and French.",
-                    "answer": "both",
-                    "hint": "pairs with and"
+            "id": 1,
+            "text": "She speaks _____ English and French fluently.",
+            "options": ["both", "either", "neither", "also"],
+            "correct": 0,
+            "explanation": "'Both...and' pairs together."
           },
           {
-                    "id": 2,
-                    "sentence": "You can choose _____ Monday or Tuesday.",
-                    "answer": "either",
-                    "hint": "pairs with or"
+            "id": 2,
+            "text": "You can choose _____ Monday or Tuesday for your interview.",
+            "options": ["either", "neither", "both", "nor"],
+            "correct": 0,
+            "explanation": "'Either...or' pairs together."
           },
           {
-                    "id": 3,
-                    "sentence": "Neither Ali _____ Hasan came.",
-                    "answer": "nor",
-                    "hint": "pairs with neither"
+            "id": 3,
+            "text": "Neither Ali _____ Hasan showed up for practice today.",
+            "options": ["nor", "or", "and", "but"],
+            "correct": 0,
+            "explanation": "'Neither' pairs with 'nor'."
           },
           {
-                    "id": 4,
-                    "sentence": "Neither Tom nor his friends _____ ready.",
-                    "answer": "are",
-                    "hint": "plural closest subject"
+            "id": 4,
+            "text": "Neither Tom nor his friends _____ ready for the presentation.",
+            "options": ["are", "is", "was", "has been"],
+            "correct": 0,
+            "explanation": "Verb agrees with closest subject 'his friends' (plural -> 'are')."
           },
           {
-                    "id": 5,
-                    "sentence": "Either you pay now _____ leave.",
-                    "answer": "or",
-                    "hint": "pairs with either"
+            "id": 5,
+            "text": "Either you pay the fine now _____ face court action.",
+            "options": ["or", "nor", "and", "but"],
+            "correct": 0,
+            "explanation": "'Either...or'."
+          },
+          {
+            "id": 6,
+            "text": "Neither Tom nor his brother _____ home right now.",
+            "options": ["is", "are", "were", "have been"],
+            "correct": 0,
+            "explanation": "Closest subject 'his brother' is singular -> 'is'."
+          },
+          {
+            "id": 7,
+            "text": "The hotel was _____ clean and very comfortable.",
+            "options": ["both", "either", "neither", "nor"],
+            "correct": 0,
+            "explanation": "'Both clean and comfortable'."
+          },
+          {
+            "id": 8,
+            "text": "She likes neither milk _____ sugar in her black tea.",
+            "options": ["nor", "or", "and", "but"],
+            "correct": 0,
+            "explanation": "'Neither...nor'."
+          },
+          {
+            "id": 9,
+            "text": "We didn't enjoy _____ the movie or the concert.",
+            "options": ["either", "neither", "both", "nor"],
+            "correct": 0,
+            "explanation": "Negative verb 'didn't enjoy' + 'either...or'."
+          },
+          {
+            "id": 10,
+            "text": "Both the manager and the employees _____ present at the meeting.",
+            "options": ["were", "was", "is", "has been"],
+            "correct": 0,
+            "explanation": "'Both...and' always takes a plural verb ('were')."
+          },
+          {
+            "id": 11,
+            "text": "He is _____ intelligent and extremely hardworking.",
+            "options": ["both", "either", "neither", "nor"],
+            "correct": 0,
+            "explanation": "'Both...and'."
+          },
+          {
+            "id": 12,
+            "text": "I have _____ time nor energy to debate this issue.",
+            "options": ["neither", "either", "both", "not"],
+            "correct": 0,
+            "explanation": "'Neither...nor'."
+          },
+          {
+            "id": 13,
+            "text": "Either you apologize to her _____ I will not speak to you.",
+            "options": ["or", "nor", "and", "but"],
+            "correct": 0,
+            "explanation": "'Either...or'."
+          },
+          {
+            "id": 14,
+            "text": "Neither the teacher nor the students _____ the answer.",
+            "options": ["knew", "knows", "is knowing", "has known"],
+            "correct": 0,
+            "explanation": "Past tense verb 'knew'."
+          },
+          {
+            "id": 15,
+            "text": "You can _____ stay here with us or go to the hotel.",
+            "options": ["either", "neither", "both", "nor"],
+            "correct": 0,
+            "explanation": "'Either...or'."
+          },
+          {
+            "id": 16,
+            "text": "She neither smiled _____ spoke during the whole interview.",
+            "options": ["nor", "or", "and", "but"],
+            "correct": 0,
+            "explanation": "'Neither...nor'."
+          },
+          {
+            "id": 17,
+            "text": "Both Mark and John _____ playing in the final game.",
+            "options": ["are", "is", "was", "be"],
+            "correct": 0,
+            "explanation": "'Both...and' plural verb 'are'."
+          },
+          {
+            "id": 18,
+            "text": "Neither the driver nor the passengers _____ injured in the crash.",
+            "options": ["were", "was", "is", "has been"],
+            "correct": 0,
+            "explanation": "Agrees with plural closest subject 'passengers' -> 'were'."
+          },
+          {
+            "id": 19,
+            "text": "He neither smokes _____ drinks alcohol.",
+            "options": ["nor", "or", "and", "but"],
+            "correct": 0,
+            "explanation": "'Neither...nor'."
+          },
+          {
+            "id": 20,
+            "text": "Either my parents or my sister _____ going to pick you up.",
+            "options": ["is", "are", "were", "have been"],
+            "correct": 0,
+            "explanation": "Agrees with closest subject 'my sister' (singular -> 'is')."
           }
-],
+        ],
         "scrambled": [
-          {
-                    "id": 1,
-                    "answer": "Neither Ali nor Hasan came to class",
-                    "hint": "Start with Neither"
-          },
-          {
-                    "id": 2,
-                    "answer": "She speaks both English and French",
-                    "hint": "Start with She"
-          },
-          {
-                    "id": 3,
-                    "answer": "You can have either tea or coffee",
-                    "hint": "Start with You"
-          },
-          {
-                    "id": 4,
-                    "answer": "Neither Tom nor his brother is ready",
-                    "hint": "Closest subject is brother"
-          },
-          {
-                    "id": 5,
-                    "answer": "He is both smart and hardworking",
-                    "hint": "Start with He"
-          }
-],
+          { "id": 1, "answer": "Neither Ali nor Hasan came to class", "hint": "Start with Neither" },
+          { "id": 2, "answer": "She speaks both English and French", "hint": "Start with She" },
+          { "id": 3, "answer": "You can have either tea or coffee", "hint": "Start with You" },
+          { "id": 4, "answer": "Neither Tom nor his brother is ready", "hint": "Start with Neither" },
+          { "id": 5, "answer": "He is both smart and hardworking", "hint": "Start with He" },
+          { "id": 6, "answer": "Either you leave now or I call the police", "hint": "Start with Either" },
+          { "id": 7, "answer": "She neither smiled nor spoke to me", "hint": "Start with She" },
+          { "id": 8, "answer": "Both Ali and Bob passed the exam", "hint": "Start with Both" },
+          { "id": 9, "answer": "Neither the driver nor the passengers were hurt", "hint": "Start with Neither" },
+          { "id": 10, "answer": "You can either call me or send an email", "hint": "Start with You" },
+          { "id": 11, "answer": "He drinks neither tea nor coffee", "hint": "Start with He" },
+          { "id": 12, "answer": "Both the manager and the team agreed", "hint": "Start with Both" },
+          { "id": 13, "answer": "Neither Tom nor his friends are here", "hint": "Start with Neither" },
+          { "id": 14, "answer": "She is both talented and humble", "hint": "Start with She" },
+          { "id": 15, "answer": "Either my sister or my parents are coming", "hint": "Start with Either" },
+          { "id": 16, "answer": "He was neither surprised nor upset", "hint": "Start with He" },
+          { "id": 17, "answer": "Both the cat and the dog were sleeping", "hint": "Start with Both" },
+          { "id": 18, "answer": "Either we win today or we go home", "hint": "Start with Either" },
+          { "id": 19, "answer": "Neither the food nor the service was good", "hint": "Start with Neither" },
+          { "id": 20, "answer": "She can both sing and dance very well", "hint": "Start with She" }
+        ],
         "errorCorrection": [
           {
-                    "id": 1,
-                    "text": "He neither called or emailed.",
-                    "correction": "He neither called nor emailed.",
-                    "explanation": "'Neither' pairs with 'nor', not 'or'."
+            "id": 1,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "He neither called nor emailed.",
+              "He neither called or emailed.",
+              "He didn't call or email.",
+              "Neither he called nor emailed."
+            ],
+            "correct": 1,
+            "explanation": "'Neither' must pair with 'nor', not 'or'."
           },
           {
-                    "id": 2,
-                    "text": "Neither Tom nor his friends is ready.",
-                    "correction": "Neither Tom nor his friends are ready.",
-                    "explanation": "Verb agrees with closest subject 'friends' (plural)."
+            "id": 2,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "Neither Tom nor his friends is ready.",
+              "Neither Tom nor his friends are ready.",
+              "Neither Tom nor his friends be ready.",
+              "Neither Tom or his friends are ready."
+            ],
+            "correct": 1,
+            "explanation": "Verb agrees with closest subject 'his friends' (plural -> 'are')."
           },
           {
-                    "id": 3,
-                    "text": "Both Ali and Karim is student.",
-                    "correction": "Both Ali and Karim are students.",
-                    "explanation": "'Both...and' takes plural verb and plural noun."
+            "id": 3,
+            "text": "Which sentence contains a grammatical error?",
+            "options": [
+              "Both Ali and Karim are students.",
+              "Both Ali and Karim is students.",
+              "Ali and Karim are both students.",
+              "Both of them are students."
+            ],
+            "correct": 1,
+            "explanation": "'Both...and' requires a plural verb ('are')."
           },
           {
-                    "id": 4,
-                    "text": "I don't like neither option.",
-                    "correction": "I don't like either option.",
-                    "explanation": "Don't use double negative."
+            "id": 4,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "I don't like either option.",
+              "I don't like neither option.",
+              "I like neither option.",
+              "I dislike both options."
+            ],
+            "correct": 1,
+            "explanation": "Double negative error: 'don't like neither'."
           },
           {
-                    "id": 5,
-                    "text": "Either tea nor coffee is fine.",
-                    "correction": "Either tea or coffee is fine.",
-                    "explanation": "'Either' pairs with 'or'."
+            "id": 5,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "Either tea nor coffee is fine.",
+              "Either tea or coffee is fine.",
+              "Either tea or coffee are fine.",
+              "Neither tea or coffee is fine."
+            ],
+            "correct": 1,
+            "explanation": "'Either...or' pairs together with singular verb."
+          },
+          {
+            "id": 6,
+            "text": "Which sentence has an error in verb agreement?",
+            "options": [
+              "Either my brother or my parents are coming.",
+              "Either my parents or my brother is coming.",
+              "Either my parents or my brother are coming.",
+              "Both my brother and my parents are coming."
+            ],
+            "correct": 2,
+            "explanation": "Verb agrees with closest subject 'my brother' (singular -> 'is')."
+          },
+          {
+            "id": 7,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "She neither ate nor drank anything.",
+              "She ate neither food nor drank water.",
+              "She neither ate or drank anything.",
+              "She didn't eat or drink anything."
+            ],
+            "correct": 2,
+            "explanation": "'Neither' pairs with 'nor'."
+          },
+          {
+            "id": 8,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "Both the teacher and the student was happy.",
+              "Both the teacher and the student were happy.",
+              "Both the teacher nor the student were happy.",
+              "Both the teacher or the student were happy."
+            ],
+            "correct": 1,
+            "explanation": "'Both...and' always takes plural verb ('were')."
+          },
+          {
+            "id": 9,
+            "text": "Which sentence contains a grammatical error?",
+            "options": [
+              "Neither the manager nor the workers were present.",
+              "Neither the workers nor the manager was present.",
+              "Neither the workers nor the manager were present.",
+              "Both the manager and workers were present."
+            ],
+            "correct": 2,
+            "explanation": "Closest subject 'the manager' is singular, so verb should be 'was'."
+          },
+          {
+            "id": 10,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "He can either drive or take the train.",
+              "He can either drive nor take the train.",
+              "He can either drive and take the train.",
+              "He can neither drive or take the train."
+            ],
+            "correct": 0,
+            "explanation": "'Either...or' pairs together."
+          },
+          {
+            "id": 11,
+            "text": "Which sentence uses 'neither' INCORRECTLY?",
+            "options": [
+              "Neither Bob nor Jim is coming.",
+              "Neither Bob nor Jim are coming.",
+              "Neither Bob or Jim is coming.",
+              "Neither Bob nor his friends are coming."
+            ],
+            "correct": 2,
+            "explanation": "'Neither' must pair with 'nor', not 'or'."
+          },
+          {
+            "id": 12,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "She is both pretty and clever.",
+              "She is both pretty or clever.",
+              "She is both pretty nor clever.",
+              "She is both pretty but clever."
+            ],
+            "correct": 0,
+            "explanation": "'Both...and'."
+          },
+          {
+            "id": 13,
+            "text": "Which sentence contains a grammar error?",
+            "options": [
+              "Neither the rain nor the wind stopped us.",
+              "Neither rain or wind stopped us.",
+              "Either rain or wind stopped us.",
+              "Both rain and wind stopped us."
+            ],
+            "correct": 1,
+            "explanation": "'Neither' requires 'nor'."
+          },
+          {
+            "id": 14,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "Either you apologize or I leave.",
+              "Either you apologize nor I leave.",
+              "Either you apologize and I leave.",
+              "Neither you apologize or I leave."
+            ],
+            "correct": 0,
+            "explanation": "'Either...or'."
+          },
+          {
+            "id": 15,
+            "text": "Which sentence has an error with 'both'?",
+            "options": [
+              "Both red and blue are fine.",
+              "Both red and blue is fine.",
+              "Red and blue are both fine.",
+              "Both of them are fine."
+            ],
+            "correct": 1,
+            "explanation": "'Both...and' requires plural verb 'are'."
+          },
+          {
+            "id": 16,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "Neither Tom nor Jerry was invited.",
+              "Neither Tom nor his friends were invited.",
+              "Neither Tom nor his friends was invited.",
+              "Neither his friends nor Tom was invited."
+            ],
+            "correct": 2,
+            "explanation": "Closest subject 'his friends' is plural, so verb must be 'were'."
+          },
+          {
+            "id": 17,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "We will buy either the house or the apartment.",
+              "We will buy either the house nor the apartment.",
+              "We will buy either the house and the apartment.",
+              "We will buy neither the house or the apartment."
+            ],
+            "correct": 0,
+            "explanation": "'Either...or'."
+          },
+          {
+            "id": 18,
+            "text": "Which sentence contains a grammatical error?",
+            "options": [
+              "He neither smokes nor drinks.",
+              "He neither smokes or drinks.",
+              "He doesn't smoke or drink.",
+              "He drinks neither coffee nor tea."
+            ],
+            "correct": 1,
+            "explanation": "'neither...or' is ungrammatical."
+          },
+          {
+            "id": 19,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "Neither the car nor the bikes were damaged.",
+              "Neither the car nor the bikes was damaged.",
+              "Neither the car or the bikes were damaged.",
+              "Neither the car and the bikes were damaged."
+            ],
+            "correct": 0,
+            "explanation": "Closest subject 'bikes' is plural -> 'were'."
+          },
+          {
+            "id": 20,
+            "text": "Which sentence uses 'either...or' INCORRECTLY?",
+            "options": [
+              "You can have either cake or pie.",
+              "Either John or Mary has the key.",
+              "Either John or Mary have the key.",
+              "Either you come or I leave."
+            ],
+            "correct": 2,
+            "explanation": "Closest subject 'Mary' is singular -> 'has', not 'have'."
           }
-],
+        ],
         "transform": [
           {
-                    "id": 1,
-                    "original": "Ali didn't come, and Hasan didn't come either.",
-                    "target": "_____ Ali nor Hasan came.",
-                    "answer": "Neither",
-                    "explanation": "Neither A nor B."
+            "id": 1,
+            "text": "Transform: \"Ali didn't come, and Hasan didn't come either.\" = \"_____ Ali nor Hasan came.\"",
+            "options": ["Neither", "Either", "Both", "Not"],
+            "correct": 0,
+            "explanation": "Neither A nor B."
+          },
+          {
+            "id": 2,
+            "text": "Transform: \"She speaks English and she speaks French.\" = \"She speaks _____ English and French.\"",
+            "options": ["both", "either", "neither", "also"],
+            "correct": 0,
+            "explanation": "both A and B."
+          },
+          {
+            "id": 3,
+            "text": "Transform: \"You can choose tea, or you can choose coffee.\" = \"You can choose _____ tea or coffee.\"",
+            "options": ["either", "neither", "both", "nor"],
+            "correct": 0,
+            "explanation": "either A or B."
+          },
+          {
+            "id": 4,
+            "text": "Transform: \"Tom wasn't ready, and his brother wasn't ready.\" = \"Neither Tom nor his brother _____ ready.\"",
+            "options": ["was", "were", "are", "be"],
+            "correct": 0,
+            "explanation": "Closest subject 'his brother' is singular -> 'was'."
+          },
+          {
+            "id": 5,
+            "text": "Transform: \"Tom wasn't ready, and his friends weren't ready.\" = \"Neither Tom nor his friends _____ ready.\"",
+            "options": ["were", "was", "is", "be"],
+            "correct": 0,
+            "explanation": "Closest subject 'his friends' is plural -> 'were'."
+          },
+          {
+            "id": 6,
+            "text": "Transform: \"He didn't write and he didn't phone.\" = \"He _____ wrote nor phoned.\"",
+            "options": ["neither", "either", "both", "not"],
+            "correct": 0,
+            "explanation": "neither A nor B."
+          },
+          {
+            "id": 7,
+            "text": "Transform: \"The hotel was clean and it was comfortable.\" = \"The hotel was _____ clean and comfortable.\"",
+            "options": ["both", "either", "neither", "also"],
+            "correct": 0,
+            "explanation": "both A and B."
+          },
+          {
+            "id": 8,
+            "text": "Transform: \"You pay now, or you leave.\" = \"Either you pay now _____ leave.\"",
+            "options": ["or", "nor", "and", "but"],
+            "correct": 0,
+            "explanation": "either...or."
+          },
+          {
+            "id": 9,
+            "text": "Transform: \"She doesn't like milk and she doesn't like sugar.\" = \"She likes _____ milk nor sugar.\"",
+            "options": ["neither", "either", "both", "not"],
+            "correct": 0,
+            "explanation": "likes neither A nor B."
+          },
+          {
+            "id": 10,
+            "text": "Transform: \"Ali is smart and Karim is smart.\" = \"_____ Ali and Karim are smart.\"",
+            "options": ["Both", "Either", "Neither", "All"],
+            "correct": 0,
+            "explanation": "Both A and B."
+          },
+          {
+            "id": 11,
+            "text": "Transform: \"We didn't enjoy the movie, and we didn't enjoy the concert.\" = \"We enjoyed _____ the movie nor the concert.\"",
+            "options": ["neither", "either", "both", "not"],
+            "correct": 0,
+            "explanation": "enjoyed neither A nor B."
+          },
+          {
+            "id": 12,
+            "text": "Transform: \"Either my sister is coming, or my parents are coming.\" = \"Either my sister or my parents _____ coming.\"",
+            "options": ["are", "is", "was", "be"],
+            "correct": 0,
+            "explanation": "Closest subject 'my parents' -> 'are'."
+          },
+          {
+            "id": 13,
+            "text": "Transform: \"He is talented and he is hardworking.\" = \"He is _____ talented and hardworking.\"",
+            "options": ["both", "either", "neither", "also"],
+            "correct": 0,
+            "explanation": "both A and B."
+          },
+          {
+            "id": 14,
+            "text": "Transform: \"I don't have time and I don't have energy.\" = \"I have _____ time nor energy.\"",
+            "options": ["neither", "either", "both", "not"],
+            "correct": 0,
+            "explanation": "neither A nor B."
+          },
+          {
+            "id": 15,
+            "text": "Transform: \"The manager came, and the workers came.\" = \"Both the manager and the workers _____.\"",
+            "options": ["came", "comes", "is coming", "has come"],
+            "correct": 0,
+            "explanation": "Both...and with past verb 'came'."
+          },
+          {
+            "id": 16,
+            "text": "Transform: \"She didn't smile, and she didn't speak.\" = \"She neither smiled _____ spoke.\"",
+            "options": ["nor", "or", "and", "but"],
+            "correct": 0,
+            "explanation": "neither...nor."
+          },
+          {
+            "id": 17,
+            "text": "Transform: \"Mark is playing, and John is playing.\" = \"Both Mark and John _____ playing.\"",
+            "options": ["are", "is", "was", "be"],
+            "correct": 0,
+            "explanation": "Both...and plural verb 'are'."
+          },
+          {
+            "id": 18,
+            "text": "Transform: \"The driver wasn't hurt, and the passengers weren't hurt.\" = \"Neither the driver nor the passengers _____ hurt.\"",
+            "options": ["were", "was", "is", "be"],
+            "correct": 0,
+            "explanation": "Closest subject 'passengers' -> 'were'."
+          },
+          {
+            "id": 19,
+            "text": "Transform: \"He doesn't smoke and he doesn't drink.\" = \"He _____ smokes nor drinks.\"",
+            "options": ["neither", "either", "both", "not"],
+            "correct": 0,
+            "explanation": "neither A nor B."
+          },
+          {
+            "id": 20,
+            "text": "Transform: \"Either your brother has the key, or your sister has the key.\" = \"Either your brother or your sister _____ the key.\"",
+            "options": ["has", "have", "are having", "were having"],
+            "correct": 0,
+            "explanation": "Closest subject 'your sister' singular -> 'has'."
           }
-],
+        ],
         "dialogue": [
           {
-                    "id": 1,
-                    "dialogue": "A: Did Ali or Bob phone you?\nB: ____ Ali nor Bob phoned me.",
-                    "options": [
-                              "Neither",
-                              "Either",
-                              "Both",
-                              "Not"
-                    ],
-                    "correct": 0,
-                    "explanation": "Pairing with 'nor'."
+            "id": 1,
+            "situation": "Checking on phone calls.",
+            "dialogue": "A: Did Ali or Bob phone you?\nB: _____ Ali nor Bob phoned me.",
+            "options": ["Neither", "Either", "Both", "Not"],
+            "correct": 0,
+            "explanation": "Pairing with 'nor'."
+          },
+          {
+            "id": 2,
+            "situation": "Ordering a drink.",
+            "dialogue": "A: What would you like to drink?\nB: I will have _____ tea or coffee, whichever is easiest.",
+            "options": ["either", "neither", "both", "nor"],
+            "correct": 0,
+            "explanation": "'Either...or'."
+          },
+          {
+            "id": 3,
+            "situation": "Asking about student results.",
+            "dialogue": "A: How did Tom and Jerry do on the exam?\nB: _____ Tom and Jerry passed with top grades!",
+            "options": ["Both", "Either", "Neither", "All"],
+            "correct": 0,
+            "explanation": "'Both...and'."
+          },
+          {
+            "id": 4,
+            "situation": "Planning dinner options.",
+            "dialogue": "A: Should we eat pizza or pasta tonight?\nB: We can eat _____ pizza or pasta, I love both!",
+            "options": ["either", "neither", "both", "nor"],
+            "correct": 0,
+            "explanation": "'Either...or'."
+          },
+          {
+            "id": 5,
+            "situation": "Inquiring about meeting attendees.",
+            "dialogue": "A: Was the manager or the workers present?\nB: Neither the manager nor the workers _____ present.",
+            "options": ["were", "was", "is", "be"],
+            "correct": 0,
+            "explanation": "Closest subject 'the workers' -> 'were'."
+          },
+          {
+            "id": 6,
+            "situation": "Talking about language skills.",
+            "dialogue": "A: Which languages does she speak?\nB: She speaks _____ Spanish and Italian.",
+            "options": ["both", "either", "neither", "also"],
+            "correct": 0,
+            "explanation": "'Both...and'."
+          },
+          {
+            "id": 7,
+            "situation": "Discussing weather conditions.",
+            "dialogue": "A: Was it rainy or windy yesterday?\nB: It was _____ rainy nor windy, it was sunny!",
+            "options": ["neither", "either", "both", "not"],
+            "correct": 0,
+            "explanation": "'Neither...nor'."
+          },
+          {
+            "id": 8,
+            "situation": "Asking about project responsibilities.",
+            "dialogue": "A: Who will lead the project?\nB: Either Sarah _____ David will lead it.",
+            "options": ["or", "nor", "and", "but"],
+            "correct": 0,
+            "explanation": "'Either...or'."
+          },
+          {
+            "id": 9,
+            "situation": "Evaluating candidate qualifications.",
+            "dialogue": "A: Is the new candidate qualified?\nB: Yes, he is _____ experienced and educated.",
+            "options": ["both", "either", "neither", "also"],
+            "correct": 0,
+            "explanation": "'Both...and'."
+          },
+          {
+            "id": 10,
+            "situation": "Asking about missed flights.",
+            "dialogue": "A: Did John or Mark miss the flight?\nB: Neither John _____ Mark missed it, they both arrived on time!",
+            "options": ["nor", "or", "and", "but"],
+            "correct": 0,
+            "explanation": "'Neither...nor'."
+          },
+          {
+            "id": 11,
+            "situation": "Choosing travel modes.",
+            "dialogue": "A: How shall we travel?\nB: You can _____ take the train or drive.",
+            "options": ["either", "neither", "both", "nor"],
+            "correct": 0,
+            "explanation": "'Either...or'."
+          },
+          {
+            "id": 12,
+            "situation": "Discussing restaurant food quality.",
+            "dialogue": "A: Was the dinner good?\nB: No, _____ the steak nor the salad was fresh.",
+            "options": ["neither", "either", "both", "not"],
+            "correct": 0,
+            "explanation": "'Neither...nor'."
+          },
+          {
+            "id": 13,
+            "situation": "Checking sports match outcome.",
+            "dialogue": "A: Who scored in the match?\nB: Both Messi _____ Ronaldo scored amazing goals!",
+            "options": ["and", "or", "nor", "but"],
+            "correct": 0,
+            "explanation": "'Both...and'."
+          },
+          {
+            "id": 14,
+            "situation": "Inquiring about hotel amenities.",
+            "dialogue": "A: Does the room have Wi-Fi or AC?\nB: It has _____ Wi-Fi and AC included.",
+            "options": ["both", "either", "neither", "also"],
+            "correct": 0,
+            "explanation": "'Both...and'."
+          },
+          {
+            "id": 15,
+            "situation": "Asking about flight delay.",
+            "dialogue": "A: Were the passengers or the pilot informed?\nB: Neither the pilot nor the passengers _____ informed.",
+            "options": ["were", "was", "is", "be"],
+            "correct": 0,
+            "explanation": "Closest subject 'passengers' -> 'were'."
+          },
+          {
+            "id": 16,
+            "situation": "Deciding on weekend plans.",
+            "dialogue": "A: What are we doing on Saturday?\nB: We can _____ go hiking or stay at home.",
+            "options": ["either", "neither", "both", "nor"],
+            "correct": 0,
+            "explanation": "'Either...or'."
+          },
+          {
+            "id": 17,
+            "situation": "Talking about job offers.",
+            "dialogue": "A: Did she accept Company A or B?\nB: She accepted _____ Company A nor Company B.",
+            "options": ["neither", "either", "both", "not"],
+            "correct": 0,
+            "explanation": "'Neither...nor'."
+          },
+          {
+            "id": 18,
+            "situation": "Inquiring about twin talents.",
+            "dialogue": "A: Can the twins play instruments?\nB: Yes, _____ Alex and Ben play the piano.",
+            "options": ["both", "either", "neither", "all"],
+            "correct": 0,
+            "explanation": "'Both...and'."
+          },
+          {
+            "id": 19,
+            "situation": "Checking exam difficulty.",
+            "dialogue": "A: Was math or physics harder?\nB: Neither math _____ physics was easy!",
+            "options": ["nor", "or", "and", "but"],
+            "correct": 0,
+            "explanation": "'Neither...nor'."
+          },
+          {
+            "id": 20,
+            "situation": "Choosing a color for painting.",
+            "dialogue": "A: Which color should we paint the living room?\nB: We can paint it _____ blue or green.",
+            "options": ["either", "neither", "both", "nor"],
+            "correct": 0,
+            "explanation": "'Either...or'."
           }
-]
+        ]
       },
       {
         "id": "each-every-distributives",
@@ -89069,118 +90261,714 @@ export const grammarData = {
 ],
         "fillBlanks": [
           {
-                    "id": 1,
-                    "sentence": "_____ student is present today.",
-                    "answer": "Every",
-                    "hint": "Every + singular noun"
+            "id": 1,
+            "text": "_____ student in the class was given a new textbook.",
+            "options": ["Every", "All", "Both", "Many"],
+            "correct": 0,
+            "explanation": "'Every' + singular noun ('student')."
           },
           {
-                    "id": 2,
-                    "sentence": "Each of the boys _____ a bike.",
-                    "answer": "has",
-                    "hint": "singular verb"
+            "id": 2,
+            "text": "Each of the boys _____ a bike.",
+            "options": ["has", "have", "are having", "were having"],
+            "correct": 0,
+            "explanation": "'Each of + plural noun' takes singular verb 'has'."
           },
           {
-                    "id": 3,
-                    "sentence": "We _____ received a certificate.",
-                    "answer": "each",
-                    "hint": "We each"
+            "id": 3,
+            "text": "We _____ received a certificate of completion.",
+            "options": ["each", "every", "all of", "every one"],
+            "correct": 0,
+            "explanation": "'We each received' (pronoun + each + verb)."
           },
           {
-                    "id": 4,
-                    "sentence": "Every room _____ a window.",
-                    "answer": "has",
-                    "hint": "singular verb"
+            "id": 4,
+            "text": "Every room in the hotel _____ an ocean view.",
+            "options": ["has", "have", "are having", "were having"],
+            "correct": 0,
+            "explanation": "'Every room' takes singular verb 'has'."
           },
           {
-                    "id": 5,
-                    "sentence": "The apples cost $1 _____.",
-                    "answer": "each",
-                    "hint": "price per item"
+            "id": 5,
+            "text": "The apples cost $1 _____ at the market.",
+            "options": ["each", "every", "all", "both"],
+            "correct": 0,
+            "explanation": "'each' at sentence end indicates price per unit."
+          },
+          {
+            "id": 6,
+            "text": "_____ applicant was asked to present their ID.",
+            "options": ["Every", "All", "Both", "Many"],
+            "correct": 0,
+            "explanation": "'Every' + singular noun ('applicant')."
+          },
+          {
+            "id": 7,
+            "text": "Each of my two sisters _____ in a different city.",
+            "options": ["lives", "live", "are living", "have lived"],
+            "correct": 0,
+            "explanation": "'Each of' takes singular verb ('lives')."
+          },
+          {
+            "id": 8,
+            "text": "He visits his grandmother _____ weekend.",
+            "options": ["every", "all", "each of", "both"],
+            "correct": 0,
+            "explanation": "'every weekend' (regular habit)."
+          },
+          {
+            "id": 9,
+            "text": "The players have _____ trained hard for the final match.",
+            "options": ["each", "every", "all of", "every of"],
+            "correct": 0,
+            "explanation": "'have each trained' (auxiliary + each + main verb)."
+          },
+          {
+            "id": 10,
+            "text": "Each of the options _____ pros and cons.",
+            "options": ["has", "have", "are having", "were having"],
+            "correct": 0,
+            "explanation": "'Each of the options has' (singular verb)."
+          },
+          {
+            "id": 11,
+            "text": "I checked _____ page of the report carefully.",
+            "options": ["every", "all", "both", "many"],
+            "correct": 0,
+            "explanation": "'every page' (singular noun)."
+          },
+          {
+            "id": 12,
+            "text": "They each _____ a different opinion on the matter.",
+            "options": ["have", "has", "is having", "was having"],
+            "correct": 0,
+            "explanation": "Subject 'They' + 'each' takes plural verb 'have'."
+          },
+          {
+            "id": 13,
+            "text": "Every single candidate _____ interviewed yesterday.",
+            "options": ["was", "were", "are", "be"],
+            "correct": 0,
+            "explanation": "'Every single candidate was' (singular verb)."
+          },
+          {
+            "id": 14,
+            "text": "She gave a present to _____ of her nieces.",
+            "options": ["each", "every", "all", "both"],
+            "correct": 0,
+            "explanation": "'each of her nieces'."
+          },
+          {
+            "id": 15,
+            "text": "_____ detail of the plan was discussed in detail.",
+            "options": ["Every", "All", "Both", "Many"],
+            "correct": 0,
+            "explanation": "'Every detail' + singular verb 'was'."
+          },
+          {
+            "id": 16,
+            "text": "There were ten questions, and _____ question was worth 5 points.",
+            "options": ["each", "all", "both", "every of"],
+            "correct": 0,
+            "explanation": "'each question' individually."
+          },
+          {
+            "id": 17,
+            "text": "Every one of the cars _____ thoroughly inspected.",
+            "options": ["was", "were", "are", "have been"],
+            "correct": 0,
+            "explanation": "'Every one of + plural noun' takes singular verb 'was'."
+          },
+          {
+            "id": 18,
+            "text": "The books cost $15 _____.",
+            "options": ["each", "every", "all", "both"],
+            "correct": 0,
+            "explanation": "'each' per book."
+          },
+          {
+            "id": 19,
+            "text": "_____ of us has a duty to respect the rules.",
+            "options": ["Each", "Every", "All", "Both"],
+            "correct": 0,
+            "explanation": "'Each of us has'."
+          },
+          {
+            "id": 20,
+            "text": "He works hard _____ day of the week.",
+            "options": ["every", "all", "both", "many"],
+            "correct": 0,
+            "explanation": "'every day' (each day in sequence)."
           }
-],
+        ],
         "scrambled": [
-          {
-                    "id": 1,
-                    "answer": "Every student is happy",
-                    "hint": "Start with Every"
-          },
-          {
-                    "id": 2,
-                    "answer": "Each of the boys has a car",
-                    "hint": "Start with Each"
-          },
-          {
-                    "id": 3,
-                    "answer": "We each signed the contract",
-                    "hint": "Start with We"
-          },
-          {
-                    "id": 4,
-                    "answer": "Every child likes ice cream",
-                    "hint": "Start with Every"
-          },
-          {
-                    "id": 5,
-                    "answer": "Each student answered the question",
-                    "hint": "Start with Each"
-          }
-],
+          { "id": 1, "answer": "Every student is happy", "hint": "Start with Every" },
+          { "id": 2, "answer": "Each of the boys has a car", "hint": "Start with Each" },
+          { "id": 3, "answer": "We each signed the contract", "hint": "Start with We" },
+          { "id": 4, "answer": "Every child likes ice cream", "hint": "Start with Every" },
+          { "id": 5, "answer": "Each student answered the question", "hint": "Start with Each" },
+          { "id": 6, "answer": "Every room has a balcony", "hint": "Start with Every" },
+          { "id": 7, "answer": "Each of the books was useful", "hint": "Start with Each" },
+          { "id": 8, "answer": "They each received a gift", "hint": "Start with They" },
+          { "id": 9, "answer": "Every applicant was interviewed", "hint": "Start with Every" },
+          { "id": 10, "answer": "Each of us has a task", "hint": "Start with Each" },
+          { "id": 11, "answer": "Every single employee was present", "hint": "Start with Every" },
+          { "id": 12, "answer": "The tickets cost ten dollars each", "hint": "End with each" },
+          { "id": 13, "answer": "Each child got a balloon", "hint": "Start with Each" },
+          { "id": 14, "answer": "Every sentence must be correct", "hint": "Start with Every" },
+          { "id": 15, "answer": "Each of my friends lives nearby", "hint": "Start with Each" },
+          { "id": 16, "answer": "We each had an opinion", "hint": "Start with We" },
+          { "id": 17, "answer": "Every picture tells a story", "hint": "Start with Every" },
+          { "id": 18, "answer": "Each of the cars was inspected", "hint": "Start with Each" },
+          { "id": 19, "answer": "Every person has a dream", "hint": "Start with Every" },
+          { "id": 20, "answer": "They have each finished their work", "hint": "Start with They" }
+        ],
         "errorCorrection": [
           {
-                    "id": 1,
-                    "text": "Every students are here.",
-                    "correction": "Every student is here.",
-                    "explanation": "'Every' requires a singular noun and singular verb."
+            "id": 1,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "Every student is present.",
+              "Every students are present.",
+              "Each student is present.",
+              "Each of the students is present."
+            ],
+            "correct": 1,
+            "explanation": "'Every' requires a singular noun and singular verb."
           },
           {
-                    "id": 2,
-                    "text": "Every of the students passed.",
-                    "correction": "Each of the students passed.",
-                    "explanation": "Use 'Each of', not 'Every of'."
+            "id": 2,
+            "text": "Which sentence contains a grammatical error?",
+            "options": [
+              "Each of the students passed.",
+              "Every of the students passed.",
+              "Every one of the students passed.",
+              "All of the students passed."
+            ],
+            "correct": 1,
+            "explanation": "'Every of' is invalid English; use 'Each of' or 'Every one of'."
           },
           {
-                    "id": 3,
-                    "text": "Each children received a gift.",
-                    "correction": "Each child received a gift.",
-                    "explanation": "'Each' requires singular noun 'child'."
+            "id": 3,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "Each child received a gift.",
+              "Each children received a gift.",
+              "Each of the children received a gift.",
+              "The children each received a gift."
+            ],
+            "correct": 1,
+            "explanation": "'Each' requires singular noun 'child', not plural 'children'."
           },
           {
-                    "id": 4,
-                    "text": "Each of my friends have a car.",
-                    "correction": "Each of my friends has a car.",
-                    "explanation": "'Each of' takes a singular verb."
+            "id": 4,
+            "text": "Which sentence has correct verb agreement?",
+            "options": [
+              "Each of my friends have a car.",
+              "Each of my friends has a car.",
+              "Each of my friend has a car.",
+              "Each my friends has a car."
+            ],
+            "correct": 1,
+            "explanation": "'Each of my friends' takes a singular verb ('has')."
           },
           {
-                    "id": 5,
-                    "text": "They every got a prize.",
-                    "correction": "They each got a prize.",
-                    "explanation": "Use 'each' after subject pronouns."
+            "id": 5,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "We each got a prize.",
+              "They each got a prize.",
+              "They every got a prize.",
+              "Every one of them got a prize."
+            ],
+            "correct": 2,
+            "explanation": "'They every' is invalid; use 'They each'."
+          },
+          {
+            "id": 6,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "Every room in the hotel have a TV.",
+              "Every room in the hotel has a TV.",
+              "Every rooms in the hotel has a TV.",
+              "Every of room has a TV."
+            ],
+            "correct": 1,
+            "explanation": "'Every room... has'."
+          },
+          {
+            "id": 7,
+            "text": "Which sentence contains a grammar error?",
+            "options": [
+              "Each of the buildings is old.",
+              "Each building is old.",
+              "Each of the building is old.",
+              "The buildings are each old."
+            ],
+            "correct": 2,
+            "explanation": "'Each of the' requires a plural noun ('buildings')."
+          },
+          {
+            "id": 8,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "Every day brings new opportunities.",
+              "Every days bring new opportunities.",
+              "All days bring new opportunities.",
+              "Each day brings new opportunities."
+            ],
+            "correct": 1,
+            "explanation": "'Every days' is ungrammatical; use 'Every day'."
+          },
+          {
+            "id": 9,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "Each of us have a role.",
+              "Each of us has a role.",
+              "Each us has a role.",
+              "Every of us has a role."
+            ],
+            "correct": 1,
+            "explanation": "'Each of us has'."
+          },
+          {
+            "id": 10,
+            "text": "Which sentence uses 'every' INCORRECTLY?",
+            "options": [
+              "Every child loves stories.",
+              "Every one of the children loves stories.",
+              "Every of children loves stories.",
+              "Every single child loves stories."
+            ],
+            "correct": 2,
+            "explanation": "'Every of' is invalid."
+          },
+          {
+            "id": 11,
+            "text": "Which sentence has correct verb agreement?",
+            "options": [
+              "Every student were excited.",
+              "Every student was excited.",
+              "Every students was excited.",
+              "Every of student was excited."
+            ],
+            "correct": 1,
+            "explanation": "'Every student was excited'."
+          },
+          {
+            "id": 12,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "The shirts cost $10 each.",
+              "The shirts cost $10 every.",
+              "Each shirt costs $10.",
+              "Every shirt costs $10."
+            ],
+            "correct": 1,
+            "explanation": "'every' cannot stand alone at the end of a sentence for price."
+          },
+          {
+            "id": 13,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "Each candidate was interviewed.",
+              "Each candidate were interviewed.",
+              "Each candidates was interviewed.",
+              "Each of candidate was interviewed."
+            ],
+            "correct": 0,
+            "explanation": "'Each candidate was'."
+          },
+          {
+            "id": 14,
+            "text": "Which sentence contains an error?",
+            "options": [
+              "They have each signed.",
+              "We each received a letter.",
+              "They have every signed.",
+              "Every one of them signed."
+            ],
+            "correct": 2,
+            "explanation": "'every signed' is invalid."
+          },
+          {
+            "id": 15,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "Each of these books is valuable.",
+              "Each of these books are valuable.",
+              "Each of these book is valuable.",
+              "Each these books is valuable."
+            ],
+            "correct": 0,
+            "explanation": "'Each of these books is'."
+          },
+          {
+            "id": 16,
+            "text": "Which sentence uses 'each' INCORRECTLY?",
+            "options": [
+              "Each member was notified.",
+              "Each of the members was notified.",
+              "Each members was notified.",
+              "The members each were notified."
+            ],
+            "correct": 2,
+            "explanation": "'Each members' should be 'Each member'."
+          },
+          {
+            "id": 17,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "Every student has a desk.",
+              "Every student have a desk.",
+              "Every students have a desk.",
+              "Every of students has a desk."
+            ],
+            "correct": 0,
+            "explanation": "'Every student has'."
+          },
+          {
+            "id": 18,
+            "text": "Which sentence contains a grammatical error?",
+            "options": [
+              "Each of my brothers is tall.",
+              "Every one of my brothers is tall.",
+              "Every of my brothers is tall.",
+              "All my brothers are tall."
+            ],
+            "correct": 2,
+            "explanation": "'Every of' is invalid."
+          },
+          {
+            "id": 19,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+              "We each have our own room.",
+              "We every have our own room.",
+              "We each has our own room.",
+              "Each we have our own room."
+            ],
+            "correct": 0,
+            "explanation": "'We each have'."
+          },
+          {
+            "id": 20,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "Every answer was correct.",
+              "Every answers were correct.",
+              "Each answer was correct.",
+              "Each of the answers was correct."
+            ],
+            "correct": 1,
+            "explanation": "'Every answers' missing singular form."
           }
-],
+        ],
         "transform": [
           {
-                    "id": 1,
-                    "original": "All the students have a book.",
-                    "target": "_____ student has a book.",
-                    "answer": "Every",
-                    "explanation": "Every + singular noun."
+            "id": 1,
+            "text": "Transform: \"All the students have a book.\" = \"_____ student has a book.\"",
+            "options": ["Every", "All", "Both", "Many"],
+            "correct": 0,
+            "explanation": "Every + singular noun."
+          },
+          {
+            "id": 2,
+            "text": "Transform: \"All of the boys have a car.\" = \"_____ of the boys has a car.\"",
+            "options": ["Each", "Every", "Every of", "Both of"],
+            "correct": 0,
+            "explanation": "Each of + plural noun + singular verb."
+          },
+          {
+            "id": 3,
+            "text": "Transform: \"We all received a certificate.\" = \"We _____ received a certificate.\"",
+            "options": ["each", "every", "all of", "every one"],
+            "correct": 0,
+            "explanation": "We each received."
+          },
+          {
+            "id": 4,
+            "text": "Transform: \"All rooms have a window.\" = \"_____ room has a window.\"",
+            "options": ["Every", "All", "Both", "Many"],
+            "correct": 0,
+            "explanation": "Every room has."
+          },
+          {
+            "id": 5,
+            "text": "Transform: \"The apples cost $1 per item.\" = \"The apples cost $1 _____.\"",
+            "options": ["each", "every", "all", "both"],
+            "correct": 0,
+            "explanation": "cost $1 each."
+          },
+          {
+            "id": 6,
+            "text": "Transform: \"All applicants were interviewed.\" = \"_____ applicant was interviewed.\"",
+            "options": ["Every", "All", "Both", "Many"],
+            "correct": 0,
+            "explanation": "Every applicant was."
+          },
+          {
+            "id": 7,
+            "text": "Transform: \"All of my friends have a car.\" = \"_____ of my friends has a car.\"",
+            "options": ["Each", "Every", "All", "Both"],
+            "correct": 0,
+            "explanation": "Each of my friends has."
+          },
+          {
+            "id": 8,
+            "text": "Transform: \"They all signed the contract.\" = \"They have _____ signed the contract.\"",
+            "options": ["each", "every", "all of", "every one"],
+            "correct": 0,
+            "explanation": "have each signed."
+          },
+          {
+            "id": 9,
+            "text": "Transform: \"All the buildings are old.\" = \"_____ building is old.\"",
+            "options": ["Every", "All", "Both", "Many"],
+            "correct": 0,
+            "explanation": "Every building is."
+          },
+          {
+            "id": 10,
+            "text": "Transform: \"All candidates were questioned.\" = \"_____ one of the candidates was questioned.\"",
+            "options": ["Every", "Each", "All", "Both"],
+            "correct": 0,
+            "explanation": "Every one of."
+          },
+          {
+            "id": 11,
+            "text": "Transform: \"All of the answers were correct.\" = \"_____ of the answers was correct.\"",
+            "options": ["Each", "Every", "All", "Both"],
+            "correct": 0,
+            "explanation": "Each of the answers was."
+          },
+          {
+            "id": 12,
+            "text": "Transform: \"All children like sweets.\" = \"_____ child likes sweets.\"",
+            "options": ["Every", "All", "Both", "Many"],
+            "correct": 0,
+            "explanation": "Every child likes."
+          },
+          {
+            "id": 13,
+            "text": "Transform: \"The books cost $10 for one.\" = \"The books cost $10 _____.\"",
+            "options": ["each", "every", "all", "both"],
+            "correct": 0,
+            "explanation": "cost $10 each."
+          },
+          {
+            "id": 14,
+            "text": "Transform: \"All members were invited.\" = \"_____ member was invited.\"",
+            "options": ["Each", "All", "Both", "Many"],
+            "correct": 0,
+            "explanation": "Each member was."
+          },
+          {
+            "id": 15,
+            "text": "Transform: \"All of us have a responsibility.\" = \"_____ of us has a responsibility.\"",
+            "options": ["Each", "Every", "All", "Both"],
+            "correct": 0,
+            "explanation": "Each of us has."
+          },
+          {
+            "id": 16,
+            "text": "Transform: \"All sentences must end with a period.\" = \"_____ sentence must end with a period.\"",
+            "options": ["Every", "All", "Both", "Many"],
+            "correct": 0,
+            "explanation": "Every sentence must."
+          },
+          {
+            "id": 17,
+            "text": "Transform: \"We all got a prize.\" = \"We _____ got a prize.\"",
+            "options": ["each", "every", "all of", "every one"],
+            "correct": 0,
+            "explanation": "We each got."
+          },
+          {
+            "id": 18,
+            "text": "Transform: \"All cars were inspected.\" = \"_____ one of the cars was inspected.\"",
+            "options": ["Every", "Each", "All", "Both"],
+            "correct": 0,
+            "explanation": "Every one of the cars."
+          },
+          {
+            "id": 19,
+            "text": "Transform: \"All student submitted their work.\" = \"_____ student submitted their work.\"",
+            "options": ["Each", "All", "Both", "Many"],
+            "correct": 0,
+            "explanation": "Each student submitted."
+          },
+          {
+            "id": 20,
+            "text": "Transform: \"All details are important.\" = \"_____ detail is important.\"",
+            "options": ["Every", "All", "Both", "Many"],
+            "correct": 0,
+            "explanation": "Every detail is."
           }
-],
+        ],
         "dialogue": [
           {
-                    "id": 1,
-                    "dialogue": "A: How much are these apples?\nB: They are $1 _____.",
-                    "options": [
-                              "each",
-                              "every",
-                              "all",
-                              "both"
-                    ],
-                    "correct": 0,
-                    "explanation": "'each' specifies per-item price."
+            "id": 1,
+            "situation": "Buying fruit at a fruit stand.",
+            "dialogue": "A: How much are these apples?\nB: They are $1 _____.",
+            "options": ["each", "every", "all", "both"],
+            "correct": 0,
+            "explanation": "'each' specifies per-item price."
+          },
+          {
+            "id": 2,
+            "situation": "Teacher addressing the class.",
+            "dialogue": "A: Did all students finish their test?\nB: Yes, _____ student submitted their paper on time!",
+            "options": ["every", "all", "both", "many"],
+            "correct": 0,
+            "explanation": "'every student'."
+          },
+          {
+            "id": 3,
+            "situation": "Checking hotel room features.",
+            "dialogue": "A: Are the rooms well-equipped?\nB: Yes, _____ of the rooms has air conditioning.",
+            "options": ["each", "every", "all", "both"],
+            "correct": 0,
+            "explanation": "'each of the rooms'."
+          },
+          {
+            "id": 4,
+            "situation": "Handing out event tickets.",
+            "dialogue": "A: Did everyone get a ticket?\nB: Yes, we _____ got a ticket at the entrance.",
+            "options": ["each", "every", "all of", "every one"],
+            "correct": 0,
+            "explanation": "'we each'."
+          },
+          {
+            "id": 5,
+            "situation": "Asking about daily habits.",
+            "dialogue": "A: How often do you jog?\nB: I jog _____ morning before work.",
+            "options": ["every", "all", "each of", "both"],
+            "correct": 0,
+            "explanation": "'every morning'."
+          },
+          {
+            "id": 6,
+            "situation": "Checking job applicant files.",
+            "dialogue": "A: Have you reviewed all resumes?\nB: Yes, _____ one of the resumes was examined.",
+            "options": ["every", "each", "all", "both"],
+            "correct": 0,
+            "explanation": "'every one of'."
+          },
+          {
+            "id": 7,
+            "situation": "In a movie theater.",
+            "dialogue": "A: Did the kids enjoy the movie?\nB: Yes, _____ child was laughing throughout!",
+            "options": ["every", "all", "both", "many"],
+            "correct": 0,
+            "explanation": "'every child'."
+          },
+          {
+            "id": 8,
+            "situation": "Talking about family members.",
+            "dialogue": "A: Where do your brothers live?\nB: _____ of my brothers lives in a different city.",
+            "options": ["Each", "Every", "All", "Both"],
+            "correct": 0,
+            "explanation": "'Each of my brothers'."
+          },
+          {
+            "id": 9,
+            "situation": "At a souvenir shop.",
+            "dialogue": "A: How much are these keychains?\nB: They are $5 _____.",
+            "options": ["each", "every", "all", "both"],
+            "correct": 0,
+            "explanation": "'each' at sentence end."
+          },
+          {
+            "id": 10,
+            "situation": "Discussing team roles.",
+            "dialogue": "A: Does everyone have a task?\nB: Yes, we _____ have a specific responsibility.",
+            "options": ["each", "every", "all of", "every one"],
+            "correct": 0,
+            "explanation": "'we each'."
+          },
+          {
+            "id": 11,
+            "situation": "Checking flight tickets.",
+            "dialogue": "A: Did all passengers board?\nB: Yes, _____ passenger has taken their seat.",
+            "options": ["every", "all", "both", "many"],
+            "correct": 0,
+            "explanation": "'every passenger'."
+          },
+          {
+            "id": 12,
+            "situation": "Discussing exam scores.",
+            "dialogue": "A: How were the exam results?\nB: _____ of the students scored above 80%.",
+            "options": ["Each", "Every", "All of", "Every of"],
+            "correct": 0,
+            "explanation": "'Each of the students'."
+          },
+          {
+            "id": 13,
+            "situation": "In a car rental office.",
+            "dialogue": "A: Are these rental cars clean?\nB: Yes, _____ single car is washed daily.",
+            "options": ["every", "all", "both", "many"],
+            "correct": 0,
+            "explanation": "'every single car'."
+          },
+          {
+            "id": 14,
+            "situation": "Buying coffee cups.",
+            "dialogue": "A: What is the price of these mugs?\nB: They cost $8 _____.",
+            "options": ["each", "every", "all", "both"],
+            "correct": 0,
+            "explanation": "'each'."
+          },
+          {
+            "id": 15,
+            "situation": "Asking about employee training.",
+            "dialogue": "A: Did all staff complete the safety course?\nB: Yes, _____ of us has completed it.",
+            "options": ["each", "every", "all", "both"],
+            "correct": 0,
+            "explanation": "'each of us'."
+          },
+          {
+            "id": 16,
+            "situation": "Checking house inspection reports.",
+            "dialogue": "A: Was the house inspected thoroughly?\nB: Yes, _____ room was checked.",
+            "options": ["every", "all", "both", "many"],
+            "correct": 0,
+            "explanation": "'every room'."
+          },
+          {
+            "id": 17,
+            "situation": "Talking about sports team members.",
+            "dialogue": "A: Did all players receive medals?\nB: Yes, the players _____ got a gold medal!",
+            "options": ["each", "every", "all of", "every one"],
+            "correct": 0,
+            "explanation": "'the players each got'."
+          },
+          {
+            "id": 18,
+            "situation": "At a book fair.",
+            "dialogue": "A: Are all books on sale?\nB: Yes, _____ book is 20% off today.",
+            "options": ["every", "all", "both", "many"],
+            "correct": 0,
+            "explanation": "'every book'."
+          },
+          {
+            "id": 19,
+            "situation": "Discussing project tasks.",
+            "dialogue": "A: Are the tasks assigned?\nB: Yes, _____ of the tasks has a designated leader.",
+            "options": ["each", "every", "all", "both"],
+            "correct": 0,
+            "explanation": "'each of the tasks'."
+          },
+          {
+            "id": 20,
+            "situation": "Checking bus schedules.",
+            "dialogue": "A: How often do buses arrive?\nB: A bus arrives _____ 15 minutes.",
+            "options": ["every", "all", "each of", "both"],
+            "correct": 0,
+            "explanation": "'every 15 minutes' (time interval)."
           }
-]
+        ]
       },
       {
         "id": "other-others-another",
@@ -89432,118 +91220,714 @@ export const grammarData = {
 ],
         "fillBlanks": [
           {
-                    "id": 1,
-                    "sentence": "Would you like _____ cup of tea?",
-                    "answer": "another",
-                    "hint": "another + singular noun"
+            "id": 1,
+            "text": "Would you like _____ cup of tea?",
+            "options": ["another", "other", "others", "the other"],
+            "correct": 0,
+            "explanation": "'another' + singular countable noun ('cup')."
           },
           {
-                    "id": 2,
-                    "sentence": "Some like tea, _____ prefer coffee.",
-                    "answer": "others",
-                    "hint": "standalone pronoun"
+            "id": 2,
+            "text": "Some like tea, while _____ prefer coffee.",
+            "options": ["others", "other", "another", "the other"],
+            "correct": 0,
+            "explanation": "'others' acts as a standalone plural pronoun."
           },
           {
-                    "id": 3,
-                    "sentence": "I have two dogs. One is brown, _____ is white.",
-                    "answer": "the other",
-                    "hint": "second of two"
+            "id": 3,
+            "text": "I have two dogs. One is brown, and _____ is white.",
+            "options": ["the other", "another", "others", "other"],
+            "correct": 0,
+            "explanation": "'the other' refers to the second of two items."
           },
           {
-                    "id": 4,
-                    "sentence": "Do you have _____ questions?",
-                    "answer": "other",
-                    "hint": "other + plural noun"
+            "id": 4,
+            "text": "Do you have any _____ questions?",
+            "options": ["other", "another", "others", "the others"],
+            "correct": 0,
+            "explanation": "'other' + plural noun ('questions')."
           },
           {
-                    "id": 5,
-                    "sentence": "Let's try _____ restaurant tonight.",
-                    "answer": "another",
-                    "hint": "a different one"
+            "id": 5,
+            "text": "Let's try _____ restaurant tonight.",
+            "options": ["another", "other", "others", "the other"],
+            "correct": 0,
+            "explanation": "'another' means a different singular restaurant."
+          },
+          {
+            "id": 6,
+            "text": "Where are _____ students from your group?",
+            "options": ["the other", "another", "others", "other"],
+            "correct": 0,
+            "explanation": "'the other' modifies plural noun 'students' when referring to specific remaining ones."
+          },
+          {
+            "id": 7,
+            "text": "Some people like city life, while _____ prefer the countryside.",
+            "options": ["others", "other", "another", "the other"],
+            "correct": 0,
+            "explanation": "Standalone plural pronoun 'others'."
+          },
+          {
+            "id": 8,
+            "text": "I've read one of these books, but I haven't read _____ ones yet.",
+            "options": ["the other", "another", "others", "other"],
+            "correct": 0,
+            "explanation": "'the other' + plural pronoun 'ones'."
+          },
+          {
+            "id": 9,
+            "text": "Could you show me _____ pair of shoes?",
+            "options": ["another", "other", "others", "the other"],
+            "correct": 0,
+            "explanation": "'another' + singular noun 'pair'."
+          },
+          {
+            "id": 10,
+            "text": "She has two brothers. One is a teacher and _____ is a doctor.",
+            "options": ["the other", "another", "others", "other"],
+            "correct": 0,
+            "explanation": "The second of two brothers = 'the other'."
+          },
+          {
+            "id": 11,
+            "text": "I need to buy _____ notebook for my class.",
+            "options": ["another", "other", "others", "the other"],
+            "correct": 0,
+            "explanation": "'another' + singular countable noun."
+          },
+          {
+            "id": 12,
+            "text": "Some guests left early, but _____ stayed until midnight.",
+            "options": ["others", "other", "another", "the other"],
+            "correct": 0,
+            "explanation": "Pronoun 'others' standing alone."
+          },
+          {
+            "id": 13,
+            "text": "They bought three shirts: one red, one blue, and _____ green.",
+            "options": ["the other", "another", "others", "other"],
+            "correct": 0,
+            "explanation": "'the other' for the final specific one of three."
+          },
+          {
+            "id": 14,
+            "text": "Are there any _____ options available?",
+            "options": ["other", "another", "others", "the other"],
+            "correct": 0,
+            "explanation": "'other' + plural noun 'options'."
+          },
+          {
+            "id": 15,
+            "text": "We need to find _____ way to solve this problem.",
+            "options": ["another", "other", "others", "the other"],
+            "correct": 0,
+            "explanation": "'another way' = an alternative way."
+          },
+          {
+            "id": 16,
+            "text": "One of my shoes is missing; where is _____?",
+            "options": ["the other", "another", "others", "other"],
+            "correct": 0,
+            "explanation": "'the other' refers to the second of a pair."
+          },
+          {
+            "id": 17,
+            "text": "Some people prefer warm weather, _____ prefer cold weather.",
+            "options": ["others", "other", "another", "the other"],
+            "correct": 0,
+            "explanation": "Plural pronoun 'others'."
+          },
+          {
+            "id": 18,
+            "text": "Can I have _____ five minutes to finish this essay?",
+            "options": ["another", "other", "others", "the other"],
+            "correct": 0,
+            "explanation": "'another' + number + plural noun."
+          },
+          {
+            "id": 19,
+            "text": "He answered three questions, but he skipped _____ three.",
+            "options": ["the other", "another", "others", "other"],
+            "correct": 0,
+            "explanation": "'the other three' = specific remaining set."
+          },
+          {
+            "id": 20,
+            "text": "This phone is broken, so I need to buy _____.",
+            "options": ["another", "other", "others", "the other"],
+            "correct": 0,
+            "explanation": "'another' as a pronoun for a replacement singular item."
           }
-],
+        ],
         "scrambled": [
-          {
-                    "id": 1,
-                    "answer": "Would you like another cup of tea",
-                    "hint": "Start with Would"
-          },
-          {
-                    "id": 2,
-                    "answer": "One is black and the other is white",
-                    "hint": "Start with One"
-          },
-          {
-                    "id": 3,
-                    "answer": "Some people agreed while others disagreed",
-                    "hint": "Start with Some"
-          },
-          {
-                    "id": 4,
-                    "answer": "We have other options to consider",
-                    "hint": "Start with We"
-          },
-          {
-                    "id": 5,
-                    "answer": "Can you give me another pen",
-                    "hint": "Start with Can"
-          }
-],
+          { "id": 1, "answer": "Would you like another cup of tea", "hint": "Start with Would" },
+          { "id": 2, "answer": "One is black and the other is white", "hint": "Start with One" },
+          { "id": 3, "answer": "Some people agreed while others disagreed", "hint": "Start with Some" },
+          { "id": 4, "answer": "We have other options to consider", "hint": "Start with We" },
+          { "id": 5, "answer": "Can you give me another pen", "hint": "Start with Can" },
+          { "id": 6, "answer": "Where are the other students going", "hint": "Start with Where" },
+          { "id": 7, "answer": "She wants to buy another dress", "hint": "Start with She" },
+          { "id": 8, "answer": "Some came early and others came late", "hint": "Start with Some" },
+          { "id": 9, "answer": "I will see you another time", "hint": "Start with I" },
+          { "id": 10, "answer": "The other shoe is under the bed", "hint": "Start with The" },
+          { "id": 11, "answer": "We need another five minutes to prepare", "hint": "Start with We" },
+          { "id": 12, "answer": "Do you have any other questions for me", "hint": "Start with Do" },
+          { "id": 13, "answer": "One twin likes sports the other prefers reading", "hint": "Start with One" },
+          { "id": 14, "answer": "Many people left but others remained", "hint": "Start with Many" },
+          { "id": 15, "answer": "Let us try another method tomorrow", "hint": "Start with Let" },
+          { "id": 16, "answer": "The other children played outside in the garden", "hint": "Start with The" },
+          { "id": 17, "answer": "He gave me another chance to explain", "hint": "Start with He" },
+          { "id": 18, "answer": "Some cars are fast while others are slow", "hint": "Start with Some" },
+          { "id": 19, "answer": "Could I have another glass of water", "hint": "Start with Could" },
+          { "id": 20, "answer": "Two of them stayed and the others left", "hint": "Start with Two" }
+        ],
         "errorCorrection": [
           {
-                    "id": 1,
-                    "text": "Others students arrived later.",
-                    "correction": "Other students arrived later.",
-                    "explanation": "'Others' cannot modify a noun directly."
+            "id": 1,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "Other students arrived later.",
+              "Others students arrived later.",
+              "Some students arrived later.",
+              "The other students arrived later."
+            ],
+            "correct": 1,
+            "explanation": "'Others' cannot modify a noun directly."
           },
           {
-                    "id": 2,
-                    "text": "I prefer other shirt.",
-                    "correction": "I prefer the other shirt.",
-                    "explanation": "Singular noun with 'other' needs a determiner like 'the'."
+            "id": 2,
+            "text": "Which sentence contains a grammatical error?",
+            "options": [
+              "I prefer the other shirt.",
+              "I prefer other shirt.",
+              "I prefer another shirt.",
+              "I prefer the other shirts."
+            ],
+            "correct": 1,
+            "explanation": "Singular noun with 'other' needs a determiner like 'the'."
           },
           {
-                    "id": 3,
-                    "text": "Can I have other cup of coffee?",
-                    "correction": "Can I have another cup of coffee?",
-                    "explanation": "Use 'another' before singular countable noun."
+            "id": 3,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "Can I have another cup of coffee?",
+              "Can I have other cup of coffee?",
+              "Can I have one more cup of coffee?",
+              "Can I have the other cup of coffee?"
+            ],
+            "correct": 1,
+            "explanation": "Use 'another' before a singular countable noun."
           },
           {
-                    "id": 4,
-                    "text": "I have two cars. One is blue, another is red.",
-                    "correction": "I have two cars. One is blue, the other is red.",
-                    "explanation": "Use 'the other' for the second of two."
+            "id": 4,
+            "text": "Which sentence has INCORRECT word choice?",
+            "options": [
+              "I have two cars. One is blue, the other is red.",
+              "I have two cars. One is blue, another is red.",
+              "I have two cars. Both are fast.",
+              "I have two cars. One is blue and the second is red."
+            ],
+            "correct": 1,
+            "explanation": "Use 'the other' for the second of two items."
           },
           {
-                    "id": 5,
-                    "text": "Some books are easy, others books are hard.",
-                    "correction": "Some books are easy, others are hard.",
-                    "explanation": "'Others' acts as pronoun without noun."
+            "id": 5,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "Some books are easy, others are hard.",
+              "Some books are easy, others books are hard.",
+              "Some books are easy, other books are hard.",
+              "Some books are easy, the others are hard."
+            ],
+            "correct": 1,
+            "explanation": "'Others' acts as a pronoun without a following noun."
+          },
+          {
+            "id": 6,
+            "text": "Which sentence contains a spelling/grammatical error?",
+            "options": [
+              "We need another pencil.",
+              "We need an other pencil.",
+              "We need other pencils.",
+              "We need the other pencil."
+            ],
+            "correct": 1,
+            "explanation": "'Another' is written as one single word."
+          },
+          {
+            "id": 7,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "She bought another pair of shoes.",
+              "She bought another shoes.",
+              "She bought other shoes.",
+              "She bought the other shoes."
+            ],
+            "correct": 1,
+            "explanation": "'Another' cannot directly modify plural nouns like 'shoes'."
+          },
+          {
+            "id": 8,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "I have three cats: one is black, and the others are white.",
+              "I have three cats: one is black, and another are white.",
+              "I have three cats: one is black, and the other two are white.",
+              "I have three cats: one is black, and others are white."
+            ],
+            "correct": 1,
+            "explanation": "'another' cannot take a plural verb 'are'."
+          },
+          {
+            "id": 9,
+            "text": "Which sentence contains a grammar error?",
+            "options": [
+              "Do you have any other ideas?",
+              "Do you have any others ideas?",
+              "Do you have another idea?",
+              "Do you have any other idea?"
+            ],
+            "correct": 1,
+            "explanation": "Use 'other' before plural noun 'ideas'."
+          },
+          {
+            "id": 10,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "One option is good, but the other option is bad.",
+              "One option is good, but the others option is bad.",
+              "One option is good, but the other is bad.",
+              "One option is good, but another option is bad."
+            ],
+            "correct": 1,
+            "explanation": "'others' cannot modify singular noun 'option'."
+          },
+          {
+            "id": 11,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "He lives on the other side of town.",
+              "He lives on another side of town.",
+              "He lives on the opposite side of town.",
+              "He lives on another street."
+            ],
+            "correct": 1,
+            "explanation": "A town has two sides, so 'the other side' is required."
+          },
+          {
+            "id": 12,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "Some workers left early, but others stayed.",
+              "Some workers left early, but other stayed.",
+              "Some workers left early, but the others stayed.",
+              "Some workers left early, but other workers stayed."
+            ],
+            "correct": 1,
+            "explanation": "Use pronoun 'others' when no noun follows."
+          },
+          {
+            "id": 13,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "We spent another three days in Paris.",
+              "We spent another three day in Paris.",
+              "We spent three more days in Paris.",
+              "We spent the other three days in Paris."
+            ],
+            "correct": 1,
+            "explanation": "Noun after a number must be plural ('days')."
+          },
+          {
+            "id": 14,
+            "text": "Which sentence contains a grammar error?",
+            "options": [
+              "Where are the other people in your group?",
+              "Where are another people in your group?",
+              "Where are other people from your team?",
+              "Where are the others in your group?"
+            ],
+            "correct": 1,
+            "explanation": "'Another' cannot modify plural noun 'people'."
+          },
+          {
+            "id": 15,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "I have two keys: one opens the front door, the other opens the back door.",
+              "I have two keys: one opens the front door, another opens the back door.",
+              "I have two keys: both open the door.",
+              "I have two keys: one is silver, the other is gold."
+            ],
+            "correct": 1,
+            "explanation": "The second of two specific keys takes 'the other'."
+          },
+          {
+            "id": 16,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "Other people might disagree with you.",
+              "Others people might disagree with you.",
+              "Some other people might disagree with you.",
+              "The other people might disagree with you."
+            ],
+            "correct": 1,
+            "explanation": "'Others' cannot be used as an adjective before nouns."
+          },
+          {
+            "id": 17,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "Can you give me another piece of advice?",
+              "Can you give me other piece of advice?",
+              "Can you give me some other advice?",
+              "Can you give me one more piece of advice?"
+            ],
+            "correct": 1,
+            "explanation": "'other' requires a determiner before singular noun 'piece'."
+          },
+          {
+            "id": 18,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "There are four boxes: one is heavy, the others are light.",
+              "There are four boxes: one is heavy, the other are light.",
+              "There are four boxes: one is heavy, the other three are light.",
+              "There are four boxes: one is heavy, others are light."
+            ],
+            "correct": 1,
+            "explanation": "Plural remaining items take 'the others'."
+          },
+          {
+            "id": 19,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "I don't like this hat, show me another.",
+              "I don't like this hat, show me other.",
+              "I don't like this hat, show me the other one.",
+              "I don't like this hat, show me another one."
+            ],
+            "correct": 1,
+            "explanation": "'other' cannot stand alone as a singular pronoun without 'the' or 'an'."
+          },
+          {
+            "id": 20,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "Some students like math, others like history.",
+              "Some students like math, other like history.",
+              "Some students like math, other students like history.",
+              "Some students like math, the others like history."
+            ],
+            "correct": 1,
+            "explanation": "Use pronoun 'others' when not followed by a noun."
           }
-],
+        ],
         "transform": [
           {
-                    "id": 1,
-                    "original": "I need one more cup of tea.",
-                    "target": "I need _____ cup of tea.",
-                    "answer": "another",
-                    "explanation": "One more = another."
+            "id": 1,
+            "text": "Transform: \"I need one more cup of tea.\" = \"I need _____ cup of tea.\"",
+            "options": ["another", "other", "others", "the other"],
+            "correct": 0,
+            "explanation": "One more = another."
+          },
+          {
+            "id": 2,
+            "text": "Transform: \"I have two pens. One is red, and the second one is blue.\" = \"I have two pens. One is red, and _____ is blue.\"",
+            "options": ["the other", "another", "others", "other"],
+            "correct": 0,
+            "explanation": "The second of two items = the other."
+          },
+          {
+            "id": 3,
+            "text": "Transform: \"Some people came early, while the rest arrived late.\" = \"Some people came early, while _____ arrived late.\"",
+            "options": ["others", "other", "another", "the other"],
+            "correct": 0,
+            "explanation": "The rest of the unspecified group = others."
+          },
+          {
+            "id": 4,
+            "text": "Transform: \"Can you show me a different piece of paper?\" = \"Can you show me _____ piece of paper?\"",
+            "options": ["another", "other", "others", "the other"],
+            "correct": 0,
+            "explanation": "A different singular item = another."
+          },
+          {
+            "id": 5,
+            "text": "Transform: \"There are no additional options available.\" = \"There are no _____ options available.\"",
+            "options": ["other", "another", "others", "the other"],
+            "correct": 0,
+            "explanation": "Additional + plural noun = other."
+          },
+          {
+            "id": 6,
+            "text": "Transform: \"I need five more minutes to finish.\" = \"I need _____ five minutes to finish.\"",
+            "options": ["another", "other", "others", "the other"],
+            "correct": 0,
+            "explanation": "Another + number + time expression."
+          },
+          {
+            "id": 7,
+            "text": "Transform: \"She bought a second slice of cake.\" = \"She bought _____ slice of cake.\"",
+            "options": ["another", "other", "others", "the other"],
+            "correct": 0,
+            "explanation": "A second singular item = another."
+          },
+          {
+            "id": 8,
+            "text": "Transform: \"Where are the remaining students?\" = \"Where are _____ students?\"",
+            "options": ["the other", "another", "others", "other"],
+            "correct": 0,
+            "explanation": "The remaining specific group = the other."
+          },
+          {
+            "id": 9,
+            "text": "Transform: \"Two cars are parked outside: one is mine, and the remaining car belongs to Mark.\" = \"Two cars are parked outside: one is mine, and _____ belongs to Mark.\"",
+            "options": ["the other", "another", "others", "other"],
+            "correct": 0,
+            "explanation": "The remaining one of two = the other."
+          },
+          {
+            "id": 10,
+            "text": "Transform: \"Would you like an additional drink?\" = \"Would you like _____ drink?\"",
+            "options": ["another", "other", "others", "the other"],
+            "correct": 0,
+            "explanation": "An additional singular item = another."
+          },
+          {
+            "id": 11,
+            "text": "Transform: \"Some people prefer tea, but remaining people prefer coffee.\" = \"Some people prefer tea, but _____ prefer coffee.\"",
+            "options": ["others", "other", "another", "the other"],
+            "correct": 0,
+            "explanation": "Standalone plural pronoun = others."
+          },
+          {
+            "id": 12,
+            "text": "Transform: \"I don't like this restaurant; let's find a different one.\" = \"I don't like this restaurant; let's find _____ one.\"",
+            "options": ["another", "other", "others", "the other"],
+            "correct": 0,
+            "explanation": "A different one = another."
+          },
+          {
+            "id": 13,
+            "text": "Transform: \"He has three brothers: one lives here, and the rest live abroad.\" = \"He has three brothers: one lives here, and _____ live abroad.\"",
+            "options": ["the others", "another", "other", "the other"],
+            "correct": 0,
+            "explanation": "The remaining plural specific items = the others."
+          },
+          {
+            "id": 14,
+            "text": "Transform: \"Do you have any alternative suggestions?\" = \"Do you have any _____ suggestions?\"",
+            "options": ["other", "another", "others", "the other"],
+            "correct": 0,
+            "explanation": "Alternative + plural noun = other."
+          },
+          {
+            "id": 15,
+            "text": "Transform: \"I lost my shoe; I can only find one.\" = \"I lost my shoe; I can't find _____.\"",
+            "options": ["the other", "another", "others", "other"],
+            "correct": 0,
+            "explanation": "The second of a pair = the other."
+          },
+          {
+            "id": 16,
+            "text": "Transform: \"Give me one more chance to prove myself.\" = \"Give me _____ chance to prove myself.\"",
+            "options": ["another", "other", "others", "the other"],
+            "correct": 0,
+            "explanation": "One more = another."
+          },
+          {
+            "id": 17,
+            "text": "Transform: \"Some guests went home, but the rest stayed.\" = \"Some guests went home, but _____ stayed.\"",
+            "options": ["others", "other", "another", "the other"],
+            "correct": 0,
+            "explanation": "Plural pronoun without noun = others."
+          },
+          {
+            "id": 18,
+            "text": "Transform: \"Is there an additional doctor on duty?\" = \"Is there _____ doctor on duty?\"",
+            "options": ["another", "other", "others", "the other"],
+            "correct": 0,
+            "explanation": "An additional singular person = another."
+          },
+          {
+            "id": 19,
+            "text": "Transform: \"I read two chapters: one was boring, but the second one was exciting.\" = \"I read two chapters: one was boring, but _____ was exciting.\"",
+            "options": ["the other", "another", "others", "other"],
+            "correct": 0,
+            "explanation": "The second of two chapters = the other."
+          },
+          {
+            "id": 20,
+            "text": "Transform: \"Are there any different questions on the exam?\" = \"Are there any _____ questions on the exam?\"",
+            "options": ["other", "another", "others", "the other"],
+            "correct": 0,
+            "explanation": "Different + plural noun = other."
           }
-],
+        ],
         "dialogue": [
           {
-                    "id": 1,
-                    "dialogue": "A: Can I have one more slice of pizza?\nB: Sure, here is _____ slice.",
-                    "options": [
-                              "another",
-                              "other",
-                              "others",
-                              "the other"
-                    ],
-                    "correct": 0,
-                    "explanation": "One more slice = another slice."
+            "id": 1,
+            "situation": "Ordering food at a café.",
+            "dialogue": "A: Can I have one more slice of pizza?\nB: Sure, here is _____ slice.",
+            "options": ["another", "other", "others", "the other"],
+            "correct": 0,
+            "explanation": "One more slice = another slice."
+          },
+          {
+            "id": 2,
+            "situation": "Talking about smartphones.",
+            "dialogue": "A: I have two phones. One is an iPhone...\nB: What brand is _____ phone?",
+            "options": ["the other", "another", "others", "other"],
+            "correct": 0,
+            "explanation": "The remaining one of two = the other."
+          },
+          {
+            "id": 3,
+            "situation": "Preparing for a business trip.",
+            "dialogue": "A: Why are you taking a second laptop?\nB: In case _____ one breaks down.",
+            "options": ["the other", "another", "others", "other"],
+            "correct": 0,
+            "explanation": "Referring to the alternative one of two laptops."
+          },
+          {
+            "id": 4,
+            "situation": "Discussing arrival times.",
+            "dialogue": "A: Some of our team members arrived at 9 AM.\nB: What about _____?",
+            "options": ["the others", "others", "another", "other"],
+            "correct": 0,
+            "explanation": "Specific remaining team members = the others."
+          },
+          {
+            "id": 5,
+            "situation": "In an office meeting room.",
+            "dialogue": "A: This chair is broken.\nB: Take _____ one from the hallway.",
+            "options": ["another", "other", "others", "the other"],
+            "correct": 0,
+            "explanation": "An alternative singular chair = another."
+          },
+          {
+            "id": 6,
+            "situation": "Asking for restaurant tips.",
+            "dialogue": "A: Do you have any _____ recommendations for restaurants?\nB: Yes, there is a great Italian place nearby.",
+            "options": ["other", "another", "others", "the other"],
+            "correct": 0,
+            "explanation": "Other + plural noun ('recommendations')."
+          },
+          {
+            "id": 7,
+            "situation": "Job interview process.",
+            "dialogue": "A: I didn't like the first candidate.\nB: Let's interview _____ candidate then.",
+            "options": ["another", "other", "others", "the other"],
+            "correct": 0,
+            "explanation": "Another candidate = a different single candidate."
+          },
+          {
+            "id": 8,
+            "situation": "Talking about hobbies.",
+            "dialogue": "A: Some people love extreme sports.\nB: Yes, but _____ prefer safe activities.",
+            "options": ["others", "other", "another", "the other"],
+            "correct": 0,
+            "explanation": "Standalone plural pronoun = others."
+          },
+          {
+            "id": 9,
+            "situation": "Looking for lost clothes.",
+            "dialogue": "A: I found one of your socks!\nB: Great! Where is _____ one?",
+            "options": ["the other", "another", "others", "other"],
+            "correct": 0,
+            "explanation": "The second of a pair = the other."
+          },
+          {
+            "id": 10,
+            "situation": "Planning a schedule.",
+            "dialogue": "A: Can we discuss this tomorrow?\nB: No, we don't have _____ time left today.",
+            "options": ["other", "another", "others", "the others"],
+            "correct": 0,
+            "explanation": "other time left."
+          },
+          {
+            "id": 11,
+            "situation": "Offering coffee.",
+            "dialogue": "A: Would you like _____ cup of coffee before you leave?\nB: No thanks, I've had enough.",
+            "options": ["another", "other", "others", "the other"],
+            "correct": 0,
+            "explanation": "Another + singular noun."
+          },
+          {
+            "id": 12,
+            "situation": "Shopping for clothes.",
+            "dialogue": "A: I bought three shirts today.\nB: I see two. Where is _____ shirt?",
+            "options": ["the other", "another", "others", "other"],
+            "correct": 0,
+            "explanation": "The specific final remaining shirt = the other."
+          },
+          {
+            "id": 13,
+            "situation": "Asking about exam results.",
+            "dialogue": "A: Some students failed the test.\nB: Did _____ pass?",
+            "options": ["the others", "another", "other", "the other"],
+            "correct": 0,
+            "explanation": "Specific remaining students in the group = the others."
+          },
+          {
+            "id": 14,
+            "situation": "At the airport.",
+            "dialogue": "A: Is there any _____ information about the flight delay?\nB: Not yet, we are still waiting.",
+            "options": ["other", "another", "others", "the other"],
+            "correct": 0,
+            "explanation": "Other + uncountable noun 'information'."
+          },
+          {
+            "id": 15,
+            "situation": "At the bank.",
+            "dialogue": "A: I lost my credit card yesterday.\nB: Oh no! You should request _____ card from the bank.",
+            "options": ["another", "other", "others", "the other"],
+            "correct": 0,
+            "explanation": "Another card = a replacement card."
+          },
+          {
+            "id": 16,
+            "situation": "Selecting a book to read.",
+            "dialogue": "A: Which of these two books do you want?\nB: I'll take this one, and you can take _____.",
+            "options": ["the other", "another", "others", "other"],
+            "correct": 0,
+            "explanation": "The second of two choices = the other."
+          },
+          {
+            "id": 17,
+            "situation": "Taking an exam.",
+            "dialogue": "A: We need _____ ten minutes to complete the test.\nB: Okay, time extended!",
+            "options": ["another", "other", "others", "the other"],
+            "correct": 0,
+            "explanation": "Another + number + plural time noun."
+          },
+          {
+            "id": 18,
+            "situation": "Talking about work location.",
+            "dialogue": "A: Some employees work from home.\nB: Do _____ come to the office every day?",
+            "options": ["others", "other", "another", "the other"],
+            "correct": 0,
+            "explanation": "Standalone pronoun 'others'."
+          },
+          {
+            "id": 19,
+            "situation": "Driving to the airport.",
+            "dialogue": "A: This route is blocked by traffic.\nB: Is there _____ way to get to the airport?",
+            "options": ["another", "other", "others", "the other"],
+            "correct": 0,
+            "explanation": "Another way = an alternative route."
+          },
+          {
+            "id": 20,
+            "situation": "Talking about twin brothers.",
+            "dialogue": "A: One twin wants to be a musician...\nB: And what does _____ twin want to be?",
+            "options": ["the other", "another", "others", "other"],
+            "correct": 0,
+            "explanation": "The second of twins = the other."
           }
-]
+        ]
       },
       {
         "id": "a-little-little-a-few-few",
@@ -89795,118 +92179,714 @@ export const grammarData = {
 ],
         "fillBlanks": [
           {
-                    "id": 1,
-                    "sentence": "I have _____ money left, enough for coffee.",
-                    "answer": "a little",
-                    "hint": "uncountable positive"
+            "id": 1,
+            "text": "I have _______ money left, enough to buy us some coffee.",
+            "options": ["a little", "little", "a few", "few"],
+            "correct": 0,
+            "explanation": "'a little' + uncountable noun ('money') in a positive context."
           },
           {
-                    "id": 2,
-                    "sentence": "She has _____ friends in the city.",
-                    "answer": "a few",
-                    "hint": "countable positive"
+            "id": 2,
+            "text": "Unfortunately, _______ students passed the difficult math test.",
+            "options": ["few", "a few", "a little", "little"],
+            "correct": 0,
+            "explanation": "'few' + plural noun ('students') means almost no students."
           },
           {
-                    "id": 3,
-                    "sentence": "Hurry up! We have _____ time.",
-                    "answer": "little",
-                    "hint": "uncountable negative"
+            "id": 3,
+            "text": "She has _______ close friends in town, so she never feels lonely.",
+            "options": ["a few", "few", "a little", "little"],
+            "correct": 0,
+            "explanation": "'a few' + plural noun ('friends') indicates a positive sufficient number."
           },
           {
-                    "id": 4,
-                    "sentence": "_____ students passed the hard exam.",
-                    "answer": "Few",
-                    "hint": "countable negative"
+            "id": 4,
+            "text": "Hurry up! We have _______ time left before the train leaves.",
+            "options": ["little", "a little", "few", "a few"],
+            "correct": 0,
+            "explanation": "'little' + uncountable noun ('time') indicates almost no time."
           },
           {
-                    "id": 5,
-                    "sentence": "Can you drive a _____ faster?",
-                    "answer": "little",
-                    "hint": "modifies comparative"
+            "id": 5,
+            "text": "Could you speak _______ louder? I can't hear you clearly.",
+            "options": ["a little", "little", "a few", "few"],
+            "correct": 0,
+            "explanation": "'a little' modifies the comparative adverb 'louder'."
+          },
+          {
+            "id": 6,
+            "text": "There is _______ sugar in the bowl, enough for your tea.",
+            "options": ["a little", "little", "a few", "few"],
+            "correct": 0,
+            "explanation": "'a little' + uncountable noun ('sugar')."
+          },
+          {
+            "id": 7,
+            "text": "He made _______ mistakes in his test, so he got an A grade.",
+            "options": ["few", "a few", "little", "a little"],
+            "correct": 0,
+            "explanation": "'few' + plural noun ('mistakes') indicates almost no mistakes."
+          },
+          {
+            "id": 8,
+            "text": "I felt _______ nervous before giving my presentation.",
+            "options": ["a little", "little", "a few", "few"],
+            "correct": 0,
+            "explanation": "'a little' + adjective ('nervous')."
+          },
+          {
+            "id": 9,
+            "text": "There were _______ people at the stadium due to heavy rain.",
+            "options": ["few", "a few", "a little", "little"],
+            "correct": 0,
+            "explanation": "'few' + plural countable noun ('people')."
+          },
+          {
+            "id": 10,
+            "text": "Could you add _______ milk to my tea, please?",
+            "options": ["a little", "little", "a few", "few"],
+            "correct": 0,
+            "explanation": "'a little' + uncountable noun ('milk')."
+          },
+          {
+            "id": 11,
+            "text": "He has _______ interest in politics; he never reads the news.",
+            "options": ["little", "a little", "few", "a few"],
+            "correct": 0,
+            "explanation": "'little' + uncountable noun ('interest') means almost none."
+          },
+          {
+            "id": 12,
+            "text": "We stayed in Paris for _______ days before returning home.",
+            "options": ["a few", "few", "a little", "little"],
+            "correct": 0,
+            "explanation": "'a few' + plural countable noun ('days')."
+          },
+          {
+            "id": 13,
+            "text": "Can you walk _______ faster so we don't miss the bus?",
+            "options": ["a little", "little", "a few", "few"],
+            "correct": 0,
+            "explanation": "'a little' + comparative ('faster')."
+          },
+          {
+            "id": 14,
+            "text": "He has _______ chance of winning without any training.",
+            "options": ["little", "a little", "few", "a few"],
+            "correct": 0,
+            "explanation": "'little' + uncountable noun ('chance') means almost zero chance."
+          },
+          {
+            "id": 15,
+            "text": "Only _______ people showed up for the meeting yesterday.",
+            "options": ["a few", "few", "a little", "little"],
+            "correct": 0,
+            "explanation": "'only a few' + plural noun ('people')."
+          },
+          {
+            "id": 16,
+            "text": "She slept _______ during the long flight to New York.",
+            "options": ["a little", "little", "a few", "few"],
+            "correct": 0,
+            "explanation": "'a little' used as an adverb after verb 'slept'."
+          },
+          {
+            "id": 17,
+            "text": "I need _______ more minutes to complete this task.",
+            "options": ["a few", "few", "a little", "little"],
+            "correct": 0,
+            "explanation": "'a few' + plural countable noun ('minutes')."
+          },
+          {
+            "id": 18,
+            "text": "There was _______ hope of finding the missing keys.",
+            "options": ["little", "a little", "few", "a few"],
+            "correct": 0,
+            "explanation": "'little' + uncountable noun ('hope') in a negative sense."
+          },
+          {
+            "id": 19,
+            "text": "I have _______ questions about the project guidelines.",
+            "options": ["a few", "few", "a little", "little"],
+            "correct": 0,
+            "explanation": "'a few' + plural countable noun ('questions')."
+          },
+          {
+            "id": 20,
+            "text": "There is _______ butter left, so we can bake a cake.",
+            "options": ["a little", "little", "a few", "few"],
+            "correct": 0,
+            "explanation": "'a little' + uncountable noun ('butter') in a positive context."
           }
-],
+        ],
         "scrambled": [
-          {
-                    "id": 1,
-                    "answer": "I have a little money left",
-                    "hint": "Start with I"
-          },
-          {
-                    "id": 2,
-                    "answer": "Few students passed the exam",
-                    "hint": "Start with Few"
-          },
-          {
-                    "id": 3,
-                    "answer": "She bought a few books yesterday",
-                    "hint": "Start with She"
-          },
-          {
-                    "id": 4,
-                    "answer": "There is little hope left",
-                    "hint": "Start with There"
-          },
-          {
-                    "id": 5,
-                    "answer": "Can you speak a little louder",
-                    "hint": "Start with Can"
-          }
-],
+          { "id": 1, "answer": "I have a little money left", "hint": "Start with I" },
+          { "id": 2, "answer": "Few students passed the exam", "hint": "Start with Few" },
+          { "id": 3, "answer": "She bought a few books yesterday", "hint": "Start with She" },
+          { "id": 4, "answer": "There is little hope left", "hint": "Start with There" },
+          { "id": 5, "answer": "Can you speak a little louder", "hint": "Start with Can" },
+          { "id": 6, "answer": "He has a few friends in the city", "hint": "Start with He" },
+          { "id": 7, "answer": "We have little time to spare", "hint": "Start with We" },
+          { "id": 8, "answer": "Could you add a little sugar", "hint": "Start with Could" },
+          { "id": 9, "answer": "Very few people attended the event", "hint": "Start with Very" },
+          { "id": 10, "answer": "I am a little tired today", "hint": "Start with I" },
+          { "id": 11, "answer": "She speaks a little English", "hint": "Start with She" },
+          { "id": 12, "answer": "He made few mistakes in the essay", "hint": "Start with He" },
+          { "id": 13, "answer": "There are a few apples in the basket", "hint": "Start with There" },
+          { "id": 14, "answer": "They have little interest in sports", "hint": "Start with They" },
+          { "id": 15, "answer": "We stayed there for a few days", "hint": "Start with We" },
+          { "id": 16, "answer": "Can you drive a little faster", "hint": "Start with Can" },
+          { "id": 17, "answer": "There was a little water in the glass", "hint": "Start with There" },
+          { "id": 18, "answer": "Few people know the secret", "hint": "Start with Few" },
+          { "id": 19, "answer": "Give me a few more minutes", "hint": "Start with Give" },
+          { "id": 20, "answer": "She showed little concern for the problem", "hint": "Start with She" }
+        ],
         "errorCorrection": [
           {
-                    "id": 1,
-                    "text": "I have a few money.",
-                    "correction": "I have a little money.",
-                    "explanation": "'Money' is uncountable; use 'a little'."
+            "id": 1,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "I have a little money left.",
+              "I have a few money left.",
+              "I have some money left.",
+              "I have little money left."
+            ],
+            "correct": 1,
+            "explanation": "'Money' is uncountable; use 'a little' instead of 'a few'."
           },
           {
-                    "id": 2,
-                    "text": "She has little friends.",
-                    "correction": "She has few friends.",
-                    "explanation": "'Friends' is countable plural; use 'few'."
+            "id": 2,
+            "text": "Which sentence contains a grammatical error?",
+            "options": [
+              "She has a few friends.",
+              "She has little friends.",
+              "She has few friends.",
+              "She has many friends."
+            ],
+            "correct": 1,
+            "explanation": "'Friends' is countable plural; use 'few' or 'a few', not 'little'."
           },
           {
-                    "id": 3,
-                    "text": "Can you walk a few faster?",
-                    "correction": "Can you walk a little faster?",
-                    "explanation": "Use 'a little' with comparatives."
+            "id": 3,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "Can you walk a little faster?",
+              "Can you walk a few faster?",
+              "Can you walk slightly faster?",
+              "Can you walk much faster?"
+            ],
+            "correct": 1,
+            "explanation": "Use 'a little' with comparative adverbs like 'faster'."
           },
           {
-                    "id": 4,
-                    "text": "There is a few water in bottle.",
-                    "correction": "There is a little water in the bottle.",
-                    "explanation": "'Water' is uncountable."
+            "id": 4,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "There is a little water in the bottle.",
+              "There is a few water in the bottle.",
+              "There is some water in the bottle.",
+              "There is little water in the bottle."
+            ],
+            "correct": 1,
+            "explanation": "'Water' is uncountable; 'a few' is ungrammatical here."
           },
           {
-                    "id": 5,
-                    "text": "Few students passed because it was easy.",
-                    "correction": "A few students passed because it was easy.",
-                    "explanation": "Use 'a few' for positive context."
+            "id": 5,
+            "text": "Which sentence has INCORRECT meaning/context?",
+            "options": [
+              "Few students passed because the exam was extremely hard.",
+              "A few students passed because the exam was extremely hard.",
+              "Very few students passed the hard exam.",
+              "Only a few students passed the hard exam."
+            ],
+            "correct": 1,
+            "explanation": "'A few' emphasizes a positive count, while 'few' emphasizes negative scarcity (almost none)."
+          },
+          {
+            "id": 6,
+            "text": "Which sentence contains a grammar error?",
+            "options": [
+              "He showed little respect to his teacher.",
+              "He showed a few respect to his teacher.",
+              "He showed a little respect to his teacher.",
+              "He showed no respect to his teacher."
+            ],
+            "correct": 1,
+            "explanation": "'Respect' is uncountable; use 'little' or 'a little'."
+          },
+          {
+            "id": 7,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "I need a few minutes.",
+              "I need a little minutes.",
+              "I need a few more minutes.",
+              "I need five more minutes."
+            ],
+            "correct": 1,
+            "explanation": "'Minutes' is countable plural; use 'a few'."
+          },
+          {
+            "id": 8,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "She speaks a little French.",
+              "She speaks a few French.",
+              "She speaks a little bit of French.",
+              "She speaks fluent French."
+            ],
+            "correct": 1,
+            "explanation": "Languages ('French') are uncountable; use 'a little'."
+          },
+          {
+            "id": 9,
+            "text": "Which sentence contains an error?",
+            "options": [
+              "We have little time left, so hurry up!",
+              "We have a few time left, so hurry up!",
+              "We have a little time left, so we can talk.",
+              "We have no time left."
+            ],
+            "correct": 1,
+            "explanation": "'Time' is uncountable; use 'little' or 'a little'."
+          },
+          {
+            "id": 10,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "He made few errors in his dictation.",
+              "He made little errors in his dictation.",
+              "He made a few errors in his dictation.",
+              "He made no errors in his dictation."
+            ],
+            "correct": 1,
+            "explanation": "'Errors' is countable plural; use 'few' or 'a few'."
+          },
+          {
+            "id": 11,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "I have a little homework tonight.",
+              "I have a few homeworks tonight.",
+              "I have some homework tonight.",
+              "I have lots of homework tonight."
+            ],
+            "correct": 1,
+            "explanation": "'Homework' is uncountable (no plural 'homeworks')."
+          },
+          {
+            "id": 12,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "There were few cars on the road at midnight.",
+              "There were little cars on the road at midnight.",
+              "There were a few cars on the road at midnight.",
+              "There were many cars on the road."
+            ],
+            "correct": 1,
+            "explanation": "'Cars' is countable plural; use 'few'."
+          },
+          {
+            "id": 13,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "Add a little salt to the soup.",
+              "Add a few salt to the soup.",
+              "Add a pinch of salt to the soup.",
+              "Add some salt to the soup."
+            ],
+            "correct": 1,
+            "explanation": "'Salt' is uncountable."
+          },
+          {
+            "id": 14,
+            "text": "Which sentence contains a grammar error?",
+            "options": [
+              "She was a little upset about the news.",
+              "She was a few upset about the news.",
+              "She was slightly upset about the news.",
+              "She was very upset about the news."
+            ],
+            "correct": 1,
+            "explanation": "Use 'a little' to modify adjectives ('upset')."
+          },
+          {
+            "id": 15,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "Only a few tickets are left.",
+              "Only few tickets are left.",
+              "A few tickets are left.",
+              "Few tickets are left."
+            ],
+            "correct": 1,
+            "explanation": "'Only' must be followed by 'a few', not standalone 'few'."
+          },
+          {
+            "id": 16,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "He has little knowledge of physics.",
+              "He has a few knowledge of physics.",
+              "He has a little knowledge of physics.",
+              "He has some knowledge of physics."
+            ],
+            "correct": 1,
+            "explanation": "'Knowledge' is uncountable."
+          },
+          {
+            "id": 17,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "They have a few questions for the speaker.",
+              "They have a little questions for the speaker.",
+              "They have some questions for the speaker.",
+              "They have several questions for the speaker."
+            ],
+            "correct": 1,
+            "explanation": "'Questions' is countable plural."
+          },
+          {
+            "id": 18,
+            "text": "Which sentence contains an error?",
+            "options": [
+              "I need a little sleep.",
+              "I need a few sleep.",
+              "I need some sleep.",
+              "I need a few hours of sleep."
+            ],
+            "correct": 1,
+            "explanation": "'Sleep' is uncountable."
+          },
+          {
+            "id": 19,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "There is little hope for success.",
+              "There is few hope for success.",
+              "There is a little hope for success.",
+              "There is no hope for success."
+            ],
+            "correct": 1,
+            "explanation": "'Hope' is uncountable."
+          },
+          {
+            "id": 20,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "Few people arrived on time due to snow.",
+              "Little people arrived on time due to snow.",
+              "A few people arrived on time.",
+              "Many people arrived on time."
+            ],
+            "correct": 1,
+            "explanation": "Use 'few' with countable plural noun 'people'."
           }
-],
+        ],
         "transform": [
           {
-                    "id": 1,
-                    "original": "I don't have much money.",
-                    "target": "I have _____ money.",
-                    "answer": "little",
-                    "explanation": "Not much = little."
+            "id": 1,
+            "text": "Transform: \"I don't have much money.\" = \"I have _____ money.\"",
+            "options": ["little", "a little", "few", "a few"],
+            "correct": 0,
+            "explanation": "Not much = little (uncountable negative)."
+          },
+          {
+            "id": 2,
+            "text": "Transform: \"I have some money, enough for coffee.\" = \"I have _____ money.\"",
+            "options": ["a little", "little", "a few", "few"],
+            "correct": 0,
+            "explanation": "Some (uncountable positive) = a little."
+          },
+          {
+            "id": 3,
+            "text": "Transform: \"Almost no students passed the test.\" = \"_____ students passed the test.\"",
+            "options": ["Few", "A few", "Little", "A little"],
+            "correct": 0,
+            "explanation": "Almost no (countable) = Few."
+          },
+          {
+            "id": 4,
+            "text": "Transform: \"She has a small number of friends in Paris.\" = \"She has _____ friends in Paris.\"",
+            "options": ["a few", "few", "a little", "little"],
+            "correct": 0,
+            "explanation": "A small number (countable positive) = a few."
+          },
+          {
+            "id": 5,
+            "text": "Transform: \"We don't have much time left.\" = \"We have _____ time left.\"",
+            "options": ["little", "a little", "few", "a few"],
+            "correct": 0,
+            "explanation": "Not much time = little time."
+          },
+          {
+            "id": 6,
+            "text": "Transform: \"Can you walk slightly faster?\" = \"Can you walk _____ faster?\"",
+            "options": ["a little", "little", "a few", "few"],
+            "correct": 0,
+            "explanation": "Slightly + comparative = a little."
+          },
+          {
+            "id": 7,
+            "text": "Transform: \"There is a small amount of sugar left.\" = \"There is _____ sugar left.\"",
+            "options": ["a little", "little", "a few", "few"],
+            "correct": 0,
+            "explanation": "A small amount (uncountable positive) = a little."
+          },
+          {
+            "id": 8,
+            "text": "Transform: \"He made almost no mistakes.\" = \"He made _____ mistakes.\"",
+            "options": ["few", "a few", "little", "a little"],
+            "correct": 0,
+            "explanation": "Almost no (countable) = few."
+          },
+          {
+            "id": 9,
+            "text": "Transform: \"I felt slightly nervous before the speech.\" = \"I felt _____ nervous before the speech.\"",
+            "options": ["a little", "little", "a few", "few"],
+            "correct": 0,
+            "explanation": "Slightly + adjective = a little."
+          },
+          {
+            "id": 10,
+            "text": "Transform: \"Almost no people came to the meeting.\" = \"_____ people came to the meeting.\"",
+            "options": ["Few", "A few", "Little", "A little"],
+            "correct": 0,
+            "explanation": "Almost no people = Few people."
+          },
+          {
+            "id": 11,
+            "text": "Transform: \"Could you add a small quantity of milk?\" = \"Could you add _____ milk?\"",
+            "options": ["a little", "little", "a few", "few"],
+            "correct": 0,
+            "explanation": "A small quantity (uncountable positive) = a little."
+          },
+          {
+            "id": 12,
+            "text": "Transform: \"He has almost no interest in music.\" = \"He has _____ interest in music.\"",
+            "options": ["little", "a little", "few", "a few"],
+            "correct": 0,
+            "explanation": "Almost no interest = little interest."
+          },
+          {
+            "id": 13,
+            "text": "Transform: \"We stayed there for a couple of days.\" = \"We stayed there for _____ days.\"",
+            "options": ["a few", "few", "a little", "little"],
+            "correct": 0,
+            "explanation": "A couple of days = a few days."
+          },
+          {
+            "id": 14,
+            "text": "Transform: \"He has almost no chance of winning.\" = \"He has _____ chance of winning.\"",
+            "options": ["little", "a little", "few", "a few"],
+            "correct": 0,
+            "explanation": "Almost no chance = little chance."
+          },
+          {
+            "id": 15,
+            "text": "Transform: \"Only a small number of people attended.\" = \"Only _____ people attended.\"",
+            "options": ["a few", "few", "a little", "little"],
+            "correct": 0,
+            "explanation": "Only a small number = only a few."
+          },
+          {
+            "id": 16,
+            "text": "Transform: \"She slept slightly during the flight.\" = \"She slept _____ during the flight.\"",
+            "options": ["a little", "little", "a few", "few"],
+            "correct": 0,
+            "explanation": "Slightly (adverb) = a little."
+          },
+          {
+            "id": 17,
+            "text": "Transform: \"I need a couple more minutes.\" = \"I need _____ more minutes.\"",
+            "options": ["a few", "few", "a little", "little"],
+            "correct": 0,
+            "explanation": "A couple more minutes = a few more minutes."
+          },
+          {
+            "id": 18,
+            "text": "Transform: \"There was almost no hope left.\" = \"There was _____ hope left.\"",
+            "options": ["little", "a little", "few", "a few"],
+            "correct": 0,
+            "explanation": "Almost no hope = little hope."
+          },
+          {
+            "id": 19,
+            "text": "Transform: \"I have a couple of questions.\" = \"I have _____ questions.\"",
+            "options": ["a few", "few", "a little", "little"],
+            "correct": 0,
+            "explanation": "A couple of questions = a few questions."
+          },
+          {
+            "id": 20,
+            "text": "Transform: \"There is some butter left in the fridge.\" = \"There is _____ butter left in the fridge.\"",
+            "options": ["a little", "little", "a few", "few"],
+            "correct": 0,
+            "explanation": "Some butter (uncountable positive) = a little butter."
           }
-],
+        ],
         "dialogue": [
           {
-                    "id": 1,
-                    "dialogue": "A: Do you have time for a chat?\nB: Yes, I have _____ time before my next meeting.",
-                    "options": [
-                              "a little",
-                              "little",
-                              "a few",
-                              "few"
-                    ],
-                    "correct": 0,
-                    "explanation": "'a little' uncountable positive."
+            "id": 1,
+            "situation": "Before a meeting.",
+            "dialogue": "A: Do you have time for a quick chat?\nB: Yes, I have _____ time before my next meeting.",
+            "options": ["a little", "little", "a few", "few"],
+            "correct": 0,
+            "explanation": "'a little' + uncountable positive."
+          },
+          {
+            "id": 2,
+            "situation": "Asking about friends.",
+            "dialogue": "A: Do you know anyone in this town?\nB: Yes, I have _____ friends who live nearby.",
+            "options": ["a few", "few", "a little", "little"],
+            "correct": 0,
+            "explanation": "'a few' + plural countable positive."
+          },
+          {
+            "id": 3,
+            "situation": "Running late.",
+            "dialogue": "A: Can we stop by the market?\nB: Sorry, we have _____ time left before the store closes!",
+            "options": ["little", "a little", "few", "a few"],
+            "correct": 0,
+            "explanation": "'little' + uncountable negative."
+          },
+          {
+            "id": 4,
+            "situation": "Discussing exam results.",
+            "dialogue": "A: Did many students pass the physics exam?\nB: No, _____ students managed to pass it.",
+            "options": ["few", "a few", "little", "a little"],
+            "correct": 0,
+            "explanation": "'few' + plural countable negative."
+          },
+          {
+            "id": 5,
+            "situation": "In a restaurant.",
+            "dialogue": "A: Is the soup spicy?\nB: Just _____ spicy, but it tastes delicious.",
+            "options": ["a little", "little", "a few", "few"],
+            "correct": 0,
+            "explanation": "'a little' modifies adjective 'spicy'."
+          },
+          {
+            "id": 6,
+            "situation": "Making coffee.",
+            "dialogue": "A: Do you take sugar in your coffee?\nB: Yes, just _____ sugar, please.",
+            "options": ["a little", "little", "a few", "few"],
+            "correct": 0,
+            "explanation": "'a little' + uncountable noun 'sugar'."
+          },
+          {
+            "id": 7,
+            "situation": "Shopping for books.",
+            "dialogue": "A: Did you buy any books at the store?\nB: Yes, I picked up _____ novels.",
+            "options": ["a few", "few", "a little", "little"],
+            "correct": 0,
+            "explanation": "'a few' + plural noun 'novels'."
+          },
+          {
+            "id": 8,
+            "situation": "Checking remaining food.",
+            "dialogue": "A: Is there any milk left?\nB: There is _____ milk left, enough for one cup.",
+            "options": ["a little", "little", "a few", "few"],
+            "correct": 0,
+            "explanation": "'a little' + uncountable noun 'milk'."
+          },
+          {
+            "id": 9,
+            "situation": "Talking about a movie.",
+            "dialogue": "A: Did you like the movie?\nB: It was okay, but there were _____ funny scenes.",
+            "options": ["few", "a few", "little", "a little"],
+            "correct": 0,
+            "explanation": "'few' funny scenes (almost none)."
+          },
+          {
+            "id": 10,
+            "situation": "Driving a car.",
+            "dialogue": "A: We are going too slow!\nB: Okay, I will drive _____ faster.",
+            "options": ["a little", "little", "a few", "few"],
+            "correct": 0,
+            "explanation": "'a little' + comparative 'faster'."
+          },
+          {
+            "id": 11,
+            "situation": "Talking about travel plans.",
+            "dialogue": "A: How long will you stay in London?\nB: Just _____ days, then I fly home.",
+            "options": ["a few", "few", "a little", "little"],
+            "correct": 0,
+            "explanation": "'a few' + plural noun 'days'."
+          },
+          {
+            "id": 12,
+            "situation": "Asking for salt at dinner.",
+            "dialogue": "A: Would you like salt on your salad?\nB: Yes, please add _____ salt.",
+            "options": ["a little", "little", "a few", "few"],
+            "correct": 0,
+            "explanation": "'a little' + uncountable noun 'salt'."
+          },
+          {
+            "id": 13,
+            "situation": "Discussing sports interest.",
+            "dialogue": "A: Does Mark watch football?\nB: No, he has _____ interest in sports.",
+            "options": ["little", "a little", "few", "a few"],
+            "correct": 0,
+            "explanation": "'little' + uncountable noun 'interest'."
+          },
+          {
+            "id": 14,
+            "situation": "Asking about concert attendance.",
+            "dialogue": "A: Was the concert crowded?\nB: No, _____ people came because of the rain.",
+            "options": ["few", "a few", "little", "a little"],
+            "correct": 0,
+            "explanation": "'few' + plural noun 'people'."
+          },
+          {
+            "id": 15,
+            "situation": "In a bakery.",
+            "dialogue": "A: Are there any croissants left?\nB: Yes, we still have _____ croissants in the display.",
+            "options": ["a few", "few", "a little", "little"],
+            "correct": 0,
+            "explanation": "'a few' + plural noun 'croissants'."
+          },
+          {
+            "id": 16,
+            "situation": "Feeling unwell.",
+            "dialogue": "A: Are you feeling okay?\nB: I feel _____ dizzy, but I will be fine.",
+            "options": ["a little", "little", "a few", "few"],
+            "correct": 0,
+            "explanation": "'a little' + adjective 'dizzy'."
+          },
+          {
+            "id": 17,
+            "situation": "Finishing homework.",
+            "dialogue": "A: Are you done with your essay?\nB: Not yet, I need _____ more minutes.",
+            "options": ["a few", "few", "a little", "little"],
+            "correct": 0,
+            "explanation": "'a few' + plural noun 'minutes'."
+          },
+          {
+            "id": 18,
+            "situation": "Discussing job chances.",
+            "dialogue": "A: Will he get the job?\nB: There is _____ hope since he lacks experience.",
+            "options": ["little", "a little", "few", "a few"],
+            "correct": 0,
+            "explanation": "'little' + uncountable noun 'hope'."
+          },
+          {
+            "id": 19,
+            "situation": "Talking about languages.",
+            "dialogue": "A: Can you understand Spanish?\nB: I can speak _____ Spanish.",
+            "options": ["a little", "little", "a few", "few"],
+            "correct": 0,
+            "explanation": "'a little' + language name."
+          },
+          {
+            "id": 20,
+            "situation": "Asking questions in class.",
+            "dialogue": "A: Does anyone have any doubts?\nB: Teacher, I have _____ questions.",
+            "options": ["a few", "few", "a little", "little"],
+            "correct": 0,
+            "explanation": "'a few' + plural noun 'questions'."
           }
-]
+        ]
       },
       {
         "id": "adjectives-types-order-forms",
@@ -90158,118 +93138,714 @@ export const grammarData = {
 ],
         "fillBlanks": [
           {
-                    "id": 1,
-                    "sentence": "She bought a beautiful _____ wooden table.",
-                    "answer": "small",
-                    "hint": "adjective order"
+            "id": 1,
+            "text": "She bought a beautiful _____ wooden table.",
+            "options": ["small", "wooden", "table", "square"],
+            "correct": 0,
+            "explanation": "Adjective order: Opinion ('beautiful') -> Size ('small') -> Material ('wooden')."
           },
           {
-                    "id": 2,
-                    "sentence": "He is a very _____ teacher.",
-                    "answer": "helpful",
-                    "hint": "-ful suffix"
+            "id": 2,
+            "text": "He is a very _____ teacher; everyone respects him.",
+            "options": ["helpful", "helpless", "helping", "helped"],
+            "correct": 0,
+            "explanation": "Suffix '-ful' means full of help."
           },
           {
-                    "id": 3,
-                    "sentence": "Your answer is _____.",
-                    "answer": "incorrect",
-                    "hint": "in- prefix"
+            "id": 3,
+            "text": "Your answer is completely _____.",
+            "options": ["incorrect", "uncorrect", "imcorrect", "discorrect"],
+            "correct": 0,
+            "explanation": "Prefix 'in-' is used to negate 'correct'."
           },
           {
-                    "id": 4,
-                    "sentence": "It is _____ to drive without a license.",
-                    "answer": "illegal",
-                    "hint": "il- prefix"
+            "id": 4,
+            "text": "It is _____ to drive without a valid license.",
+            "options": ["illegal", "unlegal", "imlegal", "dislegal"],
+            "correct": 0,
+            "explanation": "Prefix 'il-' is used before words starting with 'l'."
           },
           {
-                    "id": 5,
-                    "sentence": "The movie was very _____.",
-                    "answer": "funny",
-                    "hint": "-y suffix"
+            "id": 5,
+            "text": "The movie we watched last night was very _____.",
+            "options": ["funny", "funnily", "funniness", "funned"],
+            "correct": 0,
+            "explanation": "Suffix '-y' forms the adjective 'funny'."
+          },
+          {
+            "id": 6,
+            "text": "He wore an expensive _____ Italian suit to the meeting.",
+            "options": ["black", "Italian", "suit", "cotton"],
+            "correct": 0,
+            "explanation": "Adjective order: Opinion ('expensive') -> Colour ('black') -> Origin ('Italian')."
+          },
+          {
+            "id": 7,
+            "text": "Leaving small children unattended is highly _____.",
+            "options": ["irresponsible", "unresponsible", "inresponsible", "imresponsible"],
+            "correct": 0,
+            "explanation": "Prefix 'ir-' is used before 'r'."
+          },
+          {
+            "id": 8,
+            "text": "The mountain view was absolutely _____.",
+            "options": ["wonderful", "wonderless", "wondering", "wondered"],
+            "correct": 0,
+            "explanation": "Suffix '-ful' forms 'wonderful'."
+          },
+          {
+            "id": 9,
+            "text": "She looked at the _____ homeless man with sympathy.",
+            "options": ["poor", "poorly", "poorness", "poored"],
+            "correct": 0,
+            "explanation": "Adjective 'poor' modifies the noun phrase 'homeless man'."
+          },
+          {
+            "id": 10,
+            "text": "The chemical reaction produced a _____ gas.",
+            "options": ["poisonous", "poisoned", "poisoning", "poisoner"],
+            "correct": 0,
+            "explanation": "Suffix '-ous' forms the adjective 'poisonous'."
+          },
+          {
+            "id": 11,
+            "text": "They live in a modern _____ glass house.",
+            "options": ["large", "glass", "modern", "house"],
+            "correct": 0,
+            "explanation": "Size ('large') -> Age ('modern') -> Material ('glass')."
+          },
+          {
+            "id": 12,
+            "text": "It was very _____ of him to forget her birthday.",
+            "options": ["unkind", "inkind", "imkind", "diskind"],
+            "correct": 0,
+            "explanation": "Prefix 'un-' negates 'kind'."
+          },
+          {
+            "id": 13,
+            "text": "He gave an _____ explanation for his absence.",
+            "options": ["unsatisfactory", "insatisfactory", "imsatisfactory", "dissatisfactory"],
+            "correct": 0,
+            "explanation": "Prefix 'un-' forms 'unsatisfactory'."
+          },
+          {
+            "id": 14,
+            "text": "The carpet felt soft and _____ under our feet.",
+            "options": ["comfortable", "comfort", "comforting", "comforted"],
+            "correct": 0,
+            "explanation": "Suffix '-able' forms 'comfortable'."
+          },
+          {
+            "id": 15,
+            "text": "She bought a brand-new _____ sports car.",
+            "options": ["red", "sports", "car", "leather"],
+            "correct": 0,
+            "explanation": "Age ('brand-new') -> Colour ('red') -> Purpose ('sports')."
+          },
+          {
+            "id": 16,
+            "text": "The task was nearly _____ to complete in one hour.",
+            "options": ["impossible", "unpossible", "inpossible", "dispossible"],
+            "correct": 0,
+            "explanation": "Prefix 'im-' is used before 'p'."
+          },
+          {
+            "id": 17,
+            "text": "The sky turned a deep _____ hue at sunset.",
+            "options": ["yellowish", "yellowly", "yellowness", "yellowed"],
+            "correct": 0,
+            "explanation": "Suffix '-ish' means slightly yellow."
+          },
+          {
+            "id": 18,
+            "text": "He is an exceptionally _____ musician.",
+            "options": ["talented", "talentless", "talenting", "talently"],
+            "correct": 0,
+            "explanation": "Suffix '-ed' forms adjective 'talented'."
+          },
+          {
+            "id": 19,
+            "text": "They sat around a large _____ wooden table.",
+            "options": ["round", "wooden", "table", "brown"],
+            "correct": 0,
+            "explanation": "Size ('large') -> Shape ('round') -> Material ('wooden')."
+          },
+          {
+            "id": 20,
+            "text": "The room was warm, cozy _____ welcoming.",
+            "options": ["and", "or", "but", "so"],
+            "correct": 0,
+            "explanation": "Linking verbs with adjectives: adj, adj and adj."
           }
-],
+        ],
         "scrambled": [
-          {
-                    "id": 1,
-                    "answer": "She bought a beautiful small wooden table",
-                    "hint": "Follow adjective order"
-          },
-          {
-                    "id": 2,
-                    "answer": "He is a very helpful person",
-                    "hint": "Start with He"
-          },
-          {
-                    "id": 3,
-                    "answer": "The weather is cold windy and rainy",
-                    "hint": "Linking verb order"
-          },
-          {
-                    "id": 4,
-                    "answer": "This answer is completely incorrect",
-                    "hint": "Start with This"
-          },
-          {
-                    "id": 5,
-                    "answer": "She wore an expensive silk dress",
-                    "hint": "Start with She"
-          }
-],
+          { "id": 1, "answer": "She bought a beautiful small wooden table", "hint": "Follow adjective order" },
+          { "id": 2, "answer": "He is a very helpful person", "hint": "Start with He" },
+          { "id": 3, "answer": "The weather is cold windy and rainy", "hint": "Linking verb order" },
+          { "id": 4, "answer": "This answer is completely incorrect", "hint": "Start with This" },
+          { "id": 5, "answer": "She wore an expensive silk dress", "hint": "Start with She" },
+          { "id": 6, "answer": "It is illegal to drive without a license", "hint": "Start with It" },
+          { "id": 7, "answer": "They bought a big modern German car", "hint": "Start with They" },
+          { "id": 8, "answer": "His behavior was childish and immature", "hint": "Start with His" },
+          { "id": 9, "answer": "We stayed in a comfortable old hotel", "hint": "Start with We" },
+          { "id": 10, "answer": "She gave me a lovely round silver ring", "hint": "Start with She" },
+          { "id": 11, "answer": "That chemical is extremely poisonous", "hint": "Start with That" },
+          { "id": 12, "answer": "He was impatient during the presentation", "hint": "Start with He" },
+          { "id": 13, "answer": "The room was bright clean and spacious", "hint": "Start with The" },
+          { "id": 14, "answer": "I bought a small black leather wallet", "hint": "Start with I" },
+          { "id": 15, "answer": "It was careless of him to lose the keys", "hint": "Start with It" },
+          { "id": 16, "answer": "They found an ancient Egyptian statue", "hint": "Start with They" },
+          { "id": 17, "answer": "Her new dress is dark blue and shiny", "hint": "Start with Her" },
+          { "id": 18, "answer": "The explanation was informative and clear", "hint": "Start with The" },
+          { "id": 19, "answer": "He drove a fast new red sports car", "hint": "Start with He" },
+          { "id": 20, "answer": "It is irresponsible to ignore the rules", "hint": "Start with It" }
+        ],
         "errorCorrection": [
           {
-                    "id": 1,
-                    "text": "She is a very beauty girl.",
-                    "correction": "She is a very beautiful girl.",
-                    "explanation": "Use adjective form 'beautiful' instead of noun 'beauty'."
+            "id": 1,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "She is a very beautiful girl.",
+              "She is a very beauty girl.",
+              "She is a beautiful girl.",
+              "The girl is beautiful."
+            ],
+            "correct": 1,
+            "explanation": "Use adjective form 'beautiful' instead of noun 'beauty'."
           },
           {
-                    "id": 2,
-                    "text": "She bought a wooden small table.",
-                    "correction": "She bought a small wooden table.",
-                    "explanation": "Size comes before material."
+            "id": 2,
+            "text": "Which sentence has INCORRECT adjective order?",
+            "options": [
+              "She bought a small wooden table.",
+              "She bought a wooden small table.",
+              "She bought a beautiful wooden table.",
+              "She bought a small round table."
+            ],
+            "correct": 1,
+            "explanation": "Size ('small') comes before material ('wooden')."
           },
           {
-                    "id": 3,
-                    "text": "His answer was uncorrect.",
-                    "correction": "His answer was incorrect.",
-                    "explanation": "Prefix for 'correct' is 'in-'."
+            "id": 3,
+            "text": "Which sentence contains a prefix error?",
+            "options": [
+              "His answer was incorrect.",
+              "His answer was uncorrect.",
+              "His answer was wrong.",
+              "His answer was not correct."
+            ],
+            "correct": 1,
+            "explanation": "The prefix for 'correct' is 'in-'."
           },
           {
-                    "id": 4,
-                    "text": "He gave an unpolite response.",
-                    "correction": "He gave an impolite response.",
-                    "explanation": "Prefix for 'polite' is 'im-'."
+            "id": 4,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "He gave an impolite response.",
+              "He gave an unpolite response.",
+              "He was rude to the customer.",
+              "His response was not polite."
+            ],
+            "correct": 1,
+            "explanation": "The prefix for 'polite' is 'im-'."
           },
           {
-                    "id": 5,
-                    "text": "The weather is very hotly today.",
-                    "correction": "The weather is very hot today.",
-                    "explanation": "Use adjective 'hot' after linking verb 'is'."
+            "id": 5,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "The weather is very hot today.",
+              "The weather is very hotly today.",
+              "Today the weather feels hot.",
+              "It is hot today."
+            ],
+            "correct": 1,
+            "explanation": "Use adjective 'hot' after linking verb 'is'."
+          },
+          {
+            "id": 6,
+            "text": "Which sentence has INCORRECT adjective order?",
+            "options": [
+              "He wears an expensive black leather jacket.",
+              "He wears a leather black expensive jacket.",
+              "He wears a black leather jacket.",
+              "He wears an expensive leather jacket."
+            ],
+            "correct": 1,
+            "explanation": "Opinion ('expensive') -> Colour ('black') -> Material ('leather')."
+          },
+          {
+            "id": 7,
+            "text": "Which sentence contains a prefix error?",
+            "options": [
+              "It is illegal to park here.",
+              "It is unlegal to park here.",
+              "It is not legal to park here.",
+              "Parking here is illegal."
+            ],
+            "correct": 1,
+            "explanation": "The prefix before 'legal' is 'il-'."
+          },
+          {
+            "id": 8,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "She was helpless after losing her keys.",
+              "She was helpness after losing her keys.",
+              "She felt completely helpless.",
+              "She was unable to help."
+            ],
+            "correct": 1,
+            "explanation": "The negative suffix is '-less' ('helpless'), not '-ness'."
+          },
+          {
+            "id": 9,
+            "text": "Which sentence contains a prefix error?",
+            "options": [
+              "His attendance is irregular.",
+              "His attendance is unregular.",
+              "His attendance is not regular.",
+              "He is an irregular student."
+            ],
+            "correct": 1,
+            "explanation": "The prefix before 'regular' is 'ir-'."
+          },
+          {
+            "id": 10,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "They bought a large ancient Greek vase.",
+              "They bought a Greek ancient large vase.",
+              "They bought an ancient Greek vase.",
+              "They bought a large Greek vase."
+            ],
+            "correct": 1,
+            "explanation": "Size ('large') -> Age ('ancient') -> Origin ('Greek')."
+          },
+          {
+            "id": 11,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "The food was delicious, hot and fresh.",
+              "The food was delicious, hot, fresh.",
+              "The food was delicious and hot and fresh.",
+              "The food was hot, fresh and delicious."
+            ],
+            "correct": 2,
+            "explanation": "Connect final adjective with 'and' once: adj, adj and adj."
+          },
+          {
+            "id": 12,
+            "text": "Which sentence contains a suffix error?",
+            "options": [
+              "That poisonous snake is dangerous.",
+              "That poisonful snake is dangerous.",
+              "The snake carries deadly poison.",
+              "That snake is very poisonous."
+            ],
+            "correct": 1,
+            "explanation": "The adjective form of 'poison' is 'poisonous'."
+          },
+          {
+            "id": 13,
+            "text": "Which sentence contains a prefix error?",
+            "options": [
+              "He is impatient with noisy children.",
+              "He is inpatient with noisy children.",
+              "He lacks patience.",
+              "He gets impatient easily."
+            ],
+            "correct": 1,
+            "explanation": "Prefix before 'p' is 'im-' ('impatient')."
+          },
+          {
+            "id": 14,
+            "text": "Which sentence has INCORRECT adjective order?",
+            "options": [
+              "I saw a big round wooden box.",
+              "I saw a wooden round big box.",
+              "I saw a big wooden box.",
+              "I saw a round wooden box."
+            ],
+            "correct": 1,
+            "explanation": "Size ('big') -> Shape ('round') -> Material ('wooden')."
+          },
+          {
+            "id": 15,
+            "text": "Which sentence contains a prefix error?",
+            "options": [
+              "It is an informal meeting.",
+              "It is an unformal meeting.",
+              "The meeting is not formal.",
+              "It is informal."
+            ],
+            "correct": 1,
+            "explanation": "Prefix for 'formal' is 'in-' ('informal')."
+          },
+          {
+            "id": 16,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "She wore a beautiful red silk dress.",
+              "She wore a silk red beautiful dress.",
+              "She wore a red silk dress.",
+              "She wore a beautiful silk dress."
+            ],
+            "correct": 1,
+            "explanation": "Opinion ('beautiful') -> Colour ('red') -> Material ('silk')."
+          },
+          {
+            "id": 17,
+            "text": "Which sentence contains a suffix error?",
+            "options": [
+              "He is a very creative artist.",
+              "He is a very creation artist.",
+              "He shows great creativity.",
+              "He creates amazing artwork."
+            ],
+            "correct": 1,
+            "explanation": "Adjective form is 'creative'."
+          },
+          {
+            "id": 18,
+            "text": "Which sentence contains a prefix error?",
+            "options": [
+              "It is impossible to solve this puzzle.",
+              "It is unpossible to solve this puzzle.",
+              "This puzzle cannot be solved.",
+              "It is not possible to solve it."
+            ],
+            "correct": 1,
+            "explanation": "Prefix before 'possible' is 'im-' ('impossible')."
+          },
+          {
+            "id": 19,
+            "text": "Which sentence has INCORRECT adjective order?",
+            "options": [
+              "She has a lovely small white dog.",
+              "She has a white small lovely dog.",
+              "She has a small white dog.",
+              "She has a lovely white dog."
+            ],
+            "correct": 1,
+            "explanation": "Opinion ('lovely') -> Size ('small') -> Colour ('white')."
+          },
+          {
+            "id": 20,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+              "The soup tastes salty.",
+              "The soup tastes saltily.",
+              "The soup is salty.",
+              "The soup tastes very salty."
+            ],
+            "correct": 1,
+            "explanation": "Linking verb 'tastes' requires adjective 'salty', not adverb 'saltily'."
           }
-],
+        ],
         "transform": [
           {
-                    "id": 1,
-                    "original": "The solution is not practical.",
-                    "target": "The solution is _____.",
-                    "answer": "impractical",
-                    "explanation": "Not practical = impractical."
+            "id": 1,
+            "text": "Transform: \"The solution is not practical.\" = \"The solution is _____.\"",
+            "options": ["impractical", "unpractical", "inpractical", "dispractical"],
+            "correct": 0,
+            "explanation": "Not practical = impractical."
+          },
+          {
+            "id": 2,
+            "text": "Transform: \"The answer is not correct.\" = \"The answer is _____.\"",
+            "options": ["incorrect", "uncorrect", "imcorrect", "discorrect"],
+            "correct": 0,
+            "explanation": "Not correct = incorrect."
+          },
+          {
+            "id": 3,
+            "text": "Transform: \"He is full of help.\" = \"He is very _____.\"",
+            "options": ["helpful", "helpless", "helping", "helped"],
+            "correct": 0,
+            "explanation": "Full of help = helpful."
+          },
+          {
+            "id": 4,
+            "text": "Transform: \"The action was not legal.\" = \"The action was _____.\"",
+            "options": ["illegal", "unlegal", "imlegal", "dislegal"],
+            "correct": 0,
+            "explanation": "Not legal = illegal."
+          },
+          {
+            "id": 5,
+            "text": "Transform: \"She left the house without care.\" = \"She was very _____.\"",
+            "options": ["careless", "careful", "caring", "carefully"],
+            "correct": 0,
+            "explanation": "Without care = careless."
+          },
+          {
+            "id": 6,
+            "text": "Transform: \"He is not polite to anyone.\" = \"He is very _____.\"",
+            "options": ["impolite", "unpolite", "inpolite", "dispolite"],
+            "correct": 0,
+            "explanation": "Not polite = impolite."
+          },
+          {
+            "id": 7,
+            "text": "Transform: \"The movie is full of wonder.\" = \"The movie was _____.\"",
+            "options": ["wonderful", "wonderless", "wondering", "wondered"],
+            "correct": 0,
+            "explanation": "Full of wonder = wonderful."
+          },
+          {
+            "id": 8,
+            "text": "Transform: \"He behaves like a child.\" = \"His behavior is _____.\"",
+            "options": ["childish", "childlike", "childless", "childed"],
+            "correct": 0,
+            "explanation": "Behaving like a child = childish."
+          },
+          {
+            "id": 9,
+            "text": "Transform: \"His attendance is not regular.\" = \"His attendance is _____.\"",
+            "options": ["irregular", "unregular", "inregular", "imregular"],
+            "correct": 0,
+            "explanation": "Not regular = irregular."
+          },
+          {
+            "id": 10,
+            "text": "Transform: \"This decision is not responsible.\" = \"This decision is _____.\"",
+            "options": ["irresponsible", "unresponsible", "inresponsible", "imresponsible"],
+            "correct": 0,
+            "explanation": "Not responsible = irresponsible."
+          },
+          {
+            "id": 11,
+            "text": "Transform: \"The place is full of danger.\" = \"The place is _____.\"",
+            "options": ["dangerous", "dangerless", "dangering", "danger"],
+            "correct": 0,
+            "explanation": "Full of danger = dangerous."
+          },
+          {
+            "id": 12,
+            "text": "Transform: \"He has no patience.\" = \"He is very _____.\"",
+            "options": ["impatient", "unpatient", "inpatient", "dispatient"],
+            "correct": 0,
+            "explanation": "Without patience = impatient."
+          },
+          {
+            "id": 13,
+            "text": "Transform: \"The rule is not formal.\" = \"The event is _____.\"",
+            "options": ["informal", "unformal", "imformal", "disformal"],
+            "correct": 0,
+            "explanation": "Not formal = informal."
+          },
+          {
+            "id": 14,
+            "text": "Transform: \"She has great talent.\" = \"She is very _____.\"",
+            "options": ["talented", "talentless", "talenting", "talently"],
+            "correct": 0,
+            "explanation": "Having talent = talented."
+          },
+          {
+            "id": 15,
+            "text": "Transform: \"The task cannot be done.\" = \"The task is _____.\"",
+            "options": ["impossible", "unpossible", "inpossible", "dispossible"],
+            "correct": 0,
+            "explanation": "Cannot be done = impossible."
+          },
+          {
+            "id": 16,
+            "text": "Transform: \"The story has a lot of humor.\" = \"The story is very _____.\"",
+            "options": ["humorous", "humorless", "humoring", "humored"],
+            "correct": 0,
+            "explanation": "A lot of humor = humorous."
+          },
+          {
+            "id": 17,
+            "text": "Transform: \"He is not happy with the result.\" = \"He is _____ with the result.\"",
+            "options": ["unhappy", "inhappy", "imhappy", "dishappy"],
+            "correct": 0,
+            "explanation": "Not happy = unhappy."
+          },
+          {
+            "id": 18,
+            "text": "Transform: \"The news is full of sadness.\" = \"The news is _____.\"",
+            "options": ["sad", "sadly", "sadness", "sadder"],
+            "correct": 0,
+            "explanation": "Full of sadness = sad."
+          },
+          {
+            "id": 19,
+            "text": "Transform: \"She has no home.\" = \"She is _____.\"",
+            "options": ["homeless", "homeful", "homing", "homed"],
+            "correct": 0,
+            "explanation": "Without a home = homeless."
+          },
+          {
+            "id": 20,
+            "text": "Transform: \"The shirt has a slight green tint.\" = \"The shirt is _____.\"",
+            "options": ["greenish", "greenly", "greenness", "greened"],
+            "correct": 0,
+            "explanation": "Slight green tint = greenish."
           }
-],
+        ],
         "dialogue": [
           {
-                    "id": 1,
-                    "dialogue": "A: What kind of jacket did you buy?\nB: I bought a _____ black leather jacket.",
-                    "options": [
-                              "nice new",
-                              "leather new",
-                              "black nice",
-                              "new leather"
-                    ],
-                    "correct": 0,
-                    "explanation": "Opinion ('nice') -> Age ('new') -> Colour ('black') -> Material ('leather')."
+            "id": 1,
+            "situation": "Buying furniture.",
+            "dialogue": "A: What kind of table did you buy?\nB: I bought a _____ wooden dining table.",
+            "options": ["beautiful small", "wooden beautiful", "small wooden beautiful", "wooden small"],
+            "correct": 0,
+            "explanation": "Opinion ('beautiful') -> Size ('small') -> Material ('wooden')."
+          },
+          {
+            "id": 2,
+            "situation": "Describing a new teacher.",
+            "dialogue": "A: Do you like your new teacher?\nB: Yes, she is extremely _____ and patient.",
+            "options": ["helpful", "helpless", "helping", "helped"],
+            "correct": 0,
+            "explanation": "Suffix '-ful' forms 'helpful'."
+          },
+          {
+            "id": 3,
+            "situation": "Checking exam answers.",
+            "dialogue": "A: Did I get question 5 right?\nB: No, your answer is _____.",
+            "options": ["incorrect", "uncorrect", "imcorrect", "discorrect"],
+            "correct": 0,
+            "explanation": "Prefix 'in-' forms 'incorrect'."
+          },
+          {
+            "id": 4,
+            "situation": "Shopping for clothes.",
+            "dialogue": "A: What did you buy at the mall?\nB: I bought an _____ Italian jacket.",
+            "options": ["expensive black leather", "Italian leather black", "black expensive leather", "leather black expensive"],
+            "correct": 0,
+            "explanation": "Opinion ('expensive') -> Colour ('black') -> Origin ('Italian') -> Material ('leather')."
+          },
+          {
+            "id": 5,
+            "situation": "Discussing driving safety.",
+            "dialogue": "A: Why was he pulled over by the police?\nB: Because driving without a license is _____.",
+            "options": ["illegal", "unlegal", "imlegal", "dislegal"],
+            "correct": 0,
+            "explanation": "Prefix 'il-' forms 'illegal'."
+          },
+          {
+            "id": 6,
+            "situation": "Talking about a movie.",
+            "dialogue": "A: How was the comedy show last night?\nB: It was really _____; we laughed all night.",
+            "options": ["funny", "funnily", "funniness", "funned"],
+            "correct": 0,
+            "explanation": "Suffix '-y' forms 'funny'."
+          },
+          {
+            "id": 7,
+            "situation": "Describing a hotel room.",
+            "dialogue": "A: How was your hotel room?\nB: The room was spacious, quiet _____ comfortable.",
+            "options": ["and", "or", "but", "so"],
+            "correct": 0,
+            "explanation": "Linking verbs with adjectives: adj, adj and adj."
+          },
+          {
+            "id": 8,
+            "situation": "Talking about wild animals.",
+            "dialogue": "A: Can we pet that cobra?\nB: No, that snake is extremely _____!",
+            "options": ["poisonous", "poisoned", "poisoning", "poisoner"],
+            "correct": 0,
+            "explanation": "Suffix '-ous' forms 'poisonous'."
+          },
+          {
+            "id": 9,
+            "situation": "Discussing job qualifications.",
+            "dialogue": "A: Is she qualified for the job?\nB: Yes, she is an exceptionally _____ candidate.",
+            "options": ["talented", "talentless", "talenting", "talently"],
+            "correct": 0,
+            "explanation": "Adjective 'talented'."
+          },
+          {
+            "id": 10,
+            "situation": "Asking about someone's mood.",
+            "dialogue": "A: Why is Tom not smiling?\nB: He received some _____ news today.",
+            "options": ["unpleasant", "impleasant", "inpleasant", "displeasant"],
+            "correct": 0,
+            "explanation": "Prefix 'un-' forms 'unpleasant'."
+          },
+          {
+            "id": 11,
+            "situation": "Shopping for a car.",
+            "dialogue": "A: What kind of car does he drive?\nB: He drives a _____ German car.",
+            "options": ["fast new black", "German black fast", "new German fast", "black fast new"],
+            "correct": 0,
+            "explanation": "Speed/Quality ('fast') -> Age ('new') -> Colour ('black') -> Origin ('German')."
+          },
+          {
+            "id": 12,
+            "situation": "Waiting in a long line.",
+            "dialogue": "A: Are we going to wait much longer?\nB: Please be patient; don't be so _____!",
+            "options": ["impatient", "unpatient", "inpatient", "dispatient"],
+            "correct": 0,
+            "explanation": "Prefix 'im-' forms 'impatient'."
+          },
+          {
+            "id": 13,
+            "situation": "Talking about an old town.",
+            "dialogue": "A: Did you visit the historical center?\nB: Yes, we saw a _____ stone bridge.",
+            "options": ["beautiful old round", "stone old round", "round stone old", "old stone beautiful"],
+            "correct": 0,
+            "explanation": "Opinion ('beautiful') -> Age ('old') -> Shape ('round') -> Material ('stone')."
+          },
+          {
+            "id": 14,
+            "situation": "Discussing a mistake.",
+            "dialogue": "A: Why did he break the glass?\nB: He was just being _____.",
+            "options": ["careless", "careful", "caring", "carefully"],
+            "correct": 0,
+            "explanation": "Suffix '-less' forms 'careless'."
+          },
+          {
+            "id": 15,
+            "situation": "Describing weather.",
+            "dialogue": "A: Should I bring an umbrella?\nB: Yes, it looks very _____ outside.",
+            "options": ["rainy", "rain", "raining", "rained"],
+            "correct": 0,
+            "explanation": "Suffix '-y' forms 'rainy'."
+          },
+          {
+            "id": 16,
+            "situation": "Asking about bus schedules.",
+            "dialogue": "A: Does the bus run on weekends?\nB: No, the weekend schedule is _____.",
+            "options": ["irregular", "unregular", "inregular", "imregular"],
+            "correct": 0,
+            "explanation": "Prefix 'ir-' forms 'irregular'."
+          },
+          {
+            "id": 17,
+            "situation": "At an antique auction.",
+            "dialogue": "A: What is that object on display?\nB: It is a _____ Chinese vase.",
+            "options": ["valuable ancient porcelain", "Chinese ancient valuable", "porcelain valuable ancient", "ancient porcelain Chinese"],
+            "correct": 0,
+            "explanation": "Opinion ('valuable') -> Age ('ancient') -> Origin ('Chinese') -> Material ('porcelain')."
+          },
+          {
+            "id": 18,
+            "situation": "Discussing a puzzle.",
+            "dialogue": "A: Did you finish the riddle?\nB: No, it seems nearly _____ to solve!",
+            "options": ["impossible", "unpossible", "inpossible", "dispossible"],
+            "correct": 0,
+            "explanation": "Prefix 'im-' forms 'impossible'."
+          },
+          {
+            "id": 19,
+            "situation": "Describing a shirt color.",
+            "dialogue": "A: Is your shirt blue or green?\nB: It is a _____ color, a mix of both.",
+            "options": ["bluish", "bluely", "blueness", "blued"],
+            "correct": 0,
+            "explanation": "Suffix '-ish' forms 'bluish'."
+          },
+          {
+            "id": 20,
+            "situation": "Complimenting a dinner.",
+            "dialogue": "A: How was the steak?\nB: The steak was tender, juicy _____ delicious!",
+            "options": ["and", "or", "but", "so"],
+            "correct": 0,
+            "explanation": "Linking verbs with adjectives: adj, adj and adj."
           }
-]
+        ]
       }
     ]
   },
