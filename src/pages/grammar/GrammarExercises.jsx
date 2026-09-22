@@ -51,6 +51,7 @@ export default function GrammarExercises() {
   const getLevelLabel = () => {
     if (level === 'beginner') return t('grammar.beginner');
     if (level === 'intermediate') return t('grammar.elementary');
+    if (level === 'advanced') return t('grammar.preIntermediate');
     return t('grammar.intermediate');
   };
 

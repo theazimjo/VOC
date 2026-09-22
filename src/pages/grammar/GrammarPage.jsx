@@ -106,9 +106,10 @@ export default function GrammarPage() {
         transition={{ duration: 0.35, delay: 0.15 }}
       >
         {[
-          { id: 'beginner',     label: t('grammar.beginner'),     emoji: '🌱', locked: false },
-          { id: 'intermediate', label: t('grammar.elementary'),   emoji: '🔥', locked: false },
-          { id: 'advanced',     label: t('grammar.intermediate'), emoji: '⚡', locked: false },
+          { id: 'beginner',     label: t('grammar.beginner'),        emoji: '🌱', locked: false },
+          { id: 'intermediate', label: t('grammar.elementary'),      emoji: '🔥', locked: false },
+          { id: 'advanced',     label: t('grammar.preIntermediate'),  emoji: '⚡', locked: false },
+          { id: 'upper',        label: t('grammar.intermediate'),     emoji: '🎯', locked: false },
         ].map((lvl) => (
           <button
             key={lvl.id}

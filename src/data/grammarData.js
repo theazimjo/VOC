@@ -86115,5 +86115,3946 @@ export const grammarData = {
         ]
       }
     ]
+  },
+  "upper": {
+    "label": "Intermediate",
+    "topics": [
+      {
+        "id": "reduced-relative-clauses",
+        "title": "Reduced Relative Clauses",
+        "icon": "✂️",
+        "guide": "## ✂️ Reduced Relative Clauses (Qisqartirilgan ergash gaplar)\n\nReduced Relative Clauses (Qisqartirilgan ergash gaplar) — bu nisbiy olmoshlar (*who, which, that*) hamda yordamchi fe'llarni (*is, are, was, were, can, etc.*) tushirib qoldirish orqali gapni qisqaroq, tushunarliroq va tabiiyroq ko'rinishga keltirish usulidir.\n\n---\n\n## 1. Qisqartirish nima? (What is Reduction?)\n\nErgash gapdagi **nisbiy olmosh** (*who, which, that*) va **yordamchi fe'l** olib tashlanib, asosiy ma'no saqlab qolinadi:\n• **To'liq gap**: The man **who is standing** by the door is my teacher.\n• **Qisqartirilgan gap**: The man **standing** by the door is my teacher.\n\n• **To'liq gap**: The book **which was written** by Tolstoy is amazing.\n• **Qisqartirilgan gap**: The book **written** by Tolstoy is amazing.\n\n---\n\n## 2. Qisqartirishning 3 ta asosiy turi (3 Types of Reduction)\n\n| Tur | Formula | Misol (To'liq → Qisqartirilgan) |\n|---|---|---|\n| **Active (Hozirgi sifatdosh -ing)** | NOUN + who/that + BE + V-ing → **NOUN + V-ing** | The girl who is singing → **The girl singing** |\n| **Passive (O'tgan sifatdosh V3)** | NOUN + which/that + BE + V3 → **NOUN + V3** | The car that was stolen → **The car stolen** |\n| **Infinitive (to + Verb)** | NOUN + modal/ordinal → **NOUN + to + V** | The first person who arrived → **The first person to arrive** |\n\n---\n\n## 3. Active Reduction: Present Participle (-ing)\n\nEga aniqlovchi ergash gapda aniq ish-harakatni bajarayotgan bo'lsa (Active form), nisbiy olmosh hamda *to be* fe'li olib tashlanib, fe'lning **V-ing** shakli qoladi:\n\n• **Formula**: `NOUN + who/that + is/are/was/were + V-ing` → `NOUN + V-ing`\n\n1. The woman **who is cooking** dinner is my mom. → The woman **cooking** dinner is my mom.\n2. Students **who are studying** hard will succeed. → Students **studying** hard will succeed.\n3. The child **who was crying** needed help. → The child **crying** needed help.\n4. People **who are waiting** outside look cold. → People **waiting** outside look cold.\n5. The dog **that is barking** belongs to my neighbor. → The dog **barking** belongs to my neighbor.\n\n---\n\n## 4. Passive Reduction: Past Participle (V3)\n\nErgash gap majhul nisbatda (Passive Voice) bo'lsa, nisbiy olmosh va *to be* fe'li tushirib qoldirilib, faqat **V3 (Past Participle)** saqlanadi:\n\n• **Formula**: `NOUN + which/that + was/were + V3` → `NOUN + V3`\n\n1. The car **that was stolen** was found yesterday. → The car **stolen** was found yesterday.\n2. The bridge **which was built** in 1900 still stands. → The bridge **built** in 1900 still stands.\n3. Food **that was prepared** by chefs tastes better. → Food **prepared** by chefs tastes better.\n4. Letters **which were written** in ink faded. → Letters **written** in ink faded.\n5. The window **which was broken** by Tom was fixed. → The window **broken** by Tom was fixed.\n\n---\n\n## 5. Infinitive Reduction: to + Verb\n\nQuyidagi 3 ta holatda ergash gap **to + V (Infinitive)** shakligacha qisqartiriladi:\n\n• **Formula**: `NOUN + who/which + modal / ordinal / superlative` → `NOUN + to + V`\n\n1. **Tartib sonlar (first, last, second, only)**:\n   - She was the first student **who passed**. → She was the first student **to pass**.\n   - She was the last person **who left**. → She was the last person **to leave**.\n2. **Modal fe'llar (can, should, must, could)**:\n   - I need someone **who can help** me. → I need someone **to help** me.\n   - A house **that you can rent**. → A house **to rent**.\n   - This is the only restaurant **that can satisfy** my taste. → This is the only restaurant **to satisfy** my taste.\n3. **Orttirma daraja (Superlatives: best, worst, most...)**:\n   - He is the best player **who has ever played**. → He is the best player **to have played**.\n\n---\n\n## 6. Qisqartirish qoidalari va shartlari (Rules & Conditions)\n\n### ✅ QISQARTIRISH MUMKIN:\n• Ergash gapning nisbiy olmoshi ergash gap ichida **EGA (Subject)** vazifasida kelsa.\n• Ergash gapda `BE + V-ing`, `BE + V3` yoki `Modal + V` mavjud bo'lsa.\n\n### ❌ QISQARTIRISH MUMKIN EMAS:\n• Nisbiy olmosh **TO'LDIRUVCHI (Object)** vazifasida bo'lsa (masalan: *The book which I read* — bu yerda nisbiy olmoshni faqat tushirib qoldirish mumkin: *The book I read*, lekin *-ing* qo'shib bo'lmaydi!).\n• Ergash gap Oddiy zamonda (Simple Tense, BE yordamchi fe'lisiz) va holat fe'li bo'lsa (*The man who seems tired* → *seeming* deb qisqartirib bo'lmaydi!).\n\n> 💡 **ASOSIY QOIDA**: Qisqartirish faqat nisbiy olmosh ergash gapning **EGASI** bo'lgandagina amalga oshiriladi!\n\n---\n\n## 7. Eng ko'p yo'l qo'yiladigan xatolar (Common Mistakes)\n\n1. ❌ *The book reading by the students was long.*\n   ✓ **The book written by the students was long.** *(Majhul nisbatda V3 ishlatiladi, -ing emas)*\n2. ❌ *She is the girl who sleeping in class.*\n   ✓ **She is the girl sleeping in class.** *(Nisbiy olmosh 'who' olib tashlanishi shart)*\n3. ❌ *The man seeming tired.*\n   ✓ **The man who seems tired.** *('Seems' oddiy fe'l, BE+Ving emas — qisqartirib bo'lmaydi)*\n4. ❌ *He is the only student passing that scored 100%.*\n   ✓ **He is the only student to score 100%.** *('Only' dan keyin Infinitive (to+V) ishlatiladi)*\n5. ❌ *The car breaking down on the highway...*\n   ✓ **The car broken down on the highway...** *(Buzilgan mashina — V3)*",
+        "questions": [
+          {
+            "id": 1,
+            "text": "The man ___ by the door is my teacher.",
+            "options": [
+              "standing",
+              "who standing",
+              "stood",
+              "is standing"
+            ],
+            "correct": 0,
+            "explanation": "Active reduction: Subject + who is standing -> standing."
+          },
+          {
+            "id": 2,
+            "text": "The book ___ by Tolstoy is amazing.",
+            "options": [
+              "writing",
+              "written",
+              "which writing",
+              "wrote"
+            ],
+            "correct": 1,
+            "explanation": "Passive reduction: which was written -> written (V3)."
+          },
+          {
+            "id": 3,
+            "text": "The woman ___ dinner is my mom.",
+            "options": [
+              "is cooking",
+              "cooked",
+              "cooking",
+              "who cooking"
+            ],
+            "correct": 2,
+            "explanation": "Active reduction: who is cooking -> cooking."
+          },
+          {
+            "id": 4,
+            "text": "The car ___ yesterday was found near the river.",
+            "options": [
+              "stolen",
+              "stealing",
+              "that stolen",
+              "was stolen"
+            ],
+            "correct": 0,
+            "explanation": "Passive reduction: that was stolen -> stolen."
+          },
+          {
+            "id": 5,
+            "text": "She was the first student ___ the exam.",
+            "options": [
+              "passing",
+              "to pass",
+              "passed",
+              "who pass"
+            ],
+            "correct": 1,
+            "explanation": "Infinitive reduction after ordinal 'first': who passed -> to pass."
+          },
+          {
+            "id": 6,
+            "text": "Students ___ hard will succeed.",
+            "options": [
+              "studying",
+              "study",
+              "are studying",
+              "studied"
+            ],
+            "correct": 0,
+            "explanation": "Active reduction: who study/are studying -> studying."
+          },
+          {
+            "id": 7,
+            "text": "The bridge ___ in 1900 still stands.",
+            "options": [
+              "building",
+              "built",
+              "which built",
+              "was built"
+            ],
+            "correct": 1,
+            "explanation": "Passive reduction: which was built -> built."
+          },
+          {
+            "id": 8,
+            "text": "I need someone ___ me with this task.",
+            "options": [
+              "to help",
+              "helping",
+              "helped",
+              "helps"
+            ],
+            "correct": 0,
+            "explanation": "Infinitive reduction after modal/need: who can help -> to help."
+          },
+          {
+            "id": 9,
+            "text": "Food ___ by professional chefs tastes better.",
+            "options": [
+              "preparing",
+              "prepared",
+              "is prepared",
+              "prepares"
+            ],
+            "correct": 1,
+            "explanation": "Passive reduction: that was prepared -> prepared."
+          },
+          {
+            "id": 10,
+            "text": "The child ___ needed immediate help.",
+            "options": [
+              "cried",
+              "crying",
+              "who crying",
+              "was cried"
+            ],
+            "correct": 1,
+            "explanation": "Active reduction: who was crying -> crying."
+          },
+          {
+            "id": 11,
+            "text": "Letters ___ in ink faded over time.",
+            "options": [
+              "writing",
+              "written",
+              "were written",
+              "wrote"
+            ],
+            "correct": 1,
+            "explanation": "Passive reduction: which were written -> written."
+          },
+          {
+            "id": 12,
+            "text": "He is the best athlete ever ___ in this tournament.",
+            "options": [
+              "competing",
+              "to have competed",
+              "competed",
+              "who compete"
+            ],
+            "correct": 1,
+            "explanation": "Infinitive reduction after superlative 'best': to have competed."
+          },
+          {
+            "id": 13,
+            "text": "People ___ outside look very cold.",
+            "options": [
+              "waiting",
+              "waited",
+              "who waiting",
+              "are waiting"
+            ],
+            "correct": 0,
+            "explanation": "Active reduction: who are waiting -> waiting."
+          },
+          {
+            "id": 14,
+            "text": "The window ___ by Tom was fixed.",
+            "options": [
+              "broken",
+              "breaking",
+              "was broken",
+              "broke"
+            ],
+            "correct": 0,
+            "explanation": "Passive reduction: which was broken -> broken."
+          },
+          {
+            "id": 15,
+            "text": "This is the only restaurant ___ my taste.",
+            "options": [
+              "satisfying",
+              "to satisfy",
+              "satisfied",
+              "satisfies"
+            ],
+            "correct": 1,
+            "explanation": "Infinitive reduction after 'only': to satisfy."
+          },
+          {
+            "id": 16,
+            "text": "The packages ___ this morning are on the table.",
+            "options": [
+              "delivering",
+              "delivered",
+              "were delivered",
+              "deliver"
+            ],
+            "correct": 1,
+            "explanation": "Passive reduction: which were delivered -> delivered."
+          },
+          {
+            "id": 17,
+            "text": "The girl ___ next to me is from Turkey.",
+            "options": [
+              "sitting",
+              "sat",
+              "is sitting",
+              "sits"
+            ],
+            "correct": 0,
+            "explanation": "Active reduction: who is sitting -> sitting."
+          },
+          {
+            "id": 18,
+            "text": "She was the last person ___ the building.",
+            "options": [
+              "leaving",
+              "to leave",
+              "left",
+              "leaves"
+            ],
+            "correct": 1,
+            "explanation": "Infinitive reduction after ordinal 'last': to leave."
+          },
+          {
+            "id": 19,
+            "text": "The documents ___ by the manager are ready.",
+            "options": [
+              "signing",
+              "signed",
+              "were signed",
+              "sign"
+            ],
+            "correct": 1,
+            "explanation": "Passive reduction: which were signed -> signed."
+          },
+          {
+            "id": 20,
+            "text": "Children ___ in the park seem very happy.",
+            "options": [
+              "playing",
+              "played",
+              "play",
+              "were playing"
+            ],
+            "correct": 0,
+            "explanation": "Active reduction: who are playing -> playing."
+          },
+          {
+            "id": 21,
+            "text": "The laptop ___ by the technician works perfectly.",
+            "options": [
+              "repairing",
+              "repaired",
+              "repares",
+              "was repairing"
+            ],
+            "correct": 1,
+            "explanation": "Passive reduction: that was repaired -> repaired."
+          },
+          {
+            "id": 22,
+            "text": "The children ___ in the garden are my cousins.",
+            "options": [
+              "playing",
+              "played",
+              "were playing",
+              "plays"
+            ],
+            "correct": 0,
+            "explanation": "Active reduction: who were playing -> playing."
+          },
+          {
+            "id": 23,
+            "text": "The car ___ down on the highway was towed away.",
+            "options": [
+              "breaking",
+              "broken",
+              "broke",
+              "is breaking"
+            ],
+            "correct": 1,
+            "explanation": "Passive state/result: that broke down -> broken down."
+          },
+          {
+            "id": 24,
+            "text": "Which sentence is correctly reduced?",
+            "options": [
+              "The man seeming tired is my uncle.",
+              "The book reading by the student was long.",
+              "The woman reading the newspaper is a journalist.",
+              "She is the girl who sleeping in class."
+            ],
+            "correct": 2,
+            "explanation": "'The woman reading the newspaper is a journalist' is correct active reduction."
+          },
+          {
+            "id": 25,
+            "text": "Why CANNOT 'The book which I read was great' be reduced to 'The book reading was great'?",
+            "options": [
+              "Because 'read' is past tense",
+              "Because relative pronoun is the OBJECT of the clause",
+              "Because 'book' is a noun",
+              "Because 'great' is an adjective"
+            ],
+            "correct": 1,
+            "explanation": "Reduction is only possible when relative pronoun is the SUBJECT."
+          },
+          {
+            "id": 26,
+            "text": "The letters ___ by hand felt more personal.",
+            "options": [
+              "writing",
+              "written",
+              "wrote",
+              "write"
+            ],
+            "correct": 1,
+            "explanation": "Passive reduction: written."
+          },
+          {
+            "id": 27,
+            "text": "He was the second candidate ___ for an interview.",
+            "options": [
+              "calling",
+              "to be called",
+              "called",
+              "who call"
+            ],
+            "correct": 1,
+            "explanation": "Infinitive reduction after ordinal 'second': to be called."
+          },
+          {
+            "id": 28,
+            "text": "All products ___ in this factory meet high standards.",
+            "options": [
+              "manufactured",
+              "manufacturing",
+              "manufacture",
+              "was manufactured"
+            ],
+            "correct": 0,
+            "explanation": "Passive reduction: manufactured."
+          },
+          {
+            "id": 29,
+            "text": "The noise ___ from the next room woke me up.",
+            "options": [
+              "coming",
+              "came",
+              "was coming",
+              "come"
+            ],
+            "correct": 0,
+            "explanation": "Active reduction: coming."
+          },
+          {
+            "id": 30,
+            "text": "Trees ___ during the storm caused power outages.",
+            "options": [
+              "falling",
+              "fallen",
+              "fell",
+              "were falling"
+            ],
+            "correct": 1,
+            "explanation": "Resultative state: fallen."
+          }
+        ],
+        "fillBlanks": [
+          {
+            "id": 1,
+            "text": "The woman ___ (read) the newspaper is a journalist.",
+            "options": [
+              "reading",
+              "read",
+              "to read",
+              "is reading"
+            ],
+            "correct": 0,
+            "explanation": "Active: reading."
+          },
+          {
+            "id": 2,
+            "text": "The car ___ (steal) yesterday was found.",
+            "options": [
+              "stealing",
+              "stolen",
+              "stole",
+              "to steal"
+            ],
+            "correct": 1,
+            "explanation": "Passive: stolen."
+          },
+          {
+            "id": 3,
+            "text": "She was the first person ___ (arrive) at the party.",
+            "options": [
+              "arriving",
+              "to arrive",
+              "arrived",
+              "arrives"
+            ],
+            "correct": 1,
+            "explanation": "Infinitive after ordinal: to arrive."
+          },
+          {
+            "id": 4,
+            "text": "Food ___ (prepare) by chefs tastes better.",
+            "options": [
+              "preparing",
+              "prepared",
+              "prepares",
+              "to prepare"
+            ],
+            "correct": 1,
+            "explanation": "Passive: prepared."
+          },
+          {
+            "id": 5,
+            "text": "The children ___ (play) in the yard are loud.",
+            "options": [
+              "playing",
+              "played",
+              "to play",
+              "play"
+            ],
+            "correct": 0,
+            "explanation": "Active: playing."
+          },
+          {
+            "id": 6,
+            "text": "The bridge ___ (build) in 1900 still stands.",
+            "options": [
+              "building",
+              "built",
+              "builds",
+              "to build"
+            ],
+            "correct": 1,
+            "explanation": "Passive: built."
+          },
+          {
+            "id": 7,
+            "text": "He is the only student ___ (score) 100% on the test.",
+            "options": [
+              "scoring",
+              "to score",
+              "scored",
+              "scores"
+            ],
+            "correct": 1,
+            "explanation": "Infinitive after 'only': to score."
+          },
+          {
+            "id": 8,
+            "text": "The letters ___ (write) in ink faded.",
+            "options": [
+              "writing",
+              "written",
+              "wrote",
+              "writes"
+            ],
+            "correct": 1,
+            "explanation": "Passive: written."
+          },
+          {
+            "id": 9,
+            "text": "People ___ (wait) for the bus were freezing.",
+            "options": [
+              "waiting",
+              "waited",
+              "to wait",
+              "wait"
+            ],
+            "correct": 0,
+            "explanation": "Active: waiting."
+          },
+          {
+            "id": 10,
+            "text": "The window ___ (break) by the storm was replaced.",
+            "options": [
+              "breaking",
+              "broken",
+              "broke",
+              "to break"
+            ],
+            "correct": 1,
+            "explanation": "Passive: broken."
+          },
+          {
+            "id": 11,
+            "text": "I need a house ___ (rent) for the summer.",
+            "options": [
+              "renting",
+              "to rent",
+              "rented",
+              "rents"
+            ],
+            "correct": 1,
+            "explanation": "Infinitive reduction: to rent."
+          },
+          {
+            "id": 12,
+            "text": "The man ___ (stand) by the gate is my uncle.",
+            "options": [
+              "standing",
+              "stood",
+              "to stand",
+              "stands"
+            ],
+            "correct": 0,
+            "explanation": "Active: standing."
+          },
+          {
+            "id": 13,
+            "text": "The packages ___ (deliver) this morning belong to Mark.",
+            "options": [
+              "delivering",
+              "delivered",
+              "deliver",
+              "to deliver"
+            ],
+            "correct": 1,
+            "explanation": "Passive: delivered."
+          },
+          {
+            "id": 14,
+            "text": "She was the last candidate ___ (interview).",
+            "options": [
+              "interviewing",
+              "to be interviewed",
+              "interviewed",
+              "interviews"
+            ],
+            "correct": 1,
+            "explanation": "Infinitive after 'last': to be interviewed."
+          },
+          {
+            "id": 15,
+            "text": "The dog ___ (bark) at strangers is dangerous.",
+            "options": [
+              "barking",
+              "barked",
+              "to bark",
+              "barks"
+            ],
+            "correct": 0,
+            "explanation": "Active: barking."
+          },
+          {
+            "id": 16,
+            "text": "Songs ___ (compose) by Mozart are famous.",
+            "options": [
+              "composing",
+              "composed",
+              "composes",
+              "to compose"
+            ],
+            "correct": 1,
+            "explanation": "Passive: composed."
+          },
+          {
+            "id": 17,
+            "text": "The athlete ___ (win) the gold medal smiled.",
+            "options": [
+              "winning",
+              "won",
+              "to win",
+              "wins"
+            ],
+            "correct": 0,
+            "explanation": "Active: winning."
+          },
+          {
+            "id": 18,
+            "text": "Houses ___ (destroy) by the earthquake were rebuilt.",
+            "options": [
+              "destroying",
+              "destroyed",
+              "destroys",
+              "to destroy"
+            ],
+            "correct": 1,
+            "explanation": "Passive: destroyed."
+          },
+          {
+            "id": 19,
+            "text": "He is the best candidate ___ (lead) the team.",
+            "options": [
+              "leading",
+              "to lead",
+              "led",
+              "leads"
+            ],
+            "correct": 1,
+            "explanation": "Infinitive after superlative: to lead."
+          },
+          {
+            "id": 20,
+            "text": "The noise ___ (hear) at night was terrifying.",
+            "options": [
+              "hearing",
+              "heard",
+              "hears",
+              "to hear"
+            ],
+            "correct": 1,
+            "explanation": "Passive: heard."
+          }
+        ],
+        "scrambled": [
+          {
+            "id": 1,
+            "words": [
+              "the",
+              "woman",
+              "newspaper",
+              "reading",
+              "the",
+              "is",
+              "a",
+              "journalist"
+            ],
+            "answer": "The woman reading the newspaper is a journalist.",
+            "explanation": "Active reduction: The woman reading..."
+          },
+          {
+            "id": 2,
+            "words": [
+              "the",
+              "car",
+              "yesterday",
+              "stolen",
+              "was",
+              "found"
+            ],
+            "answer": "The car stolen yesterday was found.",
+            "explanation": "Passive reduction: The car stolen..."
+          },
+          {
+            "id": 3,
+            "words": [
+              "she",
+              "was",
+              "first",
+              "the",
+              "person",
+              "to",
+              "arrive"
+            ],
+            "answer": "She was the first person to arrive.",
+            "explanation": "Infinitive reduction: ...first person to arrive."
+          },
+          {
+            "id": 4,
+            "words": [
+              "the",
+              "book",
+              "Tolstoy",
+              "written",
+              "by",
+              "is",
+              "famous"
+            ],
+            "answer": "The book written by Tolstoy is famous.",
+            "explanation": "Passive reduction: The book written by..."
+          },
+          {
+            "id": 5,
+            "words": [
+              "the",
+              "man",
+              "by",
+              "standing",
+              "the",
+              "door",
+              "is",
+              "my",
+              "teacher"
+            ],
+            "answer": "The man standing by the door is my teacher.",
+            "explanation": "Active reduction: The man standing..."
+          },
+          {
+            "id": 6,
+            "words": [
+              "food",
+              "prepared",
+              "by",
+              "chefs",
+              "tastes",
+              "better"
+            ],
+            "answer": "Food prepared by chefs tastes better.",
+            "explanation": "Passive reduction: Food prepared..."
+          },
+          {
+            "id": 7,
+            "words": [
+              "the",
+              "children",
+              "in",
+              "playing",
+              "the",
+              "park",
+              "are",
+              "happy"
+            ],
+            "answer": "The children playing in the park are happy.",
+            "explanation": "Active reduction: The children playing..."
+          },
+          {
+            "id": 8,
+            "words": [
+              "the",
+              "bridge",
+              "built",
+              "in",
+              "1900",
+              "still",
+              "stands"
+            ],
+            "answer": "The bridge built in 1900 still stands.",
+            "explanation": "Passive reduction: The bridge built..."
+          },
+          {
+            "id": 9,
+            "words": [
+              "he",
+              "is",
+              "the",
+              "only",
+              "student",
+              "to",
+              "score",
+              "100%"
+            ],
+            "answer": "He is the only student to score 100%.",
+            "explanation": "Infinitive reduction: ...only student to score..."
+          },
+          {
+            "id": 10,
+            "words": [
+              "the",
+              "laptop",
+              "repaired",
+              "by",
+              "tech",
+              "works",
+              "well"
+            ],
+            "answer": "The laptop repaired by tech works well.",
+            "explanation": "Passive reduction: The laptop repaired..."
+          },
+          {
+            "id": 11,
+            "words": [
+              "letters",
+              "written",
+              "in",
+              "ink",
+              "faded",
+              "quickly"
+            ],
+            "answer": "Letters written in ink faded quickly.",
+            "explanation": "Passive reduction: Letters written..."
+          },
+          {
+            "id": 12,
+            "words": [
+              "the",
+              "girl",
+              "sitting",
+              "next",
+              "to",
+              "me",
+              "is",
+              "kind"
+            ],
+            "answer": "The girl sitting next to me is kind.",
+            "explanation": "Active reduction: The girl sitting..."
+          },
+          {
+            "id": 13,
+            "words": [
+              "the",
+              "window",
+              "broken",
+              "by",
+              "Tom",
+              "was",
+              "fixed"
+            ],
+            "answer": "The window broken by Tom was fixed.",
+            "explanation": "Passive reduction: The window broken..."
+          },
+          {
+            "id": 14,
+            "words": [
+              "people",
+              "waiting",
+              "outside",
+              "look",
+              "cold"
+            ],
+            "answer": "People waiting outside look cold.",
+            "explanation": "Active reduction: People waiting..."
+          },
+          {
+            "id": 15,
+            "words": [
+              "packages",
+              "delivered",
+              "this",
+              "morning",
+              "are",
+              "here"
+            ],
+            "answer": "Packages delivered this morning are here.",
+            "explanation": "Passive reduction: Packages delivered..."
+          }
+        ],
+        "errorCorrection": [
+          {
+            "id": 1,
+            "words": [
+              "The",
+              "book",
+              "reading",
+              "by",
+              "students",
+              "is",
+              "long."
+            ],
+            "answer": "The book written by students is long.",
+            "explanation": "Majhul nisbatda V3 (written) bo'lishi kerak, active -ing emas."
+          },
+          {
+            "id": 2,
+            "words": [
+              "She",
+              "is",
+              "girl",
+              "who",
+              "sleeping",
+              "in",
+              "class."
+            ],
+            "answer": "She is the girl sleeping in class.",
+            "explanation": "'who' olmoshi olib tashlanishi kerak."
+          },
+          {
+            "id": 3,
+            "words": [
+              "The",
+              "car",
+              "breaking",
+              "down",
+              "was",
+              "towed."
+            ],
+            "answer": "The car broken down was towed.",
+            "explanation": "Buzilgan mashina — V3 (broken down) ishlatiladi."
+          },
+          {
+            "id": 4,
+            "words": [
+              "He",
+              "is",
+              "only",
+              "student",
+              "passing",
+              "who",
+              "scored."
+            ],
+            "answer": "He is the only student to score 100%.",
+            "explanation": "'Only' birikmasidan keyin Infinitive (to+V) ishlatiladi."
+          },
+          {
+            "id": 5,
+            "words": [
+              "The",
+              "letters",
+              "writing",
+              "by",
+              "hand",
+              "felt",
+              "personal."
+            ],
+            "answer": "The letters written by hand felt personal.",
+            "explanation": "Qo'lda yozilgan maktublar — V3 (written) ishlatiladi."
+          },
+          {
+            "id": 6,
+            "words": [
+              "The",
+              "man",
+              "who",
+              "standing",
+              "there",
+              "is",
+              "my",
+              "father."
+            ],
+            "answer": "The man standing there is my father.",
+            "explanation": "'who' olmoshi olib tashlanishi shart."
+          },
+          {
+            "id": 7,
+            "words": [
+              "The",
+              "car",
+              "that",
+              "stolen",
+              "was",
+              "red."
+            ],
+            "answer": "The car stolen was red.",
+            "explanation": "'that' olmoshi tushirib qoldiriladi."
+          },
+          {
+            "id": 8,
+            "words": [
+              "She",
+              "was",
+              "first",
+              "girl",
+              "passing",
+              "the",
+              "test."
+            ],
+            "answer": "She was the first girl to pass the test.",
+            "explanation": "Tartib son (first) dan keyin to+V ishlatiladi."
+          },
+          {
+            "id": 9,
+            "words": [
+              "The",
+              "man",
+              "seeming",
+              "tired",
+              "went",
+              "home."
+            ],
+            "answer": "The man who seems tired went home.",
+            "explanation": "'seem' kabi holat fe'llari V-ing deb qisqartirilmaydi."
+          },
+          {
+            "id": 10,
+            "words": [
+              "The",
+              "house",
+              "cleaning",
+              "by",
+              "Mary",
+              "looks",
+              "nice."
+            ],
+            "answer": "The house cleaned by Mary looks nice.",
+            "explanation": "Majhul nisbatda V3 (cleaned) bo'ladi."
+          },
+          {
+            "id": 11,
+            "words": [
+              "Food",
+              "preparing",
+              "by",
+              "chefs",
+              "is",
+              "tasty."
+            ],
+            "answer": "Food prepared by chefs is tasty.",
+            "explanation": "Oshpazlar tayyorlagan ovqat — V3 (prepared)."
+          },
+          {
+            "id": 12,
+            "words": [
+              "The",
+              "dog",
+              "which",
+              "barking",
+              "is",
+              "mine."
+            ],
+            "answer": "The dog barking is mine.",
+            "explanation": "'which' olmoshi tushirib qoldiriladi."
+          },
+          {
+            "id": 13,
+            "words": [
+              "He",
+              "was",
+              "last",
+              "man",
+              "leaving."
+            ],
+            "answer": "He was the last man to leave.",
+            "explanation": "'last' dan keyin Infinitive (to leave) ishlatiladi."
+          },
+          {
+            "id": 14,
+            "words": [
+              "The",
+              "documents",
+              "signing",
+              "by",
+              "boss",
+              "are",
+              "here."
+            ],
+            "answer": "The documents signed by boss are here.",
+            "explanation": "Hujjatlar imzolangan — V3 (signed)."
+          },
+          {
+            "id": 15,
+            "words": [
+              "Students",
+              "who",
+              "studying",
+              "hard",
+              "get",
+              "grades."
+            ],
+            "answer": "Students studying hard get grades.",
+            "explanation": "'who' olmoshi olib tashlanishi kerak."
+          }
+        ],
+        "transform": [
+          {
+            "id": 1,
+            "original": "The woman who is reading the newspaper is a journalist.",
+            "answer": "The woman reading the newspaper is a journalist.",
+            "explanation": "Active reduction: 'who is reading' -> 'reading'"
+          },
+          {
+            "id": 2,
+            "original": "The laptop that was repaired by the technician works perfectly.",
+            "answer": "The laptop repaired by the technician works perfectly.",
+            "explanation": "Passive reduction: 'that was repaired' -> 'repaired'"
+          },
+          {
+            "id": 3,
+            "original": "He is the best athlete who has ever competed in this tournament.",
+            "answer": "He is the best athlete ever to have competed in this tournament.",
+            "explanation": "Infinitive reduction after superlative: 'who has ever competed' -> 'ever to have competed'"
+          },
+          {
+            "id": 4,
+            "original": "The children who were playing in the garden are my cousins.",
+            "answer": "The children playing in the garden are my cousins.",
+            "explanation": "Active reduction: 'who were playing' -> 'playing'"
+          },
+          {
+            "id": 5,
+            "original": "This is the only restaurant that can satisfy my taste.",
+            "answer": "This is the only restaurant to satisfy my taste.",
+            "explanation": "Infinitive reduction after 'only': 'that can satisfy' -> 'to satisfy'"
+          },
+          {
+            "id": 6,
+            "original": "The man who is standing by the door is my teacher.",
+            "answer": "The man standing by the door is my teacher.",
+            "explanation": "Active reduction: 'who is standing' -> 'standing'"
+          },
+          {
+            "id": 7,
+            "original": "The book which was written by Tolstoy is amazing.",
+            "answer": "The book written by Tolstoy is amazing.",
+            "explanation": "Passive reduction: 'which was written' -> 'written'"
+          },
+          {
+            "id": 8,
+            "original": "She was the first student who passed the exam.",
+            "answer": "She was the first student to pass the exam.",
+            "explanation": "Infinitive reduction after ordinal 'first': 'who passed' -> 'to pass'"
+          },
+          {
+            "id": 9,
+            "original": "Food that was prepared by chefs tastes better.",
+            "answer": "Food prepared by chefs tastes better.",
+            "explanation": "Passive reduction: 'that was prepared' -> 'prepared'"
+          },
+          {
+            "id": 10,
+            "original": "People who are waiting outside look cold.",
+            "answer": "People waiting outside look cold.",
+            "explanation": "Active reduction: 'who are waiting' -> 'waiting'"
+          },
+          {
+            "id": 11,
+            "original": "The car that was stolen yesterday was found.",
+            "answer": "The car stolen yesterday was found.",
+            "explanation": "Passive reduction: 'that was stolen' -> 'stolen'"
+          },
+          {
+            "id": 12,
+            "original": "Letters which were written in ink faded.",
+            "answer": "Letters written in ink faded.",
+            "explanation": "Passive reduction: 'which were written' -> 'written'"
+          },
+          {
+            "id": 13,
+            "original": "I need someone who can help me.",
+            "answer": "I need someone to help me.",
+            "explanation": "Infinitive reduction after modal verb: 'who can help' -> 'to help'"
+          },
+          {
+            "id": 14,
+            "original": "The window that was broken by Tom was fixed.",
+            "answer": "The window broken by Tom was fixed.",
+            "explanation": "Passive reduction: 'that was broken' -> 'broken'"
+          },
+          {
+            "id": 15,
+            "original": "The girl who is sitting next to me is from Turkey.",
+            "answer": "The girl sitting next to me is from Turkey.",
+            "explanation": "Active reduction: 'who is sitting' -> 'sitting'"
+          }
+        ],
+        "dialogue": [
+          {
+            "id": 1,
+            "situation": "Identifying a person standing near the door.",
+            "dialogue": "A: Who is that man near the entrance?\nB: The man ___ by the door is my new teacher.",
+            "options": [
+              "standing",
+              "who standing",
+              "is standing",
+              "stood"
+            ],
+            "correct": 0,
+            "explanation": "Active reduction: 'standing'"
+          },
+          {
+            "id": 2,
+            "situation": "Discussing a famous book.",
+            "dialogue": "A: Have you read War and Peace?\nB: Yes, the book ___ by Tolstoy is a masterpiece.",
+            "options": [
+              "written",
+              "writing",
+              "was written",
+              "wrote"
+            ],
+            "correct": 0,
+            "explanation": "Passive reduction: 'written'"
+          },
+          {
+            "id": 3,
+            "situation": "Asking about the winner of a race.",
+            "dialogue": "A: Who won the gold medal?\nB: She was the first athlete ___ the finish line.",
+            "options": [
+              "to cross",
+              "crossing",
+              "crossed",
+              "crosses"
+            ],
+            "correct": 0,
+            "explanation": "Infinitive reduction after ordinal 'first': 'to cross'"
+          },
+          {
+            "id": 4,
+            "situation": "Looking for help with homework.",
+            "dialogue": "A: I am stuck on this math problem.\nB: You need someone ___ you with advanced algebra.",
+            "options": [
+              "to help",
+              "helping",
+              "helped",
+              "helps"
+            ],
+            "correct": 0,
+            "explanation": "Infinitive reduction: 'to help'"
+          },
+          {
+            "id": 5,
+            "situation": "Checking on a stolen item.",
+            "dialogue": "A: Did the police find your car?\nB: Yes, the car ___ yesterday was recovered.",
+            "options": [
+              "stolen",
+              "stealing",
+              "that stolen",
+              "was stolen"
+            ],
+            "correct": 0,
+            "explanation": "Passive reduction: 'stolen'"
+          },
+          {
+            "id": 6,
+            "situation": "Ordering food at a restaurant.",
+            "dialogue": "A: Why is this soup so delicious?\nB: Food ___ by professional chefs always tastes better.",
+            "options": [
+              "prepared",
+              "preparing",
+              "prepares",
+              "was prepared"
+            ],
+            "correct": 0,
+            "explanation": "Passive reduction: 'prepared'"
+          },
+          {
+            "id": 7,
+            "situation": "Talking about noisy neighbors.",
+            "dialogue": "A: Why is it so loud outside?\nB: The children ___ in the yard are playing football.",
+            "options": [
+              "playing",
+              "played",
+              "were playing",
+              "plays"
+            ],
+            "correct": 0,
+            "explanation": "Active reduction: 'playing'"
+          },
+          {
+            "id": 8,
+            "situation": "Describing an old historical monument.",
+            "dialogue": "A: Is that castle very old?\nB: Yes, the bridge ___ in 1500 is still standing.",
+            "options": [
+              "built",
+              "building",
+              "which built",
+              "was built"
+            ],
+            "correct": 0,
+            "explanation": "Passive reduction: 'built'"
+          },
+          {
+            "id": 9,
+            "situation": "Selecting the best restaurant in town.",
+            "dialogue": "A: Where should we have dinner tonight?\nB: This is the only place ___ your appetite.",
+            "options": [
+              "to satisfy",
+              "satisfying",
+              "satisfied",
+              "satisfies"
+            ],
+            "correct": 0,
+            "explanation": "Infinitive reduction after 'only': 'to satisfy'"
+          },
+          {
+            "id": 10,
+            "situation": "Receiving mail.",
+            "dialogue": "A: Are those letters important?\nB: Yes, the documents ___ by the manager need to be sent.",
+            "options": [
+              "signed",
+              "signing",
+              "were signed",
+              "sign"
+            ],
+            "correct": 0,
+            "explanation": "Passive reduction: 'signed'"
+          },
+          {
+            "id": 11,
+            "situation": "Commiserating about bad weather.",
+            "dialogue": "A: Look at those people waiting for the bus!\nB: Yes, people ___ outside look completely frozen.",
+            "options": [
+              "waiting",
+              "waited",
+              "were waiting",
+              "wait"
+            ],
+            "correct": 0,
+            "explanation": "Active reduction: 'waiting'"
+          },
+          {
+            "id": 12,
+            "situation": "Explaining a broken item.",
+            "dialogue": "A: What happened to the living room window?\nB: The window ___ by the football was replaced.",
+            "options": [
+              "broken",
+              "breaking",
+              "broke",
+              "was broken"
+            ],
+            "correct": 0,
+            "explanation": "Passive reduction: 'broken'"
+          },
+          {
+            "id": 13,
+            "situation": "Introducing a new colleague.",
+            "dialogue": "A: Who is the girl sitting at the front desk?\nB: The girl ___ next to the window is our new accountant.",
+            "options": [
+              "sitting",
+              "sat",
+              "is sitting",
+              "sits"
+            ],
+            "correct": 0,
+            "explanation": "Active reduction: 'sitting'"
+          },
+          {
+            "id": 14,
+            "situation": "Talking about a historical document.",
+            "dialogue": "A: Why are these letters hard to read?\nB: Letters ___ in ink hundreds of years ago have faded.",
+            "options": [
+              "written",
+              "writing",
+              "wrote",
+              "were writing"
+            ],
+            "correct": 0,
+            "explanation": "Passive reduction: 'written'"
+          },
+          {
+            "id": 15,
+            "situation": "Leaving an event.",
+            "dialogue": "A: Did everyone leave the party already?\nB: Yes, she was the last person ___ the venue.",
+            "options": [
+              "to leave",
+              "leaving",
+              "left",
+              "leaves"
+            ],
+            "correct": 0,
+            "explanation": "Infinitive reduction after 'last': 'to leave'"
+          }
+        ]
+      },
+      {
+        "id": "appositives-reduced-adverb-clauses",
+        "title": "Appositives & Reduced Adverb Clauses",
+        "icon": "🧩",
+        "guide": "## 🧩 Appositives & Reduced Adverb Clauses (Izohlovchilar va qisqartirilgan hol ergash gaplar)\n\nUshbu darsda gapni yanada jozibali, loqa va akademik darajaga olib chiquvchi ikkita muhim grammatik mavzu: **Appositives (Izohlovchi ot birikmalari)** va **Reduced Adverb Clauses (Qisqartirilgan hol ergash gaplar)** o'rganiladi.\n\n---\n\n## 1. Appositive nima? (What is an Appositive?)\n\n**Appositive (Izohlovchi)** — bu o'zidan oldin kelgan otni qayta nomlaydigan yoki unga qo'shimcha ta'rif/ma'lumot beradigan ot yoki otli birikmadir.\n\n• **Vazifasi**: Yonidagi otga aniqlik kiritish va qo'shimcha ma'lumot berish.\n• **Shakli**: Ot, olmosh yoki to'liq otli birikma (*my dog, the best player, the capital of France*).\n\n---\n\n## 2. Appositive tinish belgilari (Punctuation)\n\nAppositive uch xil tinish belgisi yordamida ajratiladi:\n\n1. **Vergullar (, ...,)** — eng ko'p ishlatiladigan standart shakl:\n   - Dexter, **my dog**, will chew your shoes if you leave them there.\n   - Lee, **my Army mate**, caught a whelk while fishing for bass.\n   - Dr. Pat, **the creator of the turnip brew**, sold 8 barrels on the first day.\n2. **Qavslar ( ... )** — qo'shimcha, unchalik muhim bo'lmagan (\"yon eslatma\") ma'lumotlar uchun:\n   - Peter (**my mate from school**) won the lottery.\n3. **Chiziqcha / Tire ( – ... – )** — ko'proq dramatik urg'u berish yoki izohlovchi ichida vergullar bo'lganda:\n   - Prices in Alton – **a small town only 25 minutes from London** – have been soaring.\n   - The Amazon – **the world's largest river** – runs through Brazil.\n\n---\n\n## 3. Qisqartirilgan hol ergash gaplar (Reduced Adverb Clauses)\n\nHol ergash gaplar (Adverb Clauses) har ikkala gapda **EGA BIR XIL (same subject)** bo'lgandagina qisqartirilishi mumkin.\n\n### Qisqartirishning 3 bosqichi:\n1. **To'liq gap**: While I was walking down the beach, I saw a dolphin.\n2. **Ega va BE fe'lini olib tashlash**: While walking down the beach, I saw a dolphin.\n3. **Bog'lovchini tushirib qoldirish (sabab gaplarda)**: Walking down the beach, I saw a dolphin.\n\n---\n\n## 4. Vaqt ergash gaplar (Time Clauses: While, Before, After, Since, Until)\n\n> ⚠️ **MUHIM QOIDA**: Vaqt bog'lovchilari (*While, Before, After, Since, Until*) qisqartirilganda **HECH QACHON TUSHIRIB QOLDIRILMAYDI**!\n\n| Bog'lovchi | To'liq gap | Qisqartirilgan shakl |\n|---|---|---|\n| **Before** | Before I came to class, I had coffee. | **Before coming to class**, I had coffee. |\n| **Since** | Since Bahodir came here, he has learnt English. | **Since coming here**, Bahodir has learnt English. |\n| **After** | After she had finished shopping, she went home. | **After finishing shopping**, she went home. |\n| **Until** | Museums must be renovated until they are opened. | Museums must be renovated **until opened** for public. |\n\n---\n\n## 5. Sabab ergash gaplar (Cause Clauses: Because, As, Since)\n\nSabab ko'rsatuvchi bog'lovchilar (*Because, As, Since*) qisqartirilganda tushirib qoldiriladi:\n• **To'liq**: Because I felt tired, I went to sleep early.\n• **Qisqartirilgan**: **Feeling tired**, I went to sleep early.\n\n---\n\n## 6. Maxsus holatlar (Special Cases)\n\n1. **'When' → `on / upon + V-ing`**:\n   - When Sandra graduated, she applied for a job. → **On / upon graduating**, Sandra applied for a job.\n2. **Majhul nisbat va 'to be' qisqartirishlari**:\n   - When he was a little boy, he was naughty. → **When a little boy**, he was naughty.\n   - When words are used too often... → **When used too often**, words lose value.\n   - When you are walking alone at night, be careful. → **When walking alone at night**, be careful.\n\n---\n\n## 7. Eng ko'p yo'l qo'yiladigan xatolar (Common Mistakes)\n\n1. ❌ *Alex my best friend came first.*\n   ✓ **Alex, my best friend, came first.** *(Appositive ikki tomondan vergul talab qiladi)*\n2. ❌ *Before to leave the office, she sent emails.*\n   ✓ **Before leaving the office, she sent emails.** *('Before' dan keyin V-ing keladi, to+V emas)*\n3. ❌ *Since she came to London she visited museums.*\n   ✓ **Since coming to London, she has visited museums.** *(Ega tushadi, fe'l V-ing bo'ladi)*",
+        "questions": [
+          {
+            "id": 1,
+            "text": "In 'Dexter, my dog, will chew your shoes', what is 'my dog'?",
+            "options": [
+              "An appositive",
+              "A reduced relative clause",
+              "An adverb clause",
+              "A prepositional phrase"
+            ],
+            "correct": 0,
+            "explanation": "'my dog' renames the noun Dexter, functioning as an appositive."
+          },
+          {
+            "id": 2,
+            "text": "Which punctuation is used for dramatic emphasis in appositives?",
+            "options": [
+              "Commas",
+              "Parentheses",
+              "Em Dashes",
+              "Semicolons"
+            ],
+            "correct": 2,
+            "explanation": "Em dashes are used for dramatic emphasis."
+          },
+          {
+            "id": 3,
+            "text": "Reduce: 'Before I came to class, I had a cup of coffee.'",
+            "options": [
+              "Before coming to class, I had a cup of coffee.",
+              "Before to come to class, I had coffee.",
+              "Coming to class, I had coffee.",
+              "Before came to class, I had coffee."
+            ],
+            "correct": 0,
+            "explanation": "Time conjunction 'Before' stays, subject removed -> coming."
+          },
+          {
+            "id": 4,
+            "text": "Which condition is REQUIRED to reduce an adverb clause?",
+            "options": [
+              "Both clauses must share the SAME subject",
+              "The main clause must be past tense",
+              "The adverb clause must be short",
+              "The connector must be 'because'"
+            ],
+            "correct": 0,
+            "explanation": "Reduction is only possible when both clauses share the same subject."
+          },
+          {
+            "id": 5,
+            "text": "Reduce using on/upon: 'When Sandra graduated from university, she applied for a job.'",
+            "options": [
+              "On graduating from university, she applied for a job.",
+              "When graduating university, she applied.",
+              "Graduated from university, she applied.",
+              "Upon Sandra graduated, she applied."
+            ],
+            "correct": 0,
+            "explanation": "'When + clause' reduces to 'On / upon + V-ing'."
+          },
+          {
+            "id": 6,
+            "text": "Which sentence has a correctly punctuated appositive?",
+            "options": [
+              "My sister, the brilliant engineer, just got promoted.",
+              "My sister the brilliant engineer just got promoted.",
+              "My sister the brilliant engineer, got promoted.",
+              "My sister, the brilliant engineer got promoted."
+            ],
+            "correct": 0,
+            "explanation": "Non-essential appositives must be set off with commas on BOTH sides."
+          },
+          {
+            "id": 7,
+            "text": "Reduce: 'While she was waiting for the bus, she read a book.'",
+            "options": [
+              "While waiting for the bus, she read a book.",
+              "While waited for the bus, she read.",
+              "Waiting for the bus she read.",
+              "While to wait for the bus, she read."
+            ],
+            "correct": 0,
+            "explanation": "'While' stays, 'she was' removed -> waiting."
+          },
+          {
+            "id": 8,
+            "text": "Reduce: 'After she had finished her shopping, she went home.'",
+            "options": [
+              "After finishing her shopping, she went home.",
+              "After to finish her shopping, she went.",
+              "Finishing her shopping she went home.",
+              "After finished her shopping, she went."
+            ],
+            "correct": 0,
+            "explanation": "'After' stays, subject & auxiliary removed -> finishing."
+          },
+          {
+            "id": 9,
+            "text": "Reduce: 'Since Bahodir came here, he has learnt English a lot.'",
+            "options": [
+              "Since coming here, Bahodir has learnt English a lot.",
+              "Since came here, Bahodir learned English.",
+              "Coming here, Bahodir learned English.",
+              "Since to come here, Bahodir learned English."
+            ],
+            "correct": 0,
+            "explanation": "'Since' stays, subject removed -> coming."
+          },
+          {
+            "id": 10,
+            "text": "How should parentheses ( ) be used with appositives?",
+            "options": [
+              "When the appositive info is extra or a side note",
+              "For main emphasis",
+              "To replace verbs",
+              "Only in formal academic writing"
+            ],
+            "correct": 0,
+            "explanation": "Parentheses enclose extra side notes."
+          },
+          {
+            "id": 11,
+            "text": "Reduce: 'When used too often, words may lose their value.' What was the full clause?",
+            "options": [
+              "When they are used too often...",
+              "When words using too often...",
+              "When someone uses too often...",
+              "When words used too often..."
+            ],
+            "correct": 0,
+            "explanation": "Full: 'When they are used too often' -> passive reduction: 'When used too often'."
+          },
+          {
+            "id": 12,
+            "text": "Which cause connector can be DROPPED entirely during reduction?",
+            "options": [
+              "Because",
+              "Before",
+              "While",
+              "Until"
+            ],
+            "correct": 0,
+            "explanation": "Cause connectors (because, as, since) can be dropped."
+          },
+          {
+            "id": 13,
+            "text": "Correct this sentence: 'Before to leave the office, she sent all emails.'",
+            "options": [
+              "Before leaving the office, she sent all emails.",
+              "Before leave the office, she sent emails.",
+              "Leaving the office, she sent emails.",
+              "Before to leaving office, she sent emails."
+            ],
+            "correct": 0,
+            "explanation": "After 'before', use V-ing (leaving), not infinitive."
+          },
+          {
+            "id": 14,
+            "text": "In 'The Amazon – the world's largest river – runs through Brazil', what punctuation is used?",
+            "options": [
+              "Dashes (Em dashes)",
+              "Commas",
+              "Parentheses",
+              "Colons"
+            ],
+            "correct": 0,
+            "explanation": "Em dashes are used here."
+          },
+          {
+            "id": 15,
+            "text": "Reduce: 'Because I felt tired, I went to bed early.'",
+            "options": [
+              "Feeling tired, I went to bed early.",
+              "Because feeling tired, I went to bed.",
+              "Tired feeling, I went to bed.",
+              "Because felt tired, I went to bed."
+            ],
+            "correct": 0,
+            "explanation": "'Because' is dropped, verb changes to V-ing: Feeling tired..."
+          },
+          {
+            "id": 16,
+            "text": "Identify the appositive: 'Tom (my neighbor from Ohio) baked this cake.'",
+            "options": [
+              "my neighbor from Ohio",
+              "baked this cake",
+              "Tom",
+              "from Ohio"
+            ],
+            "correct": 0,
+            "explanation": "'my neighbor from Ohio' is the appositive."
+          },
+          {
+            "id": 17,
+            "text": "Reduce: 'When you are walking alone at night, be careful.'",
+            "options": [
+              "When walking alone at night, be careful.",
+              "When walk alone at night, be careful.",
+              "Walking alone at night be careful.",
+              "On walking alone at night, be careful."
+            ],
+            "correct": 0,
+            "explanation": "'When walking alone at night' (subject + be dropped)."
+          },
+          {
+            "id": 18,
+            "text": "What happens to time conjunctions (while, before, after) when reducing adverb clauses?",
+            "options": [
+              "They are NEVER omitted",
+              "They are always omitted",
+              "They change to 'because'",
+              "They move to the end of the sentence"
+            ],
+            "correct": 0,
+            "explanation": "Time conjunctions stay."
+          },
+          {
+            "id": 19,
+            "text": "Reduce: 'All museums must be renovated until they are opened for public again.'",
+            "options": [
+              "...until opened for public again.",
+              "...until opening for public.",
+              "...until they opened.",
+              "...until open for public."
+            ],
+            "correct": 0,
+            "explanation": "Passive reduction: until opened."
+          },
+          {
+            "id": 20,
+            "text": "Correct: 'Alex my best friend came first in the race.'",
+            "options": [
+              "Alex, my best friend, came first in the race.",
+              "Alex my best friend, came first.",
+              "Alex, my best friend came first.",
+              "Alex (my best friend came first."
+            ],
+            "correct": 0,
+            "explanation": "Commas needed on both sides of appositive."
+          },
+          {
+            "id": 21,
+            "text": "Identify appositive: 'Our teacher, Mr. Grant, gave us extra homework.'",
+            "options": [
+              "Mr. Grant",
+              "Our teacher",
+              "extra homework",
+              "gave us"
+            ],
+            "correct": 0,
+            "explanation": "'Mr. Grant' renames 'Our teacher'."
+          },
+          {
+            "id": 22,
+            "text": "Reduce: 'While we were watching the game, we ate popcorn.'",
+            "options": [
+              "While watching the game, we ate popcorn.",
+              "While watched the game, we ate.",
+              "Watching the game we ate.",
+              "While we watching, we ate."
+            ],
+            "correct": 0,
+            "explanation": "'While watching the game, we ate popcorn.'"
+          },
+          {
+            "id": 23,
+            "text": "Reduce: 'When he was a little boy, he was very naughty.'",
+            "options": [
+              "When a little boy, he was very naughty.",
+              "When being a little boy, he was naughty.",
+              "A little boy, he was naughty.",
+              "When was a little boy, he was naughty."
+            ],
+            "correct": 0,
+            "explanation": "Omit subject AND 'was': When a little boy..."
+          },
+          {
+            "id": 24,
+            "text": "Appositive in: 'Paris, the capital of France, is known as the City of Light.'",
+            "options": [
+              "the capital of France",
+              "Paris",
+              "City of Light",
+              "is known as"
+            ],
+            "correct": 0,
+            "explanation": "'the capital of France' is the appositive phrase."
+          },
+          {
+            "id": 25,
+            "text": "Reduce: 'One should check a contract before he signs it.'",
+            "options": [
+              "One should check a contract before signing it.",
+              "One should check a contract before to sign it.",
+              "One should check a contract signing it.",
+              "One should check a contract before signed it."
+            ],
+            "correct": 0,
+            "explanation": "Subject shift to gerund: before signing it."
+          },
+          {
+            "id": 26,
+            "text": "Which sentence contains a REDUCED adverb clause of time?",
+            "options": [
+              "After finishing dinner, they watched a movie.",
+              "The man standing there is my teacher.",
+              "The car stolen yesterday was found.",
+              "Paris, the capital of France, is beautiful."
+            ],
+            "correct": 0,
+            "explanation": "'After finishing dinner...' is a reduced time adverb clause."
+          },
+          {
+            "id": 27,
+            "text": "Why CANNOT 'While Mary was sleeping, John cooked dinner' be reduced to 'While sleeping, John cooked dinner'?",
+            "options": [
+              "Because the clauses have DIFFERENT subjects (Mary & John)",
+              "Because sleeping is past continuous",
+              "Because John cooked dinner",
+              "Because 'while' cannot be used"
+            ],
+            "correct": 0,
+            "explanation": "Reduction requires BOTH clauses to have the SAME subject."
+          },
+          {
+            "id": 28,
+            "text": "What type of punctuation is used here: 'Peter (my mate from school) won the lottery'?",
+            "options": [
+              "Parentheses",
+              "Commas",
+              "Dashes",
+              "Brackets"
+            ],
+            "correct": 0,
+            "explanation": "Parentheses (round brackets)."
+          },
+          {
+            "id": 29,
+            "text": "Reduce: 'Since he moved to this city, he has made many friends.'",
+            "options": [
+              "Since moving to this city, he has made many friends.",
+              "Since move to this city, he made friends.",
+              "Moving to this city, he made friends.",
+              "Since moved to this city, he made friends."
+            ],
+            "correct": 0,
+            "explanation": "'Since moving to this city...'"
+          },
+          {
+            "id": 30,
+            "text": "Choose the correct reduced clause: 'When Sandra graduated from university...'",
+            "options": [
+              "On graduating from university...",
+              "When graduate from university...",
+              "Graduated from university...",
+              "Upon Sandra graduated..."
+            ],
+            "correct": 0,
+            "explanation": "'On / Upon graduating from university...'"
+          }
+        ],
+        "fillBlanks": [
+          {
+            "id": 1,
+            "text": "Dexter, ___ (my dog), will chew your shoes.",
+            "options": [
+              "my dog",
+              "is my dog",
+              "who my dog",
+              "which dog"
+            ],
+            "correct": 0,
+            "explanation": "Appositive: my dog."
+          },
+          {
+            "id": 2,
+            "text": "Before ___ (come) to class, I had coffee.",
+            "options": [
+              "coming",
+              "to come",
+              "came",
+              "come"
+            ],
+            "correct": 0,
+            "explanation": "Before + V-ing."
+          },
+          {
+            "id": 3,
+            "text": "While ___ (wait) for the bus, she read a book.",
+            "options": [
+              "waiting",
+              "waited",
+              "to wait",
+              "wait"
+            ],
+            "correct": 0,
+            "explanation": "While + V-ing."
+          },
+          {
+            "id": 4,
+            "text": "On ___ (graduate) from university, Sandra applied for a job.",
+            "options": [
+              "graduating",
+              "graduated",
+              "to graduate",
+              "graduates"
+            ],
+            "correct": 0,
+            "explanation": "On + V-ing."
+          },
+          {
+            "id": 5,
+            "text": "Paris, ___ (the capital of France), is beautiful.",
+            "options": [
+              "the capital of France",
+              "is the capital of France",
+              "which capital of France",
+              "being capital of France"
+            ],
+            "correct": 0,
+            "explanation": "Appositive phrase."
+          },
+          {
+            "id": 6,
+            "text": "After ___ (finish) shopping, she went home.",
+            "options": [
+              "finishing",
+              "finished",
+              "to finish",
+              "finishes"
+            ],
+            "correct": 0,
+            "explanation": "After + V-ing."
+          },
+          {
+            "id": 7,
+            "text": "Since ___ (move) here, he has learned a lot.",
+            "options": [
+              "moving",
+              "moved",
+              "to move",
+              "moves"
+            ],
+            "correct": 0,
+            "explanation": "Since + V-ing."
+          },
+          {
+            "id": 8,
+            "text": "One should check a contract before ___ (sign) it.",
+            "options": [
+              "signing",
+              "to sign",
+              "signed",
+              "signs"
+            ],
+            "correct": 0,
+            "explanation": "Before + V-ing."
+          },
+          {
+            "id": 9,
+            "text": "Lee, ___ (my Army mate), caught a fish.",
+            "options": [
+              "my Army mate",
+              "is my Army mate",
+              "who my Army mate",
+              "he my Army mate"
+            ],
+            "correct": 0,
+            "explanation": "Appositive phrase."
+          },
+          {
+            "id": 10,
+            "text": "When ___ (walk) alone at night, be careful.",
+            "options": [
+              "walking",
+              "walked",
+              "to walk",
+              "walks"
+            ],
+            "correct": 0,
+            "explanation": "When + V-ing."
+          },
+          {
+            "id": 11,
+            "text": "___ (feel) tired, I went to sleep early.",
+            "options": [
+              "Feeling",
+              "Felt",
+              "To feel",
+              "Feels"
+            ],
+            "correct": 0,
+            "explanation": "Cause reduction: Feeling tired..."
+          },
+          {
+            "id": 12,
+            "text": "Museums must be renovated until ___ (open) again.",
+            "options": [
+              "opened",
+              "opening",
+              "to open",
+              "opens"
+            ],
+            "correct": 0,
+            "explanation": "Passive: until opened."
+          },
+          {
+            "id": 13,
+            "text": "The Amazon – ___ (the world's largest river) – runs through Brazil.",
+            "options": [
+              "the world's largest river",
+              "is the world's largest river",
+              "which largest river",
+              "being largest river"
+            ],
+            "correct": 0,
+            "explanation": "Appositive set off with em dashes."
+          },
+          {
+            "id": 14,
+            "text": "When ___ (use) too often, words lose value.",
+            "options": [
+              "used",
+              "using",
+              "to use",
+              "uses"
+            ],
+            "correct": 0,
+            "explanation": "Passive: When used."
+          },
+          {
+            "id": 15,
+            "text": "Peter (___ from school) won the lottery.",
+            "options": [
+              "my mate",
+              "he is my mate",
+              "who my mate",
+              "is mate"
+            ],
+            "correct": 0,
+            "explanation": "Appositive in parentheses."
+          },
+          {
+            "id": 16,
+            "text": "Before ___ (leave) the house, check the windows.",
+            "options": [
+              "leaving",
+              "to leave",
+              "left",
+              "leaves"
+            ],
+            "correct": 0,
+            "explanation": "Before + V-ing."
+          },
+          {
+            "id": 17,
+            "text": "Our teacher, ___ (Mr. Grant), gave us homework.",
+            "options": [
+              "Mr. Grant",
+              "is Mr. Grant",
+              "who Mr. Grant",
+              "he Mr. Grant"
+            ],
+            "correct": 0,
+            "explanation": "Appositive: Mr. Grant."
+          },
+          {
+            "id": 18,
+            "text": "While ___ (watch) the game, we ate popcorn.",
+            "options": [
+              "watching",
+              "watched",
+              "to watch",
+              "watches"
+            ],
+            "correct": 0,
+            "explanation": "While + V-ing."
+          },
+          {
+            "id": 19,
+            "text": "When ___ (be) a little boy, he was naughty.",
+            "options": [
+              "a little boy",
+              "being a little boy",
+              "was a little boy",
+              "to be a boy"
+            ],
+            "correct": 0,
+            "explanation": "When a little boy..."
+          },
+          {
+            "id": 20,
+            "text": "Upon ___ (arrive) at the airport, call me.",
+            "options": [
+              "arriving",
+              "arrived",
+              "to arrive",
+              "arrives"
+            ],
+            "correct": 0,
+            "explanation": "Upon + V-ing."
+          }
+        ],
+        "scrambled": [
+          {
+            "id": 1,
+            "words": [
+              "Dexter",
+              "my",
+              "dog",
+              "will",
+              "chew",
+              "your",
+              "shoes"
+            ],
+            "answer": "Dexter, my dog, will chew your shoes.",
+            "explanation": "Appositive: Dexter, my dog..."
+          },
+          {
+            "id": 2,
+            "words": [
+              "before",
+              "coming",
+              "to",
+              "class",
+              "I",
+              "had",
+              "coffee"
+            ],
+            "answer": "Before coming to class, I had coffee.",
+            "explanation": "Reduced time clause: Before coming..."
+          },
+          {
+            "id": 3,
+            "words": [
+              "while",
+              "waiting",
+              "for",
+              "bus",
+              "she",
+              "read",
+              "book"
+            ],
+            "answer": "While waiting for bus, she read book.",
+            "explanation": "Reduced time clause: While waiting..."
+          },
+          {
+            "id": 4,
+            "words": [
+              "Lee",
+              "my",
+              "Army",
+              "mate",
+              "caught",
+              "a",
+              "fish"
+            ],
+            "answer": "Lee, my Army mate, caught a fish.",
+            "explanation": "Appositive: Lee, my Army mate..."
+          },
+          {
+            "id": 5,
+            "words": [
+              "after",
+              "finishing",
+              "shopping",
+              "she",
+              "went",
+              "home"
+            ],
+            "answer": "After finishing shopping, she went home.",
+            "explanation": "Reduced time clause: After finishing..."
+          },
+          {
+            "id": 6,
+            "words": [
+              "since",
+              "moving",
+              "here",
+              "he",
+              "has",
+              "learned",
+              "English"
+            ],
+            "answer": "Since moving here, he has learned English.",
+            "explanation": "Reduced time clause: Since moving..."
+          },
+          {
+            "id": 7,
+            "words": [
+              "on",
+              "graduating",
+              "from",
+              "college",
+              "she",
+              "got",
+              "job"
+            ],
+            "answer": "On graduating from college, she got job.",
+            "explanation": "Reduced when clause: On graduating..."
+          },
+          {
+            "id": 8,
+            "words": [
+              "Paris",
+              "capital",
+              "of",
+              "France",
+              "is",
+              "beautiful"
+            ],
+            "answer": "Paris, capital of France, is beautiful.",
+            "explanation": "Appositive phrase: Paris, capital..."
+          },
+          {
+            "id": 9,
+            "words": [
+              "feeling",
+              "tired",
+              "I",
+              "went",
+              "to",
+              "sleep"
+            ],
+            "answer": "Feeling tired, I went to sleep.",
+            "explanation": "Reduced cause clause: Feeling tired..."
+          },
+          {
+            "id": 10,
+            "words": [
+              "before",
+              "leaving",
+              "house",
+              "check",
+              "the",
+              "windows"
+            ],
+            "answer": "Before leaving house, check the windows.",
+            "explanation": "Reduced time clause: Before leaving..."
+          },
+          {
+            "id": 11,
+            "words": [
+              "Peter",
+              "my",
+              "friend",
+              "won",
+              "the",
+              "lottery"
+            ],
+            "answer": "Peter, my friend, won the lottery.",
+            "explanation": "Appositive: Peter, my friend..."
+          },
+          {
+            "id": 12,
+            "words": [
+              "when",
+              "walking",
+              "alone",
+              "be",
+              "very",
+              "careful"
+            ],
+            "answer": "When walking alone, be very careful.",
+            "explanation": "Reduced when clause: When walking..."
+          },
+          {
+            "id": 13,
+            "words": [
+              "our",
+              "teacher",
+              "Mr",
+              "Grant",
+              "gave",
+              "us",
+              "test"
+            ],
+            "answer": "Our teacher, Mr Grant, gave us test.",
+            "explanation": "Appositive: Our teacher, Mr Grant..."
+          },
+          {
+            "id": 14,
+            "words": [
+              "while",
+              "watching",
+              "game",
+              "we",
+              "ate",
+              "popcorn"
+            ],
+            "answer": "While watching game, we ate popcorn.",
+            "explanation": "Reduced time clause: While watching..."
+          },
+          {
+            "id": 15,
+            "words": [
+              "check",
+              "contract",
+              "before",
+              "signing",
+              "it"
+            ],
+            "answer": "Check contract before signing it.",
+            "explanation": "Gerund reduction: ...before signing it."
+          }
+        ],
+        "errorCorrection": [
+          {
+            "id": 1,
+            "words": [
+              "Alex",
+              "my",
+              "best",
+              "friend",
+              "came",
+              "first."
+            ],
+            "answer": "Alex, my best friend, came first.",
+            "explanation": "Appositive 'my best friend' ikki tomondan vergul talab qiladi."
+          },
+          {
+            "id": 2,
+            "words": [
+              "Before",
+              "to",
+              "leave",
+              "office",
+              "she",
+              "sent",
+              "emails."
+            ],
+            "answer": "Before leaving office, she sent emails.",
+            "explanation": "'Before' bog'lovchisidan keyin V-ing (leaving) ishlatiladi."
+          },
+          {
+            "id": 3,
+            "words": [
+              "Since",
+              "she",
+              "came",
+              "London",
+              "she",
+              "visited",
+              "museums."
+            ],
+            "answer": "Since coming to London, she has visited museums.",
+            "explanation": "Nisbiy vaqt ergash gap qisqartmasida 'Since coming...' bo'ladi."
+          },
+          {
+            "id": 4,
+            "words": [
+              "While",
+              "she",
+              "was",
+              "waiting",
+              "she",
+              "read",
+              "book."
+            ],
+            "answer": "While waiting, she read a book.",
+            "explanation": "Ega va BE fe'li olib tashlanadi: 'While waiting'."
+          },
+          {
+            "id": 5,
+            "words": [
+              "Lee",
+              "my",
+              "mate",
+              "caught",
+              "a",
+              "fish."
+            ],
+            "answer": "Lee, my mate, caught a fish.",
+            "explanation": "Izohlovchi vergullar bilan ajratilishi kerak."
+          },
+          {
+            "id": 6,
+            "words": [
+              "After",
+              "she",
+              "finished",
+              "shopping",
+              "she",
+              "went."
+            ],
+            "answer": "After finishing shopping, she went home.",
+            "explanation": "'After finishing' bo'lib qisqartiriladi."
+          },
+          {
+            "id": 7,
+            "words": [
+              "When",
+              "graduating",
+              "she",
+              "applied",
+              "job."
+            ],
+            "answer": "On graduating, she applied for a job.",
+            "explanation": "'When' o'rniga 'On / Upon + V-ing' ishlatiladi."
+          },
+          {
+            "id": 8,
+            "words": [
+              "Dexter",
+              "my",
+              "dog",
+              "will",
+              "chew",
+              "shoes."
+            ],
+            "answer": "Dexter, my dog, will chew shoes.",
+            "explanation": "Appositive vergul bilan o'raladi."
+          },
+          {
+            "id": 9,
+            "words": [
+              "Before",
+              "to",
+              "come",
+              "class",
+              "I",
+              "had",
+              "coffee."
+            ],
+            "answer": "Before coming to class, I had coffee.",
+            "explanation": "'Before coming' bo'lishi kerak."
+          },
+          {
+            "id": 10,
+            "words": [
+              "Paris",
+              "capital",
+              "of",
+              "France",
+              "is",
+              "nice."
+            ],
+            "answer": "Paris, the capital of France, is nice.",
+            "explanation": "Izohlovchi birikma vergul bilan ajratiladi."
+          },
+          {
+            "id": 11,
+            "words": [
+              "Because",
+              "feeling",
+              "tired",
+              "I",
+              "slept."
+            ],
+            "answer": "Feeling tired, I slept.",
+            "explanation": "Sabab qisqartmasida 'Because' tushib qoladi."
+          },
+          {
+            "id": 12,
+            "words": [
+              "When",
+              "being",
+              "a",
+              "boy",
+              "he",
+              "was",
+              "naughty."
+            ],
+            "answer": "When a boy, he was naughty.",
+            "explanation": "'being' ortiqcha, faqat 'When a boy' bo'ladi."
+          },
+          {
+            "id": 13,
+            "words": [
+              "One",
+              "should",
+              "check",
+              "before",
+              "he",
+              "signs."
+            ],
+            "answer": "One should check before signing.",
+            "explanation": "Ega 'he' tushirilib, 'before signing' bo'ladi."
+          },
+          {
+            "id": 14,
+            "words": [
+              "Museums",
+              "renovated",
+              "until",
+              "opening."
+            ],
+            "answer": "Museums renovated until opened.",
+            "explanation": "Majhul nisbatda 'until opened' bo'ladi."
+          },
+          {
+            "id": 15,
+            "words": [
+              "Peter",
+              "my",
+              "friend",
+              "won",
+              "lottery."
+            ],
+            "answer": "Peter, my friend, won the lottery.",
+            "explanation": "Izohlovchi vergul bilan ajratiladi."
+          }
+        ],
+        "transform": [
+          {
+            "id": 1,
+            "original": "While she was waiting for the bus, she read a book.",
+            "answer": "While waiting for the bus, she read a book.",
+            "explanation": "Time reduction: 'While she was waiting' -> 'While waiting'"
+          },
+          {
+            "id": 2,
+            "original": "Before he left the house, he checked all the windows.",
+            "answer": "Before leaving the house, he checked all the windows.",
+            "explanation": "Time reduction: 'Before he left' -> 'Before leaving'"
+          },
+          {
+            "id": 3,
+            "original": "After they had finished dinner, they watched a movie.",
+            "answer": "After finishing dinner, they watched a movie.",
+            "explanation": "Time reduction: 'After they had finished' -> 'After finishing'"
+          },
+          {
+            "id": 4,
+            "original": "Since he moved to this city, he has made many friends.",
+            "answer": "Since moving to this city, he has made many friends.",
+            "explanation": "Time reduction: 'Since he moved' -> 'Since moving'"
+          },
+          {
+            "id": 5,
+            "original": "When Sandra graduated from university, she applied for a job.",
+            "answer": "On graduating from university, she applied for a job.",
+            "explanation": "Special case: 'When Sandra graduated' -> 'On/Upon graduating'"
+          },
+          {
+            "id": 6,
+            "original": "Because I felt tired, I went to sleep early.",
+            "answer": "Feeling tired, I went to sleep early.",
+            "explanation": "Cause reduction: drop 'Because', verb -> 'Feeling'"
+          },
+          {
+            "id": 7,
+            "original": "When he was a little boy, he was very naughty.",
+            "answer": "When a little boy, he was very naughty.",
+            "explanation": "Omit subject and 'was': 'When a little boy'"
+          },
+          {
+            "id": 8,
+            "original": "One should check a contract before he signs it.",
+            "answer": "One should check a contract before signing it.",
+            "explanation": "Gerund reduction: 'before he signs' -> 'before signing'"
+          },
+          {
+            "id": 9,
+            "original": "When you are walking alone at night, be careful.",
+            "answer": "When walking alone at night, be careful.",
+            "explanation": "Omit subject and 'are': 'When walking alone at night'"
+          },
+          {
+            "id": 10,
+            "original": "All museums must be renovated until they are opened again.",
+            "answer": "All museums must be renovated until opened again.",
+            "explanation": "Passive reduction: 'until they are opened' -> 'until opened'"
+          },
+          {
+            "id": 11,
+            "original": "While we were watching the game, we ate popcorn.",
+            "answer": "While watching the game, we ate popcorn.",
+            "explanation": "Time reduction: 'While we were watching' -> 'While watching'"
+          },
+          {
+            "id": 12,
+            "original": "When words are used too often, they lose value.",
+            "answer": "When used too often, words lose value.",
+            "explanation": "Passive reduction: 'When words are used' -> 'When used'"
+          },
+          {
+            "id": 13,
+            "original": "Before I came to class, I had a cup of coffee.",
+            "answer": "Before coming to class, I had a cup of coffee.",
+            "explanation": "Time reduction: 'Before I came' -> 'Before coming'"
+          },
+          {
+            "id": 14,
+            "original": "After she finished her homework, she slept.",
+            "answer": "After finishing her homework, she slept.",
+            "explanation": "Time reduction: 'After she finished' -> 'After finishing'"
+          },
+          {
+            "id": 15,
+            "original": "Since Bahodir came here, he has learnt English.",
+            "answer": "Since coming here, Bahodir has learnt English.",
+            "explanation": "Time reduction: 'Since Bahodir came' -> 'Since coming'"
+          }
+        ],
+        "dialogue": [
+          {
+            "id": 1,
+            "situation": "Talking about daily routine before class.",
+            "dialogue": "A: Did you eat breakfast this morning?\nB: Yes, before ___ to class, I had a cup of coffee.",
+            "options": [
+              "coming",
+              "came",
+              "to come",
+              "come"
+            ],
+            "correct": 0,
+            "explanation": "Before + V-ing."
+          },
+          {
+            "id": 2,
+            "situation": "Describing your dog.",
+            "dialogue": "A: Who is that playful dog over there?\nB: That is Dexter, ___ , and he loves chewing shoes.",
+            "options": [
+              "my dog",
+              "is my dog",
+              "who my dog",
+              "he my dog"
+            ],
+            "correct": 0,
+            "explanation": "Appositive phrase: my dog."
+          },
+          {
+            "id": 3,
+            "situation": "Discussing career milestones.",
+            "dialogue": "A: When did Sandra start her career?\nB: On ___ from university, she applied for a job immediately.",
+            "options": [
+              "graduating",
+              "graduated",
+              "to graduate",
+              "graduates"
+            ],
+            "correct": 0,
+            "explanation": "On + V-ing."
+          },
+          {
+            "id": 4,
+            "situation": "Explaining why someone went to bed early.",
+            "dialogue": "A: Why did you sleep so early yesterday?\nB: ___ tired, I went straight to sleep.",
+            "options": [
+              "Feeling",
+              "Felt",
+              "Because felt",
+              "To feel"
+            ],
+            "correct": 0,
+            "explanation": "Cause reduction: Feeling tired..."
+          },
+          {
+            "id": 5,
+            "situation": "Talking about a school friend.",
+            "dialogue": "A: Who bought that new car?\nB: Peter ( ___ ) won the lottery last month.",
+            "options": [
+              "my mate from school",
+              "is my mate from school",
+              "he my mate",
+              "who mate"
+            ],
+            "correct": 0,
+            "explanation": "Appositive in parentheses."
+          },
+          {
+            "id": 6,
+            "situation": "Talking about house safety.",
+            "dialogue": "A: Did you lock up before leaving?\nB: Yes, before ___ the house, he checked all the windows.",
+            "options": [
+              "leaving",
+              "to leave",
+              "left",
+              "leaves"
+            ],
+            "correct": 0,
+            "explanation": "Before + V-ing."
+          },
+          {
+            "id": 7,
+            "situation": "Reminiscing about childhood.",
+            "dialogue": "A: Were you well-behaved as a kid?\nB: Not really. When ___ , I was very naughty.",
+            "options": [
+              "a little boy",
+              "being a boy",
+              "was a boy",
+              "to be a boy"
+            ],
+            "correct": 0,
+            "explanation": "When a little boy..."
+          },
+          {
+            "id": 8,
+            "situation": "Describing a famous city.",
+            "dialogue": "A: Have you been to Paris?\nB: Yes, Paris, ___ , is my favorite city.",
+            "options": [
+              "the capital of France",
+              "is capital of France",
+              "which capital",
+              "being capital"
+            ],
+            "correct": 0,
+            "explanation": "Appositive phrase."
+          },
+          {
+            "id": 9,
+            "situation": "Checking contract advice.",
+            "dialogue": "A: Should I sign this agreement right away?\nB: No, one should always read a contract before ___ it.",
+            "options": [
+              "signing",
+              "to sign",
+              "signed",
+              "signs"
+            ],
+            "correct": 0,
+            "explanation": "Before + V-ing."
+          },
+          {
+            "id": 10,
+            "situation": "Describing movie night.",
+            "dialogue": "A: What did you do after dinner?\nB: After ___ dinner, we watched a movie.",
+            "options": [
+              "finishing",
+              "finished",
+              "to finish",
+              "finishes"
+            ],
+            "correct": 0,
+            "explanation": "After + V-ing."
+          },
+          {
+            "id": 11,
+            "situation": "Introducing an army buddy.",
+            "dialogue": "A: Who caught that big fish?\nB: Lee, ___ , caught it while fishing.",
+            "options": [
+              "my Army mate",
+              "he my mate",
+              "is my mate",
+              "who my mate"
+            ],
+            "correct": 0,
+            "explanation": "Appositive phrase."
+          },
+          {
+            "id": 12,
+            "situation": "Nighttime safety tip.",
+            "dialogue": "A: I am going for a walk outside.\nB: When ___ alone at night, always be careful.",
+            "options": [
+              "walking",
+              "walked",
+              "to walk",
+              "walks"
+            ],
+            "correct": 0,
+            "explanation": "When + V-ing."
+          },
+          {
+            "id": 13,
+            "situation": "Describing progress in a new city.",
+            "dialogue": "A: How is Bahodir doing in London?\nB: Since ___ here, he has learnt English a lot.",
+            "options": [
+              "coming",
+              "came",
+              "to come",
+              "comes"
+            ],
+            "correct": 0,
+            "explanation": "Since + V-ing."
+          },
+          {
+            "id": 14,
+            "situation": "Talking about an engineer.",
+            "dialogue": "A: Is your sister working now?\nB: Yes, my sister, ___ , just got promoted.",
+            "options": [
+              "the brilliant engineer",
+              "is brilliant engineer",
+              "she engineer",
+              "who engineer"
+            ],
+            "correct": 0,
+            "explanation": "Appositive phrase."
+          },
+          {
+            "id": 15,
+            "situation": "Talking about word usage.",
+            "dialogue": "A: Why shouldn't I repeat this word too much?\nB: When ___ too often, words may lose their value.",
+            "options": [
+              "used",
+              "using",
+              "to use",
+              "uses"
+            ],
+            "correct": 0,
+            "explanation": "Passive: When used..."
+          }
+        ]
+      },
+      {
+        "id": "reduced-adverb-clauses-cause-perfect",
+        "title": "Reduced Adverb Clauses (Cause & Perfect)",
+        "icon": "⚡",
+        "guide": "## ⚡ Reduced Adverb Clauses: Cause & Perfect Participles (Sabab va Tugallangan Sifatdoshli Qisqartmalar)\n\nUshbu darsda hol ergash gaplarning **Sabab (Cause & Effect)** va **Tugallangan Hozirgi/O'tgan Sifatdoshlar (Active & Passive Perfect Participles: Having V3 / Having been V3)** yordamida qisqartirilishi chuqur o'rganiladi.\n\n---\n\n## 1. Sabab ergash gaplar va bog'lovchilar (Cause Conjunctions)\n\nSabab ko'rsatuvchi bog'lovchilar (*As, Since, Because, While*) ergash gap qisqartirilganda **BUTUNLAY TUSHIRIB QOLDIRILADI**:\n\n• **Formula**: `Conjunction + S + Verb` → `V-ing`\n\n1. **Active Continuous**:\n   - *Because she is a mother now, she has more responsibilities.* → **Being a mother now, she has more responsibilities.**\n2. **Active Simple**:\n   - *Because she needed some money, Sue cashed a check.* → **Needing some money, Sue cashed a check.**\n   - *While she accepts that he's not perfect...* → **Accepting that he's not perfect...**\n3. **Inkor Sabab**:\n   - *Since I didn't want to cause any alarm...* → **Not wanting to cause her any alarm, I didn't tell her.**\n\n---\n\n## 2. Inkor qisqartmalar (Negative Reductions)\n\n> ⚠️ **MUHIM QOIDA**: Inkor shaklida **NOT** har doim sifatdoshdan (*V-ing* yoki *having V3*) **OLDIN** qo'yiladi!\n\n• **not + V-ing**:\n  - *Because I don't know her phone number...* → **Not knowing her phone number, I can't call her.**\n  - *As he didn't know the language...* → **Not knowing the language, he found it hard to get work.**\n• **not + having V3**:\n  - *Because she hadn't studied well, she failed.* → **Not having studied well, she failed the exam.**\n  - *Not having received any letters from her, I wrote again.*\n\n---\n\n## 3. 'being + Adj' hamda Conditional (If / Unless / As if) qisqartmalari\n\n1. **'to be + adjective'**: `Being` so'zini qoldirish yoki tushirib qoldirish mumkin:\n   - *Since she is suitable for the vacant post, she is lucky.*\n   - → **Being suitable for the vacant post, she is lucky.** (yoki shunchaki **Suitable for the vacant post...**)\n2. **Shart va qiyoslash bog'lovchilari (If, Unless, As if, Whether...or)**:\n   - > 💡 **QOIDA**: Shart bog'lovchilar **SAQLANIB QOLADI**!\n   - *Unless we are paid fairly, we will go on strike.* → **Unless paid fairly, we will go on strike.**\n   - *They were running as if they were being chased...* → **They were running as if being chased by someone.**\n\n---\n\n## 4. Having + V3 (Active Perfect Participle)\n\nSodir bo'lgan sabab/ish-harakat bosh gapdagi voqeadan **OLDINROQ** (avvalroq) sodir bo'lgan bo'lsa, **Having + V3** ishlatiladi va bog'lovchi tushirib qoldiriladi:\n\n• **Formula**: `Because/Since/As + S + had + V3` → **Having + V3**\n\n1. *Because I injured my back yesterday, I now have difficulty walking.*\n   → **Having injured my back yesterday, I now have difficulty walking.**\n2. *Because he had been his own boss for a long time...*\n   → **Having been his own boss for such a long time, he found it hard to accept orders.**\n3. **Having read the instructions**, he grabbed the fire extinguisher.\n4. **Having failed twice**, he didn't want to try again.\n5. **Having taken off their shoes**, they crept cautiously along the passage.\n\n---\n\n## 5. Having been + V3 (Passive Perfect Participle)\n\nMavzu majhul nisbatda (Passive) bo'lib, ish-harakat bosh gapdan **OLDINROQ** bajarilgan bo'lsa, **Having been + V3** ishlatiladi:\n\n• **Formula**: `Because + S + was/were/had been + V3` → **Having been + V3**\n\n1. *Because he had been warned about the bandits...* → **Having been warned about the bandits, he left his valuables at home.**\n2. *Because the postman had been bitten twice...* → **Having been bitten twice, the postman refused to deliver letters.**\n3. *Because John had been beaten by gangsters...* → **Having been beaten by the gangsters, John couldn't walk for 2 months.**\n4. *Because the boy had been threatened constantly...* → **Having been threatened constantly, the little boy complained.**\n\n---\n\n## 6. Qiyosiy jadval (Side-by-Side Reference)\n\n| Tur | Active (Ega o'zi bajargan) | Passive (Ega qabul qilgan) |\n|---|---|---|\n| **Simple / Ongoing** | **V-ing** (*Needing money...*) | **V3** (*Built in 1900...*) |\n| **Perfect (Avvalroq)** | **Having + V3** (*Having eaten...*) | **Having been + V3** (*Having been warned...*) |\n| **Negative** | **not + V-ing / not having V3** | **not having been V3** |\n| **Shart (Unless/If)** | **conj. + V-ing** | **conj. + V3** (*Unless paid fairly...*) |",
+        "questions": [
+          {
+            "id": 1,
+            "text": "Having been bitten twice by the dog, the postman refused to deliver letters. What form is used here?",
+            "options": [
+              "having been V3 (Passive Perfect)",
+              "having V3 (Active Perfect)",
+              "V-ing (Active Cause)",
+              "(being) + adjective"
+            ],
+            "correct": 0,
+            "explanation": "Subject received the action in past perfect passive -> having been V3."
+          },
+          {
+            "id": 2,
+            "text": "Reduce: 'Because she needed some money to buy a book, Sue cashed a check.'",
+            "options": [
+              "Needing some money to buy a book, Sue cashed a check.",
+              "Because needing money, Sue cashed a check.",
+              "Needed money, Sue cashed a check.",
+              "To need money, Sue cashed a check."
+            ],
+            "correct": 0,
+            "explanation": "Cause conjunction dropped, verb -> Needing..."
+          },
+          {
+            "id": 3,
+            "text": "Reduce: 'Because she hadn't studied well, she failed the exam.'",
+            "options": [
+              "Not having studied well, she failed the exam.",
+              "Having not studied well, she failed.",
+              "Not studying well, she failed.",
+              "Don't having studied, she failed."
+            ],
+            "correct": 0,
+            "explanation": "Negative active perfect: Not + having V3."
+          },
+          {
+            "id": 4,
+            "text": "Reduce: 'Since she is suitable for the vacant post, she is lucky.'",
+            "options": [
+              "Being suitable for the vacant post, she is lucky.",
+              "Since being suitable, she is lucky.",
+              "Because suitable, she is lucky.",
+              "Suitable she is, lucky."
+            ],
+            "correct": 0,
+            "explanation": "to be + adj -> Being suitable... (or Suitable...)."
+          },
+          {
+            "id": 5,
+            "text": "Reduce: 'Because he ate his dinner first, he rushed out of the house.'",
+            "options": [
+              "Having eaten his dinner, he rushed out of the house.",
+              "Eating his dinner, he rushed out.",
+              "Eaten his dinner, he rushed out.",
+              "Having eat his dinner, he rushed out."
+            ],
+            "correct": 0,
+            "explanation": "Action happened BEFORE main clause -> Having + V3."
+          },
+          {
+            "id": 6,
+            "text": "Where must 'NOT' be placed in negative participle reductions?",
+            "options": [
+              "Directly BEFORE the participle (V-ing or having V3)",
+              "After the participle",
+              "At the end of the sentence",
+              "After the main clause"
+            ],
+            "correct": 0,
+            "explanation": "'not' always comes BEFORE the participle."
+          },
+          {
+            "id": 7,
+            "text": "Reduce: 'Because I don't know her phone number, I can't call her.'",
+            "options": [
+              "Not knowing her phone number, I can't call her.",
+              "Knowing not her phone number, I can't call.",
+              "Not know her phone number, I can't call.",
+              "No knowing her phone number, I can't call."
+            ],
+            "correct": 0,
+            "explanation": "Negative simple cause: Not + V-ing."
+          },
+          {
+            "id": 8,
+            "text": "Reduce: 'Because I injured my back yesterday, I now have difficulty walking.'",
+            "options": [
+              "Having injured my back yesterday, I now have difficulty walking.",
+              "Injuring my back yesterday, I have difficulty.",
+              "Having been injured my back, I have difficulty.",
+              "Not injuring my back, I have difficulty."
+            ],
+            "correct": 0,
+            "explanation": "Earlier event -> Having + V3 (Having injured)."
+          },
+          {
+            "id": 9,
+            "text": "Reduce: 'Unless we are paid fairly, we will go on a strike.'",
+            "options": [
+              "Unless paid fairly, we will go on a strike.",
+              "Unless paying fairly, we will go on strike.",
+              "Paid fairly, we will go on strike.",
+              "Unless being paid fairly, we will go on strike."
+            ],
+            "correct": 0,
+            "explanation": "Keep conjunction 'Unless' + passive V3 (Unless paid fairly)."
+          },
+          {
+            "id": 10,
+            "text": "Reduce: 'Because he was warned about the bandits, he left his valuables at home.'",
+            "options": [
+              "Having been warned about the bandits, he left his valuables at home.",
+              "Having warned about the bandits, he left.",
+              "Warning about the bandits, he left.",
+              "Being warning about the bandits, he left."
+            ],
+            "correct": 0,
+            "explanation": "Passive earlier event -> Having been + V3."
+          },
+          {
+            "id": 11,
+            "text": "Correct: 'Knowing not her phone number, I can't call her.'",
+            "options": [
+              "Not knowing her phone number, I can't call her.",
+              "Not know her phone number, I can't call.",
+              "No knowing her phone number, I can't call.",
+              "Don't knowing her number, I can't call."
+            ],
+            "correct": 0,
+            "explanation": "'not' must precede the participle: Not knowing..."
+          },
+          {
+            "id": 12,
+            "text": "Correct: 'Not been warned about the bandits, he took all his valuables.'",
+            "options": [
+              "Not having been warned about the bandits, he took all his valuables.",
+              "Not warned about the bandits, he took.",
+              "Not being warned about bandits, he took.",
+              "Been not warned about bandits, he took."
+            ],
+            "correct": 0,
+            "explanation": "Negative passive perfect requires: Not having been V3."
+          },
+          {
+            "id": 13,
+            "text": "Correct: 'Been beaten by the gangsters, John couldn't walk.'",
+            "options": [
+              "Having been beaten by the gangsters, John couldn't walk.",
+              "Beaten by gangsters, John couldn't walk.",
+              "Being beaten by gangsters, John couldn't walk.",
+              "Having beaten by gangsters, John couldn't walk."
+            ],
+            "correct": 0,
+            "explanation": "Passive perfect requires: Having been V3."
+          },
+          {
+            "id": 14,
+            "text": "Reduce: 'Because she was a mother now, she had more responsibilities.'",
+            "options": [
+              "Being a mother now, she had more responsibilities.",
+              "Because being a mother, she had.",
+              "A mother now, she had.",
+              "Having a mother now, she had."
+            ],
+            "correct": 0,
+            "explanation": "to be + noun -> Being a mother now..."
+          },
+          {
+            "id": 15,
+            "text": "Reduce: 'Because he had failed twice, he didn't want to try again.'",
+            "options": [
+              "Having failed twice, he didn't want to try again.",
+              "Failing twice, he didn't want to try.",
+              "Failed twice, he didn't want to try.",
+              "Having been failed twice, he didn't want."
+            ],
+            "correct": 0,
+            "explanation": "Active perfect: Having failed twice..."
+          },
+          {
+            "id": 16,
+            "text": "Reduce: 'Because they had taken off their shoes, they crept cautiously.'",
+            "options": [
+              "Having taken off their shoes, they crept cautiously.",
+              "Taking off their shoes, they crept.",
+              "Taken off their shoes, they crept.",
+              "Having been taken off their shoes, they crept."
+            ],
+            "correct": 0,
+            "explanation": "Active perfect: Having taken off..."
+          },
+          {
+            "id": 17,
+            "text": "Reduce: 'Because he had been bitten twice, the postman refused to enter.'",
+            "options": [
+              "Having been bitten twice, the postman refused to enter.",
+              "Having bitten twice, the postman refused.",
+              "Bitten twice, the postman refused.",
+              "Being bitten twice, the postman refused."
+            ],
+            "correct": 0,
+            "explanation": "Passive perfect: Having been bitten twice..."
+          },
+          {
+            "id": 18,
+            "text": "Which conjunction is DROPPED when reducing cause clauses?",
+            "options": [
+              "Because",
+              "Unless",
+              "If",
+              "Until"
+            ],
+            "correct": 0,
+            "explanation": "Cause conjunctions like 'Because', 'As', 'Since' are dropped."
+          },
+          {
+            "id": 19,
+            "text": "Reduce: 'Because he didn't know the language, he found it hard to find work.'",
+            "options": [
+              "Not knowing the language, he found it hard to find work.",
+              "Knowing not the language, he found it hard.",
+              "Not to know the language, he found it hard.",
+              "Didn't knowing the language, he found it hard."
+            ],
+            "correct": 0,
+            "explanation": "Negative cause: Not knowing..."
+          },
+          {
+            "id": 20,
+            "text": "Reduce: 'They were running hurriedly, as if they were being chased.'",
+            "options": [
+              "They were running hurriedly, as if being chased.",
+              "They were running hurriedly, as if chased.",
+              "They were running hurriedly, as being chased.",
+              "They were running hurriedly, as if chasing."
+            ],
+            "correct": 0,
+            "explanation": "Keep 'as if' + being chased."
+          },
+          {
+            "id": 21,
+            "text": "Reduce: 'Because he had read the instructions, he grabbed the fire extinguisher.'",
+            "options": [
+              "Having read the instructions, he grabbed the fire extinguisher.",
+              "Reading the instructions, he grabbed.",
+              "Read the instructions, he grabbed.",
+              "Having been read instructions, he grabbed."
+            ],
+            "correct": 0,
+            "explanation": "Active perfect: Having read..."
+          },
+          {
+            "id": 22,
+            "text": "Reduce: 'Because I hadn't received any letters from her, I wrote again.'",
+            "options": [
+              "Not having received any letters from her, I wrote again.",
+              "Not receiving any letters, I wrote.",
+              "Having not received any letters, I wrote.",
+              "No having received any letters, I wrote."
+            ],
+            "correct": 0,
+            "explanation": "Negative active perfect: Not having received..."
+          },
+          {
+            "id": 23,
+            "text": "Reduce: 'Because John had been beaten by gangsters, he couldn't walk.'",
+            "options": [
+              "Having been beaten by gangsters, John couldn't walk.",
+              "Having beaten by gangsters, John couldn't walk.",
+              "Beaten by gangsters, John couldn't walk.",
+              "Being beaten by gangsters, John couldn't walk."
+            ],
+            "correct": 0,
+            "explanation": "Passive perfect: Having been beaten..."
+          },
+          {
+            "id": 24,
+            "text": "Reduce: 'Because he was threatened constantly, the boy complained.'",
+            "options": [
+              "Having been threatened constantly, the boy complained.",
+              "Threatening constantly, the boy complained.",
+              "Having threatened constantly, the boy complained.",
+              "Being threatened constantly, the boy complained."
+            ],
+            "correct": 0,
+            "explanation": "Passive perfect: Having been threatened..."
+          },
+          {
+            "id": 25,
+            "text": "Reduce: 'While she accepts that he is not perfect, she likes him.'",
+            "options": [
+              "Accepting that he is not perfect, she likes him.",
+              "While accepting that he is not perfect, she likes him.",
+              "Accepted that he is not perfect, she likes him.",
+              "To accept that he is not perfect, she likes him."
+            ],
+            "correct": 0,
+            "explanation": "Cause/concession reduction: Accepting that..."
+          },
+          {
+            "id": 26,
+            "text": "What is the passive perfect participle structure?",
+            "options": [
+              "Having been + V3",
+              "Having + V3",
+              "Being + V3",
+              "Not + V-ing"
+            ],
+            "correct": 0,
+            "explanation": "Passive perfect = Having been + V3."
+          },
+          {
+            "id": 27,
+            "text": "What is the active perfect participle structure?",
+            "options": [
+              "Having + V3",
+              "Having been + V3",
+              "Being + V-ing",
+              "Not + V-ing"
+            ],
+            "correct": 0,
+            "explanation": "Active perfect = Having + V3."
+          },
+          {
+            "id": 28,
+            "text": "Correct: 'Unless being paid fairly, we will strike.'",
+            "options": [
+              "Unless paid fairly, we will strike.",
+              "Unless paying fairly, we will strike.",
+              "Unless to be paid fairly, we will strike.",
+              "Unless pay fairly, we will strike."
+            ],
+            "correct": 0,
+            "explanation": "After 'unless' use past participle directly: Unless paid fairly."
+          },
+          {
+            "id": 29,
+            "text": "Reduce: 'Because he had been his own boss for a long time...'",
+            "options": [
+              "Having been his own boss for a long time...",
+              "Being his own boss for a long time...",
+              "Been his own boss for a long time...",
+              "Having his own boss for a long time..."
+            ],
+            "correct": 0,
+            "explanation": "Active perfect of 'to be': Having been..."
+          },
+          {
+            "id": 30,
+            "text": "Choose the correct negative participle reduction:",
+            "options": [
+              "Not having studied well, she failed.",
+              "Having not studied well, she failed.",
+              "Studying not well, she failed.",
+              "Not study well, she failed."
+            ],
+            "correct": 0,
+            "explanation": "Not + having V3 is correct."
+          }
+        ],
+        "fillBlanks": [
+          {
+            "id": 1,
+            "text": "___ (be) a mother now, she has more responsibilities.",
+            "options": [
+              "Being",
+              "Been",
+              "To be",
+              "Having been"
+            ],
+            "correct": 0,
+            "explanation": "Being + noun."
+          },
+          {
+            "id": 2,
+            "text": "___ (injure) my back yesterday, I have difficulty walking.",
+            "options": [
+              "Having injured",
+              "Injuring",
+              "Injured",
+              "Being injured"
+            ],
+            "correct": 0,
+            "explanation": "Active perfect: Having injured."
+          },
+          {
+            "id": 3,
+            "text": "___ (not study) well, she failed the exam.",
+            "options": [
+              "Not having studied",
+              "Not studying",
+              "Having not studied",
+              "Not study"
+            ],
+            "correct": 0,
+            "explanation": "Negative active perfect: Not having studied."
+          },
+          {
+            "id": 4,
+            "text": "___ (be) suitable for the post, she is lucky.",
+            "options": [
+              "Being",
+              "Been",
+              "To be",
+              "Having been"
+            ],
+            "correct": 0,
+            "explanation": "Being suitable..."
+          },
+          {
+            "id": 5,
+            "text": "___ (eat) his dinner, he rushed out of the house.",
+            "options": [
+              "Having eaten",
+              "Eating",
+              "Eaten",
+              "Being eaten"
+            ],
+            "correct": 0,
+            "explanation": "Active perfect: Having eaten."
+          },
+          {
+            "id": 6,
+            "text": "___ (bite) twice by the dog, the postman refused to enter.",
+            "options": [
+              "Having been bitten",
+              "Having bitten",
+              "Biting",
+              "Being bitten"
+            ],
+            "correct": 0,
+            "explanation": "Passive perfect: Having been bitten."
+          },
+          {
+            "id": 7,
+            "text": "___ (not know) her number, I can't call her.",
+            "options": [
+              "Not knowing",
+              "Knowing not",
+              "Not know",
+              "No knowing"
+            ],
+            "correct": 0,
+            "explanation": "Negative simple: Not knowing."
+          },
+          {
+            "id": 8,
+            "text": "Unless ___ (pay) fairly, we will go on strike.",
+            "options": [
+              "paid",
+              "paying",
+              "being paid",
+              "to pay"
+            ],
+            "correct": 0,
+            "explanation": "Unless + V3."
+          },
+          {
+            "id": 9,
+            "text": "___ (warn) about the bandits, he left his valuables at home.",
+            "options": [
+              "Having been warned",
+              "Having warned",
+              "Warning",
+              "Being warned"
+            ],
+            "correct": 0,
+            "explanation": "Passive perfect: Having been warned."
+          },
+          {
+            "id": 10,
+            "text": "___ (read) the instructions, he grabbed the fire extinguisher.",
+            "options": [
+              "Having read",
+              "Reading",
+              "Read",
+              "Being read"
+            ],
+            "correct": 0,
+            "explanation": "Active perfect: Having read."
+          },
+          {
+            "id": 11,
+            "text": "___ (fail) twice, he didn't want to try again.",
+            "options": [
+              "Having failed",
+              "Failing",
+              "Failed",
+              "Being failed"
+            ],
+            "correct": 0,
+            "explanation": "Active perfect: Having failed."
+          },
+          {
+            "id": 12,
+            "text": "___ (take) off their shoes, they crept along the passage.",
+            "options": [
+              "Having taken",
+              "Taking",
+              "Taken",
+              "Being taken"
+            ],
+            "correct": 0,
+            "explanation": "Active perfect: Having taken."
+          },
+          {
+            "id": 13,
+            "text": "___ (beat) by gangsters, John couldn't walk.",
+            "options": [
+              "Having been beaten",
+              "Having beaten",
+              "Beating",
+              "Being beaten"
+            ],
+            "correct": 0,
+            "explanation": "Passive perfect: Having been beaten."
+          },
+          {
+            "id": 14,
+            "text": "___ (threaten) constantly, the little boy complained.",
+            "options": [
+              "Having been threatened",
+              "Having threatened",
+              "Threatening",
+              "Being threatened"
+            ],
+            "correct": 0,
+            "explanation": "Passive perfect: Having been threatened."
+          },
+          {
+            "id": 15,
+            "text": "___ (not receive) any letters, I wrote again.",
+            "options": [
+              "Not having received",
+              "Not receiving",
+              "Having not received",
+              "Not receive"
+            ],
+            "correct": 0,
+            "explanation": "Negative active perfect: Not having received."
+          },
+          {
+            "id": 16,
+            "text": "They ran hurriedly, as if ___ (chase) by someone.",
+            "options": [
+              "being chased",
+              "chasing",
+              "chased",
+              "to chase"
+            ],
+            "correct": 0,
+            "explanation": "as if + being chased."
+          },
+          {
+            "id": 17,
+            "text": "When ___ (use) too often, words lose their value.",
+            "options": [
+              "used",
+              "using",
+              "to use",
+              "uses"
+            ],
+            "correct": 0,
+            "explanation": "When + V3."
+          },
+          {
+            "id": 18,
+            "text": "___ (need) some money, Sue cashed a check.",
+            "options": [
+              "Needing",
+              "Needed",
+              "To need",
+              "Having needed"
+            ],
+            "correct": 0,
+            "explanation": "Cause active: Needing."
+          },
+          {
+            "id": 19,
+            "text": "___ (not know) the language, he found it hard to find work.",
+            "options": [
+              "Not knowing",
+              "Knowing not",
+              "Not know",
+              "No knowing"
+            ],
+            "correct": 0,
+            "explanation": "Negative simple: Not knowing."
+          },
+          {
+            "id": 20,
+            "text": "___ (be) his own boss for years, he found it hard to take orders.",
+            "options": [
+              "Having been",
+              "Being",
+              "Been",
+              "Having"
+            ],
+            "correct": 0,
+            "explanation": "Active perfect: Having been."
+          }
+        ],
+        "scrambled": [
+          {
+            "id": 1,
+            "words": [
+              "being",
+              "a",
+              "mother",
+              "now",
+              "she",
+              "has",
+              "responsibilities"
+            ],
+            "answer": "Being a mother now, she has responsibilities.",
+            "explanation": "Cause reduction: Being a mother..."
+          },
+          {
+            "id": 2,
+            "words": [
+              "having",
+              "injured",
+              "my",
+              "back",
+              "I",
+              "have",
+              "difficulty"
+            ],
+            "answer": "Having injured my back, I have difficulty.",
+            "explanation": "Active perfect: Having injured..."
+          },
+          {
+            "id": 3,
+            "words": [
+              "not",
+              "having",
+              "studied",
+              "well",
+              "she",
+              "failed",
+              "exam"
+            ],
+            "answer": "Not having studied well, she failed exam.",
+            "explanation": "Negative active perfect: Not having studied..."
+          },
+          {
+            "id": 4,
+            "words": [
+              "having",
+              "been",
+              "bitten",
+              "twice",
+              "postman",
+              "refused",
+              "to",
+              "enter"
+            ],
+            "answer": "Having been bitten twice, postman refused to enter.",
+            "explanation": "Passive perfect: Having been bitten..."
+          },
+          {
+            "id": 5,
+            "words": [
+              "not",
+              "knowing",
+              "her",
+              "number",
+              "I",
+              "cannot",
+              "call"
+            ],
+            "answer": "Not knowing her number, I cannot call.",
+            "explanation": "Negative simple: Not knowing..."
+          },
+          {
+            "id": 6,
+            "words": [
+              "having",
+              "read",
+              "instructions",
+              "he",
+              "grabbed",
+              "extinguisher"
+            ],
+            "answer": "Having read instructions, he grabbed extinguisher.",
+            "explanation": "Active perfect: Having read..."
+          },
+          {
+            "id": 7,
+            "words": [
+              "unless",
+              "paid",
+              "fairly",
+              "we",
+              "will",
+              "go",
+              "strike"
+            ],
+            "answer": "Unless paid fairly, we will go strike.",
+            "explanation": "Conditional reduction: Unless paid..."
+          },
+          {
+            "id": 8,
+            "words": [
+              "having",
+              "been",
+              "warned",
+              "he",
+              "left",
+              "valuables",
+              "home"
+            ],
+            "answer": "Having been warned, he left valuables home.",
+            "explanation": "Passive perfect: Having been warned..."
+          },
+          {
+            "id": 9,
+            "words": [
+              "needing",
+              "some",
+              "money",
+              "Sue",
+              "cashed",
+              "a",
+              "check"
+            ],
+            "answer": "Needing some money, Sue cashed a check.",
+            "explanation": "Active cause: Needing some money..."
+          },
+          {
+            "id": 10,
+            "words": [
+              "having",
+              "failed",
+              "twice",
+              "he",
+              "gave",
+              "up"
+            ],
+            "answer": "Having failed twice, he gave up.",
+            "explanation": "Active perfect: Having failed..."
+          },
+          {
+            "id": 11,
+            "words": [
+              "having",
+              "taken",
+              "off",
+              "shoes",
+              "they",
+              "crept",
+              "quietly"
+            ],
+            "answer": "Having taken off shoes, they crept quietly.",
+            "explanation": "Active perfect: Having taken off..."
+          },
+          {
+            "id": 12,
+            "words": [
+              "having",
+              "been",
+              "beaten",
+              "John",
+              "could",
+              "not",
+              "walk"
+            ],
+            "answer": "Having been beaten, John could not walk.",
+            "explanation": "Passive perfect: Having been beaten..."
+          },
+          {
+            "id": 13,
+            "words": [
+              "not",
+              "having",
+              "received",
+              "letters",
+              "I",
+              "wrote",
+              "again"
+            ],
+            "answer": "Not having received letters, I wrote again.",
+            "explanation": "Negative active perfect: Not having received..."
+          },
+          {
+            "id": 14,
+            "words": [
+              "when",
+              "used",
+              "too",
+              "often",
+              "words",
+              "lose",
+              "value"
+            ],
+            "answer": "When used too often, words lose value.",
+            "explanation": "Passive reduction: When used..."
+          },
+          {
+            "id": 15,
+            "words": [
+              "running",
+              "as",
+              "if",
+              "being",
+              "chased",
+              "by",
+              "someone"
+            ],
+            "answer": "Running as if being chased by someone.",
+            "explanation": "Conditional comparison: ...as if being chased."
+          }
+        ],
+        "errorCorrection": [
+          {
+            "id": 1,
+            "words": [
+              "Knowing",
+              "not",
+              "her",
+              "phone",
+              "number",
+              "I",
+              "cannot",
+              "call."
+            ],
+            "answer": "Not knowing her phone number, I cannot call.",
+            "explanation": "'not' har doim sifatdoshdan OLDIN qo'yiladi."
+          },
+          {
+            "id": 2,
+            "words": [
+              "Not",
+              "been",
+              "warned",
+              "about",
+              "bandits",
+              "he",
+              "took",
+              "valuables."
+            ],
+            "answer": "Not having been warned about bandits, he took valuables.",
+            "explanation": "Negative passive perfect: Not having been V3."
+          },
+          {
+            "id": 3,
+            "words": [
+              "Been",
+              "beaten",
+              "by",
+              "gangsters",
+              "John",
+              "could",
+              "not",
+              "walk."
+            ],
+            "answer": "Having been beaten by gangsters, John could not walk.",
+            "explanation": "Passive perfect shakli: Having been V3."
+          },
+          {
+            "id": 4,
+            "words": [
+              "Unless",
+              "being",
+              "paid",
+              "fairly",
+              "we",
+              "will",
+              "strike."
+            ],
+            "answer": "Unless paid fairly, we will go on strike.",
+            "explanation": "'Unless' dan keyin to'g'ridan-to'g'ri V3 keladi."
+          },
+          {
+            "id": 5,
+            "words": [
+              "Having",
+              "not",
+              "studied",
+              "well",
+              "she",
+              "failed",
+              "exam."
+            ],
+            "answer": "Not having studied well, she failed exam.",
+            "explanation": "'Not' birinchi o'rinda turishi kerak."
+          },
+          {
+            "id": 6,
+            "words": [
+              "Injuring",
+              "my",
+              "back",
+              "yesterday",
+              "I",
+              "cannot",
+              "walk."
+            ],
+            "answer": "Having injured my back yesterday, I cannot walk.",
+            "explanation": "Avvalroq sodir bo'lgan voqea: Having + V3."
+          },
+          {
+            "id": 7,
+            "words": [
+              "Having",
+              "bitten",
+              "twice",
+              "postman",
+              "refused",
+              "to",
+              "enter."
+            ],
+            "answer": "Having been bitten twice, postman refused to enter.",
+            "explanation": "Pochtachi tishlagan emas, tishlangan (Passive): Having been bitten."
+          },
+          {
+            "id": 8,
+            "words": [
+              "Because",
+              "needing",
+              "money",
+              "Sue",
+              "cashed",
+              "a",
+              "check."
+            ],
+            "answer": "Needing money, Sue cashed a check.",
+            "explanation": "Sabab qisqartmalarida 'Because' tushirib qoldiriladi."
+          },
+          {
+            "id": 9,
+            "words": [
+              "When",
+              "being",
+              "walked",
+              "alone",
+              "be",
+              "very",
+              "careful."
+            ],
+            "answer": "When walking alone, be very careful.",
+            "explanation": "Active harakat: When walking alone..."
+          },
+          {
+            "id": 10,
+            "words": [
+              "Having",
+              "readed",
+              "instructions",
+              "he",
+              "grabbed",
+              "extinguisher."
+            ],
+            "answer": "Having read instructions, he grabbed extinguisher.",
+            "explanation": "'read' fe'lining V3 shakli 'read' bo'ladi."
+          },
+          {
+            "id": 11,
+            "words": [
+              "Not",
+              "receiving",
+              "any",
+              "letters",
+              "I",
+              "wrote",
+              "again."
+            ],
+            "answer": "Not having received any letters, I wrote again.",
+            "explanation": "Natija va o'tgan zamon bo'lgani uchun: Not having received..."
+          },
+          {
+            "id": 12,
+            "words": [
+              "Having",
+              "threatened",
+              "constantly",
+              "the",
+              "boy",
+              "complained."
+            ],
+            "answer": "Having been threatened constantly, the boy complained.",
+            "explanation": "Bola tahdid qilmagan, tahdid qilingan (Passive): Having been threatened."
+          },
+          {
+            "id": 13,
+            "words": [
+              "Since",
+              "moving",
+              "London",
+              "she",
+              "visited",
+              "museums."
+            ],
+            "answer": "Since moving to London, she has visited museums.",
+            "explanation": "Preposition 'to' yetishmaydi."
+          },
+          {
+            "id": 14,
+            "words": [
+              "One",
+              "should",
+              "check",
+              "before",
+              "he",
+              "signing."
+            ],
+            "answer": "One should check before signing.",
+            "explanation": "Ega 'he' tushib qoladi."
+          },
+          {
+            "id": 15,
+            "words": [
+              "When",
+              "using",
+              "too",
+              "often",
+              "words",
+              "lose",
+              "value."
+            ],
+            "answer": "When used too often, words lose value.",
+            "explanation": "So'zlar ishlatiladi (Passive): When used."
+          }
+        ],
+        "transform": [
+          {
+            "id": 1,
+            "original": "Because she is a mother now, she has more responsibilities.",
+            "answer": "Being a mother now, she has more responsibilities.",
+            "explanation": "to be + noun -> Being a mother now..."
+          },
+          {
+            "id": 2,
+            "original": "Because I injured my back yesterday, I now have difficulty walking.",
+            "answer": "Having injured my back yesterday, I now have difficulty walking.",
+            "explanation": "Earlier event -> Having + V3 (Having injured)"
+          },
+          {
+            "id": 3,
+            "original": "Because she hadn't studied well, she failed the exam.",
+            "answer": "Not having studied well, she failed the exam.",
+            "explanation": "Negative active perfect -> Not having studied..."
+          },
+          {
+            "id": 4,
+            "original": "Because he was warned about the bandits, he left his valuables at home.",
+            "answer": "Having been warned about the bandits, he left his valuables at home.",
+            "explanation": "Passive earlier event -> Having been warned..."
+          },
+          {
+            "id": 5,
+            "original": "Unless we are paid fairly, we will go on a strike.",
+            "answer": "Unless paid fairly, we will go on a strike.",
+            "explanation": "Conditional passive -> Unless paid fairly..."
+          },
+          {
+            "id": 6,
+            "original": "Because I don't know her phone number, I can't call her.",
+            "answer": "Not knowing her phone number, I can't call her.",
+            "explanation": "Negative simple cause -> Not knowing..."
+          },
+          {
+            "id": 7,
+            "original": "Because she needed some money, Sue cashed a check.",
+            "answer": "Needing some money, Sue cashed a check.",
+            "explanation": "Active cause -> Needing some money..."
+          },
+          {
+            "id": 8,
+            "original": "Because he had been his own boss for a long time, he found it hard to take orders.",
+            "answer": "Having been his own boss for a long time, he found it hard to take orders.",
+            "explanation": "Active perfect -> Having been his own boss..."
+          },
+          {
+            "id": 9,
+            "original": "Because the postman had been bitten twice, he refused to enter.",
+            "answer": "Having been bitten twice, the postman refused to enter.",
+            "explanation": "Passive perfect -> Having been bitten twice..."
+          },
+          {
+            "id": 10,
+            "original": "Because John had been beaten by gangsters, he couldn't walk.",
+            "answer": "Having been beaten by gangsters, John couldn't walk.",
+            "explanation": "Passive perfect -> Having been beaten..."
+          },
+          {
+            "id": 11,
+            "original": "Because he had read the instructions, he grabbed the extinguisher.",
+            "answer": "Having read the instructions, he grabbed the extinguisher.",
+            "explanation": "Active perfect -> Having read..."
+          },
+          {
+            "id": 12,
+            "original": "Because he had failed twice, he didn't want to try again.",
+            "answer": "Having failed twice, he didn't want to try again.",
+            "explanation": "Active perfect -> Having failed twice..."
+          },
+          {
+            "id": 13,
+            "original": "Because they had taken off their shoes, they crept quietly.",
+            "answer": "Having taken off their shoes, they crept quietly.",
+            "explanation": "Active perfect -> Having taken off..."
+          },
+          {
+            "id": 14,
+            "original": "Because he was threatened constantly, the boy complained.",
+            "answer": "Having been threatened constantly, the boy complained.",
+            "explanation": "Passive perfect -> Having been threatened..."
+          },
+          {
+            "id": 15,
+            "original": "Because I hadn't received any letters, I wrote again.",
+            "answer": "Not having received any letters, I wrote again.",
+            "explanation": "Negative active perfect -> Not having received..."
+          }
+        ],
+        "dialogue": [
+          {
+            "id": 1,
+            "situation": "Explaining why someone didn't call.",
+            "dialogue": "A: Why didn't you call her?\nB: ___ her phone number, I couldn't get in touch.",
+            "options": [
+              "Not knowing",
+              "Knowing not",
+              "Not know",
+              "No knowing"
+            ],
+            "correct": 0,
+            "explanation": "Negative simple: Not knowing."
+          },
+          {
+            "id": 2,
+            "situation": "Explaining an injury.",
+            "dialogue": "A: Why are you walking so slowly?\nB: ___ my back yesterday, I have difficulty moving.",
+            "options": [
+              "Having injured",
+              "Injuring",
+              "Injured",
+              "Being injured"
+            ],
+            "correct": 0,
+            "explanation": "Active perfect: Having injured."
+          },
+          {
+            "id": 3,
+            "situation": "Discussing exam results.",
+            "dialogue": "A: Did she pass the final test?\nB: No, ___ well, she failed the exam.",
+            "options": [
+              "Not having studied",
+              "Not studying",
+              "Having not studied",
+              "Not study"
+            ],
+            "correct": 0,
+            "explanation": "Negative active perfect: Not having studied."
+          },
+          {
+            "id": 4,
+            "situation": "Discussing a postman's warning.",
+            "dialogue": "A: Why is the mail delivered at the gate?\nB: ___ twice by the guard dog, the postman refuses to enter.",
+            "options": [
+              "Having been bitten",
+              "Having bitten",
+              "Biting",
+              "Being bitten"
+            ],
+            "correct": 0,
+            "explanation": "Passive perfect: Having been bitten."
+          },
+          {
+            "id": 5,
+            "situation": "Talking about worker rights.",
+            "dialogue": "A: Will the workers stop working?\nB: Yes, ___ fairly, they will go on strike.",
+            "options": [
+              "unless paid",
+              "unless paying",
+              "unless to be paid",
+              "unless pay"
+            ],
+            "correct": 0,
+            "explanation": "Unless paid fairly."
+          },
+          {
+            "id": 6,
+            "situation": "Explaining why someone went to bank.",
+            "dialogue": "A: Why did Sue go to the bank?\nB: ___ some money to buy books, she cashed a check.",
+            "options": [
+              "Needing",
+              "Needed",
+              "To need",
+              "Having needed"
+            ],
+            "correct": 0,
+            "explanation": "Active cause: Needing."
+          },
+          {
+            "id": 7,
+            "situation": "Explaining a safety precaution.",
+            "dialogue": "A: Did he carry cash through the forest?\nB: No, ___ about the bandits, he left his cash at home.",
+            "options": [
+              "Having been warned",
+              "Having warned",
+              "Warning",
+              "Being warned"
+            ],
+            "correct": 0,
+            "explanation": "Passive perfect: Having been warned."
+          },
+          {
+            "id": 8,
+            "situation": "Talking about emergency response.",
+            "dialogue": "A: How did he handle the fire so fast?\nB: ___ the safety manual, he grabbed the extinguisher immediately.",
+            "options": [
+              "Having read",
+              "Reading",
+              "Read",
+              "Being read"
+            ],
+            "correct": 0,
+            "explanation": "Active perfect: Having read."
+          },
+          {
+            "id": 9,
+            "situation": "Talking about a persistent applicant.",
+            "dialogue": "A: Is he applying again?\nB: No, ___ twice, he didn't want to try again.",
+            "options": [
+              "Having failed",
+              "Failing",
+              "Failed",
+              "Being failed"
+            ],
+            "correct": 0,
+            "explanation": "Active perfect: Having failed."
+          },
+          {
+            "id": 10,
+            "situation": "Describing stealthy movement.",
+            "dialogue": "A: How did they enter without noise?\nB: ___ their shoes, they crept along the passage.",
+            "options": [
+              "Having taken off",
+              "Taking off",
+              "Taken off",
+              "Being taken off"
+            ],
+            "correct": 0,
+            "explanation": "Active perfect: Having taken off..."
+          },
+          {
+            "id": 11,
+            "situation": "Talking about a hospital patient.",
+            "dialogue": "A: Why is John in hospital?\nB: ___ by gangsters, he couldn't walk for weeks.",
+            "options": [
+              "Having been beaten",
+              "Having beaten",
+              "Beating",
+              "Being beaten"
+            ],
+            "correct": 0,
+            "explanation": "Passive perfect: Having been beaten."
+          },
+          {
+            "id": 12,
+            "situation": "Talking about a young student's complaint.",
+            "dialogue": "A: Why is the kid upset?\nB: ___ constantly, he complained to the teacher.",
+            "options": [
+              "Having been threatened",
+              "Having threatened",
+              "Threatening",
+              "Being threatened"
+            ],
+            "correct": 0,
+            "explanation": "Passive perfect: Having been threatened."
+          },
+          {
+            "id": 13,
+            "situation": "Talking about letter correspondence.",
+            "dialogue": "A: Why did you write to her again?\nB: ___ any reply, I sent another message.",
+            "options": [
+              "Not having received",
+              "Not receiving",
+              "Having not received",
+              "Not receive"
+            ],
+            "correct": 0,
+            "explanation": "Negative active perfect: Not having received."
+          },
+          {
+            "id": 14,
+            "situation": "Discussing night walk precautions.",
+            "dialogue": "A: Any advice for walking at night?\nB: When ___ alone, always be careful.",
+            "options": [
+              "walking",
+              "walked",
+              "to walk",
+              "walks"
+            ],
+            "correct": 0,
+            "explanation": "When walking..."
+          },
+          {
+            "id": 15,
+            "situation": "Talking about a business owner.",
+            "dialogue": "A: Why doesn't he like having a manager?\nB: ___ his own boss for 20 years, he hates taking orders.",
+            "options": [
+              "Having been",
+              "Being",
+              "Been",
+              "Having"
+            ],
+            "correct": 0,
+            "explanation": "Active perfect: Having been."
+          }
+        ]
+      }
+    ]
   }
 };
