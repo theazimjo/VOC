@@ -1,0 +1,343 @@
+import json
+
+words = [
+  # Topic 1: Why Do We Miss the Past So Much?
+  {
+    "word": "nostalgia",
+    "translation": "o'tmishni sog'inish",
+    "definition": "a sentimental longing or affection for the past",
+    "example": "A cool September morning can trigger a sudden feeling of nostalgia.",
+    "partOfSpeech": "noun",
+    "topic": "Why Do We Miss the Past So Much?"
+  },
+  {
+    "word": "precious",
+    "translation": "qadrli",
+    "definition": "of great value; not to be wasted or treated carelessly",
+    "example": "Small childhood memories often feel surprisingly precious later in life.",
+    "partOfSpeech": "adjective",
+    "topic": "Why Do We Miss the Past So Much?"
+  },
+  {
+    "word": "reconstruct",
+    "translation": "qayta tiklamoq",
+    "definition": "to build or form something again in the mind or in reality",
+    "example": "The human brain constantly selects and reconstructs old memories.",
+    "partOfSpeech": "verb",
+    "topic": "Why Do We Miss the Past So Much?"
+  },
+  {
+    "word": "trigger",
+    "translation": "qo'zg'atuvchi omil",
+    "definition": "an event or thing that causes something else to happen or exist",
+    "example": "Music is one of the most powerful triggers of nostalgia.",
+    "partOfSpeech": "noun",
+    "topic": "Why Do We Miss the Past So Much?"
+  },
+  {
+    "word": "heartbreak",
+    "translation": "qalb og'rig'i / ayriliq azobi",
+    "definition": "overwhelming distress, grief, or sorrow",
+    "example": "First heartbreaks during youth leave lasting emotional impressions.",
+    "partOfSpeech": "noun",
+    "topic": "Why Do We Miss the Past So Much?"
+  },
+  {
+    "word": "transition",
+    "translation": "o'tish davri",
+    "definition": "the process or a period of changing from one state or condition to another",
+    "example": "September represents a seasonal transition from summer to autumn.",
+    "partOfSpeech": "noun",
+    "topic": "Why Do We Miss the Past So Much?"
+  },
+  {
+    "word": "association",
+    "translation": "bog'liqlik / tasavvur",
+    "definition": "a mental connection between concepts, events, or mental states",
+    "example": "Certain songs carry powerful associations with specific moments in our lives.",
+    "partOfSpeech": "noun",
+    "topic": "Why Do We Miss the Past So Much?"
+  },
+  {
+    "word": "locked away",
+    "translation": "xotirada yashirinib qolgan",
+    "definition": "stored or kept hidden in memory for a long time",
+    "example": "A familiar smell can open a memory that has been locked away for years.",
+    "partOfSpeech": "phrase",
+    "topic": "Why Do We Miss the Past So Much?"
+  },
+  {
+    "word": "in retrospect",
+    "translation": "o'tmishga nazar tashlaganda",
+    "definition": "when looking back on a past event or period of time",
+    "example": "In retrospect, childhood summers seemed much longer than adult years.",
+    "partOfSpeech": "phrase",
+    "topic": "Why Do We Miss the Past So Much?"
+  },
+  {
+    "word": "novelty",
+    "translation": "yangilik",
+    "definition": "the quality of being new, original, or unusual",
+    "example": "Childhood felt longer because it contained far more novelty.",
+    "partOfSpeech": "noun",
+    "topic": "Why Do We Miss the Past So Much?"
+  },
+  {
+    "word": "hardship",
+    "translation": "qiyinchilik",
+    "definition": "severe suffering or privation",
+    "example": "Years later, past hardship often becomes part of a beloved personal story.",
+    "partOfSpeech": "noun",
+    "topic": "Why Do We Miss the Past So Much?"
+  },
+  {
+    "word": "affection",
+    "translation": "mehr / iliq tuyg'u",
+    "definition": "a gentle feeling of fondness or liking",
+    "example": "Old memories become mixed with affection as time passes.",
+    "partOfSpeech": "noun",
+    "topic": "Why Do We Miss the Past So Much?"
+  },
+  {
+    "word": "bittersweet",
+    "translation": "ham shirin, ham achchiq tuyg'uli",
+    "definition": "arousing pleasure tinged with sadness or regret",
+    "example": "Nostalgia is usually bittersweet because the past cannot happen again in the same way.",
+    "partOfSpeech": "adjective",
+    "topic": "Why Do We Miss the Past So Much?"
+  },
+  {
+    "word": "reflection",
+    "translation": "mulohaza / o'y-fikr",
+    "definition": "serious thought or consideration about something",
+    "example": "Nostalgic reflection can strengthen our feeling of social connection.",
+    "partOfSpeech": "noun",
+    "topic": "Why Do We Miss the Past So Much?"
+  },
+  {
+    "word": "continuity",
+    "translation": "uzluksizlik",
+    "definition": "the unbroken and consistent existence or operation of something",
+    "example": "Memories provide a sense of continuity between our past and present selves.",
+    "partOfSpeech": "noun",
+    "topic": "Why Do We Miss the Past So Much?"
+  },
+  {
+    "word": "belong",
+    "translation": "tegishli bo'lmoq / o'zini bir joyga oid his qilmoq",
+    "definition": "be a member or part of a particular group or place",
+    "example": "Remembering past times reminds us that we have belonged somewhere.",
+    "partOfSpeech": "verb",
+    "topic": "Why Do We Miss the Past So Much?"
+  },
+  {
+    "word": "by comparison",
+    "translation": "taqqoslaganda",
+    "definition": "when compared with another thing",
+    "example": "The present can sometimes look disappointing by comparison with idealized memories.",
+    "partOfSpeech": "phrase",
+    "topic": "Why Do We Miss the Past So Much?"
+  },
+  {
+    "word": "old-fashioned",
+    "translation": "eskicha",
+    "definition": "belonging to or characteristic of an earlier period",
+    "example": "Your current smartphone will one day look ridiculously old-fashioned.",
+    "partOfSpeech": "adjective",
+    "topic": "Why Do We Miss the Past So Much?"
+  },
+  {
+    "word": "ordinary",
+    "translation": "oddiy",
+    "definition": "with no special or distinctive features; normal",
+    "example": "Nostalgia teaches us to notice ordinary life before it becomes memory.",
+    "partOfSpeech": "adjective",
+    "topic": "Why Do We Miss the Past So Much?"
+  },
+  {
+    "word": "desperately",
+    "translation": "juda qattiq / umidsiz darajada",
+    "definition": "with great urgency or intense desire",
+    "example": "You may desperately miss ordinary moments that you once took for granted.",
+    "partOfSpeech": "adverb",
+    "topic": "Why Do We Miss the Past So Much?"
+  },
+
+  # Topic 2: Why Are We Becoming More Lonely?
+  {
+    "word": "contradiction",
+    "translation": "qarama-qarshilik",
+    "definition": "a combination of statements, ideas, or situations that are opposed to one another",
+    "example": "It is a major contradiction of modern life that constant connection exists with isolation.",
+    "partOfSpeech": "noun",
+    "topic": "Why Are We Becoming More Lonely?"
+  },
+  {
+    "word": "deep connection",
+    "translation": "chuqur aloqa",
+    "definition": "a strong and meaningful emotional bond between people",
+    "example": "Many people say that deep connection feels harder to find today.",
+    "partOfSpeech": "phrase",
+    "topic": "Why Are We Becoming More Lonely?"
+  },
+  {
+    "word": "emotionally close",
+    "translation": "hissiy jihatdan yaqin",
+    "definition": "sharing a bond of trust, understanding, and personal intimacy",
+    "example": "The real question is whether we feel emotionally close to those around us.",
+    "partOfSpeech": "phrase",
+    "topic": "Why Are We Becoming More Lonely?"
+  },
+  {
+    "word": "substitute",
+    "translation": "o'rnini bosuvchi narsa",
+    "definition": "a person or thing acting or serving in place of another",
+    "example": "Digital messages should not become a substitute for real-world presence.",
+    "partOfSpeech": "noun",
+    "topic": "Why Are We Becoming More Lonely?"
+  },
+  {
+    "word": "intimacy",
+    "translation": "yaqinlik",
+    "definition": "close familiarity or friendship; closeness",
+    "example": "True intimacy grows from slow, focused attention.",
+    "partOfSpeech": "noun",
+    "topic": "Why Are We Becoming More Lonely?"
+  },
+  {
+    "word": "isolated",
+    "translation": "yakkalangan",
+    "definition": "far away from other places, buildings, or people; remote",
+    "example": "A person can be surrounded by crowds and still feel emotionally isolated.",
+    "partOfSpeech": "adjective",
+    "topic": "Why Are We Becoming More Lonely?"
+  },
+  {
+    "word": "selected moment",
+    "translation": "tanlab ko'rsatilgan lahza",
+    "definition": "a carefully chosen snapshot of life shown to others",
+    "example": "What we see on social media is a selected moment rather than a complete life.",
+    "partOfSpeech": "phrase",
+    "topic": "Why Are We Becoming More Lonely?"
+  },
+  {
+    "word": "spontaneous",
+    "translation": "o'z-o'zidan yuz beradigan",
+    "definition": "performed or occurring as a result of a sudden impulse without premeditation",
+    "example": "When every meeting must be scheduled, friendships become less spontaneous.",
+    "partOfSpeech": "adjective",
+    "topic": "Why Are We Becoming More Lonely?"
+  },
+  {
+    "word": "functional",
+    "translation": "amaliy / vazifaga oid",
+    "definition": "designed to be practical and useful rather than attractive or personal",
+    "example": "Daily interactions at work often remain purely functional.",
+    "partOfSpeech": "adjective",
+    "topic": "Why Are We Becoming More Lonely?"
+  },
+  {
+    "word": "social texture",
+    "translation": "ijtimoiy muhitning kundalik boyligi",
+    "definition": "the rich layer of small daily human interactions in a community",
+    "example": "Small daily interactions give ordinary days their social texture.",
+    "partOfSpeech": "phrase",
+    "topic": "Why Are We Becoming More Lonely?"
+  },
+  {
+    "word": "weak social ties",
+    "translation": "kuchsiz ijtimoiy aloqalar",
+    "definition": "casual acquaintanceships with neighbors, clerks, or gym members",
+    "example": "Weak social ties remind us that we are part of a wider human community.",
+    "partOfSpeech": "phrase",
+    "topic": "Why Are We Becoming More Lonely?"
+  },
+  {
+    "word": "awkward",
+    "translation": "noqulay",
+    "definition": "causing or feeling embarrassment or inconvenience",
+    "example": "Friends who stop calling may begin to feel awkward about the long silence.",
+    "partOfSpeech": "adjective",
+    "topic": "Why Are We Becoming More Lonely?"
+  },
+  {
+    "word": "edited highlights",
+    "translation": "tanlab bezatilgan eng yaxshi lahzalar",
+    "definition": "the best moments of someone's life edited for public presentation",
+    "example": "We compare our daily reality with other people's edited highlights.",
+    "partOfSpeech": "phrase",
+    "topic": "Why Are We Becoming More Lonely?"
+  },
+  {
+    "word": "social network",
+    "translation": "ijtimoiy aloqalar tarmog'i",
+    "definition": "the network of social interactions and personal relationships",
+    "example": "Moving to a new city breaks a social network that took years to build.",
+    "partOfSpeech": "phrase",
+    "topic": "Why Are We Becoming More Lonely?"
+  },
+  {
+    "word": "companionship",
+    "translation": "hamrohlik",
+    "definition": "a feeling of fellowship or friendship",
+    "example": "In a new environment, simple companionship must be rebuilt step by step.",
+    "partOfSpeech": "noun",
+    "topic": "Why Are We Becoming More Lonely?"
+  },
+  {
+    "word": "vulnerability",
+    "translation": "hissiy ochiqlik / zaiflik",
+    "definition": "the quality or state of being exposed to emotional risk or openness",
+    "example": "Building real connection requires vulnerability and taking the first step.",
+    "partOfSpeech": "noun",
+    "topic": "Why Are We Becoming More Lonely?"
+  },
+  {
+    "word": "acquaintances",
+    "translation": "tanishlar",
+    "definition": "people one knows slightly, but who are not close friends",
+    "example": "One honest talk brings more connection than an evening with twenty acquaintances.",
+    "partOfSpeech": "noun",
+    "topic": "Why Are We Becoming More Lonely?"
+  },
+  {
+    "word": "solitude",
+    "translation": "yolg'iz qolish / tanholik",
+    "definition": "the state or situation of being alone without feeling lonely",
+    "example": "Solitude can be restorative when chosen for quiet recovery.",
+    "partOfSpeech": "noun",
+    "topic": "Why Are We Becoming More Lonely?"
+  },
+  {
+    "word": "restorative",
+    "translation": "kuchni tiklovchi",
+    "definition": "having the ability to restore health, strength, or a feeling of well-being",
+    "example": "Reading alone or walking in silence can be deeply restorative.",
+    "partOfSpeech": "adjective",
+    "topic": "Why Are We Becoming More Lonely?"
+  },
+  {
+    "word": "repetition",
+    "translation": "takroriylik",
+    "definition": "the action of repeating something that has already been said or done",
+    "example": "Real friendship usually needs time, and time needs repetition.",
+    "partOfSpeech": "noun",
+    "topic": "Why Are We Becoming More Lonely?"
+  }
+]
+
+pack_obj = {
+    "id": "im-ready-september",
+    "name": "I'm Ready September",
+    "description": "Ulugbek Davlatov tomonidan yozilgan 'I'm Ready September' kitobidan tanlangan qiziqarli va ijtimoiy mavzular, to'liq matnlar va rasmlar bilan.",
+    "icon": "📚",
+    "color": "linear-gradient(135deg, #E11D48 0%, #F43F5E 100%)",
+    "level": "intermediate",
+    "category": "English",
+    "words": words
+}
+
+with open('scratch/im_ready_pack.json', 'w', encoding='utf-8') as f:
+    json.dump(pack_obj, f, indent=2, ensure_ascii=False)
+
+print("Saved scratch/im_ready_pack.json")

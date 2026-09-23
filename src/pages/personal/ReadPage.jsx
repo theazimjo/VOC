@@ -12,6 +12,7 @@ import { scienceChapterText } from '../../data/scienceChapterText';
 import { healthChapterText } from '../../data/healthChapterText';
 import { essential3000ChapterText } from '../../data/essential3000ChapterText';
 import { preIeltsChapterText } from '../../data/preIeltsChapterText';
+import { imReadySeptemberChapterText } from '../../data/imReadySeptemberChapterText';
 import { formatPageRange, getTopicPageRangeInfo } from '../../utils/chapterPageRanges';
 import { toShortLangCode } from '../../utils/dictionaryService';
 import { useSpeechRecognitionTracker } from '../../hooks/useSpeechRecognitionTracker';
@@ -20,7 +21,7 @@ import WordTapPopover from '../../components/Words/WordTapPopover';
 import IosSpinner from '../../components/common/IosSpinner';
 import './ReadPage.css';
 
-const chapterTextByTopic = { ...scienceChapterText, ...healthChapterText, ...essential3000ChapterText, ...preIeltsChapterText };
+const chapterTextByTopic = { ...scienceChapterText, ...healthChapterText, ...essential3000ChapterText, ...preIeltsChapterText, ...imReadySeptemberChapterText };
 
 function getBlockWordCount(text) {
   if (!text) return 0;

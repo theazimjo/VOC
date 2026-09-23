@@ -13,7 +13,20 @@ import { playSound } from '../../utils/feedback';
 import { computeRetentionStats } from '../../utils/memoryEngine';
 import { getConfusionPairs } from '../../experiment/experimentDB';
 import { formatPageRange } from '../../utils/chapterPageRanges';
+import { scienceChapterText } from '../../data/scienceChapterText';
+import { healthChapterText } from '../../data/healthChapterText';
+import { essential3000ChapterText } from '../../data/essential3000ChapterText';
+import { preIeltsChapterText } from '../../data/preIeltsChapterText';
+import { imReadySeptemberChapterText } from '../../data/imReadySeptemberChapterText';
 import WordList from '../../components/Words/WordList';
+
+const allChapterText = {
+  ...essential3000ChapterText,
+  ...scienceChapterText,
+  ...healthChapterText,
+  ...preIeltsChapterText,
+  ...imReadySeptemberChapterText
+};
 import PhotoWordExtractorModal from '../../components/Words/PhotoWordExtractorModal';
 import MoveWordsModal from '../../components/Words/MoveWordsModal';
 import SpeedDialFAB from '../../components/Words/SpeedDialFAB';
@@ -597,7 +610,7 @@ export default function PackDetail() {
                   </span>
                 )}
               </button>
-              {pack.type === 'science' && (
+              {(pack.type === 'science' || topics.some(t => Boolean(allChapterText[t]))) && (
                 <button
                   className={`btn btn-cards ${topicFilter ? 'has-topic' : ''}`}
                   onClick={() => {

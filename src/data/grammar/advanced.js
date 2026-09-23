@@ -10772,6 +10772,2691 @@ export const advancedData = {
           "explanation": "Linking verbs with adjectives: adj, adj and adj."
         }
       ]
-    }
+    },
+{
+    "id": "comparative-and-superlative-adjectives",
+    "title": "Comparative & Superlative Adjectives",
+    "icon": "⚖️",
+    "description": "Master comparative and superlative forms, spelling rules, irregular adjectives, emphasis (much, far, than ever), softer comparisons, 'more and more', 'the more..., the more...', 'less + adjective', and 'not as... as'.",
+    "guide": "## Comparative & Superlative Adjectives (Sifatlarning Qiyosiy va Orttirma Darajasi)\n\nSifatlar (**adjectives**) odamlar yoki narsalarning xususiyatini bildiradi (*big, small, fast, beautiful*). Ularni o'zaro solishtirish uchun qiyosiy (**comparative**) va orttirma (**superlative**) darajalardan foydalanamiz.\n\n---\n\n### 🎯 1. Nima uchun ishlatiladi?\n\n* **Comparative (Qiyosiy daraja):** 2 ta narsa yoki odamni solishtiradi.\n  * ▸ *Jasur is **taller than** Dilshod.* (Jasur Dilshoddan balandroq.)\n* **Superlative (Orttirma daraja):** 1 ta narsa yoki odamni butun guruh / hamma bilan solishtiradi.\n  * ▸ *Dilshod is **the tallest** boy in the class.* (Dilshod sinfdagi eng baland bo'yli bola.)\n\n---\n\n### 📊 2. Comparative Adjectives (Qiyosiy Daraja Rules)\n\n#### Formulalar:\n* **Qisqa sifatlar (1 bo'g'inli):** `adjective + -er + than`\n* **Uzun sifatlar (2+ bo'g'inli):** `more + adjective + than`\n\n#### Qisqa sifatlar uchun imlo (spelling) qoidalari:\n| Qoida | Misol (Base -> Comparative) | Jumlada qo'llanishi |\n| :--- | :--- | :--- |\n| **Standart:** `+ -er` | *small -> smaller*, *cold -> colder* | *This box is **smaller than** that one.* |\n| **`-e` bilan tugasa:** `+ -r` | *nice -> nicer*, *large -> larger* | *This room is **larger than** mine.* |\n| **Vowel + Consonant (CVC):** Undosh ikki barobar ortadi | *big -> bigger*, *hot -> hotter* | *Tashkent is **bigger than** Samarkand.* |\n| **`-y` bilan tugasa:** `y -> i + er` | *happy -> happier*, *easy -> easier*, *busy -> busier* | *Nigora is **happier than** Malika.* |\n\n#### Uzun sifatlar (2+ bo'g'inli):\nUzun sifatlarga `-er` qo'shilmaydi, ularning oldidan **`more`** ishlatiladi:\n* ▸ *This book is **more interesting than** that one.* (Bu kitob unikiga qaraganda qiziqroq.)\n* ▸ *Samarkand is **more beautiful than** Bukhara.* (Samarqand Buxorodan ko'ra chiroyliroq.)\n* ▸ *English is **more useful than** history for me.* (Ingliz tili men uchun tarixdan ko'ra foydaliroq.)\n\n#### Irregular Comparative (Noto'g'ri qiyosiy sifatlar):\n* **good** -> **better than** (*This film is better than the old one.*)\n* **bad** -> **worse than** (*My result is worse than before.*)\n* **far** -> **farther / further than** (*Tashkent is farther than Samarkand from here.*)\n* **little (amount)** -> **less** (*I have less free time now.*)\n* **much / many** -> **more** (*She has more experience.*)\n\n---\n\n### 🏆 3. Superlative Adjectives (Orttirma Daraja Rules)\n\n#### Formulalar:\n* **Qisqa sifatlar:** `the + adjective + -est`\n* **Uzun sifatlar:** `the most + adjective`\n\n#### Imlo (spelling) qoidalari:\n* **Most short adjectives:** `add -est` (*tall -> the tallest*, *cold -> the coldest*)\n* **Ending in `-e`:** `add -st` (*nice -> the nicest*, *safe -> the safest*)\n* **One vowel + one consonant (CVC):** `double consonant + -est` (*big -> the biggest*, *hot -> the hottest*, *fat -> the fattest*)\n* **Ending in `-y`:** `change y to i + -est` (*happy -> the happiest*, *busy -> the busiest*, *easy -> the easiest*)\n* **Long adjectives:** `the most + adjective` (*the most beautiful*, *the most expensive*, *the most fascinating*)\n\n#### Irregular Superlative Table:\n| Base form | Comparative | Superlative |\n| :--- | :--- | :--- |\n| **good** | better | **the best** |\n| **bad** | worse | **the worst** |\n| **far** | farther / further | **the farthest / furthest** |\n| **little (amount)** | less | **the least** |\n| **much / many** | more | **the most** |\n\n* ▸ *Dilshod is **the tallest** boy in the class.*\n* ▸ *Tashkent is **the biggest** city in Uzbekistan.*\n* ▸ *Akbar is **the most fascinating** student.*\n\n---\n\n### ⚡ 4. Stronger Comparisons (Kuchaytirilgan Solishtirish / Emphasis)\n\nFarq judayam katta va aniq ekanligini ta'kidlash uchun qiyosiy sifat oldidan **`much`**, **`a lot`**, **`far`**, **`even`**, **`rather`**, **`way`**, **`a great deal`** ishlatiladi.\n\n* **Formula:** `much / a lot / far / even / rather + comparative adjective + than`\n* ▸ *This exam is **much harder than** the last one.* (Bu imtihon oxirgisidan ancha qiyinroq.)\n* ▸ *My house is **a lot bigger than** yours.* (Mening uyim senikidan juda ko'p kattaroq.)\n* ▸ *She is **far more talented than** her classmates.* (U sinfdoshlaridan ancha iste'dodliroq.)\n* ▸ *Today is **even colder than** yesterday.* (Bugun kechagidan ham sovuqroq.)\n* ▸ *The situation is **rather worse than** we expected.* (Vaziyat biz kutganimizdan ancha yomonroq.)\n\n---\n\n### 🚀 5. \"than ever\" (Extra Emphasis — Har qachongidanam ham)\n\nNimadir ilgari bo'lgan barcha vaqtlardagidan ham kuchliroq ekanini ifodalaydi.\n\n* **Formula:** `comparative adjective + than ever`\n* ▸ *I'm **happier than ever** in my new job.* (Yangi ishimda har qachongidan ham baxtliroqman.)\n* ▸ *This city is **busier than ever**.* (Bu shahar har qachongidan ham gavjumroq.)\n* ▸ *She feels **more confident than ever**.* (U o'zini har qachongidanam ko'ra ishonchliroq his qilmoqda.)\n\n---\n\n### 🔹 6. Softer Comparisons (Yumshoqroq Solishtirish / Slight Difference)\n\nKichik yoki sezilarsiz farqni ifodalash uchun **`a little`** yoki **`a bit`** (informal) ishlatiladi.\n\n* **Formula:** `a little / a bit + comparative adjective + than`\n* ▸ *This task is **a little easier than** the last one.* (Bu vazifa oxirgisidan biroz osonroq.)\n* ▸ *He is **a bit taller than** his brother.* (U akasidan biroz balandroq.)\n* ▸ *I feel **a little more relaxed than** before.* (O'zimni avvalgidan biroz erkinroq his qilyapman.)\n* ▸ *This movie is **a bit more interesting than** the book.* (Bu film kitobga qaraganda biroz qiziqroq.)\n\n---\n\n### 📈 7. -er and -er / more and more (Tobora ... bo'lib bormoqda)\n\nHodisa yoki holatning vaqt o'tishi bilan **asta-sekin kuchayib borayotganini** bildiradi.\n\n* **Qisqa sifatlar:** `comparative + and + comparative` (*hotter and hotter*, *bigger and bigger*, *stronger and stronger*, *busier and busier*)\n* **Uzun sifatlar:** `more and more + adjective` (*more and more confident*, *more and more interesting*, *more and more difficult*)\n* ▸ *It is getting **hotter and hotter**.* (Havo tobora issiq bo'lib boryapti.)\n* ▸ *Jasur is becoming **stronger and stronger**.* (Jasur asta-sekin kuchayib boryapti.)\n* ▸ *Life is getting **busier and busier**.* (Hayot tobora bandlashib boryapti.)\n* ▸ *Nigora is getting **more and more confident**.* (Nigora o'ziga tobora ko'proq ishonchli bo'lib boryapti.)\n* ▸ *The city is getting **bigger and bigger**.* (Shahar tobora kattalashib boryapti.)\n\n---\n\n### 🔄 8. The more..., the more... (Qanchalik ko'p..., shunchalik ko'p...)\n\nIkki hodisa bir vaqtda **birgalikda o'zgarishini** ko'rsatadi.\n\n* **Formula:** `The more + subject + verb, the more + subject + verb`\n* ▸ *The **more** you study, the **better** you become.* (Ko'proq o'qisang, yaxshiroq bo'lasan.)\n* ▸ *The **more** you practice, the **easier** it is.* (Ko'proq mashq qilsang, osonroq bo'ladi.)\n* ▸ *The **more** you read, the **more** you learn.* (Ko'proq o'qisang, ko'proq o'rganasan.)\n* ▸ *The **more** you work, the **more successful** you are.* (Ko'proq ishlasang, ko'proq muvaffaqiyatli bo'lasan.)\n* ▸ *The **more** you sleep, the **healthier** you feel.* (Ko'proq uxlasang, sog'lomroq his qilasan.)\n\n#### Boshqa iboralar:\n* `the more..., the less...` (*The more you eat, the less hungry you feel.* — Qanchalik ko'p yesang, shunchalik kam och qolasan.)\n* `the more..., the better...` (*The more you sleep, the better you feel.* — Qanchalik ko'p uxlasang, shunchalik yaxshi his qilasan.)\n\n---\n\n### 📉 9. LESS + adjective (Kamroq ...)\n\n`less` sifatni antonymga o'zgartirib, unga `...-roq` ma'nosini beradi (kamroq...).\n\n* **Formula:** `less + adjective + than`\n* ▸ *This car is **less expensive than** that one.* (Bu mashina u mashinadan arzonroq / kamroq qimmat.)\n* ▸ *This task is **less difficult than** yesterday's.* (Bu vazifa kechagidan osonroq / kamroq qiyin.)\n* ▸ *This movie is **less interesting than** the book.* (Film kitobdan kamroq qiziqarli.)\n\n---\n\n### ⚖️ 10. NOT AS ... AS (Shunchalik ... emas / ...dek emas)\n\nNarsalarning teng emasligini ko'rsatish uchun ishlatiladi.\n\n* **Formula:** `not as + adjective + as`\n* ▸ *This book is **not as interesting as** the other one.* (Bu kitob boshqasidek qiziqarli emas.)\n* ▸ *My phone is **not as fast as** yours.* (Mening telefonim senikidek tez emas.)\n* ▸ *Samarkand is **not as big as** Tashkent.* (Samarqand Toshkentdek katta emas.)",
+    "questions": [
+        {
+            "id": 1,
+            "text": "Jasur is _______ than Dilshod.",
+            "options": [
+                "taller",
+                "tallest",
+                "more tall",
+                "as tall"
+            ],
+            "correct": 0,
+            "explanation": "Short adjectives add '-er' in comparative form: 'taller than'."
+        },
+        {
+            "id": 2,
+            "text": "Tashkent is _______ city in Uzbekistan.",
+            "options": [
+                "bigger",
+                "the biggest",
+                "most big",
+                "the bigger"
+            ],
+            "correct": 1,
+            "explanation": "Superlative form of short adjective 'big' is 'the biggest'."
+        },
+        {
+            "id": 3,
+            "text": "This book is _______ interesting than that one.",
+            "options": [
+                "more",
+                "most",
+                "er",
+                "much of"
+            ],
+            "correct": 0,
+            "explanation": "Long adjectives (2+ syllables) use 'more + adjective + than' for comparatives."
+        },
+        {
+            "id": 4,
+            "text": "This exam is _______ harder than the last one.",
+            "options": [
+                "much",
+                "more",
+                "very",
+                "most"
+            ],
+            "correct": 0,
+            "explanation": "'Much' is used to emphasize comparative adjectives ('much harder than')."
+        },
+        {
+            "id": 5,
+            "text": "I feel _______ happier than ever in my new job.",
+            "options": [
+                "much",
+                "more",
+                "most",
+                "as"
+            ],
+            "correct": 0,
+            "explanation": "'Happier than ever' expresses extra emphasis."
+        },
+        {
+            "id": 6,
+            "text": "He is a _______ taller than his brother.",
+            "options": [
+                "bit",
+                "lot",
+                "more",
+                "much"
+            ],
+            "correct": 0,
+            "explanation": "'A bit taller than' expresses a small or slight difference."
+        },
+        {
+            "id": 7,
+            "text": "It is getting _______ and hotter every day.",
+            "options": [
+                "hotter",
+                "hot",
+                "more hot",
+                "hottest"
+            ],
+            "correct": 0,
+            "explanation": "'Hotter and hotter' shows something increasing gradually over time."
+        },
+        {
+            "id": 8,
+            "text": "Nigora is getting _______ confident.",
+            "options": [
+                "more and more",
+                "confidenter",
+                "most and most",
+                "more and most"
+            ],
+            "correct": 0,
+            "explanation": "Long adjectives use 'more and more + adjective' for gradual increase."
+        },
+        {
+            "id": 9,
+            "text": "The more you study, the _______ you become.",
+            "options": [
+                "better",
+                "good",
+                "best",
+                "more good"
+            ],
+            "correct": 0,
+            "explanation": "Structure: 'The more + subject + verb, the + comparative + subject + verb'."
+        },
+        {
+            "id": 10,
+            "text": "The more you sleep, the _______ you feel.",
+            "options": [
+                "healthier",
+                "healthiest",
+                "more healthy",
+                "healthy"
+            ],
+            "correct": 0,
+            "explanation": "'The more... the healthier...' pairs comparative adjectives."
+        },
+        {
+            "id": 11,
+            "text": "This car is _______ expensive than that one.",
+            "options": [
+                "less",
+                "least",
+                "not",
+                "fewer"
+            ],
+            "correct": 0,
+            "explanation": "'Less + adjective + than' means lower degree."
+        },
+        {
+            "id": 12,
+            "text": "Samarkand is not _______ big as Tashkent.",
+            "options": [
+                "as",
+                "than",
+                "so as",
+                "more"
+            ],
+            "correct": 0,
+            "explanation": "'Not as + adjective + as' shows inequality."
+        },
+        {
+            "id": 13,
+            "text": "My result is _______ than before.",
+            "options": [
+                "worse",
+                "badder",
+                "worst",
+                "more bad"
+            ],
+            "correct": 0,
+            "explanation": "Irregular comparative of 'bad' is 'worse'."
+        },
+        {
+            "id": 14,
+            "text": "This film is _______ than the old one.",
+            "options": [
+                "better",
+                "gooder",
+                "best",
+                "more good"
+            ],
+            "correct": 0,
+            "explanation": "Irregular comparative of 'good' is 'better'."
+        },
+        {
+            "id": 15,
+            "text": "She is _______ the class.",
+            "options": [
+                "the tallest girl in",
+                "taller girl in",
+                "tallest girl of",
+                "the taller girl in"
+            ],
+            "correct": 0,
+            "explanation": "'The tallest girl in' is superlative."
+        },
+        {
+            "id": 16,
+            "text": "Nigora is _______ than Malika.",
+            "options": [
+                "happier",
+                "more happy",
+                "happyer",
+                "happiest"
+            ],
+            "correct": 0,
+            "explanation": "Adjectives ending in '-y' change to '-ier': 'happier than'."
+        },
+        {
+            "id": 17,
+            "text": "She is _______ far more talented than her classmates.",
+            "options": [
+                "far",
+                "very",
+                "much of",
+                "more"
+            ],
+            "correct": 0,
+            "explanation": "'Far more talented than' uses 'far' for emphasis."
+        },
+        {
+            "id": 18,
+            "text": "The task is _______ difficult than yesterday's.",
+            "options": [
+                "less",
+                "least",
+                "fewer",
+                "not as"
+            ],
+            "correct": 0,
+            "explanation": "'Less difficult than' means less hard."
+        },
+        {
+            "id": 19,
+            "text": "My phone is not as _______ as yours.",
+            "options": [
+                "fast",
+                "faster",
+                "fastest",
+                "more fast"
+            ],
+            "correct": 0,
+            "explanation": "'Not as + base adjective + as'."
+        },
+        {
+            "id": 20,
+            "text": "Life is getting _______ and busier.",
+            "options": [
+                "busier",
+                "more busy",
+                "busiest",
+                "busy"
+            ],
+            "correct": 0,
+            "explanation": "'Busier and busier' shows gradual increase."
+        },
+        {
+            "id": 21,
+            "text": "The situation is _______ worse than we expected.",
+            "options": [
+                "rather",
+                "more",
+                "very",
+                "so"
+            ],
+            "correct": 0,
+            "explanation": "'Rather worse than' adds emphasis."
+        },
+        {
+            "id": 22,
+            "text": "The more you read, the _______ you learn.",
+            "options": [
+                "more",
+                "most",
+                "much",
+                "many"
+            ],
+            "correct": 0,
+            "explanation": "'The more you read, the more you learn.'"
+        },
+        {
+            "id": 23,
+            "text": "Akbar is _______ student.",
+            "options": [
+                "the most fascinating",
+                "more fascinating",
+                "the fascinatingest",
+                "most fascinating"
+            ],
+            "correct": 0,
+            "explanation": "Superlative of 3-syllable adjective 'fascinating' is 'the most fascinating'."
+        },
+        {
+            "id": 24,
+            "text": "This room is _______ than yesterday.",
+            "options": [
+                "colder",
+                "more cold",
+                "coldest",
+                "the colder"
+            ],
+            "correct": 0,
+            "explanation": "'Colder than' is comparative."
+        },
+        {
+            "id": 25,
+            "text": "The more you eat, the _______ hungry you feel.",
+            "options": [
+                "less",
+                "least",
+                "fewer",
+                "not"
+            ],
+            "correct": 0,
+            "explanation": "'The more you eat, the less hungry you feel.'"
+        }
+    ],
+    "fillBlanks": [
+        {
+            "id": 1,
+            "text": "Jasur is _____ than Dilshod.",
+            "options": [
+                "taller",
+                "tallest",
+                "more tall",
+                "as tall"
+            ],
+            "correct": 0,
+            "explanation": "Use 'taller' for comparative."
+        },
+        {
+            "id": 2,
+            "text": "Tashkent is _____ city in Uzbekistan.",
+            "options": [
+                "the biggest",
+                "bigger",
+                "most big",
+                "the bigger"
+            ],
+            "correct": 0,
+            "explanation": "Use 'the biggest' for superlative."
+        },
+        {
+            "id": 3,
+            "text": "This exam is _____ harder than the last one.",
+            "options": [
+                "much",
+                "more",
+                "very",
+                "most"
+            ],
+            "correct": 0,
+            "explanation": "Use 'much' for stronger comparison."
+        },
+        {
+            "id": 4,
+            "text": "I feel _____ happier than ever in my new job.",
+            "options": [
+                "happier",
+                "more happy",
+                "happiest",
+                "happy"
+            ],
+            "correct": 0,
+            "explanation": "Structure: 'happier than ever'."
+        },
+        {
+            "id": 5,
+            "text": "It is getting _____ and hotter.",
+            "options": [
+                "hotter",
+                "hot",
+                "more hot",
+                "hottest"
+            ],
+            "correct": 0,
+            "explanation": "'Hotter and hotter' indicates gradual change."
+        },
+        {
+            "id": 6,
+            "text": "Nigora is getting _____ confident.",
+            "options": [
+                "more and more",
+                "confidenter",
+                "most",
+                "more"
+            ],
+            "correct": 0,
+            "explanation": "'More and more confident' shows gradual change."
+        },
+        {
+            "id": 7,
+            "text": "The more you study, the _____ you become.",
+            "options": [
+                "better",
+                "good",
+                "best",
+                "more good"
+            ],
+            "correct": 0,
+            "explanation": "'The more... the better...'."
+        },
+        {
+            "id": 8,
+            "text": "This car is _____ expensive than that one.",
+            "options": [
+                "less",
+                "least",
+                "not",
+                "fewer"
+            ],
+            "correct": 0,
+            "explanation": "'Less expensive than'."
+        },
+        {
+            "id": 9,
+            "text": "My phone is not as _____ as yours.",
+            "options": [
+                "fast",
+                "faster",
+                "fastest",
+                "more fast"
+            ],
+            "correct": 0,
+            "explanation": "'Not as fast as'."
+        },
+        {
+            "id": 10,
+            "text": "My result is _____ than before.",
+            "options": [
+                "worse",
+                "badder",
+                "worst",
+                "more bad"
+            ],
+            "correct": 0,
+            "explanation": "'Worse than' is irregular comparative of bad."
+        },
+        {
+            "id": 11,
+            "text": "This film is _____ than the old one.",
+            "options": [
+                "better",
+                "gooder",
+                "best",
+                "more good"
+            ],
+            "correct": 0,
+            "explanation": "'Better than' is irregular comparative of good."
+        },
+        {
+            "id": 12,
+            "text": "He is a _____ taller than his brother.",
+            "options": [
+                "bit",
+                "lot",
+                "more",
+                "much"
+            ],
+            "correct": 0,
+            "explanation": "'A bit taller than'."
+        },
+        {
+            "id": 13,
+            "text": "She is _____ far more talented than her classmates.",
+            "options": [
+                "far",
+                "very",
+                "much of",
+                "more"
+            ],
+            "correct": 0,
+            "explanation": "'Far more talented than'."
+        },
+        {
+            "id": 14,
+            "text": "The more you practice, the _____ it is.",
+            "options": [
+                "easier",
+                "easy",
+                "easiest",
+                "more easy"
+            ],
+            "correct": 0,
+            "explanation": "'The more... the easier...'."
+        },
+        {
+            "id": 15,
+            "text": "Life is getting _____ and busier.",
+            "options": [
+                "busier",
+                "busy",
+                "busiest",
+                "more busy"
+            ],
+            "correct": 0,
+            "explanation": "'Busier and busier'."
+        },
+        {
+            "id": 16,
+            "text": "This task is _____ difficult than yesterday's.",
+            "options": [
+                "less",
+                "least",
+                "fewer",
+                "not as"
+            ],
+            "correct": 0,
+            "explanation": "'Less difficult than'."
+        },
+        {
+            "id": 17,
+            "text": "Samarkand is not as _____ as Tashkent.",
+            "options": [
+                "big",
+                "bigger",
+                "biggest",
+                "more big"
+            ],
+            "correct": 0,
+            "explanation": "'Not as big as'."
+        },
+        {
+            "id": 18,
+            "text": "The situation is _____ worse than we expected.",
+            "options": [
+                "rather",
+                "more",
+                "very",
+                "so"
+            ],
+            "correct": 0,
+            "explanation": "'Rather worse than'."
+        },
+        {
+            "id": 19,
+            "text": "Today is _____ colder than yesterday.",
+            "options": [
+                "even",
+                "more",
+                "very",
+                "most"
+            ],
+            "correct": 0,
+            "explanation": "'Even colder than'."
+        },
+        {
+            "id": 20,
+            "text": "The more you eat, the _____ hungry you feel.",
+            "options": [
+                "less",
+                "least",
+                "fewer",
+                "not"
+            ],
+            "correct": 0,
+            "explanation": "'The more... the less...'."
+        }
+    ],
+    "scrambled": [
+        {
+            "id": 1,
+            "answer": "Jasur is taller than Dilshod",
+            "hint": "Start with Jasur"
+        },
+        {
+            "id": 2,
+            "answer": "Tashkent is bigger than Samarkand",
+            "hint": "Start with Tashkent"
+        },
+        {
+            "id": 3,
+            "answer": "This book is more interesting than that one",
+            "hint": "Start with This"
+        },
+        {
+            "id": 4,
+            "answer": "This exam is much harder than the last one",
+            "hint": "Start with This"
+        },
+        {
+            "id": 5,
+            "answer": "I am happier than ever in my new job",
+            "hint": "Start with I"
+        },
+        {
+            "id": 6,
+            "answer": "This task is a little easier than the last one",
+            "hint": "Start with This"
+        },
+        {
+            "id": 7,
+            "answer": "It is getting hotter and hotter",
+            "hint": "Start with It"
+        },
+        {
+            "id": 8,
+            "answer": "Nigora is getting more and more confident",
+            "hint": "Start with Nigora"
+        },
+        {
+            "id": 9,
+            "answer": "The more you study the better you become",
+            "hint": "Start with The"
+        },
+        {
+            "id": 10,
+            "answer": "The more you practice the easier it is",
+            "hint": "Start with The"
+        },
+        {
+            "id": 11,
+            "answer": "This car is less expensive than that one",
+            "hint": "Start with This"
+        },
+        {
+            "id": 12,
+            "answer": "Samarkand is not as big as Tashkent",
+            "hint": "Start with Samarkand"
+        },
+        {
+            "id": 13,
+            "answer": "Dilshod is the tallest boy in the class",
+            "hint": "Start with Dilshod"
+        },
+        {
+            "id": 14,
+            "answer": "My house is a lot bigger than yours",
+            "hint": "Start with My"
+        },
+        {
+            "id": 15,
+            "answer": "She is far more talented than her classmates",
+            "hint": "Start with She"
+        },
+        {
+            "id": 16,
+            "answer": "Today is even colder than yesterday",
+            "hint": "Start with Today"
+        },
+        {
+            "id": 17,
+            "answer": "Life is getting busier and busier",
+            "hint": "Start with Life"
+        },
+        {
+            "id": 18,
+            "answer": "The city is getting bigger and bigger",
+            "hint": "Start with The"
+        },
+        {
+            "id": 19,
+            "answer": "The more you read the more you learn",
+            "hint": "Start with The"
+        },
+        {
+            "id": 20,
+            "answer": "My phone is not as fast as yours",
+            "hint": "Start with My"
+        }
+    ],
+    "errorCorrection": [
+        {
+            "id": 1,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+                "Jasur is taller than Dilshod.",
+                "Jasur is more taller than Dilshod.",
+                "Jasur is faster than Rustam.",
+                "The room is colder than yesterday."
+            ],
+            "correct": 1,
+            "explanation": "Do not use 'more' with short adjectives that already end in '-er' ('more taller' is wrong)."
+        },
+        {
+            "id": 2,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+                "Nigora is happyer than Malika.",
+                "Nigora is happier than Malika.",
+                "Nigora is more happy than Malika.",
+                "Nigora is happiest than Malika."
+            ],
+            "correct": 1,
+            "explanation": "Adjectives ending in '-y' change to '-ier': 'happier'."
+        },
+        {
+            "id": 3,
+            "text": "Which sentence contains an error?",
+            "options": [
+                "This book is more interesting than that one.",
+                "This book is interestinger than that one.",
+                "This film is more exciting than the previous one.",
+                "This road is more dangerous than that one."
+            ],
+            "correct": 1,
+            "explanation": "Long adjectives (2+ syllables) require 'more', not '-er' ('interestinger' is wrong)."
+        },
+        {
+            "id": 4,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+                "This film is better than the old one.",
+                "This film is gooder than the old one.",
+                "My result is worse than before.",
+                "Tashkent is farther than Samarkand."
+            ],
+            "correct": 1,
+            "explanation": "'Good' is irregular; comparative is 'better', not 'gooder'."
+        },
+        {
+            "id": 5,
+            "text": "Which sentence uses superlative CORRECTLY?",
+            "options": [
+                "Dilshod is tallest boy in class.",
+                "Dilshod is the tallest boy in the class.",
+                "Dilshod is most tallest boy in class.",
+                "Dilshod is the taller boy in class."
+            ],
+            "correct": 1,
+            "explanation": "Superlatives require 'the': 'the tallest boy'."
+        },
+        {
+            "id": 6,
+            "text": "Which sentence correctly emphasizes strong comparison?",
+            "options": [
+                "This exam is very harder than the last one.",
+                "This exam is much harder than the last one.",
+                "This exam is more harder than the last one.",
+                "This exam is most harder than the last one."
+            ],
+            "correct": 1,
+            "explanation": "Use 'much harder than' (not 'very harder' or 'more harder')."
+        },
+        {
+            "id": 7,
+            "text": "Which sentence uses 'than ever' CORRECTLY?",
+            "options": [
+                "I'm happier than ever in my new job.",
+                "I'm more happy than ever in my new job.",
+                "I'm happiest than ever in my new job.",
+                "I'm happier as ever in my new job."
+            ],
+            "correct": 0,
+            "explanation": "'Happier than ever' is the correct comparative + than ever structure."
+        },
+        {
+            "id": 8,
+            "text": "Which sentence correctly shows a small difference?",
+            "options": [
+                "This task is a bit more easier than the last one.",
+                "This task is a little easier than the last one.",
+                "This task is very easier than the last one.",
+                "This task is more little easier than the last one."
+            ],
+            "correct": 1,
+            "explanation": "'A little easier than' is correct."
+        },
+        {
+            "id": 9,
+            "text": "Which sentence correctly shows gradual increase?",
+            "options": [
+                "It is getting more hot and more hot.",
+                "It is getting hotter and hotter.",
+                "It is getting hottest and hottest.",
+                "It is getting hot and hot."
+            ],
+            "correct": 1,
+            "explanation": "Use 'comparative + and + comparative': 'hotter and hotter'."
+        },
+        {
+            "id": 10,
+            "text": "Which sentence shows gradual increase for a long adjective?",
+            "options": [
+                "Nigora is getting confidenter and confidenter.",
+                "Nigora is getting more and more confident.",
+                "Nigora is getting most and most confident.",
+                "Nigora is getting more confident and more confidenter."
+            ],
+            "correct": 1,
+            "explanation": "Use 'more and more + long adjective'."
+        },
+        {
+            "id": 11,
+            "text": "Which sentence uses 'the more..., the more...' CORRECTLY?",
+            "options": [
+                "The more you study, the better you become.",
+                "The most you study, the best you become.",
+                "More you study, better you become.",
+                "The more you study, the more better you become."
+            ],
+            "correct": 0,
+            "explanation": "'The more you study, the better you become' is the correct double comparative."
+        },
+        {
+            "id": 12,
+            "text": "Which sentence uses 'less' CORRECTLY?",
+            "options": [
+                "This car is less cheaper than that one.",
+                "This car is less expensive than that one.",
+                "This car is least expensive than that one.",
+                "This car is lesser expensive than that one."
+            ],
+            "correct": 1,
+            "explanation": "'Less expensive than' uses base adjective with 'less'."
+        },
+        {
+            "id": 13,
+            "text": "Which sentence uses 'not as... as' CORRECTLY?",
+            "options": [
+                "My phone is not as faster as yours.",
+                "My phone is not as fast than yours.",
+                "My phone is not as fast as yours.",
+                "My phone is not fast as yours."
+            ],
+            "correct": 2,
+            "explanation": "'Not as + base adjective + as'."
+        },
+        {
+            "id": 14,
+            "text": "Which sentence has an error with spelling?",
+            "options": [
+                "big -> bigger",
+                "hot -> hotter",
+                "happy -> happyer",
+                "nice -> nicer"
+            ],
+            "correct": 2,
+            "explanation": "'Happy' changes to 'happier' (with 'i')."
+        },
+        {
+            "id": 15,
+            "text": "Which irregular comparative pair is INCORRECT?",
+            "options": [
+                "bad -> worse",
+                "good -> better",
+                "far -> farther",
+                "much -> mucher"
+            ],
+            "correct": 3,
+            "explanation": "Comparative of 'much/many' is 'more', not 'mucher'."
+        },
+        {
+            "id": 16,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+                "She is far more talented than her classmates.",
+                "She is much more talented than her classmates.",
+                "She is very more talented than her classmates.",
+                "She is a lot more talented than her classmates."
+            ],
+            "correct": 2,
+            "explanation": "'Very more' is ungrammatical; use 'far more', 'much more', or 'a lot more'."
+        },
+        {
+            "id": 17,
+            "text": "Which sentence correctly pairs 'the more..., the less...'?",
+            "options": [
+                "The more you eat, the less hungry you feel.",
+                "The more you eat, the lesser hungry you feel.",
+                "The more you eat, the least hungry you feel.",
+                "The most you eat, the less hungry you feel."
+            ],
+            "correct": 0,
+            "explanation": "'The more you eat, the less hungry you feel'."
+        },
+        {
+            "id": 18,
+            "text": "Which sentence uses 'even' for comparison CORRECTLY?",
+            "options": [
+                "Today is even colder than yesterday.",
+                "Today is even more cold than yesterday.",
+                "Today is even coldest than yesterday.",
+                "Today is even as cold than yesterday."
+            ],
+            "correct": 0,
+            "explanation": "'Even colder than' is correct."
+        },
+        {
+            "id": 19,
+            "text": "Which sentence has a double comparative error?",
+            "options": [
+                "This road is more dangerous than that one.",
+                "This road is safer than that one.",
+                "This road is more safer than that one.",
+                "This road is as safe as that one."
+            ],
+            "correct": 2,
+            "explanation": "'More safer' is a double comparative error."
+        },
+        {
+            "id": 20,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+                "The task is funnyier than I expected.",
+                "The task is funnier than I expected.",
+                "The task is more funny than I expected.",
+                "The task is funniest than I expected."
+            ],
+            "correct": 1,
+            "explanation": "'Funnier' (y -> i + er)."
+        },
+{
+    "id": "construction-of-adjectives",
+    "title": "Construction of Adjectives",
+    "icon": "🏗️",
+    "description": "Master adjective constructions: 'the + adjective' for groups/nationalities, 'one/ones' to avoid repetition, 'it is + adj + of/for', adjectives of feeling, tendency ('prone to'), and order ('the first to').",
+    "guide": "## Construction of Adjectives (Sifatlarning Ishlatilishi va Konstruktsiyalari)\n\nSifatlar (**adjectives**) ingliz tilida faqat ot oldidan kelmay, turli maxsus grammatik qurilmalar (*constructions*) va iboralar tarkibida ham faol qo'llanadi. Ushbu darsda sifatlarning eng muhim 7 ta grammatik konstruktsiyasini o'rganasiz.\n\n---\n\n### 👥 1. The + Adjective (Umumiy Insonlar Guruhi & Millatlar)\n\nSifat oldidan **`the`** artikli qo'yilganda, u sifat emas, **muayyan insonlar guruhini (ko'plikda)** anglatuvchi otga aylanadi.\n\n* **Formula:** `the + adjective = adjective + people (plural verb)`\n* **Qoida:** Har doim **ko'plikdagi fe'l** oladi (*are, have, get, help...*).\n\n#### 1. Umumiy insonlar guruhlari:\n* `the poor` = kambag'al odamlar (*poor people*)\n* `the rich` = boy odamlar (*rich people*)\n* `the blind` = ko'zi ojizlar (*blind people*)\n* `the deaf` = kar/eshitmaydiganlar (*deaf people*)\n* `the sick` = kasallar (*sick people*)\n* `the healthy` = sog'lom insonlar (*healthy people*)\n* `the unemployed` = ishsizlar (*unemployed people*)\n* `the disabled` = imkoniyati cheklanganlar (*disabled people*)\n* `the living / the dead` = tiriklar / marhumlar (*living / dead people*)\n\n* ▸ *The poor **get** less support than the rich.* (Kambag'allar boylarga qaraganda kamroq yordam olishadi.)\n* ▸ *The organization **helps** the disabled.* (Tashkilot imkoniyati cheklanganlarga yordam beradi.)\n* ▸ *Guide dogs **help** the blind.* (Yo'lboshchi itlar ko'zi ojizlarga yordam beradi.)\n* ▸ *The unemployed **can apply** for jobs here.* (Ishsizlar bu yerda ishga topshirishlari mumkin.)\n* ▸ *We remember the living as well as the dead.* (Biz tiriklar kabi marhumlarni ham xotirlaymiz.)\n\n#### 2. Millat guruhlari (Nationality adjectives):\n`-sh`, `-ch`, `-ese`, `-ss` bilan tugaydigan millat sifatlari oldiga `the` qo'yilsa, shu xalqning barcha vakillarini anglatadi:\n* `the English`, `the French`, `the Chinese`, `the Japanese`, `the Spanish`\n* `the Dutch`, `the Irish`, `the Welsh`, `the Swiss`, `the British`\n* ▸ *The French **are** famous for their cuisine.* (Fransuzlar o'z oshxonalari bilan mashhur.)\n* ▸ *The Japanese **work** long hours.* (Yaponlar uzoq soat ishlaydilar.)\n* ▸ *The country was ruled by the British.* (Mamlakat britaniyaliklar tomonidan boshqarilgan.)\n\n---\n\n### 🔄 2. Adjective + One / Ones (Otlarni Takrorlashdan Qochish)\n\nBir gapda bir xil otni qayta-qayta takrorlamaslik uchun sifatdan keyin **`one`** (birlikda) yoki **`ones`** (ko'plikda) ishlatiladi.\n\n* **Formula:**\n  * `adjective + one` (birlikdagi ot o'rniga)\n  * `adjective + ones` (ko'plikdagi ot o'rniga)\n\n* ▸ *Don't buy the expensive apples; get the cheaper **ones**.* (Qimmat olmalarni sotib olmang; arzonroqlaridan oling.)\n* ▸ *Hard beds are healthier than soft **ones**.* (Qattiq karvotlar yumshoqlariga qaraganda sog'lomroq.)\n* ▸ *I lost my old camera; this is a new **one**.* (Eski kameramni yo'qotib qo'ydim; bu yangisi.)\n\n---\n\n### 👤 3. It + be + adjective + OF somebody + to + verb (Xarakter va Xulq-Atvor)\n\nInsonning **xarakteri, odobi yoki xatti-harakatiga** baho berishda ushbu konstruktsiya qo'llanadi. Keyin albatta **`OF`** predlogi keladi!\n\n* **Formula:** `It + be + adjective + OF + somebody + to + verb`\n* **Ko'p ishlatiladigan sifatlar:** *kind, nice, generous, rude, selfish, stupid, foolish, clever, polite, cruel*\n\n* ▸ *It was **kind of you to help** him.* (Unga yordam berganingiz juda ko'nglingiz ochiqligi / mehr-oqibatingizdir.)\n* ▸ *It was **stupid of them to leave** the door open.* (Eshikni ochiq qoldirishgani ularning ahmoqligi bo'ldi.)\n* ▸ *It was very **generous of you to help** us.* (Bizga yordam berishingiz juda saxiyligingizdir.)\n* ▸ *It was **rude of him to interrupt**.* (Gapni bo'lishi uning odobsizligi bo'ldi.)\n\n---\n\n### ⚙️ 4. It + be + adjective + FOR somebody + to + verb (Qiyinchilik, Xavfsizlik, Qulaylik)\n\nBiron ishni qilish inson uchun **qiyin/oson, xavfli/xavfsiz yoki qulay/noqulay** ekanligini aytganda **`FOR`** predlogi ishlatiladi.\n\n* **Formula:** `It + be + adjective + FOR + somebody + to + verb`\n* **Ko'p ishlatiladigan sifatlar:** *easy, difficult, hard, dangerous, safe, possible, impossible, convenient*\n\n* ▸ *It was **dangerous for children to cross** the road alone.* (Bolalar uchun yo'lni yolg'iz kesib o'tish xavfli edi.)\n* ▸ *It is **difficult for me to understand** this topic.* (Menga bu mavzuni tushunish qiyin.)\n* ▸ *It was **impossible to enter** the building.* (Binoga kirishning iloji yo'q edi.)\n* ▸ *Would it be **convenient for you to meet** tomorrow?* (Ertaga uchrashish siz uchun qulay bo'ladimi?)\n\n---\n\n### 💖 5. Subject + be + adjective + to + verb (His-tuyg'ular va Reaksiyalar)\n\nInsonning biron voqea yoki xabarga bo'lgan **his-tuyg'usi va reaksiyasini** ifodalash uchun ishlatiladi.\n\n* **Formula:** `Subject + be + adjective + to + verb`\n* **Ko'p ishlatiladigan sifatlar:** *happy, sad, glad, pleased, delighted, sorry, disappointed, amazed, astonished*\n\n* ▸ *I'm **delighted to see** you.* (Sizni ko'rganimdan juda xursandman.)\n* ▸ *He was **glad to leave** school.* (U maktabni bitirganidan/xalos bo'lganidan xursand edi.)\n* ▸ *She was **sad to hear** the news.* (U xabarni eshitib xafa bo'ldi.)\n* ▸ *They were **disappointed to fail** the exam.* (Ular imtihondan yiqilib hafsalalari pir bo'ldi.)\n\n---\n\n### 🔄 6. Be + adjective + to + verb (Moyillik, Odat va Xatti-harakat)\n\nInsonning biron harakatga **moyilligi, odati yoki tayyorligini** bildiradi.\n\n* **Formula:** `Subject + be + adjective + to + verb`\n* **Ko'p ishlatiladigan sifatlar:** *prone (moyil), reluctant (ikkilanuvchi/xohlamaydigan), willing (tayyor/xohlovchi), slow (sekin), inclined (moyil)*\n\n* ▸ *People **are prone to make** mistakes when tired.* (Odamlar charchaganda xato qilishga moyil bo'ladilar.)\n* ▸ *He **is reluctant to lend** money.* (U pul berib turishga ikkilanadi / xohlamaydi.)\n* ▸ *I **am willing to help** you.* (Men sizga yordam berishga tayyorman.)\n* ▸ *She **is slow to understand** new ideas.* (U yangi g'oyalarni sekin tushunadi.)\n* ▸ *I **am inclined to believe** him.* (Men unga ishonishga moyilman.)\n\n---\n\n### 🔢 7. The first / the last / the next + to + verb (Ketma-ketlik va Tartib)\n\nBiron ishni birinchi, oxirgi yoki navbatdagi bo'lib qilganlikni **tartib bo'yicha** ko'rsatish uchun `to + verb` ishlatiladi.\n\n* **Formula:** `The first / the last / the next (+ noun) + to + verb`\n\n* ▸ *He was **the first person to arrive**.* (U yetib kelgan birinchi odam bo'ldi.)\n* ▸ *She was **the last student to leave**.* (U ketgan oxirgi talaba edi.)\n* ▸ *This will be **the next film to be released**.* (Bu namoyish etiladigan navbatdagi film bo'ladi.)\n\n---\n\n### 📋 8. Umumiy Xulosa Jadvali (Quick Summary Table)\n\n| Konstruktsiya (Structure) | Maqsadi (Use) | Misol (Example) |\n| :--- | :--- | :--- |\n| **`the + adj`** | Umumiy insonlar guruhlari | *the poor, the rich, the French* |\n| **`adj + one/ones`** | Otni takrorlashdan qochish | *the cheaper ones, a new one* |\n| **`it is + adj + of`** | Xarakter / Insoniy odob | *It was kind of you* |\n| **`it is + adj + for`** | Qiyinchilik / Xavfsizlik / Qulaylik | *It is easy for me* |\n| **`adj + to`** | His-tuyg'ular / Reaksiyalar | *happy to see you, sad to hear* |\n| **`prone / reluctant + to`** | Moyillik / Odat | *prone to make mistakes* |\n| **`the first/last/next + to`** | Ketma-ketlik / Tartib | *the first to arrive* |",
+    "questions": [
+        {
+            "id": 1,
+            "text": "The _______ get less government support than the rich.",
+            "options": [
+                "poor",
+                "poors",
+                "poorly",
+                "poverty"
+            ],
+            "correct": 0,
+            "explanation": "'The poor' refers to poor people in general as a group."
+        },
+        {
+            "id": 2,
+            "text": "The French _______ famous for their delicious cuisine.",
+            "options": [
+                "are",
+                "is",
+                "was",
+                "be"
+            ],
+            "correct": 0,
+            "explanation": "'The French' refers to the French people as a group and takes a plural verb ('are')."
+        },
+        {
+            "id": 3,
+            "text": "Don't buy the expensive apples; get the cheaper _______.",
+            "options": [
+                "ones",
+                "one",
+                "apple",
+                "them"
+            ],
+            "correct": 0,
+            "explanation": "'Ones' replaces plural noun 'apples' to avoid repetition."
+        },
+        {
+            "id": 4,
+            "text": "It was very kind _______ you to help the old lady.",
+            "options": [
+                "of",
+                "for",
+                "to",
+                "with"
+            ],
+            "correct": 0,
+            "explanation": "Describing character/behavior uses 'kind of somebody to do something'."
+        },
+        {
+            "id": 5,
+            "text": "It is difficult _______ me to understand this topic.",
+            "options": [
+                "for",
+                "of",
+                "to",
+                "by"
+            ],
+            "correct": 0,
+            "explanation": "Describing difficulty uses 'difficult for somebody to do something'."
+        },
+        {
+            "id": 6,
+            "text": "I am delighted _______ you here today.",
+            "options": [
+                "to see",
+                "for seeing",
+                "seeing",
+                "of seeing"
+            ],
+            "correct": 0,
+            "explanation": "Adjectives of feeling/reaction take 'to + verb' (delighted to see)."
+        },
+        {
+            "id": 7,
+            "text": "People are prone _______ mistakes when they are exhausted.",
+            "options": [
+                "to make",
+                "making",
+                "for making",
+                "of making"
+            ],
+            "correct": 0,
+            "explanation": "'Prone to make' shows tendency/habit."
+        },
+        {
+            "id": 8,
+            "text": "He was the first person _______ at the meeting.",
+            "options": [
+                "to arrive",
+                "arriving",
+                "arrived",
+                "of arrive"
+            ],
+            "correct": 0,
+            "explanation": "'The first person to arrive' shows order."
+        },
+        {
+            "id": 9,
+            "text": "Guide dogs are trained to help the _______.",
+            "options": [
+                "blind",
+                "blinds",
+                "blindness",
+                "blindly"
+            ],
+            "correct": 0,
+            "explanation": "'The blind' means blind people in general."
+        },
+        {
+            "id": 10,
+            "text": "It was stupid _______ them to leave the front door unlocked.",
+            "options": [
+                "of",
+                "for",
+                "at",
+                "to"
+            ],
+            "correct": 0,
+            "explanation": "'Stupid of somebody' describes character or behavior."
+        },
+        {
+            "id": 11,
+            "text": "It was dangerous _______ children to play near the river.",
+            "options": [
+                "for",
+                "of",
+                "to",
+                "with"
+            ],
+            "correct": 0,
+            "explanation": "'Dangerous for somebody' describes safety/risk."
+        },
+        {
+            "id": 12,
+            "text": "She was glad _______ the university entrance exam.",
+            "options": [
+                "to pass",
+                "for passing",
+                "passing",
+                "of passing"
+            ],
+            "correct": 0,
+            "explanation": "'Glad to pass' expresses reaction/feeling."
+        },
+        {
+            "id": 13,
+            "text": "He is reluctant _______ money to strangers.",
+            "options": [
+                "to lend",
+                "lending",
+                "for lending",
+                "of lending"
+            ],
+            "correct": 0,
+            "explanation": "'Reluctant to lend' shows unwillingness/behavior."
+        },
+        {
+            "id": 14,
+            "text": "She was the last student _______ the library yesterday.",
+            "options": [
+                "to leave",
+                "leaving",
+                "left",
+                "for leave"
+            ],
+            "correct": 0,
+            "explanation": "'The last student to leave' shows order."
+        },
+        {
+            "id": 15,
+            "text": "I lost my old camera, so I bought a new _______.",
+            "options": [
+                "one",
+                "ones",
+                "camera",
+                "it"
+            ],
+            "correct": 0,
+            "explanation": "'One' replaces singular countable noun 'camera'."
+        },
+        {
+            "id": 16,
+            "text": "The unemployed _______ able to register for welfare benefits.",
+            "options": [
+                "are",
+                "is",
+                "was",
+                "has"
+            ],
+            "correct": 0,
+            "explanation": "'The unemployed' takes a plural verb ('are')."
+        },
+        {
+            "id": 17,
+            "text": "It was rude _______ him to interrupt the presentation.",
+            "options": [
+                "of",
+                "for",
+                "to",
+                "about"
+            ],
+            "correct": 0,
+            "explanation": "'Rude of somebody' evaluates someone's behavior."
+        },
+        {
+            "id": 18,
+            "text": "Would it be convenient _______ you to meet at 3 PM?",
+            "options": [
+                "for",
+                "of",
+                "to",
+                "with"
+            ],
+            "correct": 0,
+            "explanation": "'Convenient for somebody' describes convenience."
+        },
+        {
+            "id": 19,
+            "text": "They were disappointed _______ the championship match.",
+            "options": [
+                "to lose",
+                "losing",
+                "for losing",
+                "of losing"
+            ],
+            "correct": 0,
+            "explanation": "'Disappointed to lose' expresses feelings."
+        },
+        {
+            "id": 20,
+            "text": "I am willing _______ you with your research project.",
+            "options": [
+                "to help",
+                "helping",
+                "for help",
+                "of helping"
+            ],
+            "correct": 0,
+            "explanation": "'Willing to help' shows willingness."
+        },
+        {
+            "id": 21,
+            "text": "This will be the next movie _______ in theaters.",
+            "options": [
+                "to be released",
+                "releasing",
+                "released",
+                "to release"
+            ],
+            "correct": 0,
+            "explanation": "'The next movie to be released' shows order."
+        },
+        {
+            "id": 22,
+            "text": "The Japanese _______ known for their technology and punctuality.",
+            "options": [
+                "are",
+                "is",
+                "was",
+                "be"
+            ],
+            "correct": 0,
+            "explanation": "'The Japanese' refers to the Japanese people as a whole (plural)."
+        },
+        {
+            "id": 23,
+            "text": "Hard beds are healthier than soft _______.",
+            "options": [
+                "ones",
+                "one",
+                "bed",
+                "them"
+            ],
+            "correct": 0,
+            "explanation": "'Ones' replaces plural noun 'beds'."
+        },
+        {
+            "id": 24,
+            "text": "It was generous _______ her to donate so much money.",
+            "options": [
+                "of",
+                "for",
+                "to",
+                "with"
+            ],
+            "correct": 0,
+            "explanation": "'Generous of somebody' describes character."
+        },
+        {
+            "id": 25,
+            "text": "It is impossible _______ us to finish the work in one hour.",
+            "options": [
+                "for",
+                "of",
+                "to",
+                "with"
+            ],
+            "correct": 0,
+            "explanation": "'Impossible for somebody' describes difficulty."
+        }
+    ],
+    "fillBlanks": [
+        {
+            "id": 1,
+            "text": "The _____ get less support than the rich.",
+            "options": [
+                "poor",
+                "poors",
+                "poorly",
+                "poverty"
+            ],
+            "correct": 0,
+            "explanation": "Use 'the poor' for poor people."
+        },
+        {
+            "id": 2,
+            "text": "The French _____ famous for their cuisine.",
+            "options": [
+                "are",
+                "is",
+                "was",
+                "be"
+            ],
+            "correct": 0,
+            "explanation": "Use plural verb 'are' with nationality group 'The French'."
+        },
+        {
+            "id": 3,
+            "text": "Don't buy the expensive apples; get the cheaper _____.",
+            "options": [
+                "ones",
+                "one",
+                "apple",
+                "them"
+            ],
+            "correct": 0,
+            "explanation": "Use 'ones' to replace plural noun 'apples'."
+        },
+        {
+            "id": 4,
+            "text": "It was kind _____ you to help him.",
+            "options": [
+                "of",
+                "for",
+                "to",
+                "with"
+            ],
+            "correct": 0,
+            "explanation": "Structure: 'kind of somebody'."
+        },
+        {
+            "id": 5,
+            "text": "It is difficult _____ me to understand this topic.",
+            "options": [
+                "for",
+                "of",
+                "to",
+                "by"
+            ],
+            "correct": 0,
+            "explanation": "Structure: 'difficult for somebody'."
+        },
+        {
+            "id": 6,
+            "text": "I am delighted _____ you here.",
+            "options": [
+                "to see",
+                "for seeing",
+                "seeing",
+                "of seeing"
+            ],
+            "correct": 0,
+            "explanation": "Structure: 'delighted to see'."
+        },
+        {
+            "id": 7,
+            "text": "People are prone _____ mistakes when tired.",
+            "options": [
+                "to make",
+                "making",
+                "for making",
+                "of making"
+            ],
+            "correct": 0,
+            "explanation": "Structure: 'prone to make'."
+        },
+        {
+            "id": 8,
+            "text": "He was the first person _____ at the party.",
+            "options": [
+                "to arrive",
+                "arriving",
+                "arrived",
+                "of arrive"
+            ],
+            "correct": 0,
+            "explanation": "Structure: 'the first person to arrive'."
+        },
+        {
+            "id": 9,
+            "text": "It was stupid _____ them to leave the door open.",
+            "options": [
+                "of",
+                "for",
+                "at",
+                "to"
+            ],
+            "correct": 0,
+            "explanation": "Structure: 'stupid of somebody'."
+        },
+        {
+            "id": 10,
+            "text": "It was dangerous _____ children to cross the road.",
+            "options": [
+                "for",
+                "of",
+                "to",
+                "with"
+            ],
+            "correct": 0,
+            "explanation": "Structure: 'dangerous for somebody'."
+        },
+        {
+            "id": 11,
+            "text": "I lost my camera; this is a new _____.",
+            "options": [
+                "one",
+                "ones",
+                "camera",
+                "it"
+            ],
+            "correct": 0,
+            "explanation": "Use 'one' to replace singular noun 'camera'."
+        },
+        {
+            "id": 12,
+            "text": "She was glad _____ the good news.",
+            "options": [
+                "to hear",
+                "hearing",
+                "for hearing",
+                "of hearing"
+            ],
+            "correct": 0,
+            "explanation": "Structure: 'glad to hear'."
+        },
+        {
+            "id": 13,
+            "text": "He is reluctant _____ money to anyone.",
+            "options": [
+                "to lend",
+                "lending",
+                "for lending",
+                "of lending"
+            ],
+            "correct": 0,
+            "explanation": "Structure: 'reluctant to lend'."
+        },
+        {
+            "id": 14,
+            "text": "She was the last student _____ the classroom.",
+            "options": [
+                "to leave",
+                "leaving",
+                "left",
+                "for leave"
+            ],
+            "correct": 0,
+            "explanation": "Structure: 'the last student to leave'."
+        },
+        {
+            "id": 15,
+            "text": "The organization helps the _____.",
+            "options": [
+                "disabled",
+                "disableds",
+                "disability",
+                "disable"
+            ],
+            "correct": 0,
+            "explanation": "Use 'the disabled' for disabled people."
+        },
+        {
+            "id": 16,
+            "text": "It was rude _____ him to interrupt.",
+            "options": [
+                "of",
+                "for",
+                "to",
+                "about"
+            ],
+            "correct": 0,
+            "explanation": "Structure: 'rude of somebody'."
+        },
+        {
+            "id": 17,
+            "text": "Would it be convenient _____ you to meet tomorrow?",
+            "options": [
+                "for",
+                "of",
+                "to",
+                "with"
+            ],
+            "correct": 0,
+            "explanation": "Structure: 'convenient for somebody'."
+        },
+        {
+            "id": 18,
+            "text": "They were disappointed _____ the match.",
+            "options": [
+                "to lose",
+                "losing",
+                "for losing",
+                "of losing"
+            ],
+            "correct": 0,
+            "explanation": "Structure: 'disappointed to lose'."
+        },
+        {
+            "id": 19,
+            "text": "I am willing _____ you with your homework.",
+            "options": [
+                "to help",
+                "helping",
+                "for help",
+                "of helping"
+            ],
+            "correct": 0,
+            "explanation": "Structure: 'willing to help'."
+        },
+        {
+            "id": 20,
+            "text": "The Japanese _____ work long hours.",
+            "options": [
+                "are",
+                "is",
+                "was",
+                "be"
+            ],
+            "correct": 0,
+            "explanation": "'The Japanese' as a group takes plural verb."
+        }
+    ],
+    "scrambled": [
+        {
+            "id": 1,
+            "answer": "The poor get less support than the rich",
+            "hint": "Start with The"
+        },
+        {
+            "id": 2,
+            "answer": "The French are famous for their cuisine",
+            "hint": "Start with The"
+        },
+        {
+            "id": 3,
+            "answer": "Don't buy expensive apples get cheaper ones",
+            "hint": "Start with Don't"
+        },
+        {
+            "id": 4,
+            "answer": "It was kind of you to help him",
+            "hint": "Start with It"
+        },
+        {
+            "id": 5,
+            "answer": "It is difficult for me to understand this topic",
+            "hint": "Start with It"
+        },
+        {
+            "id": 6,
+            "answer": "I am delighted to see you today",
+            "hint": "Start with I"
+        },
+        {
+            "id": 7,
+            "answer": "People are prone to make mistakes when tired",
+            "hint": "Start with People"
+        },
+        {
+            "id": 8,
+            "answer": "He was the first person to arrive",
+            "hint": "Start with He"
+        },
+        {
+            "id": 9,
+            "answer": "It was stupid of them to leave the door open",
+            "hint": "Start with It"
+        },
+        {
+            "id": 10,
+            "answer": "It was dangerous for children to cross alone",
+            "hint": "Start with It"
+        },
+        {
+            "id": 11,
+            "answer": "I lost my camera this is a new one",
+            "hint": "Start with I"
+        },
+        {
+            "id": 12,
+            "answer": "She was glad to hear the news",
+            "hint": "Start with She"
+        },
+        {
+            "id": 13,
+            "answer": "He is reluctant to lend money",
+            "hint": "Start with He"
+        },
+        {
+            "id": 14,
+            "answer": "She was the last student to leave",
+            "hint": "Start with She"
+        },
+        {
+            "id": 15,
+            "answer": "The organization helps the disabled",
+            "hint": "Start with The"
+        },
+        {
+            "id": 16,
+            "answer": "It was rude of him to interrupt us",
+            "hint": "Start with It"
+        },
+        {
+            "id": 17,
+            "answer": "Would it be convenient for you to meet tomorrow",
+            "hint": "Start with Would"
+        },
+        {
+            "id": 18,
+            "answer": "They were disappointed to fail the exam",
+            "hint": "Start with They"
+        },
+        {
+            "id": 19,
+            "answer": "I am willing to help you anytime",
+            "hint": "Start with I"
+        },
+        {
+            "id": 20,
+            "answer": "The Japanese work long hours",
+            "hint": "Start with The"
+        }
+    ],
+    "errorCorrection": [
+        {
+            "id": 1,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+                "The poor get less support than the rich.",
+                "The poors get less support than the rich.",
+                "The organization helps the disabled.",
+                "Guide dogs help the blind."
+            ],
+            "correct": 1,
+            "explanation": "Do not add '-s' to adjectives when referring to groups ('the poor', not 'the poors')."
+        },
+        {
+            "id": 2,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+                "It was kind for you to help him.",
+                "It was kind of you to help him.",
+                "It was kind to you to help him.",
+                "It was kind by you to help him."
+            ],
+            "correct": 1,
+            "explanation": "Describing someone's character uses 'kind of somebody'."
+        },
+        {
+            "id": 3,
+            "text": "Which sentence contains an error?",
+            "options": [
+                "It is difficult for me to understand this.",
+                "It is difficult of me to understand this.",
+                "It is easy for him to solve the math puzzle.",
+                "It is dangerous for kids to play here."
+            ],
+            "correct": 1,
+            "explanation": "Describing difficulty uses 'for somebody', not 'of somebody'."
+        },
+        {
+            "id": 4,
+            "text": "Which sentence uses 'one/ones' INCORRECTLY?",
+            "options": [
+                "Don't buy expensive apples; get cheaper ones.",
+                "I lost my camera, so I got a new one.",
+                "Hard beds are healthier than soft ones.",
+                "Don't buy expensive apples; get cheaper one."
+            ],
+            "correct": 3,
+            "explanation": "'Apples' is plural, so it requires 'ones', not 'one'."
+        },
+        {
+            "id": 5,
+            "text": "Which sentence has an INCORRECT subject-verb agreement?",
+            "options": [
+                "The French are famous for cuisine.",
+                "The French is famous for cuisine.",
+                "The Japanese work long hours.",
+                "The unemployed can apply here."
+            ],
+            "correct": 1,
+            "explanation": "'The French' refers to French people as a group, so it takes plural verb 'are'."
+        },
+        {
+            "id": 6,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+                "I am delighted to see you.",
+                "I am delighted for seeing you.",
+                "I am delighted seeing you.",
+                "I am delighted of see you."
+            ],
+            "correct": 0,
+            "explanation": "Adjectives of feeling/reaction take 'to + verb' (delighted to see)."
+        },
+        {
+            "id": 7,
+            "text": "Which sentence contains a preposition error?",
+            "options": [
+                "It was stupid of them to leave.",
+                "It was rude of him to interrupt.",
+                "It was generous for you to help.",
+                "It was polite of her to thank us."
+            ],
+            "correct": 2,
+            "explanation": "'Generous' describes character, so it should be 'generous of you', not 'for you'."
+        },
+        {
+            "id": 8,
+            "text": "Which sentence is CORRECT for order?",
+            "options": [
+                "He was the first person to arrive.",
+                "He was the first person arriving.",
+                "He was the first person arrived.",
+                "He was the first person for arrive."
+            ],
+            "correct": 0,
+            "explanation": "'The first person to arrive' correctly expresses order."
+        },
+        {
+            "id": 9,
+            "text": "Which sentence contains a grammar error?",
+            "options": [
+                "People are prone to make mistakes.",
+                "He is reluctant to lend money.",
+                "I am willing helping you.",
+                "She is slow to understand."
+            ],
+            "correct": 2,
+            "explanation": "'Willing' takes 'to + infinitive': 'willing to help'."
+        },
+        {
+            "id": 10,
+            "text": "Which sentence uses 'for somebody' CORRECTLY?",
+            "options": [
+                "It was stupid for him to lie.",
+                "It is safe for children to cross.",
+                "It was rude for her to walk away.",
+                "It was kind for them to invite us."
+            ],
+            "correct": 1,
+            "explanation": "'Safe for children' correctly describes safety."
+        },
+        {
+            "id": 11,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+                "The unemployed are seeking jobs.",
+                "The unemployed is seeking jobs.",
+                "Unemployed people are seeking jobs.",
+                "The unemployed need support."
+            ],
+            "correct": 1,
+            "explanation": "'The unemployed' refers to people in general, requiring plural verb 'are'."
+        },
+        {
+            "id": 12,
+            "text": "Which sentence is CORRECT for avoiding repetition?",
+            "options": [
+                "I need a pen; do you have a blue ones?",
+                "I need a pen; do you have a blue one?",
+                "I need pens; do you have blue one?",
+                "I need a pen; do you have blue it?"
+            ],
+            "correct": 1,
+            "explanation": "'A pen' is singular, so use 'a blue one'."
+        },
+        {
+            "id": 13,
+            "text": "Which sentence contains an error?",
+            "options": [
+                "She was sad to hear the bad news.",
+                "They were disappointed to fail.",
+                "He was glad leaving school.",
+                "I am happy to meet you."
+            ],
+            "correct": 2,
+            "explanation": "'Glad' takes 'to + infinitive': 'glad to leave'."
+        },
+        {
+            "id": 14,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+                "She was the last student to leave.",
+                "She was last student leaving.",
+                "She was the last student left.",
+                "She was last student for leave."
+            ],
+            "correct": 0,
+            "explanation": "'The last student to leave' is correct."
+        },
+        {
+            "id": 15,
+            "text": "Which sentence contains a preposition error?",
+            "options": [
+                "Would it be convenient for you?",
+                "It was impossible for us to enter.",
+                "It was clever of him to solve it.",
+                "It was clever for him to solve it."
+            ],
+            "correct": 3,
+            "explanation": "'Clever' describes character, so it should be 'clever of him', not 'for him'."
+        },
+        {
+            "id": 16,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+                "Guide dogs help the blind.",
+                "Guide dogs help the blind people.",
+                "Guide dogs help blind people.",
+                "Guide dogs help the blinds."
+            ],
+            "correct": 3,
+            "explanation": "'The blinds' is wrong when referring to blind people; use 'the blind' or 'blind people'."
+        },
+        {
+            "id": 17,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+                "He is inclined to believe her.",
+                "He is inclined believing her.",
+                "He is inclined for believe her.",
+                "He is inclined of believe her."
+            ],
+            "correct": 0,
+            "explanation": "'Inclined' takes 'to + infinitive': 'inclined to believe'."
+        },
+        {
+            "id": 18,
+            "text": "Which sentence uses 'the + adjective' CORRECTLY?",
+            "options": [
+                "The sick needs good healthcare.",
+                "The sick need good healthcare.",
+                "The sicks need good healthcare.",
+                "A sick need good healthcare."
+            ],
+            "correct": 1,
+            "explanation": "'The sick' refers to sick people in general and takes plural verb 'need'."
+        },
+        {
+            "id": 19,
+            "text": "Which sentence contains an error?",
+            "options": [
+                "This will be the next film to be released.",
+                "This will be the next film releasing.",
+                "This film is the next one to watch.",
+                "He was the first runner to finish."
+            ],
+            "correct": 1,
+            "explanation": "'The next film to be released' is the correct infinitive structure."
+        },
+        {
+            "id": 20,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+                "It was cruel of him to kick the dog.",
+                "It was cruel for him to kick the dog.",
+                "It was cruel to him to kick the dog.",
+                "It was cruel by him to kick the dog."
+            ],
+            "correct": 0,
+            "explanation": "'Cruel' describes character/behavior, so use 'cruel of him'."
+        },
+{
+    "id": "adverbs-of-manner",
+    "title": "Adverbs of Manner",
+    "icon": "🚀",
+    "description": "Master adverbs of manner (how actions are done), position rules (after verb, after object, before preposition, before verb), long object placement, meaning changes, character adverbs ('foolishly', 'kindly'), and 'it was ... of somebody' structures.",
+    "guide": "## Adverbs of Manner (Harakat Tarzi Ravishlari)\n\nHarakat tarzi ravishlari (**adverbs of manner**) harakatning **qanday, qay tarzda** bajarilganligini ifodalaydi. Ular asosan **\"How?\" (Qanday? Qay tarzda?)** savoliga javob beradi hamda ko'pincha sifatlarga `-ly` qo'shimchasini qo'shish orqali yasaladi (*beautiful -> beautifully*, *careful -> carefully*).\n\n---\n\n### 🎯 1. Asosiy Xususiyatlar va Yasalishi\n\n* **Sifat (Adjective):** Odam yoki narsaning xususiyatini ifodalaydi (*He is a **careful** driver.*)\n* **Ravish (Adverb):** Harakatning qanday bajarilganini ko'rsatadi (*He drives **carefully**.*)\n\n| Sifat (Adjective) | Ravish (Adverb) | Misol (Sentence) |\n| :--- | :--- | :--- |\n| **beautiful** | **beautifully** | *She sang **beautifully**.* (U chiroyli kuyladi.) |\n| **careful** | **carefully** | *He drives **carefully**.* (U ehtiyotkorlik bilan haydaydi.) |\n| **quiet** | **quietly** | *They walked **quietly**.* (Ular sekin/ovozsiz yurishdi.) |\n| **slow** | **slowly** | *The turtle moves **slowly**.* (Toshbaqa sekin harakatlanadi.) |\n| **happy** | **happily** | *The children played **happily**.* (Bolalar xursandchilik bilan o'ynashdi.) |\n| **skillful** | **skillfully** | *He carved the wood **skillfully**.* (U yog'ochni mahorat bilan yo'ndi.) |\n\n---\n\n### 📍 2. Ravishlarning Gapdagi O'rni (Positions of Adverbs)\n\n#### 1. Fe'ldan keyin (After the Verb):\nTo'ldiruvchi (object) bo'lmagan oddiy gaplarda ravish **fe'ldan keyin** keladi.\n* **Formula:** `Subject + Verb + Adverb`\n* ▸ *Susan smiled **cheerfully**.* (Süzan quvnoqlik bilan tabassum qildi.)\n* ▸ *Sam speaks **softly**.* (Sem mayin gapiradi.)\n* ▸ *He writes **carelessly**.* (U beparvolik bilan yozadi.)\n* ▸ *The baby slept **peacefully**.* (Chaqaloq tinchgina uxladi.)\n* ▸ *Aziz answered **politely**.* (Aziz xushmuomalalik bilan javob berdi.)\n\n#### 2. To'ldiruvchidan keyin (After the Object):\nAgar fe'ldan keyin **to'ldiruvchi (object)** kelsa, ravish to'ldiruvchidan keyin qo'yiladi.\n⚠️ **MUHIM:** Ravish fe'l va to'ldiruvchi **o'rtasiga tushmaydi**! (*He gave reluctantly the money* ❌)\n* **Formula:** `Subject + Verb + Object + Adverb`\n* ▸ *He gave **the money** **reluctantly**.* (U pulni noilojlik bilan berdi.)\n* ▸ *They speak **English** **well**.* (Ular ingliz tilida yaxshi gapirishadi.)\n* ▸ *I entered **the classroom** **quietly**.* (Men sinfxonaga sekingina kirdim.)\n* ▸ *Dilshod completed **the task** **quickly**.* (Dilshod topshiriqni tezda yakunladi.)\n\n#### 3. Fe'l + Predlog + To'ldiruvchi (Verb + Preposition + Object):\nAgar fe'l predlog bilan kelsa, ravish **ikki xil o'rinda** kelishi mumkin va ikkalasi ham to'g'ri:\n* **1-o'rin (Predlog va to'ldiruvchidan keyin):** `Verb + Preposition + Object + Adverb`\n  * ▸ *He looked at me **suspiciously**.*\n  * ▸ *John listened to him **attentively**.*\n* **2-o'rin (Fe'l va predlog o'rtasida / predlogdan oldin):** `Verb + Adverb + Preposition + Object`\n  * ▸ *He looked **suspiciously** at me.*\n  * ▸ *John listened **attentively** to him.*\n\n---\n\n### 📏 3. Uzun To'ldiruvchilar (Long Objects Rules)\n\n#### 1. Predlogli konstruktsiyalarda uzun to'ldiruvchi bo'lsa:\nAgar to'ldiruvchi uzun bo'lsa (tarkibida elakchi gap yoki boshqa fe'l bo'lsa), ravish **predlogdan oldin** qo'yiladi.\n* **Formula:** `Subject + Verb + Adverb + Preposition + Long Object`\n* ✅ *He looked **suspiciously** at everyone who got off the plane.* (U samolyotdan tushgan har bir kishiga shubha bilan qaradi.)\n* ❌ *He looked at everyone who got off the plane **suspiciously**.* (Tabiiy emas, chunki ravish juda uzoqlashib ketadi.)\n* ✅ *John listened **attentively** to every word his teacher told him.* (Jon o'qituvchisi aytgan har bir so'zga diqqat bilan quloq tutdi.)\n* ✅ *Nigora listened **carefully** to everything the professor explained.* (Nigora professor tushuntirgan barcha narsani diqqat bilan tingladi.)\n\n#### 2. Predlogsiz konstruktsiyalarda (Verb + Object):\n* **Qisqa to'ldiruvchi:** Ravish to'ldiruvchidan keyin keladi.\n  * ▸ *She picked up **the glass** **carefully**.*\n  * ▸ *He opened **the door** **slowly**.*\n* **Uzun to'ldiruvchi:** Ravish **fe'ldan oldin** keladi!\n  * **Formula:** `Subject + Adverb + Verb + Long Object`\n  * ▸ *She **carefully** picked up all the bits of broken glass.* (U singan shishaning barcha bo'laklarini ehtiyotkorlik bilan terib oldi.)\n  * ▸ *He **angrily** denied that he had stolen the documents.* (U hujjatlarni o'g'irlaganini jahldorlik bilan inkor qildi.)\n  * ▸ *They **secretly** decided to leave the town.* (Ular shahardan ketishga yashirincha qaror qilishdi.)\n\n---\n\n### 🔀 4. O'rin O'zgarishi Bilan Ma'noning O'zgarishi\n\nRavishning fe'ldan oldin yoki gap oxirida kelishi **gap ma'nosini o'zgartirishi** mumkin:\n\n1. **Inkorda:**\n   * ▸ *He **angrily** denied that he had stolen the documents.*\n     * ➔ **Ma'nosi:** Uning *inkor qilish harakatining o'zi* jahldorlik bilan bo'ldi (U jahli chiqib inkor qildi).\n   * ▸ *He denied that he had stolen the documents **angrily**.*\n     * ➔ **Ma'nosi:** U o'g'irlikni *jahldor tarzda qilganini* inkor qildi (Hujjatlarni jahli chiqib o'g'irlamaganini aytdi).\n\n2. **Qaror va Harakatda:**\n   * ▸ *They **secretly** decided to leave the town.*\n     * ➔ **Ma'nosi:** Qarorning o'zi *yashirincha qabul qilindi* (Decision was secret).\n   * ▸ *They decided to leave the town **secretly**.*\n     * ➔ **Ma'nosi:** Shahardan *yashirincha chiqib ketishga* qaror qilishdi (Leaving was secret).\n\n---\n\n### 🧠 5. Character & Intelligence Adverbs (Xarakter va Aql-Idrok Ravishlari)\n\nXarakter va aql-idrokni anglatuvchi ravishlar (*foolishly, kindly, generously, sensibly, stupidly, carelessly, bravely, selfishly, cruelly, unreasonably*) harakatning aqlli yoki ahmoqona bo'lganini bildiradi.\n\n#### 1. Fe'ldan oldin kelishi (xatti-harakatga baho):\n* ▸ *I **foolishly** forgot my passport.* (O'zimni ahmoqona tutib pasportimni unutibman.)\n* ▸ *He **generously** paid for all of us.* (U saxiylik qilib barchamiz uchun to'ladi.)\n\n#### 2. \"It was ... of somebody ...\" tengli formasi:\nUshbu jumlalarni teng ma'noli `It was + adjective + of somebody to + verb` qurilmasi bilan qayta yozish mumkin:\n* ▸ *I **foolishly** forgot my passport.*  ≡  *It was **foolish of me** to forget my passport.*\n* ▸ *He **kindly** waited for me.*  ≡  *It was **kind of him** to wait for me.*\n* ▸ *She **generously** helped us.*  ≡  *It was **generous of her** to help us.*\n\n#### 3. Gap oxirida vs Fe'ldan oldin kelganda ma'no farqi:\n* ▸ *He spoke **kindly**.* ➔ Uning gapirish *ohangi/tarzi* mehriboncha edi (Speech manner).\n* ▸ *He **kindly** spoke to me.* ➔ Uning men bilan gaplashishining *o'zi* mehribonlik bo'ldi (Character/Act).\n* ▸ *He answered the questions **foolishly**.* ➔ Uning bergan *javoblari* ahmoqona edi (Answers were foolish).\n* ▸ *He **foolishly** answered the questions.* ➔ Savollarga javob berish *qarorining o'zi* ahmoqona ish edi (Action to answer was foolish).\n\n---\n\n### 📋 6. Xulosa Jadvali (Summary Table)\n\n| Ravish O'rni (Position) | Misol (Example) | Ma'nosi (Meaning) |\n| :--- | :--- | :--- |\n| **Fe'ldan keyin** | *She smiled **happily**.* | Harakat qanday bajarildi |\n| **To'ldiruvchidan keyin** | *He finished the work **quickly**.* | Ish qanday yakunlandi |\n| **Predlogdan oldin** | *He looked **suspiciously** at me.* | Qanday qaradi |\n| **Fe'ldan oldin** | *He **angrily** denied the accusation.* | Jahli inkorga tegishli |\n| **Gap oxirida** | *He denied the accusation **angrily**.* | Ma'no o'zgarishi mumkin |\n| **Xarakter ravishi (fe'ldan oldin)** | *He **foolishly** forgot his keys.* | Qaror/harakat ahmoqona edi |\n| **Xarakter ravishi (fe'ldan keyin)** | *He spoke **foolishly**.* | Nutqning o'zi ahmoqona edi |",
+    "questions": [
+        {
+            "id": 1,
+            "text": "Adverbs of manner usually answer the question _______.",
+            "options": [
+                "How?",
+                "When?",
+                "Where?",
+                "Why?"
+            ],
+            "correct": 0,
+            "explanation": "Adverbs of manner describe how an action is performed."
+        },
+        {
+            "id": 2,
+            "text": "She sang _______ during the school concert.",
+            "options": [
+                "beautifully",
+                "beautiful",
+                "beauty",
+                "beautify"
+            ],
+            "correct": 0,
+            "explanation": "'Beautifully' is the adverb of manner describing how she sang."
+        },
+        {
+            "id": 3,
+            "text": "He entered the classroom _______.",
+            "options": [
+                "quietly",
+                "quiet",
+                "quietness",
+                "more quiet"
+            ],
+            "correct": 0,
+            "explanation": "Place the adverb of manner ('quietly') after the object ('the classroom')."
+        },
+        {
+            "id": 4,
+            "text": "Which sentence has the CORRECT adverb placement?",
+            "options": [
+                "They speak English well.",
+                "They speak well English.",
+                "They well speak English.",
+                "Well they speak English."
+            ],
+            "correct": 0,
+            "explanation": "Adverbs of manner come after the object ('English well'), never between verb and object."
+        },
+        {
+            "id": 5,
+            "text": "He looked _______ at everyone who got off the plane.",
+            "options": [
+                "suspiciously",
+                "suspicious",
+                "suspicion",
+                "suspiciousness"
+            ],
+            "correct": 0,
+            "explanation": "For long objects, place the adverb before the preposition ('suspiciously at...')."
+        },
+        {
+            "id": 6,
+            "text": "She _______ picked up all the bits of broken glass.",
+            "options": [
+                "carefully",
+                "careful",
+                "care",
+                "caring"
+            ],
+            "correct": 0,
+            "explanation": "When the object is long, place the adverb before the verb ('carefully picked up...')."
+        },
+        {
+            "id": 7,
+            "text": "I _______ forgot my passport at home.",
+            "options": [
+                "foolishly",
+                "foolish",
+                "fool",
+                "foolishness"
+            ],
+            "correct": 0,
+            "explanation": "'Foolishly' before the verb indicates that forgetting was a foolish act."
+        },
+        {
+            "id": 8,
+            "text": "I foolishly forgot my passport = It was _______ of me to forget my passport.",
+            "options": [
+                "foolish",
+                "foolishly",
+                "fool",
+                "foolishness"
+            ],
+            "correct": 0,
+            "explanation": "'It was foolish of me to...' is the equivalent adjective structure."
+        },
+        {
+            "id": 9,
+            "text": "'He spoke kindly' means _______.",
+            "options": [
+                "His manner of speaking was kind",
+                "It was kind of him to speak to me",
+                "He did not speak at all",
+                "He spoke angrily"
+            ],
+            "correct": 0,
+            "explanation": "When character adverbs come after the verb, they describe the manner of speech."
+        },
+        {
+            "id": 10,
+            "text": "Dilshod completed the task _______.",
+            "options": [
+                "quickly",
+                "quick",
+                "quickness",
+                "more quick"
+            ],
+            "correct": 0,
+            "explanation": "'Quickly' comes after the object 'the task'."
+        },
+        {
+            "id": 11,
+            "text": "John listened _______ to every word his teacher told him.",
+            "options": [
+                "attentively",
+                "attentive",
+                "attention",
+                "attentiveness"
+            ],
+            "correct": 0,
+            "explanation": "Place the adverb before preposition when followed by a long object."
+        },
+        {
+            "id": 12,
+            "text": "He _______ paid for all of our meals.",
+            "options": [
+                "generously",
+                "generous",
+                "generosity",
+                "more generous"
+            ],
+            "correct": 0,
+            "explanation": "'Generously' before verb evaluates the generosity of his action."
+        },
+        {
+            "id": 13,
+            "text": "He kindly waited for me = It was _______ of him to wait for me.",
+            "options": [
+                "kind",
+                "kindly",
+                "kindness",
+                "kinder"
+            ],
+            "correct": 0,
+            "explanation": "The structure 'It was kind of him' uses the adjective form."
+        },
+        {
+            "id": 14,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+                "He gave the money reluctantly.",
+                "He gave reluctantly the money.",
+                "He reluctantly gave the money.",
+                "Reluctantly, he gave the money."
+            ],
+            "correct": 1,
+            "explanation": "Adverbs must NOT be placed between verb ('gave') and direct object ('the money')."
+        },
+        {
+            "id": 15,
+            "text": "He looked at me _______.",
+            "options": [
+                "suspiciously",
+                "suspicious",
+                "suspicion",
+                "suspiciously at"
+            ],
+            "correct": 0,
+            "explanation": "Both 'looked at me suspiciously' and 'looked suspiciously at me' are correct."
+        },
+        {
+            "id": 16,
+            "text": "Susan smiled _______.",
+            "options": [
+                "cheerfully",
+                "cheerful",
+                "cheer",
+                "cheerfulness"
+            ],
+            "correct": 0,
+            "explanation": "Adverb after intransitive verb 'smiled'."
+        },
+        {
+            "id": 17,
+            "text": "The old man carves wooden figures _______.",
+            "options": [
+                "skillfully",
+                "skillful",
+                "skill",
+                "skillfulness"
+            ],
+            "correct": 0,
+            "explanation": "Adverb after object 'wooden figures'."
+        },
+        {
+            "id": 18,
+            "text": "They _______ decided to leave the town in secret.",
+            "options": [
+                "secretly",
+                "secret",
+                "secrecy",
+                "secretive"
+            ],
+            "correct": 0,
+            "explanation": "'Secretly' before verb means the decision itself was secret."
+        },
+        {
+            "id": 19,
+            "text": "Aziz answered _______.",
+            "options": [
+                "politely",
+                "polite",
+                "politeness",
+                "impolite"
+            ],
+            "correct": 0,
+            "explanation": "Adverb of manner after verb."
+        },
+        {
+            "id": 20,
+            "text": "He answered the questions _______.",
+            "options": [
+                "foolishly",
+                "foolish",
+                "fool",
+                "foolishness"
+            ],
+            "correct": 0,
+            "explanation": "'Answered the questions foolishly' means the answers were foolish."
+        },
+        {
+            "id": 21,
+            "text": "The baby slept _______ all night long.",
+            "options": [
+                "peacefully",
+                "peaceful",
+                "peace",
+                "peacefulness"
+            ],
+            "correct": 0,
+            "explanation": "Adverb after intransitive verb 'slept'."
+        },
+        {
+            "id": 22,
+            "text": "He _______ denied that he had stolen the documents.",
+            "options": [
+                "angrily",
+                "angry",
+                "anger",
+                "angrier"
+            ],
+            "correct": 0,
+            "explanation": "Adverb before verb when object is a long clause ('that he had stolen...')."
+        },
+        {
+            "id": 23,
+            "text": "She generously helped us = It was _______ of her to help us.",
+            "options": [
+                "generous",
+                "generously",
+                "generosity",
+                "more generous"
+            ],
+            "correct": 0,
+            "explanation": "'It was generous of her to help us'."
+        },
+        {
+            "id": 24,
+            "text": "Nigora listened _______ to everything the professor explained.",
+            "options": [
+                "carefully",
+                "careful",
+                "care",
+                "caringly"
+            ],
+            "correct": 0,
+            "explanation": "Adverb before preposition for long object clause."
+        },
+        {
+            "id": 25,
+            "text": "Sam speaks _______.",
+            "options": [
+                "softly",
+                "soft",
+                "softness",
+                "soften"
+            ],
+            "correct": 0,
+            "explanation": "'Softly' is the adverb of manner describing speech."
+        }
+    ],
+    "fillBlanks": [
+        {
+            "id": 1,
+            "text": "She sang _____ during the concert.",
+            "options": [
+                "beautifully",
+                "beautiful",
+                "beauty",
+                "beautify"
+            ],
+            "correct": 0,
+            "explanation": "Use adverb 'beautifully'."
+        },
+        {
+            "id": 2,
+            "text": "They speak English _____.",
+            "options": [
+                "well",
+                "good",
+                "better",
+                "best"
+            ],
+            "correct": 0,
+            "explanation": "Adverb of manner after object is 'well'."
+        },
+        {
+            "id": 3,
+            "text": "He entered the classroom _____.",
+            "options": [
+                "quietly",
+                "quiet",
+                "quietness",
+                "more quiet"
+            ],
+            "correct": 0,
+            "explanation": "Use 'quietly' after object."
+        },
+        {
+            "id": 4,
+            "text": "He looked _____ at everyone who got off the plane.",
+            "options": [
+                "suspiciously",
+                "suspicious",
+                "suspicion",
+                "suspiciousness"
+            ],
+            "correct": 0,
+            "explanation": "Place 'suspiciously' before preposition for long object."
+        },
+        {
+            "id": 5,
+            "text": "She _____ picked up all the bits of broken glass.",
+            "options": [
+                "carefully",
+                "careful",
+                "care",
+                "caring"
+            ],
+            "correct": 0,
+            "explanation": "Place 'carefully' before verb for long object."
+        },
+        {
+            "id": 6,
+            "text": "I _____ forgot my passport at home.",
+            "options": [
+                "foolishly",
+                "foolish",
+                "fool",
+                "foolishness"
+            ],
+            "correct": 0,
+            "explanation": "Use 'foolishly' before verb."
+        },
+        {
+            "id": 7,
+            "text": "It was _____ of me to forget my passport.",
+            "options": [
+                "foolish",
+                "foolishly",
+                "fool",
+                "foolishness"
+            ],
+            "correct": 0,
+            "explanation": "Use adjective 'foolish' in 'It was foolish of me'."
+        },
+        {
+            "id": 8,
+            "text": "Dilshod completed the task _____.",
+            "options": [
+                "quickly",
+                "quick",
+                "quickness",
+                "more quick"
+            ],
+            "correct": 0,
+            "explanation": "Use 'quickly' after object."
+        },
+        {
+            "id": 9,
+            "text": "John listened _____ to every word his teacher told him.",
+            "options": [
+                "attentively",
+                "attentive",
+                "attention",
+                "attentiveness"
+            ],
+            "correct": 0,
+            "explanation": "Use 'attentively' before preposition."
+        },
+        {
+            "id": 10,
+            "text": "He _____ paid for all of our meals.",
+            "options": [
+                "generously",
+                "generous",
+                "generosity",
+                "more generous"
+            ],
+            "correct": 0,
+            "explanation": "Use 'generously' before verb."
+        },
+        {
+            "id": 11,
+            "text": "It was _____ of him to wait for me.",
+            "options": [
+                "kind",
+                "kindly",
+                "kindness",
+                "kinder"
+            ],
+            "correct": 0,
+            "explanation": "Use adjective 'kind' in 'It was kind of him'."
+        },
+        {
+            "id": 12,
+            "text": "He looked at me _____.",
+            "options": [
+                "suspiciously",
+                "suspicious",
+                "suspicion",
+                "suspiciousness"
+            ],
+            "correct": 0,
+            "explanation": "Use 'suspiciously' after prepositional object."
+        },
+        {
+            "id": 13,
+            "text": "Susan smiled _____.",
+            "options": [
+                "cheerfully",
+                "cheerful",
+                "cheer",
+                "cheerfulness"
+            ],
+            "correct": 0,
+            "explanation": "Use 'cheerfully'."
+        },
+        {
+            "id": 14,
+            "text": "The old man carves wooden figures _____.",
+            "options": [
+                "skillfully",
+                "skillful",
+                "skill",
+                "skillfulness"
+            ],
+            "correct": 0,
+            "explanation": "Use 'skillfully'."
+        },
+        {
+            "id": 15,
+            "text": "They _____ decided to leave the town.",
+            "options": [
+                "secretly",
+                "secret",
+                "secrecy",
+                "secretive"
+            ],
+            "correct": 0,
+            "explanation": "Use 'secretly' before verb."
+        },
+        {
+            "id": 16,
+            "text": "Aziz answered _____.",
+            "options": [
+                "politely",
+                "polite",
+                "politeness",
+                "impolite"
+            ],
+            "correct": 0,
+            "explanation": "Use 'politely'."
+        },
+        {
+            "id": 17,
+            "text": "The baby slept _____ all night.",
+            "options": [
+                "peacefully",
+                "peaceful",
+                "peace",
+                "peacefulness"
+            ],
+            "correct": 0,
+            "explanation": "Use 'peacefully'."
+        },
+        {
+            "id": 18,
+            "text": "He _____ denied that he had stolen the documents.",
+            "options": [
+                "angrily",
+                "angry",
+                "anger",
+                "angrier"
+            ],
+            "correct": 0,
+            "explanation": "Use 'angrily' before verb."
+        },
+        {
+            "id": 19,
+            "text": "It was _____ of her to help us.",
+            "options": [
+                "generous",
+                "generously",
+                "generosity",
+                "more generous"
+            ],
+            "correct": 0,
+            "explanation": "Use adjective 'generous' in 'It was generous of her'."
+        },
+        {
+            "id": 20,
+            "text": "Nigora listened _____ to everything the professor explained.",
+            "options": [
+                "carefully",
+                "careful",
+                "care",
+                "caringly"
+            ],
+            "correct": 0,
+            "explanation": "Use 'carefully'."
+        }
+    ],
+    "scrambled": [
+        {
+            "id": 1,
+            "answer": "Susan smiled cheerfully",
+            "hint": "Start with Susan"
+        },
+        {
+            "id": 2,
+            "answer": "Sam speaks softly",
+            "hint": "Start with Sam"
+        },
+        {
+            "id": 3,
+            "answer": "He gave the money reluctantly",
+            "hint": "Start with He"
+        },
+        {
+            "id": 4,
+            "answer": "They speak English well",
+            "hint": "Start with They"
+        },
+        {
+            "id": 5,
+            "answer": "I entered the classroom quietly",
+            "hint": "Start with I"
+        },
+        {
+            "id": 6,
+            "answer": "He looked suspiciously at me",
+            "hint": "Start with He"
+        },
+        {
+            "id": 7,
+            "answer": "John listened attentively to him",
+            "hint": "Start with John"
+        },
+        {
+            "id": 8,
+            "answer": "Dilshod completed the task quickly",
+            "hint": "Start with Dilshod"
+        },
+        {
+            "id": 9,
+            "answer": "I foolishly forgot my passport",
+            "hint": "Start with I"
+        },
+        {
+            "id": 10,
+            "answer": "It was foolish of me to forget my passport",
+            "hint": "Start with It"
+        },
+        {
+            "id": 11,
+            "answer": "He generously paid for all of us",
+            "hint": "Start with He"
+        },
+        {
+            "id": 12,
+            "answer": "It was kind of him to wait for me",
+            "hint": "Start with It"
+        },
+        {
+            "id": 13,
+            "answer": "The baby slept peacefully all night",
+            "hint": "Start with The"
+        },
+        {
+            "id": 14,
+            "answer": "Aziz answered all questions politely",
+            "hint": "Start with Aziz"
+        },
+        {
+            "id": 15,
+            "answer": "She carefully picked up the broken glass",
+            "hint": "Start with She"
+        },
+        {
+            "id": 16,
+            "answer": "He angrily denied that he stole documents",
+            "hint": "Start with He"
+        },
+        {
+            "id": 17,
+            "answer": "They secretly decided to leave town",
+            "hint": "Start with They"
+        },
+        {
+            "id": 18,
+            "answer": "It was generous of her to help us",
+            "hint": "Start with It"
+        },
+        {
+            "id": 19,
+            "answer": "Nigora listened carefully to the professor",
+            "hint": "Start with Nigora"
+        },
+        {
+            "id": 20,
+            "answer": "The old man carves wooden figures skillfully",
+            "hint": "Start with The"
+        }
+    ],
+    "errorCorrection": [
+        {
+            "id": 1,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+                "They speak English well.",
+                "They speak well English.",
+                "They speak English fluent.",
+                "They speak fluent English."
+            ],
+            "correct": 1,
+            "explanation": "Do not place adverbs of manner between verb and object ('speak well English' is wrong)."
+        },
+        {
+            "id": 2,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+                "He gave the money reluctantly.",
+                "He gave reluctantly the money.",
+                "He reluctant gave the money.",
+                "He gave money reluctant."
+            ],
+            "correct": 0,
+            "explanation": "Adverb comes after object ('gave the money reluctantly')."
+        },
+        {
+            "id": 3,
+            "text": "Which sentence is INCORRECT for long objects?",
+            "options": [
+                "He looked suspiciously at everyone who got off the plane.",
+                "He looked at everyone who got off the plane suspiciously.",
+                "He carefully picked up all the bits of broken glass.",
+                "He angrily denied that he had stolen the documents."
+            ],
+            "correct": 1,
+            "explanation": "Placing 'suspiciously' at the end of a long clause is unnatural."
+        },
+        {
+            "id": 4,
+            "text": "Which sentence is equivalent to 'I foolishly forgot my passport'?",
+            "options": [
+                "It was foolish of me to forget my passport.",
+                "It was foolish for me to forget my passport.",
+                "It was foolishly of me to forget my passport.",
+                "It was foolish to me to forget my passport."
+            ],
+            "correct": 0,
+            "explanation": "'It was foolish of me to...' evaluates character/behavior."
+        },
+        {
+            "id": 5,
+            "text": "Which sentence means 'Uning gapirish ohangi mehriboncha edi'?",
+            "options": [
+                "He spoke kindly.",
+                "He kindly spoke to me.",
+                "He was kindly.",
+                "He kindly speaks."
+            ],
+            "correct": 0,
+            "explanation": "'He spoke kindly' (adverb after verb) describes the manner of speech."
+        },
+        {
+            "id": 6,
+            "text": "Which sentence contains a grammar error?",
+            "options": [
+                "She picked up the glass carefully.",
+                "She carefully picked up the glass.",
+                "She picked carefully up the glass.",
+                "Carefully, she picked up the glass."
+            ],
+            "correct": 2,
+            "explanation": "'picked carefully up' places adverb inside the phrasal verb incorrectly."
+        },
+        {
+            "id": 7,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+                "He looked at me suspiciously.",
+                "He looked suspiciously at me.",
+                "Both A and B are correct.",
+                "Neither A nor B is correct."
+            ],
+            "correct": 2,
+            "explanation": "Both positions (after object or before preposition) are correct for short objects with prepositions."
+        },
+        {
+            "id": 8,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+                "Aziz answered politely.",
+                "Aziz politely answered.",
+                "Aziz answered the question politely.",
+                "Aziz answered politely the question."
+            ],
+            "correct": 3,
+            "explanation": "Do not place adverb between verb 'answered' and direct object 'the question'."
+        },
+        {
+            "id": 9,
+            "text": "Which sentence means 'Ular yashirincha qaror qilishdi' (decision was secret)?",
+            "options": [
+                "They secretly decided to leave the town.",
+                "They decided to leave the town secretly.",
+                "They decided secretly leave the town.",
+                "They secret decided to leave."
+            ],
+            "correct": 0,
+            "explanation": "'They secretly decided' puts emphasis on the act of deciding."
+        },
+        {
+            "id": 10,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+                "It was generous of her to help us.",
+                "It was generous for her to help us.",
+                "It was generously of her to help us.",
+                "It was generous to her to help us."
+            ],
+            "correct": 0,
+            "explanation": "'It was generous of her' is the correct adjective + of structure."
+        },
+        {
+            "id": 11,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+                "Susan smiled cheerfully.",
+                "Susan cheerfully smiled.",
+                "Susan smiled cheerful.",
+                "Susan smiled in a cheerful manner."
+            ],
+            "correct": 2,
+            "explanation": "'cheerful' is an adjective; the adverb 'cheerfully' is required after the verb."
+        },
+        {
+            "id": 12,
+            "text": "Which sentence has an INCORRECT placement for a long object?",
+            "options": [
+                "Nigora listened carefully to everything the professor explained.",
+                "Nigora listened to everything the professor explained carefully.",
+                "Nigora carefully listened to everything the professor explained.",
+                "Carefully, Nigora listened to everything the professor explained."
+            ],
+            "correct": 1,
+            "explanation": "Do not put adverb at the very end of a long relative clause."
+        },
+        {
+            "id": 13,
+            "text": "Which sentence is equivalent to 'He kindly waited for me'?",
+            "options": [
+                "It was kind of him to wait for me.",
+                "It was kind for him to wait for me.",
+                "It was kindly of him to wait for me.",
+                "It was kind to him to wait for me."
+            ],
+            "correct": 0,
+            "explanation": "'It was kind of him to wait for me'."
+        },
+        {
+            "id": 14,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+                "Sam speaks softly.",
+                "Sam speaks soft.",
+                "Sam soft speaks.",
+                "Sam speaks softness."
+            ],
+            "correct": 0,
+            "explanation": "'softly' is the adverb of manner."
+        },
+        {
+            "id": 15,
+            "text": "Which sentence contains a word order error?",
+            "options": [
+                "Dilshod completed the task quickly.",
+                "Dilshod quickly completed the task.",
+                "Dilshod completed quickly the task.",
+                "Quickly, Dilshod completed the task."
+            ],
+            "correct": 2,
+            "explanation": "'completed quickly the task' is wrong because adverb is between verb and object."
+        },
+        {
+            "id": 16,
+            "text": "Which sentence means 'Savollarga javob berishning o'zi ahmoqona ish edi'?",
+            "options": [
+                "He foolishly answered the questions.",
+                "He answered the questions foolishly.",
+                "He was foolish to answers.",
+                "He answered foolish."
+            ],
+            "correct": 0,
+            "explanation": "'He foolishly answered...' means the act of answering was foolish."
+        },
+        {
+            "id": 17,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+                "The baby slept peacefully.",
+                "The baby slept peaceful.",
+                "The baby was sleeping peacefully.",
+                "The baby slept in peace."
+            ],
+            "correct": 1,
+            "explanation": "Use adverb 'peacefully', not adjective 'peaceful'."
+        },
+        {
+            "id": 18,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+                "The old man carves wooden figures skillfully.",
+                "The old man carves skillfully wooden figures.",
+                "The old man skillfully carve wooden figures.",
+                "The old man carves wooden figures skillful."
+            ],
+            "correct": 0,
+            "explanation": "Adverb after direct object 'wooden figures skillfully'."
+        },
+        {
+            "id": 19,
+            "text": "Which sentence is INCORRECT?",
+            "options": [
+                "John listened attentively to him.",
+                "John listened to him attentively.",
+                "John attentively listened to him.",
+                "John listened to attentively him."
+            ],
+            "correct": 3,
+            "explanation": "'listened to attentively him' splits preposition and pronoun incorrectly."
+        },
+        {
+            "id": 20,
+            "text": "Which sentence is CORRECT?",
+            "options": [
+                "He generously paid for all of us.",
+                "He generous paid for all of us.",
+                "He paid generous for all of us.",
+                "He paid for all of us generous."
+            ],
+            "correct": 0,
+            "explanation": "Adverb 'generously' before verb evaluates the generous act."
+        }
+    ]
+}
+    ]
+}
+    ]
+}
   ]
 };
