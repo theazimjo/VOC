@@ -534,14 +534,50 @@
   display: inline-flex;
   align-items: center;
   user-select: none;
-  touch-action: pan-y;
-  cursor: grab;
+  touch-action: pan-x;
+  cursor: pointer;
   padding: 2px 0;
+  position: relative;
 }
 
-.ielts-topic-chip-item:active {
-  cursor: grabbing;
+/* 3-second holding visual feedback */
+.ielts-topic-chip-item.is-holding .ielts-topic-chip {
+  transform: scale(0.96);
+  opacity: 0.9;
+  border-color: var(--accent-1);
+  transition: transform 0.2s ease, opacity 0.2s ease, border-color 0.2s ease;
 }
+
+.ielts-topic-chip-item.is-holding::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  height: 2px;
+  background: var(--accent-1);
+  border-radius: var(--radius-full);
+  animation: holdProgress 3s linear forwards;
+  pointer-events: none;
+}
+
+@keyframes holdProgress {
+  from { width: 0%; opacity: 0.6; }
+  to { width: 80%; opacity: 1; }
+}
+
+/* Dragging unlocked after 3 seconds */
+.ielts-topic-chip-item.drag-ready .ielts-topic-chip {
+  cursor: grabbing;
+  border-color: var(--accent-1);
+  box-shadow: 0 0 0 2px var(--accent-1), 0 8px 20px rgba(0, 0, 0, 0.3);
+  animation: dragReadyWiggle 0.3s ease-in-out infinite alternate;
+}
+
+@keyframes dragReadyWiggle {
+  0% { transform: scale(1.05) rotate(-1deg); }
+  100% { transform: scale(1.05) rotate(1deg); }
+}
+
 
 .wfp-context-menu-overlay {
   position: fixed;

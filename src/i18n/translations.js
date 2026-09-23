@@ -246,7 +246,7 @@ export const translations = {
       deleteChapterTitle: 'Delete Chapter',
       deleteChapterMsg: '"{topic}" chapter will be deleted and its words unlinked. Are you sure?',
       deleteChapterConfirm: 'Delete',
-      chapterChipHint: 'Drag to reorder or right-click to rename',
+      chapterChipHint: 'Hold for 3 seconds to reorder or right-click to rename',
     },
     wordList: {
       loading: 'Loading...',
@@ -1388,7 +1388,7 @@ export const translations = {
       deleteChapterTitle: 'Удалить главу',
       deleteChapterMsg: 'Глава "{topic}" будет удалена, а её слова отвязаны. Вы уверены?',
       deleteChapterConfirm: 'Удалить',
-      chapterChipHint: 'Перетащите для сортировки или нажмите правой кнопкой для переименования',
+      chapterChipHint: 'Удерживайте 3 секунды для сортировки или нажмите правой кнопкой для переименования',
     },
     wordList: {
       loading: 'Загрузка...',
@@ -2530,7 +2530,7 @@ export const translations = {
       deleteChapterTitle: "Chapterni o'chirish",
       deleteChapterMsg: "\"{topic}\" chapteri o'chiriladi va uning so'zlari ajratiladi. Ishonchingiz komilmi?",
       deleteChapterConfirm: "O'chirish",
-      chapterChipHint: "Tartiblash uchun suring yoki nomini o'zgartirish uchun o'ng tugmani bosing",
+      chapterChipHint: "Tartiblash uchun 3 soniya bosib turing yoki o'ng tugmani bosing",
     },
     wordList: {
       loading: "Yuklanmoqda...",

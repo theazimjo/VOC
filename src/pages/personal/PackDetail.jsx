@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
-import { motion, Reorder } from 'framer-motion';
+import { motion, Reorder, useDragControls } from 'framer-motion';
 import { Brain, AlertTriangle, Edit2, Trash2 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -19,6 +19,108 @@ import MoveWordsModal from '../../components/Words/MoveWordsModal';
 import SpeedDialFAB from '../../components/Words/SpeedDialFAB';
 import IosSpinner from '../../components/common/IosSpinner';
 import './PackDetail.css';
+
+function ChapterReorderItem({
+  topic,
+  topicFilter,
+  topicMastery,
+  pageRangeStr,
+  onSelectTopic,
+  onContextMenu,
+  hintText
+}) {
+  const dragControls = useDragControls();
+  const [isHolding, setIsHolding] = useState(false);
+  const [isReadyToDrag, setIsReadyToDrag] = useState(false);
+  const timerRef = useRef(null);
+  const startPosRef = useRef({ x: 0, y: 0 });
+  const hasDraggedRef = useRef(false);
+
+  const clearTimer = () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+    setIsHolding(false);
+  };
+
+  const handlePointerDown = (e) => {
+    if (e.button !== undefined && e.button !== 0) return;
+
+    hasDraggedRef.current = false;
+    startPosRef.current = { x: e.clientX, y: e.clientY };
+    clearTimer();
+    setIsHolding(true);
+
+    const nativeEvent = e.nativeEvent || e;
+
+    timerRef.current = setTimeout(() => {
+      hasDraggedRef.current = true;
+      setIsHolding(false);
+      setIsReadyToDrag(true);
+      if (typeof navigator !== 'undefined' && navigator.vibrate) {
+        try { navigator.vibrate(50); } catch (err) {}
+      }
+      dragControls.start(nativeEvent);
+    }, 3000);
+  };
+
+  const handlePointerMove = (e) => {
+    if (!timerRef.current) return;
+    const dist = Math.hypot(e.clientX - startPosRef.current.x, e.clientY - startPosRef.current.y);
+    if (dist > 8) {
+      clearTimer();
+    }
+  };
+
+  const handlePointerUpOrCancel = () => {
+    clearTimer();
+    setTimeout(() => setIsReadyToDrag(false), 200);
+  };
+
+  const handleClick = (e) => {
+    if (hasDraggedRef.current) {
+      e.stopPropagation();
+      hasDraggedRef.current = false;
+      return;
+    }
+    onSelectTopic(topic);
+  };
+
+  return (
+    <Reorder.Item
+      key={topic}
+      value={topic}
+      as="div"
+      dragControls={dragControls}
+      dragListener={false}
+      className={`ielts-topic-chip-item ${isHolding ? 'is-holding' : ''} ${isReadyToDrag ? 'drag-ready' : ''}`}
+      onContextMenu={(e) => onContextMenu(e, topic)}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUpOrCancel}
+      onPointerCancel={handlePointerUpOrCancel}
+      whileDrag={{ scale: 1.08, zIndex: 20 }}
+    >
+      <button
+        type="button"
+        className={`ielts-topic-chip ${topicFilter === topic ? 'active' : ''}`}
+        style={topicMastery[topic] !== undefined ? { '--chip-mastery': `${topicMastery[topic]}%` } : undefined}
+        onClick={handleClick}
+        title={hintText}
+      >
+        {topicMastery[topic] !== undefined && (
+          <span className="ielts-topic-chip-fill" aria-hidden="true" />
+        )}
+        <span className="ielts-topic-chip-label">
+          {topic}
+          {pageRangeStr && <span className="ielts-topic-chip-pages"> ({pageRangeStr})</span>}
+        </span>
+      </button>
+    </Reorder.Item>
+  );
+}
+
 
 export default function PackDetail() {
   const { packId } = useParams();
@@ -574,35 +676,18 @@ export default function PackDetail() {
             className="ielts-topic-reorder-group"
             as="div"
           >
-            {topics.map(topic => {
-              const pageRangeStr = formatPageRange(topic);
-              return (
-                <Reorder.Item
-                  key={topic}
-                  value={topic}
-                  as="div"
-                  className="ielts-topic-chip-item"
-                  onContextMenu={(e) => handleContextMenu(e, topic)}
-                  whileDrag={{ scale: 1.05, zIndex: 20 }}
-                >
-                  <button
-                    type="button"
-                    className={`ielts-topic-chip ${topicFilter === topic ? 'active' : ''}`}
-                    style={topicMastery[topic] !== undefined ? { '--chip-mastery': `${topicMastery[topic]}%` } : undefined}
-                    onClick={() => setTopicFilter(topic)}
-                    title={t('packDetail.chapterChipHint')}
-                  >
-                    {topicMastery[topic] !== undefined && (
-                      <span className="ielts-topic-chip-fill" aria-hidden="true" />
-                    )}
-                    <span className="ielts-topic-chip-label">
-                      {topic}
-                      {pageRangeStr && <span className="ielts-topic-chip-pages"> ({pageRangeStr})</span>}
-                    </span>
-                  </button>
-                </Reorder.Item>
-              );
-            })}
+            {topics.map(topic => (
+              <ChapterReorderItem
+                key={topic}
+                topic={topic}
+                topicFilter={topicFilter}
+                topicMastery={topicMastery}
+                pageRangeStr={formatPageRange(topic)}
+                onSelectTopic={setTopicFilter}
+                onContextMenu={handleContextMenu}
+                hintText={t('packDetail.chapterChipHint')}
+              />
+            ))}
           </Reorder.Group>
         </div>
       )}
