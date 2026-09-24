@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   LogOut, ChevronRight, Mail, User, Pencil, X, Check,
-  Moon, Type, Volume2, Globe, Users, AlertCircle, CheckCircle2, Shield, Clapperboard, Gamepad2
+  Moon, Type, Volume2, Globe, Users, AlertCircle, CheckCircle2, Shield
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
@@ -56,7 +56,6 @@ export default function ProfilePage() {
   const displayName = customName || user?.displayName || user?.email?.split('@')[0] || 'User';
   const initial = displayName[0]?.toUpperCase() || '?';
   const isSuperAdmin = user?.email && SUPER_ADMINS.includes(user.email.toLowerCase());
-  const isGamesUser = user?.email && user.email.toLowerCase() === 'azimjonxolmirzayev30@gmail.com';
 
   const openEditor = () => {
     setDraftName(displayName);
@@ -208,36 +207,6 @@ export default function ProfilePage() {
           </div>
           <span className="corp-profile-tile-text">{t('profile.joinAGroup')}</span>
         </div>
-      </div>
-
-      {/* ── Media & Games Trackers ── */}
-      <div className="corp-profile-section-title">{t('movies.title')}</div>
-      <div className="corp-profile-tiles" style={{ marginBottom: '16px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        <div 
-          className="corp-profile-tile" 
-          onClick={() => navigate('/movies')}
-          style={{ cursor: 'pointer' }}
-        >
-          <div className="corp-profile-tile-icon" style={{ background: '#e50914' }}>
-            <Clapperboard size={17} strokeWidth={2.2} />
-          </div>
-          <span className="corp-profile-tile-text">{t('movies.trackerTitle')}</span>
-          <ChevronRight size={16} className="corp-profile-appearance-chevron" style={{ marginLeft: 'auto' }} />
-        </div>
-
-        {isGamesUser && (
-          <div 
-            className="corp-profile-tile" 
-            onClick={() => navigate('/games')}
-            style={{ cursor: 'pointer' }}
-          >
-            <div className="corp-profile-tile-icon" style={{ background: '#2563eb' }}>
-              <Gamepad2 size={17} strokeWidth={2.2} />
-            </div>
-            <span className="corp-profile-tile-text">{t('nav.games')}</span>
-            <ChevronRight size={16} className="corp-profile-appearance-chevron" style={{ marginLeft: 'auto' }} />
-          </div>
-        )}
       </div>
 
       {/* ── Admin Panel (Super Admin only) ── */}
