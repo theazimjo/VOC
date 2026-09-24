@@ -901,7 +901,7 @@ export default function PackDetail() {
                 disabled={!renameModal.newName.trim()}
                 onClick={executeRenameChapter}
               >
-                {t('common.save') || 'Save'}
+                {t('common.save')}
               </button>
             </div>
           </motion.div>
