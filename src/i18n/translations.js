@@ -12,6 +12,11 @@ export const DEFAULT_LANGUAGE = 'en';
 
 export const translations = {
   en: {
+    common: {
+      save: 'Save',
+      cancel: 'Cancel',
+      ok: 'OK',
+    },
     nav: {
       dashboard: 'Dashboard',
       library: 'Library',
@@ -1154,6 +1159,11 @@ export const translations = {
   },
 
   ru: {
+    common: {
+      save: 'Сохранить',
+      cancel: 'Отмена',
+      ok: 'ОК',
+    },
     nav: {
       dashboard: 'Панель',
       library: 'Библиотека',
@@ -2296,6 +2306,11 @@ export const translations = {
   },
 
   uz: {
+    common: {
+      save: 'Saqlash',
+      cancel: 'Bekor qilish',
+      ok: 'OK',
+    },
     nav: {
       dashboard: 'Boshqaruv',
       library: 'Kutubxona',
