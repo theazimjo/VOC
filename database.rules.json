@@ -353,7 +353,7 @@
         },
         "groups": {
           "$groupId": {
-            ".read": "auth != null && root.child('users').child(auth.uid).child('groupMemberships').child($groupId).child('centerId').val() === $centerId",
+            ".read": "auth != null && data.child('students').child(auth.uid).exists()",
             ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'teacher' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId && ((!data.exists() && newData.child('teacherId').val() === root.child('corpUsers').child(auth.uid).child('teacherId').val()) || (data.exists() && data.child('teacherId').val() === root.child('corpUsers').child(auth.uid).child('teacherId').val()))",
             "studentsCount": {
               ".read": "auth != null",
@@ -362,7 +362,7 @@
             "students": {
               "$studentId": {
                 ".read": "auth != null && auth.uid === $studentId",
-                ".write": "auth != null && auth.uid === $studentId",
+                ".write": "auth != null && auth.uid === $studentId && root.child('centers').child($centerId).child('groups').child($groupId).child('teacherId').exists()",
                 ".validate": "newData.hasChildren(['name'])"
               }
             },
