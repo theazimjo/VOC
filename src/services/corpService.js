@@ -61,16 +61,46 @@ export async function getCorpRole(uid) {
 }
 
 /**
- * Super Admin: List every center_admin/teacher across all centers (used by
- * the Global Users page). Super admins themselves are a hardcoded email
- * allowlist (see SUPER_ADMINS in useCorpRole.js), not corpUsers records, so
- * they don't appear here.
+ * Super Admin: every account on the platform (users/*), merged with its
+ * corpUsers role if it has one. Reads the whole users tree — fine at the
+ * current scale (tens to low hundreds of accounts); needs a summary index
+ * before it grows into the thousands.
  */
-export async function getAllCorpUsers() {
-  const snap = await get(ref(db, 'corpUsers'));
-  if (!snap.exists()) return [];
-  const val = snap.val();
-  return Object.keys(val).map(uid => ({ uid, ...val[uid] }));
+export async function getAllPlatformUsers() {
+  const [usersSnap, corpSnap] = await Promise.all([
+    get(ref(db, 'users')),
+    get(ref(db, 'corpUsers')),
+  ]);
+  const corp = corpSnap.exists() ? corpSnap.val() : {};
+  const users = usersSnap.exists() ? usersSnap.val() : {};
+  const uids = new Set([...Object.keys(users), ...Object.keys(corp)]);
+
+  return [...uids].map((uid) => {
+    const u = users[uid] || {};
+    const c = corp[uid] || null;
+    const profile = u.profile || {};
+    const wordCount = Object.values(u.words || {}).reduce(
+      (sum, pack) => sum + (pack && typeof pack === 'object' ? Object.keys(pack).length : 0), 0,
+    );
+    const memberships = Object.values(u.groupMemberships || {});
+    return {
+      uid,
+      name: profile.displayName || c?.teacherName || c?.name || '',
+      email: profile.email || c?.email || '',
+      phone: c?.phone || profile.phone || '',
+      createdAt: profile.createdAt || c?.createdAt || null,
+      lastSeen: u.activity?.lastSeen || null,
+      sessions: u.activity?.sessionCount || 0,
+      streak: u.streak?.streakCount || 0,
+      wordCount,
+      packCount: Object.keys(u.packs || {}).length,
+      corpRole: c?.role || null, // 'center_admin' | 'teacher' | null
+      corpCenterName: c?.centerName || '',
+      disabled: Boolean(c?.disabled),
+      memberships, // [{ centerId, groupId, groupName, ... }]
+      activeMembership: u.groupMembership || null,
+    };
+  });
 }
 
 /**
@@ -212,25 +242,48 @@ export async function sendCorpPasswordReset(email) {
 }
 
 /**
- * Super Admin: Permanently remove a center and everything under it, plus
- * its cross-referenced entries in corpUsers/groupCodes (both live in
- * separate top-level trees and aren't cleaned up by deleting the center
- * node alone). Firebase Auth accounts for the admin/teachers are NOT
- * deleted (no Admin SDK available client-side) — removing their corpUsers
- * entry is what actually revokes their access, since CorpProtectedRoute
- * denies anyone without one.
+ * Super Admin: what deleting a center would touch — shown in the delete flow
+ * before anything happens.
+ */
+export async function getCenterDeletionPreview(centerId) {
+  const snap = await get(ref(db, `centers/${centerId}`));
+  if (!snap.exists()) return null;
+  const center = snap.val();
+  const groups = Object.values(center.groups || {});
+  const studentUids = new Set();
+  groups.forEach((g) => Object.keys(g.students || {}).forEach((uid) => studentUids.add(uid)));
+  return {
+    name: center.name || centerId,
+    teachers: Object.keys(center.teachers || {}).length,
+    groups: groups.length,
+    students: studentUids.size,
+    packs: Object.keys(center.customPacks || {}).length,
+  };
+}
+
+/**
+ * Super Admin: delete a center.
+ *
+ * Removed: the center node (groups, packs, homework, progress under it), its
+ * admin's and teachers' corpUsers roles (their personal VOC accounts stay),
+ * and the group / teacher join codes.
+ *
+ * Kept: every student account and everything in users/{uid} — words,
+ * streaks, personal packs. Students are only taken out of this center's
+ * groups: the memberships are removed, the active group switches to another
+ * group they're still in, or the app drops back to individual mode.
+ *
+ * One multi-path update, so it either all happens or none of it does.
  */
 export async function deleteCenter(centerId) {
   const snap = await get(ref(db, `centers/${centerId}`));
   if (!snap.exists()) return;
   const center = snap.val();
+  const groupIds = new Set(Object.keys(center.groups || {}));
 
   const updates = { [`centers/${centerId}`]: null };
 
-  if (center.adminUid) {
-    updates[`corpUsers/${center.adminUid}`] = null;
-  }
-
+  if (center.adminUid) updates[`corpUsers/${center.adminUid}`] = null;
   Object.values(center.teachers || {}).forEach((t) => {
     if (t.uid) updates[`corpUsers/${t.uid}`] = null;
   });
@@ -238,6 +291,38 @@ export async function deleteCenter(centerId) {
   Object.values(center.groups || {}).forEach((g) => {
     if (g.code) updates[`groupCodes/${g.code}`] = null;
   });
+  if (center.teacherJoinCode) updates[`teacherJoinCodes/${center.teacherJoinCode}`] = null;
+
+  const studentUids = new Set();
+  Object.values(center.groups || {}).forEach((g) => {
+    Object.keys(g.students || {}).forEach((uid) => studentUids.add(uid));
+  });
+
+  await Promise.all([...studentUids].map(async (uid) => {
+    const [allSnap, activeSnap] = await Promise.all([
+      get(ref(db, `users/${uid}/groupMemberships`)),
+      get(ref(db, `users/${uid}/groupMembership`)),
+    ]);
+    const all = allSnap.exists() ? allSnap.val() : {};
+    const remaining = [];
+    Object.entries(all).forEach(([gid, m]) => {
+      if (groupIds.has(gid) || m?.centerId === centerId) {
+        updates[`users/${uid}/groupMemberships/${gid}`] = null;
+      } else {
+        remaining.push(m);
+      }
+    });
+
+    const active = activeSnap.exists() ? activeSnap.val() : null;
+    if (active && (active.centerId === centerId || groupIds.has(active.groupId))) {
+      if (remaining.length > 0) {
+        updates[`users/${uid}/groupMembership`] = remaining[0];
+      } else {
+        updates[`users/${uid}/groupMembership`] = null;
+        updates[`users/${uid}/profile/appMode`] = 'individual';
+      }
+    }
+  }));
 
   await update(ref(db), updates);
 }
@@ -1080,4 +1165,34 @@ export async function deleteAnnouncement(id) {
 export async function setMaintenanceMode(enabled) {
   await set(ref(db, 'settings/global/maintenanceMode'), enabled);
   await set(ref(db, 'settings/global/updatedAt'), Date.now());
+}
+export async function getPlatformUser(uid) {
+  const [userSnap, corpSnap] = await Promise.all([
+    get(ref(db, `users/${uid}`)),
+    get(ref(db, `corpUsers/${uid}`)),
+  ]);
+  const u = userSnap.exists() ? userSnap.val() : {};
+  const c = corpSnap.exists() ? corpSnap.val() : null;
+  const profile = u.profile || {};
+  const wordCount = Object.values(u.words || {}).reduce(
+    (sum, pack) => sum + (pack && typeof pack === 'object' ? Object.keys(pack).length : 0), 0,
+  );
+  const memberships = Object.values(u.groupMemberships || {});
+  return {
+    uid,
+    name: profile.displayName || c?.teacherName || c?.name || '',
+    email: profile.email || c?.email || '',
+    phone: c?.phone || profile.phone || '',
+    createdAt: profile.createdAt || c?.createdAt || null,
+    lastSeen: u.activity?.lastSeen || null,
+    sessions: u.activity?.sessionCount || 0,
+    streak: u.streak?.streakCount || 0,
+    wordCount,
+    packCount: Object.keys(u.packs || {}).length,
+    corpRole: c?.role || null, // 'center_admin' | 'teacher' | null
+    corpCenterName: c?.centerName || '',
+    disabled: Boolean(c?.disabled),
+    memberships, // [{ centerId, groupId, groupName, ... }]
+    activeMembership: u.groupMembership || null,
+  };
 }

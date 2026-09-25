@@ -1,463 +1,311 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
-import {
-  Building2, Plus, ShieldCheck, CheckCircle2, Search,
-  Pencil, Trash2, KeyRound, PauseCircle, PlayCircle, Eye,
-  Download, LayoutGrid, Table as TableIcon
-} from 'lucide-react';
-import {
-  getAllCenters, createCenter, createCenterAdminAccount, updateCenter,
-  setCenterStatus, deleteCenter, sendCorpPasswordReset, getCenterStats
-} from '../../../services/corpService';
-import CredentialsModal from '../../../components/corp/CredentialsModal';
-import CenterDetailModal from '../../../components/corp/CenterDetailModal';
-import './shared.css';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { Building2, Check, ChevronRight, Copy, Plus, Send, TriangleAlert } from 'lucide-react';
+import { getAllCenters, createCenter, createCenterAdminAccount, getCenterStats } from '../../../services/corpService';
+import { computeCenterActivity, formatRelative, HEALTH_LABEL } from './centerActivity';
+import { Button, EmptyState, Field, LoadingRows, Page, Row, SearchField, Segmented, Sheet, StatusDot } from './ui';
+import { useToast } from './useToast';
+import { useIsDesktop } from './useIsDesktop';
 
 const EMPTY_FORM = { name: '', adminEmail: '', phone: '' };
+const HEALTH_TONE = { active: 'green', quiet: 'orange', new: 'gray' };
+const FILTERS = [
+  { value: 'all', label: 'Hammasi' },
+  { value: 'active', label: 'Faol' },
+  { value: 'suspended', label: "To'xtatilgan" },
+];
 
+const centerName = (c) => c?.name || `Nomsiz markaz (${c?.id})`;
+const initial = (c) => (c?.name ? c.name.charAt(0).toUpperCase() : '?');
+
+function buildWelcomeMessage({ name, email, tempPassword }) {
+  return [
+    `Assalomu alaykum! "${name}" uchun VOC platformasida hisob ochildi.`,
+    '',
+    `Kirish: ${window.location.origin}/login`,
+    `Login: ${email}`,
+    `Vaqtinchalik parol: ${tempPassword}`,
+    '',
+    "Kirgandan so'ng o'qituvchilaringizni qo'shishingiz mumkin.",
+  ].join('\n');
+}
+
+// Center list + "new center" flow. Everything about one center (groups,
+// teachers, edit, suspend, delete) lives on its own page:
+// SuperAdminCenterDetail at /corp/super-admin/centers/:centerId.
 export default function SuperAdminCenters() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [centers, setCenters] = useState([]);
   const [statsById, setStatsById] = useState({});
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
-  const [statusFilter, setStatusFilter] = useState('all'); // all, active, suspended
-  const [viewMode, setViewMode] = useState('grid'); // grid, table
+  const [filter, setFilter] = useState('all');
 
-  const [showModal, setShowModal] = useState(false);
-  const [editingCenter, setEditingCenter] = useState(null); // center object or null (create mode)
+  const [formOpen, setFormOpen] = useState(false);
   const [form, setForm] = useState(EMPTY_FORM);
   const [submitting, setSubmitting] = useState(false);
-
-  const [credentials, setCredentials] = useState(null);
-  const [detailCenter, setDetailCenter] = useState(null);
-  const [busyId, setBusyId] = useState(null);
+  const [welcome, setWelcome] = useState(null);
+  const [copied, setCopied] = useState(false);
+  const [toastNode, showToast] = useToast();
+  const isDesktop = useIsDesktop();
 
   const loadCenters = useCallback(async () => {
-    setLoading(true);
     try {
       const data = await getAllCenters();
       setCenters(data);
-
-      const statsEntries = await Promise.all(
-        data.map(async (c) => {
-          try {
-            const s = await getCenterStats(c.id);
-            return [c.id, s];
-          } catch {
-            return [c.id, null];
-          }
-        })
-      );
-      setStatsById(Object.fromEntries(statsEntries));
+      const entries = await Promise.all(data.map(async (c) => {
+        try {
+          return [c.id, await getCenterStats(c.id)];
+        } catch {
+          return [c.id, null];
+        }
+      }));
+      setStatsById(Object.fromEntries(entries));
     } catch (err) {
       console.error('Error loading centers:', err);
+      showToast("Markazlarni yuklab bo'lmadi", 'error');
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [showToast]);
 
+  useEffect(() => { loadCenters(); }, [loadCenters]);
+
+  // ?new=1 (from the overview's "+") opens the create sheet; ?open=<id>
+  // (older links) goes to the center's page.
   useEffect(() => {
-    loadCenters();
-  }, [loadCenters]);
+    const open = searchParams.get('open');
+    if (open) {
+      navigate(`/corp/super-admin/centers/${encodeURIComponent(open)}`, { replace: true });
+      return;
+    }
+    if (searchParams.get('new')) {
+      setForm(EMPTY_FORM);
+      setFormOpen(true);
+      setSearchParams({}, { replace: true });
+    }
+  }, [searchParams, setSearchParams, navigate]);
 
-  const openCreateModal = () => {
-    setEditingCenter(null);
+  // Message handed back by the detail page after deleting a center.
+  useEffect(() => {
+    if (location.state?.toast) {
+      showToast(location.state.toast);
+      navigate(location.pathname, { replace: true, state: null });
+    }
+  }, [location, navigate, showToast]);
+
+  const activityById = useMemo(() => {
+    const out = {};
+    centers.forEach((c) => { out[c.id] = computeCenterActivity(statsById[c.id]); });
+    return out;
+  }, [centers, statsById]);
+
+  const visible = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    return centers
+      .filter((c) => !q || (c.name || '').toLowerCase().includes(q) || (c.adminEmail || '').toLowerCase().includes(q))
+      .filter((c) => filter === 'all' || (filter === 'suspended' ? c.status === 'suspended' : c.status !== 'suspended'))
+      .sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+  }, [centers, search, filter]);
+
+  const openCenter = (c) => navigate(`/corp/super-admin/centers/${encodeURIComponent(c.id)}`);
+  const openCreate = () => {
     setForm(EMPTY_FORM);
-    setShowModal(true);
+    setFormOpen(true);
   };
 
-  const openEditModal = (center) => {
-    setEditingCenter(center);
-    setForm({ name: center.name || '', adminEmail: center.adminEmail || '', phone: center.phone || '' });
-    setShowModal(true);
-  };
-
-  const handleSubmit = async (e) => {
+  const handleCreate = async (e) => {
     e.preventDefault();
-    if (!form.name.trim()) return;
+    const name = form.name.trim();
+    const adminEmail = form.adminEmail.trim();
+    if (!name || !adminEmail) return;
     setSubmitting(true);
     try {
-      if (editingCenter) {
-        await updateCenter(editingCenter.id, { name: form.name.trim(), phone: form.phone.trim() });
-        setShowModal(false);
-        await loadCenters();
-      } else {
-        if (!form.adminEmail.trim()) return;
-        const newCenter = await createCenter(form);
-        setShowModal(false);
-        const { tempPassword } = await createCenterAdminAccount(newCenter);
-        setCredentials({ email: newCenter.adminEmail, tempPassword });
-        await loadCenters();
-      }
-      setForm(EMPTY_FORM);
+      const newCenter = await createCenter({ ...form, name, adminEmail });
+      const { tempPassword } = await createCenterAdminAccount(newCenter);
+      setFormOpen(false);
+      setCopied(false);
+      setWelcome({ name, email: adminEmail, tempPassword });
+      loadCenters();
     } catch (err) {
-      alert('Xatolik yuz berdi: ' + err.message);
+      showToast(`Xatolik: ${err.message}`, 'error');
     } finally {
       setSubmitting(false);
     }
   };
 
-  const handleToggleStatus = async (center) => {
-    const nextStatus = center.status === 'suspended' ? 'active' : 'suspended';
-    setBusyId(center.id);
+  const welcomeText = welcome ? buildWelcomeMessage(welcome) : '';
+
+  const copyWelcome = async () => {
     try {
-      await setCenterStatus(center.id, nextStatus);
-      setCenters(prev => prev.map(c => c.id === center.id ? { ...c, status: nextStatus } : c));
-    } catch (err) {
-      alert('Holatni o\'zgartirishda xatolik: ' + err.message);
-    } finally {
-      setBusyId(null);
+      await navigator.clipboard.writeText(welcomeText);
+      setCopied(true);
+    } catch {
+      showToast("Nusxalab bo'lmadi — matnni belgilab oling", 'error');
     }
   };
 
-  const handleResetPassword = async (center) => {
-    if (!center.adminEmail) return;
-    setBusyId(center.id);
-    try {
-      await sendCorpPasswordReset(center.adminEmail);
-      alert(`Parolni tiklash havolasi ${center.adminEmail} manziliga yuborildi.`);
-    } catch (err) {
-      alert('Xatolik yuz berdi: ' + err.message);
-    } finally {
-      setBusyId(null);
+  const shareWelcome = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({ text: welcomeText });
+        return;
+      } catch {
+        /* dismissed — fall through to Telegram */
+      }
     }
-  };
-
-  const handleDelete = async (center) => {
-    if (!window.confirm(`"${center.name}" markazini butunlay o'chirmoqchimisiz? Bu amalni orqaga qaytarib bo'lmaydi — barcha o'qituvchilar, guruhlar va packlar o'chib ketadi.`)) {
-      return;
-    }
-    setBusyId(center.id);
-    try {
-      await deleteCenter(center.id);
-      setCenters(prev => prev.filter(c => c.id !== center.id));
-    } catch (err) {
-      alert('O\'chirishda xatolik: ' + err.message);
-    } finally {
-      setBusyId(null);
-    }
-  };
-
-  const filteredCenters = useMemo(() => {
-    let result = centers.filter(c =>
-      (c.name || '').toLowerCase().includes(search.toLowerCase()) ||
-      (c.adminEmail || '').toLowerCase().includes(search.toLowerCase())
-    );
-    if (statusFilter === 'active') result = result.filter(c => c.status !== 'suspended');
-    if (statusFilter === 'suspended') result = result.filter(c => c.status === 'suspended');
-    return result;
-  }, [centers, search, statusFilter]);
-
-  const handleExportCSV = () => {
-    const headers = ['Nomi', 'Admin Email', 'Telefon', 'Status', 'Yaratilgan', 'O\'qituvchilar', 'Guruhlar', 'O\'quvchilar'];
-    const rows = filteredCenters.map(c => {
-      const s = statsById[c.id];
-      return [
-        c.name || '', c.adminEmail || '', c.phone || '', c.status === 'suspended' ? 'to\'xtatilgan' : 'faol',
-        c.createdAt ? new Date(c.createdAt).toLocaleDateString('uz-UZ') : '',
-        s?.teachersCount ?? '', s?.groupsCount ?? '', s?.studentsCount ?? ''
-      ];
-    });
-    const csv = [headers, ...rows]
-      .map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(','))
-      .join('\n');
-    const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'markazlar.csv';
-    a.click();
-    URL.revokeObjectURL(url);
+    window.open(`https://t.me/share/url?url=${encodeURIComponent(`${window.location.origin}/login`)}&text=${encodeURIComponent(welcomeText)}`, '_blank', 'noopener');
   };
 
   return (
-    <div className="super-admin-container">
-      {/* Header Banner */}
-      <header className="super-admin-header">
-        <div className="super-admin-badge">
-          <ShieldCheck size={16} /> Super Admin Panel
-        </div>
-        <h1>Platforma O'quv Markazlari Boshqaruvi</h1>
-        <p>Barcha hamkor o'quv markazlarini ro'yxatga olish va ularning faolligini nazorat qilish.</p>
-
-        <div className="super-admin-actions">
-          <div className="search-bar-wrap">
-            <Search size={18} />
-            <input
-              type="text"
-              placeholder="Markaz nomi yoki email bo'yicha qidiruv..."
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-            />
-          </div>
-          <button className="btn-create-center" onClick={openCreateModal}>
-            <Plus size={18} /> Yangi Markaz Qo'shish
-          </button>
-        </div>
-      </header>
-
-      {/* Filters + view toggle + export */}
-      <div className="centers-toolbar">
-        <div className="centers-filter-group">
-          <span className="centers-filter-label">Filter:</span>
-          <select value={statusFilter} onChange={e => setStatusFilter(e.target.value)} className="pack-sort-select">
-            <option value="all">Barcha Statuslar</option>
-            <option value="active">Faol</option>
-            <option value="suspended">To'xtatilgan</option>
-          </select>
-          <span className="centers-found-count">Topildi: {filteredCenters.length}</span>
-        </div>
-
-        <div className="centers-toolbar-actions">
-          <div className="view-toggle-group">
-            <button className={`view-toggle-btn ${viewMode === 'grid' ? 'active' : ''}`} onClick={() => setViewMode('grid')} title="Grid">
-              <LayoutGrid size={16} />
-            </button>
-            <button className={`view-toggle-btn ${viewMode === 'table' ? 'active' : ''}`} onClick={() => setViewMode('table')} title="Jadval">
-              <TableIcon size={16} />
-            </button>
-          </div>
-          <button className="btn-export" onClick={handleExportCSV}>
-            <Download size={16} /> Export
-          </button>
-        </div>
+    <Page
+      title="Markazlar"
+      subtitle={loading ? ' ' : `${centers.length} ta o'quv markazi`}
+      action={
+        <button type="button" className="sa-icon-btn" onClick={openCreate} aria-label="Yangi markaz">
+          <Plus size={20} strokeWidth={2.6} />
+        </button>
+      }
+    >
+      <div className={`sa-toolbar ${isDesktop ? 'is-inline' : ''}`}>
+        <SearchField value={search} onChange={setSearch} placeholder="Markaz yoki email" />
+        <Segmented label="Holat" options={FILTERS} value={filter} onChange={setFilter} />
       </div>
 
-      {/* Center List */}
       {loading ? (
-        <div className="loading-spinner">Markazlar yuklanmoqda...</div>
-      ) : filteredCenters.length === 0 ? (
-        <div className="empty-state">
-          <Building2 size={48} />
-          <p>Hozircha o'quv markazlari yo'q.</p>
-          <button className="btn-create-center" onClick={openCreateModal}>
-            <Plus size={16} /> Birinchi Markazni Qo'shish
-          </button>
+        <LoadingRows count={5} />
+      ) : visible.length === 0 ? (
+        <div className="sa-group">
+          {centers.length === 0 ? (
+            <EmptyState
+              icon={<Building2 size={40} />}
+              title="Hali markaz yo'q"
+              text="Birinchi o'quv markazini qo'shing — admin uchun kirish ma'lumotlari tayyorlanadi."
+              action={<Button onClick={openCreate}>Markaz qo'shish</Button>}
+            />
+          ) : (
+            <EmptyState title="Hech narsa topilmadi" text="Qidiruv yoki filtrni o'zgartirib ko'ring." />
+          )}
         </div>
-      ) : viewMode === 'grid' ? (
-        <div className="centers-grid">
-          {filteredCenters.map((center) => {
-            const stats = statsById[center.id];
-            const suspended = center.status === 'suspended';
+      ) : isDesktop ? (
+        <div className="sa-table" style={{ '--sa-cols': 'minmax(260px, 2.4fr) 90px 100px 130px minmax(130px, 1fr) 150px 20px' }}>
+          <div className="sa-table-head">
+            <span>Markaz</span>
+            <span className="num">Guruh</span>
+            <span className="num">O'quvchi</span>
+            <span className="num">Bu hafta faol</span>
+            <span>Oxirgi faollik</span>
+            <span>Holat</span>
+            <span />
+          </div>
+          {visible.map((c) => {
+            const a = activityById[c.id];
+            const isSuspended = c.status === 'suspended';
             return (
-              <div key={center.id} className={`center-card ${suspended ? 'is-suspended' : ''}`}>
-                <div className="center-card-head">
-                  <div className="center-avatar">
-                    <Building2 size={24} />
-                  </div>
-                  <div>
-                    <h3>{center.name || `Nomsiz markaz (${center.id})`}</h3>
-                    <span className={`center-status-badge ${suspended ? 'status-suspended' : ''}`}>
-                      <CheckCircle2 size={12} /> {suspended ? 'to\'xtatilgan' : 'faol'}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="center-card-info">
-                  <p><strong>Admin Email:</strong> {center.adminEmail || 'Kiritilmagan'}</p>
-                  <p><strong>Telefon:</strong> {center.phone || 'Kiritilmagan'}</p>
-                  {stats && (
-                    <p><strong>Statistika:</strong> {stats.teachersCount} o'qituvchi • {stats.groupsCount} guruh • {stats.studentsCount} o'quvchi</p>
-                  )}
-                </div>
-
-                <div className="center-card-actions">
-                  <button className="c-icon-btn" title="Batafsil" onClick={() => setDetailCenter(center)}>
-                    <Eye size={16} />
-                  </button>
-                  <button className="c-icon-btn" title="Tahrirlash" onClick={() => openEditModal(center)}>
-                    <Pencil size={16} />
-                  </button>
-                  <button
-                    className="c-icon-btn"
-                    title={suspended ? 'Faollashtirish' : 'To\'xtatish'}
-                    disabled={busyId === center.id}
-                    onClick={() => handleToggleStatus(center)}
-                  >
-                    {suspended ? <PlayCircle size={16} /> : <PauseCircle size={16} />}
-                  </button>
-                  <button
-                    className="c-icon-btn"
-                    title="Parolni tiklash havolasini yuborish"
-                    disabled={busyId === center.id}
-                    onClick={() => handleResetPassword(center)}
-                  >
-                    <KeyRound size={16} />
-                  </button>
-                  <button
-                    className="c-icon-btn c-icon-btn-danger"
-                    title="O'chirish"
-                    disabled={busyId === center.id}
-                    onClick={() => handleDelete(center)}
-                  >
-                    <Trash2 size={16} />
-                  </button>
-                </div>
-              </div>
+              <button type="button" key={c.id} className="sa-table-row" onClick={() => openCenter(c)}>
+                <span className="sa-cell-main">
+                  <span className={`sa-row-icon tone-${isSuspended ? 'gray' : 'blue'}`}>{initial(c)}</span>
+                  <span className="sa-cell-text">
+                    <span className="sa-cell-title">{centerName(c)}</span>
+                    <span className="sa-cell-sub">{c.adminEmail || '—'}</span>
+                  </span>
+                </span>
+                <span className="num">{a.groups}</span>
+                <span className="num">{a.students}</span>
+                <span className="num">{a.students ? `${a.activeWeek} / ${a.students}` : '—'}</span>
+                <span className="muted">{formatRelative(a.lastActivity)}</span>
+                <span className="sa-cell-status">
+                  <StatusDot tone={isSuspended ? 'red' : HEALTH_TONE[a.health]} />
+                  {isSuspended ? "To'xtatilgan" : HEALTH_LABEL[a.health]}
+                </span>
+                <ChevronRight size={17} className="sa-cell-chevron" />
+              </button>
             );
           })}
         </div>
       ) : (
-        <div className="centers-table-card">
-          {/* Desktop: data table */}
-          <div className="centers-table-wrap">
-            <table className="teachers-table">
-              <thead>
-                <tr>
-                  <th>MARKAZ</th>
-                  <th>ADMIN</th>
-                  <th>STATUS</th>
-                  <th>STATISTIKA</th>
-                  <th>YARATILGAN</th>
-                  <th style={{ width: '160px' }}>AMALLAR</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredCenters.map((center) => {
-                  const stats = statsById[center.id];
-                  const suspended = center.status === 'suspended';
-                  return (
-                    <tr key={center.id}>
-                      <td>
-                        <div className="cell-teacher-info">
-                          <div className="t-table-avatar"><Building2 size={16} /></div>
-                          <span className="t-table-name">{center.name || `Nomsiz markaz (${center.id})`}</span>
-                        </div>
-                      </td>
-                      <td style={{ fontSize: '0.85rem' }}>{center.adminEmail || '—'}</td>
-                      <td>
-                        <span className={`center-status-badge ${suspended ? 'status-suspended' : ''}`}>
-                          {suspended ? 'to\'xtatilgan' : 'faol'}
-                        </span>
-                      </td>
-                      <td style={{ fontSize: '0.82rem' }}>
-                        {stats ? `${stats.teachersCount} o'q. • ${stats.groupsCount} gr. • ${stats.studentsCount} o'quv.` : '—'}
-                      </td>
-                      <td style={{ fontSize: '0.82rem' }}>
-                        {center.createdAt ? new Date(center.createdAt).toLocaleDateString('uz-UZ') : '—'}
-                      </td>
-                      <td>
-                        <div style={{ display: 'flex', gap: 4 }}>
-                          <button className="c-icon-btn" title="Batafsil" onClick={() => setDetailCenter(center)}><Eye size={15} /></button>
-                          <button className="c-icon-btn" title="Tahrirlash" onClick={() => openEditModal(center)}><Pencil size={15} /></button>
-                          <button className="c-icon-btn" disabled={busyId === center.id} onClick={() => handleToggleStatus(center)}>
-                            {suspended ? <PlayCircle size={15} /> : <PauseCircle size={15} />}
-                          </button>
-                          <button className="c-icon-btn c-icon-btn-danger" disabled={busyId === center.id} onClick={() => handleDelete(center)}><Trash2 size={15} /></button>
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-
-          {/* Mobile: stacked cards, same data. */}
-          <div className="centers-mobile-list">
-            {filteredCenters.map((center) => {
-              const stats = statsById[center.id];
-              const suspended = center.status === 'suspended';
-              return (
-                <div key={center.id} className="centers-mobile-row" style={{ flexDirection: 'column', alignItems: 'stretch', gap: '10px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <div className="t-table-avatar"><Building2 size={16} /></div>
-                    <div style={{ minWidth: 0, flex: 1 }}>
-                      <span className="t-table-name" style={{ display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                        {center.name || `Nomsiz markaz (${center.id})`}
-                      </span>
-                      <span style={{ fontSize: '0.75rem', color: 'var(--pg-text-muted)' }}>{center.adminEmail || '—'}</span>
-                    </div>
-                    <span className={`center-status-badge ${suspended ? 'status-suspended' : ''}`} style={{ flexShrink: 0 }}>
-                      {suspended ? 'to\'xtatilgan' : 'faol'}
-                    </span>
-                  </div>
-
-                  <div style={{ fontSize: '0.8rem', color: 'var(--pg-text-secondary)' }}>
-                    {stats ? `${stats.teachersCount} o'q. • ${stats.groupsCount} gr. • ${stats.studentsCount} o'quv.` : '—'}
-                    {' · '}
-                    {center.createdAt ? new Date(center.createdAt).toLocaleDateString('uz-UZ') : '—'}
-                  </div>
-
-                  <div style={{ display: 'flex', gap: 4 }}>
-                    <button className="c-icon-btn" title="Batafsil" onClick={() => setDetailCenter(center)}><Eye size={15} /></button>
-                    <button className="c-icon-btn" title="Tahrirlash" onClick={() => openEditModal(center)}><Pencil size={15} /></button>
-                    <button className="c-icon-btn" disabled={busyId === center.id} onClick={() => handleToggleStatus(center)}>
-                      {suspended ? <PlayCircle size={15} /> : <PauseCircle size={15} />}
-                    </button>
-                    <button className="c-icon-btn" title="Parolni tiklash havolasini yuborish" disabled={busyId === center.id} onClick={() => handleResetPassword(center)}>
-                      <KeyRound size={15} />
-                    </button>
-                    <button className="c-icon-btn c-icon-btn-danger" disabled={busyId === center.id} onClick={() => handleDelete(center)}><Trash2 size={15} /></button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+        <div className="sa-group">
+          {visible.map((c) => {
+            const a = activityById[c.id];
+            const isSuspended = c.status === 'suspended';
+            return (
+              <Row
+                key={c.id}
+                icon={initial(c)}
+                iconTone={isSuspended ? 'gray' : 'blue'}
+                title={centerName(c)}
+                subtitle={isSuspended
+                  ? "To'xtatilgan"
+                  : `${a.groups} guruh · ${a.students} o'quvchi · ${formatRelative(a.lastActivity)}`}
+                accessory={!isSuspended && <StatusDot tone={HEALTH_TONE[a.health]} />}
+                onClick={() => openCenter(c)}
+              />
+            );
+          })}
         </div>
       )}
 
-      {/* Create / Edit Modal */}
-      {showModal && (
-        <div className="modal-overlay" onClick={() => setShowModal(false)}>
-          <div className="modal-content" onClick={e => e.stopPropagation()}>
-            <h2>{editingCenter ? 'Markazni Tahrirlash' : 'Yangi O\'quv Markazi Qo\'shish'}</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label>O'quv Markazi Nomi</label>
-                <input
-                  type="text"
-                  required
-                  placeholder="masalan: Cambridge Learning Center"
-                  value={form.name}
-                  onChange={e => setForm({ ...form, name: e.target.value })}
-                />
-              </div>
+      {/* ── New center ── */}
+      <Sheet open={formOpen} onClose={() => !submitting && setFormOpen(false)} title="Yangi markaz">
+        <form onSubmit={handleCreate}>
+          <Field label="Markaz nomi">
+            <input
+              className="sa-input"
+              required
+              autoFocus
+              placeholder="Masalan: Cambridge Learning Center"
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+            />
+          </Field>
+          <Field label="Admin emaili" hint="Shu email bilan markaz admini uchun hisob ochiladi.">
+            <input
+              className="sa-input"
+              type="email"
+              required
+              placeholder="admin@markaz.uz"
+              value={form.adminEmail}
+              onChange={(e) => setForm({ ...form, adminEmail: e.target.value })}
+            />
+          </Field>
+          <Field label="Telefon">
+            <input
+              className="sa-input"
+              type="tel"
+              placeholder="+998 90 123 45 67"
+              value={form.phone}
+              onChange={(e) => setForm({ ...form, phone: e.target.value })}
+            />
+          </Field>
+          <Button type="submit" block disabled={submitting}>
+            {submitting ? 'Yaratilmoqda...' : 'Markazni yaratish'}
+          </Button>
+        </form>
+      </Sheet>
 
-              <div className="form-group">
-                <label>Admin Emaili {editingCenter && '(o\'zgartirib bo\'lmaydi)'}</label>
-                <input
-                  type="email"
-                  required
-                  disabled={Boolean(editingCenter)}
-                  placeholder="admin@markaz.uz"
-                  value={form.adminEmail}
-                  onChange={e => setForm({ ...form, adminEmail: e.target.value })}
-                />
-              </div>
+      {/* ── Credentials to hand over ── */}
+      <Sheet open={Boolean(welcome)} onClose={() => setWelcome(null)} title="Markaz tayyor">
+        {welcome && (
+          <>
+            <div className="sa-warning">
+              <TriangleAlert size={18} style={{ flexShrink: 0 }} />
+              <span>Parol faqat hozir ko'rinadi. Xabarni markaz adminiga yuboring.</span>
+            </div>
+            <p className="sa-message">{welcomeText}</p>
+            <div className="sa-actions-stack">
+              <Button onClick={shareWelcome}><Send size={18} /> Telegram orqali yuborish</Button>
+              <Button variant="tinted" onClick={copyWelcome}>
+                {copied ? <Check size={18} /> : <Copy size={18} />} {copied ? 'Nusxalandi' : 'Nusxalash'}
+              </Button>
+              <Button variant="plain" onClick={() => setWelcome(null)}>Tayyor</Button>
+            </div>
+          </>
+        )}
+      </Sheet>
 
-              <div className="form-group">
-                <label>Telefon raqam</label>
-                <input
-                  type="text"
-                  placeholder="+998 90 123 45 67"
-                  value={form.phone}
-                  onChange={e => setForm({ ...form, phone: e.target.value })}
-                />
-              </div>
-
-              <div className="modal-actions">
-                <button type="button" className="btn-secondary" onClick={() => setShowModal(false)}>Bekor qilish</button>
-                <button type="submit" className="btn-primary" disabled={submitting}>
-                  {submitting ? 'Saqlanmoqda...' : (editingCenter ? 'Saqlash' : 'Markazni Yaratish')}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-
-      {credentials && (
-        <CredentialsModal
-          title="Markaz Admini Yaratildi"
-          email={credentials.email}
-          tempPassword={credentials.tempPassword}
-          onClose={() => setCredentials(null)}
-        />
-      )}
-
-      {detailCenter && (
-        <CenterDetailModal center={detailCenter} onClose={() => setDetailCenter(null)} />
-      )}
-    </div>
+      {toastNode}
+    </Page>
   );
 }

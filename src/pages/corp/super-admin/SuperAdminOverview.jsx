@@ -1,165 +1,138 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Building2, Users, GraduationCap, TrendingUp, Activity } from 'lucide-react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { Building2, Plus } from 'lucide-react';
 import { getAllCenters, getCenterStats } from '../../../services/corpService';
-import './shared.css';
+import { computeCenterActivity, formatRelative } from './centerActivity';
+import { EmptyState, LoadingRows, Page, Row, Section, Stat, StatusDot } from './ui';
+
+const HEALTH_TONE = { active: 'green', quiet: 'orange', new: 'gray' };
 
 export default function SuperAdminOverview() {
   const navigate = useNavigate();
-  const [centers, setCenters] = useState([]);
-  const [statsById, setStatsById] = useState({});
+  const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let cancelled = false;
     (async () => {
-      setLoading(true);
       try {
-        const data = await getAllCenters();
-        setCenters(data);
-        const entries = await Promise.all(
-          data.map(async (c) => {
+        const centers = await getAllCenters();
+        const withStats = await Promise.all(
+          centers.map(async (c) => {
             try {
-              return [c.id, await getCenterStats(c.id)];
+              return { center: c, activity: computeCenterActivity(await getCenterStats(c.id)) };
             } catch {
-              return [c.id, null];
+              return { center: c, activity: computeCenterActivity(null) };
             }
           })
         );
-        setStatsById(Object.fromEntries(entries));
+        if (!cancelled) setRows(withStats);
       } catch (err) {
         console.error('Error loading super admin overview:', err);
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     })();
+    return () => { cancelled = true; };
   }, []);
 
-  const globalStats = useMemo(() => {
-    return Object.values(statsById).reduce((acc, s) => {
-      if (!s) return acc;
-      acc.teachers += s.teachersCount;
-      acc.students += s.studentsCount;
-      return acc;
-    }, { teachers: 0, students: 0 });
-  }, [statsById]);
+  const live = rows.filter((r) => r.center.status !== 'suspended');
 
-  const activeCenters = centers.filter(c => c.status !== 'suspended').length;
+  const totals = useMemo(() => live.reduce((acc, { activity }) => {
+    acc.students += activity.students;
+    acc.activeWeek += activity.activeWeek;
+    acc.homeworkWeek += activity.homeworkWeek;
+    return acc;
+  }, { students: 0, activeWeek: 0, homeworkWeek: 0 }), [live]);
 
-  const chartData = useMemo(() => {
-    const sorted = [...centers].sort((a, b) => new Date(a.createdAt || 0) - new Date(b.createdAt || 0));
-    const monthsMap = new Map();
-    sorted.forEach((c) => {
-      if (!c.createdAt) return;
-      const key = new Date(c.createdAt).toLocaleString('default', { month: 'short' });
-      monthsMap.set(key, (monthsMap.get(key) || 0) + 1);
-    });
-    let cumulative = 0;
-    const chart = Array.from(monthsMap.entries()).map(([name, count]) => {
-      cumulative += count;
-      return { name, markazlar: cumulative };
-    });
-    if (chart.length === 0 && centers.length > 0) {
-      chart.push({ name: 'Jami', markazlar: centers.length });
-    }
-    return chart;
-  }, [centers]);
+  // Centers that were using VOC but went quiet, or never started — the ones
+  // worth a phone call this week.
+  const needsAttention = live
+    .filter(({ activity }) => activity.health !== 'active')
+    .sort((a, b) => (a.activity.health === 'quiet' ? -1 : 1) - (b.activity.health === 'quiet' ? -1 : 1));
 
-  const recentCenters = useMemo(() => {
-    return [...centers]
-      .sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0))
-      .slice(0, 5);
-  }, [centers]);
+  const byActivity = [...live].sort((a, b) => b.activity.activeWeek - a.activity.activeWeek || (b.activity.lastActivity || 0) - (a.activity.lastActivity || 0));
 
-  if (loading) {
-    return <div className="loading-spinner">Ma'lumotlar yuklanmoqda...</div>;
-  }
+  const openCenter = (id) => navigate(`/corp/super-admin/centers/${encodeURIComponent(id)}`);
 
   return (
-    <div className="super-admin-container">
-      <header className="super-admin-header">
-        <div className="super-admin-badge"><TrendingUp size={16} /> Platforma Statistikasi</div>
-        <h1>Boshqaruv Paneli</h1>
-        <p>Markazlar va foydalanuvchilar holatining umumiy ko'rinishi.</p>
-      </header>
-
-      <div className="super-admin-stats">
-        <div className="stat-card">
-          <div className="stat-icon icon-blue"><Building2 size={24} /></div>
-          <div>
-            <h3>{centers.length}</h3>
-            <p>Jami O'quv Markazlar</p>
-          </div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-icon icon-green"><Activity size={24} /></div>
-          <div>
-            <h3>{activeCenters}</h3>
-            <p>Aktiv Markazlar</p>
-          </div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-icon icon-purple"><GraduationCap size={24} /></div>
-          <div>
-            <h3>{globalStats.teachers}</h3>
-            <p>Jami O'qituvchilar</p>
-          </div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-icon icon-blue"><Users size={24} /></div>
-          <div>
-            <h3>{globalStats.students}</h3>
-            <p>Jami O'quvchilar</p>
-          </div>
-        </div>
+    <Page
+      title="Bosh sahifa"
+      subtitle="Markazlar VOC'dan haqiqatan foydalanyaptimi — bir qarashda."
+      action={
+        <button type="button" className="sa-icon-btn" onClick={() => navigate('/corp/super-admin/centers?new=1')} aria-label="Yangi markaz">
+          <Plus size={20} strokeWidth={2.6} />
+        </button>
+      }
+    >
+      <div className="sa-stats">
+        <Stat value={loading ? '–' : live.length} label="Faol markaz" />
+        <Stat value={loading ? '–' : totals.students} label="O'quvchi" />
+        <Stat value={loading ? '–' : totals.activeWeek} label="Shu hafta mashq qildi" tone="green" />
+        <Stat value={loading ? '–' : totals.homeworkWeek} label="Shu hafta vazifa" tone="blue" />
       </div>
 
-      <div className="overview-widgets-grid">
-        <div className="overview-chart-card">
-          <h2><TrendingUp size={18} /> Markazlar O'sishi</h2>
-          <div style={{ height: 280, marginTop: '1rem' }}>
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={chartData}>
-                <defs>
-                  <linearGradient id="colorCenters" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3} />
-                    <stop offset="95%" stopColor="#6366f1" stopOpacity={0} />
-                  </linearGradient>
-                </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
-                <XAxis dataKey="name" stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} dy={10} />
-                <YAxis stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} allowDecimals={false} />
-                <Tooltip
-                  contentStyle={{ backgroundColor: '#0f172a', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 12, color: '#fff' }}
-                  itemStyle={{ color: '#818cf8' }}
-                />
-                <Area type="monotone" dataKey="markazlar" stroke="#6366f1" strokeWidth={3} fillOpacity={1} fill="url(#colorCenters)" />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
+      {loading ? (
+        <LoadingRows count={4} />
+      ) : live.length === 0 ? (
+        <div className="sa-group">
+          <EmptyState
+            icon={<Building2 size={40} />}
+            title="Hali markaz yo'q"
+            text="Birinchi o'quv markazini qo'shing — admin uchun kirish ma'lumotlari tayyorlanadi."
+            action={<button type="button" className="sa-btn sa-btn-filled tone-blue" onClick={() => navigate('/corp/super-admin/centers?new=1')}>Markaz qo'shish</button>}
+          />
         </div>
+      ) : (
+        <>
+          <div className="sa-columns">
+            <div>
+              <Section title="Faollik" footer="Shu hafta kamida bitta mashq qilgan o'quvchilar soni.">
+                {byActivity.map(({ center, activity }) => (
+                  <Row
+                    key={center.id}
+                    icon={center.name ? center.name.charAt(0).toUpperCase() : '?'}
+                    iconTone="blue"
+                    title={center.name || `Nomsiz markaz (${center.id})`}
+                    subtitle={`${activity.students} o'quvchi · ${formatRelative(activity.lastActivity)}`}
+                    detail={
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                        <StatusDot tone={HEALTH_TONE[activity.health]} />
+                        {activity.activeWeek}/{activity.students}
+                      </span>
+                    }
+                    onClick={() => openCenter(center.id)}
+                  />
+                ))}
+              </Section>
+            </div>
+            <div>
+              {needsAttention.length > 0 && (
+                <Section title="E'tibor talab qiladi" footer="Bu hafta hech kim mashq qilmagan yoki hali boshlanmagan markazlar.">
+                  {needsAttention.map(({ center, activity }) => (
+                    <Row
+                      key={center.id}
+                      icon={center.name ? center.name.charAt(0).toUpperCase() : '?'}
+                      iconTone={activity.health === 'quiet' ? 'orange' : 'gray'}
+                      title={center.name || `Nomsiz markaz (${center.id})`}
+                      subtitle={activity.health === 'quiet'
+                        ? `Oxirgi faollik: ${formatRelative(activity.lastActivity)}`
+                        : activity.groups === 0 ? "Hali guruh ochilmagan" : "Hali o'quvchi qo'shilmagan"}
+                      onClick={() => openCenter(center.id)}
+                    />
+                  ))}
+                </Section>
+              )}
 
-        <div className="overview-side-card">
-          <h2><Activity size={18} /> So'nggi Markazlar</h2>
-          <div className="overview-recent-list">
-            {recentCenters.map(center => (
-              <div key={center.id} className="overview-recent-row" onClick={() => navigate('/corp/super-admin/centers')}>
-                <div className="overview-recent-icon"><Building2 size={18} /></div>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <p className="name">{center.name || `Nomsiz markaz (${center.id})`}</p>
-                  <p className="meta">{center.createdAt ? new Date(center.createdAt).toLocaleDateString('uz-UZ') : "Sana yo'q"}</p>
-                </div>
-                <span className={`center-status-badge ${center.status === 'suspended' ? 'status-suspended' : ''}`}>
-                  {center.status === 'suspended' ? "to'xtatilgan" : 'faol'}
-                </span>
-              </div>
-            ))}
-            {recentCenters.length === 0 && (
-              <p style={{ textAlign: 'center', color: 'var(--pg-text-muted)', padding: '2rem 0' }}>Hozircha markazlar yo'q</p>
-            )}
+              {needsAttention.length === 0 && (
+                <Section title="E'tibor talab qiladi">
+                  <Row title="Hammasi joyida" subtitle="Barcha markazlar shu hafta faol." />
+                </Section>
+              )}
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </>
+      )}
+    </Page>
   );
 }

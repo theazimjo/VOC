@@ -1,16 +1,15 @@
 import { useLocation, Link } from 'react-router-dom';
-import { LayoutDashboard, Building2, Users, Megaphone, Settings } from 'lucide-react';
+import { LayoutDashboard, Building2, Users, Settings } from 'lucide-react';
 import '../Layout/BottomNav.css';
 
 export default function SuperAdminBottomNav() {
   const location = useLocation();
 
   const navItems = [
-    { to: '/corp/super-admin', label: 'Boshqaruv', icon: LayoutDashboard, end: true },
+    { to: '/corp/super-admin', label: 'Bosh sahifa', icon: LayoutDashboard, end: true },
     { to: '/corp/super-admin/centers', label: 'Markazlar', icon: Building2 },
-    { to: '/corp/super-admin/users', label: 'Foydalanuvchi', icon: Users },
-    { to: '/corp/super-admin/announcements', label: "E'lonlar", icon: Megaphone },
-    { to: '/corp/super-admin/settings', label: 'Sozlamalar', icon: Settings },
+    { to: '/corp/super-admin/users', label: 'Odamlar', icon: Users },
+    { to: '/corp/super-admin/settings', label: 'Sozlamalar', icon: Settings, alsoActive: '/corp/super-admin/announcements' },
   ];
 
   return (
@@ -19,7 +18,7 @@ export default function SuperAdminBottomNav() {
         const IconComponent = item.icon;
         const isActive = item.end
           ? location.pathname === item.to
-          : location.pathname.startsWith(item.to);
+          : location.pathname.startsWith(item.to) || (item.alsoActive && location.pathname.startsWith(item.alsoActive));
 
         return (
           <Link

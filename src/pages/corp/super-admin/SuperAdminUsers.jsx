@@ -1,241 +1,197 @@
-import { useState, useEffect, useMemo } from 'react';
-import { Users, Search, KeyRound, Ban, CheckCircle2, Trash2, ShieldCheck, GraduationCap } from 'lucide-react';
-import { getAllCorpUsers, setCorpUserDisabled, deleteCorpUser, sendCorpPasswordReset } from '../../../services/corpService';
-import './shared.css';
+import { useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ChevronRight, Users } from 'lucide-react';
+import { getAllPlatformUsers, getAllCenters } from '../../../services/corpService';
+import { formatRelative } from './centerActivity';
+import { EmptyState, LoadingRows, Page, Row, SearchField, Section, Segmented, Stat, StatusDot } from './ui';
+import { useToast } from './useToast';
+import { useIsDesktop } from './useIsDesktop';
 
-const ROLE_LABELS = { center_admin: 'Markaz Admin', teacher: "O'qituvchi" };
+const DAY = 24 * 60 * 60 * 1000;
+
+const FILTERS = [
+  { value: 'all', label: 'Hammasi' },
+  { value: 'personal', label: 'Shaxsiy' },
+  { value: 'group', label: 'Guruhda' },
+  { value: 'staff', label: 'Xodimlar' },
+];
+
+const KIND_LABEL = {
+  center_admin: 'Markaz admini',
+  teacher: "O'qituvchi",
+  group: "Guruh o'quvchisi",
+  personal: 'Shaxsiy',
+};
+
+const KIND_TONE = { center_admin: 'blue', teacher: 'purple', group: 'green', personal: 'gray' };
+
+function kindOf(u) {
+  if (u.corpRole) return u.corpRole;
+  if (u.memberships.length > 0) return 'group';
+  return 'personal';
+}
+
+// How recently the account was used — the signal that matters most.
+function recency(lastSeen, now = Date.now()) {
+  const t = lastSeen ? Date.parse(lastSeen) : 0;
+  if (!t) return { tone: 'gray', label: 'Kirmagan' };
+  const diff = now - t;
+  if (diff < DAY) return { tone: 'green', label: 'Bugun' };
+  if (diff < 7 * DAY) return { tone: 'green', label: 'Shu hafta' };
+  if (diff < 30 * DAY) return { tone: 'orange', label: 'Shu oy' };
+  return { tone: 'gray', label: 'Nofaol' };
+}
+
+const displayName = (u) => u.name || u.email || 'Nomsiz foydalanuvchi';
+const initialOf = (u) => displayName(u).charAt(0).toUpperCase();
+const lastSeenText = (u) => (u.lastSeen ? formatRelative(Date.parse(u.lastSeen)) : '—');
+const fmtDate = (iso) => (iso ? new Date(iso).toLocaleDateString('uz-UZ', { day: 'numeric', month: 'long', year: 'numeric' }) : '—');
 
 export default function SuperAdminUsers() {
+  const navigate = useNavigate();
   const [users, setUsers] = useState([]);
+  const [centerNames, setCenterNames] = useState({});
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
-  const [roleFilter, setRoleFilter] = useState('all'); // all, center_admin, teacher
-  const [busyUid, setBusyUid] = useState(null);
-
-  const loadUsers = async () => {
-    setLoading(true);
-    try {
-      setUsers(await getAllCorpUsers());
-    } catch (err) {
-      console.error('Error loading corp users:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const [filter, setFilter] = useState('all');
+  const [toastNode, showToast] = useToast();
+  const isDesktop = useIsDesktop();
 
   useEffect(() => {
-    loadUsers();
-  }, []);
+    Promise.all([getAllPlatformUsers(), getAllCenters().catch(() => [])])
+      .then(([list, centers]) => {
+        setUsers(list);
+        setCenterNames(Object.fromEntries(centers.map((c) => [c.id, c.name || c.id])));
+      })
+      .catch((err) => {
+        console.error('Error loading users:', err);
+        showToast("Foydalanuvchilarni yuklab bo'lmadi", 'error');
+      })
+      .finally(() => setLoading(false));
+  }, [showToast]);
 
-  const filteredUsers = useMemo(() => {
-    let result = users.filter(u =>
-      (u.email || '').toLowerCase().includes(search.toLowerCase()) ||
-      (u.teacherName || u.centerName || '').toLowerCase().includes(search.toLowerCase())
-    );
-    if (roleFilter !== 'all') result = result.filter(u => u.role === roleFilter);
-    return result;
-  }, [users, search, roleFilter]);
+  const totals = useMemo(() => {
+    const now = Date.now();
+    const within = (iso, ms) => iso && now - Date.parse(iso) < ms;
+    return {
+      all: users.length,
+      today: users.filter((u) => within(u.lastSeen, DAY)).length,
+      week: users.filter((u) => within(u.lastSeen, 7 * DAY)).length,
+      newMonth: users.filter((u) => within(u.createdAt, 30 * DAY)).length,
+    };
+  }, [users]);
 
-  const handleToggleDisabled = async (u) => {
-    setBusyUid(u.uid);
-    try {
-      await setCorpUserDisabled(u.uid, !u.disabled);
-      setUsers(prev => prev.map(x => x.uid === u.uid ? { ...x, disabled: !u.disabled } : x));
-    } catch (err) {
-      alert('Xatolik: ' + err.message);
-    } finally {
-      setBusyUid(null);
-    }
-  };
+  const placeById = useMemo(() => {
+    const out = {};
+    users.forEach((u) => {
+      if (u.corpRole) {
+        out[u.uid] = u.corpCenterName || '';
+        return;
+      }
+      if (u.memberships.length === 0) {
+        out[u.uid] = '';
+        return;
+      }
+      const m = u.activeMembership || u.memberships[0];
+      const extra = u.memberships.length > 1 ? ` +${u.memberships.length - 1}` : '';
+      out[u.uid] = [centerNames[m.centerId], m.groupName].filter(Boolean).join(' · ') + extra;
+    });
+    return out;
+  }, [users, centerNames]);
 
-  const handleResetPassword = async (u) => {
-    setBusyUid(u.uid);
-    try {
-      await sendCorpPasswordReset(u.email);
-      alert(`Parolni tiklash havolasi ${u.email} manziliga yuborildi.`);
-    } catch (err) {
-      alert('Xatolik: ' + err.message);
-    } finally {
-      setBusyUid(null);
-    }
-  };
-
-  const handleDelete = async (u) => {
-    if (!confirm(`${u.email} akkauntining portalga kirish huquqini butunlay olib tashlamoqchimisiz?`)) return;
-    setBusyUid(u.uid);
-    try {
-      await deleteCorpUser(u.uid);
-      setUsers(prev => prev.filter(x => x.uid !== u.uid));
-    } catch (err) {
-      alert('Xatolik: ' + err.message);
-    } finally {
-      setBusyUid(null);
-    }
-  };
+  const visible = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    return users
+      .filter((u) => {
+        const k = kindOf(u);
+        if (filter === 'staff') return k === 'center_admin' || k === 'teacher';
+        if (filter === 'group') return k === 'group';
+        if (filter === 'personal') return k === 'personal';
+        return true;
+      })
+      .filter((u) => !q
+        || displayName(u).toLowerCase().includes(q)
+        || (u.email || '').toLowerCase().includes(q)
+        || (placeById[u.uid] || '').toLowerCase().includes(q))
+      .sort((a, b) => (Date.parse(b.lastSeen || '') || 0) - (Date.parse(a.lastSeen || '') || 0));
+  }, [users, search, filter, placeById]);
 
   return (
-    <div className="super-admin-container">
-      <header className="super-admin-header">
-        <div className="super-admin-badge"><Users size={16} /> Foydalanuvchilar</div>
-        <h1>Barcha Korporativ Foydalanuvchilar</h1>
-        <p>Barcha markazlardagi admin va o'qituvchi akkauntlarini boshqarish.</p>
+    <Page title="Foydalanuvchilar" subtitle="Platformadagi barcha hisoblar — shaxsiy, guruhdagi o'quvchilar va markaz xodimlari.">
+      <div className="sa-stats">
+        <Stat value={loading ? '–' : totals.all} label="Jami" />
+        <Stat value={loading ? '–' : totals.today} label="Bugun faol" tone="green" />
+        <Stat value={loading ? '–' : totals.week} label="7 kunda faol" tone="green" />
+        <Stat value={loading ? '–' : totals.newMonth} label="30 kunda yangi" tone="blue" />
+      </div>
 
-        <div className="super-admin-actions">
-          <div className="search-bar-wrap">
-            <Search size={18} />
-            <input
-              type="text"
-              placeholder="Email yoki ism bo'yicha qidiruv..."
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-            />
-          </div>
-        </div>
-      </header>
-
-      <div className="centers-toolbar">
-        <div className="centers-filter-group">
-          <span className="centers-filter-label">Rol:</span>
-          <select value={roleFilter} onChange={e => setRoleFilter(e.target.value)} className="pack-sort-select">
-            <option value="all">Barchasi</option>
-            <option value="center_admin">Markaz Adminlari</option>
-            <option value="teacher">O'qituvchilar</option>
-          </select>
-          <span className="centers-found-count">Topildi: {filteredUsers.length}</span>
-        </div>
+      <div className={`sa-toolbar ${isDesktop ? 'is-inline' : ''}`}>
+        <SearchField value={search} onChange={setSearch} placeholder="Ism, email yoki markaz" />
+        <Segmented label="Turi" options={FILTERS} value={filter} onChange={setFilter} />
       </div>
 
       {loading ? (
-        <div className="loading-spinner">Yuklanmoqda...</div>
-      ) : filteredUsers.length === 0 ? (
-        <div className="empty-state">
-          <Users size={48} />
-          <p>Foydalanuvchilar topilmadi.</p>
+        <LoadingRows count={8} />
+      ) : visible.length === 0 ? (
+        <div className="sa-group">
+          <EmptyState icon={<Users size={40} />} title="Hech kim topilmadi" text="Qidiruv yoki filtrni o'zgartirib ko'ring." />
+        </div>
+      ) : isDesktop ? (
+        <div className="sa-table" style={{ '--sa-cols': 'minmax(240px, 2fr) 150px minmax(180px, 1.5fr) 90px 150px 130px 20px' }}>
+          <div className="sa-table-head">
+            <span>Foydalanuvchi</span>
+            <span>Turi</span>
+            <span>Markaz / guruh</span>
+            <span className="num">So'zlar</span>
+            <span>Oxirgi kirish</span>
+            <span>Holat</span>
+            <span />
+          </div>
+          {visible.map((u) => {
+            const k = kindOf(u);
+            const r = recency(u.lastSeen);
+            return (
+              <button type="button" key={u.uid} className="sa-table-row" onClick={() => navigate(`/corp/super-admin/users/${u.uid}`)}>
+                <span className="sa-cell-main">
+                  <span className={`sa-row-icon tone-${u.disabled ? 'gray' : KIND_TONE[k]}`}>{initialOf(u)}</span>
+                  <span className="sa-cell-text">
+                    <span className="sa-cell-title">{displayName(u)}</span>
+                    {u.email && u.email !== displayName(u) && <span className="sa-cell-sub">{u.email}</span>}
+                  </span>
+                </span>
+                <span className="muted">{KIND_LABEL[k]}</span>
+                <span className="muted sa-cell-sub" style={{ fontSize: 15 }}>{placeById[u.uid] || '—'}</span>
+                <span className="num">{u.wordCount}</span>
+                <span className="muted">{lastSeenText(u)}</span>
+                <span className="sa-cell-status">
+                  <StatusDot tone={u.disabled ? 'red' : r.tone} />
+                  {u.disabled ? 'Bloklangan' : r.label}
+                </span>
+                <ChevronRight size={17} className="sa-cell-chevron" />
+              </button>
+            );
+          })}
         </div>
       ) : (
-        <div className="centers-table-card">
-          {/* Desktop: data table */}
-          <div className="centers-table-wrap">
-            <table className="teachers-table">
-              <thead>
-                <tr>
-                  <th>FOYDALANUVCHI</th>
-                  <th>ROL</th>
-                  <th>MARKAZ</th>
-                  <th>STATUS</th>
-                  <th style={{ width: '150px' }}>AMALLAR</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredUsers.map((u) => (
-                  <tr key={u.uid}>
-                    <td>
-                      <div className="cell-teacher-info">
-                        <div className="t-table-avatar">
-                          {u.role === 'center_admin' ? <ShieldCheck size={16} /> : <GraduationCap size={16} />}
-                        </div>
-                        <div>
-                          <div className="t-table-name">{u.teacherName || u.centerName || u.email}</div>
-                          <div style={{ fontSize: '0.75rem', color: 'var(--pg-text-muted)' }}>{u.email}</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td style={{ fontSize: '0.85rem' }}>{ROLE_LABELS[u.role] || u.role}</td>
-                    <td style={{ fontSize: '0.85rem' }}>{u.centerName || '—'}</td>
-                    <td>
-                      <span className={`center-status-badge ${u.disabled ? 'status-suspended' : ''}`}>
-                        {u.disabled ? 'bloklangan' : 'faol'}
-                      </span>
-                    </td>
-                    <td>
-                      <div style={{ display: 'flex', gap: 4 }}>
-                        <button
-                          className="c-icon-btn"
-                          title="Parolni tiklash"
-                          disabled={busyUid === u.uid}
-                          onClick={() => handleResetPassword(u)}
-                        >
-                          <KeyRound size={15} />
-                        </button>
-                        <button
-                          className="c-icon-btn"
-                          title={u.disabled ? 'Faollashtirish' : 'Bloklash'}
-                          disabled={busyUid === u.uid}
-                          onClick={() => handleToggleDisabled(u)}
-                        >
-                          {u.disabled ? <CheckCircle2 size={15} /> : <Ban size={15} />}
-                        </button>
-                        <button
-                          className="c-icon-btn c-icon-btn-danger"
-                          title="O'chirish"
-                          disabled={busyUid === u.uid}
-                          onClick={() => handleDelete(u)}
-                        >
-                          <Trash2 size={15} />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          {/* Mobile: stacked cards, same data. */}
-          <div className="centers-mobile-list">
-            {filteredUsers.map((u) => (
-              <div key={u.uid} className="centers-mobile-row" style={{ flexDirection: 'column', alignItems: 'stretch', gap: '10px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <div className="t-table-avatar">
-                    {u.role === 'center_admin' ? <ShieldCheck size={16} /> : <GraduationCap size={16} />}
-                  </div>
-                  <div style={{ minWidth: 0, flex: 1 }}>
-                    <div className="t-table-name" style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                      {u.teacherName || u.centerName || u.email}
-                    </div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--pg-text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                      {u.email}
-                    </div>
-                  </div>
-                  <span className={`center-status-badge ${u.disabled ? 'status-suspended' : ''}`} style={{ flexShrink: 0 }}>
-                    {u.disabled ? 'bloklangan' : 'faol'}
-                  </span>
-                </div>
-
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px', fontSize: '0.8rem', color: 'var(--pg-text-secondary)' }}>
-                  <span>{ROLE_LABELS[u.role] || u.role} · {u.centerName || '—'}</span>
-                  <div style={{ display: 'flex', gap: 4, flexShrink: 0 }}>
-                    <button
-                      className="c-icon-btn"
-                      title="Parolni tiklash"
-                      disabled={busyUid === u.uid}
-                      onClick={() => handleResetPassword(u)}
-                    >
-                      <KeyRound size={15} />
-                    </button>
-                    <button
-                      className="c-icon-btn"
-                      title={u.disabled ? 'Faollashtirish' : 'Bloklash'}
-                      disabled={busyUid === u.uid}
-                      onClick={() => handleToggleDisabled(u)}
-                    >
-                      {u.disabled ? <CheckCircle2 size={15} /> : <Ban size={15} />}
-                    </button>
-                    <button
-                      className="c-icon-btn c-icon-btn-danger"
-                      title="O'chirish"
-                      disabled={busyUid === u.uid}
-                      onClick={() => handleDelete(u)}
-                    >
-                      <Trash2 size={15} />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className="sa-group">
+          {visible.map((u) => {
+            const k = kindOf(u);
+            return (
+              <Row
+                key={u.uid}
+                icon={initialOf(u)}
+                iconTone={u.disabled ? 'gray' : KIND_TONE[k]}
+                title={displayName(u)}
+                subtitle={[KIND_LABEL[k], placeById[u.uid]].filter(Boolean).join(' · ')}
+                accessory={<StatusDot tone={u.disabled ? 'red' : recency(u.lastSeen).tone} />}
+                onClick={() => navigate(`/corp/super-admin/users/${u.uid}`)}
+              />
+            );
+          })}
         </div>
       )}
-    </div>
+
+      {toastNode}
+    </Page>
   );
 }

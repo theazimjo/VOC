@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import {
-  Shield, LayoutDashboard, Building2, Users,
-  Megaphone, Settings, LogOut, ChevronLeft, ChevronRight
+  LayoutDashboard, Building2, Users,
+  Settings, LogOut, ChevronLeft, ChevronRight
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -21,11 +21,11 @@ export default function SuperAdminSidebar({ email }) {
   };
 
   const navItems = [
-    { to: '/corp/super-admin', label: t('admin.navDashboard'), icon: LayoutDashboard, end: true },
-    { to: '/corp/super-admin/centers', label: t('admin.navCenters'), icon: Building2 },
-    { to: '/corp/super-admin/users', label: t('admin.navUsers'), icon: Users },
-    { to: '/corp/super-admin/announcements', label: t('admin.navAnnouncements'), icon: Megaphone },
-    { to: '/corp/super-admin/settings', label: t('admin.navSettings'), icon: Settings },
+    { to: '/corp/super-admin', label: 'Bosh sahifa', icon: LayoutDashboard, end: true },
+    { to: '/corp/super-admin/centers', label: 'Markazlar', icon: Building2 },
+    { to: '/corp/super-admin/users', label: 'Foydalanuvchilar', icon: Users },
+    // Announcements live under Settings — rarely used, not worth a tab.
+    { to: '/corp/super-admin/settings', label: 'Sozlamalar', icon: Settings },
   ];
 
   return (

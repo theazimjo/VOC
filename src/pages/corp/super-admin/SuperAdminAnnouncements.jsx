@@ -1,212 +1,206 @@
-import { useState, useEffect } from 'react';
-import { Megaphone, Pencil, Trash2, Power, RefreshCw, Info, TriangleAlert, OctagonAlert, Plus } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ChevronLeft, Info, Megaphone, OctagonAlert, Plus, TriangleAlert } from 'lucide-react';
 import {
   getAllAnnouncements, createAnnouncement, updateAnnouncement,
-  toggleAnnouncementActive, deleteAnnouncement
+  toggleAnnouncementActive, deleteAnnouncement,
 } from '../../../services/corpService';
-import './shared.css';
-import './SuperAdminAnnouncements.css';
+import ConfirmSheet from '../../../components/corp/ConfirmSheet';
+import { Button, EmptyState, Field, LoadingRows, Page, Row, Section, Segmented, Sheet, Toggle } from './ui';
+import { useToast } from './useToast';
 
 const EMPTY_FORM = { title: '', message: '', type: 'info', target: 'all' };
-const TYPE_ICON = { info: Info, warning: TriangleAlert, critical: OctagonAlert };
+const TYPE = {
+  info: { label: 'Xabar', icon: Info, tone: 'blue' },
+  warning: { label: 'Ogohlantirish', icon: TriangleAlert, tone: 'orange' },
+  critical: { label: 'Muhim', icon: OctagonAlert, tone: 'red' },
+};
+const TARGET_LABEL = { all: 'Hammaga', center_admin: 'Adminlarga', teacher: "O'qituvchilarga" };
 
 export default function SuperAdminAnnouncements() {
-  const [announcements, setAnnouncements] = useState([]);
+  const navigate = useNavigate();
+  const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [form, setForm] = useState(EMPTY_FORM);
+  const [formOpen, setFormOpen] = useState(false);
   const [editingId, setEditingId] = useState(null);
-  const [showFormModal, setShowFormModal] = useState(false);
+  const [form, setForm] = useState(EMPTY_FORM);
   const [submitting, setSubmitting] = useState(false);
-  const [busyId, setBusyId] = useState(null);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [toastNode, showToast] = useToast();
 
-  const loadAnnouncements = async () => {
-    setLoading(true);
+  const load = async () => {
     try {
-      setAnnouncements(await getAllAnnouncements());
+      setItems(await getAllAnnouncements());
     } catch (err) {
       console.error('Error loading announcements:', err);
+      showToast("E'lonlarni yuklab bo'lmadi", 'error');
     } finally {
       setLoading(false);
     }
   };
 
-  useEffect(() => {
-    loadAnnouncements();
-  }, []);
-
-  const resetForm = () => {
-    setForm(EMPTY_FORM);
-    setEditingId(null);
-    setShowFormModal(false);
-  };
+  useEffect(() => { load(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const openCreate = () => {
-    setForm(EMPTY_FORM);
     setEditingId(null);
-    setShowFormModal(true);
+    setForm(EMPTY_FORM);
+    setFormOpen(true);
   };
 
-  const startEdit = (a) => {
-    setForm({ title: a.title, message: a.message, type: a.type, target: a.target });
+  const openEdit = (a) => {
     setEditingId(a.id);
-    setShowFormModal(true);
+    setForm({ title: a.title || '', message: a.message || '', type: a.type || 'info', target: a.target || 'all' });
+    setFormOpen(true);
   };
+
+  const editing = items.find((a) => a.id === editingId) || null;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.title.trim() || !form.message.trim()) return;
     setSubmitting(true);
     try {
-      if (editingId) {
-        await updateAnnouncement(editingId, form);
-      } else {
-        await createAnnouncement(form);
-      }
-      resetForm();
-      await loadAnnouncements();
+      const payload = { ...form, title: form.title.trim(), message: form.message.trim() };
+      if (editingId) await updateAnnouncement(editingId, payload);
+      else await createAnnouncement(payload);
+      setFormOpen(false);
+      showToast(editingId ? 'Saqlandi' : "E'lon yuborildi");
+      load();
     } catch (err) {
-      alert('Xatolik: ' + err.message);
+      showToast(`Xatolik: ${err.message}`, 'error');
     } finally {
       setSubmitting(false);
     }
   };
 
-  const handleToggle = async (a) => {
-    setBusyId(a.id);
+  const handleToggle = async (a, next) => {
+    setItems((prev) => prev.map((x) => (x.id === a.id ? { ...x, isActive: next } : x)));
     try {
-      await toggleAnnouncementActive(a.id, !a.isActive);
-      setAnnouncements(prev => prev.map(x => x.id === a.id ? { ...x, isActive: !a.isActive } : x));
+      await toggleAnnouncementActive(a.id, next);
     } catch (err) {
-      alert('Xatolik: ' + err.message);
-    } finally {
-      setBusyId(null);
+      setItems((prev) => prev.map((x) => (x.id === a.id ? { ...x, isActive: !next } : x)));
+      showToast(`Xatolik: ${err.message}`, 'error');
     }
   };
 
-  const handleDelete = async (a) => {
-    if (!confirm(`"${a.title}" e'lonini o'chirmoqchimisiz?`)) return;
-    setBusyId(a.id);
+  const handleDelete = async () => {
+    if (!editing) return;
+    setSubmitting(true);
     try {
-      await deleteAnnouncement(a.id);
-      setAnnouncements(prev => prev.filter(x => x.id !== a.id));
-      if (editingId === a.id) resetForm();
+      await deleteAnnouncement(editing.id);
+      setItems((prev) => prev.filter((x) => x.id !== editing.id));
+      setConfirmDelete(false);
+      setFormOpen(false);
+      showToast("E'lon o'chirildi");
     } catch (err) {
-      alert('Xatolik: ' + err.message);
+      showToast(`Xatolik: ${err.message}`, 'error');
     } finally {
-      setBusyId(null);
+      setSubmitting(false);
     }
   };
 
   return (
-    <div className="super-admin-container">
-      <header className="super-admin-header">
-        <div className="super-admin-badge"><Megaphone size={16} /> E'lonlar</div>
-        <h1>Platforma E'lonlari</h1>
-        <p>Markaz adminlari va/yoki o'qituvchilarga ko'rinadigan e'lonlarni boshqarish.</p>
-      </header>
-
-      <div className="announcement-list-card">
-        <div className="announcement-list-head">
-          <h2>Barcha E'lonlar ({announcements.length})</h2>
-          <button className="c-icon-btn" title="Yangilash" onClick={loadAnnouncements}><RefreshCw size={15} /></button>
+    <Page
+      title="E'lonlar"
+      subtitle="Faol e'lonlar markaz adminlari va o'qituvchilar panelida ko'rinadi."
+      action={
+        <div style={{ display: 'flex', gap: 8 }}>
+          <button type="button" className="sa-sheet-close" style={{ width: 36, height: 36 }} onClick={() => navigate('/corp/super-admin/settings')} aria-label="Sozlamalarga qaytish">
+            <ChevronLeft size={18} strokeWidth={2.6} />
+          </button>
+          <button type="button" className="sa-icon-btn" onClick={openCreate} aria-label="Yangi e'lon">
+            <Plus size={20} strokeWidth={2.6} />
+          </button>
         </div>
-
-        {loading ? (
-          <div className="loading-spinner">Yuklanmoqda...</div>
-        ) : announcements.length === 0 ? (
-          <div className="empty-state">
-            <Megaphone size={40} />
-            <p>Hozircha e'lonlar yo'q.</p>
-          </div>
-        ) : (
-          <div className="announcement-list">
-            {announcements.map((a) => {
-              const Icon = TYPE_ICON[a.type] || Info;
-              return (
-                <div key={a.id} className={`announcement-row type-${a.type} ${!a.isActive ? 'inactive' : ''}`}>
-                  <div className="announcement-row-icon"><Icon size={18} /></div>
-                  <div className="announcement-row-body">
-                    <div className="announcement-row-head">
-                      <h3>{a.title}</h3>
-                      <span className="announcement-target-tag">
-                        {a.target === 'all' ? 'Barchaga' : a.target === 'center_admin' ? 'Adminlarga' : "O'qituvchilarga"}
-                      </span>
-                    </div>
-                    <p>{a.message}</p>
-                    <span className="announcement-date">
-                      {a.createdAt ? new Date(a.createdAt).toLocaleDateString('uz-UZ') : ''}
-                      {!a.isActive && ' · nofaol'}
-                    </span>
-                  </div>
-                  <div className="announcement-row-actions">
-                    <button className="c-icon-btn" title={a.isActive ? 'Nofaollashtirish' : 'Faollashtirish'} disabled={busyId === a.id} onClick={() => handleToggle(a)}>
-                      <Power size={15} />
-                    </button>
-                    <button className="c-icon-btn" title="Tahrirlash" onClick={() => startEdit(a)}>
-                      <Pencil size={15} />
-                    </button>
-                    <button className="c-icon-btn c-icon-btn-danger" title="O'chirish" disabled={busyId === a.id} onClick={() => handleDelete(a)}>
-                      <Trash2 size={15} />
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        )}
-      </div>
-
-      {/* Floating Action Button (New Announcement) */}
-      <button
-        type="button"
-        className="fab-add-pack-btn fab-icon-only"
-        onClick={openCreate}
-        title="Yangi e'lon"
-      >
-        <Plus size={26} />
-      </button>
-
-      {showFormModal && (
-        <div className="modal-overlay" onClick={resetForm}>
-          <div className="modal-content" onClick={e => e.stopPropagation()}>
-            <h2>{editingId ? "E'lonni Tahrirlash" : "Yangi E'lon"}</h2>
-            <form onSubmit={handleSubmit} className="settings-form">
-              <div className="form-group">
-                <label>Sarlavha</label>
-                <input type="text" required autoFocus value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} />
-              </div>
-              <div className="form-group">
-                <label>Xabar</label>
-                <textarea rows={4} required value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} />
-              </div>
-              <div className="form-row-2">
-                <div className="form-group">
-                  <label>Turi</label>
-                  <select className="pack-sort-select" value={form.type} onChange={e => setForm({ ...form, type: e.target.value })}>
-                    <option value="info">Info</option>
-                    <option value="warning">Ogohlantirish</option>
-                    <option value="critical">Kritik</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label>Kimga</label>
-                  <select className="pack-sort-select" value={form.target} onChange={e => setForm({ ...form, target: e.target.value })}>
-                    <option value="all">Barchaga</option>
-                    <option value="center_admin">Markaz Adminlariga</option>
-                    <option value="teacher">O'qituvchilarga</option>
-                  </select>
-                </div>
-              </div>
-              <div className="modal-actions">
-                <button type="button" className="btn-secondary" onClick={resetForm}>Bekor qilish</button>
-                <button type="submit" className="btn-primary" disabled={submitting}>
-                  {submitting ? 'Saqlanmoqda...' : (editingId ? 'Saqlash' : "E'lon Qilish")}
-                </button>
-              </div>
-            </form>
-          </div>
+      }
+    >
+      {loading ? (
+        <LoadingRows count={3} />
+      ) : items.length === 0 ? (
+        <div className="sa-group">
+          <EmptyState
+            icon={<Megaphone size={40} />}
+            title="Hali e'lon yo'q"
+            text="Yangilanish yoki texnik ishlar haqida xabar berish uchun e'lon yarating."
+            action={<Button onClick={openCreate}>E'lon yaratish</Button>}
+          />
         </div>
+      ) : (
+        <Section footer="E'lonni bosib, uni tahrirlash yoki yashirish mumkin.">
+          {items.map((a) => {
+            const t = TYPE[a.type] || TYPE.info;
+            const Icon = t.icon;
+            return (
+              <Row
+                key={a.id}
+                icon={<Icon size={16} />}
+                iconTone={a.isActive ? t.tone : 'gray'}
+                title={a.title}
+                subtitle={<span className="sa-ann-body">{TARGET_LABEL[a.target] || TARGET_LABEL.all} · {a.message}</span>}
+                detail={<span style={{ fontSize: 15 }}>{a.isActive ? 'Faol' : 'Yashirin'}</span>}
+                onClick={() => openEdit(a)}
+              />
+            );
+          })}
+        </Section>
       )}
-    </div>
+
+      <Sheet open={formOpen} onClose={() => !submitting && setFormOpen(false)} title={editingId ? "E'lonni tahrirlash" : "Yangi e'lon"}>
+        <form onSubmit={handleSubmit}>
+          <Field label="Sarlavha">
+            <input className="sa-input" required autoFocus value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="Masalan: Yangi imkoniyat" />
+          </Field>
+          <Field label="Xabar">
+            <textarea className="sa-textarea" required value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} />
+          </Field>
+          <Field label="Turi">
+            <Segmented
+              label="Turi"
+              value={form.type}
+              onChange={(type) => setForm({ ...form, type })}
+              options={Object.entries(TYPE).map(([value, { label }]) => ({ value, label }))}
+            />
+          </Field>
+          <Field label="Kimga">
+            <Segmented
+              label="Kimga"
+              value={form.target}
+              onChange={(target) => setForm({ ...form, target })}
+              options={Object.entries(TARGET_LABEL).map(([value, label]) => ({ value, label }))}
+            />
+          </Field>
+          {editing && (
+            <div className="sa-group" style={{ marginBottom: 16 }}>
+              <Row
+                title="Ko'rsatilsin"
+                subtitle={editing.isActive ? "Panellarda ko'rinib turibdi" : 'Hozir yashirin'}
+                accessory={<Toggle checked={Boolean(editing.isActive)} onChange={(next) => handleToggle(editing, next)} label="Ko'rsatilsin" />}
+              />
+            </div>
+          )}
+          <Button type="submit" block disabled={submitting}>
+            {submitting ? 'Saqlanmoqda...' : editingId ? 'Saqlash' : 'Yuborish'}
+          </Button>
+          {editingId && (
+            <Button variant="plain" tone="red" block style={{ marginTop: 8, color: 'var(--sa-red)' }} onClick={() => setConfirmDelete(true)}>
+              E'lonni o'chirish
+            </Button>
+          )}
+        </form>
+      </Sheet>
+
+      <ConfirmSheet
+        open={confirmDelete}
+        title="E'lonni o'chirasizmi?"
+        message={editing ? `"${editing.title}" butunlay o'chiriladi.` : undefined}
+        confirmLabel="O'chirish"
+        danger
+        busy={submitting}
+        onConfirm={handleDelete}
+        onCancel={() => !submitting && setConfirmDelete(false)}
+      />
+
+      {toastNode}
+    </Page>
   );
 }

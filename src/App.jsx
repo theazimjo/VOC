@@ -56,7 +56,10 @@ const CorpProtectedRoute = lazyWithRetry(() => import('./components/corp/CorpPro
 const SuperAdminLayout = lazyWithRetry(() => import('./components/corp/SuperAdminLayout'));
 const SuperAdminOverview = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminOverview'));
 const SuperAdminCenters = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminCenters'));
+const SuperAdminCenterDetail = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminCenterDetail'));
+const SuperAdminGroupDetail = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminGroupDetail'));
 const SuperAdminUsers = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminUsers'));
+const SuperAdminUserDetail = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminUserDetail'));
 const SuperAdminAnnouncements = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminAnnouncements'));
 const SuperAdminSettings = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminSettings'));
 const CenterAdminDashboard = lazyWithRetry(() => import('./pages/corp/center-admin/CenterAdminDashboard'));
@@ -158,7 +161,10 @@ export default function App() {
                         <Route element={<SuperAdminLayout />}>
                           <Route path="super-admin" element={<SuperAdminOverview />} />
                           <Route path="super-admin/centers" element={<SuperAdminCenters />} />
+                          <Route path="super-admin/centers/:centerId" element={<SuperAdminCenterDetail />} />
+                          <Route path="super-admin/centers/:centerId/groups/:groupId" element={<SuperAdminGroupDetail />} />
                           <Route path="super-admin/users" element={<SuperAdminUsers />} />
+                          <Route path="super-admin/users/:uid" element={<SuperAdminUserDetail />} />
                           <Route path="super-admin/announcements" element={<SuperAdminAnnouncements />} />
                           <Route path="super-admin/settings" element={<SuperAdminSettings />} />
                         </Route>
