@@ -289,6 +289,12 @@ npx cap open android
 
 ---
 
+## 🔒 License
+
+**Proprietary — All rights reserved.** This repository is not open source. You may not copy, modify, distribute, deploy, or use any part of it without prior written permission from the copyright holder. See [`LICENSE`](LICENSE).
+
+---
+
 <div align="center">
 
 Built for English learners and the learning centers that teach them.
