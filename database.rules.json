@@ -5,60 +5,103 @@
       "$uid": {
         ".read": "auth != null && (auth.uid === $uid || auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com')",
         ".write": "auth != null && (auth.uid === $uid || auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com')",
-
         "meta": {
-          "lastPackCreatedAt": { ".validate": "newData.isNumber() && newData.val() === now" },
-          "lastFolderCreatedAt": { ".validate": "newData.isNumber() && newData.val() === now" },
-          "packsCreatedTotal": { ".validate": "newData.isNumber() && newData.val() === (data.exists() ? data.val() : 0) + 1" },
-          "foldersCreatedTotal": { ".validate": "newData.isNumber() && newData.val() === (data.exists() ? data.val() : 0) + 1" }
+          "lastPackCreatedAt": {
+            ".validate": "newData.isNumber() && newData.val() === now"
+          },
+          "lastFolderCreatedAt": {
+            ".validate": "newData.isNumber() && newData.val() === now"
+          },
+          "packsCreatedTotal": {
+            ".validate": "newData.isNumber() && newData.val() === (data.exists() ? data.val() : 0) + 1"
+          },
+          "foldersCreatedTotal": {
+            ".validate": "newData.isNumber() && newData.val() === (data.exists() ? data.val() : 0) + 1"
+          }
         },
-
         "packs": {
           "$packId": {
             ".validate": "newData.hasChildren(['name']) && (data.exists() || !root.child('users').child($uid).child('meta').child('lastPackCreatedAt').exists() || now > root.child('users').child($uid).child('meta').child('lastPackCreatedAt').val() + 3000)",
-            "name": { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 200" },
-            "description": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 3000)" },
-            "icon": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 32)" },
-            "color": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 200)" },
-            "level": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 50)" },
-            "language": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 20)" },
-            "folderId": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 100)" },
-            "marketPackId": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 200)" }
-          }
-        },
-
-        "folders": {
-          "$folderId": {
-            ".validate": "newData.hasChildren(['name']) && (data.exists() || !root.child('users').child($uid).child('meta').child('lastFolderCreatedAt').exists() || now > root.child('users').child($uid).child('meta').child('lastFolderCreatedAt').val() + 3000)",
-            "name": { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 100" },
-            "icon": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 32)" }
-          }
-        },
-
-        "words": {
-          "$packId": {
-            "$wordId": {
-              "word": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 300)" },
-              "translation": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 300)" },
-              "definition": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 3000)" },
-              "example": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 3000)" },
-              "notes": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 2000)" },
-              "partOfSpeech": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 50)" }
+            "name": {
+              ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 200"
+            },
+            "description": {
+              ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 3000)"
+            },
+            "icon": {
+              ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 32)"
+            },
+            "color": {
+              ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 200)"
+            },
+            "level": {
+              ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 50)"
+            },
+            "language": {
+              ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 20)"
+            },
+            "folderId": {
+              ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 100)"
+            },
+            "marketPackId": {
+              ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 200)"
             }
           }
         },
-
+        "folders": {
+          "$folderId": {
+            ".validate": "newData.hasChildren(['name']) && (data.exists() || !root.child('users').child($uid).child('meta').child('lastFolderCreatedAt').exists() || now > root.child('users').child($uid).child('meta').child('lastFolderCreatedAt').val() + 3000)",
+            "name": {
+              ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 100"
+            },
+            "icon": {
+              ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 32)"
+            }
+          }
+        },
+        "words": {
+          "$packId": {
+            "$wordId": {
+              "word": {
+                ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 300)"
+              },
+              "translation": {
+                ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 300)"
+              },
+              "definition": {
+                ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 3000)"
+              },
+              "example": {
+                ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 3000)"
+              },
+              "notes": {
+                ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 2000)"
+              },
+              "partOfSpeech": {
+                ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 50)"
+              }
+            }
+          }
+        },
         "profile": {
-          "displayName": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 200)" },
-          "email": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 320)" },
-          "photoURL": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 1000)" }
+          "displayName": {
+            ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 200)"
+          },
+          "email": {
+            ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 320)"
+          },
+          "photoURL": {
+            ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 1000)"
+          }
         },
-
         "activity": {
-          "lastSeen": { ".validate": "!newData.exists() || newData.isString()" },
-          "sessionCount": { ".validate": "!newData.exists() || newData.isNumber()" }
+          "lastSeen": {
+            ".validate": "!newData.exists() || newData.isString()"
+          },
+          "sessionCount": {
+            ".validate": "!newData.exists() || newData.isNumber()"
+          }
         },
-
         "grammar": {
           "complex_attempts": {
             "$attemptId": {
@@ -82,20 +125,36 @@
             ".validate": "newData.isString() && newData.val().length <= 5000"
           }
         },
-        "studentEmail": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 320)" },
-        "studentName": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 200)" },
-        "testTitle": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 200)" }
+        "studentEmail": {
+          ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 320)"
+        },
+        "studentName": {
+          ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 200)"
+        },
+        "testTitle": {
+          ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 200)"
+        }
       }
     },
     "error_logs": {
       ".read": "auth != null && auth.token.email === 'azimjonxolmirzayev30@gmail.com'",
       "$logId": {
         ".write": "auth != null && (auth.token.email === 'azimjonxolmirzayev30@gmail.com' || (!data.exists() && newData.child('userId').val() === auth.uid))",
-        "message": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 500)" },
-        "stack": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 2000)" },
-        "url": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 2000)" },
-        "userAgent": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 500)" },
-        "context": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 200)" }
+        "message": {
+          ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 500)"
+        },
+        "stack": {
+          ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 2000)"
+        },
+        "url": {
+          ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 2000)"
+        },
+        "userAgent": {
+          ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 500)"
+        },
+        "context": {
+          ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 200)"
+        }
       }
     },
     "globalWordStats": {
@@ -105,41 +164,39 @@
         ".validate": "newData.hasChildren(['totalReviews', 'totalCorrect']) && newData.child('totalReviews').isNumber() && newData.child('totalCorrect').isNumber() && newData.child('totalCorrect').val() <= newData.child('totalReviews').val() && (!data.exists() || newData.child('totalReviews').val() >= data.child('totalReviews').val())"
       }
     },
-
     "corpUsers": {
       ".read": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com')",
       "$uid": {
         ".read": "auth != null && (auth.uid === $uid || auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com')",
         ".write": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com' || (root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && newData.exists() && newData.child('role').val() === 'teacher' && newData.child('centerId').val() === root.child('corpUsers').child(auth.uid).child('centerId').val()) || (root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && !newData.exists() && data.child('role').val() === 'teacher' && data.child('centerId').val() === root.child('corpUsers').child(auth.uid).child('centerId').val()) || (auth.uid === $uid && !data.exists() && newData.child('role').val() === 'teacher' && root.child('teacherInvites').child(newData.child('inviteCode').val()).child('status').val() === 'active' && root.child('teacherInvites').child(newData.child('inviteCode').val()).child('centerId').val() === newData.child('centerId').val()) || (auth.uid === $uid && !data.exists() && newData.child('role').val() === 'teacher' && newData.child('centerId').val() === root.child('teacherJoinCodes').child(newData.child('joinCode').val()).val()))",
-
-        "teacherName": { ".write": "auth != null && auth.uid === $uid && data.child('role').val() === 'teacher'" },
-        "phone": { ".write": "auth != null && auth.uid === $uid && data.child('role').val() === 'teacher'" }
+        "teacherName": {
+          ".write": "auth != null && auth.uid === $uid && data.child('role').val() === 'teacher'"
+        },
+        "phone": {
+          ".write": "auth != null && auth.uid === $uid && data.child('role').val() === 'teacher'"
+        }
       }
     },
-
     "groupCodes": {
       "$code": {
         ".read": true,
         ".write": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com' || (root.child('corpUsers').child(auth.uid).child('role').val() === 'teacher' && ((!data.exists() && newData.child('teacherId').val() === root.child('corpUsers').child(auth.uid).child('teacherId').val()) || (data.exists() && data.child('teacherId').val() === root.child('corpUsers').child(auth.uid).child('teacherId').val()))))"
       }
     },
-
     "teacherJoinCodes": {
       "$code": {
         ".read": true,
         ".write": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com' || (root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && ((newData.exists() && newData.val() === root.child('corpUsers').child(auth.uid).child('centerId').val()) || (!newData.exists() && data.val() === root.child('corpUsers').child(auth.uid).child('centerId').val()))))"
       }
     },
-
     "teacherJoinRequests": {
       "$uid": {
         ".read": "auth != null && (auth.uid === $uid || auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com')",
         ".write": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com' || (auth.uid === $uid && ((!data.exists() && newData.exists() && newData.child('uid').val() === auth.uid && newData.child('centerId').val() === root.child('teacherJoinCodes').child(newData.child('joinCode').val()).val()) || (!newData.exists() && data.exists()))) || (!newData.exists() && data.exists() && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === data.child('centerId').val()))"
       }
     },
-
     "independentTeachers": {
-      ".read": true,
+      ".read": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com')",
       "$uid": {
         "profile": {
           ".write": "auth != null && auth.uid === $uid"
@@ -162,120 +219,169 @@
               }
             },
             "homeworkList": {
-              "$hwId": { ".write": "auth != null && auth.uid === $uid" }
-            }
-          }
-        }
-      }
-    },
-
-    "independentGroupCodes": {
-      "$code": {
-        ".read": true,
-        ".write": "auth != null && (!data.exists() || data.child('teacherUid').val() === auth.uid) && (!newData.exists() || newData.child('teacherUid').val() === auth.uid)"
-      }
-    },
-
-    "settings": {
-      "global": {
-        ".read": true,
-        ".write": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com')"
-      }
-    },
-
-    "userPasswordOverrides": {
-      ".read": true,
-      "$emailKey": {
-        ".write": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com')"
-      }
-    },
-
-    "announcements": {
-      ".read": "auth != null",
-      "$announcementId": {
-        ".write": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com')"
-      }
-    },
-
-    "teacherInvites": {
-      ".read": true,
-      "$code": {
-        ".write": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com' || (root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && (newData.exists() ? newData.child('centerId').val() === root.child('corpUsers').child(auth.uid).child('centerId').val() : data.child('centerId').val() === root.child('corpUsers').child(auth.uid).child('centerId').val())) || (data.exists() && data.child('status').val() === 'active' && newData.exists() && newData.child('status').val() === 'used'))"
-      }
-    },
-
-    "centers": {
-      ".read": true,
-      "$centerId": {
-        ".write": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com')",
-
-        "name": { ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId" },
-        "email": { ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId" },
-        "phone": { ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId" },
-        "address": { ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId" },
-        "description": { ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId" },
-        "telegramUsername": { ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId" },
-        "instagramUsername": { ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId" },
-        "workingHours": { ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId" },
-        "workingDays": { ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId" },
-        "maxTeachers": { ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId" },
-        "maxStudents": { ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId" },
-        "maxGroups": { ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId" },
-        "requireApproval": { ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId" },
-        "allowStudentRegistration": { ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId" },
-        "emailNotifications": { ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId" },
-        "telegramNotifications": { ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId" },
-        "newStudentAlert": { ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId" },
-        "paymentReminders": { ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId" },
-        "updatedAt": { ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId" },
-        "teacherJoinCode": { ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId" },
-
-        "teachers": {
-          "$teacherId": {
-            ".write": "auth != null && ((root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId) || (!data.exists() && newData.child('uid').val() === auth.uid && newData.child('inviteCode').exists() && root.child('teacherInvites').child(newData.child('inviteCode').val()).child('status').val() === 'active' && root.child('teacherInvites').child(newData.child('inviteCode').val()).child('centerId').val() === $centerId) || (!data.exists() && newData.child('uid').val() === auth.uid && root.child('teacherJoinCodes').child(newData.child('joinCode').val()).val() === $centerId))",
-
-            "name": { ".write": "auth != null && auth.uid === data.parent().child('uid').val()" },
-            "phone": { ".write": "auth != null && auth.uid === data.parent().child('uid').val()" }
-          }
-        },
-
-        "teacherInvites": {
-          "$code": {
-            ".write": "auth != null && ((root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId) || (data.exists() && data.child('status').val() === 'active' && newData.exists() && newData.child('status').val() === 'used'))"
-          }
-        },
-
-        "pendingTeachers": {
-          "$uid": {
-            ".write": "auth != null && ((root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId) || (auth.uid === $uid && ((!data.exists() && newData.exists() && newData.child('uid').val() === auth.uid && $centerId === root.child('teacherJoinCodes').child(newData.child('joinCode').val()).val()) || (!newData.exists() && data.exists()))))"
-          }
-        },
-
-        "customPacks": {
-          "$packId": {
-            ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId && (root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' || (root.child('corpUsers').child(auth.uid).child('role').val() === 'teacher' && (!data.exists() || !data.child('ownerUid').exists() || data.child('ownerUid').val() === auth.uid) && (!newData.exists() || !newData.child('ownerUid').exists() || newData.child('ownerUid').val() === auth.uid)))"
-          }
-        },
-
-        "groups": {
-          "$groupId": {
-            ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'teacher' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId && ((!data.exists() && newData.child('teacherId').val() === root.child('corpUsers').child(auth.uid).child('teacherId').val()) || (data.exists() && data.child('teacherId').val() === root.child('corpUsers').child(auth.uid).child('teacherId').val()))",
-
-            "studentsCount": {
-              ".write": "auth != null"
-            },
-
-            "students": {
-              "$studentId": {
-                ".write": "auth != null && auth.uid === $studentId",
-                ".validate": "newData.hasChildren(['name'])"
+              "$hwId": {
+                ".write": "auth != null && auth.uid === $uid"
               }
             }
           }
         }
       }
     },
-
+    "independentGroupCodes": {
+      "$code": {
+        ".read": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com')",
+        ".write": "auth != null && (!data.exists() || data.child('teacherUid').val() === auth.uid) && (!newData.exists() || newData.child('teacherUid').val() === auth.uid)"
+      }
+    },
+    "settings": {
+      "global": {
+        ".read": true,
+        ".write": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com')"
+      }
+    },
+    "userPasswordOverrides": {
+      ".read": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com')",
+      "$emailKey": {
+        ".write": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com')"
+      }
+    },
+    "announcements": {
+      ".read": "auth != null",
+      "$announcementId": {
+        ".write": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com')"
+      }
+    },
+    "teacherInvites": {
+      ".read": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com')",
+      "$code": {
+        ".write": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com' || (root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && (newData.exists() ? newData.child('centerId').val() === root.child('corpUsers').child(auth.uid).child('centerId').val() : data.child('centerId').val() === root.child('corpUsers').child(auth.uid).child('centerId').val())) || (data.exists() && data.child('status').val() === 'active' && newData.exists() && newData.child('status').val() === 'used'))"
+      }
+    },
+    "centers": {
+      ".read": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com')",
+      "$centerId": {
+        ".read": "auth != null && ((auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com') || (root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId && root.child('corpUsers').child(auth.uid).child('disabled').val() !== true))",
+        ".write": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com')",
+        "name": {
+          ".read": true,
+          ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId"
+        },
+        "email": {
+          ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId"
+        },
+        "phone": {
+          ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId"
+        },
+        "address": {
+          ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId"
+        },
+        "description": {
+          ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId"
+        },
+        "telegramUsername": {
+          ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId"
+        },
+        "instagramUsername": {
+          ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId"
+        },
+        "workingHours": {
+          ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId"
+        },
+        "workingDays": {
+          ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId"
+        },
+        "maxTeachers": {
+          ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId"
+        },
+        "maxStudents": {
+          ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId"
+        },
+        "maxGroups": {
+          ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId"
+        },
+        "requireApproval": {
+          ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId"
+        },
+        "allowStudentRegistration": {
+          ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId"
+        },
+        "emailNotifications": {
+          ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId"
+        },
+        "telegramNotifications": {
+          ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId"
+        },
+        "newStudentAlert": {
+          ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId"
+        },
+        "paymentReminders": {
+          ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId"
+        },
+        "updatedAt": {
+          ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId"
+        },
+        "teacherJoinCode": {
+          ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId"
+        },
+        "teachers": {
+          "$teacherId": {
+            ".write": "auth != null && ((root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId) || (!data.exists() && newData.child('uid').val() === auth.uid && newData.child('inviteCode').exists() && root.child('teacherInvites').child(newData.child('inviteCode').val()).child('status').val() === 'active' && root.child('teacherInvites').child(newData.child('inviteCode').val()).child('centerId').val() === $centerId) || (!data.exists() && newData.child('uid').val() === auth.uid && root.child('teacherJoinCodes').child(newData.child('joinCode').val()).val() === $centerId))",
+            "name": {
+              ".read": true,
+              ".write": "auth != null && auth.uid === data.parent().child('uid').val()"
+            },
+            "phone": {
+              ".write": "auth != null && auth.uid === data.parent().child('uid').val()"
+            }
+          }
+        },
+        "teacherInvites": {
+          "$code": {
+            ".write": "auth != null && ((root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId) || (data.exists() && data.child('status').val() === 'active' && newData.exists() && newData.child('status').val() === 'used'))"
+          }
+        },
+        "pendingTeachers": {
+          "$uid": {
+            ".write": "auth != null && ((root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId) || (auth.uid === $uid && ((!data.exists() && newData.exists() && newData.child('uid').val() === auth.uid && $centerId === root.child('teacherJoinCodes').child(newData.child('joinCode').val()).val()) || (!newData.exists() && data.exists()))))"
+          }
+        },
+        "customPacks": {
+          ".read": "auth != null && root.child('users').child(auth.uid).child('groupMembership').child('centerId').val() === $centerId",
+          "$packId": {
+            ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId && (root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' || (root.child('corpUsers').child(auth.uid).child('role').val() === 'teacher' && (!data.exists() || !data.child('ownerUid').exists() || data.child('ownerUid').val() === auth.uid) && (!newData.exists() || !newData.child('ownerUid').exists() || newData.child('ownerUid').val() === auth.uid)))"
+          }
+        },
+        "groups": {
+          "$groupId": {
+            ".read": "auth != null && root.child('users').child(auth.uid).child('groupMemberships').child($groupId).child('centerId').val() === $centerId",
+            ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'teacher' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId && ((!data.exists() && newData.child('teacherId').val() === root.child('corpUsers').child(auth.uid).child('teacherId').val()) || (data.exists() && data.child('teacherId').val() === root.child('corpUsers').child(auth.uid).child('teacherId').val()))",
+            "studentsCount": {
+              ".read": "auth != null",
+              ".write": "auth != null"
+            },
+            "students": {
+              "$studentId": {
+                ".read": "auth != null && auth.uid === $studentId",
+                ".write": "auth != null && auth.uid === $studentId",
+                ".validate": "newData.hasChildren(['name'])"
+              }
+            },
+            "name": {
+              ".read": true
+            },
+            "level": {
+              ".read": true
+            },
+            "status": {
+              ".read": true
+            },
+            "teacherId": {
+              ".read": true
+            }
+          }
+        }
+      }
+    },
     "groupBattles": {
       "$groupId": {
         ".read": "auth != null",

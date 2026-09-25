@@ -1,4 +1,4 @@
-import { ref, set, get, update, push, remove } from 'firebase/database';
+import { ref, set, get, update, push, remove, runTransaction } from 'firebase/database';
 import { createUserWithEmailAndPassword, sendPasswordResetEmail, signOut } from 'firebase/auth';
 import { db, auth } from '../firebase';
 import { getSecondaryAuth } from '../firebaseSecondary';
@@ -834,14 +834,19 @@ export async function joinGroupAsUser(code, uid, profile) {
   }
 
   const { centerId, groupId } = codeSnap.val();
-  const groupRef = ref(db, `centers/${centerId}/groups/${groupId}`);
-  const groupSnap = await get(groupRef);
+  // A student who hasn't joined yet can't read the group node (only its
+  // members can — see database.rules.json), just these few public fields.
+  const groupBase = `centers/${centerId}/groups/${groupId}`;
+  const [nameSnap, levelSnap] = await Promise.all([
+    get(ref(db, `${groupBase}/name`)),
+    get(ref(db, `${groupBase}/level`)),
+  ]);
 
-  if (!groupSnap.exists()) {
+  if (!nameSnap.exists()) {
     throw new Error('Group not found!');
   }
 
-  const group = groupSnap.val();
+  const group = { name: nameSnap.val(), level: levelSnap.exists() ? levelSnap.val() : undefined };
   const existingSnap = await get(ref(db, `centers/${centerId}/groups/${groupId}/students/${uid}`));
 
   const studentPayload = existingSnap.exists()
@@ -857,10 +862,7 @@ export async function joinGroupAsUser(code, uid, profile) {
   await set(ref(db, `centers/${centerId}/groups/${groupId}/students/${uid}`), studentPayload);
 
   if (!existingSnap.exists()) {
-    const studentsRef = ref(db, `centers/${centerId}/groups/${groupId}/students`);
-    const allStudsSnap = await get(studentsRef);
-    const count = allStudsSnap.exists() ? Object.keys(allStudsSnap.val()).length : 1;
-    await update(groupRef, { studentsCount: count });
+    await runTransaction(ref(db, `${groupBase}/studentsCount`), (n) => (n || 0) + 1);
   }
 
   const membership = {

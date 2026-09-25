@@ -39,29 +39,34 @@ export default function JoinGroupPage() {
           return;
         }
         const { centerId, groupId } = codeSnap.val();
-        const [groupSnap, centerNameSnap] = await Promise.all([
-          get(ref(db, `centers/${centerId}/groups/${groupId}`)),
+        // Only these fields are publicly readable (database.rules.json) —
+        // the group node itself, with its student list, is members-only.
+        const groupBase = `centers/${centerId}/groups/${groupId}`;
+        const [nameSnap, levelSnap, statusSnap, teacherIdSnap, centerNameSnap] = await Promise.all([
+          get(ref(db, `${groupBase}/name`)),
+          get(ref(db, `${groupBase}/level`)),
+          get(ref(db, `${groupBase}/status`)),
+          get(ref(db, `${groupBase}/teacherId`)),
           get(ref(db, `centers/${centerId}/name`)),
         ]);
-        if (!groupSnap.exists()) {
+        if (!nameSnap.exists()) {
           if (!cancelled) setStatus('invalid');
           return;
         }
-        const group = groupSnap.val();
         let teacherName = '';
-        if (group.teacherId) {
-          const teacherSnap = await get(ref(db, `centers/${centerId}/teachers/${group.teacherId}/name`));
+        if (teacherIdSnap.exists()) {
+          const teacherSnap = await get(ref(db, `centers/${centerId}/teachers/${teacherIdSnap.val()}/name`));
           teacherName = teacherSnap.exists() ? teacherSnap.val() : '';
         }
         if (cancelled) return;
         setInfo({
           centerId,
           groupId,
-          groupName: group.name || 'Guruh',
-          level: group.level || '',
+          groupName: nameSnap.val() || 'Guruh',
+          level: levelSnap.exists() ? levelSnap.val() : '',
           centerName: centerNameSnap.exists() ? centerNameSnap.val() : '',
           teacherName,
-          archived: group.status === 'archived',
+          archived: statusSnap.exists() && statusSnap.val() === 'archived',
         });
         setStatus('ready');
       } catch (err) {
