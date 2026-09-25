@@ -27,7 +27,7 @@ export default function CreateGroupModal({ p }) {
               <Users size={18} />
             </div>
             <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 800, color: 'var(--pg-text)' }}>
-              Create New Group
+              Yangi guruh
             </h3>
           </div>
 
@@ -46,7 +46,7 @@ export default function CreateGroupModal({ p }) {
               justifyContent: 'center',
               cursor: 'pointer'
             }}
-            title="Close"
+            title="Yopish"
           >
             <X size={16} />
           </button>
@@ -56,13 +56,13 @@ export default function CreateGroupModal({ p }) {
         <form onSubmit={handleCreateGroup} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
             <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--pg-text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-              Group Name *
+              Guruh nomi *
             </label>
             <input
               type="text"
               className="input"
               required
-              placeholder="e.g. Beginner Monday 5pm"
+              placeholder="Masalan: Beginner, Du-Chor-Ju 17:00"
               value={groupForm.name}
               onChange={e => setGroupForm({ ...groupForm, name: e.target.value })}
               style={{
@@ -79,7 +79,7 @@ export default function CreateGroupModal({ p }) {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
             <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--pg-text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-              Level
+              Daraja
             </label>
             <select
               className="select"
@@ -115,7 +115,7 @@ export default function CreateGroupModal({ p }) {
                 cursor: 'pointer'
               }}
             >
-              Cancel
+              Bekor qilish
             </button>
 
             <button
@@ -124,7 +124,7 @@ export default function CreateGroupModal({ p }) {
               disabled={submittingGroup}
               style={{ opacity: submittingGroup ? 0.7 : 1 }}
             >
-              {submittingGroup ? 'Creating...' : 'Create Group'}
+              {submittingGroup ? 'Yaratilmoqda...' : 'Guruh yaratish'}
             </button>
           </div>
         </form>

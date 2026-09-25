@@ -24,7 +24,7 @@ import './CenterAdminDashboard.css';
 export default function CenterAdminDashboard({ tab = 'dashboard' }) {
   const context = useOutletContext() || {};
   const navigate = useNavigate();
-  const centerId = context.centerId || 'demo_center_1';
+  const centerId = context.centerId;
   const initialCenterName = context.centerName || 'O\'quv Markazi';
 
   const [centerName, setCenterName] = useState(initialCenterName);

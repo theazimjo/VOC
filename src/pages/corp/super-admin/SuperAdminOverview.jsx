@@ -146,7 +146,7 @@ export default function SuperAdminOverview() {
               <div key={center.id} className="overview-recent-row" onClick={() => navigate('/corp/super-admin/centers')}>
                 <div className="overview-recent-icon"><Building2 size={18} /></div>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <p className="name">{center.name}</p>
+                  <p className="name">{center.name || `Nomsiz markaz (${center.id})`}</p>
                   <p className="meta">{center.createdAt ? new Date(center.createdAt).toLocaleDateString('uz-UZ') : "Sana yo'q"}</p>
                 </div>
                 <span className={`center-status-badge ${center.status === 'suspended' ? 'status-suspended' : ''}`}>

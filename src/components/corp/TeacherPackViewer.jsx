@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ArrowLeft, BookOpen, Search, ChevronRight, Plus, Check, X, Pencil, Trash2, MoreVertical } from 'lucide-react';
 import { updateCustomPack } from '../../services/corpService';
-import { updateIndependentCustomPack } from '../../services/independentTeacherService';
 import TeacherAddWordModal from './TeacherAddWordModal';
 import './TeacherPackViewer.css';
 
@@ -23,7 +22,7 @@ function deriveMonths(pack) {
   return [];
 }
 
-export default function TeacherPackViewer({ pack, onBack, editable = false, centerId, independentUid = null, askConfirm = null, onUpdate }) {
+export default function TeacherPackViewer({ pack, onBack, editable = false, centerId, askConfirm = null, onUpdate }) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [months, setMonths] = useState(() => deriveMonths(pack));
@@ -127,14 +126,10 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
       const flatUnits = updatedMonths.flatMap(m => m.units || []);
       const flatWords = flatUnits.flatMap(u => u.words || []);
       const updates = { months: updatedMonths, units: flatUnits, words: flatWords, wordCount: flatWords.length };
-      if (independentUid) {
-        await updateIndependentCustomPack(independentUid, pack.id, updates);
-      } else {
-        await updateCustomPack(centerId, pack.id, updates);
-      }
+      await updateCustomPack(centerId, pack.id, updates);
       if (onUpdate) onUpdate({ ...pack, ...updates });
     } catch (err) {
-      alert('Error saving: ' + err.message);
+      alert("Saqlashda xatolik: " + err.message);
     } finally {
       setSaving(false);
     }
@@ -176,14 +171,14 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
 
     if (askConfirm) {
       askConfirm({
-        title: 'Delete Month',
-        message: `Delete "${m.title}" and all its topics?`,
-        confirmLabel: 'Delete',
-        cancelLabel: 'Cancel',
+        title: "Oyni o'chirish",
+        message: `"${m.title}" va undagi barcha mavzular o'chirilsinmi?`,
+        confirmLabel: "O'chirish",
+        cancelLabel: 'Bekor qilish',
         danger: true,
         onConfirm: executeDelete,
       });
-    } else if (window.confirm(`Delete "${m.title}" and all its topics?`)) {
+    } else if (window.confirm(`"${m.title}" va undagi barcha mavzular o'chirilsinmi?`)) {
       executeDelete();
     }
   };
@@ -231,14 +226,14 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
 
     if (askConfirm) {
       askConfirm({
-        title: 'Delete Set',
-        message: `Delete "${u.title}" and all its words?`,
-        confirmLabel: 'Delete',
-        cancelLabel: 'Cancel',
+        title: "Mavzuni o'chirish",
+        message: `"${u.title}" va undagi barcha so'zlar o'chirilsinmi?`,
+        confirmLabel: "O'chirish",
+        cancelLabel: 'Bekor qilish',
         danger: true,
         onConfirm: executeDelete,
       });
-    } else if (window.confirm(`Delete "${u.title}" and all its words?`)) {
+    } else if (window.confirm(`"${u.title}" va undagi barcha so'zlar o'chirilsinmi?`)) {
       executeDelete();
     }
   };
@@ -295,14 +290,14 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
 
     if (askConfirm) {
       askConfirm({
-        title: 'Delete Word',
-        message: `Delete "${w.word}"?`,
-        confirmLabel: 'Delete',
-        cancelLabel: 'Cancel',
+        title: "So'zni o'chirish",
+        message: `"${w.word}" o'chirilsinmi?`,
+        confirmLabel: "O'chirish",
+        cancelLabel: 'Bekor qilish',
         danger: true,
         onConfirm: executeDelete,
       });
-    } else if (window.confirm(`Delete "${w.word}"?`)) {
+    } else if (window.confirm(`"${w.word}" o'chirilsinmi?`)) {
       executeDelete();
     }
   };
@@ -347,10 +342,10 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
           <h2>{activeUnit ? activeUnit.title : activeMonth ? activeMonth.title : pack.title}</h2>
           <span>
             {activeUnit
-              ? `${activeMonth.title} · ${(activeUnit.words || []).length} words`
+              ? `${activeMonth.title} · ${(activeUnit.words || []).length} so'z`
               : activeMonth
-                ? `${(activeMonth.units || []).length} topics`
-                : `${months.length} months`}
+                ? `${(activeMonth.units || []).length} ta mavzu`
+                : `${months.length} oy`}
           </span>
         </div>
       </div>
@@ -361,7 +356,7 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
           {months.length === 0 && !editable && (
             <div className="tpv-empty">
               <BookOpen size={32} />
-              <p>This pack has no sections yet.</p>
+              <p>To'plamda hali bo'lim yo'q.</p>
             </div>
           )}
 
@@ -370,15 +365,15 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
               <form key={m.id} onSubmit={(e) => handleSaveMonthTitle(m.id, e)} className="tpv-add-form">
                 <input
                   type="text"
-                  placeholder="Month name"
+                  placeholder="Oy nomi"
                   value={editingMonthTitle}
                   onChange={e => setEditingMonthTitle(e.target.value)}
                   autoFocus
                 />
-                <button type="submit" className="tpv-add-confirm" title="Save" disabled={saving}>
+                <button type="submit" className="tpv-add-confirm" title="Saqlash" disabled={saving}>
                   <Check size={16} />
                 </button>
-                <button type="button" className="tpv-add-cancel" title="Cancel" onClick={() => setEditingMonthId(null)}>
+                <button type="button" className="tpv-add-cancel" title="Bekor qilish" onClick={() => setEditingMonthId(null)}>
                   <X size={16} />
                 </button>
               </form>
@@ -386,13 +381,13 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
               <div key={m.id} className="tpv-row" onClick={() => setMonthId(m.id)}>
                 <span className="tpv-row-num">{idx + 1}</span>
                 <span className="tpv-row-label">{m.title}</span>
-                <span className="tpv-row-meta">{(m.units || []).length} topics</span>
+                <span className="tpv-row-meta">{(m.units || []).length} ta mavzu</span>
                 
                 {editable && (
                   <div style={{ marginLeft: 'auto' }} onClick={e => e.stopPropagation()}>
                     <button
                       type="button"
-                      title="Options"
+                      title="Amallar"
                       style={{
                         background: 'rgba(255, 255, 255, 0.06)', border: '1px solid rgba(255, 255, 255, 0.1)',
                         borderRadius: '9px', color: 'var(--pg-text-secondary)', width: '28px', height: '28px',
@@ -448,7 +443,7 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
                               handleStartEditMonth(m, e);
                             }}
                           >
-                            <Pencil size={14} style={{ color: '#818cf8' }} /> Edit
+                            <Pencil size={14} style={{ color: '#818cf8' }} /> Tahrirlash
                           </button>
                           <button
                             type="button"
@@ -462,7 +457,7 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
                               handleDeleteMonth(m, e);
                             }}
                           >
-                            <Trash2 size={14} style={{ color: '#ef4444' }} /> Delete
+                            <Trash2 size={14} style={{ color: '#ef4444' }} /> O'chirish
                           </button>
                         </div>
                       </>
@@ -480,17 +475,17 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
               <form onSubmit={handleAddMonth} className="tpv-add-form">
                 <input
                   type="text"
-                  placeholder="Month name"
+                  placeholder="Oy nomi"
                   value={newMonthTitle}
                   onChange={e => setNewMonthTitle(e.target.value)}
                   autoFocus
                 />
-                <button type="submit" className="tpv-add-confirm" title="Add" disabled={saving}><Check size={16} /></button>
-                <button type="button" className="tpv-add-cancel" title="Cancel" onClick={() => { setAddingMonth(false); setNewMonthTitle(''); }}><X size={16} /></button>
+                <button type="submit" className="tpv-add-confirm" title="Qo'shish" disabled={saving}><Check size={16} /></button>
+                <button type="button" className="tpv-add-cancel" title="Bekor qilish" onClick={() => { setAddingMonth(false); setNewMonthTitle(''); }}><X size={16} /></button>
               </form>
             ) : (
               <button type="button" className="tpv-add-row" onClick={() => setAddingMonth(true)}>
-                <Plus size={16} /> Add Month
+                <Plus size={16} /> Oy qo'shish
               </button>
             )
           )}
@@ -503,7 +498,7 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
           {(activeMonth.units || []).length === 0 && !editable && (
             <div className="tpv-empty">
               <BookOpen size={32} />
-              <p>No topics in this month yet.</p>
+              <p>Bu oyda hali mavzu yo'q.</p>
             </div>
           )}
 
@@ -512,15 +507,15 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
               <form key={u.id} onSubmit={(e) => handleSaveUnitTitle(u.id, e)} className="tpv-add-form">
                 <input
                   type="text"
-                  placeholder="Set name"
+                  placeholder="Mavzu nomi"
                   value={editingUnitTitle}
                   onChange={e => setEditingUnitTitle(e.target.value)}
                   autoFocus
                 />
-                <button type="submit" className="tpv-add-confirm" title="Save" disabled={saving}>
+                <button type="submit" className="tpv-add-confirm" title="Saqlash" disabled={saving}>
                   <Check size={16} />
                 </button>
-                <button type="button" className="tpv-add-cancel" title="Cancel" onClick={() => setEditingUnitId(null)}>
+                <button type="button" className="tpv-add-cancel" title="Bekor qilish" onClick={() => setEditingUnitId(null)}>
                   <X size={16} />
                 </button>
               </form>
@@ -528,13 +523,13 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
               <div key={u.id} className="tpv-row" onClick={() => setUnitId(u.id)}>
                 <span className="tpv-row-num">{idx + 1}</span>
                 <span className="tpv-row-label">{u.title}</span>
-                <span className="tpv-row-meta">{(u.words || []).length} words</span>
+                <span className="tpv-row-meta">{(u.words || []).length} so'z</span>
 
                 {editable && (
                   <div style={{ marginLeft: 'auto' }} onClick={e => e.stopPropagation()}>
                     <button
                       type="button"
-                      title="Options"
+                      title="Amallar"
                       style={{
                         background: 'rgba(255, 255, 255, 0.06)', border: '1px solid rgba(255, 255, 255, 0.1)',
                         borderRadius: '9px', color: 'var(--pg-text-secondary)', width: '28px', height: '28px',
@@ -590,7 +585,7 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
                               handleStartEditUnit(u, e);
                             }}
                           >
-                            <Pencil size={14} style={{ color: '#818cf8' }} /> Edit
+                            <Pencil size={14} style={{ color: '#818cf8' }} /> Tahrirlash
                           </button>
                           <button
                             type="button"
@@ -604,7 +599,7 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
                               handleDeleteUnit(u, e);
                             }}
                           >
-                            <Trash2 size={14} style={{ color: '#ef4444' }} /> Delete
+                            <Trash2 size={14} style={{ color: '#ef4444' }} /> O'chirish
                           </button>
                         </div>
                       </>
@@ -622,17 +617,17 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
               <form onSubmit={handleAddUnit} className="tpv-add-form">
                 <input
                   type="text"
-                  placeholder="Set name"
+                  placeholder="Mavzu nomi"
                   value={newUnitTitle}
                   onChange={e => setNewUnitTitle(e.target.value)}
                   autoFocus
                 />
-                <button type="submit" className="tpv-add-confirm" title="Add" disabled={saving}><Check size={16} /></button>
-                <button type="button" className="tpv-add-cancel" title="Cancel" onClick={() => { setAddingUnit(false); setNewUnitTitle(''); }}><X size={16} /></button>
+                <button type="submit" className="tpv-add-confirm" title="Qo'shish" disabled={saving}><Check size={16} /></button>
+                <button type="button" className="tpv-add-cancel" title="Bekor qilish" onClick={() => { setAddingUnit(false); setNewUnitTitle(''); }}><X size={16} /></button>
               </form>
             ) : (
               <button type="button" className="tpv-add-row" onClick={() => setAddingUnit(true)}>
-                <Plus size={16} /> Add Set
+                <Plus size={16} /> Mavzu qo'shish
               </button>
             )
           )}
@@ -647,7 +642,7 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
               <Search size={15} className="tpv-search-icon" />
               <input
                 type="text"
-                placeholder="Search words..."
+                placeholder="So'zlarni qidirish..."
                 value={search}
                 onChange={e => setSearch(e.target.value)}
               />
@@ -660,7 +655,7 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
                   setEditingWord(null);
                   setShowAddWordModal(true);
                 }}
-                title="Add word"
+                title="So'z qo'shish"
               >
                 <Plus size={18} />
               </button>
@@ -670,7 +665,7 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
           {filteredWords.length === 0 ? (
             <div className="tpv-empty">
               <BookOpen size={32} />
-              <p>{search ? "No words match your search." : "No words in this topic yet."}</p>
+              <p>{search ? "Qidiruv bo'yicha so'z topilmadi." : "Bu mavzuda hali so'z yo'q."}</p>
             </div>
           ) : (
             <div className="tpv-words-grid">
@@ -686,7 +681,7 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
                         <div>
                           <button
                             type="button"
-                            title="Options"
+                            title="Amallar"
                             style={{
                               background: 'transparent', border: 'none', color: 'var(--pg-text-secondary)',
                               cursor: 'pointer', padding: '2px 4px', display: 'flex', alignItems: 'center',
@@ -743,7 +738,7 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
                                     setShowAddWordModal(true);
                                   }}
                                 >
-                                  <Pencil size={14} style={{ color: '#818cf8' }} /> Edit
+                                  <Pencil size={14} style={{ color: '#818cf8' }} /> Tahrirlash
                                 </button>
                                 <button
                                   type="button"
@@ -757,7 +752,7 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
                                     handleDeleteWord(w, e);
                                   }}
                                 >
-                                  <Trash2 size={14} style={{ color: '#ef4444' }} /> Delete
+                                  <Trash2 size={14} style={{ color: '#ef4444' }} /> O'chirish
                                 </button>
                               </div>
                             </>

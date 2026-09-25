@@ -102,25 +102,21 @@ export const healthChapterText = {
             },
             {
                 "type": "p",
-                "text": "To some extent, heredity, all the traits that are passed on biologically from parent to child, determines a person's level of wellness. These traits include hair color, eye color, height, build, and many other characteristics. Heredity also influences the soundness of your body, your reactions to stressful situations, and the aging process."
+                "text": "To some extent, your level of health is already determined at the time you are born. Heredity is all the traits that are passed biologically from parent to child. Your skin color, eye color, height, and hair texture are all inherited traits."
             },
             {
                 "type": "p",
-                "text": "As you probably know, some disabilities, diseases, and tendencies toward certain illnesses are inherited. Although inherited disabilities put some limits on an individual's level of wellness, there are still many things a person can do to reach his or her optimum health, the highest level of wellness possible. Many disabled people are energetic and productive and enjoy a high quality of life in spite of their disabilities."
+                "text": "You can also inherit risk factors for certain diseases. For example, a tendency toward high blood pressure, diabetes, or breast cancer may run in some families. Having a family history of high blood pressure does not mean that you will automatically develop the condition, but your risk of developing high blood pressure is greater than that of a person with no family history of the disease."
             },
             {
                 "type": "p",
-                "text": "Overcoming a disability is an extreme example of using mental, social, and physical resources to make up for a limitation. There are also less dramatic examples. For example, some people inherit a tendency toward high blood pressure, a condition that can contribute to heart disease and shorten life. If they are aware of their condition and know how to cope with it, they can make diet and other life-style changes to control their blood pressure. Their actions allow them to lead long and healthy lives in spite of this inherited tendency."
-            },
-            {
-                "type": "p",
-                "text": "Except in a small number of cases, heredity does not prevent a person from enjoying a healthy life. For most people, the life-style choices they make every day are far more important than heredity in maintaining, harming, or improving their wellness."
+                "text": "Except in a small number of cases, heredity does not prevent a person from enjoying a healthy life. For most people, the life-style choices they make every day are far more important than heredity in maintaining, harming, or improving their wellness. People with an inherited risk of high blood pressure, for example, can lessen their risk by maintaining a normal weight, exercising regularly, and reducing the amount of salt in their diet. Many people with an inherited risk factor live long and healthy lives in spite of this inherited tendency. Although heredity affects health, life-style choices are often more important in determining overall wellness."
             }
         ],
         [
             {
                 "type": "heading",
-                "text": "Physical Environment"
+                "text": "Environment"
             },
             {
                 "type": "p",
@@ -135,12 +131,6 @@ export const healthChapterText = {
                 "text": "Your physical environment includes the environment indoors as well as outdoors. Your home, school, and workplace are part of your physical environment. Cigarette smoking in public places and disease-causing organisms in restaurant food are some indoor hazards of the physical environment. Your own knowledge and behavior can help make your physical environment safer. How could you and your friends contribute to improving the environment of your school cafeteria or a local park?"
             },
             {
-                "type": "sidebar",
-                "text": "Health Frontiers \u2014 Mind Over Illness? Do emotions and thoughts play a role in helping the body ward off disease? The new field of psychoneuroimmunology (PNI) suggests they might. PNI researchers are now exploring the two-way connection between the brain and the immune system, the body's defense against disease. The brain's network of nerves releases many chemicals, some of which depend on mood. These chemicals bind directly to the disease-fighting cells of the immune system and influence how the cells behave. Immune cells are more active when a person's mood is good than when he or she is depressed. The immune cells send chemical messages back to the brain. These chemicals affect sleep, body temperature, heart rate, and mood. PNI supports common beliefs. A person with a positive attitude combats disease better than someone who has \"lost the will to live.\" Good health and a positive outlook tend to reinforce each other. While wellness may not be \"all in your mind,\" PNI has found that there is a close connection."
-            }
-        ],
-        [
-            {
                 "type": "heading",
                 "text": "Social Environment"
             },
@@ -152,6 +142,12 @@ export const healthChapterText = {
                 "type": "p",
                 "text": "When you were a child, your parents were the major part of your social environment. They taught you to speak and to communicate in other ways. They strongly influenced your feelings about yourself and your ideas of how to get along with other people. In addition, they probably taught you health habits that are so basic you do not even think about them anymore. Washing your hands before eating or fixing a meal, for example, may have become routine; but now you understand that these habits help to prevent the spread of germs."
             },
+            {
+                "type": "sidebar",
+                "text": "Health Frontiers: Psychoneuroimmunology: The Mind-Body Connection \u2014 Do emotions and thoughts play a role in helping the body ward off disease? The new field of psychoneuroimmunology (PNI) suggests they might. PNI researchers are now exploring the two-way connection between the brain and the immune system, the body's defense against disease. The brain's network of nerves releases many chemicals, some of which depend on mood. These chemicals bind directly to the disease-fighting cells of the immune system and influence how the cells behave. Immune cells are more active when a person's mood is good than when he or she is depressed. The immune cells send chemical messages back to the brain. These chemicals affect sleep, body temperature, heart rate, and mood. PNI supports common beliefs. A person with a positive attitude combats disease better than someone who has 'lost the will to live.' Good health and a positive outlook tend to reinforce each other. While wellness may not be 'all in your mind,' PNI has found that there is a close connection. What role does mood play in fighting disease?"
+            }
+        ],
+        [
             {
                 "type": "p",
                 "text": "As you have grown older, your social environment has expanded to include your neighbors and schoolmates. Your teachers, relatives, friends, and those involved in the community activities you participate in are an important part of your social environment."
@@ -176,14 +172,14 @@ export const healthChapterText = {
             },
             {
                 "type": "p",
-                "text": "Sometimes, you may get \"mixed messages\" from your culture. For example, our culture emphasizes the value of health and fitness. At the same time, it suggests that unhealthful behaviors, such as smoking and drinking, are fun and part of a healthful life style. You have probably seen advertisements with young, healthy-looking people trying to promote products that are not really good for your health. Because your culture offers you so many choices, you must be informed about what promotes health and what does not. This way you will be able to make your own choices without being influenced by misleading messages."
+                "text": "Sometimes, you may get \"mixed messages\" from your culture. For example, our culture emphasizes the value of health and fitness. At the same time, it suggests that unhealthful behaviors, such as smoking and drinking, are fun and part of a healthful life style. You have probably seen advertisements with young, healthy-looking people trying to promote products that are not really good for your health. The culture in which you live can affect your health in many ways. Sorting out cultural influences will help you make healthful choices."
             },
             {
                 "type": "review",
                 "title": "Section 1 Review",
                 "sections": [
                     {
-                        "heading": "Section Review",
+                        "heading": "What Have You Learned?",
                         "items": [
                             {
                                 "prompt": "1. What are the three aspects of wellness?",
@@ -191,15 +187,15 @@ export const healthChapterText = {
                             },
                             {
                                 "prompt": "2. What is a holistic view of health?",
-                                "answer": "A view of wellness as a combination of physical, mental, and social well-being, recognizing the connections among these three aspects as they affect the whole person."
+                                "answer": "A view of health that considers the interconnections between physical, mental, and social well-being as they affect the whole person."
                             },
                             {
-                                "prompt": "3. How are the three leading causes of death today different from those of 1900?",
-                                "answer": "In 1900, the leading causes were infectious diseases passed from person to person (pneumonia, influenza, tuberculosis). Today, the leading causes (heart disease, cancer, stroke) are strongly influenced by individual life style."
+                                "prompt": "3. How are the three leading causes of death today different from the three leading causes of death in 1900?",
+                                "answer": "In 1900, the leading causes of death were infectious diseases (pneumonia, tuberculosis, stomach diseases). Today, they are chronic diseases strongly influenced by life style (heart disease, cancer, stroke)."
                             },
                             {
-                                "prompt": "4. What factors determine your health? Which of these factors can you control?",
-                                "answer": "Heredity, physical environment, social environment, culture, and life style. You have the greatest control over your life-style choices, and you can also take action to protect yourself from environmental and cultural hazards."
+                                "prompt": "4. What four factors influence a person's level of wellness? Which factor can a person control most?",
+                                "answer": "Heredity, physical environment, social environment, and culture/life style. Life-style decisions can be controlled most."
                             }
                         ]
                     },
@@ -208,7 +204,7 @@ export const healthChapterText = {
                         "items": [
                             {
                                 "prompt": "5. What are two ways you could improve your physical health? Your mental health? Your social health?",
-                                "answer": "Physical: eat a balanced diet and get regular exercise. Mental: set aside time to relax and learn from past mistakes. Social: choose supportive friends and communicate feelings openly."
+                                "answer": "Physical: eat a balanced diet, exercise regularly. Mental: set aside relaxation time, learn from mistakes. Social: communicate openly, spend quality time with family/friends."
                             }
                         ]
                     }
@@ -234,19 +230,19 @@ export const healthChapterText = {
             },
             {
                 "type": "p",
-                "text": "Remember the last time you were coming down with the flu? You could feel it beginning, perhaps with a runny nose or general tiredness. Then, your symptoms became worse and your energy level dropped lower. You might have run a fever and had to stay in bed. After several days, your fever broke, you felt more energetic, and your cough no longer kept you awake at night. You might have been a bit tired and sniffly still, but you were feeling better. Finally, you felt great again. You moved from having the sniffles to walking around with a cold to lying in bed with a fever and cough to being up and around with a few symptoms to regaining wellness. You can think of the sequence you followed \u2014 from wellness to illness and back again \u2014 as a continuum (kun tin yoo um), a progression in either direction from one stage (sniffles) to another (walking around with a cold) to another, and so on."
+                "text": "Remember the last time you were coming down with the flu? You could feel it beginning, even before you showed any symptoms. As the flu progressed, you felt worse and worse. Then, as you recovered, you felt a little better each day until you were back to normal. You can picture health-related changes in your life \u2014 from wellness to illness and back again \u2014 as a continuum. A continuum is a gradual progression through many stages between one extreme and another."
             },
             {
                 "type": "p",
-                "text": "Continuums can represent other health-related changes in your life. How would you use a continuum to express changes you might experience when you start (or stop) an exercise program? How could a continuum show the changes brought on by your moving away from friends to a new school or by failing to make the swim team?"
+                "text": "Continuums can represent other health-related changes in your life. How would you use a continuum to express the gradual improvement in your fitness when you start an exercise program? How could a continuum show the changes in a person who is developing a chronic disease?"
             },
             {
                 "type": "p",
-                "text": "Your overall wellness also can be illustrated on a continuum. This sliding scale is called the Illness-Wellness continuum. Notice that on the Illness-Wellness continuum, you can move in either direction. As you move in one direction, you move toward illness; as you move the other way, you approach wellness. You can see also that there is a midpoint on the continuum. At this neutral point, a person is not sick but is not enjoying the full benefits of optimum health, either."
+                "text": "Your overall wellness also can be illustrated on a continuum. This sliding scale is called the Illness-Wellness continuum. Look at Figure 1-7. Notice that on the Illness-Wellness continuum, you can move in either direction. As you move toward the left, you move toward illness or early death. As you move toward the right, you move toward wellness. Notice also that there is a midpoint on the continuum. At this neutral point, you are neither ill nor well."
             },
             {
                 "type": "p",
-                "text": "At one time, as you learned earlier, many people in this country were satisfied just to be at the neutral point of health. Then, people were much more concerned about avoiding illness than about improving the quality of their lives. Today, achieving a higher level of wellness and a better quality of life is possible for many of the people in this country. More than ever before, people today control where on the Illness-Wellness continuum they fall."
+                "text": "At one time, as you learned earlier, many people in this country were satisfied to stay at the midpoint of the Illness-Wellness continuum. They were less concerned about avoiding illness than about improving the quality of their lives. Today, achieving a higher level of wellness and a better quality of life is possible for many of the people in this country."
             }
         ],
         [
@@ -256,15 +252,15 @@ export const healthChapterText = {
             },
             {
                 "type": "p",
-                "text": "Look again at the Illness-Wellness continuum. You can see that a risk behavior, or an action that increases the chances of a harmful outcome, moves you toward the illness-early death end of the continuum. You are probably aware of many risks to your health and do your best to avoid them. For example, you know it is dangerous to run across a four-lane highway. You also know that wearing a seat belt in a car will reduce your risk of injury in case of accident, but do you always remember to use one? If you do not, you are taking a risk that moves you toward the illness-early death end of the continuum. Perhaps thinking about your behavior in these terms will change your mind about some of the unnecessary risks you take."
+                "text": "Look again at the Illness-Wellness continuum. You can see that a risk behavior, or an action that increases the chance of a harmful outcome, moves you toward the illness-early death end of the continuum. You are probably aware of many risks to your health and do your best to avoid them. You know, for example, that wearing a seat belt in a car will reduce your risk of injury in case of an accident. If you wear a seat belt, you are practicing a healthful behavior. If you do not, you are taking a risk that moves you toward the illness-early death end of the continuum. Perhaps thinking about the continuum will help you become aware of some of the unnecessary risks you take."
             },
             {
                 "type": "p",
-                "text": "Most activities have varying degrees of risk. For example, if you exercise vigorously without doing warm-ups first, you risk pulling a muscle. If you ride a motorcycle without a helmet, you risk serious injury and death."
+                "text": "Most activities have varying degrees of risk. For example, if you exercise vigorously without warming up first, you risk pulling a muscle. If you ride a motorcycle without a helmet, you risk serious injury and death."
             },
             {
                 "type": "p",
-                "text": "Sometimes, risks are worth taking if there is a benefit greater than the possible harm. Skiing, for example, involves some risk of injury, but many people decide that this enjoyable and healthful activity is worth the risk. They also may realize that equipment, instruction, fitness, and attitude can lessen their risks while skiing. It is always worthwhile to think carefully about any activities that involve risks before you do them."
+                "text": "Sometimes, risks are worth taking if there is a benefit greater than the possible harm. Downhill skiing involves some risk of injury, but many people decide that this enjoyable and healthful activity is worth the risk. They also may lessen their risks while skiing. It is always worthwhile to think carefully about any activities that involve risks before deciding to do them."
             }
         ],
         [
@@ -274,7 +270,7 @@ export const healthChapterText = {
             },
             {
                 "type": "p",
-                "text": "Another set of risks to your wellness involves mental and social health. Keeping anger or other strong emotions \"bottled up\" inside can risk both your mental and social well-being. It is much better for your health to express your feelings by talking with someone you trust. Your relationships with others will also benefit. Strong negative feelings, when not communicated, can harm a relationship, causing resentment, jealousy, and arguments. You will learn more about the healthy expression of emotions in Chapter 2 and about communication skills in Chapter 5."
+                "text": "Another set of risks to your wellness involves mental and social health. Keeping your feelings 'bottled up' inside can risk both your mental and social well-being. You will learn more about the healthy expression of emotions in Chapter 2 and about communication skills in Chapter 5."
             },
             {
                 "type": "heading",
@@ -282,11 +278,15 @@ export const healthChapterText = {
             },
             {
                 "type": "p",
-                "text": "To achieve a better quality of life, you need to know about, choose, and practice behaviors that promote wellness. You also should be aware of your own particular conditions and needs. Awareness is the first step toward making healthful choices and decisions. The second step is acquiring the knowledge you need to promote your own wellness. Some of this knowledge is general information, such as the benefits of regular exercise, and some knowledge may relate to your particular circumstances, such as the proper diet for gaining weight. You also need to be able to distinguish between risk behaviors, which lead away from wellness, and healthful behaviors, which lead toward wellness. The last step is applying your awareness and knowledge by making healthful choices and then taking action on those choices."
+                "text": "To achieve a better quality of life, you need to know about, choose, and practice behaviors that move you toward the wellness end of the continuum. How do you decide which behaviors will promote wellness? How do you go about changing a risk behavior to a healthful behavior?"
             },
             {
                 "type": "p",
-                "text": "The remainder of this chapter, and the chapters that follow, will show you how to gain an awareness of your own health, how to acquire and evaluate health-related knowledge, and how to decide which behaviors best promote your health. Finally, you will learn how to turn your decisions into a healthful life style."
+                "text": "Making behavior changes involves a process that includes several steps. First, you must become aware of your current behaviors. You should be aware of your own particular conditions and needs. Awareness is the first step toward making healthful choices and decisions. The second step is acquiring the knowledge you need to promote your own wellness."
+            },
+            {
+                "type": "p",
+                "text": "The remainder of this chapter, and the chapters that follow, will show you how to gain an awareness of your own health, how to acquire and evaluate health-related knowledge, and how to decide which behaviors best promote your health. Finally, you will learn how to turn your decisions into action."
             }
         ],
         [
@@ -296,19 +296,19 @@ export const healthChapterText = {
             },
             {
                 "type": "p",
-                "text": "How do you become aware of your own level of wellness? In some cases, you know when you have a health problem. You know when your ankle hurts or when you have a sunburn. You are probably aware that some symptoms require medical attention and some do not."
+                "text": "How do you become aware of your own level of wellness? In some cases, you know when you are not well. You know when your ankle hurts or when you have a sunburn. You know when you are angry, worried, or depressed, or when you are not getting along with your family or friends."
             },
             {
                 "type": "p",
-                "text": "Other medical problems do not show up so readily. You should have regular check-ups to detect early signs of illness you might not be aware of. At these check-ups, you will probably discuss your life style, including what you eat, how much you sleep, how much exercise you do, and whether or not you smoke. Together, you and your doctor can determine if you are at risk for certain health problems because of your life-style choices."
+                "text": "Other medical problems do not show up so readily. You should have regular check-ups with a doctor and dentist to evaluate your health. Your doctor can check your height, weight, and blood pressure to determine if you are at risk for certain health problems because of your physical condition. Your answers to questions about your diet, exercise, and sleep habits will provide additional information. Using a questionnaire like the 'Check Your Wellness' feature at the beginning of this chapter should give you a good start. How well did you do on that check-up?"
             },
             {
                 "type": "p",
-                "text": "You may even discuss some of your feelings with your doctor. If you are depressed, for example, it is worthwhile to discover why. Feeling \"low\" all the time can be the cause or the result of a physical problem. If you are unhappy because of something that cannot be changed, such as the death of a loved one, the support of friends or professionals may help you to understand and accept your feelings."
+                "text": "You may even discuss some of your feelings with your doctor. If you are depressed, anxious, or having trouble getting along with others, your doctor may suggest ways to resolve these problems."
             },
             {
                 "type": "p",
-                "text": "Learning what questions to ask of your doctor and of yourself is an important step toward health self-awareness. The Check Your Wellness inventory at the beginning of this chapter should give you a good start. How well did you do on the inventory? What other questions might you ask yourself about your health? What questions might you ask your doctor or other health professional?"
+                "text": "Learning what questions to ask of your doctor and of yourself is an important step toward health awareness."
             },
             {
                 "type": "heading",
@@ -316,7 +316,11 @@ export const healthChapterText = {
             },
             {
                 "type": "p",
-                "text": "Knowledge about health is growing every day. New discoveries and research studies appear in the news all the time. Some of this knowledge \u2014 about the dangers of overexposure to sunlight, for example \u2014 is important to everyone. Some, such as the development of new medications, is useful to the professionals who prescribe them. Other information, such as research on the harmful effects of a particular fad diet is important to people who may try it. You need to be able to sort out the knowledge that might apply to your life."
+                "text": "Knowledge about health is growing every day. New discoveries and research studies add to what is already known about how the body works and how to prevent illness. Having accurate, up-to-date knowledge about health is important to your wellness. Knowing that high-fat diets are linked to heart disease and cancer can help you choose a healthful diet. Knowing the safety rules of a particular sport can keep you from getting hurt."
+            },
+            {
+                "type": "p",
+                "text": "Knowing facts about health is not the same as using knowledge to promote your wellness. Understanding the health risks of a particular fad diet is important to people who may try it. You need to be able to sort out the knowledge that might apply to your life."
             }
         ],
         [
@@ -326,7 +330,7 @@ export const healthChapterText = {
             },
             {
                 "type": "p",
-                "text": "This book gives you a good foundation of health-related knowledge. It also suggests how you can evaluate other health information you receive. It is up to you to stay informed about things that affect your wellness! The process of updating your knowledge is one you will need to continue throughout your life."
+                "text": "This book gives you a good foundation of health-related knowledge. It also suggests how you can evaluate other sources of health information. Updating your knowledge of things that affect your wellness is a lifelong responsibility."
             },
             {
                 "type": "heading",
@@ -334,15 +338,15 @@ export const healthChapterText = {
             },
             {
                 "type": "p",
-                "text": "Even with awareness and knowledge, it is not always easy to decide on the best course of action. In the earlier discussion of risks, the action of running across a highway presents a clear risk, but the skiing example is more complicated. Many behaviors have both positive and negative results, and you must choose between them. Suppose you were an inexperienced skier invited to ski a run known for its difficulty. Your best friend, a good skier, could not go on the trip if you did not go. Add some more complications, such as bad weather, or an upcoming exam for which you need to study, or alcohol being consumed in the car. Real life is full of such complications. How would you decide what to do?"
+                "text": "Even with awareness and knowledge, it is not always easy to decide on the best choice of action. In the earlier discussion of risks, the action of running across a highway presents a clear risk, but the skiing example is less clear-cut. Most people would agree that you should not run across a busy highway; but people disagree about whether downhill skiing is worth the risk. Similarly, a person may know about the extreme risk of drinking and driving, but still face a tough decision about whether to ride with a driver who has been drinking."
             },
             {
                 "type": "p",
-                "text": "Awareness of your own skiing ability is essential in this example. Knowledge of the dangers of driving or skiing in bad weather is also important, but even more important is knowledge about the extreme risk of drinking and driving. But, what about your friend or your exam? Here you must consider your values, the things most important to you. You value friendship, but you also value your own and your friend's safety. You value doing well in school, and so do your parents. Your decisions not only affect you, they affect other people, their health, and their values."
+                "text": "Awareness of your own skiing ability is essential in this example. Knowledge of safety rules and proper equipment is also important. Knowing your own values is equally important. Your values are the standards and beliefs that are most important to you. They help you clarify what you want out of life. Your values are formed through your experiences with your family, your religion, and your community. They are influenced by your friends and your culture. Your values help you decide what is right and wrong for you. When you face a tough decision, clarifying your values will help you choose the alternative that is best for you. Your decisions not only affect you, they affect your family and your friends."
             },
             {
                 "type": "p",
-                "text": "The DECIDE process described in the Health Skills on page 16 provides a step-by-step procedure that can help to make hard decisions easier. Look at the DECIDE process and review the steps. How could you apply these steps to the skiing example?"
+                "text": "The DECIDE process described in the Health Skills on page 16 provides a step-by-step procedure to help you make hard decisions easier. Look at the DECIDE process and think about how you might use it to make healthful decisions."
             },
             {
                 "type": "heading",
@@ -350,7 +354,7 @@ export const healthChapterText = {
             },
             {
                 "type": "p",
-                "text": "What would you think of a baseball team that spent all its time thinking and learning about the game but never played? Do you think that the team would win many games without practice? Of course not. Many people think that knowing about healthful behavior is enough to guarantee good health. This is not true. Like the baseball players, you have to practice. To have good health, you must apply the healthful decisions you have made."
+                "text": "What would you think of a baseball team that spent all its time thinking and learning about baseball, but never practiced playing the game? You would probably think that the team would not win many games. To win, you have to practice. To have good health, you must apply the healthful decisions you have made."
             }
         ],
         [
@@ -360,26 +364,26 @@ export const healthChapterText = {
             },
             {
                 "type": "p",
-                "text": "Just like the baseball player who worked to change his or her swing, you may have some habits you wish to change. A habit is a pattern of behavior that has become automatic and is hard to break. It is possible, however, to break old habits by learning new skills. With practice, your new skills will become just as natural as the old habits had been. The Health Skills in this book will help you to develop the skills you need to put decisions for wellness into action."
+                "text": "Just like the baseball player who worked to change his or her swing, you may have to practice to change a habit. A habit is a pattern of behavior that has become automatic and hard to change. Brushing your teeth after meals or putting on your seat belt in a car are examples of healthful habits. Eating a high-fat snack after school or watching television instead of exercising are unhealthful habits. You can change unhealthful habits and build new, healthful ones, but it takes time and practice. The Health Skills in this book will help you to develop the skills you need to put decisions for wellness into action."
             },
             {
                 "type": "review",
                 "title": "Section 2 Review",
                 "sections": [
                     {
-                        "heading": "Section Review",
+                        "heading": "What Have You Learned?",
                         "items": [
                             {
                                 "prompt": "1. What is the Illness-Wellness continuum?",
-                                "answer": "A sliding scale that illustrates a person's overall level of wellness, ranging from illness/early death at one end to optimum health at the other."
+                                "answer": "A sliding scale illustrating a person's overall level of wellness, ranging from illness/early death on the left to high-level wellness on the right."
                             },
                             {
                                 "prompt": "2. What is a risk behavior? Give an example of an immediate risk and a long-term risk.",
-                                "answer": "An action that increases the chances of a harmful outcome. Immediate risk: running across a four-lane highway. Long-term risk: living on a fast-food diet high in salt, fat, and sugar."
+                                "answer": "An action that increases the chance of a harmful outcome. Immediate risk: riding a motorcycle without a helmet. Long-term risk: living on a fast-food diet high in fat and salt."
                             },
                             {
                                 "prompt": "3. What steps should a person take to move toward the wellness side of the Illness-Wellness continuum?",
-                                "answer": "Increase self-awareness of health needs, acquire reliable health knowledge, make healthful behavior choices, and practice and apply health skills."
+                                "answer": "Gain awareness of current habits, acquire health knowledge, clarify values to make healthful choices, and practice skills to build healthful habits."
                             }
                         ]
                     },
@@ -388,7 +392,7 @@ export const healthChapterText = {
                         "items": [
                             {
                                 "prompt": "4. Where do you think you are on the Illness-Wellness continuum? List five behaviors that you currently practice that influence your level of wellness.",
-                                "answer": "Answers vary; examples include eating a nutritious diet, exercising regularly, getting 8 hours of sleep, wearing a seat belt, and managing stress."
+                                "answer": "Personal reflection identifying your position on the scale and listing 5 habits (e.g. regular sleep, exercising, wearing seatbelts, eating fruit, avoiding smoking)."
                             }
                         ]
                     }
@@ -402,7 +406,7 @@ export const healthChapterText = {
             },
             {
                 "type": "p",
-                "text": "Now is the time for you to start taking control of your own health. In the last few years, as you have become more physically and emotionally mature, you have also become more independent. You have begun to make many of the decisions that used to be made for you by your parents and other adults. How many of your own food choices do you now make, for example? Who decides how much exercise you should do? Who chooses your friends? Who decides what you do with your friends? More and more, the answer is you."
+                "text": "Now is the time for you to start taking control of your own health. In the last few years, as you have become more physically and emotionally independent, you have begun to make many choices for yourself. Who chooses the clothes you wear? Who chooses what you eat for lunch? Who decides what you do with your friends? Your parents probably still help you make some choices, but you are making more and more decisions on your own. By the time you finish high school, you will be making almost all of your daily choices by yourself."
             },
             {
                 "type": "heading",
@@ -410,11 +414,15 @@ export const healthChapterText = {
             },
             {
                 "type": "p",
-                "text": "Now that you have so much control over your own life, you also need to accept responsibility for it. Begin by learning the answers to these two questions: What are the leading causes of death among teenagers today? What are the risk behaviors associated with these deaths?"
+                "text": "Now that you have so much control over your own life, you also need to accept responsibility for the consequences of your choices. Nowhere is this more true than with your health. The daily choices you make will determine your level of wellness now and in the future."
             },
             {
                 "type": "p",
-                "text": "The three most common causes of teenage death are not illness \u2014 they are accidents, suicide, and homicide. Would you be surprised to learn that there is a risk behavior common to all three? That risk behavior is substance abuse, the use of alcohol or drugs. Most fatal accidents, for example, involve cars, and nearly half of all car accidents involve alcohol or drugs. Many suicides, too, are related to substance abuse. Homicide also is often tied to drugs and alcohol."
+                "text": "Look at Figure 1-11. What are the three most common causes of death among teenagers today? What are the risk behaviors that lead to these deaths? Would you be surprised to learn that there is a risk behavior common to all three? That risk behavior is substance abuse, the use of alcohol and other drugs. Heavy drinking or drug use can lead directly to death by overdose. It can also lead to fatal accidents because alcohol and other drugs impair reaction time and clear thinking. Impaired judgment can also lead to violent behavior, which accounts for many homicides and suicides."
+            },
+            {
+                "type": "p",
+                "text": "The three most common causes of teenage death are not illness \u2014 they are accidents, homicide, and suicide. These three causes account for almost three-fourths of all deaths among teenagers. All of these causes of death are largely preventable. They are the result of risk behaviors that teenagers choose to practice."
             }
         ],
         [
@@ -432,7 +440,7 @@ export const healthChapterText = {
             },
             {
                 "type": "p",
-                "text": "Making responsible decisions about relationships of all kinds, including sexual ones, is an important sign of maturity. It shows that you are beginning to take control of your own health. Thinking about the possible effects of your actions before you take them may be difficult, but it is an important thing to do."
+                "text": "Making responsible decisions about relationships of all kinds, including sexual relationships, is another way to protect your state of wellness."
             },
             {
                 "type": "heading",
@@ -440,30 +448,30 @@ export const healthChapterText = {
             },
             {
                 "type": "p",
-                "text": "Considering the long-term effects of your behavior is another sign of maturity. Earlier in this chapter, you looked at the statistics on life expectancy and causes of death for adults today. The decisions you make and the behaviors you practice now are already influencing the length and quality of life you can expect in the future."
+                "text": "Considering the long-term effects of your behavior is another sign of maturity. The habits you build now will carry over into your adult life. If you learn to eat a well-balanced diet, get regular exercise, manage stress, and avoid tobacco, alcohol, and drugs, you will build a foundation for a lifetime of wellness."
             },
             {
                 "type": "p",
-                "text": "The most common killers of adults today are health conditions that can be strongly influenced by life style. Life-style choices include diet, exercise, and the use of tobacco, alcohol, and other drugs. Your current and future health depend largely on the decisions you are starting to make now. Learning to make decisions for wellness and to practice healthful behaviors is a wise investment that you can make in yourself and your future. It is an investment that pays the highest reward \u2014 the reward of good health."
+                "text": "The most common killers of adults today are health conditions that can be strongly influenced by life-style choices: heart disease, cancer, and stroke. By choosing healthful behaviors now, you can reduce your risk of developing these diseases later in life. Remember that your health is in your hands!"
             },
             {
                 "type": "review",
                 "title": "Section 3 Review",
                 "sections": [
                     {
-                        "heading": "Section Review",
+                        "heading": "What Have You Learned?",
                         "items": [
                             {
-                                "prompt": "1. What are the three most common causes of teenage death today?",
-                                "answer": "Accidents, suicide, and homicide."
+                                "prompt": "1. What are the three most common causes of teenage death?",
+                                "answer": "Accidents, homicide, and suicide."
                             },
                             {
                                 "prompt": "2. What kind of accidents kill the most teenagers?",
-                                "answer": "Motor vehicle accidents (car accidents)."
+                                "answer": "Motor vehicle accidents."
                             },
                             {
                                 "prompt": "3. What risk behavior is often associated with the three leading causes of teenage death?",
-                                "answer": "Substance abuse \u2014 the use of alcohol or drugs."
+                                "answer": "Substance abuse (use of alcohol and other drugs)."
                             }
                         ]
                     },
@@ -472,7 +480,7 @@ export const healthChapterText = {
                         "items": [
                             {
                                 "prompt": "4. What life-style changes could you make now to improve your future quality of life?",
-                                "answer": "Eating a nutritious diet, avoiding tobacco/alcohol/drugs, exercising regularly, and practicing safe behaviors like wearing seat belts."
+                                "answer": "Adopt a balanced diet, engage in regular physical exercise, avoid tobacco and alcohol, practice stress management, and always wear seat belts."
                             }
                         ]
                     }
@@ -486,13 +494,13 @@ export const healthChapterText = {
             },
             {
                 "type": "activity",
-                "text": "Suppose you had to make this decision: You've just found the perfect after-school job. It's near home, it's fun to do, and it will pay for the bicycle you need for your bicycling trip next summer. Then you make the basketball team that you've tried out for three times. Unfortunately, the team practices during the same hours as your job. How should you choose between the team and the job?\n\nAlthough many of your choices are not this complicated, you sometimes face even harder decisions. They require much thought and soul-searching because they can make important differences in your life. Do you sometimes \"hide from\" tough choices because they make you feel anxious? Do you ever rush headlong into decisions without really thinking them through? There is a process, called DECIDE, that makes decision-making easier. This process is simple to remember because each letter in the word DECIDE stands for a step in the process.\n\n1. Define the Problem \u2014 Look carefully at the decision you are facing, and state the issue clearly. Is it important and complex enough to warrant using DECIDE? Some choices are too easy. You already know what to do. Others don't really make much difference; a flip of a coin would do.\n\n2. Explore the Alternatives \u2014 Make a list of all possible alternatives for solving your problem. Be sure to include \"doing nothing\" if it is appropriate. If you need more information to fully understand some alternatives, do the research now. You may find some choices unrealistic; do not include them.\n\n3. Consider the Consequences \u2014 One by one, think through what might happen with each alternative. List both positive and negative results. Consider what probably would happen, not what you hope would happen. Ask yourself: How risky is each alternative? What are its chances of success? How would it affect my future? Remember to consider the effects on other people."
+                "text": "Suppose you had to make this decision: You've just found the perfect after-school job. It's near home, it's fun to do, and it will pay for the bicycle you need for your bicycling trip next summer. Then you make the basketball team that you've tried out for three times. Unfortunately, the team practices during the same hours as your job. How should you choose between the team and the job?\n\nAlthough many of your choices are not this complicated, you sometimes face even harder decisions. They require much thought and soul-searching because they can make important differences in your life. Do you sometimes 'hide from' tough choices because they make you feel anxious? Do you ever rush headlong into decisions without really thinking them through? There is a process, called DECIDE, that makes decision-making easier. This process is simple to remember because each letter in the word DECIDE stands for a step in the process.\n\n1. Define the Problem: Look carefully at the decision you are facing, and state the issue clearly. Is it important and complex enough to warrant using DECIDE? Some choices are too easy; you already know what to do. Others don't really make much difference; a flip of a coin would do.\n\n2. Explore the Alternatives: Make a list of all possible alternatives for solving your problem. Be sure to include 'doing nothing' if it is appropriate. If you need more information to fully understand some alternatives, do the research now. You may find some choices unrealistic; do not include them.\n\n3. Consider the Consequences: One by one, think through what might happen with each alternative. List both positive and negative results. Consider what probably would happen, not what you hope would happen. Ask yourself: How risky is each alternative? What are its chances of success? How would it affect my future? Remember to consider the effects on other people."
             }
         ],
         [
             {
                 "type": "activity",
-                "text": "4. Identify Your Values \u2014 Your values, the things you believe in strongly, affect how you live your life and how you feel about yourself. Sometimes, your values influence your decisions even when you are not aware of them. At other times, you may overlook your values when you want something badly. When you do this, though, your values often affect how you feel about the decision later on. Think about your long-term goals as well as the beliefs of your family, religion, and community. Consider your own and others' health and safety, and your self-respect. Which of the choices are most in line with your values?\n\n5. Decide and Act \u2014 Use the information you have collected to compare each of the alternatives. Decide which one is best for you. Act on your decision by first breaking it down into smaller steps, and then setting a realistic deadline for accomplishing each step. Then, follow through with your plan.\n\n6. Evaluate the Results \u2014 How did your decision work out? What are its effects on your life? On others? What did you learn? What would you do differently? If you can change some aspect of the result for the better, do it now."
+                "text": "4. Identify Your Values: Your values, the things you believe in strongly, affect how you live your life and how you feel about yourself. Sometimes, your values influence your decisions even when you are not aware of them. At other times, you may overlook your values when you want something badly. When you do this, though, your values often affect how you feel about the decision later on. Think about your long-term goals as well as the beliefs of your family, religion, and community. Consider your own and others' health and safety, and your self-respect. Which of the choices are most in line with your values?\n\n5. Decide and Act: Use the information you have collected to compare each of the alternatives. Decide which one is best for you. Act on your decision by first breaking it down into smaller steps, and then setting a realistic deadline for accomplishing each step. Then, follow through with your plan.\n\n6. Evaluate the Results: How did your decision work out? What are its effects on your life? On others? What did you learn? What would you do differently? If you can change some aspect of the result for the better, do it now."
             },
             {
                 "type": "review",
@@ -502,20 +510,20 @@ export const healthChapterText = {
                         "heading": "Apply the Skill",
                         "items": [
                             {
-                                "prompt": "1. Imagine that you face the decision introduced at the beginning of this feature \u2014 to choose the job or the team. Follow the steps of DECIDE to determine what you would do in this situation. Write out your answers for steps 1 through 5.",
-                                "answer": "Step 1: Choose between job and team. Step 2: Alternatives: take job, stay on team, ask job for different hours, ask coach for adjusted practice time. Step 3: Weigh money for bike vs basketball experience. Step 4: Values: responsibility, health, fitness, friendship. Step 5: Decide and act."
+                                "prompt": "1. Imagine that you face the decision introduced at the beginning of this feature \u2014 to choose the job or the team. Follow the steps of DECIDE to determine what you would do in this situation. Write out your answers for steps 1 through 5. Be sure to consider all alternatives; there may be more than two. (For example, it may be possible to postpone a choice or to take another route to a goal.) Don't forget to include the step to act on your decision.",
+                                "answer": "Define problem (job vs team), explore alternatives (ask for shifted hours, work weekends, pick team, pick job), consider consequences of each, identify values (sportsmanship, financial independence, commitment), decide and act on best option."
                             },
                             {
                                 "prompt": "2. List other difficult, important decisions for which DECIDE might be useful. Do they fall into categories? What categories of decisions would not be suitable for DECIDE?",
-                                "answer": "Useful for career choices, lifestyle habits, peer pressure decisions. Not suitable for minor everyday choices like choosing what shirt to wear."
+                                "answer": "DECIDE is useful for career choices, peer pressure dilemmas, high-school course selection, or health habits. Trivial choices (what to wear, what movie to watch) or emergency split-second safety choices (swerving a bike) are not suitable."
                             },
                             {
-                                "prompt": "3. Set up a possible situation like the one in the beginning of this feature \u2014 imagine a person facing a complicated, important decision. Then use DECIDE to work through the decision-making process.",
-                                "answer": "Example: deciding whether to move to a new school or stay with host family. Evaluate alternatives, consequences, and personal values."
+                                "prompt": "3. Set up a possible situation like the one in the beginning of this feature \u2014 in other words, imagine a person facing a complicated, important decision. Include enough information about the problem to show that it is a tough choice. Then use DECIDE to work through the decision-making process. Remember, at some times there is more than one 'right' choice. Your particular values, skills, background, and preferences all help determine what is right for you.",
+                                "answer": "Example: Choosing between attending a friend's party where alcohol will be served or staying home to study for a crucial final exam."
                             },
                             {
-                                "prompt": "4. Consider a tough decision you have made in the past or one you are facing now. Use DECIDE to determine what you should do (or should have done).",
-                                "answer": "Reflect on a personal decision using steps 1 through 5 and evaluate if DECIDE helped focus on key values."
+                                "prompt": "4. Consider a tough decision you have made in the past or one you are facing now. Use DECIDE to determine what you should do (or should have done). Write out steps 1 through 5. Did DECIDE help you focus on important values or choices you might otherwise have overlooked? Which ones? Did DECIDE make the decision-making process easier? Why or why not?",
+                                "answer": "Reflect on a personal decision, applying steps 1 through 5 to see how values and consequences clarify the best path."
                             }
                         ]
                     }
@@ -565,7 +573,6 @@ export const healthChapterText = {
                 "sections": [
                     {
                         "heading": "Vocabulary Review",
-                        "instructions": "Listed below are key terms from this chapter. Match each term to the phrase that best describes it.",
                         "items": [
                             {
                                 "prompt": "1. the way or style in which you choose to live your life",
@@ -577,7 +584,7 @@ export const healthChapterText = {
                             },
                             {
                                 "prompt": "3. the well-being of your body, mind, and relationships with other people",
-                                "answer": "wellness"
+                                "answer": "wellness (or health)"
                             },
                             {
                                 "prompt": "4. a sliding scale that illustrates your overall level of wellness",
@@ -614,19 +621,19 @@ export const healthChapterText = {
                         "items": [
                             {
                                 "prompt": "1. Briefly describe three characteristics of mental health.",
-                                "answer": "Liking yourself for your achievements, learning from mistakes, and coping with the demands of life and adjusting to new situations."
+                                "answer": "Liking yourself for your achievements, learning from mistakes, and coping with the demands of life while adjusting to new situations."
                             },
                             {
                                 "prompt": "2. Give an example of how the three aspects of health are interrelated.",
-                                "answer": "When you get flu (physical), your relationships with family may suffer (social); when worried about an exam (mental), you may get a headache or stomachache (physical)."
+                                "answer": "When coming down with flu (physical), you may get easily irritable with family (social) or feel stressed about missed schoolwork (mental)."
                             },
                             {
                                 "prompt": "3. How much has the average life expectancy of Americans increased since 1900?",
-                                "answer": "By about 27 years (from 47 years in 1900 to nearly 75 years)."
+                                "answer": "By about 27 years (from ~47 years in 1900 to over 74 years)."
                             },
                             {
                                 "prompt": "4. How can heredity affect your overall level of health?",
-                                "answer": "Heredity passes on physical traits, soundness of body, stress reactions, and tendencies toward certain inherited conditions or blood pressure."
+                                "answer": "By passing down biological traits and potential risk factors (such as a tendency toward high blood pressure or diabetes)."
                             }
                         ]
                     }
@@ -747,7 +754,7 @@ export const healthChapterText = {
         ]
     ]
 },
-  "H.Ch.02 · Your Personality": {
+    "H.Ch.02 · Your Personality": {
     "title": "Your Personality",
     "pages": [
         [

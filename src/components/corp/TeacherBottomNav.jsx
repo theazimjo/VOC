@@ -9,23 +9,23 @@ export default function TeacherBottomNav({ basePath = '/corp/teacher' }) {
   const navItems = [
     {
       to: basePath,
-      label: 'Groups',
+      label: 'Guruhlar',
       icon: Users,
       isGroupTab: true,
     },
     {
       to: `${basePath}/courses`,
-      label: 'Words',
+      label: "So'zlar",
       icon: BookOpen,
     },
     {
       to: `${basePath}/statistics`,
-      label: 'Stats',
+      label: 'Statistika',
       icon: BarChart3,
     },
     {
       to: `${basePath}/settings`,
-      label: 'Settings',
+      label: 'Sozlamalar',
       icon: Settings,
     },
   ];

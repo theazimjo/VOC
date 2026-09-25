@@ -11,7 +11,6 @@ import { usePacks } from '../../hooks/usePacks';
 import { ref, onValue, get, remove } from 'firebase/database';
 import { db } from '../../firebase';
 import { switchActiveGroup, joinGroupAsUser, setAppMode } from '../../services/corpService';
-import { joinIndependentGroupByCode } from '../../services/independentTeacherService';
 import { SELECTABLE_COURSES } from '../../data/coursePicker';
 
 // Courses (Essential 3000, Science) share the generic /course/:packId
@@ -103,12 +102,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
     navigate(`${getCourseBasePath(pack.courseId)}/${pack.id}`);
   };
 
-  // A membership is either a corp/center group (centerId) or an independent
-  // teacher's group (teacherUid, no centerId) — see joinGroupAsUser vs
-  // joinIndependentGroupByCode in corpService.js / independentTeacherService.js.
-  const groupPath = (m) => m.independent
-    ? `independentTeachers/${m.teacherUid}/groups/${m.groupId}`
-    : `centers/${m.centerId}/groups/${m.groupId}`;
+  const groupPath = (m) => `centers/${m.centerId}/groups/${m.groupId}`;
 
   // Fetch all joined groups reactively and filter deleted ones
   useEffect(() => {
@@ -189,18 +183,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
     setJoinError('');
     try {
       const profile = { name: user.displayName || user.email, email: user.email || '' };
-      try {
-        // A code is either a corp/center group code or an independent
-        // teacher's group code — the two tables (groupCodes vs
-        // independentGroupCodes) are disjoint, so try the corp one first and
-        // only fall back to the independent one on a genuine "not found",
-        // not on some other failure (permission/network) that shouldn't be
-        // masked by a second, unrelated error.
-        await joinGroupAsUser(pinCode.trim(), user.uid, profile);
-      } catch (err) {
-        if (err.message !== 'Invalid group code!') throw err;
-        await joinIndependentGroupByCode(pinCode.trim(), user.uid, profile);
-      }
+      await joinGroupAsUser(pinCode.trim(), user.uid, profile);
       setPinCode('');
       setShowAddModal(false);
       setShowSwitcher(false);

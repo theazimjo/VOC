@@ -26,10 +26,10 @@ export default function TeacherSidebar({ centerName, teacherName, email, phone, 
   };
 
   const navItems = [
-    { to: basePath, label: 'My Groups', icon: Users, isGroupTab: true },
-    { to: `${basePath}/courses`, label: 'Word Bank', icon: BookOpen },
-    { to: `${basePath}/statistics`, label: 'Statistics', icon: BarChart3 },
-    { to: `${basePath}/settings`, label: 'Settings', icon: Settings, matchExtra: `${basePath}/archive` },
+    { to: basePath, label: 'Guruhlarim', icon: Users, isGroupTab: true },
+    { to: `${basePath}/courses`, label: "So'zlar", icon: BookOpen },
+    { to: `${basePath}/statistics`, label: 'Statistika', icon: BarChart3 },
+    { to: `${basePath}/settings`, label: 'Sozlamalar', icon: Settings, matchExtra: `${basePath}/archive` },
   ];
 
   return (
@@ -85,12 +85,12 @@ export default function TeacherSidebar({ centerName, teacherName, email, phone, 
 
         <button className="btn-corp-logout" onClick={handleSwitchToPersonal} title="Switch to Personal">
           <Repeat size={16} strokeWidth={2.2} />
-          {!collapsed && <span>Switch to Personal</span>}
+          {!collapsed && <span>Shaxsiy rejimga o'tish</span>}
         </button>
 
         <button className="btn-corp-logout" onClick={handleLogout} title="Log out">
           <LogOut size={16} strokeWidth={2.2} />
-          {!collapsed && <span>Log out</span>}
+          {!collapsed && <span>Chiqish</span>}
         </button>
       </div>
     </aside>

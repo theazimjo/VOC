@@ -4,7 +4,7 @@ import { computeMonthWordStats, computeUnitWordStats } from '../utils';
 import './MonthsGridView.css';
 
 export default function MonthsGridView({ p }) {
-  const { activeTab, additionalMonths, allDbWords, allMonths, combinedMonths, homeworkList, navigate } = p;
+  const { currentTab, additionalMonths, allDbWords, allMonths, combinedMonths, homeworkList, navigate } = p;
 
   const renderHomeworkGrid = () => {
     const assignments = homeworkList || [];
@@ -12,8 +12,8 @@ export default function MonthsGridView({ p }) {
       return (
         <div className="empty-state">
           <div className="empty-state-icon">📝</div>
-          <h3>No homework yet</h3>
-          <p>Your teacher hasn't assigned any homework to this group yet.</p>
+          <h3>Hozircha vazifa yo'q</h3>
+          <p>O'qituvchingiz vazifa berganda shu yerda paydo bo'ladi. Unga qadar "Barcha so'zlar" bo'limida mashq qilishingiz mumkin.</p>
         </div>
       );
     }
@@ -40,11 +40,11 @@ export default function MonthsGridView({ p }) {
                 <div className="hw-tab-info">
                   <h2 className="hw-tab-title">
                     {hw.assignedAt
-                      ? new Date(hw.assignedAt).toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })
-                      : (hw.name || 'Homework')}
+                      ? new Date(hw.assignedAt).toLocaleDateString('uz-UZ', { day: 'numeric', month: 'long', year: 'numeric' })
+                      : (hw.name || 'Vazifa')}
                   </h2>
                   <span className="hw-tab-date">
-                    {resolvedItems.length} {resolvedItems.length === 1 ? 'topic' : 'topics'} assigned
+                    {resolvedItems.length} ta mavzu
                   </span>
                 </div>
                 <span className="hw-tab-done-badge">{doneCount}/{resolvedItems.length}</span>
@@ -59,7 +59,7 @@ export default function MonthsGridView({ p }) {
                       title={item.unitTitle}
                       subtitle={item.packTitle}
                       wordCount={wordCount}
-                      wordLabel="words"
+                      wordLabel="so'z"
                       masteredCount={stats?.masteredCount || 0}
                       learningCount={stats?.learningCount || 0}
                       newCount={stats?.newCount || 0}
@@ -94,9 +94,9 @@ export default function MonthsGridView({ p }) {
               title={m.title}
               subtitle={`${m.packTitle} (${m.packLevel})`}
               setCount={(m.units || []).length}
-              setLabel="sets"
+              setLabel="mavzu"
               wordCount={stats.totalWords}
-              wordLabel="words"
+              wordLabel="so'z"
               masteredCount={stats.masteredCount}
               learningCount={stats.learningCount}
               newCount={stats.newCount}
@@ -110,16 +110,12 @@ export default function MonthsGridView({ p }) {
   );
 
   return (
-            <>
-              {activeTab === 'asosiy' && renderMonthsGrid(
-                allMonths, '📦', "No sets found",
-                "No study plan has been assigned to you yet."
-              )}
-              {activeTab === 'qoshimcha' && renderMonthsGrid(
-                additionalMonths, '✨', "No additional materials",
-                "No additional materials assigned by teacher yet."
-              )}
-              {activeTab === 'homework' && renderHomeworkGrid()}
-            </>
+    <>
+      {currentTab === 'all' && renderMonthsGrid(
+        [...allMonths, ...additionalMonths], '📦', "Hali so'zlar yo'q",
+        "O'qituvchingiz guruhga so'z to'plami biriktirganda shu yerda ko'rinadi."
+      )}
+      {currentTab === 'homework' && renderHomeworkGrid()}
+    </>
   );
 }

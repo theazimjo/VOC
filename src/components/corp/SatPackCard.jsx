@@ -8,9 +8,9 @@ export default function SatPackCard({
   subtitle,
   icon = <BookOpen size={18} className="sat-card-icon-svg" />,
   setCount,
-  setLabel = "sets",
+  setLabel = "mavzu",
   wordCount = 0,
-  wordLabel = "words",
+  wordLabel = "so'z",
   masteredCount = 0,
   learningCount = 0,
   newCount = 0,
@@ -72,9 +72,9 @@ export default function SatPackCard({
       </div>
 
       <div className="sat-card-progress-bar">
-        <div className="sat-prog-seg sat-seg-mastered" style={{ width: `${masteredPct}%` }} title={`Mastered: ${masteredCount}`} />
-        <div className="sat-prog-seg sat-seg-learning" style={{ width: `${activeMasteryPct}%` }} title={`Progress: ${displayPct}%`} />
-        <div className="sat-prog-seg sat-seg-new" style={{ width: `${unmasteredPct}%` }} title={`Remaining: ${unmasteredPct}%`} />
+        <div className="sat-prog-seg sat-seg-mastered" style={{ width: `${masteredPct}%` }} title={`O'zlashtirilgan: ${masteredCount}`} />
+        <div className="sat-prog-seg sat-seg-learning" style={{ width: `${activeMasteryPct}%` }} title={`Natija: ${displayPct}%`} />
+        <div className="sat-prog-seg sat-seg-new" style={{ width: `${unmasteredPct}%` }} title={`Qolgan: ${unmasteredPct}%`} />
       </div>
 
       <div className="sat-card-footer">

@@ -11,7 +11,7 @@ import {
   getCenterTeachers, removeStudentFromGroup, updateTeacherProfile, getActiveAnnouncementsForRole,
   ensureIrregularVerbsPack, getGroupHomeworkList, addGroupHomework
 } from '../../../services/corpService';
-import { IRREGULAR_VERBS_PACK_ID } from '../../../data/irregularVerbsCorpPack';
+import { IRREGULAR_VERBS_PACK_ID, IRREGULAR_VERBS_CORP_PACK } from '../../../data/irregularVerbsCorpPack';
 import { getHomeworkCandidates, getUsedHomeworkKeys, computeGroupStats } from './utils';
 import ConfirmSheet from '../../../components/corp/ConfirmSheet';
 import GroupsTab from './tabs/GroupsTab';
@@ -48,7 +48,6 @@ export default function TeacherDashboard({ tab = 'groups' }) {
   const [showPackEditor, setShowPackEditor] = useState(false);
   const [groupStudentsList, setGroupStudentsList] = useState([]);
   const [assigningGroup, setAssigningGroup] = useState(null);
-  const [assignCategory, setAssignCategory] = useState('assignedPacks');
   const [duplicatingPackId, setDuplicatingPackId] = useState(null);
   const [viewingPack, setViewingPack] = useState(null);
   const [selectedGroupId, setSelectedGroupId] = useState(urlGroupId || null);
@@ -244,7 +243,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       setGroupForm({ name: '', level: 'Elementary' });
       setShowCreateModal(false);
     } catch (err) {
-      alert('Error creating group: ' + err.message);
+      alert("Guruh yaratishda xatolik: " + err.message);
     } finally {
       setSubmittingGroup(false);
     }
@@ -267,9 +266,9 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       setGroups(prev => prev.map(g => g.id === selectedGroup.id ? { ...g, name: editForm.name, level: editForm.level } : g));
       setShowEditModal(false);
       setShowGroupSettingsModal(false);
-      alert('Group details saved!');
+      alert('Guruh saqlandi!');
     } catch (err) {
-      alert('Error updating group: ' + err.message);
+      alert("Guruhni saqlashda xatolik: " + err.message);
     } finally {
       setSubmittingEditGroup(false);
     }
@@ -282,7 +281,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       setSelectedGroupId(null);
       navigate('/corp/teacher');
     } catch (err) {
-      alert('Error deleting group: ' + err.message);
+      alert("Guruhni o'chirishda xatolik: " + err.message);
     }
   };
 
@@ -323,7 +322,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       setHomeworkSelection(new Set());
       setShowHomeworkEditor(false);
     } catch (err) {
-      alert('Error saving homework: ' + err.message);
+      alert("Vazifani saqlashda xatolik: " + err.message);
     } finally {
       setSavingHomework(false);
     }
@@ -335,18 +334,18 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       setGroups(prev => prev.map(g => g.id === groupId ? { ...g, [listKey]: updatedPacks } : g));
       setAssigningGroup(prev => prev ? { ...prev, [listKey]: updatedPacks } : prev);
     } catch (err) {
-      alert('Error assigning: ' + err.message);
+      alert("Biriktirishda xatolik: " + err.message);
     }
   };
 
   const handleRemovePack = (groupId, packId, listKey = 'assignedPacks') => {
     const pack = customPacks.find(p => p.id === packId);
-    const packTitle = pack ? pack.title : 'Pack';
+    const packTitle = pack ? pack.title : "To'plam";
     askConfirm({
-      title: "Remove Pack",
-      message: `Remove "${packTitle}" from this group?`,
-      confirmLabel: "Remove",
-      cancelLabel: "Cancel",
+      title: "To'plamni olib tashlash",
+      message: `"${packTitle}" to'plamini guruhdan olib tashlaysizmi?`,
+      confirmLabel: "Olib tashlash",
+      cancelLabel: "Bekor qilish",
       danger: true,
       onConfirm: async () => {
         try {
@@ -354,7 +353,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
           setGroups(prev => prev.map(g => g.id === groupId ? { ...g, [listKey]: updatedPacks } : g));
           setAssigningGroup(prev => prev ? { ...prev, [listKey]: updatedPacks } : prev);
         } catch (err) {
-          alert('Error removing: ' + err.message);
+          alert("Olib tashlashda xatolik: " + err.message);
         }
       },
     });
@@ -369,7 +368,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       const copy = await duplicateCustomPack(centerId, pack, auth.currentUser?.uid);
       setCustomPacks(prev => [{ ...copy, scope: 'own' }, ...prev]);
     } catch (err) {
-      alert('Error duplicating pack: ' + err.message);
+      alert("Nusxalashda xatolik: " + err.message);
     } finally {
       setDuplicatingPackId(null);
     }
@@ -385,7 +384,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       await deleteCustomPack(centerId, pack.id);
       setCustomPacks(prev => prev.filter(p => p.id !== pack.id));
     } catch (err) {
-      alert('Error deleting pack: ' + err.message);
+      alert("To'plamni o'chirishda xatolik: " + err.message);
     }
   };
 
@@ -394,22 +393,22 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       await updateGroupStatus(centerId, group.id, 'archived');
       setGroups(prev => prev.map(g => g.id === group.id ? { ...g, status: 'archived' } : g));
     } catch (err) {
-      alert('Error archiving: ' + err.message);
+      alert("Arxivlashda xatolik: " + err.message);
     }
   };
 
   const handleRestoreGroup = (group) => {
     askConfirm({
-      title: "Restore Group",
-      message: `Restore "${group.name}" to your active groups?`,
-      confirmLabel: "Restore",
-      cancelLabel: "Cancel",
+      title: "Guruhni tiklash",
+      message: `"${group.name}" guruhini faol guruhlarga qaytarasizmi?`,
+      confirmLabel: "Tiklash",
+      cancelLabel: "Bekor qilish",
       onConfirm: async () => {
         try {
           await updateGroupStatus(centerId, group.id, 'active');
           setGroups(prev => prev.map(g => g.id === group.id ? { ...g, status: 'active' } : g));
         } catch (err) {
-          alert('Error restoring group: ' + err.message);
+          alert("Guruhni tiklashda xatolik: " + err.message);
         }
       },
     });
@@ -428,7 +427,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
 
       if (profileForm.password.trim()) {
         if (profileForm.password.trim().length < 6) {
-          alert('New password must be at least 6 characters!');
+          alert("Yangi parol kamida 6 ta belgidan iborat bo'lishi kerak!");
           setSavingSettings(false);
           return;
         }
@@ -438,13 +437,13 @@ export default function TeacherDashboard({ tab = 'groups' }) {
         await updatePassword(auth.currentUser, profileForm.password.trim());
         setProfileForm(prev => ({ ...prev, password: '' }));
       }
-      setSettingsSuccess('Profile saved!');
+      setSettingsSuccess('Profil saqlandi!');
       setTimeout(() => setSettingsSuccess(''), 3000);
     } catch (err) {
       if (err.code === 'auth/requires-recent-login') {
-        alert('Please log in again before changing your password, then try again.');
+        alert("Parolni o'zgartirish uchun tizimga qaytadan kiring va yana urinib ko'ring.");
       } else {
-        alert('Error saving settings: ' + err.message);
+        alert("Sozlamalarni saqlashda xatolik: " + err.message);
       }
     } finally {
       setSavingSettings(false);
@@ -494,9 +493,9 @@ export default function TeacherDashboard({ tab = 'groups' }) {
         status: newStatus,
         code: groupSettingsForm.code || g.code
       } : g));
-      alert('Group details saved!');
+      alert('Guruh saqlandi!');
     } catch (err) {
-      alert('Error saving settings: ' + err.message);
+      alert("Sozlamalarni saqlashda xatolik: " + err.message);
     } finally {
       setSavingGroupSettings(false);
     }
@@ -506,10 +505,10 @@ export default function TeacherDashboard({ tab = 'groups' }) {
     const targetGroup = groupSettingsTarget || selectedGroup;
     if (!targetGroup) return;
     askConfirm({
-      title: 'New Invite Code',
-      message: 'Generate a new invite code? The old one will stop working.',
-      confirmLabel: 'Generate',
-      cancelLabel: 'Cancel',
+      title: 'Yangi taklif kodi',
+      message: "Yangi kod yaratilsinmi? Eski kod va QR ishlamay qoladi.",
+      confirmLabel: 'Yangilash',
+      cancelLabel: 'Bekor qilish',
       onConfirm: async () => {
         try {
           const newCode = Math.floor(100000 + Math.random() * 900000).toString();
@@ -517,7 +516,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
           setGroupSettingsForm(prev => ({ ...prev, code: newCode }));
           setGroups(prev => prev.map(g => g.id === targetGroup.id ? { ...g, code: newCode } : g));
         } catch (err) {
-          alert('Error refreshing code: ' + err.message);
+          alert("Kodni yangilashda xatolik: " + err.message);
         }
       },
     });
@@ -531,7 +530,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       const list = await getCenterTeachers(centerId);
       setCenterTeachersList((list || []).filter(t => t.id !== teacherId));
     } catch (err) {
-      alert('Error loading teacher list: ' + err.message);
+      alert("O'qituvchilar ro'yxatini yuklashda xatolik: " + err.message);
     } finally {
       setLoadingTransferTeachers(false);
     }
@@ -540,10 +539,10 @@ export default function TeacherDashboard({ tab = 'groups' }) {
   const handleTransferGroupTo = (targetTeacher) => {
     if (!groupSettingsTarget) return;
     askConfirm({
-      title: "Transfer Group",
-      message: `Transfer "${groupSettingsTarget.name}" to ${targetTeacher.name}?`,
-      confirmLabel: "Transfer",
-      cancelLabel: "Cancel",
+      title: "Guruhni o'tkazish",
+      message: `"${groupSettingsTarget.name}" guruhini ${targetTeacher.name}ga o'tkazasizmi?`,
+      confirmLabel: "O'tkazish",
+      cancelLabel: "Bekor qilish",
       danger: true,
       onConfirm: async () => {
         try {
@@ -554,7 +553,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
           setShowGroupSettingsModal(false);
           navigate('/corp/teacher');
         } catch (err) {
-          alert('Error transferring: ' + err.message);
+          alert("O'tkazishda xatolik: " + err.message);
         }
       },
     });
@@ -564,10 +563,10 @@ export default function TeacherDashboard({ tab = 'groups' }) {
     if (!selectedGroup) return;
     const stId = student.id || student.uid;
     askConfirm({
-      title: "Remove Student",
-      message: `Remove "${student.name}" from this group?`,
-      confirmLabel: 'Remove',
-      cancelLabel: 'Cancel',
+      title: "O'quvchini chiqarish",
+      message: `"${student.name}" guruhdan chiqarilsinmi?`,
+      confirmLabel: 'Chiqarish',
+      cancelLabel: 'Bekor qilish',
       danger: true,
       onConfirm: async () => {
         try {
@@ -578,7 +577,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
             : g));
           setActiveStudentMenu(null);
         } catch (err) {
-          alert('Error removing student: ' + err.message);
+          alert("O'quvchini chiqarishda xatolik: " + err.message);
         }
       },
     });
@@ -634,13 +633,13 @@ export default function TeacherDashboard({ tab = 'groups' }) {
   // avoids re-deriving a bespoke prop list per file while still keeping all
   // the state/handlers/derived data declared in exactly one place (here).
   const p = {
-    navigate, urlGroupId, subTab, hwId, theme, setTheme, centerId, independentUid: null, basePath: '/corp/teacher',
+    navigate, urlGroupId, subTab, hwId, theme, setTheme, centerId, basePath: '/corp/teacher',
     groups, setGroups, customPacks, setCustomPacks, loading, setLoading,
     searchTerm, setSearchTerm, showSearchInput, setShowSearchInput,
     showCreateModal, setShowCreateModal, showEditModal, setShowEditModal,
     showPackEditor, setShowPackEditor,
     groupStudentsList, setGroupStudentsList, assigningGroup, setAssigningGroup,
-    assignCategory, setAssignCategory, duplicatingPackId, setDuplicatingPackId,
+    duplicatingPackId, setDuplicatingPackId,
     viewingPack, setViewingPack, selectedGroupId, setSelectedGroupId,
     showActionsDropdown, setShowActionsDropdown, allGroupsStudents, setAllGroupsStudents,
     loadingAllStats, setLoadingAllStats, groupHomeworkList, setGroupHomeworkList,

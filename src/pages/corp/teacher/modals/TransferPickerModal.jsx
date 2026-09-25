@@ -11,16 +11,16 @@ export default function TransferPickerModal({ p }) {
       /* Group transfer picker — replaces the old raw prompt() flow */
       <TeacherModal open={showTransferPicker && !!groupSettingsTarget} onClose={() => setShowTransferPicker(false)}>
           {groupSettingsTarget && (<>
-            <h2><ArrowRightLeft size={20} /> Transfer "{groupSettingsTarget.name}"</h2>
+            <h2><ArrowRightLeft size={20} /> "{groupSettingsTarget.name}" guruhini o'tkazish</h2>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '1rem' }}>
               Select a teacher to transfer this group to:
             </p>
 
             {loadingTransferTeachers ? (
-              <div className="loading-spinner">Loading...</div>
+              <div className="loading-spinner">Yuklanmoqda...</div>
             ) : centerTeachersList.length === 0 ? (
               <div style={{ textAlign: 'center', padding: '1.5rem 0', color: 'var(--text-secondary)' }}>
-                No other teachers found at this center.
+                Markazda boshqa o'qituvchi topilmadi.
               </div>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', maxHeight: '320px', overflowY: 'auto' }}>
@@ -43,7 +43,7 @@ export default function TransferPickerModal({ p }) {
             )}
 
             <div className="modal-actions">
-              <button className="btn-secondary" onClick={() => setShowTransferPicker(false)}>Cancel</button>
+              <button className="btn-secondary" onClick={() => setShowTransferPicker(false)}>Bekor qilish</button>
             </div>
           </>)}
       </TeacherModal>

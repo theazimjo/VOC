@@ -9,7 +9,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useAvatar } from '../../hooks/useAvatar';
-import { joinIndependentGroupByCode } from '../../services/independentTeacherService';
+import { joinGroupAsUser } from '../../services/corpService';
 import '../corp/student/StudentCorpProfile.css';
 
 const AVATAR_COLORS = ['#0A84FF', '#30D158', '#FF9500', '#AF52DE', '#FF375F', '#5AC8FA'];
@@ -90,16 +90,13 @@ export default function ProfilePage() {
     setJoinGroupError('');
     setJoinGroupSuccess('');
     try {
-      const result = await joinIndependentGroupByCode(groupCodeInput.trim(), user.uid, {
-        name: user.displayName || 'Student',
+      const result = await joinGroupAsUser(groupCodeInput.trim(), user.uid, {
+        name: user.displayName || user.email || 'Student',
         email: user.email || '',
       });
       setJoinGroupSuccess(`You've joined "${result.group.name}"!`);
       setGroupCodeInput('');
-      setTimeout(() => {
-        closeSheet();
-        setJoinGroupSuccess('');
-      }, 2000);
+      setTimeout(() => navigate('/corp/student'), 1200);
     } catch (err) {
       setJoinGroupError(err.message || "Something went wrong.");
     } finally {

@@ -19,37 +19,37 @@ export default function StatisticsTab({ p }) {
             >
               <BarChart3 size={13} /> Stats
             </span>
-            <h1 style={{ margin: 0, fontSize: '1.75rem', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--pg-text)' }}>Results & Statistics</h1>
+            <h1 style={{ margin: 0, fontSize: '1.75rem', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--pg-text)' }}>Natijalar va statistika</h1>
             <p style={{ margin: '3px 0 0 0', fontSize: '0.8rem', color: 'var(--pg-text-secondary)' }}>
-              Vocabulary mastery trends across your groups and students.
+              Guruhlaringiz va o'quvchilaringiz bo'yicha so'z o'zlashtirish.
             </p>
           </div>
 
           <div className="stat-cards-grid" style={{ marginBottom: '1rem' }}>
             <div className="group-stat-card">
               <div className="group-stat-label" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Users size={16} color="#6366f1" /> Total Groups
+                <Users size={16} color="#6366f1" /> Guruhlar
               </div>
               <div className="group-stat-value">{activeGroups.length}</div>
             </div>
 
             <div className="group-stat-card">
               <div className="group-stat-label" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Users size={16} color="var(--success)" /> Total Students
+                <Users size={16} color="var(--success)" /> O'quvchilar
               </div>
               <div className="group-stat-value">{totalStudents}</div>
             </div>
 
             <div className="group-stat-card">
               <div className="group-stat-label" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <BookOpen size={16} color="#a855f7" /> Custom Packs
+                <BookOpen size={16} color="#a855f7" /> To'plamlar
               </div>
               <div className="group-stat-value">{customPacks.length}</div>
             </div>
 
             <div className="group-stat-card">
               <div className="group-stat-label" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <TrendingUp size={16} color="#38bdf8" /> Avg. Mastery
+                <TrendingUp size={16} color="#38bdf8" /> O'rtacha natija
               </div>
               <div className="group-stat-value" style={{ color: '#4ade80' }}>
                 {loadingAllStats ? '…' : `${overallAvgPercent}%`}
@@ -61,7 +61,7 @@ export default function StatisticsTab({ p }) {
             <div className="teachers-table-card" style={{ marginBottom: '1rem', padding: '1rem 1.1rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
                 <h3 style={{ margin: 0, color: 'var(--pg-text)', fontSize: '0.94rem', fontWeight: 700 }}>
-                  Average Mastery by Group
+                  Guruhlar bo'yicha o'rtacha natija
                 </h3>
                 <span style={{ fontSize: '0.72rem', color: 'var(--pg-text-muted)' }}>Lowest first</span>
               </div>
@@ -109,11 +109,11 @@ export default function StatisticsTab({ p }) {
 
           <div className="teachers-table-card">
             <h3 style={{ padding: '1rem 1.1rem', margin: 0, color: 'var(--pg-text)', borderBottom: '1px solid rgba(255,255,255,0.1)', fontSize: '0.94rem', fontWeight: 700 }}>
-              Group Statistics
+              Guruhlar statistikasi
             </h3>
 
             {allGroupsStats.length === 0 ? (
-              <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--pg-text-muted)' }}>No groups yet</div>
+              <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--pg-text-muted)' }}>Hali guruh yo'q</div>
             ) : (
               <>
                 {/* Desktop: table. A 6-column table has no good mobile
@@ -123,12 +123,12 @@ export default function StatisticsTab({ p }) {
                   <table className="teachers-table">
                     <thead>
                       <tr>
-                        <th>GROUP</th>
-                        <th>LEVEL</th>
-                        <th>STUDENTS</th>
-                        <th>PACKS</th>
-                        <th>MASTERY</th>
-                        <th>STATUS</th>
+                        <th>GURUH</th>
+                        <th>DARAJA</th>
+                        <th>O'QUVCHILAR</th>
+                        <th>TO'PLAMLAR</th>
+                        <th>NATIJA</th>
+                        <th>HOLAT</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -136,10 +136,10 @@ export default function StatisticsTab({ p }) {
                         <tr key={g.id}>
                           <td style={{ fontWeight: 600, color: 'var(--pg-text)' }}>{g.name}</td>
                           <td><span className="group-level-badge">{g.level}</span></td>
-                          <td>{g.studentsCount || 0} students</td>
+                          <td>{g.studentsCount || 0} o'quvchi</td>
                           <td>{packEntries.length} packs</td>
                           <td>{loadingAllStats && !(g.id in allGroupsStudents) ? '…' : `${avgPercent}%`}</td>
-                          <td><span className="teacher-status-pill active">• Active</span></td>
+                          <td><span className="teacher-status-pill active">• Faol</span></td>
                         </tr>
                       ))}
                     </tbody>
@@ -161,14 +161,14 @@ export default function StatisticsTab({ p }) {
                         <strong style={{ fontSize: '0.9rem', color: 'var(--pg-text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                           {g.name}
                         </strong>
-                        <span className="teacher-status-pill active" style={{ flexShrink: 0 }}>• Active</span>
+                        <span className="teacher-status-pill active" style={{ flexShrink: 0 }}>• Faol</span>
                       </div>
                       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '8px', fontSize: '0.78rem', color: 'var(--pg-text-secondary)' }}>
                         <span className="group-level-badge">{g.level}</span>
-                        <span>{g.studentsCount || 0} students</span>
+                        <span>{g.studentsCount || 0} o'quvchi</span>
                         <span>{packEntries.length} packs</span>
                         <span style={{ marginLeft: 'auto', fontWeight: 700, color: 'var(--pg-text)' }}>
-                          {loadingAllStats && !(g.id in allGroupsStudents) ? '…' : `${avgPercent}% mastery`}
+                          {loadingAllStats && !(g.id in allGroupsStudents) ? '…' : `${avgPercent}%`}
                         </span>
                       </div>
                     </div>

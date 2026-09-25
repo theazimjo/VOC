@@ -10,23 +10,23 @@ export default function ArchiveTab({ p }) {
               type="button"
               className="ios-back-btn"
               onClick={() => navigate(`${basePath}/settings`)}
-              title="Back to Settings"
+              title="Sozlamalarga qaytish"
             >
               <ArrowLeft size={18} />
             </button>
             <div className="ios-title-group">
-              <h2 className="ios-group-title">Archived Groups</h2>
+              <h2 className="ios-group-title">Arxivlangan guruhlar</h2>
             </div>
           </div>
 
           {loading ? (
             <div className="premium-glass" style={{ borderRadius: '18px', textAlign: 'center', padding: '2rem 1rem', color: 'var(--pg-text-secondary)', fontSize: '0.86rem' }}>
-              Loading archive...
+              Yuklanmoqda...
             </div>
           ) : archivedGroups.length === 0 ? (
             <div className="premium-glass" style={{ borderRadius: '18px', textAlign: 'center', padding: '2.5rem 1.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
               <Archive size={40} style={{ color: '#fbbf24', opacity: 0.8 }} />
-              <p style={{ margin: 0, fontSize: '0.88rem', color: 'var(--pg-text-secondary)' }}>No archived groups.</p>
+              <p style={{ margin: 0, fontSize: '0.88rem', color: 'var(--pg-text-secondary)' }}>Arxivda guruh yo'q.</p>
             </div>
           ) : (
             <div className="teachers-table-card">
@@ -35,10 +35,10 @@ export default function ArchiveTab({ p }) {
                 <table className="teachers-table">
                   <thead>
                     <tr>
-                      <th>GROUP</th>
-                      <th>LEVEL</th>
-                      <th>STUDENTS</th>
-                      <th>PACKS</th>
+                      <th>GURUH</th>
+                      <th>DARAJA</th>
+                      <th>O'QUVCHILAR</th>
+                      <th>TO'PLAMLAR</th>
                       <th></th>
                     </tr>
                   </thead>
@@ -47,13 +47,13 @@ export default function ArchiveTab({ p }) {
                       <tr key={group.id} className="t-table-row">
                         <td style={{ fontWeight: 600, color: 'var(--pg-text)' }}>{group.name}</td>
                         <td>{group.level ? <span className="group-level-badge">{group.level}</span> : '—'}</td>
-                        <td>{group.studentsCount || 0} students</td>
+                        <td>{group.studentsCount || 0} o'quvchi</td>
                         <td>{(group.assignedPacks || []).length + (group.additionalPacks || []).length + (group.requiredPacks || []).length} packs</td>
                         <td style={{ width: '40px' }}>
                           <button
                             type="button"
                             onClick={() => handleRestoreGroup(group)}
-                            title="Restore from archive"
+                            title="Arxivdan tiklash"
                             style={{
                               display: 'flex', alignItems: 'center', justifyContent: 'center',
                               width: '30px', height: '30px', borderRadius: '9px', flexShrink: 0,
@@ -106,7 +106,7 @@ export default function ArchiveTab({ p }) {
                     <button
                       type="button"
                       onClick={() => handleRestoreGroup(group)}
-                      title="Restore from archive"
+                      title="Arxivdan tiklash"
                       style={{
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         width: '34px', height: '34px', borderRadius: '10px', flexShrink: 0,

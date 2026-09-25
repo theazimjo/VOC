@@ -6,7 +6,6 @@ import {
   Target, CheckCircle2, Building2, GraduationCap, CalendarDays, Moon, Type, Volume2
 } from 'lucide-react';
 import { setAppMode, updateStudentProfile } from '../../../services/corpService';
-import { updateIndependentStudentProfile } from '../../../services/independentTeacherService';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useTheme } from '../../../contexts/ThemeContext';
 import { useAccountWordProgress } from '../../../hooks/useAccountWordProgress';
@@ -17,8 +16,8 @@ import './StudentCorpProfile.css';
 const AVATAR_COLORS = ['#0A84FF', '#30D158', '#FF9500', '#AF52DE', '#FF375F', '#5AC8FA'];
 
 const SHEET_META = {
-  theme: { icon: Moon, title: 'Choose Theme' },
-  font: { icon: Type, title: 'Choose Text Size' },
+  theme: { icon: Moon, title: 'Uslubni tanlang' },
+  font: { icon: Type, title: "Matn o'lchami" },
 };
 
 export default function StudentCorpProfile() {
@@ -52,7 +51,7 @@ export default function StudentCorpProfile() {
   const [draftName, setDraftName] = useState('');
   const [draftColor, setDraftColor] = useState(AVATAR_COLORS[0]);
 
-  const displayName = customName || user?.displayName || user?.email?.split('@')[0] || 'Student';
+  const displayName = customName || user?.displayName || user?.email?.split('@')[0] || "O'quvchi";
   const initial = displayName[0]?.toUpperCase() || '?';
 
   const openEditor = () => {
@@ -68,20 +67,12 @@ export default function StudentCorpProfile() {
     setCustomName(nextName);
     setAvatarColor(draftColor);
     setEditingProfile(false);
-    if (!membership?.groupId || !user?.uid) return;
-    if (!membership.independent && !membership.centerId) return;
+    if (!membership?.groupId || !membership?.centerId || !user?.uid) return;
     try {
-      if (membership.independent) {
-        await updateIndependentStudentProfile(membership.teacherUid, membership.groupId, user.uid, {
-          name: nextName,
-          avatarColor: draftColor,
-        });
-      } else {
-        await updateStudentProfile(membership.centerId, membership.groupId, user.uid, {
-          name: nextName,
-          avatarColor: draftColor,
-        });
-      }
+      await updateStudentProfile(membership.centerId, membership.groupId, user.uid, {
+        name: nextName,
+        avatarColor: draftColor,
+      });
     } catch (err) {
       console.error('Error saving profile:', err);
     }
@@ -118,7 +109,7 @@ export default function StudentCorpProfile() {
             </div>
           )}
         </div>
-        <button type="button" className="corp-profile-edit-btn" onClick={openEditor} aria-label="Edit profile">
+        <button type="button" className="corp-profile-edit-btn" onClick={openEditor} aria-label="Profilni tahrirlash">
           <Pencil size={16} strokeWidth={2.3} />
         </button>
       </div>
@@ -128,22 +119,22 @@ export default function StudentCorpProfile() {
         <PackHeaderHero
           icon={<Target size={22} />}
           tag={null}
-          title="Word Mastery"
-          subtitle={`${learnedWords} / ${targetWords} words learned`}
+          title="So'z boyligi"
+          subtitle={`${learnedWords} / ${targetWords} so'z o'rganildi`}
           masteryPct={learnedPct}
           metrics={[
-            { icon: <Target size={16} />, label: 'TARGET', value: targetWords, color: 'blue' },
-            { icon: <CheckCircle2 size={16} />, label: 'LEARNED', value: learnedWords, color: 'green' },
+            { icon: <Target size={16} />, label: 'MAQSAD', value: targetWords, color: 'blue' },
+            { icon: <CheckCircle2 size={16} />, label: "O'RGANILDI", value: learnedWords, color: 'green' },
           ]}
         />
 
         <div className="corp-profile-membership-card">
-          <span className="corp-profile-membership-title">Membership</span>
+          <span className="corp-profile-membership-title">A'zolik</span>
 
           <div className="corp-profile-membership-row">
             <div className="corp-profile-membership-icon"><Building2 size={15} strokeWidth={2.2} /></div>
             <div className="corp-profile-membership-text">
-              <div className="corp-profile-membership-label">{membership?.independent ? 'Teacher' : 'Center'}</div>
+              <div className="corp-profile-membership-label">Markaz</div>
               <div className="corp-profile-membership-value">{membership?.centerName || '—'}</div>
             </div>
           </div>
@@ -151,7 +142,7 @@ export default function StudentCorpProfile() {
           <div className="corp-profile-membership-row">
             <div className="corp-profile-membership-icon"><GraduationCap size={15} strokeWidth={2.2} /></div>
             <div className="corp-profile-membership-text">
-              <div className="corp-profile-membership-label">Group</div>
+              <div className="corp-profile-membership-label">Guruh</div>
               <div className="corp-profile-membership-value">{membership?.groupName || '—'}</div>
             </div>
           </div>
@@ -159,7 +150,7 @@ export default function StudentCorpProfile() {
           <div className="corp-profile-membership-row">
             <div className="corp-profile-membership-icon"><CalendarDays size={15} strokeWidth={2.2} /></div>
             <div className="corp-profile-membership-text">
-              <div className="corp-profile-membership-label">Joined</div>
+              <div className="corp-profile-membership-label">Qo'shilgan</div>
               <div className="corp-profile-membership-value">
                 {membership?.joinedAt ? new Date(membership.joinedAt).toLocaleDateString() : '—'}
               </div>
@@ -169,14 +160,14 @@ export default function StudentCorpProfile() {
       </div>
 
       {/* ── Appearance ── */}
-      <div className="corp-profile-section-title">Appearance</div>
+      <div className="corp-profile-section-title">Ko'rinish</div>
       <div className="corp-profile-appearance-card">
         <div className="corp-profile-appearance-row" style={{ cursor: 'pointer' }} onClick={() => setActiveSheet('theme')}>
           <div className="corp-profile-appearance-row-left">
             <div className="corp-profile-appearance-icon" style={{ background: '#0a7aff' }}>
               <Moon size={15} strokeWidth={2.2} />
             </div>
-            <span className="corp-profile-appearance-title">Theme</span>
+            <span className="corp-profile-appearance-title">Uslub</span>
           </div>
           <div className="corp-profile-appearance-right">
             <span className="corp-profile-appearance-detail">{themes.find(t => t.id === theme)?.name || theme}</span>
@@ -189,11 +180,11 @@ export default function StudentCorpProfile() {
             <div className="corp-profile-appearance-icon" style={{ background: '#8e8e93' }}>
               <Type size={15} strokeWidth={2.2} />
             </div>
-            <span className="corp-profile-appearance-title">Text Size</span>
+            <span className="corp-profile-appearance-title">Matn o'lchami</span>
           </div>
           <div className="corp-profile-appearance-right">
             <span className="corp-profile-appearance-detail">
-              {fontSize === 'small' ? 'Small (14px)' : fontSize === 'large' ? 'Large (19px)' : 'Medium (16px)'}
+              {fontSize === 'small' ? 'Kichik (14px)' : fontSize === 'large' ? 'Katta (19px)' : "O'rta (16px)"}
             </span>
             <ChevronRight size={14} className="corp-profile-appearance-chevron" />
           </div>
@@ -204,7 +195,7 @@ export default function StudentCorpProfile() {
             <div className="corp-profile-appearance-icon" style={{ background: '#ff2d55' }}>
               <Volume2 size={15} strokeWidth={2.2} />
             </div>
-            <span className="corp-profile-appearance-title">Audio Effects</span>
+            <span className="corp-profile-appearance-title">Ovoz effektlari</span>
           </div>
           <div className="corp-profile-appearance-right">
             <label className="corp-profile-switch">
@@ -216,13 +207,13 @@ export default function StudentCorpProfile() {
       </div>
 
       {/* ── Account actions ── */}
-      <div className="corp-profile-section-title">Account</div>
+      <div className="corp-profile-section-title">Hisob</div>
       <div className="corp-profile-tiles">
         <div className="corp-profile-tile" onClick={handleReturnToIndividual}>
           <div className="corp-profile-tile-icon" style={{ background: 'var(--accent-1)' }}>
             <ArrowRightLeft size={17} strokeWidth={2.2} />
           </div>
-          <span className="corp-profile-tile-text">Switch to Individual Mode</span>
+          <span className="corp-profile-tile-text">Shaxsiy rejimga o'tish</span>
           <ChevronRight className="corp-profile-tile-arrow" size={16} strokeWidth={2.5} />
         </div>
 
@@ -230,11 +221,11 @@ export default function StudentCorpProfile() {
           <div className="corp-profile-tile-icon" style={{ background: 'var(--error, #ff3b30)' }}>
             <LogOut size={17} strokeWidth={2.2} />
           </div>
-          <span className="corp-profile-tile-text">Log Out</span>
+          <span className="corp-profile-tile-text">Chiqish</span>
         </div>
       </div>
 
-      <p className="corp-profile-footer">VOCABRY · Student Profile</p>
+      <p className="corp-profile-footer">VOCABRY · O'quvchi profili</p>
 
       {/* ── Logout Confirmation Modal ── */}
       {showLogoutModal && (
@@ -264,10 +255,10 @@ export default function StudentCorpProfile() {
             </div>
 
             <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
-              Log Out?
+              Chiqasizmi?
             </h3>
             <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', margin: '0 0 0.5rem 0', lineHeight: 1.4 }}>
-              Are you sure you want to log out of your account?
+              Hisobingizdan chiqmoqchimisiz?
             </p>
 
             <div style={{ display: 'flex', gap: '0.75rem', width: '100%' }}>
@@ -286,7 +277,7 @@ export default function StudentCorpProfile() {
                 }}
                 onClick={() => setShowLogoutModal(false)}
               >
-                Cancel
+                Bekor qilish
               </button>
               <button
                 type="button"
@@ -303,7 +294,7 @@ export default function StudentCorpProfile() {
                 }}
                 onClick={handleLogout}
               >
-                Log Out
+                Chiqish
               </button>
             </div>
           </motion.div>
@@ -322,8 +313,8 @@ export default function StudentCorpProfile() {
           >
             <div className="corp-profile-edit-header">
               <div className="corp-profile-edit-header-icon"><User size={18} strokeWidth={2.3} /></div>
-              <h3>Edit Profile</h3>
-              <button type="button" className="corp-profile-edit-close" onClick={closeEditor} aria-label="Close">
+              <h3>Profilni tahrirlash</h3>
+              <button type="button" className="corp-profile-edit-close" onClick={closeEditor} aria-label="Yopish">
                 <X size={18} strokeWidth={2.3} />
               </button>
             </div>
@@ -339,19 +330,19 @@ export default function StudentCorpProfile() {
             </div>
 
             <div className="corp-profile-edit-field">
-              <label>Name</label>
+              <label>Ism</label>
               <input
                 type="text"
                 className="corp-profile-edit-input"
                 value={draftName}
                 onChange={(e) => setDraftName(e.target.value)}
                 maxLength={40}
-                placeholder="Your name"
+                placeholder="Ismingiz"
               />
             </div>
 
             <button type="button" className="corp-profile-edit-save-btn" onClick={saveProfile}>
-              <Check size={18} strokeWidth={2.6} /> Save Changes
+              <Check size={18} strokeWidth={2.6} /> Saqlash
             </button>
           </motion.div>
         </div>
@@ -370,7 +361,7 @@ export default function StudentCorpProfile() {
             <div className="corp-profile-edit-header">
               <div className="corp-profile-edit-header-icon">{SheetIcon && <SheetIcon size={18} strokeWidth={2.3} />}</div>
               <h3>{sheetMeta.title}</h3>
-              <button type="button" className="corp-profile-edit-close" onClick={closeSheet} aria-label="Close">
+              <button type="button" className="corp-profile-edit-close" onClick={closeSheet} aria-label="Yopish">
                 <X size={18} strokeWidth={2.3} />
               </button>
             </div>
@@ -388,9 +379,9 @@ export default function StudentCorpProfile() {
               ))}
 
               {activeSheet === 'font' && [
-                { id: 'small', label: 'Small (14px)' },
-                { id: 'normal', label: 'Medium (16px)' },
-                { id: 'large', label: 'Large (19px)' }
+                { id: 'small', label: 'Kichik (14px)' },
+                { id: 'normal', label: "O'rta (16px)" },
+                { id: 'large', label: 'Katta (19px)' }
               ].map(item => (
                 <button
                   key={item.id}

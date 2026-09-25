@@ -25,7 +25,7 @@ export default function CenterDetailModal({ center, onClose }) {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content large" onClick={e => e.stopPropagation()}>
-        <h2><Building2 size={20} /> {center.name}</h2>
+        <h2><Building2 size={20} /> {center.name || `Nomsiz markaz (${center.id})`}</h2>
 
         <div className="cd-meta-row">
           <span><Mail size={14} /> {center.adminEmail || 'Kiritilmagan'}</span>

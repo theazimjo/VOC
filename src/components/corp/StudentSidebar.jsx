@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import {
-  LayoutDashboard, BookOpen, ClipboardList, User
+  LayoutDashboard, BookOpen, User
 } from 'lucide-react';
 import VocLogo from '../common/VocLogo';
 import './CorpAdminSidebar.css';
@@ -9,17 +9,16 @@ export default function StudentSidebar() {
   const location = useLocation();
 
   const navItems = [
-    { to: '/corp/student', label: 'Dashboard', icon: LayoutDashboard },
-    { to: '/corp/student/learn', label: 'Vocabulary', icon: BookOpen },
-    { to: '/corp/student/assessment', label: 'Assessment', icon: ClipboardList },
-    { to: '/corp/student/profile', label: 'Profile', icon: User },
+    { to: '/corp/student', label: 'Bosh sahifa', icon: LayoutDashboard },
+    { to: '/corp/student/learn', label: "So'zlar", icon: BookOpen },
+    { to: '/corp/student/profile', label: 'Profil', icon: User },
   ];
 
   return (
     <aside className="corp-admin-sidebar">
       {/* Sidebar Top / Brand */}
       <div className="sidebar-brand-header" style={{ padding: '1.25rem 1.5rem 1rem 1.5rem', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
-        <VocLogo subTitle="Student Portal" />
+        <VocLogo subTitle="O'quvchi" />
       </div>
 
       {/* Navigation Menu */}

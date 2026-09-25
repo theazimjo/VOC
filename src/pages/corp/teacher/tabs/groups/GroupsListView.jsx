@@ -13,7 +13,7 @@ export default function GroupsListView({ p }) {
           <div className="courses-top-bar" style={{ marginBottom: '1.5rem' }}>
             <div className="courses-title-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
               <div className="courses-title-area">
-                <h1 style={{ fontSize: '1.75rem', fontWeight: 800, letterSpacing: '-0.02em', margin: 0 }}>My Groups</h1>
+                <h1 style={{ fontSize: '1.75rem', fontWeight: 800, letterSpacing: '-0.02em', margin: 0 }}>Guruhlarim</h1>
                 <p style={{ margin: '4px 0 0 0', fontSize: '0.82rem' }}>{activeGroups.length} active groups · {totalStudents} students</p>
               </div>
 
@@ -22,7 +22,7 @@ export default function GroupsListView({ p }) {
                   type="button"
                   className="top-search-lupa-btn"
                   onClick={() => setShowSearchInput(!showSearchInput)}
-                  title="Search groups"
+                  title="Guruhlarni qidirish"
                 >
                   <Search size={18} />
                 </button>
@@ -34,7 +34,7 @@ export default function GroupsListView({ p }) {
                 <Search size={16} className="search-icon" />
                 <input
                   type="text"
-                  placeholder="Search groups..."
+                  placeholder="Guruhlarni qidirish..."
                   value={searchTerm}
                   onChange={e => setSearchTerm(e.target.value)}
                   autoFocus
@@ -56,7 +56,7 @@ export default function GroupsListView({ p }) {
                     alignItems: 'center',
                     padding: 0
                   }}
-                  title="Close search"
+                  title="Qidiruvni yopish"
                 >
                   <X size={16} />
                 </button>
@@ -65,14 +65,14 @@ export default function GroupsListView({ p }) {
           </div>
 
           {loading ? (
-            <div className="loading-spinner">Loading groups...</div>
+            <div className="loading-spinner">Guruhlar yuklanmoqda...</div>
           ) : filteredActiveGroups.length === 0 ? (
             <div className="empty-state" style={{ padding: '2rem 1rem' }}>
               <Users size={40} style={{ opacity: 0.5 }} />
-              <p style={{ fontSize: '0.88rem' }}>{searchTerm ? `No groups match "${searchTerm}".` : "You don't have any active groups yet."}</p>
+              <p style={{ fontSize: '0.88rem' }}>{searchTerm ? `"${searchTerm}" bo'yicha guruh topilmadi.` : "Hali faol guruhingiz yo'q. Birinchi guruhni yarating."}</p>
               {searchTerm ? (
                 <button className="btn-secondary" onClick={() => setSearchTerm('')} style={{ marginTop: '8px' }}>
-                  Clear search
+                  Qidiruvni tozalash
                 </button>
               ) : (
                 <button className="btn-create-group" onClick={() => setShowCreateModal(true)}>
@@ -89,10 +89,10 @@ export default function GroupsListView({ p }) {
                 <table className="teachers-table">
                   <thead>
                     <tr>
-                      <th>GROUP</th>
-                      <th>LEVEL</th>
-                      <th>STUDENTS</th>
-                      <th>PACKS</th>
+                      <th>GURUH</th>
+                      <th>DARAJA</th>
+                      <th>O'QUVCHILAR</th>
+                      <th>TO'PLAMLAR</th>
                       <th></th>
                     </tr>
                   </thead>
@@ -195,7 +195,7 @@ export default function GroupsListView({ p }) {
             type="button"
             className="fab-add-pack-btn fab-icon-only"
             onClick={() => setShowCreateModal(true)}
-            title="Create New Group"
+            title="Yangi guruh"
           >
             <Plus size={26} />
           </button>

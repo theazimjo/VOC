@@ -1,14 +1,13 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { LayoutDashboard, BookOpen, ClipboardList, User } from 'lucide-react';
+import { LayoutDashboard, BookOpen, User } from 'lucide-react';
 import './StudentBottomNav.css';
 
 const NAV_ITEMS = [
-  { to: '/corp/student', label: 'Dashboard', icon: LayoutDashboard, end: true },
-  { to: '/corp/student/learn', label: 'Vocabulary', icon: BookOpen, end: false },
-  { to: '/corp/student/assessment', label: 'Assessment', icon: ClipboardList, end: false },
-  { to: '/corp/student/profile', label: 'Profile', icon: User, end: false },
+  { to: '/corp/student', label: 'Bosh sahifa', icon: LayoutDashboard, end: true },
+  { to: '/corp/student/learn', label: "So'zlar", icon: BookOpen, end: false },
+  { to: '/corp/student/profile', label: 'Profil', icon: User, end: false },
 ];
 
 function isItemActive(pathname, item) {

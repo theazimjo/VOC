@@ -1,4 +1,4 @@
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft, Layers, Type } from 'lucide-react';
 import SatPackCard from '../../../../../components/corp/SatPackCard';
 import PackHeaderHero from '../../../../../components/corp/PackHeaderHero';
 import { computeMonthWordStats, computeUnitWordStats } from '../utils';
@@ -13,11 +13,11 @@ export default function TopicsListView({ p }) {
                 <button
                   className="ios-back-btn"
                   onClick={() => navigate('/corp/student/learn')}
-                  aria-label="Back"
-                  title="Back"
+                  aria-label="Orqaga"
+                  title="Orqaga"
                 >
                   <ChevronLeft size={18} strokeWidth={2.5} />
-                  <span>Back</span>
+                  <span>Orqaga</span>
                 </button>
               </div>
 
@@ -27,10 +27,12 @@ export default function TopicsListView({ p }) {
                 return (
                   <PackHeaderHero
                     title={selectedMonth.title}
-                    subtitle={selectedMonth.packTitle ? `${selectedMonth.packTitle} (${selectedMonth.packLevel || 'Standard'})` : "Words collected from real past exams"}
-                    tag={selectedMonth.packLevel || "Question bank"}
-                    setCount={(selectedMonth.units || []).length}
-                    wordCount={monthStats.totalWords}
+                    subtitle={selectedMonth.packTitle ? (selectedMonth.packLevel ? `${selectedMonth.packTitle} (${selectedMonth.packLevel})` : selectedMonth.packTitle) : ""}
+                    tag={selectedMonth.packLevel || "So'zlar"}
+                    metrics={[
+                      { icon: <Layers size={16} />, label: 'MAVZULAR', value: (selectedMonth.units || []).length, color: 'blue' },
+                      { icon: <Type size={16} />, label: "SO'ZLAR", value: monthStats.totalWords, color: 'purple' },
+                    ]}
                     masteredCount={monthStats.masteredCount}
                     masteryPct={monthStats.avgMasteryPct}
                   />
@@ -39,7 +41,7 @@ export default function TopicsListView({ p }) {
 
               <div className="grid-cards">
                 {(selectedMonth.units || []).length === 0 ? (
-                  <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', padding: '1rem 0' }}>No topics available in this month.</div>
+                  <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', padding: '1rem 0' }}>Bu oyda hali mavzu yo'q.</div>
                 ) : (
                   selectedMonth.units.map((u) => {
                     const stats = computeUnitWordStats(selectedMonth, u, allDbWords);
@@ -51,7 +53,7 @@ export default function TopicsListView({ p }) {
                         title={u.title}
                         subtitle={u.pattern || selectedMonth.title}
                         wordCount={stats.totalWords}
-                        wordLabel="words"
+                        wordLabel="so'z"
                         masteredCount={stats.masteredCount}
                         learningCount={stats.learningCount}
                         newCount={stats.newCount}

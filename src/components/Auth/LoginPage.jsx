@@ -5,6 +5,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { resolveCorpIdentity } from '../../hooks/useCorpRole';
 import { useSuccessTransition } from '../../contexts/SuccessTransitionContext';
 import { getActiveProfile } from '../../utils/activeProfile';
+import { getPendingJoinPath } from '../../utils/pendingJoin';
 import VocLogo from '../common/VocLogo';
 import bgVideo from '../../assets/VOCABRY.mp4';
 import './LoginPage.css';
@@ -28,11 +29,6 @@ const ROUTE_PREFETCHERS = {
     () => import('../../components/corp/CorpProtectedRoute'),
     () => import('../../components/corp/TeacherLayout'),
     () => import('../../pages/corp/teacher/TeacherDashboard'),
-  ],
-  '/teacher': [
-    () => import('../../components/corp/CorpProtectedRoute'),
-    () => import('../../pages/teacher/IndependentTeacherLayout'),
-    () => import('../../pages/teacher/IndependentTeacherDashboard'),
   ],
 };
 
@@ -188,6 +184,9 @@ export default function LoginPage() {
 
   const getRedirectPath = async (u) => {
     if (!u) return '/';
+    // Came here from a group invite link — finish joining first.
+    const pendingJoinPath = getPendingJoinPath();
+    if (pendingJoinPath) return pendingJoinPath;
     try {
       const identity = await resolveCorpIdentity(u);
       if (identity) {
@@ -198,10 +197,9 @@ export default function LoginPage() {
         // via the "Admin panel" entry in Settings instead.
         if (identity.role === 'center_admin') return '/corp/admin';
         if (identity.role === 'teacher') {
-          const teacherTarget = identity.independent ? '/teacher' : '/corp/teacher';
           const activeProfile = getActiveProfile();
           if (!activeProfile) return '/choose-profile';
-          return activeProfile === 'teacher' ? teacherTarget : '/';
+          return activeProfile === 'teacher' ? '/corp/teacher' : '/';
         }
       }
     } catch (err) {

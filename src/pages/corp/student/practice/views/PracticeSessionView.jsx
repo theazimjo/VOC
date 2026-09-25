@@ -47,11 +47,11 @@ export default function PracticeSessionView({ p }) {
     >
       {selectedMode !== 'spelling' && selectedMode !== 'flashcard' && (
         <div className="practice-session-header clean-quiz-header">
-          <button className="clean-back-arrow" onClick={handleBack} title="Exit practice">
+          <button className="clean-back-arrow" onClick={handleBack} title="Mashqdan chiqish">
             <ChevronLeft size={22} strokeWidth={2.5} />
           </button>
           <h1 className="clean-quiz-title">
-            {selectedMode === 'flashcard' ? '🧠 Smart Flashcards' : selectedMode === 'spelling' ? '✍️ Spelling Practice' : selectedMode === 'match' ? '🔀 Match Game' : selectedMode === 'quiz' ? '📝 Multiple Choice Quiz' : selectedMode === 'pronounce' ? '🎙️ Pronunciation Practice' : 'Practice'}
+            {selectedMode === 'flashcard' ? '🧠 Kartochkalar' : selectedMode === 'spelling' ? '✍️ Imlo mashqi' : selectedMode === 'match' ? '🔀 Juftlash' : selectedMode === 'quiz' ? '📝 Test' : selectedMode === 'pronounce' ? '🎙️ Talaffuz' : 'Mashq'}
           </h1>
           <div style={{ width: '40px', opacity: 0 }}></div>
 

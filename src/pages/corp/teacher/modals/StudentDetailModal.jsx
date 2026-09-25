@@ -32,7 +32,7 @@ export default function StudentDetailModal({ p }) {
                   {student.name}
                 </h3>
                 <span style={{ fontSize: '0.82rem', color: 'var(--pg-text-muted)' }}>
-                  {student.email || 'No email'}
+                  {student.email || "Email yo'q"}
                 </span>
               </div>
             </div>
@@ -51,26 +51,26 @@ export default function StudentDetailModal({ p }) {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', background: 'var(--pg-surface)', padding: '14px', borderRadius: '16px', border: '1px solid var(--pg-hairline)', marginBottom: '1rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ color: 'var(--pg-text-muted)', fontSize: '0.85rem' }}>Joined on:</span>
+              <span style={{ color: 'var(--pg-text-muted)', fontSize: '0.85rem' }}>Qo'shilgan sana:</span>
               <span style={{ color: 'var(--pg-text)', fontWeight: 600, fontSize: '0.85rem' }}>
-                {student.joinedAt ? new Date(student.joinedAt).toLocaleDateString() : "Recently"}
+                {student.joinedAt ? new Date(student.joinedAt).toLocaleDateString() : "Yaqinda"}
               </span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ color: 'var(--pg-text-muted)', fontSize: '0.85rem' }}>Mastery level:</span>
+              <span style={{ color: 'var(--pg-text-muted)', fontSize: '0.85rem' }}>O'zlashtirish:</span>
               <span className="badge-active">
-                {getStudentSummary(student, selectedGroup).masteryPercent}% mastery
+                {getStudentSummary(student, selectedGroup).masteryPercent}%
               </span>
             </div>
           </div>
 
           <div style={{ fontSize: '0.72rem', fontWeight: 800, color: 'var(--pg-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>
-            Pack Breakdown
+            To'plamlar bo'yicha
           </div>
 
           {getGroupPackEntries(selectedGroup).length === 0 ? (
             <div style={{ textAlign: 'center', padding: '1.25rem 0', color: 'var(--pg-text-secondary)', fontSize: '0.85rem' }}>
-              No pack assigned to this group yet.
+              Guruhga hali to'plam biriktirilmagan.
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', maxHeight: '260px', overflowY: 'auto', paddingRight: '2px' }}>
@@ -81,14 +81,14 @@ export default function StudentDetailModal({ p }) {
                 return (
                   <div key={packId} style={{ padding: '10px 12px', borderRadius: '12px', background: 'var(--pg-surface)', border: '1px solid var(--pg-hairline)' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px', gap: '8px' }}>
-                      <strong style={{ color: 'var(--pg-text)', fontSize: '0.88rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{pack ? pack.title : 'Unknown pack'}</strong>
+                      <strong style={{ color: 'var(--pg-text)', fontSize: '0.88rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{pack ? pack.title : "Noma'lum to'plam"}</strong>
                       <span className={`pack-category-badge cat-${category === 'Main' ? 'main' : category === 'Required' ? 'required' : 'extra'}`}>{category}</span>
                     </div>
                     {agg.hasData ? (
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', fontSize: '0.78rem', color: 'var(--pg-text-secondary)' }}>
-                        <span>Learned: <strong style={{ color: 'var(--pg-text)' }}>{agg.wordsLearned || 0}</strong></span>
-                        <span>Mastery: <strong style={{ color: 'var(--success)' }}>{agg.masteryPercent || 0}%</strong></span>
-                        <span>Retention: <strong style={{ color: 'var(--pg-text)' }}>{agg.retentionPercent || 0}%</strong></span>
+                        <span>O'rgangan: <strong style={{ color: 'var(--pg-text)' }}>{agg.wordsLearned || 0}</strong></span>
+                        <span>O'zlashtirish: <strong style={{ color: 'var(--success)' }}>{agg.masteryPercent || 0}%</strong></span>
+                        <span>Eslab qolish: <strong style={{ color: 'var(--pg-text)' }}>{agg.retentionPercent || 0}%</strong></span>
                         {agg.atRiskCount > 0 && (
                           <span style={{ color: 'var(--warning)', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
                             <AlertTriangle size={12} /> {agg.atRiskCount} need attention
@@ -96,7 +96,7 @@ export default function StudentDetailModal({ p }) {
                         )}
                       </div>
                     ) : (
-                      <span style={{ fontSize: '0.78rem', color: 'var(--pg-text-muted)' }}>Not practiced yet.</span>
+                      <span style={{ fontSize: '0.78rem', color: 'var(--pg-text-muted)' }}>Hali mashq qilmagan.</span>
                     )}
 
                     {packUnits.length > 0 && (
@@ -124,7 +124,7 @@ export default function StudentDetailModal({ p }) {
           )}
 
           <div className="modal-actions" style={{ marginTop: '1.1rem' }}>
-            <button className="btn-secondary" onClick={() => setViewingStudentDetail(null)}>Close</button>
+            <button className="btn-secondary" onClick={() => setViewingStudentDetail(null)}>Yopish</button>
             <button
               type="button"
               className="btn-danger"
@@ -135,7 +135,7 @@ export default function StudentDetailModal({ p }) {
                 handleRemoveStudent(st);
               }}
             >
-              Remove from Group
+              Guruhdan chiqarish
             </button>
           </div>
         </>

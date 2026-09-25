@@ -13,7 +13,7 @@ export default function GroupsTab({ p }) {
     return (
           <div className="empty-state">
             <Users size={48} />
-            <p>Group not found, or not assigned to you.</p>
+            <p>Guruh topilmadi yoki u sizga biriktirilmagan.</p>
             <button className="btn-secondary" onClick={() => { setSelectedGroupId(null); navigate(basePath); }} style={{ marginTop: '10px' }}>
               Back to My Groups
             </button>

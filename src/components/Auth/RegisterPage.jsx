@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
+import { getPendingJoinPath } from '../../utils/pendingJoin';
 import VocLogo from '../common/VocLogo';
 import bgVideo from '../../assets/VOCABRY.mp4';
 import './LoginPage.css'; // Glass material, background video, card chrome
@@ -119,7 +120,7 @@ export default function RegisterPage() {
 
   useEffect(() => {
     if (!loading && user) {
-      navigate('/', { replace: true });
+      navigate(getPendingJoinPath() || '/', { replace: true });
     }
   }, [user, loading, navigate]);
 
@@ -162,7 +163,7 @@ export default function RegisterPage() {
     setSubmitting(true);
     try {
       await register(email.trim(), password, displayName.trim());
-      navigate('/', { replace: true });
+      navigate(getPendingJoinPath() || '/', { replace: true });
     } catch (err) {
       setError(getFirebaseErrorMessage(err.code));
     } finally {
@@ -175,7 +176,7 @@ export default function RegisterPage() {
     setSubmitting(true);
     try {
       await loginWithGoogle();
-      navigate('/', { replace: true });
+      navigate(getPendingJoinPath() || '/', { replace: true });
     } catch (err) {
       console.error("Google Sign-In Error details:", err);
       if (err.code !== 'auth/popup-closed-by-user') {

@@ -61,46 +61,6 @@ export async function getCorpRole(uid) {
 }
 
 /**
- * Full picture of an account's teacher-type affiliations, combining the two
- * tables that can each independently hold one: `corpUsers/{uid}` (center-
- * joined teacher, or center_admin) and `independentTeachers/{uid}/profile`
- * (independent tutor — see becomeIndependentTeacher in
- * independentTeacherService.js for why that's a separate table). An account
- * can have both a center and an independent affiliation at once; it cannot
- * have two centers, or be independent twice.
- */
-export async function getTeacherAffiliations(uid) {
-  const [corpSnap, independentSnap] = await Promise.all([
-    get(ref(db, `corpUsers/${uid}`)),
-    get(ref(db, `independentTeachers/${uid}/profile`)),
-  ]);
-
-  const corpRecord = corpSnap.exists() ? corpSnap.val() : null;
-  const independentProfile = independentSnap.exists() ? independentSnap.val() : null;
-
-  let centerAffiliation = null;
-  let nonTeacherRole = null; // center_admin (or a disabled/malformed record) — blocks new teacher affiliations
-  if (corpRecord) {
-    // A teacher-role record without a centerId isn't a real center
-    // affiliation — it can only be stale/malformed data (e.g. a record
-    // written by an older code path), since approveTeacherRequest() always
-    // sets centerId. Treat it like any other non-affiliation record rather
-    // than showing a phantom "joined a center" state.
-    if (corpRecord.role === 'teacher' && corpRecord.centerId && !corpRecord.disabled) {
-      centerAffiliation = corpRecord;
-    } else {
-      nonTeacherRole = corpRecord;
-    }
-  }
-
-  const independentAffiliation = independentProfile
-    ? { role: 'teacher', independent: true, centerId: null, centerName: null, teacherId: uid, ...independentProfile }
-    : null;
-
-  return { independentAffiliation, centerAffiliation, nonTeacherRole };
-}
-
-/**
  * Super Admin: List every center_admin/teacher across all centers (used by
  * the Global Users page). Super admins themselves are a hardcoded email
  * allowlist (see SUPER_ADMINS in useCorpRole.js), not corpUsers records, so
@@ -526,7 +486,6 @@ export async function approveTeacherRequest(centerId, uid) {
   updates[`centers/${centerId}/teachers/${teacherId}`] = teacherPayload;
   updates[`corpUsers/${uid}`] = {
     role: 'teacher',
-    independent: false,
     centerId,
     centerName: request.centerName,
     teacherId,

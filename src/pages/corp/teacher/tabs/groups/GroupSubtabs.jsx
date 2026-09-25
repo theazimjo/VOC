@@ -5,19 +5,17 @@ import {
 } from 'lucide-react';
 import { GROUP_LEVEL_OPTIONS, aggregatePackProgress, getHomeworkCandidates, getPackUnits, getStudentSummary, getUsedHomeworkKeys } from '../../utils';
 import { IRREGULAR_VERBS_PACK_ID } from '../../../../../data/irregularVerbsCorpPack';
-import { auth } from '../../../../../firebase';
-import GroupLiveBattle from '../../../../../components/corp/GroupLiveBattle';
 import TeacherModal from '../../TeacherModal';
 import './GroupSubtabs.css';
 
 export default function GroupSubtabs({ p }) {
   const {
-    activeStudentMenu, askConfirm, assignCategory, assigningGroup, basePath, copiedCode, copyCode, customPacks,
+    activeStudentMenu, askConfirm, assigningGroup, basePath, copiedCode, copyCode, customPacks,
     groupHomeworkList, groupSettingsForm, groupStudentsList,
-    handleAddHomework, handleArchiveGroup, handleAssignPack, handleDeleteGroup, handleRegenerateCode, handleRemovePack, handleSaveGroupSettings,
-    homeworkSelection, navigate, openHomeworkEditor, savingGroupSettings, savingHomework, selectedGroup, selectedGroupStats,
-    setActiveStudentMenu, setAssignCategory, setAssigningGroup, setGroupSettingsForm,
-    setShowHomeworkEditor, showHomeworkEditor, setStudentMenuPos, subTab, toggleHomeworkItem,
+    handleArchiveGroup, handleAssignPack, handleDeleteGroup, handleRegenerateCode, handleRemovePack, handleSaveGroupSettings,
+    homeworkSelection, navigate, openHomeworkEditor, savingGroupSettings, selectedGroup, selectedGroupStats,
+    setActiveStudentMenu, setAssigningGroup, setGroupSettingsForm,
+    showHomeworkEditor, setStudentMenuPos, subTab, toggleHomeworkItem,
   } = p;
 
   const [activePackTab, setActivePackTab] = useState('all');
@@ -25,19 +23,22 @@ export default function GroupSubtabs({ p }) {
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const [deleteNameInput, setDeleteNameInput] = useState('');
 
+  const getGroupPackIds = (group) => [...(group?.assignedPacks || []), ...(group?.additionalPacks || [])];
+  const packCategory = (packId) => (packId === IRREGULAR_VERBS_PACK_ID ? 'additionalPacks' : 'assignedPacks');
+
   const confirmAssignPack = (pack, group, category) => askConfirm({
-    title: 'Assign Pack',
-    message: `Assign "${pack.title}" to ${group.name}?`,
-    confirmLabel: 'Assign',
-    cancelLabel: 'Cancel',
+    title: "To'plam biriktirish",
+    message: `"${pack.title}" to'plamini ${group.name} guruhiga biriktirasizmi?`,
+    confirmLabel: 'Biriktirish',
+    cancelLabel: 'Bekor qilish',
     onConfirm: () => handleAssignPack(group.id, pack.id, category),
   });
 
   const confirmArchiveGroup = () => askConfirm({
-    title: 'Archive Group',
-    message: `Archive "${selectedGroup?.name}"? It will be removed from your active list and moved to Archive.`,
-    confirmLabel: 'Move to Archive',
-    cancelLabel: 'Cancel',
+    title: 'Guruhni arxivlash',
+    message: `"${selectedGroup?.name}" arxivga o'tkazilsinmi? U faol guruhlar ro'yxatidan olinadi.`,
+    confirmLabel: "Arxivga o'tkazish",
+    cancelLabel: 'Bekor qilish',
     onConfirm: () => handleArchiveGroup(selectedGroup),
   });
 
@@ -49,18 +50,18 @@ export default function GroupSubtabs({ p }) {
                   {groupStudentsList.length === 0 ? (
                     <div style={{ textAlign: 'center', padding: '3rem 2rem', background: 'var(--bg-tertiary)', borderRadius: '16px', border: '1px dashed var(--border)', color: 'var(--text-muted)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
                       <Users size={36} style={{ marginBottom: '4px', opacity: 0.5 }} />
-                      <p style={{ margin: 0, fontWeight: 600 }}>No students have joined this group yet.</p>
-                      <span style={{ fontSize: '0.85rem' }}>Give students this 6-digit join code:</span>
+                      <p style={{ margin: 0, fontWeight: 600 }}>Hali hech kim qo'shilmagan.</p>
+                      <span style={{ fontSize: '0.85rem' }}>O'quvchilarga shu 6 xonali kodni bering:</span>
                       <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', marginTop: '6px' }}>
                         <strong style={{ fontSize: '1.4rem', color: 'var(--accent)', letterSpacing: '0.14em', fontFamily: 'monospace' }}>{selectedGroup.code}</strong>
                         <button
                           type="button"
                           className="gib-code-btn"
                           onClick={() => copyCode(selectedGroup.code)}
-                          title="Copy code"
+                          title="Kodni nusxalash"
                         >
                           {copiedCode === selectedGroup.code ? <Check size={16} color="#34c759" /> : <Copy size={16} />}
-                          <span>{copiedCode === selectedGroup.code ? 'Copied' : 'Copy'}</span>
+                          <span>{copiedCode === selectedGroup.code ? 'Nusxalandi' : 'Nusxalash'}</span>
                         </button>
                       </div>
                     </div>
@@ -77,17 +78,17 @@ export default function GroupSubtabs({ p }) {
                               <div className="st-avatar">{st.name.charAt(0).toUpperCase()}</div>
                               <div className="st-info-text">
                                 <strong className="st-name">{st.name}</strong>
-                                <div className="st-email">{st.email || 'No email'}</div>
+                                <div className="st-email">{st.email || "Email yo'q"}</div>
                               </div>
                             </div>
 
                             <div className="st-stats">
                               {summary.hasData ? (
                                 <>
-                                  <span className="badge-active" title="Mastery">{summary.masteryPercent}% mastery</span>
+                                  <span className="badge-active" title="O'zlashtirish">{summary.masteryPercent}%</span>
                                   {summary.atRiskCount > 0 && (
                                     <span
-                                      title={`${summary.atRiskCount} words need attention`}
+                                      title={`${summary.atRiskCount} ta so'z e'tibor talab qiladi`}
                                       style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '0.78rem', color: 'var(--warning)' }}
                                     >
                                       <AlertTriangle size={13} /> {summary.atRiskCount}
@@ -95,13 +96,13 @@ export default function GroupSubtabs({ p }) {
                                   )}
                                 </>
                               ) : (
-                                <span className="badge-active">Joined</span>
+                                <span className="badge-active">Qo'shildi</span>
                               )}
 
                               <button
                                 type="button"
                                 className="btn-action-more"
-                                title="Actions"
+                                title="Amallar"
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   const rect = e.currentTarget.getBoundingClientRect();
@@ -120,189 +121,142 @@ export default function GroupSubtabs({ p }) {
                 </div>
               )}
 
-              {/* SUB-TAB 2: WORDS / PACKS */}
+              {/* SUB-TAB 2: WORDS / PACKS — one flat list. Irregular Verbs is
+                  stored under additionalPacks (the student side renders it
+                  with its own trainer), every other pack under assignedPacks;
+                  the teacher never has to pick between the two. */}
               {subTab === 'words' && (
                 assigningGroup ? (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', width: '100%' }}>
-                    {/* Top Segmented Tab Bar */}
-                    <div
-                      className="teacher-settings-hero-card"
-                      style={{
-                        marginBottom: 0,
-                        padding: '8px 10px',
-                        borderRadius: '18px',
-                        width: '100%',
-                        maxWidth: 'none',
-                        display: 'flex',
-                        gap: '6px'
-                      }}
-                    >
-                      {[
-                        { key: 'assignedPacks', label: 'Main Packs' },
-                        { key: 'additionalPacks', label: "Extra Packs" },
-                      ].map(({ key, label }) => (
-                        <button
-                          key={key}
-                          type="button"
-                          onClick={() => setAssignCategory(key)}
-                          style={{
-                            flex: 1,
-                            padding: '8px 14px',
-                            borderRadius: '12px',
-                            fontSize: '0.82rem',
-                            fontWeight: 700,
-                            cursor: 'pointer',
-                            border: assignCategory === key ? 'none' : '1px solid var(--border)',
-                            background: assignCategory === key ? 'var(--accent)' : 'var(--bg-tertiary)',
-                            color: assignCategory === key ? '#ffffff' : 'var(--text-primary)',
-                            transition: 'all 0.18s ease'
-                          }}
-                        >
-                          {label}
-                        </button>
-                      ))}
-                    </div>
-
-                    {/* Pack List Container */}
-                    <div className="teacher-settings-hero-card" style={{ marginBottom: 0, padding: '1rem 1.1rem', borderRadius: '20px', width: '100%', maxWidth: 'none' }}>
-                      {(() => {
-                        const assignablePacks = customPacks.filter(
-                          p => p.id !== IRREGULAR_VERBS_PACK_ID || assignCategory === 'additionalPacks'
-                        );
-                        if (assignablePacks.length === 0) {
+                  <div className="teacher-settings-hero-card" style={{ marginBottom: 0, padding: '1rem 1.1rem', borderRadius: '20px', width: '100%', maxWidth: 'none' }}>
+                    {customPacks.length === 0 ? (
+                      <div style={{ textAlign: 'center', padding: '1.5rem', background: 'var(--bg-tertiary)', borderRadius: '16px', border: '1px dashed var(--border)', color: 'var(--text-muted)', fontSize: '0.84rem' }}>
+                        Hali biriktirish uchun to'plam yo'q. "So'zlar" bo'limida yangi to'plam yarating.
+                      </div>
+                    ) : (
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                        {customPacks.map(p => {
+                          const target = assigningGroup || selectedGroup;
+                          const isAssigned = getGroupPackIds(target).includes(p.id);
                           return (
-                            <div style={{ textAlign: 'center', padding: '1.5rem', background: 'var(--bg-tertiary)', borderRadius: '16px', border: '1px dashed var(--border)', color: 'var(--text-muted)', fontSize: '0.84rem' }}>
-                              No packs available to assign yet.
-                            </div>
-                          );
-                        }
-                        return (
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                            {assignablePacks.map(p => {
-                              const isAssigned = (assigningGroup[assignCategory] || []).includes(p.id);
-                              return (
-                                <div
-                                  key={p.id}
-                                  className="student-progress-row"
+                            <div
+                              key={p.id}
+                              className="student-progress-row"
+                              style={{
+                                padding: '10px 14px',
+                                borderRadius: '16px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
+                                gap: '12px',
+                                background: 'var(--bg-glass-strong)',
+                                border: '1px solid var(--border)'
+                              }}
+                            >
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0, flex: 1 }}>
+                                <div style={{ width: '36px', height: '36px', borderRadius: '11px', background: 'rgba(var(--accent-rgb), 0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: 'var(--accent)' }}>
+                                  <BookOpen size={18} />
+                                </div>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', minWidth: 0, flex: 1 }}>
+                                  <strong style={{ color: 'var(--text-primary)', fontSize: '0.88rem', fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                    {p.title}
+                                  </strong>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', minWidth: 0 }}>
+                                    {p.level && <span className="group-level-badge" style={{ fontSize: '0.66rem', padding: '1px 6px', flexShrink: 0 }}>{p.level}</span>}
+                                    <span style={{ color: 'var(--text-muted)', fontSize: '0.74rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                      {p.wordCount || (p.words ? p.words.length : 0)} so'z · {p.scope === 'own' ? "Mening to'plamim" : "Markaz to'plami"}
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+
+                              {isAssigned ? (
+                                <span
                                   style={{
-                                    padding: '10px 14px',
-                                    borderRadius: '16px',
-                                    display: 'flex',
+                                    display: 'inline-flex',
                                     alignItems: 'center',
-                                    justifyContent: 'space-between',
-                                    gap: '12px',
-                                    background: 'var(--bg-glass-strong)',
-                                    border: '1px solid var(--border)'
+                                    gap: '4px',
+                                    padding: '5px 12px',
+                                    borderRadius: '12px',
+                                    background: 'rgba(52, 199, 89, 0.12)',
+                                    color: '#34c759',
+                                    fontSize: '0.78rem',
+                                    fontWeight: 700,
+                                    border: '1px solid rgba(52, 199, 89, 0.25)',
+                                    flexShrink: 0
                                   }}
                                 >
-                                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0, flex: 1 }}>
-                                    <div style={{ width: '36px', height: '36px', borderRadius: '11px', background: 'rgba(var(--accent-rgb), 0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: 'var(--accent)' }}>
-                                      <BookOpen size={18} />
-                                    </div>
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', minWidth: 0, flex: 1 }}>
-                                      <strong style={{ color: 'var(--text-primary)', fontSize: '0.88rem', fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                                        {p.title}
-                                      </strong>
-                                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', minWidth: 0 }}>
-                                        {p.level && <span className="group-level-badge" style={{ fontSize: '0.66rem', padding: '1px 6px', flexShrink: 0 }}>{p.level}</span>}
-                                        <span style={{ color: 'var(--text-muted)', fontSize: '0.74rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                                          {p.wordCount || (p.words ? p.words.length : 0)} words · {p.scope === 'own' ? 'My pack' : 'Center pack'}
-                                        </span>
-                                      </div>
-                                    </div>
-                                  </div>
-
-                                  {isAssigned ? (
-                                    <span
-                                      style={{
-                                        display: 'inline-flex',
-                                        alignItems: 'center',
-                                        gap: '4px',
-                                        padding: '5px 12px',
-                                        borderRadius: '12px',
-                                        background: 'rgba(52, 199, 89, 0.12)',
-                                        color: '#34c759',
-                                        fontSize: '0.78rem',
-                                        fontWeight: 700,
-                                        border: '1px solid rgba(52, 199, 89, 0.25)',
-                                        flexShrink: 0
-                                      }}
-                                    >
-                                      <Check size={14} strokeWidth={3} /> Assigned
-                                    </span>
-                                  ) : (
-                                    <button
-                                      type="button"
-                                      onClick={() => confirmAssignPack(p, assigningGroup || selectedGroup, assignCategory)}
-                                      style={{
-                                        padding: '6px 14px',
-                                        fontSize: '0.82rem',
-                                        fontWeight: 700,
-                                        borderRadius: '12px',
-                                        background: 'var(--accent)',
-                                        color: '#ffffff',
-                                        border: 'none',
-                                        cursor: 'pointer',
-                                        flexShrink: 0,
-                                        boxShadow: '0 4px 12px rgba(var(--accent-rgb), 0.3)'
-                                      }}
-                                    >
-                                      Assign
-                                    </button>
-                                  )}
-                                </div>
-                              );
-                            })}
-                          </div>
-                        );
-                      })()}
-                    </div>
+                                  <Check size={14} strokeWidth={3} /> Biriktirilgan
+                                </span>
+                              ) : (
+                                <button
+                                  type="button"
+                                  onClick={() => confirmAssignPack(p, target, packCategory(p.id))}
+                                  style={{
+                                    padding: '6px 14px',
+                                    fontSize: '0.82rem',
+                                    fontWeight: 700,
+                                    borderRadius: '12px',
+                                    background: 'var(--accent)',
+                                    color: '#ffffff',
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    flexShrink: 0,
+                                    boxShadow: '0 4px 12px rgba(var(--accent-rgb), 0.3)'
+                                  }}
+                                >
+                                  Biriktirish
+                                </button>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', width: '100%', position: 'relative' }}>
-                    {/* Floating Action Button (FAB) for adding packs */}
                     <button
                       type="button"
                       className="fab-add-pack-btn fab-icon-only"
-                      onClick={() => { setAssignCategory('assignedPacks'); setAssigningGroup(selectedGroup); }}
-                      title="Assign Pack"
+                      onClick={() => setAssigningGroup(selectedGroup)}
+                      title="To'plam biriktirish"
                     >
                       <Plus size={26} />
                     </button>
 
                     <div className="teacher-settings-hero-card" style={{ marginBottom: 0, padding: '1rem 1.1rem', borderRadius: '20px', width: '100%', maxWidth: 'none' }}>
-                      {[
-                        { key: 'assignedPacks', label: 'Main Packs', emptyText: 'No main pack assigned' },
-                        { key: 'additionalPacks', label: 'Extra Packs', emptyText: 'No extra pack assigned' },
-                      ].map(({ key, label, emptyText }, idx) => {
-                        const packIds = selectedGroup[key] || [];
+                      {(() => {
+                        const assigned = [
+                          ...(selectedGroup.assignedPacks || []).map(pid => ({ pid, key: 'assignedPacks' })),
+                          ...(selectedGroup.additionalPacks || []).map(pid => ({ pid, key: 'additionalPacks' })),
+                        ];
                         return (
-                          <div key={key} style={{ marginTop: idx > 0 ? '1rem' : 0 }}>
+                          <>
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
                               <span style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                                {label} ({packIds.length})
+                                Guruh to'plamlari ({assigned.length})
                               </span>
                             </div>
 
-                            {packIds.length === 0 ? (
-                              <div style={{ padding: '10px 14px', background: 'var(--bg-tertiary)', borderRadius: '14px', border: '1px dashed var(--border)', color: 'var(--text-muted)', fontSize: '0.78rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                <span>{emptyText}</span>
+                            {assigned.length === 0 ? (
+                              <div style={{ padding: '14px', background: 'var(--bg-tertiary)', borderRadius: '14px', border: '1px dashed var(--border)', color: 'var(--text-muted)', fontSize: '0.84rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', textAlign: 'center' }}>
+                                <span>Guruhga hali to'plam biriktirilmagan. Vazifa berish uchun avval to'plam biriktiring.</span>
                                 <button
                                   type="button"
-                                  style={{ background: 'none', border: 'none', color: 'var(--accent)', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}
-                                  onClick={() => { setAssignCategory(key); setAssigningGroup(selectedGroup); }}
+                                  style={{ background: 'none', border: 'none', color: 'var(--accent)', fontSize: '0.86rem', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}
+                                  onClick={() => setAssigningGroup(selectedGroup)}
                                 >
-                                  <Plus size={14} /> Assign
+                                  <Plus size={15} /> To'plam biriktirish
                                 </button>
                               </div>
                             ) : (
                               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                                {packIds.map(pid => {
+                                {assigned.map(({ pid, key }) => {
                                   const p = customPacks.find(cp => cp.id === pid);
                                   if (!p) return null;
                                   return (
                                     <div
-                                      key={pid}
+                                      key={`${key}_${pid}`}
                                       className="student-progress-row"
                                       style={{
                                         padding: '10px 12px',
@@ -327,7 +281,7 @@ export default function GroupSubtabs({ p }) {
                                           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', minWidth: 0 }}>
                                             {p.level && <span className="group-level-badge" style={{ fontSize: '0.66rem', padding: '1px 6px', flexShrink: 0 }}>{p.level}</span>}
                                             <span style={{ color: 'var(--text-muted)', fontSize: '0.74rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                                              {p.wordCount || (p.words ? p.words.length : 0)} words
+                                              {p.wordCount || (p.words ? p.words.length : 0)} so'z
                                             </span>
                                           </div>
                                         </div>
@@ -336,7 +290,7 @@ export default function GroupSubtabs({ p }) {
                                       <button
                                         type="button"
                                         onClick={() => handleRemovePack(selectedGroup.id, pid, key)}
-                                        title="Remove"
+                                        title="Olib tashlash"
                                         style={{
                                           background: 'rgba(239, 68, 68, 0.1)',
                                           border: '1px solid rgba(239, 68, 68, 0.2)',
@@ -359,9 +313,9 @@ export default function GroupSubtabs({ p }) {
                                 })}
                               </div>
                             )}
-                          </div>
+                          </>
                         );
-                      })}
+                      })()}
                     </div>
                   </div>
                 )
@@ -417,7 +371,7 @@ export default function GroupSubtabs({ p }) {
                               transition: 'all 0.18s ease'
                             }}
                           >
-                            All ({candidates.length})
+                            Hammasi ({candidates.length})
                           </button>
 
                           {packEntries.map(([packId, { packTitle, units }]) => (
@@ -447,7 +401,7 @@ export default function GroupSubtabs({ p }) {
                         <div className="teacher-settings-hero-card" style={{ marginBottom: 0, padding: '1rem 1.1rem', borderRadius: '20px', width: '100%', maxWidth: 'none' }}>
                           {candidates.length === 0 ? (
                             <div style={{ textAlign: 'center', padding: '1.5rem', background: 'var(--bg-tertiary)', borderRadius: '16px', border: '1px dashed var(--border)', color: 'var(--text-muted)', fontSize: '0.84rem' }}>
-                              First assign a pack to this group from the "Packs" tab.
+                              Avval guruhga so'z to'plami biriktiring.
                             </div>
                           ) : (
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
@@ -486,7 +440,7 @@ export default function GroupSubtabs({ p }) {
                                             <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0, flex: 1 }}>
                                               <strong style={{ fontSize: '0.88rem', color: 'var(--text-primary)', fontWeight: 700 }}>{u.unitTitle}</strong>
                                               <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                                                {u.totalWords} words{u.used && ' · Assigned'}
+                                                {u.totalWords} so'z{u.used && ' · Berilgan'}
                                               </span>
                                             </div>
                                           </div>
@@ -529,7 +483,7 @@ export default function GroupSubtabs({ p }) {
                       type="button"
                       className="fab-add-pack-btn fab-icon-only"
                       onClick={openHomeworkEditor}
-                      title="Assign new homework"
+                      title="Yangi vazifa"
                     >
                       <Plus size={26} />
                     </button>
@@ -537,13 +491,13 @@ export default function GroupSubtabs({ p }) {
                     <div className="teacher-settings-hero-card" style={{ marginBottom: 0, padding: '1rem 1.1rem', borderRadius: '20px', width: '100%', maxWidth: 'none' }}>
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.6rem' }}>
                         <span style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                          Homework ({groupHomeworkList.length})
+                          Vazifalar ({groupHomeworkList.length})
                         </span>
                       </div>
 
                       {groupHomeworkList.length === 0 ? (
                         <div style={{ textAlign: 'center', padding: '1.5rem', background: 'var(--bg-tertiary)', borderRadius: '16px', border: '1px dashed var(--border)', color: 'var(--text-muted)', fontSize: '0.84rem' }}>
-                          Tap "+" below to assign new homework.
+                          Yangi vazifa berish uchun pastdagi "+" tugmasini bosing.
                         </div>
                       ) : (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -574,7 +528,7 @@ export default function GroupSubtabs({ p }) {
                                     {hw.name}
                                   </strong>
                                   <span style={{ color: 'var(--text-muted)', fontSize: '0.78rem' }}>
-                                    {(hw.items || []).length} topics{hw.assignedAt && <> · {new Date(hw.assignedAt).toLocaleDateString()}</>}
+                                    {(hw.items || []).length} ta mavzu{hw.assignedAt && <> · {new Date(hw.assignedAt).toLocaleDateString('uz-UZ')}</>}
                                   </span>
                                 </div>
                               </div>
@@ -601,10 +555,10 @@ export default function GroupSubtabs({ p }) {
                     }}
                   >
                     {[
-                      { label: "Students", val: `${selectedGroup.studentsCount || 0}`, icon: Users, color: 'var(--accent)', bg: 'rgba(var(--accent-rgb), 0.14)' },
-                      { label: "Packs", val: `${selectedGroupStats.packEntries.length}`, icon: BookOpen, color: '#a855f7', bg: 'rgba(168, 85, 247, 0.14)' },
-                      { label: "Active Students", val: `${selectedGroupStats.activeStudentsCount}`, icon: Zap, color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.14)' },
-                      { label: "Mastery", val: `${selectedGroupStats.avgPercent}%`, icon: Target, color: '#34c759', bg: 'rgba(52, 199, 89, 0.14)' },
+                      { label: "O'quvchilar", val: `${selectedGroup.studentsCount || 0}`, icon: Users, color: 'var(--accent)', bg: 'rgba(var(--accent-rgb), 0.14)' },
+                      { label: "To'plamlar", val: `${selectedGroupStats.packEntries.length}`, icon: BookOpen, color: '#a855f7', bg: 'rgba(168, 85, 247, 0.14)' },
+                      { label: "Faol o'quvchilar", val: `${selectedGroupStats.activeStudentsCount}`, icon: Zap, color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.14)' },
+                      { label: "O'zlashtirish", val: `${selectedGroupStats.avgPercent}%`, icon: Target, color: '#34c759', bg: 'rgba(52, 199, 89, 0.14)' },
                     ].map(({ label, val, icon: Icon, color, bg }) => (
                       <div
                         key={label}
@@ -656,17 +610,17 @@ export default function GroupSubtabs({ p }) {
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '0.85rem' }}>
                       <Activity size={16} color="var(--accent)" />
                       <span style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                        Student Mastery (by Pack)
+                        O'quvchilar natijasi (to'plamlar bo'yicha)
                       </span>
                     </div>
 
                     {groupStudentsList.length === 0 ? (
                       <div style={{ padding: '1.5rem', textAlign: 'center', background: 'var(--bg-tertiary)', borderRadius: '14px', border: '1px dashed var(--border)', color: 'var(--text-muted)', fontSize: '0.82rem' }}>
-                        No students in this group to show statistics for.
+                        Statistika uchun guruhda hali o'quvchi yo'q.
                       </div>
                     ) : selectedGroupStats.packEntries.length === 0 ? (
                       <div style={{ padding: '1.5rem', textAlign: 'center', background: 'var(--bg-tertiary)', borderRadius: '14px', border: '1px dashed var(--border)', color: 'var(--text-muted)', fontSize: '0.82rem' }}>
-                        No pack assigned to this group yet — assign one from the "Packs" tab to see statistics.
+                        Guruhga hali to'plam biriktirilmagan — statistikani ko'rish uchun avval to'plam biriktiring.
                       </div>
                     ) : (
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -723,7 +677,7 @@ export default function GroupSubtabs({ p }) {
                                       {student.name}
                                     </strong>
                                     <span style={{ color: 'var(--text-muted)', fontSize: '0.74rem' }}>
-                                      {studentLearnedTotal} / {studentPackTotal} words learned
+                                      {studentLearnedTotal} / {studentPackTotal} so'z o'rganildi
                                     </span>
                                   </div>
                                 </div>
@@ -743,7 +697,7 @@ export default function GroupSubtabs({ p }) {
                                       border: '1px solid var(--border)'
                                     }}
                                   >
-                                    {overallMastery}% mastery
+                                    {overallMastery}%
                                   </span>
                                   <ChevronDown
                                     size={16}
@@ -761,7 +715,7 @@ export default function GroupSubtabs({ p }) {
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', paddingTop: '8px', borderTop: '1px dashed var(--border)' }}>
                                   {selectedGroupStats.packEntries.map(({ packId, category }) => {
                                     const p = customPacks.find(cp => cp.id === packId);
-                                    const packName = p ? p.title : 'Unknown pack';
+                                    const packName = p ? p.title : "Noma'lum to'plam";
                                     const totalWords = p ? (p.wordCount || (p.words ? p.words.length : 0)) : 0;
                                     const agg = aggregatePackProgress((student.progress || {})[packId]);
                                     const percent = totalWords > 0 ? Math.min(100, Math.round((agg.wordsLearned / totalWords) * 100)) : 0;
@@ -820,7 +774,7 @@ export default function GroupSubtabs({ p }) {
                                                     color: badgeColor,
                                                     border: '1px solid var(--border)'
                                                   }}
-                                                  title={`${u.monthTitle} — ${u.title}${us ? ` (${us.wordsLearned || 0}/${us.totalWords || u.totalWords})` : ' — not started yet'}`}
+                                                  title={`${u.monthTitle} — ${u.title}${us ? ` (${us.wordsLearned || 0}/${us.totalWords || u.totalWords})` : " — hali boshlanmagan"}`}
                                                 >
                                                   {u.title}: {us ? `${m}%` : '—'}
                                                 </span>
@@ -842,19 +796,6 @@ export default function GroupSubtabs({ p }) {
                 </div>
               )}
 
-              {/* SUB-TAB: LIVE BATTLE */}
-              {subTab === 'battle' && (
-                <GroupLiveBattle
-                  groupId={selectedGroup.id}
-                  groupName={selectedGroup.name}
-                  isTeacher={true}
-                  userUid={auth.currentUser?.uid}
-                  userName={auth.currentUser?.displayName || 'Teacher'}
-                  availablePacks={customPacks}
-                  onBack={() => navigate(`${basePath}/group/${selectedGroup.id}`)}
-                />
-              )}
-
               {/* SUB-TAB 5: GROUP SETTINGS */}
               {subTab === 'settings' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', maxWidth: '600px', margin: '0 auto' }}>
@@ -865,26 +806,26 @@ export default function GroupSubtabs({ p }) {
                         <Pencil size={20} />
                       </div>
                       <div>
-                        <h3 className="tshc-title">Group Settings</h3>
-                        <p className="tshc-sub">Name, course level, and invite code</p>
+                        <h3 className="tshc-title">Guruh sozlamalari</h3>
+                        <p className="tshc-sub">Nomi, darajasi va taklif kodi</p>
                       </div>
                     </div>
 
                     <form onSubmit={handleSaveGroupSettings} className="gsbm-form">
                       <div className="gsbm-field">
-                        <label className="gsbm-label">Group Name</label>
+                        <label className="gsbm-label">Guruh nomi</label>
                         <input
                           type="text"
                           className="gsbm-input"
                           required
-                          placeholder="e.g. Beginner Monday 5pm"
+                          placeholder="Masalan: Beginner, Du-Chor-Ju 17:00"
                           value={groupSettingsForm.name}
                           onChange={e => setGroupSettingsForm({ ...groupSettingsForm, name: e.target.value })}
                         />
                       </div>
 
                       <div className="gsbm-field">
-                        <label className="gsbm-label">Course Level</label>
+                        <label className="gsbm-label">Daraja</label>
                         <select
                           className="gsbm-select"
                           value={groupSettingsForm.level}
@@ -898,7 +839,7 @@ export default function GroupSubtabs({ p }) {
 
                       {/* Compact Invite Code Row */}
                       <div className="gsbm-field">
-                        <label className="gsbm-label">Group Invite Code</label>
+                        <label className="gsbm-label">Taklif kodi</label>
                         <div style={{
                           display: 'flex',
                           alignItems: 'center',
@@ -921,7 +862,7 @@ export default function GroupSubtabs({ p }) {
                             <button
                               type="button"
                               onClick={() => copyCode(groupSettingsForm.code || selectedGroup.code)}
-                              title="Copy code"
+                              title="Kodni nusxalash"
                               style={{
                                 display: 'inline-flex',
                                 alignItems: 'center',
@@ -938,13 +879,13 @@ export default function GroupSubtabs({ p }) {
                               }}
                             >
                               {copiedCode === (groupSettingsForm.code || selectedGroup.code) ? <Check size={14} color="#34c759" /> : <Copy size={14} />}
-                              <span>{copiedCode === (groupSettingsForm.code || selectedGroup.code) ? 'Copied' : 'Copy'}</span>
+                              <span>{copiedCode === (groupSettingsForm.code || selectedGroup.code) ? 'Nusxalandi' : 'Nusxalash'}</span>
                             </button>
 
                             <button
                               type="button"
                               onClick={handleRegenerateCode}
-                              title="Generate new code"
+                              title="Yangi kod yaratish"
                               style={{
                                 width: '32px',
                                 height: '32px',
@@ -972,7 +913,7 @@ export default function GroupSubtabs({ p }) {
                         disabled={savingGroupSettings}
                         style={{ marginTop: '0.6rem' }}
                       >
-                        <Save size={16} /> {savingGroupSettings ? 'Saving...' : 'Save Changes'}
+                        <Save size={16} /> {savingGroupSettings ? 'Saqlanmoqda...' : 'Saqlash'}
                       </button>
                     </form>
                   </div>
@@ -984,8 +925,8 @@ export default function GroupSubtabs({ p }) {
                         <Archive size={18} />
                       </div>
                       <div>
-                        <h3 className="tshc-title" style={{ color: '#f59e0b', fontSize: '1rem' }}>Archive Group</h3>
-                        <p className="tshc-sub">Temporarily hide this group from your active list and move it to Archive</p>
+                        <h3 className="tshc-title" style={{ color: '#f59e0b', fontSize: '1rem' }}>Guruhni arxivlash</h3>
+                        <p className="tshc-sub">Guruhni faol ro'yxatdan vaqtincha olib, arxivga o'tkazadi</p>
                       </div>
                     </div>
 
@@ -1009,7 +950,7 @@ export default function GroupSubtabs({ p }) {
                       onClick={confirmArchiveGroup}
                     >
                       <Archive size={16} />
-                      <span>Move to Archive</span>
+                      <span>Arxivga o'tkazish</span>
                     </button>
                   </div>
 
@@ -1020,8 +961,8 @@ export default function GroupSubtabs({ p }) {
                         <Trash2 size={18} />
                       </div>
                       <div>
-                        <h3 className="tshc-title" style={{ color: '#ef4444', fontSize: '1rem' }}>Delete Group (Step by Step)</h3>
-                        <p className="tshc-sub">The group and all its data will be permanently and irreversibly deleted</p>
+                        <h3 className="tshc-title" style={{ color: '#ef4444', fontSize: '1rem' }}>Guruhni o'chirish</h3>
+                        <p className="tshc-sub">Guruh va uning barcha ma'lumotlari butunlay o'chiriladi</p>
                       </div>
                     </div>
 
@@ -1034,7 +975,7 @@ export default function GroupSubtabs({ p }) {
                       }}
                     >
                       <Trash2 size={16} />
-                      <span>Start Deletion Process</span>
+                      <span>O'chirishni boshlash</span>
                     </button>
                   </div>
                 </div>
@@ -1050,8 +991,8 @@ export default function GroupSubtabs({ p }) {
             <Trash2 size={18} />
           </div>
           <div>
-            <h3 className="gsbm-delete-title">Delete Group</h3>
-            <p className="gsbm-delete-sub">This cannot be undone</p>
+            <h3 className="gsbm-delete-title">Guruhni o'chirish</h3>
+            <p className="gsbm-delete-sub">Buni qaytarib bo'lmaydi</p>
           </div>
           <button type="button" className="gsbm-icon-btn" onClick={() => setDeleteConfirmOpen(false)}>
             <X size={16} />
@@ -1061,13 +1002,13 @@ export default function GroupSubtabs({ p }) {
         <div className="gsbm-delete-warning">
           <AlertTriangle size={18} />
           <div>
-            All students, packs, and homework results for <strong>"{selectedGroup?.name}"</strong> will be permanently deleted.
+            <strong>"{selectedGroup?.name}"</strong> guruhidagi barcha o'quvchilar, to'plamlar va vazifa natijalari butunlay o'chiriladi.
           </div>
         </div>
 
         <div className="gsbm-field">
           <label className="gsbm-label">
-            Type <code>{selectedGroup?.name}</code> to confirm
+            Tasdiqlash uchun <code>{selectedGroup?.name}</code> deb yozing
           </label>
           <input
             type="text"
@@ -1081,7 +1022,7 @@ export default function GroupSubtabs({ p }) {
 
         <div className="gsbm-delete-actions">
           <button type="button" className="gsbm-btn-secondary" onClick={() => setDeleteConfirmOpen(false)}>
-            Cancel
+            Bekor qilish
           </button>
           <button
             type="button"
@@ -1092,7 +1033,7 @@ export default function GroupSubtabs({ p }) {
               handleDeleteGroup(selectedGroup);
             }}
           >
-            Delete Permanently
+            Butunlay o'chirish
           </button>
         </div>
       </TeacherModal>

@@ -1,17 +1,15 @@
 import { useMemo, useState, useEffect, useRef } from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Target, CheckCircle2, CalendarDays, NotebookPen, X, Check, ChevronRight, PartyPopper, Swords } from 'lucide-react';
+import { Target, CheckCircle2, CalendarDays, NotebookPen, X, Check, ChevronRight, PartyPopper } from 'lucide-react';
 import { updateStudentWordTarget } from '../../../services/corpService';
-import { subscribeGroupBattle } from '../../../services/groupBattleService';
 import { useAccountWordProgress } from '../../../hooks/useAccountWordProgress';
 import { corpWordStorageId } from '../../../utils/helpers';
 import PackHeaderHero from '../../../components/corp/PackHeaderHero';
-import GroupLiveBattle from '../../../components/corp/GroupLiveBattle';
 import './StudentCorpOverview.css';
 
-const WEEKDAY_LABELS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const WEEKDAY_LABELS = ['Ya', 'Du', 'Se', 'Ch', 'Pa', 'Ju', 'Sh'];
+const MONTH_NAMES = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun', 'Iyul', 'Avgust', 'Sentabr', 'Oktabr', 'Noyabr', 'Dekabr'];
 const TARGET_STEP = 10;
 const TARGET_MIN = 10;
 // How much value one full 360° drag around the ring adds/removes — keeps
@@ -72,19 +70,8 @@ function buildActivityLog(words) {
 }
 
 export default function StudentCorpOverview() {
-  const { user, homeworkList, wordTarget, membership } = useOutletContext();
+  const { user, homeworkList, wordTarget } = useOutletContext();
   const navigate = useNavigate();
-
-  const [activeBattle, setActiveBattle] = useState(null);
-  const [showBattleModal, setShowBattleModal] = useState(false);
-
-  useEffect(() => {
-    if (!membership?.groupId) return;
-    const unsub = subscribeGroupBattle(membership.groupId, (battle) => {
-      setActiveBattle(battle);
-    });
-    return () => unsub();
-  }, [membership?.groupId]);
 
   const { words, totalWords, learnedWords } = useAccountWordProgress(user?.uid);
 
@@ -249,106 +236,33 @@ export default function StudentCorpOverview() {
     [calendarCells]
   );
 
-  const displayName = user?.displayName || user?.email?.split('@')[0] || "Student";
+  const displayName = user?.displayName || user?.email?.split('@')[0] || "O'quvchi";
 
   return (
     <div className="corp-ov-container">
 
       {/* ── Header ── */}
       <div className="corp-ov-topbar">
-        <span className="corp-ov-eyebrow">Welcome back</span>
+        <span className="corp-ov-eyebrow">Xush kelibsiz</span>
         <h1 className="corp-ov-name">{displayName}</h1>
       </div>
 
-      {/* ── Live Group Battle Floating Banner ── */}
-      {activeBattle && (activeBattle.status === 'lobby' || activeBattle.status === 'active') && (
-        <div className="corp-ov-battle-banner">
-          <div className="cobb-left">
-            <div className="cobb-icon">
-              <Swords size={24} />
-            </div>
-            <div>
-              <h3 className="cobb-title">🔥 Live Battle Room Open!</h3>
-              <p className="cobb-sub">
-                Hosted by {activeBattle.teacherName || 'Teacher'} · {activeBattle.questions?.length || 10} Words · {activeBattle.status === 'lobby' ? 'Waiting for players' : 'In Progress'}
-              </p>
-            </div>
-          </div>
-          <button type="button" className="cobb-btn" onClick={() => setShowBattleModal(true)}>
-            ⚡ Enter Battle
-          </button>
-        </div>
-      )}
-
-      {/* ── Dedicated Full Screen Battle Modal ── */}
-      {(showBattleModal || (activeBattle && activeBattle.participants?.[user?.uid] && activeBattle.status !== 'finished')) && (
-        <GroupLiveBattle
-          groupId={membership?.groupId}
-          groupName={membership?.groupName || 'Group'}
-          isTeacher={false}
-          userUid={user?.uid}
-          userName={displayName}
-          isModal={true}
-          onClose={() => setShowBattleModal(false)}
-        />
-      )}
-
       <div className="corp-ov-grid">
-
-        {/* ── Target words ── */}
-        <PackHeaderHero
-          icon={<Target size={22} />}
-          tag={targetReached ? 'Target reached 🎉' : null}
-          title="Target Words"
-          subtitle={targetReached
-            ? `You've reached your goal of ${targetWords} words — set a new target to keep going`
-            : `${displayLearned} / ${targetWords} words learned`}
-          masteryPct={learnedPct}
-          metrics={[
-            { icon: <Target size={16} />, label: 'TARGET', value: targetWords, color: 'blue', onClick: openEditor },
-            { icon: <CheckCircle2 size={16} />, label: 'LEARNED', value: displayLearned, color: 'green' },
-          ]}
-        />
-
-        {/* ── Personal calendar ── */}
-        <div className="corp-ov-cal-card">
-          <div className="corp-ov-cal-header">
-            <span className="corp-ov-cal-title"><CalendarDays size={16} strokeWidth={2.2} /> Activity Calendar</span>
-            <span className="corp-ov-cal-month">{MONTH_NAMES[month]}</span>
-          </div>
-          <p className="corp-ov-cal-summary">You've completed <strong>{monthTotal}</strong> reviews this month</p>
-
-          <div className="corp-ov-cal-weekdays">
-            {WEEKDAY_LABELS.map(d => <span key={d} className="corp-ov-cal-weekday">{d}</span>)}
-          </div>
-          <div className="corp-ov-cal-grid">
-            {calendarCells.map((cell, idx) => (
-              cell ? (
-                <div key={cell.dateStr} className={`corp-ov-cal-cell ${cell.count > 0 ? 'active' : ''} ${cell.isToday ? 'today' : ''}`}>
-                  <span className="corp-ov-cal-day">{cell.day}</span>
-                  {cell.count > 0 && <span className="corp-ov-cal-count">{cell.count}</span>}
-                </div>
-              ) : (
-                <div key={`empty-${idx}`} className="corp-ov-cal-cell empty" />
-              )
-            ))}
-          </div>
-        </div>
 
         {/* ── Homework ── */}
         <div className="corp-ov-hw-card corp-ov-homework-card">
           <div className="corp-ov-hw-header">
             <div className="corp-ov-hw-header-left">
               <div className="corp-ov-hw-icon"><NotebookPen size={20} strokeWidth={2.2} /></div>
-              <h3>Homework</h3>
+              <h3>Vazifalar</h3>
             </div>
             {homeworkItems.length > 0 && (
-              <span className="corp-ov-hw-count">{homeworkDoneCount}/{homeworkItems.length} done</span>
+              <span className="corp-ov-hw-count">{homeworkDoneCount}/{homeworkItems.length} bajarildi</span>
             )}
           </div>
 
           {homeworkItems.length === 0 ? (
-            <p>No homework assigned yet. Tasks from your teacher will appear here.</p>
+            <p>Hozircha vazifa yo'q. O'qituvchingiz bergan vazifalar shu yerda ko'rinadi.</p>
           ) : (
             <div className="corp-ov-hw-list">
               {homeworkItems.map(item => (
@@ -372,12 +286,52 @@ export default function StudentCorpOverview() {
           )}
         </div>
 
+        {/* ── Target words ── */}
+        <PackHeaderHero
+          icon={<Target size={22} />}
+          tag={targetReached ? 'Maqsadga yetdingiz 🎉' : null}
+          title="Maqsad"
+          subtitle={targetReached
+            ? `${targetWords} ta so'z maqsadiga yetdingiz — davom etish uchun yangi maqsad qo'ying`
+            : `${displayLearned} / ${targetWords} so'z o'rganildi`}
+          masteryPct={learnedPct}
+          metrics={[
+            { icon: <Target size={16} />, label: 'MAQSAD', value: targetWords, color: 'blue', onClick: openEditor },
+            { icon: <CheckCircle2 size={16} />, label: "O'RGANILDI", value: displayLearned, color: 'green' },
+          ]}
+        />
+
+        {/* ── Personal calendar ── */}
+        <div className="corp-ov-cal-card">
+          <div className="corp-ov-cal-header">
+            <span className="corp-ov-cal-title"><CalendarDays size={16} strokeWidth={2.2} /> Faollik taqvimi</span>
+            <span className="corp-ov-cal-month">{MONTH_NAMES[month]}</span>
+          </div>
+          <p className="corp-ov-cal-summary">Bu oy <strong>{monthTotal}</strong> marta takrorladingiz</p>
+
+          <div className="corp-ov-cal-weekdays">
+            {WEEKDAY_LABELS.map(d => <span key={d} className="corp-ov-cal-weekday">{d}</span>)}
+          </div>
+          <div className="corp-ov-cal-grid">
+            {calendarCells.map((cell, idx) => (
+              cell ? (
+                <div key={cell.dateStr} className={`corp-ov-cal-cell ${cell.count > 0 ? 'active' : ''} ${cell.isToday ? 'today' : ''}`}>
+                  <span className="corp-ov-cal-day">{cell.day}</span>
+                  {cell.count > 0 && <span className="corp-ov-cal-count">{cell.count}</span>}
+                </div>
+              ) : (
+                <div key={`empty-${idx}`} className="corp-ov-cal-cell empty" />
+              )
+            ))}
+          </div>
+        </div>
+
       </div>
 
       {/* ── Congratulations screen: shown once the target is reached.
           Fully locked, same as the dial it leads into — no close button,
           no dismissing by clicking outside. Setting a higher target via
-          "Set New Target" is the only way past it. ── */}
+          "Yangi maqsad" is the only way past it. ── */}
       {showCongrats && (
         <div className="corp-ov-target-overlay">
           <motion.div
@@ -387,13 +341,13 @@ export default function StudentCorpOverview() {
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="corp-ov-congrats-icon"><PartyPopper size={34} strokeWidth={2} /></div>
-            <h3 className="corp-ov-congrats-title">Congratulations! 🎉</h3>
+            <h3 className="corp-ov-congrats-title">Tabriklaymiz! 🎉</h3>
             <p className="corp-ov-congrats-text">
-              You've reached your target — <strong>{targetWords} / {targetWords}</strong> words learned!
+              Maqsadga yetdingiz — <strong>{targetWords} / {targetWords}</strong> so'z o'rganildi!
             </p>
 
             <button type="button" className="corp-ov-target-save-btn" onClick={startNewTarget}>
-              <Target size={18} strokeWidth={2.6} /> Set New Target
+              <Target size={18} strokeWidth={2.6} /> Yangi maqsad
             </button>
           </motion.div>
         </div>
@@ -411,9 +365,9 @@ export default function StudentCorpOverview() {
           >
             <div className="corp-ov-target-header">
               <div className="corp-ov-target-header-icon"><Target size={18} strokeWidth={2.3} /></div>
-              <h3>Set Your Target</h3>
+              <h3>Maqsad qo'ying</h3>
               {!mustRaiseTarget && (
-                <button type="button" className="corp-ov-target-close" onClick={closeEditor} aria-label="Close">
+                <button type="button" className="corp-ov-target-close" onClick={closeEditor} aria-label="Yopish">
                   <X size={18} strokeWidth={2.3} />
                 </button>
               )}
@@ -451,14 +405,14 @@ export default function StudentCorpOverview() {
               />
               <div className="corp-ov-dial-center">
                 <span className="corp-ov-dial-value">{draftTarget}</span>
-                <span className="corp-ov-dial-unit">words</span>
+                <span className="corp-ov-dial-unit">so'z</span>
               </div>
             </div>
 
             <p className="corp-ov-dial-hint">
               {mustRaiseTarget
-                ? `You've hit ${targetWords} — drag to set a higher target to keep going`
-                : 'Drag the ring to set your target'}
+                ? `${targetWords} ga yetdingiz — davom etish uchun kattaroq maqsad tanlang`
+                : "Maqsadni tanlash uchun halqani aylantiring"}
             </p>
 
             <button
@@ -467,7 +421,7 @@ export default function StudentCorpOverview() {
               onClick={saveTarget}
               disabled={mustRaiseTarget && draftTarget <= targetWords}
             >
-              <Check size={18} strokeWidth={2.6} /> Save Target
+              <Check size={18} strokeWidth={2.6} /> Saqlash
             </button>
           </motion.div>
         </div>

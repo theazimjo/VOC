@@ -1,263 +1,227 @@
-import { ArrowLeft, BarChart3, BookOpen, Check, ChevronRight, Copy, MoreVertical, NotebookPen, Swords, Users } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowLeft, BarChart3, BookOpen, Check, ChevronRight, MoreVertical, NotebookPen, Plus, QrCode, Users } from 'lucide-react';
+import { getHomeworkCompletion, getStudentSummary } from '../../utils';
+import InviteGroupModal from '../../modals/InviteGroupModal';
 import GroupHomeworkDetail from './GroupHomeworkDetail';
 import GroupSubtabs from './GroupSubtabs';
 import './GroupDetailView.css';
 
+const SUBTAB_TITLES = {
+  students: "O'quvchilar",
+  words: "So'z to'plamlari",
+  homework: 'Vazifalar',
+  stats: 'Statistika',
+  settings: 'Guruh sozlamalari',
+};
+
+function formatShortDate(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  return Number.isNaN(d.getTime()) ? '' : d.toLocaleDateString('uz-UZ', { day: 'numeric', month: 'short' });
+}
+
 export default function GroupDetailView({ p }) {
   const {
-    assigningGroup, basePath, copiedCode, copyCode, groupHomeworkList, handleAddHomework, handleOpenGroupSettings, homeworkSelection,
-    hwId, navigate, savingHomework, selectedGroup, selectedGroupStats, setAssigningGroup, setSelectedGroupId, setShowHomeworkEditor, showHomeworkEditor, setViewingHomeworkItem, subTab, viewingHomeworkItem,
+    assigningGroup, basePath, groupHomeworkList, groupStudentsList, handleAddHomework, handleOpenGroupSettings, homeworkSelection,
+    hwId, navigate, openHomeworkEditor, savingHomework, selectedGroup, selectedGroupStats, setAssigningGroup, setSelectedGroupId,
+    setShowHomeworkEditor, setViewingStudentDetail, showHomeworkEditor, setViewingHomeworkItem, subTab, viewingHomeworkItem,
   } = p;
 
+  const [showInvite, setShowInvite] = useState(false);
   const currentHw = hwId ? groupHomeworkList.find(h => h.id === hwId) : null;
+  const groupPath = `${basePath}/group/${selectedGroup.id}`;
+
+  const packCount = (selectedGroup.assignedPacks || []).length + (selectedGroup.additionalPacks || []).length;
+  const latestHw = groupHomeworkList.length > 0 ? groupHomeworkList[groupHomeworkList.length - 1] : null;
+  const latestHwDone = latestHw
+    ? groupStudentsList.filter(st => getHomeworkCompletion(st, latestHw).allDone).length
+    : 0;
+
+  const startHomework = () => {
+    if (packCount === 0) {
+      navigate(`${groupPath}/words`);
+      return;
+    }
+    openHomeworkEditor();
+    navigate(`${groupPath}/homework`);
+  };
+
+  const goBack = () => {
+    if (viewingHomeworkItem) {
+      setViewingHomeworkItem(null);
+    } else if (showHomeworkEditor) {
+      setShowHomeworkEditor(false);
+    } else if (assigningGroup) {
+      setAssigningGroup(null);
+    } else if (hwId) {
+      navigate(`${groupPath}/homework`);
+    } else if (subTab) {
+      navigate(groupPath);
+    } else {
+      setSelectedGroupId(null);
+      navigate(basePath);
+    }
+  };
+
+  const title = viewingHomeworkItem
+    ? viewingHomeworkItem.unitTitle
+    : showHomeworkEditor
+      ? 'Yangi vazifa'
+      : assigningGroup
+        ? "To'plam biriktirish"
+        : hwId
+          ? (currentHw?.name || 'Vazifa')
+          : SUBTAB_TITLES[subTab] || selectedGroup.name;
+
+  const secondaryLinks = [
+    { key: 'homework', icon: NotebookPen, label: 'Vazifalar tarixi', meta: `${groupHomeworkList.length} ta` },
+    { key: 'words', icon: BookOpen, label: "So'z to'plamlari", meta: `${packCount} ta` },
+    { key: 'stats', icon: BarChart3, label: 'Statistika', meta: selectedGroupStats ? `${selectedGroupStats.avgPercent}%` : '' },
+  ];
 
   return (
     <div className="group-detail-container">
-            <div className="ios-group-top-bar">
-              <button
-                type="button"
-                className="ios-back-btn"
-                onClick={() => {
-                  if (viewingHomeworkItem) {
-                    setViewingHomeworkItem(null);
-                  } else if (showHomeworkEditor) {
-                    setShowHomeworkEditor(false);
-                  } else if (assigningGroup) {
-                    setAssigningGroup(null);
-                  } else if (hwId) {
-                    navigate(`${basePath}/group/${selectedGroup.id}/homework`);
-                  } else if (subTab) {
-                    navigate(`${basePath}/group/${selectedGroup.id}`);
-                  } else {
-                    setSelectedGroupId(null);
-                    navigate(basePath);
-                  }
-                }}
-                title={viewingHomeworkItem ? "Back to topics" : showHomeworkEditor ? "Back to homework" : assigningGroup ? "Back to packs" : hwId ? "Back to homework list" : subTab ? "Back to sections" : "Back to groups"}
-              >
-                <ArrowLeft size={18} />
+      <div className="ios-group-top-bar">
+        <button type="button" className="ios-back-btn" onClick={goBack} title="Orqaga">
+          <ArrowLeft size={18} />
+        </button>
+
+        <div className="ios-title-group">
+          <h2 className="ios-group-title">{title}</h2>
+        </div>
+
+        {showHomeworkEditor ? (
+          <button
+            type="button"
+            className="gov-save-btn"
+            onClick={handleAddHomework}
+            disabled={savingHomework || homeworkSelection?.size === 0}
+          >
+            {savingHomework ? 'Saqlanmoqda...' : `Berish (${homeworkSelection?.size || 0})`}
+          </button>
+        ) : !subTab && !hwId && !viewingHomeworkItem && (
+          <button
+            type="button"
+            className="ios-action-btn"
+            onClick={() => {
+              handleOpenGroupSettings(selectedGroup);
+              navigate(`${groupPath}/settings`);
+            }}
+            title="Guruh sozlamalari"
+          >
+            <MoreVertical size={18} />
+          </button>
+        )}
+      </div>
+
+      {!subTab && !hwId && (
+        <div className="gov">
+          {/* Summary + the two things a teacher does every lesson */}
+          <div className="gov-hero">
+            <div className="gov-hero-meta">
+              {selectedGroup.level && <span className="gov-level">{selectedGroup.level}</span>}
+              <span className="gov-hero-stat"><Users size={14} /> {groupStudentsList.length} o'quvchi</span>
+              {selectedGroupStats && <span className="gov-hero-stat">O'rtacha {selectedGroupStats.avgPercent}%</span>}
+            </div>
+            <div className="gov-actions">
+              <button type="button" className="gov-btn gov-btn-primary" onClick={startHomework}>
+                <Plus size={18} />
+                <span>{packCount === 0 ? "To'plam biriktirish" : 'Vazifa berish'}</span>
               </button>
+              <button type="button" className="gov-btn" onClick={() => setShowInvite(true)}>
+                <QrCode size={18} />
+                <span>Taklif qilish</span>
+              </button>
+            </div>
+          </div>
 
-              <div className="ios-title-group">
-                <h2 className="ios-group-title">
-                  {viewingHomeworkItem ? viewingHomeworkItem.unitTitle : showHomeworkEditor ? "New Homework" : assigningGroup ? "Assign Pack" : hwId ? (currentHw?.name || "Homework") : subTab === 'battle' ? "Live Battle" : subTab === 'students' ? "Students" : subTab === 'words' ? "Packs" : subTab === 'homework' ? "Homework" : subTab === 'stats' ? "Stats" : subTab === 'settings' ? "Group Settings" : selectedGroup.name}
-                </h2>
+          {/* Latest homework — who did it */}
+          {latestHw && (
+            <button type="button" className="gov-card gov-hw" onClick={() => navigate(`${groupPath}/homework/${latestHw.id}`)}>
+              <div className="gov-card-head">
+                <span className="gov-card-label">Oxirgi vazifa</span>
+                <span className="gov-card-date">{formatShortDate(latestHw.assignedAt)}</span>
               </div>
+              <div className="gov-hw-name">{latestHw.name}</div>
+              <div className="gov-progress">
+                <div
+                  className="gov-progress-fill"
+                  style={{ width: groupStudentsList.length ? `${Math.round((latestHwDone / groupStudentsList.length) * 100)}%` : 0 }}
+                />
+              </div>
+              <div className="gov-hw-foot">
+                <span><strong>{latestHwDone}</strong> / {groupStudentsList.length} o'quvchi bajardi</span>
+                <ChevronRight size={16} />
+              </div>
+            </button>
+          )}
 
-              {showHomeworkEditor ? (
-                <button
-                  type="button"
-                  onClick={handleAddHomework}
-                  disabled={savingHomework || homeworkSelection?.size === 0}
-                  style={{
-                    padding: '6px 14px',
-                    fontSize: '0.82rem',
-                    borderRadius: '12px',
-                    background: (savingHomework || homeworkSelection?.size === 0) ? 'var(--bg-tertiary)' : 'var(--accent)',
-                    color: (savingHomework || homeworkSelection?.size === 0) ? 'var(--text-muted)' : '#ffffff',
-                    border: (savingHomework || homeworkSelection?.size === 0) ? '1px solid var(--border)' : 'none',
-                    fontWeight: 700,
-                    cursor: (savingHomework || homeworkSelection?.size === 0) ? 'not-allowed' : 'pointer',
-                    boxShadow: (savingHomework || homeworkSelection?.size === 0) ? 'none' : '0 4px 14px rgba(var(--accent-rgb), 0.4)',
-                    transition: 'all 0.18s ease',
-                    flexShrink: 0
-                  }}
-                >
-                  {savingHomework ? 'Saving...' : `Save (${homeworkSelection?.size || 0})`}
-                </button>
-              ) : !subTab && !hwId && !viewingHomeworkItem && (
-                <button
-                  type="button"
-                  className="ios-action-btn"
-                  onClick={() => {
-                    handleOpenGroupSettings(selectedGroup);
-                    navigate(`${basePath}/group/${selectedGroup.id}/settings`);
-                  }}
-                  title="Group settings"
-                >
-                  <MoreVertical size={18} />
+          {/* Students */}
+          <div className="gov-card">
+            <div className="gov-card-head">
+              <span className="gov-card-label">O'quvchilar ({groupStudentsList.length})</span>
+              {groupStudentsList.length > 0 && (
+                <button type="button" className="gov-link" onClick={() => navigate(`${groupPath}/students`)}>
+                  Boshqarish
                 </button>
               )}
             </div>
-            {/* OVERVIEW: Big Main Hero Card + Bento Hero Cards Grid */}
-            {!subTab && !hwId && (
-              <>
-                {/* 1. Main Large Hero Banner Card */}
-                <div className="group-main-hero-card">
-                  <div className="gmh-top">
-                    <div className="gmh-code-block">
-                      <span className="gmh-subtitle">GROUP INVITE CODE</span>
-                      <div className="gmh-code-row">
-                        <span className="gmh-code">{selectedGroup.code}</span>
-                        <button
-                          type="button"
-                          className="gmh-copy-btn"
-                          onClick={() => copyCode(selectedGroup.code)}
-                          title="Copy"
-                        >
-                          {copiedCode === selectedGroup.code ? (
-                            <>
-                              <Check size={14} color="#34c759" />
-                              <span>Copied</span>
-                            </>
-                          ) : (
-                            <>
-                              <Copy size={14} />
-                              <span>Copy</span>
-                            </>
-                          )}
-                        </button>
-                      </div>
-                    </div>
 
-                    <span className="gmh-status-badge">
-                      <Check size={13} />
-                      {selectedGroup.level || 'Active Course'}
-                    </span>
-                  </div>
-
-                  <div className="gmh-divider" />
-
-                  <div className="gmh-stats-row">
-                    <div className="gmh-stat">
-                      <span className="gmh-stat-val">{selectedGroup.studentsCount || 0}</span>
-                      <span className="gmh-stat-label">Students</span>
-                    </div>
-                    <div className="gmh-stat">
-                      <span className="gmh-stat-val">
-                        {(selectedGroup.assignedPacks || []).length + (selectedGroup.additionalPacks || []).length}
-                      </span>
-                      <span className="gmh-stat-label">Packs</span>
-                    </div>
-                    <div className="gmh-stat">
-                      <span className="gmh-stat-val">{groupHomeworkList.length}</span>
-                      <span className="gmh-stat-label">Homework</span>
-                    </div>
-                    <div className="gmh-stat">
-                      <span className="gmh-stat-val green">
-                        {selectedGroupStats ? `${selectedGroupStats.avgPercent}%` : '0%'}
-                      </span>
-                      <span className="gmh-stat-label">Mastery</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* 2. Bento Hero Cards Grid */}
-                <div className="ios-bento-grid">
-                  {/* Card 0: Live Battle */}
-                  <div
-                    className="ios-bento-card"
-                    style={{ background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.22) 0%, rgba(168, 85, 247, 0.22) 100%)', border: '1px solid rgba(168, 85, 247, 0.4)' }}
-                    onClick={() => navigate(`${basePath}/group/${selectedGroup.id}/battle`)}
-                  >
-                    <div className="bento-top-row">
-                      <div className="bento-icon-box icon-purple" style={{ background: 'rgba(99, 102, 241, 0.3)', color: '#a5b4fc' }}>
-                        <Swords size={22} />
-                      </div>
-                      <span className="bento-badge-count" style={{ background: 'rgba(168, 85, 247, 0.3)', color: '#c084fc', fontWeight: 800 }}>LIVE</span>
-                    </div>
-                    <div className="bento-info">
-                      <h3 className="bento-title" style={{ color: '#ffffff' }}>Live Battle</h3>
-                      <p className="bento-sub">Host real-time game for students</p>
-                    </div>
-                    <div className="bento-footer">
-                      <span className="bento-action-label" style={{ color: '#a5b4fc' }}>Launch Room</span>
-                      <ChevronRight size={16} className="bento-arrow" style={{ color: '#a5b4fc' }} />
-                    </div>
-                  </div>
-
-                  {/* Card 1: Students */}
-                  <div
-                    className="ios-bento-card card-blue"
-                    onClick={() => navigate(`${basePath}/group/${selectedGroup.id}/students`)}
-                  >
-                    <div className="bento-top-row">
-                      <div className="bento-icon-box icon-blue">
-                        <Users size={22} />
-                      </div>
-                      <span className="bento-badge-count">{selectedGroup.studentsCount || 0}</span>
-                    </div>
-                    <div className="bento-info">
-                      <h3 className="bento-title">Students</h3>
-                      <p className="bento-sub">Member progress & management</p>
-                    </div>
-                    <div className="bento-footer">
-                      <span className="bento-action-label">Manage</span>
-                      <ChevronRight size={16} className="bento-arrow" />
-                    </div>
-                  </div>
-
-                  {/* Card 2: Packs */}
-                  <div
-                    className="ios-bento-card card-purple"
-                    onClick={() => navigate(`${basePath}/group/${selectedGroup.id}/words`)}
-                  >
-                    <div className="bento-top-row">
-                      <div className="bento-icon-box icon-purple">
-                        <BookOpen size={22} />
-                      </div>
-                      <span className="bento-badge-count">
-                        {(selectedGroup.assignedPacks || []).length + (selectedGroup.additionalPacks || []).length}
-                      </span>
-                    </div>
-                    <div className="bento-info">
-                      <h3 className="bento-title">Packs</h3>
-                      <p className="bento-sub">Assigned word categories</p>
-                    </div>
-                    <div className="bento-footer">
-                      <span className="bento-action-label">Manage</span>
-                      <ChevronRight size={16} className="bento-arrow" />
-                    </div>
-                  </div>
-
-                  {/* Card 3: Homework */}
-                  <div
-                    className="ios-bento-card card-amber"
-                    onClick={() => navigate(`${basePath}/group/${selectedGroup.id}/homework`)}
-                  >
-                    <div className="bento-top-row">
-                      <div className="bento-icon-box icon-amber">
-                        <NotebookPen size={22} />
-                      </div>
-                      <span className="bento-badge-count">{groupHomeworkList.length}</span>
-                    </div>
-                    <div className="bento-info">
-                      <h3 className="bento-title">Homework</h3>
-                      <p className="bento-sub">Assignments & completion status</p>
-                    </div>
-                    <div className="bento-footer">
-                      <span className="bento-action-label">Manage</span>
-                      <ChevronRight size={16} className="bento-arrow" />
-                    </div>
-                  </div>
-
-                  {/* Card 4: Stats */}
-                  <div
-                    className="ios-bento-card card-emerald"
-                    onClick={() => navigate(`${basePath}/group/${selectedGroup.id}/stats`)}
-                  >
-                    <div className="bento-top-row">
-                      <div className="bento-icon-box icon-emerald">
-                        <BarChart3 size={22} />
-                      </div>
-                      <span className="bento-badge-count green">
-                        {selectedGroupStats ? `${selectedGroupStats.avgPercent}%` : '0%'}
-                      </span>
-                    </div>
-                    <div className="bento-info">
-                      <h3 className="bento-title">Stats</h3>
-                      <p className="bento-sub">Group mastery breakdown</p>
-                    </div>
-                    <div className="bento-footer">
-                      <span className="bento-action-label">View Analysis</span>
-                      <ChevronRight size={16} className="bento-arrow" />
-                    </div>
-                  </div>
-                </div>
-              </>
+            {groupStudentsList.length === 0 ? (
+              <div className="gov-empty">
+                <p>Hali hech kim qo'shilmagan.</p>
+                <span>QR kodni sinfda ko'rsating yoki havolani guruh chatiga yuboring.</span>
+                <button type="button" className="gov-btn gov-btn-primary" onClick={() => setShowInvite(true)}>
+                  <QrCode size={18} />
+                  <span>Taklif qilish</span>
+                </button>
+              </div>
+            ) : (
+              <div className="gov-students">
+                {groupStudentsList.map((st, i) => {
+                  const summary = getStudentSummary(st, selectedGroup);
+                  const hwState = latestHw ? getHomeworkCompletion(st, latestHw) : null;
+                  return (
+                    <button
+                      type="button"
+                      key={st.id || st.uid || `st_${i}`}
+                      className="gov-student"
+                      onClick={() => setViewingStudentDetail(st)}
+                    >
+                      <span className="gov-avatar">{(st.name || '?').charAt(0).toUpperCase()}</span>
+                      <span className="gov-student-name">{st.name || "O'quvchi"}</span>
+                      {hwState && (
+                        hwState.allDone ? (
+                          <span className="gov-chip gov-chip-done"><Check size={12} strokeWidth={3} /> Bajardi</span>
+                        ) : (
+                          <span className="gov-chip">{hwState.doneCount}/{hwState.total}</span>
+                        )
+                      )}
+                      <span className="gov-mastery">{summary.hasData ? `${summary.masteryPercent}%` : '—'}</span>
+                    </button>
+                  );
+                })}
+              </div>
             )}
+          </div>
+
+          {/* Everything else */}
+          <div className="gov-card gov-links">
+            {secondaryLinks.map(({ key, icon: Icon, label, meta }) => (
+              <button type="button" key={key} className="gov-link-row" onClick={() => navigate(`${groupPath}/${key}`)}>
+                <span className="gov-link-icon"><Icon size={17} /></span>
+                <span className="gov-link-label">{label}</span>
+                <span className="gov-link-meta">{meta}</span>
+                <ChevronRight size={16} className="gov-link-chevron" />
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {hwId ? <GroupHomeworkDetail p={p} /> : subTab && <GroupSubtabs p={p} />}
+
+      <InviteGroupModal open={showInvite} onClose={() => setShowInvite(false)} group={selectedGroup} />
     </div>
   );
 }

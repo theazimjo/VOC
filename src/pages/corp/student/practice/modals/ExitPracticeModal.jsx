@@ -32,10 +32,10 @@ export default function ExitPracticeModal({ p }) {
             </div>
 
             <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
-              Quit Practice?
+              Mashqni tugatasizmi?
             </h3>
             <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.4 }}>
-              Are you sure you want to leave? Your progress in this round will not be saved.
+              Chiqsangiz, shu raunddagi natija saqlanmaydi.
             </p>
 
             <div style={{ display: 'flex', gap: '0.75rem', width: '100%', marginTop: '0.5rem' }}>
@@ -54,7 +54,7 @@ export default function ExitPracticeModal({ p }) {
                 }}
                 onClick={() => setShowExitModal(false)}
               >
-                Resume
+                Davom etish
               </button>
               <button
                 type="button"
@@ -83,7 +83,7 @@ export default function ExitPracticeModal({ p }) {
                   }
                 }}
               >
-                Quit
+                Chiqish
               </button>
             </div>
           </motion.div>

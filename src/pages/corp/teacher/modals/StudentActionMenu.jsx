@@ -47,7 +47,7 @@ export default function StudentActionMenu({ p }) {
                 setViewingStudentDetail(st);
               }}
             >
-              <Eye size={16} color="var(--accent)" /> View Details
+              <Eye size={16} color="var(--accent)" /> Batafsil
             </button>
             <button
               type="button"
@@ -58,7 +58,7 @@ export default function StudentActionMenu({ p }) {
                 handleRemoveStudent(st);
               }}
             >
-              <UserMinus size={16} color="#ef4444" /> Remove from Group
+              <UserMinus size={16} color="#ef4444" /> Guruhdan chiqarish
             </button>
           </motion.div>
         </>

@@ -1,4 +1,4 @@
-import { Outlet, useOutletContext } from 'react-router-dom';
+import { Navigate, Outlet, useOutletContext } from 'react-router-dom';
 import CorpAdminSidebar from './CorpAdminSidebar';
 import CorpAdminBottomNav from './CorpAdminBottomNav';
 import './CorpAdminLayout.css';
@@ -10,7 +10,12 @@ import './CorpAdminLayout.css';
 export default function CorpAdminLayout() {
   const identity = useOutletContext();
 
-  const centerId = identity?.centerId || 'demo_center_1';
+  // Never fall back to a placeholder centerId — writes against a made-up id
+  // create a nameless "ghost" center under centers/ (this happened with the
+  // old 'demo_center_1' fallback and crashed the super-admin centers list).
+  if (!identity?.centerId) return <Navigate to="/corp" replace />;
+
+  const centerId = identity.centerId;
   const centerName = identity?.centerName || 'O\'quv Markazi';
   const email = identity?.email || '';
 

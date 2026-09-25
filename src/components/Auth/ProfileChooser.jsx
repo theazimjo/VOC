@@ -15,7 +15,7 @@ import './ProfileChooser.css';
 export default function ProfileChooser() {
   const navigate = useNavigate();
   const { user, loading } = useAuth();
-  const { loading: identityLoading, identity } = useCorpRole();
+  const { loading: identityLoading } = useCorpRole();
 
   useEffect(() => {
     if (!loading && !user) {
@@ -32,7 +32,7 @@ export default function ProfileChooser() {
     if (profile === 'personal') {
       navigate('/', { replace: true });
     } else {
-      navigate(identity?.independent ? '/teacher' : '/corp/teacher', { replace: true });
+      navigate('/corp/teacher', { replace: true });
     }
   };
 

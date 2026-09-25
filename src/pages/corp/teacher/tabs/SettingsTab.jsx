@@ -19,10 +19,10 @@ export default function SettingsTab({ p }) {
 
   const handleLogout = () => {
     askConfirm({
-      title: 'Log Out',
-      message: 'Are you sure you want to log out?',
-      confirmLabel: 'Log Out',
-      cancelLabel: 'Cancel',
+      title: 'Chiqish',
+      message: 'Hisobdan chiqasizmi?',
+      confirmLabel: 'Chiqish',
+      cancelLabel: 'Bekor qilish',
       danger: true,
       onConfirm: async () => {
         await logout();
@@ -42,7 +42,7 @@ export default function SettingsTab({ p }) {
           {/* PROFIL — Apple ID-style identity card: avatar + name + phone,
               tap to expand into the editable fields below it. */}
           <div>
-            <div className="ios-section-label">Profile</div>
+            <div className="ios-section-label">Profil</div>
             <div className="premium-glass ios-list-card" style={{ borderRadius: '18px' }}>
               <div
                 className="ios-list-row ios-list-row-action"
@@ -65,10 +65,10 @@ export default function SettingsTab({ p }) {
                   </div>
                   <div style={{ minWidth: 0 }}>
                     <div style={{ fontSize: '0.98rem', fontWeight: 700, color: 'var(--pg-text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                      {profileForm.name || "Teacher"}
+                      {profileForm.name || "O'qituvchi"}
                     </div>
                     <div style={{ fontSize: '0.76rem', color: 'var(--pg-text-secondary)' }}>
-                      {profileForm.phone || 'No phone number'}
+                      {profileForm.phone || "Telefon raqami yo'q"}
                     </div>
                   </div>
                 </div>
@@ -85,32 +85,32 @@ export default function SettingsTab({ p }) {
               {showProfileForm && (
                 <form id="profile-edit-form" onSubmit={handleSaveProfile} autoComplete="off">
                   <div className="ios-list-row">
-                    <span className="ios-list-label">Name</span>
+                    <span className="ios-list-label">Ism</span>
                     <input
                       type="text"
                       required
                       className="ios-list-input"
-                      placeholder="Full name"
+                      placeholder="Ism familiya"
                       value={profileForm.name}
                       onChange={e => setProfileForm({ ...profileForm, name: e.target.value })}
                     />
                   </div>
                   <div className="ios-list-row">
-                    <span className="ios-list-label">Phone</span>
+                    <span className="ios-list-label">Telefon</span>
                     <input
                       type="tel"
                       className="ios-list-input"
-                      placeholder="Not set"
+                      placeholder="Kiritilmagan"
                       value={profileForm.phone}
                       onChange={e => setProfileForm({ ...profileForm, phone: e.target.value })}
                     />
                   </div>
                   <div className="ios-list-row" style={{ borderBottom: 'none' }}>
-                    <span className="ios-list-label">New password</span>
+                    <span className="ios-list-label">Yangi parol</span>
                     <input
                       type="password"
                       autoComplete="new-password"
-                      placeholder="Leave blank to keep"
+                      placeholder="O'zgartirmasangiz bo'sh qoldiring"
                       className="ios-list-input"
                       value={profileForm.password}
                       onChange={e => setProfileForm({ ...profileForm, password: e.target.value })}
@@ -128,21 +128,21 @@ export default function SettingsTab({ p }) {
                 disabled={savingSettings}
                 style={{ marginTop: '0.6rem' }}
               >
-                {savingSettings ? 'Saving...' : 'Save'}
+                {savingSettings ? 'Saqlanmoqda...' : 'Saqlash'}
               </button>
             )}
           </div>
 
           {/* APPEARANCE */}
           <div>
-            <div className="ios-section-label">Appearance</div>
+            <div className="ios-section-label">Ko'rinish</div>
             <div className="premium-glass ios-list-card" style={{ borderRadius: '18px' }}>
               <div className="ios-list-row">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <div className="ios-row-icon" style={{ background: 'rgba(99, 102, 241, 0.18)', color: '#a5b4fc' }}>
                     <Moon size={15} />
                   </div>
-                  <span className="ios-list-label">Dark Mode</span>
+                  <span className="ios-list-label">Tungi rejim</span>
                 </div>
                 <label className="gsm-toggle-switch">
                   <input
@@ -158,7 +158,7 @@ export default function SettingsTab({ p }) {
 
           {/* OTHER */}
           <div>
-            <div className="ios-section-label">Other</div>
+            <div className="ios-section-label">Boshqa</div>
             <div className="premium-glass ios-list-card" style={{ borderRadius: '18px' }}>
               <div
                 className="ios-list-row ios-list-row-action"
@@ -171,7 +171,7 @@ export default function SettingsTab({ p }) {
                   <div className="ios-row-icon" style={{ background: 'rgba(245, 158, 11, 0.16)', color: '#fbbf24' }}>
                     <Archive size={15} />
                   </div>
-                  <span className="ios-list-label">Archived Groups</span>
+                  <span className="ios-list-label">Arxivlangan guruhlar</span>
                 </div>
                 <ChevronRight size={16} style={{ color: 'var(--pg-text-muted)', flexShrink: 0 }} />
               </div>
@@ -187,7 +187,7 @@ export default function SettingsTab({ p }) {
                   <div className="ios-row-icon" style={{ background: 'rgba(52, 199, 89, 0.16)', color: '#34c759' }}>
                     <Repeat size={15} />
                   </div>
-                  <span className="ios-list-label">Switch to Personal</span>
+                  <span className="ios-list-label">Shaxsiy rejimga o'tish</span>
                 </div>
                 <ChevronRight size={16} style={{ color: 'var(--pg-text-muted)', flexShrink: 0 }} />
               </div>

@@ -8,7 +8,7 @@ import { IRREGULAR_VERBS_PACK_ID } from '../../../../data/irregularVerbsCorpPack
 
 export default function CoursesTab({ p }) {
   const {
-    centerId, independentUid, customPacks, setCustomPacks, filteredPacks, searchTerm, setSearchTerm,
+    centerId, customPacks, setCustomPacks, filteredPacks, searchTerm, setSearchTerm,
     setShowPackEditor, showPackEditor,
     handleDeletePack, askConfirm,
   } = p;
@@ -56,10 +56,10 @@ export default function CoursesTab({ p }) {
   const [packMenuPos, setPackMenuPos] = useState({ top: 0, right: 0 });
 
   const confirmDeletePack = (pack) => askConfirm({
-    title: 'Delete Pack',
-    message: `Delete "${pack.title}"? This can't be undone.`,
-    confirmLabel: 'Delete',
-    cancelLabel: 'Cancel',
+    title: "To'plamni o'chirish",
+    message: `"${pack.title}" o'chirilsinmi? Buni qaytarib bo'lmaydi.`,
+    confirmLabel: "O'chirish",
+    cancelLabel: 'Bekor qilish',
     danger: true,
     onConfirm: () => handleDeletePack(pack),
   });
@@ -77,17 +77,16 @@ export default function CoursesTab({ p }) {
                   setEditingPack(null);
                   setShowPackEditor(false);
                 }}
-                title="Back"
+                title="Orqaga"
               >
                 <ArrowLeft size={18} />
               </button>
               <div className="ios-title-group">
-                <h2 className="ios-group-title">{editingPack ? 'Edit Pack' : 'Create New Pack'}</h2>
+                <h2 className="ios-group-title">{editingPack ? "To'plamni tahrirlash" : "Yangi to'plam"}</h2>
               </div>
             </div>
             <CustomPackEditor
               centerId={centerId}
-              independentUid={independentUid}
               ownerUid={auth.currentUser?.uid}
               editPack={editingPack}
               onSaved={(savedPack) => {
@@ -116,7 +115,6 @@ export default function CoursesTab({ p }) {
             onBack={() => setViewingPack(null)}
             editable={viewingPack.scope === 'own' && viewingPack.id !== IRREGULAR_VERBS_PACK_ID && !viewingPack.isIrregularVerbs}
             centerId={centerId}
-            independentUid={independentUid}
             askConfirm={askConfirm}
             onUpdate={(updatedPack) => {
               setCustomPacks(prev => prev.map(p => p.id === updatedPack.id ? { ...updatedPack, scope: p.scope } : p));
@@ -132,15 +130,15 @@ export default function CoursesTab({ p }) {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
               <div>
                 <h2 style={{ fontSize: '1.75rem', color: 'var(--pg-text)', margin: 0, fontWeight: 800, letterSpacing: '-0.02em' }}>
-                  Word Bank
+                  So'zlar
                 </h2>
-                <p style={{ margin: '2px 0 0 0', fontSize: '0.78rem', color: 'var(--pg-text-secondary)' }}>{customPacks.length} packs</p>
+                <p style={{ margin: '2px 0 0 0', fontSize: '0.78rem', color: 'var(--pg-text-secondary)' }}>{customPacks.length} ta to'plam</p>
               </div>
 
               <button
                 type="button"
                 onClick={() => setShowSearch(!showSearch)}
-                title="Search packs"
+                title="To'plamlarni qidirish"
                 style={{
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   width: '40px', height: '40px', borderRadius: '12px',
@@ -163,7 +161,7 @@ export default function CoursesTab({ p }) {
                 <Search size={16} style={{ color: 'var(--pg-text-muted)', flexShrink: 0 }} />
                 <input
                   type="text"
-                  placeholder="Search packs..."
+                  placeholder="To'plamlarni qidirish..."
                   value={searchTerm}
                   onChange={e => setSearchTerm(e.target.value)}
                   autoFocus
@@ -188,7 +186,7 @@ export default function CoursesTab({ p }) {
             >
               <BookOpen size={40} style={{ color: '#818cf8', opacity: 0.8 }} />
               <p style={{ margin: 0, fontSize: '0.88rem', color: 'var(--pg-text-secondary)' }}>
-                {searchTerm ? 'No packs match your search.' : 'No custom packs yet.'}
+                {searchTerm ? "Qidiruv bo'yicha to'plam topilmadi." : "Hali to'plam yo'q. Pastdagi \"+\" tugmasi bilan birinchisini yarating."}
               </p>
             </div>
           ) : (
@@ -197,7 +195,7 @@ export default function CoursesTab({ p }) {
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '0.6rem' }}>
                   <span style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                    My Packs ({filteredPacks.filter(p => p.scope === 'own').length})
+                    Mening to'plamlarim ({filteredPacks.filter(p => p.scope === 'own').length})
                   </span>
                 </div>
 
@@ -221,9 +219,9 @@ export default function CoursesTab({ p }) {
                       <table className="teachers-table">
                         <thead>
                           <tr>
-                            <th>TITLE</th>
-                            <th>DESCRIPTION</th>
-                            <th>WORDS</th>
+                            <th>NOMI</th>
+                            <th>TAVSIF</th>
+                            <th>SO'ZLAR</th>
                             <th></th>
                           </tr>
                         </thead>
@@ -231,7 +229,7 @@ export default function CoursesTab({ p }) {
                           {filteredPacks.filter(p => p.scope === 'own').map((pack) => (
                             <tr key={pack.id} className="t-table-row" style={{ cursor: 'pointer' }} onClick={() => setViewingPack(pack)}>
                               <td style={{ fontWeight: 600, color: 'var(--pg-text)' }}>{pack.title}</td>
-                              <td style={{ color: 'var(--pg-text-secondary)' }}>{pack.description || 'No description'}</td>
+                              <td style={{ color: 'var(--pg-text-secondary)' }}>{pack.description || "Tavsif yo'q"}</td>
                               <td>
                                 <span
                                   style={{
@@ -240,7 +238,7 @@ export default function CoursesTab({ p }) {
                                     fontSize: '0.78rem', fontWeight: 600, whiteSpace: 'nowrap',
                                   }}
                                 >
-                                  {pack.wordCount || (pack.words ? pack.words.length : 0)} words
+                                  {pack.wordCount || (pack.words ? pack.words.length : 0)} so'z
                                 </span>
                               </td>
                               <td style={{ width: '40px' }}>
@@ -248,7 +246,7 @@ export default function CoursesTab({ p }) {
                                   <div style={{ position: 'relative', display: 'flex', justifyContent: 'flex-end' }} onClick={e => e.stopPropagation()}>
                                     <button
                                       type="button"
-                                      title="Options"
+                                      title="Amallar"
                                       style={{
                                         background: 'rgba(255, 255, 255, 0.06)',
                                         border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -308,7 +306,7 @@ export default function CoursesTab({ p }) {
                                               setShowPackEditor(true);
                                             }}
                                           >
-                                            <Pencil size={14} style={{ color: '#818cf8' }} /> Edit
+                                            <Pencil size={14} style={{ color: '#818cf8' }} /> Tahrirlash
                                           </button>
                                           <button
                                             type="button"
@@ -322,7 +320,7 @@ export default function CoursesTab({ p }) {
                                               confirmDeletePack(pack);
                                             }}
                                           >
-                                            <Trash2 size={14} style={{ color: '#ef4444' }} /> Delete
+                                            <Trash2 size={14} style={{ color: '#ef4444' }} /> O'chirish
                                           </button>
                                         </div>
                                       </>
@@ -361,7 +359,7 @@ export default function CoursesTab({ p }) {
                               {pack.title}
                             </strong>
                             <span style={{ fontSize: '0.78rem', color: 'var(--pg-text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                              {pack.description || 'No description'}
+                              {pack.description || "Tavsif yo'q"}
                             </span>
                           </div>
 
@@ -377,14 +375,14 @@ export default function CoursesTab({ p }) {
                                 whiteSpace: 'nowrap'
                               }}
                             >
-                              {pack.wordCount || (pack.words ? pack.words.length : 0)} words
+                              {pack.wordCount || (pack.words ? pack.words.length : 0)} so'z
                             </span>
 
                             {pack.id !== IRREGULAR_VERBS_PACK_ID && !pack.isIrregularVerbs ? (
                               <div style={{ position: 'relative' }} onClick={e => e.stopPropagation()}>
                                 <button
                                   type="button"
-                                  title="Options"
+                                  title="Amallar"
                                   style={{
                                     background: 'rgba(255, 255, 255, 0.06)',
                                     border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -444,7 +442,7 @@ export default function CoursesTab({ p }) {
                                           setShowPackEditor(true);
                                         }}
                                       >
-                                        <Pencil size={14} style={{ color: '#818cf8' }} /> Edit
+                                        <Pencil size={14} style={{ color: '#818cf8' }} /> Tahrirlash
                                       </button>
                                       <button
                                         type="button"
@@ -458,7 +456,7 @@ export default function CoursesTab({ p }) {
                                           confirmDeletePack(pack);
                                         }}
                                       >
-                                        <Trash2 size={14} style={{ color: '#ef4444' }} /> Delete
+                                        <Trash2 size={14} style={{ color: '#ef4444' }} /> O'chirish
                                       </button>
                                     </div>
                                   </>
@@ -479,7 +477,7 @@ export default function CoursesTab({ p }) {
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '0.6rem' }}>
                   <span style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                    Center Packs ({filteredPacks.filter(p => p.scope === 'center').length})
+                    Markaz to'plamlari ({filteredPacks.filter(p => p.scope === 'center').length})
                   </span>
                 </div>
 
@@ -493,7 +491,7 @@ export default function CoursesTab({ p }) {
                       fontSize: '0.82rem'
                     }}
                   >
-                    No shared packs from the center yet.
+                    Markaz hali umumiy to'plam qo'shmagan.
                   </div>
                 ) : (
                   <div className="teachers-table-card">
@@ -502,9 +500,9 @@ export default function CoursesTab({ p }) {
                       <table className="teachers-table">
                         <thead>
                           <tr>
-                            <th>TITLE</th>
-                            <th>DESCRIPTION</th>
-                            <th>WORDS</th>
+                            <th>NOMI</th>
+                            <th>TAVSIF</th>
+                            <th>SO'ZLAR</th>
                             <th></th>
                           </tr>
                         </thead>
@@ -512,7 +510,7 @@ export default function CoursesTab({ p }) {
                           {filteredPacks.filter(p => p.scope === 'center').map((pack) => (
                             <tr key={pack.id} className="t-table-row" style={{ cursor: 'pointer' }} onClick={() => setViewingPack(pack)}>
                               <td style={{ fontWeight: 600, color: 'var(--pg-text)' }}>{pack.title}</td>
-                              <td style={{ color: 'var(--pg-text-secondary)' }}>{pack.description || 'No description'}</td>
+                              <td style={{ color: 'var(--pg-text-secondary)' }}>{pack.description || "Tavsif yo'q"}</td>
                               <td>
                                 <span
                                   style={{
@@ -521,7 +519,7 @@ export default function CoursesTab({ p }) {
                                     fontSize: '0.78rem', fontWeight: 600, whiteSpace: 'nowrap',
                                   }}
                                 >
-                                  {pack.wordCount || (pack.words ? pack.words.length : 0)} words
+                                  {pack.wordCount || (pack.words ? pack.words.length : 0)} so'z
                                 </span>
                               </td>
                               <td style={{ width: '32px' }}>
@@ -556,7 +554,7 @@ export default function CoursesTab({ p }) {
                               {pack.title}
                             </strong>
                             <span style={{ fontSize: '0.78rem', color: 'var(--pg-text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                              {pack.description || 'No description'}
+                              {pack.description || "Tavsif yo'q"}
                             </span>
                           </div>
 
@@ -572,7 +570,7 @@ export default function CoursesTab({ p }) {
                                 whiteSpace: 'nowrap'
                               }}
                             >
-                              {pack.wordCount || (pack.words ? pack.words.length : 0)} words
+                              {pack.wordCount || (pack.words ? pack.words.length : 0)} so'z
                             </span>
                             <ChevronRight size={16} style={{ color: 'var(--pg-text-muted)' }} />
                           </div>
@@ -590,7 +588,7 @@ export default function CoursesTab({ p }) {
             type="button"
             className="fab-add-pack-btn fab-icon-only"
             onClick={() => setShowPackEditor(true)}
-            title="Create new pack"
+            title="Yangi to'plam"
           >
             <Plus size={26} />
           </button>

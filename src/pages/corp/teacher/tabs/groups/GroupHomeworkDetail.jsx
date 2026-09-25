@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ArrowLeft, BookOpen, ChevronRight, NotebookPen, X } from 'lucide-react';
-import { aggregatePackProgress, resolveHomeworkItemUnit } from '../../utils';
+import { getHomeworkCompletion, resolveHomeworkItemUnit } from '../../utils';
 import TeacherModal from '../../TeacherModal';
 import './GroupHomeworkDetail.css';
 
@@ -29,13 +29,13 @@ export default function GroupHomeworkDetail({ p }) {
         <div className="teacher-settings-hero-card" style={{ marginBottom: 0, padding: '1rem 1.1rem', borderRadius: '20px', width: '100%', maxWidth: 'none' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.6rem' }}>
             <span style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              Words ({words.length})
+              So'zlar ({words.length})
             </span>
           </div>
 
           {words.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '1.5rem', background: 'var(--bg-tertiary)', borderRadius: '16px', border: '1px dashed var(--border)', color: 'var(--text-muted)', fontSize: '0.84rem' }}>
-              Topic not found.
+              Mavzu topilmadi.
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -73,14 +73,14 @@ export default function GroupHomeworkDetail({ p }) {
     return (
       <div className="teacher-settings-hero-card" style={{ textAlign: 'center', padding: '3rem 1.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
         <NotebookPen size={44} style={{ color: 'var(--text-muted)', opacity: 0.5 }} />
-        <h3 style={{ margin: 0, color: 'var(--text-primary)', fontSize: '1.1rem' }}>This homework wasn't found.</h3>
+        <h3 style={{ margin: 0, color: 'var(--text-primary)', fontSize: '1.1rem' }}>Vazifa topilmadi.</h3>
         <button
           type="button"
           className="gib-code-btn"
           onClick={() => navigate(`${basePath}/group/${selectedGroup.id}/homework`)}
           style={{ marginTop: '8px' }}
         >
-          <ArrowLeft size={16} /> Back to homework
+          <ArrowLeft size={16} /> Vazifalarga qaytish
         </button>
       </div>
     );
@@ -94,7 +94,7 @@ export default function GroupHomeworkDetail({ p }) {
       <div className="teacher-settings-hero-card" style={{ marginBottom: 0, padding: '1rem 1.1rem', borderRadius: '20px', width: '100%', maxWidth: 'none' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.6rem' }}>
           <span style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            Topics ({hwItems.length})
+            Mavzular ({hwItems.length})
           </span>
         </div>
 
@@ -113,7 +113,7 @@ export default function GroupHomeworkDetail({ p }) {
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', minWidth: 0 }}>
                   <strong style={{ color: 'var(--text-primary)', fontSize: '0.86rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.unitTitle}</strong>
-                  <span style={{ color: 'var(--text-muted)', fontSize: '0.75rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.packTitle} · {item.totalWords} words</span>
+                  <span style={{ color: 'var(--text-muted)', fontSize: '0.75rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.packTitle} · {item.totalWords} so'z</span>
                 </div>
               </div>
               <ChevronRight size={16} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
@@ -126,25 +126,18 @@ export default function GroupHomeworkDetail({ p }) {
       <div className="teacher-settings-hero-card" style={{ marginBottom: 0, padding: '1rem 1.1rem', borderRadius: '20px', width: '100%', maxWidth: 'none' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.6rem' }}>
           <span style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            Students ({groupStudentsList.length})
+            O'quvchilar ({groupStudentsList.length})
           </span>
         </div>
 
         {groupStudentsList.length === 0 ? (
           <div style={{ textAlign: 'center', padding: '1.2rem 1rem', background: 'var(--bg-tertiary)', borderRadius: '14px', border: '1px dashed var(--border)', color: 'var(--text-muted)', fontSize: '0.82rem' }}>
-            No students yet.
+            Hali o'quvchi yo'q.
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
             {groupStudentsList.map(student => {
-              const itemStats = hwItems.map(item => {
-                const agg = aggregatePackProgress((student.progress || {})[item.packId]);
-                const us = agg.units[`${item.monthId}_${item.unitId}`];
-                const m = us ? (us.masteryPercent || 0) : 0;
-                return { item, masteryPercent: m, done: m >= 80, started: !!us };
-              });
-              const doneCount = itemStats.filter(s => s.done).length;
-              const allDone = doneCount === hwItems.length && hwItems.length > 0;
+              const { itemStats, doneCount, allDone } = getHomeworkCompletion(student, hw);
               return (
                 <div
                   key={student.id}
@@ -173,7 +166,7 @@ export default function GroupHomeworkDetail({ p }) {
                     className="badge-active"
                     style={allDone ? { padding: '3px 8px', fontSize: '0.72rem', flexShrink: 0 } : { background: 'rgba(var(--accent-rgb), 0.12)', borderColor: 'rgba(var(--accent-rgb), 0.25)', color: 'var(--accent)', padding: '3px 8px', fontSize: '0.72rem', flexShrink: 0 }}
                   >
-                    {doneCount}/{hwItems.length} done
+                    {doneCount}/{hwItems.length} bajarildi
                   </span>
                 </div>
               );
@@ -205,7 +198,7 @@ export default function GroupHomeworkDetail({ p }) {
                     {progressModal.student.name}
                   </h3>
                   <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                    Result: {progressModal.doneCount}/{progressModal.total} done
+                    Natija: {progressModal.doneCount}/{progressModal.total} bajarildi
                   </span>
                 </div>
               </div>

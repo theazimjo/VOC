@@ -6,14 +6,11 @@ import './CorpAdminLayout.css';
 export default function TeacherLayout() {
   const identity = useOutletContext();
 
-  // Independent teachers have no centerId — this layout (and everything
-  // under it) is center-scoped, so send them to their own dashboard instead
-  // of falling through to the 'demo_center_1' placeholder below.
-  if (identity?.independent) {
-    return <Navigate to="/teacher" replace />;
-  }
+  // No placeholder centerId (see CorpAdminLayout) — writes against a made-up
+  // id would create a nameless ghost center.
+  if (!identity?.centerId) return <Navigate to="/corp" replace />;
 
-  const centerId = identity?.centerId || 'demo_center_1';
+  const centerId = identity.centerId;
   const centerName = identity?.centerName || 'O\'quv Markazi';
   const teacherId = identity?.teacherId || identity?.uid || 'demo_teacher_1';
   const teacherName = identity?.teacherName || identity?.name || 'O\'qituvchi';

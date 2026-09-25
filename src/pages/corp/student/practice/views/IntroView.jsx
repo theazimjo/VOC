@@ -20,13 +20,13 @@ export default function IntroView({ p }) {
                 {selectedMode === 'flashcard' ? '🧠' : selectedMode === 'spelling' ? '✍️' : selectedMode === 'match' ? '🔀' : selectedMode === 'quiz' ? '📝' : selectedMode === 'pronounce' ? '🎙️' : '🎮'}
               </div>
               <h2>
-                {selectedMode === 'flashcard' ? 'Smart Flashcards' : selectedMode === 'spelling' ? 'Spelling Practice' : selectedMode === 'match' ? 'Match Game' : selectedMode === 'quiz' ? 'Multiple Choice Quiz' : selectedMode === 'pronounce' ? 'Pronunciation Practice' : 'Practice'}
+                {selectedMode === 'flashcard' ? 'Kartochkalar' : selectedMode === 'spelling' ? 'Imlo mashqi' : selectedMode === 'match' ? 'Juftlash' : selectedMode === 'quiz' ? 'Test' : selectedMode === 'pronounce' ? 'Talaffuz' : 'Mashq'}
               </h2>
-              <p>{practiceWords.length} words prepared</p>
+              <p>{practiceWords.length} ta so'z tayyorlandi</p>
               
               <div className="ios-activity-indicator" style={{ marginTop: 'var(--space-md)' }}>
                 <IosSpinner />
-                <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-secondary)' }}>Preparing practice...</span>
+                <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-secondary)' }}>Mashq tayyorlanmoqda...</span>
               </div>
             </div>
           </motion.div>

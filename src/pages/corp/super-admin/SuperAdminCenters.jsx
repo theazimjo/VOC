@@ -67,7 +67,7 @@ export default function SuperAdminCenters() {
 
   const openEditModal = (center) => {
     setEditingCenter(center);
-    setForm({ name: center.name, adminEmail: center.adminEmail, phone: center.phone || '' });
+    setForm({ name: center.name || '', adminEmail: center.adminEmail || '', phone: center.phone || '' });
     setShowModal(true);
   };
 
@@ -139,7 +139,7 @@ export default function SuperAdminCenters() {
 
   const filteredCenters = useMemo(() => {
     let result = centers.filter(c =>
-      c.name.toLowerCase().includes(search.toLowerCase()) ||
+      (c.name || '').toLowerCase().includes(search.toLowerCase()) ||
       (c.adminEmail || '').toLowerCase().includes(search.toLowerCase())
     );
     if (statusFilter === 'active') result = result.filter(c => c.status !== 'suspended');
@@ -152,7 +152,7 @@ export default function SuperAdminCenters() {
     const rows = filteredCenters.map(c => {
       const s = statsById[c.id];
       return [
-        c.name, c.adminEmail || '', c.phone || '', c.status === 'suspended' ? 'to\'xtatilgan' : 'faol',
+        c.name || '', c.adminEmail || '', c.phone || '', c.status === 'suspended' ? 'to\'xtatilgan' : 'faol',
         c.createdAt ? new Date(c.createdAt).toLocaleDateString('uz-UZ') : '',
         s?.teachersCount ?? '', s?.groupsCount ?? '', s?.studentsCount ?? ''
       ];
@@ -245,7 +245,7 @@ export default function SuperAdminCenters() {
                     <Building2 size={24} />
                   </div>
                   <div>
-                    <h3>{center.name}</h3>
+                    <h3>{center.name || `Nomsiz markaz (${center.id})`}</h3>
                     <span className={`center-status-badge ${suspended ? 'status-suspended' : ''}`}>
                       <CheckCircle2 size={12} /> {suspended ? 'to\'xtatilgan' : 'faol'}
                     </span>
@@ -320,7 +320,7 @@ export default function SuperAdminCenters() {
                       <td>
                         <div className="cell-teacher-info">
                           <div className="t-table-avatar"><Building2 size={16} /></div>
-                          <span className="t-table-name">{center.name}</span>
+                          <span className="t-table-name">{center.name || `Nomsiz markaz (${center.id})`}</span>
                         </div>
                       </td>
                       <td style={{ fontSize: '0.85rem' }}>{center.adminEmail || '—'}</td>
@@ -363,7 +363,7 @@ export default function SuperAdminCenters() {
                     <div className="t-table-avatar"><Building2 size={16} /></div>
                     <div style={{ minWidth: 0, flex: 1 }}>
                       <span className="t-table-name" style={{ display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                        {center.name}
+                        {center.name || `Nomsiz markaz (${center.id})`}
                       </span>
                       <span style={{ fontSize: '0.75rem', color: 'var(--pg-text-muted)' }}>{center.adminEmail || '—'}</span>
                     </div>

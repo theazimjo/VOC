@@ -20,16 +20,19 @@ export default function StudentCorpLearn() {
   const { packId, monthId, unitId } = useParams();
   const [searchParams] = useSearchParams();
   // Homework jumps straight from the flat list to a topic, skipping the
-  // month page a normal Main/Additional drill-down passes through — so its
+  // month page a normal word-list drill-down passes through — so its
   // topic view's Back button can't just assume "go up to the month" like
   // every other entry point does; it needs to know it came from Homework
   // and return to the tab instead.
   const cameFromHomework = searchParams.get('from') === 'homework';
 
   const prevGroupIdRef = useRef(membership?.groupId);
-  const [activeTab, setActiveTab] = useState('asosiy'); // 'asosiy', 'qoshimcha', 'kerakli'
+  // 'homework' | 'all'. Until the student picks one, open on homework when
+  // the teacher has given any, otherwise on the full word list.
+  const [activeTab, setActiveTab] = useState(null);
+  const currentTab = activeTab || ((homeworkList || []).length > 0 ? 'homework' : 'all');
 
-  // Build the months list per pack category ("Asosiy" / "Qo'shimcha" / "Kerakli")
+  // Build the months list per pack category (main / extra / legacy required)
   const allMonths = useMemo(() => buildMonthsFromPacks(assignedPacks), [assignedPacks]);
   const additionalMonths = useMemo(() => buildMonthsFromPacks(additionalPacks), [additionalPacks]);
   const requiredMonths = useMemo(() => buildMonthsFromPacks(requiredPacks), [requiredPacks]);
@@ -152,8 +155,6 @@ export default function StudentCorpLearn() {
       state: {
         pack: packToPractice,
         centerId: membership.centerId,
-        independent: membership.independent,
-        teacherUid: membership.teacherUid,
         groupId: membership.groupId,
         studentId: user.uid,
       },
@@ -165,7 +166,7 @@ export default function StudentCorpLearn() {
   );
 
   const p = {
-    activeTab, setActiveTab, additionalMonths, allDbWords, allMonths, cameFromHomework,
+    currentTab, additionalMonths, allDbWords, allMonths, cameFromHomework,
     combinedMonths, homeworkList, memoryTwin, monthId, navigate, packId,
     selectedMonth, selectedUnit, startPractice, unitWords,
   };
@@ -173,35 +174,22 @@ export default function StudentCorpLearn() {
   return (
     <div className="student-corp-container" style={{ minHeight: 'calc(100vh - var(--navbar-height))' }}>
 
-      {/* Tabs bar (only show at top-level Months overview) */}
+      {/* Two tabs: what the teacher asked for, and everything assigned */}
       {!selectedMonth && (
         <div className="library-tabs-container">
           <div className="library-tabs">
-
-            {/* Main Tab */}
             <button
-              className={`library-tab-btn ${activeTab === 'asosiy' ? 'active' : ''}`}
-              onClick={() => setActiveTab('asosiy')}
-            >
-              <span className="tab-icon">🏠</span> <span>Main</span>
-            </button>
-
-            {/* Additional Tab */}
-            <button
-              className={`library-tab-btn ${activeTab === 'qoshimcha' ? 'active' : ''}`}
-              onClick={() => setActiveTab('qoshimcha')}
-            >
-              <span className="tab-icon">✨</span> <span>Additional</span>
-            </button>
-
-            {/* Homework Tab */}
-            <button
-              className={`library-tab-btn ${activeTab === 'homework' ? 'active' : ''}`}
+              className={`library-tab-btn ${currentTab === 'homework' ? 'active' : ''}`}
               onClick={() => setActiveTab('homework')}
             >
-              <span className="tab-icon">📝</span> <span>Homework</span>
+              <span className="tab-icon">📝</span> <span>Vazifalar</span>
             </button>
-
+            <button
+              className={`library-tab-btn ${currentTab === 'all' ? 'active' : ''}`}
+              onClick={() => setActiveTab('all')}
+            >
+              <span className="tab-icon">📚</span> <span>Barcha so'zlar</span>
+            </button>
           </div>
         </div>
       )}

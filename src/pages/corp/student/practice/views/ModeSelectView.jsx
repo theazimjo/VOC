@@ -14,7 +14,7 @@ export default function ModeSelectView({ p }) {
           >
             {/* Word Count Selector */}
             <div className="practice-word-count-bar">
-              <span className="practice-word-count-label">🔢 Practice word count:</span>
+              <span className="practice-word-count-label">🔢 So'zlar soni:</span>
               <div className="word-count-options">
                 {[5, 10, 20, 'all'].map(count => (
                   <button
@@ -22,7 +22,7 @@ export default function ModeSelectView({ p }) {
                     className={`word-count-btn ${wordCount === count ? 'active' : ''}`}
                     onClick={() => setWordCount(count)}
                   >
-                    {count === 'all' ? 'All' : `${count} words`}
+                    {count === 'all' ? 'Hammasi' : `${count} ta so'z`}
                   </button>
                 ))}
               </div>

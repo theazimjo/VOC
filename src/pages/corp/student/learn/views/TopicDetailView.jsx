@@ -29,11 +29,11 @@ export default function TopicDetailView({ p }) {
                       navigate(`/corp/student/learn/month/${packId}/${monthId}`);
                     }
                   }}
-                  aria-label="Back"
-                  title="Back"
+                  aria-label="Orqaga"
+                  title="Orqaga"
                 >
                   <ChevronLeft size={18} strokeWidth={2.5} />
-                  <span>Back</span>
+                  <span>Orqaga</span>
                 </button>
               </div>
 
@@ -45,7 +45,7 @@ export default function TopicDetailView({ p }) {
                     <h1 className="corp-unit-detail-title">{selectedUnit.title}</h1>
                     <div className="book-stats" style={{ marginTop: '6px' }}>
                       <span className="book-stat-badge" style={{ display: 'inline-flex', background: 'var(--accent-1-dim)', color: 'var(--accent-1)', fontSize: '0.8rem', fontWeight: 600, padding: '4px 10px', borderRadius: '12px' }}>
-                        📝 {unitWords.length} words
+                        📝 {unitWords.length} so'z
                       </span>
                     </div>
                   </div>
@@ -64,7 +64,7 @@ export default function TopicDetailView({ p }) {
                       startPractice(virtualPack);
                     }}
                   >
-                    🎮 Practice
+                    🎮 Mashq qilish
                   </button>
                 </div>
               </div>
@@ -73,25 +73,25 @@ export default function TopicDetailView({ p }) {
               <div className="pack-memtwin-card">
                 <div className="pack-memtwin-header">
                   <span className="pack-memtwin-icon"><Brain size={16} strokeWidth={2.2} /></span>
-                  <span className="pack-memtwin-title">Memory Twin</span>
+                  <span className="pack-memtwin-title">Xotira holati</span>
                 </div>
 
                 <div className="pack-memtwin-stats-grid">
                   <div className="pack-memtwin-stat">
                     <span className="pack-memtwin-stat-value">{memoryTwin ? `${memoryTwin.masteryPercent}%` : '0%'}</span>
-                    <span className="pack-memtwin-stat-label">Mastery</span>
+                    <span className="pack-memtwin-stat-label">O'zlashtirish</span>
                   </div>
                   <div className="pack-memtwin-stat">
                     <span className="pack-memtwin-stat-value">{memoryTwin ? `${memoryTwin.retentionPercent}%` : '0%'}</span>
-                    <span className="pack-memtwin-stat-label">Retention</span>
+                    <span className="pack-memtwin-stat-label">Eslab qolish</span>
                   </div>
                   <div className="pack-memtwin-stat">
                     <span className="pack-memtwin-stat-value">{memoryTwin ? memoryTwin.atRisk : '0'}</span>
-                    <span className="pack-memtwin-stat-label">At risk</span>
+                    <span className="pack-memtwin-stat-label">Unutilayotgan</span>
                   </div>
                   <div className="pack-memtwin-stat">
                     <span className="pack-memtwin-stat-value">{memoryTwin ? memoryTwin.confusionCount : '0'}</span>
-                    <span className="pack-memtwin-stat-label">Confusions</span>
+                    <span className="pack-memtwin-stat-label">Chalkashliklar</span>
                   </div>
                 </div>
               </div>

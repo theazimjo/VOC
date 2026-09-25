@@ -204,3 +204,17 @@ export function getStudentSummary(student, group) {
 
   return { hasData: true, masteryPercent, retentionPercent, atRiskCount, lastActivity };
 }
+
+// How far one student is through one homework assignment: a topic counts as
+// done at 80%+ mastery (same bar GroupHomeworkDetail has always used).
+export function getHomeworkCompletion(student, hw) {
+  const items = hw?.items || [];
+  const itemStats = items.map(item => {
+    const agg = aggregatePackProgress((student.progress || {})[item.packId]);
+    const us = agg.units[`${item.monthId}_${item.unitId}`];
+    const masteryPercent = us ? (us.masteryPercent || 0) : 0;
+    return { item, masteryPercent, done: masteryPercent >= 80, started: !!us };
+  });
+  const doneCount = itemStats.filter(s => s.done).length;
+  return { itemStats, doneCount, total: items.length, allDone: items.length > 0 && doneCount === items.length };
+}

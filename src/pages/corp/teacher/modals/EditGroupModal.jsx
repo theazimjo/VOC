@@ -27,7 +27,7 @@ export default function EditGroupModal({ p }) {
               <Users size={18} />
             </div>
             <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 800, color: 'var(--pg-text)' }}>
-              Edit Group
+              Guruhni tahrirlash
             </h3>
           </div>
 
@@ -46,7 +46,7 @@ export default function EditGroupModal({ p }) {
               justifyContent: 'center',
               cursor: 'pointer'
             }}
-            title="Close"
+            title="Yopish"
           >
             <X size={16} />
           </button>
@@ -62,7 +62,7 @@ export default function EditGroupModal({ p }) {
               type="text"
               className="input"
               required
-              placeholder="e.g. Beginner Monday 5pm"
+              placeholder="Masalan: Beginner, Du-Chor-Ju 17:00"
               value={editForm.name}
               onChange={e => setEditForm({ ...editForm, name: e.target.value })}
               style={{
@@ -79,7 +79,7 @@ export default function EditGroupModal({ p }) {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
             <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--pg-text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-              Level
+              Daraja
             </label>
             <select
               className="select"
@@ -115,7 +115,7 @@ export default function EditGroupModal({ p }) {
                 cursor: 'pointer'
               }}
             >
-              Cancel
+              Bekor qilish
             </button>
 
             <button

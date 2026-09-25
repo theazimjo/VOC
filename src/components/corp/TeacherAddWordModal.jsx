@@ -83,19 +83,19 @@ export default function TeacherAddWordModal({
     try {
       const parsed = JSON.parse(raw);
       if (!Array.isArray(parsed)) {
-        setJsonError('JSON must be an array format: [ { "word": "...", "translation": "..." } ]');
+        setJsonError("JSON massiv ko'rinishida bo'lishi kerak: [ { \"word\": \"...\", \"translation\": \"...\" } ]");
         setParsedWordsCount(0);
         return;
       }
       const valid = parsed.filter(item => item && typeof item.word === 'string' && item.word.trim() && typeof item.translation === 'string' && item.translation.trim());
       setParsedWordsCount(valid.length);
       if (valid.length === 0) {
-        setJsonError('No valid word objects found. Each item must have non-empty "word" and "translation" fields.');
+        setJsonError("To'g'ri so'z topilmadi. Har bir elementda \"word\" va \"translation\" to'ldirilgan bo'lishi kerak.");
       } else {
         setJsonError('');
       }
     } catch (err) {
-      setJsonError('Invalid JSON syntax. Please check quotes and commas.');
+      setJsonError("JSON xato yozilgan. Qo'shtirnoq va vergullarni tekshiring.");
       setParsedWordsCount(0);
     }
   }, [jsonText]);
@@ -157,7 +157,7 @@ export default function TeacherAddWordModal({
         onClose();
       }
     } catch (err) {
-      setJsonError('JSON parse error: ' + err.message);
+      setJsonError("JSON xatosi: " + err.message);
     }
   };
 
@@ -172,7 +172,7 @@ export default function TeacherAddWordModal({
             onClick={() => setActiveTab('single')}
           >
             <Plus size={16} />
-            <span>Single Word</span>
+            <span>Bitta so'z</span>
           </button>
           <button
             type="button"
@@ -180,7 +180,7 @@ export default function TeacherAddWordModal({
             onClick={() => setActiveTab('json')}
           >
             <FileText size={16} />
-            <span>Bulk Import (JSON)</span>
+            <span>Ko'p so'z (JSON)</span>
           </button>
         </div>
       )}
@@ -190,10 +190,10 @@ export default function TeacherAddWordModal({
         <form onSubmit={handleSingleSubmit} className="tawm-body">
           <div className="tawm-form-grid">
             <div className="tawm-field">
-              <label>WORD (ENGLISH) *</label>
+              <label>SO'Z (INGLIZCHA) *</label>
               <input
                 type="text"
-                placeholder="e.g. Meticulous"
+                placeholder="Masalan: Meticulous"
                 value={word}
                 onChange={e => setWord(e.target.value)}
                 autoFocus
@@ -202,10 +202,10 @@ export default function TeacherAddWordModal({
             </div>
 
             <div className="tawm-field">
-              <label>TRANSLATION (UZBEK) *</label>
+              <label>TARJIMA (O'ZBEKCHA) *</label>
               <input
                 type="text"
-                placeholder="e.g. Sinchkov"
+                placeholder="Masalan: Sinchkov"
                 value={translation}
                 onChange={e => setTranslation(e.target.value)}
                 required
@@ -214,7 +214,7 @@ export default function TeacherAddWordModal({
           </div>
 
           <div className="tawm-field">
-            <label>PART OF SPEECH</label>
+            <label>SO'Z TURKUMI</label>
             <select value={partOfSpeech} onChange={e => setPartOfSpeech(e.target.value)}>
               {Object.keys(POS_LABELS).map(pos => (
                 <option key={pos} value={pos}>{POS_LABELS[pos]}</option>
@@ -223,20 +223,20 @@ export default function TeacherAddWordModal({
           </div>
 
           <div className="tawm-field">
-            <label>DEFINITION (OPTIONAL)</label>
+            <label>TA'RIF (IXTIYORIY)</label>
             <input
               type="text"
-              placeholder="e.g. Showing great attention to detail..."
+              placeholder="Masalan: Showing great attention to detail..."
               value={definition}
               onChange={e => setDefinition(e.target.value)}
             />
           </div>
 
           <div className="tawm-field">
-            <label>EXAMPLE SENTENCE (OPTIONAL)</label>
+            <label>MISOL GAP (IXTIYORIY)</label>
             <input
               type="text"
-              placeholder="e.g. He paid meticulous attention to detail."
+              placeholder="Masalan: He paid meticulous attention to detail."
               value={example}
               onChange={e => setExample(e.target.value)}
             />
@@ -244,10 +244,10 @@ export default function TeacherAddWordModal({
 
           <div className="tawm-footer">
             <button type="button" className="tawm-btn-secondary" onClick={onClose}>
-              Cancel
+              Bekor qilish
             </button>
             <button type="submit" className="tawm-btn-primary" disabled={saving || !word.trim() || !translation.trim()}>
-              {saving ? 'Saving...' : editWord ? 'Save Changes' : 'Add Word'}
+              {saving ? 'Saqlanmoqda...' : editWord ? 'Saqlash' : "So'z qo'shish"}
             </button>
           </div>
         </form>
@@ -256,11 +256,11 @@ export default function TeacherAddWordModal({
           <div className="tawm-sample-bar">
             <div className="tawm-sample-text">
               <FileText size={15} />
-              <span>Format: JSON Array</span>
+              <span>Format: JSON massiv</span>
             </div>
             <button type="button" className="tawm-sample-copy-btn" onClick={handleCopySample}>
               {copiedSample ? <Check size={14} /> : <Copy size={14} />}
-              <span>{copiedSample ? 'Copied!' : 'Copy Sample JSON'}</span>
+              <span>{copiedSample ? 'Nusxalandi!' : 'Namunani nusxalash'}</span>
             </button>
           </div>
 
@@ -288,14 +288,14 @@ export default function TeacherAddWordModal({
 
           <div className="tawm-footer">
             <button type="button" className="tawm-btn-secondary" onClick={onClose}>
-              Cancel
+              Bekor qilish
             </button>
             <button
               type="submit"
               className="tawm-btn-primary"
               disabled={saving || parsedWordsCount === 0}
             >
-              {saving ? 'Importing...' : `${parsedWordsCount > 0 ? `Import ${parsedWordsCount} Words` : 'Import Words'}`}
+              {saving ? "Qo'shilmoqda..." : `${parsedWordsCount > 0 ? `${parsedWordsCount} ta so'zni qo'shish` : "So'zlarni qo'shish"}`}
             </button>
           </div>
         </form>
@@ -307,13 +307,13 @@ export default function TeacherAddWordModal({
     return (
       <div className="tawm-page-container">
         <div className="tpv-header">
-          <button type="button" className="tpv-back" onClick={onClose} title="Back">
+          <button type="button" className="tpv-back" onClick={onClose} title="Orqaga">
             <ArrowLeft size={18} />
           </button>
           <div className="tpv-title">
-            <h2>{editWord ? 'Edit Word' : 'Add Words'}</h2>
+            <h2>{editWord ? "So'zni tahrirlash" : "So'z qo'shish"}</h2>
             <span>
-              {unitTitle ? `${monthTitle ? monthTitle + ' · ' : ''}${unitTitle}` : 'Add words to topic'}
+              {unitTitle ? `${monthTitle ? monthTitle + ' · ' : ''}${unitTitle}` : "Mavzuga so'z qo'shish"}
             </span>
           </div>
         </div>
@@ -329,7 +329,7 @@ export default function TeacherAddWordModal({
         <div className="tawm-header">
           <div>
             <h3 className="tawm-title">
-              {editWord ? 'Edit Word' : 'Add Words'}
+              {editWord ? "So'zni tahrirlash" : "So'z qo'shish"}
             </h3>
             {unitTitle && (
               <p className="tawm-subtitle">
@@ -337,7 +337,7 @@ export default function TeacherAddWordModal({
               </p>
             )}
           </div>
-          <button type="button" className="tawm-close-btn" onClick={onClose} title="Close">
+          <button type="button" className="tawm-close-btn" onClick={onClose} title="Yopish">
             <X size={20} />
           </button>
         </div>
