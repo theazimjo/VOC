@@ -5,7 +5,6 @@ import SpellingGame from '../../../../../components/Practice/SpellingGame';
 import MatchGame from '../../../../../components/Practice/MatchGame';
 import QuizGame from '../../../../../components/Practice/QuizGame';
 import PronounceGame from '../../../../../components/Practice/PronounceGame';
-import SentenceBuilder from '../../../../../components/Practice/SentenceBuilder';
 import IrregularVerbsTrainer from '../../../../../components/Practice/IrregularVerbsTrainer';
 
 export default function PracticeSessionView({ p }) {
@@ -33,7 +32,6 @@ export default function PracticeSessionView({ p }) {
       case 'match': return <MatchGame {...props} />;
       case 'quiz': return <QuizGame {...props} />;
       case 'pronounce': return <PronounceGame {...props} />;
-      case 'sentence': return <SentenceBuilder {...props} />;
       case 'irregular-verbs': return <IrregularVerbsTrainer {...props} />;
       default: return null;
     }

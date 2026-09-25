@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Zap, Brain, PenLine, Shuffle, ListChecks, Mic, NotebookPen, Timer } from 'lucide-react';
+import { Zap, Brain, PenLine, Shuffle, ListChecks, Mic, Timer } from 'lucide-react';
 import { recommendPracticeMode } from '../../utils/memoryEngine';
 import { PRACTICE_MODE_MIN_WORDS } from '../../utils/helpers';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -102,14 +102,6 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularV
         desc: t('practice.pronounceDesc'),
         badge: t('practice.minWordsBadge', { min: 1 }),
         glowColor: 'hsl(340, 85%, 60%)'
-      },
-      {
-        id: 'sentence',
-        icon: NotebookPen,
-        title: t('practice.sentenceTitle'),
-        desc: t('practice.sentenceDesc'),
-        badge: t('practice.minWordsBadge', { min: 1 }),
-        glowColor: 'hsl(175, 80%, 45%)'
       }
     );
   }

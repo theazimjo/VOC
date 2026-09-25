@@ -1,18 +1,17 @@
 <div align="center">
 
-# ⚡ VOC — Adaptive Vocabulary, Grammar & IELTS Platform
+# ⚡ VOC — Adaptive English Vocabulary & Grammar Platform
 
-**Next-generation cognitive language learning system powered by an adaptive memory engine.**
+**For individual learners and the learning centers that teach them — powered by an adaptive memory engine.**
 
-[![React 19](https://img.shields.io/badge/React-19.0.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
-[![Vite 8](https://img.shields.io/badge/Vite-8.0.12-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4.3.1-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
-[![Firebase](https://img.shields.io/badge/Firebase-12.14.0-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
+[![React 19](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![Vite 8](https://img.shields.io/badge/Vite-8-646CFF?style=for-the-badge&logo=vitejs&logoColor=white)](https://vitejs.dev/)
+[![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Firebase](https://img.shields.io/badge/Firebase-12-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
 [![Capacitor](https://img.shields.io/badge/Capacitor-Android-119EFF?style=for-the-badge&logo=capacitor&logoColor=white)](https://capacitorjs.com/)
-[![Vitest](https://img.shields.io/badge/Vitest-4.1.10-6E9F18?style=for-the-badge&logo=vitest&logoColor=white)](https://vitest.dev/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![Vitest](https://img.shields.io/badge/Vitest-4-6E9F18?style=for-the-badge&logo=vitest&logoColor=white)](https://vitest.dev/)
 
-[Features](#-key-features) • [Memory Architecture](#-cognitive-memory-engine) • [System Architecture](#-system-architecture) • [Roadmap](#-memory-twin-roadmap) • [Getting Started](#-getting-started) • [Deployment](#-deployment)
+[Product](#-one-product-two-sides) • [Memory Engine](#-cognitive-memory-engine) • [Features](#-key-features) • [Architecture](#-system-architecture) • [Roadmap](#-roadmap) • [Getting Started](#-getting-started)
 
 </div>
 
@@ -20,53 +19,49 @@
 
 ## 📌 Executive Summary
 
-**VOC** is an enterprise-grade, intelligent language acquisition platform built for English learners. Unlike traditional learning apps that rely on static intervals or generic flashcards, VOC leverages a custom **Individual Memory Dynamics Engine** (`src/utils/memoryEngine.js`) that models how each learner's brain retains, calibrates, and forgets vocabulary.
+**VOC** is an English learning platform for vocabulary and grammar. It serves two customers with one product:
 
-VOC operates cross-platform as a progressive web application (PWA) and as a native Android app via Capacitor, serving **40+ active learners** with **2,600+ mastered vocabulary terms**.
+- **B2C — individual learners** get a personal study app driven by a custom **Individual Memory Dynamics Engine** (`src/utils/memoryEngine.js`) that models how each learner retains and forgets every word.
+- **B2B — learning centers** get a multi-tenant platform to run groups, assign packs and homework, and see each student's real progress.
+
+VOC runs as a progressive web app (PWA) and as a native Android app via Capacitor, serving **40+ active learners** with **2,600+ mastered vocabulary terms**.
 
 > *"Duolingo tells you what to study. Anki tells you when to review. VOC learns how your brain retains and forgets."*
 
 ---
 
-## 🎯 Table of Contents
+## 🔁 One Product, Two Sides
 
-- [🧠 Cognitive Memory Engine](#-cognitive-memory-engine)
-- [🏗 System Architecture](#-system-architecture)
-- [🗺 Memory Twin Roadmap](#-memory-twin-roadmap)
-- [✨ Key Features](#-key-features)
-  - [📚 Vocabulary Boost Engine](#-vocabulary-boost-engine)
-  - [📖 Grammar & IELTS Prep](#-grammar--ielts-prep)
-  - [🧬 Memory Lab & Insights](#-memory-lab--insights)
-  - [🏆 Gamification & Analytics](#-gamification--analytics)
-- [🛠 Tech Stack & Dependencies](#-tech-stack--dependencies)
-- [📂 Directory Structure](#-directory-structure)
-- [🚀 Getting Started](#-getting-started)
-- [🧪 Testing & Quality Control](#-testing--quality-control)
-- [📱 Deployment & Build Pipeline](#-deployment--build-pipeline)
-- [🤝 Contributing & License](#-contributing--license)
+VOC is a single system, not two apps. A student always uses their **own personal VOC account**; joining a learning center's group (by a 6-digit PIN) switches that same account into group mode.
+
+```mermaid
+flowchart LR
+    C[Learning center signs up] --> T[Teachers create groups]
+    T --> S[Students join with a PIN<br/>using their personal account]
+    S --> H[Daily practice + homework<br/>tracked by the memory engine]
+    H --> R[Center sees real progress]
+    S --> P[Course ends — student keeps<br/>their personal app & history]
+    P --> W[Word of mouth brings<br/>new learners and centers]
+    W --> C
+```
+
+| | B2B — Learning centers | B2C — Individual learners |
+| :--- | :--- | :--- |
+| **Role in the business** | Distribution channel and revenue | Core product and long-term retention |
+| **Value** | Teachers control homework and results; admins see center-wide statistics | Adaptive spaced repetition, grammar path, personal analytics |
+| **Effect on the other side** | Brings learners in at low acquisition cost | Keeps learners after the course ends (higher lifetime value) |
 
 ---
 
 ## 🧠 Cognitive Memory Engine
 
-Standard spaced repetition algorithms (such as SM-2 or Leitner systems) rely on static global multipliers. VOC implements a personalized continuous forgetting function based on cognitive stability dynamics:
+Standard spaced repetition algorithms (such as SM-2 or Leitner systems) rely on static global multipliers. VOC implements a personalized continuous forgetting function based on memory stability:
 
 $$P(t) = e^{-\frac{t}{S}}$$
 
 Where:
 * **$P(t)$**: Probability of successful recall after $t$ elapsed days.
-* **$S$**: Dynamic **Memory Stability** score calculated individually per user $\times$ per word pair.
-
-```
-                  Memory Retention Probability P(t) over Time
-  100% | *
-       |   *
-  P(t) |     *  <-- Forgetting Curve (Decay rate inversely proportional to S)
-       |       * . . . . . . . . . . . . . . . . . -> Extended Stability (S') after Active Review
-    0% +------------------------------------------------------------------------------------> Time (t in days)
-```
-
-### Algorithmic Signals & Multi-Factor Inputs
+* **$S$**: Dynamic **Memory Stability**, calculated individually per user × per word.
 
 ```mermaid
 flowchart LR
@@ -76,14 +71,49 @@ flowchart LR
     C --> E[Sleep Consolidation & Cluster Calibration]
     D --> F[Stability Penalty + Remedial Recommendation]
     E --> G[Updated Stability S']
-    F --> G[Updated Stability S']
-    G --> H[Next Review Interval Schedule]
+    F --> G
+    G --> H[Next Review Interval]
 ```
 
-1. **Response Latency Tuning ($\Delta L$)**: Reaction speed serves as an implicit indicator of recall confidence. Rapid correct responses boost stability growth, whereas hesitant correct answers yield reduced gains.
-2. **Retrieval Mode Weighting ($w_{\text{retrieval}}$)**: Differentiates active retrieval (orthographic typing/spelling) from passive self-assessment (flashcard flipping). Active recall produces significantly higher stability increments (the *testing effect*).
-3. **Sleep-Cycle Consolidation**: Reviews spanning overnight rest receive a cognitive consolidation factor, rewarding long-term retention.
-4. **Semantic Domain Calibration**: Automatically categorizes vocabulary into semantic clusters (e.g., *Technology*, *Emotions*, *Academic Verbs*). Empirical accuracy within a cluster automatically tunes stability predictions across related terms.
+1. **Response latency**: fast correct answers grow stability more than hesitant ones.
+2. **Retrieval mode weighting**: active recall (typing, speaking) counts more than passive recognition (flipping a flashcard) — the *testing effect*.
+3. **Sleep consolidation**: reviews spanning a night's rest get a consolidation factor.
+4. **Semantic calibration**: words are grouped into semantic clusters, and accuracy within a cluster tunes predictions for related words.
+
+---
+
+## ✨ Key Features
+
+### 📚 Vocabulary
+* **Personal packs**: create, organize into folders, import from JSON, or extract words from a photo.
+* **Marketplace packs**: one-click install of curated packs — *Irregular Verbs*, *Phrasal Verbs*, *Collocations*, *Prepositions*, *Essential 3000*, *Science*, *Health*, *I'm Ready September*.
+* **Reading mode**: full chapter texts for book-based packs, read page by page alongside the pack's words.
+* **7 practice modes**:
+  1. 🎴 **Flashcards** with audio and confidence scoring
+  2. ✍️ **Spelling** — active recall with error highlighting and confusion pairing
+  3. 🔀 **Match Pairs**
+  4. 📝 **Multiple Choice Quiz**
+  5. ⏱️ **Speed Round**
+  6. 🎙️ **Pronunciation** — Web Speech API evaluation
+  7. ⚡ **Irregular Verbs Trainer** — V1/V2/V3 forms
+* **Leech detection**: words that keep failing are isolated for targeted review.
+
+### 📖 Grammar
+* **Topic library**: 71 topics across Beginner, Intermediate, Upper-Intermediate and Advanced, each with a guide (Uzbek or Russian explanations) and 6 exercise types.
+* **Grammar Path**: a sequential, Duolingo-style path that starts from zero.
+* **Grammar tests**: timed exam variants with history and per-question review, plus a general grammar test.
+
+### 🏫 Learning Center Platform (`/corp`)
+* **Roles**: super admin → center admin → teacher → student.
+* **Center admin**: manages teachers, students, custom courses, and center-wide statistics.
+* **Teacher**: creates groups, assigns packs and homework, tracks each student, archives or transfers groups.
+* **Student**: joins by PIN from their own profile; sees the group's learning plan, assessments, and homework.
+* **Independent teachers**: a personal account can also teach its own groups without a center.
+
+### 🧬 Memory Lab & Analytics
+* Retention decay curves, stability distribution, and confusion networks.
+* 30-day future-memory simulator and a human-readable explanation of every scheduling decision.
+* Daily streaks, a GitHub-style activity heatmap, achievements, and mastery/queue charts (Recharts).
 
 ---
 
@@ -91,121 +121,85 @@ flowchart LR
 
 ```mermaid
 graph TD
-    subgraph Client Layer
-        ReactApp[React 19 SPA / React Router 7]
-        TailwindUI[Tailwind CSS v4 & Framer Motion]
-        CapacitorBridge[Capacitor Native Android Shell]
+    subgraph Client
+        App[React 19 SPA / React Router 7]
+        UI[Tailwind CSS v4 & Framer Motion]
+        Android[Capacitor Android Shell]
     end
 
-    subgraph Core Engine Layer
-        MemoryEngine[Memory Dynamics Engine]
-        SemanticClassifier[Semantic Classifier & Clustering]
-        TextSimilarity[Orthographic & Phonetic Similarity Engine]
-        GrammarEngine[Grammar Rules & Evaluation Engine]
+    subgraph Core Engines
+        Memory[Memory Dynamics Engine]
+        Semantic[Semantic Classifier]
+        Similarity[Orthographic Similarity]
+        Grammar[Grammar Evaluation]
     end
 
-    subgraph Data & Storage Layer
-        FirebaseAuth[Firebase Auth - Email/OAuth]
-        FirebaseDB[Firebase Realtime Database]
-        LocalStorage[Offline PWA Cache / IndexDB]
+    subgraph Platforms
+        Personal[Personal Learner App]
+        Corp[Learning Center Platform]
     end
 
-    ReactApp --> TailwindUI
-    CapacitorBridge --> ReactApp
-    ReactApp --> MemoryEngine
-    ReactApp --> SemanticClassifier
-    ReactApp --> TextSimilarity
-    ReactApp --> GrammarEngine
-    MemoryEngine --> FirebaseDB
-    FirebaseAuth --> FirebaseDB
-    ReactApp --> LocalStorage
+    subgraph Data
+        Auth[Firebase Auth]
+        RTDB[Firebase Realtime Database]
+        TTS[Vercel Function — TTS]
+    end
+
+    Android --> App
+    App --> UI
+    App --> Personal
+    App --> Corp
+    Personal --> Memory
+    Corp --> Memory
+    Memory --> Semantic
+    Memory --> Similarity
+    Personal --> Grammar
+    Memory --> RTDB
+    Corp --> RTDB
+    Auth --> RTDB
+    App --> TTS
 ```
 
 ---
 
-## 🗺 Memory Twin Roadmap
+## 🗺 Roadmap
 
-VOC's long-term vision is to evolve from a spaced-repetition scheduler into a digital **Memory Twin** — a personal cognitive profile that models recall bottlenecks, inter-word interference, and optimal learning modalities.
+### 🟢 In production
 
-### 🟢 Production Status (Active in Application)
-
-| Module / Component | Architecture / File Source | Operational Scope |
+| Module | Source | Scope |
 | :--- | :--- | :--- |
-| **Memory Dynamics Engine** | `src/utils/memoryEngine.js` | $P(t) = e^{-t/S}$ retention decay with per-word stability state. |
-| **Future Memory Simulator** | `memoryEngine.js` $\rightarrow$ `MemoryInsights.jsx` | 30-day interactive simulation comparing retention under 0, 1, 3, 7, 14-day review intervals. |
-| **Forgetting Autopsy** | `src/utils/forgettingAutopsy.js` | Diagnostic analysis of failure factors (latency, interval, confusion) with targeted practice suggestions. |
-| **Confusion Pair Network** | `src/experiment/textSimilarity.js` | Distance-based similarity detection mapping confusable word pairs in spelling modes. |
-| **Semantic Taxonomy Calibration** | `src/utils/semanticClassifier.js` | Automated domain grouping with per-cluster accuracy calibration. |
-| **Scheduling Transparency** | `explainSchedulingDecision()` | Human-readable explanation of review timing logic for every word. |
+| **Memory Dynamics Engine** | `src/utils/memoryEngine.js` | $P(t) = e^{-t/S}$ decay with per-word stability. |
+| **Future Memory Simulator** | `memoryEngine.js` → `MemoryInsights.jsx` | 30-day retention simulation under different review intervals. |
+| **Forgetting Autopsy** | `src/utils/forgettingAutopsy.js` | Explains why a word was forgotten and suggests targeted practice. |
+| **Confusion Pair Network** | `src/experiment/textSimilarity.js` | Detects confusable word pairs in spelling modes. |
+| **Semantic Calibration** | `src/experiment/semanticClassifier.js` | Domain grouping with per-cluster accuracy calibration. |
+| **Learning Center Platform** | `src/pages/corp/`, `src/services/corpService.js` | Centers, teachers, groups, homework, statistics. |
 
-### 🟡 Pipeline & In-Progress (Infrastructure Ready)
+### 🟡 Next
 
-| Feature | Description | Implementation Complexity |
-| :--- | :--- | :--- |
-| **Automated Remedial Routing** | Direct auto-launch of practice modes based on Forgetting Autopsy diagnostics. | **Low**: Practice games ready; route navigation binding needed. |
-| **Omni-Mode Confusion Tracking** | Extend confusion pairing across Flashcards, Quiz, and Sentence Builder. | **Low**: Leverages existing `findConfusableMatch` helper. |
+| Feature | Description |
+| :--- | :--- |
+| **Automated remedial routing** | Launch the right practice mode straight from a Forgetting Autopsy diagnosis. |
+| **Confusion tracking in every mode** | Extend confusion pairing to Flashcards and Quiz. |
 
-### 🔮 Future Research & Exploration
+### 🔮 Research
 
-| Research Goal | Objective | Technical Prerequisites |
-| :--- | :--- | :--- |
-| **Memory Fingerprint** | Modality retention breakdown (Visual vs. Auditory vs. Contextual). | Multi-game modality telemetry tracking. |
-| **L1 Interference Genome** | Native language error transfer pattern analysis. | Longitudinal error corpus dataset. |
-| **Lexical Knowledge Graph** | Word association and semantic distance mapping. | WordNet / Lexical graph database integration. |
-| **Historical Retention Replay** | 90-day time-series snapshot visualizer. | Time-series state snapshot database persistence. |
+| Goal | Objective |
+| :--- | :--- |
+| **Memory Fingerprint** | Retention breakdown by modality (visual, auditory, contextual). |
+| **L1 Interference Genome** | How the learner's native language shapes their English errors. |
+| **Lexical Knowledge Graph** | Word association and semantic distance mapping. |
 
 ---
 
-## ✨ Key Features
+## 🛠 Tech Stack
 
-### 📚 Vocabulary Boost Engine
-* **Custom Packs**: Create, edit, tag, export, and import personalized word collections.
-* **Marketplace Packs**: Instant 1-click installation of curated packs (*Irregular Verbs*, *Phrasal Verbs*, *Academic Word List*, *IELTS High-Frequency*).
-* **7 Interactive Practice Engines**:
-  1. 🎴 **Smart Flashcards**: Flip cards with native audio synthesis and confidence scoring.
-  2. ✍️ **Spelling Trainer**: Active orthographic recall with instant error highlight & confusion pairing.
-  3. 🧩 **Match Pairs**: Speed association matching under time pressure.
-  4. ❓ **Multiple Choice Quiz**: Distractor-boosted vocabulary recognition.
-  5. 🎙️ **Speech Pronunciation**: Real-time Web Speech API audio evaluation.
-  6. 📝 **Sentence Builder**: Syntax order puzzle constructor.
-  7. ⚡ **Irregular Verbs Trainer**: Dedicated 3-form verb conjugate matrix trainer.
-* **Leech Word Detection**: Automatic isolation of high-failure terms for targeted remediation.
-
-### 📖 Grammar & IELTS Prep
-* **34 Curriculum Modules**: 22 Beginner and 12 Intermediate topics with concise rules, structural diagrams, and usage examples.
-* **6 Exercise Types per Topic**: Multiple choice, blank filling, sentence assembly, error spotter, transformation, and dialog completion.
-* **Full-Length IELTS Practice Suite**: Real-time timed exam simulator, open-ended writing response evaluation, and granular band performance reports.
-
-### 🧬 Memory Lab & Insights
-* Real-time interactive charts illustrating retention decay curves, stability distributions, and confusion networks.
-* Personal learning velocity diagnostics and stability growth analytics.
-
-### 🏆 Gamification & Progress Tracking
-* **Daily Streaks**: Streak counters with protection mechanics.
-* **Contribution Heatmap**: GitHub-style activity grid tracking study volume over time.
-* **Milestone Achievements**: System-wide achievement badges for vocabulary size, mastery milestones, and practice consistency.
-* **Deep Analytics**: Powered by Recharts with mastery ratios, review queue projections, and learning rates.
-
----
-
-## 🛠 Tech Stack & Dependencies
-
-```
-+-----------------------------------------------------------------------+
-|                             FRONTEND                                  |
-|   React 19  |  React Router 7  |  Vite 8  |  Tailwind CSS v4          |
-|   Framer Motion  |  Recharts  |  Lucide React                        |
-+-----------------------------------------------------------------------+
-|                             BACKEND & DATA                            |
-|   Firebase Authentication  |  Firebase Realtime Database              |
-+-----------------------------------------------------------------------+
-|                             MOBILE & PWA                              |
-|   Capacitor (Android Wrapper)  |  Web Service Worker (Offline PWA)    |
-+-----------------------------------------------------------------------+
-|                             QUALITY & TEST                            |
-|   Vitest  |  Testing Library  |  ESLint 10  |  TypeScript (Types)     |
-+-----------------------------------------------------------------------+
-```
+| Layer | Technologies |
+| :--- | :--- |
+| **Frontend** | React 19, React Router 7, Vite 8, Tailwind CSS v4, Framer Motion, Recharts, Lucide |
+| **Backend & Data** | Firebase Authentication, Firebase Realtime Database, Vercel serverless function (TTS) |
+| **Mobile & PWA** | Capacitor (Android), service worker |
+| **Quality** | Vitest, Testing Library, ESLint, TypeScript checks |
 
 ---
 
@@ -213,27 +207,28 @@ VOC's long-term vision is to evolve from a spaced-repetition scheduler into a di
 
 ```
 VOC/
-├── android/                    # Capacitor Android native platform codebase
-├── public/                     # Static assets, PWA manifest, service worker
+├── android/                 # Capacitor Android project
+├── api/                     # Vercel serverless functions (text-to-speech)
+├── public/                  # Static assets, PWA manifest, service worker
 ├── src/
-│   ├── components/             # Reusable UI component library
-│   │   ├── Auth/               # Login, Signup, Protected Routes
-│   │   ├── Layout/             # Navbar, Sidebar, Footer, Page Containers
-│   │   ├── Practice/           # 7 Practice game mode implementations
-│   │   └── Words/              # Word list management, Pack cards, Modals
-│   ├── contexts/               # React Context Providers (Auth, Packs, Theme)
-│   ├── data/                   # Static Datasets (Grammar, IELTS, Market Packs)
-│   ├── experiment/             # Memory Lab & Research diagnostic tools
-│   ├── hooks/                  # Firebase & Application Custom React Hooks
-│   ├── pages/                  # Page-level route views (Dashboard, Practice, Admin, etc.)
-│   ├── utils/                  # Algorithmic engine (Memory Engine, Similarity, Achievements)
-│   ├── App.jsx                 # Main application component & routes
-│   └── main.jsx                # DOM entry point
-├── database.rules.json         # Firebase Realtime Database Security Rules
-├── firestore.rules             # Firestore Security Rules
-├── vite.config.js              # Vite & Vitest configuration manifest
-├── vercel.json                 # Vercel SPA routing & asset caching headers
-└── package.json                # Project dependencies & scripts
+│   ├── components/          # Shared UI (Practice modes, Packs, Words, Layout, corp/)
+│   ├── contexts/            # Auth, Packs, Language, Theme, GroupMode providers
+│   ├── data/                # Grammar datasets, courses, marketplace packs, chapter texts
+│   ├── experiment/          # Memory Lab, semantic classifier, text similarity
+│   ├── hooks/               # Firebase-backed React hooks
+│   ├── i18n/                # UI translations (English, Russian, Uzbek)
+│   ├── pages/
+│   │   ├── personal/        # B2C learner app (dashboard, library, practice, stats)
+│   │   ├── grammar/         # Grammar topics, path, and tests
+│   │   ├── corp/            # B2B learning center platform
+│   │   ├── teacher/         # Independent teacher mode
+│   │   └── admin/           # Internal admin dashboard
+│   ├── services/            # Corp, independent-teacher, and group services
+│   ├── utils/               # Memory engine, spaced repetition, helpers
+│   └── App.jsx              # Routes
+├── database.rules.json      # Realtime Database security rules
+├── vite.config.js           # Vite & Vitest configuration
+└── vercel.json              # SPA routing & cache headers
 ```
 
 ---
@@ -241,90 +236,61 @@ VOC/
 ## 🚀 Getting Started
 
 ### Prerequisites
-* **Node.js**: `^18.0.0` or `^20.0.0`
-* **npm**: `^9.0.0` or higher
+* **Node.js** 20+
+* **npm** 9+
 
-### 1. Repository Setup
+### Setup
 ```bash
-git clone https://github.com/your-username/voc.git
-cd voc
+git clone <repository-url>
+cd VOC
 npm install
 ```
 
-### 2. Environment Setup
-Create a `.env` file in the root directory:
+The Firebase client config lives in `src/firebase.js`. Optional AI features read one variable from `.env`:
 ```env
-VITE_FIREBASE_API_KEY=your_api_key
-VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
-VITE_FIREBASE_DATABASE_URL=https://your_project.firebaseio.com
-VITE_FIREBASE_PROJECT_ID=your_project_id
-VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
-VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-VITE_FIREBASE_APP_ID=your_app_id
+VITE_GEMINI_API_KEY=your_key
 ```
 
-### 3. Launch Local Server
+### Run
 ```bash
 npm run dev
 ```
-Navigate to `http://localhost:5173`.
+Open `http://localhost:5173`.
 
 ---
 
-## 🧪 Testing & Quality Control
+## 🧪 Testing
 
-VOC includes unit tests covering pure algorithmic modules (`memoryEngine.js`, `textSimilarity.js`, `spacedRepetition.js`, `achievements.js`).
+Unit tests cover the algorithmic modules: memory engine, spaced repetition, forgetting autopsy, text similarity, achievements, grammar helpers, and marketplace sync.
 
 ```bash
-# Run unit test suite
-npm test
-
-# Run tests in watch mode
-npm run test:watch
-
-# Execute ESLint verification
-npm run lint
+npm test            # run once
+npm run test:watch  # watch mode
+npm run lint        # ESLint
 ```
 
 ---
 
-## 📱 Deployment & Build Pipeline
+## 📱 Build & Deployment
 
-### Production Web Build
 ```bash
+# Production web build (deployed on Vercel)
 npm run build
 npm run preview
-```
 
-### Deploying Database Rules
-```bash
+# Realtime Database security rules
 firebase deploy --only database
-```
 
-### Compiling Native Android Application
-```bash
-# Build production web bundle
+# Android
 npm run build
-
-# Sync assets to Capacitor native container
 npx cap sync android
-
-# Open Android Studio to build APK or AAB bundle
 npx cap open android
 ```
 
 ---
 
-## 🤝 Contributing & License
-
-Contributions are welcome! Please feel free to open issues or submit pull requests.
-
-Distributed under the **MIT License**. See `LICENSE` for more information.
-
----
-
 <div align="center">
 
-Crafted with ❤️ for English language learners worldwide.
+Built for English learners and the learning centers that teach them.
 
 </div>

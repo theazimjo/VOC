@@ -404,8 +404,6 @@ export const translations = {
       speedDesc: '60 seconds, as many correct answers as you can - beats your own record',
       pronounceTitle: 'Pronunciation Practice',
       pronounceDesc: 'Speak into the microphone to improve pronunciation',
-      sentenceTitle: 'Sentence Builder',
-      sentenceDesc: 'Write sentences using target words from memory',
       
       // Flashcard
       tapToFlip: 'Tap to flip card',
@@ -1406,8 +1404,6 @@ export const translations = {
       speedDesc: '60 секунд, как можно больше правильных ответов — победите свой рекорд',
       pronounceTitle: 'Практика произношения',
       pronounceDesc: 'Говорите в микрофон, чтобы улучшить произношение',
-      sentenceTitle: 'Составление предложений',
-      sentenceDesc: 'Составляйте предложения с изученными словами по памяти',
       
       // Flashcard
       tapToFlip: 'Нажмите, чтобы перевернуть',
@@ -2408,8 +2404,6 @@ export const translations = {
       speedDesc: "60 soniya, iloji boricha ko'p to'g'ri javob — o'z rekordingizni yangilang",
       pronounceTitle: "Talaffuz mashqi",
       pronounceDesc: "Talaffuzni yaxshilash uchun mikrofonga gapiring",
-      sentenceTitle: "Jumla tuzish",
-      sentenceDesc: "O'rganilgan so'zlar bilan xotiradan gaplar tuzing",
       
       // Flashcard
       tapToFlip: "Aylantirish uchun bosing",

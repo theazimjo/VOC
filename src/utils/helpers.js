@@ -95,12 +95,10 @@ export function weightedSelectWords(words, count) {
 }
 
 // Spelling (type the translation's English word from the scrambled letters)
-// and Sentence Builder (recall the English word from memory to use it in a
-// sentence) both require the learner to already have *some* trace of the
-// word — the English form is never shown up front, only revealed after
+// requires the learner to already have *some* trace of the word — the English form is never shown up front, only revealed after
 // answering. A word with zero prior reviews has no trace to draw on, so
 // picking it here is just an unwinnable guess, not practice.
-export const RECALL_ONLY_MODES = new Set(['spelling', 'sentence']);
+export const RECALL_ONLY_MODES = new Set(['spelling']);
 
 /**
  * Narrow a word pool to what's actually appropriate for the chosen practice
@@ -133,7 +131,6 @@ export const PRACTICE_MODE_MIN_WORDS = {
   match: 4,
   quiz: 4,
   pronounce: 1,
-  sentence: 1,
   speed: 4,
   'irregular-verbs': 1,
 };

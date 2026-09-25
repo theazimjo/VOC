@@ -22,7 +22,6 @@ import MatchGame from '../../components/Practice/MatchGame';
 import QuizGame from '../../components/Practice/QuizGame';
 import PronounceGame from '../../components/Practice/PronounceGame';
 import IrregularVerbsTrainer from '../../components/Practice/IrregularVerbsTrainer';
-import SentenceBuilder from '../../components/Practice/SentenceBuilder';
 import SpeedGame, { getSpeedRecord } from '../../components/Practice/SpeedGame';
 import PracticeResultsView from '../../components/Practice/PracticeResultsView';
 import PracticeQuitModal from '../../components/Practice/PracticeQuitModal';
@@ -515,7 +514,6 @@ export default function PracticePage({ embedded = false, initialSource = null, i
       case 'match': return <MatchGame {...props} />;
       case 'quiz': return <QuizGame {...props} />;
       case 'pronounce': return <PronounceGame {...props} />;
-      case 'sentence': return <SentenceBuilder {...props} />;
       case 'speed': return <SpeedGame {...props} />;
       case 'irregular-verbs': return <IrregularVerbsTrainer {...props} initialSubStep={querySubStep} />;
       default: return null;
@@ -683,10 +681,10 @@ export default function PracticePage({ embedded = false, initialSource = null, i
             >
               <div className="intro-card">
                 <div className="intro-mode-icon">
-                  {selectedMode === 'flashcard' ? '🧠' : selectedMode === 'spelling' ? '✍️' : selectedMode === 'match' ? '🔀' : selectedMode === 'quiz' ? '📝' : selectedMode === 'pronounce' ? '🎙️' : selectedMode === 'sentence' ? '📓' : selectedMode === 'speed' ? '⏱️' : selectedMode === 'irregular-verbs' ? '⚡' : '🎮'}
+                  {selectedMode === 'flashcard' ? '🧠' : selectedMode === 'spelling' ? '✍️' : selectedMode === 'match' ? '🔀' : selectedMode === 'quiz' ? '📝' : selectedMode === 'pronounce' ? '🎙️' : selectedMode === 'speed' ? '⏱️' : selectedMode === 'irregular-verbs' ? '⚡' : '🎮'}
                 </div>
                 <h2>
-                  {selectedMode === 'flashcard' ? t('practice.flashcardsTitle') : selectedMode === 'spelling' ? t('practice.spellingTitle') : selectedMode === 'match' ? t('practice.matchTitle') : selectedMode === 'quiz' ? t('practice.quizTitle') : selectedMode === 'pronounce' ? t('practice.pronounceTitle') : selectedMode === 'sentence' ? 'Sentence Builder' : selectedMode === 'speed' ? t('practice.speedTitle') : selectedMode === 'irregular-verbs' ? t('practice.irregularVerbsTitle') : t('practice.title')}
+                  {selectedMode === 'flashcard' ? t('practice.flashcardsTitle') : selectedMode === 'spelling' ? t('practice.spellingTitle') : selectedMode === 'match' ? t('practice.matchTitle') : selectedMode === 'quiz' ? t('practice.quizTitle') : selectedMode === 'pronounce' ? t('practice.pronounceTitle') : selectedMode === 'speed' ? t('practice.speedTitle') : selectedMode === 'irregular-verbs' ? t('practice.irregularVerbsTitle') : t('practice.title')}
                 </h2>
                 <p>{t('practice.wordsReady', { count: practiceWords.length })}</p>
                 {selectedMode === 'speed' && (
@@ -718,7 +716,7 @@ export default function PracticePage({ embedded = false, initialSource = null, i
                     <ChevronLeft size={22} strokeWidth={2.5} />
                   </button>
                   <h1 className="clean-quiz-title">
-                    {selectedMode === 'flashcard' ? `🧠 ${t('practice.flashcardsTitle')}` : selectedMode === 'spelling' ? `✍️ ${t('practice.spellingTitle')}` : selectedMode === 'match' ? `🔀 ${t('practice.matchTitle')}` : selectedMode === 'quiz' ? `📝 ${t('practice.quizTitle')}` : selectedMode === 'pronounce' ? `🎙️ ${t('practice.pronounceTitle')}` : selectedMode === 'sentence' ? '📓 Sentence Builder' : selectedMode === 'speed' ? `⏱️ ${t('practice.speedTitle')}` : selectedMode === 'irregular-verbs' ? `⚡ ${t('practice.irregularVerbsTitle')}` : t('practice.title')}
+                    {selectedMode === 'flashcard' ? `🧠 ${t('practice.flashcardsTitle')}` : selectedMode === 'spelling' ? `✍️ ${t('practice.spellingTitle')}` : selectedMode === 'match' ? `🔀 ${t('practice.matchTitle')}` : selectedMode === 'quiz' ? `📝 ${t('practice.quizTitle')}` : selectedMode === 'pronounce' ? `🎙️ ${t('practice.pronounceTitle')}` : selectedMode === 'speed' ? `⏱️ ${t('practice.speedTitle')}` : selectedMode === 'irregular-verbs' ? `⚡ ${t('practice.irregularVerbsTitle')}` : t('practice.title')}
                   </h1>
                   <div style={{ width: '40px', opacity: 0 }}></div>
 

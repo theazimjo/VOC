@@ -64,7 +64,7 @@ describe('filterWordsForMode', () => {
     expect(filterWordsForMode(mixed, 'pronounce')).toEqual(mixed);
   });
 
-  it('drops never-reviewed words for spelling and sentence modes when enough reviewed words exist', () => {
+  it('drops never-reviewed words for spelling mode when enough reviewed words exist', () => {
     const pool = [
       { id: 1, reviewCount: 0 },
       { id: 2, reviewCount: 3 },
@@ -74,12 +74,9 @@ describe('filterWordsForMode', () => {
     ];
     const spelling = filterWordsForMode(pool, 'spelling');
     expect(spelling.map(w => w.id)).toEqual([2, 4, 5]);
-
-    const sentence = filterWordsForMode(pool, 'sentence');
-    expect(sentence.map(w => w.id)).toEqual([2, 4, 5]);
   });
 
-  it('returns reviewed words for spelling and sentence modes', () => {
+  it('returns reviewed words for spelling mode', () => {
     const pool = [
       { id: 1, reviewCount: 0 },
       { id: 2, reviewCount: 3 },
