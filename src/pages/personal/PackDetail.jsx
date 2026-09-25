@@ -16,7 +16,6 @@ import { formatPageRange } from '../../utils/chapterPageRanges';
 import { scienceChapterText } from '../../data/scienceChapterText';
 import { healthChapterText } from '../../data/healthChapterText';
 import { essential3000ChapterText } from '../../data/essential3000ChapterText';
-import { preIeltsChapterText } from '../../data/preIeltsChapterText';
 import { imReadySeptemberChapterText } from '../../data/imReadySeptemberChapterText';
 import WordList from '../../components/Words/WordList';
 
@@ -24,7 +23,6 @@ const allChapterText = {
   ...essential3000ChapterText,
   ...scienceChapterText,
   ...healthChapterText,
-  ...preIeltsChapterText,
   ...imReadySeptemberChapterText
 };
 import PhotoWordExtractorModal from '../../components/Words/PhotoWordExtractorModal';
@@ -107,7 +105,7 @@ function ChapterReorderItem({
       as="div"
       dragControls={dragControls}
       dragListener={false}
-      className={`ielts-topic-chip-item ${isHolding ? 'is-holding' : ''} ${isReadyToDrag ? 'drag-ready' : ''}`}
+      className={`pack-topic-chip-item ${isHolding ? 'is-holding' : ''} ${isReadyToDrag ? 'drag-ready' : ''}`}
       onContextMenu={(e) => onContextMenu(e, topic)}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
@@ -117,17 +115,17 @@ function ChapterReorderItem({
     >
       <button
         type="button"
-        className={`ielts-topic-chip ${topicFilter === topic ? 'active' : ''}`}
+        className={`pack-topic-chip ${topicFilter === topic ? 'active' : ''}`}
         style={topicMastery[topic] !== undefined ? { '--chip-mastery': `${topicMastery[topic]}%` } : undefined}
         onClick={handleClick}
         title={hintText}
       >
         {topicMastery[topic] !== undefined && (
-          <span className="ielts-topic-chip-fill" aria-hidden="true" />
+          <span className="pack-topic-chip-fill" aria-hidden="true" />
         )}
-        <span className="ielts-topic-chip-label">
+        <span className="pack-topic-chip-label">
           {topic}
-          {pageRangeStr && <span className="ielts-topic-chip-pages"> ({pageRangeStr})</span>}
+          {pageRangeStr && <span className="pack-topic-chip-pages"> ({pageRangeStr})</span>}
         </span>
       </button>
     </Reorder.Item>
@@ -313,7 +311,7 @@ export default function PackDetail() {
     requestAnimationFrame(() => window.scrollTo(0, parseInt(saved, 10)));
   }, [pack, loading, packId]);
 
-  // The chapter chip row (.ielts-topic-filter-row) scrolls horizontally on
+  // The chapter chip row (.pack-topic-filter-row) scrolls horizontally on
   // its own, independent of the page's vertical scroll restored above. On a
   // fresh mount - coming back from Practice, for instance - it always
   // starts scrolled to the left, so a chapter picked from further along
@@ -325,7 +323,7 @@ export default function PackDetail() {
     if (!topicFilter || topics.length === 0) return;
     const row = topicRowRef.current;
     if (!row) return;
-    const activeChip = row.querySelector('.ielts-topic-chip.active');
+    const activeChip = row.querySelector('.pack-topic-chip.active');
     if (!activeChip) return;
     const rowRect = row.getBoundingClientRect();
     const chipRect = activeChip.getBoundingClientRect();
@@ -458,14 +456,6 @@ export default function PackDetail() {
   const handleEditWord = (word) => {
     if (pack?.name === 'Irregular Verbs') return;
     saveScrollPosition();
-    if (pack?.type === 'ielts') {
-      navigate(`/packs/${packId}/word/ielts/edit/${word.id}`);
-      return;
-    }
-    if (pack?.type === 'english') {
-      navigate(`/packs/${packId}/word/english/edit/${word.id}`);
-      return;
-    }
     navigate(`/packs/${packId}/word/edit/${word.id}`);
   };
 
@@ -565,8 +555,6 @@ export default function PackDetail() {
           <div className="pack-detail-text">
             <h1>
               {pack.name}
-              {pack.type === 'ielts' && <span className="pack-type-badge">🎓 IELTS</span>}
-              {pack.type === 'english' && <span className="pack-type-badge pack-type-badge-english">🔤 English</span>}
             </h1>
             {pack.description && <p>{pack.description}</p>}
             <div className="book-stats">
@@ -674,10 +662,10 @@ export default function PackDetail() {
       )}
 
       {topics.length > 0 && (
-        <div className="ielts-topic-filter-row" ref={topicRowRef}>
+        <div className="pack-topic-filter-row" ref={topicRowRef}>
           <button
             type="button"
-            className={`ielts-topic-chip ${topicFilter === null ? 'active' : ''}`}
+            className={`pack-topic-chip ${topicFilter === null ? 'active' : ''}`}
             onClick={() => setTopicFilter(null)}
           >
             {t('packDetail.allTopics')}
@@ -686,7 +674,7 @@ export default function PackDetail() {
             axis="x"
             values={topics}
             onReorder={handleReorderChapters}
-            className="ielts-topic-reorder-group"
+            className="pack-topic-reorder-group"
             as="div"
           >
             {topics.map(topic => (
@@ -727,17 +715,11 @@ export default function PackDetail() {
       {pack.name !== 'Irregular Verbs' && (
         <SpeedDialFAB
           onAddWord={() => navigate(
-            pack.type === 'ielts' ? `/packs/${packId}/word/ielts/new`
-              : pack.type === 'english' ? `/packs/${packId}/word/english/new`
-                : `/packs/${packId}/word/new${topicFilter ? `?topic=${encodeURIComponent(topicFilter)}` : ''}`
+            `/packs/${packId}/word/new${topicFilter ? `?topic=${encodeURIComponent(topicFilter)}` : ''}`
           )}
           onImportJson={() => navigate(`/packs/${packId}/import-json${topicFilter ? `?topic=${encodeURIComponent(topicFilter)}` : ''}`)}
           onExtractPhoto={() => setShowPhotoExtractorModal(true)}
-          onAddChapter={
-            pack.type === 'ielts' || pack.type === 'english'
-              ? undefined
-              : () => setShowAddChapterModal(true)
-          }
+          onAddChapter={() => setShowAddChapterModal(true)}
         />
       )}
 

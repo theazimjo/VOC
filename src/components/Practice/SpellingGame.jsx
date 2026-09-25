@@ -28,7 +28,6 @@ export default function SpellingGame({
   onProgress,
   onExit,
   language = 'en-US',
-  isEnglishPack = false,
 }) {
   const { user } = useAuth();
   const { t, language: appLanguage } = useLanguage();

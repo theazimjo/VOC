@@ -112,7 +112,6 @@ export default function LibraryPage() {
 
     const categoryIcons = {
       all: '✨',
-      'IELTS': '🎓',
       'Grammatika': '📋',
       'Iboralar': '🔗',
       "So'z birikmalari": '🧩',
@@ -320,8 +319,8 @@ export default function LibraryPage() {
       example: wordData.example || '',
       notes: wordData.notes || '',
       partOfSpeech: wordData.partOfSpeech || 'noun',
-      // IELTS-pack-only fields - '' default, harmless no-op for every other
-      // market pack (see the "IELTS Pack Type" plan).
+      // Optional extra fields - '' default, harmless no-op for packs
+      // that don't carry them.
       synonyms: wordData.synonyms || '',
       collocations: wordData.collocations || '',
       nounForm: wordData.nounForm || '',

@@ -156,7 +156,6 @@ export default function Flashcard({
   onProgress,
   onExit,
   language = 'en-US',
-  isEnglishPack = false,
 }) {
   const { t } = useLanguage();
   const [currentIndex, setCurrentIndex]   = useState(0);
@@ -173,7 +172,7 @@ export default function Flashcard({
   const reviewWordsRef   = useRef([]);
 
   const currentWord       = words[currentIndex];
-  const isMonolingualCard = isEnglishPack || Boolean(!currentWord?.translation && currentWord?.definition);
+  const isMonolingualCard = Boolean(!currentWord?.translation && currentWord?.definition);
 
   const wordsKey = useMemo(() => {
     if (!words || !Array.isArray(words)) return '';

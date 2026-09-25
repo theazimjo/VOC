@@ -89,7 +89,7 @@
   flex-wrap: wrap;
 }
 
-.ielts-topic-filter-row {
+.pack-topic-filter-row {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
@@ -107,11 +107,11 @@
   mask-image: linear-gradient(to right, #000 calc(100% - 24px), transparent 100%);
 }
 
-.ielts-topic-filter-row::-webkit-scrollbar {
+.pack-topic-filter-row::-webkit-scrollbar {
   display: none;
 }
 
-.ielts-topic-chip {
+.pack-topic-chip {
   position: relative;
   overflow: hidden;
   isolation: isolate;
@@ -128,12 +128,12 @@
   transition: border-color 0.15s ease, color 0.15s ease;
 }
 
-.ielts-topic-chip:hover {
+.pack-topic-chip:hover {
   border-color: var(--accent-1);
   color: var(--text-primary);
 }
 
-.ielts-topic-chip.active {
+.pack-topic-chip.active {
   background: var(--accent-1-dim);
   border-color: var(--accent-1);
   color: var(--accent-1);
@@ -142,7 +142,7 @@
 /* Fills the chip's own background left-to-right, proportional to how well
    the user knows that chapter's words - a mastery bar built into the chip
    itself, so progress is visible without opening the chapter. */
-.ielts-topic-chip-fill {
+.pack-topic-chip-fill {
   position: absolute;
   inset: 0;
   z-index: 0;
@@ -152,41 +152,20 @@
   pointer-events: none;
 }
 
-.ielts-topic-chip.active .ielts-topic-chip-fill {
+.pack-topic-chip.active .pack-topic-chip-fill {
   background: linear-gradient(90deg, var(--accent-1-dim), var(--accent-1-dim));
 }
 
-.ielts-topic-chip-label {
+.pack-topic-chip-label {
   position: relative;
   z-index: 1;
 }
 
-.ielts-topic-chip-pages {
+.pack-topic-chip-pages {
   font-size: 0.82em;
   opacity: 0.82;
   font-weight: 500;
   margin-left: 2px;
-}
-
-.pack-type-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 0.68rem;
-  font-weight: 700;
-  color: var(--accent-1);
-  background: var(--accent-1-dim);
-  border: 1px solid var(--border);
-  padding: 3px 9px;
-  border-radius: var(--radius-full);
-  letter-spacing: 0.01em;
-  vertical-align: middle;
-}
-
-.pack-type-badge-english {
-  color: #3b82f6;
-  background: rgba(59, 130, 246, 0.12);
-  border-color: rgba(59, 130, 246, 0.25);
 }
 
 .pack-detail-text p {
@@ -522,7 +501,7 @@
 }
 
 /* Chapter Drag and Context Menu Styles */
-.ielts-topic-reorder-group {
+.pack-topic-reorder-group {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -530,7 +509,7 @@
   padding: 2px 0;
 }
 
-.ielts-topic-chip-item {
+.pack-topic-chip-item {
   display: inline-flex;
   align-items: center;
   user-select: none;
@@ -541,14 +520,14 @@
 }
 
 /* 3-second holding visual feedback */
-.ielts-topic-chip-item.is-holding .ielts-topic-chip {
+.pack-topic-chip-item.is-holding .pack-topic-chip {
   transform: scale(0.96);
   opacity: 0.9;
   border-color: var(--accent-1);
   transition: transform 0.2s ease, opacity 0.2s ease, border-color 0.2s ease;
 }
 
-.ielts-topic-chip-item.is-holding::after {
+.pack-topic-chip-item.is-holding::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -566,7 +545,7 @@
 }
 
 /* Dragging unlocked after 3 seconds */
-.ielts-topic-chip-item.drag-ready .ielts-topic-chip {
+.pack-topic-chip-item.drag-ready .pack-topic-chip {
   cursor: grabbing;
   border-color: var(--accent-1);
   box-shadow: 0 0 0 2px var(--accent-1), 0 8px 20px rgba(0, 0, 0, 0.3);

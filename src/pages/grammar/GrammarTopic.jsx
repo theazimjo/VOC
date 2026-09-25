@@ -2,9 +2,6 @@ import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useParams, useNavigate } from 'react-router-dom';
 import { grammarData } from '../../data/grammarData';
-import { russianGrammarData } from '../../data/russianGrammarData';
-import { sicilianGrammarData } from '../../data/sicilianGrammarData';
-import { greekGrammarData } from '../../data/greekGrammarData';
 import { getQuestionsForExercise, getExerciseType, findGrammarTopic } from '../../utils/grammarHelpers';
 import { useGrammarStats } from '../../hooks/useGrammarStats';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -493,11 +490,6 @@ export default function GrammarTopic() {
     ? manualGuideLang
     : (appLang === 'ru' ? 'ru' : 'uz');
 
-  // Which language a question's Sicilian/Russian words should be read aloud
-  // in — inferred from the topic id's track prefix, same convention GrammarPage
-  // and GrammarGuide use to keep each track's own language of instruction.
-  const speakLang = topicId?.startsWith('scn-') ? 'it-IT' : topicId?.startsWith('ru-') ? 'ru-RU' : 'en-US';
-
   const topic = findGrammarTopic(level, topicId);
 
   const [currentQ, setCurrentQ] = useState(0);
@@ -770,7 +762,7 @@ export default function GrammarTopic() {
             question={question}
             answered={answered}
             guideLang={activeGuideLang}
-            lang={speakLang}
+            lang="en-US"
             onAnswer={(isCorrect) => {
               setAnswered(true);
               if (isCorrect) { playCorrectSound(); vibrate([50, 30, 50]); setScore(s => s + 1); }

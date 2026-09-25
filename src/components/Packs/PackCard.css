@@ -105,27 +105,6 @@
   min-width: 0;
 }
 
-.pack-type-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 0.62rem;
-  font-weight: 700;
-  color: #7c3aed;
-  background: rgba(124, 58, 237, 0.12);
-  border: 1px solid rgba(124, 58, 237, 0.25);
-  padding: 2px 7px;
-  border-radius: var(--radius-full);
-  margin-left: 6px;
-}
-
-.pack-type-badge-english {
-  color: #3b82f6;
-  background: rgba(59, 130, 246, 0.12);
-  border-color: rgba(59, 130, 246, 0.25);
-  vertical-align: middle;
-}
-
 .pack-card-title {
   font-weight: 700;
   font-size: var(--font-md);

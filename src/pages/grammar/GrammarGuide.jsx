@@ -72,11 +72,6 @@ export default function GrammarGuide() {
 
   const blocks = parseGuide(activeGuideText);
 
-  // Which language the example sentences should be read aloud in — inferred
-  // from the topic id's track prefix (ru-/scn-), never from the UZB/RUS guide
-  // -language toggle above, which only translates the explanation text.
-  const speakLang = topicId?.startsWith('scn-') ? 'it-IT' : topicId?.startsWith('ru-') ? 'ru-RU' : 'en-US';
-
   return (
     <div className="grammar-guide-page">
       <div className="gg-header">
@@ -114,7 +109,7 @@ export default function GrammarGuide() {
       </div>
 
       <div className="gg-body">
-        <GuideBlocks blocks={blocks} lang={speakLang} />
+        <GuideBlocks blocks={blocks} lang="en-US" />
       </div>
 
       <div className="gg-footer">

@@ -80,13 +80,10 @@ export function getExerciseType(exerciseId, t) {
 }
 
 import { grammarData } from '../data/grammarData.js';
-import { russianGrammarData } from '../data/russianGrammarData.js';
-import { sicilianGrammarData } from '../data/sicilianGrammarData.js';
-import { greekGrammarData } from '../data/greekGrammarData.js';
 
 export function findGrammarTopic(level, topicId) {
   if (!topicId) return null;
-  const datasets = [grammarData, russianGrammarData, sicilianGrammarData, greekGrammarData];
+  const datasets = [grammarData];
 
   // 1. Try finding in the specified level across datasets
   if (level) {

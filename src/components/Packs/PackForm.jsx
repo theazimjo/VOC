@@ -12,7 +12,6 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
   const [color, setColor] = useState(bookColors[0]);
   const [folderId, setFolderId] = useState('');
   const [language, setLanguage] = useState('en-US');
-  const [type, setType] = useState('default');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [folderMenuOpen, setFolderMenuOpen] = useState(false);
@@ -20,7 +19,6 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
   const { t } = useLanguage();
 
   const isLocked = Boolean(editPack && (editPack.name === 'Irregular Verbs' || editPack.isSystem));
-  const isTypeLocked = isLocked;
 
   useEffect(() => {
     if (editPack) {
@@ -30,7 +28,6 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
       setColor(editPack.color || bookColors[0]);
       setFolderId(editPack.folderId || '');
       setLanguage(editPack.language || 'en-US');
-      setType(editPack.type || 'default');
     } else {
       setName('');
       setDescription('');
@@ -38,7 +35,6 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
       setColor(bookColors[Math.floor(Math.random() * bookColors.length)]);
       setFolderId(defaultFolderId || '');
       setLanguage('en-US');
-      setType('default');
     }
     setIsSubmitting(false);
     setShowDeleteConfirm(false);
@@ -72,7 +68,7 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
     if (!name.trim() || isSubmitting) return;
     setIsSubmitting(true);
     try {
-      await onSave({ name, description, icon, color, folderId: folderId || null, language, type });
+      await onSave({ name, description, icon, color, folderId: folderId || null, language });
     } finally {
       setIsSubmitting(false);
     }
@@ -130,24 +126,6 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
                     />
                   </div>
 
-                  <div className="input-group">
-                    <label>{t('library.packType')}</label>
-                    <select
-                      className="select"
-                      value={type}
-                      onChange={e => setType(e.target.value)}
-                      disabled={isTypeLocked}
-                    >
-                      <option value="default">{t('library.packTypeGeneral')}</option>
-                      <option value="ielts">{t('library.packTypeIelts')}</option>
-                      <option value="english">{t('library.packTypeEnglish')}</option>
-                    </select>
-                    {isTypeLocked && (
-                      <span style={{ fontSize: 'var(--font-xs)', color: 'var(--text-muted)' }}>
-                        {t('library.packTypeLocked')}
-                      </span>
-                    )}
-                  </div>
 
                   {folders.length > 0 && (
                     <div className="input-group">

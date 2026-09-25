@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Zap, Brain, PenLine, Shuffle, ListChecks, Mic, NotebookPen, GraduationCap, BookOpenText, Timer, Grid3x3 } from 'lucide-react';
+import { Zap, Brain, PenLine, Shuffle, ListChecks, Mic, NotebookPen, Timer } from 'lucide-react';
 import { recommendPracticeMode } from '../../utils/memoryEngine';
 import { PRACTICE_MODE_MIN_WORDS } from '../../utils/helpers';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -11,7 +11,7 @@ const RECOMMENDATION_BADGES = {
   reinforce: (count) => `${count} forgetting ⏰`,
 };
 
-export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularVerbsOnly, isIeltsPack, isEnglishPack, words = [] }) {
+export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularVerbsOnly, words = [] }) {
   const { t } = useLanguage();
   const modes = [];
 
@@ -46,51 +46,12 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularV
     glowColor: 'hsl(200, 90%, 55%)'
   });
 
-  // Additive, unlike the Irregular-Verbs-only block below - an IELTS pack
-  // still gets every generic mode too, since its words still have
-  // word/translation like any other pack. This just adds one more option.
-  if (isIeltsPack) {
-    modes.push({
-      id: 'ielts-trainer',
-      icon: GraduationCap,
-      title: t('practice.ieltsTrainerTitle'),
-      desc: t('practice.ieltsTrainerDesc'),
-      badge: t('practice.minWordsBadge', { min: 3 }),
-      glowColor: 'hsl(258, 85%, 62%)'
-    });
-  }
-
-  // English-monolingual packs often leave translation blank on purpose (the
-  // whole point is learning through English definitions, not Uzbek), so
-  // Match/Quiz — which key off translation as the graded answer — are
-  // skipped for them, same reasoning as the Irregular-Verbs-only block
-  // below. Pronunciation still works fine either way, so it's kept.
-  if (isEnglishPack) {
-    modes.push({
-      id: 'english-trainer',
-      icon: BookOpenText,
-      title: t('practice.englishTrainerTitle'),
-      desc: t('practice.englishTrainerDesc'),
-      badge: t('practice.minWordsBadge', { min: 3 }),
-      glowColor: 'hsl(210, 90%, 58%)'
-    });
-  }
-
-  // Spelling is the only OTHER active-recall (typing) drill in the app
-  // besides Pronunciation — without it, an English-monolingual pack would
-  // never be able to satisfy the "confirmed from 2 distinct angles" gate in
-  // spacedRepetition.js (MIN_CONFIRMED_MODES), permanently capping mastery
-  // at 65% no matter how many correct answers a word gets. word.definition
-  // is a required field on every English-pack word (unlike translation), so
-  // SpellingGame can safely use it as the prompt instead for this pack type.
   if (!irregularVerbsOnly) {
     modes.push({
       id: 'spelling',
       icon: PenLine,
       title: t('practice.spellingTitle'),
-      desc: isEnglishPack
-        ? t('practice.spellingDescEnglish')
-        : t('practice.spellingDescGeneric'),
+      desc: t('practice.spellingDescGeneric'),
       badge: recommendation?.modeId === 'spelling'
         ? (recommendation.reason === 'new' ? t('practice.recBadge')
           : recommendation.reason === 'confirm' ? t('practice.toConfirmBadge', { count: recommendation.count })
@@ -103,7 +64,7 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularV
   // The corp Irregular Verbs pack only ever needs the dedicated trainer plus
   // flashcards — Match/Quiz are built around translation recall, not V1/V2/V3
   // conjugation, so they're skipped entirely here.
-  if (!irregularVerbsOnly && !isEnglishPack) {
+  if (!irregularVerbsOnly) {
     modes.push(
       {
         id: 'match',
@@ -128,14 +89,6 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularV
         desc: t('practice.speedDesc'),
         badge: t('practice.minWordsBadge', { min: 4 }),
         glowColor: 'hsl(0, 85%, 60%)'
-      },
-      {
-        id: 'gridmatch',
-        icon: Grid3x3,
-        title: t('practice.gridmatchTitle'),
-        desc: t('practice.gridmatchDesc'),
-        badge: t('practice.minWordsBadge', { min: 6 }),
-        glowColor: 'hsl(280, 80%, 62%)'
       }
     );
   }

@@ -14,10 +14,9 @@ import { switchActiveGroup, joinGroupAsUser, setAppMode } from '../../services/c
 import { joinIndependentGroupByCode } from '../../services/independentTeacherService';
 import { SELECTABLE_COURSES } from '../../data/coursePicker';
 
-// Most courses (Sicilian, Essential 3000, Science) share the generic
-// /course/:packId Dashboard/Lesson/Vocabulary pages; a course can opt into
-// its own fully separate section (e.g. Greek → /greek/:packId, see
-// pages/greek/GreekLayout.jsx) via `basePath` in coursePicker.js.
+// Courses (Essential 3000, Science) share the generic /course/:packId
+// Dashboard/Lesson/Vocabulary pages; a course can opt into its own fully
+// separate section via `basePath` in coursePicker.js.
 const getCourseBasePath = (courseId) =>
   SELECTABLE_COURSES.find((c) => c.id === courseId)?.basePath || '/course';
 import GlobalSearch from '../common/GlobalSearch';
@@ -44,8 +43,8 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
   const switcherRef = useRef(null);
 
   // "Add" modal — opened from the Plus card in the group switcher. Offers
-  // both joining a group by PIN and starting a self-serve course (e.g.
-  // Sicilian A1) Duolingo-style; a started course then shows up as its own
+  // both joining a group by PIN and starting a self-serve course
+  // Duolingo-style; a started course then shows up as its own
   // card in the switcher row, before the group cards.
   const [showAddModal, setShowAddModal] = useState(false);
   const [startingCourseId, setStartingCourseId] = useState(null);
@@ -396,7 +395,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                 <span style={{ fontSize: '0.72rem', color: appMode === 'individual' && !activeCourse ? 'var(--text-primary)' : 'var(--text-secondary)', fontWeight: appMode === 'individual' && !activeCourse ? 700 : 500, textAlign: 'center' }}>{t('nav.personal')}</span>
               </div>
 
-              {/* Course Cards — self-started courses (e.g. Sicilian A1), shown before the group cards */}
+              {/* Course Cards — self-started courses, shown before the group cards */}
               {myCourses.map((c) => {
                 const isActive = location.pathname.startsWith(`/course/${c.id}`);
                 return (

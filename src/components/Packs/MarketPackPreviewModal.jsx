@@ -5,7 +5,6 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { essential3000ChapterText } from '../../data/essential3000ChapterText';
 import { scienceChapterText } from '../../data/scienceChapterText';
 import { healthChapterText } from '../../data/healthChapterText';
-import { preIeltsChapterText } from '../../data/preIeltsChapterText';
 import { imReadySeptemberChapterText } from '../../data/imReadySeptemberChapterText';
 import './MarketPackPreviewModal.css';
 
@@ -13,7 +12,6 @@ const allChapterText = {
   ...essential3000ChapterText,
   ...scienceChapterText,
   ...healthChapterText,
-  ...preIeltsChapterText,
   ...imReadySeptemberChapterText
 };
 

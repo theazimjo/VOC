@@ -9,7 +9,7 @@ import { packIcons } from '../../utils/helpers';
 import { WHATS_NEW_VERSION } from './WhatsNewModal';
 import './OnboardingModal.css';
 
-const SUGGESTED_NAMES = ['Daily Words', 'IELTS Vocabulary', 'Work & Business', 'Travel'];
+const SUGGESTED_NAMES = ['Daily Words', 'Everyday English', 'Work & Business', 'Travel'];
 const GOAL_OPTIONS = [5, 10, 15, 20];
 
 function markOnboardingDone(uid) {
@@ -76,7 +76,7 @@ export default function OnboardingModal({ onClose }) {
             <motion.div key="s1" className="onboarding-step" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
               <div className="onboarding-icon-circle"><GraduationCap size={36} strokeWidth={2} /></div>
               <h2>Welcome to VOC!</h2>
-              <p>Your personal assistant for building vocabulary, mastering grammar, and preparing for IELTS.</p>
+              <p>Your personal assistant for building vocabulary, and mastering grammar.</p>
               <button className="onboarding-primary-btn" onClick={() => setStep(2)}>Get Started →</button>
             </motion.div>
           )}
@@ -96,7 +96,7 @@ export default function OnboardingModal({ onClose }) {
               <input
                 type="text"
                 className="onboarding-input"
-                placeholder="Pack Name (e.g. IELTS Words)"
+                placeholder="Pack Name (e.g. Daily Words)"
                 value={packName}
                 onChange={e => setPackName(e.target.value)}
               />

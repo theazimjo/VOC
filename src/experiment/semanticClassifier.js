@@ -355,7 +355,7 @@ const ALL_CLUSTERS_BY_KEY = new Map([
 
 /**
  * Resolve the best available cluster for a word record, in priority order:
- *  1. A curated `topic` field (market packs like IELTS/Science set this by
+ *  1. A curated `topic` field (market packs like Science set this by
  *     hand — real, zero-cost ground truth, always trusted first).
  *  2. A cached `clusterKey` — written once onto the word record by
  *     PacksContext's background classifyWordSemantic() pass. Only the key

@@ -48,7 +48,7 @@ export default function PacksPage() {
         <div className="empty-state">
           <div className="empty-state-icon">📦</div>
           <h3>To'plamlar topilmadi</h3>
-          <p>Mavzu bo'yicha so'z to'plamlari yarating — IELTS, Business English, Daily Life va boshqalar</p>
+          <p>Mavzu bo'yicha so'z to'plamlari yarating — Business English, Daily Life va boshqalar</p>
           <button className="btn btn-primary" onClick={() => setShowForm(true)}>
             Birinchi to'plamni yaratish
           </button>

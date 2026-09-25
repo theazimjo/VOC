@@ -24,15 +24,11 @@ const CourseDashboard = lazyWithRetry(() => import('./pages/personal/course/Cour
 const CourseLesson = lazyWithRetry(() => import('./pages/personal/course/CourseLesson'));
 const CourseVocabulary = lazyWithRetry(() => import('./pages/personal/course/CourseVocabulary'));
 const WordFormPage = lazyWithRetry(() => import('./pages/personal/WordFormPage'));
-const IeltsWordFormPage = lazyWithRetry(() => import('./pages/personal/IeltsWordFormPage'));
-const EnglishWordFormPage = lazyWithRetry(() => import('./pages/personal/EnglishWordFormPage'));
 const BulkImportPage = lazyWithRetry(() => import('./pages/personal/BulkImportPage'));
 const PracticePage = lazyWithRetry(() => import('./pages/personal/PracticePage'));
 const StatsPage = lazyWithRetry(() => import('./pages/personal/StatsPage'));
 const ProfilePage = lazyWithRetry(() => import('./pages/personal/ProfilePage'));
 const LibraryPage = lazyWithRetry(() => import('./pages/personal/LibraryPage'));
-const MoviesPage = lazyWithRetry(() => import('./pages/personal/MoviesPage'));
-const GamesPage = lazyWithRetry(() => import('./pages/personal/GamesPage'));
 const MixedPractice = lazyWithRetry(() => import('./pages/personal/MixedPractice'));
 const Settings = lazyWithRetry(() => import('./pages/personal/Settings'));
 const GrammarPage = lazyWithRetry(() => import('./pages/grammar/GrammarPage'));
@@ -47,14 +43,6 @@ const GrammarPathPractice = lazyWithRetry(() => import('./pages/grammar/GrammarP
 const GrammarPathReview = lazyWithRetry(() => import('./pages/grammar/GrammarPathReview'));
 const MemoryLab = lazyWithRetry(() => import('./experiment/pages/MemoryLab'));
 const AdminDashboard = lazyWithRetry(() => import('./pages/admin/AdminDashboard'));
-
-// Standalone Greek track — own layout/pages, deliberately not sharing the
-// generic Course* components (see pages/greek/GreekLayout.jsx).
-const GreekLayout = lazyWithRetry(() => import('./pages/greek/GreekLayout'));
-const GreekDashboard = lazyWithRetry(() => import('./pages/greek/GreekDashboard'));
-const GreekAlphabet = lazyWithRetry(() => import('./pages/greek/GreekAlphabet'));
-const GreekVocabulary = lazyWithRetry(() => import('./pages/greek/GreekVocabulary'));
-const GreekGrammar = lazyWithRetry(() => import('./pages/greek/GreekGrammar'));
 
 // Corporate / Learning Center Portal Routes (fully independent of the
 // individual-learner auth/route tree above — see CorpProtectedRoute)
@@ -130,12 +118,6 @@ export default function App() {
                         <Route path="vocabulary" element={<CourseVocabulary />} />
                         <Route path="practice" element={<PracticePage />} />
                       </Route>
-                      <Route path="/greek/:packId" element={<GreekLayout />}>
-                        <Route index element={<GreekDashboard />} />
-                        <Route path="alphabet" element={<GreekAlphabet />} />
-                        <Route path="vocabulary" element={<GreekVocabulary />} />
-                        <Route path="grammar" element={<GreekGrammar />} />
-                      </Route>
                       <Route element={<Layout />}>
                         <Route path="/" element={<Dashboard />} />
                         <Route path="/library" element={<LibraryPage />} />
@@ -145,10 +127,6 @@ export default function App() {
                         <Route path="/packs/:packId" element={<PackDetail />} />
                         <Route path="/packs/:packId/word/new" element={<WordFormPage />} />
                         <Route path="/packs/:packId/word/edit/:wordId" element={<WordFormPage />} />
-                        <Route path="/packs/:packId/word/ielts/new" element={<IeltsWordFormPage />} />
-                        <Route path="/packs/:packId/word/ielts/edit/:wordId" element={<IeltsWordFormPage />} />
-                        <Route path="/packs/:packId/word/english/new" element={<EnglishWordFormPage />} />
-                        <Route path="/packs/:packId/word/english/edit/:wordId" element={<EnglishWordFormPage />} />
                         <Route path="/packs/:packId/import-json" element={<BulkImportPage />} />
                         <Route path="/practice" element={<PracticePage />} />
                         <Route path="/practice/:sourceType/:sourceId" element={<PracticePage />} />
@@ -167,8 +145,6 @@ export default function App() {
                         <Route path="/grammar/:level/:topicId/:exerciseId" element={<GrammarTopic />} />
                         <Route path="/grammar-test" element={<GrammarTest />} />
                         <Route path="/grammar-test/run/:testId" element={<GrammarTest />} />
-                        <Route path="/movies" element={<MoviesPage />} />
-                        <Route path="/games" element={<GamesPage />} />
                         <Route path="/experiment" element={<MemoryLab />} />
                         <Route path="/admin" element={<AdminDashboard />} />
                       </Route>

@@ -257,10 +257,7 @@ export function PacksProvider({ children }) {
         icon: data.icon || '📦',
         level: data.level || 'beginner',
         language: data.language || 'en-US',
-        // 'default' unless explicitly requested otherwise - existing
-        // callers never pass this, so every pre-existing pack-creation
-        // path keeps behaving exactly as before.
-        type: ['ielts', 'english'].includes(data.type) ? data.type : 'default',
+        type: 'default',
         createdAt: new Date().toISOString(),
         wordCount: 0,
         ...(data.marketPackId ? { marketPackId: data.marketPackId } : {}),

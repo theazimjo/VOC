@@ -1022,7 +1022,7 @@ ${exampleGrades}
                         onClick={() => handleViewAttempt(att)}
                       >
                         <div className="history-main-content">
-                          <span className={`history-badge-letter ${att.testId.startsWith('ielts_') ? 'ielts' : ''}`}>
+                          <span className="history-badge-letter">
                             {getVariantLetter(att.testId)}
                           </span>
                           <div className="history-info">

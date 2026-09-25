@@ -22,11 +22,8 @@ import MatchGame from '../../components/Practice/MatchGame';
 import QuizGame from '../../components/Practice/QuizGame';
 import PronounceGame from '../../components/Practice/PronounceGame';
 import IrregularVerbsTrainer from '../../components/Practice/IrregularVerbsTrainer';
-import IeltsTrainer from '../../components/Practice/IeltsTrainer';
-import EnglishTrainer from '../../components/Practice/EnglishTrainer';
 import SentenceBuilder from '../../components/Practice/SentenceBuilder';
 import SpeedGame, { getSpeedRecord } from '../../components/Practice/SpeedGame';
-import GridMatchGame from '../../components/Practice/GridMatchGame';
 import PracticeResultsView from '../../components/Practice/PracticeResultsView';
 import PracticeQuitModal from '../../components/Practice/PracticeQuitModal';
 import './PracticePage.css';
@@ -509,7 +506,6 @@ export default function PracticePage({ embedded = false, initialSource = null, i
       onExit: handleBack,
       sourceName: selectedSource?.title || selectedSource?.name || "Library",
       language: selectedSource?.language || 'en-US',
-      isEnglishPack: selectedSource?.type === 'english' || selectedSource?.type === 'monolingual',
       onProgress: (current, total) => setProgressPct(total > 0 ? (current / total) * 100 : 0)
     };
 
@@ -521,10 +517,7 @@ export default function PracticePage({ embedded = false, initialSource = null, i
       case 'pronounce': return <PronounceGame {...props} />;
       case 'sentence': return <SentenceBuilder {...props} />;
       case 'speed': return <SpeedGame {...props} />;
-      case 'gridmatch': return <GridMatchGame {...props} />;
       case 'irregular-verbs': return <IrregularVerbsTrainer {...props} initialSubStep={querySubStep} />;
-      case 'ielts-trainer': return <IeltsTrainer {...props} />;
-      case 'english-trainer': return <EnglishTrainer {...props} />;
       default: return null;
     }
   };
@@ -671,8 +664,6 @@ export default function PracticePage({ embedded = false, initialSource = null, i
               <PracticeHub
                 onSelectMode={handleStartPractice}
                 isIrregularVerbs={selectedSource?.id === 'irregular-verbs' || selectedSource?.isIrregularVerbs}
-                isIeltsPack={selectedSource?.type === 'ielts'}
-                isEnglishPack={selectedSource?.type === 'english' || selectedSource?.type === 'monolingual'}
                 words={sourceWords}
               />
             </motion.div>
@@ -692,10 +683,10 @@ export default function PracticePage({ embedded = false, initialSource = null, i
             >
               <div className="intro-card">
                 <div className="intro-mode-icon">
-                  {selectedMode === 'flashcard' ? '🧠' : selectedMode === 'spelling' ? '✍️' : selectedMode === 'match' ? '🔀' : selectedMode === 'quiz' ? '📝' : selectedMode === 'pronounce' ? '🎙️' : selectedMode === 'sentence' ? '📓' : selectedMode === 'speed' ? '⏱️' : selectedMode === 'gridmatch' ? '🧩' : selectedMode === 'irregular-verbs' ? '⚡' : selectedMode === 'ielts-trainer' ? '🎓' : selectedMode === 'english-trainer' ? '🔤' : '🎮'}
+                  {selectedMode === 'flashcard' ? '🧠' : selectedMode === 'spelling' ? '✍️' : selectedMode === 'match' ? '🔀' : selectedMode === 'quiz' ? '📝' : selectedMode === 'pronounce' ? '🎙️' : selectedMode === 'sentence' ? '📓' : selectedMode === 'speed' ? '⏱️' : selectedMode === 'irregular-verbs' ? '⚡' : '🎮'}
                 </div>
                 <h2>
-                  {selectedMode === 'flashcard' ? t('practice.flashcardsTitle') : selectedMode === 'spelling' ? t('practice.spellingTitle') : selectedMode === 'match' ? t('practice.matchTitle') : selectedMode === 'quiz' ? t('practice.quizTitle') : selectedMode === 'pronounce' ? t('practice.pronounceTitle') : selectedMode === 'sentence' ? 'Sentence Builder' : selectedMode === 'speed' ? t('practice.speedTitle') : selectedMode === 'gridmatch' ? t('practice.gridmatchTitle') : selectedMode === 'irregular-verbs' ? t('practice.irregularVerbsTitle') : selectedMode === 'ielts-trainer' ? t('practice.ieltsTrainerTitle') : selectedMode === 'english-trainer' ? t('practice.englishTrainerTitle') : t('practice.title')}
+                  {selectedMode === 'flashcard' ? t('practice.flashcardsTitle') : selectedMode === 'spelling' ? t('practice.spellingTitle') : selectedMode === 'match' ? t('practice.matchTitle') : selectedMode === 'quiz' ? t('practice.quizTitle') : selectedMode === 'pronounce' ? t('practice.pronounceTitle') : selectedMode === 'sentence' ? 'Sentence Builder' : selectedMode === 'speed' ? t('practice.speedTitle') : selectedMode === 'irregular-verbs' ? t('practice.irregularVerbsTitle') : t('practice.title')}
                 </h2>
                 <p>{t('practice.wordsReady', { count: practiceWords.length })}</p>
                 {selectedMode === 'speed' && (
@@ -716,18 +707,18 @@ export default function PracticePage({ embedded = false, initialSource = null, i
           {!pageLoading && step === 'practice' && (
             <motion.div
               key="practice"
-              className={`practice-session ${selectedMode === 'spelling' || selectedMode === 'flashcard' || selectedMode === 'match' || selectedMode === 'quiz' || selectedMode === 'speed' || selectedMode === 'gridmatch' || selectedMode === 'pronounce' || selectedMode === 'irregular-verbs' ? 'spelling-session-fullscreen' : ''}`}
+              className={`practice-session ${selectedMode === 'spelling' || selectedMode === 'flashcard' || selectedMode === 'match' || selectedMode === 'quiz' || selectedMode === 'speed' || selectedMode === 'pronounce' || selectedMode === 'irregular-verbs' ? 'spelling-session-fullscreen' : ''}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
             >
-              {selectedMode !== 'spelling' && selectedMode !== 'flashcard' && selectedMode !== 'match' && selectedMode !== 'quiz' && selectedMode !== 'speed' && selectedMode !== 'gridmatch' && selectedMode !== 'pronounce' && selectedMode !== 'irregular-verbs' && (
+              {selectedMode !== 'spelling' && selectedMode !== 'flashcard' && selectedMode !== 'match' && selectedMode !== 'quiz' && selectedMode !== 'speed' && selectedMode !== 'pronounce' && selectedMode !== 'irregular-verbs' && (
                 <div className="practice-session-header clean-quiz-header">
                   <button className="clean-back-arrow" onClick={handleBack} title="Exit practice">
                     <ChevronLeft size={22} strokeWidth={2.5} />
                   </button>
                   <h1 className="clean-quiz-title">
-                    {selectedMode === 'flashcard' ? `🧠 ${t('practice.flashcardsTitle')}` : selectedMode === 'spelling' ? `✍️ ${t('practice.spellingTitle')}` : selectedMode === 'match' ? `🔀 ${t('practice.matchTitle')}` : selectedMode === 'quiz' ? `📝 ${t('practice.quizTitle')}` : selectedMode === 'pronounce' ? `🎙️ ${t('practice.pronounceTitle')}` : selectedMode === 'sentence' ? '📓 Sentence Builder' : selectedMode === 'speed' ? `⏱️ ${t('practice.speedTitle')}` : selectedMode === 'gridmatch' ? `🧩 ${t('practice.gridmatchTitle')}` : selectedMode === 'irregular-verbs' ? `⚡ ${t('practice.irregularVerbsTitle')}` : selectedMode === 'ielts-trainer' ? `🎓 ${t('practice.ieltsTrainerTitle')}` : selectedMode === 'english-trainer' ? `🔤 ${t('practice.englishTrainerTitle')}` : t('practice.title')}
+                    {selectedMode === 'flashcard' ? `🧠 ${t('practice.flashcardsTitle')}` : selectedMode === 'spelling' ? `✍️ ${t('practice.spellingTitle')}` : selectedMode === 'match' ? `🔀 ${t('practice.matchTitle')}` : selectedMode === 'quiz' ? `📝 ${t('practice.quizTitle')}` : selectedMode === 'pronounce' ? `🎙️ ${t('practice.pronounceTitle')}` : selectedMode === 'sentence' ? '📓 Sentence Builder' : selectedMode === 'speed' ? `⏱️ ${t('practice.speedTitle')}` : selectedMode === 'irregular-verbs' ? `⚡ ${t('practice.irregularVerbsTitle')}` : t('practice.title')}
                   </h1>
                   <div style={{ width: '40px', opacity: 0 }}></div>
 
