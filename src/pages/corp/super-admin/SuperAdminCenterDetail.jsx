@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Building2, ChevronRight, KeyRound, Mail, PauseCircle, Pencil, Phone, PlayCircle, Users, Settings } from 'lucide-react';
-import { getCenter, updateCenter, setCenterStatus, sendCorpPasswordReset } from '../../../services/corpService';
+import { getCenter, updateCenter, setCenterStatus } from '../../../services/corpService';
 import ConfirmSheet from '../../../components/corp/ConfirmSheet';
 import DeleteCenterFlow from './DeleteCenterFlow';
+import SetPasswordSheet from './SetPasswordSheet';
 import { computeCenterActivity, computeGroupActivity, formatRelative, HEALTH_LABEL } from './centerActivity';
 import { Button, EmptyState, Field, LoadingRows, Page, Row, Section, Sheet, Stat, StatusDot } from './ui';
 import { useToast } from './useToast';
@@ -27,6 +28,7 @@ export default function SuperAdminCenterDetail() {
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [busy, setBusy] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [passwordOpen, setPasswordOpen] = useState(false);
 
   const load = useCallback(async () => {
     try {
@@ -132,19 +134,6 @@ export default function SuperAdminCenterDetail() {
     }
   };
 
-  const resetPassword = async () => {
-    if (!center.adminEmail) return;
-    setBusy(true);
-    try {
-      await sendCorpPasswordReset(center.adminEmail);
-      showToast(`Parolni tiklash xati ${center.adminEmail} ga yuborildi`);
-    } catch (err) {
-      showToast(`Xatolik: ${err.message}`, 'error');
-    } finally {
-      setBusy(false);
-    }
-  };
-
   const openGroup = (g) => navigate(`/corp/super-admin/centers/${center.id}/groups/${g.id}`);
 
   const groupsSection = (
@@ -241,7 +230,7 @@ export default function SuperAdminCenterDetail() {
         {teachersSection}
       </div>
 
-      <Sheet open={settingsOpen} onClose={() => setSettingsOpen(false)} title="Boshqaruv va Faollik">
+      <Sheet open={settingsOpen} onClose={() => setSettingsOpen(false)} title="Boshqaruv">
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <Section title="Faollik">
             <Row title="Bu hafta vazifa" detail={activity.homeworkWeek} />
@@ -264,9 +253,9 @@ export default function SuperAdminCenterDetail() {
             <Row
               icon={<KeyRound size={16} />}
               iconTone="orange"
-              title="Parolni tiklash xatini yuborish"
-              onClick={resetPassword}
-              disabled={busy || !center.adminEmail}
+              title="Admin parolini o'zgartirish"
+              onClick={() => { setSettingsOpen(false); setPasswordOpen(true); }}
+              disabled={!center.adminUid && !center.adminEmail}
             />
             <Row
               icon={suspended ? <PlayCircle size={16} /> : <PauseCircle size={16} />}
@@ -296,6 +285,12 @@ export default function SuperAdminCenterDetail() {
           <Button type="submit" block disabled={saving}>{saving ? 'Saqlanmoqda...' : 'Saqlash'}</Button>
         </form>
       </Sheet>
+
+      <SetPasswordSheet
+        open={passwordOpen}
+        onClose={() => setPasswordOpen(false)}
+        target={{ uid: center.adminUid, email: center.adminEmail, label: name }}
+      />
 
       <ConfirmSheet
         open={confirmSuspend}

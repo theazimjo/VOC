@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Ban, CheckCircle2, KeyRound, Users } from 'lucide-react';
 import { getPlatformUser, sendCorpPasswordReset, deleteCorpUser, setCorpUserDisabled, getAllCenters } from '../../../services/corpService';
 import ConfirmSheet from '../../../components/corp/ConfirmSheet';
 import { Page, Section, Row, Stat, StatusDot, LoadingRows } from './ui';
+import { useToast } from './useToast';
+import SetPasswordSheet from './SetPasswordSheet';
 import './sa.css';
 
 // Helpers from SuperAdminUsers (simplified)
@@ -45,6 +47,9 @@ function lastSeenText(u) {
 
 export default function SuperAdminUserDetail() {
   const { uid } = useParams();
+  const navigate = useNavigate();
+  const [toastNode, showToast] = useToast();
+  const [passwordOpen, setPasswordOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [centerNames, setCenterNames] = useState({});
   const [loading, setLoading] = useState(true);
@@ -76,9 +81,9 @@ export default function SuperAdminUserDetail() {
     setBusy(true);
     try {
       await sendCorpPasswordReset(user.email);
-      alert(`Parolni tiklash xati ${user.email} ga yuborildi`);
+      showToast(`Parolni tiklash xati ${user.email} ga yuborildi`);
     } catch (err) {
-      alert(`Xatolik: ${err.message}`);
+      showToast(`Xatolik: ${err.message}`, 'error');
     } finally {
       setBusy(false);
     }
@@ -92,15 +97,15 @@ export default function SuperAdminUserDetail() {
       if (kind === 'remove') {
         await deleteCorpUser(user.uid);
         setUser({ ...user, corpRole: null, corpCenterName: '', disabled: false });
-        alert('Markaz paneliga kirish huquqi olib tashlandi');
+        showToast('Markaz paneliga kirish huquqi olib tashlandi');
       } else {
         await setCorpUserDisabled(user.uid, !user.disabled);
         setUser({ ...user, disabled: !user.disabled });
-        alert(user.disabled ? 'Blokdan chiqarildi' : 'Bloklandi');
+        showToast(user.disabled ? 'Blokdan chiqarildi' : 'Bloklandi');
       }
       setConfirm(null);
     } catch (err) {
-      alert(`Xatolik: ${err.message}`);
+      showToast(`Xatolik: ${err.message}`, 'error');
     } finally {
       setBusy(false);
     }
@@ -207,13 +212,22 @@ export default function SuperAdminUserDetail() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
           {user.email && (
             <Section title="Boshqaruv">
-              <Row
-                icon={<KeyRound size={16} />}
-                iconTone="orange"
-                title="Parolni tiklash xatini yuborish"
-                onClick={handleReset}
-                disabled={busy}
-              />
+              {user.corpRole ? (
+                <Row
+                  icon={<KeyRound size={16} />}
+                  iconTone="orange"
+                  title="Parolni o'zgartirish"
+                  onClick={() => setPasswordOpen(true)}
+                />
+              ) : (
+                <Row
+                  icon={<KeyRound size={16} />}
+                  iconTone="orange"
+                  title="Parolni tiklash xatini yuborish"
+                  onClick={handleReset}
+                  disabled={busy}
+                />
+              )}
               {user.corpRole && (
                 <Row
                   icon={user.disabled ? <CheckCircle2 size={16} /> : <Ban size={16} />}
@@ -249,6 +263,16 @@ export default function SuperAdminUserDetail() {
         onConfirm={runConfirmed}
         onCancel={() => !busy && setConfirm(null)}
       />
+
+      {user.corpRole && (
+        <SetPasswordSheet
+          open={passwordOpen}
+          onClose={() => setPasswordOpen(false)}
+          target={{ uid: user.uid, email: user.email, label: displayName(user) }}
+        />
+      )}
+
+      {toastNode}
     </Page>
   );
 }

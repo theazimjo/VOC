@@ -982,6 +982,47 @@
   color: #ffffff;
 }
 
+/* ── Password field ── */
+.sa-password-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.sa-password-field .sa-input {
+  padding-right: 92px;
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  letter-spacing: 0.04em;
+}
+
+.sa-password-btn {
+  position: absolute;
+  top: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--sa-label-2);
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.sa-password-btn:nth-of-type(1) {
+  right: 44px;
+}
+
+.sa-password-btn:nth-of-type(2) {
+  right: 6px;
+}
+
+.sa-password-btn:active {
+  background: var(--sa-press);
+}
+
 /* Confirm dialogs must sit above an open sheet. */
 .sa-layout .confirm-sheet-overlay {
   z-index: 3200;
