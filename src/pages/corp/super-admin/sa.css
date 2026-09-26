@@ -15,6 +15,8 @@
   --sa-label: #ffffff;
   --sa-label-2: rgba(235, 235, 245, 0.62);
   --sa-label-3: rgba(235, 235, 245, 0.32);
+  /* Placeholder text stays ≥4.5:1 on its field (label-3 is for glyphs). */
+  --sa-placeholder: rgba(235, 235, 245, 0.55);
   --sa-blue: #0a84ff;
   --sa-green: #30d158;
   --sa-orange: #ff9f0a;
@@ -52,6 +54,7 @@
   --sa-label: #000000;
   --sa-label-2: rgba(60, 60, 67, 0.62);
   --sa-label-3: rgba(60, 60, 67, 0.32);
+  --sa-placeholder: rgba(60, 60, 67, 0.7);
   --sa-blue: #007aff;
   --sa-green: #34c759;
   --sa-orange: #ff9500;
@@ -682,7 +685,7 @@
 
 .sa-input::placeholder,
 .sa-textarea::placeholder {
-  color: var(--sa-label-3);
+  color: var(--sa-placeholder);
 }
 
 /* ── Center sheet header ── */
@@ -1358,4 +1361,290 @@
 @keyframes sa-ios-spin {
   0% { opacity: 1; }
   100% { opacity: 0.25; }
+}
+
+/* ── Small controls shared with the center admin panel ── */
+.sa-icon-btn.is-gray {
+  background: var(--sa-fill);
+  color: var(--sa-label);
+}
+
+.sa-link-btn {
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-size: 15px;
+  color: var(--sa-blue);
+  cursor: pointer;
+}
+
+.sa-link-btn:active {
+  opacity: 0.5;
+}
+
+/* "…" at the end of a table row — the row itself opens the item. */
+.sa-more-btn {
+  justify-self: end;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--sa-label-2);
+  cursor: pointer;
+  transition: background-color 120ms ease-out, transform 100ms ease-out;
+}
+
+.sa-more-btn:hover {
+  background: var(--sa-fill);
+}
+
+.sa-more-btn:active {
+  transform: scale(0.92);
+}
+
+.sa-table-row:focus-visible {
+  outline: 2px solid var(--sa-blue);
+  outline-offset: -2px;
+}
+
+/* Older editors still built on the --pg-* / --accent tokens
+   (CourseManager, TeacherPackViewer) — point them at this surface. */
+.sa-layout .sa-legacy {
+  --pg-surface: var(--sa-surface);
+  --pg-surface-hover: var(--sa-surface-2);
+  --pg-card-bg: var(--sa-surface);
+  --accent: var(--sa-blue);
+  --accent-rgb: 10, 132, 255;
+  --accent-hover: color-mix(in srgb, var(--sa-blue) 85%, #000);
+  --card-shadow: var(--sa-shadow);
+  min-height: 100%;
+}
+
+/* ── Teacher panel additions ── */
+.sa-stats.is-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Primary actions under a page title (e.g. "Vazifa berish" / "Taklif qilish"). */
+.sa-page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.sa-page-actions .sa-btn {
+  flex: 1 1 200px;
+}
+
+@media (min-width: 1100px) {
+  .sa-page-actions .sa-btn {
+    flex: 0 0 auto;
+    min-width: 200px;
+  }
+}
+
+/* Small status pill inside rows and tables. */
+.sa-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--sa-fill);
+  color: var(--sa-label-2);
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.sa-chip.tone-green { background: color-mix(in srgb, var(--sa-green) 18%, transparent); color: var(--sa-green); }
+.sa-chip.tone-orange { background: color-mix(in srgb, var(--sa-orange) 18%, transparent); color: var(--sa-orange); }
+.sa-chip.tone-blue { background: color-mix(in srgb, var(--sa-blue) 16%, transparent); color: var(--sa-blue); }
+
+.sa-chip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 12px 16px;
+}
+
+.sa-mono {
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Selection checkbox (blue), vs. the red one in the delete flow. */
+.sa-check.is-select {
+  margin-right: 16px;
+}
+
+.sa-check.is-select.is-on {
+  border-color: var(--sa-blue);
+  background: var(--sa-blue);
+}
+
+.sa-check.is-used {
+  border-color: var(--sa-label-3);
+  background: var(--sa-label-3);
+}
+
+/* Invite QR — white plate so it scans in dark mode too. */
+.sa-qr {
+  width: min(260px, 70vw);
+  aspect-ratio: 1;
+  margin: 4px auto 14px;
+  padding: 12px;
+  box-sizing: border-box;
+  border-radius: 18px;
+  background: #ffffff;
+}
+
+.sa-qr img,
+.sa-qr-placeholder {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 6px;
+}
+
+/* Sticky action bar at the bottom of a page (homework picker). */
+.sa-bottom-bar {
+  position: sticky;
+  bottom: 16px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+  padding: 10px 10px 10px 18px;
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--sa-surface) 86%, transparent);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  box-shadow: 0 0 0 0.5px var(--sa-separator), 0 8px 28px rgba(0, 0, 0, 0.18);
+}
+
+.sa-bottom-bar-text {
+  font-size: 15px;
+  color: var(--sa-label-2);
+}
+
+@media (max-width: 768px) {
+  .sa-bottom-bar {
+    bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* ── Browser surfaces: focus, selection, caret ── */
+.sa-layout :focus-visible {
+  outline: 2px solid var(--sa-blue);
+  outline-offset: 2px;
+}
+
+.sa-layout .sa-row:focus-visible,
+.sa-layout .sa-table-row:focus-visible {
+  outline-offset: -2px;
+}
+
+.sa-layout .sa-input:focus-visible,
+.sa-layout .sa-textarea:focus-visible,
+.sa-layout .sa-select:focus-visible,
+.sa-layout .sa-search input:focus-visible {
+  outline: none; /* the field draws its own blue ring */
+}
+
+.sa-layout ::selection {
+  background: color-mix(in srgb, var(--sa-blue) 32%, transparent);
+}
+
+.sa-layout input,
+.sa-layout textarea {
+  caret-color: var(--sa-blue);
+}
+
+/* ── Settings-style pages ── */
+@media (min-width: 1100px) {
+  .sa-page.is-narrow {
+    max-width: 720px;
+  }
+}
+
+/* Label left, value typed on the right, inside an .sa-group. */
+.sa-form-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 48px;
+  padding: 0 16px;
+  cursor: text;
+}
+
+.sa-form-row + .sa-form-row::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 16px;
+  right: 0;
+  border-top: 0.5px solid var(--sa-separator);
+}
+
+.sa-form-row-label {
+  flex: 0 0 auto;
+  min-width: 110px;
+  font-size: 17px;
+  color: var(--sa-label);
+}
+
+.sa-form-row input,
+.sa-form-row select {
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+  border: none;
+  background: transparent;
+  color: var(--sa-label);
+  font: inherit;
+  font-size: 17px;
+  text-align: right;
+  outline: none;
+}
+
+.sa-form-row input::placeholder {
+  color: var(--sa-placeholder);
+}
+
+.sa-form-row:focus-within .sa-form-row-label {
+  color: var(--sa-blue);
+}
+
+/* Save bar under a grouped form — appears only when something changed. */
+.sa-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin: 10px 0 0;
+}
+
+@media (max-width: 768px) {
+  .sa-form-actions .sa-btn {
+    flex: 1;
+  }
+}
+
+.sa-section:has(+ .sa-form-actions) {
+  margin-bottom: 0;
+}
+
+.sa-form-actions {
+  margin-bottom: 28px;
 }

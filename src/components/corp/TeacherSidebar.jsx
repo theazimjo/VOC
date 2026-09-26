@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import {
-  Building2, Users, BookOpen,
-  BarChart3, Settings, LogOut, ChevronLeft, ChevronRight, Repeat
+  Users, BookOpen, Settings, LogOut, ChevronLeft, ChevronRight, Repeat
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { setActiveProfile } from '../../utils/activeProfile';
@@ -27,22 +26,21 @@ export default function TeacherSidebar({ centerName, teacherName, email, phone, 
 
   const navItems = [
     { to: basePath, label: 'Guruhlarim', icon: Users, isGroupTab: true },
-    { to: `${basePath}/courses`, label: "So'zlar", icon: BookOpen },
-    { to: `${basePath}/statistics`, label: 'Statistika', icon: BarChart3 },
-    { to: `${basePath}/settings`, label: 'Sozlamalar', icon: Settings, matchExtra: `${basePath}/archive` },
+    { to: `${basePath}/courses`, label: "So'z to'plamlari", icon: BookOpen },
+    { to: `${basePath}/settings`, label: 'Sozlamalar', icon: Settings, },
   ];
 
   return (
     <aside className={`corp-admin-sidebar ${collapsed ? 'collapsed' : ''}`}>
       {/* Sidebar Top / Brand */}
       <div className="sidebar-brand-header">
-        <VocLogo collapsed={collapsed} subTitle={centerName ? `${centerName} • Teacher` : 'Teacher'} />
+        <VocLogo collapsed={collapsed} subTitle={centerName ? `${centerName} · O'qituvchi` : "O'qituvchi"} />
 
         <button
           className="sidebar-collapse-toggle"
           onClick={() => setCollapsed(!collapsed)}
-          title={collapsed ? 'Expand' : 'Collapse'}
-          aria-label={collapsed ? 'Expand' : 'Collapse'}
+          title={collapsed ? 'Kengaytirish' : "Yig'ish"}
+          aria-label={collapsed ? 'Kengaytirish' : "Yig'ish"}
         >
           {collapsed ? <ChevronRight size={16} strokeWidth={2.4} /> : <ChevronLeft size={16} strokeWidth={2.4} />}
         </button>
@@ -53,7 +51,7 @@ export default function TeacherSidebar({ centerName, teacherName, email, phone, 
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = item.isGroupTab
-            ? (location.pathname === basePath || location.pathname.startsWith(`${basePath}/group/`))
+            ? (location.pathname === basePath || location.pathname.startsWith(`${basePath}/group/`) || location.pathname.startsWith(`${basePath}/archive`))
             : location.pathname.startsWith(item.to) || (item.matchExtra && location.pathname.startsWith(item.matchExtra));
           return (
             <Link
@@ -77,18 +75,18 @@ export default function TeacherSidebar({ centerName, teacherName, email, phone, 
               {(teacherName || email || 'T')[0].toUpperCase()}
             </div>
             <div className="admin-email-text">
-              <span className="adm-name">{teacherName || 'Teacher'}</span>
-              <span className="adm-mail">{phone || email || 'Teacher account'}</span>
+              <span className="adm-name">{teacherName || "O'qituvchi"}</span>
+              <span className="adm-mail">{phone || email}</span>
             </div>
           </div>
         )}
 
-        <button className="btn-corp-logout" onClick={handleSwitchToPersonal} title="Switch to Personal">
+        <button className="btn-corp-logout" onClick={handleSwitchToPersonal} title="Shaxsiy rejimga o'tish">
           <Repeat size={16} strokeWidth={2.2} />
           {!collapsed && <span>Shaxsiy rejimga o'tish</span>}
         </button>
 
-        <button className="btn-corp-logout" onClick={handleLogout} title="Log out">
+        <button className="btn-corp-logout" onClick={handleLogout} title="Chiqish">
           <LogOut size={16} strokeWidth={2.2} />
           {!collapsed && <span>Chiqish</span>}
         </button>

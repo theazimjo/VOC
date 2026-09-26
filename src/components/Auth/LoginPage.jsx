@@ -13,7 +13,7 @@ import './LoginPage.css';
 // Warm every lazy chunk *in the destination's render chain* while the
 // success transition plays — not just the leaf page. /corp/teacher, for
 // instance, renders CorpLayout > CorpProtectedRoute > TeacherLayout >
-// TeacherDashboard; each is its own lazyWithRetry() chunk, and leaving any
+// TeacherGroups; each is its own lazyWithRetry() chunk, and leaving any
 // of them un-prefetched still suspends React on navigate, showing the
 // generic FullScreenLoader instead of a clean cut.
 const ROUTE_PREFETCHERS = {
@@ -22,13 +22,13 @@ const ROUTE_PREFETCHERS = {
     () => import('../../components/corp/CorpLayout'),
     () => import('../../components/corp/CorpProtectedRoute'),
     () => import('../../components/corp/CorpAdminLayout'),
-    () => import('../../pages/corp/center-admin/CenterAdminDashboard'),
+    () => import('../../pages/corp/center-admin/AdminHome'),
   ],
   '/corp/teacher': [
     () => import('../../components/corp/CorpLayout'),
     () => import('../../components/corp/CorpProtectedRoute'),
     () => import('../../components/corp/TeacherLayout'),
-    () => import('../../pages/corp/teacher/TeacherDashboard'),
+    () => import('../../pages/corp/teacher/TeacherGroups'),
   ],
 };
 

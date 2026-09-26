@@ -1,12 +1,15 @@
 import { Navigate, Outlet, useOutletContext } from 'react-router-dom';
 import CorpAdminSidebar from './CorpAdminSidebar';
 import CorpAdminBottomNav from './CorpAdminBottomNav';
+import { CenterDataProvider } from '../../pages/corp/center-admin/CenterDataContext';
 import './CorpAdminLayout.css';
+import '../../pages/corp/super-admin/sa.css';
 
 // The corp identity (role/centerId/centerName/email) is resolved once by
 // CorpProtectedRoute and handed down via its <Outlet context={identity} />;
 // read it here with useOutletContext() rather than re-deriving it, so the
 // centerId used for every write below actually matches corpUsers/{uid}.
+// Same Apple-style surface (sa-layout) as the super admin panel.
 export default function CorpAdminLayout() {
   const identity = useOutletContext();
 
@@ -16,21 +19,20 @@ export default function CorpAdminLayout() {
   if (!identity?.centerId) return <Navigate to="/corp" replace />;
 
   const centerId = identity.centerId;
-  const centerName = identity?.centerName || 'O\'quv Markazi';
+  const centerName = identity?.centerName || "O'quv markazi";
   const email = identity?.email || '';
 
   return (
-    <div className="corp-admin-layout">
-      {/* Dedicated Center Admin Sidebar (desktop only) */}
-      <CorpAdminSidebar centerName={centerName} email={email} />
+    <CenterDataProvider centerId={centerId} fallbackName={centerName}>
+      <div className="corp-admin-layout sa-layout">
+        <CorpAdminSidebar centerName={centerName} email={email} />
 
-      {/* Main Content Pane */}
-      <main className="corp-admin-main-pane">
-        <Outlet context={{ centerId, centerName }} />
-      </main>
+        <main className="corp-admin-main-pane">
+          <Outlet context={{ centerId, centerName, email }} />
+        </main>
 
-      {/* Center Admin Bottom Navigation (mobile only) */}
-      <CorpAdminBottomNav />
-    </div>
+        <CorpAdminBottomNav />
+      </div>
+    </CenterDataProvider>
   );
 }

@@ -409,200 +409,7 @@ export async function createTeacher(centerId, centerName, teacherForm) {
 
   await set(teacherRef, teacherPayload);
 
-  return { id: teacherId, name, email, tempPassword };
-}
-
-/**
- * Center Admin: Get this center's persistent teacher join code, generating
- * one on first use. Kept as a single stable code per center (unlike the
- * per-group 6-digit codes) plus a top-level `teacherJoinCodes/{code}` index
- * mirroring the `groupCodes` reverse-lookup pattern, so a prospective
- * teacher's code entry resolves in one read.
- */
-export async function getOrCreateTeacherJoinCode(centerId) {
-  const codeFieldRef = ref(db, `centers/${centerId}/teacherJoinCode`);
-  const snap = await get(codeFieldRef);
-  if (snap.exists()) return snap.val();
-
-  let code = generateJoinCode();
-  let indexSnap = await get(ref(db, `teacherJoinCodes/${code}`));
-  let attempts = 0;
-  while (indexSnap.exists() && attempts < 10) {
-    code = generateJoinCode();
-    indexSnap = await get(ref(db, `teacherJoinCodes/${code}`));
-    attempts++;
-  }
-
-  await set(codeFieldRef, code);
-  await set(ref(db, `teacherJoinCodes/${code}`), centerId);
-  return code;
-}
-
-/**
- * Center Admin: Replace the center's teacher join code — the old one stops
- * resolving immediately (its index entry is deleted, not just left stale).
- */
-export async function regenerateTeacherJoinCode(centerId) {
-  const oldSnap = await get(ref(db, `centers/${centerId}/teacherJoinCode`));
-  const oldCode = oldSnap.exists() ? oldSnap.val() : null;
-
-  let code = generateJoinCode();
-  let indexSnap = await get(ref(db, `teacherJoinCodes/${code}`));
-  let attempts = 0;
-  while (indexSnap.exists() && attempts < 10) {
-    code = generateJoinCode();
-    indexSnap = await get(ref(db, `teacherJoinCodes/${code}`));
-    attempts++;
-  }
-
-  const updates = { [`centers/${centerId}/teacherJoinCode`]: code, [`teacherJoinCodes/${code}`]: centerId };
-  if (oldCode) updates[`teacherJoinCodes/${oldCode}`] = null;
-  await update(ref(db), updates);
-  return code;
-}
-
-/**
- * Self-service: an already-signed-in personal account requests to join the
- * center identified by `code` (from getOrCreateTeacherJoinCode) as a
- * teacher. Does NOT create the teacher record — that only happens once a
- * center admin calls approveTeacherRequest(). Mirrored under two paths:
- * `centers/{centerId}/pendingTeachers/{uid}` (the admin's Pending Requests
- * list, already scoped to their center) and `teacherJoinRequests/{uid}` (a
- * direct-by-uid mirror so the requester can check their own status without
- * needing to already know the centerId).
- */
-export async function requestToJoinCenter(code, uid, profile) {
-  const centerIdSnap = await get(ref(db, `teacherJoinCodes/${code}`));
-  if (!centerIdSnap.exists()) {
-    throw new Error('Invalid center ID!');
-  }
-  const centerId = centerIdSnap.val();
-
-  const centerSnap = await get(ref(db, `centers/${centerId}`));
-  if (!centerSnap.exists()) {
-    throw new Error('Center not found!');
-  }
-  const center = centerSnap.val();
-  if (center.status === 'suspended') {
-    throw new Error('This center is currently suspended.');
-  }
-
-  const existingCorpSnap = await get(ref(db, `corpUsers/${uid}`));
-  if (existingCorpSnap.exists()) {
-    throw new Error('This account already has a teacher or admin role.');
-  }
-
-  const existingRequestSnap = await get(ref(db, `teacherJoinRequests/${uid}`));
-  if (existingRequestSnap.exists()) {
-    throw new Error('You already have a pending request.');
-  }
-
-  const request = {
-    uid,
-    name: profile.name,
-    email: profile.email || '',
-    phone: profile.phone || '',
-    centerId,
-    centerName: center.name || '',
-    joinCode: code,
-    requestedAt: new Date().toISOString(),
-    status: 'pending',
-  };
-
-  const updates = {};
-  updates[`centers/${centerId}/pendingTeachers/${uid}`] = request;
-  updates[`teacherJoinRequests/${uid}`] = request;
-  await update(ref(db), updates);
-  return request;
-}
-
-/** Self-service: check if the signed-in account has a pending center-join request. */
-export async function getMyTeacherJoinRequest(uid) {
-  const snap = await get(ref(db, `teacherJoinRequests/${uid}`));
-  return snap.exists() ? snap.val() : null;
-}
-
-/** Self-service: withdraw a not-yet-approved request. */
-export async function cancelTeacherRequest(uid, centerId) {
-  const updates = {};
-  updates[`centers/${centerId}/pendingTeachers/${uid}`] = null;
-  updates[`teacherJoinRequests/${uid}`] = null;
-  await update(ref(db), updates);
-}
-
-/** Center Admin: every pending teacher request for their center. */
-export async function getCenterPendingTeachers(centerId) {
-  const snap = await get(ref(db, `centers/${centerId}/pendingTeachers`));
-  if (!snap.exists()) return [];
-  const val = snap.val();
-  return Object.keys(val).map(uid => ({ uid, ...val[uid] }));
-}
-
-/**
- * Center Admin: approve a pending request — creates the real teacher record
- * (same shape createTeacher/the old joinCenterAsTeacher produced, so every
- * existing center-admin view keeps working unmodified) and clears the
- * request from both tables.
- */
-export async function approveTeacherRequest(centerId, uid) {
-  const requestSnap = await get(ref(db, `centers/${centerId}/pendingTeachers/${uid}`));
-  if (!requestSnap.exists()) {
-    throw new Error('Request not found.');
-  }
-  const request = requestSnap.val();
-
-  const teacherRef = push(ref(db, `centers/${centerId}/teachers`));
-  const teacherId = teacherRef.key;
-
-  const teacherPayload = {
-    id: teacherId,
-    uid,
-    centerId,
-    name: request.name,
-    email: request.email || '',
-    phone: request.phone || '',
-    subject: 'Ingliz tili',
-    status: 'active',
-    joinCode: request.joinCode,
-    createdAt: new Date().toISOString(),
-  };
-
-  const updates = {};
-  updates[`centers/${centerId}/teachers/${teacherId}`] = teacherPayload;
-  updates[`corpUsers/${uid}`] = {
-    role: 'teacher',
-    centerId,
-    centerName: request.centerName,
-    teacherId,
-    teacherName: request.name,
-    email: request.email || '',
-    phone: request.phone || '',
-    joinCode: request.joinCode,
-    createdAt: new Date().toISOString(),
-  };
-  updates[`centers/${centerId}/pendingTeachers/${uid}`] = null;
-  updates[`teacherJoinRequests/${uid}`] = null;
-
-  await update(ref(db), updates);
-  return { centerId, centerName: request.centerName, teacherId };
-}
-
-/** Center Admin: reject a pending request — the requester can submit a new one later. */
-export async function rejectTeacherRequest(centerId, uid) {
-  const updates = {};
-  updates[`centers/${centerId}/pendingTeachers/${uid}`] = null;
-  updates[`teacherJoinRequests/${uid}`] = null;
-  await update(ref(db), updates);
-}
-
-export async function updateTeacherPassword(centerId, teacherId, uid, newPassword) {
-  const updates = {};
-  updates[`centers/${centerId}/teachers/${teacherId}/tempPassword`] = newPassword;
-  if (uid) {
-    updates[`corpUsers/${uid}/tempPassword`] = newPassword;
-  }
-  await update(ref(db), updates);
-  return { success: true };
+  return { id: teacherId, uid, name, email, tempPassword };
 }
 
 /**
@@ -668,13 +475,24 @@ export async function createCustomPack(centerId, packData, ownerUid = null) {
  * if the source was a shared center pack.
  */
 export async function duplicateCustomPack(centerId, pack, ownerUid = null) {
-  return createCustomPack(centerId, {
+  const copy = await createCustomPack(centerId, {
     title: `${pack.title} (Nusxa)`,
     level: pack.level,
     description: pack.description,
+    language: pack.language,
     words: pack.words || [],
     createdBy: pack.createdBy,
   }, ownerUid);
+  // Month / topic structure too — without it the copy collapses into one
+  // flat word list.
+  if (!pack.months?.length && !pack.units?.length) return copy;
+  const structure = {
+    months: pack.months || [],
+    units: pack.units || [],
+    sectionsCount: pack.sectionsCount || (pack.units || []).length,
+  };
+  await update(ref(db, `centers/${centerId}/customPacks/${copy.id}`), structure);
+  return { ...copy, ...structure };
 }
 
 /**
@@ -784,7 +602,7 @@ export async function createGroup(centerId, teacherId, groupData) {
     centerId,
     teacherId,
     name: groupData.name, // e.g. "General English - Group A"
-    level: groupData.level || 'Beginner',
+    ...(groupData.level ? { level: groupData.level } : {}), // optional, no longer asked for
     code,
     assignedPacks: groupData.assignedPacks || [], // list of pack IDs (default or custom) — "Asosiy"
     additionalPacks: groupData.additionalPacks || [], // "Qo'shimcha" (optional/supplementary) packs
@@ -843,6 +661,51 @@ export async function updateGroupDetails(centerId, groupId, updates) {
     }
   }
   return true;
+}
+
+/**
+ * Teacher: give a group a fresh 6-digit invite code. Students join by
+ * looking the code up in the global `groupCodes` index, so the index moves
+ * with it: the new code starts resolving and the old one (and its QR) stops,
+ * in one atomic write.
+ */
+export async function regenerateGroupCode(centerId, groupId) {
+  const snap = await get(ref(db, `centers/${centerId}/groups/${groupId}`));
+  if (!snap.exists()) throw new Error('Group not found');
+  const group = snap.val();
+
+  let code = generateJoinCode();
+  let attempts = 0;
+  while ((await get(ref(db, `groupCodes/${code}`))).exists() && attempts < 10) {
+    code = generateJoinCode();
+    attempts++;
+  }
+
+  const updates = {
+    [`centers/${centerId}/groups/${groupId}/code`]: code,
+    [`centers/${centerId}/groups/${groupId}/updatedAt`]: new Date().toISOString(),
+    [`groupCodes/${code}`]: { centerId, groupId, teacherId: group.teacherId, code, name: group.name || '' },
+  };
+  if (group.code && group.code !== code) updates[`groupCodes/${group.code}`] = null;
+  await update(ref(db), updates);
+  return code;
+}
+
+/**
+ * Teacher: hand a group over to another teacher of the same center. The
+ * code index carries the owning teacher too (the DB rules check it), so it
+ * moves in the same write.
+ */
+export async function transferGroup(centerId, groupId, newTeacherId) {
+  const snap = await get(ref(db, `centers/${centerId}/groups/${groupId}`));
+  if (!snap.exists()) throw new Error('Group not found');
+  const group = snap.val();
+  const updates = {
+    [`centers/${centerId}/groups/${groupId}/teacherId`]: newTeacherId,
+    [`centers/${centerId}/groups/${groupId}/updatedAt`]: new Date().toISOString(),
+  };
+  if (group.code) updates[`groupCodes/${group.code}/teacherId`] = newTeacherId;
+  await update(ref(db), updates);
 }
 
 export async function deleteGroup(centerId, groupId) {
@@ -1050,7 +913,7 @@ export async function addGroupHomework(centerId, groupId, items) {
   const newRef = push(ref(db, `centers/${centerId}/groups/${groupId}/homeworkList`));
   const now = new Date();
   const titles = items.map(i => i.unitTitle).filter(Boolean);
-  const dateLabel = now.toLocaleDateString(undefined, { day: 'numeric', month: 'long' });
+  const dateLabel = now.toLocaleDateString('uz-UZ', { day: 'numeric', month: 'long' });
   const name = titles.length > 0
     ? `${dateLabel} — ${titles.slice(0, 3).join(', ')}${titles.length > 3 ? ` +${titles.length - 3}` : ''}`
     : dateLabel;

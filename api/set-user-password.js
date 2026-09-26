@@ -2,9 +2,13 @@ import { cert, getApps, initializeApp } from 'firebase-admin/app';
 import { getAuth } from 'firebase-admin/auth';
 import { getDatabase } from 'firebase-admin/database';
 
-// Super admin sets a new login password for a center admin or teacher.
+// Sets a new login password for a center admin or teacher.
 //
 //   POST { idToken, uid?, email?, password } → { ok: true, email }
+//
+// Who may call it:
+//   - super admin: any center admin or teacher;
+//   - center admin: only teachers of their own center.
 //
 // Changing someone else's Firebase Auth password is only possible with the
 // Admin SDK, so this has to run server-side. It only touches accounts that
@@ -75,9 +79,15 @@ export default async function handler(req, res) {
     res.status(401).json({ error: 'Qaytadan tizimga kiring.' });
     return;
   }
-  if (!caller.email || !SUPER_ADMINS.includes(caller.email.toLowerCase())) {
-    res.status(403).json({ error: 'Faqat super admin uchun.' });
-    return;
+  const db = getDatabase(app);
+  const isSuperAdmin = Boolean(caller.email && SUPER_ADMINS.includes(caller.email.toLowerCase()));
+  let callerCorp = null;
+  if (!isSuperAdmin) {
+    callerCorp = (await db.ref(`corpUsers/${caller.uid}`).get()).val();
+    if (callerCorp?.role !== 'center_admin' || callerCorp.disabled === true || !callerCorp.centerId) {
+      res.status(403).json({ error: 'Faqat super admin yoki markaz admini uchun.' });
+      return;
+    }
   }
 
   let target;
@@ -88,11 +98,14 @@ export default async function handler(req, res) {
     return;
   }
 
-  const db = getDatabase(app);
-  const roleSnap = await db.ref(`corpUsers/${target.uid}/role`).get();
-  const role = roleSnap.val();
+  const targetCorp = (await db.ref(`corpUsers/${target.uid}`).get()).val();
+  const role = targetCorp?.role;
   if (role !== 'center_admin' && role !== 'teacher') {
     res.status(403).json({ error: "Faqat markaz admini yoki o'qituvchi parolini o'zgartirish mumkin." });
+    return;
+  }
+  if (!isSuperAdmin && (role !== 'teacher' || targetCorp.centerId !== callerCorp.centerId)) {
+    res.status(403).json({ error: "Faqat o'z markazingiz o'qituvchisining parolini o'zgartira olasiz." });
     return;
   }
 

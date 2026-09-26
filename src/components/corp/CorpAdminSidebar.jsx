@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import {
-  Building2, LayoutDashboard, Users, GraduationCap, BookOpen,
-  BarChart3, Settings, LogOut, ChevronLeft, ChevronRight
+  LayoutDashboard, Users, GraduationCap, BookOpen, Layers,
+  Settings, LogOut, ChevronLeft, ChevronRight
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -21,19 +21,19 @@ export default function CorpAdminSidebar({ centerName, email }) {
   };
 
   const navItems = [
-    { to: '/corp/admin', label: t('admin.navDashboard'), icon: LayoutDashboard, end: true },
-    { to: '/corp/admin/teachers', label: t('admin.navTeachers'), icon: Users },
-    { to: '/corp/admin/students', label: t('admin.navStudents'), icon: GraduationCap },
-    { to: '/corp/admin/courses', label: t('admin.navCourses'), icon: BookOpen },
-    { to: '/corp/admin/statistics', label: t('admin.navStatistics'), icon: BarChart3 },
-    { to: '/corp/admin/settings', label: t('admin.navSettings'), icon: Settings },
+    { to: '/corp/admin', label: 'Bosh sahifa', icon: LayoutDashboard, end: true },
+    { to: '/corp/admin/teachers', label: "O'qituvchilar", icon: Users },
+    { to: '/corp/admin/groups', label: 'Guruhlar', icon: Layers },
+    { to: '/corp/admin/students', label: "O'quvchilar", icon: GraduationCap },
+    { to: '/corp/admin/courses', label: 'Kurslar', icon: BookOpen },
+    { to: '/corp/admin/settings', label: 'Sozlamalar', icon: Settings },
   ];
 
   return (
     <aside className={`corp-admin-sidebar ${collapsed ? 'collapsed' : ''}`}>
       {/* Sidebar Top / Brand */}
       <div className="sidebar-brand-header">
-        <VocLogo collapsed={collapsed} subTitle={centerName ? `${centerName} • Admin` : 'Center Admin'} />
+        <VocLogo collapsed={collapsed} subTitle={centerName ? `${centerName} · Admin` : 'Markaz admini'} />
 
         <button
           className="sidebar-collapse-toggle"
@@ -73,7 +73,7 @@ export default function CorpAdminSidebar({ centerName, email }) {
             </div>
             <div className="admin-email-text">
               <span className="adm-name">{email?.split('@')[0] || 'Admin'}</span>
-              <span className="adm-mail">{email || 'admin@markaz.uz'}</span>
+              <span className="adm-mail">{email}</span>
             </div>
           </div>
         )}

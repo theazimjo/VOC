@@ -10,9 +10,11 @@ import { ChevronLeft, ChevronRight, Search, X } from 'lucide-react';
 // wasn't flung by the user.
 const SPRING = { type: 'spring', bounce: 0, duration: 0.38 };
 
-export function Page({ title, subtitle, action, back, children }) {
+// `narrow` keeps form-like pages (settings) at a readable width on desktop
+// instead of stretching every field across the whole screen.
+export function Page({ title, subtitle, action, back, narrow = false, children }) {
   return (
-    <div className="sa-page">
+    <div className={`sa-page ${narrow ? 'is-narrow' : ''}`}>
       {back && (
         <button type="button" className="sa-back" onClick={back.onClick}>
           <ChevronLeft size={20} strokeWidth={2.6} />
@@ -200,6 +202,17 @@ export function Button({ children, variant = 'filled', tone = 'blue', block = fa
     <button type={type} className={`sa-btn sa-btn-${variant} tone-${tone} ${block ? 'sa-btn-block' : ''}`} {...rest}>
       {children}
     </button>
+  );
+}
+
+// A labelled input inside a grouped list (iOS Settings style): label on
+// the left, value typed on the right, rows separated like Row.
+export function FormRow({ label, children }) {
+  return (
+    <label className="sa-form-row">
+      <span className="sa-form-row-label">{label}</span>
+      {children}
+    </label>
   );
 }
 

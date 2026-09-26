@@ -60,7 +60,10 @@ function TopCard({ word, isFlipped, onFlip, onJudge, language, isMonolingual, sa
       drag="x"
       dragConstraints={{ left: 0, right: 0 }}
       dragElastic={0.85}
-      onTap={() => {
+      onTap={(event) => {
+        if (event?.target && typeof event.target.closest === 'function' && event.target.closest('.duo-fc-speaker-btn, button')) {
+          return;
+        }
         if (Math.abs(x.get()) < 8) {
           onFlip();
         }
@@ -84,6 +87,7 @@ function TopCard({ word, isFlipped, onFlip, onJudge, language, isMonolingual, sa
           <button
             type="button"
             className="duo-fc-speaker-btn"
+            onPointerDown={e => e.stopPropagation()}
             onClick={e => { e.stopPropagation(); speakWord(word.word, language); }}
             title={safeT('practice.listen', 'Listen')}
           >
@@ -105,6 +109,7 @@ function TopCard({ word, isFlipped, onFlip, onJudge, language, isMonolingual, sa
           <button
             type="button"
             className="duo-fc-speaker-btn"
+            onPointerDown={e => e.stopPropagation()}
             onClick={e => { e.stopPropagation(); speakWord(word.word, language); }}
             title={safeT('practice.listen', 'Listen')}
           >

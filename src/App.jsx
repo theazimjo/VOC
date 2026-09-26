@@ -62,8 +62,21 @@ const SuperAdminUsers = lazyWithRetry(() => import('./pages/corp/super-admin/Sup
 const SuperAdminUserDetail = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminUserDetail'));
 const SuperAdminAnnouncements = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminAnnouncements'));
 const SuperAdminSettings = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminSettings'));
-const CenterAdminDashboard = lazyWithRetry(() => import('./pages/corp/center-admin/CenterAdminDashboard'));
-const TeacherDashboard = lazyWithRetry(() => import('./pages/corp/teacher/TeacherDashboard'));
+const AdminHome = lazyWithRetry(() => import('./pages/corp/center-admin/AdminHome'));
+const AdminTeachers = lazyWithRetry(() => import('./pages/corp/center-admin/AdminTeachers'));
+const AdminTeacherDetail = lazyWithRetry(() => import('./pages/corp/center-admin/AdminTeacherDetail'));
+const AdminGroups = lazyWithRetry(() => import('./pages/corp/center-admin/AdminGroups'));
+const AdminGroupDetail = lazyWithRetry(() => import('./pages/corp/center-admin/AdminGroupDetail'));
+const AdminStudents = lazyWithRetry(() => import('./pages/corp/center-admin/AdminStudents'));
+const AdminCourses = lazyWithRetry(() => import('./pages/corp/center-admin/AdminCourses'));
+const AdminSettings = lazyWithRetry(() => import('./pages/corp/center-admin/AdminSettings'));
+const TeacherGroups = lazyWithRetry(() => import('./pages/corp/teacher/TeacherGroups'));
+const TeacherGroup = lazyWithRetry(() => import('./pages/corp/teacher/TeacherGroup'));
+const TeacherAssignHomework = lazyWithRetry(() => import('./pages/corp/teacher/TeacherAssignHomework'));
+const TeacherHomework = lazyWithRetry(() => import('./pages/corp/teacher/TeacherHomework'));
+const TeacherArchive = lazyWithRetry(() => import('./pages/corp/teacher/TeacherArchive'));
+const TeacherPacks = lazyWithRetry(() => import('./pages/corp/teacher/TeacherPacks'));
+const TeacherSettings = lazyWithRetry(() => import('./pages/corp/teacher/TeacherSettings'));
 const StudentCorpOverview = lazyWithRetry(() => import('./pages/corp/student/StudentCorpOverview'));
 const StudentCorpLearn = lazyWithRetry(() => import('./pages/corp/student/learn/StudentCorpLearn'));
 const StudentCorpProfile = lazyWithRetry(() => import('./pages/corp/student/StudentCorpProfile'));
@@ -171,24 +184,29 @@ export default function App() {
                       </Route>
                       <Route element={<CorpProtectedRoute allowedRoles={['center_admin']} />}>
                         <Route element={<CorpAdminLayout />}>
-                          <Route path="admin" element={<CenterAdminDashboard tab="dashboard" />} />
-                          <Route path="admin/teachers" element={<CenterAdminDashboard tab="teachers" />} />
-                          <Route path="admin/students" element={<CenterAdminDashboard tab="students" />} />
-                          <Route path="admin/courses" element={<CenterAdminDashboard tab="courses" />} />
-                          <Route path="admin/statistics" element={<CenterAdminDashboard tab="statistics" />} />
-                          <Route path="admin/settings" element={<CenterAdminDashboard tab="settings" />} />
+                          <Route path="admin" element={<AdminHome />} />
+                          <Route path="admin/teachers" element={<AdminTeachers />} />
+                          <Route path="admin/teachers/:teacherId" element={<AdminTeacherDetail />} />
+                          <Route path="admin/groups" element={<AdminGroups />} />
+                          <Route path="admin/groups/:groupId" element={<AdminGroupDetail />} />
+                          <Route path="admin/students" element={<AdminStudents />} />
+                          <Route path="admin/courses" element={<AdminCourses />} />
+                          <Route path="admin/statistics" element={<Navigate to="/corp/admin" replace />} />
+                          <Route path="admin/settings" element={<AdminSettings />} />
                         </Route>
                       </Route>
                       <Route element={<CorpProtectedRoute allowedRoles={['teacher']} />}>
                         <Route element={<TeacherLayout />}>
-                          <Route path="teacher" element={<TeacherDashboard tab="groups" />} />
-                          <Route path="teacher/group/:groupId" element={<TeacherDashboard tab="groups" />} />
-                          <Route path="teacher/group/:groupId/homework/:hwId" element={<TeacherDashboard tab="groups" />} />
-                          <Route path="teacher/group/:groupId/:subTab" element={<TeacherDashboard tab="groups" />} />
-                          <Route path="teacher/archive" element={<TeacherDashboard tab="archive" />} />
-                          <Route path="teacher/courses" element={<TeacherDashboard tab="courses" />} />
-                          <Route path="teacher/statistics" element={<TeacherDashboard tab="statistics" />} />
-                          <Route path="teacher/settings" element={<TeacherDashboard tab="settings" />} />
+                          <Route path="teacher" element={<TeacherGroups />} />
+                          <Route path="teacher/group/:groupId" element={<TeacherGroup />} />
+                          <Route path="teacher/group/:groupId/assign" element={<TeacherAssignHomework />} />
+                          <Route path="teacher/group/:groupId/homework/:hwId" element={<TeacherHomework />} />
+                          {/* Old per-group sub-tabs (students/words/stats/...) are all on the group page now. */}
+                          <Route path="teacher/group/:groupId/:subTab" element={<TeacherGroup />} />
+                          <Route path="teacher/archive" element={<TeacherArchive />} />
+                          <Route path="teacher/courses" element={<TeacherPacks />} />
+                          <Route path="teacher/statistics" element={<Navigate to="/corp/teacher" replace />} />
+                          <Route path="teacher/settings" element={<TeacherSettings />} />
                         </Route>
                       </Route>
                       <Route element={<StudentLayout />}>

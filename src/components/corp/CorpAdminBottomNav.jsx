@@ -1,27 +1,25 @@
 import { useLocation, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { LayoutDashboard, Users, GraduationCap, BookOpen, BarChart3, Settings } from 'lucide-react';
+import { LayoutDashboard, Users, GraduationCap, BookOpen, Layers } from 'lucide-react';
 import '../Layout/BottomNav.css';
 
+// Five tabs max on a phone; Settings opens from the gear on the home page.
 export default function CorpAdminBottomNav() {
   const location = useLocation();
 
   const navItems = [
-    { to: '/corp/admin', label: 'Dashboard', icon: LayoutDashboard, end: true },
-    { to: '/corp/admin/teachers', label: 'Teachers', icon: Users },
-    { to: '/corp/admin/students', label: 'Students', icon: GraduationCap },
-    { to: '/corp/admin/courses', label: 'Courses', icon: BookOpen },
-    { to: '/corp/admin/statistics', label: 'Stats', icon: BarChart3 },
-    { to: '/corp/admin/settings', label: 'Settings', icon: Settings },
+    { to: '/corp/admin', label: 'Asosiy', icon: LayoutDashboard, end: true, alsoActive: '/corp/admin/settings' },
+    { to: '/corp/admin/teachers', label: "O'qituvchi", icon: Users },
+    { to: '/corp/admin/groups', label: 'Guruhlar', icon: Layers },
+    { to: '/corp/admin/students', label: "O'quvchi", icon: GraduationCap },
+    { to: '/corp/admin/courses', label: 'Kurslar', icon: BookOpen },
   ];
 
   return (
-    <nav className="bottom-nav corp-admin-bottom-nav">
+    <nav className="bottom-nav">
       {navItems.map((item) => {
         const IconComponent = item.icon;
-        const isActive = item.end
-          ? location.pathname === item.to
-          : location.pathname.startsWith(item.to);
+        const isActive = (item.end ? location.pathname === item.to : location.pathname.startsWith(item.to))
+          || (item.alsoActive && location.pathname.startsWith(item.alsoActive));
 
         return (
           <Link
@@ -29,13 +27,6 @@ export default function CorpAdminBottomNav() {
             to={item.to}
             className={`bottom-nav-link ${isActive ? 'active' : ''}`}
           >
-            {isActive && (
-              <motion.span
-                className="bottom-nav-active-pill"
-                layoutId="corpAdminBottomNavPill"
-                transition={{ type: 'spring', stiffness: 420, damping: 34 }}
-              />
-            )}
             <span className="bottom-nav-icon">
               <IconComponent size={20} strokeWidth={2.2} />
             </span>

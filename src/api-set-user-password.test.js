@@ -2,10 +2,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 // Fake Admin SDK: `tokens` maps idToken → decoded token, `accounts` holds
-// Auth users, `roles` is corpUsers/{uid}/role.
+// Auth users, `corp` is corpUsers/{uid}.
 let tokens;
 let accounts;
-let roles;
+let corp;
 let updated;
 let removed;
 
@@ -35,7 +35,7 @@ vi.mock('firebase-admin/auth', () => ({
 vi.mock('firebase-admin/database', () => ({
   getDatabase: () => ({
     ref: (path) => ({
-      get: async () => ({ val: () => roles[path.split('/')[1]] ?? null }),
+      get: async () => ({ val: () => corp[path.split('/')[1]] ?? null }),
       remove: async () => { removed.push(path); },
     }),
   }),
@@ -60,9 +60,22 @@ beforeEach(() => {
   tokens = {
     sa: { uid: 'sa1', email: 'azimjonxolmirzayev30@gmail.com' },
     teacher: { uid: 't9', email: 'teacher@x.uz' },
+    centerAdmin: { uid: 'admin1', email: 'admin@center.uz' },
   };
-  accounts = { admin1: 'admin@center.uz', student1: 'student@gmail.com' };
-  roles = { admin1: 'center_admin', student1: undefined };
+  accounts = {
+    admin1: 'admin@center.uz',
+    admin2: 'admin@other.uz',
+    student1: 'student@gmail.com',
+    teacher1: 'teacher_998901234567@markaz.uz',
+    teacher2: 'teacher_998907654321@markaz.uz',
+  };
+  corp = {
+    admin1: { role: 'center_admin', centerId: 'c1' },
+    admin2: { role: 'center_admin', centerId: 'c2' },
+    teacher1: { role: 'teacher', centerId: 'c1' },
+    teacher2: { role: 'teacher', centerId: 'c2' },
+    t9: { role: 'teacher', centerId: 'c1' },
+  };
   updated = [];
   removed = [];
 });
@@ -81,10 +94,34 @@ describe('set-user-password API', () => {
     expect(updated[0].uid).toBe('admin1');
   });
 
-  it('refuses anyone who is not a super admin', async () => {
-    const r = await call({ idToken: 'teacher', uid: 'admin1', password: 'NewPass123' });
+  it('refuses a teacher', async () => {
+    const r = await call({ idToken: 'teacher', uid: 'teacher1', password: 'NewPass123' });
     expect(r.status).toBe(403);
     expect(updated).toHaveLength(0);
+  });
+
+  it("lets a center admin set their own teacher's password", async () => {
+    const r = await call({ idToken: 'centerAdmin', uid: 'teacher1', password: 'NewPass123' });
+    expect(r.status).toBe(200);
+    expect(updated).toEqual([{ uid: 'teacher1', password: 'NewPass123' }]);
+  });
+
+  it("refuses a center admin touching another center's teacher", async () => {
+    const r = await call({ idToken: 'centerAdmin', uid: 'teacher2', password: 'NewPass123' });
+    expect(r.status).toBe(403);
+    expect(updated).toHaveLength(0);
+  });
+
+  it('refuses a center admin changing another admin password', async () => {
+    const r = await call({ idToken: 'centerAdmin', uid: 'admin2', password: 'NewPass123' });
+    expect(r.status).toBe(403);
+    expect(updated).toHaveLength(0);
+  });
+
+  it('refuses a disabled center admin', async () => {
+    corp.admin1.disabled = true;
+    const r = await call({ idToken: 'centerAdmin', uid: 'teacher1', password: 'NewPass123' });
+    expect(r.status).toBe(403);
   });
 
   it('refuses an invalid sign-in token', async () => {

@@ -1,8 +1,3 @@
-export const GROUP_LEVEL_OPTIONS = [
-  'Beginner', 'Elementary', 'Pre-Intermediate', 'Intermediate', 'Upper-Intermediate',
-  'Advanced', 'Pre-IELTS', 'IELTS', 'CEFR B1', 'CEFR B2', 'CEFR C1',
-];
-
 // All packs assigned to a group across its three categories, deduplicated,
 // each tagged with the category it's assigned under (a pack could in theory
 // appear in more than one category — first match wins for the badge).

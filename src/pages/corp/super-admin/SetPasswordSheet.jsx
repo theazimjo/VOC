@@ -1,40 +1,66 @@
 import { useEffect, useState } from 'react';
-import { Check, Copy, Eye, EyeOff, RefreshCw, Send } from 'lucide-react';
+import { Eye, EyeOff, RefreshCw } from 'lucide-react';
 import { auth } from '../../../firebase';
 import { Button, Field, Sheet } from './ui';
+import ShareCredentials, { credentialsMessage } from './ShareCredentials';
 
-const MIN_LENGTH = 8;
+export const MIN_PASSWORD = 8;
 // No look-alikes (0/O, 1/l/I) — the password is usually read out or retyped.
 const ALPHABET = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 
-function generatePassword(length = 10) {
+export function generatePassword(length = 10) {
   const bytes = new Uint32Array(length);
   crypto.getRandomValues(bytes);
   return Array.from(bytes, (b) => ALPHABET[b % ALPHABET.length]).join('');
 }
 
-// Super admin sets a new login password for a center admin / teacher by
-// hand (api/set-user-password.js does the actual Firebase Auth change).
+// Password input with show/hide and "generate another" buttons.
+export function PasswordInput({ value, onChange }) {
+  const [visible, setVisible] = useState(true);
+  return (
+    <div className="sa-password-field">
+      <input
+        className="sa-input"
+        type={visible ? 'text' : 'password'}
+        autoComplete="new-password"
+        spellCheck={false}
+        value={value}
+        onChange={(e) => onChange(e.target.value.trim())}
+        aria-label="Parol"
+      />
+      <button type="button" className="sa-password-btn" onClick={() => setVisible((v) => !v)} aria-label={visible ? 'Yashirish' : "Ko'rsatish"}>
+        {visible ? <EyeOff size={18} /> : <Eye size={18} />}
+      </button>
+      <button type="button" className="sa-password-btn" onClick={() => onChange(generatePassword())} aria-label="Yangi parol yaratish">
+        <RefreshCw size={17} />
+      </button>
+    </div>
+  );
+}
+
+// Sets a new login password for a center admin / teacher by hand
+// (api/set-user-password.js does the actual Firebase Auth change). Used by
+// the super admin and by a center admin for their own teachers.
+// target: { uid, email, login?, label } — `login` is what the person types
+// on the login screen (a phone number for teachers), defaults to email.
 export default function SetPasswordSheet({ open, onClose, target, onDone }) {
   const [password, setPassword] = useState('');
-  const [visible, setVisible] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
-  const [saved, setSaved] = useState(null); // { email, password }
-  const [copied, setCopied] = useState(false);
+  const [saved, setSaved] = useState(null); // { login, password }
 
   useEffect(() => {
     if (!open) return;
     setPassword(generatePassword());
-    setVisible(true);
     setError('');
     setSaved(null);
-    setCopied(false);
   }, [open]);
+
+  const login = target?.login || target?.email || '';
 
   const submit = async (e) => {
     e.preventDefault();
-    if (password.length < MIN_LENGTH) return;
+    if (password.length < MIN_PASSWORD) return;
     setSaving(true);
     setError('');
     try {
@@ -51,7 +77,7 @@ export default function SetPasswordSheet({ open, onClose, target, onDone }) {
         /* non-JSON error page */
       }
       if (!res.ok) throw new Error(data.error || `Server xatosi (${res.status})`);
-      setSaved({ email: data.email || target?.email || '', password });
+      setSaved({ login: target?.login || data.email || target?.email || '', password });
       onDone?.();
     } catch (err) {
       setError(err.message);
@@ -60,77 +86,20 @@ export default function SetPasswordSheet({ open, onClose, target, onDone }) {
     }
   };
 
-  const message = saved
-    ? [
-      `${target?.label ? `${target.label} — ` : ''}VOC uchun yangi kirish ma'lumotlari:`,
-      '',
-      `Kirish: ${window.location.origin}/login`,
-      `Login: ${saved.email}`,
-      `Parol: ${saved.password}`,
-    ].join('\n')
-    : '';
-
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(message);
-      setCopied(true);
-    } catch {
-      setError("Nusxalab bo'lmadi — matnni belgilab oling.");
-    }
-  };
-
-  const share = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({ text: message });
-        return;
-      } catch {
-        /* dismissed — fall through to Telegram */
-      }
-    }
-    window.open(`https://t.me/share/url?url=${encodeURIComponent(`${window.location.origin}/login`)}&text=${encodeURIComponent(message)}`, '_blank', 'noopener');
-  };
-
   return (
     <Sheet open={open} onClose={() => !saving && onClose()} title={saved ? 'Parol yangilandi' : "Parolni o'zgartirish"}>
       {saved ? (
-        <>
-          <p className="sa-message">{message}</p>
-          {error && <p className="sa-flow-error">{error}</p>}
-          <div className="sa-actions-stack">
-            <Button onClick={share}><Send size={18} /> Telegram orqali yuborish</Button>
-            <Button variant="tinted" onClick={copy}>
-              {copied ? <Check size={18} /> : <Copy size={18} />} {copied ? 'Nusxalandi' : 'Nusxalash'}
-            </Button>
-            <Button variant="plain" onClick={onClose}>Tayyor</Button>
-          </div>
-        </>
+        <ShareCredentials message={credentialsMessage({ label: target?.label, ...saved })} onDone={onClose} />
       ) : (
         <form onSubmit={submit}>
           <Field label="Login">
-            <input className="sa-input" disabled value={target?.email || ''} />
+            <input className="sa-input" disabled value={login} />
           </Field>
-          <Field label="Yangi parol" hint={`Kamida ${MIN_LENGTH} ta belgi. Eski parol darhol ishlamay qoladi.`}>
-            <div className="sa-password-field">
-              <input
-                className="sa-input"
-                type={visible ? 'text' : 'password'}
-                autoComplete="new-password"
-                spellCheck={false}
-                value={password}
-                onChange={(e) => setPassword(e.target.value.trim())}
-                aria-label="Yangi parol"
-              />
-              <button type="button" className="sa-password-btn" onClick={() => setVisible((v) => !v)} aria-label={visible ? 'Yashirish' : "Ko'rsatish"}>
-                {visible ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
-              <button type="button" className="sa-password-btn" onClick={() => setPassword(generatePassword())} aria-label="Yangi parol yaratish">
-                <RefreshCw size={17} />
-              </button>
-            </div>
+          <Field label="Yangi parol" hint={`Kamida ${MIN_PASSWORD} ta belgi. Eski parol darhol ishlamay qoladi.`}>
+            <PasswordInput value={password} onChange={setPassword} />
           </Field>
           {error && <p className="sa-flow-error">{error}</p>}
-          <Button type="submit" block disabled={saving || password.length < MIN_LENGTH}>
+          <Button type="submit" block disabled={saving || password.length < MIN_PASSWORD}>
             {saving ? 'Saqlanmoqda...' : 'Parolni saqlash'}
           </Button>
         </form>

@@ -1,66 +1,32 @@
 import { useLocation, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Users, BookOpen, BarChart3, Settings } from 'lucide-react';
+import { Users, BookOpen, Settings } from 'lucide-react';
 import '../Layout/BottomNav.css';
 
 export default function TeacherBottomNav({ basePath = '/corp/teacher' }) {
   const location = useLocation();
+  const path = location.pathname;
 
   const navItems = [
     {
       to: basePath,
       label: 'Guruhlar',
       icon: Users,
-      isGroupTab: true,
+      active: path === basePath || path.startsWith(`${basePath}/group/`) || path.startsWith(`${basePath}/archive`),
     },
-    {
-      to: `${basePath}/courses`,
-      label: "So'zlar",
-      icon: BookOpen,
-    },
-    {
-      to: `${basePath}/statistics`,
-      label: 'Statistika',
-      icon: BarChart3,
-    },
-    {
-      to: `${basePath}/settings`,
-      label: 'Sozlamalar',
-      icon: Settings,
-    },
+    { to: `${basePath}/courses`, label: "To'plamlar", icon: BookOpen, active: path.startsWith(`${basePath}/courses`) },
+    { to: `${basePath}/settings`, label: 'Sozlamalar', icon: Settings, active: path.startsWith(`${basePath}/settings`) },
   ];
 
   return (
-    <nav className="bottom-nav teacher-bottom-nav">
-      {navItems.map((item) => {
-        const IconComponent = item.icon;
-        const isActive = item.isGroupTab
-          ? location.pathname === basePath ||
-            location.pathname.startsWith(`${basePath}/group/`)
-          : item.to === `${basePath}/settings`
-          ? location.pathname.startsWith(`${basePath}/settings`) || location.pathname.startsWith(`${basePath}/archive`)
-          : location.pathname.startsWith(item.to);
-
-        return (
-          <Link
-            key={item.to}
-            to={item.to}
-            className={`bottom-nav-link ${isActive ? 'active' : ''}`}
-          >
-            {isActive && (
-              <motion.span
-                className="bottom-nav-active-pill"
-                layoutId="teacherBottomNavPill"
-                transition={{ type: 'spring', stiffness: 420, damping: 34 }}
-              />
-            )}
-            <span className="bottom-nav-icon">
-              <IconComponent size={20} strokeWidth={2.2} />
-            </span>
-            <span className="bottom-nav-label">{item.label}</span>
-          </Link>
-        );
-      })}
+    <nav className="bottom-nav">
+      {navItems.map(({ to, label, icon: Icon, active }) => (
+        <Link key={to} to={to} className={`bottom-nav-link ${active ? 'active' : ''}`}>
+          <span className="bottom-nav-icon">
+            <Icon size={20} strokeWidth={2.2} />
+          </span>
+          <span className="bottom-nav-label">{label}</span>
+        </Link>
+      ))}
     </nav>
   );
 }
