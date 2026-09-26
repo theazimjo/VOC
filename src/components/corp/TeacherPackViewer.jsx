@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { ArrowLeft, BookOpen, Search, ChevronRight, Plus, Check, X, Pencil, Trash2, MoreVertical } from 'lucide-react';
+import { ArrowLeft, BookOpen, Search, ChevronRight, Plus, Check, X, Pencil, Trash2, MoreVertical, Volume2 } from 'lucide-react';
 import { updateCustomPack } from '../../services/corpService';
+import { speakWord } from '../../utils/helpers';
 import TeacherAddWordModal from './TeacherAddWordModal';
 import './TeacherPackViewer.css';
 
@@ -17,16 +18,30 @@ const POS_LABELS = {
 
 function deriveMonths(pack) {
   if (pack.months && pack.months.length > 0) return pack.months;
-  if (pack.units && pack.units.length > 0) return [{ id: 'm1', title: 'Month 1', units: pack.units }];
-  if (pack.words && pack.words.length > 0) return [{ id: 'm1', title: 'Month 1', units: [{ id: 'u1', title: 'Topic 1', words: pack.words }] }];
+  if (pack.units && pack.units.length > 0) return [{ id: 'm1', title: pack.title || '1-Oy', units: pack.units }];
+  if (pack.words && pack.words.length > 0) return [{ id: 'm1', title: pack.title || '1-Oy', units: [{ id: 'u1', title: '1-Mavzu', words: pack.words }] }];
   return [];
 }
 
 export default function TeacherPackViewer({ pack, onBack, editable = false, centerId, askConfirm = null, onUpdate }) {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [months, setMonths] = useState(() => deriveMonths(pack));
-  const [monthId, setMonthIdState] = useState(() => searchParams.get('monthId') || null);
+  const derivedMonthsList = useMemo(() => deriveMonths(pack), [pack]);
+  const [months, setMonths] = useState(derivedMonthsList);
+
+  useEffect(() => {
+    setMonths(deriveMonths(pack));
+  }, [pack]);
+
+  const initialMonthId = useMemo(() => {
+    const urlMonthId = searchParams.get('monthId');
+    if (urlMonthId) return urlMonthId;
+    const derived = deriveMonths(pack);
+    if (derived.length === 1) return derived[0].id;
+    return null;
+  }, [pack, searchParams]);
+
+  const [monthId, setMonthIdState] = useState(initialMonthId);
   const [unitId, setUnitIdState] = useState(() => searchParams.get('unitId') || null);
   const [search, setSearch] = useState('');
   const [saving, setSaving] = useState(false);
@@ -88,26 +103,36 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
   };
 
   useEffect(() => {
-    const derived = deriveMonths(pack);
-    setMonths(derived);
-
     const urlMonthId = searchParams.get('monthId');
     const urlUnitId = searchParams.get('unitId');
     const urlMode = searchParams.get('mode');
 
     if (urlMonthId) {
       setMonthIdState(urlMonthId);
+    } else if (months.length === 1) {
+      setMonthIdState(months[0].id);
     }
+
     if (urlUnitId) {
       setUnitIdState(urlUnitId);
     }
+
     if (urlMode === 'addWord') {
       setShowAddWordModalState(true);
     }
-  }, [pack.id, searchParams]);
+  }, [pack.id, searchParams, months]);
 
-  const activeMonth = months.find(m => m.id === monthId) || null;
+  const activeMonth = months.find(m => m.id === monthId) || (months.length === 1 ? months[0] : null);
   const activeUnit = activeMonth?.units?.find(u => u.id === unitId) || null;
+
+  const filteredUnits = (activeMonth?.units || []).filter(u => {
+    const q = search.trim().toLowerCase();
+    if (!q) return true;
+    return (
+      (u.title || '').toLowerCase().includes(q) ||
+      (u.words || []).some(w => (w.word || '').toLowerCase().includes(q) || (w.translation || '').toLowerCase().includes(q))
+    );
+  });
 
   const filteredWords = (activeUnit?.words || []).filter(w => {
     const q = search.trim().toLowerCase();
@@ -117,6 +142,11 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
       (w.translation || '').toLowerCase().includes(q)
     );
   });
+
+  const totalWordsInMonth = useMemo(() => {
+    if (!activeMonth) return 0;
+    return (activeMonth.units || []).reduce((acc, u) => acc + (u.words || []).length, 0);
+  }, [activeMonth]);
 
   const persist = async (updatedMonths) => {
     setMonths(updatedMonths);
@@ -132,6 +162,18 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
       alert("Saqlashda xatolik: " + err.message);
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handleBackNavigation = () => {
+    if (activeUnit) {
+      setUnitId(null);
+      setSearch('');
+    } else if (activeMonth && months.length > 1) {
+      setMonthId(null);
+      setSearch('');
+    } else {
+      onBack();
     }
   };
 
@@ -325,32 +367,30 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
 
   return (
     <div className="tpv-container">
-      {/* Simple header, same on every level */}
+      {/* Navigation Header */}
       <div className="tpv-header">
         <button
           type="button"
           className="tpv-back"
-          onClick={() => {
-            if (activeUnit) { setUnitId(null); setSearch(''); }
-            else if (activeMonth) { setMonthId(null); setAddingUnit(false); }
-            else onBack();
-          }}
+          onClick={handleBackNavigation}
+          title="Orqaga"
         >
           <ArrowLeft size={18} />
         </button>
+
         <div className="tpv-title">
-          <h2>{activeUnit ? activeUnit.title : activeMonth ? activeMonth.title : pack.title}</h2>
+          <h2>{activeUnit ? activeUnit.title : activeMonth && months.length > 1 ? activeMonth.title : pack.title}</h2>
           <span>
             {activeUnit
-              ? `${activeMonth.title} · ${(activeUnit.words || []).length} so'z`
+              ? `${pack.title} · ${activeMonth?.title || ''} · ${(activeUnit.words || []).length} so'z`
               : activeMonth
-                ? `${(activeMonth.units || []).length} ta mavzu`
+                ? `${(activeMonth.units || []).length} ta mavzu · ${totalWordsInMonth} so'z`
                 : `${months.length} oy`}
           </span>
         </div>
       </div>
 
-      {/* Level 1: Months */}
+      {/* Level 1: Months (Only when multi-month pack and no active month selected) */}
       {!activeMonth && (
         <div className="tpv-list">
           {months.length === 0 && !editable && (
@@ -382,17 +422,12 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
                 <span className="tpv-row-num">{idx + 1}</span>
                 <span className="tpv-row-label">{m.title}</span>
                 <span className="tpv-row-meta">{(m.units || []).length} ta mavzu</span>
-                
+
                 {editable && (
                   <div style={{ marginLeft: 'auto' }} onClick={e => e.stopPropagation()}>
                     <button
                       type="button"
-                      title="Amallar"
-                      style={{
-                        background: 'rgba(255, 255, 255, 0.06)', border: '1px solid rgba(255, 255, 255, 0.1)',
-                        borderRadius: '9px', color: 'var(--pg-text-secondary)', width: '28px', height: '28px',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0
-                      }}
+                      className="tpv-more-btn"
                       onClick={(e) => {
                         e.stopPropagation();
                         if (activeItemMenuId === m.id) {
@@ -433,11 +468,7 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
                         >
                           <button
                             type="button"
-                            style={{
-                              display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '8px 12px',
-                              borderRadius: '8px', border: 'none', background: 'transparent', color: 'var(--pg-text, #f8fafc)',
-                              fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer'
-                            }}
+                            className="tpv-menu-item"
                             onClick={(e) => {
                               setActiveItemMenuId(null);
                               handleStartEditMonth(m, e);
@@ -447,11 +478,7 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
                           </button>
                           <button
                             type="button"
-                            style={{
-                              display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '8px 12px',
-                              borderRadius: '8px', border: 'none', background: 'transparent', color: '#ef4444',
-                              fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer'
-                            }}
+                            className="tpv-menu-item danger"
                             onClick={(e) => {
                               setActiveItemMenuId(null);
                               handleDeleteMonth(m, e);
@@ -492,62 +519,113 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
         </div>
       )}
 
-      {/* Level 2: Units */}
+      {/* Level 2: Units / Topics (Grid View) */}
       {activeMonth && !activeUnit && (
-        <div className="tpv-list">
-          {(activeMonth.units || []).length === 0 && !editable && (
-            <div className="tpv-empty">
-              <BookOpen size={32} />
-              <p>Bu oyda hali mavzu yo'q.</p>
+        <div className="tpv-units-section">
+          <div className="tpv-controls-bar">
+            <div className="tpv-search-wrap" style={{ flex: 1 }}>
+              <Search size={15} className="tpv-search-icon" />
+              <input
+                type="text"
+                placeholder="Mavzularni qidirish..."
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+              />
             </div>
+            {editable && (
+              <button
+                type="button"
+                className="tpv-add-unit-btn"
+                onClick={() => setAddingUnit(true)}
+              >
+                <Plus size={16} /> <span>Mavzu qo'shish</span>
+              </button>
+            )}
+          </div>
+
+          {addingUnit && (
+            <form onSubmit={handleAddUnit} className="tpv-add-form" style={{ marginBottom: '16px' }}>
+              <input
+                type="text"
+                placeholder="Mavzu nomi"
+                value={newUnitTitle}
+                onChange={e => setNewUnitTitle(e.target.value)}
+                autoFocus
+              />
+              <button type="submit" className="tpv-add-confirm" title="Qo'shish" disabled={saving}><Check size={16} /></button>
+              <button type="button" className="tpv-add-cancel" title="Bekor qilish" onClick={() => { setAddingUnit(false); setNewUnitTitle(''); }}><X size={16} /></button>
+            </form>
           )}
 
-          {(activeMonth.units || []).map((u, idx) => (
-            editingUnitId === u.id ? (
-              <form key={u.id} onSubmit={(e) => handleSaveUnitTitle(u.id, e)} className="tpv-add-form">
-                <input
-                  type="text"
-                  placeholder="Mavzu nomi"
-                  value={editingUnitTitle}
-                  onChange={e => setEditingUnitTitle(e.target.value)}
-                  autoFocus
-                />
-                <button type="submit" className="tpv-add-confirm" title="Saqlash" disabled={saving}>
-                  <Check size={16} />
-                </button>
-                <button type="button" className="tpv-add-cancel" title="Bekor qilish" onClick={() => setEditingUnitId(null)}>
-                  <X size={16} />
-                </button>
-              </form>
-            ) : (
-              <div key={u.id} className="tpv-row" onClick={() => setUnitId(u.id)}>
-                <span className="tpv-row-num">{idx + 1}</span>
-                <span className="tpv-row-label">{u.title}</span>
-                <span className="tpv-row-meta">{(u.words || []).length} so'z</span>
+          {filteredUnits.length === 0 ? (
+            <div className="tpv-empty">
+              <BookOpen size={32} />
+              <p>{search ? "Qidiruv bo'yicha mavzu topilmadi." : "Bu bo'limda hali mavzu yo'q."}</p>
+            </div>
+          ) : (
+            <div className="tpv-units-grid">
+              {filteredUnits.map((u, idx) => {
+                const wordsList = u.words || [];
+                const wordsPreview = wordsList.slice(0, 5).map(w => w.word).join(', ');
 
-                {editable && (
-                  <div style={{ marginLeft: 'auto' }} onClick={e => e.stopPropagation()}>
-                    <button
-                      type="button"
-                      title="Amallar"
-                      style={{
-                        background: 'rgba(255, 255, 255, 0.06)', border: '1px solid rgba(255, 255, 255, 0.1)',
-                        borderRadius: '9px', color: 'var(--pg-text-secondary)', width: '28px', height: '28px',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0
-                      }}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        if (activeItemMenuId === u.id) {
-                          setActiveItemMenuId(null);
-                        } else {
-                          const rect = e.currentTarget.getBoundingClientRect();
-                          setItemMenuPos({ top: rect.bottom + 4, right: window.innerWidth - rect.right });
-                          setActiveItemMenuId(u.id);
-                        }
-                      }}
-                    >
-                      <MoreVertical size={15} />
+                return editingUnitId === u.id ? (
+                  <form key={u.id} onSubmit={(e) => handleSaveUnitTitle(u.id, e)} className="tpv-add-form">
+                    <input
+                      type="text"
+                      placeholder="Mavzu nomi"
+                      value={editingUnitTitle}
+                      onChange={e => setEditingUnitTitle(e.target.value)}
+                      autoFocus
+                    />
+                    <button type="submit" className="tpv-add-confirm" title="Saqlash" disabled={saving}>
+                      <Check size={16} />
                     </button>
+                    <button type="button" className="tpv-add-cancel" title="Bekor qilish" onClick={() => setEditingUnitId(null)}>
+                      <X size={16} />
+                    </button>
+                  </form>
+                ) : (
+                  <div key={u.id} className="tpv-unit-card" onClick={() => setUnitId(u.id)}>
+                    <div className="tpv-unit-card-head">
+                      <div className="tpv-unit-card-title-wrap">
+                        <span className="tpv-unit-num">#{idx + 1}</span>
+                        <h3 className="tpv-unit-title">{u.title}</h3>
+                      </div>
+
+                      {editable && (
+                        <button
+                          type="button"
+                          className="tpv-more-btn"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (activeItemMenuId === u.id) {
+                              setActiveItemMenuId(null);
+                            } else {
+                              const rect = e.currentTarget.getBoundingClientRect();
+                              setItemMenuPos({ top: rect.bottom + 4, right: window.innerWidth - rect.right });
+                              setActiveItemMenuId(u.id);
+                            }
+                          }}
+                        >
+                          <MoreVertical size={16} />
+                        </button>
+                      )}
+                    </div>
+
+                    {wordsPreview && (
+                      <div className="tpv-unit-words-preview" title={wordsPreview}>
+                        {wordsPreview}{wordsList.length > 5 ? '...' : ''}
+                      </div>
+                    )}
+
+                    <div className="tpv-unit-card-foot">
+                      <span className="tpv-unit-badge">
+                        {wordsList.length} ta so'z
+                      </span>
+                      <span className="tpv-unit-open">
+                        Ko'rish <ChevronRight size={14} />
+                      </span>
+                    </div>
 
                     {activeItemMenuId === u.id && (
                       <>
@@ -575,11 +653,7 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
                         >
                           <button
                             type="button"
-                            style={{
-                              display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '8px 12px',
-                              borderRadius: '8px', border: 'none', background: 'transparent', color: 'var(--pg-text, #f8fafc)',
-                              fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer'
-                            }}
+                            className="tpv-menu-item"
                             onClick={(e) => {
                               setActiveItemMenuId(null);
                               handleStartEditUnit(u, e);
@@ -589,11 +663,7 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
                           </button>
                           <button
                             type="button"
-                            style={{
-                              display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '8px 12px',
-                              borderRadius: '8px', border: 'none', background: 'transparent', color: '#ef4444',
-                              fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer'
-                            }}
+                            className="tpv-menu-item danger"
                             onClick={(e) => {
                               setActiveItemMenuId(null);
                               handleDeleteUnit(u, e);
@@ -605,31 +675,9 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
                       </>
                     )}
                   </div>
-                )}
-
-                <ChevronRight size={18} className="tpv-row-arrow" />
-              </div>
-            )
-          ))}
-
-          {editable && (
-            addingUnit ? (
-              <form onSubmit={handleAddUnit} className="tpv-add-form">
-                <input
-                  type="text"
-                  placeholder="Mavzu nomi"
-                  value={newUnitTitle}
-                  onChange={e => setNewUnitTitle(e.target.value)}
-                  autoFocus
-                />
-                <button type="submit" className="tpv-add-confirm" title="Qo'shish" disabled={saving}><Check size={16} /></button>
-                <button type="button" className="tpv-add-cancel" title="Bekor qilish" onClick={() => { setAddingUnit(false); setNewUnitTitle(''); }}><X size={16} /></button>
-              </form>
-            ) : (
-              <button type="button" className="tpv-add-row" onClick={() => setAddingUnit(true)}>
-                <Plus size={16} /> Mavzu qo'shish
-              </button>
-            )
+                );
+              })}
+            </div>
           )}
         </div>
       )}
@@ -637,7 +685,7 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
       {/* Level 3: Words */}
       {activeUnit && (
         <div className="tpv-words">
-          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+          <div className="tpv-controls-bar">
             <div className="tpv-search-wrap" style={{ flex: 1 }}>
               <Search size={15} className="tpv-search-icon" />
               <input
@@ -672,7 +720,21 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
               {filteredWords.map(w => (
                 <div key={w.id} className="tpv-word-card">
                   <div className="tpv-word-top">
-                    <strong>{w.word}</strong>
+                    <div className="tpv-word-heading">
+                      <strong className="tpv-word-text">{w.word}</strong>
+                      <button
+                        type="button"
+                        className="tpv-word-speaker-btn"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          speakWord(w.word, 'en-US');
+                        }}
+                        title="Tinglash"
+                      >
+                        <Volume2 size={15} />
+                      </button>
+                    </div>
+
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                       <span className={`tpv-pos tpv-pos-${w.partOfSpeech || 'noun'}`}>
                         {POS_LABELS[w.partOfSpeech] || POS_LABELS.other}
@@ -681,12 +743,7 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
                         <div>
                           <button
                             type="button"
-                            title="Amallar"
-                            style={{
-                              background: 'transparent', border: 'none', color: 'var(--pg-text-secondary)',
-                              cursor: 'pointer', padding: '2px 4px', display: 'flex', alignItems: 'center',
-                              borderRadius: '6px'
-                            }}
+                            className="tpv-more-btn"
                             onClick={(e) => {
                               e.stopPropagation();
                               if (activeItemMenuId === w.id) {
@@ -727,11 +784,7 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
                               >
                                 <button
                                   type="button"
-                                  style={{
-                                    display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '8px 12px',
-                                    borderRadius: '8px', border: 'none', background: 'transparent', color: 'var(--pg-text, #f8fafc)',
-                                    fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer'
-                                  }}
+                                  className="tpv-menu-item"
                                   onClick={() => {
                                     setActiveItemMenuId(null);
                                     setEditingWord(w);
@@ -742,11 +795,7 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
                                 </button>
                                 <button
                                   type="button"
-                                  style={{
-                                    display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '8px 12px',
-                                    borderRadius: '8px', border: 'none', background: 'transparent', color: '#ef4444',
-                                    fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer'
-                                  }}
+                                  className="tpv-menu-item danger"
                                   onClick={(e) => {
                                     setActiveItemMenuId(null);
                                     handleDeleteWord(w, e);
@@ -761,8 +810,22 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
                       )}
                     </div>
                   </div>
+                  {w.phonetic && <div className="tpv-word-phonetic">/{w.phonetic}/</div>}
                   <div className="tpv-word-translation">{w.translation}</div>
-                  {w.definition && <div className="tpv-word-def">{w.definition}</div>}
+                  {(w.v1 || w.v2 || w.v3 || w.notes) && (
+                    <div className="tpv-word-forms">
+                      {w.v1 && w.v2 && w.v3 ? (
+                        <span className="tpv-verb-badge">
+                          <strong>V1:</strong> {w.v1} &bull; <strong>V2:</strong> {w.v2} &bull; <strong>V3:</strong> {w.v3}
+                        </span>
+                      ) : w.notes ? (
+                        <span className="tpv-verb-badge">{w.notes}</span>
+                      ) : null}
+                    </div>
+                  )}
+                  {w.definition && (!w.v1 || w.definition !== `${w.v1} - ${w.v2} - ${w.v3}`) && (
+                    <div className="tpv-word-def">{w.definition}</div>
+                  )}
                   {w.example && <div className="tpv-word-example">"{w.example}"</div>}
                 </div>
               ))}

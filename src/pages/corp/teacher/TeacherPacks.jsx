@@ -59,7 +59,7 @@ export default function TeacherPacks() {
   if (viewing) {
     const editable = viewing.scope === 'own' && !viewing.isSystem;
     return (
-      <div className="sa-legacy">
+      <div className="sa-page is-wide">
         <TeacherPackViewer
           pack={viewing}
           onBack={() => setSearchParams({})}
@@ -136,53 +136,39 @@ export default function TeacherPacks() {
     <Page
       title="So'z to'plamlari"
       subtitle={loading ? ' ' : `${packs.length} ta to'plam`}
+      wide
       action={
         <button type="button" className="sa-icon-btn" onClick={() => setEditor({})} aria-label="Yangi to'plam">
           <Plus size={20} strokeWidth={2.6} />
         </button>
       }
     >
-      {isDesktop ? (
-        <>
-          <div className="sa-toolbar is-inline">
-            <SearchField value={search} onChange={setSearch} placeholder="To'plam nomi" />
-            <Segmented
-              label="To'plam turi"
-              options={[
-                { value: 'all', label: `Hammasi (${packs.length})` },
-                { value: 'center', label: 'Markaz' },
-                { value: 'own', label: 'Mening' },
-              ]}
-              value={scope}
-              onChange={setScope}
-            />
-          </div>
-          {loading ? <LoadingRows count={5} /> : <PackTable packs={scope === 'all' ? visible : visible.filter((p) => p.scope === scope)} usedIn={usedIn} onOpen={open} onMenu={setMenuPack} onCreate={() => setEditor({})} scope={scope} searching={Boolean(q)} />}
-        </>
-      ) : (
-        <>
-          {packs.length > 6 && (
-            <div className="sa-toolbar">
-              <SearchField value={search} onChange={setSearch} placeholder="To'plam nomi" />
-            </div>
-          )}
+      <div className="sa-toolbar is-inline" style={{ flexWrap: 'wrap', gap: '12px' }}>
+        <SearchField value={search} onChange={setSearch} placeholder="To'plam nomi" />
+        <Segmented
+          label="To'plam turi"
+          options={[
+            { value: 'all', label: `Hammasi (${packs.length})` },
+            { value: 'center', label: 'Markaz' },
+            { value: 'own', label: 'Mening' },
+          ]}
+          value={scope}
+          onChange={setScope}
+        />
+      </div>
 
-          {loading ? <LoadingRows count={4} /> : (
-            <>
-              <Section title="Markaz to'plamlari" footer="Markaz admini qo'shgan. Guruhlaringizga biriktirishingiz mumkin; o'zgartirish uchun nusxa oling.">
-                {shared.length ? shared.map(row) : <Row title={q ? 'Topilmadi' : "Markaz hali to'plam qo'shmagan"} />}
-              </Section>
-              <Section title="Mening to'plamlarim" footer="Faqat siz va guruhlaringiz ko'radi.">
-                {own.length ? own.map(row) : (
-                  <EmptyState
-                    title={q ? 'Topilmadi' : "Hali shaxsiy to'plam yo'q"}
-                    text={q ? null : "O'z so'zlaringiz bilan to'plam yarating yoki markaz to'plamidan nusxa oling."}
-                  />
-                )}
-              </Section>
-            </>
-          )}
-        </>
+      {loading ? (
+        <LoadingRows count={4} />
+      ) : (
+        <PackCards
+          packs={scope === 'all' ? visible : visible.filter((p) => p.scope === scope)}
+          usedIn={usedIn}
+          onOpen={open}
+          onMenu={setMenuPack}
+          onCreate={() => setEditor({})}
+          scope={scope}
+          searching={Boolean(q)}
+        />
       )}
 
       <Sheet open={Boolean(menuPack)} onClose={() => setMenuPack(null)} title={menuPack?.title || "To'plam"}>
@@ -243,8 +229,8 @@ export default function TeacherPacks() {
 
 const SCOPE_LABEL = { own: 'Shaxsiy', center: 'Markaz' };
 
-// Desktop: the row opens the words straight away; "…" holds the rest.
-function PackTable({ packs, usedIn, onOpen, onMenu, onCreate, scope, searching }) {
+// Card grid view for teacher word packs
+function PackCards({ packs, usedIn, onOpen, onMenu, onCreate, scope, searching }) {
   if (packs.length === 0) {
     return (
       <div className="sa-group">
@@ -265,45 +251,63 @@ function PackTable({ packs, usedIn, onOpen, onMenu, onCreate, scope, searching }
   }
 
   return (
-    <div className="sa-table" style={{ '--sa-cols': 'minmax(260px, 2.4fr) 90px 90px 120px 110px 44px' }}>
-      <div className="sa-table-head">
-        <span>To'plam</span>
-        <span className="num">Mavzu</span>
-        <span className="num">So'z</span>
-        <span>Guruhlarda</span>
-        <span>Turi</span>
-        <span />
-      </div>
+    <div className="sa-pack-grid">
       {packs.map((p) => {
         const n = usedIn(p.id);
+        const unitsCount = getPackUnits(p).length;
+        const tone = p.isSystem ? 'purple' : p.scope === 'own' ? 'green' : 'blue';
+        const badgeText = p.isSystem ? 'Tizim' : SCOPE_LABEL[p.scope];
+
         return (
           <div
             key={p.id}
             role="button"
             tabIndex={0}
-            className="sa-table-row"
+            className="sa-pack-card"
             onClick={() => onOpen(p)}
             onKeyDown={(e) => { if (e.key === 'Enter') onOpen(p); }}
           >
-            <span className="sa-cell-main">
-              <span className={`sa-row-icon tone-${p.isSystem ? 'purple' : p.scope === 'own' ? 'green' : 'blue'}`}><BookOpen size={16} /></span>
-              <span className="sa-cell-text">
-                <span className="sa-cell-title">{p.title || 'Nomsiz'}</span>
-                <span className="sa-cell-sub">{p.description || (p.isSystem ? "Tizim to'plami" : '—')}</span>
+            <div className="sa-pack-card-top">
+              <div className="sa-pack-card-main">
+                <span className={`sa-pack-card-icon tone-${tone}`}>
+                  <BookOpen size={18} />
+                </span>
+                <div className="sa-pack-card-title-group">
+                  <span className="sa-pack-card-title">{p.title || 'Nomsiz'}</span>
+                  <span className={`sa-pack-card-badge badge-${tone}`}>
+                    {badgeText}
+                  </span>
+                </div>
+              </div>
+              <button
+                type="button"
+                className="sa-more-btn"
+                onClick={(e) => { e.stopPropagation(); onMenu(p); }}
+                aria-label={`${p.title} amallari`}
+              >
+                <MoreHorizontal size={18} />
+              </button>
+            </div>
+
+            {p.description && (
+              <p className="sa-pack-card-desc" title={p.description}>
+                {p.description}
+              </p>
+            )}
+
+            <div className="sa-pack-card-footer">
+              <div className="sa-pack-card-stats">
+                <span className="sa-pack-card-stat">
+                  <span className="sa-pack-card-stat-val">{unitsCount}</span> mavzu
+                </span>
+                <span className="sa-pack-card-stat">
+                  <span className="sa-pack-card-stat-val">{p.wordsCount}</span> so'z
+                </span>
+              </div>
+              <span className="sa-pack-card-groups">
+                {n ? `${n} guruhda` : '—'}
               </span>
-            </span>
-            <span className="num">{getPackUnits(p).length}</span>
-            <span className="num">{p.wordsCount}</span>
-            <span className="muted">{n ? `${n} ta guruh` : '—'}</span>
-            <span className="muted">{p.isSystem ? 'Tizim' : SCOPE_LABEL[p.scope]}</span>
-            <button
-              type="button"
-              className="sa-more-btn"
-              onClick={(e) => { e.stopPropagation(); onMenu(p); }}
-              aria-label={`${p.title} amallari`}
-            >
-              <MoreHorizontal size={18} />
-            </button>
+            </div>
           </div>
         );
       })}

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Search, X } from 'lucide-react';
 
@@ -12,9 +12,9 @@ const SPRING = { type: 'spring', bounce: 0, duration: 0.38 };
 
 // `narrow` keeps form-like pages (settings) at a readable width on desktop
 // instead of stretching every field across the whole screen.
-export function Page({ title, subtitle, action, back, narrow = false, children }) {
+export function Page({ title, subtitle, action, back, narrow = false, wide = false, children }) {
   return (
-    <div className={`sa-page ${narrow ? 'is-narrow' : ''}`}>
+    <div className={`sa-page ${narrow ? 'is-narrow' : ''} ${wide ? 'is-wide' : ''}`}>
       {back && (
         <button type="button" className="sa-back" onClick={back.onClick}>
           <ChevronLeft size={20} strokeWidth={2.6} />
@@ -137,11 +137,33 @@ export function StatusDot({ tone }) {
   return <span className={`sa-dot tone-bg-${tone}`} aria-hidden="true" />;
 }
 
-// Bottom sheet on phones, centered card on wider screens. Enters and exits
-// along the same path (up from the bottom / scale from center) so dismissing
-// feels like the reverse of opening.
+// Where sheets open on wider screens: 'center' (default, a card) or
+// 'drawer' (a full-height panel from the right edge — the center admin
+// panel provides this). Phones always get a bottom sheet.
+export const SheetPlacementContext = createContext('center');
+
+const TABLET_UP = '(min-width: 769px)';
+function useTabletUp() {
+  const get = () => typeof window !== 'undefined' && window.matchMedia(TABLET_UP).matches;
+  const [match, setMatch] = useState(get);
+  useEffect(() => {
+    const mq = window.matchMedia(TABLET_UP);
+    const onChange = (e) => setMatch(e.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+  return match;
+}
+
+// Bottom sheet on phones, centered card (or right-edge drawer) on wider
+// screens. Enters and exits along the same path (up from the bottom /
+// scale from center / in from the right) so dismissing feels like the
+// reverse of opening.
 export function Sheet({ open, onClose, title, children, footer, wide = false }) {
   const reduce = useReducedMotion();
+  const placement = useContext(SheetPlacementContext);
+  const tabletUp = useTabletUp();
+  const drawer = placement === 'drawer' && tabletUp;
   const closeRef = useRef(onClose);
   closeRef.current = onClose;
 
@@ -159,13 +181,15 @@ export function Sheet({ open, onClose, title, children, footer, wide = false }) 
 
   const panel = reduce
     ? { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 } }
-    : { initial: { opacity: 0, y: 40, scale: 0.98 }, animate: { opacity: 1, y: 0, scale: 1 }, exit: { opacity: 0, y: 40, scale: 0.98 } };
+    : drawer
+      ? { initial: { x: '100%' }, animate: { x: 0 }, exit: { x: '100%' } }
+      : { initial: { opacity: 0, y: 40, scale: 0.98 }, animate: { opacity: 1, y: 0, scale: 1 }, exit: { opacity: 0, y: 40, scale: 0.98 } };
 
   return (
     <AnimatePresence>
       {open && (
         <motion.div
-          className="sa-sheet-scrim"
+          className={`sa-sheet-scrim ${drawer ? 'is-drawer' : ''}`}
           onClick={onClose}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -173,7 +197,7 @@ export function Sheet({ open, onClose, title, children, footer, wide = false }) 
           transition={{ duration: 0.2 }}
         >
           <motion.div
-            className={`sa-sheet ${wide ? 'is-wide' : ''}`}
+            className={`sa-sheet ${wide ? 'is-wide' : ''} ${drawer ? 'is-drawer' : ''}`}
             role="dialog"
             aria-modal="true"
             aria-label={title}

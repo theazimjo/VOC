@@ -40,8 +40,8 @@ export default function ProfileChooser() {
     <div className="pc-page">
       <div className="pc-card">
         <VocLogo size="lg" />
-        <h1 className="pc-title">Which profile would you like to use?</h1>
-        <p className="pc-subtitle">You can switch this again anytime from Settings</p>
+        <h1 className="pc-title">Qaysi rejimda davom etasiz?</h1>
+        <p className="pc-subtitle">Keyin istalgan vaqtda Sozlamalardan almashtirasiz</p>
 
         <div className="pc-options">
           <motion.button
@@ -54,8 +54,8 @@ export default function ProfileChooser() {
             <div className="pc-option-icon pc-option-icon-personal">
               <User size={26} strokeWidth={2.2} />
             </div>
-            <span className="pc-option-title">Personal</span>
-            <span className="pc-option-desc">Your vocabulary and practice</span>
+            <span className="pc-option-title">Shaxsiy</span>
+            <span className="pc-option-desc">O'z so'zlaringiz va mashqlar</span>
           </motion.button>
 
           <motion.button
@@ -68,8 +68,8 @@ export default function ProfileChooser() {
             <div className="pc-option-icon pc-option-icon-teacher">
               <GraduationCap size={26} strokeWidth={2.2} />
             </div>
-            <span className="pc-option-title">Teacher</span>
-            <span className="pc-option-desc">Your groups and students</span>
+            <span className="pc-option-title">O'qituvchi</span>
+            <span className="pc-option-desc">Guruhlaringiz va o'quvchilar</span>
           </motion.button>
         </div>
       </div>

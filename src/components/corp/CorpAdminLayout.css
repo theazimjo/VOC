@@ -13,6 +13,7 @@
   min-height: 100vh;
   overflow-x: clip;
   box-sizing: border-box;
+  transition: margin-left 0.3s ease; /* same timing as the sidebar's width */
   background:
     radial-gradient(850px circle at 12% 8%, rgba(59, 130, 246, 0.09), transparent 65%),
     radial-gradient(800px circle at 88% 18%, rgba(168, 85, 247, 0.08), transparent 65%),
@@ -29,6 +30,17 @@
     radial-gradient(750px circle at 25% 92%, rgba(255, 149, 0, 0.04), transparent 65%),
     #eef0f5;
   background-attachment: fixed;
+}
+
+/* Collapsed sidebar (72px) — the content follows instead of leaving an
+   empty 188px strip behind it. */
+.corp-admin-layout:has(.corp-admin-sidebar.collapsed) .corp-admin-main-pane {
+  margin-left: 72px;
+}
+
+/* The logo is the collapse control. */
+.corp-admin-sidebar .voc-logo-brand {
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {

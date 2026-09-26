@@ -1,16 +1,16 @@
-import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard, Users, GraduationCap, BookOpen, Layers,
-  Settings, LogOut, ChevronLeft, ChevronRight
+  Settings, LogOut
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import VocLogo from '../common/VocLogo';
+import { useSidebarCollapsed } from './useSidebarCollapsed';
 import './CorpAdminSidebar.css';
 
 export default function CorpAdminSidebar({ centerName, email }) {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, toggleCollapsed] = useSidebarCollapsed();
   const { logout } = useAuth();
   const navigate = useNavigate();
   const { t } = useLanguage();
@@ -33,16 +33,7 @@ export default function CorpAdminSidebar({ centerName, email }) {
     <aside className={`corp-admin-sidebar ${collapsed ? 'collapsed' : ''}`}>
       {/* Sidebar Top / Brand */}
       <div className="sidebar-brand-header">
-        <VocLogo collapsed={collapsed} subTitle={centerName ? `${centerName} · Admin` : 'Markaz admini'} />
-
-        <button
-          className="sidebar-collapse-toggle"
-          onClick={() => setCollapsed(!collapsed)}
-          title={collapsed ? "Expand" : "Collapse"}
-          aria-label={collapsed ? "Expand" : "Collapse"}
-        >
-          {collapsed ? <ChevronRight size={16} strokeWidth={2.4} /> : <ChevronLeft size={16} strokeWidth={2.4} />}
-        </button>
+        <VocLogo collapsed={collapsed} onClick={toggleCollapsed} subTitle={centerName ? `${centerName} · Admin` : 'Markaz admini'} />
       </div>
 
       {/* Navigation Menu */}

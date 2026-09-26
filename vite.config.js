@@ -17,7 +17,8 @@ function vercelApiDev() {
       server.middlewares.use(async (req, res, next) => {
         const url = new URL(req.url, 'http://localhost');
         const match = url.pathname.match(/^\/api\/([\w-]+)$/);
-        if (!match) return next();
+        // Like Vercel: api/_*.js are shared helpers, not endpoints.
+        if (!match || match[1].startsWith('_')) return next();
         const file = path.resolve('api', `${match[1]}.js`);
         if (!fs.existsSync(file)) return next();
 

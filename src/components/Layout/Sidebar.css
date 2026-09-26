@@ -310,3 +310,17 @@
     height: auto;
   }
 }
+
+/* "O'qituvchi paneli" — leaves the personal app, so set it apart. */
+.sidebar-link.sidebar-link-staff {
+  margin-top: 12px;
+}
+
+.sidebar-link.sidebar-link-staff::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 12px;
+  right: 12px;
+  border-top: 1px solid var(--border, rgba(127, 127, 127, 0.2));
+}

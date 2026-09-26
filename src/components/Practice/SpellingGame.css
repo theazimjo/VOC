@@ -62,6 +62,34 @@
   background-color: var(--bg-tertiary);
 }
 
+.duo-audio-toggle-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
+  outline: none;
+  flex-shrink: 0;
+}
+
+.duo-audio-toggle-btn:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-tertiary);
+}
+
+.duo-audio-toggle-btn.is-active {
+  color: var(--accent-1);
+}
+
+.duo-audio-toggle-btn.is-muted {
+  color: var(--text-muted);
+}
+
 .duo-progress-track {
   flex: 1;
   height: 16px;

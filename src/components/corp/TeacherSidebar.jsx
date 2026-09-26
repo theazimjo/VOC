@@ -1,15 +1,15 @@
-import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import {
-  Users, BookOpen, Settings, LogOut, ChevronLeft, ChevronRight, Repeat
+  Users, BookOpen, Settings, LogOut, Repeat
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { setActiveProfile } from '../../utils/activeProfile';
 import VocLogo from '../common/VocLogo';
+import { useSidebarCollapsed } from './useSidebarCollapsed';
 import './CorpAdminSidebar.css';
 
 export default function TeacherSidebar({ centerName, teacherName, email, phone, basePath = '/corp/teacher' }) {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, toggleCollapsed] = useSidebarCollapsed();
   const { logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -34,16 +34,7 @@ export default function TeacherSidebar({ centerName, teacherName, email, phone, 
     <aside className={`corp-admin-sidebar ${collapsed ? 'collapsed' : ''}`}>
       {/* Sidebar Top / Brand */}
       <div className="sidebar-brand-header">
-        <VocLogo collapsed={collapsed} subTitle={centerName ? `${centerName} · O'qituvchi` : "O'qituvchi"} />
-
-        <button
-          className="sidebar-collapse-toggle"
-          onClick={() => setCollapsed(!collapsed)}
-          title={collapsed ? 'Kengaytirish' : "Yig'ish"}
-          aria-label={collapsed ? 'Kengaytirish' : "Yig'ish"}
-        >
-          {collapsed ? <ChevronRight size={16} strokeWidth={2.4} /> : <ChevronLeft size={16} strokeWidth={2.4} />}
-        </button>
+        <VocLogo collapsed={collapsed} onClick={toggleCollapsed} subTitle={centerName ? `${centerName} · O'qituvchi` : "O'qituvchi"} />
       </div>
 
       {/* Navigation Menu */}

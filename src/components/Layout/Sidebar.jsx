@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useAvatar } from '../../hooks/useAvatar';
-import { LayoutDashboard, BookOpen, GraduationCap, LogOut, Shield, FlaskConical, User } from 'lucide-react';
+import { useStaffRole } from '../../hooks/useStaffRole';
+import { LayoutDashboard, BookOpen, GraduationCap, LogOut, FlaskConical, User, Presentation, Building2 } from 'lucide-react';
 import VocLogo from '../common/VocLogo';
 import './Sidebar.css';
 
@@ -14,6 +15,7 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
   const { t } = useLanguage();
   const navigate = useNavigate();
   const { avatarSrc, avatarError } = useAvatar(user?.photoURL);
+  const { staffRole, staffPath, staffLabel, selectStaffPanel } = useStaffRole();
 
   const baseNavItems = [
     { to: '/',         icon: LayoutDashboard, label: t('nav.dashboard') },
@@ -41,7 +43,10 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
       .toUpperCase();
   };
 
-  const navItems = [...baseNavItems];
+  // Teachers (and center admins) get a way back into their panel.
+  const navItems = staffRole
+    ? [...baseNavItems, { to: staffPath, icon: staffRole === 'center_admin' ? Building2 : Presentation, label: staffLabel, onSelect: selectStaffPanel, isStaff: true }]
+    : baseNavItems;
 
   const handleProfileClick = (e) => {
     e.stopPropagation();
@@ -95,9 +100,9 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
                 to={item.to}
                 end={item.to === '/'}
                 className={({ isActive }) =>
-                  `sidebar-link ${isActive ? 'active' : ''}`
+                  `sidebar-link ${isActive ? 'active' : ''} ${item.isStaff ? 'sidebar-link-staff' : ''}`
                 }
-                onClick={onMobileClose}
+                onClick={() => { item.onSelect?.(); onMobileClose?.(); }}
                 title={collapsed ? item.label : undefined}
                 initial="initial"
                 whileHover="hover"

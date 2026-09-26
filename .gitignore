@@ -26,3 +26,6 @@ __pycache__
 *.njsproj
 *.sln
 *.sw?
+
+# Demo account logins (scripts/seed-demo-center.mjs)
+demo-accounts.local.txt

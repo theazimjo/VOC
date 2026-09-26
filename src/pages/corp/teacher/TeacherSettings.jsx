@@ -10,6 +10,7 @@ import { setActiveProfile } from '../../../utils/activeProfile';
 import ConfirmSheet from '../../../components/corp/ConfirmSheet';
 import { Button, Field, FormRow, Page, Row, Section, Sheet, Toggle } from '../super-admin/ui';
 import { MIN_PASSWORD } from '../super-admin/SetPasswordSheet';
+import GoogleLinkRows from '../super-admin/GoogleLinkRows';
 import { useToast } from '../super-admin/useToast';
 import { useTeacherData } from './TeacherDataContext';
 
@@ -76,8 +77,9 @@ export default function TeacherSettings() {
         )}
       </form>
 
-      <Section title="Hisob" footer="Ismingiz o'quvchilarga va markaz adminiga ko'rinadi.">
+      <Section title="Kirish" footer="Google hisobni bog'lasangiz, telefon va parolni eslab qolmasdan «Google bilan kirish» orqali kirasiz. Login va parol ham ishlashda davom etadi.">
         <Row title="Login" detail={login || '—'} />
+        <GoogleLinkRows showToast={showToast} allowMove />
         {hasPassword && (
           <Row icon={<KeyRound size={16} />} iconTone="orange" title="Parolni o'zgartirish" onClick={() => setPasswordOpen(true)} />
         )}

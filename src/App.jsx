@@ -62,6 +62,10 @@ const SuperAdminUsers = lazyWithRetry(() => import('./pages/corp/super-admin/Sup
 const SuperAdminUserDetail = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminUserDetail'));
 const SuperAdminAnnouncements = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminAnnouncements'));
 const SuperAdminSettings = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminSettings'));
+// Dev-only role switcher (/dev/roles). `import.meta.env.DEV` is false in
+// production builds, so the page and its import are dropped entirely.
+const RoleSwitcher = import.meta.env.DEV ? lazyWithRetry(() => import('./pages/dev/RoleSwitcher')) : null;
+const DevRolesPill = import.meta.env.DEV ? lazyWithRetry(() => import('./pages/dev/DevRolesPill')) : null;
 const AdminHome = lazyWithRetry(() => import('./pages/corp/center-admin/AdminHome'));
 const AdminTeachers = lazyWithRetry(() => import('./pages/corp/center-admin/AdminTeachers'));
 const AdminTeacherDetail = lazyWithRetry(() => import('./pages/corp/center-admin/AdminTeacherDetail'));
@@ -115,6 +119,7 @@ export default function App() {
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/choose-profile" element={<ProfileChooser />} />
+                    {RoleSwitcher && <Route path="/dev/roles" element={<RoleSwitcher />} />}
   
                     {/* Protected routes */}
                     <Route element={<ProtectedRoute />}>
@@ -222,6 +227,7 @@ export default function App() {
                     {/* Catch all */}
                     <Route path="*" element={<Navigate to="/" replace />} />
                   </Routes>
+                  {DevRolesPill && <DevRolesPill />}
                 </Suspense>
                 </SuccessTransitionProvider>
               </PacksProvider>

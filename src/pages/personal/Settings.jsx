@@ -4,10 +4,11 @@ import { useTheme } from '../../contexts/ThemeContext';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useCorpRole } from '../../hooks/useCorpRole';
+import { useStaffRole } from '../../hooks/useStaffRole';
 import { useDailyNewWordLimit } from '../../hooks/useDailyNewWordLimit';
 import {
   Moon, Volume2, BookOpen, Bell, Clock, Check, ChevronRight, Type,
-  KeyRound, Lock, ShieldCheck, AlertCircle, CheckCircle2, Shield
+  KeyRound, Lock, ShieldCheck, AlertCircle, CheckCircle2, Shield, GraduationCap, Building2
 } from 'lucide-react';
 import './Settings.css';
 
@@ -15,6 +16,8 @@ export default function Settings() {
   const { user, changePassword, resetPassword } = useAuth();
   const { identity } = useCorpRole();
   const navigate = useNavigate();
+
+  const { staffRole, openStaffPanel } = useStaffRole();
   const { t } = useLanguage();
   const {
     theme,
@@ -201,6 +204,31 @@ export default function Settings() {
       <div className="ios-settings-footer">
         Kunlik yangi so'z limiti sizga har kuni optimal miqdordagi yangi so'zlarni taqdim etadi. Bugun o'rganildi: {todayCount} ta so'z.
       </div>
+
+      {/* SECTION: WORK PANEL (teachers / center admins) */}
+      {staffRole && (
+        <>
+          <div className="ios-settings-header">Ish paneli</div>
+          <div className="ios-settings-section">
+            <div className="ios-settings-row" style={{ cursor: 'pointer' }} onClick={openStaffPanel}>
+              <div className="ios-settings-left">
+                <div className="ios-icon-box" style={{ background: staffRole === 'teacher' ? '#34c759' : '#007aff' }}>
+                  {staffRole === 'teacher' ? <GraduationCap size={16} strokeWidth={2.2} /> : <Building2 size={16} strokeWidth={2.2} />}
+                </div>
+                <span className="ios-row-title">{staffRole === 'teacher' ? "O'qituvchi paneliga o'tish" : "Markaz paneliga o'tish"}</span>
+              </div>
+              <div className="ios-settings-right">
+                <ChevronRight size={14} className="ios-chevron" />
+              </div>
+            </div>
+          </div>
+          <div className="ios-settings-footer">
+            {staffRole === 'teacher'
+              ? "Guruhlaringiz, vazifalar va o'quvchilar natijalari. Keyingi safar kirganingizda ham shu panel ochiladi."
+              : "Markazingizning o'qituvchilari, guruhlari va kurslari."}
+          </div>
+        </>
+      )}
 
       {/* SECTION: ADMIN ACCESS (super admins only) */}
       {identity?.role === 'super_admin' && (

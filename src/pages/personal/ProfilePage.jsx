@@ -2,18 +2,18 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
-  LogOut, ChevronRight, Mail, User, Pencil, X, Check,
-  Moon, Type, Volume2, Globe, Users, AlertCircle, CheckCircle2, Shield
+  LogOut, ChevronRight, Mail, Pencil, X, Check,
+  Moon, Type, Volume2, Globe, Users, AlertCircle, CheckCircle2, Presentation, Building2
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useAvatar } from '../../hooks/useAvatar';
+import { useStaffRole } from '../../hooks/useStaffRole';
 import { joinGroupAsUser } from '../../services/corpService';
 import '../corp/student/StudentCorpProfile.css';
 
 const AVATAR_COLORS = ['#0A84FF', '#30D158', '#FF9500', '#AF52DE', '#FF375F', '#5AC8FA'];
-const SUPER_ADMINS = ['azimjon29042006@gmail.com', 'azimjonxolmirzayev30@gmail.com'];
 
 const SHEET_ICONS = {
   theme: Moon,
@@ -34,6 +34,7 @@ export default function ProfilePage() {
     joinGroup: { icon: SHEET_ICONS.joinGroup, title: t('profile.joinGroupSheetTitle') },
   };
   const { avatarSrc, avatarError } = useAvatar(user?.photoURL);
+  const { staffRole, staffLabel, openStaffPanel } = useStaffRole();
 
   const [activeSheet, setActiveSheet] = useState(null); // 'theme', 'font', or null
   const closeSheet = () => setActiveSheet(null);
@@ -55,7 +56,6 @@ export default function ProfilePage() {
 
   const displayName = customName || user?.displayName || user?.email?.split('@')[0] || 'User';
   const initial = displayName[0]?.toUpperCase() || '?';
-  const isSuperAdmin = user?.email && SUPER_ADMINS.includes(user.email.toLowerCase());
 
   const openEditor = () => {
     setDraftName(displayName);
@@ -204,27 +204,16 @@ export default function ProfilePage() {
           </div>
           <span className="corp-profile-tile-text">{t('profile.joinAGroup')}</span>
         </div>
-      </div>
-
-      {/* ── Admin Panel (Super Admin only) ── */}
-      {isSuperAdmin && (
-        <>
-          <div className="corp-profile-section-title">{t('nav.admin')}</div>
-          <div className="corp-profile-tiles" style={{ marginBottom: '16px' }}>
-            <div 
-              className="corp-profile-tile" 
-              onClick={() => navigate('/admin')}
-              style={{ cursor: 'pointer' }}
-            >
-              <div className="corp-profile-tile-icon" style={{ background: '#7c3aed' }}>
-                <Shield size={17} strokeWidth={2.2} />
-              </div>
-              <span className="corp-profile-tile-text">{t('nav.admin')}</span>
-              <ChevronRight size={16} className="corp-profile-appearance-chevron" style={{ marginLeft: 'auto' }} />
+        {staffRole && (
+          <div className="corp-profile-tile" onClick={openStaffPanel}>
+            <div className="corp-profile-tile-icon" style={{ background: staffRole === 'teacher' ? '#34c759' : '#5856d6' }}>
+              {staffRole === 'teacher' ? <Presentation size={17} strokeWidth={2.2} /> : <Building2 size={17} strokeWidth={2.2} />}
             </div>
+            <span className="corp-profile-tile-text">{staffLabel}ga o'tish</span>
+            <ChevronRight size={16} className="corp-profile-appearance-chevron" style={{ marginLeft: 'auto' }} />
           </div>
-        </>
-      )}
+        )}
+      </div>
 
       {/* ── Account actions ── */}
       <div className="corp-profile-section-title">{t('profile.account')}</div>

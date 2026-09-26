@@ -1648,3 +1648,224 @@
 .sa-form-actions {
   margin-bottom: 28px;
 }
+
+/* ── Pack Cards Grid ── */
+.sa-pack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+.sa-pack-card {
+  background: var(--sa-surface);
+  border-radius: var(--sa-radius);
+  box-shadow: var(--sa-shadow);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  cursor: pointer;
+  transition: background-color 150ms ease-out, transform 120ms ease-out, box-shadow 150ms ease-out;
+  box-sizing: border-box;
+}
+
+.sa-page.is-narrow {
+  max-width: 620px;
+}
+
+.sa-page.is-wide {
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  .sa-page {
+    padding: 24px 16px 40px;
+  }
+}
+
+.sa-pack-card:hover {
+  background: var(--sa-surface-2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.sa-pack-card:active {
+  transform: translateY(0);
+}
+
+.sa-pack-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.sa-pack-card-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  flex: 1;
+}
+
+.sa-pack-card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.sa-pack-card-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.sa-pack-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--sa-label);
+  line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sa-pack-card-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  width: fit-content;
+}
+
+.sa-pack-card-badge.badge-purple {
+  background: color-mix(in srgb, var(--sa-purple) 20%, transparent);
+  color: var(--sa-purple);
+}
+
+.sa-pack-card-badge.badge-blue {
+  background: color-mix(in srgb, var(--sa-blue) 20%, transparent);
+  color: var(--sa-blue);
+}
+
+.sa-pack-card-badge.badge-green {
+  background: color-mix(in srgb, var(--sa-green) 20%, transparent);
+  color: var(--sa-green);
+}
+
+.sa-pack-card-desc {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--sa-label-2);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;
+}
+
+.sa-pack-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 0.5px solid var(--sa-separator);
+  font-size: 13px;
+  color: var(--sa-label-2);
+}
+
+.sa-pack-card-stats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sa-pack-card-stat {
+  font-size: 13px;
+  color: var(--sa-label-2);
+}
+
+.sa-pack-card-stat-val {
+  font-weight: 700;
+  color: var(--sa-label);
+}
+
+.sa-pack-card-groups {
+  font-size: 13px;
+  color: var(--sa-label-2);
+}
+
+/* White tile for brand marks (Google) that carry their own colors. */
+.tone-white.sa-row-icon {
+  background: #ffffff;
+  box-shadow: inset 0 0 0 0.5px var(--sa-separator);
+}
+
+.sa-row-link {
+  flex-shrink: 0;
+  font-size: 17px;
+}
+
+.sa-row-link.is-danger {
+  color: var(--sa-red);
+}
+
+.sa-row-link:disabled {
+  opacity: 0.45;
+}
+
+.sa-bullets {
+  margin: 0 0 18px;
+  padding-left: 20px;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--sa-label-2);
+}
+
+.sa-bullets li + li {
+  margin-top: 6px;
+}
+
+/* ── Drawer sheets (right edge, full height) ── */
+.sa-sheet-scrim.is-drawer {
+  justify-content: flex-end;
+  align-items: stretch;
+  padding: 0;
+}
+
+.sa-sheet.is-drawer {
+  width: min(460px, 100vw);
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  border-radius: 0;
+  box-shadow: -1px 0 0 var(--sa-separator), -16px 0 48px rgba(0, 0, 0, 0.2);
+}
+
+.sa-sheet.is-drawer.is-wide {
+  width: min(680px, 100vw);
+}
+
+.sa-sheet.is-drawer .sa-sheet-head {
+  padding-top: calc(18px + env(safe-area-inset-top, 0px));
+  border-bottom: 1px solid var(--sa-separator);
+  padding-bottom: 14px;
+  margin-bottom: 12px;
+}
+
+.sa-sheet.is-drawer .sa-sheet-body {
+  padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+}

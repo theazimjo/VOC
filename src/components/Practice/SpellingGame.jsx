@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Volume2, Check, X, Keyboard } from 'lucide-react';
+import { Volume2, VolumeX, Check, X, Keyboard } from 'lucide-react';
 import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
 import { speakWord, shuffleArray } from '../../utils/helpers';
 import { findConfusableMatch } from '../../experiment/textSimilarity';
@@ -38,6 +38,24 @@ export default function SpellingGame({
   const [tileBank, setTileBank] = useState([]); // [{ id, text, isDistractor }]
   const [typedBuffer, setTypedBuffer] = useState('');
   const [showQuitModal, setShowQuitModal] = useState(false);
+  const [speakLetters, setSpeakLetters] = useState(() => {
+    try {
+      const saved = localStorage.getItem('spelling_speak_letters');
+      return saved !== null ? JSON.parse(saved) : true;
+    } catch (err) {
+      return true;
+    }
+  });
+
+  const toggleSpeakLetters = () => {
+    setSpeakLetters((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem('spelling_speak_letters', JSON.stringify(next));
+      } catch (err) {}
+      return next;
+    });
+  };
 
   const [answered, setAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
@@ -197,7 +215,7 @@ export default function SpellingGame({
   const handleTileTap = (tile) => {
     if (answered) return;
 
-    if (tile.text !== ' ') {
+    if (tile.text !== ' ' && speakLetters) {
       const targetLang = getTargetAnswerLang();
       speakWord(tile.text, targetLang);
     }
@@ -237,7 +255,7 @@ export default function SpellingGame({
 
     if (exactMatch) {
       setPlacedTiles(prev => [...prev, exactMatch]);
-      if (exactMatch.text !== ' ') {
+      if (exactMatch.text !== ' ' && speakLetters) {
         speakWord(exactMatch.text, getTargetAnswerLang());
       }
       return;
@@ -541,6 +559,15 @@ export default function SpellingGame({
             transition={{ duration: 0.35, ease: 'easeOut' }}
           />
         </div>
+
+        <button
+          type="button"
+          className={`duo-audio-toggle-btn ${speakLetters ? 'is-active' : 'is-muted'}`}
+          onClick={toggleSpeakLetters}
+          title={speakLetters ? (t('practice.muteLetters') || "Harflarni aytishni o'chirish") : (t('practice.unmuteLetters') || "Harflarni aytishni yoqish")}
+        >
+          {speakLetters ? <Volume2 size={22} strokeWidth={2.4} /> : <VolumeX size={22} strokeWidth={2.4} />}
+        </button>
       </header>
 
       {/* Main Content Area */}

@@ -1,0 +1,150 @@
+.rs-page {
+  min-height: 100vh;
+  background: var(--sa-bg);
+  color: var(--sa-label);
+  padding: 48px 20px 64px;
+  box-sizing: border-box;
+}
+
+.rs-inner {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.rs-head {
+  margin-bottom: 24px;
+}
+
+.rs-badge {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--sa-orange) 18%, transparent);
+  color: var(--sa-orange);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.rs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.rs-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  min-height: 170px;
+  padding: 18px;
+  border: none;
+  border-radius: 16px;
+  background: var(--sa-surface);
+  box-shadow: var(--sa-shadow);
+  color: var(--sa-label);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 100ms ease-out, box-shadow 150ms ease-out;
+}
+
+.rs-card:hover {
+  box-shadow: var(--sa-shadow), 0 0 0 1.5px color-mix(in srgb, var(--sa-blue) 45%, transparent);
+}
+
+.rs-card:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.rs-card:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.rs-card.is-current {
+  box-shadow: 0 0 0 2px var(--sa-blue);
+}
+
+.rs-icon.sa-row-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  margin-bottom: 6px;
+}
+
+.rs-title {
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.rs-text {
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--sa-label-2);
+}
+
+.rs-login {
+  font-size: 13px;
+  color: var(--sa-blue);
+  font-variant-numeric: tabular-nums;
+}
+
+.rs-current {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--sa-blue) 16%, transparent);
+  color: var(--sa-blue);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.rs-foot {
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--sa-label-2);
+}
+
+.rs-foot code {
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 12px;
+}
+
+/* Floating "Rollar" shortcut on every page (dev only). */
+.rs-pill {
+  position: fixed;
+  left: 12px;
+  bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+  z-index: 9000;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(20, 20, 22, 0.82);
+  color: #ffffff;
+  font: 600 12px/1 -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
+  text-decoration: none;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  opacity: 0.7;
+  transition: opacity 150ms ease-out;
+}
+
+.rs-pill:hover {
+  opacity: 1;
+}
+
+@media (min-width: 769px) {
+  .rs-pill {
+    bottom: 16px;
+  }
+}

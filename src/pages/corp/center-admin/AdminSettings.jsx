@@ -8,6 +8,7 @@ import ConfirmSheet from '../../../components/corp/ConfirmSheet';
 import { Button, FormRow, LoadingRows, Page, Row, Section, Toggle } from '../super-admin/ui';
 import { useIsDesktop } from '../super-admin/useIsDesktop';
 import { useToast } from '../super-admin/useToast';
+import GoogleLinkRows from '../super-admin/GoogleLinkRows';
 import { useCenterData } from './CenterDataContext';
 
 export default function AdminSettings() {
@@ -81,8 +82,9 @@ export default function AdminSettings() {
         </form>
       )}
 
-      <Section title="Hisob" footer="Parolni unutsangiz, VOC qo'llab-quvvatlash xizmatiga yozing — yangi parol o'rnatib beriladi.">
+      <Section title="Kirish" footer="Google hisobni bog'lasangiz, «Google bilan kirish» orqali ham kirasiz. Parolni unutsangiz, VOC qo'llab-quvvatlash xizmatiga yozing.">
         <Row title="Login" detail={email || '—'} />
+        <GoogleLinkRows showToast={showToast} />
       </Section>
 
       <Section title="Ko'rinish">

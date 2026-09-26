@@ -1,0 +1,193 @@
+/* ─────────────────────────────────────────────────────────────
+   Center admin theme — colors and corners matched to the UITS CRM
+   admin ("new" / Linear-style mode): slate/zinc neutrals, 1px hairline
+   borders instead of soft shadows, 4px corners, #007aff accent.
+   Scoped to .ca-theme (CorpAdminLayout) so the super admin and teacher
+   panels keep the iOS look. Loaded after sa.css; it only re-points the
+   --sa-* tokens and tightens the radii, the components stay the same.
+   ───────────────────────────────────────────────────────────── */
+
+/* Dark (app "android" theme) */
+.sa-layout.ca-theme {
+  --sa-bg: #0c0d0e;
+  --sa-surface: #141517;
+  --sa-surface-2: #18191c;
+  --sa-fill: #1c1e22;
+  --sa-fill-strong: #24262b;
+  --sa-separator: #24262b;
+  --sa-label: #f4f4f5;
+  --sa-label-2: #a1a1aa;
+  --sa-label-3: #52525b;
+  --sa-placeholder: #8b8b94;
+  --sa-blue: #0a84ff;
+  --sa-green: #34c759;
+  --sa-orange: #ff9500;
+  --sa-red: #ff3b30;
+  --sa-purple: #af52de;
+  --sa-gray: #71717a;
+  --sa-press: #1a1c20;
+  --sa-shadow: 0 0 0 1px #24262b;
+  --sa-sheet-bg: #141517;
+  --sa-sheet-cell: #18191c;
+  --sa-scrim: rgba(0, 0, 0, 0.6);
+  --sa-radius: 4px;
+  --ca-border-strong: #2b2d35;
+  --ca-sidebar-bg: #121315;
+  --ca-active-bg: #1c1e22;
+  --ca-active-text: #f4f4f5;
+}
+
+/* Light */
+[data-theme="ios"] .sa-layout.ca-theme,
+[data-theme="sepia"] .sa-layout.ca-theme {
+  --sa-bg: #f8fafc;
+  --sa-surface: #ffffff;
+  --sa-surface-2: #fafafa;
+  --sa-fill: #f1f5f9;
+  --sa-fill-strong: #e4e4e7;
+  --sa-separator: #e4e4e7;
+  --sa-label: #18181b;
+  --sa-label-2: #71717a;
+  --sa-label-3: #a1a1aa;
+  --sa-placeholder: #71717a;
+  --sa-blue: #007aff;
+  --sa-press: #f1f5f9;
+  --sa-shadow: 0 0 0 1px #e4e4e7, 0 1px 2px rgba(0, 0, 0, 0.04);
+  --sa-sheet-bg: #f8fafc;
+  --sa-sheet-cell: #ffffff;
+  --sa-scrim: rgba(15, 23, 42, 0.4);
+  --ca-border-strong: #e4e4e7;
+  --ca-sidebar-bg: #ffffff;
+  --ca-active-bg: #f1f5f9;
+  --ca-active-text: #007aff;
+}
+
+/* ── Corners: 4px controls and cards, 6px for floating layers ── */
+.ca-theme .sa-back,
+.ca-theme .sa-row-icon,
+.ca-theme .sa-cell-main .sa-row-icon,
+.ca-theme .sa-search,
+.ca-theme .sa-segmented,
+.ca-theme .sa-btn,
+.ca-theme .sa-input,
+.ca-theme .sa-textarea,
+.ca-theme .sa-select,
+.ca-theme .sa-icon-btn,
+.ca-theme .sa-more-btn,
+.ca-theme .sa-status-pill,
+.ca-theme .sa-message,
+.ca-theme .sa-warning,
+.ca-theme .sa-flow-name,
+.ca-theme .sa-flow-error,
+.ca-theme .sa-flow-icon,
+.ca-theme .sa-password-btn,
+.ca-theme .sa-hero-avatar {
+  border-radius: 4px;
+}
+
+.ca-theme .sa-segment,
+.ca-theme .sa-segment-thumb,
+.ca-theme .sa-chip {
+  border-radius: 3px;
+}
+
+.ca-theme .sa-sheet,
+.ca-theme .sa-toast,
+.ca-theme .sa-bottom-bar,
+.ca-theme .sa-qr {
+  border-radius: 6px;
+}
+
+@media (max-width: 768px) {
+  .ca-theme .sa-sheet {
+    border-radius: 8px 8px 0 0;
+  }
+}
+
+/* Hairline borders read as the elevation, like the reference. */
+.ca-theme .sa-segmented {
+  background: var(--sa-fill);
+  box-shadow: inset 0 0 0 1px var(--sa-separator);
+}
+
+.ca-theme .sa-segment-thumb {
+  background: var(--sa-surface);
+  box-shadow: 0 0 0 1px var(--ca-border-strong);
+}
+
+.ca-theme .sa-segment.is-active .sa-segment-label {
+  color: var(--sa-blue);
+}
+
+.ca-theme .sa-icon-btn.is-gray {
+  background: var(--sa-surface);
+  box-shadow: 0 0 0 1px var(--sa-separator);
+}
+
+.ca-theme .sa-table-head {
+  background: var(--sa-surface-2);
+}
+
+.ca-theme .sa-btn-tinted.tone-gray {
+  background: var(--sa-surface);
+  box-shadow: inset 0 0 0 1px var(--sa-separator);
+}
+
+/* ── Sidebar ── */
+.ca-theme .corp-admin-sidebar {
+  --text-primary: var(--sa-label);
+  --text-secondary: var(--sa-label-2);
+  --text-muted: var(--sa-label-3);
+  --border: var(--sa-separator);
+  --bg-glass-hover: var(--sa-press);
+  --bg-tertiary: var(--sa-fill);
+  --accent-1: var(--sa-blue);
+  --accent-1-dim: var(--ca-active-bg);
+  background: var(--ca-sidebar-bg);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.ca-theme .sidebar-nav-btn {
+  border-radius: 4px;
+  border: 1px solid transparent;
+  font-size: 13px;
+}
+
+.ca-theme .sidebar-nav-btn.active {
+  background: var(--ca-active-bg);
+  border-color: var(--ca-border-strong);
+  color: var(--ca-active-text);
+}
+
+.ca-theme .sidebar-nav-btn.active::before {
+  display: none;
+}
+
+.ca-theme .sidebar-collapse-toggle,
+.ca-theme .btn-corp-logout,
+.ca-theme .brand-logo-wrap {
+  border-radius: 4px;
+}
+
+/* ── Phone tab bar ── */
+.ca-theme .bottom-nav {
+  --text-muted: var(--sa-label-2);
+  background: var(--sa-surface);
+  border-color: var(--sa-separator);
+  border-radius: 6px;
+}
+
+.ca-theme .bottom-nav-link {
+  border-radius: 4px;
+}
+
+.ca-theme .bottom-nav-link.active {
+  color: var(--sa-blue);
+  background: var(--sa-fill);
+}
+
+/* Right-edge drawers sit flush against the window edge. */
+.ca-theme .sa-sheet.is-drawer {
+  border-radius: 0;
+}
