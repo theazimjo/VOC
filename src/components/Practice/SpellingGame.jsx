@@ -146,18 +146,8 @@ export default function SpellingGame({
     prevWordKeyRef.current = currentWordKey;
 
     const targetSpelling = currentWord.targetSpelling || '';
-    const isMultiWord = targetSpelling.trim().includes(' ');
-
-    let correctTokens = [];
-    let distractorTokens = [];
-
-    if (isMultiWord) {
-      correctTokens = targetSpelling.split(/\s+/).filter(Boolean);
-      distractorTokens = [];
-    } else {
-      correctTokens = targetSpelling.split('');
-      distractorTokens = [];
-    }
+    const correctTokens = targetSpelling.split('');
+    const distractorTokens = [];
 
     const allTokens = [
       ...correctTokens.map((t, idx) => ({ id: `token-${idx}-${t}`, text: t, isDistractor: false })),
@@ -201,15 +191,16 @@ export default function SpellingGame({
   };
 
   const currentAnswerString = useMemo(() => {
-    const isMultiWord = (currentWord?.targetSpelling || '').trim().includes(' ');
-    return placedTiles.map(t => t.text).join(isMultiWord ? ' ' : '');
-  }, [placedTiles, currentWord]);
+    return placedTiles.map(t => t.text).join('');
+  }, [placedTiles]);
 
   const handleTileTap = (tile) => {
     if (answered) return;
 
-    const targetLang = getTargetAnswerLang();
-    speakWord(tile.text, targetLang);
+    if (tile.text !== ' ') {
+      const targetLang = getTargetAnswerLang();
+      speakWord(tile.text, targetLang);
+    }
 
     const isAlreadyPlaced = placedTiles.some(t => t.id === tile.id);
 
@@ -238,9 +229,6 @@ export default function SpellingGame({
   const handleCharacterInput = (char) => {
     if (answered || !char) return;
 
-    const targetSpelling = currentWord?.targetSpelling || '';
-    const isMultiWord = targetSpelling.trim().includes(' ');
-
     const unplacedTiles = tileBank.filter(t => !placedTiles.some(pt => pt.id === t.id));
     const exactMatch = unplacedTiles.find(
       t => t.text.toLowerCase() === char.toLowerCase() ||
@@ -249,41 +237,13 @@ export default function SpellingGame({
 
     if (exactMatch) {
       setPlacedTiles(prev => [...prev, exactMatch]);
-      speakWord(exactMatch.text, getTargetAnswerLang());
+      if (exactMatch.text !== ' ') {
+        speakWord(exactMatch.text, getTargetAnswerLang());
+      }
       return;
     }
 
-    if (isMultiWord) {
-      if (char === ' ') {
-        if (typedBuffer) {
-          const wordMatch = unplacedTiles.find(
-            t => t.text.toLowerCase() === typedBuffer.toLowerCase()
-          );
-          if (wordMatch) {
-            setPlacedTiles(prev => [...prev, wordMatch]);
-            speakWord(wordMatch.text, getTargetAnswerLang());
-            setTypedBuffer('');
-            return;
-          }
-        }
-      } else {
-        const nextBuf = typedBuffer + char;
-        const wordMatch = unplacedTiles.find(
-          t => t.text.toLowerCase() === nextBuf.toLowerCase()
-        );
-        if (wordMatch) {
-          setPlacedTiles(prev => [...prev, wordMatch]);
-          speakWord(wordMatch.text, getTargetAnswerLang());
-          setTypedBuffer('');
-          return;
-        } else {
-          setTypedBuffer(nextBuf);
-          return;
-        }
-      }
-    }
-
-    // Custom typed character fallback
+    // Custom typed character fallback (handles space or letters outside tileBank)
     setPlacedTiles(prev => [
       ...prev,
       { id: `custom-${Date.now()}-${Math.random()}`, text: char, isCustom: true },
@@ -361,14 +321,25 @@ export default function SpellingGame({
 
     const variants = getWordVariants(currentWord.originalWord);
 
+    const noSpaceSubmitted = cleanSubmitted.replace(/\s+/g, '');
+    const noSpaceTarget = cleanTarget.replace(/\s+/g, '');
+    const noSpaceNormSubmitted = normSubmitted.replace(/\s+/g, '');
+    const noSpaceNormTarget = normTarget.replace(/\s+/g, '');
+
     const correct =
       cleanSubmitted === cleanTarget ||
       normSubmitted === normTarget ||
+      noSpaceSubmitted === noSpaceTarget ||
+      noSpaceNormSubmitted === noSpaceNormTarget ||
       cleanSubmitted === fullTargetClean ||
       normSubmitted === fullTargetNorm ||
       variants.some(v => {
         const vClean = v.toLowerCase().trim().replace(/\s+/g, ' ');
-        return cleanSubmitted === vClean || normSubmitted === normalizeForComparison(vClean);
+        const vNorm = normalizeForComparison(vClean);
+        const vNoSpace = vClean.replace(/\s+/g, '');
+        return cleanSubmitted === vClean ||
+               normSubmitted === vNorm ||
+               noSpaceSubmitted === vNoSpace;
       });
 
     setAnswered(true);
@@ -621,11 +592,12 @@ export default function SpellingGame({
                 <AnimatePresence>
                   {placedTiles.map((tile) => {
                     const isSingleLetter = tile.text.length === 1;
+                    const isSpace = tile.text === ' ';
                     return (
                       <motion.button
                         key={tile.id}
                         type="button"
-                        className={`duo-tile ${isSingleLetter ? 'duo-tile-letter' : 'duo-tile-word'} duo-tile-placed ${
+                        className={`duo-tile ${isSpace ? 'duo-tile-space' : isSingleLetter ? 'duo-tile-letter' : 'duo-tile-word'} duo-tile-placed ${
                           answered ? (isCorrect ? 'tile-correct' : 'tile-wrong') : ''
                         }`}
                         onClick={() => handleRemovePlacedTile(tile)}
@@ -636,7 +608,7 @@ export default function SpellingGame({
                         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                         disabled={answered}
                       >
-                        {tile.text}
+                        {isSpace ? '␣' : tile.text}
                       </motion.button>
                     );
                   })}
@@ -651,24 +623,25 @@ export default function SpellingGame({
           {tileBank.map((tile) => {
             const isUsed = placedTiles.some(t => t.id === tile.id);
             const isSingleLetter = tile.text.length === 1;
+            const isSpace = tile.text === ' ';
 
             return (
               <div
                 key={tile.id}
-                className={`duo-tile-wrapper ${isSingleLetter ? 'wrapper-letter' : 'wrapper-word'}`}
+                className={`duo-tile-wrapper ${isSpace ? 'wrapper-space' : isSingleLetter ? 'wrapper-letter' : 'wrapper-word'}`}
               >
                 {isUsed ? (
-                  <div className={`duo-tile-slot ${isSingleLetter ? 'slot-letter' : 'slot-word'}`} />
+                  <div className={`duo-tile-slot ${isSpace ? 'slot-space' : isSingleLetter ? 'slot-letter' : 'slot-word'}`} />
                 ) : (
                   <motion.button
                     type="button"
-                    className={`duo-tile ${isSingleLetter ? 'duo-tile-letter' : 'duo-tile-word'}`}
+                    className={`duo-tile ${isSpace ? 'duo-tile-space' : isSingleLetter ? 'duo-tile-letter' : 'duo-tile-word'}`}
                     onClick={() => handleTileTap(tile)}
                     whileHover={{ y: -2 }}
                     whileTap={{ y: 2 }}
                     disabled={answered}
                   >
-                    {tile.text}
+                    {isSpace ? '␣' : tile.text}
                   </motion.button>
                 )}
               </div>
