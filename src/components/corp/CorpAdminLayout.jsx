@@ -2,10 +2,11 @@ import { Navigate, Outlet, useOutletContext } from 'react-router-dom';
 import CorpAdminSidebar from './CorpAdminSidebar';
 import CorpAdminBottomNav from './CorpAdminBottomNav';
 import { CenterDataProvider } from '../../pages/corp/center-admin/CenterDataContext';
-import { SheetPlacementContext } from '../../pages/corp/super-admin/ui';
+import { PageStyleContext, SheetPlacementContext } from '../../pages/corp/super-admin/ui';
 import './CorpAdminLayout.css';
 import '../../pages/corp/super-admin/sa.css';
 import '../../pages/corp/center-admin/theme.css';
+import '../../pages/corp/center-admin/uits.css';
 
 // The corp identity (role/centerId/centerName/email) is resolved once by
 // CorpProtectedRoute and handed down via its <Outlet context={identity} />;
@@ -28,6 +29,7 @@ export default function CorpAdminLayout() {
   return (
     <CenterDataProvider centerId={centerId} fallbackName={centerName}>
       <SheetPlacementContext.Provider value="drawer">
+      <PageStyleContext.Provider value="toolbar">
       <div className="corp-admin-layout sa-layout ca-theme">
         <CorpAdminSidebar centerName={centerName} email={email} />
 
@@ -37,6 +39,7 @@ export default function CorpAdminLayout() {
 
         <CorpAdminBottomNav />
       </div>
+      </PageStyleContext.Provider>
       </SheetPlacementContext.Provider>
     </CenterDataProvider>
   );

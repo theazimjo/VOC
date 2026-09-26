@@ -1,5 +1,5 @@
 // Ready-made Beginner (A1) English vocabulary course — 3 months, 15 units, 332 words.
-// Shape matches what CourseManager reads/writes (months -> units -> words),
+// Shape matches what CourseEditor reads/writes (months -> units -> words),
 // so it can be written straight into a customPacks/{id} record.
 export const BEGINNER_ENGLISH_PACK = {
   "title": "Beginner English — 3 Oylik Kurs",

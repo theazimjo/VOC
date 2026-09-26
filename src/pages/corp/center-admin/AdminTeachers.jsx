@@ -36,6 +36,7 @@ export default function AdminTeachers() {
 
   return (
     <Page
+      icon={<Users />}
       title="O'qituvchilar"
       subtitle={loading ? ' ' : `${teachers.length} ta o'qituvchi`}
       action={

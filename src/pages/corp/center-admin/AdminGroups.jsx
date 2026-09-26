@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronRight, Users } from 'lucide-react';
+import { ChevronRight, Layers, Users } from 'lucide-react';
 import { formatRelative } from '../super-admin/centerActivity';
 import { EmptyState, LoadingRows, Page, Row, SearchField, Segmented, StatusDot } from '../super-admin/ui';
 import { useIsDesktop } from '../super-admin/useIsDesktop';
@@ -44,7 +44,8 @@ export default function AdminGroups() {
   const teacherName = (g) => teacherById[g.teacherId]?.name || "O'qituvchisiz";
 
   return (
-    <Page title="Guruhlar" subtitle={loading ? ' ' : `${groups.filter((g) => g.status !== 'archived').length} ta faol guruh`}>
+    <Page icon={<Layers />}
+      title="Guruhlar" subtitle={loading ? ' ' : `${groups.filter((g) => g.status !== 'archived').length} ta faol guruh`}>
       <div className={`sa-toolbar ${isDesktop ? 'is-inline' : ''}`}>
         <SearchField value={search} onChange={setSearch} placeholder="Guruh yoki o'qituvchi" />
         <Segmented label="Guruh holati" options={FILTERS} value={filter} onChange={setFilter} />

@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { BookOpen, Copy, MoreHorizontal, Pencil, Plus, Trash2 } from 'lucide-react';
 import { deleteCustomPack, duplicateCustomPack } from '../../../services/corpService';
-import CourseManager from '../../../components/corp/CourseManager';
+import CourseEditor from './CourseEditor';
 import ConfirmSheet from '../../../components/corp/ConfirmSheet';
 import { Button, EmptyState, LoadingRows, Page, Row, SearchField, Section, Sheet } from '../super-admin/ui';
 import PackEditorSheet from '../super-admin/PackEditorSheet';
@@ -11,7 +11,7 @@ import { useToast } from '../super-admin/useToast';
 import { useCenterData } from './CenterDataContext';
 
 // Course library. Tapping a course opens its months / topics / words
-// (CourseManager); the "…" button holds rename / duplicate / delete.
+// (CourseEditor); the "…" button holds rename / duplicate / delete.
 export default function AdminCourses() {
   const isDesktop = useIsDesktop();
   const [toastNode, showToast] = useToast();
@@ -40,14 +40,12 @@ export default function AdminCourses() {
 
   if (managing) {
     return (
-      <div className="sa-legacy">
-        <CourseManager
-          centerId={centerId}
-          course={managing}
-          onBack={() => setSearchParams({})}
-          onUpdate={putPack}
-        />
-      </div>
+      <CourseEditor
+        centerId={centerId}
+        course={managing}
+        onBack={() => setSearchParams({})}
+        onUpdate={putPack}
+      />
     );
   }
 
@@ -85,6 +83,7 @@ export default function AdminCourses() {
 
   return (
     <Page
+      icon={<BookOpen />}
       title="Kurslar"
       subtitle={loading ? ' ' : `${packs.length} ta kurs`}
       action={

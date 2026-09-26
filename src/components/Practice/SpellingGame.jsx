@@ -308,6 +308,8 @@ export default function SpellingGame({
       if (e.key.length === 1) {
         if (e.key === ' ') {
           e.preventDefault();
+          handleCharacterInput(' ');
+          return;
         }
         // If input element is NOT focused, focus it and process character directly.
         // If input element IS focused, do nothing here because onChange will process it!

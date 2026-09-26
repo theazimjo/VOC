@@ -51,7 +51,8 @@ export default function AdminStudents() {
   const openGroup = (st) => navigate(`/corp/admin/groups/${st.groupId}`);
 
   return (
-    <Page title="O'quvchilar" subtitle={loading ? ' ' : `${uniqueCount} ta o'quvchi`}>
+    <Page icon={<GraduationCap />}
+      title="O'quvchilar" subtitle={loading ? ' ' : `${uniqueCount} ta o'quvchi`}>
       <div className={`sa-toolbar ${isDesktop ? 'is-inline' : ''}`}>
         <SearchField value={search} onChange={setSearch} placeholder="Ism, guruh yoki o'qituvchi" />
         <Segmented label="O'quvchi faolligi" options={FILTERS} value={filter} onChange={setFilter} />

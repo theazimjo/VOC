@@ -10,11 +10,43 @@ import { ChevronLeft, ChevronRight, Search, X } from 'lucide-react';
 // wasn't flung by the user.
 const SPRING = { type: 'spring', bounce: 0, duration: 0.38 };
 
+// How a Page draws its header: 'large' (iOS large title, default) or
+// 'toolbar' (a sticky bar with an icon box, compact title and the actions
+// on the right — the center admin panel provides this, UITS CRM style).
+export const PageStyleContext = createContext('large');
+
 // `narrow` keeps form-like pages (settings) at a readable width on desktop
-// instead of stretching every field across the whole screen.
-export function Page({ title, subtitle, action, back, narrow = false, wide = false, children }) {
+// instead of stretching every field across the whole screen. `icon` shows
+// in the toolbar style only.
+export function Page({ title, subtitle, action, back, narrow = false, icon, children }) {
+  const style = useContext(PageStyleContext);
+
+  if (style === 'toolbar') {
+    return (
+      <div className="sa-page is-toolbar">
+        <header className="ca-toolbar">
+          <div className="ca-toolbar-titles">
+            {back && (
+              <button type="button" className="ca-toolbar-back" onClick={back.onClick} aria-label={back.label}>
+                <ChevronLeft size={18} strokeWidth={2.4} />
+              </button>
+            )}
+            {icon && <span className="ca-toolbar-icon">{icon}</span>}
+            <div className="ca-toolbar-text">
+              <h1 className="ca-toolbar-title">{title}</h1>
+              {subtitle && <p className="ca-toolbar-sub">{back ? <span className="ca-toolbar-crumb">{back.label} · </span> : null}{subtitle}</p>}
+              {!subtitle && back && <p className="ca-toolbar-sub"><span className="ca-toolbar-crumb">{back.label}</span></p>}
+            </div>
+          </div>
+          {action && <div className="ca-toolbar-actions">{action}</div>}
+        </header>
+        <div className={`ca-content ${narrow ? 'is-narrow' : ''}`}>{children}</div>
+      </div>
+    );
+  }
+
   return (
-    <div className={`sa-page ${narrow ? 'is-narrow' : ''} ${wide ? 'is-wide' : ''}`}>
+    <div className={`sa-page ${narrow ? 'is-narrow' : ''}`}>
       {back && (
         <button type="button" className="sa-back" onClick={back.onClick}>
           <ChevronLeft size={20} strokeWidth={2.6} />

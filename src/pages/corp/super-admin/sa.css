@@ -1869,3 +1869,64 @@
 .sa-sheet.is-drawer .sa-sheet-body {
   padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
 }
+
+/* ── Course editor ── */
+.sa-head-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sa-num {
+  font-size: 13px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.sa-select.sa-select-compact {
+  width: auto;
+  min-width: 190px;
+  min-height: 36px;
+  padding: 6px 12px;
+  font-size: 15px;
+}
+
+.sa-check.is-select.is-small {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.sa-check.is-select.is-small.is-on {
+  background: var(--sa-blue);
+}
+
+.sa-table-row.is-selected {
+  background: color-mix(in srgb, var(--sa-blue) 10%, transparent);
+}
+
+.sa-cell-clip {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sa-btn-plain.tone-red {
+  color: var(--sa-red);
+}
+
+.sa-btn-block + .sa-btn-block {
+  margin-top: 8px;
+}
+
+.sa-flow-lead code {
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--sa-fill);
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.9em;
+}
