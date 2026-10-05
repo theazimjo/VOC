@@ -1,5 +1,5 @@
 import { useLocation, Link } from 'react-router-dom';
-import { LayoutDashboard, Building2, Users, Settings } from 'lucide-react';
+import { LayoutDashboard, Building2, Users, Settings, Newspaper } from 'lucide-react';
 import '../Layout/BottomNav.css';
 
 export default function SuperAdminBottomNav() {
@@ -9,6 +9,7 @@ export default function SuperAdminBottomNav() {
     { to: '/corp/super-admin', label: 'Bosh sahifa', icon: LayoutDashboard, end: true },
     { to: '/corp/super-admin/centers', label: 'Markazlar', icon: Building2 },
     { to: '/corp/super-admin/users', label: 'Odamlar', icon: Users },
+    { to: '/corp/super-admin/blog', label: 'Blog', icon: Newspaper },
     { to: '/corp/super-admin/settings', label: 'Sozlamalar', icon: Settings, alsoActive: '/corp/super-admin/announcements' },
   ];
 

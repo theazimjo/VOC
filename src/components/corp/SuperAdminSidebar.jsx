@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard, Building2, Users,
-  Settings, LogOut
+  Settings, LogOut, Newspaper
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -24,6 +24,7 @@ export default function SuperAdminSidebar({ email }) {
     { to: '/corp/super-admin', label: 'Bosh sahifa', icon: LayoutDashboard, end: true },
     { to: '/corp/super-admin/centers', label: 'Markazlar', icon: Building2 },
     { to: '/corp/super-admin/users', label: 'Foydalanuvchilar', icon: Users },
+    { to: '/corp/super-admin/blog', label: 'Blog', icon: Newspaper },
     // Announcements live under Settings — rarely used, not worth a tab.
     { to: '/corp/super-admin/settings', label: 'Sozlamalar', icon: Settings },
   ];

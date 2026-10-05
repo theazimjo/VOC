@@ -1,0 +1,25 @@
+/* Super-admin blog editor: form on the left, live preview on the right (desktop). */
+.sa-blog-editor { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (min-width: 1180px) {
+  .sa-blog-editor { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .sa-blog-preview { position: sticky; top: 16px; max-height: calc(100dvh - 32px); overflow: auto; }
+}
+.sa-blog-form { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.sa-blog-fields { display: flex; flex-direction: column; gap: 4px; }
+.sa-blog-body { min-height: 360px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 14px; line-height: 1.55; }
+
+.sa-blog-toolbar { display: flex; flex-wrap: wrap; gap: 6px; }
+.sa-blog-tool {
+  height: 34px; padding: 0 12px; border-radius: 9px; border: 1px solid var(--border, rgba(127, 127, 127, 0.3));
+  background: transparent; color: inherit; font: 600 13px/1 inherit; cursor: pointer;
+  transition: background-color 150ms ease, transform 150ms ease;
+}
+.sa-blog-tool:hover { background: rgba(127, 127, 127, 0.14); }
+.sa-blog-tool:active { transform: scale(0.96); }
+.sa-blog-figure { appearance: auto; padding-right: 8px; }
+
+.sa-blog-preview { border-radius: 16px; padding: 20px 22px 28px; background: #e8e5dd; color: #101113; min-width: 0; }
+.sa-blog-preview-label { margin: 0 0 12px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #4a4c52; }
+.sa-blog-preview-title { font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 2.2rem; line-height: 1; margin: 0 0 18px; }
+.sa-blog-preview .bl-body { font-size: 1.0625rem; }
+.sa-blog-preview .bl-body h2 { font-size: 1.7rem; margin-top: 32px; }

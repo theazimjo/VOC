@@ -66,6 +66,8 @@ const SuperAdminUsers = lazyWithRetry(() => import('./pages/corp/super-admin/Sup
 const SuperAdminUserDetail = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminUserDetail'));
 const SuperAdminAnnouncements = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminAnnouncements'));
 const SuperAdminSettings = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminSettings'));
+const SuperAdminBlog = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminBlog'));
+const SuperAdminBlogEditor = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminBlogEditor'));
 const AdminHome = lazyWithRetry(() => import('./pages/corp/center-admin/AdminHome'));
 const AdminTeachers = lazyWithRetry(() => import('./pages/corp/center-admin/AdminTeachers'));
 const AdminTeacherDetail = lazyWithRetry(() => import('./pages/corp/center-admin/AdminTeacherDetail'));
@@ -188,6 +190,8 @@ export default function App() {
                           <Route path="super-admin/users" element={<SuperAdminUsers />} />
                           <Route path="super-admin/users/:uid" element={<SuperAdminUserDetail />} />
                           <Route path="super-admin/announcements" element={<SuperAdminAnnouncements />} />
+                          <Route path="super-admin/blog" element={<SuperAdminBlog />} />
+                          <Route path="super-admin/blog/:id" element={<SuperAdminBlogEditor />} />
                           <Route path="super-admin/settings" element={<SuperAdminSettings />} />
                         </Route>
                       </Route>
