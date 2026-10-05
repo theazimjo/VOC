@@ -69,11 +69,11 @@ for (const list of Object.values(byUser)) {
 for (const r of rows) r.x = buildFeatures(r);
 
 // ── logistic regression (standardised features, L2, full-batch GD) ────────────
-function fit(data) {
-  const d = FEATURE_NAMES.length;
-  const mu = Array.from({ length: d }, (_, j) => data.reduce((s, r) => s + r.x[j], 0) / data.length);
-  const sd = Array.from({ length: d }, (_, j) => Math.sqrt(data.reduce((s, r) => s + (r.x[j] - mu[j]) ** 2, 0) / data.length) || 1);
-  const Z = data.map((r) => r.x.map((v, j) => (v - mu[j]) / sd[j]));
+function fit(data, getX = (r) => r.x) {
+  const d = getX(data[0]).length;
+  const mu = Array.from({ length: d }, (_, j) => data.reduce((s, r) => s + getX(r)[j], 0) / data.length);
+  const sd = Array.from({ length: d }, (_, j) => Math.sqrt(data.reduce((s, r) => s + (getX(r)[j] - mu[j]) ** 2, 0) / data.length) || 1);
+  const Z = data.map((r) => getX(r).map((v, j) => (v - mu[j]) / sd[j]));
   const base = data.reduce((s, r) => s + r.y, 0) / data.length;
   let bias = Math.log(base / (1 - base));
   let w = new Array(d).fill(0);
@@ -111,6 +111,30 @@ console.log('constant average     ', f(score(test, () => trainRate)));
 console.log('old engine e^(-t/S)  ', f(score(test, (r) => r.pEngine)));
 console.log('calibrated predictor ', f(score(test, (r) => predictFromFeatures(r.x, trained))));
 console.log('weights (standardised):', Object.fromEntries(FEATURE_NAMES.map((n, j) => [n, +trained.weights[j].toFixed(3)])));
+
+// ── spaced reviews only ───────────────────────────────────────────────────────
+// Most logged reviews are repeats inside one practice session, where elapsed
+// time carries no information. The scheduler's forgetting-curve model is
+// really about *spaced* reviews, so score it separately on reviews that came
+// at least MIN_GAP_DAYS after the previous one. "engine recalibrated" maps the
+// old engine's P through a 1-feature logistic fitted on the spaced train rows
+// (it ranks words well but is overconfident, so raw P is not trustworthy).
+const MIN_GAP_DAYS = 0.25;
+const spacedTrain = train.filter((r) => r.gapDays >= MIN_GAP_DAYS);
+const spacedTest = test.filter((r) => r.gapDays >= MIN_GAP_DAYS);
+if (spacedTrain.length > 200 && spacedTest.length > 200) {
+  const lg = (p) => Math.log(Math.min(0.999, Math.max(0.001, p)) / (1 - Math.min(0.999, Math.max(0.001, p))));
+  const engineCal = fit(spacedTrain, (r) => [lg(r.pEngine)]);
+  const spacedRate = spacedTrain.reduce((s, r) => s + r.y, 0) / spacedTrain.length;
+  console.log(`
+Spaced reviews only (gap >= ${MIN_GAP_DAYS * 24}h): train ${spacedTrain.length}, test ${spacedTest.length}`);
+  console.log('constant average     ', f(score(spacedTest, () => spacedRate)));
+  console.log('old engine e^(-t/S)  ', f(score(spacedTest, (r) => r.pEngine)));
+  console.log('engine recalibrated  ', f(score(spacedTest, (r) => predictFromFeatures([lg(r.pEngine)], engineCal))));
+  console.log('calibrated predictor ', f(score(spacedTest, (r) => predictFromFeatures(r.x, trained))));
+} else {
+  console.log('\nSpaced reviews only: not enough spaced reviews yet to evaluate.');
+}
 
 // ── ship parameters fitted on everyone ────────────────────────────────────────
 if (write) {
