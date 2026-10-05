@@ -1,10 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useReducedMotion } from 'framer-motion';
 import { AlertCircle, CheckCircle2 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { resolveCorpIdentity } from '../../hooks/useCorpRole';
-import { useSuccessTransition } from '../../contexts/SuccessTransitionContext';
 import { getActiveProfile } from '../../utils/activeProfile';
 import { getPendingJoinPath } from '../../utils/pendingJoin';
 import { useSiteLanguage } from '../../utils/useSiteLanguage';
@@ -44,16 +42,13 @@ function prefetchRoute(path) {
 export default function LoginPage() {
   const { user, loading, login, loginWithOverride, loginWithGoogle, resetPassword } = useAuth();
   const navigate = useNavigate();
-  const { start: startSuccessTransition } = useSuccessTransition();
-  const prefersReducedMotion = useReducedMotion();
   // Firebase fires its auth-state listener (which updates `user` above)
   // as a side effect of login()/loginWithGoogle() — sometimes before our
-  // own async handler even resumes. `transitioning` (React state) isn't
-  // fast enough to guard against that: it doesn't take effect until the
-  // next render, so the auto-redirect effect below could still fire and
-  // navigate first, leaving our transition to play *on top of* the
-  // already-loaded destination page. A ref updates synchronously, so
-  // setting it before we even call login() closes that window entirely.
+  // own async handler even resumes. React state isn't fast enough to guard
+  // against that (it only takes effect on the next render), so the
+  // auto-redirect effect below could navigate first. A ref updates
+  // synchronously, so setting it before we even call login() closes that
+  // window entirely.
   const signingInRef = useRef(false);
 
   const { lang, setLanguage } = useSiteLanguage();
@@ -64,11 +59,8 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
-  // Set the instant sign-in succeeds — drives this page's own visuals
-  // (card exit, background warp). The full-screen burst/text/flash overlay
-  // itself lives in SuccessTransitionProvider, above the router, so it
-  // survives the navigate() call this triggers.
-  const [transitioning, setTransitioning] = useState(false);
+  // Set the instant sign-in succeeds, while the destination's chunks load.
+  const [redirecting, setRedirecting] = useState(false);
 
   // Inline "forgot password" mode — no separate route needed for a single email field.
   const [mode, setMode] = useState('login'); // 'login' | 'reset'
@@ -136,30 +128,21 @@ export default function LoginPage() {
   };
 
   useEffect(() => {
-    // Skip whenever a sign-in attempt is in flight or a success transition
-    // is already running — completeSignIn() owns navigation for this
-    // sign-in and will call navigate itself once the animation finishes.
-    // Without both guards, Firebase's auth-state update can fire this
-    // effect and navigate away immediately (see signingInRef above),
-    // leaving the transition to play over an already-loaded destination.
-    if (!loading && user && !transitioning && !signingInRef.current) {
+    // Skip whenever a sign-in attempt is in flight — completeSignIn() owns
+    // navigation for it (see signingInRef above).
+    if (!loading && user && !redirecting && !signingInRef.current) {
       getRedirectPath(user).then((targetPath) => {
         navigate(targetPath, { replace: true });
       });
     }
-  }, [user, loading, navigate, mode, transitioning]);
+  }, [user, loading, navigate, mode, redirecting]);
 
-  // Kicks off the success transition: warms the destination route's chunk
-  // and hands the resulting promise, plus the actual navigate() call, off
-  // to the shared overlay — it owns timing and navigation from here.
-  const completeSignIn = (targetPath) => {
-    if (prefersReducedMotion) {
-      navigate(targetPath, { replace: true });
-      return;
-    }
-    setTransitioning(true);
-    const readyPromise = prefetchRoute(targetPath);
-    startSuccessTransition(() => navigate(targetPath, { replace: true }), readyPromise);
+  // Warm the destination's chunks first so navigating doesn't flash the
+  // generic loader, then go straight there (no celebratory animation).
+  const completeSignIn = async (targetPath) => {
+    setRedirecting(true);
+    await prefetchRoute(targetPath);
+    navigate(targetPath, { replace: true });
   };
 
   const handleSubmit = async (e) => {
@@ -223,11 +206,11 @@ export default function LoginPage() {
     }
   };
 
-  const showForm = !loading && !user && !transitioning;
+  const showForm = !loading && !user && !redirecting;
 
   return (
     <AuthShell copy={copy} lang={lang} setLanguage={setLanguage}>
-      {loading ? (
+      {loading || redirecting ? (
         <span className="as-spinner" style={{ borderColor: 'rgba(16,17,19,0.2)', borderTopColor: '#101113' }} aria-label="Loading" />
       ) : showForm ? (
         <>

@@ -5,7 +5,6 @@ import { LanguageProvider } from './contexts/LanguageContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { PacksProvider } from './contexts/PacksContext';
 import { GroupModeProvider } from './contexts/GroupModeContext';
-import { SuccessTransitionProvider } from './contexts/SuccessTransitionContext';
 import LoginPage from './components/Auth/LoginPage';
 import RegisterPage from './components/Auth/RegisterPage';
 import ProfileChooser from './components/Auth/ProfileChooser';
@@ -108,11 +107,6 @@ export default function App() {
             <LanguageProvider>
             <GroupModeProvider>
               <PacksProvider>
-                {/* Deliberately OUTSIDE Suspense: if it were inside, the
-                    Routes' own lazy-chunk fallback would swap out this
-                    overlay too the instant a route suspends, defeating the
-                    whole point of covering that flash. */}
-                <SuccessTransitionProvider>
                 <Suspense fallback={<RouteLoader />}>
                   <Routes>
                     {/* Public routes */}
@@ -233,7 +227,6 @@ export default function App() {
                     <Route path="*" element={<Navigate to="/" replace />} />
                   </Routes>
                 </Suspense>
-                </SuccessTransitionProvider>
               </PacksProvider>
             </GroupModeProvider>
             </LanguageProvider>
