@@ -52,7 +52,7 @@ export default function StudentSidebar() {
           );
         })}
 
-        <button type="button" className="sidebar-nav-btn sidebar-logout" onClick={() => setConfirmOpen(true)} title={t('profile.logout')}>
+        <button type="button" className="sidebar-nav-btn sidebar-signout" onClick={() => setConfirmOpen(true)} title={t('profile.logout')}>
           <LogOut size={23} strokeWidth={2.3} />
           <span>{t('profile.logout')}</span>
         </button>

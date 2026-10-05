@@ -215,13 +215,13 @@
 }
 
 /* Logout row: last row of the student sidebar nav, set apart by a hairline. */
-.corp-admin-sidebar .sidebar-logout {
+.corp-admin-sidebar .sidebar-signout {
   margin-top: 10px;
   border-top: 1px solid var(--border);
   color: var(--text-secondary);
 }
-.corp-admin-sidebar .sidebar-logout:hover {
+.corp-admin-sidebar .sidebar-signout:hover {
   background: rgba(255, 69, 58, 0.1);
   color: var(--error, #ff453a);
 }
-.corp-admin-sidebar .sidebar-logout:active { transform: scale(0.98); }
+.corp-admin-sidebar .sidebar-signout:active { transform: scale(0.98); }

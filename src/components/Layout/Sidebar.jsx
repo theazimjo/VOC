@@ -66,7 +66,7 @@ export default function Sidebar() {
           );
         })}
 
-        <button type="button" className="sidebar-nav-btn sidebar-logout" onClick={() => setConfirmOpen(true)} title={t('profile.logOut')}>
+        <button type="button" className="sidebar-nav-btn sidebar-signout" onClick={() => setConfirmOpen(true)} title={t('profile.logOut')}>
           <LogOut size={23} strokeWidth={2.3} />
           <span>{t('profile.logOut')}</span>
         </button>
