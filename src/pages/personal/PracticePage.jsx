@@ -11,7 +11,7 @@ import { useStreak } from '../../hooks/useStreak';
 import { migratePackWordsIfNeeded } from '../../utils/wordsMigration';
 import { weightedSelectWords, filterWordsForMode, shuffleArray, speakWord, PRACTICE_MODE_MIN_WORDS, RECALL_ONLY_MODES } from '../../utils/helpers';
 import { playSound, triggerVibration } from '../../utils/feedback';
-import { computeClusterCalibration } from '@voc/memory-engine';
+import { computeClusterCalibration, computeUserRate } from '@voc/memory-engine';
 import { saveReviewEvent } from '../../experiment/experimentDB';
 import { getWordCluster } from '../../experiment/semanticClassifier';
 import IosSpinner from '../../components/common/IosSpinner';
@@ -362,6 +362,7 @@ export default function PracticePage({ embedded = false, initialSource = null, i
         responseTime,
         retrievalType,
         clusterMultiplier,
+        userRate: computeUserRate(allWords),
         mode: selectedMode,
         wordText: word.word,
       });

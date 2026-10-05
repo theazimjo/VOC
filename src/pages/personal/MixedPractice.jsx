@@ -14,7 +14,7 @@ import { useStreak } from '../../hooks/useStreak';
 import { shuffleArray } from '../../utils/helpers';
 import { playSound, triggerVibration } from '../../utils/feedback';
 import { getDueWords } from '@voc/memory-engine';
-import { inferConfidenceFromSpeed, computeClusterCalibration, getRecommendedRetrievalType } from '@voc/memory-engine';
+import { inferConfidenceFromSpeed, computeClusterCalibration, computeUserRate, getRecommendedRetrievalType } from '@voc/memory-engine';
 import { saveReviewEvent } from '../../experiment/experimentDB';
 import { getWordCluster } from '../../experiment/semanticClassifier';
 import IosSpinner from '../../components/common/IosSpinner';
@@ -206,6 +206,7 @@ export default function MixedPractice() {
         responseTime,
         retrievalType,
         clusterMultiplier,
+        userRate: computeUserRate(allWords),
         mode,
         wordText: wordObj.word,
       });

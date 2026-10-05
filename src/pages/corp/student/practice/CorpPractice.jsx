@@ -8,7 +8,7 @@ import { updateStudentUnitProgress } from '../../../../services/corpService';
 import { weightedSelectWords, filterWordsForMode, PRACTICE_MODE_MIN_WORDS, corpWordStorageId } from '../../../../utils/helpers';
 import { playSound, triggerVibration } from '../../../../utils/feedback';
 import { getWordCluster } from '../../../../experiment/semanticClassifier';
-import { computeClusterCalibration, getDecayedMastery, computeRetentionStats } from '@voc/memory-engine';
+import { computeClusterCalibration, computeUserRate, getDecayedMastery, computeRetentionStats } from '@voc/memory-engine';
 import { saveReviewEvent } from '../../../../experiment/experimentDB';
 import IosSpinner from '../../../../components/common/IosSpinner';
 import { IRREGULAR_VERBS_PACK_ID } from '../../../../data/irregularVerbsCorpPack';
@@ -248,6 +248,7 @@ export default function CorpPractice() {
         responseTime,
         retrievalType,
         clusterMultiplier,
+        userRate: computeUserRate(allWords),
         mode: selectedMode,
         wordText: word.word,
       });
