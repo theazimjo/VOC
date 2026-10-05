@@ -14,21 +14,17 @@ export const BUILT_IN_POSTS = [
     slug: 'taxmin-emas-olchov',
     date: '2026-10-05',
     cover: 'compare',
-    minutes: 6,
+    minutes: 5,
     uz: {
-      title: "Modelimiz oddiy o'rtachadan yomon chiqdi. Mana nima qildik",
-      excerpt: "VOC'dagi unutish modelini birinchi marta real takrorlarda sinadik. Natija biz kutganday bo'lmadi, lekin undan ko'p narsa o'rgandik.",
-      body: `Bir necha oy davomida VOC ichida har bir so'z uchun "bu odam hozir shu so'zni eslay oladimi" degan ehtimolni hisoblab keldik. Formula chiroyli edi: unutish egri chizig'i va har bir so'zning o'z mustahkamlik ko'rsatkichi. Lekin chiroyli formula ishlaydi degani emas. Shuning uchun uni haqiqiy takrorlarda sinab ko'rishga qaror qildik.
+      title: "Modelimiz oddiy o'rtachadan yomon chiqdi",
+      excerpt: "VOC'dagi unutish modelini birinchi marta haqiqiy takrorlarda sinadik. Natija yoqmadi, lekin shu tufayli nimaga qarash kerakligini bildik.",
+      body: `VOC har bir so'z uchun "bu odam hozir shu so'zni eslay oladimi" degan ehtimolni hisoblaydi. Modelni yozayotganimizda hammasi mantiqiy tuyulardi: so'z vaqt o'tgani sari unutiladi, har takror uni mustahkamlaydi. Faqat bir narsa qolgan edi: buni haqiqiy o'quvchilarning javoblarida tekshirib ko'rmagan edik.
 
-## Sinov qanday o'tdi
+Endi tekshirdik. Bazadan 24 o'quvchining 37 mingdan ortiq takrorini oldik. Ism ham, email ham yo'q, faqat javoblar tarixi. Sakkiz o'quvchini chetga qo'ydik: model o'qitilayotganda ularni ko'rmaydi, keyin aynan shularda sinaymiz.
 
-Bazadan 24 o'quvchining 37 mingdan ortiq takrorini oldik. Ism va email olmadik, faqat javoblar tarixi. Uchdan bir qismini, ya'ni 8 o'quvchini, chetga qo'ydik: model o'qitilayotganda ularni ko'rmaydi.
+Taqqoslash uchun eng oddiy narsani oldik, ya'ni hamma uchun bir xil taxmin. O'quvchilar so'zlarning taxminan 89 foizini to'g'ri topayotgan edi, shuning uchun "doim to'g'ri" deyish ham ancha yaxshi taxmin. Modelimiz shundan yaxshi bo'lmasa, uning nima keragi bor.
 
-Keyin oddiy savol berdik: modelimiz "hamma uchun bir xil o'rtacha taxmin"dan yaxshimi? Bu muhim savol, chunki o'quvchilar so'zlarning taxminan 89 foizini to'g'ri javoblayotgan edi. "Doim to'g'ri" deb taxmin qilgan odam ham yomon natija chiqarmaydi.
-
-## Yoqimsiz natija
-
-Ko'rilmagan o'quvchilarda eski modelimiz o'rtacha taxmindan yomonroq ishladi. Qaysi so'z unutilishini ajratishda u 0,53 oldi, tasodif esa 0,50. Deyarli farq yo'q.
+## Yaxshi chiqmadi
 
 :::bars Hamma takrorlar, ko'rilmagan o'quvchilar
 note: Qaysi so'z unutilishini ajratish aniqligi (AUC). 0,5 tasodif, 1 mukammal.
@@ -37,29 +33,23 @@ Klassik unutish egri chizig'i | 0.53 | mid
 VOC yangi modeli | 0.78 | model
 :::
 
-Raqamga qarab turib nima noto'g'ri ketganini topa olmadik, shuning uchun ma'lumotning o'ziga tushdik.
+Eski modelimiz 0,53 oldi. Tasodif 0,50, farqi deyarli yo'q. Ehtimollarini butun ma'lumot bo'yicha tekshirganimizda yana g'alati narsa chiqdi: model "bu so'zni deyarli eslay olmaydi, 3 foiz" degan 461 ta takrorda o'quvchilar aslida 67 foiz hollarda to'g'ri javob bergan edi. Model unutishni kerak bo'lganidan ancha ko'p kutayotgan edi.
 
-## Ma'lumot unutish haqida emas ekan
+## Ma'lumotga qaraganimizda
 
-Takrorlarning 67 foizi bir mashq sessiyasi ichida, oldingi takrordan bir soat ham o'tmay sodir bo'lgan. O'yin yoki test ichida so'z ketma-ket ikki marta chiqsa, unutishga vaqt yo'q. Eslab qolish bir soatdan kam oraliqda 89 foiz, bir-uch kundan keyin 92 foiz, haftalar o'tganda ham 88 atrofida edi. Vaqt deyarli hech narsani o'zgartirmayotgan edi.
+Avval kodda xato bormi deb qaradik, topmadik. Keyin ma'lumotning o'ziga tushdik. Takrorlarning 67 foizi bir mashq sessiyasi ichida, oldingi takrordan bir soat ham o'tmay bo'lgan ekan. O'yinda yoki testda bir so'z ketma-ket ikki marta chiqsa, uni unutishga vaqt yo'q. Eslab qolish bir soatdan kam oraliqda 89 foiz, bir-uch kundan keyin 92 foiz, haftalar o'tgach ham taxminan 88 foiz edi. Vaqt deyarli hech narsani o'zgartirmayotgan edi.
 
 :::figure sessions
 
-Yana bir narsa: javoblarning ko'pi "bildim" tugmasi yoki variantlardan tanlash. Variant tanlaganda taxmin ham to'g'ri chiqadi.
-
-> Bu ko'proq mashq sessiyasi ma'lumoti edi, unutish tajribasi emas.
+Yana, javoblarning ko'pi "bildim" tugmasi yoki variantlardan tanlash. Variant tanlaganda taxmin ham to'g'ri chiqadi. Ya'ni bu ma'lumot unutish haqida emas, mashq qilish haqida edi, unutish egri chizig'i esa bunday ma'lumotda ushlaydigan narsa topa olmaydi.
 
 ## Nima ishladi
 
-Eng yaxshi signal so'zning aynan shu odamdagi o'z tarixi bo'ldi. Undan keyin oldingi takrordagi ishonch, so'z necha marta ko'rilgani va odamning umumiy aniqligi. Shularni birlashtirib yangi baholash yozdik. U ko'rilmagan o'quvchilarda 0,78 berdi.
+Keyin savolni o'zgartirdik: eslab qolishga aslida nima ta'sir qilyapti? Eng kuchli signal so'zning aynan shu odamdagi o'z tarixi chiqdi, ya'ni oldin necha marta to'g'ri javob bergani. Undan keyin oxirgi takrordagi ishonch, so'z necha marta ko'rilgani va odamning umumiy aniqligi. Shu to'rttadan yangi baholash yozdik. U ko'rilmagan o'quvchilarda 0,78 berdi va ehtimollari haqiqatga yaqin chiqdi: 80 foiz desa, taxminan 80 foiz holatda to'g'ri.
 
 :::figure factors
 
-Ehtimollari ham haqiqatga yaqin chiqdi. Model 80 foiz desa, taxminan 80 foiz holatda to'g'ri chiqadi.
-
-## Oraliqli takrorlarda nima bo'ladi
-
-Adolat uchun yana bir narsani tekshirdik. Unutish modeli aslida oraliqli takrorlar uchun yozilgan, shuning uchun faqat oldingi takrordan kamida 6 soat o'tgan takrorlarga qaradik. Bu yerda eski modelimiz o'zini ancha yaxshi ko'rsatdi, ochiq FSRS-6 algoritmi ham xuddi shuncha. Faqat ikkalasi ham o'z ehtimollariga ortiqcha ishonar edi.
+Bitta narsani adolat uchun tekshirdik. Unutish modeli aslida oraliqli takrorlar uchun yozilgan, shuning uchun faqat oldingi takrordan kamida 6 soat o'tgan takrorlarni alohida ko'rdik. Bu yerda eski modelimiz ancha o'ziga keldi. Ochiq FSRS-6 algoritmini ham qo'shdik (ochiq manba kodidan, standart sozlamalarda), u ham shu atrofda chiqdi. Ikkalasi ham o'z ehtimollariga ortiqcha ishonar edi.
 
 :::bars Faqat oraliqli takrorlar
 note: Oldingi takrordan kamida 6 soat o'tgan takrorlar, AUC.
@@ -69,28 +59,24 @@ FSRS-6 (standart sozlamalar) | 0.69 | mid
 VOC yangi modeli | 0.72 | model
 :::
 
-Taqqoslashda bitta ogohlantirish bor: bizning yangi modelimiz shu o'quvchilar ma'lumotida o'qitilgan, FSRS esa standart sozlamalarda ishlagan. Shuning uchun "FSRS'dan yaxshimiz" demaymiz. "Shu darajada ishlaydi" deymiz.
+Yangi modelimiz shu o'quvchilar ma'lumotida o'qitilgan, FSRS esa yo'q. Shuning uchun "FSRS'dan yaxshimiz" demaymiz, "shu darajada ishlaydi" deymiz.
 
-## Hali bilmaydiganlarimiz
+## Bilmaydigan narsalarimiz
 
-Atigi 24 o'quvchi bor, sinov qismida 8 tasi. Raqamlar yo'nalishni ko'rsatadi, isbot emas. Haqiqiy oraliqli takrorlar hali kam, shuning uchun takrorlash jadvalimiz, ya'ni so'zni qachon qaytarish, hozircha eski mantiqda qolgan. Ma'lumot ko'paygach qayta o'lchaymiz va natijani shu yerga yozamiz.
+Atigi 24 o'quvchi bor, sinovda 8 tasi, shuning uchun bu raqamlarga qat'iy ishonib bo'lmaydi, ular faqat yo'nalishni ko'rsatadi. Haqiqiy oraliqli takrorlar ham hali kam. Shu sababli takrorlash jadvali, ya'ni so'z qachon qaytishi, hozircha eski mantiqda qolgan. Ma'lumot ko'paygach qayta o'lchaymiz va natijani shu yerga yozamiz.
 
-Ilovada esa quyidagi o'zgardi: "eslab qolish" foizi va "xavf ostidagi so'zlar" endi o'tgan vaqtga emas, so'zning sizdagi tarixiga qarab chiqadi. Har bir takror uchun sessiya va javob turini ham (yozdingizmi, tanladingizmi) yozib bora boshladik, keyingi o'lchovlar aniqroq bo'lsin.`,
+Ilovada esa quyidagi o'zgardi: "eslab qolish" foizi va "xavf ostidagi so'zlar" endi o'tgan vaqtga emas, so'zning sizdagi tarixiga qarab chiqadi. Har bir takror uchun sessiyani va javob turini ham (yozdingizmi, tanladingizmi) yozib bora boshladik. Keyingi safar bu ikkisi ajratilgan holda o'lchaymiz.`,
     },
     en: {
-      title: 'Our model did worse than a plain average. Here is what we did',
-      excerpt: 'We tested the forgetting model inside VOC on real reviews for the first time. The result was not what we hoped for, and we learned a lot from it.',
-      body: `For a few months VOC has been computing, for every word, the chance that a person can recall it right now. The formula looked nice: a forgetting curve plus a strength value for each word. But a nice formula does not mean it works, so we decided to test it on real reviews.
+      title: 'Our model did worse than a plain average',
+      excerpt: 'We tested the forgetting model inside VOC on real reviews for the first time. We did not like the result, but it showed us what to look at.',
+      body: `VOC works out, for every word, the chance that a person can recall it right now. When we wrote the model it all felt logical: words fade as time passes, every review strengthens them. One thing was missing. We had never checked it against what real learners actually answered.
 
-## How the test went
+So we did. We took more than 37,000 reviews from 24 learners. No names, no emails, just answer history. Eight learners were set aside: the model never sees them while it trains, and we test on exactly those.
 
-We took more than 37,000 reviews from 24 learners. No names, no emails, just answer history. A third of the learners, 8 of them, were set aside: the model never sees them while it is being trained.
+For comparison we used the simplest thing there is, the same guess for everyone. Learners were getting about 89 percent of words right, so just saying "correct" every time is already a decent guess. If our model could not beat that, what was it for?
 
-Then we asked a plain question: is our model better than "the same average guess for everyone"? That question matters because learners were answering about 89 percent of words correctly. Someone who just guesses "correct" every time does not do badly.
-
-## The unwelcome result
-
-On learners it had not seen, our old model did worse than the plain average. Its score at telling which words you will forget was 0.53, where chance is 0.50. Practically no difference.
+## It did not come out well
 
 :::bars All reviews, unseen learners
 note: How well it separates words you will forget from words you will remember (AUC). 0.5 is chance, 1 is perfect.
@@ -99,29 +85,23 @@ Classic forgetting curve | 0.53 | mid
 New VOC model | 0.78 | model
 :::
 
-Staring at the number did not show us what was wrong, so we went into the data itself.
+The old model scored 0.53. Chance is 0.50, so there is barely any difference. Checking its probabilities across all the data showed something odd too: in the 461 reviews where it said "this person will almost certainly forget, 3 percent", learners actually got the word right 67 percent of the time. The model expected far more forgetting than there was.
 
-## The data was not about forgetting
+## Looking at the data
 
-67 percent of reviews happened inside one practice session, less than an hour after the previous review of that word. If a word comes up twice in a row in a game or a quiz, there is no time to forget it. Recall was 89 percent under an hour, 92 percent after one to three days, and still about 88 after weeks. Time was barely changing anything.
+First we checked the code for a bug and did not find one. Then we looked at the data itself. 67 percent of the reviews happened inside a single practice session, less than an hour after the previous review of that word. If a word shows up twice in a row in a game or a quiz, there is no time to forget it. Recall was 89 percent under an hour, 92 percent after one to three days, and still around 88 after weeks. Time was hardly changing anything.
 
 :::figure sessions
 
-One more thing: most answers were the "I knew it" button or picking from options. When you pick from options, a guess can be right too.
-
-> This was mostly practice-session data, not forgetting data.
+On top of that, most answers were the "I knew it" button or picking from options, and a guess can be right when you pick. So this data was about practising, not about forgetting, and a forgetting curve has nothing to grab onto in data like that.
 
 ## What worked
 
-The best signal turned out to be the word's own record with that particular person. After that came the confidence reported last time, how many times the word had been seen, and the person's overall accuracy. We built a new estimate from those. On unseen learners it scored 0.78.
+So we changed the question: what actually affects recall? The strongest signal was the word's own record with that person, meaning how often they had got it right before. After that came the confidence reported on the last review, how many times the word had been seen, and the person's overall accuracy. We built a new estimate from those four. On unseen learners it scored 0.78, and its probabilities came out close to reality: when it says 80 percent, it is right about 80 percent of the time.
 
 :::figure factors
 
-Its probabilities came out close to reality too. When the model says 80 percent, it is right about 80 percent of the time.
-
-## What happens with spaced reviews
-
-To be fair, we checked one more thing. A forgetting model is really written for spaced reviews, so we looked only at reviews that came at least 6 hours after the previous one. There our old model did much better, and so did the open FSRS-6 algorithm. Both were overconfident in their own probabilities, though.
+One more check, to be fair. A forgetting model is really written for spaced reviews, so we looked separately at reviews that came at least 6 hours after the previous one. There the old model came back to life. We also added the open FSRS-6 algorithm (from its open source code, default settings) and it landed in the same place. Both were overconfident in their own probabilities.
 
 :::bars Spaced reviews only
 note: Reviews at least 6 hours after the previous one, AUC.
@@ -131,79 +111,65 @@ FSRS-6 (default settings) | 0.69 | mid
 New VOC model | 0.72 | model
 :::
 
-One warning about that comparison: our new model was trained on these learners' data and FSRS ran on default settings. So we do not say "we beat FSRS". We say "it performs at that level".
+Our new model was trained on these learners' data and FSRS was not. So we do not say "we beat FSRS". We say "it performs at that level".
 
-## What we still do not know
+## What we do not know
 
-There are only 24 learners, 8 in the test part. The numbers show a direction, not proof. Genuinely spaced reviews are still scarce, so our review schedule, meaning when a word comes back, still uses the older logic. When there is more data we will measure again and write the result here.
+There are only 24 learners, 8 in the test, so please do not lean on these numbers; they show a direction. Genuinely spaced reviews are also still rare. That is why the review schedule, meaning when a word comes back, still runs on the older logic. When there is more data we will measure again and write the result here.
 
-In the app, this changed: the "recall" percentage and "words at risk" now come from the word's history with you, not from elapsed time. We also started logging the session and the answer type (typed or chosen) for every review, so the next measurement is sharper.`,
+In the app, this changed: the "recall" percentage and "words at risk" now come from the word's history with you, not from elapsed time. We also started logging the session and the answer type (typed or chosen) for every review. Next time we will measure those two separately.`,
     },
   },
   {
     slug: 'nega-sozlar-unutiladi',
     date: '2026-10-05',
     cover: 'curve',
-    minutes: 4,
+    minutes: 3,
     uz: {
       title: "Yangi so'z nega ertasiga yo'qoladi",
       excerpt: "Ertalab o'nta so'z yodlaysiz, kechqurun yarmi qoladi. Bu odatiy hol, va uni sekinlashtirish mumkin.",
-      body: `Ertalab o'nta yangi so'z yodlaysiz, kechqurun yarmini eslaysiz, bir haftadan keyin deyarli hech birini. Bu sizning xotirangizda muammo bor degani emas. Odamlar shunday.
+      body: `Ertalab o'nta yangi so'z yodlaysiz. Kechqurun besh-oltitasini eslaysiz, bir haftadan keyin deyarli hech birini. Birinchi marta shunday bo'lganda ko'pchilik o'zini ayblaydi: xotiram yomon, deydi. Aslida odamlar shunday.
 
 ## Unutish tez boshlanadi
 
-1885 yilda nemis psixologi Hermann Ebbinghaus o'zida tajriba qilgan: ma'nosiz bo'g'inlar ro'yxatini yodlab, qancha vaqtdan keyin qanchasi esda qolganini sanagan. Eng katta yo'qotish boshida bo'lgan, keyin egri chiziq yotiqlashgan. Keyingi tadqiqotlar ham shu shaklni tasdiqlagan. Aniq tezlik esa so'zga, odamga va o'sha kuni qanchalik charchaganingizga qarab farq qiladi.
+1885 yilda nemis olimi Hermann Ebbinghaus buni o'zida sinab ko'rgan. Ma'nosiz bo'g'inlar ro'yxatini yodlab, bir necha vaqtdan keyin qanchasi qolganini sanagan. Eng katta yo'qotish boshida bo'lgan, keyin egri chiziq yotiqlashgan. Keyingi tadqiqotlar ham shu shaklni tasdiqlagan, tezlik esa so'zga va odamga qarab farq qilgan.
 
-## Takrorlash egri chiziqni sekinlashtiradi
+Yaxshi xabar shu: har gal eslaganingizda unutish sekinlashadi. Shuning uchun takrorlash oraliqlari kengayib boradi, bugun, ertaga, bir haftadan keyin, bir oydan keyin. Hunar bitta: so'zni unutilib bo'layotganda, lekin hali butunlay yo'qolmaganda qaytarish. Juda erta takrorlasangiz vaqt bekor ketadi, juda kech qolsangiz deyarli qaytadan o'rganasiz.
 
-Har gal eslaganingizda iz biroz chuqurlashadi va keyingi unutish sekinroq ketadi. Shuning uchun intervallar kengayib boradi: bugun, ertaga, bir haftadan keyin, bir oydan keyin. Asosiy hunar bitta: so'zni unutilib bo'layotganda, lekin hali butunlay yo'qolmaganda qaytarish.
+## Amalda nima yordam beradi
 
-## Nima ko'proq yordam beradi
+Javobni ko'rishdan oldin o'zingiz eslashga urinib ko'ring. Tarjimani shunchaki o'qishdan ko'ra, eslashga harakat qilish xotirani kuchliroq mustahkamlaydi, tadqiqotchilar buni sinov effekti deyishadi. So'zni yozib ko'rsangiz yoki ovoz chiqarib aytsangiz yana yaxshi: mehnat ko'proq, esda qolishi ham.
 
-- Javobni ko'rishdan oldin o'zingiz eslashga urinib ko'ring. Tadqiqotlarda bunga sinov effekti deyiladi: tarjimani shunchaki o'qishdan ko'ra eslashga urinish xotirani kuchliroq mustahkamlaydi.
-- So'zni yozib ko'ring yoki ovoz chiqarib ayting. Bu ko'proq mehnat talab qiladi, shuning uchun yaxshiroq qoladi.
-- Bir kunda o'n marta emas, kunlarga yoyib takrorlang.
-- Takrorlar orasida uxlab oling. Uyqu paytida yangi o'rganilgan narsa mustahkamlanadi.
+Bir kunda o'n marta emas, kunlarga yoyib takrorlang. Va imkon bo'lsa, takrorlar orasida uxlab oling, chunki yangi o'rganilgan narsa uyqu paytida mustahkamlanadi.
 
-## Hamma so'z bir xil unutilmaydi
-
-"Table" bir marta ko'rganingizdan keyin qoladi. "Reluctant" esa o'n marta ko'rsangiz ham qochadi. Hamma so'zga bir xil jadval qo'llash shuning uchun samarasiz: oson so'zlarga vaqt ketadi, qiyinlari yetarlicha qaytmaydi.
+Yana bir narsa: hamma so'z bir xil unutilmaydi. "Table" bir ko'rishda qoladi, "reluctant" esa o'nta takrordan keyin ham qochadi. Shuning uchun hamma so'zga bir xil jadval qo'llash samarasiz, oson so'zlarga vaqt ketadi, qiyinlari esa kam qaytadi.
 
 :::figure factors
 
-VOC har bir so'z uchun alohida baho yuritadi. U so'zning sizdagi natijalarini, javob berishdagi ishonchingizni va javobni yozdingizmi yoki tanladingizmi ham hisobga oladi. Yozib bergan to'g'ri javob tanlab bergan javobdan ko'ra ko'proq hisoblanadi. Qiyin so'zlar tez-tez qaytadi, oson so'zlar kamroq.
-
-Bu baho amalda qanchalik ishlashini real ma'lumotda o'lchaganimiz haqida [alohida maqola yozdik](/blog/taxmin-emas-olchov).`,
+VOC'da har bir so'z uchun alohida baho yuritiladi. U so'z sizda qanday ketayotganini, javobda qanchalik ishonchli bo'lganingizni va javobni yozdingizmi yoki tanladingizmi, shularni hisobga oladi. Yozib bergan to'g'ri javob ko'proq hisoblanadi. Qiyin so'zlar tez-tez qaytadi, oson so'zlar kamroq. Bu baho amalda qanchalik ishlashini real ma'lumotda o'lchadik, bu haqda [alohida yozdik](/blog/taxmin-emas-olchov).`,
     },
     en: {
       title: 'Why a new word disappears by tomorrow',
       excerpt: 'You learn ten words in the morning and by evening half are gone. That is normal, and you can slow it down.',
-      body: `You learn ten new words in the morning, recall half of them in the evening, and almost none after a week. That does not mean something is wrong with your memory. People work like that.
+      body: `You learn ten new words in the morning. By evening you remember five or six, and after a week almost none. The first time it happens, most people blame themselves: my memory is bad, they say. It is not. People just work like that.
 
 ## Forgetting starts fast
 
-In 1885 the German psychologist Hermann Ebbinghaus experimented on himself: he memorised lists of nonsense syllables and counted how many he still knew after different delays. The biggest loss came right at the start, then the curve flattened. Later research has backed that shape. The exact speed differs by word, by person and by how tired you were that day.
+In 1885 the German scientist Hermann Ebbinghaus tried this on himself. He memorised lists of nonsense syllables and counted how many he still knew after different delays. The biggest loss came right at the start, then the curve flattened out. Later studies have backed that shape, while the exact speed changes from word to word and from person to person.
 
-## Reviewing slows the curve
+The good news is that every time you recall a word, forgetting slows down. That is why review gaps keep growing: today, tomorrow, in a week, in a month. The whole craft is one thing, bringing a word back while it is slipping but has not vanished yet. Review too early and you waste the time, too late and you are close to learning it from scratch.
 
-Each time you recall a word, the trace gets a little deeper and the next stretch of forgetting is slower. That is why the gaps keep growing: today, tomorrow, in a week, in a month. The whole craft comes down to one thing: bring the word back when it is about to slip, but has not vanished yet.
+## What helps in practice
 
-## What helps most
+Try to recall a word before you look at the answer. Making yourself remember beats reading the translation; researchers call this the testing effect. Writing the word or saying it out loud is better still, since it takes more effort and so it sticks more.
 
-- Try to recall before you look at the answer. In research this is called the testing effect: trying to remember beats just reading the translation.
-- Write the word or say it out loud. It takes more effort, so it sticks better.
-- Spread reviews over days instead of ten repetitions in one.
-- Sleep between reviews. Newly learned material consolidates while you sleep.
+Spread your reviews over days instead of doing ten in one. And if you can, sleep between them, because newly learned material consolidates while you sleep.
 
-## Not every word is forgotten the same way
-
-"Table" stays after one look. "Reluctant" slips away even after ten. Applying one schedule to every word is wasteful for that reason: easy words eat time while hard ones do not come back often enough.
+One more thing: not every word is forgotten the same way. "Table" stays after one look, while "reluctant" slips away even after ten tries. So giving every word the same schedule is wasteful. Easy words eat time, and hard words do not come back often enough.
 
 :::figure factors
 
-VOC keeps a separate estimate for each word. It takes into account how the word has gone for you, how confident you were, and whether you typed the answer or chose it. A correct typed answer counts for more than a chosen one. Hard words come back often, easy ones less.
-
-We wrote [a separate post](/blog/taxmin-emas-olchov) about how we measured how well this works on real data.`,
+VOC keeps a separate estimate for each word. It looks at how the word has been going for you, how confident you were, and whether you typed the answer or picked it. A correct typed answer counts for more. Hard words come back often, easy words less. We also measured how well this works on real data, and [wrote about that separately](/blog/taxmin-emas-olchov).`,
     },
   },
 ];
