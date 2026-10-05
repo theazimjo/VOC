@@ -42,7 +42,7 @@ export const CONTENT = {
       sub: "VOC har bir so'zni sizning o'zingiz uchun alohida kuzatadi va unutilishiga oz qolganda qaytaradi.",
       primary: 'Bepul boshlash',
       secondary: "O'quv markazlari uchun",
-      note: "Hozir 40 dan ortiq o'quvchi foydalanmoqda.",
+      note: "Beta versiya: hozir 40 dan ortiq o'quvchi foydalanmoqda.",
     },
     board: {
       title: 'Bugungi takrorlash',
@@ -98,6 +98,7 @@ export const CONTENT = {
     faq: {
       title: "Ko'p so'raladigan savollar",
       items: [
+        { q: "Beta versiya nimani anglatadi?", a: "VOC hozir beta versiyada ishlayapti. Asosiy imkoniyatlar ishlaydi va o'quvchilar undan foydalanmoqda, lekin biz uni hali takomillashtiryapmiz, shuning uchun ayrim kamchiliklar uchrashi mumkin." },
         { q: "Boshqa takrorlash ilovalaridan nimasi bilan farq qiladi?", a: "Ko'pchilik ilovalar hamma so'zga bir xil intervallar jadvalini qo'llaydi. VOC har bir so'zga alohida qaraydi: u sizda qanday ketayotganiga qarab qachon qaytarishni hal qiladi." },
         { q: 'Telefonda ishlaydimi?', a: "Ha. Telefon brauzerida ishlaydi, uni bosh ekranga qo'shsangiz ilova kabi ochiladi." },
         { q: "Mening ma'lumotlarim qanday ishlatiladi?", a: "Javoblar tarixi hisobingizda saqlanadi va takrorlash jadvalini hisoblash uchun ishlatiladi. Modelni yaxshilash uchun uni anonim, umumlashtirilgan holda tahlil qilishimiz ham mumkin: ism va email bunga kirmaydi." },
@@ -107,7 +108,7 @@ export const CONTENT = {
       ],
     },
     close: { title: "Birinchi so'zingizni bugun qo'shing.", cta: 'Bepul boshlash' },
-    footer: { login: 'Kirish', start: 'Boshlash' },
+    footer: { login: 'Kirish', start: 'Boshlash', beta: 'Beta versiya' },
   },
   ru: {
     langLabel: 'Язык',
@@ -118,7 +119,7 @@ export const CONTENT = {
       sub: 'VOC следит за каждым словом отдельно, именно для вас, и возвращает его, когда вы вот-вот его забудете.',
       primary: 'Начать бесплатно',
       secondary: 'Для учебных центров',
-      note: 'Сегодня им пользуются более 40 учеников.',
+      note: 'Бета-версия: сегодня ею пользуются более 40 учеников.',
     },
     board: {
       title: 'Повторение на сегодня',
@@ -174,6 +175,7 @@ export const CONTENT = {
     faq: {
       title: 'Вопросы и ответы',
       items: [
+        { q: 'Что значит «бета-версия»?', a: 'VOC сейчас работает в бета-версии. Основные возможности работают, ею пользуются ученики, но мы всё ещё её дорабатываем, поэтому возможны недочёты.' },
         { q: 'Чем это отличается от других приложений для повторения?', a: 'Большинство приложений применяет ко всем словам одно расписание интервалов. VOC смотрит на каждое слово отдельно: по тому, как оно идёт у вас, он решает, когда его вернуть.' },
         { q: 'Работает ли на телефоне?', a: 'Да. Работает в браузере телефона, а если добавить на главный экран, открывается как приложение.' },
         { q: 'Как используются мои данные?', a: 'История ответов хранится в вашем аккаунте и нужна для расчёта расписания повторений. Чтобы улучшать модель, мы можем анализировать её и в обезличенном, сводном виде: имена и email в это не входят.' },
@@ -183,7 +185,7 @@ export const CONTENT = {
       ],
     },
     close: { title: 'Добавьте первое слово сегодня.', cta: 'Начать бесплатно' },
-    footer: { login: 'Войти', start: 'Начать' },
+    footer: { login: 'Войти', start: 'Начать', beta: 'Бета-версия' },
   },
   en: {
     langLabel: 'Language',
@@ -194,7 +196,7 @@ export const CONTENT = {
       sub: 'VOC tracks every word separately, just for you, and brings it back when you are about to forget it.',
       primary: 'Start free',
       secondary: 'For learning centers',
-      note: 'More than 40 learners use it today.',
+      note: 'Beta version: more than 40 learners use it today.',
     },
     board: {
       title: "Today's review",
@@ -250,6 +252,7 @@ export const CONTENT = {
     faq: {
       title: 'Questions',
       items: [
+        { q: 'What does beta mean?', a: 'VOC is currently running as a beta. The core features work and learners are using it, but we are still improving it, so you may run into rough edges.' },
         { q: 'How is it different from other review apps?', a: 'Most apps apply one interval schedule to every word. VOC looks at each word on its own: from how it is going for you, it decides when to bring it back.' },
         { q: 'Does it work on a phone?', a: 'Yes. It runs in your phone browser, and if you add it to the home screen it opens like an app.' },
         { q: 'How is my data used?', a: 'Your answer history is stored in your account and used to compute your review schedule. To improve the model we may also analyse it in anonymised, aggregate form: names and emails are not part of that.' },
@@ -259,6 +262,6 @@ export const CONTENT = {
       ],
     },
     close: { title: 'Add your first word today.', cta: 'Start free' },
-    footer: { login: 'Log in', start: 'Get started' },
+    footer: { login: 'Log in', start: 'Get started', beta: 'Beta' },
   },
 };

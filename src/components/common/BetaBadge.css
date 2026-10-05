@@ -1,0 +1,6 @@
+.beta-badge {
+  display: inline-block; align-self: center; margin-left: 2px; padding: 3px 8px;
+  border-radius: 999px; background: #ffb020; color: #101113;
+  font: 700 0.6875rem/1 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}

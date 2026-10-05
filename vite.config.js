@@ -3,6 +3,9 @@ import tailwindcss from '@tailwindcss/vite';
 import fs from 'node:fs';
 import path from 'node:path';
 
+// Single source of truth for the version shown on the site: package.json.
+const pkg = JSON.parse(fs.readFileSync(new URL('./package.json', import.meta.url), 'utf8'));
+
 // `npm run dev` only serves the frontend — Vercel runs api/*.js in
 // production. This dev-only plugin mounts those same handlers under /api so
 // the functions (TTS, center delete code) work locally too. Server-side env
@@ -67,6 +70,7 @@ function siteUrlInHtml() {
 }
 
 export default defineConfig({
+  define: { __APP_VERSION__: JSON.stringify(pkg.version) },
   plugins: [
     tailwindcss(),
     vercelApiDev(),

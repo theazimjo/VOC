@@ -17,6 +17,8 @@
 
 ---
 
+> **Status: public beta, `v1.0.0-beta.1`.** The core product works and is in use; see [CHANGELOG.md](CHANGELOG.md) for what is in this release and what is still open.
+
 ## 📌 Executive Summary
 
 **VOC** is an English learning platform for vocabulary and grammar. It serves two customers with one product:

@@ -129,7 +129,8 @@
 .as-strength .strong { background: #1b8f4e; }
 .as-strength-hint { margin-top: 6px; font-size: 0.8125rem; font-weight: 600; color: var(--ink-soft); }
 
-.as-bottom { display: flex; }
+.as-bottom { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.as-version { font-size: 0.8125rem; color: var(--ink-soft); }
 .as-back { display: inline-flex; align-items: center; gap: 7px; color: var(--ink-soft); font-size: 0.875rem; font-weight: 500; text-decoration: none; }
 .as-back:hover { color: var(--ink); }
 

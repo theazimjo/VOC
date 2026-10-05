@@ -3,6 +3,8 @@ import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Check, Link2 } from 'lucide-react';
 import { useReducedMotion } from 'framer-motion';
 import { pickLang } from './posts';
+import { APP_VERSION_LABEL } from '../../utils/appVersion';
+import BetaBadge from '../../components/common/BetaBadge';
 import { useBlogPosts } from './useBlogPosts';
 import { parseMarkdown } from './markdown';
 import Markdown from './BlogMarkdown';
@@ -51,6 +53,7 @@ function Shell({ ui, children }) {
         <Link to="/welcome" className="bl-brand" aria-label="VOCABRY">
           <img src="/logo.png" alt="" width="34" height="34" />
           <span>VOCABRY</span>
+          <BetaBadge />
         </Link>
         <nav className="bl-nav" aria-label="Blog">
           <Link to="/blog">{ui.title}</Link>
@@ -63,7 +66,7 @@ function Shell({ ui, children }) {
       {children}
       <footer className="bl-footer">
         <Link to="/welcome" className="bl-back"><ArrowLeft size={15} strokeWidth={2.2} aria-hidden="true" />{ui.home}</Link>
-        <span>&copy; {new Date().getFullYear()} VOCABRY</span>
+        <span>&copy; {new Date().getFullYear()} VOCABRY &middot; Beta {APP_VERSION_LABEL}</span>
       </footer>
     </div>
   );

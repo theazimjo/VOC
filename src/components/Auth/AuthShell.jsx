@@ -1,6 +1,8 @@
 import { useId, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Eye, EyeOff, ArrowLeft } from 'lucide-react';
+import { APP_VERSION_LABEL } from '../../utils/appVersion';
+import BetaBadge from '../common/BetaBadge';
 import './AuthShell.css';
 
 const ASIDE_ROWS = [
@@ -80,6 +82,7 @@ export function AuthShell({ copy, lang, setLanguage, children }) {
           <Link to="/welcome" className="as-brand" aria-label="VOCABRY">
             <img src="/logo.png" alt="" width="34" height="34" />
             <span>VOCABRY</span>
+            <BetaBadge />
           </Link>
           <div className="as-lang" role="group" aria-label={copy.langLabel}>
             {['uz', 'ru', 'en'].map((code) => (
@@ -94,6 +97,7 @@ export function AuthShell({ copy, lang, setLanguage, children }) {
 
         <footer className="as-bottom">
           <Link to="/welcome" className="as-back"><ArrowLeft size={15} strokeWidth={2.2} aria-hidden="true" />{copy.back}</Link>
+          <span className="as-version">Beta {APP_VERSION_LABEL}</span>
         </footer>
       </main>
 
