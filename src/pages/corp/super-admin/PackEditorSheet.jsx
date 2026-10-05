@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import { Sparkles } from 'lucide-react';
 import { createCustomPack, updateCustomPack } from '../../../services/corpService';
 import { speechLanguages } from '../../../utils/helpers';
-import { BEGINNER_ENGLISH_PACK } from '../../../data/beginnerEnglishCoursePack';
-import { Button, Field, Row, Section, Sheet } from './ui';
+import { Button, Field, Sheet } from './ui';
 
-// Create a word pack (blank, or — for center admins — the ready-made
-// Beginner course) or rename one. Pass `ownerUid` for a teacher's private
-// pack. onSaved(pack, { openAfter }) — openAfter is true for a new pack.
-export default function PackEditorSheet({ open, pack, centerId, ownerUid = null, allowPreset = false, onClose, onSaved }) {
+// Create a word pack or rename one. `isCourse` words it as a course (center
+// admin) instead of a pack (teacher). Pass `ownerUid` for a teacher's
+// private pack. onSaved(pack, { openAfter }) — openAfter is true for a new
+// pack. `en` (center admin only — teacher panel stays Uzbek) switches
+// every string here, same pattern as SetPasswordSheet.jsx/ClassesTab.jsx.
+export default function PackEditorSheet({ open, pack, centerId, ownerUid = null, isCourse = false, onClose, onSaved, en = false }) {
   const [form, setForm] = useState({ title: '', description: '', language: 'en-US' });
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
@@ -45,39 +45,28 @@ export default function PackEditorSheet({ open, pack, centerId, ownerUid = null,
     });
   };
 
-  // One tap: the full Beginner (A1) course — 3 months, 15 topics, 332 words.
-  const seedBeginner = () => run(async () => {
-    const { title, level, description, months } = BEGINNER_ENGLISH_PACK;
-    const created = await createCustomPack(centerId, { title, level, description });
-    const units = months.flatMap((m) => m.units);
-    const words = units.flatMap((u) => u.words);
-    const updates = { months, units, words, sectionsCount: units.length, wordCount: words.length };
-    await updateCustomPack(centerId, created.id, updates);
-    onSaved({ ...created, ...updates }, { openAfter: true });
-  });
+  const title = pack ? (en ? 'Edit' : 'Tahrirlash') : isCourse ? (en ? 'New Course' : 'Yangi kurs') : (en ? 'New Pack' : "Yangi to'plam");
+  const submitLabel = saving
+    ? (en ? 'Saving...' : 'Saqlanmoqda...')
+    : pack ? (en ? 'Save' : 'Saqlash') : isCourse ? (en ? 'Create Course' : 'Kurs yaratish') : (en ? 'Create' : 'Yaratish');
 
   return (
-    <Sheet open={open} onClose={() => !saving && onClose()} title={pack ? 'Tahrirlash' : allowPreset ? 'Yangi kurs' : "Yangi to'plam"}>
-      {!pack && allowPreset && (
-        <Section footer="3 oy, 15 mavzu, 332 so'z — darhol guruhlarga berish mumkin.">
-          <Row icon={<Sparkles size={16} />} iconTone="orange" title="Tayyor Beginner (A1) kursi" onClick={seedBeginner} disabled={saving} />
-        </Section>
-      )}
+    <Sheet open={open} onClose={() => !saving && onClose()} title={title} en={en}>
       <form onSubmit={submit}>
-        <Field label="Nomi">
-          <input className="sa-input" required autoFocus={Boolean(pack)} placeholder="Masalan: Beginner — 1-oy" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
+        <Field label={en ? 'Name' : 'Nomi'}>
+          <input className="sa-input" required autoFocus={Boolean(pack)} placeholder={en ? 'e.g. Beginner — Month 1' : 'Masalan: Beginner — 1-oy'} value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
         </Field>
-        <Field label="Tavsif (ixtiyoriy)">
+        <Field label={en ? 'Description (optional)' : 'Tavsif (ixtiyoriy)'}>
           <textarea className="sa-textarea" rows={2} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} />
         </Field>
-        <Field label="So'zlar tili" hint="Talaffuz uchun.">
+        <Field label={en ? 'Word Language' : "So'zlar tili"} hint={en ? 'For pronunciation.' : 'Talaffuz uchun.'}>
           <select className="sa-select" value={form.language} onChange={(e) => setForm({ ...form, language: e.target.value })}>
             {speechLanguages.map((l) => <option key={l.code} value={l.code}>{l.flag} {l.label}</option>)}
           </select>
         </Field>
         {error && <p className="sa-flow-error">{error}</p>}
         <Button type="submit" block disabled={saving || !form.title.trim()}>
-          {saving ? 'Saqlanmoqda...' : pack ? 'Saqlash' : allowPreset ? "Bo'sh kurs yaratish" : 'Yaratish'}
+          {submitLabel}
         </Button>
       </form>
     </Sheet>

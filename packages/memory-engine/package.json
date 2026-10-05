@@ -1,0 +1,16 @@
+{
+  "name": "@voc/memory-engine",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Individual Memory Dynamics Engine — per-user, per-word forgetting curve P(t)=e^(-t/S). Pure, dependency-free, deterministic.",
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "test": "cd ../.. && vitest run packages/memory-engine",
+    "eval": "node eval/run.js"
+  }
+}

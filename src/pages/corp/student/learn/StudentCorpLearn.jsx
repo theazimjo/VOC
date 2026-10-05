@@ -1,10 +1,12 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { useOutletContext, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { ref, onValue } from 'firebase/database';
 import { db } from '../../../../firebase';
-import { getDecayedMastery, computeRetentionStats } from '../../../../utils/memoryEngine';
+import { getDecayedMastery, computeRetentionStats } from '@voc/memory-engine';
 import { getConfusionPairs } from '../../../../experiment/experimentDB';
 import { corpWordStorageId } from '../../../../utils/helpers';
+import { useStudentT } from '../../../../hooks/useStudentT';
 import { buildMonthsFromPacks } from './utils';
 import MonthsGridView from './views/MonthsGridView';
 import TopicsListView from './views/TopicsListView';
@@ -12,9 +14,11 @@ import TopicDetailView from './views/TopicDetailView';
 import '../../../../components/Packs/PackCard.css';
 import '../../../personal/PackDetail.css';
 import './shared.css';
+import '../../../personal/LibraryPage.css';
 import './StudentCorpLearn.css';
 
 export default function StudentCorpLearn() {
+  const { t } = useStudentT();
   const { user, membership, student, assignedPacks, additionalPacks, requiredPacks, homeworkList } = useOutletContext();
   const navigate = useNavigate();
   const { packId, monthId, unitId } = useParams();
@@ -165,16 +169,20 @@ export default function StudentCorpLearn() {
     student?.progress?.[`${selectedMonth.packId}_${selectedMonth.id}_${selectedUnit.id}`]
   );
 
+  const homeworkTopicCount = (homeworkList || []).reduce((n, hw) => n + (hw.items || []).length, 0);
+  const allMonthsCount = allMonths.length + additionalMonths.length;
+
   const p = {
     currentTab, additionalMonths, allDbWords, allMonths, cameFromHomework,
     combinedMonths, homeworkList, memoryTwin, monthId, navigate, packId,
-    selectedMonth, selectedUnit, startPractice, unitWords,
+    selectedMonth, selectedUnit, setActiveTab, startPractice, unitWords,
   };
 
   return (
-    <div className="student-corp-container" style={{ minHeight: 'calc(100vh - var(--navbar-height))' }}>
+    <div className="library-page" style={{ minHeight: 'calc(100vh - var(--navbar-height))' }}>
 
-      {/* Two tabs: what the teacher asked for, and everything assigned */}
+      {/* Tabs bar — same segmented control as the personal Library: what the
+          teacher asked for, and everything assigned */}
       {!selectedMonth && (
         <div className="library-tabs-container">
           <div className="library-tabs">
@@ -182,13 +190,21 @@ export default function StudentCorpLearn() {
               className={`library-tab-btn ${currentTab === 'homework' ? 'active' : ''}`}
               onClick={() => setActiveTab('homework')}
             >
-              <span className="tab-icon">📝</span> <span>Vazifalar</span>
+              {currentTab === 'homework' && (
+                <motion.div className="active-tab-pill" layoutId="activeTabPill" />
+              )}
+              <span className="tab-label">📝 {t('words.tabHomework')}</span>
+              {homeworkTopicCount > 0 && <span className="tab-count-badge">{homeworkTopicCount}</span>}
             </button>
             <button
               className={`library-tab-btn ${currentTab === 'all' ? 'active' : ''}`}
               onClick={() => setActiveTab('all')}
             >
-              <span className="tab-icon">📚</span> <span>Barcha so'zlar</span>
+              {currentTab === 'all' && (
+                <motion.div className="active-tab-pill" layoutId="activeTabPill" />
+              )}
+              <span className="tab-label">📚 {t('words.tabAll')}</span>
+              {allMonthsCount > 0 && <span className="tab-count-badge">{allMonthsCount}</span>}
             </button>
           </div>
         </div>

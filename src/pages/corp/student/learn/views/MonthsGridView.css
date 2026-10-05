@@ -76,3 +76,18 @@
     font-size: 0.7rem;
   }
 }
+
+/* .st-packs-section h2 (1.4rem) was overriding the card title size. */
+.st-packs-section .hw-tab-title {
+  font-size: 1.02rem;
+}
+
+.hw-tab-done-badge {
+  color: var(--text-secondary);
+  background: var(--bg-tertiary);
+}
+
+.hw-tab-done-badge.is-done {
+  color: var(--success);
+  background: var(--success-dim, rgba(52, 199, 89, 0.12));
+}

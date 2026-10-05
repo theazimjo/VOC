@@ -17,7 +17,7 @@
 /* ── Toolbar ── */
 .ca-toolbar {
   position: sticky;
-  top: 0;
+  top: var(--ca-topbar-h, 64px);
   z-index: 30;
   display: flex;
   flex-wrap: wrap;
@@ -229,6 +229,125 @@
   color: var(--sa-label-2);
 }
 
+/* A big, friendly section title (Typing.com dashboard reference —
+   .claude/image copy 6.png) — for the dashboard's own section headers
+   (Student Activity, Most Active Students), not the uppercase-mono
+   .ca-card-title convention the rest of the module uses. */
+.ca-title-lg {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+  font-family: var(--ca-sidebar-font, 'Fredoka', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #4d5259;
+}
+
+.ca-title-lg-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
+  background: color-mix(in srgb, var(--sa-blue) 14%, transparent);
+  color: var(--sa-blue);
+  flex-shrink: 0;
+}
+
+/* A toolbar row inside a card, above its table (search on the left,
+   the primary action — "Invite/Add" — on the right). */
+.ca-card-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.ca-card-toolbar .sa-search {
+  flex: 1;
+  max-width: 340px;
+}
+
+.ca-card-toolbar .sa-btn {
+  flex-shrink: 0;
+  width: auto;
+}
+
+/* A footer row inside a card, below its table (an export/"see all"
+   link, right-aligned). */
+.ca-card-foot {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+
+/* Row selection checkbox column + sortable header buttons, for tables
+   with bulk actions (Faculty). */
+.ca-th-check,
+.ca-td-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ca-th-check input,
+.ca-td-check input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--sa-blue);
+  cursor: pointer;
+}
+
+.ca-th-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.ca-sort-icon {
+  color: var(--sa-blue);
+}
+
+.ca-sort-icon.is-idle {
+  color: var(--sa-label-3);
+}
+
+.ca-td-link {
+  display: block;
+  min-width: 0;
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ca-td-link:hover .sa-cell-title {
+  color: var(--sa-blue);
+}
+
+.sa-table-row.is-selected {
+  background: color-mix(in srgb, var(--sa-blue) 6%, transparent);
+}
+
 .ca-tag {
   flex-shrink: 0;
   padding: 3px 9px;
@@ -419,73 +538,66 @@
   color: var(--sa-label-2);
 }
 
-/* ── Horizontal bars (groups this week) ── */
-.ca-bars {
+/* ── Student activity card (Typing.com dashboard reference:
+   .claude/image copy.png) — one plain card, label top-left, a tall
+   centered body below it for either the empty state or the big number. ── */
+.ca-activity-card {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  padding: 20px 24px;
 }
 
-.ca-bar {
-  display: grid;
-  grid-template-columns: minmax(120px, 1.1fr) minmax(0, 3fr) 70px;
-  align-items: center;
-  gap: 14px;
-  padding: 2px 0;
-  border: none;
-  background: none;
-  color: var(--sa-label);
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-}
-
-.ca-bar-name {
-  font-size: 13px;
+.ca-activity-card-label {
+  font-size: 14px;
   font-weight: 600;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  color: var(--sa-label);
 }
 
-.ca-bar-name small {
-  display: block;
+.ca-activity-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 220px;
+  padding: 24px;
+  text-align: center;
+}
+
+.ca-activity-empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--sa-blue) 12%, transparent);
+  color: var(--sa-blue);
+}
+
+.ca-activity-empty-text {
   font-family: var(--ca-mono);
-  font-size: 10px;
-  font-weight: 400;
+  font-size: 12px;
   color: var(--sa-label-2);
 }
 
-.ca-bar-track {
-  height: 8px;
-  border-radius: 2px;
-  background: var(--sa-fill);
-  overflow: hidden;
-}
-
-.ca-bar-fill {
-  height: 100%;
-  width: 100%;
-  border-radius: 2px;
-  background: var(--sa-green);
-  transform-origin: left center;
-  transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.ca-bar-fill.is-low {
-  background: var(--sa-orange);
-}
-
-.ca-bar-value {
-  justify-self: end;
+.ca-activity-value {
   font-family: var(--ca-mono);
-  font-size: 12px;
+  font-size: 40px;
   font-weight: 700;
+  letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
+  color: var(--sa-label);
 }
 
-.ca-bar:hover .ca-bar-name {
-  color: var(--sa-blue);
+/* ── Chart card (mastery distribution) ── */
+.ca-chart {
+  height: 300px;
+  min-width: 0;
+}
+
+.ca-chart .recharts-cartesian-grid line {
+  stroke: var(--sa-separator);
 }
 
 /* ── Activity feed ── */
@@ -581,6 +693,103 @@ button.ca-feed-item:hover {
 
 @keyframes ca-spin {
   to { transform: rotate(360deg); }
+}
+
+/* ── Most Active Teachers table header background
+   (.claude/image copy 5.png — light gray bar behind the column labels) ── */
+.ca-teachers-table .sa-table-head {
+  background: var(--sa-surface-2);
+}
+
+/* ── Date-range dropdown (Most Active Teachers "Date: Last Week ▾") ── */
+.ca-daterange {
+  position: relative;
+}
+
+.ca-daterange-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--ca-border-strong);
+  border-radius: 4px;
+  background: var(--sa-surface);
+  color: var(--sa-label);
+  font-family: var(--ca-mono);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.ca-daterange-btn:hover {
+  background: var(--sa-fill);
+}
+
+/* A "View All ..." button matched to .ca-daterange-btn's size/shape so the
+   two sit as a balanced pair next to a section title, instead of a bare
+   text link floating beside a bordered pill. */
+.ca-view-all-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 14px;
+  border: 1px solid var(--ca-border-strong);
+  border-radius: 4px;
+  background: var(--sa-surface);
+  color: var(--sa-blue);
+  font-family: var(--ca-mono);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.ca-view-all-btn:hover {
+  background: color-mix(in srgb, var(--sa-blue) 8%, var(--sa-surface));
+  border-color: var(--sa-blue);
+}
+
+.ca-daterange-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  padding: 4px;
+  border: 1px solid var(--sa-separator);
+  border-radius: 6px;
+  background: var(--sa-surface);
+  box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.18);
+}
+
+.ca-daterange-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  color: var(--sa-blue);
+  font-family: var(--ca-mono);
+  font-size: 12px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ca-daterange-item:hover {
+  background: var(--sa-fill);
+}
+
+.ca-daterange-item.is-active {
+  background: var(--sa-blue);
+  color: #fff;
 }
 
 /* ── Settings: tabs in the toolbar, two-column forms ── */
@@ -771,13 +980,8 @@ button.ca-feed-item:hover {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .ca-bar {
-    grid-template-columns: minmax(0, 1fr) 60px;
-  }
-
-  .ca-bar-track {
-    grid-column: 1 / -1;
-    grid-row: 2;
+  .ca-chart {
+    height: 240px;
   }
 }
 
@@ -792,4 +996,5804 @@ button.ca-feed-item:hover {
 .ca-card-sub,
 .ca-empty {
   display: block;
+}
+
+.ca-head-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.ca-tag.is-good {
+  border-color: color-mix(in srgb, var(--sa-green) 35%, transparent);
+  color: var(--sa-green);
+}
+
+.ca-tag.is-bad {
+  border-color: color-mix(in srgb, var(--sa-red) 35%, transparent);
+  color: var(--sa-red);
+}
+
+/* ── Word import (text / Excel / .txt) ── */
+.ca-import-source {
+  margin-bottom: 14px;
+}
+
+.ca-drop {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 22px 16px;
+  margin-bottom: 12px;
+  border: 1px dashed var(--ca-border-strong, var(--sa-separator));
+  border-radius: var(--sa-radius);
+  background: var(--sa-surface-2);
+  color: var(--sa-label-2);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.ca-drop:hover,
+.ca-drop.is-over {
+  border-color: var(--sa-blue);
+  background: color-mix(in srgb, var(--sa-blue) 6%, var(--sa-surface-2));
+}
+
+.ca-drop:focus-within {
+  outline: 2px solid var(--sa-blue);
+  outline-offset: 2px;
+}
+
+.ca-drop input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.ca-drop-title {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--sa-label);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ca-drop-sub {
+  font-size: 12px;
+}
+
+.ca-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: 600;
+  color: var(--sa-blue);
+  cursor: pointer;
+}
+
+.ca-link:hover {
+  text-decoration: underline;
+}
+
+.ca-import-preview {
+  margin: 4px 0 14px;
+  border: 1px solid var(--sa-separator);
+  border-radius: var(--sa-radius);
+  background: var(--sa-surface-2);
+}
+
+.ca-import-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px;
+  border-bottom: 1px solid var(--sa-separator);
+}
+
+.ca-import-rows {
+  max-height: 280px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.ca-import-rows li {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr) minmax(0, 1.2fr) 24px;
+  align-items: center;
+  align-items: baseline;
+  gap: 10px;
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--sa-separator);
+  font-size: 13px;
+}
+
+.ca-import-rows li:last-child {
+  border-bottom: 0;
+}
+
+.ca-import-line {
+  font-family: var(--ca-mono);
+  font-size: 11px;
+  color: var(--sa-label-3);
+  text-align: right;
+}
+
+.ca-import-word {
+  overflow: hidden;
+  font-weight: 600;
+  color: var(--sa-label);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ca-import-tr {
+  overflow: hidden;
+  color: var(--sa-label-2);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ca-import-rows li.is-error .ca-import-tr {
+  color: var(--sa-red);
+}
+
+.ca-import-rows li.is-skip {
+  opacity: 0.55;
+}
+
+.ca-import-more {
+  margin: 0;
+  padding: 8px 10px;
+  border-top: 1px solid var(--sa-separator);
+  font-size: 12px;
+  color: var(--sa-label-3);
+}
+
+.ca-template-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+  margin: -4px 0 14px;
+  font-size: 13px;
+  color: var(--sa-label-2);
+}
+
+/* ── Student detail page ── */
+.ca-kpi.is-static {
+  cursor: default;
+}
+
+.ca-kpi.is-static:hover {
+  border-color: var(--sa-separator);
+  background: var(--sa-surface);
+}
+
+.ca-inline-error {
+  margin: 12px 0 0;
+  font-family: var(--ca-mono);
+  font-size: 12px;
+  color: var(--sa-red);
+}
+
+/* GitHub-style practice calendar: a column per week, a row per weekday. */
+.ca-cal-scroll {
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.ca-cal {
+  --cell: 12px;
+  --gap: 3px;
+  display: grid;
+  grid-template-columns: auto max-content;
+  column-gap: 6px;
+  row-gap: 4px;
+  width: max-content;
+}
+
+.ca-cal-months,
+.ca-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--weeks), var(--cell));
+  gap: var(--gap);
+}
+
+.ca-cal-months span {
+  font-family: var(--ca-mono);
+  font-size: 10px;
+  line-height: 1;
+  color: var(--sa-label-2);
+  white-space: nowrap;
+}
+
+.ca-cal-days {
+  display: grid;
+  grid-template-rows: repeat(7, var(--cell));
+  gap: var(--gap);
+}
+
+.ca-cal-days span {
+  font-family: var(--ca-mono);
+  font-size: 9px;
+  line-height: var(--cell);
+  color: var(--sa-label-2);
+}
+
+.ca-cal-grid {
+  grid-template-rows: repeat(7, var(--cell));
+  grid-auto-flow: column;
+}
+
+.ca-cal-grid .ca-heat-cell {
+  width: var(--cell);
+  height: var(--cell);
+}
+
+.ca-heat-cell.is-future {
+  visibility: hidden;
+}
+
+.ca-heat-cell {
+  display: block;
+  border-radius: 2px;
+  background: var(--sa-fill);
+}
+
+.ca-heat-cell.is-l1 { background: color-mix(in srgb, var(--sa-green) 25%, var(--sa-fill)); }
+.ca-heat-cell.is-l2 { background: color-mix(in srgb, var(--sa-green) 50%, var(--sa-fill)); }
+.ca-heat-cell.is-l3 { background: color-mix(in srgb, var(--sa-green) 78%, var(--sa-fill)); }
+.ca-heat-cell.is-l4 { background: var(--sa-green); }
+
+.ca-heat-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin-top: 14px;
+  font-family: var(--ca-mono);
+  font-size: 10px;
+  color: var(--sa-label-2);
+}
+
+.ca-heat-legend .ca-heat-cell {
+  width: 11px;
+  height: 11px;
+}
+
+.ca-heat-goal {
+  margin-right: auto;
+}
+
+.ca-link.is-quiet {
+  font-weight: 400;
+  color: var(--sa-label-2);
+}
+
+.ca-group-switch {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+}
+
+/* Key–value list */
+.ca-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.ca-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--sa-separator);
+  font-size: 13px;
+}
+
+.ca-info-row:first-child {
+  padding-top: 0;
+}
+
+.ca-info-row:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.ca-info-label {
+  flex-shrink: 0;
+  font-family: var(--ca-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--sa-label-2);
+}
+
+.ca-info-value {
+  min-width: 0;
+  text-align: right;
+  overflow-wrap: anywhere;
+  color: var(--sa-label);
+}
+
+/* Per-topic mastery bars */
+.ca-topics-title {
+  margin: 0 0 8px;
+  font-family: var(--ca-mono);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.ca-topic {
+  display: grid;
+  grid-template-columns: minmax(90px, 1.2fr) minmax(0, 2fr) 44px;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 0;
+  font-size: 13px;
+}
+
+.ca-topic-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ca-topic-bar {
+  height: 6px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--sa-fill);
+}
+
+.ca-topic-bar span {
+  display: block;
+  height: 100%;
+  background: var(--sa-label-3);
+  transform-origin: left;
+}
+
+.ca-topic-bar span.is-mid { background: var(--sa-orange); }
+.ca-topic-bar span.is-good { background: var(--sa-green); }
+
+.ca-topic-val {
+  font-family: var(--ca-mono);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: var(--sa-label-2);
+}
+
+/* ── Group detail page ── */
+.ca-chart.is-compact {
+  height: 240px;
+}
+
+.ca-topic-bar span.is-low { background: var(--sa-red); }
+
+.ca-topic.is-wide {
+  grid-template-columns: minmax(90px, 1.2fr) minmax(0, 2fr) 44px 110px;
+}
+
+.ca-topic-meta {
+  font-family: var(--ca-mono);
+  font-size: 11px;
+  text-align: right;
+  color: var(--sa-label-3);
+}
+
+/* Rename/delete buttons on a topic row in the course editor's topic list —
+   real actions right there, no need to open the topic first to find them. */
+.ca-topic-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+/* Group card: identity on the left, the join code on the right. */
+.ca-group-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.ca-group-id {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.ca-group-avatar {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--sa-blue) 12%, transparent);
+  color: var(--sa-blue);
+  font-family: var(--ca-mono);
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.ca-group-meta {
+  min-width: 0;
+}
+
+.ca-group-meta h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.ca-group-meta p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--sa-label-2);
+}
+
+.ca-group-courses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.ca-group-code {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 18px;
+  border: 1px dashed var(--ca-border-strong);
+  border-radius: 4px;
+  background: var(--sa-surface-2);
+  color: var(--sa-label);
+  font: inherit;
+  cursor: pointer;
+}
+
+.ca-group-code:hover {
+  border-color: var(--sa-blue);
+}
+
+.ca-group-code-label,
+.ca-group-code-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--ca-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--sa-label-2);
+}
+
+.ca-group-code-value {
+  font-family: var(--ca-mono);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+/* The group's state in three sentences. */
+.ca-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.ca-fact {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ca-fact-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--sa-label-2);
+}
+
+.ca-fact-text b {
+  color: var(--sa-label);
+  font-weight: 700;
+}
+
+.ca-group-tabs {
+  width: max-content;
+  max-width: 100%;
+  margin-bottom: 14px;
+}
+
+.ca-tab-count {
+  padding: 0 6px;
+  border-radius: 3px;
+  background: var(--sa-fill);
+  font-size: 11px;
+  color: var(--sa-label-2);
+}
+
+/* Students tab */
+.ca-list-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  margin-bottom: 12px;
+}
+
+.ca-list-tools .sa-search {
+  flex: 1 1 240px;
+  max-width: 360px;
+}
+
+.ca-sort {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--sa-label-2);
+}
+
+.ca-chip-btn {
+  padding: 4px 10px;
+  border: 1px solid var(--sa-separator);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--sa-label-2);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.ca-chip-btn.is-active {
+  border-color: var(--sa-blue);
+  color: var(--sa-blue);
+  background: color-mix(in srgb, var(--sa-blue) 8%, transparent);
+}
+
+.ca-people {
+  display: flex;
+  flex-direction: column;
+}
+
+.ca-person {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) 110px minmax(120px, 180px) 80px 16px;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 8px;
+  border: 0;
+  border-bottom: 1px solid var(--sa-separator);
+  background: transparent;
+  color: var(--sa-label);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ca-person:last-child {
+  border-bottom: 0;
+}
+
+.ca-person:hover {
+  background: var(--sa-surface-2);
+}
+
+.ca-person-avatar {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--sa-fill);
+  font-weight: 700;
+  color: var(--sa-label-2);
+}
+
+.ca-person-main,
+.ca-hw-title {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ca-person-name {
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ca-person-note {
+  overflow: hidden;
+  font-size: 12px;
+  color: var(--sa-label-2);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ca-status {
+  justify-self: start;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ca-status.is-green { background: color-mix(in srgb, var(--sa-green) 14%, transparent); color: var(--sa-green); }
+.ca-status.is-orange { background: color-mix(in srgb, var(--sa-orange) 16%, transparent); color: var(--sa-orange); }
+.ca-status.is-gray { background: var(--sa-fill); color: var(--sa-label-2); }
+
+.ca-person-mastery {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 38px;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--ca-mono);
+  font-size: 12px;
+  text-align: right;
+}
+
+.ca-person-hw {
+  font-size: 12px;
+  color: var(--sa-label-2);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.ca-person-chevron,
+.ca-hw-chevron {
+  color: var(--sa-label-3);
+}
+
+/* Homework tab: tap a row to see who did it. */
+.ca-hw-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.ca-hw {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--sa-separator);
+}
+
+.ca-hw:first-child {
+  padding-top: 0;
+}
+
+.ca-hw:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.ca-hw-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto 16px;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 0 0 8px;
+  border: 0;
+  background: transparent;
+  color: var(--sa-label);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ca-hw-count {
+  font-size: 13px;
+  color: var(--sa-label-2);
+  white-space: nowrap;
+}
+
+.ca-hw-count b {
+  color: var(--sa-label);
+}
+
+.ca-hw-chevron {
+  transition: transform 160ms ease-out;
+}
+
+.ca-hw.is-open .ca-hw-chevron {
+  transform: rotate(180deg);
+}
+
+.ca-hw-bar {
+  display: flex;
+  height: 8px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--sa-fill);
+}
+
+.ca-hw-bar span {
+  flex-basis: 0;
+}
+
+.ca-hw-bar .is-done { background: var(--sa-green); }
+.ca-hw-bar .is-started { background: var(--sa-orange); }
+
+.ca-hw-people {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.ca-hw-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 12px;
+}
+
+.ca-hw-names {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  font-size: 13px;
+}
+
+/* Progress tab: distribution bars */
+.ca-dist {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ca-dist-row {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr) 28px;
+  align-items: center;
+  gap: 10px;
+}
+
+.ca-dist-label,
+.ca-dist-count {
+  font-family: var(--ca-mono);
+  font-size: 11px;
+  color: var(--sa-label-2);
+}
+
+.ca-dist-count {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--sa-label);
+}
+
+.ca-dist-track {
+  height: 10px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--sa-fill);
+}
+
+.ca-dist-track span {
+  display: block;
+  height: 100%;
+  transform-origin: left;
+}
+
+.ca-footnote {
+  margin: 12px 0 0;
+  font-family: var(--ca-mono);
+  font-size: 11px;
+  color: var(--sa-label-2);
+}
+
+@media (max-width: 900px) {
+  .ca-facts {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .ca-person {
+    grid-template-columns: 36px minmax(0, 1fr) auto 16px;
+    grid-template-areas: "av main status chev" "av bar bar hw";
+    row-gap: 8px;
+  }
+
+  .ca-person-avatar { grid-area: av; }
+  .ca-person-main { grid-area: main; }
+  .ca-status { grid-area: status; }
+  .ca-person-mastery { grid-area: bar; }
+  .ca-person-hw { grid-area: hw; }
+  .ca-person-chevron { grid-area: chev; }
+}
+
+@media (max-width: 640px) {
+  .ca-group-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ca-topic.is-wide {
+    grid-template-columns: minmax(80px, 1fr) minmax(0, 1fr) 40px;
+  }
+
+  .ca-topic.is-wide .ca-topic-meta {
+    display: none;
+  }
+}
+
+/* A filter select that is narrowing the list. */
+.sa-select.is-set {
+  border-color: var(--sa-blue);
+  color: var(--sa-blue);
+}
+
+/* Import sheet: a worked example above the text box. */
+.ca-example {
+  margin-bottom: 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--sa-separator);
+  border-left: 3px solid var(--sa-blue);
+  border-radius: var(--sa-radius);
+  background: var(--sa-surface-2);
+}
+
+.ca-example-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+  font-family: var(--ca-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--sa-label-2);
+}
+
+.ca-example-head .ca-link {
+  font-family: inherit;
+  font-size: 12px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.ca-example pre {
+  margin: 0;
+  font-family: var(--ca-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--sa-label);
+  white-space: pre-wrap;
+}
+
+.ca-example p {
+  margin: 8px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--sa-label-2);
+}
+
+.ca-example code {
+  font-family: var(--ca-mono);
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+/* Import preview panel (left of the import drawer): every row, every field. */
+.ca-preview {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+}
+
+.ca-preview-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px 16px;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--sa-separator);
+}
+
+.ca-preview-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+.ca-preview-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.ca-preview-table th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--sa-separator);
+  background: var(--sa-surface-2);
+  font-family: var(--ca-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-align: left;
+  text-transform: uppercase;
+  color: var(--sa-label-2);
+  white-space: nowrap;
+}
+
+.ca-preview-table td {
+  max-width: 220px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--sa-separator);
+  vertical-align: top;
+  color: var(--sa-label);
+  overflow-wrap: anywhere;
+}
+
+.ca-preview-table .num {
+  width: 1%;
+  font-family: var(--ca-mono);
+  font-size: 11px;
+  text-align: right;
+  color: var(--sa-label-3);
+}
+
+.ca-preview-table .is-word {
+  font-weight: 600;
+}
+
+.ca-preview-table .is-muted {
+  color: var(--sa-label-2);
+}
+
+.ca-preview-table tr.is-error td {
+  background: color-mix(in srgb, var(--sa-red) 6%, transparent);
+}
+
+.ca-preview-table tr.is-skip td {
+  opacity: 0.55;
+}
+
+.ca-preview-table .ca-tag {
+  white-space: nowrap;
+}
+
+/* × on a preview row: drop it from the import. */
+.ca-row-remove {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--sa-label-3);
+  cursor: pointer;
+}
+
+.ca-row-remove:hover {
+  background: color-mix(in srgb, var(--sa-red) 12%, transparent);
+  color: var(--sa-red);
+}
+
+.ca-row-remove:focus-visible {
+  outline: 2px solid var(--sa-blue);
+  outline-offset: 1px;
+}
+
+.ca-preview-table td.is-action {
+  width: 1%;
+  padding: 4px 8px;
+  vertical-align: middle;
+}
+
+.ca-tag.is-warn {
+  border-color: color-mix(in srgb, var(--sa-orange) 40%, transparent);
+  color: color-mix(in srgb, var(--sa-orange) 80%, #000000);
+}
+
+.ca-preview-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 32px 24px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--sa-label-2);
+}
+
+.ca-preview-empty b {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--sa-label);
+}
+
+.ca-preview-empty-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 6px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--sa-blue) 10%, transparent);
+  color: var(--sa-blue);
+}
+
+/* ── Import Words: center admin look (Typing.com-style, not mono caps) ── */
+.is-center-admin .ca-preview-head {
+  padding: 20px 24px 16px;
+}
+
+.is-center-admin .ca-preview-head .ca-card-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #4d5259;
+}
+
+.is-center-admin .ca-preview-head .ca-card-sub {
+  margin-top: 2px;
+  font-size: 13px;
+  color: #8a9099;
+}
+
+.is-center-admin .ca-preview .ca-tag,
+.is-center-admin .ca-import-summary .ca-tag {
+  padding: 4px 10px;
+  border: 0;
+  border-radius: 999px;
+  background: #f1f3f5;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: #5f6670;
+}
+
+.is-center-admin .ca-preview .ca-tag.is-good,
+.is-center-admin .ca-import-summary .ca-tag.is-good {
+  background: #e7f6ec;
+  color: #1f8a3e;
+}
+
+.is-center-admin .ca-preview .ca-tag.is-warn,
+.is-center-admin .ca-import-summary .ca-tag.is-warn {
+  background: #fff4e0;
+  color: #b26a00;
+}
+
+.is-center-admin .ca-preview .ca-tag.is-bad,
+.is-center-admin .ca-import-summary .ca-tag.is-bad {
+  background: #fdecec;
+  color: #c9302c;
+}
+
+.is-center-admin .ca-preview-table {
+  font-size: 13.5px;
+}
+
+.is-center-admin .ca-preview-table th {
+  padding: 10px 14px;
+  background: #f7f8fa;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #6b7280;
+}
+
+.is-center-admin .ca-preview-table td {
+  padding: 11px 14px;
+  border-bottom-color: #eef0f2;
+  vertical-align: middle;
+}
+
+.is-center-admin .ca-preview-table tbody tr {
+  transition: background-color 0.12s ease;
+}
+
+.is-center-admin .ca-preview-table tbody tr:hover td {
+  background: #f9fafb;
+}
+
+.is-center-admin .ca-preview-table .is-word {
+  color: #1f2937;
+}
+
+.is-center-admin .ca-preview-table .is-muted {
+  color: #8a9099;
+}
+
+/* Status pill gets a leading dot. */
+.is-center-admin .ca-preview-table .ca-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px 3px 8px;
+  font-weight: 500;
+}
+
+.is-center-admin .ca-preview-table .ca-tag::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* × stays quiet until the row is hovered. */
+.is-center-admin .ca-preview-table .ca-row-remove {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  opacity: 0.45;
+}
+
+.is-center-admin .ca-preview-table tr:hover .ca-row-remove,
+.is-center-admin .ca-preview-table .ca-row-remove:focus-visible {
+  opacity: 1;
+}
+
+/* Form side */
+.is-center-admin .ca-example {
+  padding: 14px 16px;
+  border: 1px solid #e6e8eb;
+  border-radius: 10px;
+  background: #f8f9fb;
+}
+
+.is-center-admin .ca-example-head {
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #6b7280;
+}
+
+.is-center-admin .ca-example pre {
+  padding: 10px 12px;
+  border: 1px solid #eceef1;
+  border-radius: 8px;
+  background: #ffffff;
+  font-size: 12.5px;
+}
+
+.is-center-admin .ca-ai-hint {
+  margin-top: 0;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--sa-purple) 18%, transparent);
+  border-radius: 10px;
+}
+
+.is-center-admin .ca-import-text {
+  min-height: 150px;
+  border-radius: 10px;
+  font-family: var(--ca-mono);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.is-center-admin .ca-drop {
+  gap: 8px;
+  padding: 32px 20px;
+  border: 1.5px dashed #cfd4da;
+  border-radius: 12px;
+  background: #fafbfc;
+}
+
+.is-center-admin .ca-drop > svg {
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--sa-blue) 10%, transparent);
+  color: var(--sa-blue);
+}
+
+.is-center-admin .ca-drop:hover,
+.is-center-admin .ca-drop.is-over {
+  border-color: var(--sa-blue);
+  background: color-mix(in srgb, var(--sa-blue) 5%, #ffffff);
+}
+
+.is-center-admin .ca-template-links {
+  margin-top: 0;
+}
+
+.ca-example-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px 14px;
+}
+
+/* Import sheet: getting the list from an AI chat. */
+.ca-ai-hint {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  margin: -4px 0 14px;
+  padding: 10px 12px;
+  border-radius: var(--sa-radius);
+  background: color-mix(in srgb, var(--sa-purple) 8%, transparent);
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--sa-label-2);
+}
+
+.ca-ai-hint > svg {
+  flex-shrink: 0;
+  color: var(--sa-purple);
+}
+
+.ca-ai-hint > span {
+  flex: 1 1 200px;
+}
+
+/* ── Teacher panel ── */
+.ca-tool-btn.is-primary {
+  border-color: var(--sa-blue);
+  background: var(--sa-blue);
+  color: #ffffff;
+}
+
+.ca-tool-btn.is-primary:hover {
+  background: color-mix(in srgb, var(--sa-blue) 88%, #000000);
+}
+
+.ca-tool-btn.is-icon {
+  width: 32px;
+  justify-content: center;
+  padding: 0;
+}
+
+.ca-panel-action {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 14px;
+}
+
+.ca-section-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  margin-bottom: 14px;
+}
+
+.ca-section-row .ca-section-label {
+  margin: 0;
+}
+
+.ca-section-search {
+  flex: 0 1 320px;
+}
+
+/* Announcements from VOC */
+.ca-announce {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-left: 3px solid var(--sa-orange);
+}
+
+.ca-announce-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.ca-announce-item .ca-icon-box {
+  color: var(--sa-orange);
+}
+
+.ca-announce-text {
+  display: block;
+  margin-top: 2px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--sa-label-2);
+}
+
+/* Group cards on the teacher's home */
+.ca-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.ca-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid var(--sa-separator);
+  border-radius: 4px;
+  background: var(--sa-surface);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  color: var(--sa-label);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 150ms ease-out, background-color 150ms ease-out;
+}
+
+.ca-tile:hover {
+  border-color: var(--ca-border-strong);
+  background: var(--sa-surface-2);
+}
+
+.ca-tile:focus-visible {
+  outline: 2px solid var(--sa-blue);
+  outline-offset: 2px;
+}
+
+.ca-tile-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.ca-tile-avatar {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--sa-blue) 12%, transparent);
+  color: var(--sa-blue);
+  font-family: var(--ca-mono);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.ca-tile-titles {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ca-tile-name {
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ca-tile-sub {
+  font-family: var(--ca-mono);
+  font-size: 11px;
+  color: var(--sa-label-2);
+}
+
+.ca-tile-chevron {
+  flex-shrink: 0;
+  color: var(--sa-label-3);
+}
+
+.ca-tile-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ca-tile-stat-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--sa-label-2);
+}
+
+.ca-tile-stat-row span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ca-tile-stat-row b {
+  flex-shrink: 0;
+  font-family: var(--ca-mono);
+  color: var(--sa-label);
+}
+
+.ca-tile-foot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-top: 12px;
+  border-top: 1px solid var(--sa-separator);
+  font-family: var(--ca-mono);
+  font-size: 11px;
+  color: var(--sa-label-2);
+}
+
+.ca-archive-link {
+  width: 100%;
+  margin-top: 4px;
+}
+
+@media (max-width: 640px) {
+  .ca-tiles {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .ca-toolbar-actions {
+    flex-wrap: wrap;
+  }
+}
+
+/* Word list: pronunciation button next to the word. */
+.ca-word-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.ca-speak {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--sa-label-3);
+  cursor: pointer;
+}
+
+.ca-speak:hover {
+  background: color-mix(in srgb, var(--sa-blue) 12%, transparent);
+  color: var(--sa-blue);
+}
+
+.ca-speak:focus-visible {
+  outline: 2px solid var(--sa-blue);
+  outline-offset: 1px;
+}
+
+/* A read-only table row (center pack seen by a teacher). */
+.sa-table-row.is-static {
+  cursor: default;
+}
+
+.sa-table-row.is-static:hover {
+  background: transparent;
+}
+
+/* ── Phones ──
+   Toolbar: titles on one line, actions on the next and full width; KPIs
+   stay two-up (compact); rows drop the chevron and fold into two lines. */
+@media (max-width: 640px) {
+  .ca-toolbar {
+    gap: 10px;
+  }
+
+  /* Actions wrap under the title only when they don't fit beside it. */
+  .ca-toolbar-actions {
+    flex: 1 1 auto;
+    justify-content: flex-end;
+    min-width: 0;
+  }
+
+  .ca-toolbar-actions .ca-tool-btn:not(.is-icon) {
+    flex: 0 1 auto;
+    min-width: 0;
+    justify-content: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ca-toolbar-actions .ca-tabs {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .ca-toolbar-actions .ca-tab {
+    flex: 1 0 auto;
+    justify-content: center;
+    padding: 6px 10px;
+  }
+
+  .ca-toolbar-actions .sa-select,
+  .ca-toolbar-actions .sa-search {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .ca-kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .ca-kpi {
+    padding: 12px;
+  }
+
+  .ca-kpi-top {
+    margin-bottom: 10px;
+  }
+
+  .ca-kpi-top .ca-icon-box {
+    display: none;
+  }
+
+  .ca-kpi-value {
+    font-size: 22px;
+  }
+
+  .ca-kpi-foot {
+    padding-top: 8px;
+    font-size: 10px;
+  }
+
+  .ca-card {
+    padding: 14px;
+  }
+
+  .ca-card-head {
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+
+  .ca-head-tags {
+    justify-content: flex-start;
+  }
+
+  .ca-block {
+    margin-bottom: 16px;
+  }
+
+  .ca-profile {
+    gap: 12px;
+  }
+
+  .ca-profile .ca-icon-box {
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
+  }
+
+  /* Group page */
+  .ca-group-avatar {
+    width: 44px;
+    height: 44px;
+    font-size: 19px;
+  }
+
+  .ca-group-meta h2 {
+    font-size: 17px;
+  }
+
+  .ca-group-code {
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    padding: 8px 12px;
+  }
+
+  .ca-group-code-value {
+    font-size: 19px;
+  }
+
+  .ca-group-tabs {
+    width: auto;
+  }
+
+  .ca-group-tabs .ca-tab {
+    flex: 1 0 auto;
+    justify-content: center;
+    padding: 6px 10px;
+  }
+
+  .ca-section-search {
+    flex-basis: 100%;
+  }
+
+  .ca-list-tools .sa-search {
+    flex-basis: 100%;
+    max-width: none;
+  }
+
+  .ca-person {
+    grid-template-columns: 36px minmax(0, 1fr) auto;
+    grid-template-areas: "av main status" "av bar hw";
+    column-gap: 10px;
+  }
+
+  .ca-person-chevron {
+    display: none;
+  }
+
+  .ca-dist-row {
+    grid-template-columns: 76px minmax(0, 1fr) 28px;
+  }
+
+  .ca-topic {
+    grid-template-columns: minmax(80px, 1fr) minmax(0, 1.4fr) 40px;
+  }
+
+  .ca-info-row {
+    flex-wrap: wrap;
+  }
+
+  .ca-info-value {
+    text-align: left;
+  }
+
+  .ca-example pre {
+    font-size: 11px;
+    overflow-x: auto;
+  }
+
+  .ca-import-rows li {
+    grid-template-columns: 24px minmax(0, 1fr) minmax(0, 1fr) 24px;
+    gap: 6px;
+  }
+}
+
+/* ── Faculty / Teachers table matching clean admin table design ── */
+.ca-card.is-faculty-card {
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--sa-separator, #e2e8f0);
+  border-radius: 8px;
+  background: var(--sa-surface, #ffffff);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.faculty-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 20px;
+  background: var(--sa-surface, #ffffff);
+}
+
+.faculty-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.faculty-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.faculty-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--sa-separator, #e2e8f0);
+  border-radius: 6px;
+  background: var(--sa-surface-2, #f8fafc);
+  color: var(--sa-label-2, #64748b);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.faculty-icon-btn:hover {
+  background: var(--sa-fill, #f1f5f9);
+  color: var(--sa-label, #0f172a);
+}
+
+.faculty-btn-delete {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid var(--sa-separator, #cbd5e1);
+  border-radius: 6px;
+  background: var(--sa-surface-2, #f8fafc);
+  color: var(--sa-label-2, #475569);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.faculty-btn-delete:hover:not(:disabled) {
+  border-color: #ef4444;
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.faculty-btn-delete:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.faculty-btn-invite {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 16px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 6px;
+  background: #3b82f6;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(59, 130, 246, 0.25);
+  transition: background-color 0.15s ease;
+}
+
+.faculty-btn-invite:hover {
+  background: #2563eb;
+}
+
+.faculty-table {
+  width: 100%;
+}
+
+.faculty-table-head {
+  display: grid;
+  grid-template-columns: 44px minmax(220px, 2.2fr) 140px 160px 90px 90px minmax(110px, 1fr);
+  align-items: center;
+  padding: 10px 20px;
+  background: var(--sa-surface-2, #f8fafc);
+  border-top: 1px solid var(--sa-separator, #e2e8f0);
+  border-bottom: 1px solid var(--sa-separator, #e2e8f0);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--sa-label-2, #64748b);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.faculty-th-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.faculty-table-row {
+  display: grid;
+  grid-template-columns: 44px minmax(220px, 2.2fr) 140px 160px 90px 90px minmax(110px, 1fr);
+  align-items: center;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--sa-separator, #f1f5f9);
+  font-size: 13px;
+  color: var(--sa-label, #334155);
+  transition: background-color 0.12s ease;
+  cursor: pointer;
+}
+
+.faculty-table-row:last-child {
+  border-bottom: none;
+}
+
+.faculty-table-row:hover {
+  background: color-mix(in srgb, var(--sa-blue) 4%, var(--sa-surface-2));
+}
+
+.faculty-table-row.is-selected {
+  background: color-mix(in srgb, var(--sa-blue) 8%, var(--sa-surface));
+}
+
+.faculty-cell-name {
+  display: flex;
+  flex-direction: column;
+}
+
+.faculty-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* The signed-in admin's own row on Faculty (see AdminTeachers.jsx's `me`). */
+.faculty-you-badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--sa-green) 18%, transparent);
+  color: var(--sa-green);
+  font-family: var(--ca-mono);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.faculty-name-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--sa-label, #0f172a);
+  border: none;
+  background: none;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+}
+
+.faculty-name-link:hover {
+  color: var(--sa-blue, #2563eb);
+}
+
+.faculty-email-sub {
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--sa-label-2, #64748b);
+  font-weight: 400;
+}
+
+/* ── Invite Faculty Dropdown Popover ── */
+.faculty-invite-wrap {
+  position: relative;
+}
+
+.faculty-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 60;
+  width: 220px;
+  padding: 6px;
+  background: var(--sa-surface, #ffffff);
+  border: 1px solid var(--sa-separator, #e2e8f0);
+  border-radius: 10px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  animation: facultyMenuFadeIn 0.15s ease-out;
+}
+
+@keyframes facultyMenuFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.faculty-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: #3b82f6;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+}
+
+.faculty-dropdown-item:hover {
+  background: color-mix(in srgb, var(--sa-blue, #2563eb) 8%, transparent);
+}
+
+.faculty-dropdown-item svg {
+  flex-shrink: 0;
+  color: #3b82f6;
+}
+
+/* ── Groups list — same ca-card/faculty-table shell as Faculty, with a
+   filter row (search + teacher select + status segmented) in the toolbar
+   instead of icon buttons, since this page has no bulk actions. ── */
+.faculty-toolbar-wrap {
+  flex-wrap: wrap;
+  row-gap: 10px;
+}
+
+.faculty-toolbar-filters {
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.groups-table .faculty-table-head,
+.groups-table .faculty-table-row {
+  grid-template-columns: minmax(220px, 2fr) minmax(160px, 1.2fr) 100px 130px 90px minmax(140px, 1fr);
+}
+
+.students-table .faculty-table-head,
+.students-table .faculty-table-row {
+  grid-template-columns: minmax(220px, 2fr) minmax(150px, 1.2fr) minmax(150px, 1.2fr) 130px minmax(140px, 1fr);
+}
+
+/* A student in more than one group gets a chip per group instead of a
+   comma-run-on string. */
+.students-groups-cell {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Mastery reads as a small bar + number instead of bare text — same visual
+   language as the group/student-detail topic bars (.ca-topic-bar). */
+.students-mastery-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.students-mastery-bar {
+  width: 56px;
+  flex-shrink: 0;
+}
+
+.groups-cell-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ── Invite Faculty Modal Dialog ── */
+.adm-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.invite-modal-card {
+  width: 100%;
+  max-width: 580px;
+  margin: 0 16px;
+  background: var(--sa-surface, #ffffff);
+  border: 1px solid var(--sa-separator, #e2e8f0);
+  border-radius: 12px;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15), 0 10px 15px -5px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  animation: inviteModalPop 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes inviteModalPop {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.invite-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--sa-separator, #e2e8f0);
+}
+
+.invite-modal-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--sa-label, #0f172a);
+}
+
+.invite-title-icon {
+  color: var(--sa-label-2, #475569);
+  flex-shrink: 0;
+}
+
+.invite-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid #3b82f6;
+  border-radius: 6px;
+  background: color-mix(in srgb, #3b82f6 6%, transparent);
+  color: #3b82f6;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.invite-copy-btn:hover {
+  background: color-mix(in srgb, #3b82f6 12%, transparent);
+}
+
+.invite-modal-body {
+  padding: 18px 24px 24px;
+}
+
+.invite-field-label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sa-label-2, #475569);
+}
+
+.invite-textarea-wrap {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--sa-separator, #cbd5e1);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.invite-textarea-wrap:focus-within {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.invite-textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  background: var(--sa-surface, #ffffff);
+  color: var(--sa-label, #0f172a);
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  resize: vertical;
+  min-height: 130px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.invite-textarea::placeholder {
+  color: var(--sa-label-3, #94a3b8);
+}
+
+.invite-textarea-note {
+  padding: 10px 16px;
+  background: var(--sa-surface-2, #f8fafc);
+  border-top: 1px solid var(--sa-separator, #e2e8f0);
+  font-size: 12px;
+  color: var(--sa-label-2, #64748b);
+}
+
+.invite-modal-foot {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.invite-result-row {
+  padding: 12px;
+  border: 1px solid var(--sa-separator, #e2e8f0);
+  border-radius: 6px;
+  margin-bottom: 8px;
+  background: var(--sa-surface-2, #f8fafc);
+}
+
+/* ── School Admin Form Modal Styles ── */
+.invite-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.invite-input {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--sa-separator, #cbd5e1);
+  border-radius: 6px;
+  background: var(--sa-surface, #ffffff);
+  color: var(--sa-label, #0f172a);
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.invite-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.invite-modal-foot-spacebetween {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.invite-btn-cancel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 16px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid var(--sa-separator, #cbd5e1);
+  border-radius: 6px;
+  background: var(--sa-surface, #ffffff);
+  color: var(--sa-label, #334155);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.invite-btn-cancel:hover {
+  background: var(--sa-surface-2, #f8fafc);
+}
+
+/* ── Teacher Detail Page UI — matches the Typing.com School Admin
+   reference (.claude/image.png): big title, amber role badge, outlined
+   settings button, underline tab row, illustrated empty-classes banner. ── */
+.teacher-detail-page {
+  width: 100%;
+}
+
+/* Full-bleed white band for the back link + header + tabs — escapes
+   .ca-content's 24px side padding so it reaches the pane's edges, matching
+   the reference where only the tab body sits on the tinted background. */
+.teacher-detail-topband {
+  background: #ffffff;
+  margin: -24px -24px 24px;
+  padding: 16px 24px 0;
+}
+
+@media (max-width: 768px) {
+  .teacher-detail-topband {
+    margin: -16px -16px 24px;
+    padding: 16px 16px 0;
+  }
+}
+
+.teacher-detail-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.teacher-detail-title {
+  margin: 0 0 6px;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--sa-label, #0f172a);
+  letter-spacing: -0.02em;
+}
+
+.teacher-role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: #fdf1e0;
+  color: #b45309;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.teacher-settings-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 16px;
+  border: 1px solid #3b82f6;
+  border-radius: 8px;
+  background: var(--sa-surface, #ffffff);
+  color: #3b82f6;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.teacher-settings-btn:hover {
+  background: color-mix(in srgb, #3b82f6 8%, var(--sa-surface, #ffffff));
+}
+
+.teacher-nav-tabs {
+  display: flex;
+  gap: 28px;
+  border-bottom: 1px solid var(--sa-separator, #e2e8f0);
+  margin-bottom: 24px;
+}
+
+.teacher-nav-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 0 12px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--sa-label-2, #64748b);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-bottom: -1px;
+}
+
+.teacher-nav-tab:hover {
+  color: var(--sa-label, #0f172a);
+}
+
+.teacher-nav-tab.is-active {
+  border-bottom-color: #3b82f6;
+  color: #2563eb;
+  font-weight: 600;
+}
+
+/* Empty State Banner Card */
+.teacher-empty-banner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 32px;
+  padding: 48px 40px;
+  border: 1px solid var(--sa-separator, #e2e8f0);
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f4fbf7 0%, #edf7f2 100%);
+  overflow: hidden;
+  min-height: 380px;
+}
+
+.teacher-empty-center-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 36px 28px;
+  border: 1px solid #dcfce7;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  text-align: center;
+}
+
+.teacher-empty-title {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.teacher-empty-sub {
+  margin: 0 0 20px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.teacher-add-class-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 6px;
+  background: #3b82f6;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.25);
+  transition: background-color 0.15s ease;
+}
+
+.teacher-add-class-btn:hover {
+  background: #2563eb;
+}
+
+.teacher-illustration-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.teacher-illustration-svg {
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+}
+
+/* Classes table inside the Classes tab (populated state) — reuses the
+   Faculty table shell (.ca-card.is-faculty-card / .faculty-toolbar /
+   .faculty-table*) with its own 4-column layout and a neutral toolbar
+   button variant (no red hover) for the non-destructive actions. */
+.faculty-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid var(--sa-separator, #cbd5e1);
+  border-radius: 6px;
+  background: var(--sa-surface-2, #f8fafc);
+  color: var(--sa-label-2, #475569);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.faculty-btn-secondary:hover:not(:disabled) {
+  border-color: #3b82f6;
+  background: color-mix(in srgb, #3b82f6 6%, var(--sa-surface-2, #f8fafc));
+  color: #2563eb;
+}
+
+.faculty-btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.teacher-classes-table .faculty-table-head,
+.teacher-classes-table .faculty-table-row {
+  grid-template-columns: 44px minmax(220px, 2fr) minmax(140px, 1fr);
+}
+
+.teacher-class-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.class-new-badge {
+  flex-shrink: 0;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: #3b82f6;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.class-add-students-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: none;
+  background: none;
+  padding: 0;
+  color: #3b82f6;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.class-add-students-link:hover {
+  color: #2563eb;
+}
+
+/* ── Edit Teacher Information Modal ── */
+.teacher-info-modal-card {
+  width: 100%;
+  max-width: 620px;
+  padding: 28px 32px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.16), 0 4px 12px rgba(0, 0, 0, 0.04);
+  animation: saModalPop 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.teacher-info-modal-title {
+  margin: 0 0 14px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.teacher-info-divider {
+  height: 1px;
+  background: #e2e8f0;
+  margin-bottom: 24px;
+}
+
+.teacher-info-section {
+  margin-bottom: 20px;
+}
+
+.teacher-info-section-label {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #334155;
+}
+
+.teacher-role-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.teacher-role-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 116px;
+  padding: 14px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.teacher-role-card:hover {
+  border-color: #3b82f6;
+  background: #f8fafc;
+}
+
+.teacher-role-card.is-selected.role-teacher {
+  border: 2px solid #22c55e;
+  background: #f0fdf4;
+}
+
+.teacher-role-card.is-selected.role-admin {
+  border: 2px solid #3b82f6;
+  background: #eff6ff;
+}
+
+.role-check-badge {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+.role-check-green {
+  background: #22c55e;
+}
+
+.role-check-blue {
+  background: #3b82f6;
+}
+
+.role-card-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.role-card-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0284c7;
+}
+
+.teacher-role-card.is-selected.role-teacher .role-card-title {
+  color: #16a34a;
+}
+
+.teacher-role-card.is-selected.role-admin .role-card-title {
+  color: #2563eb;
+}
+
+.teacher-info-name-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.teacher-info-input-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #475569;
+}
+
+.req-star {
+  color: #ef4444;
+  font-weight: 700;
+}
+
+.teacher-info-input {
+  width: 100%;
+  height: 42px;
+  padding: 0 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #eceff1;
+  color: #334155;
+  font-size: 14px;
+  font-weight: 600;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.teacher-info-input:focus {
+  border-color: #3b82f6;
+  background: #ffffff;
+}
+
+.teacher-info-modal-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.teacher-info-btn-cancel {
+  height: 38px;
+  padding: 0 20px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #475569;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.teacher-info-btn-cancel:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+}
+
+.teacher-info-btn-submit {
+  height: 38px;
+  padding: 0 24px;
+  border: none;
+  border-radius: 8px;
+  background: #3b82f6;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.25);
+  transition: background-color 0.15s ease;
+}
+
+.teacher-info-btn-submit:hover {
+  background: #2563eb;
+}
+
+
+
+
+
+
+
+/* ── Courses: list, topic list, word list (AdminCourses / CourseEditor's
+   `en` views). All three share the Faculty card shell; these add the
+   column sets, inline row actions and the quick-add row. ── */
+.courses-table .faculty-table-head,
+.courses-table .faculty-table-row {
+  grid-template-columns: minmax(280px, 2.6fr) 90px 90px 130px 100px 132px;
+}
+
+.ca-course-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.ca-course-cell .faculty-cell-name {
+  min-width: 0;
+}
+
+.ca-course-cell .faculty-email-sub {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ca-course-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: #e8f1fe;
+  color: #2563eb;
+}
+
+.ca-course-icon.is-system {
+  background: #f1ebfd;
+  color: #7c3aed;
+}
+
+.ca-list-count,
+.ca-selected-count {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sa-label-2, #64748b);
+}
+
+.ca-selected-count {
+  color: #2563eb;
+}
+
+.ca-muted {
+  color: var(--sa-label-3, #94a3b8);
+}
+
+.courses-table .ca-tag,
+.ca-course-card .ca-tag {
+  padding: 2px 8px;
+  border: none;
+  border-radius: 999px;
+  background: #f1f3f5;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  color: #5b6470;
+}
+
+.ca-course-card .ca-tag.is-warn {
+  background: #fff4e0;
+  color: #b26a00;
+}
+
+/* Inline row actions: quiet until the row is hovered / focused, so a long
+   table doesn't read as a wall of buttons. Always visible on touch. */
+.ca-row-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
+}
+
+.ca-row-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--sa-label-2, #64748b);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.12s ease, background-color 0.12s ease, color 0.12s ease;
+}
+
+.faculty-table-row:hover .ca-row-action,
+.faculty-table-row:focus-within .ca-row-action,
+.ca-row-action:focus-visible {
+  opacity: 1;
+}
+
+.ca-row-action:hover {
+  background: #eef2f7;
+  color: var(--sa-label, #0f172a);
+}
+
+.ca-row-action.is-danger:hover {
+  background: #fdecec;
+  color: #dc2626;
+}
+
+.ca-row-action:active {
+  transform: scale(0.94);
+}
+
+@media (hover: none) {
+  .ca-row-action {
+    opacity: 1;
+  }
+}
+
+.ca-row-chevron {
+  margin-left: 4px;
+  color: var(--sa-label-3, #94a3b8);
+}
+
+.faculty-table-row:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: -2px;
+}
+
+/* Topic list */
+.ca-topics-table .faculty-table-head,
+.ca-topics-table .faculty-table-row {
+  grid-template-columns: 48px minmax(0, 1fr) 110px 110px;
+}
+
+.ca-topic-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: #eef2f7;
+  font-size: 12px;
+  font-weight: 700;
+  color: #475569;
+}
+
+.ca-topic-sub {
+  display: none;
+}
+
+.ca-topics-month {
+  padding: 14px 20px 6px;
+  border-bottom: 1px solid var(--sa-separator, #f1f5f9);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--sa-label-2, #64748b);
+}
+
+/* Word list */
+.ca-words-table .faculty-table-head,
+.ca-words-table .faculty-table-row {
+  grid-template-columns: 40px minmax(150px, 1fr) minmax(150px, 1fr) 130px minmax(200px, 1.6fr);
+}
+
+.ca-words-table .ca-word-cell {
+  cursor: pointer;
+}
+
+.ca-words-detail {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--sa-label-2, #64748b);
+}
+
+.ca-words-list {
+  padding: 4px 12px 12px;
+}
+
+.ca-course-empty {
+  padding: 28px 20px 12px;
+}
+
+/* Quick-add row: a dashed "type here" strip, turns solid blue-ish when
+   every required field is filled so Enter's effect is predictable. */
+.ca-quick-add {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 16px;
+  padding: 6px 6px 6px 12px;
+  border: 1.5px dashed #cfd4da;
+  border-radius: 10px;
+  background: #fbfcfd;
+  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ca-quick-add:focus-within {
+  border-style: solid;
+  border-color: #93b4f5;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+.ca-quick-add-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: #3b82f6;
+}
+
+.ca-quick-add-input {
+  flex: 1;
+  min-width: 0;
+  height: 34px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  color: var(--sa-label, #0f172a);
+  outline: none;
+}
+
+.ca-quick-add-input + .ca-quick-add-input {
+  border-left: 1px solid #e3e7ec;
+  border-radius: 0;
+}
+
+.ca-quick-add-input::placeholder {
+  color: #9aa3ad;
+}
+
+.ca-quick-add-btn {
+  flex-shrink: 0;
+  height: 32px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 7px;
+  background: #e8eef7;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+
+.ca-quick-add.is-ready .ca-quick-add-btn {
+  background: #3b82f6;
+  color: #ffffff;
+}
+
+.ca-quick-add-btn:active {
+  transform: scale(0.97);
+}
+
+@media (max-width: 720px) {
+  .ca-topics-table .faculty-table-head,
+  .ca-topics-table .faculty-table-row {
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+    padding-left: 14px;
+    padding-right: 10px;
+  }
+
+  .ca-topics-table .ca-col-words {
+    display: none;
+  }
+
+  .ca-topic-sub {
+    display: block;
+  }
+
+  .ca-quick-add {
+    flex-wrap: wrap;
+    margin: 12px;
+  }
+
+  .ca-quick-add-input + .ca-quick-add-input {
+    border-left: none;
+    border-top: 1px solid #e3e7ec;
+    flex-basis: 100%;
+  }
+}
+
+/* Course pages' header: sentence-case title instead of the mono-caps
+   toolbar label, so a course / topic name reads as the page's subject. */
+.is-center-admin .sa-page.is-toolbar:has(.ca-course-card) .ca-toolbar-title {
+  font-family: inherit;
+  font-size: 18px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.is-center-admin .sa-page.is-toolbar:has(.ca-course-card) .ca-toolbar-sub {
+  font-family: inherit;
+  font-size: 12px;
+}
+
+.ca-course-card {
+  overflow: hidden;
+}
+
+@media (max-width: 560px) {
+  .ca-toolbar-actions .ca-btn-label {
+    display: none;
+  }
+
+  .ca-toolbar-actions .faculty-btn-invite,
+  .ca-toolbar-actions .faculty-btn-secondary {
+    padding: 0 10px;
+  }
+}
+
+/* ── Dashboard (AdminHome): header + date filter, 4 stat tiles, mastery
+   breakdown, most-active table. Own ca-dash-* classes; the older mono
+   .ca-kpi family is still used by Group/Student Detail. ── */
+.ca-dash-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 16px;
+  margin-bottom: 18px;
+}
+
+.ca-dash-range {
+  display: block;
+  margin: 6px 0 0 58px;
+  font-size: 13px;
+  color: #8a9099;
+}
+
+.ca-dash-head-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ca-dash-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid #dfe3e8;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #3f4650;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.ca-dash-btn:hover:not(:disabled) {
+  border-color: #c9d0d8;
+  background: #f7f8fa;
+}
+
+.ca-dash-btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.ca-dash-btn.is-icon {
+  width: 36px;
+  padding: 0;
+  justify-content: center;
+}
+
+.ca-dash-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.ca-dash-tiles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.ca-dash-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 20px;
+  border: 1px solid #e6e9ed;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+}
+
+.ca-dash-tile-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ca-dash-tile-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 9px;
+}
+
+.tone-blue.ca-dash-tile-icon { background: #e8f1fe; color: #2563eb; }
+.tone-purple.ca-dash-tile-icon { background: #f1ebfd; color: #7c3aed; }
+.tone-green.ca-dash-tile-icon { background: #e7f6ec; color: #1f8a3e; }
+.tone-orange.ca-dash-tile-icon { background: #fff4e0; color: #c26a00; }
+
+.ca-dash-tile-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #5b6470;
+}
+
+.ca-dash-tile-value {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  min-height: 38px;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: #1f2530;
+}
+
+.ca-dash-tile-suffix {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: #9aa3ad;
+}
+
+.ca-dash-tile-foot {
+  margin-top: auto;
+  font-size: 12px;
+  color: #8a9099;
+}
+
+.ca-dash-skeleton {
+  display: block;
+  width: 70px;
+  height: 28px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #eef1f4, #f7f8fa, #eef1f4);
+  background-size: 200% 100%;
+  animation: caDashShimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes caDashShimmer {
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
+}
+
+.ca-dash-bar {
+  height: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #eef1f4;
+}
+
+.ca-dash-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  transition: width 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.ca-dash-bar .is-blue { background: #3b82f6; }
+.ca-dash-bar .is-good,
+.ca-dash-stack .is-good,
+.ca-dash-legend-dot.is-good { background: #22a34a; }
+.ca-dash-bar .is-mid,
+.ca-dash-stack .is-mid,
+.ca-dash-legend-dot.is-mid { background: #f59e0b; }
+.ca-dash-bar .is-low,
+.ca-dash-stack .is-low,
+.ca-dash-legend-dot.is-low { background: #ef4444; }
+.ca-dash-stack .is-none,
+.ca-dash-legend-dot.is-none { background: #d5dae0; }
+
+.ca-dash-card {
+  border-radius: 12px;
+  border-color: #e6e9ed;
+}
+
+.ca-dash-levels {
+  padding: 20px 24px;
+}
+
+.ca-dash-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.ca-dash-card-head.is-padded {
+  margin: 0;
+  padding: 18px 24px 14px;
+}
+
+.ca-dash-card-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #2b313a;
+}
+
+.ca-dash-card-sub {
+  display: block;
+  margin-top: 3px;
+  font-size: 13px;
+  color: #8a9099;
+}
+
+.ca-dash-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 4px;
+  border: none;
+  background: none;
+  color: #2563eb;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ca-dash-link:hover {
+  text-decoration: underline;
+}
+
+.ca-dash-stack {
+  display: flex;
+  gap: 3px;
+  height: 14px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #eef1f4;
+}
+
+.ca-dash-stack span {
+  min-width: 6px;
+  flex-basis: 0;
+}
+
+.ca-dash-legend {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.ca-dash-legend-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.ca-dash-legend-dot {
+  width: 10px;
+  height: 10px;
+  margin-top: 4px;
+  flex-shrink: 0;
+  border-radius: 3px;
+}
+
+.ca-dash-legend-label {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #3f4650;
+}
+
+.ca-dash-legend-label small,
+.ca-dash-legend-value small {
+  font-size: 11px;
+  font-weight: 500;
+  color: #9aa3ad;
+}
+
+.ca-dash-legend-value {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 15px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: #1f2530;
+}
+
+.ca-dash-table-head,
+.ca-dash-table-row {
+  display: grid;
+  grid-template-columns: 44px minmax(200px, 2fr) minmax(130px, 1.2fr) 100px minmax(120px, 1fr) minmax(150px, 1.2fr);
+  align-items: center;
+  gap: 12px;
+  padding: 0 24px;
+}
+
+.ca-dash-table-head {
+  height: 38px;
+  border-top: 1px solid #eef1f4;
+  border-bottom: 1px solid #eef1f4;
+  background: #f7f8fa;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.ca-dash-table-row {
+  width: 100%;
+  min-height: 58px;
+  border: none;
+  border-bottom: 1px solid #f1f3f5;
+  background: #ffffff;
+  font: inherit;
+  font-size: 14px;
+  color: #2b313a;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+}
+
+.ca-dash-table-row:last-child {
+  border-bottom: none;
+}
+
+.ca-dash-table-row:hover {
+  background: #f9fafb;
+}
+
+.ca-dash-table-row:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: -2px;
+}
+
+.ca-dash-table-head .num,
+.ca-dash-table-row .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.ca-dash-rank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #8a9099;
+}
+
+.ca-dash-rank.is-1 { background: #fff4d6; color: #a86b00; }
+.ca-dash-rank.is-2 { background: #eef1f4; color: #5b6470; }
+.ca-dash-rank.is-3 { background: #fbeee4; color: #a4582a; }
+
+.ca-dash-student {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.ca-dash-student-name {
+  overflow: hidden;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ca-dash-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ca-dash-avatar.tone-blue { background: #e8f1fe; color: #2563eb; }
+.ca-dash-avatar.tone-green { background: #e7f6ec; color: #1f8a3e; }
+.ca-dash-avatar.tone-purple { background: #f1ebfd; color: #7c3aed; }
+.ca-dash-avatar.tone-orange { background: #fff4e0; color: #c26a00; }
+.ca-dash-avatar.tone-pink { background: #fdebf3; color: #c2296f; }
+.ca-dash-avatar.tone-teal { background: #e3f6f5; color: #0f8a83; }
+
+.ca-dash-chip {
+  display: inline-block;
+  max-width: 100%;
+  padding: 3px 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #f1f3f5;
+  font-size: 12px;
+  font-weight: 600;
+  color: #5b6470;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.ca-dash-muted {
+  font-size: 13px;
+  color: #8a9099;
+}
+
+.ca-dash-mastery {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ca-dash-bar.is-inline {
+  flex: 1;
+  max-width: 110px;
+}
+
+.ca-dash-mastery-val {
+  min-width: 36px;
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: #3f4650;
+}
+
+.ca-dash-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 40px 24px 48px;
+  border-top: 1px solid #eef1f4;
+  text-align: center;
+}
+
+.ca-dash-empty b {
+  font-size: 15px;
+  color: #3f4650;
+}
+
+.ca-dash-empty-text {
+  max-width: 380px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #8a9099;
+}
+
+@media (max-width: 1100px) {
+  .ca-dash-tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .ca-dash-range {
+    margin-left: 0;
+  }
+
+  .ca-dash-tiles {
+    gap: 10px;
+  }
+
+  .ca-dash-tile {
+    padding: 14px;
+  }
+
+  .ca-dash-tile-value {
+    font-size: 24px;
+    min-height: 30px;
+  }
+
+  .ca-dash-legend {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ca-dash-levels,
+  .ca-dash-card-head.is-padded {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ca-dash-skeleton { animation: none; }
+  .ca-dash-bar span { transition: none; }
+}
+
+/* ── Teacher panel (TeacherLayout carries .is-center-admin too, so it gets
+   the whole center-admin look; these are its own table column sets). ── */
+.teacher-groups-table .faculty-table-head,
+.teacher-groups-table .faculty-table-row {
+  grid-template-columns: minmax(220px, 2fr) 100px minmax(150px, 1.2fr) minmax(170px, 1.4fr) minmax(130px, 1fr) 40px;
+}
+
+.teacher-archive-table .faculty-table-head,
+.teacher-archive-table .faculty-table-row {
+  grid-template-columns: minmax(220px, 2fr) 110px 110px minmax(140px, 1fr) 40px;
+}
+
+.teacher-groups-table .ca-course-icon {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ca-course-icon.is-own {
+  background: #e7f6ec;
+  color: #1f8a3e;
+}
+
+.ca-course-icon.is-archived {
+  background: #f1f3f5;
+  color: #6b7280;
+}
+
+.courses-table .ca-tag.is-own {
+  background: #e7f6ec;
+  color: #1f8a3e;
+}
+
+.teacher-hw-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.teacher-hw-name {
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.faculty-toolbar-right .ca-btn-label {
+  white-space: nowrap;
+}
+
+/* ── Group page (groupView.jsx — AdminGroupDetail + TeacherGroup) ── */
+.ca-group-band .sa-back {
+  margin-bottom: 14px;
+}
+
+.ca-group-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px 24px;
+  margin-bottom: 18px;
+}
+
+.ca-group-head-id {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  min-width: 0;
+}
+
+.ca-group-head-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.ca-group-head-text {
+  min-width: 0;
+}
+
+.ca-group-head-text .teacher-detail-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.ca-group-head-badge {
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #f1f3f5;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: #5b6470;
+}
+
+.ca-group-head-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0;
+  font-size: 14px;
+  color: var(--sa-label-2, #64748b);
+}
+
+.ca-dot-sep {
+  margin: 0 8px;
+  color: var(--sa-label-3, #94a3b8);
+}
+
+.ca-group-head-courses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.ca-group-head-side {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.ca-group-head-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ca-group-code-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 6px 0 12px;
+  border: 1px solid #dfe3e8;
+  border-radius: 8px;
+  background: #ffffff;
+  font: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.ca-group-code-pill:hover {
+  border-color: #93c5fd;
+  background: #f5f9ff;
+}
+
+.ca-group-code-pill:active {
+  transform: scale(0.97);
+}
+
+.ca-group-code-pill-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #8a9099;
+}
+
+.ca-group-code-pill-value {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #1f2530;
+}
+
+.ca-group-code-pill-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: #e8f1fe;
+  color: #2563eb;
+}
+
+.ca-group-nav {
+  margin-bottom: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.ca-group-nav .teacher-nav-tab {
+  white-space: nowrap;
+}
+
+.ca-nav-count {
+  min-width: 20px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: #f1f3f5;
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  color: #5b6470;
+}
+
+.teacher-nav-tab.is-active .ca-nav-count {
+  background: #e8f1fe;
+  color: #2563eb;
+}
+
+/* Status pills (students, homework states, import summary) */
+.ca-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #f1f3f5;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: #5b6470;
+}
+
+.ca-pill::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.ca-pill.is-green { background: #e7f6ec; color: #1f8a3e; }
+.ca-pill.is-orange { background: #fff4e0; color: #b26a00; }
+.ca-pill.is-red { background: #fdecec; color: #c62828; }
+.ca-pill.is-gray { background: #f1f3f5; color: #6b7280; }
+
+/* Filter pills (status filter, "only errors") */
+.ca-filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ca-filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid #dfe3e8;
+  border-radius: 999px;
+  background: #ffffff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: #3f4650;
+  cursor: pointer;
+  transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+}
+
+.ca-filter-pill:hover {
+  border-color: #c9d0d8;
+}
+
+.ca-filter-pill.is-active {
+  border-color: #2563eb;
+  background: #eef4ff;
+  color: #1d4ed8;
+}
+
+.ca-filter-pill:active {
+  transform: scale(0.97);
+}
+
+.ca-filter-count {
+  font-weight: 500;
+  color: #8a9099;
+}
+
+.ca-filter-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.ca-filter-dot.is-green { background: #22a34a; }
+.ca-filter-dot.is-orange { background: #f59e0b; }
+.ca-filter-dot.is-gray { background: #a1a1aa; }
+.ca-filter-dot.is-red { background: #ef4444; }
+
+.ca-panel-empty {
+  padding: 28px 20px 32px;
+}
+
+.ca-panel-empty .ca-empty {
+  display: block;
+  text-align: center;
+}
+
+/* Students table */
+.ca-students-table .faculty-table-head,
+.ca-students-table .faculty-table-row {
+  grid-template-columns: minmax(220px, 2fr) 140px minmax(150px, 1.2fr) minmax(120px, 1fr) minmax(110px, 0.9fr) 32px;
+}
+
+.ca-students-table .faculty-cell-name {
+  min-width: 0;
+}
+
+.ca-students-table .faculty-email-sub {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Phone list rows (students) */
+.ca-mobile-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.ca-mobile-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-top: 1px solid #f1f3f5;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ca-mobile-row:active {
+  background: #f7f8fa;
+}
+
+.ca-mobile-row-main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Homework list */
+.ca-hwx-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.ca-hwx {
+  border-top: 1px solid #eef1f4;
+}
+
+.ca-hwx-head {
+  display: grid;
+  grid-template-columns: 36px minmax(160px, 1.3fr) minmax(200px, 2fr) 52px 20px;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 14px 20px;
+  border: none;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+}
+
+.ca-hwx-head:hover {
+  background: #f9fafb;
+}
+
+.ca-hwx-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: #fff4e0;
+  color: #c26a00;
+}
+
+.ca-hwx-title {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ca-hwx-name {
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #1f2530;
+}
+
+.ca-hwx-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.ca-hwx-stack {
+  display: flex;
+  gap: 2px;
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #eef1f4;
+}
+
+.ca-hwx-stack span {
+  min-width: 0;
+  flex-basis: 0;
+}
+
+.ca-hwx-stack .is-done,
+.ca-hwx-legend i.is-done { background: #22a34a; }
+.ca-hwx-stack .is-started,
+.ca-hwx-legend i.is-started { background: #f59e0b; }
+.ca-hwx-stack .is-none,
+.ca-hwx-legend i.is-none { background: #d5dae0; }
+
+.ca-hwx-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.ca-hwx-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.ca-hwx-legend i {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+.ca-hwx-rate {
+  font-size: 15px;
+  font-weight: 700;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: #8a9099;
+}
+
+.ca-hwx-rate.is-good { color: #1f8a3e; }
+.ca-hwx-rate.is-mid { color: #b26a00; }
+
+.ca-hwx-chevron {
+  color: #9aa3ad;
+  transition: transform 0.2s ease;
+}
+
+.ca-hwx.is-open .ca-hwx-chevron {
+  transform: rotate(180deg);
+}
+
+.ca-hwx-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 4px 20px 18px 70px;
+}
+
+.ca-hwx-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.ca-hwx-names {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ca-hwx-person {
+  padding: 4px 10px;
+  border: 1px solid #e6e9ed;
+  border-radius: 8px;
+  background: #ffffff;
+  font: inherit;
+  font-size: 13px;
+  color: #2b313a;
+  cursor: pointer;
+}
+
+.ca-hwx-person:hover {
+  border-color: #93c5fd;
+  color: #1d4ed8;
+}
+
+.ca-hwx-open {
+  align-self: flex-start;
+}
+
+/* Topics */
+.ca-topicx + .ca-topicx {
+  border-top: 1px solid #eef1f4;
+}
+
+.ca-topicx-table .faculty-table-row {
+  grid-template-columns: 44px minmax(0, 1.4fr) minmax(160px, 1fr) 120px;
+}
+
+.faculty-table-row.is-static {
+  cursor: default;
+}
+
+.ca-topicx-name {
+  font-weight: 600;
+  color: #2b313a;
+}
+
+.ca-topicx-meta {
+  font-size: 13px;
+  text-align: right;
+  color: #8a9099;
+}
+
+/* Progress — six mastery buckets */
+.ca-dash-levels .ca-dash-legend:has(> :nth-child(5)) {
+  grid-template-columns: repeat(3, minmax(0, 220px));
+  gap: 12px 40px;
+}
+
+/* Student modal (TeacherGroup) */
+.ca-st-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.ca-st-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: #e8f1fe;
+  font-size: 18px;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.ca-st-head-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ca-st-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1f2530;
+}
+
+.ca-st-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.ca-st-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+  border: 1px solid #e6e9ed;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.ca-st-stat-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.ca-st-stat-value {
+  font-size: 20px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: #1f2530;
+}
+
+.ca-st-stat-value.is-text {
+  font-size: 14px;
+}
+
+.ca-st-pack {
+  margin-bottom: 16px;
+  padding: 14px;
+  border: 1px solid #e6e9ed;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.ca-st-pack-head {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.ca-st-pack-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1f2530;
+}
+
+.ca-st-risk {
+  margin-bottom: 10px;
+}
+
+.ca-st-topics {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ca-st-topic {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 90px 40px;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.ca-st-topic-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #3f4650;
+}
+
+.ca-st-topic-val {
+  font-weight: 600;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.ca-st-remove {
+  width: 100%;
+  justify-content: center;
+}
+
+/* ── Word import modal ── */
+.ca-imp-target {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: #5b6470;
+}
+
+.ca-imp-sources {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.ca-imp-source {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 12px;
+  border: 1px solid #e6e9ed;
+  border-radius: 10px;
+  background: #ffffff;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ca-imp-source:hover {
+  border-color: #c9d0d8;
+}
+
+.ca-imp-source:active {
+  transform: scale(0.98);
+}
+
+.ca-imp-source.is-active {
+  border-color: #2563eb;
+  background: #f5f9ff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.ca-imp-source-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-bottom: 6px;
+  border-radius: 8px;
+  background: #f1f3f5;
+  color: #5b6470;
+}
+
+.ca-imp-source.is-active .ca-imp-source-icon {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.ca-imp-source-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1f2530;
+}
+
+.ca-imp-source-sub {
+  font-size: 12px;
+  color: #8a9099;
+}
+
+.ca-imp-text {
+  margin-bottom: 12px;
+}
+
+.ca-imp-text-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #3f4650;
+}
+
+.ca-imp-text-tools {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ca-imp-count {
+  font-size: 12px;
+  font-weight: 500;
+  color: #8a9099;
+}
+
+.ca-imp-text .ca-import-text {
+  width: 100%;
+  min-height: 180px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.ca-imp-help {
+  margin-bottom: 8px;
+}
+
+.ca-imp-help summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2563eb;
+  cursor: pointer;
+  list-style: none;
+}
+
+.ca-imp-help summary::-webkit-details-marker {
+  display: none;
+}
+
+.ca-imp-help-chevron {
+  transition: transform 0.15s ease;
+}
+
+.ca-imp-help[open] .ca-imp-help-chevron {
+  transform: rotate(90deg);
+}
+
+.ca-imp-help .ca-example {
+  margin-top: 8px;
+}
+
+.ca-imp-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+}
+
+.ca-imp-steps li {
+  display: flex;
+  gap: 12px;
+}
+
+.ca-imp-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: #e8f1fe;
+  font-size: 12px;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.ca-imp-step-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.ca-imp-step-body b {
+  font-size: 14px;
+  color: #1f2530;
+}
+
+.ca-imp-step-body .faculty-btn-secondary {
+  margin-top: 4px;
+}
+
+.ca-imp-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+}
+
+.ca-imp-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.sa-sheet-footer .ca-imp-footer .sa-btn {
+  flex: 0 0 auto;
+}
+
+.ca-drop.has-file {
+  border-style: solid;
+  border-color: #86efac;
+  background: #f3fbf5;
+}
+
+.ca-drop.has-file > svg {
+  color: #1f8a3e;
+}
+
+.ca-preview-head .ca-head-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (max-width: 900px) {
+  .ca-hwx-head {
+    grid-template-columns: 36px minmax(0, 1fr) 48px 20px;
+  }
+
+  .ca-hwx-progress {
+    grid-column: 2 / -1;
+    grid-row: 2;
+  }
+
+  .ca-hwx-body {
+    padding-left: 20px;
+  }
+
+  .ca-dash-levels .ca-dash-legend:has(> :nth-child(5)) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .ca-group-head-avatar {
+    width: 44px;
+    height: 44px;
+    font-size: 19px;
+  }
+
+  .ca-group-head-side {
+    width: 100%;
+  }
+
+  .ca-group-head-actions {
+    margin-left: auto;
+  }
+
+  .ca-topicx-table .faculty-table-row {
+    grid-template-columns: 36px minmax(0, 1fr) 110px;
+  }
+
+  .ca-topicx-meta {
+    display: none;
+  }
+
+  .ca-dash-levels .ca-dash-legend:has(> :nth-child(5)) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ca-imp-source-sub {
+    display: none;
+  }
+
+  .ca-st-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ── Homework page + assign homework (teacher) ── */
+.ca-hw-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.ca-hw-columns .faculty-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ca-hw-columns .ca-dash-mastery {
+  margin-top: 4px;
+}
+
+.ca-wordlist {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e6e9ed;
+  border-radius: 10px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.ca-wordlist-row {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  border-top: 1px solid #f1f3f5;
+  font-size: 14px;
+}
+
+.ca-wordlist-row:first-child {
+  border-top: none;
+}
+
+.ca-wordlist-num {
+  font-size: 12px;
+  color: #9aa3ad;
+  font-variant-numeric: tabular-nums;
+}
+
+.ca-wordlist-word {
+  font-weight: 600;
+  color: #1f2530;
+}
+
+.ca-wordlist-tr {
+  color: #5b6470;
+}
+
+.ca-assign-filter {
+  margin-bottom: 14px;
+}
+
+.ca-assign-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.ca-assign-row {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) 80px 130px;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 20px;
+  border: none;
+  border-top: 1px solid #f1f3f5;
+  background: #ffffff;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+}
+
+.ca-assign-row:hover:not(:disabled) {
+  background: #f9fafb;
+}
+
+.ca-assign-row.is-on {
+  background: #f5f9ff;
+}
+
+.ca-assign-row.is-used {
+  cursor: default;
+}
+
+.ca-assign-row.is-used .ca-assign-title {
+  color: #9aa3ad;
+}
+
+.ca-assign-title {
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #1f2530;
+}
+
+.ca-assign-words {
+  font-size: 13px;
+  text-align: right;
+  color: #8a9099;
+}
+
+.ca-stack > .ca-card.is-faculty-card .faculty-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (max-width: 900px) {
+  .ca-hw-columns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+
+/* ── New homework (TeacherAssignHomework): picker + sticky summary ── */
+.ca-assign-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 20px;
+  align-items: start;
+}
+
+.ca-assign-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.ca-assign-tools .sa-search {
+  flex: 1 1 220px;
+  max-width: 320px;
+}
+
+.ca-assign-head,
+.ca-assign-row {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) 64px minmax(150px, 210px) 32px;
+  align-items: center;
+  gap: 12px;
+}
+
+.ca-assign-head {
+  padding: 8px 20px;
+  border-top: 1px solid #eef1f4;
+  background: #f7f8fa;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.ca-assign-head > :nth-child(3) {
+  text-align: right;
+}
+
+.ca-assign-item {
+  border-top: 1px solid #f1f3f5;
+}
+
+.ca-assign-row {
+  width: 100%;
+  padding: 11px 20px;
+  border: none;
+  background: #ffffff;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ca-assign-item:first-child .ca-assign-row,
+.ca-assign-item .ca-assign-row {
+  border-top: none;
+}
+
+.ca-assign-row:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: -2px;
+}
+
+.ca-assign-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.ca-assign-stat {
+  min-width: 0;
+}
+
+.ca-assign-started {
+  font-size: 12px;
+  color: #9aa3ad;
+  font-variant-numeric: tabular-nums;
+}
+
+.ca-assign-peek {
+  opacity: 1;
+}
+
+.ca-assign-peek svg {
+  transition: transform 0.15s ease;
+}
+
+.ca-assign-item.is-open .ca-assign-peek svg {
+  transform: rotate(180deg);
+}
+
+.ca-assign-words-peek {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 2px 20px 14px 60px;
+}
+
+.ca-assign-word {
+  padding: 3px 9px;
+  border-radius: 6px;
+  background: #f4f6f8;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.ca-assign-word b {
+  font-weight: 600;
+  color: #1f2530;
+}
+
+.ca-assign-summary {
+  position: sticky;
+  top: 84px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.ca-assign-summary-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ca-assign-name {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #3f4650;
+}
+
+.ca-assign-picked-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #3f4650;
+}
+
+.ca-assign-hint {
+  margin: 0;
+  padding: 14px;
+  border: 1px dashed #dfe3e8;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #8a9099;
+}
+
+.ca-assign-picked-list {
+  display: flex;
+  flex-direction: column;
+  max-height: 280px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.ca-assign-picked-list li {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr) 28px;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 0;
+  border-top: 1px solid #f1f3f5;
+}
+
+.ca-assign-picked-list li:first-child {
+  border-top: none;
+}
+
+.ca-assign-picked-list .ca-row-remove {
+  opacity: 1;
+}
+
+.ca-assign-picked-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: #e8f1fe;
+  font-size: 11px;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.ca-assign-picked-title {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1f2530;
+}
+
+.ca-assign-picked-title small {
+  overflow: hidden;
+  font-size: 11px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #9aa3ad;
+}
+
+.ca-assign-totals {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  padding: 12px 0;
+  border-top: 1px solid #eef1f4;
+  border-bottom: 1px solid #eef1f4;
+}
+
+.ca-assign-totals div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ca-assign-totals b {
+  font-size: 20px;
+  font-variant-numeric: tabular-nums;
+  color: #1f2530;
+}
+
+.ca-assign-totals span {
+  font-size: 12px;
+  color: #8a9099;
+}
+
+.ca-assign-clear {
+  align-self: center;
+}
+
+@media (max-width: 1100px) {
+  .ca-assign-head,
+  .ca-assign-row {
+    grid-template-columns: 28px minmax(0, 1fr) 56px 32px;
+  }
+
+  .ca-assign-head > :nth-child(4),
+  .ca-assign-stat {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .ca-assign-head {
+    display: none;
+  }
+
+  .ca-assign-row {
+    padding: 11px 16px;
+  }
+
+  .ca-assign-words-peek {
+    padding-left: 16px;
+  }
+}
+
+/* ── Phone / tablet pass for the teacher + center admin shells ──
+   Tables switch to row lists below 1100px (useIsDesktop); these rules
+   handle everything that stays on screen at every width. */
+.ca-assign-layout {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.ca-assign-layout.has-aside {
+  grid-template-columns: minmax(0, 1fr) 340px;
+}
+
+.ca-assign-layout:not(.has-aside) .ca-assign-summary {
+  position: static;
+}
+
+@media (max-width: 768px) {
+  /* Card toolbars: wrap instead of squeezing, primary action stays right. */
+  .faculty-toolbar {
+    flex-wrap: wrap;
+    row-gap: 10px;
+    padding: 12px 14px;
+  }
+
+  .faculty-toolbar-left {
+    min-width: 0;
+    flex-wrap: wrap;
+  }
+
+  .faculty-toolbar-right {
+    margin-left: auto;
+  }
+
+  .faculty-toolbar-filters .sa-search,
+  .ca-assign-tools .sa-search {
+    flex: 1 1 100%;
+    max-width: none;
+  }
+
+  /* Filter pills scroll sideways instead of wrapping into three rows. */
+  .faculty-toolbar-filters .ca-filter-pills {
+    flex-wrap: nowrap;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ca-filter-pills::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ca-filter-pill {
+    flex-shrink: 0;
+  }
+
+  /* Group header band */
+  .ca-group-band .sa-back {
+    margin-bottom: 10px;
+  }
+
+  .ca-group-head {
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .ca-group-head-id {
+    gap: 12px;
+    width: 100%;
+  }
+
+  .ca-group-head-text .teacher-detail-title {
+    font-size: 21px;
+  }
+
+  .ca-group-head-meta {
+    font-size: 13px;
+  }
+
+  .ca-group-head-side {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .ca-group-nav {
+    gap: 22px;
+    margin-left: -16px;
+    margin-right: -16px;
+    padding: 0 16px;
+  }
+
+  .ca-group-nav .teacher-nav-tab {
+    padding: 10px 0 11px;
+    font-size: 13px;
+  }
+
+  /* Dashboard-style tiles read better a little tighter on phones. */
+  .ca-dash-head {
+    margin-bottom: 14px;
+  }
+
+  .ca-dash-tile-label {
+    font-size: 12px;
+  }
+
+  .ca-dash-tile-foot {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Homework rows */
+  .ca-hwx-head {
+    gap: 10px;
+    padding: 12px 14px;
+  }
+
+  .ca-hwx-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .ca-hwx-body {
+    padding: 4px 14px 16px;
+  }
+
+  .ca-panel-empty {
+    padding: 20px 14px 24px;
+  }
+
+  .ca-topicx-table .faculty-table-row {
+    padding: 10px 14px;
+  }
+
+  .ca-mobile-row {
+    padding: 12px 14px;
+  }
+
+  /* Homework page */
+  .ca-hw-columns .faculty-toolbar > .ca-list-count {
+    flex-basis: 100%;
+  }
+
+  /* Assign page */
+  .ca-assign-row {
+    padding: 11px 14px;
+  }
+
+  .ca-assign-words-peek {
+    padding: 0 14px 12px 54px;
+  }
+
+  .ca-assign-summary {
+    padding: 16px;
+  }
+
+  /* Import modal: the sheet is a bottom sheet here — keep the footer
+     compact and let the add button take the full row. */
+  .ca-imp-footer .sa-btn {
+    flex: 1 1 100%;
+  }
+
+  .ca-imp-sources {
+    gap: 6px;
+  }
+
+  .ca-imp-source {
+    align-items: center;
+    padding: 10px 6px;
+    text-align: center;
+  }
+
+  .ca-imp-source-icon {
+    margin-bottom: 4px;
+  }
+
+  .ca-imp-text .ca-import-text {
+    min-height: 150px;
+  }
+
+  /* Under 16px, iOS Safari zooms the page in when the field is focused. */
+  .ca-imp-text .ca-import-text,
+  .ca-assign-name .sa-input,
+  .ca-quick-add-input,
+  .ca-topbar-search input {
+    font-size: 16px;
+  }
+
+  /* Bottom bar sits above the tab bar; give the list room to scroll past it. */
+  .ca-assign-layout {
+    padding-bottom: 72px;
+  }
+}
+
+@media (max-width: 560px) {
+  /* Icon-only secondary actions in the group header; primary keeps its label. */
+  .ca-group-head-actions .faculty-btn-secondary .ca-btn-label {
+    display: none;
+  }
+
+  .ca-group-head-actions .faculty-btn-secondary {
+    padding: 0 10px;
+  }
+
+  .ca-group-head-actions .faculty-btn-invite {
+    padding: 0 12px;
+  }
+
+  .ca-group-code-pill-label {
+    display: none;
+  }
+
+  .faculty-toolbar-right .faculty-btn-secondary .ca-btn-label {
+    display: none;
+  }
+
+  .ca-hwx-legend {
+    gap: 2px 10px;
+    font-size: 11px;
+  }
+
+  .ca-st-topic {
+    grid-template-columns: minmax(0, 1fr) 70px 36px;
+  }
+
+  .ca-wordlist-row {
+    grid-template-columns: 24px minmax(0, 1fr) minmax(0, 1fr);
+    padding: 9px 12px;
+  }
+
+  .ca-assign-totals b {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Settings forms: under 16px iOS zooms in on focus. */
+  .ca-theme .ca-card .sa-input {
+    font-size: 16px;
+  }
+}
+
+/* ── Mobile pass 2 (checked in a 390px harness) ── */
+
+/* The UITS monospace leftovers (profile name, field labels, tabs, buttons)
+   read as a different app next to the Typing.com-style pages — both
+   center admin and teacher use the regular UI font now. */
+.sa-layout.ca-theme.is-center-admin {
+  --ca-mono: inherit;
+}
+
+.ca-hide-sm {
+  display: inline;
+}
+
+@media (max-width: 768px) {
+  /* Topbar: the profile chevron was pushed past the right edge. */
+  .ca-topbar-chevron {
+    display: none;
+  }
+
+  .ca-topbar-right {
+    gap: 8px;
+  }
+
+  /* Toolbar pages with tabs (Settings): tabs get their own full row. */
+  .ca-toolbar-actions:has(.ca-tabs) {
+    flex: 1 1 100%;
+  }
+
+  .ca-toolbar-actions .ca-tabs {
+    width: 100%;
+  }
+
+  .ca-toolbar-actions .ca-tabs .ca-tab {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Compact stat tiles: four numbers in ~200px instead of ~330px. */
+  .ca-dash-tiles {
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .ca-dash-tile {
+    gap: 6px;
+    padding: 12px;
+    border-radius: 10px;
+  }
+
+  .ca-dash-tile-top {
+    gap: 8px;
+  }
+
+  .ca-dash-tile-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 7px;
+  }
+
+  .ca-dash-tile-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .ca-dash-tile-label {
+    overflow: hidden;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .ca-dash-tile-value {
+    min-height: 0;
+    font-size: 22px;
+  }
+
+  .ca-dash-tile-suffix {
+    font-size: 13px;
+  }
+
+  .ca-dash-tile-foot {
+    font-size: 11px;
+  }
+
+  .ca-dash-bar {
+    height: 5px;
+  }
+
+  .ca-dash-head .ca-title-lg {
+    font-size: 24px;
+  }
+
+  .ca-dash-head .ca-title-lg-icon {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 560px) {
+  .ca-hide-sm {
+    display: none;
+  }
+
+  /* Group header: the code pill already opens the invite (QR + link), so
+     the separate Invite button goes — pill, gear and the primary action
+     then fit on one row. */
+  .ca-group-head-actions .faculty-btn-secondary {
+    display: none;
+  }
+
+  .ca-group-head-side {
+    flex-wrap: nowrap;
+  }
+
+  .ca-group-nav {
+    gap: 18px;
+  }
+
+  /* Segmented filters keep one line. */
+  .faculty-toolbar-filters .sa-segmented {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .faculty-toolbar-filters .sa-segmented button,
+  .faculty-toolbar-filters .sa-segment {
+    white-space: nowrap;
+  }
+
+  /* Assign page: pack header keeps "Select all" on the title row. */
+  .ca-assign-main .faculty-toolbar {
+    flex-wrap: nowrap;
+  }
+
+  .ca-assign-main .faculty-toolbar .ca-list-count {
+    display: none;
+  }
+
+  .ca-assign-main .faculty-toolbar .ca-card-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .ca-assign-main .faculty-toolbar-left {
+    flex-wrap: nowrap;
+    flex: 1;
+  }
+}
+
+/* Students tab toolbar on phones: search + sort on one row, status pills
+   scrolling underneath. */
+@media (max-width: 768px) {
+  .ca-st-toolbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+  }
+
+  .ca-st-toolbar > .faculty-toolbar-left,
+  .ca-st-toolbar > .faculty-toolbar-right {
+    display: contents;
+  }
+
+  .ca-st-toolbar .sa-search {
+    grid-row: 1;
+    grid-column: 1;
+    min-width: 0;
+  }
+
+  .ca-st-toolbar .sa-select {
+    grid-row: 1;
+    grid-column: 2;
+    width: auto;
+    max-width: 150px;
+  }
+
+  .ca-st-toolbar .ca-filter-pills {
+    grid-row: 2;
+    grid-column: 1 / -1;
+  }
+
+  .ca-st-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .ca-st-stat {
+    padding: 10px;
+  }
+
+  .ca-st-stat-value {
+    font-size: 17px;
+  }
+
+  .ca-st-stat-value.is-text {
+    font-size: 13px;
+  }
+}
+
+.ca-group-letter {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ca-mobile-row-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+  line-height: 1.2;
+}
+
+.ca-mobile-row-stat b {
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  color: #1f2530;
+}
+
+.ca-mobile-row-stat small {
+  font-size: 11px;
+  color: #8a9099;
+}
+
+.ca-mobile-row .ca-dash-student-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .ca-st-toolbar .sa-select {
+    width: 128px;
+    min-width: 0;
+  }
+}
+
+/* ── Center admin detail pages on phones ── */
+@media (max-width: 640px) {
+  .teacher-detail-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .teacher-detail-title {
+    font-size: 22px;
+  }
+
+  .teacher-settings-btn {
+    height: 34px;
+    padding: 0 12px;
+  }
+
+  .teacher-nav-tabs {
+    gap: 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .teacher-nav-tab {
+    white-space: nowrap;
+  }
+
+  .teacher-classes-table .faculty-table-head,
+  .teacher-classes-table .faculty-table-row {
+    grid-template-columns: 32px minmax(0, 1fr) 84px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .faculty-toolbar-left > .faculty-btn-secondary .ca-btn-label,
+  .faculty-toolbar-left > .faculty-btn-delete .ca-btn-label {
+    display: none;
+  }
+
+  .faculty-toolbar-left > .faculty-btn-secondary,
+  .faculty-toolbar-left > .faculty-btn-delete {
+    padding: 0 10px;
+  }
+}
+
+/* ── Center admin's bespoke modals (Invite Teachers / Invite School Admin /
+   Add Class / Teacher Information) ──
+   Above the phone tab bar (z-index 1000) — at 100 the tab bar covered
+   their footer buttons. */
+.adm-modal-overlay {
+  z-index: 2000;
+}
+
+@keyframes caSheetUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+/* Phones: the same bottom-sheet shape as every other sheet in the panel. */
+@media (max-width: 640px) {
+  .adm-modal-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .invite-modal-card,
+  .teacher-info-modal-card {
+    max-width: none;
+    max-height: 92vh;
+    margin: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border: none;
+    border-radius: 16px 16px 0 0;
+    animation: caSheetUp 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  .invite-modal-head {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 18px 16px 14px;
+  }
+
+  .invite-modal-title {
+    flex: 1 1 0;
+    min-width: 0;
+    font-size: 16px;
+    line-height: 1.3;
+  }
+
+  .invite-modal-head .invite-copy-btn {
+    order: 3;
+    flex-basis: 100%;
+    justify-content: center;
+    padding: 9px 12px;
+  }
+
+  .invite-modal-body {
+    padding: 16px 16px calc(20px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .invite-modal-foot .faculty-btn-invite,
+  .invite-modal-foot > button {
+    width: 100%;
+    justify-content: center;
+    height: 42px;
+  }
+
+  .teacher-info-modal-card {
+    padding: 18px 16px 0;
+  }
+
+  .teacher-info-modal-title {
+    font-size: 18px;
+  }
+
+  .teacher-role-cards-grid {
+    gap: 10px;
+  }
+
+  /* Footer stays reachable however long the form gets. */
+  .teacher-info-modal-foot {
+    position: sticky;
+    bottom: 0;
+    gap: 10px;
+    margin: 20px -16px 0;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+    background: #ffffff;
+  }
+
+  .teacher-info-modal-foot > button {
+    flex: 1;
+    justify-content: center;
+    height: 42px;
+  }
+
+  /* Under 16px iOS zooms the page on focus. */
+  .teacher-info-input,
+  .invite-input,
+  .invite-textarea,
+  .invite-modal-card .sa-input {
+    font-size: 16px;
+  }
+
+  /* Dashboard date menu sat off-screen to the left: the button is at the
+     left edge on phones, so open the menu rightward. */
+  .ca-dash-head .ca-daterange-menu {
+    left: 0;
+    right: auto;
+  }
+}
+
+/* ── List toolbars on phones (Groups, Students, Courses, My Groups, Word
+   Packs…): the first control (search, or the count) and the primary
+   button share the top row; the other filters get the rows below. As a
+   wrapping flex row the button landed on top of the search field. ── */
+@media (max-width: 768px) {
+  .faculty-toolbar.faculty-toolbar-wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .faculty-toolbar.faculty-toolbar-wrap > .faculty-toolbar-left {
+    display: contents;
+  }
+
+  .faculty-toolbar.faculty-toolbar-wrap > .faculty-toolbar-left > * {
+    grid-column: 1 / -1;
+    min-width: 0;
+  }
+
+  .faculty-toolbar.faculty-toolbar-wrap > .faculty-toolbar-left > :first-child {
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  .faculty-toolbar.faculty-toolbar-wrap > .faculty-toolbar-right {
+    grid-row: 1;
+    grid-column: 2;
+    margin-left: 0;
+  }
+
+  /* With no primary button the first control spans the whole row. */
+  .faculty-toolbar.faculty-toolbar-wrap:not(:has(> .faculty-toolbar-right)) > .faculty-toolbar-left > :first-child {
+    grid-column: 1 / -1;
+  }
+
+  .faculty-toolbar.faculty-toolbar-wrap .sa-search {
+    width: 100%;
+    max-width: none;
+  }
+
+  .faculty-toolbar.faculty-toolbar-wrap > .faculty-toolbar-left > .sa-segmented,
+  .faculty-toolbar.faculty-toolbar-wrap > .faculty-toolbar-left > .sa-select {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .faculty-toolbar.faculty-toolbar-wrap > .faculty-toolbar-left > button:not(:first-child) {
+    justify-self: start;
+  }
+}
+
+/* Faculty toolbar on phones: refresh, role filter and Invite stay on one
+   row (the button used to drop onto its own line). */
+@media (max-width: 768px) {
+  .faculty-toolbar.ca-faculty-toolbar {
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+
+  .ca-faculty-toolbar .faculty-toolbar-left {
+    flex: 1 1 auto;
+    flex-wrap: nowrap;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .ca-faculty-toolbar .sa-segmented {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .ca-faculty-toolbar .sa-segmented button {
+    min-width: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+    white-space: nowrap;
+  }
+
+  .ca-faculty-toolbar .faculty-toolbar-right {
+    flex-shrink: 0;
+    margin-left: 0;
+  }
+
+  .ca-faculty-toolbar .faculty-btn-invite {
+    padding: 0 12px;
+  }
+}
+
+/* ── Teacher / admin detail pages (AdminTeacherDetail, AdminProfileDetail) ── */
+.ca-person-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.ca-person-head-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.ca-person-head-text {
+  min-width: 0;
+}
+
+.ca-person-head-text .teacher-detail-title {
+  margin-bottom: 6px;
+}
+
+.ca-person-head-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+  font-size: 13px;
+  color: var(--sa-label-2, #64748b);
+}
+
+/* Classes table: Class / Students / Active this week / Homework / Last activity */
+.teacher-classes-table .faculty-table-head,
+.teacher-classes-table .faculty-table-row {
+  grid-template-columns: 44px minmax(200px, 2fr) 110px minmax(150px, 1.2fr) 100px minmax(120px, 1fr);
+}
+
+.teacher-reports-table .faculty-table-head,
+.teacher-reports-table .faculty-table-row {
+  grid-template-columns: minmax(200px, 2fr) 100px minmax(150px, 1.2fr) minmax(150px, 1.2fr) minmax(120px, 1fr) 32px;
+}
+
+.ca-dash-tile-value.is-small {
+  font-size: 22px;
+  min-height: 38px;
+  align-items: center;
+}
+
+/* Label/value cards (School details, Login & security) */
+.ca-info-card .ca-card-head {
+  align-items: center;
+}
+
+.ca-info-list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.ca-info-list > div {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid #f1f3f5;
+}
+
+.ca-info-list > div:first-child {
+  border-top: none;
+}
+
+.ca-info-list dt {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.ca-info-list dd {
+  margin: 0;
+  overflow: hidden;
+  font-size: 14px;
+  color: #1f2530;
+  text-overflow: ellipsis;
+}
+
+.ca-info-list dd.is-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@media (max-width: 640px) {
+  .ca-person-head-avatar {
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+  }
+
+  .teacher-classes-table .faculty-table-head,
+  .teacher-classes-table .faculty-table-row {
+    grid-template-columns: 32px minmax(0, 1fr) 84px;
+  }
+
+  .teacher-classes-extra {
+    display: none;
+  }
+
+  .ca-info-list > div {
+    grid-template-columns: 110px minmax(0, 1fr);
+  }
+
+  .ca-info-card .ca-card-head {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* "No classes" banner: one column on phones, illustration under the
+     message instead of squeezing it to a word per line. */
+  .teacher-empty-banner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    min-height: 0;
+    padding: 20px 16px;
+  }
+
+  .teacher-empty-center-box {
+    padding: 24px 18px;
+  }
+
+  .teacher-empty-title {
+    font-size: 18px;
+  }
+
+  .teacher-illustration-svg {
+    max-width: 240px;
+  }
+}
+
+.ca-info-danger {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+  padding: 14px;
+  border: 1px solid #fde2e2;
+  border-radius: 10px;
+  background: #fff8f8;
+}
+
+.ca-info-danger > div {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.ca-info-danger b {
+  font-size: 14px;
+  color: #b91c1c;
+}
+
+/* Group header: with no actions (center admin) the join-code pill sits in
+   the chips row instead of taking a row of its own on phones. */
+.ca-group-head-courses {
+  align-items: center;
+}
+
+.ca-group-head-courses .ca-group-code-pill {
+  height: 30px;
+  padding: 0 4px 0 10px;
+}
+
+.ca-group-head-courses .ca-group-code-pill-value {
+  font-size: 13px;
+}
+
+.ca-group-head-courses .ca-group-code-pill-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.ca-group-head-opened {
+  display: inline-flex;
+  align-items: center;
+}
+
+@media (max-width: 560px) {
+  /* The opened date is the least useful bit — dropping it keeps the meta
+     on one line ("Teacher · 2 students"). */
+  .ca-group-head-opened {
+    display: none;
+  }
+
+  /* Four tabs with counts fit a 390px screen. */
+  .ca-group-nav {
+    gap: 14px;
+  }
+
+  .ca-group-nav .teacher-nav-tab {
+    gap: 4px;
+    font-size: 13px;
+  }
+
+  .ca-group-nav .ca-nav-count {
+    min-width: 18px;
+    padding: 1px 5px;
+    font-size: 10px;
+  }
+}
+
+/* ── Student detail (AdminStudentDetail) ── */
+.ca-mobile-row.is-static {
+  cursor: default;
+}
+
+.ca-mobile-row.is-static:active {
+  background: none;
+}
+
+.ca-student-groups {
+  max-width: 100%;
+}
+
+.ca-student-hw-summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 20px 14px;
+}
+
+.ca-student-hw-summary .ca-dash-bar {
+  flex: 1;
+}
+
+.ca-student-hw-summary b {
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  color: #1f2530;
+}
+
+.ca-dash-card-head .ca-head-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+@media (max-width: 640px) {
+  .ca-student-hw-summary {
+    padding: 0 14px 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Reset password lives in the Account tab on phones — in the header it
+     took a whole row. */
+  .ca-student-reset {
+    display: none;
+  }
+
+  .ca-dash-card-head {
+    flex-wrap: wrap;
+  }
 }

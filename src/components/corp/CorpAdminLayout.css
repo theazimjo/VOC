@@ -1,4 +1,6 @@
 .corp-admin-layout {
+  --ca-sidebar-w: 228px;
+  --ca-sidebar-w-collapsed: 64px;
   display: flex;
   min-height: 100vh;
   width: 100%;
@@ -9,7 +11,7 @@
 .corp-admin-main-pane {
   flex: 1;
   min-width: 0;
-  margin-left: 260px;
+  margin-left: var(--ca-sidebar-w);
   min-height: 100vh;
   overflow-x: clip;
   box-sizing: border-box;
@@ -23,22 +25,26 @@
   background-attachment: fixed;
 }
 
-[data-theme="ios"] .corp-admin-main-pane {
+[data-theme="ios"] .corp-admin-main-pane,
+/* Center admin has no dark mode (see theme.css .is-center-admin) — pin it
+   to the light gradient regardless of the account's data-theme. */
+.corp-admin-layout.is-center-admin .corp-admin-main-pane {
   background:
     radial-gradient(850px circle at 12% 8%, rgba(0, 122, 255, 0.06), transparent 65%),
     radial-gradient(800px circle at 88% 18%, rgba(175, 82, 222, 0.05), transparent 65%),
     radial-gradient(750px circle at 25% 92%, rgba(255, 149, 0, 0.04), transparent 65%),
-    #eef0f5;
+    #f6fdff;
   background-attachment: fixed;
 }
 
-/* Collapsed sidebar (72px) — the content follows instead of leaving an
-   empty 188px strip behind it. */
+/* Collapsed sidebar (64px) — the content follows instead of leaving an
+   empty strip behind it. Only Teacher/Super Admin sidebars still collapse;
+   the center admin sidebar no longer does (see CorpAdminSidebar.jsx). */
 .corp-admin-layout:has(.corp-admin-sidebar.collapsed) .corp-admin-main-pane {
-  margin-left: 72px;
+  margin-left: var(--ca-sidebar-w-collapsed);
 }
 
-/* The logo is the collapse control. */
+/* The logo is the collapse control (Teacher/Super Admin sidebars). */
 .corp-admin-sidebar .voc-logo-brand {
   cursor: pointer;
 }

@@ -15,7 +15,7 @@ export function generatePassword(length = 10) {
 }
 
 // Password input with show/hide and "generate another" buttons.
-export function PasswordInput({ value, onChange }) {
+export function PasswordInput({ value, onChange, en = false }) {
   const [visible, setVisible] = useState(true);
   return (
     <div className="sa-password-field">
@@ -26,12 +26,12 @@ export function PasswordInput({ value, onChange }) {
         spellCheck={false}
         value={value}
         onChange={(e) => onChange(e.target.value.trim())}
-        aria-label="Parol"
+        aria-label={en ? 'Password' : 'Parol'}
       />
-      <button type="button" className="sa-password-btn" onClick={() => setVisible((v) => !v)} aria-label={visible ? 'Yashirish' : "Ko'rsatish"}>
+      <button type="button" className="sa-password-btn" onClick={() => setVisible((v) => !v)} aria-label={en ? (visible ? 'Hide' : 'Show') : (visible ? 'Yashirish' : "Ko'rsatish")}>
         {visible ? <EyeOff size={18} /> : <Eye size={18} />}
       </button>
-      <button type="button" className="sa-password-btn" onClick={() => onChange(generatePassword())} aria-label="Yangi parol yaratish">
+      <button type="button" className="sa-password-btn" onClick={() => onChange(generatePassword())} aria-label={en ? 'Generate a new password' : 'Yangi parol yaratish'}>
         <RefreshCw size={17} />
       </button>
     </div>
@@ -43,7 +43,11 @@ export function PasswordInput({ value, onChange }) {
 // the super admin and by a center admin for their own teachers.
 // target: { uid, email, login?, label } — `login` is what the person types
 // on the login screen (a phone number for teachers), defaults to email.
-export default function SetPasswordSheet({ open, onClose, target, onDone }) {
+// `endpoint` + `extraBody` point it at another API with the same contract
+// (e.g. api/student-account.js for a center's students). `en` (center admin
+// only — super admin/teacher stay Uzbek) switches every string here,
+// including the shareable credentials message.
+export default function SetPasswordSheet({ open, onClose, target, onDone, endpoint = '/api/set-user-password', extraBody, en = false }) {
   const [password, setPassword] = useState('');
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
@@ -65,10 +69,10 @@ export default function SetPasswordSheet({ open, onClose, target, onDone }) {
     setError('');
     try {
       const idToken = await auth.currentUser?.getIdToken();
-      const res = await fetch('/api/set-user-password', {
+      const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ idToken, uid: target?.uid || undefined, email: target?.uid ? undefined : target?.email, password }),
+        body: JSON.stringify({ idToken, uid: target?.uid || undefined, email: target?.uid ? undefined : target?.email, password, ...extraBody }),
       });
       let data = {};
       try {
@@ -76,7 +80,7 @@ export default function SetPasswordSheet({ open, onClose, target, onDone }) {
       } catch {
         /* non-JSON error page */
       }
-      if (!res.ok) throw new Error(data.error || `Server xatosi (${res.status})`);
+      if (!res.ok) throw new Error(data.error || `${en ? 'Server error' : 'Server xatosi'} (${res.status})`);
       setSaved({ login: target?.login || data.email || target?.email || '', password });
       onDone?.();
     } catch (err) {
@@ -87,20 +91,20 @@ export default function SetPasswordSheet({ open, onClose, target, onDone }) {
   };
 
   return (
-    <Sheet open={open} onClose={() => !saving && onClose()} title={saved ? 'Parol yangilandi' : "Parolni o'zgartirish"}>
+    <Sheet open={open} onClose={() => !saving && onClose()} title={saved ? (en ? 'Password Updated' : 'Parol yangilandi') : (en ? 'Change Password' : "Parolni o'zgartirish")} en={en}>
       {saved ? (
-        <ShareCredentials message={credentialsMessage({ label: target?.label, ...saved })} onDone={onClose} />
+        <ShareCredentials message={credentialsMessage({ label: target?.label, ...saved, en })} onDone={onClose} en={en} />
       ) : (
         <form onSubmit={submit}>
           <Field label="Login">
             <input className="sa-input" disabled value={login} />
           </Field>
-          <Field label="Yangi parol" hint={`Kamida ${MIN_PASSWORD} ta belgi. Eski parol darhol ishlamay qoladi.`}>
-            <PasswordInput value={password} onChange={setPassword} />
+          <Field label={en ? 'New Password' : 'Yangi parol'} hint={en ? `At least ${MIN_PASSWORD} characters. The old password stops working immediately.` : `Kamida ${MIN_PASSWORD} ta belgi. Eski parol darhol ishlamay qoladi.`}>
+            <PasswordInput value={password} onChange={setPassword} en={en} />
           </Field>
           {error && <p className="sa-flow-error">{error}</p>}
           <Button type="submit" block disabled={saving || password.length < MIN_PASSWORD}>
-            {saving ? 'Saqlanmoqda...' : 'Parolni saqlash'}
+            {saving ? (en ? 'Saving...' : 'Saqlanmoqda...') : (en ? 'Save Password' : 'Parolni saqlash')}
           </Button>
         </form>
       )}

@@ -13,11 +13,25 @@ export const POS_OPTIONS = [
 
 export const POS_LABEL = Object.fromEntries(POS_OPTIONS.map((o) => [o.value, o.label]));
 
+// English versions, for the center admin panel (see CourseEditor.jsx's `en`
+// prop) — the teacher panel keeps POS_OPTIONS/POS_LABEL above.
+export const POS_OPTIONS_EN = [
+  { value: 'noun', label: 'Noun' },
+  { value: 'verb', label: 'Verb' },
+  { value: 'adjective', label: 'Adjective' },
+  { value: 'adverb', label: 'Adverb' },
+  { value: 'phrase', label: 'Phrase' },
+  { value: 'preposition', label: 'Preposition' },
+  { value: 'other', label: 'Other' },
+];
+
+export const POS_LABEL_EN = Object.fromEntries(POS_OPTIONS_EN.map((o) => [o.value, o.label]));
+
 // Older packs stored a flat `units` or `words` list — show them as one month.
-export function monthsOf(course) {
+export function monthsOf(course, en = false) {
   if (course?.months?.length) return course.months;
-  if (course?.units?.length) return [{ id: 'm1', title: '1-oy', units: course.units }];
-  if (course?.words?.length) return [{ id: 'm1', title: '1-oy', units: [{ id: 'u1', title: '1-mavzu', words: course.words }] }];
+  if (course?.units?.length) return [{ id: 'm1', title: en ? 'Month 1' : '1-oy', units: course.units }];
+  if (course?.words?.length) return [{ id: 'm1', title: en ? 'Month 1' : '1-oy', units: [{ id: 'u1', title: en ? 'Topic 1' : '1-mavzu', words: course.words }] }];
   return [];
 }
 
@@ -63,55 +77,6 @@ export function normalizePOS(str) {
   if (s.startsWith('prep') || s.startsWith('pred')) return 'preposition';
   if (s.startsWith('oth') || s.startsWith('bos') || s.startsWith('etc')) return 'other';
   return null;
-}
-
-// Pasted word lists: entries separated by new lines, ";" or ". " before
-// the next "word," — fields separated by "," (or "|", or "-", ":", tab, "=").
-//   word, translation [, part of speech] [, definition] [, example]
-// e.g. "Apple, Olma. Book, Kitob" or "Apple, Olma, noun, Qizil meva, I ate an apple."
-export function parseWordList(text) {
-  const blocks = [];
-  String(text || '').replace(/[\r\n;]+/g, '\n').split('\n').forEach((line) => {
-    const trimmed = line.trim();
-    if (!trimmed) return;
-    trimmed.split(/\.\s+(?=[A-Za-z0-9ʻʼ']+\s*[,|\-:\t=])/).forEach((sub) => {
-      const cleaned = sub.trim();
-      if (cleaned) blocks.push(cleaned);
-    });
-  });
-
-  const words = [];
-  blocks.forEach((block) => {
-    let parts;
-    if (block.includes(',')) parts = block.split(',');
-    else if (block.includes('|')) parts = block.split('|');
-    else parts = block.split(/[-:\t=]/);
-    if (parts.length < 2) return;
-
-    const word = parts[0]?.trim();
-    let translation = parts[1]?.trim();
-    if (parts.length === 2 && translation.endsWith('.')) translation = translation.slice(0, -1).trim();
-    if (!word || !translation) return;
-
-    let partOfSpeech = 'noun';
-    let definition = '';
-    let example = '';
-    if (parts.length >= 4) {
-      partOfSpeech = normalizePOS(parts[2]) || 'other';
-      definition = parts[3]?.trim() || '';
-      example = parts[4]?.trim()?.replace(/\.$/, '') || '';
-    } else if (parts.length === 3) {
-      const pos = normalizePOS(parts[2]);
-      if (pos) {
-        partOfSpeech = pos;
-      } else {
-        partOfSpeech = 'other';
-        definition = parts[2]?.trim()?.replace(/\.$/, '') || '';
-      }
-    }
-    words.push({ id: newId('w'), word, translation, partOfSpeech, definition, example });
-  });
-  return words;
 }
 
 // Adds new words; a word already in the topic (same spelling, any case) is

@@ -1,4 +1,3 @@
-import { useState, useCallback } from 'react';
 import { Outlet, useLocation, Navigate } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import StudentSidebar from '../corp/StudentSidebar';
@@ -11,25 +10,11 @@ import FullScreenLoader from '../common/FullScreenLoader';
 import './Layout.css';
 
 export default function Layout() {
-  const [collapsed, setCollapsed] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
   const { loading: groupModeLoading, appMode } = useGroupMode();
 
   useDailyReminder();
   useAppBadge();
-
-  const handleToggleSidebar = useCallback(() => {
-    setCollapsed((prev) => !prev);
-  }, []);
-
-  const handleHamburgerClick = useCallback(() => {
-    setMobileOpen((prev) => !prev);
-  }, []);
-
-  const handleMobileClose = useCallback(() => {
-    setMobileOpen(false);
-  }, []);
 
   // Redirection rules to separate the modes completely
   if (!groupModeLoading) {
@@ -64,19 +49,12 @@ export default function Layout() {
         appMode === 'group' ? (
           <StudentSidebar />
         ) : (
-          <Sidebar
-            collapsed={collapsed}
-            onToggle={handleToggleSidebar}
-            mobileOpen={mobileOpen}
-            onMobileClose={handleMobileClose}
-          />
+          <Sidebar />
         )
       )}
 
       {!isFullscreenMode && (
         <Navbar
-          sidebarCollapsed={collapsed}
-          onHamburgerClick={handleHamburgerClick}
           appMode={appMode}
         />
       )}
@@ -85,7 +63,7 @@ export default function Layout() {
         className={`layout-content ${
           isFullscreenMode
             ? 'layout-content--test-mode'
-            : (appMode === 'group' ? 'layout-content--expanded' : (collapsed ? 'layout-content--collapsed' : 'layout-content--expanded'))
+            : 'layout-content--expanded'
         } ${isIndividualMode ? 'layout-content--dashboard layout-content--themed-bg' : ''}`}
       >
         <Outlet />

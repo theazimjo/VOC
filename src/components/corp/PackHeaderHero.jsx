@@ -12,6 +12,7 @@ export default function PackHeaderHero({
   masteredCount = 0,
   masteryPct = 0,
   metrics = null,
+  children = null,
 }) {
   const overallMasteryPct = masteryPct;
 
@@ -66,6 +67,8 @@ export default function PackHeaderHero({
           <span className="hero-badge-text">{overallMasteryPct}%</span>
         </div>
       </div>
+
+      {children}
 
       {/* Bottom Metric Cards Row */}
       <div className="hero-metrics-grid" style={{ gridTemplateColumns: `repeat(${metricItems.length}, 1fr)` }}>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Type, ChevronRight, BookOpen } from 'lucide-react';
+import { useStudentT } from '../../hooks/useStudentT';
 import './SatPackCard.css';
 
 export default function SatPackCard({
@@ -8,9 +9,9 @@ export default function SatPackCard({
   subtitle,
   icon = <BookOpen size={18} className="sat-card-icon-svg" />,
   setCount,
-  setLabel = "mavzu",
+  setLabel,
   wordCount = 0,
-  wordLabel = "so'z",
+  wordLabel,
   masteredCount = 0,
   learningCount = 0,
   newCount = 0,
@@ -18,6 +19,9 @@ export default function SatPackCard({
   onClick,
   disabled = false,
 }) {
+  const { t } = useStudentT();
+  const setText = setLabel ?? t('words.topicLabel');
+  const wordText = wordLabel ?? t('words.wordLabel');
   const total = (masteredCount + learningCount + newCount) || wordCount || 1;
   const masteredPct = Math.min(100, Math.round((masteredCount / total) * 100));
 
@@ -54,7 +58,7 @@ export default function SatPackCard({
           {subtitle && <p className="sat-card-subtitle" title={subtitle}>{subtitle}</p>}
         </div>
 
-        <div className="sat-card-badge-circle" title={`${displayPct}% progress`}>
+        <div className="sat-card-badge-circle" title={t('words.progress', { n: displayPct })}>
           <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="sat-card-ring-svg">
             <circle className="sat-card-ring-bg" cx={size / 2} cy={size / 2} r={radius} strokeWidth={strokeWidth} />
             <circle
@@ -72,17 +76,17 @@ export default function SatPackCard({
       </div>
 
       <div className="sat-card-progress-bar">
-        <div className="sat-prog-seg sat-seg-mastered" style={{ width: `${masteredPct}%` }} title={`O'zlashtirilgan: ${masteredCount}`} />
-        <div className="sat-prog-seg sat-seg-learning" style={{ width: `${activeMasteryPct}%` }} title={`Natija: ${displayPct}%`} />
-        <div className="sat-prog-seg sat-seg-new" style={{ width: `${unmasteredPct}%` }} title={`Qolgan: ${unmasteredPct}%`} />
+        <div className="sat-prog-seg sat-seg-mastered" style={{ width: `${masteredPct}%` }} title={t('words.mastered', { n: masteredCount })} />
+        <div className="sat-prog-seg sat-seg-learning" style={{ width: `${activeMasteryPct}%` }} title={t('words.result', { n: displayPct })} />
+        <div className="sat-prog-seg sat-seg-new" style={{ width: `${unmasteredPct}%` }} title={t('words.remaining', { n: unmasteredPct })} />
       </div>
 
       <div className="sat-card-footer">
         <div className="sat-card-meta">
           {setCount !== undefined && setCount !== null && (
-            <span className="sat-meta-item">{setCount} {setLabel}</span>
+            <span className="sat-meta-item">{setCount} {setText}</span>
           )}
-          <span className="sat-meta-item"><Type size={12} className="sat-pill-icon" /> {wordCount} {wordLabel}</span>
+          <span className="sat-meta-item"><Type size={12} className="sat-pill-icon" /> {wordCount} {wordText}</span>
         </div>
         <ChevronRight size={16} className="sat-action-arrow" />
       </div>

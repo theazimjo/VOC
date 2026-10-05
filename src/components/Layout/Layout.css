@@ -96,3 +96,18 @@
     background-attachment: scroll;
   }
 }
+
+/* ---------- Sidebar width — both the personal Sidebar and the group-mode
+   StudentSidebar are the 228px corp sidebar (CorpAdminSidebar.css), so the
+   content and the navbar start where it ends. ---------- */
+.layout {
+  --sidebar-width: var(--ca-sidebar-w, 228px);
+}
+
+/* Personal mode keeps the bottom-nav shell up to 1024px (see the tablet
+   block above), so its docked sidebar only appears past that. */
+@media (max-width: 1024px) {
+  .layout--personal .corp-admin-sidebar.is-personal {
+    display: none !important;
+  }
+}

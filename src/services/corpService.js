@@ -1,4 +1,4 @@
-import { ref, set, get, update, push, remove, runTransaction } from 'firebase/database';
+import { ref, set, get, update, push, remove, runTransaction, increment } from 'firebase/database';
 import { createUserWithEmailAndPassword, sendPasswordResetEmail, signOut } from 'firebase/auth';
 import { db, auth } from '../firebase';
 import { getSecondaryAuth } from '../firebaseSecondary';
@@ -265,8 +265,8 @@ export async function getCenterDeletionPreview(centerId) {
  * Super Admin: delete a center.
  *
  * Removed: the center node (groups, packs, homework, progress under it), its
- * admin's and teachers' corpUsers roles (their personal VOC accounts stay),
- * and the group / teacher join codes.
+ * admin's, co-admins' and teachers' corpUsers roles (their personal VOC
+ * accounts stay), and the group / teacher join codes.
  *
  * Kept: every student account and everything in users/{uid} — words,
  * streaks, personal packs. Students are only taken out of this center's
@@ -284,6 +284,7 @@ export async function deleteCenter(centerId) {
   const updates = { [`centers/${centerId}`]: null };
 
   if (center.adminUid) updates[`corpUsers/${center.adminUid}`] = null;
+  Object.keys(center.coAdmins || {}).forEach((uid) => { updates[`corpUsers/${uid}`] = null; });
   Object.values(center.teachers || {}).forEach((t) => {
     if (t.uid) updates[`corpUsers/${t.uid}`] = null;
   });
@@ -413,6 +414,123 @@ export async function createTeacher(centerId, centerName, teacherForm) {
 }
 
 /**
+ * Center Admin: invite a co-admin for their own center — a second person
+ * with full center_admin access (roles are resolved purely from
+ * corpUsers/{uid}.role in database.rules.json, not from centers/{id}.adminUid,
+ * so this doesn't touch or replace the center's original admin).
+ *
+ * Also records them under centers/{id}/coAdmins/{uid} — corpUsers/{uid} is
+ * only readable by that uid itself (see database.rules.json), so without
+ * this a co-admin was invisible to the rest of the center: nobody else
+ * could even discover their uid to list or remove them.
+ */
+export async function inviteCenterAdmin(centerId, centerName, email) {
+  const { uid, tempPassword } = await createCorpAccount(email, {
+    role: 'center_admin',
+    centerId,
+    centerName: centerName || '',
+  });
+  const coAdmin = { uid, email, invitedAt: new Date().toISOString() };
+  await set(ref(db, `centers/${centerId}/coAdmins/${uid}`), coAdmin);
+  return { uid, email, tempPassword };
+}
+
+/**
+ * Center Admin: revoke a co-admin's access to this center. Mirrors
+ * removeTeacherFromCenter — same "Auth account itself stays, only the
+ * role mapping is revoked" trade-off.
+ */
+export async function removeCenterAdmin(centerId, uid) {
+  await update(ref(db), {
+    [`corpUsers/${uid}`]: null,
+    [`centers/${centerId}/coAdmins/${uid}`]: null,
+  });
+}
+
+/**
+ * Center Admin: the reusable link/code prospective teachers can use to
+ * self-register for this center (like a group's join code, but for the
+ * whole center). Created once and reused — deleteCenter already cleans up
+ * teacherJoinCodes/{code} when the center is removed.
+ */
+export async function getOrCreateTeacherJoinCode(centerId) {
+  const existing = await get(ref(db, `centers/${centerId}/teacherJoinCode`));
+  if (existing.exists()) return existing.val();
+
+  let code = generateJoinCode();
+  let attempts = 0;
+  while ((await get(ref(db, `teacherJoinCodes/${code}`))).exists() && attempts < 10) {
+    code = generateJoinCode();
+    attempts++;
+  }
+
+  await update(ref(db), {
+    [`teacherJoinCodes/${code}`]: centerId,
+    [`centers/${centerId}/teacherJoinCode`]: code,
+  });
+  return code;
+}
+
+/**
+ * Public: resolve a teacher join code to the center it belongs to, for the
+ * /join-teacher/:code landing page — before the visitor has an account,
+ * only teacherJoinCodes/{code} and centers/{id}/name are publicly readable.
+ */
+export async function getCenterByTeacherJoinCode(code) {
+  const centerIdSnap = await get(ref(db, `teacherJoinCodes/${code}`));
+  if (!centerIdSnap.exists()) return null;
+  const centerId = centerIdSnap.val();
+  const nameSnap = await get(ref(db, `centers/${centerId}/name`));
+  return { centerId, centerName: nameSnap.exists() ? nameSnap.val() : "O'quv markazi" };
+}
+
+/**
+ * Self-service: an already-authenticated visitor (signed up or logged in
+ * right on the join-teacher page) attaches themselves as a teacher of the
+ * center behind `code`. The security rules (corpUsers/$uid and
+ * centers/$id/teachers/$tid .write) are what actually enforce the code is
+ * valid — this just performs the writes with the fields they check for.
+ */
+export async function joinCenterAsTeacher(code, uid, profile) {
+  const centerIdSnap = await get(ref(db, `teacherJoinCodes/${code}`));
+  if (!centerIdSnap.exists()) throw new Error('Invalid or expired invite link.');
+  const centerId = centerIdSnap.val();
+
+  const nameSnap = await get(ref(db, `centers/${centerId}/name`));
+  const centerName = nameSnap.exists() ? nameSnap.val() : '';
+
+  const teacherRef = push(ref(db, `centers/${centerId}/teachers`));
+  const teacherId = teacherRef.key;
+
+  const teacherPayload = {
+    id: teacherId,
+    uid,
+    centerId,
+    name: profile.name,
+    email: profile.email || '',
+    phone: profile.phone || '',
+    subject: 'Ingliz tili',
+    status: 'active',
+    joinCode: code,
+    createdAt: new Date().toISOString(),
+  };
+
+  await set(teacherRef, teacherPayload);
+  await set(ref(db, `corpUsers/${uid}`), {
+    role: 'teacher',
+    centerId,
+    centerName,
+    teacherId,
+    teacherName: profile.name,
+    phone: profile.phone || '',
+    joinCode: code,
+    createdAt: new Date().toISOString(),
+  });
+
+  return { centerId, centerName, teacher: teacherPayload };
+}
+
+/**
  * Teacher: self-update name/phone on their own record. Requires the
  * database.rules.json addition granting `teachers/$teacherId` and
  * `corpUsers/$uid` self-write for these two fields only.
@@ -425,6 +543,24 @@ export async function updateTeacherProfile(centerId, teacherId, uid, { name, pho
     updates[`corpUsers/${uid}/teacherName`] = name;
     updates[`corpUsers/${uid}/phone`] = phone || '';
   }
+  await update(ref(db), updates);
+  return { success: true };
+}
+
+/**
+ * Center Admin: switch one of this center's Faculty entries between the
+ * Teacher and School Admin roles in place — same person, same teacher
+ * record (so their existing classes stay attributed to them), but their
+ * corpUsers/{uid}.role (the actual authorization source, see
+ * database.rules.json) flips accordingly. `newRole` is 'teacher' or 'admin'
+ * (the informational tag stored on the teacher record itself —
+ * AdminTeacherDetail reads it back via `teacher.role`).
+ */
+export async function changeTeacherRole(centerId, teacherId, uid, newRole) {
+  const updates = {
+    [`centers/${centerId}/teachers/${teacherId}/role`]: newRole === 'admin' ? 'admin' : null,
+    [`corpUsers/${uid}/role`]: newRole === 'admin' ? 'center_admin' : 'teacher',
+  };
   await update(ref(db), updates);
   return { success: true };
 }
@@ -909,14 +1045,17 @@ export async function getGroupHomeworkList(centerId, groupId) {
  * it (e.g. "7-avgust — Set 1, Set 3, Set 5"), so each round reads as what it
  * actually was instead of a generic label.
  */
-export async function addGroupHomework(centerId, groupId, items) {
+export async function addGroupHomework(centerId, groupId, items, { name: customName = '' } = {}) {
   const newRef = push(ref(db, `centers/${centerId}/groups/${groupId}/homeworkList`));
   const now = new Date();
   const titles = items.map(i => i.unitTitle).filter(Boolean);
-  const dateLabel = now.toLocaleDateString('uz-UZ', { day: 'numeric', month: 'long' });
-  const name = titles.length > 0
-    ? `${dateLabel} — ${titles.slice(0, 3).join(', ')}${titles.length > 3 ? ` +${titles.length - 3}` : ''}`
-    : dateLabel;
+  // A teacher-typed name wins; otherwise the first topics. No date in the
+  // name — every screen shows assignedAt next to it in its own language
+  // (a baked-in date read "Oct 4" to Uzbek students, or "2026 M10 4" when
+  // formatted with Chrome's missing uz locale).
+  const name = customName ? customName.slice(0, 80) : titles.length > 0
+    ? `${titles.slice(0, 3).join(', ')}${titles.length > 3 ? ` +${titles.length - 3}` : ''}`
+    : 'Homework';
   const payload = { name, items, assignedAt: now.toISOString() };
   await set(newRef, payload);
   return { id: newRef.key, ...payload };
@@ -944,6 +1083,8 @@ export async function updateStudentUnitProgress(centerId, groupId, studentId, pa
     masteryPercent: stats.masteryPercent || 0,
     retentionPercent: stats.retentionPercent || 0,
     atRiskCount: stats.atRiskCount || 0,
+    // Accumulates across sessions (a plain write kept only the last run).
+    timeSpentSeconds: increment(stats.timeSpentSeconds || 0),
     lastActivity: new Date().toISOString()
   });
 }

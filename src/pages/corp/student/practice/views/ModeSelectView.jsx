@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
 import PracticeHub from '../../../../../components/Practice/PracticeHub';
 import { IRREGULAR_VERBS_PACK_ID } from '../../../../../data/irregularVerbsCorpPack';
+import { useStudentT } from '../../../../../hooks/useStudentT';
 
 export default function ModeSelectView({ p }) {
+  const { t } = useStudentT();
   const { handleStartPractice, packId, setWordCount, sourceWords, wordCount } = p;
 
   return (
@@ -14,7 +16,7 @@ export default function ModeSelectView({ p }) {
           >
             {/* Word Count Selector */}
             <div className="practice-word-count-bar">
-              <span className="practice-word-count-label">🔢 So'zlar soni:</span>
+              <span className="practice-word-count-label">🔢 {t('practice.wordCount')}</span>
               <div className="word-count-options">
                 {[5, 10, 20, 'all'].map(count => (
                   <button
@@ -22,7 +24,7 @@ export default function ModeSelectView({ p }) {
                     className={`word-count-btn ${wordCount === count ? 'active' : ''}`}
                     onClick={() => setWordCount(count)}
                   >
-                    {count === 'all' ? 'Hammasi' : `${count} ta so'z`}
+                    {count === 'all' ? t('practice.all') : t('practice.nWords', { n: count })}
                   </button>
                 ))}
               </div>

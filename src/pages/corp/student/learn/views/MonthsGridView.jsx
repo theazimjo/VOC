@@ -1,9 +1,27 @@
 import { NotebookPen } from 'lucide-react';
 import SatPackCard from '../../../../../components/corp/SatPackCard';
+import { useStudentT } from '../../../../../hooks/useStudentT';
 import { computeMonthWordStats, computeUnitWordStats } from '../utils';
 import './MonthsGridView.css';
 
+// Dates are written by hand (fmtDate from useStudentT) — Chrome has no
+// 'uz' locale data, so toLocaleDateString('uz-UZ') comes out as "2026 M10 4".
+// The year is only shown when it isn't the current one.
+function shortDate(fmtDate, iso) {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return '';
+  return fmtDate(d, { withYear: d.getFullYear() !== new Date().getFullYear() });
+}
+
+// Older auto-names start with a date ("Oct 4 — …", "2026 M10 4 — …");
+// the date is shown on its own line, so only the topics are kept.
+function hwTitle(hw, t, fmtDate) {
+  const name = (hw.name || '').replace(/^[^—]{0,24}\s—\s/, '').trim();
+  return name || (hw.assignedAt ? t('words.hwFallbackDated', { date: shortDate(fmtDate, hw.assignedAt) }) : t('words.hwFallbackTitle'));
+}
+
 export default function MonthsGridView({ p }) {
+  const { t, tn, fmtDate } = useStudentT();
   const { currentTab, additionalMonths, allDbWords, allMonths, combinedMonths, homeworkList, navigate } = p;
 
   const renderHomeworkGrid = () => {
@@ -12,8 +30,8 @@ export default function MonthsGridView({ p }) {
       return (
         <div className="empty-state">
           <div className="empty-state-icon">📝</div>
-          <h3>Hozircha vazifa yo'q</h3>
-          <p>O'qituvchingiz vazifa berganda shu yerda paydo bo'ladi. Unga qadar "Barcha so'zlar" bo'limida mashq qilishingiz mumkin.</p>
+          <h3>{t('words.hwEmptyTitle')}</h3>
+          <p>{t('words.hwEmptyText')}</p>
         </div>
       );
     }
@@ -39,15 +57,13 @@ export default function MonthsGridView({ p }) {
                 </div>
                 <div className="hw-tab-info">
                   <h2 className="hw-tab-title">
-                    {hw.assignedAt
-                      ? new Date(hw.assignedAt).toLocaleDateString('uz-UZ', { day: 'numeric', month: 'long', year: 'numeric' })
-                      : (hw.name || 'Vazifa')}
+                    {hwTitle(hw, t, fmtDate)}
                   </h2>
                   <span className="hw-tab-date">
-                    {resolvedItems.length} ta mavzu
+                    {[hw.assignedAt ? t('words.assigned', { date: shortDate(fmtDate, hw.assignedAt) }) : null, tn('words.topicsCount', resolvedItems.length)].filter(Boolean).join(' · ')}
                   </span>
                 </div>
-                <span className="hw-tab-done-badge">{doneCount}/{resolvedItems.length}</span>
+                <span className={`hw-tab-done-badge ${doneCount === resolvedItems.length ? 'is-done' : ''}`}>{t('words.doneBadge', { done: doneCount, total: resolvedItems.length })}</span>
               </div>
 
               <div className="grid-cards">
@@ -59,7 +75,7 @@ export default function MonthsGridView({ p }) {
                       title={item.unitTitle}
                       subtitle={item.packTitle}
                       wordCount={wordCount}
-                      wordLabel="so'z"
+                      wordLabel={t('words.wordLabel')}
                       masteredCount={stats?.masteredCount || 0}
                       learningCount={stats?.learningCount || 0}
                       newCount={stats?.newCount || 0}
@@ -91,12 +107,12 @@ export default function MonthsGridView({ p }) {
           return (
             <SatPackCard
               key={`${m.packId}_${m.id}`}
-              title={m.title}
-              subtitle={`${m.packTitle} (${m.packLevel})`}
+              title={m.packTitle || m.title}
+              subtitle={[m.title, m.packLevel].filter(Boolean).join(' · ')}
               setCount={(m.units || []).length}
-              setLabel="mavzu"
+              setLabel={t('words.topicLabel')}
               wordCount={stats.totalWords}
-              wordLabel="so'z"
+              wordLabel={t('words.wordLabel')}
               masteredCount={stats.masteredCount}
               learningCount={stats.learningCount}
               newCount={stats.newCount}
@@ -112,8 +128,8 @@ export default function MonthsGridView({ p }) {
   return (
     <>
       {currentTab === 'all' && renderMonthsGrid(
-        [...allMonths, ...additionalMonths], '📦', "Hali so'zlar yo'q",
-        "O'qituvchingiz guruhga so'z to'plami biriktirganda shu yerda ko'rinadi."
+        [...allMonths, ...additionalMonths], '📦', t('words.noWordsTitle'),
+        t('words.noWordsText')
       )}
       {currentTab === 'homework' && renderHomeworkGrid()}
     </>

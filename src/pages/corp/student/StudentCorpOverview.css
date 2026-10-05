@@ -1,8 +1,9 @@
 /* ========================================
-   STUDENT CORP OVERVIEW — simple stacked
-   dashboard: welcome, target words, personal
-   calendar, homework. Desktop widens into a
-   2-col grid; mobile keeps the exact order.
+   STUDENT HOME — identical to the personal
+   dashboard (pages/personal/Dashboard.css):
+   same paddings, 960px column, two-column
+   grid and card styles; homework sits in the
+   full-width card at the bottom.
    ======================================== */
 
 .corp-ov-container {
@@ -37,13 +38,7 @@
   margin: 0;
 }
 
-.corp-ov-subtitle {
-  font-size: 0.86rem;
-  color: var(--text-secondary);
-  margin: 4px 0 0 0;
-}
-
-/* ── Section grid: target-words / calendar / homework ── */
+/* ── Section grid: target-words / calendar / due-words ── */
 .corp-ov-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -60,7 +55,7 @@
   }
 }
 
-/* ── Target editor modal (replaces a plain number input) ── */
+/* ── Target editor modal ── */
 .corp-ov-target-overlay {
   position: fixed;
   inset: 0;
@@ -89,8 +84,6 @@
   gap: 1.15rem;
 }
 
-/* Congratulations screen — reuses .corp-ov-target-editor's card, just a
-   centered celebratory layout instead of the dial. */
 .corp-ov-congrats {
   text-align: center;
   align-items: center;
@@ -123,7 +116,6 @@
   line-height: 1.45;
 }
 
-/* Header: icon badge + title + close */
 .corp-ov-target-header {
   display: flex;
   align-items: center;
@@ -250,7 +242,6 @@
   margin: 0;
 }
 
-/* Full-width save — the only action button in the modal */
 .corp-ov-target-save-btn {
   width: 100%;
   display: flex;
@@ -283,7 +274,7 @@
   box-shadow: none;
 }
 
-/* ── Personal calendar ── */
+/* ── Activity calendar ── */
 .corp-ov-cal-card {
   background: var(--bg-secondary);
   border: 1px solid var(--border-light);
@@ -382,7 +373,7 @@
   line-height: 1;
 }
 
-/* ── Homework ── */
+/* ── Words due for repetition (replaces corp's Homework card) ── */
 .corp-ov-hw-card {
   background: var(--bg-secondary);
   border: 1px solid var(--border-light);
@@ -429,8 +420,8 @@
 .corp-ov-hw-count {
   font-size: 0.78rem;
   font-weight: 700;
-  color: var(--success);
-  background: var(--success-dim, rgba(52, 199, 89, 0.12));
+  color: var(--warning);
+  background: var(--warning-dim, rgba(255, 149, 0, 0.12));
   padding: 4px 10px;
   border-radius: 999px;
   flex-shrink: 0;
@@ -468,12 +459,8 @@
   background: var(--bg-glass-hover);
 }
 
-.corp-ov-hw-item.done {
-  border-color: var(--success-dim, rgba(52, 199, 89, 0.3));
-}
-
 .corp-ov-hw-item-check {
-  width: 22px;
+  width: 38px;
   height: 22px;
   border-radius: 7px;
   flex-shrink: 0;
@@ -481,12 +468,8 @@
   align-items: center;
   justify-content: center;
   border: 1.5px solid var(--border);
-  color: #fff;
-}
-
-.corp-ov-hw-item-check.done {
-  background: var(--success);
-  border-color: var(--success);
+  font-size: 0.68rem;
+  font-weight: 700;
 }
 
 .corp-ov-hw-item-text {
@@ -514,6 +497,24 @@
 .corp-ov-hw-item-arrow {
   color: var(--text-muted);
   flex-shrink: 0;
+}
+
+.corp-ov-hw-practice-btn {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--radius-md, 12px);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  background: var(--accent-1);
+  color: #fff;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease;
+}
+
+.corp-ov-hw-practice-btn:active {
+  transform: scale(0.98);
 }
 
 /* ── Mobile ── */

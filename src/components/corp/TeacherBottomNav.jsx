@@ -9,12 +9,12 @@ export default function TeacherBottomNav({ basePath = '/corp/teacher' }) {
   const navItems = [
     {
       to: basePath,
-      label: 'Guruhlar',
+      label: 'Groups',
       icon: Users,
       active: path === basePath || path.startsWith(`${basePath}/group/`) || path.startsWith(`${basePath}/archive`),
     },
-    { to: `${basePath}/courses`, label: "To'plamlar", icon: BookOpen, active: path.startsWith(`${basePath}/courses`) },
-    { to: `${basePath}/settings`, label: 'Sozlamalar', icon: Settings, active: path.startsWith(`${basePath}/settings`) },
+    { to: `${basePath}/courses`, label: 'Packs', icon: BookOpen, active: path.startsWith(`${basePath}/courses`) },
+    { to: `${basePath}/settings`, label: 'Settings', icon: Settings, active: path.startsWith(`${basePath}/settings`) },
   ];
 
   return (

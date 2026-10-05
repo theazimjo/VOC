@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Trophy, Check, X, Volume2 } from 'lucide-react';
 import { shuffleArray, speakWord } from '../../utils/helpers';
-import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
+import { inferConfidenceFromSpeed } from '@voc/memory-engine';
 import { playSound, triggerVibration } from '../../utils/feedback';
 import { useLanguage } from '../../contexts/LanguageContext';
 import PracticeQuitModal from './PracticeQuitModal';

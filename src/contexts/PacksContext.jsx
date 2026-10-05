@@ -3,7 +3,7 @@ import { ref, push, update, remove, get, onValue, serverTimestamp, runTransactio
 import { db } from '../firebase';
 import { useAuth } from './AuthContext';
 import { migratePackWordsIfNeeded } from '../utils/wordsMigration';
-import { getDecayedMastery } from '../utils/memoryEngine';
+import { getDecayedMastery } from '@voc/memory-engine';
 import { classifyWordSemantic } from '../experiment/semanticClassifier';
 
 const PacksContext = createContext(null);

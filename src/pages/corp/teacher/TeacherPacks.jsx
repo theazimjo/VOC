@@ -1,20 +1,22 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { BookOpen, Copy, Eye, MoreHorizontal, Pencil, Plus, Trash2 } from 'lucide-react';
+import { BookOpen, ChevronRight, Copy, Eye, Pencil, Plus, Trash2 } from 'lucide-react';
 import { auth } from '../../../firebase';
 import { deleteCustomPack, duplicateCustomPack } from '../../../services/corpService';
-import TeacherPackViewer from '../../../components/corp/TeacherPackViewer';
+import CourseEditor from '../center-admin/CourseEditor';
 import ConfirmSheet from '../../../components/corp/ConfirmSheet';
-import { EmptyState, LoadingRows, Page, Row, SearchField, Section, Segmented, Sheet } from '../super-admin/ui';
-import PackEditorSheet from '../super-admin/PackEditorSheet';
+import { Button, EmptyState, LoadingRows, Page, Row, SearchField, Section, Segmented, Sheet } from '../super-admin/ui';
 import { useIsDesktop } from '../super-admin/useIsDesktop';
+import PackEditorSheet from '../super-admin/PackEditorSheet';
 import { useToast } from '../super-admin/useToast';
 import { getPackUnits } from './utils';
 import { useTeacherData } from './TeacherDataContext';
 
 // The teacher's word packs: the center's shared ones (read-only here) and
-// their own private ones (only they and their groups see them). Tapping a
-// pack opens its words; the sheet holds rename / copy / delete.
+// their own private ones (only they and their groups see them). Same
+// Faculty-card table as the center admin's Courses (AdminCourses): a row
+// opens the pack, rename / copy / delete sit inline on the row, and inside
+// an own pack the header's gear opens the same sheet.
 export default function TeacherPacks() {
   const [toastNode, showToast] = useToast();
   const isDesktop = useIsDesktop();
@@ -27,7 +29,9 @@ export default function TeacherPacks() {
   const [confirm, setConfirm] = useState(null);
   const [busy, setBusy] = useState(false);
 
-  const viewingId = searchParams.get('packId');
+  // ?courseId= is what CourseEditor keeps in the URL (with monthId/unitId);
+  // ?packId= is the old link shape.
+  const viewingId = searchParams.get('courseId') || searchParams.get('packId');
   const viewing = packs.find((p) => p.id === viewingId) || null;
 
   const q = search.trim().toLowerCase();
@@ -41,7 +45,16 @@ export default function TeacherPacks() {
     ...c,
     customPacks: { ...(c.customPacks || {}), [pack.id]: { ...(c.customPacks?.[pack.id] || {}), ...pack } },
   }));
-  const open = (p) => setSearchParams({ packId: p.id });
+  const open = (p) => setSearchParams({ courseId: p.id });
+  const isOwn = (p) => p.scope === 'own' && !p.isSystem;
+
+  // ?new=pack — the topbar's quick-add menu.
+  useEffect(() => {
+    if (searchParams.get('new') === 'pack') {
+      setEditor({});
+      setSearchParams({}, { replace: true });
+    }
+  }, [searchParams, setSearchParams]);
 
   const askConfirm = (sheet) => setConfirm(sheet);
   const runConfirm = async () => {
@@ -50,47 +63,21 @@ export default function TeacherPacks() {
       await confirm.onConfirm();
       setConfirm(null);
     } catch (err) {
-      showToast(`Xatolik: ${err.message}`, 'error');
+      showToast(`Error: ${err.message}`, 'error');
     } finally {
       setBusy(false);
     }
   };
 
-  if (viewing) {
-    const editable = viewing.scope === 'own' && !viewing.isSystem;
-    return (
-      <div className="sa-page is-wide">
-        <TeacherPackViewer
-          pack={viewing}
-          onBack={() => setSearchParams({})}
-          editable={editable}
-          centerId={centerId}
-          askConfirm={askConfirm}
-          onUpdate={putPack}
-        />
-        <ConfirmSheet
-          open={Boolean(confirm)}
-          title={confirm?.title}
-          message={confirm?.message}
-          confirmLabel={confirm?.confirmLabel}
-          danger={confirm?.danger}
-          busy={busy}
-          onConfirm={runConfirm}
-          onCancel={() => !busy && setConfirm(null)}
-        />
-        {toastNode}
-      </div>
-    );
-  }
-
   const duplicate = async (p) => {
     setMenuPack(null);
     try {
       // A copy is always the teacher's own private pack.
-      putPack(await duplicateCustomPack(centerId, p, auth.currentUser?.uid));
-      showToast("Nusxa \"Mening to'plamlarim\"ga qo'shildi");
+      const copy = await duplicateCustomPack(centerId, p, auth.currentUser?.uid);
+      putPack(copy);
+      showToast(`"${copy.title || 'Copy'}" added to your own packs`);
     } catch (err) {
-      showToast(`Xatolik: ${err.message}`, 'error');
+      showToast(`Error: ${err.message}`, 'error');
     }
   };
 
@@ -98,11 +85,11 @@ export default function TeacherPacks() {
     setMenuPack(null);
     const n = usedIn(p.id);
     askConfirm({
-      title: `"${p.title}" o'chirilsinmi?`,
+      title: `Delete "${p.title}"?`,
       message: n
-        ? `Bu to'plam ${n} ta guruhingizda ishlatilmoqda — u yerdan ham yo'qoladi. Qaytarib bo'lmaydi.`
-        : "To'plamdagi barcha so'zlar o'chadi. Qaytarib bo'lmaydi.",
-      confirmLabel: "O'chirish",
+        ? `This pack is used in ${n} of your groups — it will disappear there too. This can't be undone.`
+        : "All of this pack's topics and words will be deleted. This can't be undone.",
+      confirmLabel: 'Delete',
       danger: true,
       onConfirm: async () => {
         await deleteCustomPack(centerId, p.id);
@@ -111,86 +98,34 @@ export default function TeacherPacks() {
           delete next[p.id];
           return { ...c, customPacks: next };
         });
-        showToast("To'plam o'chirildi");
+        if (viewingId === p.id) setSearchParams({});
+        showToast('Pack deleted');
       },
     });
   };
 
-  const own = visible.filter((p) => p.scope === 'own');
-  const shared = visible.filter((p) => p.scope === 'center');
-  const row = (p) => {
-    const n = usedIn(p.id);
-    return (
-      <Row
-        key={p.id}
-        icon={<BookOpen size={16} />}
-        iconTone={p.isSystem ? 'purple' : p.scope === 'own' ? 'green' : 'blue'}
-        title={p.title || 'Nomsiz'}
-        subtitle={`${p.wordsCount} so'z${n ? ` · ${n} guruhda` : ''}`}
-        onClick={() => setMenuPack(p)}
-      />
-    );
-  };
-
-  return (
-    <Page
-      title="So'z to'plamlari"
-      subtitle={loading ? ' ' : `${packs.length} ta to'plam`}
-      wide
-      action={
-        <button type="button" className="sa-icon-btn" onClick={() => setEditor({})} aria-label="Yangi to'plam">
-          <Plus size={20} strokeWidth={2.6} />
-        </button>
-      }
-    >
-      <div className="sa-toolbar is-inline" style={{ flexWrap: 'wrap', gap: '12px' }}>
-        <SearchField value={search} onChange={setSearch} placeholder="To'plam nomi" />
-        <Segmented
-          label="To'plam turi"
-          options={[
-            { value: 'all', label: `Hammasi (${packs.length})` },
-            { value: 'center', label: 'Markaz' },
-            { value: 'own', label: 'Mening' },
-          ]}
-          value={scope}
-          onChange={setScope}
-        />
-      </div>
-
-      {loading ? (
-        <LoadingRows count={4} />
-      ) : (
-        <PackCards
-          packs={scope === 'all' ? visible : visible.filter((p) => p.scope === scope)}
-          usedIn={usedIn}
-          onOpen={open}
-          onMenu={setMenuPack}
-          onCreate={() => setEditor({})}
-          scope={scope}
-          searching={Boolean(q)}
-        />
-      )}
-
-      <Sheet open={Boolean(menuPack)} onClose={() => setMenuPack(null)} title={menuPack?.title || "To'plam"}>
+  const sheets = (
+    <>
+      <Sheet open={Boolean(menuPack)} onClose={() => setMenuPack(null)} title={menuPack?.title || 'Word pack'}>
         {menuPack && (
           <>
             <Section>
-              <Row title="So'zlar" detail={menuPack.wordsCount} />
-              <Row title="Guruhlarda" detail={usedIn(menuPack.id) || "Yo'q"} />
-              <Row title="Turi" detail={menuPack.isSystem ? 'Tizim' : menuPack.scope === 'own' ? 'Shaxsiy' : 'Markaz'} />
+              <Row title="Words" detail={menuPack.wordsCount} />
+              <Row title="Used in" detail={usedIn(menuPack.id) ? `${usedIn(menuPack.id)} groups` : 'No groups'} />
+              <Row title="Type" detail={menuPack.isSystem ? 'System' : menuPack.scope === 'own' ? 'Personal' : 'Center'} />
             </Section>
             <Section>
-              <Row icon={<Eye size={16} />} iconTone="blue" title={menuPack.scope === 'own' && !menuPack.isSystem ? "So'zlarni ko'rish va tahrirlash" : "So'zlarni ko'rish"} onClick={() => { const p = menuPack; setMenuPack(null); open(p); }} />
+              <Row icon={<Eye size={16} />} iconTone="blue" title={menuPack.scope === 'own' && !menuPack.isSystem ? 'View and edit words' : 'View words'} onClick={() => { const p = menuPack; setMenuPack(null); open(p); }} />
               {menuPack.scope === 'own' && !menuPack.isSystem && (
-                <Row icon={<Pencil size={16} />} iconTone="gray" title="Nomini tahrirlash" onClick={() => { setEditor({ pack: menuPack }); setMenuPack(null); }} />
+                <Row icon={<Pencil size={16} />} iconTone="gray" title="Edit name and details" onClick={() => { setEditor({ pack: menuPack }); setMenuPack(null); }} />
               )}
               {!menuPack.isSystem && (
-                <Row icon={<Copy size={16} />} iconTone="gray" title="Nusxa olish" onClick={() => duplicate(menuPack)} />
+                <Row icon={<Copy size={16} />} iconTone="gray" title="Duplicate" onClick={() => duplicate(menuPack)} />
               )}
             </Section>
             {menuPack.scope === 'own' && !menuPack.isSystem && (
               <Section>
-                <Row icon={<Trash2 size={16} />} iconTone="red" title="O'chirish" destructive chevron={false} onClick={() => askDelete(menuPack)} />
+                <Row icon={<Trash2 size={16} />} iconTone="red" title="Delete Pack" destructive chevron={false} onClick={() => askDelete(menuPack)} />
               </Section>
             )}
           </>
@@ -202,12 +137,13 @@ export default function TeacherPacks() {
         pack={editor?.pack || null}
         centerId={centerId}
         ownerUid={auth.currentUser?.uid || null}
+        en
         onClose={() => setEditor(null)}
         onSaved={(pack, { openAfter } = {}) => {
           putPack(pack);
           setEditor(null);
           if (openAfter) open(pack);
-          else showToast('Saqlandi');
+          else showToast('Saved');
         }}
       />
 
@@ -223,94 +159,146 @@ export default function TeacherPacks() {
       />
 
       {toastNode}
+    </>
+  );
+
+  // Own packs are edited like the admin's courses (topics → words, quick
+  // add, text/Excel import); center packs open read-only.
+  if (viewing) {
+    return (
+      <>
+        <CourseEditor
+          centerId={centerId}
+          course={viewing}
+          readOnly={!isOwn(viewing)}
+          backLabel="Word Packs"
+          en
+          onBack={() => setSearchParams({})}
+          onUpdate={putPack}
+          onSettings={isOwn(viewing) ? () => setMenuPack(viewing) : undefined}
+        />
+        {sheets}
+      </>
+    );
+  }
+
+  const shown = scope === 'all' ? visible : visible.filter((p) => p.scope === scope);
+  const typeLabel = (p) => (p.isSystem ? 'System' : p.scope === 'own' ? 'Personal' : 'Center');
+  const summary = (p) => { const t = getPackUnits(p).length; return `${t} ${t === 1 ? 'topic' : 'topics'} · ${p.wordsCount} words`; };
+
+  return (
+    <Page hideHeader>
+      <section className="ca-card is-faculty-card">
+        <div className="faculty-toolbar faculty-toolbar-wrap">
+          <div className="faculty-toolbar-left faculty-toolbar-filters">
+            {packs.length > 5 && <SearchField value={search} onChange={setSearch} placeholder="Pack name" />}
+            <Segmented
+              label="Pack type"
+              options={[
+                { value: 'all', label: `All (${packs.length})` },
+                { value: 'center', label: 'Center' },
+                { value: 'own', label: 'Personal' },
+              ]}
+              value={scope}
+              onChange={setScope}
+            />
+          </div>
+          <div className="faculty-toolbar-right">
+            <button type="button" className="faculty-btn-invite" onClick={() => setEditor({})}>
+              <Plus size={14} /> New<span className="ca-hide-sm"> Word Pack</span>
+            </button>
+          </div>
+        </div>
+
+        {loading ? (
+          <div style={{ padding: 20 }}><LoadingRows count={4} /></div>
+        ) : shown.length === 0 ? (
+          <div className="sa-group" style={{ padding: 20 }}>
+            {q ? (
+              <EmptyState title="Nothing found" text="Try a different search." />
+            ) : scope === 'center' ? (
+              <EmptyState icon={<BookOpen size={40} />} title="The center hasn't added any packs yet" />
+            ) : (
+              <EmptyState
+                icon={<BookOpen size={40} />}
+                title="No personal packs yet"
+                text="Create a pack with your own words, or duplicate a center pack. Only you and your groups see it."
+                action={<Button onClick={() => setEditor({})}>Create Pack</Button>}
+              />
+            )}
+          </div>
+        ) : isDesktop ? (
+          <div className="faculty-table courses-table teacher-packs-table">
+            <div className="faculty-table-head">
+              <span>Pack</span>
+              <span>Topics</span>
+              <span>Words</span>
+              <span>Used in</span>
+              <span>Type</span>
+              <span />
+            </div>
+            {shown.map((p) => {
+              const n = usedIn(p.id);
+              return (
+                <div
+                  key={p.id}
+                  className="faculty-table-row"
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => open(p)}
+                  onKeyDown={(e) => { if (e.key === 'Enter') open(p); }}
+                >
+                  <div className="ca-course-cell">
+                    <span className={`ca-course-icon ${p.isSystem ? 'is-system' : p.scope === 'own' ? 'is-own' : ''}`} aria-hidden="true"><BookOpen size={16} /></span>
+                    <div className="faculty-cell-name">
+                      <span className="faculty-name-link">{p.title || 'Untitled'}</span>
+                      <span className="faculty-email-sub">{p.description || (p.wordsCount ? summary(p) : 'Empty — add topics and words')}</span>
+                    </div>
+                  </div>
+                  <span>{getPackUnits(p).length}</span>
+                  <span>{p.wordsCount}</span>
+                  <span className={n ? '' : 'ca-muted'}>{n ? `${n} ${n === 1 ? 'group' : 'groups'}` : 'No groups'}</span>
+                  <span><span className={`ca-tag ${p.scope === 'own' && !p.isSystem ? 'is-own' : ''}`}>{typeLabel(p)}</span></span>
+                  <span className="ca-row-actions" onClick={(e) => e.stopPropagation()}>
+                    {isOwn(p) && (
+                      <button type="button" className="ca-row-action" onClick={() => setEditor({ pack: p })} aria-label={`Edit ${p.title}`} title="Edit name">
+                        <Pencil size={14} />
+                      </button>
+                    )}
+                    {!p.isSystem && (
+                      <button type="button" className="ca-row-action" onClick={() => duplicate(p)} aria-label={`Duplicate ${p.title}`} title="Duplicate">
+                        <Copy size={14} />
+                      </button>
+                    )}
+                    {isOwn(p) && (
+                      <button type="button" className="ca-row-action is-danger" onClick={() => askDelete(p)} aria-label={`Delete ${p.title}`} title="Delete">
+                        <Trash2 size={14} />
+                      </button>
+                    )}
+                    <ChevronRight size={16} className="ca-row-chevron" aria-hidden="true" />
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="sa-group" style={{ padding: 12 }}>
+            {shown.map((p) => (
+              <Row
+                key={p.id}
+                icon={<BookOpen size={16} />}
+                iconTone={p.isSystem ? 'purple' : p.scope === 'own' ? 'green' : 'blue'}
+                title={p.title || 'Untitled'}
+                subtitle={`${typeLabel(p)} · ${summary(p)}`}
+                onClick={() => (p.isSystem ? open(p) : setMenuPack(p))}
+              />
+            ))}
+          </div>
+        )}
+      </section>
+
+      {sheets}
     </Page>
   );
 }
 
-const SCOPE_LABEL = { own: 'Shaxsiy', center: 'Markaz' };
-
-// Card grid view for teacher word packs
-function PackCards({ packs, usedIn, onOpen, onMenu, onCreate, scope, searching }) {
-  if (packs.length === 0) {
-    return (
-      <div className="sa-group">
-        {searching ? (
-          <EmptyState title="Topilmadi" text="Qidiruvni o'zgartirib ko'ring." />
-        ) : scope === 'own' ? (
-          <EmptyState
-            icon={<BookOpen size={40} />}
-            title="Hali shaxsiy to'plam yo'q"
-            text="O'z so'zlaringiz bilan to'plam yarating yoki markaz to'plamidan nusxa oling. Uni faqat siz va guruhlaringiz ko'radi."
-            action={<button type="button" className="sa-btn sa-btn-filled tone-blue" onClick={onCreate}>To'plam yaratish</button>}
-          />
-        ) : (
-          <EmptyState icon={<BookOpen size={40} />} title="Markaz hali to'plam qo'shmagan" />
-        )}
-      </div>
-    );
-  }
-
-  return (
-    <div className="sa-pack-grid">
-      {packs.map((p) => {
-        const n = usedIn(p.id);
-        const unitsCount = getPackUnits(p).length;
-        const tone = p.isSystem ? 'purple' : p.scope === 'own' ? 'green' : 'blue';
-        const badgeText = p.isSystem ? 'Tizim' : SCOPE_LABEL[p.scope];
-
-        return (
-          <div
-            key={p.id}
-            role="button"
-            tabIndex={0}
-            className="sa-pack-card"
-            onClick={() => onOpen(p)}
-            onKeyDown={(e) => { if (e.key === 'Enter') onOpen(p); }}
-          >
-            <div className="sa-pack-card-top">
-              <div className="sa-pack-card-main">
-                <span className={`sa-pack-card-icon tone-${tone}`}>
-                  <BookOpen size={18} />
-                </span>
-                <div className="sa-pack-card-title-group">
-                  <span className="sa-pack-card-title">{p.title || 'Nomsiz'}</span>
-                  <span className={`sa-pack-card-badge badge-${tone}`}>
-                    {badgeText}
-                  </span>
-                </div>
-              </div>
-              <button
-                type="button"
-                className="sa-more-btn"
-                onClick={(e) => { e.stopPropagation(); onMenu(p); }}
-                aria-label={`${p.title} amallari`}
-              >
-                <MoreHorizontal size={18} />
-              </button>
-            </div>
-
-            {p.description && (
-              <p className="sa-pack-card-desc" title={p.description}>
-                {p.description}
-              </p>
-            )}
-
-            <div className="sa-pack-card-footer">
-              <div className="sa-pack-card-stats">
-                <span className="sa-pack-card-stat">
-                  <span className="sa-pack-card-stat-val">{unitsCount}</span> mavzu
-                </span>
-                <span className="sa-pack-card-stat">
-                  <span className="sa-pack-card-stat-val">{p.wordsCount}</span> so'z
-                </span>
-              </div>
-              <span className="sa-pack-card-groups">
-                {n ? `${n} guruhda` : '—'}
-              </span>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-}

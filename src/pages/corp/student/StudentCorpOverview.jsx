@@ -5,11 +5,10 @@ import { Target, CheckCircle2, CalendarDays, NotebookPen, X, Check, ChevronRight
 import { updateStudentWordTarget } from '../../../services/corpService';
 import { useAccountWordProgress } from '../../../hooks/useAccountWordProgress';
 import { corpWordStorageId } from '../../../utils/helpers';
+import { useStudentT } from '../../../hooks/useStudentT';
 import PackHeaderHero from '../../../components/corp/PackHeaderHero';
 import './StudentCorpOverview.css';
 
-const WEEKDAY_LABELS = ['Ya', 'Du', 'Se', 'Ch', 'Pa', 'Ju', 'Sh'];
-const MONTH_NAMES = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun', 'Iyul', 'Avgust', 'Sentabr', 'Oktabr', 'Noyabr', 'Dekabr'];
 const TARGET_STEP = 10;
 const TARGET_MIN = 10;
 // How much value one full 360° drag around the ring adds/removes — keeps
@@ -69,9 +68,21 @@ function buildActivityLog(words) {
   return log;
 }
 
+// Renders a template like 'Shu oyda {n} ta takrorlash' with the number bold.
+function withBoldN(str, n) {
+  const [before, after = ''] = str.split('{n}');
+  return <>{before}<strong>{n}</strong>{after}</>;
+}
+
 export default function StudentCorpOverview() {
   const { user, homeworkList, wordTarget } = useOutletContext();
   const navigate = useNavigate();
+  const { t, tn, locale } = useStudentT();
+  const weekdayLabels = useMemo(
+    () => Array.from({ length: 7 }, (_, i) => new Intl.DateTimeFormat(locale, { weekday: 'short' }).format(new Date(2023, 0, 1 + i))),
+    [locale]
+  );
+  const monthName = (m) => new Intl.DateTimeFormat(locale, { month: 'long' }).format(new Date(2023, m, 1));
 
   const { words, totalWords, learnedWords } = useAccountWordProgress(user?.uid);
 
@@ -92,6 +103,15 @@ export default function StudentCorpOverview() {
     });
   }, [homeworkList, words]);
   const homeworkDoneCount = homeworkItems.filter(i => i.done).length;
+  const homeworkLeft = homeworkItems.length - homeworkDoneCount;
+  // Unfinished topics first (in the order the teacher gave them), finished
+  // ones after — the student always sees what still needs doing on top.
+  const homeworkSorted = useMemo(
+    () => [...homeworkItems.filter(i => !i.done), ...homeworkItems.filter(i => i.done)],
+    [homeworkItems]
+  );
+  // Opens that exact set (topic) of the pack, with its words and the practice button.
+  const openTopic = (item) => navigate(`/corp/student/learn/topic/${item.packId}/${item.monthId}/${item.unitId}?from=homework`);
 
   // The student's own goal overrides the account-wide total as the ring's
   // denominator; null means "use the total words touched so far". `wordTarget`
@@ -231,91 +251,59 @@ export default function StudentCorpOverview() {
     () => getMonthCalendar(activityLog),
     [activityLog]
   );
+
   const monthTotal = useMemo(
     () => calendarCells.reduce((sum, c) => sum + (c?.count || 0), 0),
     [calendarCells]
   );
 
-  const displayName = user?.displayName || user?.email?.split('@')[0] || "O'quvchi";
+  const displayName = user?.displayName || user?.email?.split('@')[0] || t('common.student');
 
   return (
     <div className="corp-ov-container">
 
       {/* ── Header ── */}
       <div className="corp-ov-topbar">
-        <span className="corp-ov-eyebrow">Xush kelibsiz</span>
+        <span className="corp-ov-eyebrow">{t('ov.welcome')}</span>
         <h1 className="corp-ov-name">{displayName}</h1>
       </div>
 
       <div className="corp-ov-grid">
 
-        {/* ── Homework ── */}
-        <div className="corp-ov-hw-card corp-ov-homework-card">
-          <div className="corp-ov-hw-header">
-            <div className="corp-ov-hw-header-left">
-              <div className="corp-ov-hw-icon"><NotebookPen size={20} strokeWidth={2.2} /></div>
-              <h3>Vazifalar</h3>
-            </div>
-            {homeworkItems.length > 0 && (
-              <span className="corp-ov-hw-count">{homeworkDoneCount}/{homeworkItems.length} bajarildi</span>
-            )}
-          </div>
-
-          {homeworkItems.length === 0 ? (
-            <p>Hozircha vazifa yo'q. O'qituvchingiz bergan vazifalar shu yerda ko'rinadi.</p>
-          ) : (
-            <div className="corp-ov-hw-list">
-              {homeworkItems.map(item => (
-                <button
-                  key={`${item.packId}_${item.monthId}_${item.unitId}`}
-                  type="button"
-                  className={`corp-ov-hw-item ${item.done ? 'done' : ''}`}
-                  onClick={() => navigate(`/corp/student/learn/topic/${item.packId}/${item.monthId}/${item.unitId}?from=homework`)}
-                >
-                  <div className={`corp-ov-hw-item-check ${item.done ? 'done' : ''}`}>
-                    {item.done && <Check size={13} strokeWidth={3} />}
-                  </div>
-                  <div className="corp-ov-hw-item-text">
-                    <span className="corp-ov-hw-item-title">{item.unitTitle}</span>
-                    <span className="corp-ov-hw-item-sub">{item.packTitle} · {item.masteryPct}%</span>
-                  </div>
-                  <ChevronRight size={16} className="corp-ov-hw-item-arrow" />
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-
         {/* ── Target words ── */}
         <PackHeaderHero
           icon={<Target size={22} />}
-          tag={targetReached ? 'Maqsadga yetdingiz 🎉' : null}
-          title="Maqsad"
+          tag={targetReached ? t('ov.goalReachedTag') : null}
+          title={t('ov.goal')}
           subtitle={targetReached
-            ? `${targetWords} ta so'z maqsadiga yetdingiz — davom etish uchun yangi maqsad qo'ying`
-            : `${displayLearned} / ${targetWords} so'z o'rganildi`}
+            ? t('ov.goalSubReached', { n: targetWords })
+            : t('ov.goalProgress', { a: displayLearned, b: targetWords })}
           masteryPct={learnedPct}
           metrics={[
-            { icon: <Target size={16} />, label: 'MAQSAD', value: targetWords, color: 'blue', onClick: openEditor },
-            { icon: <CheckCircle2 size={16} />, label: "O'RGANILDI", value: displayLearned, color: 'green' },
+            { icon: <Target size={16} />, label: t('ov.goal').toUpperCase(), value: targetWords, color: 'blue', onClick: openEditor },
+            { icon: <CheckCircle2 size={16} />, label: t('ov.learned').toUpperCase(), value: displayLearned, color: 'green' },
           ]}
         />
 
         {/* ── Personal calendar ── */}
         <div className="corp-ov-cal-card">
           <div className="corp-ov-cal-header">
-            <span className="corp-ov-cal-title"><CalendarDays size={16} strokeWidth={2.2} /> Faollik taqvimi</span>
-            <span className="corp-ov-cal-month">{MONTH_NAMES[month]}</span>
+            <span className="corp-ov-cal-title"><CalendarDays size={16} strokeWidth={2.2} /> {t('ov.activity')}</span>
+            <span className="corp-ov-cal-month">{monthName(month)}</span>
           </div>
-          <p className="corp-ov-cal-summary">Bu oy <strong>{monthTotal}</strong> marta takrorladingiz</p>
+          <p className="corp-ov-cal-summary">{withBoldN(t(monthTotal === 1 ? 'ov.reviewsMonth_one' : 'ov.reviewsMonth'), monthTotal)}</p>
 
           <div className="corp-ov-cal-weekdays">
-            {WEEKDAY_LABELS.map(d => <span key={d} className="corp-ov-cal-weekday">{d}</span>)}
+            {weekdayLabels.map(d => <span key={d} className="corp-ov-cal-weekday">{d}</span>)}
           </div>
           <div className="corp-ov-cal-grid">
             {calendarCells.map((cell, idx) => (
               cell ? (
-                <div key={cell.dateStr} className={`corp-ov-cal-cell ${cell.count > 0 ? 'active' : ''} ${cell.isToday ? 'today' : ''}`}>
+                <div
+                  key={cell.dateStr}
+                  className={`corp-ov-cal-cell ${cell.count > 0 ? 'active' : ''} ${cell.isToday ? 'today' : ''}`}
+                  title={cell.count > 0 ? tn('ov.reviews', cell.count) : t('ov.noPractice')}
+                >
                   <span className="corp-ov-cal-day">{cell.day}</span>
                   {cell.count > 0 && <span className="corp-ov-cal-count">{cell.count}</span>}
                 </div>
@@ -326,12 +314,62 @@ export default function StudentCorpOverview() {
           </div>
         </div>
 
+        {/* ── Homework — the full-width card at the bottom, like the personal
+            dashboard's "words due for review" card ── */}
+        <div className="corp-ov-hw-card corp-ov-homework-card">
+          <div className="corp-ov-hw-header">
+            <div className="corp-ov-hw-header-left">
+              <div className="corp-ov-hw-icon"><NotebookPen size={20} strokeWidth={2.2} /></div>
+              <h3>{t('ov.homework')}</h3>
+            </div>
+            {homeworkItems.length > 0 && (
+              <span className="corp-ov-hw-count">
+                {t('ov.hwCount', { done: homeworkDoneCount, total: homeworkItems.length })}
+              </span>
+            )}
+          </div>
+
+          {homeworkItems.length === 0 ? (
+            <p>{t('ov.hwEmptyText')}</p>
+          ) : (
+            <>
+              <div className="corp-ov-hw-list">
+                {homeworkSorted.map(item => {
+                  const color = item.masteryPct < 50 ? 'var(--error)' : item.masteryPct < 80 ? 'var(--warning)' : 'var(--success)';
+                  return (
+                    <button
+                      key={`${item.packId}_${item.monthId}_${item.unitId}`}
+                      type="button"
+                      className="corp-ov-hw-item"
+                      onClick={() => openTopic(item)}
+                    >
+                      <div className="corp-ov-hw-item-check" style={{ backgroundColor: `color-mix(in srgb, ${color} 12%, transparent)`, color, borderColor: 'transparent' }}>
+                        {item.masteryPct}%
+                      </div>
+                      <div className="corp-ov-hw-item-text">
+                        <span className="corp-ov-hw-item-title">{item.unitTitle}</span>
+                        <span className="corp-ov-hw-item-sub">{item.packTitle}</span>
+                      </div>
+                      <ChevronRight size={16} className="corp-ov-hw-item-arrow" />
+                    </button>
+                  );
+                })}
+              </div>
+              {homeworkLeft > 0 && (
+                <button type="button" className="corp-ov-hw-practice-btn" onClick={() => openTopic(homeworkSorted[0])}>
+                  {t('ov.practice')}
+                </button>
+              )}
+            </>
+          )}
+        </div>
+
       </div>
 
       {/* ── Congratulations screen: shown once the target is reached.
           Fully locked, same as the dial it leads into — no close button,
           no dismissing by clicking outside. Setting a higher target via
-          "Yangi maqsad" is the only way past it. ── */}
+          "New goal" is the only way past it. ── */}
       {showCongrats && (
         <div className="corp-ov-target-overlay">
           <motion.div
@@ -341,13 +379,13 @@ export default function StudentCorpOverview() {
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="corp-ov-congrats-icon"><PartyPopper size={34} strokeWidth={2} /></div>
-            <h3 className="corp-ov-congrats-title">Tabriklaymiz! 🎉</h3>
+            <h3 className="corp-ov-congrats-title">{t('ov.congrats')}</h3>
             <p className="corp-ov-congrats-text">
-              Maqsadga yetdingiz — <strong>{targetWords} / {targetWords}</strong> so'z o'rganildi!
+              {withBoldN(t('ov.congratsText'), `${targetWords} / ${targetWords}`)}
             </p>
 
             <button type="button" className="corp-ov-target-save-btn" onClick={startNewTarget}>
-              <Target size={18} strokeWidth={2.6} /> Yangi maqsad
+              <Target size={18} strokeWidth={2.6} /> {t('ov.newGoal')}
             </button>
           </motion.div>
         </div>
@@ -365,9 +403,9 @@ export default function StudentCorpOverview() {
           >
             <div className="corp-ov-target-header">
               <div className="corp-ov-target-header-icon"><Target size={18} strokeWidth={2.3} /></div>
-              <h3>Maqsad qo'ying</h3>
+              <h3>{t('ov.setGoal')}</h3>
               {!mustRaiseTarget && (
-                <button type="button" className="corp-ov-target-close" onClick={closeEditor} aria-label="Yopish">
+                <button type="button" className="corp-ov-target-close" onClick={closeEditor} aria-label={t('common.close')}>
                   <X size={18} strokeWidth={2.3} />
                 </button>
               )}
@@ -405,14 +443,14 @@ export default function StudentCorpOverview() {
               />
               <div className="corp-ov-dial-center">
                 <span className="corp-ov-dial-value">{draftTarget}</span>
-                <span className="corp-ov-dial-unit">so'z</span>
+                <span className="corp-ov-dial-unit">{t('ov.unit')}</span>
               </div>
             </div>
 
             <p className="corp-ov-dial-hint">
               {mustRaiseTarget
-                ? `${targetWords} ga yetdingiz — davom etish uchun kattaroq maqsad tanlang`
-                : "Maqsadni tanlash uchun halqani aylantiring"}
+                ? t('ov.hintRaise', { n: targetWords })
+                : t('ov.hintDrag')}
             </p>
 
             <button
@@ -421,7 +459,7 @@ export default function StudentCorpOverview() {
               onClick={saveTarget}
               disabled={mustRaiseTarget && draftTarget <= targetWords}
             >
-              <Check size={18} strokeWidth={2.6} /> Saqlash
+              <Check size={18} strokeWidth={2.6} /> {t('profile.save')}
             </button>
           </motion.div>
         </div>

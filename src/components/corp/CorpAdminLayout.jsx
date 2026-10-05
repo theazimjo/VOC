@@ -1,8 +1,9 @@
 import { Navigate, Outlet, useOutletContext } from 'react-router-dom';
 import CorpAdminSidebar from './CorpAdminSidebar';
+import CorpAdminTopbar from './CorpAdminTopbar';
 import CorpAdminBottomNav from './CorpAdminBottomNav';
 import { CenterDataProvider } from '../../pages/corp/center-admin/CenterDataContext';
-import { PageStyleContext, SheetPlacementContext } from '../../pages/corp/super-admin/ui';
+import { PageStyleContext, PanelLanguageContext, SheetPlacementContext } from '../../pages/corp/super-admin/ui';
 import './CorpAdminLayout.css';
 import '../../pages/corp/super-admin/sa.css';
 import '../../pages/corp/center-admin/theme.css';
@@ -28,17 +29,20 @@ export default function CorpAdminLayout() {
 
   return (
     <CenterDataProvider centerId={centerId} fallbackName={centerName}>
-      <SheetPlacementContext.Provider value="drawer">
+      <SheetPlacementContext.Provider value="center">
       <PageStyleContext.Provider value="toolbar">
-      <div className="corp-admin-layout sa-layout ca-theme">
-        <CorpAdminSidebar centerName={centerName} email={email} />
+      <PanelLanguageContext.Provider value="en">
+      <div className="corp-admin-layout sa-layout ca-theme is-center-admin">
+        <CorpAdminSidebar />
 
         <main className="corp-admin-main-pane">
+          <CorpAdminTopbar centerName={centerName} email={email} />
           <Outlet context={{ centerId, centerName, email }} />
         </main>
 
         <CorpAdminBottomNav />
       </div>
+      </PanelLanguageContext.Provider>
       </PageStyleContext.Provider>
       </SheetPlacementContext.Provider>
     </CenterDataProvider>

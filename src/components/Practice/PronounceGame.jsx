@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Volume2, Mic, RotateCcw, Check, X, AlertCircle } from 'lucide-react';
-import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
+import { inferConfidenceFromSpeed } from '@voc/memory-engine';
 import { speakWord } from '../../utils/helpers';
 import { playSound, triggerVibration } from '../../utils/feedback';
 import { useLanguage } from '../../contexts/LanguageContext';

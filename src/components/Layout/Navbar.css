@@ -16,27 +16,11 @@
   transition: left var(--transition-slow);
 }
 
-/* ---------- Corp student — same glass material as the bottom nav ----------
-   Same background/blur/border recipe as .personal-bottom-nav /
-   .corp-bottom-nav, so the top and bottom chrome read as one consistent
-   material instead of two different levels of glass. */
-.navbar--corp-student {
-  background: rgba(255, 255, 255, 0.97);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-}
-
-[data-theme='android'] .navbar--corp-student {
-  background: rgba(30, 30, 32, 0.97);
-  border-bottom-color: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-}
-
-[data-theme='sepia'] .navbar--corp-student {
-  background: rgba(244, 228, 193, 0.97);
-  border-bottom-color: rgba(112, 91, 69, 0.2);
+/* ---------- Corp student — same bar as the personal one (group switcher
+   centered, search + avatar on the right); it only starts where the 228px
+   StudentSidebar ends instead of the personal 260px sidebar. ---------- */
+.navbar.navbar--corp-student {
+  left: var(--ca-sidebar-w, 228px);
 }
 
 /* left offset matches sidebar */
@@ -504,3 +488,4 @@
   font-size: 0.78rem;
   color: var(--text-secondary);
 }
+

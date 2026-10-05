@@ -14,6 +14,11 @@ function toList(obj) {
   return Object.entries(obj || {}).map(([id, v]) => ({ id, ...v }));
 }
 
+function nameFromEmail(email) {
+  if (!email) return 'Admin';
+  return email.split('@')[0].replace(/[._-]/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
 export function CenterDataProvider({ centerId, fallbackName, children }) {
   const [center, setCenter] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -52,7 +57,40 @@ export function CenterDataProvider({ centerId, fallbackName, children }) {
         lastActivity: Math.max(0, ...own.map((g) => g.activity.lastActivity || 0)) || null,
       };
     });
+
+    // Admins who exist only as a corpUsers/{uid} role mapping, with no
+    // centers/{id}/teachers/{} record of their own: the center's original
+    // admin (adminUid/adminEmail, set once at center creation) and any
+    // co-admins invited via inviteCenterAdmin (recorded under coAdmins so
+    // they're discoverable at all — corpUsers/{uid} is only readable by
+    // that uid itself). A teacher promoted to admin via changeTeacherRole
+    // is NOT in this list — they already have a normal teacher record.
+    const admins = [];
+    if (center?.adminUid) admins.push({ uid: center.adminUid, email: center?.adminEmail || '', kind: 'primary' });
+    toList(center?.coAdmins).forEach((c) => {
+      if (c.uid && c.uid !== center?.adminUid) admins.push({ uid: c.uid, email: c.email || '', invitedAt: c.invitedAt || null, kind: 'co' });
+    });
+
+    // Keyed by id so `teacherById[group.teacherId]` resolves a class's
+    // owner whether that id is a real teachers/{} push-key or an admin's
+    // uid — a class's `teacherId` is just a foreign key to whoever runs it
+    // (see ClassesTab.jsx), and an admin can own classes the same way a
+    // teacher does.
     const teacherById = Object.fromEntries(teachers.map((t) => [t.id, t]));
+    admins.forEach((a) => {
+      const own = activeGroups.filter((g) => g.teacherId === a.uid);
+      teacherById[a.uid] = {
+        id: a.uid,
+        uid: a.uid,
+        name: nameFromEmail(a.email),
+        email: a.email,
+        isAdmin: true,
+        groupsCount: own.length,
+        studentsCount: own.reduce((sum, g) => sum + g.activity.students, 0),
+        activeWeek: own.reduce((sum, g) => sum + g.activity.activeWeek, 0),
+        lastActivity: Math.max(0, ...own.map((g) => g.activity.lastActivity || 0)) || null,
+      };
+    });
 
     // Packs a teacher created privately (ownerUid set) stay out of the
     // admin's course library.
@@ -63,7 +101,8 @@ export function CenterDataProvider({ centerId, fallbackName, children }) {
         return {
           ...p,
           isSystem: p.id === IRREGULAR_VERBS_PACK_ID,
-          sectionsCount: p.sectionsCount || 0,
+          // Older packs never stored sectionsCount — count their topics.
+          sectionsCount: p.sectionsCount || (p.months || []).reduce((n, m) => n + (m.units || []).length, 0),
           wordsCount: p.wordCount || (p.words ? p.words.length : 0),
           groupsCount: used.length,
           studentsCount: used.reduce((sum, g) => sum + g.activity.students, 0),
@@ -89,6 +128,7 @@ export function CenterDataProvider({ centerId, fallbackName, children }) {
       patch,
       teachers,
       teacherById,
+      admins,
       groups,
       activeGroups,
       packs,

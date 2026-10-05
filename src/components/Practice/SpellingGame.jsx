@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2, VolumeX, Check, X, Keyboard } from 'lucide-react';
-import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
+import { inferConfidenceFromSpeed } from '@voc/memory-engine';
 import { speakWord, shuffleArray } from '../../utils/helpers';
 import { findConfusableMatch } from '../../experiment/textSimilarity';
 import { recordConfusionPair } from '../../experiment/experimentDB';

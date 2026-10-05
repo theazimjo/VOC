@@ -15,31 +15,61 @@ const SPRING = { type: 'spring', bounce: 0, duration: 0.38 };
 // on the right — the center admin panel provides this, UITS CRM style).
 export const PageStyleContext = createContext('large');
 
+// The panel's UI language: 'uz' (super admin, default) or 'en' (center
+// admin and teacher panels provide it). Shared pieces with built-in copy —
+// Sheet's close label, SearchField's placeholder, ConfirmSheet's buttons —
+// read it, so a page doesn't have to thread `en` into every one of them.
+export const PanelLanguageContext = createContext('uz');
+export const usePanelEn = () => useContext(PanelLanguageContext) === 'en';
+
 // `narrow` keeps form-like pages (settings) at a readable width on desktop
 // instead of stretching every field across the whole screen. `icon` shows
 // in the toolbar style only.
-export function Page({ title, subtitle, action, back, narrow = false, icon, children }) {
+export function Page({ title, subtitle, action, back, narrow = false, icon, hideHeader = false, children }) {
   const style = useContext(PageStyleContext);
 
+  if (hideHeader) {
+    return (
+      <div className={`sa-page ${style === 'toolbar' ? 'is-toolbar' : ''} ${narrow ? 'is-narrow' : ''}`}>
+        {back && (
+          <div style={{ padding: '16px 24px 0' }}>
+            <button type="button" className="sa-back" onClick={back.onClick}>
+              <ChevronLeft size={20} strokeWidth={2.6} />
+              <span>{back.label}</span>
+            </button>
+          </div>
+        )}
+        <div className={`ca-content ${narrow ? 'is-narrow' : ''}`}>{children}</div>
+      </div>
+    );
+  }
+
+  // Sticky bar: back (a small square button, not the full-width link the
+  // hideHeader pages draw themselves) + icon box + title/sub, actions on
+  // the right. The CSS for this (.ca-toolbar*, in uits.css) already existed
+  // — this branch previously dropped title/subtitle/action/icon entirely
+  // instead of rendering it, which silently hid things like Settings' tabs
+  // and Course Editor's "add topic" button.
   if (style === 'toolbar') {
     return (
-      <div className="sa-page is-toolbar">
-        <header className="ca-toolbar">
+      <div className={`sa-page is-toolbar ${narrow ? 'is-narrow' : ''}`}>
+        <div className="ca-toolbar">
           <div className="ca-toolbar-titles">
             {back && (
-              <button type="button" className="ca-toolbar-back" onClick={back.onClick} aria-label={back.label}>
-                <ChevronLeft size={18} strokeWidth={2.4} />
+              <button type="button" className="ca-toolbar-back" onClick={back.onClick} aria-label={back.label || 'Back'}>
+                <ChevronLeft size={16} strokeWidth={2.6} />
               </button>
             )}
             {icon && <span className="ca-toolbar-icon">{icon}</span>}
-            <div className="ca-toolbar-text">
-              <h1 className="ca-toolbar-title">{title}</h1>
-              {subtitle && <p className="ca-toolbar-sub">{back ? <span className="ca-toolbar-crumb">{back.label} · </span> : null}{subtitle}</p>}
-              {!subtitle && back && <p className="ca-toolbar-sub"><span className="ca-toolbar-crumb">{back.label}</span></p>}
-            </div>
+            {(title || subtitle) && (
+              <div className="ca-toolbar-text">
+                {title && <h1 className="ca-toolbar-title">{title}</h1>}
+                {subtitle && <p className="ca-toolbar-sub">{subtitle}</p>}
+              </div>
+            )}
           </div>
           {action && <div className="ca-toolbar-actions">{action}</div>}
-        </header>
+        </div>
         <div className={`ca-content ${narrow ? 'is-narrow' : ''}`}>{children}</div>
       </div>
     );
@@ -115,6 +145,10 @@ export function Stat({ value, label, tone }) {
   );
 }
 
+// `options[].dot` is optional — a StatusDot tone ('green'/'orange'/'gray'/
+// 'red') shown before the label, for filters whose options already have a
+// color meaning elsewhere on the page (e.g. an activity status column) so
+// picking the right segment doesn't need reading the word first.
 export function Segmented({ options, value, onChange, label }) {
   return (
     <div className="sa-segmented" role="radiogroup" aria-label={label}>
@@ -128,6 +162,7 @@ export function Segmented({ options, value, onChange, label }) {
           onClick={() => onChange(o.value)}
         >
           {value === o.value && <motion.span layoutId={`seg-${label}`} className="sa-segment-thumb" transition={SPRING} />}
+          {o.dot && <StatusDot tone={o.dot} />}
           <span className="sa-segment-label">{o.label}</span>
         </button>
       ))}
@@ -135,7 +170,9 @@ export function Segmented({ options, value, onChange, label }) {
   );
 }
 
-export function SearchField({ value, onChange, placeholder = 'Qidirish' }) {
+export function SearchField({ value, onChange, placeholder }) {
+  const panelEn = usePanelEn();
+  if (placeholder == null) placeholder = panelEn ? 'Search' : 'Qidirish';
   return (
     <label className="sa-search">
       <Search size={16} aria-hidden="true" />
@@ -175,7 +212,13 @@ export function StatusDot({ tone }) {
 export const SheetPlacementContext = createContext('center');
 
 const TABLET_UP = '(min-width: 769px)';
-function useTabletUp() {
+// Exported so a Sheet caller with an `aside` (e.g. CourseEditor's
+// ImportSheet) can check, the same way Sheet itself does internally,
+// whether that aside will actually render (tablet-up only, regardless of
+// drawer vs. centered placement) — otherwise a caller has no way to know
+// and ends up hiding its own fallback content for a side panel that was
+// never going to show.
+export function useTabletUp() {
   const get = () => typeof window !== 'undefined' && window.matchMedia(TABLET_UP).matches;
   const [match, setMatch] = useState(get);
   useEffect(() => {
@@ -191,7 +234,12 @@ function useTabletUp() {
 // screens. Enters and exits along the same path (up from the bottom /
 // scale from center / in from the right) so dismissing feels like the
 // reverse of opening.
-export function Sheet({ open, onClose, title, children, footer, wide = false }) {
+// `aside`: an optional second panel shown to the left of the sheet, on
+// tablet-up screens (drawer or centered placement — callers decide when
+// there is room for it via useTabletUp()).
+export function Sheet({ open, onClose, title, children, footer, wide = false, aside = null, en: enProp = false }) {
+  const panelEn = usePanelEn();
+  const en = enProp || panelEn;
   const reduce = useReducedMotion();
   const placement = useContext(SheetPlacementContext);
   const tabletUp = useTabletUp();
@@ -228,6 +276,21 @@ export function Sheet({ open, onClose, title, children, footer, wide = false }) 
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
         >
+          <AnimatePresence>
+            {tabletUp && aside && (
+              <motion.aside
+                key="aside"
+                className="sa-sheet-aside"
+                onClick={(e) => e.stopPropagation()}
+                initial={reduce ? { opacity: 0 } : { opacity: 0, x: 24 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={reduce ? { opacity: 0 } : { opacity: 0, x: 24 }}
+                transition={{ duration: 0.2, ease: 'easeOut' }}
+              >
+                {aside}
+              </motion.aside>
+            )}
+          </AnimatePresence>
           <motion.div
             className={`sa-sheet ${wide ? 'is-wide' : ''} ${drawer ? 'is-drawer' : ''}`}
             role="dialog"
@@ -240,7 +303,7 @@ export function Sheet({ open, onClose, title, children, footer, wide = false }) 
             <div className="sa-sheet-grabber" aria-hidden="true" />
             <div className="sa-sheet-head">
               <h2 className="sa-sheet-title">{title}</h2>
-              <button type="button" className="sa-sheet-close" onClick={onClose} aria-label="Yopish">
+              <button type="button" className="sa-sheet-close" onClick={onClose} aria-label={en ? 'Close' : 'Yopish'}>
                 <X size={16} strokeWidth={2.6} />
               </button>
             </div>

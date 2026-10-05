@@ -6,6 +6,7 @@ import { computeCenterActivity, formatRelative, HEALTH_LABEL } from './centerAct
 import { Button, EmptyState, Field, LoadingRows, Page, Row, SearchField, Segmented, Sheet, StatusDot } from './ui';
 import { useToast } from './useToast';
 import { useIsDesktop } from './useIsDesktop';
+import { PUBLIC_SITE_URL } from '../../../utils/pendingJoin';
 
 const EMPTY_FORM = { name: '', adminEmail: '', phone: '' };
 const HEALTH_TONE = { active: 'green', quiet: 'orange', new: 'gray' };
@@ -22,7 +23,7 @@ function buildWelcomeMessage({ name, email, tempPassword }) {
   return [
     `Assalomu alaykum! "${name}" uchun VOC platformasida hisob ochildi.`,
     '',
-    `Kirish: ${window.location.origin}/login`,
+    `Kirish: ${PUBLIC_SITE_URL}/login`,
     `Login: ${email}`,
     `Vaqtinchalik parol: ${tempPassword}`,
     '',
@@ -156,7 +157,7 @@ export default function SuperAdminCenters() {
         /* dismissed — fall through to Telegram */
       }
     }
-    window.open(`https://t.me/share/url?url=${encodeURIComponent(`${window.location.origin}/login`)}&text=${encodeURIComponent(welcomeText)}`, '_blank', 'noopener');
+    window.open(`https://t.me/share/url?url=${encodeURIComponent(`${PUBLIC_SITE_URL}/login`)}&text=${encodeURIComponent(welcomeText)}`, '_blank', 'noopener');
   };
 
   return (

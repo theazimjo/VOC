@@ -403,6 +403,10 @@
 
 .sa-segment {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   flex: 1;
   min-height: 30px;
   padding: 0 10px;
@@ -414,6 +418,10 @@
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
+}
+
+.sa-segment .sa-dot {
+  position: relative;
 }
 
 .sa-segment.is-active {
@@ -1868,6 +1876,32 @@
 
 .sa-sheet.is-drawer .sa-sheet-body {
   padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+}
+
+/* Second panel to the left of a drawer (e.g. the import preview). */
+.sa-sheet-aside {
+  align-self: stretch;
+  width: min(860px, calc(100vw - 460px - 48px));
+  margin: 16px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid var(--sa-separator);
+  border-radius: var(--sa-radius, 12px);
+  background: var(--sa-surface);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+}
+
+/* Same aside panel, but next to a CENTERED sheet (center admin never uses
+   the drawer placement) — sized off the room left over beside the 520px
+   card + its gap + the scrim's own padding, same idea as the drawer
+   formula above, capped wide enough for the import preview table's
+   columns to breathe without a horizontal scrollbar. */
+.sa-sheet-scrim:not(.is-drawer) .sa-sheet-aside {
+  width: min(760px, calc(100vw - 520px - 64px));
+  max-height: min(86vh, 760px);
+  margin: 0 16px 0 0;
 }
 
 /* ── Course editor ── */

@@ -1,28 +1,28 @@
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import {
   LayoutDashboard, BookOpen, User
 } from 'lucide-react';
-import VocLogo from '../common/VocLogo';
+import { useStudentT } from '../../hooks/useStudentT';
 import './CorpAdminSidebar.css';
 
 export default function StudentSidebar() {
-  const location = useLocation();
-
+  const { t } = useStudentT();
   const navItems = [
-    { to: '/corp/student', label: 'Bosh sahifa', icon: LayoutDashboard },
-    { to: '/corp/student/learn', label: "So'zlar", icon: BookOpen },
-    { to: '/corp/student/profile', label: 'Profil', icon: User },
+    { to: '/corp/student', label: t('nav.home'), icon: LayoutDashboard },
+    { to: '/corp/student/learn', label: t('nav.words'), icon: BookOpen },
+    { to: '/corp/student/profile', label: t('nav.profile'), icon: User },
   ];
 
   return (
-    <aside className="corp-admin-sidebar">
-      {/* Sidebar Top / Brand */}
-      <div className="sidebar-brand-header" style={{ padding: '1.25rem 1.5rem 1rem 1.5rem', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
-        <VocLogo subTitle="O'quvchi" />
+    <aside className="corp-admin-sidebar is-student">
+      <div className="sidebar-brand-header">
+        <span className="voc-logo-title sidebar-brand-name">
+          vocabry<span className="sidebar-brand-tld">.uz</span>
+        </span>
       </div>
 
       {/* Navigation Menu */}
-      <nav className="corp-sidebar-nav" style={{ marginTop: '1.5rem' }}>
+      <nav className="corp-sidebar-nav">
         {navItems.map((item) => {
           const Icon = item.icon;
           return (
@@ -33,7 +33,7 @@ export default function StudentSidebar() {
               className={({ isActive }) => `sidebar-nav-btn ${isActive ? 'active' : ''}`}
               title={item.label}
             >
-              <Icon size={20} strokeWidth={2.2} />
+              <Icon size={23} strokeWidth={2.3} />
               <span>{item.label}</span>
             </NavLink>
           );

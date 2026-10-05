@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2, Check, X } from 'lucide-react';
 import { shuffleArray, speakWord } from '../../utils/helpers';
-import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
+import { inferConfidenceFromSpeed } from '@voc/memory-engine';
 import { playSound, triggerVibration } from '../../utils/feedback';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useKeyboardInset } from '../../hooks/useKeyboardInset';

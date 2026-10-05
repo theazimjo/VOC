@@ -17,8 +17,8 @@
 
 import { ref, update, get, runTransaction } from 'firebase/database';
 import { db } from '../firebase';
-import { applyReview } from '../utils/spacedRepetition';
-import { computeRecallProbability, clampStability } from '../utils/memoryEngine';
+import { applyReview } from '@voc/memory-engine';
+import { computeRecallProbability, clampStability } from '@voc/memory-engine';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 

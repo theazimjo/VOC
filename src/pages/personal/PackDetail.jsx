@@ -10,20 +10,18 @@ import { useDailyNewWordLimit } from '../../hooks/useDailyNewWordLimit';
 import { getIrregularVerbGroup } from '../../data/irregularVerbGroups';
 import { findSourceMarketPack, getMissingMarketWords } from '../../utils/marketSync';
 import { playSound } from '../../utils/feedback';
-import { computeRetentionStats } from '../../utils/memoryEngine';
+import { computeRetentionStats } from '@voc/memory-engine';
 import { getConfusionPairs } from '../../experiment/experimentDB';
 import { formatPageRange } from '../../utils/chapterPageRanges';
 import { scienceChapterText } from '../../data/scienceChapterText';
 import { healthChapterText } from '../../data/healthChapterText';
 import { essential3000ChapterText } from '../../data/essential3000ChapterText';
-import { imReadySeptemberChapterText } from '../../data/imReadySeptemberChapterText';
 import WordList from '../../components/Words/WordList';
 
 const allChapterText = {
   ...essential3000ChapterText,
   ...scienceChapterText,
-  ...healthChapterText,
-  ...imReadySeptemberChapterText
+  ...healthChapterText
 };
 import PhotoWordExtractorModal from '../../components/Words/PhotoWordExtractorModal';
 import MoveWordsModal from '../../components/Words/MoveWordsModal';

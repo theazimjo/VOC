@@ -9,7 +9,7 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { ref, get } from 'firebase/database';
 import { db } from '../../firebase';
 import { setAppMode, switchActiveGroup } from '../../services/corpService';
-import { getMasteryLevel } from '../../utils/spacedRepetition';
+import { getMasteryLevel } from '@voc/memory-engine';
 import './GlobalSearch.css';
 
 const MAX_WORD_RESULTS = 20;

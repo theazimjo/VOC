@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
 import { Volume2, X, RotateCw, Check, PenLine } from 'lucide-react';
-import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
+import { inferConfidenceFromSpeed } from '@voc/memory-engine';
 import { speakWord } from '../../utils/helpers';
 import { useLanguage } from '../../contexts/LanguageContext';
 import PracticeQuitModal from './PracticeQuitModal';

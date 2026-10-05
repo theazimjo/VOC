@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
+import { usePanelEn } from '../../pages/corp/super-admin/ui';
 import './ConfirmSheet.css';
 
 // iOS-style action-sheet confirm dialog — replaces window.confirm() with a
@@ -8,13 +9,16 @@ export default function ConfirmSheet({
   open,
   title,
   message,
-  confirmLabel = 'Tasdiqlash',
-  cancelLabel = 'Bekor qilish',
+  confirmLabel,
+  cancelLabel,
   danger = false,
   busy = false,
   onConfirm,
   onCancel,
 }) {
+  const en = usePanelEn();
+  confirmLabel = confirmLabel || (en ? 'Confirm' : 'Tasdiqlash');
+  cancelLabel = cancelLabel || (en ? 'Cancel' : 'Bekor qilish');
   return (
     <AnimatePresence>
       {open && (

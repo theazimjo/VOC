@@ -7,11 +7,11 @@ export default function CorpAdminBottomNav() {
   const location = useLocation();
 
   const navItems = [
-    { to: '/corp/admin', label: 'Asosiy', icon: LayoutDashboard, end: true, alsoActive: '/corp/admin/settings' },
-    { to: '/corp/admin/teachers', label: "O'qituvchi", icon: Users },
-    { to: '/corp/admin/groups', label: 'Guruhlar', icon: Layers },
-    { to: '/corp/admin/students', label: "O'quvchi", icon: GraduationCap },
-    { to: '/corp/admin/courses', label: 'Kurslar', icon: BookOpen },
+    { to: '/corp/admin', label: 'Home', icon: LayoutDashboard, end: true, alsoActive: '/corp/admin/settings' },
+    { to: '/corp/admin/teachers', label: 'Faculty', icon: Users },
+    { to: '/corp/admin/groups', label: 'Groups', icon: Layers },
+    { to: '/corp/admin/students', label: 'Students', icon: GraduationCap },
+    { to: '/corp/admin/courses', label: 'Courses', icon: BookOpen },
   ];
 
   return (

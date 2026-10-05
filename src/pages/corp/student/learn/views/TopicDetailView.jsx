@@ -2,9 +2,11 @@ import { motion } from 'framer-motion';
 import { Brain, ChevronLeft } from 'lucide-react';
 import WordList from '../../../../../components/Words/WordList';
 import { corpWordStorageId } from '../../../../../utils/helpers';
+import { useStudentT } from '../../../../../hooks/useStudentT';
 import './TopicDetailView.css';
 
 export default function TopicDetailView({ p }) {
+  const { t } = useStudentT();
   const {
     cameFromHomework, memoryTwin, monthId, navigate, packId,
     selectedMonth, selectedUnit, setActiveTab, startPractice, unitWords,
@@ -29,11 +31,11 @@ export default function TopicDetailView({ p }) {
                       navigate(`/corp/student/learn/month/${packId}/${monthId}`);
                     }
                   }}
-                  aria-label="Orqaga"
-                  title="Orqaga"
+                  aria-label={t('common.back')}
+                  title={t('common.back')}
                 >
                   <ChevronLeft size={18} strokeWidth={2.5} />
-                  <span>Orqaga</span>
+                  <span>{t('common.back')}</span>
                 </button>
               </div>
 
@@ -45,7 +47,7 @@ export default function TopicDetailView({ p }) {
                     <h1 className="corp-unit-detail-title">{selectedUnit.title}</h1>
                     <div className="book-stats" style={{ marginTop: '6px' }}>
                       <span className="book-stat-badge" style={{ display: 'inline-flex', background: 'var(--accent-1-dim)', color: 'var(--accent-1)', fontSize: '0.8rem', fontWeight: 600, padding: '4px 10px', borderRadius: '12px' }}>
-                        📝 {unitWords.length} so'z
+                        📝 {unitWords.length} {t('words.wordLabel')}
                       </span>
                     </div>
                   </div>
@@ -64,7 +66,7 @@ export default function TopicDetailView({ p }) {
                       startPractice(virtualPack);
                     }}
                   >
-                    🎮 Mashq qilish
+                    🎮 {t('words.practice')}
                   </button>
                 </div>
               </div>
@@ -73,25 +75,25 @@ export default function TopicDetailView({ p }) {
               <div className="pack-memtwin-card">
                 <div className="pack-memtwin-header">
                   <span className="pack-memtwin-icon"><Brain size={16} strokeWidth={2.2} /></span>
-                  <span className="pack-memtwin-title">Xotira holati</span>
+                  <span className="pack-memtwin-title">{t('words.memory')}</span>
                 </div>
 
                 <div className="pack-memtwin-stats-grid">
                   <div className="pack-memtwin-stat">
                     <span className="pack-memtwin-stat-value">{memoryTwin ? `${memoryTwin.masteryPercent}%` : '0%'}</span>
-                    <span className="pack-memtwin-stat-label">O'zlashtirish</span>
+                    <span className="pack-memtwin-stat-label">{t('words.mastery')}</span>
                   </div>
                   <div className="pack-memtwin-stat">
                     <span className="pack-memtwin-stat-value">{memoryTwin ? `${memoryTwin.retentionPercent}%` : '0%'}</span>
-                    <span className="pack-memtwin-stat-label">Eslab qolish</span>
+                    <span className="pack-memtwin-stat-label">{t('words.retention')}</span>
                   </div>
                   <div className="pack-memtwin-stat">
                     <span className="pack-memtwin-stat-value">{memoryTwin ? memoryTwin.atRisk : '0'}</span>
-                    <span className="pack-memtwin-stat-label">Unutilayotgan</span>
+                    <span className="pack-memtwin-stat-label">{t('words.atRisk')}</span>
                   </div>
                   <div className="pack-memtwin-stat">
                     <span className="pack-memtwin-stat-value">{memoryTwin ? memoryTwin.confusionCount : '0'}</span>
-                    <span className="pack-memtwin-stat-label">Chalkashliklar</span>
+                    <span className="pack-memtwin-stat-label">{t('words.confusions')}</span>
                   </div>
                 </div>
               </div>

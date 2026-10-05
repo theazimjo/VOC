@@ -2,12 +2,13 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { LayoutDashboard, BookOpen, User } from 'lucide-react';
+import { useStudentT } from '../../hooks/useStudentT';
 import './StudentBottomNav.css';
 
 const NAV_ITEMS = [
-  { to: '/corp/student', label: 'Bosh sahifa', icon: LayoutDashboard, end: true },
-  { to: '/corp/student/learn', label: "So'zlar", icon: BookOpen, end: false },
-  { to: '/corp/student/profile', label: 'Profil', icon: User, end: false },
+  { to: '/corp/student', labelKey: 'nav.home', icon: LayoutDashboard, end: true },
+  { to: '/corp/student/learn', labelKey: 'nav.words', icon: BookOpen, end: false },
+  { to: '/corp/student/profile', labelKey: 'nav.profile', icon: User, end: false },
 ];
 
 function isItemActive(pathname, item) {
@@ -16,6 +17,7 @@ function isItemActive(pathname, item) {
 }
 
 export default function StudentBottomNav() {
+  const { t } = useStudentT();
   const location = useLocation();
   const itemRefs = useRef([]);
   // Measured in real pixels from the rendered tabs, not guessed via CSS
@@ -82,7 +84,7 @@ export default function StudentBottomNav() {
             <span className="corp-bottom-nav-icon">
               <IconComponent size={20} strokeWidth={2.2} />
             </span>
-            <span className="corp-bottom-nav-label">{item.label}</span>
+            <span className="corp-bottom-nav-label">{t(item.labelKey)}</span>
           </NavLink>
         );
       })}

@@ -52,6 +52,7 @@ const TeacherLayout = lazyWithRetry(() => import('./components/corp/TeacherLayou
 const StudentLayout = lazyWithRetry(() => import('./components/corp/StudentLayout'));
 const CorpPortalHome = lazyWithRetry(() => import('./pages/corp/CorpPortalHome'));
 const JoinGroupPage = lazyWithRetry(() => import('./pages/corp/JoinGroupPage'));
+const JoinTeacherPage = lazyWithRetry(() => import('./pages/corp/JoinTeacherPage'));
 const CorpProtectedRoute = lazyWithRetry(() => import('./components/corp/CorpProtectedRoute'));
 const SuperAdminLayout = lazyWithRetry(() => import('./components/corp/SuperAdminLayout'));
 const SuperAdminOverview = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminOverview'));
@@ -62,16 +63,14 @@ const SuperAdminUsers = lazyWithRetry(() => import('./pages/corp/super-admin/Sup
 const SuperAdminUserDetail = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminUserDetail'));
 const SuperAdminAnnouncements = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminAnnouncements'));
 const SuperAdminSettings = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminSettings'));
-// Dev-only role switcher (/dev/roles). `import.meta.env.DEV` is false in
-// production builds, so the page and its import are dropped entirely.
-const RoleSwitcher = import.meta.env.DEV ? lazyWithRetry(() => import('./pages/dev/RoleSwitcher')) : null;
-const DevRolesPill = import.meta.env.DEV ? lazyWithRetry(() => import('./pages/dev/DevRolesPill')) : null;
 const AdminHome = lazyWithRetry(() => import('./pages/corp/center-admin/AdminHome'));
 const AdminTeachers = lazyWithRetry(() => import('./pages/corp/center-admin/AdminTeachers'));
 const AdminTeacherDetail = lazyWithRetry(() => import('./pages/corp/center-admin/AdminTeacherDetail'));
+const AdminProfileDetail = lazyWithRetry(() => import('./pages/corp/center-admin/AdminProfileDetail'));
 const AdminGroups = lazyWithRetry(() => import('./pages/corp/center-admin/AdminGroups'));
 const AdminGroupDetail = lazyWithRetry(() => import('./pages/corp/center-admin/AdminGroupDetail'));
 const AdminStudents = lazyWithRetry(() => import('./pages/corp/center-admin/AdminStudents'));
+const AdminStudentDetail = lazyWithRetry(() => import('./pages/corp/center-admin/AdminStudentDetail'));
 const AdminCourses = lazyWithRetry(() => import('./pages/corp/center-admin/AdminCourses'));
 const AdminSettings = lazyWithRetry(() => import('./pages/corp/center-admin/AdminSettings'));
 const TeacherGroups = lazyWithRetry(() => import('./pages/corp/teacher/TeacherGroups'));
@@ -119,7 +118,6 @@ export default function App() {
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/choose-profile" element={<ProfileChooser />} />
-                    {RoleSwitcher && <Route path="/dev/roles" element={<RoleSwitcher />} />}
   
                     {/* Protected routes */}
                     <Route element={<ProtectedRoute />}>
@@ -173,6 +171,7 @@ export default function App() {
                     <Route path="/corp/login" element={<Navigate to="/login" replace />} />
                     <Route path="/corp/teacher/join" element={<Navigate to="/login" replace />} />
                     <Route path="/join/:code" element={<JoinGroupPage />} />
+                    <Route path="/join-teacher/:code" element={<JoinTeacherPage />} />
                     <Route path="/corp" element={<CorpLayout />}>
                       <Route index element={<CorpPortalHome />} />
                       <Route element={<CorpProtectedRoute allowedRoles={['super_admin']} />}>
@@ -192,9 +191,11 @@ export default function App() {
                           <Route path="admin" element={<AdminHome />} />
                           <Route path="admin/teachers" element={<AdminTeachers />} />
                           <Route path="admin/teachers/:teacherId" element={<AdminTeacherDetail />} />
+                          <Route path="admin/admins/:uid" element={<AdminProfileDetail />} />
                           <Route path="admin/groups" element={<AdminGroups />} />
                           <Route path="admin/groups/:groupId" element={<AdminGroupDetail />} />
                           <Route path="admin/students" element={<AdminStudents />} />
+                          <Route path="admin/students/:studentId" element={<AdminStudentDetail />} />
                           <Route path="admin/courses" element={<AdminCourses />} />
                           <Route path="admin/statistics" element={<Navigate to="/corp/admin" replace />} />
                           <Route path="admin/settings" element={<AdminSettings />} />
@@ -227,7 +228,6 @@ export default function App() {
                     {/* Catch all */}
                     <Route path="*" element={<Navigate to="/" replace />} />
                   </Routes>
-                  {DevRolesPill && <DevRolesPill />}
                 </Suspense>
                 </SuccessTransitionProvider>
               </PacksProvider>

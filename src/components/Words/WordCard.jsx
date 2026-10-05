@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { getMasteryLevel } from '../../utils/spacedRepetition';
+import { getMasteryLevel } from '@voc/memory-engine';
 import { partOfSpeechOptions, speakWord } from '../../utils/helpers';
 import { Volume2, Edit2, Trash2, MoreVertical, Check } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';

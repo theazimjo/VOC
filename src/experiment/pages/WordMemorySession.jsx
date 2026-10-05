@@ -31,7 +31,7 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SkipForward, PenLine, Eye } from 'lucide-react';
-import { inferConfidenceFromSpeed, getRecommendedRetrievalType } from '../../utils/memoryEngine';
+import { inferConfidenceFromSpeed, getRecommendedRetrievalType } from '@voc/memory-engine';
 import { similarityRatio, findConfusableMatch } from '../textSimilarity';
 import { useLanguage } from '../../contexts/LanguageContext';
 

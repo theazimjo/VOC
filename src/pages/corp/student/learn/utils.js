@@ -1,4 +1,4 @@
-import { getDecayedMastery } from '../../../../utils/memoryEngine';
+import { getDecayedMastery } from '@voc/memory-engine';
 import { corpWordStorageId } from '../../../../utils/helpers';
 
 // Build the list of months (with month → unit → words nesting normalized)

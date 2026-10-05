@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Zap, Brain, PenLine, Shuffle, ListChecks, Mic, Timer } from 'lucide-react';
-import { recommendPracticeMode } from '../../utils/memoryEngine';
+import { recommendPracticeMode } from '@voc/memory-engine';
 import { PRACTICE_MODE_MIN_WORDS } from '../../utils/helpers';
 import { useLanguage } from '../../contexts/LanguageContext';
 import './PracticeHub.css';

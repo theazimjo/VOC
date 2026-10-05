@@ -16,7 +16,7 @@ vi.mock('firebase/database', () => ({
     return { exists: () => val !== undefined && val !== null, val: () => val };
   },
   update: async (_ref, updates) => { lastUpdate = updates; },
-  set: vi.fn(), push: vi.fn(), remove: vi.fn(), runTransaction: vi.fn(),
+  set: vi.fn(), push: vi.fn(), remove: vi.fn(), runTransaction: vi.fn(), increment: vi.fn(),
 }));
 vi.mock('firebase/auth', () => ({ createUserWithEmailAndPassword: vi.fn(), sendPasswordResetEmail: vi.fn(), signOut: vi.fn() }));
 vi.mock('../firebase', () => ({ db: {}, auth: {} }));

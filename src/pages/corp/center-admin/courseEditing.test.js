@@ -1,35 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { courseTotals, courseUpdates, mapUnit, mergeWords, monthsOf, normalizePOS, parseWordList } from './courseEditing';
-
-const strip = (words) => words.map(({ id, ...w }) => w); // eslint-disable-line no-unused-vars
-
-describe('parseWordList', () => {
-  it('reads "word, translation" entries separated by dots', () => {
-    expect(strip(parseWordList('Apple, Olma. Book, Kitob. Run, Yugurmoq'))).toEqual([
-      { word: 'Apple', translation: 'Olma', partOfSpeech: 'noun', definition: '', example: '' },
-      { word: 'Book', translation: 'Kitob', partOfSpeech: 'noun', definition: '', example: '' },
-      { word: 'Run', translation: 'Yugurmoq', partOfSpeech: 'noun', definition: '', example: '' },
-    ]);
-  });
-
-  it('reads full entries with part of speech, definition and example', () => {
-    const [w] = parseWordList('Apple, Olma, noun, Qizil meva, I ate an apple.');
-    expect(w).toMatchObject({ word: 'Apple', translation: 'Olma', partOfSpeech: 'noun', definition: 'Qizil meva', example: 'I ate an apple' });
-  });
-
-  it('treats a non-POS third field as a definition', () => {
-    const [w] = parseWordList('Run, Yugurmoq, tez harakat');
-    expect(w).toMatchObject({ partOfSpeech: 'other', definition: 'tez harakat' });
-  });
-
-  it('accepts new lines, semicolons and other separators', () => {
-    expect(parseWordList('cat - mushuk\ndog: it; bird | qush').map((w) => w.translation)).toEqual(['mushuk', 'it', 'qush']);
-  });
-
-  it('ignores lines without a translation', () => {
-    expect(parseWordList('hello\n\n  ')).toEqual([]);
-  });
-});
+import { courseTotals, courseUpdates, mapUnit, mergeWords, monthsOf, normalizePOS } from './courseEditing';
 
 describe('normalizePOS', () => {
   it('understands English and Uzbek names', () => {
@@ -42,7 +12,10 @@ describe('normalizePOS', () => {
 describe('mergeWords', () => {
   it('adds new words and updates existing ones instead of duplicating', () => {
     const existing = [{ id: 'a', word: 'Apple', translation: 'olma', partOfSpeech: 'noun', definition: 'eski', example: '' }];
-    const incoming = parseWordList('apple, Olma!, noun, yangi ta\'rif, x. Pear, Nok');
+    const incoming = [
+      { id: 'n1', word: 'apple', translation: 'Olma!', partOfSpeech: 'noun', definition: "yangi ta'rif", example: 'x' },
+      { id: 'n2', word: 'Pear', translation: 'Nok', partOfSpeech: 'noun', definition: '', example: '' },
+    ];
     const { words, added, updated } = mergeWords(existing, incoming);
     expect(added).toBe(1);
     expect(updated).toBe(1);

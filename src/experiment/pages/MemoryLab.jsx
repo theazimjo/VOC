@@ -22,7 +22,7 @@ import {
 } from 'lucide-react';
 
 import { useMemoryExperiment } from '../useMemoryExperiment';
-import { simulateReviewScenarios } from '../../utils/memoryEngine';
+import { simulateReviewScenarios } from '@voc/memory-engine';
 import { useLanguage } from '../../contexts/LanguageContext';
 import WordMemorySession from './WordMemorySession';
 import MemoryInsights from './MemoryInsights';

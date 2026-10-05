@@ -5,7 +5,7 @@ import { usePacks } from '../../hooks/usePacks';
 import { useGrammarStats } from '../../hooks/useGrammarStats';
 import { useStreak } from '../../hooks/useStreak';
 import { grammarTopicCounts } from '../../data/grammarTopicCounts';
-import { getDueWords } from '../../utils/spacedRepetition';
+import { getDueWords } from '@voc/memory-engine';
 import IosSpinner from '../../components/common/IosSpinner';
 import ActivityHeatmap from '../../components/Stats/ActivityHeatmap';
 import './StatsPage.css';

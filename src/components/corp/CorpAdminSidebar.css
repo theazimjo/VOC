@@ -1,5 +1,9 @@
 .corp-admin-sidebar {
-  width: 260px;
+  /* Rounded, friendly display font for the sidebar's brand title and
+     nav labels — loaded from index.html (a @import here gets silently
+     dropped once this file lands mid-bundle, after other CSS). */
+  --ca-sidebar-font: 'Fredoka', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  width: var(--ca-sidebar-w, 228px);
   height: 100vh;
   position: fixed;
   top: 0;
@@ -12,14 +16,14 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1rem 0.85rem;
+  padding: 1rem 0;
   transition: width 0.3s ease;
   z-index: 90;
   box-sizing: border-box;
 }
 
 .corp-admin-sidebar.collapsed {
-  width: 72px;
+  width: var(--ca-sidebar-w-collapsed, 64px);
 }
 
 /* Brand header - sleek dark theme logo & title styling */
@@ -27,10 +31,40 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 8px 4px 16px 4px;
+  padding: 8px 20px 16px;
   border-bottom: 1px solid var(--border);
   position: relative;
   min-height: 54px;
+}
+
+.corp-admin-sidebar.collapsed .sidebar-brand-header {
+  padding: 8px 0 16px;
+  justify-content: center;
+}
+
+/* A little bigger than VocLogo's default 'md' size, to hold its own
+   against the wider nav icons/bold labels. */
+.corp-admin-sidebar .voc-logo-img-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+}
+
+.corp-admin-sidebar .voc-logo-title {
+  font-family: var(--ca-sidebar-font);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.sidebar-brand-name {
+  user-select: none;
+  text-transform: uppercase;
+}
+
+.sidebar-brand-tld {
+  font-weight: 500;
+  opacity: 0.72;
 }
 
 .brand-logo-wrap {
@@ -71,36 +105,13 @@
   text-transform: uppercase;
 }
 
-.sidebar-collapse-toggle {
-  position: absolute;
-  right: -14px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 10;
-  transition: all 150ms ease;
-}
-
-.sidebar-collapse-toggle:hover {
-  background: var(--accent-1);
-  color: #ffffff;
-  border-color: var(--accent-1);
-}
-
-/* Nav links - dark theme sidebar links */
+/* Nav links — flush edge-to-edge rows, no side gutter (the highlighted
+   row and its accent bar reach both edges of the sidebar, like the
+   reference). */
 .corp-sidebar-nav {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 0;
   margin-top: 1rem;
   flex: 1;
 }
@@ -111,21 +122,23 @@
   letter-spacing: 0.08em;
   color: var(--text-muted);
   margin-bottom: 6px;
-  padding-left: 8px;
+  padding-left: 20px;
 }
 
 .sidebar-nav-btn {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   width: 100%;
-  padding: 10px 12px;
-  border-radius: 12px;
+  padding: 13px 18px;
+  border-radius: 0;
   background: transparent;
   border: none;
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-  font-weight: 500;
+  color: var(--text-primary);
+  font-family: var(--ca-sidebar-font);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
   cursor: pointer;
   transition: all 150ms ease;
   white-space: nowrap;
@@ -148,96 +161,55 @@
   content: '';
   position: absolute;
   left: 0;
-  top: 6px;
-  bottom: 6px;
+  top: 0;
+  bottom: 0;
   width: 3px;
-  border-radius: 0 3px 3px 0;
   background: var(--accent-1);
 }
 
 /* Collapsed state adjustments */
 .corp-admin-sidebar.collapsed .sidebar-nav-btn {
   justify-content: center;
-  padding: 10px;
+  padding: 13px 0;
 }
 
 .corp-admin-sidebar.collapsed .brand-logo-wrap {
   margin: 0 auto;
 }
 
-/* Footer & Profile */
-.corp-sidebar-footer {
-  border-top: 1px solid var(--border);
-  padding-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.admin-profile-info {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.admin-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #0A84FF;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 0.875rem;
-  flex-shrink: 0;
-}
-
-.admin-email-text {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.adm-name {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  text-transform: capitalize;
-}
-
-.adm-mail {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.btn-corp-logout {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 12px;
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.2);
-  color: #f87171;
-  font-size: 0.88rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 150ms ease;
-}
-
-.btn-corp-logout:hover {
-  background: rgba(239, 68, 68, 0.2);
-  color: #ef4444;
-}
-
 @media (max-width: 768px) {
   .corp-admin-sidebar {
     display: none !important;
   }
+}
+
+/* Student sidebar — in the light (ios) theme identical to the teacher / center-admin one: solid
+   brand blue with white text (those rules live in
+   center-admin/theme.css under .ca-theme, which the student shell does not
+   carry, so they are repeated here for .is-student). */
+[data-theme="ios"] .corp-admin-sidebar.is-student {
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.72);
+  --text-muted: rgba(255, 255, 255, 0.55);
+  --border: rgba(255, 255, 255, 0.14);
+  --bg-glass-hover: rgba(255, 255, 255, 0.10);
+  --bg-tertiary: rgba(255, 255, 255, 0.14);
+  --accent-1: #ffffff;
+  --accent-1-dim: rgba(255, 255, 255, 0.18);
+  background: #3182ce;
+  border-right: none;
+  box-shadow: 1px 0 0 rgba(0, 0, 0, 0.06);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+[data-theme="ios"] .corp-admin-sidebar.is-student .sidebar-nav-btn.active {
+  font-weight: 700;
+}
+
+[data-theme="ios"] .corp-admin-sidebar.is-student .voc-logo-title {
+  background: none !important;
+  -webkit-text-fill-color: #ffffff !important;
+  color: #ffffff !important;
+  text-shadow: none !important;
 }

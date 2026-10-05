@@ -3,7 +3,7 @@ import { ref, set, push, update, remove, get, onValue, runTransaction } from 'fi
 import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
 import { migratePackWordsIfNeeded } from '../utils/wordsMigration';
-import { getDecayedMastery } from '../utils/memoryEngine';
+import { getDecayedMastery } from '@voc/memory-engine';
 
 // Cache/DB keep the raw, last-review-time mastery snapshot; consumers of
 // this hook should see it decayed toward the word's current retrievability

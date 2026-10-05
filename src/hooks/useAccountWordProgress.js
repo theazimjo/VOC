@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { ref, onValue } from 'firebase/database';
 import { db } from '../firebase';
-import { getDecayedMastery } from '../utils/memoryEngine';
+import { getDecayedMastery } from '@voc/memory-engine';
 
 /**
  * Every word this student has ever practiced, anywhere — any corp group,

@@ -6,8 +6,10 @@ import MatchGame from '../../../../../components/Practice/MatchGame';
 import QuizGame from '../../../../../components/Practice/QuizGame';
 import PronounceGame from '../../../../../components/Practice/PronounceGame';
 import IrregularVerbsTrainer from '../../../../../components/Practice/IrregularVerbsTrainer';
+import { useStudentT } from '../../../../../hooks/useStudentT';
 
 export default function PracticeSessionView({ p }) {
+  const { t } = useStudentT();
   const {
     allWords, handleAnswer, handleBack, handleComplete, handleUpdateWord,
     loadedPack, practiceWords, progressPct, selectedMode, setProgressPct,
@@ -21,7 +23,7 @@ export default function PracticeSessionView({ p }) {
       onUpdateWord: handleUpdateWord, // Syncs spaced repetition statistics
       onAnswer: handleAnswer,
       onExit: (skipConfirm = true) => handleBack(skipConfirm),
-      sourceName: loadedPack.title || "Kutubxona",
+      sourceName: loadedPack.title || t('practice.library'),
       language: loadedPack.language || 'en-US',
       onProgress: (current, total) => setProgressPct(total > 0 ? (current / total) * 100 : 0)
     };
@@ -47,11 +49,11 @@ export default function PracticeSessionView({ p }) {
     >
       {selectedMode !== 'spelling' && selectedMode !== 'flashcard' && (
         <div className="practice-session-header clean-quiz-header">
-          <button className="clean-back-arrow" onClick={handleBack} title="Mashqdan chiqish">
+          <button className="clean-back-arrow" onClick={handleBack} title={t('practice.leave')}>
             <ChevronLeft size={22} strokeWidth={2.5} />
           </button>
           <h1 className="clean-quiz-title">
-            {selectedMode === 'flashcard' ? '🧠 Kartochkalar' : selectedMode === 'spelling' ? '✍️ Imlo mashqi' : selectedMode === 'match' ? '🔀 Juftlash' : selectedMode === 'quiz' ? '📝 Test' : selectedMode === 'pronounce' ? '🎙️ Talaffuz' : 'Mashq'}
+            {selectedMode === 'flashcard' ? '🧠 ' : selectedMode === 'spelling' ? '✍️ ' : selectedMode === 'match' ? '🔀 ' : selectedMode === 'quiz' ? '📝 ' : selectedMode === 'pronounce' ? '🎙️ ' : ''}{selectedMode === 'flashcard' ? t('practice.modeFlashcard') : selectedMode === 'spelling' ? t('practice.modeSpelling') : selectedMode === 'match' ? t('practice.modeMatch') : selectedMode === 'quiz' ? t('practice.modeQuiz') : selectedMode === 'pronounce' ? t('practice.modePronounce') : t('practice.modeDefault')}
           </h1>
           <div style={{ width: '40px', opacity: 0 }}></div>
 

@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { useOutletContext, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { ChevronLeft } from 'lucide-react';
 import { ref, get, update } from 'firebase/database';
@@ -8,7 +8,7 @@ import { updateStudentUnitProgress } from '../../../../services/corpService';
 import { weightedSelectWords, filterWordsForMode, PRACTICE_MODE_MIN_WORDS, corpWordStorageId } from '../../../../utils/helpers';
 import { playSound, triggerVibration } from '../../../../utils/feedback';
 import { getWordCluster } from '../../../../experiment/semanticClassifier';
-import { computeClusterCalibration, getDecayedMastery, computeRetentionStats } from '../../../../utils/memoryEngine';
+import { computeClusterCalibration, getDecayedMastery, computeRetentionStats } from '@voc/memory-engine';
 import { saveReviewEvent } from '../../../../experiment/experimentDB';
 import IosSpinner from '../../../../components/common/IosSpinner';
 import { IRREGULAR_VERBS_PACK_ID } from '../../../../data/irregularVerbsCorpPack';
@@ -17,10 +17,12 @@ import IntroView from './views/IntroView';
 import PracticeSessionView from './views/PracticeSessionView';
 import ResultsView from './views/ResultsView';
 import ExitPracticeModal from './modals/ExitPracticeModal';
+import { useStudentT } from '../../../../hooks/useStudentT';
 import '../../../personal/PracticePage.css';
 import './CorpPractice.css';
 
 export default function CorpPractice() {
+  const { t } = useStudentT();
   const navigate = useNavigate();
   const { packId, monthId, unitId } = useParams();
   const [searchParams] = useSearchParams();
@@ -43,6 +45,11 @@ export default function CorpPractice() {
   const [saving, setSaving] = useState(false);
   const [roundNumber, setRoundNumber] = useState(1);
   const [showExitModal, setShowExitModal] = useState(false);
+  // Wall-clock start of the current practice run, for the time-spent stat
+  // the center admin dashboard shows. Set once in handleStartPractice, not
+  // reset on the intro->practice step change, so a "review wrong words"
+  // round still counts as the same session.
+  const sessionStartRef = useRef(null);
 
   // Derive corporate pack details reactively from the StudentLayout context —
   // search across all three categories (Asosiy/Kerakli/Qo'shimcha) since a
@@ -142,6 +149,7 @@ export default function CorpPractice() {
     setWrongWords([]);
     setProgressPct(0);
     setRoundNumber(1);
+    sessionStartRef.current = Date.now();
     setPracticeWords(sourceWords);
     setStep('intro');
   }, [packId, step, sourceWords]);
@@ -166,7 +174,7 @@ export default function CorpPractice() {
       <div style={{ padding: '3rem 1.5rem', textAlign: 'center' }}>
         <div className="ios-activity-indicator">
           <IosSpinner />
-          <span style={{ color: 'var(--text-secondary)' }}>Yuklanmoqda...</span>
+          <span style={{ color: 'var(--text-secondary)' }}>{t('common.loading')}</span>
         </div>
       </div>
     );
@@ -183,6 +191,7 @@ export default function CorpPractice() {
     setWrongWords([]);
     setProgressPct(0);
     setRoundNumber(1);
+    sessionStartRef.current = Date.now();
 
     // Spaced repetition weighted selection — Spelling/Sentence narrow to
     // already-seen words first, same as individual practice.
@@ -282,6 +291,12 @@ export default function CorpPractice() {
         const { retentionPercent, atRisk } = computeRetentionStats(decayed);
         const wordsLearned = decayed.filter(w => (w.mastery || 0) >= 60).length;
 
+        // Wall-clock duration of this practice run, capped at 60 minutes so
+        // a tab left open in the background can't blow out the center's
+        // average-time-spent stat.
+        const rawSeconds = sessionStartRef.current ? Math.round((Date.now() - sessionStartRef.current) / 1000) : 0;
+        const timeSpentSeconds = Math.min(Math.max(rawSeconds, 0), 3600);
+
         // Keyed by the real pack id (route param), not `loadedPack.id` (a
         // composite unit id) — the teacher dashboard matches this against
         // group.assignedPacks/customPacks, so a mismatched key here would
@@ -294,6 +309,7 @@ export default function CorpPractice() {
           masteryPercent,
           retentionPercent,
           atRiskCount: atRisk,
+          timeSpentSeconds,
         };
         await updateStudentUnitProgress(membership.centerId, membership.groupId, user.uid, packId, `${monthId}_${unitId}`, progressStats);
       } catch (err) {
@@ -350,11 +366,11 @@ export default function CorpPractice() {
           <button
             className="ios-back-btn"
             onClick={handleBack}
-            aria-label="Orqaga"
-            title="Orqaga"
+            aria-label={t('common.back')}
+            title={t('common.back')}
           >
             <ChevronLeft size={18} strokeWidth={2.5} />
-            <span>Orqaga</span>
+            <span>{t('common.back')}</span>
           </button>
         </div>
       )}

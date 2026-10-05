@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
+import { useStudentT } from '../../../../../hooks/useStudentT';
 import IosSpinner from '../../../../../components/common/IosSpinner';
 
 export default function IntroView({ p }) {
+  const { t } = useStudentT();
   const { practiceWords, selectedMode, setStep } = p;
 
   return (
@@ -20,13 +22,13 @@ export default function IntroView({ p }) {
                 {selectedMode === 'flashcard' ? '🧠' : selectedMode === 'spelling' ? '✍️' : selectedMode === 'match' ? '🔀' : selectedMode === 'quiz' ? '📝' : selectedMode === 'pronounce' ? '🎙️' : '🎮'}
               </div>
               <h2>
-                {selectedMode === 'flashcard' ? 'Kartochkalar' : selectedMode === 'spelling' ? 'Imlo mashqi' : selectedMode === 'match' ? 'Juftlash' : selectedMode === 'quiz' ? 'Test' : selectedMode === 'pronounce' ? 'Talaffuz' : 'Mashq'}
+                {selectedMode === 'flashcard' ? t('practice.modeFlashcard') : selectedMode === 'spelling' ? t('practice.modeSpelling') : selectedMode === 'match' ? t('practice.modeMatch') : selectedMode === 'quiz' ? t('practice.modeQuiz') : selectedMode === 'pronounce' ? t('practice.modePronounce') : t('practice.modeDefault')}
               </h2>
-              <p>{practiceWords.length} ta so'z tayyorlandi</p>
+              <p>{t('practice.wordsReady', { n: practiceWords.length })}</p>
               
               <div className="ios-activity-indicator" style={{ marginTop: 'var(--space-md)' }}>
                 <IosSpinner />
-                <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-secondary)' }}>Mashq tayyorlanmoqda...</span>
+                <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-secondary)' }}>{t('practice.preparing')}</span>
               </div>
             </div>
           </motion.div>

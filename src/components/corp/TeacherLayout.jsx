@@ -1,20 +1,27 @@
 import { useMemo } from 'react';
 import { Navigate, Outlet, useOutletContext } from 'react-router-dom';
 import TeacherSidebar from './TeacherSidebar';
+import TeacherTopbar from './TeacherTopbar';
 import TeacherBottomNav from './TeacherBottomNav';
 import { TeacherDataProvider } from '../../pages/corp/teacher/TeacherDataContext';
+import { PageStyleContext, PanelLanguageContext, SheetPlacementContext } from '../../pages/corp/super-admin/ui';
 import './CorpAdminLayout.css';
 import '../../pages/corp/super-admin/sa.css';
+import '../../pages/corp/center-admin/theme.css';
+import '../../pages/corp/center-admin/uits.css';
 
-// Same Apple-style surface (sa-layout) as the admin panels.
+// The same shell as the center admin panel (CorpAdminLayout): sidebar,
+// topbar, always-light theme, centered sheets. `is-center-admin` is the
+// class every center-admin look hangs off (theme.css / uits.css), so the
+// teacher panel carries it too. Both panels are English (PanelLanguageContext).
 export default function TeacherLayout() {
   const identity = useOutletContext();
 
   const value = useMemo(() => (identity?.centerId ? {
     centerId: identity.centerId,
-    centerName: identity.centerName || "O'quv markazi",
+    centerName: identity.centerName || 'Learning center',
     teacherId: identity.teacherId || identity.uid,
-    teacherName: identity.teacherName || identity.name || "O'qituvchi",
+    teacherName: identity.teacherName || identity.name || 'Teacher',
     email: identity.email || '',
     phone: identity.phone || '',
   } : null), [identity]);
@@ -25,15 +32,22 @@ export default function TeacherLayout() {
 
   return (
     <TeacherDataProvider identity={value}>
-      <div className="corp-admin-layout sa-layout">
-        <TeacherSidebar centerName={value.centerName} teacherName={value.teacherName} email={value.email} phone={value.phone} />
+      <SheetPlacementContext.Provider value="center">
+      <PageStyleContext.Provider value="toolbar">
+      <PanelLanguageContext.Provider value="en">
+      <div className="corp-admin-layout sa-layout ca-theme is-center-admin is-teacher-panel">
+        <TeacherSidebar />
 
         <main className="corp-admin-main-pane">
+          <TeacherTopbar />
           <Outlet context={value} />
         </main>
 
         <TeacherBottomNav />
       </div>
+      </PanelLanguageContext.Provider>
+      </PageStyleContext.Provider>
+      </SheetPlacementContext.Provider>
     </TeacherDataProvider>
   );
 }

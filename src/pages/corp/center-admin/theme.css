@@ -7,6 +7,13 @@
    --sa-* tokens and tightens the radii, the components stay the same.
    ───────────────────────────────────────────────────────────── */
 
+/* Height of the persistent CorpAdminTopbar — the per-page ca-toolbar sticks
+   right below it (see uits.css .ca-toolbar top offset). Same in every
+   app theme, so it's set once, unconditionally. */
+.sa-layout.ca-theme {
+  --ca-topbar-h: 64px;
+}
+
 /* Dark (app "android" theme) */
 .sa-layout.ca-theme {
   --sa-bg: #0c0d0e;
@@ -32,14 +39,18 @@
   --sa-scrim: rgba(0, 0, 0, 0.6);
   --sa-radius: 4px;
   --ca-border-strong: #2b2d35;
-  --ca-sidebar-bg: #121315;
-  --ca-active-bg: #1c1e22;
-  --ca-active-text: #f4f4f5;
+  --ca-sidebar-bg: #3182ce;
+  --ca-active-bg: rgba(255, 255, 255, 0.16);
+  --ca-active-text: #ffffff;
 }
 
 /* Light */
 [data-theme="ios"] .sa-layout.ca-theme,
-[data-theme="sepia"] .sa-layout.ca-theme {
+[data-theme="sepia"] .sa-layout.ca-theme,
+/* Center admin has no dark mode — always light, regardless of the
+   account's personal (learner-app) theme setting. See AdminSettings.jsx,
+   which no longer offers a theme picker for this panel. */
+.sa-layout.ca-theme.is-center-admin {
   --sa-bg: #f8fafc;
   --sa-surface: #ffffff;
   --sa-surface-2: #fafafa;
@@ -57,12 +68,46 @@
   --sa-sheet-cell: #ffffff;
   --sa-scrim: rgba(15, 23, 42, 0.4);
   --ca-border-strong: #e4e4e7;
-  --ca-sidebar-bg: #ffffff;
-  --ca-active-bg: #f1f5f9;
-  --ca-active-text: #007aff;
+  --ca-sidebar-bg: #3182ce;
+  --ca-active-bg: rgba(255, 255, 255, 0.18);
+  --ca-active-text: #ffffff;
 }
 
-/* ── Corners: 4px controls and cards, 6px for floating layers ── */
+/* Some shared corp components (ConfirmSheet, etc.) style themselves with
+   the app-wide --bg-, --text- and --border tokens (index.css) instead of
+   the --sa- ones above. Those flip dark under [data-theme="android"] at the
+   <html> level, so redeclare them here too — any inherited custom property
+   is overridden by one set directly on the element itself, regardless of
+   the ancestor selector's specificity, which is what keeps every center
+   admin page (and portalless overlays rendered inside it) pinned to light
+   no matter what theme the account has set elsewhere in VOC. */
+.is-center-admin {
+  --bg-primary: #f2f2f7;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #e5e5ea;
+  --bg-glass: rgba(255, 255, 255, 0.75);
+  --bg-glass-hover: rgba(245, 245, 248, 0.9);
+  --bg-glass-strong: rgba(255, 255, 255, 0.95);
+  --accent-1: #007aff;
+  --accent-1-dim: rgba(0, 122, 255, 0.1);
+  --accent-2: #34c759;
+  --accent-2-dim: rgba(52, 199, 89, 0.1);
+  --accent-3: #ff9500;
+  --accent-3-dim: rgba(255, 149, 0, 0.1);
+  --text-primary: rgba(0, 0, 0, 0.88);
+  --text-secondary: rgba(60, 60, 67, 0.6);
+  --text-muted: rgba(60, 60, 67, 0.35);
+  --border: rgba(60, 60, 67, 0.16);
+  --border-light: rgba(60, 60, 67, 0.08);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(0, 0, 0, 0.04);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.06), 0 24px 48px rgba(0, 0, 0, 0.08);
+  --shadow-glow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* ── Corners: rounder, friendlier shapes than the old CRM look —
+   10px controls and cards, 8px for chips/segments, 16px for floating
+   layers (sheets/toasts). ── */
 .ca-theme .sa-back,
 .ca-theme .sa-row-icon,
 .ca-theme .sa-cell-main .sa-row-icon,
@@ -81,27 +126,43 @@
 .ca-theme .sa-flow-error,
 .ca-theme .sa-flow-icon,
 .ca-theme .sa-password-btn,
-.ca-theme .sa-hero-avatar {
-  border-radius: 4px;
+.ca-theme .sa-hero-avatar,
+.ca-theme .ca-card,
+.ca-theme .ca-kpi,
+.ca-theme .ca-icon-box,
+.ca-theme .ca-toolbar-icon,
+.ca-theme .ca-toolbar-back {
+  border-radius: 10px;
 }
 
 .ca-theme .sa-segment,
 .ca-theme .sa-segment-thumb,
-.ca-theme .sa-chip {
-  border-radius: 3px;
+.ca-theme .sa-chip,
+.ca-theme .ca-tag {
+  border-radius: 8px;
 }
 
 .ca-theme .sa-sheet,
 .ca-theme .sa-toast,
 .ca-theme .sa-bottom-bar,
 .ca-theme .sa-qr {
-  border-radius: 6px;
+  border-radius: 16px;
 }
 
 @media (max-width: 768px) {
   .ca-theme .sa-sheet {
     border-radius: 8px 8px 0 0;
   }
+}
+
+/* A centered Sheet (SheetPlacementContext="center", e.g. SetPasswordSheet
+   opened from the Faculty edit modal) should read as the same modal family
+   as the panel's bespoke invite/edit modal cards (.invite-modal-card,
+   .teacher-info-modal-card) — same corner radius and shadow — instead of
+   the drawer's floating-panel look. */
+.ca-theme .sa-sheet:not(.is-drawer) {
+  border-radius: 12px;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15), 0 10px 15px -5px rgba(0, 0, 0, 0.04);
 }
 
 /* Hairline borders read as the elevation, like the reference. */
@@ -133,41 +194,59 @@
   box-shadow: inset 0 0 0 1px var(--sa-separator);
 }
 
-/* ── Sidebar ── */
+/* ── Sidebar — solid brand blue, same in every app theme (like the
+   reference dashboard), independent of the light/dark/sepia content
+   area next to it. ── */
 .ca-theme .corp-admin-sidebar {
-  --text-primary: var(--sa-label);
-  --text-secondary: var(--sa-label-2);
-  --text-muted: var(--sa-label-3);
-  --border: var(--sa-separator);
-  --bg-glass-hover: var(--sa-press);
-  --bg-tertiary: var(--sa-fill);
-  --accent-1: var(--sa-blue);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.72);
+  --text-muted: rgba(255, 255, 255, 0.55);
+  --border: rgba(255, 255, 255, 0.14);
+  --bg-glass-hover: rgba(255, 255, 255, 0.10);
+  --bg-tertiary: rgba(255, 255, 255, 0.14);
+  --accent-1: #ffffff;
   --accent-1-dim: var(--ca-active-bg);
   background: var(--ca-sidebar-bg);
+  border-right: none;
+  box-shadow: 1px 0 0 rgba(0, 0, 0, 0.06);
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
 }
 
 .ca-theme .sidebar-nav-btn {
-  border-radius: 4px;
-  border: 1px solid transparent;
-  font-size: 13px;
+  border-radius: 0;
+  border: none;
 }
 
 .ca-theme .sidebar-nav-btn.active {
   background: var(--ca-active-bg);
-  border-color: var(--ca-border-strong);
   color: var(--ca-active-text);
+  font-weight: 700;
 }
 
-.ca-theme .sidebar-nav-btn.active::before {
-  display: none;
-}
-
-.ca-theme .sidebar-collapse-toggle,
-.ca-theme .btn-corp-logout,
 .ca-theme .brand-logo-wrap {
-  border-radius: 4px;
+  border-radius: 10px;
+}
+
+/* VocLogo's theme-gradient title/icon is tuned for the app background, not
+   a solid blue bar — pin it to solid white here instead. !important because
+   the base .voc-logo-title rules (VocLogo.css) apply a background-clip:text
+   gradient whose selector (:root:not(...):not(...) .voc-logo-title) is more
+   specific than this one in the default (non-ios/sepia) personal theme, so
+   plain overrides here lose that fight and the text renders translucent. */
+.ca-theme .corp-admin-sidebar .voc-logo-title {
+  background: none !important;
+  -webkit-text-fill-color: #ffffff !important;
+  color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+/* Center admin's own "vocabry.uz" wordmark reads a bit bigger than the
+   shared default — scoped to .is-center-admin (not just .ca-theme, which
+   the teacher panel's sidebar also matches) so this doesn't resize the
+   teacher panel's "VOCABRY" brand text too. */
+.is-center-admin .corp-admin-sidebar .voc-logo-title {
+  font-size: 1.65rem;
 }
 
 /* ── Phone tab bar ── */
@@ -175,11 +254,11 @@
   --text-muted: var(--sa-label-2);
   background: var(--sa-surface);
   border-color: var(--sa-separator);
-  border-radius: 6px;
+  border-radius: 16px;
 }
 
 .ca-theme .bottom-nav-link {
-  border-radius: 4px;
+  border-radius: 10px;
 }
 
 .ca-theme .bottom-nav-link.active {
@@ -190,4 +269,28 @@
 /* Right-edge drawers sit flush against the window edge. */
 .ca-theme .sa-sheet.is-drawer {
   border-radius: 0;
+}
+
+/* ── Typography: normal-case sans titles instead of the old uppercase
+   mono "CRM terminal" look, matching the reference dashboard's plain
+   section headings (icon + title). ── */
+.ca-theme .ca-toolbar-title,
+.ca-theme .ca-card-title,
+.ca-theme .sa-section-title {
+  font-family: inherit;
+  text-transform: none;
+  letter-spacing: -0.01em;
+  font-size: 15px;
+}
+
+.ca-theme .ca-toolbar-sub,
+.ca-theme .ca-card-sub {
+  font-family: inherit;
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: 12.5px;
+}
+
+.ca-theme .sa-section-title::before {
+  display: none;
 }

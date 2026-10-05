@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
 import { Dumbbell } from 'lucide-react';
+import { useStudentT } from '../../../../../hooks/useStudentT';
 import { IRREGULAR_VERBS_PACK_ID } from '../../../../../data/irregularVerbsCorpPack';
 
 export default function ExitPracticeModal({ p }) {
+  const { t } = useStudentT();
   const { monthId, navigate, packId, setShowExitModal, setStep, topicBackQuery, unitId } = p;
 
   return (
@@ -32,10 +34,10 @@ export default function ExitPracticeModal({ p }) {
             </div>
 
             <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
-              Mashqni tugatasizmi?
+              {t('practice.exitTitle')}
             </h3>
             <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.4 }}>
-              Chiqsangiz, shu raunddagi natija saqlanmaydi.
+              {t('practice.exitText')}
             </p>
 
             <div style={{ display: 'flex', gap: '0.75rem', width: '100%', marginTop: '0.5rem' }}>
@@ -54,7 +56,7 @@ export default function ExitPracticeModal({ p }) {
                 }}
                 onClick={() => setShowExitModal(false)}
               >
-                Davom etish
+                {t('practice.keepGoing')}
               </button>
               <button
                 type="button"
@@ -83,7 +85,7 @@ export default function ExitPracticeModal({ p }) {
                   }
                 }}
               >
-                Chiqish
+                {t('practice.exit')}
               </button>
             </div>
           </motion.div>

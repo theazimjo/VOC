@@ -1,0 +1,333 @@
+/* Persistent header for the center-admin panel — search, quick add and
+   profile menu. Sits above the per-page ca-toolbar (see --ca-topbar-h). */
+
+.ca-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: var(--ca-topbar-h, 64px);
+  padding: 0 24px;
+  padding-top: env(safe-area-inset-top, 0px);
+  box-sizing: border-box;
+  background: var(--sa-surface);
+  border-bottom: 1px solid var(--sa-separator);
+}
+
+.ca-topbar-search {
+  position: relative;
+  flex: 1;
+  max-width: 480px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 12px;
+  border-radius: 10px;
+  background: var(--sa-fill);
+  box-shadow: inset 0 0 0 1px transparent;
+  color: var(--sa-label-2);
+  transition: box-shadow 150ms ease;
+}
+
+.ca-topbar-search.is-open,
+.ca-topbar-search:focus-within {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--sa-blue) 45%, transparent);
+}
+
+.ca-topbar-search-icon {
+  flex-shrink: 0;
+}
+
+.ca-topbar-search input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--sa-label);
+  font: inherit;
+  font-size: 14px;
+}
+
+.ca-topbar-search input::placeholder {
+  color: var(--sa-label-2);
+}
+
+.ca-topbar-search input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.ca-topbar-results {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  max-height: 360px;
+  overflow-y: auto;
+  padding: 6px;
+  border-radius: 12px;
+  background: var(--sa-surface);
+  box-shadow: 0 0 0 1px var(--sa-separator), 0 12px 32px rgba(0, 0, 0, 0.14);
+  z-index: 50;
+}
+
+.ca-topbar-empty {
+  padding: 14px 10px;
+  font-size: 13px;
+  color: var(--sa-label-2);
+  text-align: center;
+}
+
+.ca-topbar-result {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 10px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition: background 100ms ease;
+}
+
+.ca-topbar-result:hover {
+  background: var(--sa-fill);
+}
+
+.ca-topbar-result-kind {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--sa-blue) 12%, transparent);
+  color: var(--sa-blue);
+}
+
+.ca-topbar-result-kind.is-group {
+  background: color-mix(in srgb, var(--sa-purple) 14%, transparent);
+  color: var(--sa-purple);
+}
+
+.ca-topbar-result-kind.is-student {
+  background: color-mix(in srgb, var(--sa-green) 14%, transparent);
+  color: var(--sa-green);
+}
+
+.ca-topbar-result-text {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.ca-topbar-result-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--sa-label);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ca-topbar-result-sub {
+  font-size: 11.5px;
+  color: var(--sa-label-2);
+}
+
+.ca-topbar-right {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ca-topbar-add {
+  position: relative;
+}
+
+.ca-topbar-add-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border: none;
+  background: var(--sa-blue);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: filter 120ms ease, transform 120ms ease;
+}
+
+.ca-topbar-add-btn:hover {
+  filter: brightness(1.08);
+}
+
+.ca-topbar-add-btn:active {
+  transform: scale(0.94);
+}
+
+.ca-topbar-profile {
+  position: relative;
+}
+
+.ca-topbar-profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px 5px 5px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: transparent;
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+
+.ca-topbar-profile-btn:hover {
+  background: var(--sa-fill);
+  border-color: var(--sa-separator);
+}
+
+.ca-topbar-avatar {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--sa-blue);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.ca-topbar-profile-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.25;
+  min-width: 0;
+}
+
+.ca-topbar-profile-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sa-label);
+  text-transform: capitalize;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ca-topbar-profile-role {
+  font-size: 11px;
+  color: var(--sa-label-2);
+}
+
+.ca-topbar-chevron {
+  flex-shrink: 0;
+  color: var(--sa-label-2);
+  transition: transform 150ms ease;
+}
+
+.ca-topbar-chevron.is-open {
+  transform: rotate(180deg);
+}
+
+.ca-topbar-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 200px;
+  padding: 6px;
+  border-radius: 12px;
+  background: var(--sa-surface);
+  box-shadow: 0 0 0 1px var(--sa-separator), 0 12px 32px rgba(0, 0, 0, 0.14);
+  z-index: 50;
+}
+
+.ca-topbar-add .ca-topbar-menu {
+  left: 0;
+  right: auto;
+}
+
+.ca-topbar-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 10px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--sa-label);
+  font-size: 13.5px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 100ms ease;
+}
+
+.ca-topbar-menu-item:hover {
+  background: var(--sa-fill);
+}
+
+.ca-topbar-menu-item.is-danger {
+  color: var(--sa-red);
+}
+
+@media (max-width: 768px) {
+  .ca-topbar {
+    padding: 0 16px;
+    padding-top: env(safe-area-inset-top, 0px);
+    gap: 10px;
+  }
+
+  .ca-topbar-profile-text {
+    display: none;
+  }
+
+  .ca-topbar-profile-btn {
+    padding: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ca-topbar-search {
+    max-width: none;
+  }
+}
+
+/* Phones: the quick-add menu opened rightward from the "+" button and ran
+   off the screen. Anchor it to the right edge of the button group instead
+   (the profile avatar's right edge), so it stays inside the 16px gutter. */
+@media (max-width: 768px) {
+  .ca-topbar-right {
+    position: relative;
+  }
+
+  .ca-topbar-add {
+    position: static;
+  }
+
+  .ca-topbar-add .ca-topbar-menu {
+    left: auto;
+    right: 0;
+  }
+
+  .ca-topbar-menu {
+    max-width: calc(100vw - 32px);
+  }
+}

@@ -2,7 +2,7 @@
  * Utility / helper functions
  */
 
-import { getDecayedMastery } from './memoryEngine';
+import { getDecayedMastery } from '@voc/memory-engine';
 import { IRREGULAR_VERBS_PACK_ID } from '../data/irregularVerbsCorpPack';
 
 /**

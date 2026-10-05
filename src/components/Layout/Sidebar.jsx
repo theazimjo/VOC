@@ -1,236 +1,58 @@
-import { NavLink, useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useAuth } from '../../contexts/AuthContext';
+import { NavLink } from 'react-router-dom';
+import { LayoutDashboard, BookOpen, GraduationCap, FlaskConical, User, Presentation, Building2 } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { useAvatar } from '../../hooks/useAvatar';
 import { useStaffRole } from '../../hooks/useStaffRole';
-import { LayoutDashboard, BookOpen, GraduationCap, LogOut, FlaskConical, User, Presentation, Building2 } from 'lucide-react';
-import VocLogo from '../common/VocLogo';
+import '../corp/CorpAdminSidebar.css';
+// Still loaded for the shared .sidebar-link / .sidebar-overlay classes the
+// personal course sidebar (pages/personal/course/CourseSidebar) uses.
 import './Sidebar.css';
 
-const MotionNavLink = motion(NavLink);
-
-export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose }) {
-  const { user, logout } = useAuth();
+// Personal-mode sidebar — the same look as the corp student one
+// (StudentSidebar): "vocabry.uz" wordmark on top, flat nav rows, solid blue
+// in the light theme. Profile and logout live on the Profile page.
+export default function Sidebar() {
   const { t } = useLanguage();
-  const navigate = useNavigate();
-  const { avatarSrc, avatarError } = useAvatar(user?.photoURL);
   const { staffRole, staffPath, staffLabel, selectStaffPanel } = useStaffRole();
 
   const baseNavItems = [
-    { to: '/',         icon: LayoutDashboard, label: t('nav.dashboard') },
-    { to: '/library',  icon: BookOpen,        label: t('nav.library') },
-    { to: '/grammar',  icon: GraduationCap,   label: t('nav.grammar') },
-    { to: '/experiment', icon: FlaskConical,   label: t('nav.lab') },
-    { to: '/profile',  icon: User,            label: t('nav.profile') },
+    { to: '/', icon: LayoutDashboard, label: t('nav.dashboard') },
+    { to: '/library', icon: BookOpen, label: t('nav.library') },
+    { to: '/grammar', icon: GraduationCap, label: t('nav.grammar') },
+    { to: '/experiment', icon: FlaskConical, label: t('nav.lab') },
+    { to: '/profile', icon: User, label: t('nav.profile') },
   ];
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-    } catch {
-      // silently fail
-    }
-  };
-
-  const getInitials = () => {
-    const name = user?.displayName || user?.email || '?';
-    return name
-      .split(' ')
-      .map((w) => w[0])
-      .slice(0, 2)
-      .join('')
-      .toUpperCase();
-  };
 
   // Teachers (and center admins) get a way back into their panel.
   const navItems = staffRole
-    ? [...baseNavItems, { to: staffPath, icon: staffRole === 'center_admin' ? Building2 : Presentation, label: staffLabel, onSelect: selectStaffPanel, isStaff: true }]
+    ? [...baseNavItems, { to: staffPath, icon: staffRole === 'center_admin' ? Building2 : Presentation, label: staffLabel, onSelect: selectStaffPanel }]
     : baseNavItems;
 
-  const handleProfileClick = (e) => {
-    e.stopPropagation();
-    if (collapsed && onToggle) {
-      onToggle();
-    }
-    navigate('/profile');
-    if (onMobileClose) onMobileClose();
-  };
-
   return (
-    <>
-      {/* Mobile overlay */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            className="sidebar-overlay visible"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onMobileClose}
-          />
-        )}
-      </AnimatePresence>
+    <aside className="corp-admin-sidebar is-student is-personal">
+      <div className="sidebar-brand-header">
+        <span className="voc-logo-title sidebar-brand-name">
+          vocabry<span className="sidebar-brand-tld">.uz</span>
+        </span>
+      </div>
 
-      <motion.aside
-        className={`sidebar ${collapsed ? 'collapsed' : ''} ${
-          mobileOpen ? 'mobile-open' : ''
-        }`}
-        animate={{ width: collapsed ? 72 : 260 }}
-        transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-      >
-        {/* Header */}
-        <div className="sidebar-header">
-          <div 
-            className="sidebar-logo-wrapper" 
-            title={collapsed ? t('nav.expand') : t('nav.collapse')}
-            style={{ cursor: 'pointer' }}
-          >
-            <VocLogo collapsed={collapsed} onClick={onToggle} />
-          </div>
-        </div>
-
-        {/* Navigation */}
-        <nav className="sidebar-nav">
-          {navItems.map((item) => {
-            const IconComponent = item.icon;
-            return (
-              <MotionNavLink
-                key={item.to}
-                to={item.to}
-                end={item.to === '/'}
-                className={({ isActive }) =>
-                  `sidebar-link ${isActive ? 'active' : ''} ${item.isStaff ? 'sidebar-link-staff' : ''}`
-                }
-                onClick={() => { item.onSelect?.(); onMobileClose?.(); }}
-                title={collapsed ? item.label : undefined}
-                initial="initial"
-                whileHover="hover"
-                whileTap="tap"
-              >
-                {({ isActive }) => (
-                  <>
-                    {isActive && (
-                      <motion.div
-                        className="sidebar-link-active-bg"
-                        layoutId="activeSidebarIndicator"
-                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                      />
-                    )}
-                    <motion.span 
-                      className="sidebar-link-icon"
-                      variants={{
-                        initial: { scale: 1, rotate: 0, y: 0 },
-                        hover: { scale: 1.18, rotate: -8, y: -1 },
-                        tap: { scale: 0.92, rotate: 0, y: 0 }
-                      }}
-                      transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-                    >
-                      <IconComponent size={20} strokeWidth={2.2} />
-                    </motion.span>
-                    <AnimatePresence initial={false}>
-                      {!collapsed && (
-                        <motion.span 
-                          className="sidebar-link-text"
-                          initial={{ opacity: 0, x: -8 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          exit={{ opacity: 0, x: -8 }}
-                          transition={{ duration: 0.18, ease: 'easeOut' }}
-                        >
-                          <motion.span
-                            style={{ display: 'inline-block' }}
-                            variants={{
-                              initial: { x: 0 },
-                              hover: { x: 5 },
-                              tap: { x: 0 }
-                            }}
-                            transition={{ type: 'spring', stiffness: 350, damping: 20 }}
-                          >
-                            {item.label}
-                          </motion.span>
-                        </motion.span>
-                      )}
-                    </AnimatePresence>
-                  </>
-                )}
-              </MotionNavLink>
-            );
-          })}
-        </nav>
-
-        {/* Footer — user info */}
-        <div className="sidebar-footer">
-          <motion.div
-            className="sidebar-profile-card"
-            onClick={handleProfileClick}
-            title={collapsed ? `${t('nav.profile')} (${t('nav.expand')})` : t('nav.profile')}
-            initial="initial"
-            whileHover="hover"
-            whileTap="tap"
-          >
-            <motion.div 
-              className="sidebar-avatar"
-              variants={{
-                initial: { scale: 1, rotate: 0 },
-                hover: { scale: 1.14, rotate: -6 },
-                tap: { scale: 0.94, rotate: 0 }
-              }}
-              transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+      <nav className="corp-sidebar-nav">
+        {navItems.map((item) => {
+          const Icon = item.icon;
+          return (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              end={item.to === '/'}
+              className={({ isActive }) => `sidebar-nav-btn ${isActive ? 'active' : ''}`}
+              onClick={() => item.onSelect?.()}
+              title={item.label}
             >
-              {avatarSrc && !avatarError ? (
-                <img src={avatarSrc} alt={user?.displayName || 'Avatar'} />
-              ) : (
-                getInitials()
-              )}
-            </motion.div>
-
-            <AnimatePresence initial={false}>
-              {!collapsed && (
-                <motion.div 
-                  className="sidebar-user-info"
-                  initial={{ opacity: 0, x: -8 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -8 }}
-                  transition={{ duration: 0.18, ease: 'easeOut' }}
-                >
-                  <motion.div
-                    variants={{
-                      initial: { x: 0 },
-                      hover: { x: 5 },
-                      tap: { x: 0 }
-                    }}
-                    transition={{ type: 'spring', stiffness: 350, damping: 20 }}
-                  >
-                    <div className="sidebar-user-name">
-                      {user?.displayName || t('nav.user')}
-                    </div>
-                    <div className="sidebar-user-email">{user?.email}</div>
-                  </motion.div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-
-          <AnimatePresence initial={false}>
-            {!collapsed && (
-              <motion.button
-                className="sidebar-logout"
-                onClick={(e) => { e.stopPropagation(); handleLogout(); }}
-                aria-label={t('nav.logout')}
-                title={t('nav.logout')}
-                whileHover={{ scale: 1.15, rotate: -8 }}
-                whileTap={{ scale: 0.9 }}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ duration: 0.18, ease: 'easeOut' }}
-              >
-                <LogOut size={16} strokeWidth={2.2} />
-              </motion.button>
-            )}
-          </AnimatePresence>
-        </div>
-      </motion.aside>
-    </>
+              <Icon size={23} strokeWidth={2.3} />
+              <span>{item.label}</span>
+            </NavLink>
+          );
+        })}
+      </nav>
+    </aside>
   );
 }

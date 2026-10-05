@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2, Eye, CheckCircle2, XCircle, ChevronRight, ChevronLeft, X, Check, Sparkles } from 'lucide-react';
 import { playSound, triggerVibration } from '../../utils/feedback';
 import { weightedSelectWords, shuffleArray } from '../../utils/helpers';
-import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
+import { inferConfidenceFromSpeed } from '@voc/memory-engine';
 import { useLanguage } from '../../contexts/LanguageContext';
 import PracticeQuitModal from './PracticeQuitModal';
 import './IrregularVerbsTrainer.css';

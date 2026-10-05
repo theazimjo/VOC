@@ -8,8 +8,8 @@
 import { useMemo, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TrendingUp, TrendingDown, Clock, Brain, Lightbulb, AlertTriangle, Stethoscope, Rocket } from 'lucide-react';
-import { getForgettingCurvePoints, getMemoryHealth, computeRecallProbability, isDue, computeCategoryMastery, computeInitialStability, explainSchedulingDecision, simulateReviewDayOptions } from '../../utils/memoryEngine';
-import { diagnoseForgetting, getConfusionPairsForWord } from '../../utils/forgettingAutopsy';
+import { getForgettingCurvePoints, getMemoryHealth, computeRecallProbability, isDue, computeCategoryMastery, computeInitialStability, explainSchedulingDecision, simulateReviewDayOptions } from '@voc/memory-engine';
+import { diagnoseForgetting, getConfusionPairsForWord } from '@voc/memory-engine';
 import { getWordCluster } from '../semanticClassifier';
 import { useLanguage } from '../../contexts/LanguageContext';
 

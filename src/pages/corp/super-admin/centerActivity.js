@@ -90,6 +90,26 @@ export function studentMastery(student) {
   return Math.round(values.reduce((a, b) => a + b, 0) / values.length);
 }
 
+// Total seconds a student has spent typing, summed across every unit's
+// latest recorded session (see corpService.updateStudentUnitProgress). Pass
+// `sinceTs` to only count units last practiced after that time (e.g. "this
+// week"). Units saved before this stat existed have no `timeSpentSeconds`
+// and simply contribute 0 — not an error, just no data yet.
+export function studentTimeSpent(student, { sinceTs } = {}) {
+  let seconds = 0;
+  Object.values(student?.progress || {}).forEach((pack) => {
+    Object.values(pack?.units || {}).forEach((u) => {
+      if (!u?.timeSpentSeconds) return;
+      if (sinceTs) {
+        const t = u.lastActivity ? Date.parse(u.lastActivity) : 0;
+        if (t < sinceTs) return;
+      }
+      seconds += u.timeSpentSeconds;
+    });
+  });
+  return seconds;
+}
+
 export function formatRelative(ts, now = Date.now()) {
   if (!ts) return "hali faollik yo'q";
   const diff = now - ts;
@@ -101,8 +121,54 @@ export function formatRelative(ts, now = Date.now()) {
   return new Date(ts).toLocaleDateString('uz-UZ', { day: 'numeric', month: 'short' });
 }
 
+// English equivalent of formatRelative, for the center admin panel only
+// (built fully in English — see DESIGN.md's Language section). Teacher and
+// super admin stay on the Uzbek formatRelative above; this is a separate
+// function rather than a locale param so neither panel's copy can drift by
+// accident when one of them changes.
+export function formatRelativeEn(ts, now = Date.now()) {
+  if (!ts) return 'no activity yet';
+  const diff = now - ts;
+  if (diff < 60 * 60 * 1000) return 'just now';
+  if (diff < DAY) {
+    const hours = Math.floor(diff / (60 * 60 * 1000));
+    return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+  }
+  const days = Math.floor(diff / DAY);
+  if (days === 1) return 'yesterday';
+  if (days < 30) return `${days} day${days > 1 ? 's' : ''} ago`;
+  return new Date(ts).toLocaleDateString('en-US', { day: 'numeric', month: 'short' });
+}
+
 export const HEALTH_LABEL = {
   active: 'Faol',
   quiet: 'Sustlashgan',
   new: 'Boshlanmagan',
 };
+
+// One day's mastery point for a center: the average of every student (in
+// active groups) who has practiced, plus how many that is. Written nightly
+// by api/cron-mastery-snapshot.js and shown live for "today" on the admin
+// dashboard, so both use this one definition.
+export function masterySnapshot(groups) {
+  let practiced = 0;
+  let total = 0;
+  let sum = 0;
+  (groups || []).forEach((g) => {
+    if (g?.status === 'archived') return;
+    Object.values(g?.students || {}).forEach((st) => {
+      total += 1;
+      const m = studentMastery(st);
+      if (m != null) {
+        practiced += 1;
+        sum += m;
+      }
+    });
+  });
+  return { avg: practiced ? Math.round(sum / practiced) : null, practiced, total };
+}
+
+// Calendar day in Tashkent (the product's market), e.g. "2026-09-26".
+export function tashkentDay(ts = Date.now()) {
+  return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Tashkent', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(ts));
+}

@@ -289,27 +289,6 @@
     font-size: 1.15rem;
   }
 
-  .library-tabs {
-    width: 100% !important;
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 4px !important;
-    padding: 3px !important;
-    border-radius: 12px !important;
-  }
-  
-  .library-tab-btn {
-    padding: 8px 4px !important;
-    font-size: 0.8rem !important;
-    justify-content: center !important;
-    gap: 4px !important;
-  }
-  
-  /* Hide emoji icons inside tabs on mobile to save space */
-  .library-tab-btn span.tab-icon {
-    display: none !important;
-  }
-
   .corp-unit-detail-title {
     font-size: 1.15rem !important;
   }

@@ -1,26 +1,77 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  Activity, AlertTriangle, BookOpen, CheckCircle2, ChevronRight, GraduationCap, LayoutDashboard, Layers,
-  NotebookPen, RefreshCw, Settings, TrendingUp, UserPlus, Users, Zap,
-} from 'lucide-react';
-import { formatRelative, latestUnitActivity, studentMastery } from '../super-admin/centerActivity';
-import { Page } from '../super-admin/ui';
+import { Activity, Calendar, Check, ChevronDown, ChevronRight, Clock, GraduationCap, RefreshCw, Target, User, Users } from 'lucide-react';
+import { formatRelativeEn, latestUnitActivity, studentMastery, studentTimeSpent } from '../super-admin/centerActivity';
+import { Page, Row } from '../super-admin/ui';
 import { useIsDesktop } from '../super-admin/useIsDesktop';
 import { useCenterData } from './CenterDataContext';
 
 const DAY = 24 * 60 * 60 * 1000;
-const fmtDay = (ts) => new Date(ts).toLocaleDateString('uz-UZ', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
 
-// Center admin home, UITS CRM dashboard layout: KPI cards, this week's
-// activity per group, a few secondary numbers, the recent event feed and
-// what needs attention. Every number comes from the center node already
-// loaded — nothing estimated.
+const DATE_RANGES = [
+  { value: 'yesterday', label: 'Yesterday', days: 1 },
+  { value: 'week', label: 'Last Week', days: 7 },
+  { value: 'month', label: 'Last Month', days: 30 },
+];
+
+// Mastery buckets for the breakdown bar — same thresholds as the rest of
+// the module's bars (.ca-topic-bar is-good / is-mid / is-low).
+const LEVELS = [
+  { key: 'strong', label: 'Strong', hint: '70%+', cls: 'is-good' },
+  { key: 'learning', label: 'Learning', hint: '40–69%', cls: 'is-mid' },
+  { key: 'help', label: 'Needs help', hint: 'under 40%', cls: 'is-low' },
+  { key: 'none', label: 'Not started', hint: 'no practice yet', cls: 'is-none' },
+];
+
+const levelOf = (mastery) => {
+  if (mastery == null) return 'none';
+  if (mastery >= 70) return 'strong';
+  if (mastery >= 40) return 'learning';
+  return 'help';
+};
+
+const barCls = (m) => (m >= 70 ? 'is-good' : m >= 40 ? 'is-mid' : 'is-low');
+
+const formatDuration = (totalSeconds) => {
+  const s = Math.round(totalSeconds || 0);
+  const h = Math.floor(s / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  if (h) return `${h}h ${m}m`;
+  if (m) return `${m}m ${String(s % 60).padStart(2, '0')}s`;
+  return `${s}s`;
+};
+
+const fmtDay = (ts) => new Date(ts).toLocaleDateString('en-US', { day: 'numeric', month: 'short' });
+
+const AVATAR_TONES = ['blue', 'green', 'purple', 'orange', 'pink', 'teal'];
+const toneFor = (id = '') => AVATAR_TONES[[...id].reduce((a, c) => a + c.charCodeAt(0), 0) % AVATAR_TONES.length];
+
+// Center admin home: Student Activity. One date filter drives the whole
+// page (active students, time spent, the ranking); mastery is all-time.
+// Every number comes from progress data students already write
+// (corpService.updateStudentUnitProgress): "practiced" from `lastActivity`
+// (on every practiced unit), time from `timeSpentSeconds` (only on units
+// practiced since time tracking was added — so the time tile says so
+// instead of showing 0 when it has nothing yet). No teacher leaderboard;
+// that lives on Faculty / Teacher Detail.
 export default function AdminHome() {
   const navigate = useNavigate();
   const isDesktop = useIsDesktop();
-  const { centerName, loading, reload, activity, teachers, activeGroups, packs, students, teacherById } = useCenterData();
+  const { loading, reload, students } = useCenterData();
   const [refreshing, setRefreshing] = useState(false);
+  const [dateRange, setDateRange] = useState('week');
+  const [dateOpen, setDateOpen] = useState(false);
+  const dateMenuRef = useRef(null);
+  const activeRange = DATE_RANGES.find((r) => r.value === dateRange) || DATE_RANGES[1];
+
+  useEffect(() => {
+    if (!dateOpen) return;
+    const onClick = (e) => {
+      if (dateMenuRef.current && !dateMenuRef.current.contains(e.target)) setDateOpen(false);
+    };
+    document.addEventListener('mousedown', onClick);
+    return () => document.removeEventListener('mousedown', onClick);
+  }, [dateOpen]);
 
   const refresh = async () => {
     setRefreshing(true);
@@ -28,225 +79,241 @@ export default function AdminHome() {
     setRefreshing(false);
   };
 
-  const data = useMemo(() => {
-    const now = Date.now();
-    const idleTeachers = teachers.filter((t) => t.groupsCount === 0);
-    const emptyGroups = activeGroups.filter((g) => g.activity.students === 0);
-    const quietGroups = activeGroups.filter((g) => g.activity.students > 0 && (!g.activity.lastActivity || now - g.activity.lastActivity > 14 * DAY));
+  const now = Date.now();
+  const sinceTs = now - activeRange.days * DAY;
 
-    const masteries = students.map((st) => studentMastery(st)).filter((m) => m != null);
-    const avgMastery = masteries.length ? Math.round(masteries.reduce((a, b) => a + b, 0) / masteries.length) : null;
+  const rows = useMemo(() => students.map((st) => ({
+    ...st,
+    lastTs: latestUnitActivity(st),
+    timeSeconds: studentTimeSpent(st, { sinceTs }),
+    mastery: studentMastery(st),
+  })), [students, sinceTs]);
 
-    // Real events, newest first: homework given, students joining, practice.
-    const events = [];
-    activeGroups.forEach((g) => {
-      const teacher = teacherById[g.teacherId]?.name || "O'qituvchisiz";
-      Object.values(g.homeworkList || {}).forEach((hw) => {
-        const t = Date.parse(hw.assignedAt || '');
-        if (t) events.push({ t, kind: 'hw', title: `Vazifa berildi: ${hw.name || 'vazifa'}`, sub: `${g.name} · ${teacher}`, to: `/corp/admin/groups/${g.id}` });
-      });
-      Object.values(g.students || {}).forEach((st) => {
-        const joined = Date.parse(st.joinedAt || '');
-        if (joined) events.push({ t: joined, kind: 'join', title: `${st.name || "O'quvchi"} guruhga qo'shildi`, sub: g.name, to: `/corp/admin/groups/${g.id}` });
-        const practiced = latestUnitActivity(st);
-        if (practiced) events.push({ t: practiced, kind: 'practice', title: `${st.name || "O'quvchi"} mashq qildi`, sub: g.name, to: `/corp/admin/groups/${g.id}` });
-      });
-    });
-    teachers.forEach((t) => {
-      const created = Date.parse(t.createdAt || '');
-      if (created) events.push({ t: created, kind: 'teacher', title: `Yangi o'qituvchi: ${t.name}`, sub: `${t.groupsCount} ta guruh`, to: `/corp/admin/teachers/${t.id}` });
-    });
-    events.sort((a, b) => b.t - a.t);
+  const stats = useMemo(() => {
+    const total = rows.length;
+    const practiced = rows.filter((r) => r.lastTs > 0).length;
+    const active = rows.filter((r) => r.lastTs >= sinceTs).length;
+    const timed = rows.filter((r) => r.timeSeconds > 0);
+    const avgTime = timed.length ? timed.reduce((a, r) => a + r.timeSeconds, 0) / timed.length : null;
+    const mastered = rows.filter((r) => r.mastery != null);
+    const avgMastery = mastered.length ? Math.round(mastered.reduce((a, r) => a + r.mastery, 0) / mastered.length) : null;
+    const levels = { strong: 0, learning: 0, help: 0, none: 0 };
+    rows.forEach((r) => { levels[levelOf(r.mastery)] += 1; });
+    return { total, practiced, active, timedCount: timed.length, avgTime, avgMastery, levels };
+  }, [rows, sinceTs]);
 
-    const attention = [
-      ...idleTeachers.map((t) => ({ key: `t-${t.id}`, title: t.name, sub: 'Hali guruh ochmagan', to: `/corp/admin/teachers/${t.id}` })),
-      ...emptyGroups.map((g) => ({ key: `e-${g.id}`, title: g.name, sub: "Guruhda o'quvchi yo'q", to: `/corp/admin/groups/${g.id}` })),
-      ...quietGroups.map((g) => ({ key: `q-${g.id}`, title: g.name, sub: "2 haftadan beri mashq yo'q", to: `/corp/admin/groups/${g.id}` })),
-    ];
+  // Active in the range = practiced in it at all; ranked by recorded time,
+  // then by most recent practice.
+  const topStudents = useMemo(() => rows
+    .filter((r) => r.lastTs >= sinceTs)
+    .sort((a, b) => b.timeSeconds - a.timeSeconds || b.lastTs - a.lastTs)
+    .slice(0, 8), [rows, sinceTs]);
 
-    const bars = [...activeGroups]
-      .filter((g) => g.activity.students > 0)
-      .sort((a, b) => b.activity.activeWeek / b.activity.students - a.activity.activeWeek / a.activity.students)
-      .slice(0, 8);
+  const pct = (n) => (stats.total ? Math.round((n / stats.total) * 100) : 0);
+  const rangeText = activeRange.days === 1 ? `Yesterday, ${fmtDay(sinceTs)}` : `${fmtDay(sinceTs)} — ${fmtDay(now)}`;
 
-    return { idleTeachers, emptyGroups, avgMastery, events: events.slice(0, 10), attention, bars };
-  }, [teachers, activeGroups, students, teacherById]);
-
-  const pct = activity.students ? Math.round((activity.activeWeek / activity.students) * 100) : 0;
-
-  const kpis = [
+  const tiles = [
     {
-      label: "O'qituvchilar", value: activity.teachers, icon: <GraduationCap size={17} />, to: '/corp/admin/teachers',
-      sub: data.idleTeachers.length ? `${data.idleTeachers.length} tasi guruh ochmagan` : 'Hammasida guruh bor', good: !data.idleTeachers.length,
+      key: 'active',
+      icon: <Activity size={18} />,
+      tone: 'blue',
+      label: `Active · ${activeRange.label.toLowerCase()}`,
+      value: stats.active,
+      suffix: stats.total ? `/ ${stats.total}` : null,
+      bar: pct(stats.active),
+      foot: stats.total ? `${pct(stats.active)}% of students practiced` : 'No students yet',
     },
     {
-      label: 'Faol guruhlar', value: activity.groups, icon: <Layers size={17} />, to: '/corp/admin/groups',
-      sub: data.emptyGroups.length ? `${data.emptyGroups.length} tasi bo'sh` : "Hammasida o'quvchi bor", good: !data.emptyGroups.length,
+      key: 'time',
+      icon: <Clock size={18} />,
+      tone: 'purple',
+      label: 'Avg time per student',
+      value: stats.avgTime == null ? '—' : formatDuration(stats.avgTime),
+      foot: stats.timedCount
+        ? `${stats.timedCount} ${stats.timedCount === 1 ? 'student' : 'students'} with recorded time`
+        : 'Recorded from the next practice session',
     },
     {
-      label: "O'quvchilar", value: activity.students, icon: <Users size={17} />, to: '/corp/admin/students',
-      sub: `${activity.groups} ta guruhda`, good: activity.students > 0,
+      key: 'mastery',
+      icon: <Target size={18} />,
+      tone: 'green',
+      label: 'Avg mastery',
+      value: stats.avgMastery == null ? '—' : `${stats.avgMastery}%`,
+      bar: stats.avgMastery,
+      barCls: stats.avgMastery == null ? '' : barCls(stats.avgMastery),
+      foot: 'Across every practiced topic',
     },
     {
-      label: 'Bu hafta faol', value: activity.students ? `${pct}%` : '—', icon: <Zap size={17} />, to: '/corp/admin/students',
-      sub: `${activity.activeWeek} / ${activity.students} o'quvchi mashq qildi`, good: pct >= 50,
+      key: 'practiced',
+      icon: <GraduationCap size={18} />,
+      tone: 'orange',
+      label: 'Ever practiced',
+      value: stats.practiced,
+      suffix: stats.total ? `/ ${stats.total}` : null,
+      foot: stats.total - stats.practiced > 0
+        ? `${stats.total - stats.practiced} haven't started yet`
+        : stats.total ? 'Everyone has started' : 'No students yet',
     },
   ];
-
-  const minis = [
-    { label: 'Kurslar', value: packs.length, sub: `${packs.filter((p) => p.groupsCount).length} tasi ishlatilmoqda`, icon: <BookOpen size={14} />, to: '/corp/admin/courses' },
-    { label: "O'rtacha o'zlashtirish", value: data.avgMastery == null ? '—' : `${data.avgMastery}%`, sub: "Mashq qilgan o'quvchilar", icon: <TrendingUp size={14} />, to: '/corp/admin/students' },
-    { label: 'Bu hafta vazifa', value: activity.homeworkWeek, sub: `Jami ${activity.homeworkTotal} ta`, icon: <NotebookPen size={14} />, to: '/corp/admin/groups' },
-    { label: 'Oxirgi faollik', value: activity.lastActivity ? formatRelative(activity.lastActivity) : '—', sub: "Markaz bo'yicha", icon: <Activity size={14} /> },
-  ];
-
-  const feedIcon = { hw: <NotebookPen size={15} />, join: <UserPlus size={15} />, practice: <Zap size={15} />, teacher: <GraduationCap size={15} /> };
 
   return (
-    <Page
-      icon={<LayoutDashboard />}
-      title="Bosh panel"
-      subtitle={`${centerName} · bugungi holat`}
-      action={
-        <>
-          <button type="button" className="ca-tool-btn" onClick={refresh} disabled={refreshing || loading}>
-            <RefreshCw size={13} className={refreshing ? 'ca-spin' : ''} /> Yangilash
-          </button>
-          {!isDesktop && (
-            <button type="button" className="sa-icon-btn is-gray" onClick={() => navigate('/corp/admin/settings')} aria-label="Sozlamalar">
-              <Settings size={17} />
-            </button>
-          )}
-        </>
-      }
-    >
+    <Page hideHeader>
       <section className="ca-block">
-        <h2 className="ca-section-label">Asosiy ko'rsatkichlar</h2>
-        <div className="ca-kpis">
-          {kpis.map((k) => (
-            <button key={k.label} type="button" className="ca-kpi" onClick={() => navigate(k.to)}>
-              <div className="ca-kpi-top">
-                <div>
-                  <span className="ca-kpi-label">{k.label}</span>
-                  <span className="ca-kpi-value">{loading ? '–' : k.value}</span>
+        <div className="ca-dash-head">
+          <div>
+            <h2 className="ca-title-lg">
+              <span className="ca-title-lg-icon"><Users size={24} /></span>
+              Student Activity
+            </h2>
+            <span className="ca-dash-range">{activeRange.label}: {rangeText}</span>
+          </div>
+          <div className="ca-dash-head-actions">
+            <div className="ca-daterange" ref={dateMenuRef}>
+              <button type="button" className="ca-dash-btn" onClick={() => setDateOpen((o) => !o)} aria-expanded={dateOpen}>
+                <Calendar size={14} /> {activeRange.label} <ChevronDown size={14} />
+              </button>
+              {dateOpen && (
+                <div className="ca-daterange-menu">
+                  {DATE_RANGES.map((r) => (
+                    <button
+                      key={r.value}
+                      type="button"
+                      className={`ca-daterange-item ${r.value === dateRange ? 'is-active' : ''}`}
+                      onClick={() => { setDateRange(r.value); setDateOpen(false); }}
+                    >
+                      {r.label}
+                      {r.value === dateRange && <Check size={13} />}
+                    </button>
+                  ))}
                 </div>
-                <span className="ca-icon-box">{k.icon}</span>
-              </div>
-              <div className="ca-kpi-foot">
-                <span className={`ca-kpi-dot ${k.good ? 'is-good' : 'is-warn'}`}>
-                  {k.good ? <CheckCircle2 size={10} strokeWidth={3} /> : <AlertTriangle size={10} strokeWidth={3} />}
-                </span>
-                {loading ? 'Yuklanmoqda...' : k.sub}
-              </div>
+              )}
+            </div>
+            <button type="button" className="ca-dash-btn is-icon" onClick={refresh} disabled={refreshing || loading} aria-label="Refresh" title="Refresh">
+              <RefreshCw size={14} className={refreshing ? 'ca-spin' : ''} />
             </button>
+          </div>
+        </div>
+
+        <div className="ca-dash-tiles">
+          {tiles.map((t) => (
+            <div key={t.key} className="ca-dash-tile">
+              <div className="ca-dash-tile-top">
+                <span className={`ca-dash-tile-icon tone-${t.tone}`}>{t.icon}</span>
+                <span className="ca-dash-tile-label">{t.label}</span>
+              </div>
+              <div className="ca-dash-tile-value">
+                {loading ? <span className="ca-dash-skeleton" /> : (
+                  <>
+                    {t.value}
+                    {t.suffix && <span className="ca-dash-tile-suffix">{t.suffix}</span>}
+                  </>
+                )}
+              </div>
+              {t.bar != null && !loading && (
+                <div className="ca-dash-bar"><span className={t.barCls || 'is-blue'} style={{ width: `${t.bar}%` }} /></div>
+              )}
+              <span className="ca-dash-tile-foot">{loading ? ' ' : t.foot}</span>
+            </div>
           ))}
         </div>
+
+        {!loading && stats.total > 0 && (
+          <div className="ca-card ca-dash-card ca-dash-levels">
+            <div className="ca-dash-card-head">
+              <div>
+                <h3 className="ca-dash-card-title">Mastery breakdown</h3>
+                <span className="ca-dash-card-sub">How well {stats.total} {stats.total === 1 ? 'student knows' : 'students know'} their words</span>
+              </div>
+            </div>
+            <div className="ca-dash-stack" role="img" aria-label={LEVELS.map((l) => `${l.label}: ${stats.levels[l.key]}`).join(', ')}>
+              {LEVELS.filter((l) => stats.levels[l.key]).map((l) => (
+                <span key={l.key} className={l.cls} style={{ flexGrow: stats.levels[l.key] }} title={`${l.label}: ${stats.levels[l.key]}`} />
+              ))}
+            </div>
+            <div className="ca-dash-legend">
+              {LEVELS.map((l) => (
+                <div key={l.key} className="ca-dash-legend-item">
+                  <span className={`ca-dash-legend-dot ${l.cls}`} />
+                  <span className="ca-dash-legend-label">{l.label}<small>{l.hint}</small></span>
+                  <span className="ca-dash-legend-value">{stats.levels[l.key]}<small>{pct(stats.levels[l.key])}%</small></span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </section>
 
-      <div className="ca-row-2-1 ca-block">
-        <section className="ca-card">
-          <div className="ca-card-head">
+      <section className="ca-block">
+        <div className="ca-card ca-dash-card" style={{ padding: 0 }}>
+          <div className="ca-dash-card-head is-padded">
             <div>
-              <h3 className="ca-card-title"><Layers size={15} /> Guruhlar faolligi</h3>
-              <span className="ca-card-sub">Bu hafta mashq qilgan o'quvchilar ulushi</span>
+              <h3 className="ca-dash-card-title">Most active students</h3>
+              <span className="ca-dash-card-sub">{activeRange.label} · {rangeText}</span>
             </div>
-            <span className="ca-tag">{activity.groups} ta guruh</span>
+            <button type="button" className="ca-dash-link" onClick={() => navigate('/corp/admin/students')}>
+              View all <ChevronRight size={14} />
+            </button>
           </div>
-          {data.bars.length === 0 ? (
-            <span className="ca-empty">O'quvchili guruh hali yo'q.</span>
+          {loading ? (
+            <div className="ca-dash-empty"><span className="ca-dash-empty-text">Loading...</span></div>
+          ) : topStudents.length === 0 ? (
+            <div className="ca-dash-empty">
+              <span className="ca-activity-empty-icon"><User size={20} /></span>
+              <b>{stats.total === 0 ? 'No students yet' : 'No activity in this period'}</b>
+              <span className="ca-dash-empty-text">
+                {stats.total === 0
+                  ? 'Students appear here once they join a group and start practicing.'
+                  : `None of your ${stats.total} students practiced ${activeRange.label.toLowerCase()}. Try a longer range.`}
+              </span>
+            </div>
+          ) : isDesktop ? (
+            <div className="ca-dash-table">
+              <div className="ca-dash-table-head">
+                <span>#</span>
+                <span>Student</span>
+                <span>Group</span>
+                <span className="num">Time</span>
+                <span>Last active</span>
+                <span>Mastery</span>
+              </div>
+              {topStudents.map((st, i) => (
+                <button type="button" key={`${st.groupId}-${st.uid}`} className="ca-dash-table-row" onClick={() => navigate(`/corp/admin/students/${st.uid}`)}>
+                  <span className={`ca-dash-rank ${i < 3 ? `is-top is-${i + 1}` : ''}`}>{i + 1}</span>
+                  <span className="ca-dash-student">
+                    <span className={`ca-dash-avatar tone-${toneFor(st.uid)}`}>{(st.name || '?').charAt(0).toUpperCase()}</span>
+                    <span className="ca-dash-student-name">{st.name || 'Student'}</span>
+                  </span>
+                  <span><span className="ca-dash-chip">{st.groupName || '—'}</span></span>
+                  <span className="num">{st.timeSeconds > 0 ? formatDuration(st.timeSeconds) : <span className="ca-dash-muted">—</span>}</span>
+                  <span className="ca-dash-muted">{formatRelativeEn(st.lastTs, now)}</span>
+                  <span className="ca-dash-mastery">
+                    {st.mastery == null ? <span className="ca-dash-muted">—</span> : (
+                      <>
+                        <span className="ca-dash-bar is-inline"><span className={barCls(st.mastery)} style={{ width: `${st.mastery}%` }} /></span>
+                        <span className="ca-dash-mastery-val">{st.mastery}%</span>
+                      </>
+                    )}
+                  </span>
+                </button>
+              ))}
+            </div>
           ) : (
-            <div className="ca-bars">
-              {data.bars.map((g) => {
-                const share = Math.round((g.activity.activeWeek / g.activity.students) * 100);
-                return (
-                  <button key={g.id} type="button" className="ca-bar" onClick={() => navigate(`/corp/admin/groups/${g.id}`)}>
-                    <span className="ca-bar-name">
-                      {g.name}
-                      <small>{teacherById[g.teacherId]?.name || "O'qituvchisiz"}</small>
-                    </span>
-                    <span className="ca-bar-track"><span className={`ca-bar-fill ${share < 40 ? 'is-low' : ''}`} style={{ transform: `scaleX(${Math.max(share, 2) / 100})`, display: 'block' }} /></span>
-                    <span className="ca-bar-value">{g.activity.activeWeek}/{g.activity.students}</span>
-                  </button>
-                );
-              })}
+            <div className="sa-group" style={{ padding: 12 }}>
+              {topStudents.map((st) => (
+                <Row
+                  key={`${st.groupId}-${st.uid}`}
+                  icon={(st.name || '?').charAt(0).toUpperCase()}
+                  iconTone="green"
+                  title={st.name || 'Student'}
+                  subtitle={`${st.groupName || '—'} · ${formatRelativeEn(st.lastTs, now)}${st.timeSeconds > 0 ? ` · ${formatDuration(st.timeSeconds)}` : ''}`}
+                  detail={st.mastery == null ? undefined : `${st.mastery}%`}
+                  onClick={() => navigate(`/corp/admin/students/${st.uid}`)}
+                />
+              ))}
             </div>
           )}
-        </section>
-
-        <div className="ca-minis">
-          {minis.map((m) => {
-            const Tag = m.to ? 'button' : 'div';
-            return (
-              <Tag
-                key={m.label}
-                type={m.to ? 'button' : undefined}
-                className={`ca-mini ${m.to ? 'ca-kpi' : ''}`}
-                style={{ padding: 14 }}
-                onClick={m.to ? () => navigate(m.to) : undefined}
-              >
-                <span className="ca-icon-box is-sm">{m.icon}</span>
-                <span className="ca-mini-label">{m.label}</span>
-                <span className="ca-mini-value">{loading ? '–' : m.value}</span>
-                <span className="ca-mini-sub">{m.sub}</span>
-              </Tag>
-            );
-          })}
         </div>
-      </div>
-
-      <div className="ca-row-2-1">
-        <section className="ca-card">
-          <div className="ca-card-head">
-            <div>
-              <h3 className="ca-card-title"><Activity size={15} /> So'nggi harakatlar</h3>
-              <span className="ca-card-sub">Vazifalar, yangi o'quvchilar va mashqlar</span>
-            </div>
-            <span className="ca-tag">Oxirgi {data.events.length} ta</span>
-          </div>
-          {data.events.length === 0 ? (
-            <span className="ca-empty">Hali harakat yo'q. O'qituvchilar guruh ochib, vazifa bergach shu yerda ko'rinadi.</span>
-          ) : (
-            <div className="ca-feed">
-              {data.events.map((e, i) => (
-                <button key={`${e.kind}-${e.t}-${i}`} type="button" className="ca-feed-item" onClick={() => navigate(e.to)}>
-                  <span className="ca-icon-box">{feedIcon[e.kind]}</span>
-                  <span className="ca-feed-text">
-                    <span className="ca-feed-title">{e.title}</span>
-                    <span className="ca-feed-sub">{e.sub}</span>
-                  </span>
-                  <span className="ca-tag">{fmtDay(e.t)}</span>
-                  <ChevronRight size={15} className="sa-row-chevron" />
-                </button>
-              ))}
-            </div>
-          )}
-        </section>
-
-        <section className="ca-card">
-          <div className="ca-card-head">
-            <div>
-              <h3 className="ca-card-title"><AlertTriangle size={15} /> E'tibor bering</h3>
-              <span className="ca-card-sub">Tuzatish mumkin bo'lgan holatlar</span>
-            </div>
-            <span className="ca-tag">{data.attention.length}</span>
-          </div>
-          {data.attention.length === 0 ? (
-            <span className="ca-empty">Hammasi joyida — bo'sh yoki sust guruh yo'q.</span>
-          ) : (
-            <div className="ca-feed">
-              {data.attention.slice(0, 8).map((a) => (
-                <button key={a.key} type="button" className="ca-feed-item" onClick={() => navigate(a.to)}>
-                  <span className="ca-feed-text">
-                    <span className="ca-feed-title">{a.title}</span>
-                    <span className="ca-feed-sub">{a.sub}</span>
-                  </span>
-                  <ChevronRight size={15} className="sa-row-chevron" />
-                </button>
-              ))}
-            </div>
-          )}
-        </section>
-      </div>
+      </section>
     </Page>
   );
 }
