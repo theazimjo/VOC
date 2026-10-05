@@ -1,5 +1,6 @@
 import { Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import { AuthProvider } from './contexts/AuthContext';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { ThemeProvider } from './contexts/ThemeContext';
@@ -102,6 +103,8 @@ export default function App() {
   return (
     <ErrorBoundary>
       <BrowserRouter>
+        {/* Cookie-free page-view analytics (Vercel); only active in production builds. */}
+        <Analytics />
         <ThemeProvider>
           <AuthProvider>
             <LanguageProvider>

@@ -82,8 +82,11 @@ export function AuthShell({ copy, lang, setLanguage, children }) {
             <span>VOCABRY</span>
           </Link>
           <div className="as-lang" role="group" aria-label={copy.langLabel}>
-            <button type="button" className={lang === 'uz' ? 'is-on' : ''} aria-pressed={lang === 'uz'} onClick={() => setLanguage('uz')}>UZ</button>
-            <button type="button" className={lang === 'en' ? 'is-on' : ''} aria-pressed={lang === 'en'} onClick={() => setLanguage('en')}>EN</button>
+            {['uz', 'ru', 'en'].map((code) => (
+              <button key={code} type="button" className={lang === code ? 'is-on' : ''} aria-pressed={lang === code} onClick={() => setLanguage(code)}>
+                {code.toUpperCase()}
+              </button>
+            ))}
           </div>
         </header>
 

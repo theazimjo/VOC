@@ -233,6 +233,26 @@
 .lp-points li { padding: 16px 0; border-top: 1px solid var(--ground-line); color: var(--ink-soft); max-width: 34rem; }
 .lp-points li:first-child { color: var(--ink); }
 
+/* ---------- FAQ ---------- */
+.lp-faq { border-top: 1px solid var(--ground-line); display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); }
+.lp-faq-item { border-top: 1px solid var(--ground-line); }
+.lp-faq-item:first-child { border-top: 0; }
+.lp-faq-item summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  min-height: 64px; padding: 14px 0; cursor: pointer; list-style: none;
+  font-weight: 600; font-size: 1.125rem; line-height: 1.35;
+}
+.lp-faq-item summary::-webkit-details-marker { display: none; }
+.lp-faq-item summary::after {
+  content: '+'; flex: none; width: 28px; height: 28px; display: grid; place-items: center;
+  border-radius: 50%; background: rgba(16, 17, 19, 0.07); font-size: 1.25rem; line-height: 1; font-weight: 500;
+  transition: transform 220ms var(--ease), background-color 160ms var(--ease);
+}
+.lp-faq-item[open] summary::after { transform: rotate(45deg); background: var(--ink); color: var(--paper); }
+.lp-faq-item summary:hover::after { background: rgba(16, 17, 19, 0.14); }
+.lp-faq-item[open] summary:hover::after { background: var(--ink); }
+.lp-faq-item p { padding: 0 48px 22px 0; max-width: 38rem; color: var(--ink-soft); }
+
 /* ---------- Close ---------- */
 .lp-close {
   max-width: 1320px; margin: 0 auto; padding: clamp(56px, 10vh, 120px) var(--pad) clamp(72px, 12vh, 140px);
@@ -254,7 +274,7 @@
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1020px) {
-  .lp-hero, .lp-how, .lp-evidence-inner, .lp-centers { grid-template-columns: 1fr; }
+  .lp-hero, .lp-how, .lp-evidence-inner, .lp-centers, .lp-faq { grid-template-columns: 1fr; }
   .lp-hero { min-height: 0; }
   .lp-nav-links { display: none; }
   .lp-nav-end { margin-left: auto; }
@@ -280,5 +300,5 @@
 @media (prefers-reduced-motion: reduce) {
   .lp-flap-tile { animation: none; }
   .lp-bar-fill { transition: none; }
-  .lp-btn, .lp-board-btn, .lp-board-ctrl { transition: none; }
+  .lp-btn, .lp-board-btn, .lp-board-ctrl, .lp-faq-item summary::after { transition: none; }
 }

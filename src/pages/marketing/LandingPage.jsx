@@ -4,6 +4,8 @@ import { useInView, useReducedMotion } from 'framer-motion';
 import { ArrowRight, RotateCcw, FastForward } from 'lucide-react';
 import { useSiteLanguage } from '../../utils/useSiteLanguage';
 import { CONTENT, EVIDENCE, GROUP_ROWS, WORDS } from './landingContent';
+
+const LANGS = ['uz', 'ru', 'en'];
 import './LandingPage.css';
 
 /*
@@ -202,7 +204,7 @@ function GroupBoard({ t }) {
 function EvidenceBars({ t }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, amount: 0.5 });
-  const fmt = (n) => n.toFixed(2).replace('.', t === CONTENT.uz ? ',' : '.');
+  const fmt = (n) => n.toFixed(2).replace('.', t.decimal);
   const bars = [
     { key: 'base', label: t.evidence.baseline, value: EVIDENCE.baselineAuc },
     { key: 'model', label: t.evidence.model, value: EVIDENCE.auc },
@@ -246,11 +248,15 @@ export default function LandingPage() {
           <a href="#how" onClick={scrollTo('how')}>{t.nav.how}</a>
           <a href="#evidence" onClick={scrollTo('evidence')}>{t.nav.evidence}</a>
           <a href="#centers" onClick={scrollTo('centers')}>{t.nav.centers}</a>
+          <a href="#faq" onClick={scrollTo('faq')}>{t.nav.faq}</a>
         </nav>
         <div className="lp-nav-end">
           <div className="lp-lang" role="group" aria-label={t.langLabel}>
-            <button type="button" className={lang === 'uz' ? 'is-on' : ''} aria-pressed={lang === 'uz'} onClick={() => setLanguage('uz')}>UZ</button>
-            <button type="button" className={lang === 'en' ? 'is-on' : ''} aria-pressed={lang === 'en'} onClick={() => setLanguage('en')}>EN</button>
+            {LANGS.map((code) => (
+              <button key={code} type="button" className={lang === code ? 'is-on' : ''} aria-pressed={lang === code} onClick={() => setLanguage(code)}>
+                {code.toUpperCase()}
+              </button>
+            ))}
           </div>
           <Link to="/login" className="lp-nav-login">{t.nav.login}</Link>
           <Link to="/register" className="lp-btn lp-btn--sm">{t.nav.start}</Link>
@@ -329,6 +335,21 @@ export default function LandingPage() {
             <p className="lp-hero-note">{t.centers.note}</p>
           </div>
           <GroupBoard t={t} />
+        </section>
+
+        {/* ---------- FAQ ---------- */}
+        <section className="lp-section lp-faq" id="faq">
+          <div className="lp-section-head">
+            <h2>{t.faq.title}</h2>
+          </div>
+          <div className="lp-faq-list">
+            {t.faq.items.map((item) => (
+              <details key={item.q} className="lp-faq-item">
+                <summary>{item.q}</summary>
+                <p>{item.a}</p>
+              </details>
+            ))}
+          </div>
         </section>
 
         {/* ---------- Close ---------- */}
