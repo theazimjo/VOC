@@ -16,6 +16,8 @@ import {
   recommendPracticeMode,
   clampStability,
   clampNextReview,
+  resolveStability,
+  getDecayedMastery,
 } from './engine.js';
 
 describe('computeRecallProbability', () => {
@@ -366,5 +368,70 @@ describe('recommendPracticeMode', () => {
       lastReviewed: new Date().toISOString(),
     }));
     expect(recommendPracticeMode(words)).toBeNull();
+  });
+});
+
+describe('resolveStability (legacy records without `stability`)', () => {
+  it('uses stability when present, clamped', () => {
+    expect(resolveStability({ stability: 5 })).toBe(5);
+    expect(resolveStability({ stability: 99999 })).toBeLessThanOrEqual(243.33);
+  });
+
+  it('seeds from the legacy interval when stability is absent', () => {
+    expect(resolveStability({ interval: 8 })).toBe(8);
+  });
+
+  it('falls back to the initial stability for brand-new / empty records', () => {
+    expect(resolveStability({})).toBe(1);
+    expect(resolveStability()).toBe(1);
+    expect(resolveStability({ interval: 0 })).toBe(1);
+  });
+
+  it('treats non-positive stability as the initial value instead of propagating it', () => {
+    expect(resolveStability({ stability: 0 })).toBe(1);
+    expect(resolveStability({ stability: -3 })).toBe(1);
+  });
+
+  it('makes display agree with the scheduler: a legacy word is not decayed as if S were 1', () => {
+    const DAY = 86400000;
+    const t0 = Date.UTC(2026, 0, 1);
+    const legacy = { mastery: 70, interval: 8, lastReviewed: new Date(t0).toISOString() };
+    const withStability = { ...legacy, stability: 8 };
+    const now = t0 + 3 * DAY;
+
+    expect(getDecayedMastery(legacy, now)).toBe(getDecayedMastery(withStability, now));
+    expect(getDecayedMastery(legacy, now)).toBeGreaterThan(40);
+    expect(computeRetentionStats([legacy], now)).toEqual(computeRetentionStats([withStability], now));
+  });
+});
+
+describe('updateStability saturation', () => {
+  const growth = (S) => updateStability(S, true, 4, 3, 0, {}) / S;
+
+  it('does not damp growth at or below the saturation point (S <= 10)', () => {
+    expect(updateStability(10, true, 4, 3, 0, {})).toBeCloseTo(10 * (1 + 0.35 + 0.2), 1);
+  });
+
+  it('grows stability proportionally less the stronger the memory already is', () => {
+    expect(growth(20)).toBeLessThan(growth(10));
+    expect(growth(80)).toBeLessThan(growth(20));
+  });
+
+  it('still always grows on a correct answer and never exceeds the cap', () => {
+    for (const S of [10, 30, 100, 200, 243]) {
+      const next = updateStability(S, true, 5, 1, 0, { retrievalType: 'active_recall' });
+      expect(next).toBeGreaterThanOrEqual(S);
+      expect(next).toBeLessThanOrEqual(243.33);
+    }
+  });
+
+  it('takes more than 9 consecutive perfect active reviews to reach the 70-day cap', () => {
+    let S = 1;
+    let n = 0;
+    while (S < 243 && n < 50) {
+      S = updateStability(S, true, 4, 3, 0, { retrievalType: 'active_recall', hadOvernightGap: false });
+      n++;
+    }
+    expect(n).toBeGreaterThan(9);
   });
 });

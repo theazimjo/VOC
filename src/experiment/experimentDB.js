@@ -18,7 +18,7 @@
 import { ref, update, get, runTransaction } from 'firebase/database';
 import { db } from '../firebase';
 import { applyReview } from '@voc/memory-engine';
-import { computeRecallProbability, clampStability } from '@voc/memory-engine';
+import { computeRecallProbability, resolveStability } from '@voc/memory-engine';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -66,11 +66,7 @@ export async function saveReviewEvent(userId, packId, wordId, currentWord, revie
   } = reviewData;
 
   const lastRev = currentWord.lastReviewed ?? null;
-  const seedStability = clampStability(
-    typeof currentWord.stability === 'number'
-      ? currentWord.stability
-      : (currentWord.interval > 0 ? currentWord.interval : 1.0)
-  );
+  const seedStability = resolveStability(currentWord);
   const daysSince = lastRev ? (Date.now() - new Date(lastRev).getTime()) / (86400 * 1000) : 0;
 
   // Predicted recall probability right before this review — stored so future

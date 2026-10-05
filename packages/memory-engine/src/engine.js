@@ -23,6 +23,18 @@ const TARGET_RECALL = 0.75;
 /** Stability growth multiplier base on a successful review */
 const STABILITY_GROWTH_BASE = 0.35;
 
+/**
+ * Stability saturation ("the stronger the memory, the harder it is to
+ * strengthen further"). Below STABILITY_SATURATION_S the growth factor is
+ * untouched; above it, growth is damped by (S_sat / S)^exponent. Without this
+ * a word answered correctly every time doubled its stability on every review
+ * and hit the 70-day cap in ~9 reviews, which is faster than real memory
+ * consolidates. Same qualitative shape as FSRS's S^-w term. Both values are
+ * judgement calls, not fitted — tune them with `npm run eval:memory -- --data`.
+ */
+const STABILITY_SATURATION_S = 10;
+const STABILITY_SATURATION_EXPONENT = 0.4;
+
 /** Stability decay factor on a failed review */
 const STABILITY_DECAY = 0.5;
 
@@ -69,7 +81,7 @@ const MAX_REVIEW_INTERVAL_DAYS = 70;
  * existed) can end up with a stability of thousands of days, producing
  * confusing UI strings like "2234 kundan keyin".
  */
-const MAX_STABILITY = Math.round((-MAX_REVIEW_INTERVAL_DAYS / Math.log(TARGET_RECALL)) * 100) / 100;
+export const MAX_STABILITY = Math.round((-MAX_REVIEW_INTERVAL_DAYS / Math.log(TARGET_RECALL)) * 100) / 100;
 
 /**
  * Minimum sample size before a calibration is trusted over the neutral
@@ -137,6 +149,25 @@ export function clampStability(stability) {
 }
 
 /**
+ * The single source of truth for "what is this word's stability right now?".
+ * Every reader (scheduler, mastery display, retention stats, Memory Lab) must
+ * use this so they can't disagree: a legacy record that predates `stability`
+ * (it only has `interval`) is seeded from that interval — the same rule
+ * applyReview uses — instead of one place reading it as 1 day and another as
+ * the old interval (which made a legacy word's mastery collapse on the
+ * dashboard while the scheduler still treated it as well-known).
+ *
+ * @param {{stability?:number, interval?:number}} [word]
+ * @returns {number} stability in (0, MAX_STABILITY]
+ */
+export function resolveStability(word = {}) {
+  const raw = typeof word.stability === 'number'
+    ? word.stability
+    : (word.interval > 0 ? word.interval : INITIAL_STABILITY);
+  return clampStability(raw);
+}
+
+/**
  * Clamp a stored `nextReview` date so it's never more than
  * MAX_REVIEW_INTERVAL_DAYS past `lastReviewed` — same rationale as
  * clampStability, but for the already-computed date some legacy word
@@ -178,7 +209,7 @@ export function getDecayedMastery(word = {}, now = Date.now()) {
   const storedMastery = typeof word.mastery === 'number' ? word.mastery : 0;
   if (storedMastery <= 0 || !word.lastReviewed) return storedMastery;
 
-  const stability = typeof word.stability === 'number' && word.stability > 0 ? word.stability : 1.0;
+  const stability = resolveStability(word);
   const daysSince = (now - new Date(word.lastReviewed).getTime()) / (24 * 60 * 60 * 1000);
   const retrievability = computeRecallProbability(stability, daysSince);
 
@@ -198,6 +229,7 @@ export function getDecayedMastery(word = {}, now = Date.now()) {
  *   - overnight sleep consolidation (options.hadOvernightGap)
  *   - retrieval type — active production vs passive self-judgement (options.retrievalType)
  *   - per-cluster self-calibration multiplier (options.clusterMultiplier)
+ *   - saturation: growth is damped once S exceeds STABILITY_SATURATION_S
  *
  * @param {number} currentS        - current stability (days)
  * @param {boolean} isCorrect      - whether recall was successful
@@ -261,7 +293,10 @@ export function updateStability(
   // Nudges growth up/down based on how well past predictions in this
   // semantic cluster matched this user's actual outcomes.
   const boundedMultiplier = Math.max(CALIBRATION_MIN, Math.min(CALIBRATION_MAX, clusterMultiplier || 1.0));
-  const alpha = rawAlpha * boundedMultiplier;
+  const saturation = S > STABILITY_SATURATION_S
+    ? Math.pow(STABILITY_SATURATION_S / S, STABILITY_SATURATION_EXPONENT)
+    : 1;
+  const alpha = rawAlpha * boundedMultiplier * saturation;
 
   const S_new = Math.min(S * (1 + alpha), MAX_STABILITY);
   return Math.round(S_new * 100) / 100;
@@ -535,7 +570,7 @@ export function explainSchedulingDecision(stability, lastReview, nextOptimalRevi
   }
 
   const daysUntil = nextOptimalReview
-    ? Math.min(MAX_REVIEW_INTERVAL_DAYS, Math.max(0, Math.round((new Date(nextOptimalReview) - now) / (86400 * 1000))))
+    ? Math.min(MAX_REVIEW_INTERVAL_DAYS, Math.max(0, Math.ceil((new Date(nextOptimalReview) - now) / (86400 * 1000))))
     : null;
 
   return `Recall probability is still ${pct}% — memory is strong.` +
@@ -561,7 +596,7 @@ export function computeRetentionStats(words, now = Date.now()) {
   let totalP = 0;
   let atRisk = 0;
   reviewed.forEach(w => {
-    const stability = typeof w.stability === 'number' ? w.stability : 1.0;
+    const stability = resolveStability(w);
     const daysSince = (now - new Date(w.lastReviewed).getTime()) / (24 * 60 * 60 * 1000);
     const p = computeRecallProbability(stability, daysSince);
     totalP += p;

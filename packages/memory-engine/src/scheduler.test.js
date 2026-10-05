@@ -6,6 +6,7 @@ import {
   getMasteryLevel,
   responseToQuality,
   initWordProgress,
+  stabilityToMastery,
 } from './scheduler.js';
 
 describe('applyReview', () => {
@@ -200,5 +201,49 @@ describe('initWordProgress', () => {
     expect(progress.mastery).toBe(0);
     expect(progress.reviewCount).toBe(0);
     expect(progress.nextReview).toBeNull();
+  });
+});
+
+describe('mastery confirmation requires distinct active-recall modes', () => {
+  const passive = (w) => applyReview(w, { isCorrect: true, confidence: 5, retrievalType: 'passive_recall' });
+  const active = (w, mode) => applyReview(w, { isCorrect: true, confidence: 5, retrievalType: 'active_recall', mode });
+
+  it('does not unlock mastery past the passive ceiling by repeating the same drill', () => {
+    let w = initWordProgress();
+    for (let i = 0; i < 12; i++) w = passive(w);
+    const capped = w.mastery;
+    for (let i = 0; i < 6; i++) w = active(w, 'spelling');
+    expect(w.confirmedModes).toEqual(['spelling']);
+    expect(w.mastery).toBeLessThanOrEqual(Math.max(capped, 65));
+  });
+
+  it('unlocks it once two different drills are passed', () => {
+    let w = initWordProgress();
+    for (let i = 0; i < 12; i++) w = passive(w);
+    w = active(w, 'spelling');
+    w = active(w, 'sentence');
+    for (let i = 0; i < 4; i++) w = active(w, 'spelling');
+    expect(w.mastery).toBeGreaterThan(65);
+  });
+
+  it('keeps the old 2-active-passes rule for legacy records without confirmedModes', () => {
+    const legacy = { stability: 30, reviewCount: 9, activeRecallPasses: 2 };
+    const r = applyReview(legacy, { isCorrect: true, confidence: 5, retrievalType: 'passive_recall' });
+    expect(r.stability).toBeGreaterThan(30);
+  });
+});
+
+describe('stabilityToMastery stays distinguishable for strong words', () => {
+  it('is monotonic, continuous at the 65% passive ceiling, and 100% only at the stability cap', () => {
+    const values = [0, 2, 6, 12.5, 12.7, 20, 40, 80, 160, 243.33].map(stabilityToMastery);
+    for (let i = 1; i < values.length; i++) expect(values[i]).toBeGreaterThanOrEqual(values[i - 1]);
+    expect(stabilityToMastery(12.6)).toBe(65);
+    expect(stabilityToMastery(40)).toBeLessThan(90);
+    expect(stabilityToMastery(120)).toBeLessThan(100);
+    expect(stabilityToMastery(243.33)).toBe(100);
+  });
+
+  it('keeps S=40 and S=243 visibly different (used to both read ~100%)', () => {
+    expect(stabilityToMastery(243.33) - stabilityToMastery(40)).toBeGreaterThanOrEqual(10);
   });
 });

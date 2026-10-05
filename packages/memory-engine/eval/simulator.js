@@ -6,6 +6,7 @@ import { applyReview, initWordProgress, isDue, inferConfidenceFromSpeed, getReco
 import { createRng } from './rng.js';
 
 const DAY = 86400000;
+const DRILLS = ['spelling', 'sentence', 'pronounce']; // distinct active-recall angles
 
 export function makeLearner(rng, { words = 60, medianStability = 2, spread = 0.6 } = {}) {
   return Array.from({ length: words }, (_, i) => ({
@@ -67,7 +68,7 @@ export function simulate(policyName, { seed = 1, days = 90, dailyCap = 25, words
         : w.trueS * 0.6;
 
       const confidence = inferConfidenceFromSpeed(responseTime, ok);
-      const mode = retrievalType === 'active_recall' ? 'spelling' : undefined;
+      const mode = retrievalType === 'active_recall' ? DRILLS[Math.floor(rng() * DRILLS.length)] : undefined;
       w.events.push({ ts: nowMs, result: ok, confidence, responseTime, retrievalType, mode });
       w.state = applyReview(w.state, { isCorrect: ok, confidence, responseTimeSec: responseTime, retrievalType, mode, now: nowMs });
       policy.after?.(w, ok);

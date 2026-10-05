@@ -221,7 +221,7 @@ function WordInsightCard({ memory, confusionPairs }) {
       return t('memoryLab.explainDropped', { pct, targetPct: 75 });
     }
     const daysUntil = nextOptimalReview
-      ? Math.min(70, Math.max(0, Math.round((new Date(nextOptimalReview) - Date.now()) / (86400 * 1000))))
+      ? Math.min(70, Math.max(0, Math.ceil((new Date(nextOptimalReview) - Date.now()) / (86400 * 1000))))
       : null;
     let text = t('memoryLab.explainStrong', { pct });
     if (daysUntil !== null) {
@@ -231,7 +231,7 @@ function WordInsightCard({ memory, confusionPairs }) {
   }, [expanded, stability, lastReview, nextOptimalReview, t]);
 
   const daysUntilNext = nextOptimalReview && !due
-    ? Math.max(0, Math.round((new Date(nextOptimalReview) - Date.now()) / (86400 * 1000)))
+    ? Math.max(0, Math.ceil((new Date(nextOptimalReview) - Date.now()) / (86400 * 1000)))
     : null;
 
   return (

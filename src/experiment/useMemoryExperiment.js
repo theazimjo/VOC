@@ -15,7 +15,7 @@ import {
   recordConfusionPair,
   getConfusionPairs,
 } from './experimentDB';
-import { computeRecallProbability, computeClusterCalibration, estimateDifficulty, clampStability, clampNextReview } from '@voc/memory-engine';
+import { computeRecallProbability, computeClusterCalibration, estimateDifficulty, resolveStability, clampNextReview } from '@voc/memory-engine';
 import { getWordCluster } from './semanticClassifier';
 
 // ─── Hook ────────────────────────────────────────────────────────────────────
@@ -70,7 +70,7 @@ export function useMemoryExperiment() {
       map[w.id] = {
         wordId: w.id,
         packId: w.packId,
-        stability: typeof w.stability === 'number' ? clampStability(w.stability) : 1.0,
+        stability: resolveStability(w),
         mastery: w.mastery || 0,
         interval: w.interval || 0,
         reviewCount,

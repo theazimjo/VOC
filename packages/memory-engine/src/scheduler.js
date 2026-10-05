@@ -35,15 +35,28 @@ import {
   updateStability,
   getOptimalReviewDate,
   computeInitialStability,
-  clampStability,
+  resolveStability,
   clampNextReview,
+  MAX_STABILITY,
 } from './engine.js';
 
 const MASTERY_TIME_CONSTANT = 12;
 
-function stabilityToMastery(stability) {
-  const pct = 100 * (1 - Math.exp(-Math.max(0, stability) / MASTERY_TIME_CONSTANT));
-  return Math.round(Math.max(0, Math.min(100, pct)));
+// Stability -> mastery %. Below the passive ceiling it is a saturating
+// exponential (unchanged). A pure exponential hits ~100% by S≈40, so a word
+// at S=40 and one at S=243 looked identical — and a lapse that halved a
+// strong word's stability changed nothing visible. Above the ceiling, mastery
+// therefore keeps climbing on a log scale from the ceiling (65%) to 100% at
+// MAX_STABILITY, so every doubling of stability stays visible. Continuous at
+// the ceiling and monotonic.
+export function stabilityToMastery(stability) {
+  const s = Math.max(0, stability);
+  if (s <= UNCONFIRMED_STABILITY_CAP) {
+    return Math.round(100 * (1 - Math.exp(-s / MASTERY_TIME_CONSTANT)));
+  }
+  const span = Math.log(MAX_STABILITY / UNCONFIRMED_STABILITY_CAP);
+  const t = Math.min(1, Math.log(s / UNCONFIRMED_STABILITY_CAP) / span);
+  return Math.round(UNCONFIRMED_MASTERY_CEILING + (100 - UNCONFIRMED_MASTERY_CEILING) * t);
 }
 
 // A passive self-judgement ("Bildim" on a flashcard, a quiz guess, a match)
@@ -104,11 +117,7 @@ export function applyReview(word = {}, options = {}) {
 
   const revCount = word.reviewCount ?? 0;
   const lastRev = word.lastReviewed ?? null;
-  const seedStability = clampStability(
-    typeof word.stability === 'number'
-      ? word.stability
-      : (word.interval > 0 ? word.interval : computeInitialStability())
-  );
+  const seedStability = resolveStability(word);
 
   const now = new Date(nowMs);
   const daysSince = daysBetween(lastRev, now);
@@ -129,7 +138,13 @@ export function applyReview(word = {}, options = {}) {
     if (!confirmedModes.includes(tag)) confirmedModes.push(tag);
   }
 
-  const isConfirmed = activeRecallPasses >= 2 || confirmedModes.length >= MIN_CONFIRMED_MODES;
+  // Confirmation needs correct active recall from MIN_CONFIRMED_MODES distinct
+  // drills — typing the same word twice in one drill isn't a second angle.
+  // Legacy records that predate confirmedModes tracking keep the old
+  // "2 active passes" rule so they aren't suddenly un-confirmed.
+  const modesTracked = Array.isArray(word.confirmedModes);
+  const isConfirmed = confirmedModes.length >= MIN_CONFIRMED_MODES
+    || (!modesTracked && activeRecallPasses >= 2);
 
   if (!isConfirmed) {
     // Never lower stability a word already had (e.g. legacy words reviewed
