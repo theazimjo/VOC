@@ -65,12 +65,11 @@ export default function Sidebar() {
             </NavLink>
           );
         })}
-
-        <button type="button" className="sidebar-nav-btn sidebar-signout" onClick={() => setConfirmOpen(true)} title={t('profile.logOut')}>
-          <LogOut size={23} strokeWidth={2.3} />
-          <span>{t('profile.logOut')}</span>
-        </button>
       </nav>
+      <button type="button" className="sidebar-nav-btn sidebar-signout" onClick={() => setConfirmOpen(true)} title={t('profile.logOut')}>
+        <LogOut size={23} strokeWidth={2.3} />
+        <span>{t('profile.logOut')}</span>
+      </button>
     </aside>
 
       {/* Outside the <aside>: its backdrop-filter would otherwise trap this fixed overlay inside the sidebar. */}

@@ -214,9 +214,9 @@
   text-shadow: none !important;
 }
 
-/* Logout row: last row of the student sidebar nav, set apart by a hairline. */
+/* Logout row pinned to the bottom of the student sidebars (the nav above has flex: 1). */
 .corp-admin-sidebar .sidebar-signout {
-  margin-top: 10px;
+  margin-top: 8px;
   border-top: 1px solid var(--border);
   color: var(--text-secondary);
 }
