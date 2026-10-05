@@ -6,9 +6,7 @@ const base = () => ({
   date: '2026-10-05',
   cover: 'board',
   published: true,
-  uz: { title: 'Sarlavha', excerpt: 'Qisqacha', body: 'Matn '.repeat(10) },
-  en: { title: '', excerpt: '', body: '' },
-  ru: { title: '', excerpt: '', body: '' },
+  en: { title: 'A title', excerpt: 'A summary', body: 'Some text '.repeat(10) },
 });
 
 describe('validatePost', () => {
@@ -39,9 +37,9 @@ describe('validatePost', () => {
     expect(validatePost({ ...base(), cover: '' }).ok).toBe(true);
   });
 
-  it('needs content in at least one language and caps length', () => {
-    expect(validatePost({ ...base(), uz: { title: '', excerpt: '', body: '' } }).ok).toBe(false);
-    expect(validatePost({ ...base(), uz: { title: 'x', excerpt: '', body: 'a'.repeat(60001) } }).ok).toBe(false);
+  it('needs an English title and text, and caps length', () => {
+    expect(validatePost({ ...base(), en: { title: '', excerpt: '', body: '' } }).ok).toBe(false);
+    expect(validatePost({ ...base(), en: { title: 'x', excerpt: '', body: 'a'.repeat(60001) } }).ok).toBe(false);
   });
 
   it('treats only published === true as published', () => {
@@ -50,8 +48,8 @@ describe('validatePost', () => {
 });
 
 describe('estimateMinutes', () => {
-  it('uses the longest language, ~200 words per minute, at least 1', () => {
-    expect(estimateMinutes({ uz: { body: 'a b c' } })).toBe(1);
-    expect(estimateMinutes({ uz: { body: 'w '.repeat(600) }, en: { body: 'w '.repeat(100) } })).toBe(3);
+  it('uses ~200 words per minute, at least 1', () => {
+    expect(estimateMinutes({ en: { body: 'a b c' } })).toBe(1);
+    expect(estimateMinutes({ en: { body: 'w '.repeat(600) } })).toBe(3);
   });
 });

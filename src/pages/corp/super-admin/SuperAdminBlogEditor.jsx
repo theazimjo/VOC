@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ConfirmSheet from '../../../components/corp/ConfirmSheet';
-import { Button, Field, LoadingRows, Page, Row, Section, Segmented, Toggle } from './ui';
+import { Button, Field, LoadingRows, Page, Row, Section, Toggle } from './ui';
 import { parseMarkdown } from '../../blog/markdown';
 import BlogMarkdown from '../../blog/BlogMarkdown';
 import { deleteBlogPost, EMPTY_POST, listBlogPosts, saveBlogPost, slugFromTitle } from './blogApi';
@@ -9,11 +9,6 @@ import { useToast } from './useToast';
 import '../../blog/Blog.css';
 import './blogEditor.css';
 
-const LANG_OPTIONS = [
-  { value: 'uz', label: "O'zbekcha" },
-  { value: 'ru', label: 'Русский' },
-  { value: 'en', label: 'English' },
-];
 const COVER_KEYS = [
   ['board', 'Tablo'],
   ['curve', "Unutish egri chizig'i"],
@@ -40,7 +35,7 @@ export default function SuperAdminBlogEditor() {
   const isNew = id === 'new';
   const navigate = useNavigate();
   const [post, setPost] = useState(isNew ? EMPTY_POST() : null);
-  const [lang, setLang] = useState('uz');
+  const lang = 'en'; // the blog is English only
   const [saving, setSaving] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [slugTouched, setSlugTouched] = useState(!isNew);
@@ -55,7 +50,7 @@ export default function SuperAdminBlogEditor() {
         if (!alive) return;
         const found = all.find((p) => p.id === id);
         if (!found) { showToast('Maqola topilmadi', 'error'); navigate('/corp/super-admin/blog', { replace: true }); return; }
-        setPost({ ...EMPTY_POST(), ...found, uz: { ...EMPTY_POST().uz, ...found.uz }, ru: { ...EMPTY_POST().ru, ...found.ru }, en: { ...EMPTY_POST().en, ...found.en } });
+        setPost({ ...EMPTY_POST(), ...found, en: { ...EMPTY_POST().en, ...found.en } });
       })
       .catch((err) => showToast(`Yuklab bo'lmadi: ${err.message}`, 'error'));
     return () => { alive = false; };
@@ -69,8 +64,8 @@ export default function SuperAdminBlogEditor() {
 
   const onTitle = (title) => {
     patchLang({ title });
-    // First Uzbek title of a new post fills the URL, until the slug is edited by hand.
-    if (lang === 'uz' && !slugTouched) patch({ slug: slugFromTitle(title) });
+    // The title of a new post fills the URL, until the slug is edited by hand.
+    if (!slugTouched) patch({ slug: slugFromTitle(title) });
   };
 
   const insert = ([, before, after, placeholder]) => {
@@ -138,7 +133,7 @@ export default function SuperAdminBlogEditor() {
 
   return (
     <Page
-      title={isNew ? 'Yangi maqola' : (post.uz.title || post.en.title || 'Maqola')}
+      title={isNew ? 'Yangi maqola' : (post.en.title || 'Maqola')}
       back={goBack}
       action={<Button onClick={() => save()} disabled={saving}>{saving ? 'Saqlanmoqda...' : 'Saqlash'}</Button>}
     >
@@ -176,7 +171,7 @@ export default function SuperAdminBlogEditor() {
             )}
           </div>
 
-          <Segmented label="Til" value={lang} onChange={setLang} options={LANG_OPTIONS} />
+          <p className="sa-blog-lang-note">Maqola inglizcha yoziladi.</p>
           <div className="sa-blog-fields">
             <Field label="Sarlavha">
               <input className="sa-input" value={block.title} onChange={(e) => onTitle(e.target.value)} />

@@ -2,19 +2,17 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Check, Link2 } from 'lucide-react';
 import { useReducedMotion } from 'framer-motion';
-import { useSiteLanguage } from '../../utils/useSiteLanguage';
-import { pickLang, hasLang } from './posts';
+import { pickLang } from './posts';
 import { useBlogPosts } from './useBlogPosts';
 import { parseMarkdown } from './markdown';
 import Markdown from './BlogMarkdown';
 import Illustration from './illustrations';
 import './Blog.css';
 
-const LANGS = ['uz', 'ru', 'en'];
+// The blog is written in English only, whatever language the rest of the site uses.
+const LANG = 'en';
 
 const UI = {
-  uz: { langLabel: 'Til', title: 'Blog', sub: "Xotira, o'rganish va VOC ortidagi ishlar haqida.", read: "O'qish", back: 'Blog', home: 'Bosh sahifa', minutes: (n) => `${n} daqiqa`, byline: 'VOC jamoasi', start: 'Bepul boshlash', ctaTitle: "Birinchi so'zingizni bugun qo'shing.", toc: 'Mundarija', copy: 'Havolani nusxalash', copied: 'Nusxalandi', next: 'Keyingi maqola', latest: 'Yangi', all: 'Barcha maqolalar', empty: "Hozircha maqola yo'q.", months: ['yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun', 'iyul', 'avgust', 'sentabr', 'oktabr', 'noyabr', 'dekabr'], date: (d, m, y) => `${d}-${m}, ${y}`, notice: null },
-  ru: { langLabel: 'Язык', title: 'Блог', sub: 'О памяти, обучении и о том, что стоит за VOC.', read: 'Читать', back: 'Блог', home: 'На главную', minutes: (n) => `${n} мин`, byline: 'Команда VOC', start: 'Начать бесплатно', ctaTitle: 'Добавьте первое слово сегодня.', toc: 'Содержание', copy: 'Скопировать ссылку', copied: 'Скопировано', next: 'Следующая статья', latest: 'Новое', all: 'Все статьи', empty: 'Пока статей нет.', months: ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'], date: (d, m, y) => `${d} ${m} ${y}`, notice: 'Эта статья пока доступна на другом языке.' },
   en: { langLabel: 'Language', title: 'Blog', sub: 'On memory, learning and the work behind VOC.', read: 'Read', back: 'Blog', home: 'Home', minutes: (n) => `${n} min read`, byline: 'The VOC team', start: 'Start free', ctaTitle: 'Add your first word today.', toc: 'On this page', copy: 'Copy link', copied: 'Copied', next: 'Next post', latest: 'New', all: 'All posts', empty: 'No posts yet.', months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], date: (d, m, y) => `${m} ${d}, ${y}`, notice: 'This post is not available in this language yet.' },
 };
 
@@ -46,9 +44,9 @@ export function Cover({ post, lang }) {
   return <Illustration name={post.cover || 'board'} lang={lang} />;
 }
 
-function Shell({ ui, lang, setLanguage, children }) {
+function Shell({ ui, children }) {
   return (
-    <div className="bl-page">
+    <div className="bl-page" lang="en">
       <header className="bl-top">
         <Link to="/welcome" className="bl-brand" aria-label="VOCABRY">
           <img src="/logo.png" alt="" width="34" height="34" />
@@ -59,13 +57,6 @@ function Shell({ ui, lang, setLanguage, children }) {
           <Link to="/welcome">{ui.home}</Link>
         </nav>
         <div className="bl-top-end">
-          <div className="bl-lang" role="group" aria-label={ui.langLabel}>
-            {LANGS.map((code) => (
-              <button key={code} type="button" className={lang === code ? 'is-on' : ''} aria-pressed={lang === code} onClick={() => setLanguage(code)}>
-                {code.toUpperCase()}
-              </button>
-            ))}
-          </div>
           <Link to="/register" className="bl-btn bl-btn--sm">{ui.start}</Link>
         </div>
       </header>
@@ -161,8 +152,8 @@ function CopyLink({ ui }) {
 }
 
 export function BlogIndex() {
-  const { lang, setLanguage } = useSiteLanguage();
-  const ui = UI[lang];
+  const lang = LANG;
+  const ui = UI.en;
   const { posts } = useBlogPosts();
   useDocumentMeta(`${ui.title} — VOCABRY`, ui.sub);
 
@@ -170,7 +161,7 @@ export function BlogIndex() {
   const fc = featured ? pickLang(featured, lang) : null;
 
   return (
-    <Shell ui={ui} lang={lang} setLanguage={setLanguage}>
+    <Shell ui={ui}>
       <main className="bl-main">
         <header className="bl-head">
           <h1 className="bl-h1">{ui.title}</h1>
@@ -222,8 +213,8 @@ export function BlogIndex() {
 
 export function BlogPost() {
   const { slug } = useParams();
-  const { lang, setLanguage } = useSiteLanguage();
-  const ui = UI[lang];
+  const lang = LANG;
+  const ui = UI.en;
   const { posts, loading } = useBlogPosts();
   const post = posts.find((p) => p.slug === slug) || null;
   const c = post ? pickLang(post, lang) : null;
@@ -235,7 +226,7 @@ export function BlogPost() {
 
   if (!post) {
     return (
-      <Shell ui={ui} lang={lang} setLanguage={setLanguage}>
+      <Shell ui={ui}>
         <main className="bl-main">
           <h1 className="bl-h1">{loading ? '…' : '404'}</h1>
           <Link to="/blog" className="bl-back"><ArrowLeft size={15} strokeWidth={2.2} aria-hidden="true" />{ui.back}</Link>
@@ -250,7 +241,7 @@ export function BlogPost() {
   const nc = nextPost ? pickLang(nextPost, lang) : null;
 
   return (
-    <Shell ui={ui} lang={lang} setLanguage={setLanguage}>
+    <Shell ui={ui}>
       <ReadingProgress targetRef={articleRef} />
       <article className="bl-article" ref={articleRef}>
         <header className="bl-article-head">
@@ -258,7 +249,6 @@ export function BlogPost() {
           <p className="bl-meta">{formatDate(post.date, ui)} · {ui.minutes(post.minutes || 1)} · {ui.byline}</p>
           <h1 className="bl-h1">{c.title}</h1>
           {c.excerpt && <p className="bl-lede">{c.excerpt}</p>}
-          {!hasLang(post, lang) && ui.notice && <p className="bl-notice">{ui.notice}</p>}
         </header>
 
         <div className="bl-article-cover"><Cover post={post} lang={lang} /></div>

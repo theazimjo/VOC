@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useInView, useReducedMotion } from 'framer-motion';
 import { ArrowRight, ArrowUpRight, RotateCcw, FastForward } from 'lucide-react';
 import { useSiteLanguage } from '../../utils/useSiteLanguage';
-import { CONTENT, EVIDENCE, GROUP_ROWS, WORDS } from './landingContent';
+import { CONTENT, EVIDENCE, EVIDENCE_POST, GROUP_ROWS, WORDS } from './landingContent';
 
 const LANGS = ['uz', 'ru', 'en'];
 import './LandingPage.css';
@@ -310,6 +310,9 @@ export default function LandingPage() {
                 {t.evidence.facts.map((f) => <li key={f}>{f}</li>)}
               </ul>
               <p className="lp-caveat">{t.evidence.caveat}</p>
+              <a className="lp-more" href={EVIDENCE_POST} target="_blank" rel="noopener noreferrer">
+                {t.evidence.more}<ArrowUpRight size={16} strokeWidth={2.4} aria-hidden="true" />
+              </a>
             </div>
             <EvidenceBars t={t} />
           </div>

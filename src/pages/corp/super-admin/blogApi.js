@@ -41,7 +41,5 @@ export const EMPTY_POST = () => ({
   date: todayIso(),
   cover: 'board',
   published: false,
-  uz: { title: '', excerpt: '', body: '' },
-  ru: { title: '', excerpt: '', body: '' },
   en: { title: '', excerpt: '', body: '' },
 });

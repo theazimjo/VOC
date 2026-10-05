@@ -5,7 +5,7 @@ import { EmptyState, LoadingRows, Page, Row, Section, Button } from './ui';
 import { listBlogPosts } from './blogApi';
 import { useToast } from './useToast';
 
-const titleOf = (p) => p.uz?.title || p.en?.title || p.ru?.title || p.slug;
+const titleOf = (p) => p.en?.title || p.uz?.title || p.slug;
 
 export default function SuperAdminBlog() {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ export default function SuperAdminBlog() {
   return (
     <Page
       title="Blog"
-      subtitle="Maqolalar saytdagi /blog sahifasida chiqadi. Qoralama ko'rinmaydi."
+      subtitle="Maqolalar faqat inglizcha yoziladi va /blog sahifasida chiqadi. Qoralama ko'rinmaydi."
       action={
         <div style={{ display: 'flex', gap: 8 }}>
           <a className="sa-icon-btn" href="/blog" target="_blank" rel="noopener noreferrer" aria-label="Blogni yangi oynada ochish">
@@ -51,7 +51,7 @@ export default function SuperAdminBlog() {
           />
         </div>
       ) : (
-        <Section footer="Sayt tilida ko'rinadigan tayyor maqolalar (UZ va EN) kodga kiritilgan va bu ro'yxatda chiqmaydi.">
+        <Section footer="Ilova bilan birga kelgan ikkita boshlang'ich maqola kodda turadi va bu ro'yxatda chiqmaydi.">
           {posts.map((p) => (
             <Row
               key={p.id}

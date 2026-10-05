@@ -2,7 +2,8 @@
 // panel. Pure (no Firebase) so it can be unit-tested. Files starting with "_"
 // are helpers, not deployed endpoints.
 
-export const LANGS = ['uz', 'ru', 'en'];
+// The blog is written in English only.
+export const LANGS = ['en'];
 export const COVERS = ['board', 'curve', 'compare', 'sessions', 'factors'];
 
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -56,7 +57,7 @@ export function validatePost(input) {
     if (title && body.trim()) hasContent = true;
     post[lang] = { title, excerpt, body };
   }
-  if (!hasContent) return { ok: false, error: "Kamida bitta tilda sarlavha va matn kerak." };
+  if (!hasContent) return { ok: false, error: "Sarlavha va matn (inglizcha) kerak." };
 
   post.minutes = estimateMinutes(post);
   return { ok: true, post };
