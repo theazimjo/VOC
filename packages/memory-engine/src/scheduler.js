@@ -36,6 +36,8 @@ import {
   getOptimalReviewDate,
   computeInitialStability,
   resolveStability,
+  resolveDifficulty,
+  updateDifficulty,
   clampNextReview,
   MAX_STABILITY,
 } from './engine.js';
@@ -119,6 +121,8 @@ export function applyReview(word = {}, options = {}) {
   const lastRev = word.lastReviewed ?? null;
   const seedStability = resolveStability(word);
 
+  const difficulty = resolveDifficulty(word);
+
   const now = new Date(nowMs);
   const daysSince = daysBetween(lastRev, now);
   const overnight = hadOvernightGap(lastRev, now);
@@ -127,6 +131,7 @@ export function applyReview(word = {}, options = {}) {
     hadOvernightGap: overnight,
     retrievalType: retrievalType === 'active_recall' ? 'active_recall' : 'passive_recall',
     clusterMultiplier,
+    difficulty,
   });
 
   const activeRecallPasses =
@@ -163,6 +168,7 @@ export function applyReview(word = {}, options = {}) {
     lastReviewed: now.toISOString(),
     quality: isCorrect ? clampedConfidence : Math.min(2, clampedConfidence - 1),
     stability: newStability,
+    difficulty: updateDifficulty(difficulty, isCorrect, confidence),
     activeRecallPasses,
     confirmedModes,
   };
@@ -239,6 +245,7 @@ export function initWordProgress() {
     nextReview: null,
     lastReviewed: null,
     stability: computeInitialStability(),
+    difficulty: 0.5,
     activeRecallPasses: 0,
     confirmedModes: [],
   };

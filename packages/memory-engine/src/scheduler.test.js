@@ -247,3 +247,21 @@ describe('stabilityToMastery stays distinguishable for strong words', () => {
     expect(stabilityToMastery(243.33) - stabilityToMastery(40)).toBeGreaterThanOrEqual(10);
   });
 });
+
+describe('applyReview persists and uses per-word difficulty', () => {
+  it('stores difficulty, raising it on a lapse', () => {
+    const r = applyReview({ difficulty: 0.5, stability: 5 }, { isCorrect: false });
+    expect(r.difficulty).toBeGreaterThan(0.5);
+  });
+
+  it('grows a hard word less than an easy one from the same state', () => {
+    const base = { stability: 5, reviewCount: 3, confirmedModes: ['a', 'b'] };
+    const hard = applyReview({ ...base, difficulty: 0.9 }, { isCorrect: true, confidence: 4, retrievalType: 'active_recall', mode: 'a' });
+    const easy = applyReview({ ...base, difficulty: 0.1 }, { isCorrect: true, confidence: 4, retrievalType: 'active_recall', mode: 'a' });
+    expect(easy.stability).toBeGreaterThan(hard.stability);
+  });
+
+  it('initWordProgress starts neutral', () => {
+    expect(initWordProgress().difficulty).toBe(0.5);
+  });
+});

@@ -172,8 +172,6 @@ function WordInsightCard({ memory, confusionPairs }) {
   );
   const activeSimulatorOption = simulatorOptions.find((o) => o.reviewDay === simulatorDay) || null;
 
-  if (!wordData || !wordData.word || typeof wordData.word !== 'string' || !wordData.word.trim()) return null;
-
   const difficulty = Number(memory.difficulty) || 0.5;
   const totalReviews = Number(memory.totalReviews) || 0;
 
@@ -233,6 +231,9 @@ function WordInsightCard({ memory, confusionPairs }) {
   const daysUntilNext = nextOptimalReview && !due
     ? Math.max(0, Math.ceil((new Date(nextOptimalReview) - Date.now()) / (86400 * 1000)))
     : null;
+
+  // Early return must come after every hook (rules-of-hooks).
+  if (!wordData || !wordData.word || typeof wordData.word !== 'string' || !wordData.word.trim()) return null;
 
   return (
     <div

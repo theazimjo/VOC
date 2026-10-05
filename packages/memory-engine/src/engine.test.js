@@ -18,6 +18,8 @@ import {
   clampNextReview,
   resolveStability,
   getDecayedMastery,
+  resolveDifficulty,
+  updateDifficulty,
 } from './engine.js';
 
 describe('computeRecallProbability', () => {
@@ -433,5 +435,48 @@ describe('updateStability saturation', () => {
       n++;
     }
     expect(n).toBeGreaterThan(9);
+  });
+});
+
+describe('per-word difficulty', () => {
+  it('is neutral by default and leaves growth unchanged at 0.5', () => {
+    expect(resolveDifficulty({})).toBe(0.5);
+    expect(updateStability(5, true, 4, 3, 0, { difficulty: 0.5 })).toBe(updateStability(5, true, 4, 3, 0, {}));
+  });
+
+  it('makes hard words strengthen slower and easy words faster', () => {
+    const easy = updateStability(5, true, 4, 3, 0, { difficulty: 0 });
+    const neutral = updateStability(5, true, 4, 3, 0, { difficulty: 0.5 });
+    const hard = updateStability(5, true, 4, 3, 0, { difficulty: 1 });
+    expect(easy).toBeGreaterThan(neutral);
+    expect(neutral).toBeGreaterThan(hard);
+    expect(hard).toBeGreaterThan(5); // still grows on a correct answer
+  });
+
+  it('rises on a lapse and falls on a confident success, within [0, 1]', () => {
+    expect(updateDifficulty(0.5, false)).toBeGreaterThan(0.5);
+    expect(updateDifficulty(0.5, true, 5)).toBeLessThan(0.5);
+    expect(updateDifficulty(0.99, false)).toBe(1);
+    expect(updateDifficulty(0.01, true, 5)).toBe(0);
+  });
+
+  it('a hesitant success (confidence 1) does not make a word look easier', () => {
+    expect(updateDifficulty(0.5, true, 1)).toBeGreaterThanOrEqual(0.5);
+  });
+
+  it('settles near 83% accuracy: a word failed 1 in 3 drifts hard, 1 in 10 drifts easy', () => {
+    const run = (failEvery) => {
+      let d = 0.5;
+      for (let i = 1; i <= 200; i++) d = updateDifficulty(d, i % failEvery !== 0, 3);
+      return d;
+    };
+    expect(run(3)).toBeGreaterThan(0.7);
+    expect(run(10)).toBeLessThan(0.3);
+  });
+
+  it('derives legacy difficulty from recallHistory (>=3 reviews), else neutral', () => {
+    expect(resolveDifficulty({ recallHistory: [{ result: false }, { result: false }, { result: true }] })).toBeGreaterThan(0.5);
+    expect(resolveDifficulty({ recallHistory: [{ result: false }] })).toBe(0.5);
+    expect(resolveDifficulty({ difficulty: 0.9, recallHistory: [] })).toBe(0.9);
   });
 });

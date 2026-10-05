@@ -15,7 +15,7 @@ import {
   recordConfusionPair,
   getConfusionPairs,
 } from './experimentDB';
-import { computeRecallProbability, computeClusterCalibration, estimateDifficulty, resolveStability, clampNextReview } from '@voc/memory-engine';
+import { computeRecallProbability, computeClusterCalibration, resolveStability, resolveDifficulty, clampNextReview } from '@voc/memory-engine';
 import { getWordCluster } from './semanticClassifier';
 
 // ─── Hook ────────────────────────────────────────────────────────────────────
@@ -80,7 +80,7 @@ export function useMemoryExperiment() {
         nextReview,
         nextOptimalReview: nextReview,
         recallHistory,
-        difficulty: estimateDifficulty(recallHistory),
+        difficulty: resolveDifficulty(w),
         wordData: {
           word: w.word, translation: w.translation, packName: w.source,
           topic: w.topic, clusterKey: w.clusterKey, clusterName: w.clusterName, clusterIcon: w.clusterIcon,

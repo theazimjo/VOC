@@ -35,6 +35,23 @@ const STABILITY_GROWTH_BASE = 0.35;
 const STABILITY_SATURATION_S = 10;
 const STABILITY_SATURATION_EXPONENT = 0.4;
 
+/**
+ * Per-word difficulty D ∈ [0, 1] (0 = effortless, 1 = this learner keeps
+ * failing it). It is *per user × per word*, which is the whole point of the
+ * engine: two words with the same stability no longer strengthen at the same
+ * rate. D drifts up on lapses and down on successes (see updateDifficulty);
+ * it settles where the learner's accuracy on that word is ~83%.
+ * Growth multiplier = DIFFICULTY_GROWTH_BASE − DIFFICULTY_GROWTH_SLOPE × D,
+ * i.e. 1.3× for an easy word, 1.0× at neutral, 0.7× for a hard one.
+ * Both numbers (and the step sizes below) are judgement calls, not fitted.
+ */
+const DIFFICULTY_NEUTRAL = 0.5;
+const DIFFICULTY_GROWTH_BASE = 1.3;
+const DIFFICULTY_GROWTH_SLOPE = 0.6;
+const DIFFICULTY_STEP_FAIL = 0.15;
+const DIFFICULTY_STEP_SUCCESS = 0.03;
+const DIFFICULTY_STEP_CONFIDENCE = 0.015;
+
 /** Stability decay factor on a failed review */
 const STABILITY_DECAY = 0.5;
 
@@ -142,6 +159,44 @@ export function computeRecallProbability(stability, daysSince) {
  * @param {number} stability
  * @returns {number}
  */
+export function clampDifficulty(difficulty) {
+  const d = Number(difficulty);
+  return Number.isFinite(d) ? Math.max(0, Math.min(1, d)) : DIFFICULTY_NEUTRAL;
+}
+
+/**
+ * Current difficulty of a word record. Uses the stored `difficulty` when
+ * present; otherwise (legacy records) derives it from the recent failure rate
+ * in `recallHistory` once there are at least 3 reviews to learn from, else
+ * neutral. Every reader must go through this so they cannot disagree.
+ *
+ * @param {{difficulty?:number, recallHistory?:Array<{result:boolean}>}} [word]
+ * @returns {number} difficulty in [0, 1]
+ */
+export function resolveDifficulty(word = {}) {
+  if (typeof word.difficulty === 'number') return clampDifficulty(word.difficulty);
+  const history = Array.isArray(word.recallHistory) ? word.recallHistory : [];
+  return history.length >= 3 ? estimateDifficulty(history) : DIFFICULTY_NEUTRAL;
+}
+
+/**
+ * Move difficulty after a review. A lapse pushes it up by a fixed step; a
+ * success pulls it down, more for a confident answer and not at all for a
+ * hesitant one (confidence 1). Equilibrium is ~83% accuracy.
+ *
+ * @param {number} currentD
+ * @param {boolean} isCorrect
+ * @param {number} [confidence=3] 1–5
+ * @returns {number} new difficulty in [0, 1]
+ */
+export function updateDifficulty(currentD, isCorrect, confidence = 3) {
+  const d = clampDifficulty(currentD);
+  const delta = isCorrect
+    ? -(DIFFICULTY_STEP_SUCCESS + (confidence - 3) * DIFFICULTY_STEP_CONFIDENCE)
+    : DIFFICULTY_STEP_FAIL;
+  return Math.round(clampDifficulty(d + delta) * 1000) / 1000;
+}
+
 export function clampStability(stability) {
   const s = Number(stability);
   if (!Number.isFinite(s) || s <= 0) return INITIAL_STABILITY;
@@ -230,6 +285,7 @@ export function getDecayedMastery(word = {}, now = Date.now()) {
  *   - retrieval type — active production vs passive self-judgement (options.retrievalType)
  *   - per-cluster self-calibration multiplier (options.clusterMultiplier)
  *   - saturation: growth is damped once S exceeds STABILITY_SATURATION_S
+ *   - per-word difficulty (options.difficulty): harder words strengthen slower
  *
  * @param {number} currentS        - current stability (days)
  * @param {boolean} isCorrect      - whether recall was successful
@@ -240,6 +296,7 @@ export function getDecayedMastery(word = {}, now = Date.now()) {
  * @param {boolean} [options.hadOvernightGap=false]      - at least one local-midnight boundary crossed since last review
  * @param {'active_recall'|'passive_recall'} [options.retrievalType='passive_recall']
  * @param {number} [options.clusterMultiplier=1.0]       - output of computeClusterCalibration for this word's cluster
+ * @param {number} [options.difficulty=0.5]              - per-word difficulty in [0,1], see resolveDifficulty
  * @returns {number}                - new stability (days)
  */
 export function updateStability(
@@ -254,6 +311,7 @@ export function updateStability(
     hadOvernightGap = false,
     retrievalType = 'passive_recall',
     clusterMultiplier = 1.0,
+    difficulty = DIFFICULTY_NEUTRAL,
   } = options;
 
   const S = Math.max(currentS, 0.1);
@@ -296,7 +354,8 @@ export function updateStability(
   const saturation = S > STABILITY_SATURATION_S
     ? Math.pow(STABILITY_SATURATION_S / S, STABILITY_SATURATION_EXPONENT)
     : 1;
-  const alpha = rawAlpha * boundedMultiplier * saturation;
+  const difficultyFactor = DIFFICULTY_GROWTH_BASE - DIFFICULTY_GROWTH_SLOPE * clampDifficulty(difficulty);
+  const alpha = rawAlpha * boundedMultiplier * saturation * difficultyFactor;
 
   const S_new = Math.min(S * (1 + alpha), MAX_STABILITY);
   return Math.round(S_new * 100) / 100;
