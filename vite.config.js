@@ -51,10 +51,26 @@ function vercelApiDev() {
   };
 }
 
+// Link-preview scrapers need an absolute og:image URL, but the domain isn't
+// in the repo. Use VITE_SITE_URL if set, else Vercel's production domain at
+// build time; with neither, drop the image tags rather than ship a broken one.
+function siteUrlInHtml() {
+  return {
+    name: 'site-url-in-html',
+    transformIndexHtml(html) {
+      const host = process.env.VITE_SITE_URL || process.env.VERCEL_PROJECT_PRODUCTION_URL;
+      if (!host) return html.split('\n').filter((line) => !line.includes('__SITE_URL__')).join('\n');
+      const base = /^https?:\/\//.test(host) ? host : `https://${host}`;
+      return html.replaceAll('__SITE_URL__', base.replace(/\/$/, ''));
+    },
+  };
+}
+
 export default defineConfig({
   plugins: [
     tailwindcss(),
     vercelApiDev(),
+    siteUrlInHtml(),
   ],
   test: {
     environment: 'jsdom',
