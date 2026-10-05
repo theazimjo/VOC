@@ -32,3 +32,6 @@ demo-accounts.local.txt
 
 # anonymised review logs for memory-engine evaluation
 memory-export*.json
+
+# design review screenshots
+.impeccable/
