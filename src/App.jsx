@@ -16,6 +16,7 @@ import ErrorBoundary from './components/common/ErrorBoundary';
 import { installGlobalErrorLogging } from './utils/errorLogger';
 import { lazyWithRetry } from './utils/lazyWithRetry';
 
+const LandingPage = lazyWithRetry(() => import('./pages/marketing/LandingPage'));
 const Dashboard = lazyWithRetry(() => import('./pages/personal/Dashboard'));
 const PackDetail = lazyWithRetry(() => import('./pages/personal/PackDetail'));
 const ReadPage = lazyWithRetry(() => import('./pages/personal/ReadPage'));
@@ -115,6 +116,9 @@ export default function App() {
                 <Suspense fallback={<RouteLoader />}>
                   <Routes>
                     {/* Public routes */}
+                    {/* The public landing page, reachable whether or not you are signed in
+                        ("/" shows it only to logged-out visitors). Share this link. */}
+                    <Route path="/welcome" element={<LandingPage />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/choose-profile" element={<ProfileChooser />} />
