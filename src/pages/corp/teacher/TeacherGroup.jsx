@@ -596,6 +596,11 @@ function StudentSheet({ student, group, onClose, onConfirm, showToast }) {
             </div>
           </div>
 
+          <p className="ca-muted">
+            Retention is the predicted chance the student recalls a word right now, based on their own answer history for that word.
+            "At risk" means that chance is below 75%. Numbers can move between app versions as the prediction model improves.
+          </p>
+
           {group.packIds.map((pid) => {
             const pack = packById[pid];
             if (!pack) return null;
@@ -612,7 +617,7 @@ function StudentSheet({ student, group, onClose, onConfirm, showToast }) {
                   </span>
                 </div>
                 {agg.atRiskCount > 0 && (
-                  <span className="ca-pill is-orange ca-st-risk">{agg.atRiskCount} words being forgotten</span>
+                  <span className="ca-pill is-orange ca-st-risk">{agg.atRiskCount} words at risk</span>
                 )}
                 <div className="ca-st-topics">
                   {units.length === 0 && <span className="ca-muted">No topics</span>}

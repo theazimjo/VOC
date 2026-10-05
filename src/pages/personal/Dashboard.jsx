@@ -7,7 +7,7 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { usePacks } from '../../hooks/usePacks';
 import { useWordTarget } from '../../hooks/useWordTarget';
 import { updateStudentWordTarget } from '../../services/corpService';
-import { computeRecallProbability } from '@voc/memory-engine';
+import { predictRecall, computeUserRate } from '@voc/memory-engine';
 import { getDueWords } from '@voc/memory-engine';
 import OnboardingModal from '../../components/Onboarding/OnboardingModal';
 import WhatsNewModal, { WHATS_NEW_VERSION } from '../../components/Onboarding/WhatsNewModal';
@@ -39,11 +39,14 @@ function getLocalDateString(d) {
   return new Date(d.getTime() - offset * 60 * 1000).toISOString().split('T')[0];
 }
 
-/** Current recall probability P(t) = e^(-t/S) for a word, given its stability and last review. */
-function getRecallInfo(word) {
-  const stability = typeof word.stability === 'number' ? word.stability : 1.0;
-  const daysSince = word.lastReviewed ? (Date.now() - new Date(word.lastReviewed).getTime()) / 86400000 : 0;
-  const pct = Math.round(computeRecallProbability(stability, daysSince) * 100);
+/**
+ * Predicted chance the learner recalls this word right now — the calibrated
+ * predictor (word's own track record, learner's overall rate, confidence),
+ * not the raw forgetting curve: on real review logs the curve was
+ * overconfident and worse than guessing the average.
+ */
+function getRecallInfo(word, userRate) {
+  const pct = Math.round(predictRecall(word, { userRate }) * 100);
   const color = pct < 50 ? 'var(--error)' : pct < 75 ? 'var(--warning)' : 'var(--success)';
   return { pct, color };
 }
@@ -119,6 +122,8 @@ export default function Dashboard() {
   const totalWords = allWords.length;
   const learnedWords = useMemo(() => allWords.filter(w => (w.mastery || 0) >= 80).length, [allWords]);
 
+  const userRate = useMemo(() => computeUserRate(allWords), [allWords]);
+
   const dueWordsList = useMemo(() => {
     // getDueWords clamps each word's nextReview before comparing, so a
     // legacy word whose stored date is a holdover from a since-fixed
@@ -127,8 +132,8 @@ export default function Dashboard() {
     // Most at-risk first — lowest current recall probability, not just oldest
     // due date, since two overdue words with different stability forget at
     // different rates.
-    return [...due].sort((a, b) => getRecallInfo(a).pct - getRecallInfo(b).pct);
-  }, [allWords]);
+    return [...due].sort((a, b) => getRecallInfo(a, userRate).pct - getRecallInfo(b, userRate).pct);
+  }, [allWords, userRate]);
   const dueWords = dueWordsList.length;
 
   // Same account-level field the corp "Target Words" card reads/writes
@@ -335,7 +340,7 @@ export default function Dashboard() {
             <>
               <div className="dash-ov-hw-list">
                 {dueWordsList.slice(0, 6).map(word => {
-                  const recall = getRecallInfo(word);
+                  const recall = getRecallInfo(word, userRate);
                   return (
                     <button
                       key={word.id}

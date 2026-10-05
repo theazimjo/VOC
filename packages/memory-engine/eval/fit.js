@@ -13,6 +13,7 @@
 // through buildFeatures(), the same function the runtime uses.
 import fs from 'node:fs';
 import { replay } from './replay.js';
+import { fsrsPredictions } from './fsrs.js';
 import { summarize } from './metrics.js';
 import { buildFeatures, predictFromFeatures, FEATURE_NAMES, PRIOR_USER_RATE } from '../src/predictor.js';
 
@@ -34,6 +35,7 @@ let k = 0;
 words.forEach((w, wi) => {
   const ev = [...w.events].sort((a, b) => new Date(a.ts) - new Date(b.ts));
   let ok = 0;
+  const fsrsP = fsrsPredictions(ev);
   ev.forEach((e, i) => {
     if (i > 0) {
       rows.push({
@@ -47,6 +49,7 @@ words.forEach((w, wi) => {
         prevConf: ev[i - 1].confidence ?? 3,
         y: e.result ? 1 : 0,
         pEngine: engineP[k++],
+        pFsrs: fsrsP[i - 1],
       });
     }
     ok += e.result ? 1 : 0;
@@ -109,6 +112,7 @@ console.log(`train: ${train.length} predictions / ${users.length - testUsers.siz
 console.log('model                  held-out users');
 console.log('constant average     ', f(score(test, () => trainRate)));
 console.log('old engine e^(-t/S)  ', f(score(test, (r) => r.pEngine)));
+console.log('FSRS-6 (defaults)    ', f(score(test, (r) => r.pFsrs)));
 console.log('calibrated predictor ', f(score(test, (r) => predictFromFeatures(r.x, trained))));
 console.log('weights (standardised):', Object.fromEntries(FEATURE_NAMES.map((n, j) => [n, +trained.weights[j].toFixed(3)])));
 
@@ -125,12 +129,15 @@ const spacedTest = test.filter((r) => r.gapDays >= MIN_GAP_DAYS);
 if (spacedTrain.length > 200 && spacedTest.length > 200) {
   const lg = (p) => Math.log(Math.min(0.999, Math.max(0.001, p)) / (1 - Math.min(0.999, Math.max(0.001, p))));
   const engineCal = fit(spacedTrain, (r) => [lg(r.pEngine)]);
+  const fsrsCal = fit(spacedTrain, (r) => [lg(r.pFsrs)]);
   const spacedRate = spacedTrain.reduce((s, r) => s + r.y, 0) / spacedTrain.length;
   console.log(`
 Spaced reviews only (gap >= ${MIN_GAP_DAYS * 24}h): train ${spacedTrain.length}, test ${spacedTest.length}`);
   console.log('constant average     ', f(score(spacedTest, () => spacedRate)));
   console.log('old engine e^(-t/S)  ', f(score(spacedTest, (r) => r.pEngine)));
   console.log('engine recalibrated  ', f(score(spacedTest, (r) => predictFromFeatures([lg(r.pEngine)], engineCal))));
+  console.log('FSRS-6 (defaults)    ', f(score(spacedTest, (r) => r.pFsrs)));
+  console.log('FSRS-6 recalibrated  ', f(score(spacedTest, (r) => predictFromFeatures([lg(r.pFsrs)], fsrsCal))));
   console.log('calibrated predictor ', f(score(spacedTest, (r) => predictFromFeatures(r.x, trained))));
 } else {
   console.log('\nSpaced reviews only: not enough spaced reviews yet to evaluate.');
