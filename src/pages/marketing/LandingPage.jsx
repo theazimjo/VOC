@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useInView, useReducedMotion } from 'framer-motion';
 import { ArrowRight, RotateCcw, FastForward } from 'lucide-react';
-import { useLanguage } from '../../contexts/LanguageContext';
+import { useSiteLanguage } from '../../utils/useSiteLanguage';
 import { CONTENT, EVIDENCE, GROUP_ROWS, WORDS } from './landingContent';
 import './LandingPage.css';
 
@@ -229,12 +229,7 @@ function EvidenceBars({ t }) {
 }
 
 export default function LandingPage() {
-  const { language, setLanguage } = useLanguage();
-  // The audience is Uzbek-speaking: show UZ until the visitor has actually
-  // chosen a language (the app-wide default is English).
-  let hasChosen = false;
-  try { hasChosen = !!localStorage.getItem('voc-language'); } catch { /* storage blocked */ }
-  const lang = hasChosen && language === 'en' ? 'en' : 'uz';
+  const { lang, setLanguage } = useSiteLanguage();
   const t = useMemo(() => CONTENT[lang], [lang]);
   const reduce = useReducedMotion();
 
