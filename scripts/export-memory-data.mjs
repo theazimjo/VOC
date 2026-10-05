@@ -98,6 +98,9 @@ for (const [uid, user] of Object.entries(users)) {
           ...(typeof h.confidence === 'number' ? { confidence: h.confidence } : {}),
           ...(typeof h.responseTime === 'number' ? { responseTime: h.responseTime } : {}),
           ...(h.retrievalType ? { retrievalType: h.retrievalType } : {}),
+          ...(h.mode ? { mode: h.mode } : {}),
+          ...(h.fmt ? { fmt: h.fmt } : {}),
+          ...(h.sid ? { sid: h.sid } : {}),
         }))
         .sort((a, b) => new Date(a.ts) - new Date(b.ts));
       if (!events.length) continue;

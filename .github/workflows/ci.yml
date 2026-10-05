@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      # Root install also links the @voc/* workspace packages.
+      - run: npm ci
+
+      - name: Tests
+        run: npm test
+
+      # Whole-repo lint still has older findings; keep the memory engine and
+      # its scripts clean so they cannot regress.
+      - name: Lint (memory engine + scripts)
+        run: npx eslint packages scripts
+
+      - name: Build
+        run: npm run build

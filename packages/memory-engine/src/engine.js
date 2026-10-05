@@ -169,8 +169,8 @@ export function clampDifficulty(difficulty) {
 /**
  * Current difficulty of a word record. Uses the stored `difficulty` when
  * present; otherwise (legacy records) derives it from the recent failure rate
- * in `recallHistory` once there are at least 3 reviews to learn from, else
- * neutral. Every reader must go through this so they cannot disagree.
+ * in `recallHistory` (replayed through updateDifficulty) once there are at
+ * least 3 reviews to learn from, else neutral. Every reader must go through this so they cannot disagree.
  *
  * @param {{difficulty?:number, recallHistory?:Array<{result:boolean}>}} [word]
  * @returns {number} difficulty in [0, 1]
@@ -178,7 +178,13 @@ export function clampDifficulty(difficulty) {
 export function resolveDifficulty(word = {}) {
   if (typeof word.difficulty === 'number') return clampDifficulty(word.difficulty);
   const history = Array.isArray(word.recallHistory) ? word.recallHistory : [];
-  return history.length >= 3 ? estimateDifficulty(history) : DIFFICULTY_NEUTRAL;
+  if (history.length < 3) return DIFFICULTY_NEUTRAL;
+  // Replay the history through the live update rule so a legacy-derived value
+  // sits on the same scale as one that was tracked review by review.
+  return history.reduce(
+    (d, h) => updateDifficulty(d, !!h.result, typeof h.confidence === 'number' ? h.confidence : 3),
+    DIFFICULTY_NEUTRAL,
+  );
 }
 
 /**

@@ -18,9 +18,13 @@
 import { ref, update, get, runTransaction } from 'firebase/database';
 import { db } from '../firebase';
 import { applyReview } from '@voc/memory-engine';
-import { predictRecall } from '@voc/memory-engine';
+import { predictRecall, answerFormatForMode, createSessionTracker, ENGINE_VERSION } from '@voc/memory-engine';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
+
+// One id per practice sitting (30 min idle gap), logged with each review so
+// analyses can tell same-sitting repeats from genuinely spaced ones.
+const sessionIdAt = createSessionTracker();
 
 const wordRef = (userId, packId, wordId) =>
   ref(db, `users/${userId}/words/${packId}/${wordId}`);
@@ -91,6 +95,9 @@ export async function saveReviewEvent(userId, packId, wordId, currentWord, revie
     ts: updatedFields.lastReviewed,
     retrievalType,
     ...(mode ? { mode } : {}),
+    fmt: answerFormatForMode(mode, retrievalType),
+    sid: sessionIdAt(),
+    ev: ENGINE_VERSION,
     ...(predictedP !== null ? { predictedP: Math.round(predictedP * 1000) / 1000 } : {}),
   };
   const newHistory = [...(currentWord.recallHistory || []), newEntry].slice(-50);
