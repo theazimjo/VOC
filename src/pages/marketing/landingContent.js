@@ -3,7 +3,7 @@
 //  - Evidence numbers come from packages/memory-engine/eval/fit.js on the
 //    2026-10-05 export (37,852 replayed predictions, 24 learners, 8 held out,
 //    AUC 0.78 vs 0.50). Re-run `npm run fit:memory` and update them together
-//    with the blog post "taxmin-emas-olchov".
+//    with the blog post "measured-not-guessed".
 //  - Everything on the two boards is labelled sample data in the UI.
 
 export const EVIDENCE = {
@@ -14,7 +14,7 @@ export const EVIDENCE = {
   baselineAuc: 0.5,
 };
 
-export const EVIDENCE_POST = '/blog/taxmin-emas-olchov';
+export const EVIDENCE_POST = '/blog/measured-not-guessed';
 
 export const WORDS = [
   { id: 'achieve', word: 'achieve', uz: 'erishmoq', stability: 16, elapsed: 1 },

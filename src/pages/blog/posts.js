@@ -5,12 +5,12 @@
 // where the block is { title, excerpt, body } and body is the small
 // Markdown described in markdown.js. The blog is English only.
 //
-// Numbers in "taxmin-emas-olchov" come from packages/memory-engine
+// Numbers in "measured-not-guessed" come from packages/memory-engine
 // (`npm run fit:memory`) on the 2026-10-05 export. Update both together.
 
 export const BUILT_IN_POSTS = [
   {
-    slug: 'taxmin-emas-olchov',
+    slug: 'measured-not-guessed',
     date: '2026-10-05',
     cover: 'compare',
     minutes: 5,
@@ -68,7 +68,7 @@ In the app, this changed: the "recall" percentage and "words at risk" now come f
     },
   },
   {
-    slug: 'nega-sozlar-unutiladi',
+    slug: 'why-new-words-disappear',
     date: '2026-10-05',
     cover: 'curve',
     minutes: 3,
@@ -93,7 +93,7 @@ One more thing: not every word is forgotten the same way. "Table" stays after on
 
 :::figure factors
 
-VOC keeps a separate estimate for each word. It looks at how the word has been going for you, how confident you were, and whether you typed the answer or picked it. A correct typed answer counts for more. Hard words come back often, easy words less. We also measured how well this works on real data, and [wrote about that separately](/blog/taxmin-emas-olchov).`,
+VOC keeps a separate estimate for each word. It looks at how the word has been going for you, how confident you were, and whether you typed the answer or picked it. A correct typed answer counts for more. Hard words come back often, easy words less. We also measured how well this works on real data, and [wrote about that separately](/blog/measured-not-guessed).`,
     },
   },
 ];

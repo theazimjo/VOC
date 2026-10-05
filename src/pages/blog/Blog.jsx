@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Check, Link2 } from 'lucide-react';
 import { useReducedMotion } from 'framer-motion';
 import { pickLang } from './posts';
@@ -13,6 +13,12 @@ import './Blog.css';
 
 // The blog is written in English only, whatever language the rest of the site uses.
 const LANG = 'en';
+
+// Old (Uzbek) post addresses keep working.
+const SLUG_REDIRECTS = {
+  'taxmin-emas-olchov': 'measured-not-guessed',
+  'nega-sozlar-unutiladi': 'why-new-words-disappear',
+};
 
 const UI = {
   en: { langLabel: 'Language', title: 'Blog', sub: 'On memory, learning and the work behind VOC.', read: 'Read', back: 'Blog', home: 'Home', minutes: (n) => `${n} min read`, byline: 'The VOC team', start: 'Start free', ctaTitle: 'Add your first word today.', toc: 'On this page', copy: 'Copy link', copied: 'Copied', next: 'Next post', latest: 'New', all: 'All posts', empty: 'No posts yet.', months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], date: (d, m, y) => `${m} ${d}, ${y}`, notice: 'This post is not available in this language yet.' },
@@ -221,11 +227,14 @@ export function BlogPost() {
   const { posts, loading } = useBlogPosts();
   const post = posts.find((p) => p.slug === slug) || null;
   const c = post ? pickLang(post, lang) : null;
+  const redirectTo = SLUG_REDIRECTS[slug];
   const parsed = useMemo(() => parseMarkdown(c?.body || ''), [c?.body]);
   const articleRef = useRef(null);
   useDocumentMeta(c ? `${c.title} — VOCABRY` : `${ui.title} — VOCABRY`, c?.excerpt);
 
   useEffect(() => { window.scrollTo(0, 0); }, [slug]);
+
+  if (redirectTo) return <Navigate to={`/blog/${redirectTo}`} replace />;
 
   if (!post) {
     return (
