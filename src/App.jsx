@@ -17,6 +17,8 @@ import { installGlobalErrorLogging } from './utils/errorLogger';
 import { lazyWithRetry } from './utils/lazyWithRetry';
 
 const LandingPage = lazyWithRetry(() => import('./pages/marketing/LandingPage'));
+const BlogIndex = lazyWithRetry(() => import('./pages/blog/Blog').then((m) => ({ default: m.BlogIndex })));
+const BlogPost = lazyWithRetry(() => import('./pages/blog/Blog').then((m) => ({ default: m.BlogPost })));
 const Dashboard = lazyWithRetry(() => import('./pages/personal/Dashboard'));
 const PackDetail = lazyWithRetry(() => import('./pages/personal/PackDetail'));
 const ReadPage = lazyWithRetry(() => import('./pages/personal/ReadPage'));
@@ -116,6 +118,8 @@ export default function App() {
                     {/* The public landing page, reachable whether or not you are signed in
                         ("/" shows it only to logged-out visitors). Share this link. */}
                     <Route path="/welcome" element={<LandingPage />} />
+                    <Route path="/blog" element={<BlogIndex />} />
+                    <Route path="/blog/:slug" element={<BlogPost />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/choose-profile" element={<ProfileChooser />} />

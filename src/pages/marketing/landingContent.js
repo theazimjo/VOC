@@ -33,7 +33,7 @@ export const CONTENT = {
   uz: {
     langLabel: 'Til',
     decimal: ',',
-    nav: { how: 'Qanday ishlaydi', evidence: 'Natijalar', centers: 'Markazlar uchun', faq: 'Savollar', login: 'Kirish', start: 'Boshlash' },
+    nav: { how: 'Qanday ishlaydi', evidence: 'Natijalar', centers: 'Markazlar uchun', faq: 'Savollar', blog: 'Blog', login: 'Kirish', start: 'Boshlash' },
     hero: {
       title: "Har bir so'zning o'z vaqti bor.",
       sub: "VOC har bir o'quvchi uchun har bir so'zni alohida kuzatadi va aynan unutilish arafasidagi so'zlarni takrorlashga qaytaradi.",
@@ -108,7 +108,7 @@ export const CONTENT = {
   ru: {
     langLabel: 'Язык',
     decimal: ',',
-    nav: { how: 'Как это работает', evidence: 'Результаты', centers: 'Для центров', faq: 'Вопросы', login: 'Войти', start: 'Начать' },
+    nav: { how: 'Как это работает', evidence: 'Результаты', centers: 'Для центров', faq: 'Вопросы', blog: 'Блог', login: 'Войти', start: 'Начать' },
     hero: {
       title: 'У каждого слова — своё время.',
       sub: 'VOC отслеживает каждое слово отдельно для каждого ученика и возвращает именно те слова, которые вот-вот забудутся.',
@@ -183,7 +183,7 @@ export const CONTENT = {
   en: {
     langLabel: 'Language',
     decimal: '.',
-    nav: { how: 'How it works', evidence: 'Results', centers: 'For centers', faq: 'FAQ', login: 'Log in', start: 'Get started' },
+    nav: { how: 'How it works', evidence: 'Results', centers: 'For centers', faq: 'FAQ', blog: 'Blog', login: 'Log in', start: 'Get started' },
     hero: {
       title: 'Every word has its own time.',
       sub: 'VOC tracks every word separately for every learner and brings back exactly the words that are about to be forgotten.',

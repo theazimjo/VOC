@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useInView, useReducedMotion } from 'framer-motion';
-import { ArrowRight, RotateCcw, FastForward } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, RotateCcw, FastForward } from 'lucide-react';
 import { useSiteLanguage } from '../../utils/useSiteLanguage';
 import { CONTENT, EVIDENCE, GROUP_ROWS, WORDS } from './landingContent';
 
@@ -249,6 +249,9 @@ export default function LandingPage() {
           <a href="#evidence" onClick={scrollTo('evidence')}>{t.nav.evidence}</a>
           <a href="#centers" onClick={scrollTo('centers')}>{t.nav.centers}</a>
           <a href="#faq" onClick={scrollTo('faq')}>{t.nav.faq}</a>
+          <a href="/blog" target="_blank" rel="noopener noreferrer" className="lp-nav-ext">
+            {t.nav.blog}<ArrowUpRight size={14} strokeWidth={2.4} aria-hidden="true" />
+          </a>
         </nav>
         <div className="lp-nav-end">
           <div className="lp-lang" role="group" aria-label={t.langLabel}>
@@ -367,6 +370,7 @@ export default function LandingPage() {
         <div className="lp-footer-links">
           <Link to="/login">{t.footer.login}</Link>
           <Link to="/register">{t.footer.start}</Link>
+          <a href="/blog" target="_blank" rel="noopener noreferrer">{t.nav.blog}</a>
         </div>
         <span className="lp-footer-copy">&copy; {new Date().getFullYear()} VOCABRY</span>
       </footer>
