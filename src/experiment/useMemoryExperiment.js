@@ -15,7 +15,7 @@ import {
   recordConfusionPair,
   getConfusionPairs,
 } from './experimentDB';
-import { computeRecallProbability, computeClusterCalibration, resolveStability, resolveDifficulty, clampNextReview } from '@voc/memory-engine';
+import { computeRecallProbability, computeClusterCalibration, computeUserRate, predictRecall, resolveStability, resolveDifficulty, clampNextReview } from '@voc/memory-engine';
 import { getWordCluster } from './semanticClassifier';
 
 // ─── Hook ────────────────────────────────────────────────────────────────────
@@ -80,6 +80,8 @@ export function useMemoryExperiment() {
         nextReview,
         nextOptimalReview: nextReview,
         recallHistory,
+        correctCount: w.correctCount,
+        lastConfidence: w.lastConfidence,
         difficulty: resolveDifficulty(w),
         wordData: {
           word: w.word, translation: w.translation, packName: w.source,
@@ -101,10 +103,13 @@ export function useMemoryExperiment() {
   // Sorting criteria:
   //   1. Unreviewed words first (never reviewed)
   //   2. Words past their optimal review date (isDue)
-  //   3. Lowest recall probability P(t) = e^(-t/S) first
+  //   3. Lowest predicted chance of recall first (calibrated predictor)
   const dueWords = useMemo(() => {
     const now = Date.now();
-    return Object.values(memoryMap).sort((a, b) => {
+    const all = Object.values(memoryMap);
+    const userRate = computeUserRate(all);
+    const chance = (m) => predictRecall(m, { now, userRate });
+    return all.sort((a, b) => {
       if (!a.lastReviewed && b.lastReviewed) return -1;
       if (a.lastReviewed && !b.lastReviewed) return 1;
 
@@ -113,11 +118,7 @@ export function useMemoryExperiment() {
       if (aDue && !bDue) return -1;
       if (!aDue && bDue) return 1;
 
-      const daysSinceA = a.lastReviewed ? (now - new Date(a.lastReviewed).getTime()) / 86400000 : 999;
-      const daysSinceB = b.lastReviewed ? (now - new Date(b.lastReviewed).getTime()) / 86400000 : 999;
-      const pA = Math.exp(-daysSinceA / (a.stability || 1));
-      const pB = Math.exp(-daysSinceB / (b.stability || 1));
-      return pA - pB;
+      return chance(a) - chance(b);
     });
   }, [memoryMap]);
 

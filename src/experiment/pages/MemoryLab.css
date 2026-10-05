@@ -1933,4 +1933,50 @@
   }
 }
 
+/* ===== Plain-language review page: statuses, word list, explainer ===== */
+.mem-chip { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; line-height: 1.3; white-space: nowrap; }
+.mem-chip--strong { background: rgba(52, 211, 153, 0.16); color: #34d399; }
+.mem-chip--medium { background: rgba(245, 158, 11, 0.16); color: #f59e0b; }
+.mem-chip--weak { background: rgba(248, 113, 113, 0.16); color: #f87171; }
+.mem-chip--new { background: rgba(139, 143, 168, 0.18); color: var(--text-secondary, #8b8fa8); }
 
+.mem-due-chip { display: inline-flex; align-items: center; gap: 8px; }
+
+.mem-explain { margin-top: 24px; padding: 18px 20px; border-radius: 16px; background: var(--bg-glass, rgba(255, 255, 255, 0.05)); border: 1px solid var(--border, rgba(255, 255, 255, 0.1)); }
+.mem-explain h3 { margin: 0 0 10px; font-size: 15px; font-weight: 700; }
+.mem-explain ol { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 14px; line-height: 1.5; color: var(--text-secondary, #a0a3b8); }
+
+.mem-stats-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+.mem-words { display: flex; flex-direction: column; gap: 14px; width: 100%; }
+.mem-words-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.mem-words-title { margin: 0; font-size: 22px; font-weight: 800; }
+.mem-words-total { font-size: 14px; color: var(--text-secondary, #a0a3b8); }
+.mem-words-legend { margin: 0; font-size: 13px; line-height: 1.5; color: var(--text-secondary, #a0a3b8); }
+.mem-words-search { display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 14px; border-radius: 12px; background: var(--bg-glass, rgba(255, 255, 255, 0.06)); border: 1px solid var(--border, rgba(255, 255, 255, 0.1)); }
+.mem-words-search input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; color: inherit; font: inherit; font-size: 15px; }
+.mem-words-filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.mem-filter { height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--border, rgba(255, 255, 255, 0.14)); background: transparent; color: inherit; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; transition: background-color 150ms ease, transform 150ms ease; }
+.mem-filter:active { transform: scale(0.96); }
+.mem-filter.is-on { background: var(--accent-1, #0a84ff); border-color: transparent; color: #fff; }
+.mem-words-none { margin: 8px 0; color: var(--text-secondary, #a0a3b8); font-size: 14px; }
+
+.mem-wlist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.mem-wrow { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 14px 4px; border-top: 1px solid var(--border, rgba(255, 255, 255, 0.08)); }
+.mem-wrow-text { display: flex; flex-direction: column; min-width: 0; }
+.mem-wrow-word { font-size: 17px; font-weight: 700; }
+.mem-wrow-trans { font-size: 14px; color: var(--text-secondary, #a0a3b8); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mem-wrow-side { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0; }
+.mem-wrow-next { font-size: 12px; color: var(--text-secondary, #a0a3b8); }
+.mem-words-more { align-self: center; }
+
+.mem-confused { margin-top: 18px; padding: 16px 18px; border-radius: 16px; background: var(--bg-glass, rgba(255, 255, 255, 0.05)); border: 1px solid var(--border, rgba(255, 255, 255, 0.1)); }
+.mem-confused h3 { margin: 0 0 4px; font-size: 15px; font-weight: 700; }
+.mem-confused p { margin: 0 0 10px; font-size: 13px; color: var(--text-secondary, #a0a3b8); }
+.mem-confused ul { list-style: none; margin: 0; padding: 0; }
+.mem-confused li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-top: 1px solid var(--border, rgba(255, 255, 255, 0.08)); font-weight: 600; }
+.mem-confused-n { color: var(--text-secondary, #a0a3b8); font-weight: 500; }
+
+@media (max-width: 520px) {
+  .mem-stats-grid--3 { grid-template-columns: 1fr; }
+}
