@@ -11,6 +11,7 @@ are injectable, so every result is deterministic and testable.
 |---|---|
 | `src/engine.js` | Math core: recall probability, stability update, scheduling, mastery/retention stats |
 | `src/scheduler.js` | `applyReview(word, opts)` — the one entry point practice modes use; mastery gate (passive ceiling 65% until confirmed by 2 active-recall angles) |
+| `src/predictor.js` | Calibrated recall predictor (logistic over word record, learner rate, gap, confidence). Fitted on real logs; weights in `src/predictor-params.js` (generated) |
 | `src/autopsy.js` | Heuristic "why did I forget this" diagnosis |
 | `eval/` | Evaluation harness: replay, metrics (Brier, log-loss, AUC, ECE, calibration), synthetic simulator |
 
@@ -24,7 +25,9 @@ Firebase persistence stays in the app (`src/experiment/experimentDB.js`).
    retention at equal-or-fewer reviews improves (scheduling).
 4. `npm test` must stay green; add a test for any new rule.
 
-Real data: export `recallHistory` per word into
+Real data: `node scripts/export-memory-data.mjs` (anonymised, read-only, writes gitignored `memory-export.local.json`), then
+`npm run fit:memory -- ../../memory-export.local.json [--write]` re-fits the predictor on held-out users
+(every 3rd user is test). Old notes: export `recallHistory` per word into
 `[{ wordId, events: [{ ts, result, confidence, responseTime, retrievalType, mode }] }]`
 and run `npm run eval:memory -- --data export.json`.
 
@@ -34,3 +37,9 @@ assumption. Trust real-data replay for tuning decisions.
 ## Versioning rule
 Word records carry no `engineVersion` yet. Before changing stored fields, add one and a
 migration in `applyReview` (legacy `interval` -> `stability` seeding is the existing example).
+
+## What real data showed (2026-10, 24 learners, ~38k predictions)
+- Pure `e^(-t/S)` as a *prediction* lost to "always guess the average" on held-out users (log-loss 0.53 vs 0.29).
+- Real recall barely depends on elapsed time (68% of reviews are same-session repeats; many answers are passive/MCQ).
+- A word's own track record, learner rate, previous confidence and review count predict well: the calibrated predictor reaches log-loss 0.244 / AUC 0.78 on held-out users.
+- Scheduling (S, difficulty, next review) is still the forgetting-curve model; the data cannot validate it yet because there are too few genuine spaced reviews. Re-run the export as spaced data accumulates.

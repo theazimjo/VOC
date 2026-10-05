@@ -41,6 +41,7 @@ import {
   clampNextReview,
   MAX_STABILITY,
 } from './engine.js';
+import { resolveCorrectCount } from './predictor.js';
 
 const MASTERY_TIME_CONSTANT = 12;
 
@@ -169,6 +170,8 @@ export function applyReview(word = {}, options = {}) {
     quality: isCorrect ? clampedConfidence : Math.min(2, clampedConfidence - 1),
     stability: newStability,
     difficulty: updateDifficulty(difficulty, isCorrect, confidence),
+    correctCount: resolveCorrectCount(word) + (isCorrect ? 1 : 0),
+    lastConfidence: clampedConfidence,
     activeRecallPasses,
     confirmedModes,
   };
@@ -246,6 +249,8 @@ export function initWordProgress() {
     lastReviewed: null,
     stability: computeInitialStability(),
     difficulty: 0.5,
+    correctCount: 0,
+    lastConfidence: 3,
     activeRecallPasses: 0,
     confirmedModes: [],
   };

@@ -18,7 +18,7 @@
 import { ref, update, get, runTransaction } from 'firebase/database';
 import { db } from '../firebase';
 import { applyReview } from '@voc/memory-engine';
-import { computeRecallProbability, resolveStability } from '@voc/memory-engine';
+import { predictRecall } from '@voc/memory-engine';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -66,12 +66,13 @@ export async function saveReviewEvent(userId, packId, wordId, currentWord, revie
   } = reviewData;
 
   const lastRev = currentWord.lastReviewed ?? null;
-  const seedStability = resolveStability(currentWord);
   const daysSince = lastRev ? (Date.now() - new Date(lastRev).getTime()) / (86400 * 1000) : 0;
 
-  // Predicted recall probability right before this review — stored so future
-  // reviews can self-calibrate the model (see computeClusterCalibration).
-  const predictedP = lastRev ? computeRecallProbability(seedStability, daysSince) : null;
+  // Predicted recall probability right before this review (calibrated
+  // predictor, see packages/memory-engine/src/predictor.js) — stored so future
+  // reviews can self-calibrate the model (see computeClusterCalibration) and
+  // so fit.js can be re-run on the log. `mode` is logged for the same reason.
+  const predictedP = lastRev ? predictRecall(currentWord, { retrievalType, userRate: reviewData.userRate }) : null;
 
   const updatedFields = applyReview(currentWord, {
     isCorrect,
@@ -89,6 +90,7 @@ export async function saveReviewEvent(userId, packId, wordId, currentWord, revie
     confidence,
     ts: updatedFields.lastReviewed,
     retrievalType,
+    ...(mode ? { mode } : {}),
     ...(predictedP !== null ? { predictedP: Math.round(predictedP * 1000) / 1000 } : {}),
   };
   const newHistory = [...(currentWord.recallHistory || []), newEntry].slice(-50);

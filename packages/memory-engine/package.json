@@ -11,6 +11,7 @@
   "sideEffects": false,
   "scripts": {
     "test": "cd ../.. && vitest run packages/memory-engine",
-    "eval": "node eval/run.js"
+    "eval": "node eval/run.js",
+    "fit": "node eval/fit.js"
   }
 }

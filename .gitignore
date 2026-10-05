@@ -29,3 +29,6 @@ __pycache__
 
 # Demo account logins (scripts/seed-demo-center.mjs)
 demo-accounts.local.txt
+
+# anonymised review logs for memory-engine evaluation
+memory-export*.json

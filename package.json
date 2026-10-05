@@ -14,7 +14,8 @@
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "eval:memory": "npm run eval -w @voc/memory-engine"
+    "eval:memory": "npm run eval -w @voc/memory-engine",
+    "fit:memory": "npm run fit -w @voc/memory-engine --"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

@@ -12,6 +12,8 @@
  * and learns their individual memory characteristics over time.
  */
 
+import { predictRecall, computeUserRate } from './predictor.js';
+
 // ─── Constants ───────────────────────────────────────────────────────────────
 
 /** Default stability for a brand-new word (1 day = forgets quickly) */
@@ -637,7 +639,7 @@ export function explainSchedulingDecision(stability, lastReview, nextOptimalRevi
 }
 
 /**
- * Shared "Memory Twin" retention aggregate — the one piece of math that used
+ * Shared "Memory Twin" retention aggregate (uses the calibrated predictor, see predictor.js) — the one piece of math that used
  * to be copy-pasted separately into Dashboard, PackDetail, and
  * StudentCorpLearn (and had already drifted out of sync once). Every
  * per-word retention/at-risk stat shown anywhere in the app should come from
@@ -654,12 +656,12 @@ export function computeRetentionStats(words, now = Date.now()) {
 
   let totalP = 0;
   let atRisk = 0;
+  const userRate = computeUserRate(reviewed);
   reviewed.forEach(w => {
-    const stability = resolveStability(w);
-    const daysSince = (now - new Date(w.lastReviewed).getTime()) / (24 * 60 * 60 * 1000);
-    const p = computeRecallProbability(stability, daysSince);
+    const p = predictRecall(w, { now, userRate });
     totalP += p;
-    if (p < 0.5) atRisk++;
+    // "At risk" = predicted recall below the same target the scheduler aims for.
+    if (p < TARGET_RECALL) atRisk++;
   });
 
   return {

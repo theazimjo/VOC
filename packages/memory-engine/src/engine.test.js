@@ -323,20 +323,21 @@ describe('computeRetentionStats', () => {
     expect(computeRetentionStats([{ stability: 5 }])).toEqual({ retentionPercent: 0, atRisk: 0, reviewedCount: 0 });
   });
 
-  it('reports full retention right after review', () => {
-    const words = [{ stability: 10, lastReviewed: new Date().toISOString() }];
+  it('reports high retention for a word with a strong track record', () => {
+    const words = [{ reviewCount: 8, correctCount: 8, lastConfidence: 5, lastReviewed: new Date().toISOString() }];
     const stats = computeRetentionStats(words);
     expect(stats.reviewedCount).toBe(1);
-    expect(stats.retentionPercent).toBe(100);
+    expect(stats.retentionPercent).toBeGreaterThan(85);
     expect(stats.atRisk).toBe(0);
   });
 
-  it('flags a stale, low-stability word as at-risk', () => {
-    const staleDate = new Date(Date.now() - 30 * 86400000).toISOString();
-    const words = [{ stability: 1, lastReviewed: staleDate }];
+  it('flags a word the learner keeps failing as at-risk', () => {
+    const words = [{ reviewCount: 8, correctCount: 1, lastConfidence: 1, lastReviewed: new Date().toISOString() }];
     const stats = computeRetentionStats(words);
     expect(stats.atRisk).toBe(1);
-    expect(stats.retentionPercent).toBeLessThan(50);
+    const strong = computeRetentionStats([{ reviewCount: 8, correctCount: 8, lastConfidence: 5, lastReviewed: new Date().toISOString() }]);
+    expect(stats.retentionPercent).toBeLessThan(75);
+    expect(stats.retentionPercent).toBeLessThan(strong.retentionPercent);
   });
 });
 
