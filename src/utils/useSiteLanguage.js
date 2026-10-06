@@ -1,15 +1,14 @@
 import { useLanguage } from '../contexts/LanguageContext';
 
 /**
- * Language for the public pages (landing, login, register). The audience is
- * Uzbek-speaking, so show UZ until the visitor has actually chosen a language
- * (the app-wide default is English). UZ, RU and EN are written for these
- * pages; anything else falls back to UZ.
+ * Language for the public pages (landing, login, register). English is the
+ * default until the visitor has chosen a language. UZ, RU and EN are written
+ * for these pages; anything else falls back to EN.
  */
 export function useSiteLanguage() {
   const { language, setLanguage } = useLanguage();
   let hasChosen = false;
   try { hasChosen = !!localStorage.getItem('voc-language'); } catch { /* storage blocked */ }
-  const lang = hasChosen && (language === 'en' || language === 'ru') ? language : 'uz';
+  const lang = hasChosen && (language === 'uz' || language === 'ru') ? language : 'en';
   return { lang, setLanguage };
 }
