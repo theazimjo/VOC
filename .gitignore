@@ -35,3 +35,6 @@ memory-export*.json
 
 # design review screenshots
 .impeccable/
+
+# presentation screenshots (demo data), not part of the app
+deck-screenshots/

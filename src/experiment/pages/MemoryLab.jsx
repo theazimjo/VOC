@@ -236,16 +236,17 @@ function ReviewTab({ dueWords, allWords, onStart, loading }) {
 
 // ─── Page ────────────────────────────────────────────────────────────────────
 
-export default function MemoryLab() {
+/** Presentational page: everything comes in through `data` (the shape useMemoryExperiment returns). */
+export function MemoryLabView({ data, initialTab = 'review' }) {
   const navigate = useNavigate();
   const { language } = useLanguage();
   const lab = labCopy(language);
-  const [activeTab, setActiveTab] = useState('review');
+  const [activeTab, setActiveTab] = useState(initialTab);
 
   const {
     allWords, dueWords, memoryMap, confusionPairs, loading, error,
     session, startSession, submitReview, skipWord, endSession, reportConfusion,
-  } = useMemoryExperiment();
+  } = data;
 
   const inSession = !!session && !session.finished;
   const sessionDone = session?.finished;
@@ -309,4 +310,8 @@ export default function MemoryLab() {
       </div>
     </div>
   );
+}
+
+export default function MemoryLab() {
+  return <MemoryLabView data={useMemoryExperiment()} />;
 }

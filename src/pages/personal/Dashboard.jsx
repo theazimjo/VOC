@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Target, CheckCircle2, CalendarDays, RotateCcw, X, Check, ChevronRight, PartyPopper } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { labCopy } from '../../experiment/labContent';
 import { usePacks } from '../../hooks/usePacks';
 import { useWordTarget } from '../../hooks/useWordTarget';
 import { updateStudentWordTarget } from '../../services/corpService';
@@ -46,6 +47,8 @@ function getLocalDateString(d) {
  * overconfident and worse than guessing the average.
  */
 function getRecallInfo(word, userRate) {
+  // A word that has never been reviewed has no track record yet: show "New", not the 75% prior.
+  if (!(Number(word.reviewCount) || word.lastReviewed)) return { pct: null, color: 'var(--text-muted)' };
   const pct = Math.round(predictRecall(word, { userRate }) * 100);
   const color = pct < 50 ? 'var(--error)' : pct < 75 ? 'var(--warning)' : 'var(--success)';
   return { pct, color };
@@ -90,7 +93,8 @@ function buildActivityLog(words) {
 
 export default function Dashboard() {
   const { user } = useAuth();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const newLabel = labCopy(language).status.new;
   const WEEKDAY_LABELS = t('dashboard.weekdays');
   const MONTH_NAMES = t('dashboard.months');
   const { allWords, packs, loading: packsLoading } = usePacks();
@@ -132,7 +136,7 @@ export default function Dashboard() {
     // Most at-risk first — lowest current recall probability, not just oldest
     // due date, since two overdue words with different stability forget at
     // different rates.
-    return [...due].sort((a, b) => getRecallInfo(a, userRate).pct - getRecallInfo(b, userRate).pct);
+    return [...due].sort((a, b) => (getRecallInfo(a, userRate).pct ?? 75) - (getRecallInfo(b, userRate).pct ?? 75));
   }, [allWords, userRate]);
   const dueWords = dueWordsList.length;
 
@@ -349,7 +353,7 @@ export default function Dashboard() {
                       onClick={() => navigate('/mixed-practice?filter=due')}
                     >
                       <div className="dash-ov-hw-item-check" style={{ backgroundColor: `${recall.color}15`, color: recall.color, borderColor: 'transparent' }}>
-                        {recall.pct}%
+                        {recall.pct == null ? newLabel : `${recall.pct}%`}
                       </div>
                       <div className="dash-ov-hw-item-text">
                         <span className="dash-ov-hw-item-title">{word.word}</span>
