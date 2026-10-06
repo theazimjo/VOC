@@ -26,7 +26,7 @@ function getPasswordStrength(password) {
 export default function RegisterPage() {
   const { user, loading, register, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
-  const { lang, setLanguage } = useSiteLanguage();
+  const { lang } = useSiteLanguage();
   const copy = AUTH_CONTENT[lang];
   const t = copy.register;
 
@@ -104,7 +104,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <AuthShell copy={copy} lang={lang} setLanguage={setLanguage}>
+    <AuthShell copy={copy}>
       {loading ? (
         <span className="as-spinner" style={{ borderColor: 'rgba(16,17,19,0.2)', borderTopColor: '#101113' }} aria-label="Loading" />
       ) : user ? null : (

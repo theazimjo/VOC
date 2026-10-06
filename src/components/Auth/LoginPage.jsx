@@ -51,7 +51,7 @@ export default function LoginPage() {
   // window entirely.
   const signingInRef = useRef(false);
 
-  const { lang, setLanguage } = useSiteLanguage();
+  const { lang } = useSiteLanguage();
   const copy = AUTH_CONTENT[lang];
   const t = copy.login;
 
@@ -209,7 +209,7 @@ export default function LoginPage() {
   const showForm = !loading && !user && !redirecting;
 
   return (
-    <AuthShell copy={copy} lang={lang} setLanguage={setLanguage}>
+    <AuthShell copy={copy}>
       {loading || redirecting ? (
         <span className="as-spinner" style={{ borderColor: 'rgba(16,17,19,0.2)', borderTopColor: '#101113' }} aria-label="Loading" />
       ) : showForm ? (

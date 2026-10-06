@@ -74,7 +74,7 @@ export function Field({ label, type = 'text', value, onChange, autoComplete, dis
  * Two-pane shell for sign-in and sign-up: form on warm ground, a departures
  * board on ink beside it (hidden on narrow screens).
  */
-export function AuthShell({ copy, lang, setLanguage, children }) {
+export function AuthShell({ copy, children }) {
   return (
     <div className="as-page">
       <main className="as-main">
@@ -84,13 +84,6 @@ export function AuthShell({ copy, lang, setLanguage, children }) {
             <span>VOCABRY</span>
             <BetaBadge />
           </Link>
-          <div className="as-lang" role="group" aria-label={copy.langLabel}>
-            {['uz', 'ru', 'en'].map((code) => (
-              <button key={code} type="button" className={lang === code ? 'is-on' : ''} aria-pressed={lang === code} onClick={() => setLanguage(code)}>
-                {code.toUpperCase()}
-              </button>
-            ))}
-          </div>
         </header>
 
         <div className="as-card">{children}</div>
