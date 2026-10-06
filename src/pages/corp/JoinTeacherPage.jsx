@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { GraduationCap, Building2, AlertCircle } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
-import { getCenterByTeacherJoinCode, joinCenterAsTeacher } from '../../services/corpService';
-import { clearCorpIdentityCache } from '../../hooks/useCorpRole';
+import { getCenterByTeacherJoinCode, getCorpRole, requestTeacherAccess } from '../../services/corpService';
 import { setPendingTeacherJoinCode, clearPendingTeacherJoinCode } from '../../utils/pendingJoin';
 import IosSpinner from '../../components/common/IosSpinner';
 import VocLogo from '../../components/common/VocLogo';
@@ -21,6 +20,7 @@ export default function JoinTeacherPage() {
   const [info, setInfo] = useState(null); // { centerId, centerName }
   const [status, setStatus] = useState('loading'); // loading | ready | invalid
   const [joining, setJoining] = useState(false);
+  const [requested, setRequested] = useState(false);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -49,6 +49,20 @@ export default function JoinTeacherPage() {
     return () => { cancelled = true; };
   }, [code]);
 
+  useEffect(() => {
+    if (!user) return;
+    let cancelled = false;
+    getCorpRole(user.uid)
+      .then((role) => {
+        if (!cancelled && role?.role === 'teacher') {
+          clearPendingTeacherJoinCode();
+          navigate('/corp/teacher', { replace: true });
+        }
+      })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, [user, navigate]);
+
   const goToAuth = (path) => {
     setPendingTeacherJoinCode(code);
     navigate(path);
@@ -58,18 +72,21 @@ export default function JoinTeacherPage() {
     setJoining(true);
     setError('');
     try {
-      await joinCenterAsTeacher(code, user.uid, {
+      await requestTeacherAccess(code, user.uid, {
         name: user.displayName || user.email || 'Teacher',
         email: user.email || '',
       });
-      // The just-created corpUsers role wouldn't be picked up until the
-      // short-lived identity cache (see useCorpRole) expires on its own.
-      clearCorpIdentityCache(user.uid);
       clearPendingTeacherJoinCode();
-      navigate('/corp/teacher', { replace: true });
+      setRequested(true);
     } catch (err) {
-      console.error('Error joining center as teacher:', err);
-      setError(err.message || "Markazga qo'shilib bo'lmadi. Internetni tekshirib, qayta urinib ko'ring.");
+      if (err.code === 'already-requested') {
+        clearPendingTeacherJoinCode();
+        setRequested(true);
+      } else {
+        console.error('Error requesting teacher access:', err);
+        setError(err.message || "Couldn't send the request. Check your connection and try again.");
+      }
+    } finally {
       setJoining(false);
     }
   };
@@ -114,7 +131,12 @@ export default function JoinTeacherPage() {
               </div>
             </div>
 
-            {!user ? (
+            {requested ? (
+              <>
+                <p className="join-text">Request sent. The center admin will review it. You can use VOCABRY as usual in the meantime and come back to the teacher panel once you're approved.</p>
+                <button type="button" className="join-btn join-btn-secondary" onClick={dismiss}>Go to VOCABRY</button>
+              </>
+            ) : !user ? (
               <>
                 <p className="join-text">Qo'shilish uchun VOC hisobingizga kiring yoki yangi hisob oching. Bu bir daqiqa oladi.</p>
                 <button type="button" className="join-btn" onClick={() => goToAuth('/register')}>
@@ -128,7 +150,7 @@ export default function JoinTeacherPage() {
               <>
                 {error && <p className="join-text join-text-warning">{error}</p>}
                 <button type="button" className="join-btn" onClick={handleJoin} disabled={joining}>
-                  {joining ? <IosSpinner size={18} /> : "O'qituvchi sifatida qo'shilish"}
+                  {joining ? <IosSpinner size={18} /> : 'Request teacher access'}
                 </button>
                 <p className="join-account">
                   {user.displayName || user.email} sifatida · <Link to="/" onClick={clearPendingTeacherJoinCode}>Bekor qilish</Link>

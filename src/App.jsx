@@ -17,6 +17,7 @@ import { installGlobalErrorLogging } from './utils/errorLogger';
 import { lazyWithRetry } from './utils/lazyWithRetry';
 
 const LandingPage = lazyWithRetry(() => import('./pages/marketing/LandingPage'));
+const StartCenterPage = lazyWithRetry(() => import('./pages/marketing/StartCenterPage'));
 const BlogIndex = lazyWithRetry(() => import('./pages/blog/Blog').then((m) => ({ default: m.BlogIndex })));
 const BlogPost = lazyWithRetry(() => import('./pages/blog/Blog').then((m) => ({ default: m.BlogPost })));
 const Dashboard = lazyWithRetry(() => import('./pages/personal/Dashboard'));
@@ -124,6 +125,7 @@ export default function App() {
                     <Route path="/blog/:slug" element={<BlogPost />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
+                    <Route path="/start-center" element={<StartCenterPage />} />
                     <Route path="/choose-profile" element={<ProfileChooser />} />
   
                     {/* Protected routes */}

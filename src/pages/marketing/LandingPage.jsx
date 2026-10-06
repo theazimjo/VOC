@@ -23,10 +23,6 @@ FORM: departures board (assigned roll 3 of 7, key 82dc0ba2, degraded roll).
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
 */
 
-// Set to a real URL (Telegram, form, mailto) to show a contact button in the
-// centers section. Empty means the section sends visitors to /login.
-const CENTER_CONTACT_URL = '';
-
 const DAY_TICK_MS = 4200;
 const MAX_AUTO_DAYS = 3;
 
@@ -319,17 +315,10 @@ export default function LandingPage() {
               {t.centers.points.map((p) => <li key={p}>{p}</li>)}
             </ul>
             <div className="lp-hero-ctas">
-              {CENTER_CONTACT_URL ? (
-                <a href={CENTER_CONTACT_URL} className="lp-btn" target="_blank" rel="noopener noreferrer">
-                  {t.centers.ctaContact}
-                  <ArrowRight size={18} strokeWidth={2.4} aria-hidden="true" />
-                </a>
-              ) : (
-                <Link to="/login" className="lp-btn">
-                  {t.centers.cta}
-                  <ArrowRight size={18} strokeWidth={2.4} aria-hidden="true" />
-                </Link>
-              )}
+              <Link to="/start-center" className="lp-btn">
+                {t.centers.cta}
+                <ArrowRight size={18} strokeWidth={2.4} aria-hidden="true" />
+              </Link>
             </div>
             <p className="lp-hero-note">{t.centers.note}</p>
           </div>

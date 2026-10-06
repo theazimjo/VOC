@@ -85,9 +85,8 @@ export const CONTENT = {
         'The center owner sees weekly which groups are active and which went quiet.',
         'Students join with their personal account and keep their history after the course ends.',
       ],
-      cta: 'Log in',
-      ctaContact: 'Contact us as a center',
-      note: 'We currently onboard centers by hand.',
+      cta: 'Create your center',
+      note: 'Free during the beta. Confirm your Gmail and you are in.',
       board: {
         title: 'Group status',
         cols: { student: 'Student', today: 'Today, words', status: 'Status' },

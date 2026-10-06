@@ -485,49 +485,133 @@ export async function getCenterByTeacherJoinCode(code) {
 }
 
 /**
- * Self-service: an already-authenticated visitor (signed up or logged in
- * right on the join-teacher page) attaches themselves as a teacher of the
- * center behind `code`. The security rules (corpUsers/$uid and
- * centers/$id/teachers/$tid .write) are what actually enforce the code is
- * valid — this just performs the writes with the fields they check for.
+ * Self-service: a signed-in visitor asks to become a teacher of the center
+ * behind `code`. Nothing is granted yet — the request lands in
+ * centers/{id}/teacherRequests/{uid} and the center admin approves or
+ * declines it (approveTeacherRequest). Throws code 'already-requested' when a
+ * request from this account is already waiting.
  */
-export async function joinCenterAsTeacher(code, uid, profile) {
+export async function requestTeacherAccess(code, uid, profile) {
   const centerIdSnap = await get(ref(db, `teacherJoinCodes/${code}`));
   if (!centerIdSnap.exists()) throw new Error('Invalid or expired invite link.');
   const centerId = centerIdSnap.val();
 
-  const nameSnap = await get(ref(db, `centers/${centerId}/name`));
-  const centerName = nameSnap.exists() ? nameSnap.val() : '';
+  try {
+    await set(ref(db, `centers/${centerId}/teacherRequests/${uid}`), {
+      uid,
+      name: profile.name || '',
+      email: profile.email || '',
+      joinCode: code,
+      createdAt: new Date().toISOString(),
+    });
+  } catch (err) {
+    // Writing over an existing request is denied by the rules.
+    if (err?.code === 'PERMISSION_DENIED' || /permission/i.test(err?.message || '')) {
+      const e = new Error('Your request is already waiting for approval.', { cause: err });
+      e.code = 'already-requested';
+      throw e;
+    }
+    throw err;
+  }
+  return { centerId };
+}
 
+/**
+ * Center Admin: accept a teacher request — creates the teacher record and the
+ * corpUsers role, then removes the request.
+ */
+export async function approveTeacherRequest(centerId, centerName, request) {
   const teacherRef = push(ref(db, `centers/${centerId}/teachers`));
   const teacherId = teacherRef.key;
+  const now = new Date().toISOString();
+  const name = request.name || request.email || 'Teacher';
 
-  const teacherPayload = {
+  const teacher = {
     id: teacherId,
-    uid,
+    uid: request.uid,
     centerId,
-    name: profile.name,
-    email: profile.email || '',
-    phone: profile.phone || '',
+    name,
+    email: request.email || '',
+    phone: '',
     subject: 'Ingliz tili',
     status: 'active',
-    joinCode: code,
-    createdAt: new Date().toISOString(),
+    createdAt: now,
   };
-
-  await set(teacherRef, teacherPayload);
-  await set(ref(db, `corpUsers/${uid}`), {
+  await set(teacherRef, teacher);
+  await set(ref(db, `corpUsers/${request.uid}`), {
+    email: request.email || '',
     role: 'teacher',
     centerId,
-    centerName,
+    centerName: centerName || '',
     teacherId,
-    teacherName: profile.name,
-    phone: profile.phone || '',
-    joinCode: code,
-    createdAt: new Date().toISOString(),
+    teacherName: name,
+    phone: '',
+    createdAt: now,
   });
+  await remove(ref(db, `centers/${centerId}/teacherRequests/${request.uid}`));
+  return teacher;
+}
 
-  return { centerId, centerName, teacher: teacherPayload };
+/** Center Admin: decline (delete) a teacher request. */
+export async function declineTeacherRequest(centerId, uid) {
+  await remove(ref(db, `centers/${centerId}/teacherRequests/${uid}`));
+}
+
+/**
+ * Center Admin: replace the center's shared teacher link with a new one. The
+ * old link stops working at once; requests already sent stay in the list.
+ */
+export async function regenerateTeacherJoinCode(centerId) {
+  const oldSnap = await get(ref(db, `centers/${centerId}/teacherJoinCode`));
+  let code = generateJoinCode();
+  let attempts = 0;
+  while ((await get(ref(db, `teacherJoinCodes/${code}`))).exists() && attempts < 10) {
+    code = generateJoinCode();
+    attempts++;
+  }
+  await update(ref(db), {
+    ...(oldSnap.exists() ? { [`teacherJoinCodes/${oldSnap.val()}`]: null } : {}),
+    [`teacherJoinCodes/${code}`]: centerId,
+    [`centers/${centerId}/teacherJoinCode`]: code,
+  });
+  return code;
+}
+
+// ---------------------------------------------------------------------------
+// Self-serve center signup (/start-center)
+// ---------------------------------------------------------------------------
+
+/**
+ * A signed-in user with a verified email (Google) creates their own center
+ * and becomes its admin at once — no approval step. The security rules
+ * require a verified email and one center per account; the two writes are
+ * sequential because the corpUsers rule checks the center it just created.
+ */
+export async function createOwnCenter(user, { centerName, phone }) {
+  const email = (user.email || '').toLowerCase();
+  const centerRef = push(ref(db, 'centers'));
+  const centerId = centerRef.key;
+  const now = new Date().toISOString();
+  const name = centerName.trim().slice(0, 120);
+
+  await set(centerRef, {
+    id: centerId,
+    name,
+    adminEmail: email,
+    adminUid: user.uid,
+    phone: (phone || '').trim().slice(0, 40),
+    status: 'active',
+    createdAt: now,
+    updatedAt: now,
+  });
+  await set(ref(db, `corpUsers/${user.uid}`), {
+    email,
+    role: 'center_admin',
+    centerId,
+    centerName: name,
+    createdAt: now,
+  });
+  return { centerId, name };
 }
 
 /**

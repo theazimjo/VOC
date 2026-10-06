@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Check, ChevronDown, ChevronUp, Copy, Link as LinkIcon, RotateCcw, Trash2, UserCog, UserPlus, Users, X } from 'lucide-react';
 import { auth } from '../../../firebase';
-import { createTeacher, getOrCreateTeacherJoinCode, inviteCenterAdmin, removeTeacherFromCenter, sendCorpPasswordReset } from '../../../services/corpService';
+import { approveTeacherRequest, createTeacher, declineTeacherRequest, getOrCreateTeacherJoinCode, inviteCenterAdmin, regenerateTeacherJoinCode, removeTeacherFromCenter, sendCorpPasswordReset } from '../../../services/corpService';
 import { buildTeacherInviteUrl } from '../../../utils/pendingJoin';
 import ConfirmSheet from '../../../components/corp/ConfirmSheet';
 import { Button, EmptyState, LoadingRows, Page, Row, Segmented } from '../super-admin/ui';
@@ -53,7 +53,31 @@ export default function AdminTeachers() {
   const navigate = useNavigate();
   const isDesktop = useIsDesktop();
   const myUid = auth.currentUser?.uid;
-  const { centerId, centerName, loading, teachers, admins, reload, patch } = useCenterData();
+  const { centerId, centerName, center, loading, teachers, admins, reload, patch } = useCenterData();
+  const requests = useMemo(
+    () => Object.values(center?.teacherRequests || {}).sort((a, b) => (a.createdAt || '').localeCompare(b.createdAt || '')),
+    [center],
+  );
+  const [requestBusy, setRequestBusy] = useState(null);
+
+  const decideRequest = async (req, approve) => {
+    setRequestBusy(req.uid);
+    try {
+      let teacher = null;
+      if (approve) teacher = await approveTeacherRequest(centerId, centerName, req);
+      else await declineTeacherRequest(centerId, req.uid);
+      patch((c) => {
+        const nextReq = { ...(c.teacherRequests || {}) };
+        delete nextReq[req.uid];
+        return { ...c, teacherRequests: nextReq, ...(teacher ? { teachers: { ...(c.teachers || {}), [teacher.id]: teacher } } : {}) };
+      });
+      showToast(approve ? `${req.name || req.email} is now a teacher` : 'Request declined');
+    } catch (err) {
+      showToast(`Error: ${err.message}`, 'error');
+    } finally {
+      setRequestBusy(null);
+    }
+  };
   const [toastNode, showToast] = useToast();
 
   // Admins who exist only as corpUsers/{uid} — never a
@@ -141,6 +165,26 @@ export default function AdminTeachers() {
 
   return (
     <Page hideHeader>
+      {requests.length > 0 && (
+        <section className="ca-card" style={{ marginBottom: 16, padding: 16 }}>
+          <strong style={{ fontSize: 14 }}>Teacher requests ({requests.length})</strong>
+          <p style={{ fontSize: 12, color: 'var(--sa-label-2, #64748b)', margin: '4px 0 10px' }}>
+            These people used your invite link. They can't enter the teacher panel until you approve them.
+          </p>
+          {requests.map((r) => (
+            <div key={r.uid} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, padding: '8px 0', borderTop: '1px solid rgba(0,0,0,0.06)' }}>
+              <div style={{ minWidth: 0 }}>
+                <div style={{ fontSize: 14, fontWeight: 600 }}>{r.name || 'Teacher'}</div>
+                <div style={{ fontSize: 12, color: 'var(--sa-label-2, #64748b)' }}>{r.email}</div>
+              </div>
+              <div style={{ display: 'flex', gap: 8, flexShrink: 0 }}>
+                <Button onClick={() => decideRequest(r, true)} disabled={requestBusy === r.uid}>Approve</Button>
+                <Button variant="tinted" tone="red" onClick={() => decideRequest(r, false)} disabled={requestBusy === r.uid}>Decline</Button>
+              </div>
+            </div>
+          ))}
+        </section>
+      )}
       <section className="ca-card is-faculty-card">
         <div className="faculty-toolbar ca-faculty-toolbar">
           <div className="faculty-toolbar-left">
@@ -354,6 +398,7 @@ function InviteTeachersModal({ open, onClose, centerId, centerName, teachers, on
   const [joinCode, setJoinCode] = useState(null);
   const [linkLoading, setLinkLoading] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
+  const [confirmReset, setConfirmReset] = useState(false);
 
   useEffect(() => {
     if (!open) return;
@@ -376,6 +421,23 @@ function InviteTeachersModal({ open, onClose, centerId, centerName, teachers, on
 
   const displaySchool = centerName || 'None';
   const inviteLink = joinCode ? buildTeacherInviteUrl(joinCode) : '';
+
+  const resetLink = async () => {
+    if (!confirmReset) {
+      setConfirmReset(true);
+      setTimeout(() => setConfirmReset(false), 4000);
+      return;
+    }
+    setConfirmReset(false);
+    setLinkLoading(true);
+    try {
+      setJoinCode(await regenerateTeacherJoinCode(centerId));
+    } catch (err) {
+      setError(`Couldn't create a new link: ${err.message}`);
+    } finally {
+      setLinkLoading(false);
+    }
+  };
 
   const copyLink = () => {
     if (!inviteLink) return;
@@ -554,6 +616,9 @@ function InviteTeachersModal({ open, onClose, centerId, centerName, teachers, on
               <button type="button" className="invite-copy-btn" onClick={copyLink} disabled={!inviteLink || linkLoading}>
                 <LinkIcon size={14} /> {linkCopied ? 'Link Copied!' : 'Copy Invite Link'}
               </button>
+              <button type="button" className="invite-copy-btn" onClick={resetLink} disabled={!inviteLink || linkLoading} title="The old link stops working">
+                <RotateCcw size={14} /> {confirmReset ? 'Tap again: old link stops working' : 'New link'}
+              </button>
             </div>
 
             <div className="invite-modal-body">
@@ -568,7 +633,7 @@ function InviteTeachersModal({ open, onClose, centerId, centerName, teachers, on
                   autoFocus
                 />
                 <div className="invite-textarea-note">
-                  List one teacher work email per line. You can also copy/paste from Word or Excel.
+                  List one teacher work email per line. Each person gets an email to set their own password. People who use the invite link need your approval first.
                 </div>
               </div>
 

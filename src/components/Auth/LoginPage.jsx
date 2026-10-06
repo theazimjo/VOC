@@ -101,11 +101,8 @@ export default function LoginPage() {
     try {
       const identity = await resolveCorpIdentity(u);
       if (identity) {
-        // super_admin is deliberately excluded here — a super admin is
-        // usually also a regular individual learner, and dropping them
-        // straight into the admin panel on every login is jarring when
-        // they just want their own dashboard. They reach it deliberately
-        // via the "Admin panel" entry in Settings instead.
+        // Super admins go straight to the admin panel.
+        if (identity.role === 'super_admin') return '/corp/super-admin';
         if (identity.role === 'center_admin') return '/corp/admin';
         if (identity.role === 'teacher') {
           const activeProfile = getActiveProfile();
