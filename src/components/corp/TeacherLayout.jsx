@@ -1,5 +1,6 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Navigate, Outlet, useOutletContext } from 'react-router-dom';
+import { markTeacherAccepted } from '../../services/corpService';
 import TeacherSidebar from './TeacherSidebar';
 import TeacherTopbar from './TeacherTopbar';
 import TeacherBottomNav from './TeacherBottomNav';
@@ -9,6 +10,7 @@ import './CorpAdminLayout.css';
 import '../../pages/corp/super-admin/sa.css';
 import '../../pages/corp/center-admin/theme.css';
 import '../../pages/corp/center-admin/uits.css';
+import '../../pages/corp/center-admin/vocabry.css';
 
 // The same shell as the center admin panel (CorpAdminLayout): sidebar,
 // topbar, always-light theme, centered sheets. `is-center-admin` is the
@@ -25,6 +27,10 @@ export default function TeacherLayout() {
     email: identity.email || '',
     phone: identity.phone || '',
   } : null), [identity]);
+
+  useEffect(() => {
+    if (value?.centerId && identity?.teacherId) markTeacherAccepted(value.centerId, identity.teacherId);
+  }, [value, identity?.teacherId]);
 
   // No placeholder centerId (see CorpAdminLayout) — writes against a made-up
   // id would create a nameless ghost center.

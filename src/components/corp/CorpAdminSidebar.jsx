@@ -1,7 +1,8 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
 import {
   LayoutDashboard, Users, GraduationCap, BookOpen, Layers,
-  Settings
+  Settings, LogOut
 } from 'lucide-react';
 import './CorpAdminSidebar.css';
 
@@ -9,6 +10,13 @@ import './CorpAdminSidebar.css';
 // (top-right profile menu) — this sidebar is navigation only. Always
 // expanded — no collapse/expand toggle.
 export default function CorpAdminSidebar() {
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+  const handleLogout = async () => {
+    await logout();
+    navigate('/login');
+  };
+
   const navItems = [
     { to: '/corp/admin', label: 'Dashboard', icon: LayoutDashboard, end: true },
     { to: '/corp/admin/teachers', label: 'Faculty', icon: Users },
@@ -44,6 +52,11 @@ export default function CorpAdminSidebar() {
           );
         })}
       </nav>
+
+      <button type="button" className="sidebar-nav-btn sidebar-logout" onClick={handleLogout}>
+        <LogOut size={23} strokeWidth={2.3} />
+        <span>Log out</span>
+      </button>
     </aside>
   );
 }

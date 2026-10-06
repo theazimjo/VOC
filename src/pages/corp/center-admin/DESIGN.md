@@ -47,7 +47,7 @@ language — see "Language" below.
 - Empty state: plain `<EmptyState icon title text action={<Button>...} />`
   inside `<div className="sa-group" style={{ padding: 20 }}>` — no
   illustration. A table with zero rows isn't the same thing as "this one
-  person/thing has nothing in it" (see the illustrated banner below).
+  person/thing has nothing in it" (see the "no classes" banner below).
 
 ## 2. Detail/profile page — the Teacher Detail pattern
 
@@ -73,13 +73,9 @@ Used for: a page about one entity with its own sub-sections
   component from `.ca-tabs`/`.ca-tab` (the chip-style segmented control used
   on Settings pages, section 3) — don't swap one for the other.
 - Empty state for something this entity owns (e.g. "has no classes"):
-  the illustrated banner — `.teacher-empty-banner` (soft green gradient,
-  rounded, grid of message-box + illustration) containing
-  `.teacher-empty-center-box` (message + CTA) and
-  `.teacher-illustration-wrap` (a decorative SVG scene, see
-  `TeacherClassroomIllustration` in `AdminTeacherDetail.jsx`). This is
-  deliberately heavier than the plain `EmptyState` used for table emptiness
-  — it's "this specific person has nothing yet", not "this list is empty".
+  `.teacher-empty-banner` — a plain paper card with a centered
+  `.teacher-empty-center-box` (title + one CTA). No illustration (removed on
+  purpose; keep it typographic, like the landing page).
 - Populated sections mostly use the shared `Section` + `Row` components
   (`super-admin/ui.jsx`), *except* when the tab's content is itself a list
   worth a table — the populated Classes tab (`.claude/image copy 4.png`)

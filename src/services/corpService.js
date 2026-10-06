@@ -335,8 +335,18 @@ export async function deleteCenter(centerId) {
  * Auth account client-side" trade-off as deleteCenter.
  */
 export async function removeTeacherFromCenter(centerId, teacherId, uid) {
+  // Keep the invitation log honest: note when (and whether they had joined)
+  // before the teacher record disappears.
+  const tSnap = await get(ref(db, `centers/${centerId}/teachers/${teacherId}`)).catch(() => null);
+  const teacher = tSnap?.exists() ? tSnap.val() : null;
   const updates = { [`centers/${centerId}/teachers/${teacherId}`]: null };
   if (uid) updates[`corpUsers/${uid}`] = null;
+  if (teacher?.inviteId) {
+    const base = `centers/${centerId}/invitations/${teacher.inviteId}`;
+    updates[`${base}/canceledAt`] = new Date().toISOString();
+    updates[`${base}/canceledByEmail`] = (auth.currentUser?.email || '').toLowerCase();
+    if (teacher.acceptedAt) updates[`${base}/acceptedAt`] = teacher.acceptedAt;
+  }
   await update(ref(db), updates);
 }
 
@@ -406,11 +416,28 @@ export async function createTeacher(centerId, centerName, teacherForm) {
     subject: subject || 'Ingliz tili',
     status: 'active',
     createdAt: new Date().toISOString(),
+    invitedAt: new Date().toISOString(),
   };
 
-  await set(teacherRef, teacherPayload);
+  const invRef = push(ref(db, `centers/${centerId}/invitations`));
+  const invitation = {
+    id: invRef.key,
+    via: 'email',
+    name,
+    email,
+    phone: phone || '',
+    invitedAt: teacherPayload.invitedAt,
+    invitedByUid: auth.currentUser?.uid || '',
+    invitedByEmail: (auth.currentUser?.email || '').toLowerCase(),
+    teacherId,
+    teacherUid: uid,
+  };
+  teacherPayload.inviteId = invRef.key;
 
-  return { id: teacherId, uid, name, email, tempPassword };
+  await set(teacherRef, teacherPayload);
+  await set(invRef, invitation);
+
+  return { id: teacherId, uid, name, email, tempPassword, invitedAt: teacherPayload.invitedAt, invitation };
 }
 
 /**
@@ -537,7 +564,20 @@ export async function approveTeacherRequest(centerId, centerName, request) {
     status: 'active',
     createdAt: now,
   };
+  const invRef = push(ref(db, `centers/${centerId}/invitations`));
+  teacher.inviteId = invRef.key;
   await set(teacherRef, teacher);
+  await set(invRef, {
+    id: invRef.key,
+    via: 'link',
+    name,
+    email: request.email || '',
+    invitedAt: request.createdAt || now,
+    decidedByEmail: (auth.currentUser?.email || '').toLowerCase(),
+    teacherId,
+    teacherUid: request.uid,
+    acceptedAt: now,
+  });
   await set(ref(db, `corpUsers/${request.uid}`), {
     email: request.email || '',
     role: 'teacher',
@@ -553,8 +593,18 @@ export async function approveTeacherRequest(centerId, centerName, request) {
 }
 
 /** Center Admin: decline (delete) a teacher request. */
-export async function declineTeacherRequest(centerId, uid) {
-  await remove(ref(db, `centers/${centerId}/teacherRequests/${uid}`));
+export async function declineTeacherRequest(centerId, request) {
+  const invRef = push(ref(db, `centers/${centerId}/invitations`));
+  await set(invRef, {
+    id: invRef.key,
+    via: 'link',
+    name: request.name || request.email || 'Teacher',
+    email: request.email || '',
+    invitedAt: request.createdAt || new Date().toISOString(),
+    declinedAt: new Date().toISOString(),
+    decidedByEmail: (auth.currentUser?.email || '').toLowerCase(),
+  });
+  await remove(ref(db, `centers/${centerId}/teacherRequests/${request.uid}`));
 }
 
 /**
@@ -612,6 +662,20 @@ export async function createOwnCenter(user, { centerName, phone }) {
     createdAt: now,
   });
   return { centerId, name };
+}
+
+/**
+ * Teacher: record that an invited teacher has opened their panel (set once),
+ * so the center admin can tell "invited" from "joined". Safe to call on every
+ * load: the rules only allow the first write, and a local flag avoids retries.
+ */
+export async function markTeacherAccepted(centerId, teacherId) {
+  const key = `voc_teacher_accepted_${teacherId}`;
+  try { if (localStorage.getItem(key)) return; } catch { /* storage blocked */ }
+  try {
+    await set(ref(db, `centers/${centerId}/teachers/${teacherId}/acceptedAt`), new Date().toISOString());
+  } catch { /* already recorded (rules allow one write) */ }
+  try { localStorage.setItem(key, '1'); } catch { /* storage blocked */ }
 }
 
 /**

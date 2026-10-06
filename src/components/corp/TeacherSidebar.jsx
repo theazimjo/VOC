@@ -1,5 +1,6 @@
-import { NavLink, useLocation } from 'react-router-dom';
-import { Users, BookOpen, Settings } from 'lucide-react';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { Users, BookOpen, Settings, LogOut } from 'lucide-react';
+import { useAuth } from '../../contexts/AuthContext';
 import './CorpAdminSidebar.css';
 
 // Same sidebar as the center admin's (CorpAdminSidebar): brand on top,
@@ -7,6 +8,12 @@ import './CorpAdminSidebar.css';
 // in TeacherTopbar's profile menu.
 export default function TeacherSidebar({ basePath = '/corp/teacher' }) {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+  const handleLogout = async () => {
+    await logout();
+    navigate('/login');
+  };
   const inGroups = pathname === basePath
     || pathname.startsWith(`${basePath}/group/`)
     || pathname.startsWith(`${basePath}/archive`);
@@ -42,6 +49,11 @@ export default function TeacherSidebar({ basePath = '/corp/teacher' }) {
           );
         })}
       </nav>
+
+      <button type="button" className="sidebar-nav-btn sidebar-logout" onClick={handleLogout}>
+        <LogOut size={23} strokeWidth={2.3} />
+        <span>Log out</span>
+      </button>
     </aside>
   );
 }

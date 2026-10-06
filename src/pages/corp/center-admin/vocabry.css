@@ -1,0 +1,563 @@
+/* ─────────────────────────────────────────────────────────────
+   Center admin in the VOCABRY landing/login look: warm concrete ground,
+   near-black sidebar (the "departures board"), Barlow Condensed signage
+   type for titles and nav, Hanken Grotesk body, amber only as the accent on
+   the active nav item, blue only on actions. Loaded after theme.css and
+   uits.css, so it only re-points tokens and a few shells; the components
+   themselves stay the same.
+   ───────────────────────────────────────────────────────────── */
+
+.corp-admin-layout.sa-layout.ca-theme.is-center-admin {
+  --va-ground: #e8e5dd;
+  --va-paper: #f6f4ed;
+  --va-ink: #101113;
+  --va-ink-soft: #4a4c52;
+  --va-line: rgba(16, 17, 19, 0.14);
+  --va-amber: #ffb020;
+  --va-display: 'Barlow Condensed', 'Arial Narrow', 'Roboto Condensed', sans-serif;
+  --va-body: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --sa-bg: var(--va-ground);
+  --sa-surface: var(--va-paper);
+  --sa-surface-2: #efece3;
+  --sa-fill: #ebe8df;
+  --sa-fill-strong: #dedad0;
+  --sa-separator: var(--va-line);
+  --sa-label: var(--va-ink);
+  --sa-label-2: var(--va-ink-soft);
+  --sa-label-3: #7a7c82;
+  --sa-placeholder: #7a7c82;
+  --sa-press: #ebe8df;
+  --sa-shadow: 0 0 0 1px var(--va-line);
+  --sa-sheet-bg: var(--va-ground);
+  --sa-sheet-cell: var(--va-paper);
+  --ca-border-strong: rgba(16, 17, 19, 0.24);
+  --ca-sidebar-bg: var(--va-ink);
+  --ca-active-bg: rgba(255, 176, 32, 0.16);
+  --ca-active-text: var(--va-amber);
+
+  --bg-primary: var(--va-ground);
+  --bg-secondary: var(--va-paper);
+  --bg-tertiary: #dedad0;
+  --text-primary: var(--va-ink);
+  --text-secondary: var(--va-ink-soft);
+  --border: var(--va-line);
+  --border-light: rgba(16, 17, 19, 0.08);
+
+  font-family: var(--va-body);
+}
+
+.corp-admin-layout.is-center-admin .corp-admin-main-pane {
+  background: var(--va-ground);
+}
+
+/* ── Sidebar ── */
+.is-center-admin .corp-admin-sidebar {
+  --ca-sidebar-font: var(--va-display);
+  --text-secondary: rgba(244, 241, 232, 0.7);
+  --text-muted: rgba(244, 241, 232, 0.5);
+  --border: rgba(244, 241, 232, 0.12);
+  --bg-glass-hover: rgba(244, 241, 232, 0.07);
+  background: var(--va-ink);
+  box-shadow: none;
+}
+
+.is-center-admin .corp-admin-sidebar .voc-logo-title {
+  font-family: var(--va-display);
+  font-size: 1.7rem;
+  letter-spacing: 0.04em;
+  -webkit-text-fill-color: #f4f1e8 !important;
+  color: #f4f1e8 !important;
+}
+
+.is-center-admin .sidebar-brand-tld { color: var(--va-amber); -webkit-text-fill-color: var(--va-amber); opacity: 1; }
+
+.is-center-admin .sidebar-nav-btn {
+  font-family: var(--va-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(244, 241, 232, 0.72);
+}
+
+.is-center-admin .sidebar-nav-btn:hover { color: #f4f1e8; }
+
+.is-center-admin .sidebar-nav-btn.active {
+  background: var(--ca-active-bg);
+  color: var(--va-amber);
+  font-weight: 700;
+  box-shadow: inset 3px 0 0 var(--va-amber);
+}
+
+/* ── Top bar ── */
+.is-center-admin .ca-topbar {
+  background: var(--va-paper);
+  border-bottom: 1px solid var(--va-line);
+}
+
+.is-center-admin .ca-topbar-search { background: var(--sa-fill); }
+
+/* ── Cards, titles ── */
+.is-center-admin .ca-card,
+.is-center-admin .ca-kpi {
+  background: var(--va-paper);
+  border: 1px solid var(--va-line);
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+.is-center-admin .ca-title-lg {
+  font-family: var(--va-display);
+  font-size: 2.25rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--va-ink);
+}
+
+.is-center-admin .ca-title-lg-icon {
+  background: var(--va-ink);
+  color: var(--va-amber);
+  border-radius: 10px;
+}
+
+.is-center-admin .ca-card-title,
+.is-center-admin .sa-section-title,
+.is-center-admin .ca-toolbar-title {
+  font-family: var(--va-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--va-ink);
+}
+
+.is-center-admin .ca-kpi-value,
+.is-center-admin .ca-kpi strong {
+  font-family: var(--va-display);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* ── Tables ── */
+.is-center-admin .faculty-table-head {
+  background: var(--sa-surface-2);
+  font-family: var(--va-display);
+  font-size: 0.8125rem;
+  letter-spacing: 0.1em;
+}
+
+.is-center-admin .faculty-table-row:hover { background: #efece3; }
+
+/* ── Actions: blue only on actions, same radius as the landing buttons ── */
+.is-center-admin .faculty-btn-invite,
+.is-center-admin .sa-btn-filled {
+  border-radius: 10px;
+  font-family: var(--va-body);
+  font-weight: 600;
+}
+
+.is-center-admin .faculty-btn-invite { background: #0a84ff; box-shadow: none; }
+.is-center-admin .faculty-btn-invite:hover { background: #0071e3; }
+
+.is-center-admin .sa-input,
+.is-center-admin .sa-select,
+.is-center-admin .sa-textarea,
+.is-center-admin .sa-search {
+  background: #fbfaf6;
+  border: 1px solid rgba(16, 17, 19, 0.2);
+  border-radius: 10px;
+}
+
+.is-center-admin ::selection { background: var(--va-amber); color: var(--va-ink); }
+
+/* Toolbars and table shells inside cards keep the same paper tone as the card. */
+.is-center-admin .ca-card.is-faculty-card,
+.is-center-admin .ca-card.is-faculty-card .faculty-toolbar,
+.is-center-admin .faculty-toolbar {
+  background: var(--va-paper);
+}
+
+.is-center-admin .faculty-icon-btn,
+.is-center-admin .sa-segmented { background: #efece3; border-color: var(--va-line); }
+
+/* Faculty | Invitations switch: full width on phones, compact on desktop. */
+.is-center-admin .ca-view-switch { margin-bottom: 12px; }
+@media (min-width: 768px) {
+  .is-center-admin .ca-view-switch { width: 300px; }
+}
+
+/* Teacher requests: text and buttons wrap instead of overlapping on phones. */
+.is-center-admin .ca-req-row {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 10px 12px; padding: 10px 0; border-top: 1px solid var(--va-line);
+}
+.is-center-admin .ca-req-text { flex: 1 1 200px; min-width: 0; overflow-wrap: anywhere; }
+.is-center-admin .ca-req-actions { display: flex; gap: 8px; flex: 0 0 auto; }
+@media (max-width: 520px) {
+  .is-center-admin .ca-req-actions { width: 100%; }
+  .is-center-admin .ca-req-actions .sa-btn { flex: 1; }
+}
+
+/* Invitation cards (phone layout of the Invitations view). */
+.is-center-admin .ca-inv-list { list-style: none; margin: 0; padding: 12px; display: grid; gap: 10px; }
+.is-center-admin .ca-inv-card {
+  padding: 14px; border: 1px solid var(--va-line); border-radius: 12px; background: var(--va-paper);
+  display: grid; gap: 8px; min-width: 0;
+}
+.is-center-admin .ca-inv-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 10px; }
+.is-center-admin .ca-inv-name { font-weight: 700; font-size: 15px; overflow-wrap: anywhere; min-width: 0; }
+.is-center-admin .ca-inv-email { font-size: 13px; color: var(--sa-label-2); overflow-wrap: anywhere; }
+.is-center-admin .ca-inv-meta { margin: 0; display: grid; gap: 4px; font-size: 12.5px; }
+.is-center-admin .ca-inv-meta > div { display: flex; gap: 10px; min-width: 0; }
+.is-center-admin .ca-inv-meta dt { flex: 0 0 64px; color: var(--sa-label-3); text-transform: uppercase; letter-spacing: 0.06em; font-size: 11px; padding-top: 1px; }
+.is-center-admin .ca-inv-meta dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.is-center-admin .ca-inv-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.is-center-admin .ca-inv-actions .faculty-btn-secondary { flex: 1 1 130px; justify-content: center; }
+
+/* Invitations toolbar + table: nothing is allowed to run into its neighbour. */
+.is-center-admin .ca-inv-toolbar { flex-wrap: wrap; gap: 8px 12px; }
+.is-center-admin .ca-inv-toolbar .faculty-toolbar-left { flex: 1 1 280px; min-width: 0; }
+.is-center-admin .ca-inv-toolbar .sa-segmented { width: 100%; max-width: 380px; }
+.is-center-admin .ca-inv-toolbar .sa-segment { min-width: 0; padding-left: 8px; padding-right: 8px; }
+.is-center-admin .ca-inv-summary { font-size: 12.5px; color: var(--sa-label-2); }
+@media (max-width: 767px) {
+  .is-center-admin .ca-inv-toolbar .sa-segmented { max-width: none; }
+  .is-center-admin .ca-inv-summary { flex: 1 1 100%; }
+}
+.is-center-admin .ca-inv-row > * { min-width: 0; overflow-wrap: anywhere; }
+.is-center-admin .ca-inv-row { column-gap: 12px; }
+.is-center-admin .ca-inv-row .faculty-email-sub,
+.is-center-admin .ca-inv-row .faculty-name-link { white-space: normal; overflow-wrap: anywhere; }
+
+/* ── Group / teacher detail pages ── */
+.is-center-admin .teacher-detail-topband { background: var(--va-paper); border-bottom: 1px solid var(--va-line); }
+
+.is-center-admin .ca-group-head-avatar {
+  background: var(--va-ink);
+  color: var(--va-amber);
+  font-family: var(--va-display);
+  font-weight: 600;
+  border-radius: 12px;
+}
+
+.is-center-admin .teacher-detail-title {
+  font-family: var(--va-display);
+  font-size: 2.25rem;
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.is-center-admin .teacher-nav-tab {
+  font-family: var(--va-display);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.is-center-admin .teacher-nav-tab.is-active { border-bottom-color: var(--va-amber); color: var(--va-ink); }
+.is-center-admin .teacher-nav-tab.is-active .ca-nav-count { background: var(--va-amber); color: var(--va-ink); }
+.is-center-admin .ca-nav-count,
+.is-center-admin .ca-dash-chip,
+.is-center-admin .ca-group-head-badge { background: #ebe8df; color: var(--va-ink-soft); }
+
+.is-center-admin .ca-filter-pill { border-color: var(--va-line); background: #fbfaf6; color: var(--va-ink-soft); }
+.is-center-admin .ca-filter-pill:hover { border-color: rgba(16, 17, 19, 0.3); }
+.is-center-admin .ca-filter-pill.is-active { border-color: var(--va-ink); background: var(--va-ink); color: var(--va-paper); }
+
+.is-center-admin .ca-group-code-pill { border-color: var(--va-line); background: #fbfaf6; }
+.is-center-admin .ca-group-code-pill:hover { border-color: var(--va-ink); background: #fbfaf6; }
+.is-center-admin .ca-group-code-pill-value { font-family: var(--va-display); font-size: 1.25rem; letter-spacing: 0.08em; color: var(--va-ink); }
+.is-center-admin .ca-group-code-pill-icon { background: var(--va-ink); color: var(--va-amber); }
+
+/* Bottom tab bar on phones: ink pill, amber for the active tab. */
+.is-center-admin .bottom-nav { background: var(--va-ink); border-color: var(--va-ink); }
+.is-center-admin .bottom-nav-link { color: rgba(244, 241, 232, 0.65); font-family: var(--va-display); letter-spacing: 0.06em; text-transform: uppercase; }
+.is-center-admin .bottom-nav-link.active { background: rgba(255, 176, 32, 0.16); color: var(--va-amber); }
+.is-center-admin .bottom-nav-link.active svg { color: var(--va-amber); }
+
+/* "No classes" empty state: plain centered message, no illustration. */
+.is-center-admin .teacher-empty-center-box {
+  width: 100%;
+  max-width: 420px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  padding: 0;
+}
+.is-center-admin .teacher-empty-title {
+  font-family: var(--va-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--va-ink);
+}
+.is-center-admin .teacher-empty-sub { color: var(--va-ink-soft); font-size: 14px; }
+.is-center-admin .teacher-add-class-btn {
+  height: 44px;
+  padding: 0 22px;
+  border-radius: 10px;
+  background: #0a84ff;
+  box-shadow: none;
+  font-size: 14px;
+}
+.is-center-admin .teacher-add-class-btn:hover { background: #0071e3; }
+
+.is-center-admin .ca-person-head-avatar {
+  background: var(--va-ink);
+  color: var(--va-amber);
+  font-family: var(--va-display);
+  font-weight: 600;
+}
+
+/* ── Modals / sheets (group settings, change password, invites, ...) ── */
+.is-center-admin .sa-sheet {
+  background: var(--va-ground);
+  border: 1px solid var(--va-line);
+  border-radius: 16px;
+  box-shadow: 0 24px 60px rgba(16, 17, 19, 0.28);
+}
+.is-center-admin .sa-sheet-title {
+  font-family: var(--va-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--va-ink);
+}
+.is-center-admin .sa-sheet-close { background: #ddd9cf; color: var(--va-ink); }
+.is-center-admin .sa-sheet .sa-group { background: var(--va-paper); border: 1px solid var(--va-line); box-shadow: none; border-radius: 12px; }
+.is-center-admin .sa-sheet .sa-row-title { color: var(--va-ink); }
+.is-center-admin .sa-sheet .sa-row-subtitle,
+.is-center-admin .sa-sheet .sa-row-detail { color: var(--va-ink-soft); }
+.is-center-admin .sa-sheet .sa-row-icon[class*="tone-"]:not(.tone-red) { background: var(--va-ink); color: var(--va-amber); }
+.is-center-admin .sa-sheet .sa-row-icon.tone-red { background: rgba(255, 59, 48, 0.14); color: #d1271c; }
+.is-center-admin .sa-sheet .sa-btn-filled { border-radius: 10px; }
+.is-center-admin .sa-scrim, .is-center-admin .sa-sheet-scrim { background: rgba(16, 17, 19, 0.5); }
+
+/* Form fields and page bands stay on the same light paper tone. */
+.is-center-admin .ca-card input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+.is-center-admin .ca-card textarea,
+.is-center-admin .ca-card select,
+.is-center-admin .sa-sheet input:not([type="checkbox"]):not([type="radio"]),
+.is-center-admin .sa-sheet textarea,
+.is-center-admin .sa-sheet select {
+  background-color: #fbfaf6;
+  border-color: rgba(16, 17, 19, 0.2);
+}
+.is-center-admin .ca-toolbar { background: var(--va-paper); border-bottom: 1px solid var(--va-line); }
+.is-center-admin .ca-toolbar-title { font-family: var(--va-display); font-size: 1.375rem; letter-spacing: 0.04em; }
+.is-center-admin .ca-profile-avatar,
+.is-center-admin .ca-hero-avatar,
+.is-center-admin .sa-hero-avatar { background: var(--va-ink); color: var(--va-amber); font-family: var(--va-display); }
+
+/* ── Teacher / admin settings, Class Settings and Invite dialogs ── */
+.is-center-admin .adm-modal-overlay { background: rgba(16, 17, 19, 0.55); }
+
+.is-center-admin .invite-modal-card {
+  background: var(--va-ground);
+  border: 1px solid var(--va-line);
+  border-radius: 16px;
+  box-shadow: 0 24px 60px rgba(16, 17, 19, 0.3);
+}
+
+.is-center-admin .invite-modal-title,
+.is-center-admin .teacher-info-modal-title {
+  font-family: var(--va-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--va-ink);
+}
+.is-center-admin .invite-title-icon { color: var(--va-amber); background: var(--va-ink); border-radius: 8px; padding: 4px; box-sizing: content-box; }
+
+.is-center-admin .invite-modal-head { border-bottom: 1px solid var(--va-line); }
+
+/* Section labels: "Select a Role", "Teacher Details" */
+.is-center-admin .teacher-info-section-label,
+.is-center-admin .invite-field-label {
+  font-family: var(--va-display);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--va-ink);
+}
+.is-center-admin .teacher-info-input-label { color: var(--va-ink-soft); font-weight: 600; }
+
+/* Role cards: ink outline + amber check when chosen */
+.is-center-admin .teacher-role-card {
+  background: #fbfaf6;
+  border: 1px solid var(--va-line);
+  border-radius: 12px;
+}
+.is-center-admin .teacher-role-card:hover { border-color: rgba(16, 17, 19, 0.4); }
+.is-center-admin .teacher-role-card.is-selected.role-teacher,
+.is-center-admin .teacher-role-card.is-selected.role-admin {
+  background: var(--va-paper);
+  border: 2px solid var(--va-ink);
+  box-shadow: 0 0 0 3px rgba(255, 176, 32, 0.28);
+}
+.is-center-admin .teacher-role-card .role-card-title,
+.is-center-admin .teacher-role-card.is-selected.role-teacher .role-card-title,
+.is-center-admin .teacher-role-card.is-selected.role-admin .role-card-title {
+  font-family: var(--va-display);
+  font-size: 1.125rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--va-ink);
+}
+.is-center-admin .role-check-badge,
+.is-center-admin .role-check-badge.role-check-blue { background: var(--va-amber); color: var(--va-ink); }
+
+/* Fields */
+.is-center-admin .teacher-info-input,
+.is-center-admin .invite-input,
+.is-center-admin .invite-textarea-wrap {
+  background: #fbfaf6;
+  border: 1px solid rgba(16, 17, 19, 0.2);
+  border-radius: 10px;
+  color: var(--va-ink);
+}
+.is-center-admin .teacher-info-input:focus,
+.is-center-admin .invite-input:focus,
+.is-center-admin .invite-textarea-wrap:focus-within {
+  border-color: var(--va-ink);
+  box-shadow: 0 0 0 3px rgba(255, 176, 32, 0.35);
+  outline: none;
+}
+.is-center-admin .invite-textarea { background: transparent; }
+.is-center-admin .invite-textarea-note { background: #efece3; }
+
+/* Rows inside the dialog (Change Password / Remove from Center) */
+.is-center-admin .invite-modal-card .sa-row-icon[class*="tone-"]:not(.tone-red) { background: var(--va-ink); color: var(--va-amber); }
+.is-center-admin .invite-modal-card .sa-row-icon.tone-red { background: rgba(255, 59, 48, 0.14); color: #d1271c; }
+
+/* Footer buttons */
+.is-center-admin .teacher-info-btn-submit,
+.is-center-admin .invite-btn-primary {
+  background: #0a84ff;
+  border-radius: 10px;
+  box-shadow: none;
+  font-weight: 600;
+}
+.is-center-admin .teacher-info-btn-submit:hover:not(:disabled) { background: #0071e3; }
+.is-center-admin .teacher-info-btn-cancel,
+.is-center-admin .invite-btn-cancel {
+  background: transparent;
+  border: 1px solid rgba(16, 17, 19, 0.25);
+  border-radius: 10px;
+  color: var(--va-ink);
+}
+
+/* The "Teacher Settings" button on the detail page */
+.is-center-admin .teacher-settings-btn {
+  border: 1px solid var(--va-ink);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--va-ink);
+  font-family: var(--va-display);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.is-center-admin .teacher-settings-btn:hover { background: var(--va-ink); color: var(--va-amber); }
+
+.is-center-admin .adm-modal-overlay .sa-row-icon[class*="tone-"]:not(.tone-red) { background: var(--va-ink); color: var(--va-amber); }
+.is-center-admin .adm-modal-overlay .sa-row-icon.tone-red { background: rgba(255, 59, 48, 0.14); color: #d1271c; }
+
+/* Log out at the bottom of the sidebar */
+.is-center-admin .sidebar-logout {
+  margin-top: auto;
+  border-top: 1px solid rgba(244, 241, 232, 0.12);
+  color: rgba(244, 241, 232, 0.72);
+}
+.is-center-admin .sidebar-logout:hover { background: rgba(255, 59, 48, 0.16); color: #ff8a80; }
+.is-center-admin .corp-admin-sidebar .sidebar-logout {
+  align-self: stretch;
+  width: auto;
+  flex: 0 0 auto;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+.is-center-admin .corp-admin-sidebar .sidebar-logout { min-height: 54px; height: 54px; margin-bottom: -1rem; }
+
+/* ── Settings pages (center admin + teacher) ── */
+.is-center-admin .ca-toolbar-icon {
+  background: var(--va-ink);
+  color: var(--va-amber);
+  border: 0;
+  border-radius: 8px;
+}
+
+/* Tabs (Center | Account, Profile | Sign-in): ink pill for the active one */
+.is-center-admin .sa-segmented { background: #e3dfd5; border: 1px solid var(--va-line); border-radius: 10px; }
+.is-center-admin .sa-segment-thumb { background: var(--va-ink); box-shadow: none; border-radius: 8px; }
+.is-center-admin .sa-segment { color: var(--va-ink-soft); }
+.is-center-admin .sa-segment.is-active,
+.is-center-admin .sa-segment.is-active .sa-segment-label { color: var(--va-paper); }
+.is-center-admin .sa-segment.is-active svg { color: var(--va-amber); }
+
+/* Profile card avatar + section icons */
+.is-center-admin .sa-hero-avatar {
+  background: var(--va-ink);
+  color: var(--va-amber);
+  font-family: var(--va-display);
+  font-weight: 600;
+  border-radius: 14px;
+}
+.is-center-admin .ca-card-title svg,
+.is-center-admin .sa-section-title svg { color: var(--va-ink); }
+
+/* Pills ("Center Admin", "Teacher") */
+.is-center-admin .sa-status-pill,
+.is-center-admin .ca-pill { background: #ebe8df; color: var(--va-ink-soft); border: 1px solid var(--va-line); }
+
+/* Rows in settings cards: ink icon tiles instead of the iOS rainbow */
+.is-center-admin .ca-card .sa-row-icon[class*="tone-"]:not(.tone-red):not(.tone-green) { background: var(--va-ink); color: var(--va-amber); }
+
+/* Save + sign out */
+.is-center-admin .ca-card .sa-btn-filled.tone-blue { background: #0a84ff; border-radius: 10px; }
+.is-center-admin .ca-card .sa-btn-filled.tone-blue:disabled { background: rgba(10, 132, 255, 0.35); }
+.is-center-admin .ca-card .sa-btn-filled.tone-red {
+  background: transparent;
+  color: #d1271c;
+  border: 1px solid #d1271c;
+  border-radius: 10px;
+}
+.is-center-admin .ca-card .sa-btn-filled.tone-red:hover { background: #d1271c; color: #fff; }
+
+/* Higher-specificity pass: these lost to the theme's [data-theme] / .ca-theme rules. */
+.corp-admin-layout.is-center-admin .sa-segmented .sa-segment-thumb { background: var(--va-ink); box-shadow: none; }
+.corp-admin-layout.is-center-admin .sa-segmented .sa-segment.is-active,
+.corp-admin-layout.is-center-admin .sa-segmented .sa-segment.is-active .sa-segment-label { color: var(--va-paper); }
+.corp-admin-layout.is-center-admin .sa-segmented .sa-segment.is-active svg { color: var(--va-amber); }
+.corp-admin-layout.is-center-admin .ca-icon-box {
+  background: var(--va-ink);
+  color: var(--va-amber);
+  border-color: var(--va-ink);
+  font-family: var(--va-display);
+  font-weight: 600;
+}
+.corp-admin-layout.is-center-admin .ca-tag { background: #ebe8df; color: var(--va-ink-soft); border: 1px solid var(--va-line); }
+.corp-admin-layout.is-center-admin .ca-profile-name { font-family: var(--va-display); font-size: 1.5rem; letter-spacing: 0.02em; text-transform: uppercase; }
+
+/* Settings tabs use .ca-tabs / .ca-tab */
+.corp-admin-layout.is-center-admin .ca-tabs { background: #e3dfd5; border: 1px solid var(--va-line); border-radius: 10px; }
+.corp-admin-layout.is-center-admin .ca-tab { border-radius: 8px; color: var(--va-ink-soft); font-family: var(--va-body); }
+.corp-admin-layout.is-center-admin .ca-tab.is-active {
+  background: var(--va-ink);
+  border-color: var(--va-ink);
+  color: var(--va-paper);
+  box-shadow: none;
+}
+.corp-admin-layout.is-center-admin .ca-tab.is-active svg { color: var(--va-amber); }

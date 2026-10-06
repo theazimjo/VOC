@@ -2191,7 +2191,7 @@ button.ca-feed-item:hover {
   padding: 10px 12px;
   border: 1px solid #eceef1;
   border-radius: 8px;
-  background: #ffffff;
+  background: var(--va-paper, #ffffff);
   font-size: 12.5px;
 }
 
@@ -3207,7 +3207,7 @@ button.ca-feed-item:hover {
    .ca-content's 24px side padding so it reaches the pane's edges, matching
    the reference where only the tab body sits on the tinted background. */
 .teacher-detail-topband {
-  background: #ffffff;
+  background: var(--va-paper, #ffffff);
   margin: -24px -24px 24px;
   padding: 16px 24px 0;
 }
@@ -3303,16 +3303,14 @@ button.ca-feed-item:hover {
 /* Empty State Banner Card */
 .teacher-empty-banner {
   position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  display: flex;
   align-items: center;
-  gap: 32px;
-  padding: 48px 40px;
+  justify-content: center;
+  padding: 56px 24px;
   border: 1px solid var(--sa-separator, #e2e8f0);
   border-radius: 12px;
-  background: linear-gradient(135deg, #f4fbf7 0%, #edf7f2 100%);
-  overflow: hidden;
-  min-height: 380px;
+  background: var(--va-paper, #ffffff);
+  min-height: 280px;
 }
 
 .teacher-empty-center-box {
@@ -3361,18 +3359,6 @@ button.ca-feed-item:hover {
 
 .teacher-add-class-btn:hover {
   background: #2563eb;
-}
-
-.teacher-illustration-wrap {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.teacher-illustration-svg {
-  width: 100%;
-  max-width: 380px;
-  height: auto;
 }
 
 /* Classes table inside the Classes tab (populated state) — reuses the
@@ -3450,7 +3436,7 @@ button.ca-feed-item:hover {
   max-width: 620px;
   padding: 28px 32px;
   border-radius: 12px;
-  background: #ffffff;
+  background: var(--va-paper, #ffffff);
   box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.16), 0 4px 12px rgba(0, 0, 0, 0.04);
   animation: saModalPop 0.18s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -3496,7 +3482,7 @@ button.ca-feed-item:hover {
   padding: 14px;
   border: 1.5px solid #cbd5e1;
   border-radius: 10px;
-  background: #ffffff;
+  background: var(--va-paper, #ffffff);
   cursor: pointer;
   transition: all 0.15s ease;
   user-select: none;
@@ -3595,7 +3581,7 @@ button.ca-feed-item:hover {
 
 .teacher-info-input:focus {
   border-color: #3b82f6;
-  background: #ffffff;
+  background: var(--va-paper, #ffffff);
 }
 
 .teacher-info-modal-foot {
@@ -3612,7 +3598,7 @@ button.ca-feed-item:hover {
   padding: 0 20px;
   border: 1.5px solid #cbd5e1;
   border-radius: 8px;
-  background: #ffffff;
+  background: var(--va-paper, #ffffff);
   color: #475569;
   font-size: 14px;
   font-weight: 700;
@@ -3856,7 +3842,7 @@ button.ca-feed-item:hover {
 .ca-quick-add:focus-within {
   border-style: solid;
   border-color: #93b4f5;
-  background: #ffffff;
+  background: var(--va-paper, #ffffff);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
 }
 
@@ -4002,7 +3988,7 @@ button.ca-feed-item:hover {
   padding: 0 14px;
   border: 1px solid #dfe3e8;
   border-radius: 8px;
-  background: #ffffff;
+  background: var(--va-paper, #ffffff);
   color: #3f4650;
   font: inherit;
   font-size: 13px;
@@ -4045,7 +4031,7 @@ button.ca-feed-item:hover {
   padding: 18px 20px;
   border: 1px solid #e6e9ed;
   border-radius: 12px;
-  background: #ffffff;
+  background: var(--va-paper, #ffffff);
   box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
 }
 
@@ -4284,7 +4270,7 @@ button.ca-feed-item:hover {
   min-height: 58px;
   border: none;
   border-bottom: 1px solid #f1f3f5;
-  background: #ffffff;
+  background: var(--va-paper, #ffffff);
   font: inherit;
   font-size: 14px;
   color: #2b313a;
@@ -4612,7 +4598,7 @@ button.ca-feed-item:hover {
   padding: 0 6px 0 12px;
   border: 1px solid #dfe3e8;
   border-radius: 8px;
-  background: #ffffff;
+  background: var(--va-paper, #ffffff);
   font: inherit;
   cursor: pointer;
   transition: border-color 0.15s ease, background-color 0.15s ease;
@@ -4720,7 +4706,7 @@ button.ca-feed-item:hover {
   padding: 0 12px;
   border: 1px solid #dfe3e8;
   border-radius: 999px;
-  background: #ffffff;
+  background: var(--va-paper, #ffffff);
   font: inherit;
   font-size: 13px;
   font-weight: 600;
@@ -4962,7 +4948,7 @@ button.ca-feed-item:hover {
   padding: 4px 10px;
   border: 1px solid #e6e9ed;
   border-radius: 8px;
-  background: #ffffff;
+  background: var(--va-paper, #ffffff);
   font: inherit;
   font-size: 13px;
   color: #2b313a;
@@ -5056,7 +5042,7 @@ button.ca-feed-item:hover {
   padding: 12px;
   border: 1px solid #e6e9ed;
   border-radius: 10px;
-  background: #ffffff;
+  background: var(--va-paper, #ffffff);
 }
 
 .ca-st-stat-label {
@@ -5081,7 +5067,7 @@ button.ca-feed-item:hover {
   padding: 14px;
   border: 1px solid #e6e9ed;
   border-radius: 10px;
-  background: #ffffff;
+  background: var(--va-paper, #ffffff);
 }
 
 .ca-st-pack-head {
@@ -5154,7 +5140,7 @@ button.ca-feed-item:hover {
   padding: 12px;
   border: 1px solid #e6e9ed;
   border-radius: 10px;
-  background: #ffffff;
+  background: var(--va-paper, #ffffff);
   font: inherit;
   text-align: left;
   cursor: pointer;
@@ -5432,7 +5418,7 @@ button.ca-feed-item:hover {
   flex-direction: column;
   border: 1px solid #e6e9ed;
   border-radius: 10px;
-  background: #ffffff;
+  background: var(--va-paper, #ffffff);
   overflow: hidden;
 }
 
@@ -5483,7 +5469,7 @@ button.ca-feed-item:hover {
   padding: 12px 20px;
   border: none;
   border-top: 1px solid #f1f3f5;
-  background: #ffffff;
+  background: var(--va-paper, #ffffff);
   font: inherit;
   text-align: left;
   cursor: pointer;
@@ -5584,7 +5570,7 @@ button.ca-feed-item:hover {
   width: 100%;
   padding: 11px 20px;
   border: none;
-  background: #ffffff;
+  background: var(--va-paper, #ffffff);
   cursor: pointer;
   user-select: none;
 }
@@ -6410,7 +6396,7 @@ button.ca-feed-item:hover {
     gap: 10px;
     margin: 20px -16px 0;
     padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
-    background: #ffffff;
+    background: var(--va-paper, #ffffff);
   }
 
   .teacher-info-modal-foot > button {
@@ -6648,11 +6634,8 @@ button.ca-feed-item:hover {
     gap: 10px;
   }
 
-  /* "No classes" banner: one column on phones, illustration under the
-     message instead of squeezing it to a word per line. */
+  /* "No classes" banner on phones. */
   .teacher-empty-banner {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 16px;
     min-height: 0;
     padding: 20px 16px;
   }
@@ -6665,9 +6648,6 @@ button.ca-feed-item:hover {
     font-size: 18px;
   }
 
-  .teacher-illustration-svg {
-    max-width: 240px;
-  }
 }
 
 .ca-info-danger {

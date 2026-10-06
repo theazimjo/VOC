@@ -28,47 +28,6 @@ function GroupSortIcon({ active, dir }) {
   return dir === 'asc' ? <ChevronUp size={12} /> : <ChevronDown size={12} />;
 }
 
-// Desk-and-teacher scene for the empty-classes banner, matching the
-// Typing.com reference (see .claude/image.png) — a whiteboard message card
-// sitting over a desk illustration, a teacher gesturing at it from the right.
-export function ClassroomIllustration() {
-  return (
-    <svg className="teacher-illustration-svg" viewBox="0 0 500 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="110" y="30" width="280" height="180" rx="8" fill="#EBF6F0" stroke="#D1E9DC" strokeWidth="4" />
-      <rect x="120" y="40" width="260" height="160" rx="4" fill="#F4FBF7" />
-      <line x1="100" y1="210" x2="400" y2="210" stroke="#CBD5E1" strokeWidth="4" strokeLinecap="round" />
-
-      <rect x="100" y="240" width="270" height="60" rx="4" fill="#D98A6C" />
-      <rect x="90" y="232" width="290" height="12" rx="4" fill="#C27557" />
-      <rect x="180" y="295" width="12" height="25" fill="#A4583C" />
-      <rect x="300" y="295" width="12" height="25" fill="#A4583C" />
-
-      <circle cx="135" cy="205" r="22" fill="#7DD3FC" stroke="#0284C7" strokeWidth="3" />
-      <path d="M125 200 C130 190, 140 190, 145 200 C140 215, 130 215, 125 200 Z" fill="#4ADE80" />
-      <path d="M130 227 L140 227 M135 227 L135 220" stroke="#0284C7" strokeWidth="3" />
-
-      <rect x="180" y="215" width="50" height="18" rx="2" fill="#334155" />
-      <path d="M175 233 L235 233 L230 236 L180 236 Z" fill="#64748b" />
-
-      <rect x="245" y="222" width="25" height="10" rx="1" fill="#3B82F6" />
-      <rect x="248" y="214" width="22" height="8" rx="1" fill="#F59E0B" />
-      <rect x="310" y="218" width="16" height="14" rx="2" fill="#C084FC" />
-      <path d="M318 208 C314 212, 322 212, 318 218 Z" fill="#22C55E" />
-
-      <circle cx="370" cy="140" r="20" fill="#1E293B" />
-      <circle cx="384" cy="132" r="10" fill="#1E293B" />
-      <circle cx="366" cy="155" r="16" fill="#FDBA74" />
-      <circle cx="360" cy="153" r="5" stroke="#334155" strokeWidth="2" fill="none" />
-      <circle cx="372" cy="153" r="5" stroke="#334155" strokeWidth="2" fill="none" />
-      <line x1="365" y1="153" x2="367" y2="153" stroke="#334155" strokeWidth="2" />
-
-      <path d="M350 180 C350 170, 382 170, 382 180 L390 240 L345 240 Z" fill="#1E3A8A" />
-      <path d="M345 240 L390 240 L385 300 L350 300 Z" fill="#2563EB" />
-      <path d="M350 190 Q310 185 320 180" stroke="#FDBA74" strokeWidth="8" strokeLinecap="round" />
-    </svg>
-  );
-}
-
 // The Reports tab: real numbers derived straight from the owner's groups
 // (only the active ones, same as CenterDataContext computes
 // teacher.groupsCount etc.) — works identically whether the owner is a
@@ -361,9 +320,6 @@ export function ClassesTab({ centerId, ownerId, ownerName, groups, patch, showTo
             <button type="button" className="teacher-add-class-btn" onClick={openAddClass}>
               <PlusCircle size={16} /> Add Class
             </button>
-          </div>
-          <div className="teacher-illustration-wrap">
-            <ClassroomIllustration />
           </div>
         </div>
       ) : (

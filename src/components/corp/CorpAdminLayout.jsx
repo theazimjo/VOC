@@ -8,6 +8,7 @@ import './CorpAdminLayout.css';
 import '../../pages/corp/super-admin/sa.css';
 import '../../pages/corp/center-admin/theme.css';
 import '../../pages/corp/center-admin/uits.css';
+import '../../pages/corp/center-admin/vocabry.css';
 
 // The corp identity (role/centerId/centerName/email) is resolved once by
 // CorpProtectedRoute and handed down via its <Outlet context={identity} />;

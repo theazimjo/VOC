@@ -10,6 +10,7 @@ import { generatePassword } from '../super-admin/SetPasswordSheet';
 import { useIsDesktop } from '../super-admin/useIsDesktop';
 import { useToast } from '../super-admin/useToast';
 import { useCenterData } from './CenterDataContext';
+import AdminInvitations from './AdminInvitations';
 
 function nameFromEmail(email) {
   if (!email) return 'Admin';
@@ -49,6 +50,18 @@ const ROLE_FILTERS = [
   { value: 'admin', label: 'Admin' },
 ];
 
+// Invited by email and hasn't opened the panel yet.
+const isInvited = (t) => Boolean(t.invitedAt) && !t.acceptedAt;
+
+function InvitedBadge({ t }) {
+  if (!isInvited(t)) return null;
+  return (
+    <span className="faculty-you-badge" style={{ background: 'rgba(255,176,32,0.2)', color: '#8a5a00' }}>
+      Invited {new Date(t.invitedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+    </span>
+  );
+}
+
 export default function AdminTeachers() {
   const navigate = useNavigate();
   const isDesktop = useIsDesktop();
@@ -59,19 +72,67 @@ export default function AdminTeachers() {
     [center],
   );
   const [requestBusy, setRequestBusy] = useState(null);
+  const [params, setParams] = useSearchParams();
+  const view = params.get('view') === 'invitations' ? 'invitations' : 'faculty';
+  const setView = (v) => {
+    const next = new URLSearchParams(params);
+    if (v === 'invitations') next.set('view', 'invitations'); else next.delete('view');
+    setParams(next, { replace: true });
+  };
+  const invitations = useMemo(() => Object.values(center?.invitations || {}), [center]);
+  const pendingInvites = useMemo(() => {
+    const byId = Object.fromEntries(teachers.map((t) => [t.id, t]));
+    const open = invitations.filter((i) => i.via === 'email' && !i.canceledAt && !i.declinedAt && !i.acceptedAt && !byId[i.teacherId]?.acceptedAt).length;
+    return open + requests.length;
+  }, [invitations, teachers, requests]);
+  const [inviteBusy, setInviteBusy] = useState(null);
+
+  const cancelInvitation = async (inv) => {
+    setInviteBusy(inv.id);
+    try {
+      await removeTeacherFromCenter(centerId, inv.teacherId, inv.teacherUid);
+      patch((c) => {
+        const nextTeachers = { ...(c.teachers || {}) };
+        delete nextTeachers[inv.teacherId];
+        return {
+          ...c,
+          teachers: nextTeachers,
+          invitations: { ...(c.invitations || {}), [inv.id]: { ...(c.invitations?.[inv.id] || inv), canceledAt: new Date().toISOString() } },
+        };
+      });
+      showToast('Invitation canceled');
+    } catch (err) {
+      showToast(`Error: ${err.message}`, 'error');
+    } finally {
+      setInviteBusy(null);
+    }
+  };
+
+  const resendInvitation = async (inv) => {
+    setInviteBusy(inv.id);
+    try {
+      await sendCorpPasswordReset(inv.email);
+      showToast(`Email sent again to ${inv.email}`);
+    } catch (err) {
+      showToast(`Error: ${err.message}`, 'error');
+    } finally {
+      setInviteBusy(null);
+    }
+  };
 
   const decideRequest = async (req, approve) => {
     setRequestBusy(req.uid);
     try {
       let teacher = null;
       if (approve) teacher = await approveTeacherRequest(centerId, centerName, req);
-      else await declineTeacherRequest(centerId, req.uid);
+      else await declineTeacherRequest(centerId, req);
       patch((c) => {
         const nextReq = { ...(c.teacherRequests || {}) };
         delete nextReq[req.uid];
         return { ...c, teacherRequests: nextReq, ...(teacher ? { teachers: { ...(c.teachers || {}), [teacher.id]: teacher } } : {}) };
       });
       showToast(approve ? `${req.name || req.email} is now a teacher` : 'Request declined');
+      reload();
     } catch (err) {
       showToast(`Error: ${err.message}`, 'error');
     } finally {
@@ -172,12 +233,12 @@ export default function AdminTeachers() {
             These people used your invite link. They can't enter the teacher panel until you approve them.
           </p>
           {requests.map((r) => (
-            <div key={r.uid} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, padding: '8px 0', borderTop: '1px solid rgba(0,0,0,0.06)' }}>
-              <div style={{ minWidth: 0 }}>
+            <div key={r.uid} className="ca-req-row">
+              <div className="ca-req-text">
                 <div style={{ fontSize: 14, fontWeight: 600 }}>{r.name || 'Teacher'}</div>
                 <div style={{ fontSize: 12, color: 'var(--sa-label-2, #64748b)' }}>{r.email}</div>
               </div>
-              <div style={{ display: 'flex', gap: 8, flexShrink: 0 }}>
+              <div className="ca-req-actions">
                 <Button onClick={() => decideRequest(r, true)} disabled={requestBusy === r.uid}>Approve</Button>
                 <Button variant="tinted" tone="red" onClick={() => decideRequest(r, false)} disabled={requestBusy === r.uid}>Decline</Button>
               </div>
@@ -185,6 +246,25 @@ export default function AdminTeachers() {
           ))}
         </section>
       )}
+      <div className="ca-view-switch">
+        <Segmented
+          label="View"
+          options={[{ value: 'faculty', label: 'Faculty' }, { value: 'invitations', label: pendingInvites ? `Invitations (${pendingInvites})` : 'Invitations' }]}
+          value={view}
+          onChange={setView}
+        />
+      </div>
+
+      {view === 'invitations' ? (
+        <AdminInvitations
+          invitations={invitations}
+          pendingRequests={requests}
+          teachers={teachers}
+          onCancel={cancelInvitation}
+          onResend={resendInvitation}
+          busyId={inviteBusy}
+        />
+      ) : (
       <section className="ca-card is-faculty-card">
         <div className="faculty-toolbar ca-faculty-toolbar">
           <div className="faculty-toolbar-left">
@@ -300,13 +380,16 @@ export default function AdminTeachers() {
                   />
                 </span>
                 <div className="faculty-cell-name">
-                  <button type="button" className="faculty-name-link" onClick={(e) => { e.stopPropagation(); open(t); }}>
-                    {formatName(t.name)}
-                  </button>
+                  <span className="faculty-name-row">
+                    <button type="button" className="faculty-name-link" onClick={(e) => { e.stopPropagation(); open(t); }}>
+                      {formatName(t.name)}
+                    </button>
+                    <InvitedBadge t={t} />
+                  </span>
                   <span className="faculty-email-sub">{t.email || t.phone || '—'}</span>
                 </div>
                 <span>{t.role === 'admin' ? 'Admin' : 'Teacher'}</span>
-                <span>{formatLastLogin(t.lastActivity)}</span>
+                <span>{isInvited(t) ? 'Not joined yet' : formatLastLogin(t.lastActivity)}</span>
                 <span>{t.groupsCount ?? 0}</span>
                 <span>{t.studentsCount ?? 0}</span>
                 <span>{centerName || 'None'}</span>
@@ -331,13 +414,14 @@ export default function AdminTeachers() {
                 icon={(t.name || '?').charAt(0).toUpperCase()}
                 iconTone="purple"
                 title={t.name || 'Teacher'}
-                subtitle={`${t.groupsCount} classes · ${t.studentsCount} students · ${formatLastLogin(t.lastActivity)}`}
+                subtitle={isInvited(t) ? `Invited ${new Date(t.invitedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} · not joined yet` : `${t.groupsCount} classes · ${t.studentsCount} students · ${formatLastLogin(t.lastActivity)}`}
                 onClick={() => open(t)}
               />
             ))}
           </div>
         )}
       </section>
+      )}
 
       <ConfirmSheet
         open={confirmDelete}
@@ -357,7 +441,11 @@ export default function AdminTeachers() {
         centerId={centerId}
         centerName={centerName}
         teachers={teachers}
-        onCreated={(teacher) => patch((c) => ({ ...c, teachers: { ...(c.teachers || {}), [teacher.id]: teacher } }))}
+        onCreated={({ invitation, ...teacher }) => patch((c) => ({
+          ...c,
+          teachers: { ...(c.teachers || {}), [teacher.id]: teacher },
+          ...(invitation ? { invitations: { ...(c.invitations || {}), [invitation.id]: invitation } } : {}),
+        }))}
       />
 
       <InviteSchoolAdminModal
@@ -507,6 +595,9 @@ function InviteTeachersModal({ open, onClose, centerId, centerName, teachers, on
           phone: isEmail ? '' : item,
           status: 'active',
           createdAt: new Date().toISOString(),
+          invitedAt: teacher.invitedAt,
+          invitation: teacher.invitation,
+          inviteId: teacher.invitation?.id,
           emailSent: false,
         };
 
