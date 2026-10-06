@@ -2,21 +2,21 @@
 // header, sized columns) and a plain .txt. Both round-trip through
 // readWordFile — see templateFiles.test.js.
 
-export const TEMPLATE_HEADER = ["So'z", 'Tarjima', 'Turkum', "Ta'rif", 'Misol'];
+export const TEMPLATE_HEADER = ["So'z", 'Tarjima', 'Ruscha', 'Turkum', "Ta'rif", 'Misol'];
 // English header, for the center admin panel (see downloadTemplate's `en`).
-export const TEMPLATE_HEADER_EN = ['Word', 'Translation', 'Part of Speech', 'Definition', 'Example'];
+export const TEMPLATE_HEADER_EN = ['Word', 'Translation', 'Russian', 'Part of Speech', 'Definition', 'Example'];
 
 export const TEMPLATE_ROWS = [
-  ['mother', 'ona', 'noun', '', 'My mother is a doctor.'],
-  ['father', 'ota', 'noun', '', 'My father works in a bank.'],
-  ['brother', 'aka / uka', 'noun', '', 'I have one brother.'],
-  ['eat', 'yemoq', 'verb', '', 'We eat lunch at school.'],
-  ['ice-cream', 'muzqaymoq', 'noun', '', 'I like ice-cream.'],
-  ['delicious', 'mazali', 'adjective', '', 'This soup is delicious.'],
+  ['mother', 'ona', 'мама', 'noun', '', 'My mother is a doctor.'],
+  ['father', 'ota', 'папа', 'noun', '', 'My father works in a bank.'],
+  ['brother', 'aka / uka', 'брат', 'noun', '', 'I have one brother.'],
+  ['eat', 'yemoq', 'есть', 'verb', '', 'We eat lunch at school.'],
+  ['ice-cream', 'muzqaymoq', 'мороженое', 'noun', '', 'I like ice-cream.'],
+  ['delicious', 'mazali', 'вкусный', 'adjective', '', 'This soup is delicious.'],
 ];
 
 // Column widths in Excel "characters".
-const WIDTHS = [16, 18, 12, 26, 34];
+const WIDTHS = [16, 18, 18, 12, 26, 34];
 
 const esc = (s) => String(s)
   .replace(/&/g, '&amp;')
@@ -26,8 +26,8 @@ const esc = (s) => String(s)
 
 const col = (i) => String.fromCharCode(65 + i);
 
-function sheetXml(rows) {
-  const cols = WIDTHS.map((w, i) => `<col min="${i + 1}" max="${i + 1}" width="${w}" customWidth="1"/>`).join('');
+function sheetXml(rows, widths = WIDTHS) {
+  const cols = widths.map((w, i) => `<col min="${i + 1}" max="${i + 1}" width="${w}" customWidth="1"/>`).join('');
   const body = rows.map((r, ri) => {
     const style = ri === 0 ? ' s="1"' : '';
     const cells = r.map((v, ci) => (v === ''
@@ -55,12 +55,16 @@ const STYLES = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
 // → Uint8Array with a valid one-sheet workbook. `en` (center admin only —
 // teacher panel stays Uzbek) switches the header row and the sheet's own
 // tab name (visible if the admin opens the file in Excel).
-export async function templateXlsx(en = false) {
+export async function templateXlsx(en = false, course = false) {
   const { zipSync, strToU8 } = await import('fflate');
   const rel = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships';
   const pkg = 'http://schemas.openxmlformats.org/package/2006/relationships';
   const ct = 'application/vnd.openxmlformats-officedocument.spreadsheetml';
-  const sheetName = en ? 'Words' : "So'zlar";
+  const sheetName = course ? (en ? 'Course' : 'Kurs') : (en ? 'Words' : "So'zlar");
+  const head = en ? TEMPLATE_HEADER_EN : TEMPLATE_HEADER;
+  const table = course
+    ? [[en ? 'Topic' : 'Mavzu', ...head], ...TEMPLATE_ROWS.map((r, i) => [(en ? ['Family', 'Food'] : ['Oila', 'Ovqat'])[i < 3 ? 0 : 1], ...r])]
+    : [head, ...TEMPLATE_ROWS];
   return zipSync({
     '[Content_Types].xml': strToU8('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
       + '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
@@ -79,7 +83,7 @@ export async function templateXlsx(en = false) {
       + `<Relationship Id="rId1" Type="${rel}/worksheet" Target="worksheets/sheet1.xml"/>`
       + `<Relationship Id="rId2" Type="${rel}/styles" Target="styles.xml"/></Relationships>`),
     'xl/styles.xml': strToU8(STYLES),
-    'xl/worksheets/sheet1.xml': strToU8(sheetXml([en ? TEMPLATE_HEADER_EN : TEMPLATE_HEADER, ...TEMPLATE_ROWS])),
+    'xl/worksheets/sheet1.xml': strToU8(sheetXml(table, course ? [16, ...WIDTHS] : WIDTHS)),
   });
 }
 
@@ -87,9 +91,9 @@ export async function templateXlsx(en = false) {
 // then a single full one to show the optional fields.
 export function templateTxt() {
   return [
-    'apple - olma',
-    'book - kitob',
-    'ice-cream - muzqaymoq',
+    'apple - olma - noun - I eat an apple every day.',
+    'book - kitob - noun - This book is interesting.',
+    'ice-cream - muzqaymoq - noun - I like ice-cream.',
     'mother - ona - noun - My mother is a doctor.',
     '',
   ].join('\r\n');
@@ -106,9 +110,9 @@ function save(data, name, type) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
-export async function downloadTemplate(kind, en = false) {
+export async function downloadTemplate(kind, en = false, course = false) {
   if (kind === 'xlsx') {
-    save(await templateXlsx(en), en ? 'voc-words-sample.xlsx' : 'voc-sozlar-namuna.xlsx', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    save(await templateXlsx(en, course), course ? (en ? 'voc-course-sample.xlsx' : 'voc-kurs-namuna.xlsx') : (en ? 'voc-words-sample.xlsx' : 'voc-sozlar-namuna.xlsx'), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
   } else {
     save(templateTxt(), en ? 'voc-words-sample.txt' : 'voc-sozlar-namuna.txt', 'text/plain;charset=utf-8');
   }

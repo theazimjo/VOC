@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, Plus, ChevronDown, Users, Layers, GraduationCap, BookOpen, Settings, LogOut } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+import RoleMenuItems from './RoleMenuItems';
 import { useCenterData } from '../../pages/corp/center-admin/CenterDataContext';
 import './CorpAdminTopbar.css';
 
@@ -144,6 +145,7 @@ export default function CorpAdminTopbar({ centerName, email }) {
               <button type="button" className="ca-topbar-menu-item" onClick={() => { setProfileOpen(false); navigate('/corp/admin/settings'); }}>
                 <Settings size={15} /> Settings
               </button>
+              <RoleMenuItems onClose={() => setProfileOpen(false)} />
               <button type="button" className="ca-topbar-menu-item is-danger" onClick={handleLogout}>
                 <LogOut size={15} /> Log out
               </button>

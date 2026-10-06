@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Building2, ChevronRight, KeyRound, Mail, PauseCircle, Pencil, Phone, PlayCircle, Users, Settings } from 'lucide-react';
-import { getCenter, updateCenter, setCenterStatus } from '../../../services/corpService';
+import { Building2, ChevronRight, GraduationCap, KeyRound, Mail, PauseCircle, Pencil, Phone, PlayCircle, Users, Settings } from 'lucide-react';
+import { getCenter, updateCenter, setCenterStatus, joinGroupAsUser } from '../../../services/corpService';
+import { useAuth } from '../../../contexts/AuthContext';
+import { ROLE_HOME, setActiveRole, setViewAs } from '../../../utils/activeRole';
 import ConfirmSheet from '../../../components/corp/ConfirmSheet';
 import DeleteCenterFlow from './DeleteCenterFlow';
 import SetPasswordSheet from './SetPasswordSheet';
@@ -18,6 +20,7 @@ export default function SuperAdminCenterDetail() {
   const navigate = useNavigate();
   const isDesktop = useIsDesktop();
   const [toastNode, showToast] = useToast();
+  const { user } = useAuth();
 
   const [center, setCenter] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -136,6 +139,60 @@ export default function SuperAdminCenterDetail() {
 
   const openGroup = (g) => navigate(`/corp/super-admin/centers/${center.id}/groups/${g.id}`);
 
+  // Super admin: use this center as its admin or as one of its teachers (the
+  // panel shows a banner with a way back), or join one of its groups as a student.
+  const openAs = (role, teacher) => {
+    setViewAs({
+      role,
+      centerId: center.id,
+      centerName: center.name || '',
+      ...(role === 'teacher' ? { teacherId: teacher.id, teacherName: teacher.name || '' } : {}),
+    });
+    window.location.assign(ROLE_HOME[role]);
+  };
+  const joinAsStudent = async (g) => {
+    if (!g.code) { showToast("Guruh kodi topilmadi", 'error'); return; }
+    setBusy(true);
+    try {
+      await joinGroupAsUser(g.code, user.uid, { name: user.displayName || user.email || 'Super admin', email: user.email || '' });
+      setActiveRole(null);
+      window.location.assign(ROLE_HOME.student);
+    } catch (err) {
+      showToast(err.message || "Qo'shilib bo'lmadi", 'error');
+      setBusy(false);
+    }
+  };
+
+  const openAsSection = (
+    <Section title="Shu markazga ulanish">
+      <Row
+        icon={<Building2 size={16} />}
+        iconTone="blue"
+        title="Markaz admini sifatida ochish"
+        subtitle="Markazning admin panelini shu hisobingiz bilan boshqarasiz"
+        onClick={() => openAs('center_admin')}
+      />
+      {teachers.length > 0 && (
+        <Row
+          icon={<Users size={16} />}
+          iconTone="purple"
+          title="O'qituvchi sifatida ochish"
+          subtitle="Pastdagi o'qituvchilar ro'yxatidan birini tanlang"
+        />
+      )}
+      {groups.filter((g) => g.status !== 'archived' && g.code).slice(0, 12).map((g) => (
+        <Row
+          key={g.id}
+          icon={<GraduationCap size={16} />}
+          iconTone="green"
+          title={`O'quvchi sifatida qo'shilish: ${g.name || 'Guruh'}`}
+          subtitle={teacherName(g.teacherId)}
+          onClick={busy ? undefined : () => joinAsStudent(g)}
+        />
+      ))}
+    </Section>
+  );
+
   const groupsSection = (
     <Section title={`Guruhlar (${groups.length})`}>
       {groups.length === 0 ? (
@@ -196,6 +253,7 @@ export default function SuperAdminCenterDetail() {
           title={t.name || "O'qituvchi"}
           subtitle={[t.email, t.phone].filter(Boolean).join(' · ')}
           detail={`${groupsOf(t.id)} guruh`}
+          onClick={() => openAs('teacher', t)}
         />
       ))}
     </Section>
@@ -226,6 +284,7 @@ export default function SuperAdminCenterDetail() {
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+        {openAsSection}
         {groupsSection}
         {teachersSection}
       </div>

@@ -12,6 +12,7 @@ import '../../pages/corp/center-admin/theme.css';
 import '../../pages/corp/center-admin/uits.css';
 import '../../pages/corp/center-admin/vocabry.css';
 import { usePanelTheme } from '../../pages/corp/center-admin/usePanelTheme';
+import ViewAsBanner from './ViewAsBanner';
 
 // The same shell as the center admin panel (CorpAdminLayout): sidebar,
 // topbar, always-light theme, centered sheets. `is-center-admin` is the
@@ -47,6 +48,7 @@ export default function TeacherLayout() {
         <TeacherSidebar />
 
         <main className="corp-admin-main-pane">
+          <ViewAsBanner identity={identity} />
           <TeacherTopbar />
           <Outlet context={value} />
         </main>

@@ -2769,16 +2769,16 @@ button.ca-feed-item:hover {
   font-size: 13px;
   font-weight: 600;
   border-radius: 6px;
-  background: #3b82f6;
+  background: var(--va-solid, #101113);
   color: #ffffff;
   border: none;
   cursor: pointer;
-  box-shadow: 0 1px 2px rgba(59, 130, 246, 0.25);
+  box-shadow: 0 1px 2px rgba(128, 128, 128, 0.25);
   transition: background-color 0.15s ease;
 }
 
 .faculty-btn-invite:hover {
-  background: #2563eb;
+  background: var(--va-solid, #101113);
 }
 
 .faculty-table {
@@ -2876,7 +2876,7 @@ button.ca-feed-item:hover {
 }
 
 .faculty-name-link:hover {
-  color: var(--sa-blue, #2563eb);
+  color: var(--sa-blue, var(--va-ink, #101113));
 }
 
 .faculty-email-sub {
@@ -2927,7 +2927,7 @@ button.ca-feed-item:hover {
   border-radius: 6px;
   border: none;
   background: transparent;
-  color: #3b82f6;
+  color: var(--va-ink, #101113);
   font-size: 14px;
   font-weight: 500;
   text-align: left;
@@ -2936,12 +2936,12 @@ button.ca-feed-item:hover {
 }
 
 .faculty-dropdown-item:hover {
-  background: color-mix(in srgb, var(--sa-blue, #2563eb) 8%, transparent);
+  background: color-mix(in srgb, var(--sa-blue, var(--va-ink, #101113)) 8%, transparent);
 }
 
 .faculty-dropdown-item svg {
   flex-shrink: 0;
-  color: #3b82f6;
+  color: var(--va-ink, #101113);
 }
 
 /* ── Groups list — same ca-card/faculty-table shell as Faculty, with a
@@ -3060,10 +3060,10 @@ button.ca-feed-item:hover {
   align-items: center;
   gap: 6px;
   padding: 6px 12px;
-  border: 1px solid #3b82f6;
+  border: 1px solid var(--va-ink, #101113);
   border-radius: 6px;
-  background: color-mix(in srgb, #3b82f6 6%, transparent);
-  color: #3b82f6;
+  background: color-mix(in srgb, var(--va-ink, #101113) 6%, transparent);
+  color: var(--va-ink, #101113);
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -3072,7 +3072,7 @@ button.ca-feed-item:hover {
 }
 
 .invite-copy-btn:hover {
-  background: color-mix(in srgb, #3b82f6 12%, transparent);
+  background: color-mix(in srgb, var(--va-ink, #101113) 12%, transparent);
 }
 
 .invite-modal-body {
@@ -3097,8 +3097,8 @@ button.ca-feed-item:hover {
 }
 
 .invite-textarea-wrap:focus-within {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  border-color: var(--va-ink, #101113);
+  box-shadow: 0 0 0 3px rgba(128, 128, 128, 0.15);
 }
 
 .invite-textarea {
@@ -3165,8 +3165,8 @@ button.ca-feed-item:hover {
 }
 
 .invite-input:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  border-color: var(--va-ink, #101113);
+  box-shadow: 0 0 0 3px rgba(128, 128, 128, 0.15);
 }
 
 .invite-modal-foot-spacebetween {
@@ -3253,10 +3253,10 @@ button.ca-feed-item:hover {
   gap: 8px;
   height: 38px;
   padding: 0 16px;
-  border: 1px solid #3b82f6;
+  border: 1px solid var(--va-ink, #101113);
   border-radius: 8px;
   background: var(--sa-surface, #ffffff);
-  color: #3b82f6;
+  color: var(--va-ink, #101113);
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -3264,7 +3264,7 @@ button.ca-feed-item:hover {
 }
 
 .teacher-settings-btn:hover {
-  background: color-mix(in srgb, #3b82f6 8%, var(--sa-surface, #ffffff));
+  background: color-mix(in srgb, var(--va-ink, #101113) 8%, var(--sa-surface, #ffffff));
 }
 
 .teacher-nav-tabs {
@@ -3295,8 +3295,8 @@ button.ca-feed-item:hover {
 }
 
 .teacher-nav-tab.is-active {
-  border-bottom-color: #3b82f6;
-  color: #2563eb;
+  border-bottom-color: var(--va-ink, #101113);
+  color: var(--va-ink, #101113);
   font-weight: 600;
 }
 
@@ -3348,17 +3348,17 @@ button.ca-feed-item:hover {
   padding: 0 20px;
   border: none;
   border-radius: 6px;
-  background: #3b82f6;
+  background: var(--va-solid, #101113);
   color: #ffffff;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.25);
+  box-shadow: 0 2px 4px rgba(128, 128, 128, 0.25);
   transition: background-color 0.15s ease;
 }
 
 .teacher-add-class-btn:hover {
-  background: #2563eb;
+  background: var(--va-solid, #101113);
 }
 
 /* Classes table inside the Classes tab (populated state) — reuses the
@@ -3382,9 +3382,9 @@ button.ca-feed-item:hover {
 }
 
 .faculty-btn-secondary:hover:not(:disabled) {
-  border-color: #3b82f6;
-  background: color-mix(in srgb, #3b82f6 6%, var(--sa-surface-2, #f8fafc));
-  color: #2563eb;
+  border-color: var(--va-ink, #101113);
+  background: color-mix(in srgb, var(--va-ink, #101113) 6%, var(--sa-surface-2, #f8fafc));
+  color: var(--va-ink, #101113);
 }
 
 .faculty-btn-secondary:disabled {
@@ -3407,7 +3407,7 @@ button.ca-feed-item:hover {
   flex-shrink: 0;
   padding: 2px 8px;
   border-radius: 10px;
-  background: #3b82f6;
+  background: var(--va-solid, #101113);
   color: #ffffff;
   font-size: 11px;
   font-weight: 700;
@@ -3420,14 +3420,14 @@ button.ca-feed-item:hover {
   border: none;
   background: none;
   padding: 0;
-  color: #3b82f6;
+  color: var(--va-ink, #101113);
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
 }
 
 .class-add-students-link:hover {
-  color: #2563eb;
+  color: var(--va-ink, #101113);
 }
 
 /* ── Edit Teacher Information Modal ── */
@@ -3489,7 +3489,7 @@ button.ca-feed-item:hover {
 }
 
 .teacher-role-card:hover {
-  border-color: #3b82f6;
+  border-color: var(--va-ink, #101113);
   background: var(--va-sunk1, #f8fafc);
 }
 
@@ -3499,7 +3499,7 @@ button.ca-feed-item:hover {
 }
 
 .teacher-role-card.is-selected.role-admin {
-  border: 2px solid #3b82f6;
+  border: 2px solid var(--va-ink, #101113);
   background: #eff6ff;
 }
 
@@ -3522,7 +3522,7 @@ button.ca-feed-item:hover {
 }
 
 .role-check-blue {
-  background: #3b82f6;
+  background: var(--va-solid, #101113);
 }
 
 .role-card-icon-wrap {
@@ -3543,7 +3543,7 @@ button.ca-feed-item:hover {
 }
 
 .teacher-role-card.is-selected.role-admin .role-card-title {
-  color: #2563eb;
+  color: var(--va-ink, #101113);
 }
 
 .teacher-info-name-grid {
@@ -3580,7 +3580,7 @@ button.ca-feed-item:hover {
 }
 
 .teacher-info-input:focus {
-  border-color: #3b82f6;
+  border-color: var(--va-ink, #101113);
   background: var(--va-paper, #ffffff);
 }
 
@@ -3616,17 +3616,17 @@ button.ca-feed-item:hover {
   padding: 0 24px;
   border: none;
   border-radius: 8px;
-  background: #3b82f6;
+  background: var(--va-solid, #101113);
   color: #ffffff;
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.25);
+  box-shadow: 0 2px 4px rgba(128, 128, 128, 0.25);
   transition: background-color 0.15s ease;
 }
 
 .teacher-info-btn-submit:hover {
-  background: #2563eb;
+  background: var(--va-solid, #101113);
 }
 
 
@@ -3669,7 +3669,7 @@ button.ca-feed-item:hover {
   height: 34px;
   border-radius: 8px;
   background: var(--va-tint-b, #e8f1fe);
-  color: #2563eb;
+  color: var(--va-ink, #101113);
 }
 
 .ca-course-icon.is-system {
@@ -3685,7 +3685,7 @@ button.ca-feed-item:hover {
 }
 
 .ca-selected-count {
-  color: #2563eb;
+  color: var(--va-ink, #101113);
 }
 
 .ca-muted {
@@ -3765,7 +3765,7 @@ button.ca-feed-item:hover {
 }
 
 .faculty-table-row:focus-visible {
-  outline: 2px solid #3b82f6;
+  outline: 2px solid var(--va-ink, #101113);
   outline-offset: -2px;
 }
 
@@ -3803,8 +3803,12 @@ button.ca-feed-item:hover {
 /* Word list */
 .ca-words-table .faculty-table-head,
 .ca-words-table .faculty-table-row {
-  grid-template-columns: 40px minmax(150px, 1fr) minmax(150px, 1fr) 130px minmax(200px, 1.6fr);
+  grid-template-columns: 40px minmax(130px, 1fr) minmax(130px, 1fr) minmax(120px, 0.9fr) 110px minmax(180px, 1.5fr) 72px;
 }
+
+/* word actions stay visible (no hover needed) */
+.ca-word-actions .ca-row-action { opacity: 1; }
+.ca-word-actions .ca-row-action.is-danger:hover { color: #d1271c; background: rgba(209, 39, 28, 0.1); }
 
 .ca-words-table .ca-word-cell {
   cursor: pointer;
@@ -3843,13 +3847,13 @@ button.ca-feed-item:hover {
   border-style: solid;
   border-color: #93b4f5;
   background: var(--va-paper, #ffffff);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+  box-shadow: 0 0 0 3px rgba(128, 128, 128, 0.12);
 }
 
 .ca-quick-add-icon {
   display: inline-flex;
   flex-shrink: 0;
-  color: #3b82f6;
+  color: var(--va-ink, #101113);
 }
 
 .ca-quick-add-input {
@@ -3890,7 +3894,7 @@ button.ca-feed-item:hover {
 }
 
 .ca-quick-add.is-ready .ca-quick-add-btn {
-  background: #3b82f6;
+  background: var(--va-solid, #101113);
   color: #ffffff;
 }
 
@@ -4051,7 +4055,7 @@ button.ca-feed-item:hover {
   border-radius: 9px;
 }
 
-.tone-blue.ca-dash-tile-icon { background: var(--va-tint-b, #e8f1fe); color: #2563eb; }
+.tone-blue.ca-dash-tile-icon { background: var(--va-tint-b, #e8f1fe); color: var(--va-ink, #101113); }
 .tone-purple.ca-dash-tile-icon { background: var(--va-tint-b, #f1ebfd); color: #7c3aed; }
 .tone-green.ca-dash-tile-icon { background: var(--va-tint-g, #e7f6ec); color: #1f8a3e; }
 .tone-orange.ca-dash-tile-icon { background: var(--va-tint-a, #fff4e0); color: #c26a00; }
@@ -4117,7 +4121,7 @@ button.ca-feed-item:hover {
   transition: width 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.ca-dash-bar .is-blue { background: #3b82f6; }
+.ca-dash-bar .is-blue { background: var(--va-solid, #101113); }
 .ca-dash-bar .is-good,
 .ca-dash-stack .is-good,
 .ca-dash-legend-dot.is-good { background: #22a34a; }
@@ -4173,7 +4177,7 @@ button.ca-feed-item:hover {
   padding: 6px 4px;
   border: none;
   background: none;
-  color: #2563eb;
+  color: var(--va-ink, #101113);
   font: inherit;
   font-size: 13px;
   font-weight: 600;
@@ -4288,7 +4292,7 @@ button.ca-feed-item:hover {
 }
 
 .ca-dash-table-row:focus-visible {
-  outline: 2px solid #3b82f6;
+  outline: 2px solid var(--va-ink, #101113);
   outline-offset: -2px;
 }
 
@@ -4340,7 +4344,7 @@ button.ca-feed-item:hover {
   font-weight: 700;
 }
 
-.ca-dash-avatar.tone-blue { background: var(--va-tint-b, #e8f1fe); color: #2563eb; }
+.ca-dash-avatar.tone-blue { background: var(--va-tint-b, #e8f1fe); color: var(--va-ink, #101113); }
 .ca-dash-avatar.tone-green { background: var(--va-tint-g, #e7f6ec); color: #1f8a3e; }
 .ca-dash-avatar.tone-purple { background: var(--va-tint-b, #f1ebfd); color: #7c3aed; }
 .ca-dash-avatar.tone-orange { background: var(--va-tint-a, #fff4e0); color: #c26a00; }
@@ -4528,7 +4532,7 @@ button.ca-feed-item:hover {
   height: 56px;
   flex-shrink: 0;
   border-radius: 14px;
-  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  background: var(--va-solid, #101113);
   color: #ffffff;
   font-size: 24px;
   font-weight: 700;
@@ -4605,7 +4609,7 @@ button.ca-feed-item:hover {
 }
 
 .ca-group-code-pill:hover {
-  border-color: #93c5fd;
+  border-color: var(--va-ink, #101113);
   background: var(--va-tint-b, #f5f9ff);
 }
 
@@ -4635,7 +4639,7 @@ button.ca-feed-item:hover {
   height: 24px;
   border-radius: 6px;
   background: var(--va-tint-b, #e8f1fe);
-  color: #2563eb;
+  color: var(--va-ink, #101113);
 }
 
 .ca-group-nav {
@@ -4661,7 +4665,7 @@ button.ca-feed-item:hover {
 
 .teacher-nav-tab.is-active .ca-nav-count {
   background: var(--va-tint-b, #e8f1fe);
-  color: #2563eb;
+  color: var(--va-ink, #101113);
 }
 
 /* Status pills (students, homework states, import summary) */
@@ -4720,9 +4724,9 @@ button.ca-feed-item:hover {
 }
 
 .ca-filter-pill.is-active {
-  border-color: #2563eb;
+  border-color: var(--va-ink, #101113);
   background: #eef4ff;
-  color: #1d4ed8;
+  color: var(--va-ink, #101113);
 }
 
 .ca-filter-pill:active {
@@ -4956,8 +4960,8 @@ button.ca-feed-item:hover {
 }
 
 .ca-hwx-person:hover {
-  border-color: #93c5fd;
-  color: #1d4ed8;
+  border-color: var(--va-ink, #101113);
+  color: var(--va-ink, #101113);
 }
 
 .ca-hwx-open {
@@ -5013,7 +5017,7 @@ button.ca-feed-item:hover {
   background: var(--va-tint-b, #e8f1fe);
   font-size: 18px;
   font-weight: 700;
-  color: #2563eb;
+  color: var(--va-ink, #101113);
 }
 
 .ca-st-head-text {
@@ -5156,9 +5160,9 @@ button.ca-feed-item:hover {
 }
 
 .ca-imp-source.is-active {
-  border-color: #2563eb;
+  border-color: var(--va-ink, #101113);
   background: var(--va-tint-b, #f5f9ff);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+  box-shadow: 0 0 0 3px rgba(128, 128, 128, 0.12);
 }
 
 .ca-imp-source-icon {
@@ -5174,7 +5178,7 @@ button.ca-feed-item:hover {
 }
 
 .ca-imp-source.is-active .ca-imp-source-icon {
-  background: #2563eb;
+  background: var(--va-solid, #101113);
   color: #ffffff;
 }
 
@@ -5236,7 +5240,7 @@ button.ca-feed-item:hover {
   padding: 4px 0;
   font-size: 13px;
   font-weight: 600;
-  color: #2563eb;
+  color: var(--va-ink, #101113);
   cursor: pointer;
   list-style: none;
 }
@@ -5282,7 +5286,7 @@ button.ca-feed-item:hover {
   background: var(--va-tint-b, #e8f1fe);
   font-size: 12px;
   font-weight: 700;
-  color: #2563eb;
+  color: var(--va-ink, #101113);
 }
 
 .ca-imp-step-body {
@@ -5581,7 +5585,7 @@ button.ca-feed-item:hover {
 }
 
 .ca-assign-row:focus-visible {
-  outline: 2px solid #3b82f6;
+  outline: 2px solid var(--va-ink, #101113);
   outline-offset: -2px;
 }
 
@@ -5714,7 +5718,7 @@ button.ca-feed-item:hover {
   background: var(--va-tint-b, #e8f1fe);
   font-size: 11px;
   font-weight: 700;
-  color: #2563eb;
+  color: var(--va-ink, #101113);
 }
 
 .ca-assign-picked-title {
@@ -6528,7 +6532,7 @@ button.ca-feed-item:hover {
   height: 56px;
   flex-shrink: 0;
   border-radius: 999px;
-  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  background: var(--va-solid, #101113);
   color: #ffffff;
   font-size: 22px;
   font-weight: 700;
@@ -6777,3 +6781,32 @@ button.ca-feed-item:hover {
     flex-wrap: wrap;
   }
 }
+
+/* ── Home dashboard on phones ── */
+@media (max-width: 640px) {
+  .ca-title-lg { font-size: 22px; gap: 10px; }
+  .ca-title-lg-icon { width: 38px; height: 38px; border-radius: 10px; }
+  .ca-dash-head { gap: 10px; }
+  .ca-dash-tile-top { align-items: flex-start; }
+  .ca-dash-tile-label { font-size: 12px; line-height: 1.25; overflow-wrap: anywhere; }
+  .ca-dash-tile-foot { white-space: normal; line-height: 1.35; overflow-wrap: anywhere; }
+  .ca-dash-legend { gap: 14px 12px; }
+  .ca-dash-legend-item { align-items: flex-start; min-width: 0; }
+  .ca-dash-legend-value { flex-shrink: 0; font-size: 14px; }
+  .ca-dash-card-title { font-size: 20px; }
+  .ca-dash-card-sub { overflow-wrap: anywhere; }
+}
+
+@media (max-width: 640px) {
+  .ca-dash-rows .sa-row-subtitle { white-space: normal; overflow: visible; text-overflow: clip; line-height: 1.35; }
+}
+
+/* "Read this chapter" banner on a topic page (library books) */
+.ca-read-banner { display: flex; align-items: center; gap: 12px; width: 100%; margin: 0; padding: 12px 16px; border: 0; border-bottom: 1px solid var(--va-line, rgba(16, 17, 19, 0.14)); background: color-mix(in srgb, var(--va-amber, #ffb020) 16%, transparent); color: var(--va-ink, #101113); text-align: left; cursor: pointer; font: inherit; }
+.ca-read-banner:hover { background: color-mix(in srgb, var(--va-amber, #ffb020) 24%, transparent); }
+.ca-read-banner-icon { display: grid; flex: 0 0 38px; width: 38px; height: 38px; place-items: center; border-radius: 10px; background: var(--va-solid, #101113); color: var(--va-amber, #ffb020); }
+.ca-read-banner-text { display: flex; flex: 1; min-width: 0; flex-direction: column; gap: 1px; }
+.ca-read-banner-text b { font-size: 0.9375rem; }
+.ca-read-banner-text small { font-size: 0.8125rem; color: var(--va-mute, #6b7280); }
+
+.ca-ru-empty { color: var(--va-mute, #9aa3ad); }

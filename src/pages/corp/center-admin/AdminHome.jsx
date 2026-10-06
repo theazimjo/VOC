@@ -298,7 +298,7 @@ export default function AdminHome() {
               ))}
             </div>
           ) : (
-            <div className="sa-group" style={{ padding: 12 }}>
+            <div className="sa-group ca-dash-rows" style={{ padding: 12 }}>
               {topStudents.map((st) => (
                 <Row
                   key={`${st.groupId}-${st.uid}`}

@@ -18,11 +18,14 @@ import PracticeSessionView from './views/PracticeSessionView';
 import ResultsView from './views/ResultsView';
 import ExitPracticeModal from './modals/ExitPracticeModal';
 import { useStudentT } from '../../../../hooks/useStudentT';
+import { useLanguage } from '../../../../contexts/LanguageContext';
+import { localizeWord } from '../learn/utils';
 import '../../../personal/PracticePage.css';
 import './CorpPractice.css';
 
 export default function CorpPractice() {
   const { t } = useStudentT();
+  const { language } = useLanguage();
   const navigate = useNavigate();
   const { packId, monthId, unitId } = useParams();
   const [searchParams] = useSearchParams();
@@ -116,7 +119,7 @@ export default function CorpPractice() {
     return loadedPack.words.map((w, i) => {
       const wordKey = w.id || String(i);
       const dbStat = dbWords[wordKey] || {};
-      return {
+      return localizeWord({
         id: wordKey,
         addedAt: new Date().toISOString(),
         wrongCount: 0,
@@ -124,9 +127,9 @@ export default function CorpPractice() {
         stability: 1.0,
         ...w,
         ...dbStat
-      };
+      }, language);
     });
-  }, [loadedPack, dbWords]);
+  }, [loadedPack, dbWords, language]);
 
   // Intro shape transition timer
   useEffect(() => {

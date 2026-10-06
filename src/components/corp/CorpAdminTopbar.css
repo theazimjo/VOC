@@ -331,3 +331,6 @@
     max-width: calc(100vw - 32px);
   }
 }
+
+.ca-topbar-menu-label { padding: 8px 12px 4px; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--va-mute, #6b7280); border-top: 1px solid var(--va-line, rgba(16, 17, 19, 0.12)); margin-top: 4px; }
+.ca-topbar-menu-item:disabled { opacity: 0.6; cursor: default; }

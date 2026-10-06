@@ -45,7 +45,7 @@ describe('parseWordText', () => {
   });
 
   it('reports bad lines with their line number and marks repeats', () => {
-    const rows = parseWordText('apple - olma\n\nhello\napple - olma');
+    const rows = parseWordText('apple - olma - noun - I eat apples.\n\nhello\napple - olma - noun - I eat apples.');
     expect(rows[1]).toMatchObject({ line: 3, error: "Tarjima yo'q" });
     expect(rows[2]).toMatchObject({ line: 4, duplicate: true });
     expect(importable(rows)).toHaveLength(1);
@@ -97,11 +97,11 @@ describe('lists pasted from an AI chat', () => {
       '',
       '### Family',
       '1. **mother** – ona – noun – bolaning onasi – My mother is a doctor.',
-      '2) **father** - ota',
-      '- brother - aka',
-      '* sister → opa',
+      '2) **father** - ota - noun - My father works.',
+      '- brother - aka - noun - I have a brother.',
+      '* sister → opa → noun → She is my sister.',
       '**Food**',
-      '10 - o\'n',
+      '10\to\'n\tnoun\t\tI am ten.',
       '---',
       'Umid qilamanki, bu foydali bo\'ladi!',
     ].join('\n');

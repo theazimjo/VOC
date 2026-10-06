@@ -1,5 +1,8 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Brain, ChevronLeft } from 'lucide-react';
+import { BookOpen, Brain, ChevronLeft } from 'lucide-react';
+import ChapterReader from '../../../../../components/corp/ChapterReader';
+import { readingForUnit } from '../../../../../data/libraryChapters';
 import WordList from '../../../../../components/Words/WordList';
 import { corpWordStorageId } from '../../../../../utils/helpers';
 import { useStudentT } from '../../../../../hooks/useStudentT';
@@ -7,12 +10,15 @@ import './TopicDetailView.css';
 
 export default function TopicDetailView({ p }) {
   const { t } = useStudentT();
+  const [readerOpen, setReaderOpen] = useState(false);
+  const reading = readingForUnit(selectedUnit);
   const {
     cameFromHomework, memoryTwin, monthId, navigate, packId,
     selectedMonth, selectedUnit, setActiveTab, startPractice, unitWords,
   } = p;
 
   return (
+    <>
             <motion.div
               className="pack-detail-page"
               initial={{ opacity: 0 }}
@@ -68,6 +74,11 @@ export default function TopicDetailView({ p }) {
                   >
                     🎮 {t('words.practice')}
                   </button>
+                  {reading && (
+                    <button className="btn btn-secondary btn-mashq" onClick={() => setReaderOpen(true)}>
+                      <BookOpen size={16} /> {t('words.read')}
+                    </button>
+                  )}
                 </div>
               </div>
 
@@ -105,5 +116,13 @@ export default function TopicDetailView({ p }) {
                 language={selectedMonth?.packLanguage || 'en-US'}
               />
             </motion.div>
+            {readerOpen && reading && (
+              <ChapterReader
+                reading={reading}
+                onClose={() => setReaderOpen(false)}
+                labels={{ close: t('words.readClose'), prev: t('words.readPrev'), next: t('words.readNext'), loading: t('words.readLoading'), missing: t('words.readMissing'), activity: t('words.readActivity'), summary: t('words.readSummary'), review: t('words.readReview') }}
+              />
+            )}
+    </>
   );
 }

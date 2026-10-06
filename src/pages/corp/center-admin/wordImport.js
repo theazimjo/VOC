@@ -6,7 +6,7 @@
 //          topic, error, duplicate }
 // Rows with an `error` or marked `duplicate` are shown but never imported.
 
-import { newId, normalizePOS } from './courseEditing';
+import { mergeWords, newId, normalizePOS } from './courseEditing';
 
 export const MAX_FILE_BYTES = 2 * 1024 * 1024;
 export const MAX_ROWS = 3000;
@@ -16,12 +16,13 @@ export const MAX_ROWS = 3000;
 const HEADERS = {
   word: ['word', 'words', 'english', 'inglizcha', 'ingliz', 'soz', 'sozlar', 'term', 'vocabulary'],
   translation: ['translation', 'tarjima', 'tarjimasi', 'uzbek', 'ozbekcha', 'ozbek', 'meaning', 'manosi', 'manoni'],
+  translationRu: ['translationru', 'tarjimaru', 'ruscha', 'ruschatarjima', 'russian', 'rus', 'ru', 'perevod'],
   partOfSpeech: ['pos', 'partofspeech', 'turkum', 'turkumi', 'sozturkumi', 'type', 'turi'],
   definition: ['definition', 'tarif', 'izoh', 'description'],
   example: ['example', 'examples', 'misol', 'sentence', 'gap'],
   topic: ['topic', 'mavzu', 'unit', 'lesson', 'dars', 'bolim', 'section'],
 };
-const POSITIONAL = ['word', 'translation', 'partOfSpeech', 'definition', 'example'];
+const POSITIONAL = ['word', 'translation', 'partOfSpeech', 'definition', 'example', 'translationRu'];
 
 const headerKey = (s) => String(s ?? '').toLowerCase().replace(/[^a-z]/g, '');
 
@@ -181,6 +182,7 @@ function withError(row, en = false) {
   let error = null;
   if (!row.word) error = en ? 'No word' : "So'z yo'q";
   else if (!row.translation) error = en ? 'No translation' : "Tarjima yo'q";
+  else if (!row.example) error = en ? 'No example' : "Misol yo'q";
   else if (row.word.length > 80) error = en ? "Too long — word and translation weren't separated" : "Juda uzun — so'z va tarjima ajratilmagan";
   return { ...row, error };
 }
@@ -255,13 +257,14 @@ export function parseWordCells(cells, sheetTopic = '', en = false) {
   const rows = [];
   table.slice(header ? first + 1 : first).forEach((cellsOfRow, i) => {
     if (!cellsOfRow.some(Boolean)) return;
-    const row = { word: '', translation: '', partOfSpeech: '', definition: '', example: '', topic: '' };
+    const row = { word: '', translation: '', translationRu: '', partOfSpeech: '', definition: '', example: '', topic: '' };
     Object.entries(columns).forEach(([idx, field]) => { row[field] = cellsOfRow[idx] || ''; });
     const pos = normalizePOS(row.partOfSpeech);
     rows.push(withError({
       line: (header ? first + 2 : first + 1) + i,
       word: row.word,
       translation: row.translation,
+      translationRu: row.translationRu,
       partOfSpeech: pos || (row.partOfSpeech ? 'other' : guessPOS(row.translation)),
       definition: row.definition,
       example: row.example,
@@ -289,6 +292,7 @@ export const toWord = (r) => ({
   id: newId('w'),
   word: r.word,
   translation: r.translation,
+  ...(r.translationRu ? { translationRu: r.translationRu } : {}),
   partOfSpeech: r.partOfSpeech || 'noun',
   definition: r.definition || '',
   example: r.example || '',
@@ -352,4 +356,107 @@ function topicsOf(rows) {
   const seen = new Map();
   rows.forEach((r) => { if (r.topic && !seen.has(r.topic.toLowerCase())) seen.set(r.topic.toLowerCase(), r.topic); });
   return [...seen.values()];
+}
+
+// ── Whole-course import ──
+// A pasted course: "# Family" (or "Topic: Family" / "Mavzu: Family") starts a
+// topic, the lines below it are its words. Lines before the first heading
+// have no topic (the importer files them under a default one).
+const TOPIC_LINE = /^(?:#{1,6}\s+|(?:topic|mavzu|unit|lesson|dars)\s*\d*\s*[:–—-]\s*)(.+)$/i;
+
+export function parseCourseText(text, en = false) {
+  const groups = [{ topic: '', start: 0, lines: [] }];
+  String(text || '').split(/\r\n|\r|\n/).forEach((raw, i) => {
+    const heading = stripBom(raw).trim().match(TOPIC_LINE);
+    if (heading) groups.push({ topic: heading[1].replace(/\*\*|__|`/g, '').replace(/[:：]\s*$/, '').trim(), start: i + 1, lines: [] });
+    else groups[groups.length - 1].lines.push(raw);
+  });
+  const rows = groups.flatMap((g) => parseWordText(g.lines.join('\n'), en)
+    .map((r) => ({ ...r, line: r.line + g.start, topic: g.topic })));
+  return markDuplicates(rows.slice(0, MAX_ROWS));
+}
+
+// Rows → months, filling topics by title (same title, any case, is the same
+// topic: its words are merged, not duplicated). Rows with no topic go to
+// `fallbackTitle`. New topics land in the last month (created if missing).
+export function applyImportedRows(months, rows, fallbackTitle, defaultMonthTitle = 'Month 1') {
+  const next = months.length ? months.map((m) => ({ ...m, units: [...(m.units || [])] })) : [{ id: 'm1', title: defaultMonthTitle, units: [] }];
+  const byTitle = new Map();
+  next.forEach((m, mi) => m.units.forEach((u, ui) => byTitle.set(u.title.trim().toLowerCase(), { mi, ui })));
+  const last = next.length - 1;
+  let addedTopics = 0;
+  let added = 0;
+  let updated = 0;
+  const order = [];
+  rows.forEach((r) => {
+    const title = (r.topic || fallbackTitle).trim();
+    const key = title.toLowerCase();
+    if (!byTitle.has(key)) {
+      next[last].units.push({ id: newId('unit'), title, words: [] });
+      byTitle.set(key, { mi: last, ui: next[last].units.length - 1 });
+      addedTopics += 1;
+    }
+    if (!order.includes(key)) order.push(key);
+  });
+  order.forEach((key) => {
+    const { mi, ui } = byTitle.get(key);
+    const incoming = rows.filter((r) => (r.topic || fallbackTitle).trim().toLowerCase() === key).map(toWord);
+    const result = mergeWords(next[mi].units[ui].words, incoming);
+    next[mi].units[ui] = { ...next[mi].units[ui], words: result.words };
+    added += result.added;
+    updated += result.updated;
+  });
+  return { months: next, addedTopics, added, updated };
+}
+
+// Live table sync: writes the table's valid rows into the course tree.
+// `entries` carry the word's stable id, so an edited row updates its word
+// instead of adding a copy, and `removedIds` are words whose row was deleted.
+// With `unitId` the rows belong to that one topic; without it each row's
+// `topic` picks (or creates) its topic. Topics created here that end up
+// empty again (a half-typed topic name) are dropped via `autoUnits`.
+export function syncGridRows(months, entries, removedIds, { unitId = null, fallbackTitle = '', defaultMonthTitle = 'Month 1', autoUnits = [] } = {}) {
+  const removed = new Set(removedIds);
+  const next = (months.length ? months : [{ id: 'm1', title: defaultMonthTitle, units: [] }])
+    .map((m) => ({ ...m, units: (m.units || []).map((u) => ({ ...u, words: (u.words || []).filter((w) => !removed.has(w.id)) })) }));
+  const created = [];
+  const asWord = (e) => ({
+    id: e.id,
+    word: e.word,
+    translation: e.translation,
+    ...(e.translationRu ? { translationRu: e.translationRu } : {}),
+    partOfSpeech: e.partOfSpeech || 'noun',
+    definition: e.definition || '',
+    example: e.example || '',
+  });
+  const units = next.flatMap((m) => m.units);
+
+  entries.forEach((e) => {
+    let target;
+    if (unitId) {
+      target = units.find((u) => u.id === unitId);
+    } else {
+      const title = (e.topic || fallbackTitle).trim();
+      target = units.find((u) => u.title.trim().toLowerCase() === title.toLowerCase());
+      if (!target) {
+        target = { id: newId('unit'), title, words: [] };
+        next[next.length - 1].units.push(target);
+        units.push(target);
+        created.push(target.id);
+      }
+    }
+    if (!target) return;
+    const word = asWord(e);
+    const here = target.words.findIndex((w) => w.id === e.id);
+    if (here !== -1) {
+      target.words[here] = word;
+      return;
+    }
+    units.forEach((u) => { if (u !== target) u.words = u.words.filter((w) => w.id !== e.id); });
+    target.words.push(word);
+  });
+
+  const auto = new Set([...autoUnits, ...created]);
+  next.forEach((m) => { m.units = m.units.filter((u) => !(auto.has(u.id) && u.words.length === 0)); });
+  return { months: next, created };
 }

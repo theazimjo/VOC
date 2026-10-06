@@ -95,6 +95,7 @@ export function mergeWords(existing, incoming) {
       words[idx] = {
         ...old,
         translation: w.translation || old.translation,
+        ...((w.translationRu || old.translationRu) ? { translationRu: w.translationRu || old.translationRu } : {}),
         partOfSpeech: w.partOfSpeech || old.partOfSpeech,
         definition: w.definition || old.definition,
         example: w.example || old.example,
@@ -103,4 +104,91 @@ export function mergeWords(existing, incoming) {
     }
   });
   return { words, added, updated };
+}
+
+// Moves a topic one place up (-1) or down (+1) inside its month.
+export function moveUnit(months, monthId, unitId, delta) {
+  return mapMonth(months, monthId, (m) => {
+    const units = [...(m.units || [])];
+    const i = units.findIndex((u) => u.id === unitId);
+    const j = i + delta;
+    if (i === -1 || j < 0 || j >= units.length) return m;
+    [units[i], units[j]] = [units[j], units[i]];
+    return { ...m, units };
+  });
+}
+
+// Books from the system library (marketData packs with a `topic` on each
+// word, like Science and Health) become a course of the center: one topic
+// per chapter, in book order, every word with its own id so it can be
+// edited afterwards like any other course word.
+export const LIBRARY_BOOK_IDS = ['science', 'health'];
+
+// Bump when the library books get new words or translations: courses added
+// earlier are then brought up to date once (see syncCourseWithBook).
+export const LIBRARY_VERSION = 2;
+
+const libraryWord = (w) => ({
+  id: newId('w'),
+  word: w.word,
+  translation: w.translation || '',
+  ...(w.translationRu ? { translationRu: w.translationRu } : {}),
+  partOfSpeech: normalizePOS(w.partOfSpeech) || 'noun',
+  definition: w.definition || '',
+  example: w.example || '',
+});
+
+export function libraryBookToCourse(book) {
+  const byTopic = new Map();
+  (book.words || []).forEach((w) => {
+    const topic = w.topic || book.name;
+    if (!byTopic.has(topic)) byTopic.set(topic, []);
+    byTopic.get(topic).push(libraryWord(w));
+  });
+  // `reading` points at the chapter text bundled with the app (ChapterReader loads it on demand).
+  const units = [...byTopic].map(([title, words]) => ({ id: newId('unit'), title, words, reading: { book: book.id, topic: title } }));
+  const level = String(book.level || 'intermediate');
+  return {
+    title: book.name,
+    level: level.charAt(0).toUpperCase() + level.slice(1),
+    description: '',
+    months: [{ id: 'm1', title: '1-oy', units }],
+  };
+}
+
+// Brings a course that was added from the library earlier up to date: library
+// words the course doesn't have yet are added, and words without a Russian
+// translation get it. Nothing the center changed is overwritten or removed.
+export function syncCourseWithBook(months, book) {
+  const byTopic = new Map();
+  (book.words || []).forEach((w) => {
+    const topic = w.topic || book.name;
+    if (!byTopic.has(topic)) byTopic.set(topic, []);
+    byTopic.get(topic).push(w);
+  });
+  let added = 0;
+  let filled = 0;
+  let matched = 0;
+  const next = (months || []).map((m) => ({
+    ...m,
+    units: (m.units || []).map((u) => {
+      const topic = u.reading?.topic || u.title;
+      const lib = byTopic.get(topic);
+      if (!lib) return u;
+      matched += 1;
+      const words = [...(u.words || [])];
+      lib.forEach((lw) => {
+        const i = words.findIndex((w) => (w.word || '').toLowerCase() === lw.word.toLowerCase());
+        if (i === -1) {
+          words.push(libraryWord(lw));
+          added += 1;
+        } else if (!words[i].translationRu && lw.translationRu) {
+          words[i] = { ...words[i], translationRu: lw.translationRu };
+          filled += 1;
+        }
+      });
+      return { ...u, words, reading: u.reading || { book: book.id, topic } };
+    }),
+  }));
+  return { months: next, added, filled, matched };
 }

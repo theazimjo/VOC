@@ -90,3 +90,11 @@ export function computeUnitWordStats(selectedMonth, unit, allDbWords) {
   const avgMasteryPct = totalWords > 0 ? Math.round(totalMasterySum / totalWords) : 0;
   return { masteredCount, learningCount, newCount, totalWords, avgMasteryPct };
 }
+
+// A student who picked Russian sees the Russian translation wherever the
+// word's `translation` is shown or checked (cards, tests, games). Words
+// without one keep the Uzbek translation, so nothing shows up blank.
+export function localizeWord(word, language) {
+  if (language !== 'ru' || !word?.translationRu) return word;
+  return { ...word, translation: word.translationRu, translationUz: word.translation };
+}

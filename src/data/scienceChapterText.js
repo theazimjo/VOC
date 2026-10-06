@@ -451,9 +451,6 @@ export const scienceChapterText = {
       [
         { type: 'p', text: "Insects have special mouth parts formed for chewing, sucking, or piercing — the kind of mouth parts an insect has depends on the food it eats. Beetles and grasshoppers, for example, eat leaves, so their mouths have parts that cut and chew. Butterflies and moths have mouth parts that suck up juices from flowers. Mosquitoes have mouth parts for piercing skin and sucking blood." },
         { type: 'p', text: "An insect's body is covered by an exoskeleton that does not grow as the insect grows. When the covering gets too small, the insect molts — to molt is to shed the hard outer covering. The exoskeleton splits down the middle, the insect works its way out, and once the old covering is shed, it forms a new exoskeleton." },
-        { type: 'image-group', images: [
-          { src: '/images/science/ch02/molting-exoskeleton.jpg', caption: 'Molting exoskeleton' }
-        ] }
       ],
       [
         { type: 'p', text: "Insects are both harmful and helpful. Some insects feed on other insects that destroy crops — the ladybug is an example of this kind of helpful insect. Many insects are also an important source of food for fish, birds, frogs, and other animals." },

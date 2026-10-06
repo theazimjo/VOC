@@ -111,6 +111,8 @@ export default function LoginPage() {
           return '/corp/super-admin';
         }
         if (identity.role === 'center_admin') return '/corp/admin';
+        // A center admin who last worked as a teacher (see utils/activeRole.js).
+        if (identity.realRole === 'center_admin' && identity.role === 'teacher') return '/corp/teacher';
         if (identity.role === 'teacher') {
           const activeProfile = getActiveProfile();
           if (!activeProfile) return '/choose-profile';

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, Plus, ChevronDown, Layers, GraduationCap, BookOpen, Settings, LogOut, Repeat } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+import RoleMenuItems from './RoleMenuItems';
 import { setActiveProfile } from '../../utils/activeProfile';
 import { useTeacherData } from '../../pages/corp/teacher/TeacherDataContext';
 import './CorpAdminTopbar.css';
@@ -146,6 +147,7 @@ export default function TeacherTopbar() {
               <button type="button" className="ca-topbar-menu-item" onClick={() => { setProfileOpen(false); setActiveProfile('personal'); navigate('/'); }}>
                 <Repeat size={15} /> Switch to personal mode
               </button>
+              <RoleMenuItems onClose={() => setProfileOpen(false)} />
               <button type="button" className="ca-topbar-menu-item is-danger" onClick={handleLogout}>
                 <LogOut size={15} /> Log out
               </button>

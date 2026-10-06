@@ -10,6 +10,7 @@ import '../../pages/corp/center-admin/theme.css';
 import '../../pages/corp/center-admin/uits.css';
 import '../../pages/corp/center-admin/vocabry.css';
 import { usePanelTheme } from '../../pages/corp/center-admin/usePanelTheme';
+import ViewAsBanner from './ViewAsBanner';
 
 // The corp identity (role/centerId/centerName/email) is resolved once by
 // CorpProtectedRoute and handed down via its <Outlet context={identity} />;
@@ -39,6 +40,7 @@ export default function CorpAdminLayout() {
         <CorpAdminSidebar />
 
         <main className="corp-admin-main-pane">
+          <ViewAsBanner identity={identity} />
           <CorpAdminTopbar centerName={centerName} email={email} />
           <Outlet context={{ centerId, centerName, email }} />
         </main>

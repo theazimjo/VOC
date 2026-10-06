@@ -3,6 +3,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { ref, get } from 'firebase/database';
 import { auth, db } from '../firebase';
 import { getActiveProfile } from '../utils/activeProfile';
+import { getActiveRole, getViewAs } from '../utils/activeRole';
 
 export const SUPER_ADMINS = ['azimjon29042006@gmail.com', 'azimjonxolmirzayev30@gmail.com'];
 
@@ -31,6 +32,23 @@ export async function resolveCorpIdentity(fbUser) {
   if (!fbUser) return null;
 
   if (fbUser.email && SUPER_ADMINS.includes(fbUser.email.toLowerCase())) {
+    // "View as": the super admin opened a center's admin or a teacher panel.
+    // Security rules already give this account full access, so only the
+    // identity the panels read changes.
+    const view = getViewAs();
+    if (view) {
+      return {
+        role: view.role,
+        centerId: view.centerId,
+        centerName: view.centerName || '',
+        ...(view.role === 'teacher' ? { teacherId: view.teacherId, teacherName: view.teacherName || '' } : {}),
+        email: fbUser.email,
+        uid: fbUser.uid,
+        viewAs: true,
+        realRole: 'super_admin',
+        roles: ['super_admin'],
+      };
+    }
     // A super admin's email can *also* hold a teacher role (self-service
     // "Become a Teacher" — being on the allowlist doesn't block that write).
     // Only surface the teacher
@@ -68,7 +86,13 @@ async function fetchCorpIdentity(fbUser) {
     const statusSnap = await get(ref(db, `centers/${roleData.centerId}/status`));
     if (statusSnap.exists() && statusSnap.val() === 'suspended') return null;
 
-    return { ...roleData, uid };
+    // A center admin who also teaches has a linked teacher record
+    // (corpUsers.teacherId): the account can act as either, per device.
+    const roles = roleData.role === 'center_admin' && roleData.teacherId ? ['center_admin', 'teacher'] : [roleData.role];
+    if (roles.includes('teacher') && roleData.role === 'center_admin' && getActiveRole() === 'teacher') {
+      return { ...roleData, role: 'teacher', realRole: 'center_admin', roles, uid };
+    }
+    return { ...roleData, roles, uid };
   } catch (err) {
     // Don't let a transient failure poison the cache for the rest of the TTL.
     identityCache.delete(uid);

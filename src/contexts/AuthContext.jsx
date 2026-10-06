@@ -13,6 +13,7 @@ import {
 } from 'firebase/auth';
 import { ref, set, get, update, increment } from 'firebase/database';
 import { auth, db, googleProvider } from '../firebase';
+import { clearActiveRole, clearViewAs } from '../utils/activeRole';
 
 const AuthContext = createContext(null);
 
@@ -177,6 +178,8 @@ export function AuthProvider({ children }) {
 
   const logout = async () => {
     localStorage.removeItem('voc_override_user');
+    clearViewAs();
+    clearActiveRole();
     if ('clearAppBadge' in navigator) {
       navigator.clearAppBadge().catch(() => {});
     }

@@ -7,7 +7,8 @@ import { getDecayedMastery, computeRetentionStats } from '@voc/memory-engine';
 import { getConfusionPairs } from '../../../../experiment/experimentDB';
 import { corpWordStorageId } from '../../../../utils/helpers';
 import { useStudentT } from '../../../../hooks/useStudentT';
-import { buildMonthsFromPacks } from './utils';
+import { useLanguage } from '../../../../contexts/LanguageContext';
+import { buildMonthsFromPacks, localizeWord } from './utils';
 import MonthsGridView from './views/MonthsGridView';
 import TopicsListView from './views/TopicsListView';
 import TopicDetailView from './views/TopicDetailView';
@@ -19,6 +20,7 @@ import './StudentCorpLearn.css';
 
 export default function StudentCorpLearn() {
   const { t } = useStudentT();
+  const { language } = useLanguage();
   const { user, membership, student, assignedPacks, additionalPacks, requiredPacks, homeworkList } = useOutletContext();
   const navigate = useNavigate();
   const { packId, monthId, unitId } = useParams();
@@ -121,9 +123,9 @@ export default function StudentCorpLearn() {
         ...w,
         ...dbStat
       };
-      return { ...merged, mastery: getDecayedMastery(merged) };
+      return localizeWord({ ...merged, mastery: getDecayedMastery(merged) }, language);
     });
-  }, [selectedUnit, dbWords]);
+  }, [selectedUnit, dbWords, language]);
 
   // Compute dynamic Memory Twin statistics based on spaced repetition stats
   const memoryTwin = useMemo(() => {

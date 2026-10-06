@@ -3,13 +3,15 @@ import { useNavigate, useOutletContext } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   ArrowRightLeft, LogOut, ChevronRight, Mail, User, Pencil, X, Check,
-  Moon, Type, Volume2, Globe
+  Moon, Type, Volume2, Globe,
+  Repeat,
 } from 'lucide-react';
 import { setAppMode, updateStudentProfile } from '../../../services/corpService';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useTheme } from '../../../contexts/ThemeContext';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import { useStudentT } from '../../../hooks/useStudentT';
+import { useRoleSwitch, ROLE_LABEL } from '../../../hooks/useRoleSwitch';
 import { useAvatar } from '../../../hooks/useAvatar';
 import './StudentCorpProfile.css';
 
@@ -31,6 +33,8 @@ export default function StudentCorpProfile() {
   const { theme, setTheme, fontSize, setFontSize, audioEnabled, setAudioEnabled, themes } = useTheme();
   const { language, setLanguage, languages } = useLanguage();
   const { t } = useStudentT();
+  const { roles: allRoles, switchTo } = useRoleSwitch();
+  const staffRoles = allRoles.filter((r) => r !== 'student');
   const themeName = (id, fallback) => (THEME_KEYS[id] ? t(THEME_KEYS[id]) : fallback);
 
   const [activeSheet, setActiveSheet] = useState(null); // 'theme', 'font', 'lang' or null
@@ -141,6 +145,21 @@ export default function StudentCorpProfile() {
                 <ChevronRight size={14} className="corp-profile-appearance-chevron" />
               </div>
             </div>
+
+            {staffRoles.map((r) => (
+              <div key={r} className="corp-profile-appearance-row" style={{ cursor: 'pointer' }} onClick={() => switchTo(r)}>
+                <div className="corp-profile-appearance-row-left">
+                  <div className="corp-profile-appearance-icon" style={{ background: '#101113' }}>
+                    <Repeat size={15} strokeWidth={2.2} />
+                  </div>
+                  <span className="corp-profile-appearance-title">{t('profile.switchRole')}</span>
+                </div>
+                <div className="corp-profile-appearance-right">
+                  <span className="corp-profile-appearance-detail">{ROLE_LABEL[r]}</span>
+                  <ChevronRight size={14} className="corp-profile-appearance-chevron" />
+                </div>
+              </div>
+            ))}
 
             <div className="corp-profile-appearance-row" style={{ cursor: 'pointer' }} onClick={() => setActiveSheet('lang')}>
               <div className="corp-profile-appearance-row-left">

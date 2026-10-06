@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { BookOpen, ChevronRight, Copy, Pencil, Plus, Trash2 } from 'lucide-react';
-import { deleteCustomPack, duplicateCustomPack } from '../../../services/corpService';
+import { createCustomPack, deleteCustomPack, duplicateCustomPack, updateCustomPack } from '../../../services/corpService';
+import { courseUpdates, LIBRARY_BOOK_IDS, LIBRARY_VERSION, libraryBookToCourse, monthsOf, syncCourseWithBook } from './courseEditing';
 import CourseEditor from './CourseEditor';
 import ConfirmSheet from '../../../components/corp/ConfirmSheet';
 import { Button, EmptyState, LoadingRows, Page, Row, SearchField, Section, Sheet } from '../super-admin/ui';
@@ -29,11 +30,45 @@ export default function AdminCourses() {
   // ?new=course — the topbar's "+" menu.
   useEffect(() => {
     if (searchParams.get('new') !== 'course') return;
-    setEditor({});
+    setChooser(true);
     setSearchParams({}, { replace: true });
   }, [searchParams, setSearchParams]);
   const [confirmDelete, setConfirmDelete] = useState(null);
   const [busy, setBusy] = useState(false);
+  const syncedRef = useRef(new Set());
+  const [chooser, setChooser] = useState(false); // "New course" menu: blank or a library book
+  const [books, setBooks] = useState(null); // system library books: null = loading
+  const [adding, setAdding] = useState(null); // id of the book being added
+
+  // The system library (Science, Health…) is big, so it loads only when the sheet opens.
+  useEffect(() => {
+    if (!chooser || books) return undefined;
+    let alive = true;
+    import('../../../data/marketData').then(({ marketPacks }) => {
+      if (alive) setBooks(marketPacks.filter((b) => LIBRARY_BOOK_IDS.includes(b.id)).map((b) => {
+        const topics = new Set((b.words || []).map((w) => w.topic).filter(Boolean));
+        return { id: b.id, name: b.name, icon: b.icon, color: b.color, level: b.level, description: b.description, chapters: topics.size, words: (b.words || []).length, book: b };
+      }));
+    }).catch(() => { if (alive) setBooks([]); });
+    return () => { alive = false; };
+  }, [chooser, books]);
+
+  const addBook = async (entry) => {
+    setAdding(entry.id);
+    try {
+      const course = libraryBookToCourse(entry.book);
+      const created = await createCustomPack(centerId, { title: course.title, level: course.level, description: course.description, language: 'en-US' });
+      const updates = { ...courseUpdates(course.months), libraryBook: entry.id, libraryVersion: LIBRARY_VERSION };
+      await updateCustomPack(centerId, created.id, updates);
+      putPack({ ...created, ...updates, wordsCount: updates.wordCount });
+      setChooser(false);
+      showToast(`"${course.title}" added — ${updates.sectionsCount} topics, ${updates.wordCount} words`);
+    } catch (err) {
+      showToast(`Error: ${err.message}`, 'error');
+    } finally {
+      setAdding(null);
+    }
+  };
 
   const managingId = searchParams.get('courseId');
   const managing = packs.find((p) => p.id === managingId) || null;
@@ -48,6 +83,33 @@ export default function AdminCourses() {
 
   const putPack = (pack) => patch((c) => ({ ...c, customPacks: { ...(c.customPacks || {}), [pack.id]: { ...(c.customPacks?.[pack.id] || {}), ...pack } } }));
   const open = (p) => setSearchParams({ courseId: p.id });
+
+  // Courses this center added from the library earlier get the newer words and
+  // Russian translations, once (the pack remembers which library version it has).
+  useEffect(() => {
+    if (loading || !centerId) return;
+    const names = new Map([['science', 'science'], ['health', 'health']]);
+    const todo = packs.filter((p) => !p.isSystem && (p.libraryVersion || 0) < LIBRARY_VERSION
+      && names.has(p.libraryBook || String(p.title || '').trim().toLowerCase()) && !syncedRef.current.has(p.id));
+    if (!todo.length) return;
+    todo.forEach((p) => syncedRef.current.add(p.id));
+    import('../../../data/marketData').then(async ({ marketPacks }) => {
+      for (const p of todo) {
+        const book = marketPacks.find((b) => b.id === (p.libraryBook || String(p.title).trim().toLowerCase()));
+        if (!book) continue;
+        const res = syncCourseWithBook(monthsOf(p, true), book);
+        if (!res.matched) continue; // not really a library copy
+        const updates = { ...courseUpdates(res.months), libraryBook: book.id, libraryVersion: LIBRARY_VERSION };
+        try {
+          await updateCustomPack(centerId, p.id, updates);
+          putPack({ ...p, ...updates, wordsCount: updates.wordCount });
+          if (res.added || res.filled) showToast(`"${p.title}" updated from the library: ${res.added} new words, ${res.filled} Russian translations`);
+        } catch (err) {
+          syncedRef.current.delete(p.id);
+        }
+      }
+    });
+  }, [loading, centerId, packs]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const duplicate = async (p) => {
     setMenuPack(null);
@@ -116,6 +178,34 @@ export default function AdminCourses() {
         )}
       </Sheet>
 
+      <Sheet open={chooser} onClose={() => !adding && setChooser(false)} title="New Course" en>
+        <Section>
+          <Row
+            icon={<Plus size={16} />}
+            iconTone="blue"
+            title="Blank course"
+            subtitle="Start empty and add your own topics and words"
+            onClick={adding ? undefined : () => { setChooser(false); setEditor({}); }}
+          />
+        </Section>
+        <p className="sa-section-footer">Or add a ready-made book from the system — a copy goes into your courses and can be edited freely.</p>
+        <Section>
+          {books === null ? <LoadingRows count={2} /> : books.map((b) => (
+            <Row
+              key={b.id}
+              icon={b.icon}
+              iconTone="gray"
+              title={b.name}
+              subtitle={packs.some((x) => !x.isSystem && x.title === b.name) ? `${b.chapters} chapters · ${b.words} words · already in your courses` : `${b.chapters} chapters · ${b.words} words`}
+              detail={adding === b.id ? 'Adding…' : packs.some((x) => !x.isSystem && x.title === b.name) ? 'Added' : undefined}
+              chevron={!packs.some((x) => !x.isSystem && x.title === b.name)}
+              onClick={adding || packs.some((x) => !x.isSystem && x.title === b.name) ? undefined : () => addBook(b)}
+            />
+          ))}
+          {books && books.length === 0 && <p className="sa-section-footer">The library couldn't be loaded.</p>}
+        </Section>
+      </Sheet>
+
       <PackEditorSheet
         isCourse
         en
@@ -176,7 +266,7 @@ export default function AdminCourses() {
               : packs.length > 0 && <span className="ca-list-count">{packs.length} {packs.length === 1 ? 'course' : 'courses'}</span>}
           </div>
           <div className="faculty-toolbar-right">
-            <button type="button" className="faculty-btn-invite" onClick={() => setEditor({})}>
+            <button type="button" className="faculty-btn-invite" onClick={() => setChooser(true)}>
               <Plus size={14} /> New Course
             </button>
           </div>
@@ -191,7 +281,7 @@ export default function AdminCourses() {
                 icon={<BookOpen size={40} />}
                 title="No courses yet"
                 text="Create a course, then add topics and import words from text or an Excel file."
-                action={<Button onClick={() => setEditor({})}>Add Course</Button>}
+                action={<Button onClick={() => setChooser(true)}>Add Course</Button>}
               />
             ) : (
               <EmptyState title="Nothing found" text="Try a different search." />
