@@ -1,13 +1,11 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useInView, useReducedMotion } from 'framer-motion';
 import { ArrowRight, ArrowUpRight, RotateCcw, FastForward } from 'lucide-react';
-import { useSiteLanguage } from '../../utils/useSiteLanguage';
 import { APP_VERSION_LABEL } from '../../utils/appVersion';
 import BetaBadge from '../../components/common/BetaBadge';
 import { CONTENT, EVIDENCE, EVIDENCE_POST, GROUP_ROWS, WORDS } from './landingContent';
 
-const LANGS = ['uz', 'ru', 'en'];
 import './LandingPage.css';
 
 /*
@@ -234,8 +232,7 @@ function EvidenceBars({ t }) {
 }
 
 export default function LandingPage() {
-  const { lang, setLanguage } = useSiteLanguage();
-  const t = useMemo(() => CONTENT[lang], [lang]);
+  const t = CONTENT.en;
   const reduce = useReducedMotion();
 
   const scrollTo = (id) => (e) => {
@@ -257,13 +254,6 @@ export default function LandingPage() {
           </a>
         </nav>
         <div className="lp-nav-end">
-          <div className="lp-lang" role="group" aria-label={t.langLabel}>
-            {LANGS.map((code) => (
-              <button key={code} type="button" className={lang === code ? 'is-on' : ''} aria-pressed={lang === code} onClick={() => setLanguage(code)}>
-                {code.toUpperCase()}
-              </button>
-            ))}
-          </div>
           <Link to="/login" className="lp-nav-login">{t.nav.login}</Link>
           <Link to="/register" className="lp-btn lp-btn--sm">{t.nav.start}</Link>
         </div>
