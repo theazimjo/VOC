@@ -8,7 +8,9 @@ import { Button, Field, LoadingRows, Page } from '../super-admin/ui';
 import { useIsDesktop } from '../super-admin/useIsDesktop';
 import { useToast } from '../super-admin/useToast';
 import GoogleLinkRows from '../super-admin/GoogleLinkRows';
+import ChangePasswordSheet from './ChangePasswordSheet';
 import { useCenterData } from './CenterDataContext';
+import AppearanceCard from './AppearanceCard';
 
 const TABS = [
   { id: 'center', label: 'Center', icon: Building2 },
@@ -23,6 +25,7 @@ export default function AdminSettings() {
   const { email } = useOutletContext() || {};
   const { logout } = useAuth();
   const [toastNode, showToast] = useToast();
+  const [passwordOpen, setPasswordOpen] = useState(false);
   const { centerId, center, centerName, loading, patch } = useCenterData();
 
   const [tab, setTab] = useState(() => {
@@ -132,6 +135,7 @@ export default function AdminSettings() {
 
       {tab === 'account' && (
         <div className="ca-stack">
+          <AppearanceCard />
           <section className="ca-card">
             <div className="ca-card-head">
               <div>
@@ -146,10 +150,19 @@ export default function AdminSettings() {
                   <span className="sa-row-detail">{email || '—'}</span>
                 </span>
               </div>
+              <button type="button" className="sa-row is-tappable" onClick={() => setPasswordOpen(true)}>
+                <span className="sa-row-icon tone-orange"><KeyRound size={16} /></span>
+                <span className="sa-row-body">
+                  <span className="sa-row-text">
+                    <span className="sa-row-title">Change password</span>
+                    <span className="sa-row-subtitle">Use a password to sign in with your email</span>
+                  </span>
+                </span>
+              </button>
               <GoogleLinkRows showToast={showToast} en />
             </div>
             <p className="sa-section-footer" style={{ marginTop: 10 }}>
-              Linking a Google account also lets you sign in with "Sign in with Google". If you forget your password, contact VOC support.
+              Linking a Google account also lets you sign in with "Sign in with Google". Forgot your password? Sign out and use "Forgot password" on the login page.
             </p>
           </section>
 
@@ -164,6 +177,8 @@ export default function AdminSettings() {
           </section>
         </div>
       )}
+
+      <ChangePasswordSheet open={passwordOpen} onClose={() => setPasswordOpen(false)} onDone={() => showToast('Password changed')} />
 
       <ConfirmSheet
         open={confirmLogout}

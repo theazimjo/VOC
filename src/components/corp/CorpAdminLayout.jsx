@@ -9,6 +9,7 @@ import '../../pages/corp/super-admin/sa.css';
 import '../../pages/corp/center-admin/theme.css';
 import '../../pages/corp/center-admin/uits.css';
 import '../../pages/corp/center-admin/vocabry.css';
+import { usePanelTheme } from '../../pages/corp/center-admin/usePanelTheme';
 
 // The corp identity (role/centerId/centerName/email) is resolved once by
 // CorpProtectedRoute and handed down via its <Outlet context={identity} />;
@@ -18,6 +19,7 @@ import '../../pages/corp/center-admin/vocabry.css';
 // CRM colors and corners on top (ca-theme, center-admin/theme.css).
 export default function CorpAdminLayout() {
   const identity = useOutletContext();
+  const theme = usePanelTheme();
 
   // Never fall back to a placeholder centerId — writes against a made-up id
   // create a nameless "ghost" center under centers/ (this happened with the
@@ -33,7 +35,7 @@ export default function CorpAdminLayout() {
       <SheetPlacementContext.Provider value="center">
       <PageStyleContext.Provider value="toolbar">
       <PanelLanguageContext.Provider value="en">
-      <div className="corp-admin-layout sa-layout ca-theme is-center-admin">
+      <div className={`corp-admin-layout sa-layout ca-theme is-center-admin${theme === 'dark' ? ' is-dark' : ''}`}>
         <CorpAdminSidebar />
 
         <main className="corp-admin-main-pane">

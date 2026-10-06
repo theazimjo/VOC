@@ -4,6 +4,7 @@ import { AlertCircle, CheckCircle2 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { resolveCorpIdentity } from '../../hooks/useCorpRole';
 import { getActiveProfile } from '../../utils/activeProfile';
+import { getCorpRole } from '../../services/corpService';
 import { getPendingJoinPath } from '../../utils/pendingJoin';
 import { useSiteLanguage } from '../../utils/useSiteLanguage';
 import { AuthShell, Field, GoogleIcon } from './AuthShell';
@@ -101,8 +102,14 @@ export default function LoginPage() {
     try {
       const identity = await resolveCorpIdentity(u);
       if (identity) {
-        // Super admins go straight to the admin panel.
-        if (identity.role === 'super_admin') return '/corp/super-admin';
+        if (identity.role === 'super_admin') {
+          // A super admin's email can also be a teacher at a center. Then let
+          // them pick (personal / teacher) like any dual-profile account instead
+          // of dropping them into the admin panel; otherwise go straight in.
+          const own = await getCorpRole(u.uid).catch(() => null);
+          if (own?.role === 'teacher') return getActiveProfile() ? '/' : '/choose-profile';
+          return '/corp/super-admin';
+        }
         if (identity.role === 'center_admin') return '/corp/admin';
         if (identity.role === 'teacher') {
           const activeProfile = getActiveProfile();

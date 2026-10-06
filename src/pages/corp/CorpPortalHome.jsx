@@ -7,6 +7,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useCorpRole } from '../../hooks/useCorpRole';
 import { useGroupMode } from '../../hooks/useGroupMode';
 import './CorpPortalHome.css';
+import './vocabry-public.css';
 
 export default function CorpPortalHome() {
   const { user } = useAuth();

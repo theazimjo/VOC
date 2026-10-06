@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { EmailAuthProvider, reauthenticateWithCredential, updatePassword } from 'firebase/auth';
 import {
   Archive, ChevronRight, KeyRound, LogOut, Repeat, Save, Settings as SettingsIcon, UserRound,
 } from 'lucide-react';
@@ -9,11 +8,12 @@ import { updateTeacherProfile } from '../../../services/corpService';
 import { useAuth } from '../../../contexts/AuthContext';
 import { setActiveProfile } from '../../../utils/activeProfile';
 import ConfirmSheet from '../../../components/corp/ConfirmSheet';
-import { Button, Field, Page, Sheet } from '../super-admin/ui';
-import { MIN_PASSWORD } from '../super-admin/SetPasswordSheet';
+import { Button, Field, Page } from '../super-admin/ui';
+import ChangePasswordSheet from '../center-admin/ChangePasswordSheet';
 import GoogleLinkRows from '../super-admin/GoogleLinkRows';
 import { useToast } from '../super-admin/useToast';
 import { useTeacherData } from './TeacherDataContext';
+import AppearanceCard from '../center-admin/AppearanceCard';
 
 const TABS = [
   { id: 'profile', label: 'Profile', icon: UserRound },
@@ -22,7 +22,7 @@ const TABS = [
 const TAB_KEY = 'voc_teacher_settings_tab';
 
 // Same layout as the center admin's settings: tabs in the toolbar, one card
-// per topic. No theme tab — the panel is always light, like center admin
+// per topic. Appearance (light/dark) lives on the Sign-in tab, shared with center admin
 // (TeacherLayout carries .is-center-admin).
 export default function TeacherSettings() {
   const navigate = useNavigate();
@@ -162,6 +162,7 @@ export default function TeacherSettings() {
 
       {tab === 'account' && (
         <div className="ca-stack">
+          <AppearanceCard />
           <section className="ca-card">
             <div className="ca-card-head">
               <div>
@@ -212,57 +213,5 @@ export default function TeacherSettings() {
 
       {toastNode}
     </Page>
-  );
-}
-
-// Firebase needs a recent sign-in to change a password, so ask for the
-// current one and re-authenticate first instead of failing with
-// "requires-recent-login".
-function ChangePasswordSheet({ open, onClose, onDone }) {
-  const [current, setCurrent] = useState('');
-  const [next, setNext] = useState('');
-  const [saving, setSaving] = useState(false);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    if (!open) return;
-    setCurrent('');
-    setNext('');
-    setError('');
-  }, [open]);
-
-  const submit = async (e) => {
-    e.preventDefault();
-    if (next.length < MIN_PASSWORD) return;
-    setSaving(true);
-    setError('');
-    try {
-      const user = auth.currentUser;
-      await reauthenticateWithCredential(user, EmailAuthProvider.credential(user.email, current));
-      await updatePassword(user, next);
-      onClose();
-      onDone();
-    } catch (err) {
-      setError(err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential'
-        ? 'The current password is wrong.'
-        : err.message);
-    } finally {
-      setSaving(false);
-    }
-  };
-
-  return (
-    <Sheet open={open} onClose={() => !saving && onClose()} title="Change Password">
-      <form onSubmit={submit}>
-        <Field label="Current password">
-          <input className="sa-input" type="password" autoComplete="current-password" required autoFocus value={current} onChange={(e) => setCurrent(e.target.value)} />
-        </Field>
-        <Field label="New password" hint={`At least ${MIN_PASSWORD} characters.`}>
-          <input className="sa-input" type="password" autoComplete="new-password" required value={next} onChange={(e) => setNext(e.target.value)} />
-        </Field>
-        {error && <p className="sa-flow-error">{error}</p>}
-        <Button type="submit" block disabled={saving || !current || next.length < MIN_PASSWORD}>{saving ? 'Saving...' : 'Change password'}</Button>
-      </form>
-    </Sheet>
   );
 }

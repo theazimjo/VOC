@@ -1,0 +1,114 @@
+/* ─────────────────────────────────────────────────────────────
+   Public / in-between pages in the VOCABRY landing look: warm concrete
+   ground, near-black ink, Barlow Condensed signage titles, Hanken Grotesk
+   body, amber as the accent, blue only on the main action.
+   Used by /join/:code, /join-teacher/:code, /choose-profile and /corp.
+   ───────────────────────────────────────────────────────────── */
+
+.join-page,
+.pc-page,
+.corp-layout-wrapper:has(.corp-home-container) {
+  --vp-ground: #e8e5dd;
+  --vp-paper: #f6f4ed;
+  --vp-ink: #101113;
+  --vp-ink-soft: #4a4c52;
+  --vp-line: rgba(16, 17, 19, 0.14);
+  --vp-amber: #ffb020;
+  --vp-display: 'Barlow Condensed', 'Arial Narrow', 'Roboto Condensed', sans-serif;
+  --vp-body: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--vp-ground);
+  color: var(--vp-ink);
+  font-family: var(--vp-body);
+}
+
+/* ── Join pages ── */
+.join-page .join-card {
+  background: var(--vp-paper);
+  border: 1px solid var(--vp-line);
+  border-radius: 16px;
+  box-shadow: 0 18px 50px rgba(16, 17, 19, 0.12);
+}
+.join-page .join-eyebrow { font-family: var(--vp-display); font-size: 0.95rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--vp-ink-soft); }
+.join-page .join-icon { background: var(--vp-ink); color: var(--vp-amber); border-radius: 12px; }
+.join-page .join-icon-error { background: rgba(255, 59, 48, 0.14); color: #d1271c; }
+.join-page .join-group-name,
+.join-page .join-title { font-family: var(--vp-display); font-size: 2rem; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; color: var(--vp-ink); }
+.join-page .join-group-level { background: #ebe8df; color: var(--vp-ink-soft); }
+.join-page .join-meta { background: #ebe8df; border-radius: 12px; }
+.join-page .join-meta-row, .join-text { color: var(--vp-ink-soft); }
+.join-page .join-btn { border-radius: 12px; font-family: var(--vp-body); }
+.join-page .join-btn-secondary { background: transparent; color: var(--vp-ink); border: 1px solid rgba(16, 17, 19, 0.25); }
+.join-page .join-account { color: var(--vp-ink-soft); }
+.join-page .join-account a { color: var(--vp-ink); text-decoration: underline; text-decoration-color: var(--vp-amber); text-underline-offset: 3px; }
+
+/* ── Profile chooser ── */
+.pc-page .pc-card {
+  background: var(--vp-paper);
+  border: 1px solid var(--vp-line);
+  border-radius: 16px;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: 0 18px 50px rgba(16, 17, 19, 0.12);
+}
+.pc-page .pc-title { font-family: var(--vp-display); font-size: 2rem; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; color: var(--vp-ink); }
+.pc-page .pc-subtitle { color: var(--vp-ink-soft); }
+.pc-page .pc-option { background: #fbfaf6; border: 1px solid var(--vp-line); border-radius: 14px; color: var(--vp-ink); }
+.pc-page .pc-option:hover:not(:disabled) { border-color: var(--vp-ink); }
+.pc-page .pc-option-icon,
+.pc-page .pc-option-icon-personal,
+.pc-page .pc-option-icon-teacher { background: var(--vp-ink); color: var(--vp-amber); border-radius: 12px; }
+.pc-page .pc-option-title { font-family: var(--vp-display); font-size: 1.25rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--vp-ink); }
+.pc-page .pc-option-desc { color: var(--vp-ink-soft); }
+
+/* ── /corp portal ── */
+.corp-layout-wrapper:has(.corp-home-container) .corp-nav-bar {
+  background: var(--vp-ink);
+  border-bottom: 0;
+  backdrop-filter: none;
+}
+.corp-layout-wrapper:has(.corp-home-container) .corp-logo-icon { background: var(--vp-amber); color: var(--vp-ink); }
+.corp-layout-wrapper:has(.corp-home-container) .brand-title { font-family: var(--vp-display); font-size: 1.4rem; letter-spacing: 0.06em; text-transform: uppercase; color: #f4f1e8; }
+.corp-layout-wrapper:has(.corp-home-container) .brand-tag { color: rgba(244, 241, 232, 0.6); }
+
+.corp-layout-wrapper .corp-hero-badge { background: var(--vp-ink); color: var(--vp-amber); border: 0; font-family: var(--vp-display); letter-spacing: 0.1em; text-transform: uppercase; }
+.corp-layout-wrapper .corp-hero h1 {
+  font-family: var(--vp-display);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--vp-ink);
+  background: none;
+  -webkit-text-fill-color: var(--vp-ink);
+}
+.corp-layout-wrapper .corp-hero p { color: var(--vp-ink-soft); }
+.corp-layout-wrapper .role-card,
+.corp-layout-wrapper .role-card.card-highlight,
+.corp-layout-wrapper .role-card.card-gold {
+  background: var(--vp-paper);
+  border: 1px solid var(--vp-line);
+  border-radius: 14px;
+  color: var(--vp-ink);
+}
+.corp-layout-wrapper .role-card:hover { border-color: var(--vp-ink); box-shadow: 0 14px 30px rgba(16, 17, 19, 0.12); }
+.corp-layout-wrapper .role-icon,
+.corp-layout-wrapper .role-icon.purple,
+.corp-layout-wrapper .role-icon.blue,
+.corp-layout-wrapper .role-icon.green,
+.corp-layout-wrapper .role-icon.gold { background: var(--vp-ink); color: var(--vp-amber); border-radius: 12px; }
+.corp-layout-wrapper .role-card h3 { font-family: var(--vp-display); font-size: 1.6rem; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; color: var(--vp-ink); }
+.corp-layout-wrapper .role-card p { color: var(--vp-ink-soft); }
+.corp-layout-wrapper .btn-role-action { background: var(--vp-ink); color: var(--vp-paper); border: 0; border-radius: 10px; }
+
+/* Page grounds + logo wordmark (beat the app-wide theme variables) */
+.join-page.join-page,
+.pc-page.pc-page { background: var(--vp-ground); color: var(--vp-ink); }
+.join-page .voc-logo-title,
+.pc-page .voc-logo-title {
+  background: none !important;
+  -webkit-text-fill-color: var(--vp-ink) !important;
+  color: var(--vp-ink) !important;
+  font-family: var(--vp-display);
+  font-size: 1.6rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}

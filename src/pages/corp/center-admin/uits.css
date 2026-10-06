@@ -243,7 +243,7 @@
   font-weight: 400;
   letter-spacing: 0;
   text-transform: none;
-  color: #4d5259;
+  color: var(--va-ink, #4d5259);
 }
 
 .ca-title-lg-icon {
@@ -789,7 +789,7 @@ button.ca-feed-item:hover {
 
 .ca-daterange-item.is-active {
   background: var(--sa-blue);
-  color: #fff;
+  color: var(--sa-surface, #fff);
 }
 
 /* ── Settings: tabs in the toolbar, two-column forms ── */
@@ -948,7 +948,7 @@ button.ca-feed-item:hover {
 .ca-choice-preview.is-dark span:first-child { background: #121315; border-color: #24262b; }
 .ca-choice-preview.is-dark span:last-child { background: #0c0d0e; }
 .ca-choice-preview.is-light span:first-child { background: #ffffff; border-color: #e4e4e7; }
-.ca-choice-preview.is-light span:last-child { background: #f8fafc; }
+.ca-choice-preview.is-light span:last-child { background: var(--va-sunk1, #f8fafc); }
 
 .ca-choice-name {
   display: flex;
@@ -2064,13 +2064,13 @@ button.ca-feed-item:hover {
 .is-center-admin .ca-preview-head .ca-card-title {
   font-size: 17px;
   font-weight: 600;
-  color: #4d5259;
+  color: var(--va-ink, #4d5259);
 }
 
 .is-center-admin .ca-preview-head .ca-card-sub {
   margin-top: 2px;
   font-size: 13px;
-  color: #8a9099;
+  color: var(--va-mute, #8a9099);
 }
 
 .is-center-admin .ca-preview .ca-tag,
@@ -2078,7 +2078,7 @@ button.ca-feed-item:hover {
   padding: 4px 10px;
   border: 0;
   border-radius: 999px;
-  background: #f1f3f5;
+  background: var(--va-sunk1, #f1f3f5);
   font-family: inherit;
   font-size: 12px;
   font-weight: 600;
@@ -2087,19 +2087,19 @@ button.ca-feed-item:hover {
 
 .is-center-admin .ca-preview .ca-tag.is-good,
 .is-center-admin .ca-import-summary .ca-tag.is-good {
-  background: #e7f6ec;
+  background: var(--va-tint-g, #e7f6ec);
   color: #1f8a3e;
 }
 
 .is-center-admin .ca-preview .ca-tag.is-warn,
 .is-center-admin .ca-import-summary .ca-tag.is-warn {
-  background: #fff4e0;
+  background: var(--va-tint-a, #fff4e0);
   color: #b26a00;
 }
 
 .is-center-admin .ca-preview .ca-tag.is-bad,
 .is-center-admin .ca-import-summary .ca-tag.is-bad {
-  background: #fdecec;
+  background: var(--va-tint-r, #fdecec);
   color: #c9302c;
 }
 
@@ -2109,13 +2109,13 @@ button.ca-feed-item:hover {
 
 .is-center-admin .ca-preview-table th {
   padding: 10px 14px;
-  background: #f7f8fa;
+  background: var(--va-sunk1, #f7f8fa);
   font-family: inherit;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0;
   text-transform: none;
-  color: #6b7280;
+  color: var(--va-mute, #6b7280);
 }
 
 .is-center-admin .ca-preview-table td {
@@ -2129,7 +2129,7 @@ button.ca-feed-item:hover {
 }
 
 .is-center-admin .ca-preview-table tbody tr:hover td {
-  background: #f9fafb;
+  background: var(--va-sunk1, #f9fafb);
 }
 
 .is-center-admin .ca-preview-table .is-word {
@@ -2137,7 +2137,7 @@ button.ca-feed-item:hover {
 }
 
 .is-center-admin .ca-preview-table .is-muted {
-  color: #8a9099;
+  color: var(--va-mute, #8a9099);
 }
 
 /* Status pill gets a leading dot. */
@@ -2175,7 +2175,7 @@ button.ca-feed-item:hover {
   padding: 14px 16px;
   border: 1px solid #e6e8eb;
   border-radius: 10px;
-  background: #f8f9fb;
+  background: var(--va-sunk1, #f8f9fb);
 }
 
 .is-center-admin .ca-example-head {
@@ -2184,12 +2184,12 @@ button.ca-feed-item:hover {
   font-weight: 600;
   letter-spacing: 0;
   text-transform: none;
-  color: #6b7280;
+  color: var(--va-mute, #6b7280);
 }
 
 .is-center-admin .ca-example pre {
   padding: 10px 12px;
-  border: 1px solid #eceef1;
+  border: 1px solid var(--va-line, #eceef1);
   border-radius: 8px;
   background: var(--va-paper, #ffffff);
   font-size: 12.5px;
@@ -2215,7 +2215,7 @@ button.ca-feed-item:hover {
   padding: 32px 20px;
   border: 1.5px dashed #cfd4da;
   border-radius: 12px;
-  background: #fafbfc;
+  background: var(--va-sunk1, #fafbfc);
 }
 
 .is-center-admin .ca-drop > svg {
@@ -2272,7 +2272,7 @@ button.ca-feed-item:hover {
 .ca-tool-btn.is-primary {
   border-color: var(--sa-blue);
   background: var(--sa-blue);
-  color: #ffffff;
+  color: var(--sa-surface, #fff);
 }
 
 .ca-tool-btn.is-primary:hover {
@@ -2751,7 +2751,7 @@ button.ca-feed-item:hover {
 
 .faculty-btn-delete:hover:not(:disabled) {
   border-color: #ef4444;
-  background: #fef2f2;
+  background: var(--va-tint-r, #fef2f2);
   color: #dc2626;
 }
 
@@ -3241,7 +3241,7 @@ button.ca-feed-item:hover {
   gap: 5px;
   padding: 3px 10px;
   border-radius: 12px;
-  background: #fdf1e0;
+  background: var(--va-tint-a, #fdf1e0);
   color: #b45309;
   font-size: 12px;
   font-weight: 600;
@@ -3337,7 +3337,7 @@ button.ca-feed-item:hover {
 .teacher-empty-sub {
   margin: 0 0 20px;
   font-size: 13px;
-  color: #64748b;
+  color: var(--va-mute, #64748b);
 }
 
 .teacher-add-class-btn {
@@ -3463,7 +3463,7 @@ button.ca-feed-item:hover {
   margin-bottom: 12px;
   font-size: 15px;
   font-weight: 700;
-  color: #334155;
+  color: var(--va-ink, #334155);
 }
 
 .teacher-role-cards-grid {
@@ -3480,7 +3480,7 @@ button.ca-feed-item:hover {
   justify-content: center;
   height: 116px;
   padding: 14px;
-  border: 1.5px solid #cbd5e1;
+  border: 1.5px solid var(--va-line, #cbd5e1);
   border-radius: 10px;
   background: var(--va-paper, #ffffff);
   cursor: pointer;
@@ -3490,7 +3490,7 @@ button.ca-feed-item:hover {
 
 .teacher-role-card:hover {
   border-color: #3b82f6;
-  background: #f8fafc;
+  background: var(--va-sunk1, #f8fafc);
 }
 
 .teacher-role-card.is-selected.role-teacher {
@@ -3557,7 +3557,7 @@ button.ca-feed-item:hover {
   margin-bottom: 6px;
   font-size: 13px;
   font-weight: 700;
-  color: #475569;
+  color: var(--va-ink, #475569);
 }
 
 .req-star {
@@ -3569,10 +3569,10 @@ button.ca-feed-item:hover {
   width: 100%;
   height: 42px;
   padding: 0 14px;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--va-line, #cbd5e1);
   border-radius: 8px;
   background: #eceff1;
-  color: #334155;
+  color: var(--va-ink, #334155);
   font-size: 14px;
   font-weight: 600;
   outline: none;
@@ -3590,16 +3590,16 @@ button.ca-feed-item:hover {
   justify-content: space-between;
   margin-top: 28px;
   padding-top: 18px;
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid var(--va-line, #f1f5f9);
 }
 
 .teacher-info-btn-cancel {
   height: 38px;
   padding: 0 20px;
-  border: 1.5px solid #cbd5e1;
+  border: 1.5px solid var(--va-line, #cbd5e1);
   border-radius: 8px;
   background: var(--va-paper, #ffffff);
-  color: #475569;
+  color: var(--va-ink, #475569);
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
@@ -3607,7 +3607,7 @@ button.ca-feed-item:hover {
 }
 
 .teacher-info-btn-cancel:hover {
-  background: #f8fafc;
+  background: var(--va-sunk1, #f8fafc);
   border-color: #94a3b8;
 }
 
@@ -3668,12 +3668,12 @@ button.ca-feed-item:hover {
   width: 34px;
   height: 34px;
   border-radius: 8px;
-  background: #e8f1fe;
+  background: var(--va-tint-b, #e8f1fe);
   color: #2563eb;
 }
 
 .ca-course-icon.is-system {
-  background: #f1ebfd;
+  background: var(--va-tint-b, #f1ebfd);
   color: #7c3aed;
 }
 
@@ -3697,15 +3697,15 @@ button.ca-feed-item:hover {
   padding: 2px 8px;
   border: none;
   border-radius: 999px;
-  background: #f1f3f5;
+  background: var(--va-sunk1, #f1f3f5);
   font-family: inherit;
   font-size: 11px;
   font-weight: 600;
-  color: #5b6470;
+  color: var(--va-mute, #5b6470);
 }
 
 .ca-course-card .ca-tag.is-warn {
-  background: #fff4e0;
+  background: var(--va-tint-a, #fff4e0);
   color: #b26a00;
 }
 
@@ -3740,12 +3740,12 @@ button.ca-feed-item:hover {
 }
 
 .ca-row-action:hover {
-  background: #eef2f7;
+  background: var(--va-sunk1, #eef2f7);
   color: var(--sa-label, #0f172a);
 }
 
 .ca-row-action.is-danger:hover {
-  background: #fdecec;
+  background: var(--va-tint-r, #fdecec);
   color: #dc2626;
 }
 
@@ -3782,10 +3782,10 @@ button.ca-feed-item:hover {
   width: 26px;
   height: 26px;
   border-radius: 999px;
-  background: #eef2f7;
+  background: var(--va-sunk1, #eef2f7);
   font-size: 12px;
   font-weight: 700;
-  color: #475569;
+  color: var(--va-ink, #475569);
 }
 
 .ca-topic-sub {
@@ -3835,7 +3835,7 @@ button.ca-feed-item:hover {
   padding: 6px 6px 6px 12px;
   border: 1.5px dashed #cfd4da;
   border-radius: 10px;
-  background: #fbfcfd;
+  background: var(--va-sunk1, #fbfcfd);
   transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
 }
 
@@ -3867,12 +3867,12 @@ button.ca-feed-item:hover {
 }
 
 .ca-quick-add-input + .ca-quick-add-input {
-  border-left: 1px solid #e3e7ec;
+  border-left: 1px solid var(--va-line, #e3e7ec);
   border-radius: 0;
 }
 
 .ca-quick-add-input::placeholder {
-  color: #9aa3ad;
+  color: var(--va-mute, #9aa3ad);
 }
 
 .ca-quick-add-btn {
@@ -3882,7 +3882,7 @@ button.ca-feed-item:hover {
   border: none;
   border-radius: 7px;
   background: #e8eef7;
-  color: #64748b;
+  color: var(--va-mute, #64748b);
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -3921,7 +3921,7 @@ button.ca-feed-item:hover {
 
   .ca-quick-add-input + .ca-quick-add-input {
     border-left: none;
-    border-top: 1px solid #e3e7ec;
+    border-top: 1px solid var(--va-line, #e3e7ec);
     flex-basis: 100%;
   }
 }
@@ -3971,7 +3971,7 @@ button.ca-feed-item:hover {
   display: block;
   margin: 6px 0 0 58px;
   font-size: 13px;
-  color: #8a9099;
+  color: var(--va-mute, #8a9099);
 }
 
 .ca-dash-head-actions {
@@ -3986,10 +3986,10 @@ button.ca-feed-item:hover {
   gap: 7px;
   height: 36px;
   padding: 0 14px;
-  border: 1px solid #dfe3e8;
+  border: 1px solid var(--va-line, #dfe3e8);
   border-radius: 8px;
   background: var(--va-paper, #ffffff);
-  color: #3f4650;
+  color: var(--va-ink, #3f4650);
   font: inherit;
   font-size: 13px;
   font-weight: 600;
@@ -3999,7 +3999,7 @@ button.ca-feed-item:hover {
 
 .ca-dash-btn:hover:not(:disabled) {
   border-color: #c9d0d8;
-  background: #f7f8fa;
+  background: var(--va-sunk1, #f7f8fa);
 }
 
 .ca-dash-btn:active:not(:disabled) {
@@ -4029,7 +4029,7 @@ button.ca-feed-item:hover {
   flex-direction: column;
   gap: 10px;
   padding: 18px 20px;
-  border: 1px solid #e6e9ed;
+  border: 1px solid var(--va-line, #e6e9ed);
   border-radius: 12px;
   background: var(--va-paper, #ffffff);
   box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
@@ -4051,15 +4051,15 @@ button.ca-feed-item:hover {
   border-radius: 9px;
 }
 
-.tone-blue.ca-dash-tile-icon { background: #e8f1fe; color: #2563eb; }
-.tone-purple.ca-dash-tile-icon { background: #f1ebfd; color: #7c3aed; }
-.tone-green.ca-dash-tile-icon { background: #e7f6ec; color: #1f8a3e; }
-.tone-orange.ca-dash-tile-icon { background: #fff4e0; color: #c26a00; }
+.tone-blue.ca-dash-tile-icon { background: var(--va-tint-b, #e8f1fe); color: #2563eb; }
+.tone-purple.ca-dash-tile-icon { background: var(--va-tint-b, #f1ebfd); color: #7c3aed; }
+.tone-green.ca-dash-tile-icon { background: var(--va-tint-g, #e7f6ec); color: #1f8a3e; }
+.tone-orange.ca-dash-tile-icon { background: var(--va-tint-a, #fff4e0); color: #c26a00; }
 
 .ca-dash-tile-label {
   font-size: 13px;
   font-weight: 600;
-  color: #5b6470;
+  color: var(--va-mute, #5b6470);
 }
 
 .ca-dash-tile-value {
@@ -4072,20 +4072,20 @@ button.ca-feed-item:hover {
   line-height: 1.15;
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
-  color: #1f2530;
+  color: var(--va-ink, #1f2530);
 }
 
 .ca-dash-tile-suffix {
   font-size: 16px;
   font-weight: 600;
   letter-spacing: 0;
-  color: #9aa3ad;
+  color: var(--va-mute, #9aa3ad);
 }
 
 .ca-dash-tile-foot {
   margin-top: auto;
   font-size: 12px;
-  color: #8a9099;
+  color: var(--va-mute, #8a9099);
 }
 
 .ca-dash-skeleton {
@@ -4093,7 +4093,7 @@ button.ca-feed-item:hover {
   width: 70px;
   height: 28px;
   border-radius: 6px;
-  background: linear-gradient(90deg, #eef1f4, #f7f8fa, #eef1f4);
+  background: linear-gradient(90deg, var(--va-sunk2, #eef1f4), var(--va-sunk4, #f7f8fa), var(--va-sunk2, #eef1f4));
   background-size: 200% 100%;
   animation: caDashShimmer 1.2s ease-in-out infinite;
 }
@@ -4107,7 +4107,7 @@ button.ca-feed-item:hover {
   height: 6px;
   overflow: hidden;
   border-radius: 999px;
-  background: #eef1f4;
+  background: var(--va-sunk1, #eef1f4);
 }
 
 .ca-dash-bar span {
@@ -4128,7 +4128,7 @@ button.ca-feed-item:hover {
 .ca-dash-stack .is-low,
 .ca-dash-legend-dot.is-low { background: #ef4444; }
 .ca-dash-stack .is-none,
-.ca-dash-legend-dot.is-none { background: #d5dae0; }
+.ca-dash-legend-dot.is-none { background: var(--va-sunk1, #d5dae0); }
 
 .ca-dash-card {
   border-radius: 12px;
@@ -4156,14 +4156,14 @@ button.ca-feed-item:hover {
   margin: 0;
   font-size: 16px;
   font-weight: 700;
-  color: #2b313a;
+  color: var(--va-ink, #2b313a);
 }
 
 .ca-dash-card-sub {
   display: block;
   margin-top: 3px;
   font-size: 13px;
-  color: #8a9099;
+  color: var(--va-mute, #8a9099);
 }
 
 .ca-dash-link {
@@ -4190,7 +4190,7 @@ button.ca-feed-item:hover {
   height: 14px;
   overflow: hidden;
   border-radius: 999px;
-  background: #eef1f4;
+  background: var(--va-sunk1, #eef1f4);
 }
 
 .ca-dash-stack span {
@@ -4226,14 +4226,14 @@ button.ca-feed-item:hover {
   min-width: 0;
   font-size: 13px;
   font-weight: 600;
-  color: #3f4650;
+  color: var(--va-ink, #3f4650);
 }
 
 .ca-dash-legend-label small,
 .ca-dash-legend-value small {
   font-size: 11px;
   font-weight: 500;
-  color: #9aa3ad;
+  color: var(--va-mute, #9aa3ad);
 }
 
 .ca-dash-legend-value {
@@ -4243,7 +4243,7 @@ button.ca-feed-item:hover {
   font-size: 15px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
-  color: #1f2530;
+  color: var(--va-ink, #1f2530);
 }
 
 .ca-dash-table-head,
@@ -4257,23 +4257,23 @@ button.ca-feed-item:hover {
 
 .ca-dash-table-head {
   height: 38px;
-  border-top: 1px solid #eef1f4;
-  border-bottom: 1px solid #eef1f4;
-  background: #f7f8fa;
+  border-top: 1px solid var(--va-line, #eef1f4);
+  border-bottom: 1px solid var(--va-line, #eef1f4);
+  background: var(--va-sunk1, #f7f8fa);
   font-size: 12px;
   font-weight: 600;
-  color: #6b7280;
+  color: var(--va-mute, #6b7280);
 }
 
 .ca-dash-table-row {
   width: 100%;
   min-height: 58px;
   border: none;
-  border-bottom: 1px solid #f1f3f5;
+  border-bottom: 1px solid var(--va-line, #f1f3f5);
   background: var(--va-paper, #ffffff);
   font: inherit;
   font-size: 14px;
-  color: #2b313a;
+  color: var(--va-ink, #2b313a);
   text-align: left;
   cursor: pointer;
   transition: background-color 0.12s ease;
@@ -4284,7 +4284,7 @@ button.ca-feed-item:hover {
 }
 
 .ca-dash-table-row:hover {
-  background: #f9fafb;
+  background: var(--va-sunk1, #f9fafb);
 }
 
 .ca-dash-table-row:focus-visible {
@@ -4307,12 +4307,12 @@ button.ca-feed-item:hover {
   border-radius: 999px;
   font-size: 12px;
   font-weight: 700;
-  color: #8a9099;
+  color: var(--va-mute, #8a9099);
 }
 
-.ca-dash-rank.is-1 { background: #fff4d6; color: #a86b00; }
-.ca-dash-rank.is-2 { background: #eef1f4; color: #5b6470; }
-.ca-dash-rank.is-3 { background: #fbeee4; color: #a4582a; }
+.ca-dash-rank.is-1 { background: var(--va-tint-a, #fff4d6); color: #a86b00; }
+.ca-dash-rank.is-2 { background: var(--va-sunk1, #eef1f4); color: var(--va-mute, #5b6470); }
+.ca-dash-rank.is-3 { background: var(--va-tint-a, #fbeee4); color: #a4582a; }
 
 .ca-dash-student {
   display: flex;
@@ -4340,11 +4340,11 @@ button.ca-feed-item:hover {
   font-weight: 700;
 }
 
-.ca-dash-avatar.tone-blue { background: #e8f1fe; color: #2563eb; }
-.ca-dash-avatar.tone-green { background: #e7f6ec; color: #1f8a3e; }
-.ca-dash-avatar.tone-purple { background: #f1ebfd; color: #7c3aed; }
-.ca-dash-avatar.tone-orange { background: #fff4e0; color: #c26a00; }
-.ca-dash-avatar.tone-pink { background: #fdebf3; color: #c2296f; }
+.ca-dash-avatar.tone-blue { background: var(--va-tint-b, #e8f1fe); color: #2563eb; }
+.ca-dash-avatar.tone-green { background: var(--va-tint-g, #e7f6ec); color: #1f8a3e; }
+.ca-dash-avatar.tone-purple { background: var(--va-tint-b, #f1ebfd); color: #7c3aed; }
+.ca-dash-avatar.tone-orange { background: var(--va-tint-a, #fff4e0); color: #c26a00; }
+.ca-dash-avatar.tone-pink { background: var(--va-tint-b, #fdebf3); color: #c2296f; }
 .ca-dash-avatar.tone-teal { background: #e3f6f5; color: #0f8a83; }
 
 .ca-dash-chip {
@@ -4353,10 +4353,10 @@ button.ca-feed-item:hover {
   padding: 3px 10px;
   overflow: hidden;
   border-radius: 999px;
-  background: #f1f3f5;
+  background: var(--va-sunk1, #f1f3f5);
   font-size: 12px;
   font-weight: 600;
-  color: #5b6470;
+  color: var(--va-mute, #5b6470);
   text-overflow: ellipsis;
   white-space: nowrap;
   vertical-align: middle;
@@ -4364,7 +4364,7 @@ button.ca-feed-item:hover {
 
 .ca-dash-muted {
   font-size: 13px;
-  color: #8a9099;
+  color: var(--va-mute, #8a9099);
 }
 
 .ca-dash-mastery {
@@ -4383,7 +4383,7 @@ button.ca-feed-item:hover {
   font-size: 13px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
-  color: #3f4650;
+  color: var(--va-ink, #3f4650);
 }
 
 .ca-dash-empty {
@@ -4392,20 +4392,20 @@ button.ca-feed-item:hover {
   align-items: center;
   gap: 8px;
   padding: 40px 24px 48px;
-  border-top: 1px solid #eef1f4;
+  border-top: 1px solid var(--va-line, #eef1f4);
   text-align: center;
 }
 
 .ca-dash-empty b {
   font-size: 15px;
-  color: #3f4650;
+  color: var(--va-ink, #3f4650);
 }
 
 .ca-dash-empty-text {
   max-width: 380px;
   font-size: 13px;
   line-height: 1.5;
-  color: #8a9099;
+  color: var(--va-mute, #8a9099);
 }
 
 @media (max-width: 1100px) {
@@ -4466,17 +4466,17 @@ button.ca-feed-item:hover {
 }
 
 .ca-course-icon.is-own {
-  background: #e7f6ec;
+  background: var(--va-tint-g, #e7f6ec);
   color: #1f8a3e;
 }
 
 .ca-course-icon.is-archived {
-  background: #f1f3f5;
-  color: #6b7280;
+  background: var(--va-sunk1, #f1f3f5);
+  color: var(--va-mute, #6b7280);
 }
 
 .courses-table .ca-tag.is-own {
-  background: #e7f6ec;
+  background: var(--va-tint-g, #e7f6ec);
   color: #1f8a3e;
 }
 
@@ -4549,11 +4549,11 @@ button.ca-feed-item:hover {
 .ca-group-head-badge {
   padding: 3px 10px;
   border-radius: 999px;
-  background: #f1f3f5;
+  background: var(--va-sunk1, #f1f3f5);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0;
-  color: #5b6470;
+  color: var(--va-mute, #5b6470);
 }
 
 .ca-group-head-meta {
@@ -4596,7 +4596,7 @@ button.ca-feed-item:hover {
   gap: 8px;
   height: 36px;
   padding: 0 6px 0 12px;
-  border: 1px solid #dfe3e8;
+  border: 1px solid var(--va-line, #dfe3e8);
   border-radius: 8px;
   background: var(--va-paper, #ffffff);
   font: inherit;
@@ -4606,7 +4606,7 @@ button.ca-feed-item:hover {
 
 .ca-group-code-pill:hover {
   border-color: #93c5fd;
-  background: #f5f9ff;
+  background: var(--va-tint-b, #f5f9ff);
 }
 
 .ca-group-code-pill:active {
@@ -4616,7 +4616,7 @@ button.ca-feed-item:hover {
 .ca-group-code-pill-label {
   font-size: 12px;
   font-weight: 600;
-  color: #8a9099;
+  color: var(--va-mute, #8a9099);
 }
 
 .ca-group-code-pill-value {
@@ -4624,7 +4624,7 @@ button.ca-feed-item:hover {
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #1f2530;
+  color: var(--va-ink, #1f2530);
 }
 
 .ca-group-code-pill-icon {
@@ -4634,7 +4634,7 @@ button.ca-feed-item:hover {
   width: 24px;
   height: 24px;
   border-radius: 6px;
-  background: #e8f1fe;
+  background: var(--va-tint-b, #e8f1fe);
   color: #2563eb;
 }
 
@@ -4652,15 +4652,15 @@ button.ca-feed-item:hover {
   min-width: 20px;
   padding: 1px 7px;
   border-radius: 999px;
-  background: #f1f3f5;
+  background: var(--va-sunk1, #f1f3f5);
   font-size: 11px;
   font-weight: 600;
   text-align: center;
-  color: #5b6470;
+  color: var(--va-mute, #5b6470);
 }
 
 .teacher-nav-tab.is-active .ca-nav-count {
-  background: #e8f1fe;
+  background: var(--va-tint-b, #e8f1fe);
   color: #2563eb;
 }
 
@@ -4671,11 +4671,11 @@ button.ca-feed-item:hover {
   gap: 6px;
   padding: 3px 10px;
   border-radius: 999px;
-  background: #f1f3f5;
+  background: var(--va-sunk1, #f1f3f5);
   font-size: 12px;
   font-weight: 600;
   white-space: nowrap;
-  color: #5b6470;
+  color: var(--va-mute, #5b6470);
 }
 
 .ca-pill::before {
@@ -4686,10 +4686,10 @@ button.ca-feed-item:hover {
   background: currentColor;
 }
 
-.ca-pill.is-green { background: #e7f6ec; color: #1f8a3e; }
-.ca-pill.is-orange { background: #fff4e0; color: #b26a00; }
-.ca-pill.is-red { background: #fdecec; color: #c62828; }
-.ca-pill.is-gray { background: #f1f3f5; color: #6b7280; }
+.ca-pill.is-green { background: var(--va-tint-g, #e7f6ec); color: #1f8a3e; }
+.ca-pill.is-orange { background: var(--va-tint-a, #fff4e0); color: #b26a00; }
+.ca-pill.is-red { background: var(--va-tint-r, #fdecec); color: #c62828; }
+.ca-pill.is-gray { background: var(--va-sunk1, #f1f3f5); color: var(--va-mute, #6b7280); }
 
 /* Filter pills (status filter, "only errors") */
 .ca-filter-pills {
@@ -4704,13 +4704,13 @@ button.ca-feed-item:hover {
   gap: 6px;
   height: 32px;
   padding: 0 12px;
-  border: 1px solid #dfe3e8;
+  border: 1px solid var(--va-line, #dfe3e8);
   border-radius: 999px;
   background: var(--va-paper, #ffffff);
   font: inherit;
   font-size: 13px;
   font-weight: 600;
-  color: #3f4650;
+  color: var(--va-ink, #3f4650);
   cursor: pointer;
   transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease;
 }
@@ -4731,7 +4731,7 @@ button.ca-feed-item:hover {
 
 .ca-filter-count {
   font-weight: 500;
-  color: #8a9099;
+  color: var(--va-mute, #8a9099);
 }
 
 .ca-filter-dot {
@@ -4783,7 +4783,7 @@ button.ca-feed-item:hover {
   width: 100%;
   padding: 12px 16px;
   border: none;
-  border-top: 1px solid #f1f3f5;
+  border-top: 1px solid var(--va-line, #f1f3f5);
   background: none;
   font: inherit;
   text-align: left;
@@ -4791,7 +4791,7 @@ button.ca-feed-item:hover {
 }
 
 .ca-mobile-row:active {
-  background: #f7f8fa;
+  background: var(--va-sunk1, #f7f8fa);
 }
 
 .ca-mobile-row-main {
@@ -4808,7 +4808,7 @@ button.ca-feed-item:hover {
 }
 
 .ca-hwx {
-  border-top: 1px solid #eef1f4;
+  border-top: 1px solid var(--va-line, #eef1f4);
 }
 
 .ca-hwx-head {
@@ -4827,7 +4827,7 @@ button.ca-feed-item:hover {
 }
 
 .ca-hwx-head:hover {
-  background: #f9fafb;
+  background: var(--va-sunk1, #f9fafb);
 }
 
 .ca-hwx-icon {
@@ -4837,7 +4837,7 @@ button.ca-feed-item:hover {
   width: 36px;
   height: 36px;
   border-radius: 9px;
-  background: #fff4e0;
+  background: var(--va-tint-a, #fff4e0);
   color: #c26a00;
 }
 
@@ -4853,7 +4853,7 @@ button.ca-feed-item:hover {
   font-weight: 600;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #1f2530;
+  color: var(--va-ink, #1f2530);
 }
 
 .ca-hwx-progress {
@@ -4869,7 +4869,7 @@ button.ca-feed-item:hover {
   height: 8px;
   overflow: hidden;
   border-radius: 999px;
-  background: #eef1f4;
+  background: var(--va-sunk1, #eef1f4);
 }
 
 .ca-hwx-stack span {
@@ -4882,14 +4882,14 @@ button.ca-feed-item:hover {
 .ca-hwx-stack .is-started,
 .ca-hwx-legend i.is-started { background: #f59e0b; }
 .ca-hwx-stack .is-none,
-.ca-hwx-legend i.is-none { background: #d5dae0; }
+.ca-hwx-legend i.is-none { background: var(--va-sunk1, #d5dae0); }
 
 .ca-hwx-legend {
   display: flex;
   flex-wrap: wrap;
   gap: 4px 12px;
   font-size: 12px;
-  color: #6b7280;
+  color: var(--va-mute, #6b7280);
 }
 
 .ca-hwx-legend span {
@@ -4909,14 +4909,14 @@ button.ca-feed-item:hover {
   font-weight: 700;
   text-align: right;
   font-variant-numeric: tabular-nums;
-  color: #8a9099;
+  color: var(--va-mute, #8a9099);
 }
 
 .ca-hwx-rate.is-good { color: #1f8a3e; }
 .ca-hwx-rate.is-mid { color: #b26a00; }
 
 .ca-hwx-chevron {
-  color: #9aa3ad;
+  color: var(--va-mute, #9aa3ad);
   transition: transform 0.2s ease;
 }
 
@@ -4946,12 +4946,12 @@ button.ca-feed-item:hover {
 
 .ca-hwx-person {
   padding: 4px 10px;
-  border: 1px solid #e6e9ed;
+  border: 1px solid var(--va-line, #e6e9ed);
   border-radius: 8px;
   background: var(--va-paper, #ffffff);
   font: inherit;
   font-size: 13px;
-  color: #2b313a;
+  color: var(--va-ink, #2b313a);
   cursor: pointer;
 }
 
@@ -4966,7 +4966,7 @@ button.ca-feed-item:hover {
 
 /* Topics */
 .ca-topicx + .ca-topicx {
-  border-top: 1px solid #eef1f4;
+  border-top: 1px solid var(--va-line, #eef1f4);
 }
 
 .ca-topicx-table .faculty-table-row {
@@ -4979,13 +4979,13 @@ button.ca-feed-item:hover {
 
 .ca-topicx-name {
   font-weight: 600;
-  color: #2b313a;
+  color: var(--va-ink, #2b313a);
 }
 
 .ca-topicx-meta {
   font-size: 13px;
   text-align: right;
-  color: #8a9099;
+  color: var(--va-mute, #8a9099);
 }
 
 /* Progress — six mastery buckets */
@@ -5010,7 +5010,7 @@ button.ca-feed-item:hover {
   height: 44px;
   flex-shrink: 0;
   border-radius: 999px;
-  background: #e8f1fe;
+  background: var(--va-tint-b, #e8f1fe);
   font-size: 18px;
   font-weight: 700;
   color: #2563eb;
@@ -5025,7 +5025,7 @@ button.ca-feed-item:hover {
 .ca-st-name {
   font-size: 16px;
   font-weight: 700;
-  color: #1f2530;
+  color: var(--va-ink, #1f2530);
 }
 
 .ca-st-stats {
@@ -5040,7 +5040,7 @@ button.ca-feed-item:hover {
   flex-direction: column;
   gap: 6px;
   padding: 12px;
-  border: 1px solid #e6e9ed;
+  border: 1px solid var(--va-line, #e6e9ed);
   border-radius: 10px;
   background: var(--va-paper, #ffffff);
 }
@@ -5048,14 +5048,14 @@ button.ca-feed-item:hover {
 .ca-st-stat-label {
   font-size: 12px;
   font-weight: 600;
-  color: #6b7280;
+  color: var(--va-mute, #6b7280);
 }
 
 .ca-st-stat-value {
   font-size: 20px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
-  color: #1f2530;
+  color: var(--va-ink, #1f2530);
 }
 
 .ca-st-stat-value.is-text {
@@ -5065,7 +5065,7 @@ button.ca-feed-item:hover {
 .ca-st-pack {
   margin-bottom: 16px;
   padding: 14px;
-  border: 1px solid #e6e9ed;
+  border: 1px solid var(--va-line, #e6e9ed);
   border-radius: 10px;
   background: var(--va-paper, #ffffff);
 }
@@ -5079,7 +5079,7 @@ button.ca-feed-item:hover {
 .ca-st-pack-title {
   font-size: 14px;
   font-weight: 700;
-  color: #1f2530;
+  color: var(--va-ink, #1f2530);
 }
 
 .ca-st-risk {
@@ -5104,7 +5104,7 @@ button.ca-feed-item:hover {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #3f4650;
+  color: var(--va-ink, #3f4650);
 }
 
 .ca-st-topic-val {
@@ -5122,7 +5122,7 @@ button.ca-feed-item:hover {
 .ca-imp-target {
   margin: 0 0 12px;
   font-size: 13px;
-  color: #5b6470;
+  color: var(--va-mute, #5b6470);
 }
 
 .ca-imp-sources {
@@ -5138,7 +5138,7 @@ button.ca-feed-item:hover {
   align-items: flex-start;
   gap: 2px;
   padding: 12px;
-  border: 1px solid #e6e9ed;
+  border: 1px solid var(--va-line, #e6e9ed);
   border-radius: 10px;
   background: var(--va-paper, #ffffff);
   font: inherit;
@@ -5157,7 +5157,7 @@ button.ca-feed-item:hover {
 
 .ca-imp-source.is-active {
   border-color: #2563eb;
-  background: #f5f9ff;
+  background: var(--va-tint-b, #f5f9ff);
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
 }
 
@@ -5169,8 +5169,8 @@ button.ca-feed-item:hover {
   height: 32px;
   margin-bottom: 6px;
   border-radius: 8px;
-  background: #f1f3f5;
-  color: #5b6470;
+  background: var(--va-sunk1, #f1f3f5);
+  color: var(--va-mute, #5b6470);
 }
 
 .ca-imp-source.is-active .ca-imp-source-icon {
@@ -5181,12 +5181,12 @@ button.ca-feed-item:hover {
 .ca-imp-source-title {
   font-size: 14px;
   font-weight: 700;
-  color: #1f2530;
+  color: var(--va-ink, #1f2530);
 }
 
 .ca-imp-source-sub {
   font-size: 12px;
-  color: #8a9099;
+  color: var(--va-mute, #8a9099);
 }
 
 .ca-imp-text {
@@ -5201,7 +5201,7 @@ button.ca-feed-item:hover {
   margin-bottom: 6px;
   font-size: 13px;
   font-weight: 600;
-  color: #3f4650;
+  color: var(--va-ink, #3f4650);
 }
 
 .ca-imp-text-tools {
@@ -5213,7 +5213,7 @@ button.ca-feed-item:hover {
 .ca-imp-count {
   font-size: 12px;
   font-weight: 500;
-  color: #8a9099;
+  color: var(--va-mute, #8a9099);
 }
 
 .ca-imp-text .ca-import-text {
@@ -5279,7 +5279,7 @@ button.ca-feed-item:hover {
   height: 24px;
   flex-shrink: 0;
   border-radius: 999px;
-  background: #e8f1fe;
+  background: var(--va-tint-b, #e8f1fe);
   font-size: 12px;
   font-weight: 700;
   color: #2563eb;
@@ -5291,12 +5291,12 @@ button.ca-feed-item:hover {
   align-items: flex-start;
   gap: 4px;
   font-size: 13px;
-  color: #6b7280;
+  color: var(--va-mute, #6b7280);
 }
 
 .ca-imp-step-body b {
   font-size: 14px;
-  color: #1f2530;
+  color: var(--va-ink, #1f2530);
 }
 
 .ca-imp-step-body .faculty-btn-secondary {
@@ -5326,7 +5326,7 @@ button.ca-feed-item:hover {
 .ca-drop.has-file {
   border-style: solid;
   border-color: #86efac;
-  background: #f3fbf5;
+  background: var(--va-tint-g, #f3fbf5);
 }
 
 .ca-drop.has-file > svg {
@@ -5416,7 +5416,7 @@ button.ca-feed-item:hover {
 .ca-wordlist {
   display: flex;
   flex-direction: column;
-  border: 1px solid #e6e9ed;
+  border: 1px solid var(--va-line, #e6e9ed);
   border-radius: 10px;
   background: var(--va-paper, #ffffff);
   overflow: hidden;
@@ -5428,7 +5428,7 @@ button.ca-feed-item:hover {
   align-items: center;
   gap: 10px;
   padding: 9px 14px;
-  border-top: 1px solid #f1f3f5;
+  border-top: 1px solid var(--va-line, #f1f3f5);
   font-size: 14px;
 }
 
@@ -5438,17 +5438,17 @@ button.ca-feed-item:hover {
 
 .ca-wordlist-num {
   font-size: 12px;
-  color: #9aa3ad;
+  color: var(--va-mute, #9aa3ad);
   font-variant-numeric: tabular-nums;
 }
 
 .ca-wordlist-word {
   font-weight: 600;
-  color: #1f2530;
+  color: var(--va-ink, #1f2530);
 }
 
 .ca-wordlist-tr {
-  color: #5b6470;
+  color: var(--va-mute, #5b6470);
 }
 
 .ca-assign-filter {
@@ -5468,7 +5468,7 @@ button.ca-feed-item:hover {
   width: 100%;
   padding: 12px 20px;
   border: none;
-  border-top: 1px solid #f1f3f5;
+  border-top: 1px solid var(--va-line, #f1f3f5);
   background: var(--va-paper, #ffffff);
   font: inherit;
   text-align: left;
@@ -5477,11 +5477,11 @@ button.ca-feed-item:hover {
 }
 
 .ca-assign-row:hover:not(:disabled) {
-  background: #f9fafb;
+  background: var(--va-sunk1, #f9fafb);
 }
 
 .ca-assign-row.is-on {
-  background: #f5f9ff;
+  background: var(--va-tint-b, #f5f9ff);
 }
 
 .ca-assign-row.is-used {
@@ -5489,7 +5489,7 @@ button.ca-feed-item:hover {
 }
 
 .ca-assign-row.is-used .ca-assign-title {
-  color: #9aa3ad;
+  color: var(--va-mute, #9aa3ad);
 }
 
 .ca-assign-title {
@@ -5498,13 +5498,13 @@ button.ca-feed-item:hover {
   font-weight: 600;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #1f2530;
+  color: var(--va-ink, #1f2530);
 }
 
 .ca-assign-words {
   font-size: 13px;
   text-align: right;
-  color: #8a9099;
+  color: var(--va-mute, #8a9099);
 }
 
 .ca-stack > .ca-card.is-faculty-card .faculty-toolbar-left {
@@ -5551,11 +5551,11 @@ button.ca-feed-item:hover {
 
 .ca-assign-head {
   padding: 8px 20px;
-  border-top: 1px solid #eef1f4;
-  background: #f7f8fa;
+  border-top: 1px solid var(--va-line, #eef1f4);
+  background: var(--va-sunk1, #f7f8fa);
   font-size: 12px;
   font-weight: 600;
-  color: #6b7280;
+  color: var(--va-mute, #6b7280);
 }
 
 .ca-assign-head > :nth-child(3) {
@@ -5563,7 +5563,7 @@ button.ca-feed-item:hover {
 }
 
 .ca-assign-item {
-  border-top: 1px solid #f1f3f5;
+  border-top: 1px solid var(--va-line, #f1f3f5);
 }
 
 .ca-assign-row {
@@ -5598,7 +5598,7 @@ button.ca-feed-item:hover {
 
 .ca-assign-started {
   font-size: 12px;
-  color: #9aa3ad;
+  color: var(--va-mute, #9aa3ad);
   font-variant-numeric: tabular-nums;
 }
 
@@ -5624,14 +5624,14 @@ button.ca-feed-item:hover {
 .ca-assign-word {
   padding: 3px 9px;
   border-radius: 6px;
-  background: #f4f6f8;
+  background: var(--va-sunk1, #f4f6f8);
   font-size: 12px;
-  color: #6b7280;
+  color: var(--va-mute, #6b7280);
 }
 
 .ca-assign-word b {
   font-weight: 600;
-  color: #1f2530;
+  color: var(--va-ink, #1f2530);
 }
 
 .ca-assign-summary {
@@ -5656,7 +5656,7 @@ button.ca-feed-item:hover {
   gap: 6px;
   font-size: 13px;
   font-weight: 600;
-  color: #3f4650;
+  color: var(--va-ink, #3f4650);
 }
 
 .ca-assign-picked-label {
@@ -5664,7 +5664,7 @@ button.ca-feed-item:hover {
   margin-bottom: 6px;
   font-size: 13px;
   font-weight: 600;
-  color: #3f4650;
+  color: var(--va-ink, #3f4650);
 }
 
 .ca-assign-hint {
@@ -5674,7 +5674,7 @@ button.ca-feed-item:hover {
   border-radius: 10px;
   font-size: 13px;
   line-height: 1.5;
-  color: #8a9099;
+  color: var(--va-mute, #8a9099);
 }
 
 .ca-assign-picked-list {
@@ -5693,7 +5693,7 @@ button.ca-feed-item:hover {
   align-items: center;
   gap: 8px;
   padding: 7px 0;
-  border-top: 1px solid #f1f3f5;
+  border-top: 1px solid var(--va-line, #f1f3f5);
 }
 
 .ca-assign-picked-list li:first-child {
@@ -5711,7 +5711,7 @@ button.ca-feed-item:hover {
   width: 22px;
   height: 22px;
   border-radius: 999px;
-  background: #e8f1fe;
+  background: var(--va-tint-b, #e8f1fe);
   font-size: 11px;
   font-weight: 700;
   color: #2563eb;
@@ -5723,7 +5723,7 @@ button.ca-feed-item:hover {
   min-width: 0;
   font-size: 13px;
   font-weight: 600;
-  color: #1f2530;
+  color: var(--va-ink, #1f2530);
 }
 
 .ca-assign-picked-title small {
@@ -5732,7 +5732,7 @@ button.ca-feed-item:hover {
   font-weight: 500;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #9aa3ad;
+  color: var(--va-mute, #9aa3ad);
 }
 
 .ca-assign-totals {
@@ -5740,8 +5740,8 @@ button.ca-feed-item:hover {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
   padding: 12px 0;
-  border-top: 1px solid #eef1f4;
-  border-bottom: 1px solid #eef1f4;
+  border-top: 1px solid var(--va-line, #eef1f4);
+  border-bottom: 1px solid var(--va-line, #eef1f4);
 }
 
 .ca-assign-totals div {
@@ -5753,12 +5753,12 @@ button.ca-feed-item:hover {
 .ca-assign-totals b {
   font-size: 20px;
   font-variant-numeric: tabular-nums;
-  color: #1f2530;
+  color: var(--va-ink, #1f2530);
 }
 
 .ca-assign-totals span {
   font-size: 12px;
-  color: #8a9099;
+  color: var(--va-mute, #8a9099);
 }
 
 .ca-assign-clear {
@@ -6249,12 +6249,12 @@ button.ca-feed-item:hover {
 .ca-mobile-row-stat b {
   font-size: 14px;
   font-variant-numeric: tabular-nums;
-  color: #1f2530;
+  color: var(--va-ink, #1f2530);
 }
 
 .ca-mobile-row-stat small {
   font-size: 11px;
-  color: #8a9099;
+  color: var(--va-mute, #8a9099);
 }
 
 .ca-mobile-row .ca-dash-student-name {
@@ -6584,7 +6584,7 @@ button.ca-feed-item:hover {
   grid-template-columns: 180px minmax(0, 1fr);
   gap: 12px;
   padding: 12px 0;
-  border-top: 1px solid #f1f3f5;
+  border-top: 1px solid var(--va-line, #f1f3f5);
 }
 
 .ca-info-list > div:first-child {
@@ -6594,14 +6594,14 @@ button.ca-feed-item:hover {
 .ca-info-list dt {
   font-size: 13px;
   font-weight: 600;
-  color: #6b7280;
+  color: var(--va-mute, #6b7280);
 }
 
 .ca-info-list dd {
   margin: 0;
   overflow: hidden;
   font-size: 14px;
-  color: #1f2530;
+  color: var(--va-ink, #1f2530);
   text-overflow: ellipsis;
 }
 
@@ -6658,16 +6658,16 @@ button.ca-feed-item:hover {
   gap: 12px;
   margin-top: 8px;
   padding: 14px;
-  border: 1px solid #fde2e2;
+  border: 1px solid var(--va-line, #fde2e2);
   border-radius: 10px;
-  background: #fff8f8;
+  background: var(--va-tint-r, #fff8f8);
 }
 
 .ca-info-danger > div {
   display: flex;
   flex-direction: column;
   font-size: 13px;
-  color: #6b7280;
+  color: var(--va-mute, #6b7280);
 }
 
 .ca-info-danger b {
@@ -6751,7 +6751,7 @@ button.ca-feed-item:hover {
 .ca-student-hw-summary b {
   font-size: 14px;
   font-variant-numeric: tabular-nums;
-  color: #1f2530;
+  color: var(--va-ink, #1f2530);
 }
 
 .ca-dash-card-head .ca-head-tags {

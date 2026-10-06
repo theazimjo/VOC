@@ -10,6 +10,18 @@
 .corp-admin-layout.sa-layout.ca-theme.is-center-admin {
   --va-ground: #e8e5dd;
   --va-paper: #f6f4ed;
+  --va-solid: #101113;
+  --va-side: #101113;
+  --va-input: #fbfaf6;
+  --va-sunk1: #efece3;
+  --va-sunk2: #ebe8df;
+  --va-sunk3: #e3dfd5;
+  --va-sunk4: #d9d5ca;
+  --va-mute: #6b7280;
+  --va-tint-b: #e8f1fe;
+  --va-tint-a: #fff4e0;
+  --va-tint-g: #e7f6ec;
+  --va-tint-r: #fdecec;
   --va-ink: #101113;
   --va-ink-soft: #4a4c52;
   --va-line: rgba(16, 17, 19, 0.14);
@@ -19,15 +31,16 @@
 
   --sa-bg: var(--va-ground);
   --sa-surface: var(--va-paper);
-  --sa-surface-2: #efece3;
-  --sa-fill: #ebe8df;
-  --sa-fill-strong: #dedad0;
+  --sa-surface-2: var(--va-sunk1);
+  --sa-blue: #101113;
+  --sa-fill: var(--va-sunk2);
+  --sa-fill-strong: var(--va-sunk4);
   --sa-separator: var(--va-line);
   --sa-label: var(--va-ink);
   --sa-label-2: var(--va-ink-soft);
   --sa-label-3: #7a7c82;
   --sa-placeholder: #7a7c82;
-  --sa-press: #ebe8df;
+  --sa-press: var(--va-sunk2);
   --sa-shadow: 0 0 0 1px var(--va-line);
   --sa-sheet-bg: var(--va-ground);
   --sa-sheet-cell: var(--va-paper);
@@ -38,7 +51,7 @@
 
   --bg-primary: var(--va-ground);
   --bg-secondary: var(--va-paper);
-  --bg-tertiary: #dedad0;
+  --bg-tertiary: var(--va-sunk4);
   --text-primary: var(--va-ink);
   --text-secondary: var(--va-ink-soft);
   --border: var(--va-line);
@@ -58,7 +71,7 @@
   --text-muted: rgba(244, 241, 232, 0.5);
   --border: rgba(244, 241, 232, 0.12);
   --bg-glass-hover: rgba(244, 241, 232, 0.07);
-  background: var(--va-ink);
+  background: var(--va-side);
   box-shadow: none;
 }
 
@@ -118,7 +131,7 @@
 }
 
 .is-center-admin .ca-title-lg-icon {
-  background: var(--va-ink);
+  background: var(--va-solid);
   color: var(--va-amber);
   border-radius: 10px;
 }
@@ -149,7 +162,7 @@
   letter-spacing: 0.1em;
 }
 
-.is-center-admin .faculty-table-row:hover { background: #efece3; }
+.is-center-admin .faculty-table-row:hover { background: var(--va-sunk1); }
 
 /* ── Actions: blue only on actions, same radius as the landing buttons ── */
 .is-center-admin .faculty-btn-invite,
@@ -159,14 +172,14 @@
   font-weight: 600;
 }
 
-.is-center-admin .faculty-btn-invite { background: #0a84ff; box-shadow: none; }
-.is-center-admin .faculty-btn-invite:hover { background: #0071e3; }
+.is-center-admin .faculty-btn-invite { background: var(--va-solid); box-shadow: none; }
+.is-center-admin .faculty-btn-invite:hover { background: var(--va-amber); color: var(--va-ink); }
 
 .is-center-admin .sa-input,
 .is-center-admin .sa-select,
 .is-center-admin .sa-textarea,
 .is-center-admin .sa-search {
-  background: #fbfaf6;
+  background: var(--va-input);
   border: 1px solid rgba(16, 17, 19, 0.2);
   border-radius: 10px;
 }
@@ -181,7 +194,7 @@
 }
 
 .is-center-admin .faculty-icon-btn,
-.is-center-admin .sa-segmented { background: #efece3; border-color: var(--va-line); }
+.is-center-admin .sa-segmented { background: var(--va-sunk1); border-color: var(--va-line); }
 
 /* Faculty | Invitations switch: full width on phones, compact on desktop. */
 .is-center-admin .ca-view-switch { margin-bottom: 12px; }
@@ -236,7 +249,7 @@
 .is-center-admin .teacher-detail-topband { background: var(--va-paper); border-bottom: 1px solid var(--va-line); }
 
 .is-center-admin .ca-group-head-avatar {
-  background: var(--va-ink);
+  background: var(--va-solid);
   color: var(--va-amber);
   font-family: var(--va-display);
   font-weight: 600;
@@ -264,19 +277,19 @@
 .is-center-admin .teacher-nav-tab.is-active .ca-nav-count { background: var(--va-amber); color: var(--va-ink); }
 .is-center-admin .ca-nav-count,
 .is-center-admin .ca-dash-chip,
-.is-center-admin .ca-group-head-badge { background: #ebe8df; color: var(--va-ink-soft); }
+.is-center-admin .ca-group-head-badge { background: var(--va-sunk2); color: var(--va-ink-soft); }
 
-.is-center-admin .ca-filter-pill { border-color: var(--va-line); background: #fbfaf6; color: var(--va-ink-soft); }
+.is-center-admin .ca-filter-pill { border-color: var(--va-line); background: var(--va-input); color: var(--va-ink-soft); }
 .is-center-admin .ca-filter-pill:hover { border-color: rgba(16, 17, 19, 0.3); }
-.is-center-admin .ca-filter-pill.is-active { border-color: var(--va-ink); background: var(--va-ink); color: var(--va-paper); }
+.is-center-admin .ca-filter-pill.is-active { border-color: var(--va-ink); background: var(--va-solid); color: var(--va-paper); }
 
-.is-center-admin .ca-group-code-pill { border-color: var(--va-line); background: #fbfaf6; }
-.is-center-admin .ca-group-code-pill:hover { border-color: var(--va-ink); background: #fbfaf6; }
+.is-center-admin .ca-group-code-pill { border-color: var(--va-line); background: var(--va-input); }
+.is-center-admin .ca-group-code-pill:hover { border-color: var(--va-ink); background: var(--va-input); }
 .is-center-admin .ca-group-code-pill-value { font-family: var(--va-display); font-size: 1.25rem; letter-spacing: 0.08em; color: var(--va-ink); }
-.is-center-admin .ca-group-code-pill-icon { background: var(--va-ink); color: var(--va-amber); }
+.is-center-admin .ca-group-code-pill-icon { background: var(--va-solid); color: var(--va-amber); }
 
 /* Bottom tab bar on phones: ink pill, amber for the active tab. */
-.is-center-admin .bottom-nav { background: var(--va-ink); border-color: var(--va-ink); }
+.is-center-admin .bottom-nav { background: var(--va-side); border-color: var(--va-side); }
 .is-center-admin .bottom-nav-link { color: rgba(244, 241, 232, 0.65); font-family: var(--va-display); letter-spacing: 0.06em; text-transform: uppercase; }
 .is-center-admin .bottom-nav-link.active { background: rgba(255, 176, 32, 0.16); color: var(--va-amber); }
 .is-center-admin .bottom-nav-link.active svg { color: var(--va-amber); }
@@ -304,14 +317,14 @@
   height: 44px;
   padding: 0 22px;
   border-radius: 10px;
-  background: #0a84ff;
+  background: var(--va-solid);
   box-shadow: none;
   font-size: 14px;
 }
-.is-center-admin .teacher-add-class-btn:hover { background: #0071e3; }
+.is-center-admin .teacher-add-class-btn:hover { background: var(--va-amber); color: var(--va-ink); }
 
 .is-center-admin .ca-person-head-avatar {
-  background: var(--va-ink);
+  background: var(--va-solid);
   color: var(--va-amber);
   font-family: var(--va-display);
   font-weight: 600;
@@ -332,12 +345,12 @@
   text-transform: uppercase;
   color: var(--va-ink);
 }
-.is-center-admin .sa-sheet-close { background: #ddd9cf; color: var(--va-ink); }
+.is-center-admin .sa-sheet-close { background: var(--va-sunk4); color: var(--va-ink); }
 .is-center-admin .sa-sheet .sa-group { background: var(--va-paper); border: 1px solid var(--va-line); box-shadow: none; border-radius: 12px; }
 .is-center-admin .sa-sheet .sa-row-title { color: var(--va-ink); }
 .is-center-admin .sa-sheet .sa-row-subtitle,
 .is-center-admin .sa-sheet .sa-row-detail { color: var(--va-ink-soft); }
-.is-center-admin .sa-sheet .sa-row-icon[class*="tone-"]:not(.tone-red) { background: var(--va-ink); color: var(--va-amber); }
+.is-center-admin .sa-sheet .sa-row-icon[class*="tone-"]:not(.tone-red) { background: var(--va-solid); color: var(--va-amber); }
 .is-center-admin .sa-sheet .sa-row-icon.tone-red { background: rgba(255, 59, 48, 0.14); color: #d1271c; }
 .is-center-admin .sa-sheet .sa-btn-filled { border-radius: 10px; }
 .is-center-admin .sa-scrim, .is-center-admin .sa-sheet-scrim { background: rgba(16, 17, 19, 0.5); }
@@ -349,14 +362,14 @@
 .is-center-admin .sa-sheet input:not([type="checkbox"]):not([type="radio"]),
 .is-center-admin .sa-sheet textarea,
 .is-center-admin .sa-sheet select {
-  background-color: #fbfaf6;
+  background-color: var(--va-input);
   border-color: rgba(16, 17, 19, 0.2);
 }
 .is-center-admin .ca-toolbar { background: var(--va-paper); border-bottom: 1px solid var(--va-line); }
 .is-center-admin .ca-toolbar-title { font-family: var(--va-display); font-size: 1.375rem; letter-spacing: 0.04em; }
 .is-center-admin .ca-profile-avatar,
 .is-center-admin .ca-hero-avatar,
-.is-center-admin .sa-hero-avatar { background: var(--va-ink); color: var(--va-amber); font-family: var(--va-display); }
+.is-center-admin .sa-hero-avatar { background: var(--va-solid); color: var(--va-amber); font-family: var(--va-display); }
 
 /* ── Teacher / admin settings, Class Settings and Invite dialogs ── */
 .is-center-admin .adm-modal-overlay { background: rgba(16, 17, 19, 0.55); }
@@ -377,7 +390,7 @@
   text-transform: uppercase;
   color: var(--va-ink);
 }
-.is-center-admin .invite-title-icon { color: var(--va-amber); background: var(--va-ink); border-radius: 8px; padding: 4px; box-sizing: content-box; }
+.is-center-admin .invite-title-icon { color: var(--va-amber); background: var(--va-solid); border-radius: 8px; padding: 4px; box-sizing: content-box; }
 
 .is-center-admin .invite-modal-head { border-bottom: 1px solid var(--va-line); }
 
@@ -395,7 +408,7 @@
 
 /* Role cards: ink outline + amber check when chosen */
 .is-center-admin .teacher-role-card {
-  background: #fbfaf6;
+  background: var(--va-input);
   border: 1px solid var(--va-line);
   border-radius: 12px;
 }
@@ -422,7 +435,7 @@
 .is-center-admin .teacher-info-input,
 .is-center-admin .invite-input,
 .is-center-admin .invite-textarea-wrap {
-  background: #fbfaf6;
+  background: var(--va-input);
   border: 1px solid rgba(16, 17, 19, 0.2);
   border-radius: 10px;
   color: var(--va-ink);
@@ -435,21 +448,21 @@
   outline: none;
 }
 .is-center-admin .invite-textarea { background: transparent; }
-.is-center-admin .invite-textarea-note { background: #efece3; }
+.is-center-admin .invite-textarea-note { background: var(--va-sunk1); }
 
 /* Rows inside the dialog (Change Password / Remove from Center) */
-.is-center-admin .invite-modal-card .sa-row-icon[class*="tone-"]:not(.tone-red) { background: var(--va-ink); color: var(--va-amber); }
+.is-center-admin .invite-modal-card .sa-row-icon[class*="tone-"]:not(.tone-red) { background: var(--va-solid); color: var(--va-amber); }
 .is-center-admin .invite-modal-card .sa-row-icon.tone-red { background: rgba(255, 59, 48, 0.14); color: #d1271c; }
 
 /* Footer buttons */
 .is-center-admin .teacher-info-btn-submit,
 .is-center-admin .invite-btn-primary {
-  background: #0a84ff;
+  background: var(--va-solid);
   border-radius: 10px;
   box-shadow: none;
   font-weight: 600;
 }
-.is-center-admin .teacher-info-btn-submit:hover:not(:disabled) { background: #0071e3; }
+.is-center-admin .teacher-info-btn-submit:hover:not(:disabled) { background: var(--va-amber); color: var(--va-ink); }
 .is-center-admin .teacher-info-btn-cancel,
 .is-center-admin .invite-btn-cancel {
   background: transparent;
@@ -470,9 +483,9 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
-.is-center-admin .teacher-settings-btn:hover { background: var(--va-ink); color: var(--va-amber); }
+.is-center-admin .teacher-settings-btn:hover { background: var(--va-solid); color: var(--va-amber); }
 
-.is-center-admin .adm-modal-overlay .sa-row-icon[class*="tone-"]:not(.tone-red) { background: var(--va-ink); color: var(--va-amber); }
+.is-center-admin .adm-modal-overlay .sa-row-icon[class*="tone-"]:not(.tone-red) { background: var(--va-solid); color: var(--va-amber); }
 .is-center-admin .adm-modal-overlay .sa-row-icon.tone-red { background: rgba(255, 59, 48, 0.14); color: #d1271c; }
 
 /* Log out at the bottom of the sidebar */
@@ -493,15 +506,15 @@
 
 /* ── Settings pages (center admin + teacher) ── */
 .is-center-admin .ca-toolbar-icon {
-  background: var(--va-ink);
+  background: var(--va-solid);
   color: var(--va-amber);
   border: 0;
   border-radius: 8px;
 }
 
 /* Tabs (Center | Account, Profile | Sign-in): ink pill for the active one */
-.is-center-admin .sa-segmented { background: #e3dfd5; border: 1px solid var(--va-line); border-radius: 10px; }
-.is-center-admin .sa-segment-thumb { background: var(--va-ink); box-shadow: none; border-radius: 8px; }
+.is-center-admin .sa-segmented { background: var(--va-sunk3); border: 1px solid var(--va-line); border-radius: 10px; }
+.is-center-admin .sa-segment-thumb { background: var(--va-solid); box-shadow: none; border-radius: 8px; }
 .is-center-admin .sa-segment { color: var(--va-ink-soft); }
 .is-center-admin .sa-segment.is-active,
 .is-center-admin .sa-segment.is-active .sa-segment-label { color: var(--va-paper); }
@@ -509,7 +522,7 @@
 
 /* Profile card avatar + section icons */
 .is-center-admin .sa-hero-avatar {
-  background: var(--va-ink);
+  background: var(--va-solid);
   color: var(--va-amber);
   font-family: var(--va-display);
   font-weight: 600;
@@ -520,14 +533,14 @@
 
 /* Pills ("Center Admin", "Teacher") */
 .is-center-admin .sa-status-pill,
-.is-center-admin .ca-pill { background: #ebe8df; color: var(--va-ink-soft); border: 1px solid var(--va-line); }
+.is-center-admin .ca-pill { background: var(--va-sunk2); color: var(--va-ink-soft); border: 1px solid var(--va-line); }
 
 /* Rows in settings cards: ink icon tiles instead of the iOS rainbow */
-.is-center-admin .ca-card .sa-row-icon[class*="tone-"]:not(.tone-red):not(.tone-green) { background: var(--va-ink); color: var(--va-amber); }
+.is-center-admin .ca-card .sa-row-icon[class*="tone-"]:not(.tone-red):not(.tone-green) { background: var(--va-solid); color: var(--va-amber); }
 
 /* Save + sign out */
-.is-center-admin .ca-card .sa-btn-filled.tone-blue { background: #0a84ff; border-radius: 10px; }
-.is-center-admin .ca-card .sa-btn-filled.tone-blue:disabled { background: rgba(10, 132, 255, 0.35); }
+.is-center-admin .ca-card .sa-btn-filled.tone-blue { background: var(--va-solid); border-radius: 10px; }
+.is-center-admin .ca-card .sa-btn-filled.tone-blue:disabled { background: var(--va-sunk4); }
 .is-center-admin .ca-card .sa-btn-filled.tone-red {
   background: transparent;
   color: #d1271c;
@@ -537,27 +550,254 @@
 .is-center-admin .ca-card .sa-btn-filled.tone-red:hover { background: #d1271c; color: #fff; }
 
 /* Higher-specificity pass: these lost to the theme's [data-theme] / .ca-theme rules. */
-.corp-admin-layout.is-center-admin .sa-segmented .sa-segment-thumb { background: var(--va-ink); box-shadow: none; }
+.corp-admin-layout.is-center-admin .sa-segmented .sa-segment-thumb { background: var(--va-solid); box-shadow: none; }
 .corp-admin-layout.is-center-admin .sa-segmented .sa-segment.is-active,
 .corp-admin-layout.is-center-admin .sa-segmented .sa-segment.is-active .sa-segment-label { color: var(--va-paper); }
 .corp-admin-layout.is-center-admin .sa-segmented .sa-segment.is-active svg { color: var(--va-amber); }
 .corp-admin-layout.is-center-admin .ca-icon-box {
-  background: var(--va-ink);
+  background: var(--va-solid);
   color: var(--va-amber);
   border-color: var(--va-ink);
   font-family: var(--va-display);
   font-weight: 600;
 }
-.corp-admin-layout.is-center-admin .ca-tag { background: #ebe8df; color: var(--va-ink-soft); border: 1px solid var(--va-line); }
+.corp-admin-layout.is-center-admin .ca-tag { background: var(--va-sunk2); color: var(--va-ink-soft); border: 1px solid var(--va-line); }
 .corp-admin-layout.is-center-admin .ca-profile-name { font-family: var(--va-display); font-size: 1.5rem; letter-spacing: 0.02em; text-transform: uppercase; }
 
 /* Settings tabs use .ca-tabs / .ca-tab */
-.corp-admin-layout.is-center-admin .ca-tabs { background: #e3dfd5; border: 1px solid var(--va-line); border-radius: 10px; }
+.corp-admin-layout.is-center-admin .ca-tabs { background: var(--va-sunk3); border: 1px solid var(--va-line); border-radius: 10px; }
 .corp-admin-layout.is-center-admin .ca-tab { border-radius: 8px; color: var(--va-ink-soft); font-family: var(--va-body); }
 .corp-admin-layout.is-center-admin .ca-tab.is-active {
-  background: var(--va-ink);
+  background: var(--va-solid);
   border-color: var(--va-ink);
   color: var(--va-paper);
   box-shadow: none;
 }
 .corp-admin-layout.is-center-admin .ca-tab.is-active svg { color: var(--va-amber); }
+
+/* ── Dashboard ── */
+.corp-admin-layout.is-center-admin .ca-dash-tile-icon[class*="tone-"] { background: var(--va-solid); color: var(--va-amber); border-radius: 8px; }
+.corp-admin-layout.is-center-admin .ca-dash-tile-label {
+  font-family: var(--va-display);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--va-ink-soft);
+}
+.corp-admin-layout.is-center-admin .ca-dash-tile-value {
+  font-family: var(--va-display);
+  font-size: 2.75rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: var(--va-ink);
+}
+.corp-admin-layout.is-center-admin .ca-dash-tile-suffix { font-family: var(--va-display); font-size: 1.5rem; color: var(--va-ink-soft); }
+.corp-admin-layout.is-center-admin .ca-dash-tile-foot { color: var(--va-ink-soft); }
+.corp-admin-layout.is-center-admin .ca-dash-bar { background: var(--va-sunk3); }
+.corp-admin-layout.is-center-admin .ca-dash-bar > span.is-blue { background: var(--va-solid); }
+
+.corp-admin-layout.is-center-admin .ca-dash-card-title {
+  font-family: var(--va-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--va-ink);
+}
+.corp-admin-layout.is-center-admin .ca-dash-card-sub { color: var(--va-ink-soft); }
+
+.corp-admin-layout.is-center-admin .ca-dash-table-head {
+  background: var(--sa-surface-2);
+  font-family: var(--va-display);
+  font-size: 0.8125rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.corp-admin-layout.is-center-admin .ca-dash-table-row:hover { background: var(--va-sunk1); }
+
+/* Ranking: amber medal for #1, outlined for 2 and 3 */
+.corp-admin-layout.is-center-admin .ca-dash-rank { font-family: var(--va-display); font-size: 0.9375rem; }
+.corp-admin-layout.is-center-admin .ca-dash-rank.is-1 { background: var(--va-amber); color: var(--va-ink); }
+.corp-admin-layout.is-center-admin .ca-dash-rank.is-2,
+.corp-admin-layout.is-center-admin .ca-dash-rank.is-3 { background: transparent; border: 1.5px solid var(--va-ink); color: var(--va-ink); }
+
+.corp-admin-layout.is-center-admin .ca-dash-avatar[class*="tone-"] { background: var(--va-solid); color: var(--va-amber); font-family: var(--va-display); font-weight: 600; }
+.corp-admin-layout.is-center-admin .ca-dash-chip { background: var(--va-sunk2); color: var(--va-ink-soft); border: 1px solid var(--va-line); }
+
+.corp-admin-layout.is-center-admin .ca-dash-link { color: var(--va-ink); font-weight: 600; text-decoration: underline; text-decoration-color: var(--va-amber); text-underline-offset: 4px; text-decoration-thickness: 2px; }
+.corp-admin-layout.is-center-admin .ca-dash-btn { background: var(--va-input); border: 1px solid var(--va-line); border-radius: 10px; color: var(--va-ink); }
+.corp-admin-layout.is-center-admin .ca-dash-student-name { font-weight: 600; }
+
+/* Dashboard on phones: KPI labels wrap instead of being cut off; list icons match. */
+@media (max-width: 767px) {
+  .corp-admin-layout.is-center-admin .ca-dash-tile-label {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    line-height: 1.15;
+  }
+  .corp-admin-layout.is-center-admin .ca-dash-tile-top { align-items: flex-start; }
+  .corp-admin-layout.is-center-admin .ca-dash-tile-value { font-size: 2.25rem; }
+}
+.corp-admin-layout.is-center-admin .ca-dash-card .sa-row-icon[class*="tone-"],
+.corp-admin-layout.is-center-admin .sa-group .sa-row-icon.tone-green { background: var(--va-solid); color: var(--va-amber); font-family: var(--va-display); font-weight: 600; }
+
+/* Leftovers from the audit */
+.corp-admin-layout.is-center-admin .ca-topbar-avatar { background: var(--va-solid); color: var(--va-amber); font-family: var(--va-display); font-weight: 600; }
+.corp-admin-layout.is-center-admin .ca-course-icon,
+.corp-admin-layout.is-center-admin .ca-course-icon.is-system,
+.corp-admin-layout.is-center-admin .ca-course-icon.is-own { background: var(--va-solid); color: var(--va-amber); }
+.corp-admin-layout.is-center-admin .ca-link,
+.corp-admin-layout.is-center-admin .faculty-name-link { color: var(--va-ink); }
+.corp-admin-layout.is-center-admin .ca-link { text-decoration: underline; text-decoration-color: var(--va-amber); text-underline-offset: 3px; }
+.corp-admin-layout.is-center-admin .ca-dash-stack,
+.corp-admin-layout.is-center-admin .ca-hwx-stack { background: transparent; }
+
+/* ── Buttons everywhere (sheets, dialogs, toolbars): one family ──
+   Filled = blue action, tinted = ink outline, disabled = flat concrete. */
+.is-center-admin .sa-btn,
+.is-center-admin .faculty-btn-secondary,
+.is-center-admin .faculty-btn-delete {
+  border-radius: 10px;
+  font-family: var(--va-body);
+  font-weight: 600;
+  letter-spacing: 0;
+  box-shadow: none;
+}
+.is-center-admin .sa-btn.sa-btn-filled.tone-blue:not(:disabled) { background: var(--va-solid); color: #fff; }
+.is-center-admin .sa-btn.sa-btn-filled.tone-blue:hover:not(:disabled) { background: var(--va-amber); color: var(--va-ink); }
+.is-center-admin .sa-btn.sa-btn-filled.tone-red:not(:disabled) { background: #d1271c; color: #fff; }
+.is-center-admin .sa-btn.sa-btn-tinted,
+.is-center-admin .sa-btn.sa-btn-tinted.tone-blue,
+.is-center-admin .faculty-btn-secondary {
+  background: transparent;
+  border: 1px solid rgba(16, 17, 19, 0.28);
+  color: var(--va-ink);
+}
+.is-center-admin .sa-btn.sa-btn-tinted:hover:not(:disabled),
+.is-center-admin .faculty-btn-secondary:hover:not(:disabled) { background: rgba(16, 17, 19, 0.06); }
+.is-center-admin .sa-btn.sa-btn-tinted.tone-red,
+.is-center-admin .faculty-btn-delete { background: transparent; border: 1px solid rgba(209, 39, 28, 0.45); color: #d1271c; }
+.is-center-admin .sa-btn:disabled,
+.is-center-admin .sa-btn[disabled] {
+  opacity: 1;
+  background: var(--va-sunk4);
+  border-color: transparent;
+  color: rgba(16, 17, 19, 0.45);
+  cursor: not-allowed;
+}
+.is-center-admin .confirm-sheet-btn { font-family: var(--va-body); }
+
+/* Selects: drop the native iOS chevron look, same arrow as the other inputs */
+.is-center-admin .sa-select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 38px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%23101113' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m1 1.5 5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+.is-center-admin .sa-field-label,
+.is-center-admin .sa-label {
+  font-family: var(--va-display);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.is-center-admin .sa-btn + .sa-btn { margin-top: 8px; }
+.is-center-admin .sa-btn + .sa-row { margin-top: 10px; }
+
+/* ── Dark theme (Settings → Appearance). Same tokens, night values. ── */
+.corp-admin-layout.sa-layout.ca-theme.is-center-admin.is-dark {
+  color-scheme: dark;
+  --va-ground: #131417;
+  --va-paper: #1b1c20;
+  --va-ink: #f1eee6;
+  --va-ink-soft: #a9aab0;
+  --va-line: rgba(241, 238, 230, 0.13);
+  --va-solid: #2b2d33;
+  --va-side: #0b0c0e;
+  --va-input: #232429;
+  --va-sunk1: #202126;
+  --va-sunk2: #2a2b31;
+  --va-sunk3: #2a2b31;
+  --va-sunk4: #34363c;
+  --va-mute: #9a9ba1;
+  --va-tint-b: rgba(10, 132, 255, 0.16);
+  --va-tint-a: rgba(255, 176, 32, 0.16);
+  --va-tint-g: rgba(52, 199, 89, 0.16);
+  --va-tint-r: rgba(255, 69, 58, 0.16);
+  --sa-label-3: #8d8e95;
+  --sa-placeholder: #8d8e95;
+  --sa-press: #26272c;
+  --sa-blue: #f1eee6;
+  --ca-border-strong: rgba(241, 238, 230, 0.26);
+  --border-light: rgba(241, 238, 230, 0.08);
+  --bg-tertiary: #2a2b31;
+}
+.is-center-admin.is-dark .sa-scrim, .is-center-admin.is-dark .sa-sheet-scrim, .is-center-admin.is-dark .adm-modal-overlay { background: rgba(0, 0, 0, 0.65); }
+.is-center-admin.is-dark .sa-input,
+.is-center-admin.is-dark .sa-select,
+.is-center-admin.is-dark .sa-textarea,
+.is-center-admin.is-dark .sa-search { border-color: rgba(241, 238, 230, 0.2); color: var(--va-ink); }
+.is-center-admin.is-dark .sa-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%23f1eee6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m1 1.5 5 5 5-5'/%3E%3C/svg%3E");
+}
+/* Primary actions flip: light button, dark text */
+.is-center-admin.is-dark .faculty-btn-invite,
+.is-center-admin.is-dark .teacher-add-class-btn,
+.is-center-admin.is-dark .teacher-info-btn-submit,
+.is-center-admin.is-dark .invite-btn-primary,
+.is-center-admin.is-dark .ca-card .sa-btn-filled.tone-blue,
+.is-center-admin.is-dark .sa-btn.sa-btn-filled.tone-blue:not(:disabled) { background: #f1eee6; color: #101113; }
+.is-center-admin.is-dark .faculty-btn-invite:hover,
+.is-center-admin.is-dark .teacher-add-class-btn:hover,
+.is-center-admin.is-dark .teacher-info-btn-submit:hover:not(:disabled),
+.is-center-admin.is-dark .sa-btn.sa-btn-filled.tone-blue:hover:not(:disabled) { background: var(--va-amber); color: #101113; }
+.is-center-admin.is-dark .sa-btn:disabled,
+.is-center-admin.is-dark .sa-btn[disabled] { color: rgba(241, 238, 230, 0.4); }
+.is-center-admin.is-dark .ca-filter-pill.is-active { background: #f1eee6; color: #101113; border-color: #f1eee6; }
+.is-center-admin.is-dark .sa-segment-thumb,
+.corp-admin-layout.is-center-admin.is-dark .sa-segmented .sa-segment-thumb { background: #f1eee6; }
+.is-center-admin.is-dark .sa-segment.is-active, .is-center-admin.is-dark .sa-segment[aria-selected="true"] { color: #101113; }
+.is-center-admin.is-dark .sa-btn.sa-btn-tinted,
+.is-center-admin.is-dark .faculty-btn-secondary,
+.is-center-admin.is-dark .teacher-info-btn-cancel,
+.is-center-admin.is-dark .invite-btn-cancel { border-color: rgba(241, 238, 230, 0.3); color: var(--va-ink); }
+.is-center-admin.is-dark .sa-btn.sa-btn-tinted:hover:not(:disabled),
+.is-center-admin.is-dark .faculty-btn-secondary:hover:not(:disabled) { background: rgba(241, 238, 230, 0.08); }
+.is-center-admin.is-dark .sa-sheet-close { color: var(--va-ink); }
+.is-center-admin.is-dark .sa-sheet, .is-center-admin.is-dark .invite-modal-card { box-shadow: 0 0 0 1px var(--va-line), 0 24px 60px rgba(0, 0, 0, 0.5); }
+.is-center-admin.is-dark .sa-row-icon.tone-red { color: #ff8a80; }
+
+/* Appearance picker (Settings) */
+.va-theme-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.va-theme-opt {
+  display: flex; flex-direction: column; gap: 10px; padding: 12px; cursor: pointer; text-align: left;
+  background: var(--va-input); border: 1.5px solid var(--va-line); border-radius: 12px; color: var(--va-ink);
+  font-family: var(--va-body); font-weight: 600; font-size: 0.9375rem;
+}
+.va-theme-opt.is-active { border-color: var(--va-amber); box-shadow: 0 0 0 1px var(--va-amber); }
+.va-theme-prev { height: 64px; border-radius: 8px; display: grid; grid-template-columns: 26% 1fr; overflow: hidden; border: 1px solid rgba(128, 128, 128, 0.35); }
+.va-theme-prev > i { background: #101113; }
+.va-theme-prev > b { margin: 10px; border-radius: 4px; }
+.va-theme-prev.is-light > b { background: #f6f4ed; box-shadow: 0 0 0 10px #e8e5dd; }
+.va-theme-prev.is-light { background: #e8e5dd; }
+.va-theme-prev.is-dark > b { background: #1b1c20; }
+.va-theme-prev.is-dark { background: #131417; }
+.va-theme-prev.is-dark > i { background: #0b0c0e; }
+.is-center-admin.is-dark .ca-tab.is-active,
+.is-center-admin.is-dark .sa-segment.is-active .sa-segment-label,
+.is-center-admin.is-dark .sa-segment-label { color: inherit; }
+.corp-admin-layout.is-center-admin.is-dark .ca-tab.is-active { color: #101113; }
+.is-center-admin.is-dark .sa-segment[aria-selected="true"] .sa-segment-label,
+.is-center-admin.is-dark .sa-segment.is-selected .sa-segment-label { color: #101113; }
+.is-center-admin.is-dark .ca-topbar-add,
+.is-center-admin.is-dark .ca-topbar-quick { color: #101113; }
+.is-center-admin.is-dark .faculty-btn-delete { color: #ff8a80; border-color: rgba(255, 138, 128, 0.5); }
+.is-center-admin.is-dark .ca-topbar-add-btn { background: #f1eee6; color: #101113; }
+.is-center-admin.is-dark .ca-topbar-add-btn:hover { background: var(--va-amber); }

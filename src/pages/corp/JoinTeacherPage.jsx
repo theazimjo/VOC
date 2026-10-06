@@ -7,6 +7,7 @@ import { setPendingTeacherJoinCode, clearPendingTeacherJoinCode } from '../../ut
 import IosSpinner from '../../components/common/IosSpinner';
 import VocLogo from '../../components/common/VocLogo';
 import './JoinGroupPage.css';
+import './vocabry-public.css';
 
 // Public landing for a center admin's teacher invite link (/join-teacher/:code)
 // — the teacher-side twin of JoinGroupPage. A signed-out visitor sees which

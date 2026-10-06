@@ -11,6 +11,7 @@ import '../../pages/corp/super-admin/sa.css';
 import '../../pages/corp/center-admin/theme.css';
 import '../../pages/corp/center-admin/uits.css';
 import '../../pages/corp/center-admin/vocabry.css';
+import { usePanelTheme } from '../../pages/corp/center-admin/usePanelTheme';
 
 // The same shell as the center admin panel (CorpAdminLayout): sidebar,
 // topbar, always-light theme, centered sheets. `is-center-admin` is the
@@ -18,6 +19,7 @@ import '../../pages/corp/center-admin/vocabry.css';
 // teacher panel carries it too. Both panels are English (PanelLanguageContext).
 export default function TeacherLayout() {
   const identity = useOutletContext();
+  const theme = usePanelTheme();
 
   const value = useMemo(() => (identity?.centerId ? {
     centerId: identity.centerId,
@@ -41,7 +43,7 @@ export default function TeacherLayout() {
       <SheetPlacementContext.Provider value="center">
       <PageStyleContext.Provider value="toolbar">
       <PanelLanguageContext.Provider value="en">
-      <div className="corp-admin-layout sa-layout ca-theme is-center-admin is-teacher-panel">
+      <div className={`corp-admin-layout sa-layout ca-theme is-center-admin is-teacher-panel${theme === 'dark' ? ' is-dark' : ''}`}>
         <TeacherSidebar />
 
         <main className="corp-admin-main-pane">

@@ -7,6 +7,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import VocLogo from '../common/VocLogo';
 import { setActiveProfile } from '../../utils/activeProfile';
 import './ProfileChooser.css';
+import '../../pages/corp/vocabry-public.css';
 
 // Shown once per device after a dual-profile account (personal + teacher)
 // signs in with no stored preference yet — picking a card here is what

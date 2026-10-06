@@ -9,6 +9,7 @@ import { setPendingJoinCode, clearPendingJoinCode } from '../../utils/pendingJoi
 import IosSpinner from '../../components/common/IosSpinner';
 import VocLogo from '../../components/common/VocLogo';
 import './JoinGroupPage.css';
+import './vocabry-public.css';
 
 // Public landing for a teacher's invite link / QR code (/join/:code). A
 // signed-out visitor sees which group they're joining and is sent through
