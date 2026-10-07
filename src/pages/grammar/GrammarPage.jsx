@@ -118,7 +118,11 @@ export default function GrammarPage() {
               activeLevel === lvl.id ? 'active' : '',
               lvl.locked ? 'locked' : '',
             ].filter(Boolean).join(' ')}
-            onClick={() => !lvl.locked && setActiveLevel(lvl.id)}
+            onClick={(e) => {
+              if (lvl.locked) return;
+              setActiveLevel(lvl.id);
+              e.currentTarget.scrollIntoView?.({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+            }}
             disabled={lvl.locked}
             title={lvl.locked ? t('grammar.comingSoonDots') : lvl.label}
           >

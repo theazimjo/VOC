@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useCorpRole } from '../../hooks/useCorpRole';
 import { useStaffRole } from '../../hooks/useStaffRole';
+import { isSuperAdminEmail } from '../../components/corp/SuperRoleSwitcher';
+import { clearActiveRole, clearViewAs } from '../../utils/activeRole';
 import { useDailyNewWordLimit } from '../../hooks/useDailyNewWordLimit';
 import {
   Moon, Volume2, BookOpen, Bell, Clock, Check, ChevronRight, Type,
@@ -15,7 +16,6 @@ import './Settings.css';
 export default function Settings() {
   const { user, changePassword, resetPassword } = useAuth();
   const { identity } = useCorpRole();
-  const navigate = useNavigate();
 
   const { staffRole, openStaffPanel } = useStaffRole();
   const { t } = useLanguage();
@@ -231,14 +231,14 @@ export default function Settings() {
       )}
 
       {/* SECTION: ADMIN ACCESS (super admins only) */}
-      {identity?.role === 'super_admin' && (
+      {(identity?.role === 'super_admin' || isSuperAdminEmail(user?.email)) && (
         <>
           <div className="ios-settings-header">Boshqaruv</div>
           <div className="ios-settings-section">
             <div
               className="ios-settings-row"
               style={{ cursor: 'pointer' }}
-              onClick={() => navigate('/corp/super-admin')}
+              onClick={() => { clearViewAs(); clearActiveRole(); window.location.assign('/corp/super-admin'); }}
             >
               <div className="ios-settings-left">
                 <div className="ios-icon-box" style={{ background: '#5856d6' }}>

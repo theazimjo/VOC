@@ -8,6 +8,7 @@ import { useTheme } from '../../../contexts/ThemeContext';
 import { useAuth } from '../../../contexts/AuthContext';
 import ConfirmSheet from '../../../components/corp/ConfirmSheet';
 import { Page, Row, Section, Toggle } from './ui';
+import SuperRoleSwitcher from '../../../components/corp/SuperRoleSwitcher';
 import { useToast } from './useToast';
 
 export default function SuperAdminSettings() {
@@ -89,6 +90,8 @@ export default function SuperAdminSettings() {
             accessory={<Toggle checked={theme === 'android'} onChange={(on) => setTheme(on ? 'android' : 'ios')} label="Tungi rejim" />}
           />
         </Section>
+
+        <SuperRoleSwitcher />
 
         <Section title="Hisob">
           <Row icon={<ShieldCheck size={16} />} iconTone="blue" title="Super admin" subtitle={email} />

@@ -12,6 +12,7 @@ import { useTheme } from '../../../contexts/ThemeContext';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import { useStudentT } from '../../../hooks/useStudentT';
 import { useRoleSwitch, ROLE_LABEL } from '../../../hooks/useRoleSwitch';
+import { isSuperAdminEmail } from '../../../components/corp/SuperRoleSwitcher';
 import { useAvatar } from '../../../hooks/useAvatar';
 import './StudentCorpProfile.css';
 
@@ -34,7 +35,7 @@ export default function StudentCorpProfile() {
   const { language, setLanguage, languages } = useLanguage();
   const { t } = useStudentT();
   const { roles: allRoles, switchTo } = useRoleSwitch();
-  const staffRoles = allRoles.filter((r) => r !== 'student');
+  const staffRoles = isSuperAdminEmail(user?.email) ? allRoles.filter((r) => r === 'super_admin') : [];
   const themeName = (id, fallback) => (THEME_KEYS[id] ? t(THEME_KEYS[id]) : fallback);
 
   const [activeSheet, setActiveSheet] = useState(null); // 'theme', 'font', 'lang' or null

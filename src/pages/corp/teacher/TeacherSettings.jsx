@@ -14,6 +14,7 @@ import GoogleLinkRows from '../super-admin/GoogleLinkRows';
 import { useToast } from '../super-admin/useToast';
 import { useTeacherData } from './TeacherDataContext';
 import AppearanceCard from '../center-admin/AppearanceCard';
+import SuperRoleSwitcher from '../../../components/corp/SuperRoleSwitcher';
 
 const TABS = [
   { id: 'profile', label: 'Profile', icon: UserRound },
@@ -162,6 +163,7 @@ export default function TeacherSettings() {
 
       {tab === 'account' && (
         <div className="ca-stack">
+          <SuperRoleSwitcher />
           <AppearanceCard />
           <section className="ca-card">
             <div className="ca-card-head">

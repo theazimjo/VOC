@@ -1348,35 +1348,3 @@ export async function getPlatformUser(uid) {
     activeMembership: u.groupMembership || null,
   };
 }
-
-/**
- * Center Admin: also act as a teacher at the same center. Creates a teacher
- * record linked to the admin's own uid (role 'admin', like an admin who was
- * once a teacher — see changeTeacherRole) and remembers its id on
- * corpUsers/{uid}.teacherId, which is what lets the account switch into the
- * teacher panel. No second login is created. Returns the teacher id.
- */
-export async function enableAdminTeaching(centerId, uid, { name, email }) {
-  const existing = await get(ref(db, `corpUsers/${uid}/teacherId`));
-  if (existing.exists()) return existing.val();
-
-  const teacherRef = push(ref(db, `centers/${centerId}/teachers`));
-  const teacherId = teacherRef.key;
-  const now = new Date().toISOString();
-  await set(teacherRef, {
-    id: teacherId,
-    uid,
-    centerId,
-    name: name || email || 'Teacher',
-    email: email || '',
-    phone: '',
-    subject: 'Ingliz tili',
-    status: 'active',
-    role: 'admin',
-    createdAt: now,
-    invitedAt: now,
-    acceptedAt: now,
-  });
-  await update(ref(db, `corpUsers/${uid}`), { teacherId, teacherName: name || email || 'Teacher' });
-  return teacherId;
-}

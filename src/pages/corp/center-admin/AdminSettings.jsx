@@ -11,6 +11,7 @@ import GoogleLinkRows from '../super-admin/GoogleLinkRows';
 import ChangePasswordSheet from './ChangePasswordSheet';
 import { useCenterData } from './CenterDataContext';
 import AppearanceCard from './AppearanceCard';
+import SuperRoleSwitcher from '../../../components/corp/SuperRoleSwitcher';
 
 const TABS = [
   { id: 'center', label: 'Center', icon: Building2 },
@@ -135,6 +136,7 @@ export default function AdminSettings() {
 
       {tab === 'account' && (
         <div className="ca-stack">
+          <SuperRoleSwitcher />
           <AppearanceCard />
           <section className="ca-card">
             <div className="ca-card-head">
