@@ -7,7 +7,6 @@ import { useDailyReminder } from '../../hooks/useDailyReminder';
 import { useAppBadge } from '../../hooks/useAppBadge';
 import { useGroupMode } from '../../hooks/useGroupMode';
 import FullScreenLoader from '../common/FullScreenLoader';
-import { SuperAdminReturnBar } from '../corp/ViewAsBanner';
 import './Layout.css';
 
 export default function Layout() {
@@ -67,7 +66,6 @@ export default function Layout() {
             : 'layout-content--expanded'
         } ${isIndividualMode ? 'layout-content--dashboard layout-content--themed-bg' : ''}`}
       >
-        {!isFullscreenMode && appMode !== 'group' && <SuperAdminReturnBar mode="personal" />}
         <Outlet />
       </main>
 
