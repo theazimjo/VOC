@@ -105,6 +105,7 @@ export default function TopicDetailView({ p }) {
                     </button>
                     {modesOpen && (
                       <div className="practice-split-menu" role="menu">
+                        <div className="practice-split-title">{t('practice.chooseExercise')}</div>
                         {PRACTICE_MENU.map(({ mode, icon, label }) => {
                           const tooFew = unitWords.length < (PRACTICE_MODE_MIN_WORDS[mode] || 1);
                           return (
@@ -113,6 +114,7 @@ export default function TopicDetailView({ p }) {
                               type="button"
                               role="menuitem"
                               className="practice-split-item"
+                              data-mode={mode}
                               disabled={tooFew}
                               onClick={() => { setModesOpen(false); startPractice(virtualPack(), mode); }}
                             >
