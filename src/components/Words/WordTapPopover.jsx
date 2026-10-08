@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Plus, X, Check, ChevronDown, Volume2, BookOpen, Sparkles, Eye } from 'lucide-react';
 import { speechLanguages, speakWord } from '../../utils/helpers';
-import { lookupWordFromDictionary, fetchWordMeanings, toShortLangCode } from '../../utils/dictionaryService';
+import { lookupWordFromDictionary, fetchWordMeanings, quickTranslate, toShortLangCode } from '../../utils/dictionaryService';
 import { useLanguage } from '../../contexts/LanguageContext';
 import IosSpinner from '../common/IosSpinner';
 import './WordTapPopover.css';
@@ -144,8 +144,26 @@ export default function WordTapPopover({
         : Promise.resolve(null)
     ];
 
-    Promise.all(tasks)
-      .then(([res, mList, wikiData]) => {
+    // Show a translation as soon as the quick call answers; the full lookup
+    // (context, cross-check, dictionary) refines it when it arrives.
+    let fullDone = false;
+    if (!existingWord) {
+      quickTranslate(word, wordLangCode, translationLangCode).then((quick) => {
+        if (cancelledRef.current || fullDone || !quick) return;
+        setTranslation(quick);
+        setIsLoading(false);
+      });
+    }
+
+    // Meanings and the picture arrive on their own, without holding up the translation
+    tasks[1].then((mList) => { if (!cancelledRef.current && Array.isArray(mList)) setMeanings(mList); });
+    tasks[2].then((wikiData) => {
+      if (!cancelledRef.current && wikiData?.thumbnail?.source) setWordImage({ src: wikiData.thumbnail.source, alt: wikiData.title || word });
+    });
+
+    tasks[0]
+      .then((res) => {
+        fullDone = true;
         if (cancelledRef.current) return;
         if (res?.translation) {
           setTranslation(res.translation);
@@ -155,17 +173,13 @@ export default function WordTapPopover({
           setExample(res.example || '');
           setPhonetic(res.phonetic || '');
         } else if (!existingWord) {
-          // Only show error if there's no cached data to fall back on
-          setLookupError(true);
-        }
-        if (Array.isArray(mList)) {
-          setMeanings(mList);
-        }
-        if (wikiData?.thumbnail?.source) {
-          setWordImage({ src: wikiData.thumbnail.source, alt: wikiData.title || word });
+          // keep the quick translation if there is one; only a miss on both is an error
+          quickTranslate(word, wordLangCode, translationLangCode).then((quick) => {
+            if (!cancelledRef.current && !quick) setLookupError(true);
+          });
         }
       })
-      .catch(() => { if (!cancelledRef.current && !existingWord) setLookupError(true); })
+      .catch(() => { fullDone = true; if (!cancelledRef.current && !existingWord) setLookupError(true); })
       .finally(() => { if (!cancelledRef.current) setIsLoading(false); });
 
     return () => { cancelledRef.current = true; };

@@ -144,6 +144,21 @@ async function translateWord(query, fromLang, toLang) {
   }
 }
 
+// One Google call, remembered for the session: lets the word popover show a
+// translation straight away while the fuller lookup (context, cross-check,
+// dictionary) is still running.
+const quickCache = new Map();
+export function quickTranslate(query, fromLang, toLang) {
+  const key = `${fromLang}|${toLang}|${(query || '').trim().toLowerCase()}`;
+  if (!quickCache.has(key)) {
+    quickCache.set(key, translateWord(query, fromLang, toLang).then((r) => {
+      if (!r) quickCache.delete(key);
+      return r;
+    }, () => { quickCache.delete(key); return ''; }));
+  }
+  return quickCache.get(key);
+}
+
 function normalizeForComparison(s) {
   return (s || '').trim().toLowerCase().replace(/['’‘`]/g, "'");
 }
