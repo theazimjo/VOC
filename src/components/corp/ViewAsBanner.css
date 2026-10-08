@@ -3,3 +3,5 @@
 .va-banner span { flex: 1; min-width: 0; }
 .va-banner button { flex-shrink: 0; padding: 4px 12px; border: 1px solid rgba(246, 244, 237, 0.4); border-radius: 8px; background: transparent; color: inherit; font: inherit; font-weight: 700; cursor: pointer; }
 .va-banner button:hover { background: rgba(246, 244, 237, 0.12); }
+.va-banner--inline { position: static; margin-bottom: 12px; border-radius: 10px; flex-wrap: wrap; }
+.va-banner button:disabled { opacity: 0.5; cursor: default; }
