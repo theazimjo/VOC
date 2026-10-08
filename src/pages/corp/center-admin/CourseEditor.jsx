@@ -214,7 +214,6 @@ export default function CourseEditor({ centerId, course, onBack, onUpdate, onSet
           <ChapterReader
             reading={readingForUnit(unit)}
             onClose={() => setReaderOpen(false)}
-            labels={{ close: 'Close', prev: 'Previous', next: 'Next', loading: 'Loading…', missing: "This chapter's text isn't available.", activity: 'Activity', summary: 'Summary', review: 'Review' }}
           />
         )}
         <WordGrid

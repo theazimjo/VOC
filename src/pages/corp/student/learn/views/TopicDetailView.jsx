@@ -189,7 +189,6 @@ export default function TopicDetailView({ p }) {
               <ChapterReader
                 reading={reading}
                 onClose={() => setReaderOpen(false)}
-                labels={{ done: t('words.readDone'), smaller: t('words.readSmaller'), larger: t('words.readLarger'), close: t('words.readClose'), prev: t('words.readPrev'), next: t('words.readNext'), loading: t('words.readLoading'), missing: t('words.readMissing'), activity: t('words.readActivity'), summary: t('words.readSummary'), review: t('words.readReview') }}
               />
             )}
     </>

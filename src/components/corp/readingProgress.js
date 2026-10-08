@@ -13,17 +13,3 @@ export function getReadingProgress(reading) {
 export function saveReadingProgress(reading, page, total) {
   try { localStorage.setItem(key(reading), JSON.stringify({ page, total })); } catch { /* storage full or blocked */ }
 }
-
-const SIZE_KEY = 'voc-reader-size';
-export const READER_SIZES = [0.9, 1, 1.12, 1.26, 1.42];
-
-export function getReaderSize() {
-  try {
-    const n = Number(localStorage.getItem(SIZE_KEY));
-    return Number.isInteger(n) && n >= 0 && n < READER_SIZES.length ? n : 1;
-  } catch { return 1; }
-}
-
-export function saveReaderSize(n) {
-  try { localStorage.setItem(SIZE_KEY, String(n)); } catch { /* storage blocked */ }
-}

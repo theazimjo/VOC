@@ -425,8 +425,8 @@ export default function WordTapPopover({
           )}
         </div>
 
-        {/* Footer Target Chapter & Action Button */}
-        <div className="wtp-footer-block">
+        {/* Footer Target Chapter & Action Button (look-up only when there is nowhere to add the word) */}
+        {onAdd && <div className="wtp-footer-block">
           {existingWord ? (
             <div className="wtp-existing-note">
               {t('read.alreadyInPackNote')}
@@ -449,7 +449,7 @@ export default function WordTapPopover({
               <><Plus size={15} /> {existingWord ? t('read.reAddBtn') : t('read.addToChapterBtn')}</>
             )}
           </button>
-        </div>
+        </div>}
       </motion.div>
     </>
   );
