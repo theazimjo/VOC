@@ -147,21 +147,6 @@ export default function StudentCorpProfile() {
               </div>
             </div>
 
-            {staffRoles.map((r) => (
-              <div key={r} className="corp-profile-appearance-row" style={{ cursor: 'pointer' }} onClick={() => switchTo(r)}>
-                <div className="corp-profile-appearance-row-left">
-                  <div className="corp-profile-appearance-icon" style={{ background: '#101113' }}>
-                    <Repeat size={15} strokeWidth={2.2} />
-                  </div>
-                  <span className="corp-profile-appearance-title">{t('profile.switchRole')}</span>
-                </div>
-                <div className="corp-profile-appearance-right">
-                  <span className="corp-profile-appearance-detail">{ROLE_LABEL[r]}</span>
-                  <ChevronRight size={14} className="corp-profile-appearance-chevron" />
-                </div>
-              </div>
-            ))}
-
             <div className="corp-profile-appearance-row" style={{ cursor: 'pointer' }} onClick={() => setActiveSheet('lang')}>
               <div className="corp-profile-appearance-row-left">
                 <div className="corp-profile-appearance-icon" style={{ background: '#34c759' }}>
@@ -200,6 +185,16 @@ export default function StudentCorpProfile() {
               <span className="corp-profile-tile-text">{t('profile.personalMode')}</span>
               <ChevronRight className="corp-profile-tile-arrow" size={16} strokeWidth={2.5} />
             </div>
+
+            {staffRoles.map((r) => (
+              <div key={r} className="corp-profile-tile" onClick={() => switchTo(r)}>
+                <div className="corp-profile-tile-icon" style={{ background: '#101113' }}>
+                  <Repeat size={17} strokeWidth={2.2} />
+                </div>
+                <span className="corp-profile-tile-text">{ROLE_LABEL[r]} panel</span>
+                <ChevronRight className="corp-profile-tile-arrow" size={16} strokeWidth={2.5} />
+              </div>
+            ))}
 
             <div className="corp-profile-tile danger" onClick={() => setShowLogoutModal(true)}>
               <div className="corp-profile-tile-icon" style={{ background: 'var(--error, #ff3b30)' }}>

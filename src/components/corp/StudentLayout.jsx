@@ -4,8 +4,6 @@ import { ref, get, update, onValue } from 'firebase/database';
 import { db } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
 import { useGroupMode } from '../../hooks/useGroupMode';
-import { SUPER_ADMINS } from '../../hooks/useCorpRole';
-import { SuperAdminReturnBar } from './ViewAsBanner';
 import { getGroup, getCenterCustomPacks } from '../../services/corpService';
 import StudentSidebar from './StudentSidebar';
 import StudentBottomNav from './StudentBottomNav';
@@ -167,7 +165,6 @@ export default function StudentLayout() {
         
         {/* Main Content Pane */}
         <main className="corp-admin-main-pane" style={{ flex: 1, paddingTop: 'var(--navbar-height)' }}>
-          {user?.email && SUPER_ADMINS.includes(user.email.toLowerCase()) && <SuperAdminReturnBar />}
           <Outlet context={contextValue} />
         </main>
       </div>

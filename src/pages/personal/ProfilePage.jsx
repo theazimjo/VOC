@@ -3,14 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   LogOut, ChevronRight, Mail, Pencil, X, Check,
-  Moon, Type, Volume2, Globe, Users, AlertCircle, CheckCircle2, Presentation, Building2
+  Moon, Type, Volume2, Globe, Users, AlertCircle, CheckCircle2, Presentation, Building2, GraduationCap, Shield
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useAvatar } from '../../hooks/useAvatar';
 import { useStaffRole } from '../../hooks/useStaffRole';
-import { joinGroupAsUser } from '../../services/corpService';
+import { joinGroupAsUser, switchActiveGroup } from '../../services/corpService';
+import { useGroupMode } from '../../hooks/useGroupMode';
+import { isSuperAdminEmail } from '../../components/corp/SuperRoleSwitcher';
+import { clearActiveRole, clearViewAs, ROLE_HOME } from '../../utils/activeRole';
 import '../corp/student/StudentCorpProfile.css';
 
 const AVATAR_COLORS = ['#0A84FF', '#30D158', '#FF9500', '#AF52DE', '#FF375F', '#5AC8FA'];
@@ -35,6 +38,21 @@ export default function ProfilePage() {
   };
   const { avatarSrc, avatarError } = useAvatar(user?.photoURL);
   const { staffRole, staffLabel, openStaffPanel } = useStaffRole();
+  const { membership } = useGroupMode();
+  const superAdmin = isSuperAdminEmail(user?.email);
+
+  // Super admin accounts: their own student profile and the admin panel.
+  const openStudent = async () => {
+    try { await switchActiveGroup(user.uid, membership.groupId); } catch (err) { console.error(err); }
+    clearViewAs();
+    clearActiveRole();
+    window.location.assign(ROLE_HOME.student);
+  };
+  const openSuperAdmin = () => {
+    clearViewAs();
+    clearActiveRole();
+    window.location.assign(ROLE_HOME.super_admin);
+  };
 
   const [activeSheet, setActiveSheet] = useState(null); // 'theme', 'font', or null
   const closeSheet = () => setActiveSheet(null);
@@ -210,6 +228,24 @@ export default function ProfilePage() {
               {staffRole === 'teacher' ? <Presentation size={17} strokeWidth={2.2} /> : <Building2 size={17} strokeWidth={2.2} />}
             </div>
             <span className="corp-profile-tile-text">{staffLabel}ga o'tish</span>
+            <ChevronRight size={16} className="corp-profile-appearance-chevron" style={{ marginLeft: 'auto' }} />
+          </div>
+        )}
+        {superAdmin && membership && (
+          <div className="corp-profile-tile" onClick={openStudent}>
+            <div className="corp-profile-tile-icon" style={{ background: '#ff9500' }}>
+              <GraduationCap size={17} strokeWidth={2.2} />
+            </div>
+            <span className="corp-profile-tile-text">Student profile{membership.groupName ? ` · ${membership.groupName}` : ''}</span>
+            <ChevronRight size={16} className="corp-profile-appearance-chevron" style={{ marginLeft: 'auto' }} />
+          </div>
+        )}
+        {superAdmin && (
+          <div className="corp-profile-tile" onClick={openSuperAdmin}>
+            <div className="corp-profile-tile-icon" style={{ background: '#101113' }}>
+              <Shield size={17} strokeWidth={2.2} />
+            </div>
+            <span className="corp-profile-tile-text">Super admin panel</span>
             <ChevronRight size={16} className="corp-profile-appearance-chevron" style={{ marginLeft: 'auto' }} />
           </div>
         )}

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Building2, GraduationCap, Shield, Users } from 'lucide-react';
+import { Building2, GraduationCap, Shield, User, Users } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { SUPER_ADMINS } from '../../hooks/useCorpRole';
 import { useRoleSwitch } from '../../hooks/useRoleSwitch';
-import { getAllCenters, joinGroupAsUser, switchActiveGroup } from '../../services/corpService';
+import { getAllCenters, joinGroupAsUser, setAppMode, switchActiveGroup } from '../../services/corpService';
 import { useGroupMode } from '../../hooks/useGroupMode';
 import { clearActiveRole, clearViewAs, ROLE_HOME, setViewAs } from '../../utils/activeRole';
 import { LoadingRows, Row, Section, Sheet } from '../../pages/corp/super-admin/ui';
@@ -77,6 +77,15 @@ export default function SuperRoleSwitcher() {
     }
   };
 
+  // The account's own personal app (no group, no panel).
+  const openPersonal = async () => {
+    setBusy(true);
+    try { await setAppMode(user.uid, 'individual'); } catch (err) { console.error(err); }
+    clearViewAs();
+    clearActiveRole();
+    go('personal');
+  };
+
   const now = identity?.viewAs ? identity.role : current;
   const title = pick ? { center_admin: 'Center admin of…', teacher: 'Teacher at…', student: 'Student in…' }[pick.role] : '';
   const centerList = (centers || []).filter((c) => c.status !== 'suspended');
@@ -102,6 +111,7 @@ export default function SuperRoleSwitcher() {
         ) : (
           <Row icon={<GraduationCap size={16} />} iconTone="orange" title="Student" subtitle="Join a group to get a student profile" onClick={() => setPick({ role: 'student' })} />
         )}
+        <Row icon={<User size={16} />} iconTone="gray" title="Personal" subtitle="Your own learning app" detail={busy ? 'Opening…' : 'Open'} onClick={busy ? undefined : openPersonal} />
       </Section>
       {error && !pick && <p className="sa-section-footer" role="alert">{error}</p>}
 
