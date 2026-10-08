@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import PracticeHub from '../../../../../components/Practice/PracticeHub';
-import { IRREGULAR_VERBS_PACK_ID } from '../../../../../data/irregularVerbsCorpPack';
+import { IRREGULAR_VERBS_PACK_ID } from '../../../../../data/irregularVerbsId';
 import { useStudentT } from '../../../../../hooks/useStudentT';
 
 export default function ModeSelectView({ p }) {

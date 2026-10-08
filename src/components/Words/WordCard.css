@@ -13,7 +13,11 @@
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   position: relative;
   box-shadow: var(--shadow);
+  animation: word-card-in 0.2s ease both;
 }
+
+@keyframes word-card-in { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .word-card { animation: none; } }
 
 .word-card:hover {
   border-color: var(--accent-1);

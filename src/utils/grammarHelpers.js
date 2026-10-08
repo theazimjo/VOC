@@ -79,11 +79,12 @@ export function getExerciseType(exerciseId, t) {
   return types[parseInt(exerciseId, 10)] || types[1];
 }
 
-import { grammarData } from '../data/grammarData.js';
+import { getLoadedGrammar } from '../data/grammarLevels.js';
 
 export function findGrammarTopic(level, topicId) {
   if (!topicId) return null;
-  const datasets = [grammarData];
+  // only the levels that have been loaded (see GrammarLevelGate)
+  const datasets = [getLoadedGrammar()];
 
   // 1. Try finding in the specified level across datasets
   if (level) {

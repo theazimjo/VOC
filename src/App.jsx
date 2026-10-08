@@ -39,6 +39,7 @@ const GrammarPage = lazyWithRetry(() => import('./pages/grammar/GrammarPage'));
 const GrammarTopic = lazyWithRetry(() => import('./pages/grammar/GrammarTopic'));
 const GrammarExercises = lazyWithRetry(() => import('./pages/grammar/GrammarExercises'));
 const GrammarGuide = lazyWithRetry(() => import('./pages/grammar/GrammarGuide'));
+const GrammarLevelGate = lazyWithRetry(() => import('./pages/grammar/GrammarLevelGate'));
 const GrammarTest = lazyWithRetry(() => import('./pages/grammar/GrammarTest'));
 const GeneralGrammarTest = lazyWithRetry(() => import('./pages/grammar/GeneralGrammarTest'));
 const GrammarPath = lazyWithRetry(() => import('./pages/grammar/GrammarPath'));
@@ -162,9 +163,9 @@ export default function App() {
                         <Route path="/grammar/path/lesson/:lessonId" element={<GrammarPathLesson />} />
                         <Route path="/grammar/path/practice/:lessonId" element={<GrammarPathPractice />} />
                         <Route path="/grammar/path/review/:sectionId" element={<GrammarPathReview />} />
-                        <Route path="/grammar/:level/:topicId" element={<GrammarExercises />} />
-                        <Route path="/grammar/:level/:topicId/guide" element={<GrammarGuide />} />
-                        <Route path="/grammar/:level/:topicId/:exerciseId" element={<GrammarTopic />} />
+                        <Route path="/grammar/:level/:topicId" element={<GrammarLevelGate><GrammarExercises /></GrammarLevelGate>} />
+                        <Route path="/grammar/:level/:topicId/guide" element={<GrammarLevelGate><GrammarGuide /></GrammarLevelGate>} />
+                        <Route path="/grammar/:level/:topicId/:exerciseId" element={<GrammarLevelGate><GrammarTopic /></GrammarLevelGate>} />
                         <Route path="/grammar-test" element={<GrammarTest />} />
                         <Route path="/grammar-test/run/:testId" element={<GrammarTest />} />
                         <Route path="/experiment" element={<MemoryLab />} />

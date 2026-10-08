@@ -240,3 +240,5 @@
     padding: 10px 12px;
   }
 }
+
+.word-list-sentinel { height: 1px; width: 100%; grid-column: 1 / -1; }

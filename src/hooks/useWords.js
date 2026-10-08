@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { ref, set, push, update, remove, get, onValue, runTransaction } from 'firebase/database';
 import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
@@ -14,9 +14,14 @@ function decayWordsMastery(wordsList) {
 
 export function useWords(collectionType, collectionId) {
   const { user } = useAuth();
+  // Which cache key the current `words` state was read from, so the effect
+  // below does not parse the same (possibly huge) cache a second time.
+  const seededKeyRef = useRef(null);
   const [words, setWords] = useState(() => {
     if (typeof window !== 'undefined' && user && collectionType && collectionId) {
-      const cached = localStorage.getItem(`voc-cache-words-${user.uid}-${collectionType}-${collectionId}`);
+      const key = `voc-cache-words-${user.uid}-${collectionType}-${collectionId}`;
+      const cached = localStorage.getItem(key);
+      seededKeyRef.current = key;
       return cached ? decayWordsMastery(JSON.parse(cached)) : [];
     }
     return [];
@@ -51,7 +56,10 @@ export function useWords(collectionType, collectionId) {
     const cacheKey = `voc-cache-words-${user.uid}-${collectionType}-${collectionId}`;
     const cached = localStorage.getItem(cacheKey);
     if (cached) {
-      setWords(decayWordsMastery(JSON.parse(cached)));
+      if (seededKeyRef.current !== cacheKey) {
+        setWords(decayWordsMastery(JSON.parse(cached)));
+        seededKeyRef.current = cacheKey;
+      }
       setLoading(false);
     } else {
       setLoading(true);
@@ -59,6 +67,7 @@ export function useWords(collectionType, collectionId) {
 
     let unsubscribe = () => {};
     let cancelled = false;
+    let cacheTimer = null;
 
     const start = async () => {
       // One-time, idempotent migration of this pack's legacy nested words
@@ -109,11 +118,17 @@ export function useWords(collectionType, collectionId) {
             }
           }
 
-          // Sort by addedAt descending
-          wordsData.sort((a, b) => new Date(b.addedAt || 0) - new Date(a.addedAt || 0));
+          // Sort by addedAt descending (dates parsed once, not per comparison)
+          const stamp = new Map(wordsData.map(w => [w.id, Date.parse(w.addedAt) || 0]));
+          wordsData.sort((a, b) => stamp.get(b.id) - stamp.get(a.id));
 
-          // Cache raw data
-          localStorage.setItem(cacheKey, JSON.stringify(wordsData));
+          // Cache raw data. Stringifying thousands of words blocks the main
+          // thread, and every review during practice triggers a snapshot, so
+          // the write is debounced instead of done on every change.
+          clearTimeout(cacheTimer);
+          cacheTimer = setTimeout(() => {
+            try { localStorage.setItem(cacheKey, JSON.stringify(wordsData)); } catch { /* storage full */ }
+          }, 1500);
 
           setWords(decayWordsMastery(wordsData));
           setLoading(false);
@@ -129,6 +144,7 @@ export function useWords(collectionType, collectionId) {
 
     return () => {
       cancelled = true;
+      clearTimeout(cacheTimer);
       unsubscribe();
     };
   }, [user, collectionType, collectionId, getWordsRef, getWordCountRef]);

@@ -1,12 +1,8 @@
 import { marketPacks } from './marketData';
 import { IRREGULAR_VERB_GROUPS, getIrregularVerbGroup } from './irregularVerbGroups';
+import { IRREGULAR_VERBS_PACK_ID } from './irregularVerbsId';
 
-// Canonical pack id — used both as the corp customPacks key (same id in
-// every center, see corpService.ensureIrregularVerbsPack) and as the
-// flat word-storage key (see utils/helpers.corpWordStorageId) so a
-// student's mastery on a given verb is one shared record no matter which
-// group/center/individual pack it was practiced through.
-export const IRREGULAR_VERBS_PACK_ID = 'irregular-verbs';
+export { IRREGULAR_VERBS_PACK_ID };
 
 const SOURCE = marketPacks.find((p) => p.id === IRREGULAR_VERBS_PACK_ID);
 const SOURCE_WORDS = SOURCE?.words || [];

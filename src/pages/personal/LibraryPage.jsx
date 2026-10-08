@@ -16,10 +16,10 @@ import FolderForm from '../../components/Packs/FolderForm';
 import MarketPackPreviewModal from '../../components/Packs/MarketPackPreviewModal';
 import { packIcons } from '../../utils/helpers';
 import { playSound } from '../../utils/feedback';
-import { marketPacks } from '../../data/marketData';
+import { useMarketPacks } from '../../hooks/useMarketPacks';
 import { getMissingMarketWords } from '../../utils/marketSync';
 import { findKnownSnapshot } from '../../utils/crossPackKnowledge';
-import { IRREGULAR_VERBS_PACK_ID } from '../../data/irregularVerbsCorpPack';
+import { IRREGULAR_VERBS_PACK_ID } from '../../data/irregularVerbsId';
 import IosSpinner from '../../components/common/IosSpinner';
 import './LibraryPage.css';
 
@@ -27,6 +27,7 @@ export default function LibraryPage() {
   const { user } = useAuth();
   const { t } = useLanguage();
   const { books, loading: booksLoading } = useBooks(); // Loaded strictly for automatic migration
+  const marketPacks = useMarketPacks();
   const {
     packs: allPacks, loading: packsLoading, addPack, updatePack, deletePack, allWords,
     folders, addFolder, updateFolder, deleteFolder
@@ -128,7 +129,7 @@ export default function LibraryPage() {
       count: counts[catKey] || 0,
       icon: categoryIcons[catKey] || '🏷️'
     }));
-  }, [getCategoryLabel]);
+  }, [getCategoryLabel, marketPacks]);
 
   // Filtered market packs based on search query, category, level, and status
   const filteredMarketPacks = useMemo(() => {
@@ -162,7 +163,7 @@ export default function LibraryPage() {
 
       return true;
     });
-  }, [marketSearchQuery, activeCategory, activeLevel, activeStatus, packs, justInstalledIds]);
+  }, [marketPacks, marketSearchQuery, activeCategory, activeLevel, activeStatus, packs, justInstalledIds]);
 
   // Words already present in the user's installed copy of a market pack,
   // used to figure out which market words are new.
@@ -493,9 +494,11 @@ export default function LibraryPage() {
               <motion.div className="active-tab-pill" layoutId="activeTabPill" />
             )}
             <span className="tab-label">🛒 {t('library.market')}</span>
-            <span className="tab-count-badge">
-              {marketPacks.length}
-            </span>
+            {marketPacks.length > 0 && (
+              <span className="tab-count-badge">
+                {marketPacks.length}
+              </span>
+            )}
           </button>
         </div>
       </div>

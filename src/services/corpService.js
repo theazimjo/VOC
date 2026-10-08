@@ -2,7 +2,7 @@ import { ref, set, get, update, push, remove, runTransaction, increment } from '
 import { createUserWithEmailAndPassword, sendPasswordResetEmail, signOut } from 'firebase/auth';
 import { db, auth } from '../firebase';
 import { getSecondaryAuth } from '../firebaseSecondary';
-import { IRREGULAR_VERBS_PACK_ID, IRREGULAR_VERBS_CORP_PACK } from '../data/irregularVerbsCorpPack';
+import { IRREGULAR_VERBS_PACK_ID } from '../data/irregularVerbsId';
 
 // Helper to generate unique 6-digit join PIN
 function generateJoinCode() {
@@ -840,6 +840,8 @@ export async function getCenterCustomPacks(centerId) {
  * to those (via CustomPackEditor) are left alone on later calls.
  */
 export async function ensureIrregularVerbsPack(centerId) {
+  // loaded on demand: building the pack pulls in the whole market word bank
+  const { IRREGULAR_VERBS_CORP_PACK } = await import('../data/irregularVerbsCorpPack');
   const packRef = ref(db, `centers/${centerId}/customPacks/${IRREGULAR_VERBS_PACK_ID}`);
   const snap = await get(packRef);
 

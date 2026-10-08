@@ -3,7 +3,7 @@
  */
 
 import { getDecayedMastery } from '@voc/memory-engine';
-import { IRREGULAR_VERBS_PACK_ID } from '../data/irregularVerbsCorpPack';
+import { IRREGULAR_VERBS_PACK_ID } from '../data/irregularVerbsId';
 
 /**
  * Shuffle an array (Fisher-Yates algorithm)

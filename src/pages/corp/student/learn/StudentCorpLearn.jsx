@@ -1,8 +1,7 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { useOutletContext, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ref, onValue } from 'firebase/database';
-import { db } from '../../../../firebase';
+import { usePacks } from '../../../../hooks/usePacks';
 import { getDecayedMastery, computeRetentionStats } from '@voc/memory-engine';
 import { getConfusionPairs } from '../../../../experiment/experimentDB';
 import { corpWordStorageId } from '../../../../utils/helpers';
@@ -17,6 +16,8 @@ import '../../../personal/PackDetail.css';
 import './shared.css';
 import '../../../personal/LibraryPage.css';
 import './StudentCorpLearn.css';
+
+const EMPTY_WORDS = {};
 
 export default function StudentCorpLearn() {
   const { t } = useStudentT();
@@ -63,34 +64,12 @@ export default function StudentCorpLearn() {
       : null;
   }, [selectedMonth, unitId]);
 
-  const [allDbWords, setAllDbWords] = useState({});
-  const [loadingDbWords, setLoadingDbWords] = useState(false);
+  // Corporate and individual word learning progress comes from the single
+  // words subscription the whole app already shares (PacksContext).
+  const { wordsByPack, allWordsLoading } = usePacks();
+  const allDbWords = user ? wordsByPack : EMPTY_WORDS;
+  const loadingDbWords = !!user && allWordsLoading;
   const [confusionPairs, setConfusionPairs] = useState([]);
-
-  // Fetch all corporate and individual word learning progress reactively from Firebase
-  useEffect(() => {
-    if (!user) {
-      setAllDbWords({});
-      return;
-    }
-
-    const wordsRef = ref(db, `users/${user.uid}/words`);
-
-    setLoadingDbWords(true);
-    const unsub = onValue(wordsRef, (snap) => {
-      if (snap.exists()) {
-        setAllDbWords(snap.val());
-      } else {
-        setAllDbWords({});
-      }
-      setLoadingDbWords(false);
-    }, (err) => {
-      console.error('Error fetching corporate word progress:', err);
-      setLoadingDbWords(false);
-    });
-
-    return unsub;
-  }, [user?.uid]);
 
   // Load confusion pairs once per user — filtered per-unit in memoryTwin below.
   useEffect(() => {

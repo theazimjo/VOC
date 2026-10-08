@@ -1,12 +1,11 @@
-import { useState, useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { memo, useState, useRef, useEffect } from 'react';
 import { getMasteryLevel } from '@voc/memory-engine';
 import { partOfSpeechOptions, speakWord } from '../../utils/helpers';
 import { Volume2, Edit2, Trash2, MoreVertical, Check } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import './WordCard.css';
 
-export default function WordCard({
+function WordCard({
   word,
   onEdit,
   onDelete,
@@ -43,14 +42,9 @@ export default function WordCard({
   }, [menuOpen]);
 
   return (
-    <motion.div
+    <div
       className={`word-card${isSelectionMode ? ' selection-mode' : ''}${isSelected ? ' selected' : ''}`}
       data-word-id={word.id}
-      layout
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
       onPointerDown={(e) => {
         if (!readOnly && onPointerDownCard) {
           onPointerDownCard(word.id, e);
@@ -229,6 +223,8 @@ export default function WordCard({
           </div>
         </div>
       )}
-    </motion.div>
+    </div>
   );
 }
+
+export default memo(WordCard);

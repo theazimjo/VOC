@@ -1,7 +1,8 @@
-import { useState, useEffect, useMemo } from 'react';
-import { ref, onValue } from 'firebase/database';
-import { db } from '../firebase';
+import { useMemo } from 'react';
 import { getDecayedMastery } from '@voc/memory-engine';
+import { usePacks } from './usePacks';
+
+const EMPTY = {};
 
 /**
  * Every word this student has ever practiced, anywhere — any corp group,
@@ -15,20 +16,10 @@ import { getDecayedMastery } from '@voc/memory-engine';
  * @returns {{ words: Object[], totalWords: number, learnedWords: number }}
  */
 export function useAccountWordProgress(uid) {
-  const [allDbWords, setAllDbWords] = useState({});
-
-  useEffect(() => {
-    if (!uid) {
-      setAllDbWords({});
-      return;
-    }
-    const unsub = onValue(ref(db, `users/${uid}/words`), (snap) => {
-      setAllDbWords(snap.exists() ? snap.val() : {});
-    }, (err) => {
-      console.error('Error fetching account word progress:', err);
-    });
-    return unsub;
-  }, [uid]);
+  // The words tree is already subscribed once for the whole app (PacksContext);
+  // reading it from there avoids a second listener and a second full parse.
+  const { wordsByPack } = usePacks();
+  const allDbWords = uid ? wordsByPack : EMPTY;
 
   const words = useMemo(() => {
     const flat = [];

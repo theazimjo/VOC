@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Dumbbell } from 'lucide-react';
 import { useStudentT } from '../../../../../hooks/useStudentT';
-import { IRREGULAR_VERBS_PACK_ID } from '../../../../../data/irregularVerbsCorpPack';
+import { IRREGULAR_VERBS_PACK_ID } from '../../../../../data/irregularVerbsId';
 
 export default function ExitPracticeModal({ p }) {
   const { t } = useStudentT();

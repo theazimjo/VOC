@@ -1,9 +1,15 @@
-import { marketPacks } from '../data/marketData';
+// The market word bank is large (it is the biggest file in the app), so it is
+// fetched on demand - never as part of the app's startup bundle.
+let marketPromise = null;
+export function loadMarketPacks() {
+  if (!marketPromise) marketPromise = import('../data/marketData').then((m) => m.marketPacks);
+  return marketPromise;
+}
 
 // Given a user's installed pack, find the Market pack it originated from —
 // matched by marketPackId when available, falling back to name for packs
-// installed before that field existed.
-export function findSourceMarketPack(pack) {
+// installed before that field existed. `marketPacks` comes from loadMarketPacks().
+export function findSourceMarketPack(pack, marketPacks) {
   if (!pack) return null;
   return marketPacks.find((mp) => mp.id === pack.marketPackId)
     || marketPacks.find((mp) => mp.name === pack.name);

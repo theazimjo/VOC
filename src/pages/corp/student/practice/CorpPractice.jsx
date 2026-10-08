@@ -11,7 +11,7 @@ import { getWordCluster } from '../../../../experiment/semanticClassifier';
 import { computeClusterCalibration, computeUserRate, getDecayedMastery, computeRetentionStats } from '@voc/memory-engine';
 import { saveReviewEvent } from '../../../../experiment/experimentDB';
 import IosSpinner from '../../../../components/common/IosSpinner';
-import { IRREGULAR_VERBS_PACK_ID } from '../../../../data/irregularVerbsCorpPack';
+import { IRREGULAR_VERBS_PACK_ID } from '../../../../data/irregularVerbsId';
 import ModeSelectView from './views/ModeSelectView';
 import IntroView from './views/IntroView';
 import PracticeSessionView from './views/PracticeSessionView';

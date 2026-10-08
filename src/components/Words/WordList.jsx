@@ -1,14 +1,21 @@
-import { useState, useRef, useEffect } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { useState, useRef, useEffect, useMemo, useCallback, useDeferredValue } from 'react';
+import { motion } from 'framer-motion';
 import { Search, CheckSquare, X, Trash2, Check, FolderInput } from 'lucide-react';
 import WordCard from './WordCard';
 import IosSpinner from '../common/IosSpinner';
 import { useLanguage } from '../../contexts/LanguageContext';
 import './WordList.css';
 
+// Long packs (Science / Health have thousands of words) are rendered a page at
+// a time: a sentinel under the list asks for the next page as it scrolls near.
+const PAGE_SIZE = 30;
+
 export default function WordList({ words, onEdit, onDelete, onBulkDelete, onBulkMove, loading, readOnly, groupFn, language = 'en-US' }) {
   const [search, setSearch] = useState('');
+  const deferredSearch = useDeferredValue(search);
   const [sortBy, setSortBy] = useState(groupFn ? 'group' : 'date-desc');
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const sentinelRef = useRef(null);
   const { t } = useLanguage();
 
   const [isSelectionMode, setIsSelectionMode] = useState(false);
@@ -20,24 +27,29 @@ export default function WordList({ words, onEdit, onDelete, onBulkDelete, onBulk
   const dragModeRef = useRef('select'); // 'select' | 'deselect'
   const pointerStartPosRef = useRef({ x: 0, y: 0 });
 
-  const toggleSelectWord = (wordId) => {
+  // Latest selection state for the stable callbacks below (cards are memoized).
+  const selectionRef = useRef({ mode: false, ids: selectedWordIds, readOnly });
+  selectionRef.current = { mode: isSelectionMode, ids: selectedWordIds, readOnly };
+
+  const toggleSelectWord = useCallback((wordId) => {
     setSelectedWordIds(prev => {
       const next = new Set(prev);
       if (next.has(wordId)) next.delete(wordId);
       else next.add(wordId);
       return next;
     });
-  };
+  }, []);
 
-  const handleCardPointerDown = (wordId, e) => {
-    if (readOnly) return;
+  const handleCardPointerDown = useCallback((wordId, e) => {
+    const { mode, ids, readOnly: ro } = selectionRef.current;
+    if (ro) return;
     if (e.button && e.button !== 0) return;
 
     pointerStartPosRef.current = { x: e.clientX, y: e.clientY };
 
-    if (isSelectionMode) {
+    if (mode) {
       isDraggingRef.current = true;
-      const isCurrentlySelected = selectedWordIds.has(wordId);
+      const isCurrentlySelected = ids.has(wordId);
       dragModeRef.current = isCurrentlySelected ? 'deselect' : 'select';
 
       setSelectedWordIds(prev => {
@@ -58,7 +70,7 @@ export default function WordList({ words, onEdit, onDelete, onBulkDelete, onBulk
         dragModeRef.current = 'select';
       }, 350);
     }
-  };
+  }, []);
 
   useEffect(() => {
     const handleWindowPointerMove = (e) => {
@@ -77,12 +89,12 @@ export default function WordList({ words, onEdit, onDelete, onBulkDelete, onBulk
           const wordId = cardElem.getAttribute('data-word-id');
           if (wordId) {
             setSelectedWordIds(prev => {
+              const has = prev.has(wordId);
+              // nothing to change: keep the same Set so nothing re-renders
+              if (dragModeRef.current === 'select' ? has : !has) return prev;
               const next = new Set(prev);
-              if (dragModeRef.current === 'select') {
-                if (!next.has(wordId)) next.add(wordId);
-              } else {
-                if (next.has(wordId)) next.delete(wordId);
-              }
+              if (dragModeRef.current === 'select') next.add(wordId);
+              else next.delete(wordId);
               return next;
             });
           }
@@ -116,6 +128,43 @@ export default function WordList({ words, onEdit, onDelete, onBulkDelete, onBulk
     };
   }, []);
 
+  const sortedWords = useMemo(() => {
+    const q = deferredSearch.toLowerCase();
+    const list = (words || []).filter(w =>
+      !q || (w.word || '').toLowerCase().includes(q) || (w.translation || '').toLowerCase().includes(q)
+    );
+    // date keys are parsed once, not on every comparison
+    const dated = (w) => Date.parse(w.addedAt) || 0;
+    const decorated = list.map(w => ({ w, t: sortBy.startsWith('date') ? dated(w) : 0 }));
+    decorated.sort((a, b) => {
+      if (sortBy === 'group' && groupFn) {
+        const diff = groupFn(a.w.word).id - groupFn(b.w.word).id;
+        return diff !== 0 ? diff : a.w.word.localeCompare(b.w.word);
+      }
+      if (sortBy === 'date-desc') return b.t - a.t;
+      if (sortBy === 'date-asc') return a.t - b.t;
+      if (sortBy === 'alpha-asc') return a.w.word.localeCompare(b.w.word);
+      if (sortBy === 'mastery-asc') return (a.w.mastery || 0) - (b.w.mastery || 0);
+      if (sortBy === 'mastery-desc') return (b.w.mastery || 0) - (a.w.mastery || 0);
+      return 0;
+    });
+    return decorated.map(d => d.w);
+  }, [words, deferredSearch, sortBy, groupFn]);
+
+  // a new search / sort starts again from the first page
+  useEffect(() => { setVisibleCount(PAGE_SIZE); }, [deferredSearch, sortBy]);
+
+  const hasMore = visibleCount < sortedWords.length;
+  useEffect(() => {
+    const el = sentinelRef.current;
+    if (!el || !hasMore) return undefined;
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some(e => e.isIntersecting)) setVisibleCount(c => c + PAGE_SIZE);
+    }, { rootMargin: '900px 0px' });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [hasMore, visibleCount, loading]);
+
   if (loading) {
     return (
       <div className="ios-activity-indicator">
@@ -134,24 +183,6 @@ export default function WordList({ words, onEdit, onDelete, onBulkDelete, onBulk
       </div>
     );
   }
-
-  const filteredWords = words.filter(w => 
-    w.word.toLowerCase().includes(search.toLowerCase()) || 
-    w.translation.toLowerCase().includes(search.toLowerCase())
-  );
-
-  const sortedWords = [...filteredWords].sort((a, b) => {
-    if (sortBy === 'group' && groupFn) {
-      const diff = groupFn(a.word).id - groupFn(b.word).id;
-      return diff !== 0 ? diff : a.word.localeCompare(b.word);
-    }
-    if (sortBy === 'date-desc') return new Date(b.addedAt || 0) - new Date(a.addedAt || 0);
-    if (sortBy === 'date-asc') return new Date(a.addedAt || 0) - new Date(b.addedAt || 0);
-    if (sortBy === 'alpha-asc') return a.word.localeCompare(b.word);
-    if (sortBy === 'mastery-asc') return (a.mastery || 0) - (b.mastery || 0);
-    if (sortBy === 'mastery-desc') return (b.mastery || 0) - (a.mastery || 0);
-    return 0;
-  });
 
   const handleToggleSelectAll = () => {
     const visibleIds = sortedWords.map(w => w.id);
@@ -292,8 +323,8 @@ export default function WordList({ words, onEdit, onDelete, onBulkDelete, onBulk
       </div>
 
       <div className="word-list-grid">
-        <AnimatePresence>
-          {sortedWords.map(word => {
+        <>
+          {sortedWords.slice(0, visibleCount).map(word => {
             let groupHeader = null;
             if (sortBy === 'group' && groupFn) {
               const group = groupFn(word.word);
@@ -324,7 +355,8 @@ export default function WordList({ words, onEdit, onDelete, onBulkDelete, onBulk
               </div>
             );
           })}
-        </AnimatePresence>
+        </>
+        {hasMore && <div ref={sentinelRef} className="word-list-sentinel" aria-hidden="true" />}
       </div>
 
       {showBulkDeleteConfirm && (

@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { ensureIrregularVerbsPack, getCenter } from '../../../services/corpService';
-import { IRREGULAR_VERBS_PACK_ID } from '../../../data/irregularVerbsCorpPack';
+import { IRREGULAR_VERBS_PACK_ID } from '../../../data/irregularVerbsId';
 import { computeCenterActivity, computeGroupActivity } from '../super-admin/centerActivity';
 
 // The whole center node (teachers, groups with their students, packs) is

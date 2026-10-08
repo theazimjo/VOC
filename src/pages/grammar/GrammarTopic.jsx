@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useParams, useNavigate } from 'react-router-dom';
-import { grammarData } from '../../data/grammarData';
 import { getQuestionsForExercise, getExerciseType, findGrammarTopic } from '../../utils/grammarHelpers';
 import { useGrammarStats } from '../../hooks/useGrammarStats';
 import { useLanguage } from '../../contexts/LanguageContext';

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { grammarData } from '../../data/grammarData';
+import { grammarIndex } from '../../data/grammarIndex';
 import { useGrammarStats } from '../../hooks/useGrammarStats';
 import { useLanguage } from '../../contexts/LanguageContext';
 import './GrammarPage.css';
@@ -30,7 +30,7 @@ const headerVariants = {
 };
 
 const GRAMMAR_TRACKS = {
-  en: { data: grammarData, prefix: null, label: '🇬🇧 English', icon: '🇬🇧' },
+  en: { data: grammarIndex, prefix: null, label: '🇬🇧 English', icon: '🇬🇧' },
 };
 
 export default function GrammarPage() {
@@ -157,14 +157,7 @@ export default function GrammarPage() {
               const topicStats = grammarStats?.topics?.[topic.id];
               const completedExCount = topicStats?.exercises ? Object.keys(topicStats.exercises).length : 0;
 
-              const rawGuide = topic.guide || topic.description || '';
-
-              const cleanSnippet = rawGuide
-                .replace(/#+\s*/g, '')
-                .replace(/\*+/g, '')
-                .replace(/💡\s*/g, '')
-                .replace(/\n+/g, ' ')
-                .trim();
+              const cleanSnippet = topic.snippet || '';
 
               return (
                 <motion.div

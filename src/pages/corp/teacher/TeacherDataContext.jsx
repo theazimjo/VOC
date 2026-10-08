@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { auth } from '../../../firebase';
 import { ensureIrregularVerbsPack, getActiveAnnouncementsForRole, getCenter } from '../../../services/corpService';
-import { IRREGULAR_VERBS_PACK_ID } from '../../../data/irregularVerbsCorpPack';
+import { IRREGULAR_VERBS_PACK_ID } from '../../../data/irregularVerbsId';
 import { computeGroupActivity, latestUnitActivity, studentMastery } from '../super-admin/centerActivity';
 import { getHomeworkCompletion } from './utils';
 

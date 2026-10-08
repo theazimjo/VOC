@@ -8,21 +8,14 @@ import { usePacks } from '../../hooks/usePacks';
 import { useWords } from '../../hooks/useWords';
 import { useDailyNewWordLimit } from '../../hooks/useDailyNewWordLimit';
 import { getIrregularVerbGroup } from '../../data/irregularVerbGroups';
-import { findSourceMarketPack, getMissingMarketWords } from '../../utils/marketSync';
+import { findSourceMarketPack, getMissingMarketWords, loadMarketPacks } from '../../utils/marketSync';
 import { playSound } from '../../utils/feedback';
 import { computeRetentionStats } from '@voc/memory-engine';
 import { getConfusionPairs } from '../../experiment/experimentDB';
 import { formatPageRange } from '../../utils/chapterPageRanges';
-import { scienceChapterText } from '../../data/scienceChapterText';
-import { healthChapterText } from '../../data/healthChapterText';
-import { essential3000ChapterText } from '../../data/essential3000ChapterText';
+import { hasChapterText } from '../../data/chapterTextKeys';
 import WordList from '../../components/Words/WordList';
 
-const allChapterText = {
-  ...essential3000ChapterText,
-  ...scienceChapterText,
-  ...healthChapterText
-};
 import PhotoWordExtractorModal from '../../components/Words/PhotoWordExtractorModal';
 import MoveWordsModal from '../../components/Words/MoveWordsModal';
 import SpeedDialFAB from '../../components/Words/SpeedDialFAB';
@@ -272,28 +265,39 @@ export default function PackDetail() {
   // add the missing ones to this installed copy (existing words/progress are
   // never touched) and let the user know with a one-time notice.
   useEffect(() => {
-    if (marketSyncCheckedRef.current || !pack || loading) return;
-    marketSyncCheckedRef.current = true;
+    if (marketSyncCheckedRef.current || !pack || loading) return undefined;
+    let cancelled = false;
 
-    const sourcePack = findSourceMarketPack(pack);
-    if (!sourcePack) return;
+    // The Market word bank is big; fetch it a moment after the pack has
+    // painted instead of competing with the first render for the main thread.
+    const timer = setTimeout(() => {
+      loadMarketPacks().then((marketPacks) => {
+        if (cancelled || marketSyncCheckedRef.current) return;
+        marketSyncCheckedRef.current = true;
 
-    // Packs installed before a market pack's `type` field existed (or before
-    // it changed) never get it backfilled by the word-only sync above - it's
-    // pack-level metadata, not a word. Type-gated features (like Science's
-    // Read mode) would otherwise stay invisible forever on an old install.
-    if (sourcePack.type && pack.type !== sourcePack.type) {
-      updatePack(packId, { type: sourcePack.type });
-      setPack(prev => (prev ? { ...prev, type: sourcePack.type } : prev));
-    }
+        const sourcePack = findSourceMarketPack(pack, marketPacks);
+        if (!sourcePack) return;
 
-    const missingWords = getMissingMarketWords(sourcePack, words);
-    if (missingWords.length === 0) return;
+        // Packs installed before a market pack's `type` field existed (or before
+        // it changed) never get it backfilled by the word-only sync above - it's
+        // pack-level metadata, not a word. Type-gated features (like Science's
+        // Read mode) would otherwise stay invisible forever on an old install.
+        if (sourcePack.type && pack.type !== sourcePack.type) {
+          updatePack(packId, { type: sourcePack.type });
+          setPack(prev => (prev ? { ...prev, type: sourcePack.type } : prev));
+        }
 
-    bulkAddWords(missingWords).then(() => {
-      playSound('correct');
-      setNewWordsAddedCount(missingWords.length);
-    });
+        const missingWords = getMissingMarketWords(sourcePack, words);
+        if (missingWords.length === 0) return;
+
+        bulkAddWords(missingWords).then(() => {
+          playSound('correct');
+          setNewWordsAddedCount(missingWords.length);
+        });
+      });
+    }, 1000);
+
+    return () => { cancelled = true; clearTimeout(timer); };
   }, [pack, words, loading, bulkAddWords, packId, updatePack]);
 
   // Restore the scroll position saveScrollPosition() saved before leaving
@@ -596,7 +600,7 @@ export default function PackDetail() {
                   </span>
                 )}
               </button>
-              {(pack.type === 'science' || topics.some(t => Boolean(allChapterText[t]))) && (
+              {(pack.type === 'science' || topics.some(hasChapterText)) && (
                 <button
                   className={`btn btn-cards ${topicFilter ? 'has-topic' : ''}`}
                   onClick={() => {

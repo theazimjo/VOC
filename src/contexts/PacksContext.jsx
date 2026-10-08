@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, useCallback, useMemo, useRef } from 'react';
-import { ref, push, update, remove, get, onValue, serverTimestamp, runTransaction } from 'firebase/database';
+import { ref, push, update, remove, get, onValue, onChildAdded, onChildChanged, onChildRemoved, serverTimestamp, runTransaction } from 'firebase/database';
 import { db } from '../firebase';
 import { useAuth } from './AuthContext';
 import { migratePackWordsIfNeeded } from '../utils/wordsMigration';
@@ -72,9 +72,10 @@ export function PacksProvider({ children }) {
           }
         });
 
-        packsData.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+        const created = new Map(packsData.map((p) => [p.id, Date.parse(p.createdAt) || 0]));
+        packsData.sort((a, b) => created.get(b.id) - created.get(a.id));
 
-        localStorage.setItem(`voc-cache-packs-${user.uid}`, JSON.stringify(packsData));
+        try { localStorage.setItem(`voc-cache-packs-${user.uid}`, JSON.stringify(packsData)); } catch { /* storage full */ }
 
         setPacks(packsData);
         setLoading(false);
@@ -124,10 +125,14 @@ export function PacksProvider({ children }) {
     return () => unsubscribe();
   }, [user]);
 
-  // Single real-time listener for ALL words across ALL packs, shared across
-  // the whole app. Only components that actually need word-level data
+  // Real-time listeners for ALL words across ALL packs, shared across the
+  // whole app. Only components that actually need word-level data
   // (Dashboard stats, StatsPage, MixedPractice pool) read from this —
   // pack list/summary views never touch it.
+  // Per-pack child events (instead of one listener on the whole words tree):
+  // a single review during practice re-delivers only that pack's words, not
+  // every word the user owns, and the other packs keep the same object
+  // identity so their derived data is not rebuilt.
   useEffect(() => {
     if (!user) {
       setWordsByPack({});
@@ -136,57 +141,81 @@ export function PacksProvider({ children }) {
     }
 
     setWordsLoading(true);
+    setWordsByPack({});
     const wordsRef = ref(db, `users/${user.uid}/words`);
+    const put = (snap) => {
+      const val = snap.val();
+      setWordsByPack((prev) => ({ ...prev, [snap.key]: val && typeof val === 'object' ? val : {} }));
+    };
+    const onErr = (error) => {
+      console.error('Error listening to words from RTDB:', error);
+      setWordsLoading(false);
+    };
+    const offAdded = onChildAdded(wordsRef, put, onErr);
+    const offChanged = onChildChanged(wordsRef, put, onErr);
+    const offRemoved = onChildRemoved(wordsRef, (snap) => {
+      setWordsByPack((prev) => {
+        if (!(snap.key in prev)) return prev;
+        const next = { ...prev };
+        delete next[snap.key];
+        return next;
+      });
+    }, onErr);
+    // fires after the initial child_added events, so everything is in by now
+    onValue(wordsRef, () => setWordsLoading(false), onErr, { onlyOnce: true });
 
-    const unsubscribe = onValue(
-      wordsRef,
-      (snapshot) => {
-        setWordsByPack(snapshot.val() || {});
-        setWordsLoading(false);
-      },
-      (error) => {
-        console.error('Error listening to words from RTDB:', error);
-        setWordsLoading(false);
-      }
-    );
-
-    return () => unsubscribe();
+    return () => { offAdded(); offChanged(); offRemoved(); };
   }, [user]);
 
+  // Flattened words, rebuilt per pack only when that pack's words (or the pack
+  // fields copied onto each word) changed.
+  const flatCacheRef = useRef(new Map());
   const allWords = useMemo(() => {
     const packById = {};
     packs.forEach((p) => { packById[p.id] = p; });
 
-    const flat = [];
-    const seenByPack = {};
+    const cache = flatCacheRef.current;
+    const nextCache = new Map();
+    const out = [];
 
     Object.keys(wordsByPack).forEach((packId) => {
       const pack = packById[packId];
       const wordsObj = wordsByPack[packId] || {};
-      if (!seenByPack[packId]) seenByPack[packId] = new Set();
+      const source = pack?.name || 'Kutubxona';
+      const sourceIcon = pack?.icon || '📦';
+      const language = pack?.language || 'en-US';
 
-      Object.keys(wordsObj).forEach((wordId) => {
-        const word = wordsObj[wordId];
-        if (!word || typeof word !== 'object' || !word.word || typeof word.word !== 'string' || !word.word.trim()) {
-          return;
-        }
-        const norm = word.word.trim().toLowerCase();
-        if (seenByPack[packId].has(norm)) return;
-        seenByPack[packId].add(norm);
+      let entry = cache.get(packId);
+      if (!entry || entry.wordsObj !== wordsObj || entry.source !== source || entry.sourceIcon !== sourceIcon || entry.language !== language) {
+        const flat = [];
+        const seen = new Set();
+        Object.keys(wordsObj).forEach((wordId) => {
+          const word = wordsObj[wordId];
+          if (!word || typeof word !== 'object' || !word.word || typeof word.word !== 'string' || !word.word.trim()) {
+            return;
+          }
+          const norm = word.word.trim().toLowerCase();
+          if (seen.has(norm)) return;
+          seen.add(norm);
 
-        flat.push({
-          id: wordId,
-          ...word,
-          mastery: getDecayedMastery(word),
-          packId,
-          source: pack?.name || 'Kutubxona',
-          sourceIcon: pack?.icon || '📦',
-          sourceType: 'packs',
-          language: pack?.language || 'en-US'
+          flat.push({
+            id: wordId,
+            ...word,
+            mastery: getDecayedMastery(word),
+            packId,
+            source,
+            sourceIcon,
+            sourceType: 'packs',
+            language
+          });
         });
-      });
+        entry = { wordsObj, source, sourceIcon, language, flat };
+      }
+      nextCache.set(packId, entry);
+      for (let i = 0; i < entry.flat.length; i += 1) out.push(entry.flat[i]);
     });
-    return flat;
+    flatCacheRef.current = nextCache;
+    return out;
   }, [packs, wordsByPack]);
 
   // Self-healing: Ensure RTDB pack.wordCount stays in sync with actual unique word count
@@ -220,28 +249,37 @@ export function PacksProvider({ children }) {
   // which recomputes `allWords`, which re-fires this effect for the next
   // word) - no manual timers, no risk of hammering the free API at once.
   const clusteringInFlightRef = useRef(new Set());
+  const lastClusterAtRef = useRef(0);
+  const CLUSTER_GAP_MS = 2500;
   useEffect(() => {
-    if (!user) return;
+    if (!user) return undefined;
     const next = allWords.find(
       (w) => !w.topic && !w.clusterKey && !clusteringInFlightRef.current.has(w.id)
     );
-    if (!next) return;
+    if (!next) return undefined;
 
-    clusteringInFlightRef.current.add(next.id);
     let cancelled = false;
-
-    classifyWordSemantic(next.word).then((result) => {
-      if (cancelled || !result) return;
-      return update(ref(db, `users/${user.uid}/words/${next.packId}/${next.id}`), {
-        clusterKey: result.key,
-        clusterName: result.name,
-        clusterIcon: result.icon,
+    // Paced: at most one word per CLUSTER_GAP_MS, and not while the tab is in
+    // the background, so a big un-classified library cannot keep the main
+    // thread busy with a write -> re-render -> write loop.
+    const wait = Math.max(CLUSTER_GAP_MS - (Date.now() - lastClusterAtRef.current), 0);
+    const timer = setTimeout(() => {
+      if (cancelled || document.hidden) return;
+      lastClusterAtRef.current = Date.now();
+      clusteringInFlightRef.current.add(next.id);
+      classifyWordSemantic(next.word).then((result) => {
+        if (cancelled || !result) return;
+        return update(ref(db, `users/${user.uid}/words/${next.packId}/${next.id}`), {
+          clusterKey: result.key,
+          clusterName: result.name,
+          clusterIcon: result.icon,
+        });
+      }).catch((err) => {
+        console.warn('Background cluster classification failed for', next.word, err);
       });
-    }).catch((err) => {
-      console.warn('Background cluster classification failed for', next.word, err);
-    });
+    }, wait + 1500);
 
-    return () => { cancelled = true; };
+    return () => { cancelled = true; clearTimeout(timer); };
   }, [allWords, user]);
 
   const addPack = useCallback(
@@ -390,7 +428,8 @@ export function PacksProvider({ children }) {
     [user, packs]
   );
 
-  const value = {
+  // Memoized so consumers only re-render when something they can read changed.
+  const value = useMemo(() => ({
     packs,
     loading,
     addPack,
@@ -403,8 +442,10 @@ export function PacksProvider({ children }) {
     updateFolder,
     deleteFolder,
     allWords,
+    // raw users/{uid}/words tree, { [packOrCorpStorageId]: { [wordId]: record } }
+    wordsByPack,
     allWordsLoading: wordsLoading
-  };
+  }), [packs, loading, addPack, updatePack, deletePack, getPack, folders, foldersLoading, addFolder, updateFolder, deleteFolder, allWords, wordsByPack, wordsLoading]);
 
   return <PacksContext.Provider value={value}>{children}</PacksContext.Provider>;
 }

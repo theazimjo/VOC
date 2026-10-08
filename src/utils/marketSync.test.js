@@ -1,23 +1,24 @@
 import { describe, it, expect } from 'vitest';
 import { findSourceMarketPack, getMissingMarketWords } from './marketSync';
+import { marketPacks } from '../data/marketData';
 
 describe('findSourceMarketPack', () => {
   it('returns null for a null pack', () => {
-    expect(findSourceMarketPack(null)).toBeNull();
+    expect(findSourceMarketPack(null, marketPacks)).toBeNull();
   });
 
   it('matches by marketPackId when present', () => {
-    const found = findSourceMarketPack({ marketPackId: 'irregular-verbs', name: 'Something Else' });
+    const found = findSourceMarketPack({ marketPackId: 'irregular-verbs', name: 'Something Else' }, marketPacks);
     expect(found?.id).toBe('irregular-verbs');
   });
 
   it('falls back to matching by name for packs installed before marketPackId existed', () => {
-    const found = findSourceMarketPack({ name: 'Phrasal Verbs' });
+    const found = findSourceMarketPack({ name: 'Phrasal Verbs' }, marketPacks);
     expect(found?.id).toBe('phrasal-verbs');
   });
 
   it('returns undefined when nothing matches', () => {
-    expect(findSourceMarketPack({ name: 'Not A Real Pack' })).toBeUndefined();
+    expect(findSourceMarketPack({ name: 'Not A Real Pack' }, marketPacks)).toBeUndefined();
   });
 });
 

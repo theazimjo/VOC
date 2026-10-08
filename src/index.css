@@ -1146,5 +1146,18 @@ a:hover {
   100% { opacity: 0.15; }
 }
 
-
-
+/* ---------- Phone performance ----------
+   A blurred backdrop on a bar that sits over scrolling content is re-computed
+   on every frame, which is what makes lists stutter on phones. The persistent
+   chrome gets a solid surface there instead (same as reduced-transparency). */
+@media (max-width: 1024px), (pointer: coarse) {
+  body .navbar,
+  body .personal-bottom-nav,
+  body .bottom-nav,
+  body .sidebar {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  body .navbar { background: var(--bg-secondary); }
+  body .personal-bottom-nav { background: var(--bg-secondary); }
+}

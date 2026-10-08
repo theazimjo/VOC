@@ -8,7 +8,7 @@ import {
   assignPackToGroup, deleteGroup, regenerateGroupCode, removePackFromGroup, removeStudentFromGroup,
   transferGroup, updateGroupDetails, updateGroupStatus,
 } from '../../../services/corpService';
-import { IRREGULAR_VERBS_PACK_ID } from '../../../data/irregularVerbsCorpPack';
+import { IRREGULAR_VERBS_PACK_ID } from '../../../data/irregularVerbsId';
 import { buildGroupInviteUrl } from '../../../utils/pendingJoin';
 import ConfirmSheet from '../../../components/corp/ConfirmSheet';
 import { formatRelativeEn as formatRelative } from '../super-admin/centerActivity';
