@@ -148,3 +148,11 @@ describe('the "|" format (AI prompt)', () => {
     expect(parseWordText('apple - olma\nbook | kitob').map((r) => [r.word, r.translation])).toEqual([['apple', 'olma'], ['book', 'kitob']]);
   });
 });
+
+describe('same spelling, different meaning', () => {
+  it('keeps both meanings of "book" and only flags the identical repeat', () => {
+    const rows = parseWordText('book - kitob - noun - I read a book.\nbook - bron qilish - verb - Book a table.\nbook - kitob - noun - I read a book.');
+    expect(rows.map((r) => !!r.duplicate)).toEqual([false, false, true]);
+    expect(importable(rows)).toHaveLength(2);
+  });
+});

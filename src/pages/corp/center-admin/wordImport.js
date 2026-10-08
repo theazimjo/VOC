@@ -274,12 +274,14 @@ export function parseWordCells(cells, sheetTopic = '', en = false) {
   return rows.slice(0, MAX_ROWS);
 }
 
-// Later repeats of the same word (in the same topic) are shown, not imported.
+// Later repeats of the same word with the same meaning (in the same topic)
+// are shown, not imported. The same spelling with another meaning is a
+// different word ("book" = kitob / bron qilish).
 export function markDuplicates(rows) {
   const seen = new Set();
   return rows.map((r) => {
     if (r.error) return r;
-    const key = `${r.topic.toLowerCase()}\u0000${r.word.toLowerCase()}`;
+    const key = `${r.topic.toLowerCase()}\u0000${r.word.toLowerCase()}\u0000${(r.translation || '').trim().toLowerCase()}`;
     const duplicate = seen.has(key);
     seen.add(key);
     return { ...r, duplicate };

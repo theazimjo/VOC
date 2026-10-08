@@ -843,6 +843,26 @@
 .va-grid td.va-grid-del { text-align: center; }
 .va-grid td input { display: block; width: 100%; height: 38px; padding: 0 10px; border: 0; border-radius: 0; background: transparent; color: var(--va-ink); font: 500 0.9375rem var(--va-body); outline: none !important; text-overflow: ellipsis; }
 .va-grid td input:focus { background: var(--va-input); box-shadow: inset 0 0 0 2px var(--va-xl); position: relative; z-index: 1; text-overflow: clip; }
+.va-grid .va-grid-num { cursor: pointer; }
+.va-grid thead th:not(.va-grid-num) { cursor: pointer; }
+.va-grid thead th.is-sel, .va-grid .va-grid-num.is-sel { background: var(--va-xl-soft); color: var(--va-xl); }
+.va-grid tbody tr td.is-sel:not(.va-grid-num) { background: var(--va-xl-soft); }
+.va-grid td.is-sel input:not(:focus) { user-select: none; }
+.va-grid-tool { padding: 0 10px; }
+.va-grid-tool:disabled { opacity: 0.4; cursor: default; }
+.va-grid-selinfo { font-size: 0.875rem; font-weight: 600; color: var(--va-ink-soft); }
+.va-grid-selinfo button { border: 0; background: none; color: var(--va-xl); font: inherit; text-decoration: underline; cursor: pointer; padding: 0; }
+.va-grid-selinfo button.is-danger { color: #d1271c; }
+.va-grid td input[readonly] { cursor: cell; caret-color: transparent; user-select: none; }
+.va-grid td input[readonly]:focus { background: transparent; }
+.va-grid-menu { position: fixed; z-index: 20; width: 240px; padding: 6px; border: 1px solid var(--va-line); border-radius: 12px; background: var(--va-paper); box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18); }
+.va-grid-menu button { display: flex; align-items: center; gap: 10px; width: 100%; height: 32px; padding: 0 10px; border: 0; border-radius: 8px; background: transparent; color: var(--va-ink); font: 500 0.875rem var(--va-body); text-align: left; cursor: pointer; }
+.va-grid-menu button:hover:not(:disabled) { background: var(--va-xl-soft); }
+.va-grid-menu button:disabled { opacity: 0.4; cursor: default; }
+.va-grid-menu button.is-danger { color: #d1271c; }
+.va-grid-menu button span { flex: 1; }
+.va-grid-menu kbd { font: 500 0.7rem var(--va-body); color: var(--va-ink-soft); }
+.va-grid-menu-sep { height: 1px; margin: 5px 4px; background: var(--va-line); }
 .va-grid-resize { position: absolute; top: 0; right: -3px; width: 7px; height: 100%; cursor: col-resize; z-index: 5; touch-action: none; }
 .va-grid-resize::after { content: ''; position: absolute; left: 3px; top: 8px; bottom: 8px; width: 1px; background: transparent; }
 .va-grid-resize:hover::after, .va-grid-resize.is-dragging::after { background: var(--va-xl); width: 2px; left: 2px; }

@@ -85,10 +85,14 @@ export function mergeWords(existing, incoming) {
   const words = [...(existing || [])];
   let added = 0;
   let updated = 0;
+  const touched = new Set();
   incoming.forEach((w) => {
-    const idx = words.findIndex((x) => (x.word || '').toLowerCase() === w.word.toLowerCase());
+    // A spelling is updated once per import; a second row with the same
+    // spelling is another meaning ("book" = kitob / bron qilish) and is added.
+    const idx = words.findIndex((x) => !touched.has(x) && (x.word || '').toLowerCase() === w.word.toLowerCase());
     if (idx === -1) {
       words.push(w);
+      touched.add(w);
       added += 1;
     } else {
       const old = words[idx];
@@ -100,6 +104,7 @@ export function mergeWords(existing, incoming) {
         definition: w.definition || old.definition,
         example: w.example || old.example,
       };
+      touched.add(words[idx]);
       updated += 1;
     }
   });
@@ -126,7 +131,7 @@ export const LIBRARY_BOOK_IDS = ['science', 'health'];
 
 // Bump when the library books get new words or translations: courses added
 // earlier are then brought up to date once (see syncCourseWithBook).
-export const LIBRARY_VERSION = 2;
+export const LIBRARY_VERSION = 3;
 
 const libraryWord = (w) => ({
   id: newId('w'),
