@@ -134,11 +134,12 @@ export default function StudentCorpLearn() {
     }
   }, [membership?.groupId]);
 
-  const startPractice = (packToPractice) => {
+  const startPractice = (packToPractice, mode = null) => {
     const query = cameFromHomework ? '?from=homework' : '';
     navigate(`/corp/practice/${packId}/${monthId}/${unitId}${query}`, {
       state: {
         pack: packToPractice,
+        mode,
         centerId: membership.centerId,
         groupId: membership.groupId,
         studentId: user.uid,

@@ -1,11 +1,12 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
-import { useOutletContext, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useLocation, useOutletContext, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { ChevronLeft } from 'lucide-react';
 import { ref, get, update } from 'firebase/database';
 import { db } from '../../../../firebase';
 import { usePacks } from '../../../../hooks/usePacks';
 import { updateStudentUnitProgress } from '../../../../services/corpService';
 import { weightedSelectWords, filterWordsForMode, PRACTICE_MODE_MIN_WORDS, corpWordStorageId } from '../../../../utils/helpers';
+import { planSmartSession } from '../../../../utils/practicePath';
 import { playSound, triggerVibration } from '../../../../utils/feedback';
 import { getWordCluster } from '../../../../experiment/semanticClassifier';
 import { computeClusterCalibration, computeUserRate, getDecayedMastery, computeRetentionStats } from '@voc/memory-engine';
@@ -25,6 +26,30 @@ import './CorpPractice.css';
 import '../../../../components/Practice/PracticeFlatSkin.css';
 import { PracticeCaps } from '../../../../components/Practice/practiceCase';
 
+// Months of a pack, with the same fallbacks the practice route always used for
+// older packs that stored units / words directly.
+function monthsOfPack(pack) {
+  if (pack.months && pack.months.length > 0) return pack.months;
+  if (pack.units && pack.units.length > 0) return [{ id: 'm1', title: '1-Oy', units: pack.units }];
+  if (pack.words && pack.words.length > 0) return [{ id: 'm1', title: '1-Oy', units: [{ id: 'u1', title: '1-Mavzu', words: pack.words }] }];
+  return [];
+}
+
+// The numbers of several smart-session parts, added up into the one result the
+// student sees at the end.
+function mergeSummaries(list, startedAt) {
+  const sum = (key) => list.reduce((n, item) => n + (item?.[key] || 0), 0);
+  const seconds = startedAt ? Math.max(0, Math.round((Date.now() - startedAt) / 1000)) : 0;
+  return {
+    totalWords: sum('totalWords'),
+    correctCount: sum('correctCount'),
+    incorrectCount: sum('incorrectCount'),
+    knownWords: list.flatMap((item) => item?.knownWords || []),
+    reviewWords: list.flatMap((item) => item?.reviewWords || []),
+    durationFormatted: `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`,
+  };
+}
+
 export default function CorpPractice() {
   const { t } = useStudentT();
   const { language } = useLanguage();
@@ -34,11 +59,23 @@ export default function CorpPractice() {
   // Carried through from StudentCorpLearn so the topic page's own Back
   // button still knows to return to the Homework tab, not the pack's month.
   const topicBackQuery = searchParams.get('from') === 'homework' ? '?from=homework' : '';
-  const { user, membership, student, assignedPacks, additionalPacks, requiredPacks } = useOutletContext();
-  const { allWords } = usePacks();
+  const { user, membership, student, assignedPacks, additionalPacks, requiredPacks, homeworkList } = useOutletContext();
+  const { allWords, wordsByPack, allWordsLoading } = usePacks();
+  const location = useLocation();
+  // Practice opens as one smart session; a mode picked in the topic page's
+  // menu (location.state.mode) is started as-is instead.
+  const requestedMode = location.state?.mode || null;
+  const autoStartedRef = useRef(false);
+  const smartPlanRef = useRef(null); // { parts, index, summaries }
+  const reviewWordsRef = useRef(new Map()); // composite id -> word of an earlier topic
+  const [smartPart, setSmartPart] = useState(null); // { kind, index, total } for the intro screen
 
   const [dbWords, setDbWords] = useState({});
   const [loadingProgress, setLoadingProgress] = useState(false);
+  // The saved progress has been read: the smart session must not be planned from an empty record.
+  const [progressLoaded, setProgressLoaded] = useState(false);
+  // Between opening the page and the session starting, show a spinner instead of flashing the mode list.
+  const [booting, setBooting] = useState(true);
 
   const [step, setStep] = useState('mode'); // 'mode' | 'intro' | 'practice' | 'results'
   const [selectedMode, setSelectedMode] = useState(null);
@@ -109,7 +146,7 @@ export default function CorpPractice() {
       } catch (err) {
         console.error('Error loading word progress in CorpPractice:', err);
       } finally {
-        if (!cancelled) setLoadingProgress(false);
+        if (!cancelled) { setLoadingProgress(false); setProgressLoaded(true); }
       }
     }
     loadWordProgress();
@@ -133,16 +170,74 @@ export default function CorpPractice() {
     });
   }, [loadedPack, dbWords, language]);
 
+  // Topics assigned earlier, with the student's saved progress on each (taken
+  // from the one words subscription the whole app shares - no extra reads).
+  const otherTopics = useMemo(() => {
+    if (!loadedPack) return [];
+    const groupPacks = [...(assignedPacks || []), ...(requiredPacks || []), ...(additionalPacks || [])];
+    const seenKeys = new Set([loadedPack.id]);
+    const out = [];
+    (homeworkList || []).forEach((hw) => (hw.items || []).forEach((item) => {
+      const pack = groupPacks.find((candidate) => candidate.id === item.packId);
+      if (!pack || pack.id === IRREGULAR_VERBS_PACK_ID) return;
+      const month = monthsOfPack(pack).find((m) => m.id === item.monthId);
+      const unit = (month?.units || []).find((u) => u.id === item.unitId);
+      if (!unit) return;
+      const storageId = corpWordStorageId(pack.id, month.id, unit.id);
+      if (seenKeys.has(storageId)) return;
+      seenKeys.add(storageId);
+      const saved = wordsByPack?.[storageId] || {};
+      const words = (unit.words || []).map((w, i) => {
+        const key = w.id || String(i);
+        return localizeWord({ id: key, mastery: 0, stability: 1.0, ...w, ...(saved[key] || {}) }, language);
+      });
+      if (words.some((w) => (w.reviewCount || 0) > 0)) out.push({ storageId, title: unit.title, words });
+    }));
+    return out;
+  }, [homeworkList, assignedPacks, requiredPacks, additionalPacks, wordsByPack, loadedPack, language]);
+
+  // Pressing Practice: build the session for this learner and start it. A mode
+  // chosen in the menu next to the button starts that one exercise instead.
+  useEffect(() => {
+    if (autoStartedRef.current || step !== 'mode' || !progressLoaded || allWordsLoading || !loadedPack || sourceWords.length === 0) return;
+    if (packId === IRREGULAR_VERBS_PACK_ID) return; // has its own trainer flow
+    autoStartedRef.current = true;
+    setBooting(false);
+    sessionStartRef.current = Date.now();
+    setWrongWords([]);
+    setProgressPct(0);
+    setRoundNumber(1);
+
+    if (requestedMode) {
+      const pool = filterWordsForMode(sourceWords, requestedMode);
+      if (pool.length < (PRACTICE_MODE_MIN_WORDS[requestedMode] || 1)) return; // stay on the mode list
+      setSelectedMode(requestedMode);
+      setPracticeWords(weightedSelectWords(pool, Math.min(10, pool.length)));
+      setStep('intro');
+      return;
+    }
+
+    const plan = planSmartSession({ unitWords: sourceWords, otherTopics });
+    if (plan.parts.length === 0) return;
+    plan.parts.forEach((part) => part.words.forEach((w) => { if (w.__storageId) reviewWordsRef.current.set(w.id, w); }));
+    smartPlanRef.current = { parts: plan.parts, index: 0, summaries: [] };
+    const first = plan.parts[0];
+    setSmartPart({ kind: first.kind, index: 0, total: plan.parts.length });
+    setSelectedMode(first.mode);
+    setPracticeWords(first.words);
+    setStep('intro');
+  }, [step, progressLoaded, allWordsLoading, loadedPack, sourceWords, packId, requestedMode, otherTopics]);
+
   // Intro shape transition timer
   useEffect(() => {
     if (step !== 'intro') return;
 
     const timerId = setTimeout(() => {
       setStep('practice');
-    }, 700);
+    }, smartPart ? 1100 : 700);
 
     return () => clearTimeout(timerId);
-  }, [step]);
+  }, [step, smartPart]);
 
   // Irregular Verbs skips the PracticeHub mode picker entirely — its
   // trainer already combines a flashcard-style study pass with the
@@ -174,7 +269,9 @@ export default function CorpPractice() {
 
   const autoStartingIrregularVerbs = packId === IRREGULAR_VERBS_PACK_ID && step === 'mode';
 
-  if (!loadedPack || sourceWords.length === 0 || loadingProgress || autoStartingIrregularVerbs) {
+  const smartBooting = booting && step === 'mode' && packId !== IRREGULAR_VERBS_PACK_ID;
+
+  if (!loadedPack || sourceWords.length === 0 || loadingProgress || autoStartingIrregularVerbs || smartBooting) {
     return (
       <div style={{ padding: '3rem 1.5rem', textAlign: 'center' }}>
         <div className="ios-activity-indicator">
@@ -187,6 +284,9 @@ export default function CorpPractice() {
 
   const handleStartPractice = (mode) => {
     if (sourceWords.length === 0) return;
+    // chosen by hand from the mode list: not part of a smart session any more
+    smartPlanRef.current = null;
+    setSmartPart(null);
 
     const pool = filterWordsForMode(sourceWords, mode);
     const minWords = PRACTICE_MODE_MIN_WORDS[mode] || 1;
@@ -231,7 +331,12 @@ export default function CorpPractice() {
   const handleUpdateWord = async (wordId, reviewInput) => {
     if (!user || !loadedPack) return null;
     try {
-      const word = sourceWords.find(w => w.id === wordId);
+      // A word brought back from an earlier topic keeps its progress under
+      // that topic's own storage key.
+      const reviewWord = reviewWordsRef.current.get(wordId) || null;
+      const storageId = reviewWord ? reviewWord.__storageId : loadedPack.id;
+      const storedId = reviewWord ? reviewWord.__origId : wordId;
+      const word = reviewWord || sourceWords.find(w => w.id === wordId);
       if (!word) return null;
 
       const { isCorrect, confidence, responseTime, retrievalType = 'passive_recall' } = reviewInput;
@@ -247,7 +352,7 @@ export default function CorpPractice() {
       });
       const clusterMultiplier = computeClusterCalibration(clusterHistory);
 
-      const updated = await saveReviewEvent(user.uid, loadedPack.id, wordId, word, {
+      const updated = await saveReviewEvent(user.uid, storageId, storedId, word, {
         isCorrect,
         confidence,
         responseTime,
@@ -259,19 +364,21 @@ export default function CorpPractice() {
       });
 
       const wrongCount = isCorrect ? Math.max(0, prevWrongCount - 1) : prevWrongCount + 1;
-      const wordRef = ref(db, `users/${user.uid}/words/${loadedPack.id}/${wordId}`);
+      const wordRef = ref(db, `users/${user.uid}/words/${storageId}/${storedId}`);
       await update(wordRef, { wrongCount });
 
       const finalData = { ...updated, wrongCount };
 
       // Sync local state immediately so weights are updated in the UI
-      setDbWords(prev => ({
-        ...prev,
-        [wordId]: {
-          ...(prev[wordId] || {}),
-          ...finalData
-        }
-      }));
+      if (!reviewWord) {
+        setDbWords(prev => ({
+          ...prev,
+          [wordId]: {
+            ...(prev[wordId] || {}),
+            ...finalData
+          }
+        }));
+      }
 
       return finalData;
     } catch (e) {
@@ -280,7 +387,26 @@ export default function CorpPractice() {
     }
   };
 
-  const handleComplete = async (summary) => {
+  const handleComplete = async (partSummary) => {
+    let summary = partSummary;
+    const plan = smartPlanRef.current;
+    if (plan) {
+      plan.summaries.push(partSummary);
+      if (plan.index < plan.parts.length - 1) {
+        // more to do: straight on to the next exercise, no results screen between
+        plan.index += 1;
+        const next = plan.parts[plan.index];
+        setSmartPart({ kind: next.kind, index: plan.index, total: plan.parts.length });
+        setSelectedMode(next.mode);
+        setPracticeWords(next.words);
+        setProgressPct(0);
+        setStep('intro');
+        return;
+      }
+      summary = mergeSummaries(plan.summaries, sessionStartRef.current);
+      smartPlanRef.current = null;
+      setSmartPart(null);
+    }
     playSound('victory');
     triggerVibration('victory');
     setResults(summary);
@@ -343,6 +469,8 @@ export default function CorpPractice() {
   };
 
   const handleReset = () => {
+    smartPlanRef.current = null;
+    setSmartPart(null);
     setResults(null);
     setWrongWords([]);
     setProgressPct(0);
@@ -359,7 +487,7 @@ export default function CorpPractice() {
     allWords: sourceWords, handleAnswer, handleBack, handleComplete, handleRepeatReviewWords,
     handleReset, handleStartPractice, handleUpdateWord, loadedPack, monthId,
     navigate, packId, practiceWords, progressPct, results, roundNumber,
-    selectedMode, setProgressPct, setShowExitModal, setStep, setWordCount,
+    selectedMode, setProgressPct, setShowExitModal, setStep, setWordCount, smartPart,
     showExitModal, sourceWords, step, topicBackQuery, unitId, wordCount, wrongWords,
   };
 

@@ -1,21 +1,48 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { BookOpen, Brain, ChevronLeft } from 'lucide-react';
+import { BookOpen, Brain, ChevronDown, ChevronLeft } from 'lucide-react';
 import ChapterReader from '../../../../../components/corp/ChapterReader';
 import { readingForUnit } from '../../../../../data/libraryChapters';
 import WordList from '../../../../../components/Words/WordList';
-import { corpWordStorageId } from '../../../../../utils/helpers';
+import { corpWordStorageId, PRACTICE_MODE_MIN_WORDS } from '../../../../../utils/helpers';
 import { useStudentT } from '../../../../../hooks/useStudentT';
 import './TopicDetailView.css';
+
+const PRACTICE_MENU = [
+  { mode: 'flashcard', icon: '🧠', label: 'practice.modeFlashcard' },
+  { mode: 'spelling', icon: '✍️', label: 'practice.modeSpelling' },
+  { mode: 'match', icon: '🔀', label: 'practice.modeMatch' },
+  { mode: 'quiz', icon: '📝', label: 'practice.modeQuiz' },
+  { mode: 'speed', icon: '⏱️', label: 'practice.modeSpeed' },
+  { mode: 'pronounce', icon: '🎙️', label: 'practice.modePronounce' },
+];
 
 export default function TopicDetailView({ p }) {
   const { t } = useStudentT();
   const [readerOpen, setReaderOpen] = useState(false);
+  // The small button next to Practice: pick one exercise instead of the
+  // automatic session.
+  const [modesOpen, setModesOpen] = useState(false);
+  const splitRef = useRef(null);
+  useEffect(() => {
+    if (!modesOpen) return undefined;
+    const close = (e) => { if (splitRef.current && !splitRef.current.contains(e.target)) setModesOpen(false); };
+    document.addEventListener('mousedown', close);
+    document.addEventListener('touchstart', close);
+    return () => { document.removeEventListener('mousedown', close); document.removeEventListener('touchstart', close); };
+  }, [modesOpen]);
   const {
     cameFromHomework, memoryTwin, monthId, navigate, packId,
     selectedMonth, selectedUnit, setActiveTab, startPractice, unitWords,
   } = p;
   const reading = readingForUnit(selectedUnit);
+  const virtualPack = () => ({
+    id: corpWordStorageId(selectedMonth.packId, selectedMonth.id, selectedUnit.id),
+    title: `${selectedMonth.packTitle} - ${selectedUnit.title}`,
+    words: selectedUnit.words || [],
+    level: selectedMonth.packLevel,
+    language: selectedMonth.packLanguage,
+  });
 
   return (
     <>
@@ -59,21 +86,45 @@ export default function TopicDetailView({ p }) {
                   </div>
                 </div>
                 <div className="pack-detail-actions">
-                  <button
-                    className="btn btn-primary btn-mashq"
-                    onClick={() => {
-                      const virtualPack = {
-                        id: corpWordStorageId(selectedMonth.packId, selectedMonth.id, selectedUnit.id),
-                        title: `${selectedMonth.packTitle} - ${selectedUnit.title}`,
-                        words: selectedUnit.words || [],
-                        level: selectedMonth.packLevel,
-                        language: selectedMonth.packLanguage
-                      };
-                      startPractice(virtualPack);
-                    }}
-                  >
-                    🎮 {t('words.practice')}
-                  </button>
+                  <div className="practice-split" ref={splitRef}>
+                    <button
+                      className="btn btn-primary btn-mashq practice-split-main"
+                      onClick={() => startPractice(virtualPack())}
+                    >
+                      🎮 {t('words.practice')}
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-primary btn-mashq practice-split-more"
+                      aria-label={t('practice.chooseExercise')}
+                      aria-expanded={modesOpen}
+                      title={t('practice.chooseExercise')}
+                      onClick={() => setModesOpen((open) => !open)}
+                    >
+                      <ChevronDown size={18} strokeWidth={2.6} className={modesOpen ? 'is-open' : ''} />
+                    </button>
+                    {modesOpen && (
+                      <div className="practice-split-menu" role="menu">
+                        {PRACTICE_MENU.map(({ mode, icon, label }) => {
+                          const tooFew = unitWords.length < (PRACTICE_MODE_MIN_WORDS[mode] || 1);
+                          return (
+                            <button
+                              key={mode}
+                              type="button"
+                              role="menuitem"
+                              className="practice-split-item"
+                              disabled={tooFew}
+                              onClick={() => { setModesOpen(false); startPractice(virtualPack(), mode); }}
+                            >
+                              <span className="practice-split-item-icon" aria-hidden="true">{icon}</span>
+                              <span className="practice-split-item-label">{t(label)}</span>
+                              {tooFew && <span className="practice-split-item-min">{t('practice.minWords', { n: PRACTICE_MODE_MIN_WORDS[mode] })}</span>}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
                   {reading && (
                     <button className="btn btn-secondary btn-mashq" onClick={() => setReaderOpen(true)}>
                       <BookOpen size={16} /> {t('words.read')}
