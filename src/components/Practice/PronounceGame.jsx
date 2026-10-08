@@ -5,6 +5,7 @@ import { inferConfidenceFromSpeed } from '@voc/memory-engine';
 import { speakWord } from '../../utils/helpers';
 import { playSound, triggerVibration } from '../../utils/feedback';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { usePracticeCase } from './practiceCase';
 import { useKeyboardInset } from '../../hooks/useKeyboardInset';
 import PracticeQuitModal from './PracticeQuitModal';
 import './PronounceGame.css';
@@ -70,6 +71,7 @@ export default function PronounceGame({
   language = 'en-US',
 }) {
   const { t } = useLanguage();
+  const c = usePracticeCase();
   const keyboardInset = useKeyboardInset();
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -469,7 +471,7 @@ export default function PronounceGame({
               onClick={handleSkip}
               disabled={isListening}
             >
-              {t('practice.skip')?.toUpperCase() || 'SKIP'}
+              {c(t('practice.skip')) || 'SKIP'}
             </button>
           ) : (
             <div className="duo-feedback-container">
@@ -507,7 +509,7 @@ export default function PronounceGame({
                   className={`duo-btn duo-btn-continue ${isCorrect ? 'btn-correct' : 'btn-wrong'}`}
                   onClick={handleNext}
                 >
-                  {isLast ? (t('practice.resultsBtn')?.toUpperCase() || 'RESULTS') : (t('practice.continueBtn')?.toUpperCase() || 'CONTINUE')}
+                  {isLast ? (c(t('practice.resultsBtn')) || 'RESULTS') : (c(t('practice.continueBtn')) || 'CONTINUE')}
                 </button>
               </div>
             </div>

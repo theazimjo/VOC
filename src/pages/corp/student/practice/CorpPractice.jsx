@@ -22,6 +22,8 @@ import { useLanguage } from '../../../../contexts/LanguageContext';
 import { localizeWord } from '../learn/utils';
 import '../../../personal/PracticePage.css';
 import './CorpPractice.css';
+import './CorpPracticeSkin.css';
+import { PracticeCaps } from '../../../../components/Practice/practiceCase';
 
 export default function CorpPractice() {
   const { t } = useStudentT();
@@ -362,7 +364,8 @@ export default function CorpPractice() {
   };
 
   return (
-    <div className="practice-page" style={{ padding: '1.25rem var(--space-md) var(--space-xl)' }}>
+    <PracticeCaps.Provider value={false}>
+    <div className="practice-page corp-practice" style={{ padding: '1.25rem var(--space-md) var(--space-xl)' }}>
 
       {/* Sleek iOS pill back button */}
       {step !== 'results' && step !== 'practice' && (
@@ -388,6 +391,6 @@ export default function CorpPractice() {
 
       {showExitModal && <ExitPracticeModal p={p} />}
     </div>
+    </PracticeCaps.Provider>
   );
 }
-

@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { usePracticeCase } from './practiceCase';
 import './PracticeQuitModal.css';
 
 export default function PracticeQuitModal({ isOpen, onClose, onConfirm }) {
   const { t } = useLanguage();
+  const c = usePracticeCase();
 
   const safeT = (key, fallback) => {
     const val = t(key);
@@ -30,14 +32,14 @@ export default function PracticeQuitModal({ isOpen, onClose, onConfirm }) {
     'practice.quitMessage',
     safeT('practice.quitDesc', 'Hozir chiqib ketsangiz, erishgan natijangiz saqlanmaydi')
   );
-  const cancelBtnText = safeT(
+  const cancelBtnText = c(safeT(
     'practice.keepLearning',
     safeT('practice.cancel', 'DAVOM ETISH')
-  ).toUpperCase();
-  const quitBtnText = safeT(
+  ));
+  const quitBtnText = c(safeT(
     'practice.endSession',
     safeT('practice.quit', 'SESSIYANI YAKUNLASH')
-  ).toUpperCase();
+  ));
 
   return (
     <div className="duo-modal-overlay" onClick={onClose}>

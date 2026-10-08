@@ -4,6 +4,7 @@ import { Volume2, X, RotateCw, Check, PenLine } from 'lucide-react';
 import { inferConfidenceFromSpeed } from '@voc/memory-engine';
 import { speakWord } from '../../utils/helpers';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { usePracticeCase } from './practiceCase';
 import PracticeQuitModal from './PracticeQuitModal';
 import './Flashcard.css';
 
@@ -163,6 +164,7 @@ export default function Flashcard({
   language = 'en-US',
 }) {
   const { t } = useLanguage();
+  const c = usePracticeCase();
   const [currentIndex, setCurrentIndex]   = useState(0);
   const [isFlipped, setIsFlipped]         = useState(false);
   // 'right' | 'left' | null — drives BOTH exit and ghost-shift animations
@@ -401,18 +403,18 @@ export default function Flashcard({
             <button type="button" className="duo-btn duo-btn-results-continue duo-btn-flip-card"
               onClick={handleFlip}>
               <RotateCw size={18} />
-              <span>{safeT('practice.flipCard', "AG'DARISH").toUpperCase()}</span>
+              <span>{c(safeT('practice.flipCard', "AG'DARISH"))}</span>
             </button>
           ) : (
             <div className="duo-flashcard-judge-btns">
               <button type="button" className="duo-btn duo-btn-dont-know"
                 onClick={() => handleJudge(false)}>
-                ❌ {safeT('practice.dontKnow', 'BILMAYMAN').toUpperCase()} (1)
+                ❌ {c(safeT('practice.dontKnow', 'BILMAYMAN'))} (1)
               </button>
               <button type="button" className="duo-btn duo-btn-know"
                 onClick={() => handleJudge(true)}>
                 <Check size={20} strokeWidth={3} />
-                <span>{safeT('practice.know', 'BILAMAN').toUpperCase()} (2)</span>
+                <span>{c(safeT('practice.know', 'BILAMAN'))} (2)</span>
               </button>
             </div>
           )}

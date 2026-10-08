@@ -1,0 +1,371 @@
+/* ==========================================================================
+   Student practice — the student panel's flat iOS look.
+
+   The practice games (src/components/Practice) are drawn in a chunky,
+   Duolingo-like way: thick borders, a hard 4-6px "3D" shadow under every
+   card and button, uppercase heavy buttons. Everything else a student sees
+   (Home, Words, a topic, Profile) is flat: 1px hairline border, soft shadow,
+   normal-case 600-700 weight text. This skin, scoped to the student practice
+   page only, brings the games in line with the rest of the panel without
+   touching the personal app's practice screens.
+   ========================================================================== */
+
+.corp-practice {
+  --cp-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.04);
+  --cp-shadow-lift: 0 2px 6px rgba(0, 0, 0, 0.06), 0 12px 28px rgba(0, 0, 0, 0.06);
+  --cp-btn-shadow: 0 2px 10px color-mix(in srgb, var(--accent-1) 28%, transparent);
+  --cp-ok-shadow: 0 2px 10px color-mix(in srgb, var(--success) 28%, transparent);
+  --cp-bad-shadow: 0 2px 10px color-mix(in srgb, var(--error) 28%, transparent);
+  --cp-radius: var(--radius-lg, 14px);
+}
+
+/* ---- Cards and answer options: hairline border + soft shadow ------------ */
+.corp-practice .practice-mode-card,
+.corp-practice .practice-word-count-bar,
+.corp-practice .fc-face,
+.corp-practice .fc-stack-ghost,
+.corp-practice .duo-prompt-card,
+.corp-practice .duo-modal-card,
+.corp-practice .duo-match-card,
+.corp-practice .duo-quiz-option-card,
+.corp-practice .duo-speed-option-card,
+.corp-practice .duo-tile,
+.corp-practice .duo-tile-placed,
+.corp-practice .duo-btn-skip,
+.corp-practice .duo-btn-toggle-input,
+.corp-practice .duo-btn-check:disabled {
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--cp-shadow) !important;
+}
+
+.corp-practice .practice-mode-card,
+.corp-practice .practice-word-count-bar,
+.corp-practice .duo-prompt-card,
+.corp-practice .duo-modal-card { border-radius: var(--cp-radius) !important; }
+
+.corp-practice .duo-match-card,
+.corp-practice .duo-quiz-option-card,
+.corp-practice .duo-speed-option-card,
+.corp-practice .fc-face { border-radius: var(--cp-radius) !important; }
+
+/* hover: only the border picks up the accent, nothing jumps */
+.corp-practice .practice-mode-card:hover:not(.disabled) {
+  border-color: var(--mode-glow-color, var(--accent-1)) !important;
+  box-shadow: var(--cp-shadow-lift) !important;
+  transform: none;
+}
+.corp-practice .duo-match-card:hover:not(:disabled):not(.is-selected):not(.is-matched):not(.is-error),
+.corp-practice .duo-quiz-option-card:hover:not(:disabled):not(.is-correct):not(.is-wrong):not(.is-dimmed),
+.corp-practice .duo-speed-option-card:hover:not(:disabled):not(.is-correct):not(.is-wrong):not(.is-dimmed),
+.corp-practice .duo-tile:hover:not(:disabled) {
+  box-shadow: var(--cp-shadow-lift) !important;
+  transform: none;
+}
+
+/* pressed: a small scale instead of the card sinking into its shadow */
+.corp-practice .practice-mode-card:active:not(.disabled),
+.corp-practice .duo-match-card:active:not(:disabled),
+.corp-practice .duo-quiz-option-card:active:not(:disabled),
+.corp-practice .duo-speed-option-card:active:not(:disabled),
+.corp-practice .duo-tile:active:not(:disabled),
+.corp-practice .duo-btn-skip:active,
+.corp-practice .duo-btn-toggle-input:active {
+  transform: scale(0.98) !important;
+  box-shadow: var(--cp-shadow) !important;
+}
+
+/* chosen / right / wrong: a colored border and a light tint, no hard shadow */
+.corp-practice .duo-match-card.is-selected,
+.corp-practice .duo-tile-placed { border-width: 1.5px !important; }
+.corp-practice .duo-match-card.is-selected { box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-1) 18%, transparent) !important; }
+.corp-practice .duo-match-card.is-matched,
+.corp-practice .duo-quiz-option-card.is-correct,
+.corp-practice .duo-speed-option-card.is-correct,
+.corp-practice .duo-tile-placed.tile-correct {
+  border-width: 1.5px !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--success) 16%, transparent) !important;
+}
+.corp-practice .duo-match-card.is-error,
+.corp-practice .duo-quiz-option-card.is-wrong,
+.corp-practice .duo-speed-option-card.is-wrong,
+.corp-practice .duo-tile-placed.tile-wrong {
+  border-width: 1.5px !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--error) 16%, transparent) !important;
+}
+
+/* ---- Practice mode list ------------------------------------------------- */
+.corp-practice .practice-mode-icon-wrap,
+.corp-practice .practice-mode-card:hover:not(.disabled) .practice-mode-icon-wrap {
+  box-shadow: none !important;
+  border: 0 !important;
+  border-radius: 12px;
+}
+.corp-practice .practice-mode-icon-wrap {
+  background: color-mix(in srgb, var(--mode-glow-color, var(--accent-1)) 12%, var(--bg-secondary));
+}
+.corp-practice .practice-mode-card:hover:not(.disabled) .practice-mode-icon-wrap {
+  background: color-mix(in srgb, var(--mode-glow-color, var(--accent-1)) 18%, var(--bg-secondary));
+  color: var(--mode-glow-color, var(--accent-1));
+}
+.corp-practice .practice-mode-title { font-weight: 650; letter-spacing: -0.01em; }
+.corp-practice .practice-mode-desc { font-weight: 400; }
+.corp-practice .practice-mode-footer { border-top: 1px solid var(--border-light, var(--border)); }
+.corp-practice .practice-mode-badge,
+.corp-practice .practice-mode-badge-warning,
+.corp-practice .practice-mode-arrow { font-weight: 600; }
+
+/* ---- Word-count picker: same segmented control as the Words tabs --------- */
+.corp-practice .practice-word-count-label { font-weight: 600; letter-spacing: 0.04em; }
+.corp-practice .word-count-options {
+  border: 0;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--text-primary) 6%, transparent);
+  gap: 2px;
+}
+.corp-practice .word-count-btn {
+  border: 0;
+  border-radius: 9px;
+  font-weight: 600;
+}
+.corp-practice .word-count-btn.active {
+  border: 0;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-weight: 650;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 1px rgba(0, 0, 0, 0.06);
+}
+.corp-practice .word-count-btn:active { transform: scale(0.97); }
+
+/* ---- Buttons: flat, normal case, soft colored glow ----------------------- */
+.corp-practice button,
+.corp-practice button * {
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+.corp-practice .duo-btn,
+.corp-practice .duo-btn-flip-card,
+.corp-practice .duo-btn-know,
+.corp-practice .duo-btn-dont-know,
+.corp-practice .duo-btn-check,
+.corp-practice .duo-btn-continue,
+.corp-practice .duo-btn-keep-learning,
+.corp-practice .duo-btn-end-session,
+.corp-practice .duo-btn-modal-cancel,
+.corp-practice .duo-btn-modal-quit,
+.corp-practice .duo-btn-results-continue,
+.corp-practice .duo-btn-skip,
+.corp-practice .duo-btn-toggle-input {
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  font-weight: 650 !important;
+  border-radius: var(--radius-md, 10px) !important;
+}
+
+.corp-practice .duo-btn-flip-card,
+.corp-practice .duo-btn-check:not(:disabled),
+.corp-practice .duo-btn-keep-learning,
+.corp-practice .duo-btn-modal-cancel,
+.corp-practice .duo-btn-results-continue {
+  border: 0 !important;
+  box-shadow: var(--cp-btn-shadow) !important;
+}
+.corp-practice .duo-btn-know,
+.corp-practice .duo-btn-continue.btn-correct { border: 0 !important; box-shadow: var(--cp-ok-shadow) !important; }
+.corp-practice .duo-btn-dont-know,
+.corp-practice .duo-btn-continue.btn-wrong { border: 0 !important; box-shadow: var(--cp-bad-shadow) !important; }
+
+.corp-practice .duo-btn-flip-card:active,
+.corp-practice .duo-btn-check:active:not(:disabled),
+.corp-practice .duo-btn-keep-learning:active,
+.corp-practice .duo-btn-modal-cancel:active,
+.corp-practice .duo-btn-results-continue:active,
+.corp-practice .duo-btn-know:active,
+.corp-practice .duo-btn-dont-know:active,
+.corp-practice .duo-btn-continue:active {
+  transform: scale(0.98) !important;
+  filter: brightness(0.96);
+}
+
+/* ---- Headings: 650-700 like the rest of the panel, not 850-900 ------------ */
+.corp-practice .duo-prompt-title,
+.corp-practice .duo-fc-word,
+.corp-practice .duo-results-title,
+.corp-practice .duo-stat-value,
+.corp-practice .duo-modal-title,
+.corp-practice .duo-feedback-heading,
+.corp-practice .duo-correct-word,
+.corp-practice .results-mistake-word,
+.corp-practice .perfect-score-banner,
+.corp-practice .duo-quiz-badge,
+.corp-practice .duo-speed-badge,
+.corp-practice .duo-speed-tally,
+.corp-practice .duo-speed-record-badge,
+.corp-practice .duo-speed-timer-badge,
+.corp-practice .duo-quiz-timer-badge,
+.corp-practice .fc-pos-badge,
+.corp-practice .duo-stat-badge,
+.corp-practice .results-mistakes-title { font-weight: 700 !important; }
+
+/* ---- Pronounce: the mic is the one round control, give it the soft glow --- */
+.corp-practice .duo-mic-button { box-shadow: var(--cp-btn-shadow) !important; border-bottom-width: 0 !important; }
+
+
+/* ---- One header, not two -------------------------------------------------
+   Match, Quiz, Speed, Pronounce and the verb trainer each draw their own
+   close button and progress bar; the extra "< Title" bar the practice
+   session adds above them only repeated that (and the student pages above
+   already have the Back pill), so it is dropped here. */
+.corp-practice .practice-session-header.clean-quiz-header { display: none; }
+
+
+/* ---- Results ------------------------------------------------------------- */
+.corp-practice .duo-results-fullscreen-wrapper { background: transparent !important; }
+.corp-practice .duo-results-title {
+  font-size: 1.6rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em;
+}
+.corp-practice .duo-results-subtitle { font-weight: 500 !important; }
+
+/* three stat tiles: the same white card as everywhere else, label on top */
+.corp-practice .duo-stat-card {
+  border: 1px solid var(--border) !important;
+  border-radius: var(--cp-radius) !important;
+  background: var(--bg-secondary) !important;
+  box-shadow: var(--cp-shadow) !important;
+  overflow: hidden !important;
+  min-height: 0 !important;
+}
+.corp-practice .duo-stat-badge {
+  background: transparent !important;
+  color: var(--text-secondary) !important;
+  padding: 12px 6px 0 !important;
+  font-size: 0.68rem !important;
+  font-weight: 600 !important;
+  white-space: normal !important;
+  letter-spacing: 0.02em !important;
+}
+.corp-practice .duo-stat-content {
+  margin: 0 !important;
+  border-radius: 0 !important;
+  padding: 10px 6px 14px !important;
+  min-height: 0 !important;
+}
+.corp-practice .duo-stat-value { font-weight: 700 !important; }
+
+.corp-practice .results-mistakes-container,
+.corp-practice .perfect-score-banner {
+  border: 1px solid var(--border) !important;
+  border-radius: var(--cp-radius) !important;
+  box-shadow: var(--cp-shadow);
+}
+.corp-practice .results-mistakes-container { background: var(--bg-secondary) !important; }
+.corp-practice .results-mistakes-title { font-weight: 600 !important; }
+
+/* the sticky "back" bar at the bottom of the phone results */
+.corp-practice .duo-results-bottom-bar-fixed .duo-btn-results-continue {
+  font-weight: 650 !important;
+  font-size: 1rem !important;
+  border-radius: var(--radius-md, 10px) !important;
+  letter-spacing: 0 !important;
+}
+
+
+/* ---- Confirmation windows ------------------------------------------------
+   The games' own "leave?" window used to look nothing like the student
+   panel's exit window (ExitPracticeModal). Same card, same red icon, same two
+   side-by-side buttons here. */
+.corp-practice .duo-modal-overlay {
+  background: rgba(0, 0, 0, 0.65) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+.corp-practice .duo-modal-card {
+  max-width: 360px !important;
+  padding: 24px 22px 22px !important;
+  gap: 0.85rem;
+  border-radius: 18px !important;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+.corp-practice .duo-modal-card::before {
+  content: '';
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255, 59, 48, 0.15) center / 24px 24px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ff3b30' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z'/%3E%3Cpath d='m2.5 21.5 1.4-1.4'/%3E%3Cpath d='m20.1 3.9 1.4-1.4'/%3E%3Cpath d='M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z'/%3E%3Cpath d='m9.6 14.4 4.8-4.8'/%3E%3C/svg%3E");
+}
+.corp-practice .duo-modal-title { font-size: 1.2rem !important; margin: 0 !important; }
+.corp-practice .duo-modal-desc { font-size: 0.88rem !important; line-height: 1.4 !important; margin: 0 !important; }
+.corp-practice .duo-modal-actions { flex-direction: row !important; gap: 0.75rem !important; margin-top: 0.4rem; }
+.corp-practice .duo-btn-modal-cancel,
+.corp-practice .duo-btn-modal-quit {
+  flex: 1;
+  width: auto !important;
+  padding: 11px 16px !important;
+  font-size: 0.9rem !important;
+  border-radius: 12px !important;
+}
+.corp-practice .duo-btn-modal-cancel {
+  background: var(--bg-tertiary) !important;
+  border: 1px solid var(--border-light) !important;
+  color: var(--text-primary) !important;
+  box-shadow: none !important;
+}
+.corp-practice .duo-btn-modal-quit {
+  order: 2;
+  background: #ff3b30 !important;
+  color: #fff !important;
+}
+.corp-practice .duo-btn-modal-quit:hover { background: #ff3b30 !important; filter: brightness(0.95); }
+
+/* ---- Desktop: the exercise lives inside the student panel -----------------
+   On a computer the games used to cover the whole screen - no sidebar, no top
+   bar, a flat grey page. They now sit in the panel as one white card on the
+   same background as every other student page. Phones keep the immersive
+   full screen. */
+@media (min-width: 769px) {
+  .corp-practice .practice-session,
+  .corp-practice .spelling-session-fullscreen,
+  .corp-practice .duo-irregular-page,
+  .corp-practice .checkpoint-fullscreen-wrapper,
+  .corp-practice .practice-intro-screen {
+    position: relative !important;
+    inset: auto !important;
+    z-index: auto !important;
+    height: auto !important;
+    width: auto !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: transparent !important;
+  }
+  .corp-practice .practice-session-content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 !important;
+  }
+  .corp-practice .duo-spelling-page,
+  .corp-practice .duo-irregular-page {
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 0 !important;
+    background: var(--bg-secondary) !important;
+    border: 1px solid var(--border);
+    border-radius: var(--cp-radius);
+    box-shadow: var(--cp-shadow);
+    overflow: hidden;
+  }
+  .corp-practice .duo-top-header { padding: 18px 22px 6px; }
+  .corp-practice .duo-spelling-body { padding: 12px 28px 28px !important; min-height: 380px; }
+  .corp-practice .duo-bottom-bar,
+  .corp-practice .duo-flashcard-bottom-bar {
+    position: static !important;
+    border-top: 1px solid var(--border) !important;
+    padding: 16px 22px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .corp-practice * { transition-duration: 0.01ms !important; }
+}

@@ -1,11 +1,13 @@
 import { motion } from 'framer-motion';
 import { Sparkles, TrendingDown, Volume2 } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { usePracticeCase } from './practiceCase';
 import { speakWord } from '../../utils/helpers';
 import './PracticeResultsView.css';
 
 export default function PracticeResultsView({ results, wrongWords = [], onReset, language = 'en-US' }) {
   const { t } = useLanguage();
+  const c = usePracticeCase();
 
   if (!results) return null;
 
@@ -143,7 +145,7 @@ export default function PracticeResultsView({ results, wrongWords = [], onReset,
             style={{ width: '100%', padding: '14px 24px' }}
             onClick={onReset}
           >
-            {t('practice.backToMenu')?.toUpperCase() || 'BACK TO PRACTICE MENU'}
+            {c(t('practice.backToMenu')) || 'BACK TO PRACTICE MENU'}
           </button>
         </div>
       </div>
@@ -155,7 +157,7 @@ export default function PracticeResultsView({ results, wrongWords = [], onReset,
           style={{ width: '100%', maxWidth: '440px', padding: '14px 24px' }}
           onClick={onReset}
         >
-          {t('practice.backToMenu')?.toUpperCase() || 'BACK TO PRACTICE MENU'}
+          {c(t('practice.backToMenu')) || 'BACK TO PRACTICE MENU'}
         </button>
       </div>
     </motion.div>

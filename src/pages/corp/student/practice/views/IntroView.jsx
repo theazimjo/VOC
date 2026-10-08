@@ -19,7 +19,7 @@ export default function IntroView({ p }) {
           >
             <div className="intro-card" style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border)' }}>
               <div className="intro-mode-icon">
-                {selectedMode === 'flashcard' ? '🧠' : selectedMode === 'spelling' ? '✍️' : selectedMode === 'match' ? '🔀' : selectedMode === 'quiz' ? '📝' : selectedMode === 'pronounce' ? '🎙️' : '🎮'}
+                {selectedMode === 'flashcard' ? '🧠' : selectedMode === 'spelling' ? '✍️' : selectedMode === 'match' ? '🔀' : selectedMode === 'quiz' ? '📝' : selectedMode === 'pronounce' ? '🎙️' : selectedMode === 'speed' ? '⏱️' : '🎮'}
               </div>
               <h2>
                 {selectedMode === 'flashcard' ? t('practice.modeFlashcard') : selectedMode === 'spelling' ? t('practice.modeSpelling') : selectedMode === 'match' ? t('practice.modeMatch') : selectedMode === 'quiz' ? t('practice.modeQuiz') : selectedMode === 'pronounce' ? t('practice.modePronounce') : t('practice.modeDefault')}

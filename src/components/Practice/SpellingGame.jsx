@@ -7,6 +7,7 @@ import { findConfusableMatch } from '../../experiment/textSimilarity';
 import { recordConfusionPair } from '../../experiment/experimentDB';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { usePracticeCase } from './practiceCase';
 import { useKeyboardInset } from '../../hooks/useKeyboardInset';
 import PracticeQuitModal from './PracticeQuitModal';
 import './SpellingGame.css';
@@ -31,6 +32,7 @@ export default function SpellingGame({
 }) {
   const { user } = useAuth();
   const { t, language: appLanguage } = useLanguage();
+  const c = usePracticeCase();
   const keyboardInset = useKeyboardInset();
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -495,7 +497,7 @@ export default function SpellingGame({
                 className="duo-btn duo-btn-review-mistakes"
                 onClick={() => setShowMistakes(!showMistakes)}
               >
-                {t('practice.reviewLesson')?.toUpperCase() || 'REVIEW MISTAKES'}
+                {c(t('practice.reviewLesson')) || 'REVIEW MISTAKES'}
               </button>
             ) : <div />}
 
@@ -510,7 +512,7 @@ export default function SpellingGame({
                   setIsFinished(false);
                 }}
               >
-                {t('practice.practiceAgain')?.toUpperCase() || 'PRACTICE AGAIN'}
+                {c(t('practice.practiceAgain')) || 'PRACTICE AGAIN'}
               </button>
 
               <button
@@ -525,7 +527,7 @@ export default function SpellingGame({
                   }
                 }}
               >
-                {t('practice.continueBtn')?.toUpperCase() || 'CONTINUE'}
+                {c(t('practice.continueBtn')) || 'CONTINUE'}
               </button>
             </div>
           </div>
@@ -694,7 +696,7 @@ export default function SpellingGame({
                 className="duo-btn duo-btn-skip"
                 onClick={handleSkip}
               >
-                {t('practice.skip')?.toUpperCase() || 'SKIP'}
+                {c(t('practice.skip')) || 'SKIP'}
               </button>
 
               <button
@@ -703,7 +705,7 @@ export default function SpellingGame({
                 onClick={submitAnswer}
                 disabled={!currentAnswerString.trim()}
               >
-                {t('practice.check')?.toUpperCase() || 'CHECK'}
+                {c(t('practice.check')) || 'CHECK'}
               </button>
             </>
           ) : (
@@ -735,7 +737,7 @@ export default function SpellingGame({
                 className={`duo-btn duo-btn-continue ${isCorrect ? 'btn-correct' : 'btn-wrong'}`}
                 onClick={handleNext}
               >
-                {isLast ? (t('practice.resultsBtn')?.toUpperCase() || 'RESULTS') : (t('practice.continueBtn')?.toUpperCase() || 'CONTINUE')}
+                {isLast ? (c(t('practice.resultsBtn')) || 'RESULTS') : (c(t('practice.continueBtn')) || 'CONTINUE')}
               </button>
             </div>
           )}
