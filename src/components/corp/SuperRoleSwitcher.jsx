@@ -3,7 +3,8 @@ import { Building2, GraduationCap, Shield, Users } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { SUPER_ADMINS } from '../../hooks/useCorpRole';
 import { useRoleSwitch } from '../../hooks/useRoleSwitch';
-import { getAllCenters, joinGroupAsUser } from '../../services/corpService';
+import { getAllCenters, joinGroupAsUser, switchActiveGroup } from '../../services/corpService';
+import { useGroupMode } from '../../hooks/useGroupMode';
 import { clearActiveRole, clearViewAs, ROLE_HOME, setViewAs } from '../../utils/activeRole';
 import { LoadingRows, Row, Section, Sheet } from '../../pages/corp/super-admin/ui';
 
@@ -21,6 +22,7 @@ const activeGroups = (center) => Object.entries(center.groups || {})
 export default function SuperRoleSwitcher() {
   const { user } = useAuth();
   const { current, identity } = useRoleSwitch();
+  const { membership } = useGroupMode();
   const allowed = isSuperAdminEmail(user?.email);
 
   const [pick, setPick] = useState(null); // null | { role: 'center_admin' | 'teacher' | 'student', center? }
@@ -59,6 +61,22 @@ export default function SuperRoleSwitcher() {
     }
   };
 
+  // The account already is a student somewhere (it joined a group before):
+  // go straight to that student profile instead of asking for a group again.
+  const openMyStudent = async () => {
+    setBusy(true);
+    setError('');
+    try {
+      await switchActiveGroup(user.uid, membership.groupId);
+      clearViewAs();
+      clearActiveRole();
+      go('student');
+    } catch (err) {
+      setError(err.message || "Couldn't open the student profile");
+      setBusy(false);
+    }
+  };
+
   const now = identity?.viewAs ? identity.role : current;
   const title = pick ? { center_admin: 'Center admin of…', teacher: 'Teacher at…', student: 'Student in…' }[pick.role] : '';
   const centerList = (centers || []).filter((c) => c.status !== 'suspended');
@@ -69,8 +87,23 @@ export default function SuperRoleSwitcher() {
         <Row icon={<Shield size={16} />} iconTone="blue" title="Super admin" detail={now === 'super_admin' ? 'Current' : undefined} onClick={() => { clearViewAs(); clearActiveRole(); go('super_admin'); }} />
         <Row icon={<Building2 size={16} />} iconTone="purple" title="Center admin" detail={now === 'center_admin' ? 'Current' : undefined} onClick={() => setPick({ role: 'center_admin' })} />
         <Row icon={<Users size={16} />} iconTone="green" title="Teacher" detail={now === 'teacher' ? 'Current' : undefined} onClick={() => setPick({ role: 'teacher' })} />
-        <Row icon={<GraduationCap size={16} />} iconTone="orange" title="Student" onClick={() => setPick({ role: 'student' })} />
+        {membership ? (
+          <>
+            <Row
+              icon={<GraduationCap size={16} />}
+              iconTone="orange"
+              title="Student"
+              subtitle={membership.groupName || 'Your student profile'}
+              detail={busy ? 'Opening…' : now === 'student' ? 'Current' : 'Open'}
+              onClick={busy ? undefined : openMyStudent}
+            />
+            <Row icon={<GraduationCap size={16} />} iconTone="gray" title="Join another group as a student…" onClick={() => setPick({ role: 'student' })} />
+          </>
+        ) : (
+          <Row icon={<GraduationCap size={16} />} iconTone="orange" title="Student" subtitle="Join a group to get a student profile" onClick={() => setPick({ role: 'student' })} />
+        )}
       </Section>
+      {error && !pick && <p className="sa-section-footer" role="alert">{error}</p>}
 
       <Sheet open={Boolean(pick)} onClose={() => !busy && (setPick((p) => (p?.center ? { role: p.role } : null)))} title={pick?.center ? pick.center.name || 'Center' : title} en>
         {error && <p className="sa-section-footer" role="alert">{error}</p>}
