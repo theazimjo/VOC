@@ -11,11 +11,11 @@ import './TopicDetailView.css';
 export default function TopicDetailView({ p }) {
   const { t } = useStudentT();
   const [readerOpen, setReaderOpen] = useState(false);
-  const reading = readingForUnit(selectedUnit);
   const {
     cameFromHomework, memoryTwin, monthId, navigate, packId,
     selectedMonth, selectedUnit, setActiveTab, startPractice, unitWords,
   } = p;
+  const reading = readingForUnit(selectedUnit);
 
   return (
     <>
