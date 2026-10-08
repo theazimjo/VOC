@@ -1,6 +1,7 @@
-import { Fragment, useEffect, useMemo, useState } from 'react';
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { Check, ChevronLeft, ChevronRight, Minus, Plus, X } from 'lucide-react';
+import { READER_SIZES, getReaderSize, getReadingProgress, saveReaderSize, saveReadingProgress } from './readingProgress';
 import './ChapterReader.css';
 
 // Full-screen reader for a library book's chapter (Science, Health). The text
@@ -73,6 +74,8 @@ function Block({ block, labels }) {
 export default function ChapterReader({ reading, onClose, labels }) {
   const [chapter, setChapter] = useState(undefined); // undefined = loading, null = not found
   const [page, setPage] = useState(0);
+  const [size, setSize] = useState(getReaderSize);
+  const touchRef = useRef(null);
 
   useEffect(() => {
     let alive = true;
@@ -80,7 +83,14 @@ export default function ChapterReader({ reading, onClose, labels }) {
     setPage(0);
     const load = LOADERS[reading?.book];
     if (!load) { setChapter(null); return undefined; }
-    load().then((all) => { if (alive) setChapter(all[reading.topic] || null); }).catch(() => { if (alive) setChapter(null); });
+    load().then((all) => {
+      if (!alive) return;
+      const found = all[reading.topic] || null;
+      setChapter(found);
+      // pick up where the reader stopped last time
+      const saved = getReadingProgress(reading);
+      if (found && saved) setPage(Math.min(saved.page, Math.max((found.pages || []).length - 1, 0)));
+    }).catch(() => { if (alive) setChapter(null); });
     return () => { alive = false; };
   }, [reading?.book, reading?.topic]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -102,6 +112,29 @@ export default function ChapterReader({ reading, onClose, labels }) {
 
   useEffect(() => { document.querySelector('.cr-scroll')?.scrollTo({ top: 0 }); }, [page]);
 
+  // remember the page (and the page count, for the topic page's "Continue")
+  useEffect(() => {
+    if (chapter && pages.length > 0) saveReadingProgress(reading, page, pages.length);
+  }, [chapter, pages.length, page]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const bump = (d) => setSize((n) => {
+    const next = Math.min(Math.max(n + d, 0), READER_SIZES.length - 1);
+    saveReaderSize(next);
+    return next;
+  });
+
+  // swipe to turn the page on touch screens
+  const onTouchStart = (e) => { const t = e.touches[0]; touchRef.current = { x: t.clientX, y: t.clientY }; };
+  const onTouchEnd = (e) => {
+    const start = touchRef.current;
+    touchRef.current = null;
+    if (!start) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - start.x;
+    const dy = t.clientY - start.y;
+    if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.6) go(dx < 0 ? 1 : -1);
+  };
+
   return createPortal(
     <div className="cr-root" role="dialog" aria-modal="true" aria-label={chapter?.title || reading?.topic}>
       <header className="cr-head">
@@ -109,10 +142,19 @@ export default function ChapterReader({ reading, onClose, labels }) {
           <span className="cr-kicker">{reading?.topic}</span>
           <h2 className="cr-title">{chapter?.title || reading?.topic}</h2>
         </div>
-        <button type="button" className="cr-close" onClick={onClose} aria-label={labels.close}><X size={18} /></button>
+        <div className="cr-tools">
+          <button type="button" className="cr-tool" onClick={() => bump(-1)} disabled={size === 0} aria-label={labels.smaller || 'Smaller text'}><Minus size={15} /><span aria-hidden="true">A</span></button>
+          <button type="button" className="cr-tool is-big" onClick={() => bump(1)} disabled={size === READER_SIZES.length - 1} aria-label={labels.larger || 'Larger text'}><Plus size={15} /><span aria-hidden="true">A</span></button>
+          <button type="button" className="cr-close" onClick={onClose} aria-label={labels.close}><X size={18} /></button>
+        </div>
       </header>
+      {chapter && pages.length > 1 && (
+        <div className="cr-progress" role="progressbar" aria-valuemin={1} aria-valuemax={pages.length} aria-valuenow={page + 1}>
+          <span style={{ width: `${((page + 1) / pages.length) * 100}%` }} />
+        </div>
+      )}
 
-      <div className="cr-scroll">
+      <div className="cr-scroll" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd} style={{ '--cr-scale': READER_SIZES[size] }}>
         <div className="cr-page">
           {chapter === undefined && <p className="cr-state">{labels.loading}</p>}
           {chapter === null && <p className="cr-state">{labels.missing}</p>}
@@ -126,9 +168,15 @@ export default function ChapterReader({ reading, onClose, labels }) {
             <ChevronLeft size={18} /> <span>{labels.prev}</span>
           </button>
           <span className="cr-count">{page + 1} / {pages.length}</span>
-          <button type="button" className="cr-nav is-next" onClick={() => go(1)} disabled={page === last}>
-            <span>{labels.next}</span> <ChevronRight size={18} />
-          </button>
+          {page === last ? (
+            <button type="button" className="cr-nav is-next" onClick={onClose}>
+              <span>{labels.done || 'Done'}</span> <Check size={18} />
+            </button>
+          ) : (
+            <button type="button" className="cr-nav is-next" onClick={() => go(1)}>
+              <span>{labels.next}</span> <ChevronRight size={18} />
+            </button>
+          )}
         </footer>
       )}
     </div>,

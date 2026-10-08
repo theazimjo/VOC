@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { BookOpen, Brain, ChevronDown, ChevronLeft } from 'lucide-react';
+import { BookOpen, Brain, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
+import { getReadingProgress } from '../../../../../components/corp/readingProgress';
 import ChapterReader from '../../../../../components/corp/ChapterReader';
 import { readingForUnit } from '../../../../../data/libraryChapters';
 import WordList from '../../../../../components/Words/WordList';
@@ -36,6 +37,7 @@ export default function TopicDetailView({ p }) {
     selectedMonth, selectedUnit, setActiveTab, startPractice, unitWords,
   } = p;
   const reading = readingForUnit(selectedUnit);
+  const readProgress = reading ? getReadingProgress(reading) : null; // re-read on every render, e.g. after the reader closes
   const virtualPack = () => ({
     id: corpWordStorageId(selectedMonth.packId, selectedMonth.id, selectedUnit.id),
     title: `${selectedMonth.packTitle} - ${selectedUnit.title}`,
@@ -128,8 +130,22 @@ export default function TopicDetailView({ p }) {
                     )}
                   </div>
                   {reading && (
-                    <button className="btn btn-secondary btn-mashq" onClick={() => setReaderOpen(true)}>
-                      <BookOpen size={16} /> {t('words.read')}
+                    <button type="button" className="read-card" onClick={() => setReaderOpen(true)}>
+                      <span className="read-card-icon" aria-hidden="true"><BookOpen size={20} strokeWidth={2.2} /></span>
+                      <span className="read-card-text">
+                        <span className="read-card-title">{t('words.read')}</span>
+                        <span className="read-card-sub">
+                          {readProgress
+                            ? (readProgress.page + 1 >= readProgress.total
+                              ? t('words.readFinished', { total: readProgress.total })
+                              : t('words.readContinue', { page: readProgress.page + 1, total: readProgress.total }))
+                            : t('words.readHint')}
+                        </span>
+                        {readProgress && (
+                          <span className="read-card-bar" aria-hidden="true"><span style={{ width: `${((readProgress.page + 1) / readProgress.total) * 100}%` }} /></span>
+                        )}
+                      </span>
+                      <ChevronRight size={18} className="read-card-chevron" aria-hidden="true" />
                     </button>
                   )}
                 </div>
@@ -173,7 +189,7 @@ export default function TopicDetailView({ p }) {
               <ChapterReader
                 reading={reading}
                 onClose={() => setReaderOpen(false)}
-                labels={{ close: t('words.readClose'), prev: t('words.readPrev'), next: t('words.readNext'), loading: t('words.readLoading'), missing: t('words.readMissing'), activity: t('words.readActivity'), summary: t('words.readSummary'), review: t('words.readReview') }}
+                labels={{ done: t('words.readDone'), smaller: t('words.readSmaller'), larger: t('words.readLarger'), close: t('words.readClose'), prev: t('words.readPrev'), next: t('words.readNext'), loading: t('words.readLoading'), missing: t('words.readMissing'), activity: t('words.readActivity'), summary: t('words.readSummary'), review: t('words.readReview') }}
               />
             )}
     </>
