@@ -22,7 +22,7 @@ import { useLanguage } from '../../../../contexts/LanguageContext';
 import { localizeWord } from '../learn/utils';
 import '../../../personal/PracticePage.css';
 import './CorpPractice.css';
-import './CorpPracticeSkin.css';
+import '../../../../components/Practice/PracticeFlatSkin.css';
 import { PracticeCaps } from '../../../../components/Practice/practiceCase';
 
 export default function CorpPractice() {
@@ -365,7 +365,7 @@ export default function CorpPractice() {
 
   return (
     <PracticeCaps.Provider value={false}>
-    <div className="practice-page corp-practice" style={{ padding: '1.25rem var(--space-md) var(--space-xl)' }}>
+    <div className="practice-page practice-flat" style={{ padding: '1.25rem var(--space-md) var(--space-xl)' }}>
 
       {/* Sleek iOS pill back button */}
       {step !== 'results' && step !== 'practice' && (

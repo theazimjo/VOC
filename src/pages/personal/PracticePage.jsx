@@ -15,6 +15,8 @@ import { computeClusterCalibration, computeUserRate } from '@voc/memory-engine';
 import { saveReviewEvent } from '../../experiment/experimentDB';
 import { getWordCluster } from '../../experiment/semanticClassifier';
 import IosSpinner from '../../components/common/IosSpinner';
+import { PracticeCaps } from '../../components/Practice/practiceCase';
+import '../../components/Practice/PracticeFlatSkin.css';
 import PracticeHub from '../../components/Practice/PracticeHub';
 import Flashcard from '../../components/Practice/Flashcard';
 import SpellingGame from '../../components/Practice/SpellingGame';
@@ -562,12 +564,14 @@ export default function PracticePage({ embedded = false, initialSource = null, i
   };
 
   return (
-    <div className="practice-page">
+    <PracticeCaps.Provider value={false}>
+    <div className="practice-page practice-flat">
       {step !== 'practice' && step !== 'results' && (
         <div className="practice-page-header">
           {step !== 'source' && (
-            <button className="clean-back-arrow" onClick={handleBack} title="Back">
-              ←
+            <button className="ios-back-btn" onClick={handleBack} aria-label={t('library.back')} title={t('library.back')}>
+              <ChevronLeft size={18} strokeWidth={2.5} />
+              <span>{t('library.back')}</span>
             </button>
           )}
           <h1>
@@ -802,5 +806,6 @@ export default function PracticePage({ embedded = false, initialSource = null, i
         }}
       />
     </div>
+    </PracticeCaps.Provider>
   );
 }
