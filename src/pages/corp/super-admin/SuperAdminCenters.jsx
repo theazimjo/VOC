@@ -11,23 +11,23 @@ import { PUBLIC_SITE_URL } from '../../../utils/pendingJoin';
 const EMPTY_FORM = { name: '', adminEmail: '', phone: '' };
 const HEALTH_TONE = { active: 'green', quiet: 'orange', new: 'gray' };
 const FILTERS = [
-  { value: 'all', label: 'Hammasi' },
-  { value: 'active', label: 'Faol' },
-  { value: 'suspended', label: "To'xtatilgan" },
+  { value: 'all', label: 'All' },
+  { value: 'active', label: 'Active' },
+  { value: 'suspended', label: 'Suspended' },
 ];
 
-const centerName = (c) => c?.name || `Nomsiz markaz (${c?.id})`;
+const centerName = (c) => c?.name || `Unnamed center (${c?.id})`;
 const initial = (c) => (c?.name ? c.name.charAt(0).toUpperCase() : '?');
 
 function buildWelcomeMessage({ name, email, tempPassword }) {
   return [
-    `Assalomu alaykum! "${name}" uchun VOC platformasida hisob ochildi.`,
+    `Hello! An account for "${name}" has been created on the VOC platform.`,
     '',
-    `Kirish: ${PUBLIC_SITE_URL}/login`,
+    `Sign in: ${PUBLIC_SITE_URL}/login`,
     `Login: ${email}`,
-    `Vaqtinchalik parol: ${tempPassword}`,
+    `Temporary password: ${tempPassword}`,
     '',
-    "Kirgandan so'ng o'qituvchilaringizni qo'shishingiz mumkin.",
+    'After signing in you can add your teachers.',
   ].join('\n');
 }
 
@@ -66,7 +66,7 @@ export default function SuperAdminCenters() {
       setStatsById(Object.fromEntries(entries));
     } catch (err) {
       console.error('Error loading centers:', err);
-      showToast("Markazlarni yuklab bo'lmadi", 'error');
+      showToast("Couldn't load the centers", 'error');
     } finally {
       setLoading(false);
     }
@@ -131,7 +131,7 @@ export default function SuperAdminCenters() {
       setWelcome({ name, email: adminEmail, tempPassword });
       loadCenters();
     } catch (err) {
-      showToast(`Xatolik: ${err.message}`, 'error');
+      showToast(`Error: ${err.message}`, 'error');
     } finally {
       setSubmitting(false);
     }
@@ -144,7 +144,7 @@ export default function SuperAdminCenters() {
       await navigator.clipboard.writeText(welcomeText);
       setCopied(true);
     } catch {
-      showToast("Nusxalab bo'lmadi — matnni belgilab oling", 'error');
+      showToast("Couldn't copy — select the text instead", 'error');
     }
   };
 
@@ -162,17 +162,17 @@ export default function SuperAdminCenters() {
 
   return (
     <Page
-      title="Markazlar"
-      subtitle={loading ? ' ' : `${centers.length} ta o'quv markazi`}
+      title="Centers"
+      subtitle={loading ? ' ' : `${centers.length} ${centers.length === 1 ? 'center' : 'centers'}`}
       action={
-        <button type="button" className="sa-icon-btn" onClick={openCreate} aria-label="Yangi markaz">
+        <button type="button" className="sa-icon-btn" onClick={openCreate} aria-label="New center">
           <Plus size={20} strokeWidth={2.6} />
         </button>
       }
     >
       <div className={`sa-toolbar ${isDesktop ? 'is-inline' : ''}`}>
-        <SearchField value={search} onChange={setSearch} placeholder="Markaz yoki email" />
-        <Segmented label="Holat" options={FILTERS} value={filter} onChange={setFilter} />
+        <SearchField value={search} onChange={setSearch} placeholder="Center or email" />
+        <Segmented label="Status" options={FILTERS} value={filter} onChange={setFilter} />
       </div>
 
       {loading ? (
@@ -182,23 +182,23 @@ export default function SuperAdminCenters() {
           {centers.length === 0 ? (
             <EmptyState
               icon={<Building2 size={40} />}
-              title="Hali markaz yo'q"
-              text="Birinchi o'quv markazini qo'shing — admin uchun kirish ma'lumotlari tayyorlanadi."
-              action={<Button onClick={openCreate}>Markaz qo'shish</Button>}
+              title="No centers yet"
+              text="Add the first learning center — sign-in details for its admin are prepared for you."
+              action={<Button onClick={openCreate}>Add center</Button>}
             />
           ) : (
-            <EmptyState title="Hech narsa topilmadi" text="Qidiruv yoki filtrni o'zgartirib ko'ring." />
+            <EmptyState title="Nothing found" text="Try a different search or filter." />
           )}
         </div>
       ) : isDesktop ? (
         <div className="sa-table" style={{ '--sa-cols': 'minmax(260px, 2.4fr) 90px 100px 130px minmax(130px, 1fr) 150px 20px' }}>
           <div className="sa-table-head">
-            <span>Markaz</span>
-            <span className="num">Guruh</span>
-            <span className="num">O'quvchi</span>
-            <span className="num">Bu hafta faol</span>
-            <span>Oxirgi faollik</span>
-            <span>Holat</span>
+            <span>Center</span>
+            <span className="num">Groups</span>
+            <span className="num">Students</span>
+            <span className="num">Active this week</span>
+            <span>Last activity</span>
+            <span>Status</span>
             <span />
           </div>
           {visible.map((c) => {
@@ -219,7 +219,7 @@ export default function SuperAdminCenters() {
                 <span className="muted">{formatRelative(a.lastActivity)}</span>
                 <span className="sa-cell-status">
                   <StatusDot tone={isSuspended ? 'red' : HEALTH_TONE[a.health]} />
-                  {isSuspended ? "To'xtatilgan" : HEALTH_LABEL[a.health]}
+                  {isSuspended ? 'Suspended' : HEALTH_LABEL[a.health]}
                 </span>
                 <ChevronRight size={17} className="sa-cell-chevron" />
               </button>
@@ -238,8 +238,8 @@ export default function SuperAdminCenters() {
                 iconTone={isSuspended ? 'gray' : 'blue'}
                 title={centerName(c)}
                 subtitle={isSuspended
-                  ? "To'xtatilgan"
-                  : `${a.groups} guruh · ${a.students} o'quvchi · ${formatRelative(a.lastActivity)}`}
+                  ? 'Suspended'
+                  : `${a.groups} ${a.groups === 1 ? 'group' : 'groups'} · ${a.students} ${a.students === 1 ? 'student' : 'students'} · ${formatRelative(a.lastActivity)}`}
                 accessory={!isSuspended && <StatusDot tone={HEALTH_TONE[a.health]} />}
                 onClick={() => openCenter(c)}
               />
@@ -249,19 +249,19 @@ export default function SuperAdminCenters() {
       )}
 
       {/* ── New center ── */}
-      <Sheet open={formOpen} onClose={() => !submitting && setFormOpen(false)} title="Yangi markaz">
+      <Sheet open={formOpen} onClose={() => !submitting && setFormOpen(false)} title="New center">
         <form onSubmit={handleCreate}>
-          <Field label="Markaz nomi">
+          <Field label="Center name">
             <input
               className="sa-input"
               required
               autoFocus
-              placeholder="Masalan: Cambridge Learning Center"
+              placeholder="e.g. Cambridge Learning Center"
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
             />
           </Field>
-          <Field label="Admin emaili" hint="Shu email bilan markaz admini uchun hisob ochiladi.">
+          <Field label="Admin email" hint="An account for the center admin is created with this email.">
             <input
               className="sa-input"
               type="email"
@@ -271,7 +271,7 @@ export default function SuperAdminCenters() {
               onChange={(e) => setForm({ ...form, adminEmail: e.target.value })}
             />
           </Field>
-          <Field label="Telefon">
+          <Field label="Phone">
             <input
               className="sa-input"
               type="tel"
@@ -281,26 +281,26 @@ export default function SuperAdminCenters() {
             />
           </Field>
           <Button type="submit" block disabled={submitting}>
-            {submitting ? 'Yaratilmoqda...' : 'Markazni yaratish'}
+            {submitting ? 'Creating...' : 'Create center'}
           </Button>
         </form>
       </Sheet>
 
       {/* ── Credentials to hand over ── */}
-      <Sheet open={Boolean(welcome)} onClose={() => setWelcome(null)} title="Markaz tayyor">
+      <Sheet open={Boolean(welcome)} onClose={() => setWelcome(null)} title="Center is ready">
         {welcome && (
           <>
             <div className="sa-warning">
               <TriangleAlert size={18} style={{ flexShrink: 0 }} />
-              <span>Parol faqat hozir ko'rinadi. Xabarni markaz adminiga yuboring.</span>
+              <span>The password is shown only now. Send the message to the center admin.</span>
             </div>
             <p className="sa-message">{welcomeText}</p>
             <div className="sa-actions-stack">
-              <Button onClick={shareWelcome}><Send size={18} /> Telegram orqali yuborish</Button>
+              <Button onClick={shareWelcome}><Send size={18} /> Send via Telegram</Button>
               <Button variant="tinted" onClick={copyWelcome}>
-                {copied ? <Check size={18} /> : <Copy size={18} />} {copied ? 'Nusxalandi' : 'Nusxalash'}
+                {copied ? <Check size={18} /> : <Copy size={18} />} {copied ? 'Copied' : 'Copy'}
               </Button>
-              <Button variant="plain" onClick={() => setWelcome(null)}>Tayyor</Button>
+              <Button variant="plain" onClick={() => setWelcome(null)}>Done</Button>
             </div>
           </>
         )}

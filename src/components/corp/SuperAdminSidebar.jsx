@@ -1,38 +1,33 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import {
-  LayoutDashboard, Building2, Users,
-  Settings, LogOut, Newspaper
-} from 'lucide-react';
+import { LayoutDashboard, Building2, Users, Settings, LogOut, Newspaper } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
-import { useLanguage } from '../../contexts/LanguageContext';
-import VocLogo from '../common/VocLogo';
-import { useSidebarCollapsed } from './useSidebarCollapsed';
 import './CorpAdminSidebar.css';
 
-export default function SuperAdminSidebar({ email }) {
-  const [collapsed, toggleCollapsed] = useSidebarCollapsed();
-  const { logout } = useAuth();
+// Same sidebar as the center admin panel (CorpAdminSidebar): navigation only,
+// always expanded; profile and settings live in the topbar's profile menu.
+export default function SuperAdminSidebar() {
   const navigate = useNavigate();
-  const { t } = useLanguage();
-
+  const { logout } = useAuth();
   const handleLogout = async () => {
     await logout();
     navigate('/login');
   };
 
   const navItems = [
-    { to: '/corp/super-admin', label: 'Bosh sahifa', icon: LayoutDashboard, end: true },
-    { to: '/corp/super-admin/centers', label: 'Markazlar', icon: Building2 },
-    { to: '/corp/super-admin/users', label: 'Foydalanuvchilar', icon: Users },
+    { to: '/corp/super-admin', label: 'Overview', icon: LayoutDashboard, end: true },
+    { to: '/corp/super-admin/centers', label: 'Centers', icon: Building2 },
+    { to: '/corp/super-admin/users', label: 'Users', icon: Users },
     { to: '/corp/super-admin/blog', label: 'Blog', icon: Newspaper },
     // Announcements live under Settings — rarely used, not worth a tab.
-    { to: '/corp/super-admin/settings', label: 'Sozlamalar', icon: Settings },
+    { to: '/corp/super-admin/settings', label: 'Settings', icon: Settings },
   ];
 
   return (
-    <aside className={`corp-admin-sidebar ${collapsed ? 'collapsed' : ''}`}>
+    <aside className="corp-admin-sidebar">
       <div className="sidebar-brand-header">
-        <VocLogo collapsed={collapsed} onClick={toggleCollapsed} subTitle="Super Admin" />
+        <span className="voc-logo-title sidebar-brand-name">
+          vocabry<span className="sidebar-brand-tld">.uz</span>
+        </span>
       </div>
 
       <nav className="corp-sidebar-nav">
@@ -46,29 +41,17 @@ export default function SuperAdminSidebar({ email }) {
               className={({ isActive }) => `sidebar-nav-btn ${isActive ? 'active' : ''}`}
               title={item.label}
             >
-              <Icon size={20} strokeWidth={2.2} />
-              {!collapsed && <span>{item.label}</span>}
+              <Icon size={23} strokeWidth={2.3} />
+              <span>{item.label}</span>
             </NavLink>
           );
         })}
       </nav>
 
-      <div className="corp-sidebar-footer">
-        {!collapsed && (
-          <div className="admin-profile-info">
-            <div className="admin-avatar">{(email || 'S')[0].toUpperCase()}</div>
-            <div className="admin-email-text">
-              <span className="adm-name">{email?.split('@')[0] || 'Super Admin'}</span>
-              <span className="adm-mail">{email || ''}</span>
-            </div>
-          </div>
-        )}
-
-        <button className="btn-corp-logout" onClick={handleLogout} title={t('admin.logoutBtn')}>
-          <LogOut size={16} strokeWidth={2.2} />
-          {!collapsed && <span>{t('admin.logoutBtn')}</span>}
-        </button>
-      </div>
+      <button type="button" className="sidebar-nav-btn sidebar-logout" onClick={handleLogout}>
+        <LogOut size={23} strokeWidth={2.3} />
+        <span>Log out</span>
+      </button>
     </aside>
   );
 }

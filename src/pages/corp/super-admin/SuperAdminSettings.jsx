@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ref, get } from 'firebase/database';
-import { Megaphone, Moon, ShieldCheck, Wrench } from 'lucide-react';
+import { Megaphone, ShieldCheck, Wrench } from 'lucide-react';
 import { db, auth } from '../../../firebase';
 import { setMaintenanceMode as saveMaintenanceMode } from '../../../services/corpService';
-import { useTheme } from '../../../contexts/ThemeContext';
 import { useAuth } from '../../../contexts/AuthContext';
 import ConfirmSheet from '../../../components/corp/ConfirmSheet';
 import { Page, Row, Section, Toggle } from './ui';
 import SuperRoleSwitcher from '../../../components/corp/SuperRoleSwitcher';
+import AppearanceCard from '../center-admin/AppearanceCard';
 import { useToast } from './useToast';
 
 export default function SuperAdminSettings() {
@@ -18,7 +18,6 @@ export default function SuperAdminSettings() {
   const [confirm, setConfirm] = useState(null); // 'maintenance' | 'logout'
   const [toastNode, showToast] = useToast();
 
-  const { theme, setTheme } = useTheme();
   const { logout } = useAuth();
   const navigate = useNavigate();
   const email = auth.currentUser?.email || '';
@@ -35,10 +34,10 @@ export default function SuperAdminSettings() {
     setMaintenance(next);
     try {
       await saveMaintenanceMode(next);
-      showToast(next ? 'Texnik xizmat rejimi yoqildi' : "Texnik xizmat rejimi o'chirildi");
+      showToast(next ? 'Maintenance mode is on' : 'Maintenance mode is off');
     } catch (err) {
       setMaintenance(!next);
-      showToast(`Xatolik: ${err.message}`, 'error');
+      showToast(`Error: ${err.message}`, 'error');
     } finally {
       setSaving(false);
       setConfirm(null);
@@ -58,17 +57,19 @@ export default function SuperAdminSettings() {
   };
 
   return (
-    <Page title="Sozlamalar">
+    <Page title="Settings">
       <div style={{ maxWidth: 720, margin: '0 auto', width: '100%' }}>
+        <SuperRoleSwitcher />
+
         <Section
-          title="Platforma"
-          footer="Yoqilganda super admindan boshqa hech kim markaz paneliga kira olmaydi. Shaxsiy VOC ilovasiga ta'sir qilmaydi."
+          title="Platform"
+          footer="While on, nobody except the super admin can open a center panel. The personal VOC app is not affected."
         >
           <Row
             icon={<Wrench size={16} />}
             iconTone={maintenance ? 'orange' : 'gray'}
-            title="Texnik xizmat rejimi"
-            accessory={<Toggle checked={maintenance} onChange={onMaintenanceChange} disabled={loading || saving} label="Texnik xizmat rejimi" />}
+            title="Maintenance mode"
+            accessory={<Toggle checked={maintenance} onChange={onMaintenanceChange} disabled={loading || saving} label="Maintenance mode" />}
           />
         </Section>
 
@@ -76,37 +77,30 @@ export default function SuperAdminSettings() {
           <Row
             icon={<Megaphone size={16} />}
             iconTone="red"
-            title="E'lonlar"
-            subtitle="Markaz adminlari va o'qituvchilarga xabar"
+            title="Announcements"
+            subtitle="Messages for center admins and teachers"
             onClick={() => navigate('/corp/super-admin/announcements')}
           />
         </Section>
 
-        <Section title="Ko'rinish">
-          <Row
-            icon={<Moon size={16} />}
-            iconTone="purple"
-            title="Tungi rejim"
-            accessory={<Toggle checked={theme === 'android'} onChange={(on) => setTheme(on ? 'android' : 'ios')} label="Tungi rejim" />}
-          />
-        </Section>
+        <div style={{ marginBottom: 28 }}>
+          <AppearanceCard />
+        </div>
 
-        <SuperRoleSwitcher />
-
-        <Section title="Hisob">
+        <Section title="Account">
           <Row icon={<ShieldCheck size={16} />} iconTone="blue" title="Super admin" subtitle={email} />
         </Section>
 
         <Section>
-          <Row title="Chiqish" destructive chevron={false} onClick={() => setConfirm('logout')} icon={null} />
+          <Row title="Log out" destructive chevron={false} onClick={() => setConfirm('logout')} icon={null} />
         </Section>
       </div>
 
       <ConfirmSheet
         open={confirm === 'maintenance'}
-        title="Texnik xizmat rejimini yoqasizmi?"
-        message="Barcha markaz adminlari, o'qituvchilar va o'quvchilar markaz paneliga kira olmay qoladi."
-        confirmLabel="Yoqish"
+        title="Turn on maintenance mode?"
+        message="All center admins, teachers and students will be locked out of the center panels."
+        confirmLabel="Turn on"
         danger
         busy={saving}
         onConfirm={() => applyMaintenance(true)}
@@ -114,9 +108,9 @@ export default function SuperAdminSettings() {
       />
       <ConfirmSheet
         open={confirm === 'logout'}
-        title="Chiqasizmi?"
-        message={email ? `${email} hisobidan chiqasiz.` : undefined}
-        confirmLabel="Chiqish"
+        title="Log out?"
+        message={email ? `You will be signed out of ${email}.` : undefined}
+        confirmLabel="Log out"
         danger
         onConfirm={handleLogout}
         onCancel={() => setConfirm(null)}

@@ -57,19 +57,19 @@ export default function SuperAdminOverview() {
 
   return (
     <Page
-      title="Bosh sahifa"
-      subtitle="Markazlar VOC'dan haqiqatan foydalanyaptimi — bir qarashda."
+      title="Overview"
+      subtitle="Are the centers really using VOC? At a glance."
       action={
-        <button type="button" className="sa-icon-btn" onClick={() => navigate('/corp/super-admin/centers?new=1')} aria-label="Yangi markaz">
+        <button type="button" className="sa-icon-btn" onClick={() => navigate('/corp/super-admin/centers?new=1')} aria-label="New center">
           <Plus size={20} strokeWidth={2.6} />
         </button>
       }
     >
       <div className="sa-stats">
-        <Stat value={loading ? '–' : live.length} label="Faol markaz" />
-        <Stat value={loading ? '–' : totals.students} label="O'quvchi" />
-        <Stat value={loading ? '–' : totals.activeWeek} label="Shu hafta mashq qildi" tone="green" />
-        <Stat value={loading ? '–' : totals.homeworkWeek} label="Shu hafta vazifa" tone="blue" />
+        <Stat value={loading ? '–' : live.length} label="Active centers" />
+        <Stat value={loading ? '–' : totals.students} label="Students" />
+        <Stat value={loading ? '–' : totals.activeWeek} label="Practiced this week" tone="green" />
+        <Stat value={loading ? '–' : totals.homeworkWeek} label="Homework this week" tone="blue" />
       </div>
 
       {loading ? (
@@ -78,23 +78,23 @@ export default function SuperAdminOverview() {
         <div className="sa-group">
           <EmptyState
             icon={<Building2 size={40} />}
-            title="Hali markaz yo'q"
-            text="Birinchi o'quv markazini qo'shing — admin uchun kirish ma'lumotlari tayyorlanadi."
-            action={<button type="button" className="sa-btn sa-btn-filled tone-blue" onClick={() => navigate('/corp/super-admin/centers?new=1')}>Markaz qo'shish</button>}
+            title="No centers yet"
+            text="Add the first learning center — sign-in details for its admin are prepared for you."
+            action={<button type="button" className="sa-btn sa-btn-filled tone-blue" onClick={() => navigate('/corp/super-admin/centers?new=1')}>Add center</button>}
           />
         </div>
       ) : (
         <>
           <div className="sa-columns">
             <div>
-              <Section title="Faollik" footer="Shu hafta kamida bitta mashq qilgan o'quvchilar soni.">
+              <Section title="Activity" footer="Students who practiced at least once this week.">
                 {byActivity.map(({ center, activity }) => (
                   <Row
                     key={center.id}
                     icon={center.name ? center.name.charAt(0).toUpperCase() : '?'}
                     iconTone="blue"
-                    title={center.name || `Nomsiz markaz (${center.id})`}
-                    subtitle={`${activity.students} o'quvchi · ${formatRelative(activity.lastActivity)}`}
+                    title={center.name || `Unnamed center (${center.id})`}
+                    subtitle={`${activity.students} ${activity.students === 1 ? 'student' : 'students'} · ${formatRelative(activity.lastActivity)}`}
                     detail={
                       <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
                         <StatusDot tone={HEALTH_TONE[activity.health]} />
@@ -108,16 +108,16 @@ export default function SuperAdminOverview() {
             </div>
             <div>
               {needsAttention.length > 0 && (
-                <Section title="E'tibor talab qiladi" footer="Bu hafta hech kim mashq qilmagan yoki hali boshlanmagan markazlar.">
+                <Section title="Needs attention" footer="Centers where nobody practiced this week, or that have not started yet.">
                   {needsAttention.map(({ center, activity }) => (
                     <Row
                       key={center.id}
                       icon={center.name ? center.name.charAt(0).toUpperCase() : '?'}
                       iconTone={activity.health === 'quiet' ? 'orange' : 'gray'}
-                      title={center.name || `Nomsiz markaz (${center.id})`}
+                      title={center.name || `Unnamed center (${center.id})`}
                       subtitle={activity.health === 'quiet'
-                        ? `Oxirgi faollik: ${formatRelative(activity.lastActivity)}`
-                        : activity.groups === 0 ? "Hali guruh ochilmagan" : "Hali o'quvchi qo'shilmagan"}
+                        ? `Last activity: ${formatRelative(activity.lastActivity)}`
+                        : activity.groups === 0 ? 'No groups yet' : 'No students yet'}
                       onClick={() => openCenter(center.id)}
                     />
                   ))}
@@ -125,8 +125,8 @@ export default function SuperAdminOverview() {
               )}
 
               {needsAttention.length === 0 && (
-                <Section title="E'tibor talab qiladi">
-                  <Row title="Hammasi joyida" subtitle="Barcha markazlar shu hafta faol." />
+                <Section title="Needs attention">
+                  <Row title="All good" subtitle="Every center is active this week." />
                 </Section>
               )}
             </div>

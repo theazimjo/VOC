@@ -6,7 +6,7 @@ import { EmptyState, LoadingRows, Page, Row, Section, Stat, StatusDot } from './
 import { useIsDesktop } from './useIsDesktop';
 
 const DAY = 24 * 60 * 60 * 1000;
-const fmtDate = (iso) => (iso ? new Date(iso).toLocaleDateString('uz-UZ', { day: 'numeric', month: 'long' }) : '—');
+const fmtDate = (iso) => (iso ? new Date(iso).toLocaleDateString('en-US', { day: 'numeric', month: 'long' }) : '—');
 
 function recencyTone(ts, now = Date.now()) {
   if (!ts) return 'gray';
@@ -42,8 +42,8 @@ export default function GroupDetailView({ group, teacher, back, loading }) {
 
   if (!group) {
     return (
-      <Page title="Guruh topilmadi" back={back}>
-        <div className="sa-group"><EmptyState icon={<Users size={40} />} title="Bu guruh yo'q" text="U o'chirilgan bo'lishi mumkin." /></div>
+      <Page title="Group not found" back={back}>
+        <div className="sa-group"><EmptyState icon={<Users size={40} />} title="This group doesn't exist" text="It may have been deleted." /></div>
       </Page>
     );
   }
@@ -51,28 +51,28 @@ export default function GroupDetailView({ group, teacher, back, loading }) {
   return (
     <Page
       back={back}
-      title={group.name || 'Guruh'}
-      subtitle={[group.level, teacher?.name ? `O'qituvchi: ${teacher.name}` : null, group.status === 'archived' ? 'Arxivda' : null].filter(Boolean).join(' · ')}
+      title={group.name || 'Group'}
+      subtitle={[group.level, teacher?.name ? `Teacher: ${teacher.name}` : null, group.status === 'archived' ? 'Archived' : null].filter(Boolean).join(' · ')}
     >
       <div className="sa-stats">
-        <Stat value={activity.students} label="O'quvchi" />
-        <Stat value={activity.activeWeek} label="Bu hafta mashq qildi" tone="green" />
-        <Stat value={activity.homework} label="Berilgan vazifa" tone="blue" />
-        <Stat value={formatRelative(activity.lastActivity)} label="Oxirgi faollik" />
+        <Stat value={activity.students} label="Students" />
+        <Stat value={activity.activeWeek} label="Practiced this week" tone="green" />
+        <Stat value={activity.homework} label="Homework given" tone="blue" />
+        <Stat value={formatRelative(activity.lastActivity)} label="Last activity" />
       </div>
 
       <div className="sa-columns">
         <div>
-          <Section title={`O'quvchilar (${students.length})`}>
+          <Section title={`Students (${students.length})`}>
             {students.length === 0 ? (
-              <Row title="Hali hech kim qo'shilmagan" subtitle="O'quvchilar guruh kodi yoki QR orqali qo'shiladi." />
+              <Row title="Nobody has joined yet" subtitle="Students join with the group code or the QR code." />
             ) : isDesktop ? (
               <div className="sa-table is-flat" style={{ '--sa-cols': 'minmax(200px, 2fr) 110px 110px 150px 18px' }}>
                 <div className="sa-table-head">
-                  <span>O'quvchi</span>
-                  <span className="num">O'zlashtirish</span>
-                  <span className="num">Vazifalar</span>
-                  <span>Oxirgi mashq</span>
+                  <span>Student</span>
+                  <span className="num">Mastery</span>
+                  <span className="num">Homework</span>
+                  <span>Last practice</span>
                   <span />
                 </div>
                 {students.map((st) => (
@@ -80,15 +80,15 @@ export default function GroupDetailView({ group, teacher, back, loading }) {
                     <span className="sa-cell-main">
                       <span className="sa-row-icon tone-green">{(st.name || '?').charAt(0).toUpperCase()}</span>
                       <span className="sa-cell-text">
-                        <span className="sa-cell-title">{st.name || "O'quvchi"}</span>
-                        <span className="sa-cell-sub">{st.email || `Qo'shilgan: ${fmtDate(st.joinedAt)}`}</span>
+                        <span className="sa-cell-title">{st.name || 'Student'}</span>
+                        <span className="sa-cell-sub">{st.email || `Joined: ${fmtDate(st.joinedAt)}`}</span>
                       </span>
                     </span>
                     <span className="num">{st.mastery == null ? '—' : `${st.mastery}%`}</span>
                     <span className="num">{homework.length ? `${st.doneHomework} / ${homework.length}` : '—'}</span>
                     <span className="sa-cell-status">
                       <StatusDot tone={recencyTone(st.last)} />
-                      {st.last ? formatRelative(st.last) : 'Mashq qilmagan'}
+                      {st.last ? formatRelative(st.last) : 'Has not practiced'}
                     </span>
                     <span />
                   </div>
@@ -100,11 +100,11 @@ export default function GroupDetailView({ group, teacher, back, loading }) {
                   key={st.uid}
                   icon={(st.name || '?').charAt(0).toUpperCase()}
                   iconTone="green"
-                  title={st.name || "O'quvchi"}
+                  title={st.name || 'Student'}
                   subtitle={[
                     st.mastery == null ? null : `${st.mastery}%`,
-                    homework.length ? `vazifa ${st.doneHomework}/${homework.length}` : null,
-                    st.last ? formatRelative(st.last) : 'mashq qilmagan',
+                    homework.length ? `homework ${st.doneHomework}/${homework.length}` : null,
+                    st.last ? formatRelative(st.last) : 'has not practiced',
                   ].filter(Boolean).join(' · ')}
                   accessory={<StatusDot tone={recencyTone(st.last)} />}
                 />
@@ -114,16 +114,16 @@ export default function GroupDetailView({ group, teacher, back, loading }) {
         </div>
 
         <div>
-          <Section title="Guruh">
-            <Row title="Kod" detail={group.code || '—'} />
-            <Row title="Daraja" detail={group.level || '—'} />
-            <Row title="O'qituvchi" detail={teacher?.name || '—'} />
-            <Row title="Ochilgan" detail={fmtDate(group.createdAt)} />
+          <Section title="Group">
+            <Row title="Code" detail={group.code || '—'} />
+            <Row title="Level" detail={group.level || '—'} />
+            <Row title="Teacher" detail={teacher?.name || '—'} />
+            <Row title="Created" detail={fmtDate(group.createdAt)} />
           </Section>
 
-          <Section title={`Vazifalar (${homework.length})`}>
+          <Section title={`Homework (${homework.length})`}>
             {homework.length === 0 ? (
-              <Row title="Hali vazifa berilmagan" />
+              <Row title="No homework assigned yet" />
             ) : homework.slice(0, 8).map((hw) => {
               const done = students.filter((st) => getHomeworkCompletion(st, hw).allDone).length;
               return (
@@ -131,8 +131,8 @@ export default function GroupDetailView({ group, teacher, back, loading }) {
                   key={hw.id}
                   icon={<NotebookPen size={16} />}
                   iconTone="blue"
-                  title={hw.name || 'Vazifa'}
-                  subtitle={`${(hw.items || []).length} ta mavzu · ${fmtDate(hw.assignedAt)}`}
+                  title={hw.name || 'Homework'}
+                  subtitle={`${(hw.items || []).length} ${(hw.items || []).length === 1 ? 'topic' : 'topics'} · ${fmtDate(hw.assignedAt)}`}
                   detail={`${done}/${students.length}`}
                 />
               );

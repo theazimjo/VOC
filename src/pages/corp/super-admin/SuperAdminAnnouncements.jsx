@@ -11,11 +11,11 @@ import { useToast } from './useToast';
 
 const EMPTY_FORM = { title: '', message: '', type: 'info', target: 'all' };
 const TYPE = {
-  info: { label: 'Xabar', icon: Info, tone: 'blue' },
-  warning: { label: 'Ogohlantirish', icon: TriangleAlert, tone: 'orange' },
-  critical: { label: 'Muhim', icon: OctagonAlert, tone: 'red' },
+  info: { label: 'Info', icon: Info, tone: 'blue' },
+  warning: { label: 'Warning', icon: TriangleAlert, tone: 'orange' },
+  critical: { label: 'Critical', icon: OctagonAlert, tone: 'red' },
 };
-const TARGET_LABEL = { all: 'Hammaga', center_admin: 'Adminlarga', teacher: "O'qituvchilarga" };
+const TARGET_LABEL = { all: 'Everyone', center_admin: 'Center admins', teacher: 'Teachers' };
 
 export default function SuperAdminAnnouncements() {
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ export default function SuperAdminAnnouncements() {
       setItems(await getAllAnnouncements());
     } catch (err) {
       console.error('Error loading announcements:', err);
-      showToast("E'lonlarni yuklab bo'lmadi", 'error');
+      showToast("Couldn't load the announcements", 'error');
     } finally {
       setLoading(false);
     }
@@ -64,10 +64,10 @@ export default function SuperAdminAnnouncements() {
       if (editingId) await updateAnnouncement(editingId, payload);
       else await createAnnouncement(payload);
       setFormOpen(false);
-      showToast(editingId ? 'Saqlandi' : "E'lon yuborildi");
+      showToast(editingId ? 'Saved' : 'Announcement sent');
       load();
     } catch (err) {
-      showToast(`Xatolik: ${err.message}`, 'error');
+      showToast(`Error: ${err.message}`, 'error');
     } finally {
       setSubmitting(false);
     }
@@ -79,7 +79,7 @@ export default function SuperAdminAnnouncements() {
       await toggleAnnouncementActive(a.id, next);
     } catch (err) {
       setItems((prev) => prev.map((x) => (x.id === a.id ? { ...x, isActive: !next } : x)));
-      showToast(`Xatolik: ${err.message}`, 'error');
+      showToast(`Error: ${err.message}`, 'error');
     }
   };
 
@@ -91,9 +91,9 @@ export default function SuperAdminAnnouncements() {
       setItems((prev) => prev.filter((x) => x.id !== editing.id));
       setConfirmDelete(false);
       setFormOpen(false);
-      showToast("E'lon o'chirildi");
+      showToast('Announcement deleted');
     } catch (err) {
-      showToast(`Xatolik: ${err.message}`, 'error');
+      showToast(`Error: ${err.message}`, 'error');
     } finally {
       setSubmitting(false);
     }
@@ -101,14 +101,14 @@ export default function SuperAdminAnnouncements() {
 
   return (
     <Page
-      title="E'lonlar"
-      subtitle="Faol e'lonlar markaz adminlari va o'qituvchilar panelida ko'rinadi."
+      title="Announcements"
+      subtitle="Active announcements show up in the center admin and teacher panels."
       action={
         <div style={{ display: 'flex', gap: 8 }}>
-          <button type="button" className="sa-sheet-close" style={{ width: 36, height: 36 }} onClick={() => navigate('/corp/super-admin/settings')} aria-label="Sozlamalarga qaytish">
+          <button type="button" className="sa-sheet-close" style={{ width: 36, height: 36 }} onClick={() => navigate('/corp/super-admin/settings')} aria-label="Back to settings">
             <ChevronLeft size={18} strokeWidth={2.6} />
           </button>
-          <button type="button" className="sa-icon-btn" onClick={openCreate} aria-label="Yangi e'lon">
+          <button type="button" className="sa-icon-btn" onClick={openCreate} aria-label="New announcement">
             <Plus size={20} strokeWidth={2.6} />
           </button>
         </div>
@@ -120,13 +120,13 @@ export default function SuperAdminAnnouncements() {
         <div className="sa-group">
           <EmptyState
             icon={<Megaphone size={40} />}
-            title="Hali e'lon yo'q"
-            text="Yangilanish yoki texnik ishlar haqida xabar berish uchun e'lon yarating."
-            action={<Button onClick={openCreate}>E'lon yaratish</Button>}
+            title="No announcements yet"
+            text="Create an announcement to tell people about an update or maintenance."
+            action={<Button onClick={openCreate}>Create announcement</Button>}
           />
         </div>
       ) : (
-        <Section footer="E'lonni bosib, uni tahrirlash yoki yashirish mumkin.">
+        <Section footer="Tap an announcement to edit or hide it.">
           {items.map((a) => {
             const t = TYPE[a.type] || TYPE.info;
             const Icon = t.icon;
@@ -137,7 +137,7 @@ export default function SuperAdminAnnouncements() {
                 iconTone={a.isActive ? t.tone : 'gray'}
                 title={a.title}
                 subtitle={<span className="sa-ann-body">{TARGET_LABEL[a.target] || TARGET_LABEL.all} · {a.message}</span>}
-                detail={<span style={{ fontSize: 15 }}>{a.isActive ? 'Faol' : 'Yashirin'}</span>}
+                detail={<span style={{ fontSize: 15 }}>{a.isActive ? 'Active' : 'Hidden'}</span>}
                 onClick={() => openEdit(a)}
               />
             );
@@ -145,25 +145,25 @@ export default function SuperAdminAnnouncements() {
         </Section>
       )}
 
-      <Sheet open={formOpen} onClose={() => !submitting && setFormOpen(false)} title={editingId ? "E'lonni tahrirlash" : "Yangi e'lon"}>
+      <Sheet open={formOpen} onClose={() => !submitting && setFormOpen(false)} title={editingId ? 'Edit announcement' : 'New announcement'}>
         <form onSubmit={handleSubmit}>
-          <Field label="Sarlavha">
-            <input className="sa-input" required autoFocus value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="Masalan: Yangi imkoniyat" />
+          <Field label="Title">
+            <input className="sa-input" required autoFocus value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="e.g. A new feature" />
           </Field>
-          <Field label="Xabar">
+          <Field label="Message">
             <textarea className="sa-textarea" required value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} />
           </Field>
-          <Field label="Turi">
+          <Field label="Type">
             <Segmented
-              label="Turi"
+              label="Type"
               value={form.type}
               onChange={(type) => setForm({ ...form, type })}
               options={Object.entries(TYPE).map(([value, { label }]) => ({ value, label }))}
             />
           </Field>
-          <Field label="Kimga">
+          <Field label="Audience">
             <Segmented
-              label="Kimga"
+              label="Audience"
               value={form.target}
               onChange={(target) => setForm({ ...form, target })}
               options={Object.entries(TARGET_LABEL).map(([value, label]) => ({ value, label }))}
@@ -172,18 +172,18 @@ export default function SuperAdminAnnouncements() {
           {editing && (
             <div className="sa-group" style={{ marginBottom: 16 }}>
               <Row
-                title="Ko'rsatilsin"
-                subtitle={editing.isActive ? "Panellarda ko'rinib turibdi" : 'Hozir yashirin'}
-                accessory={<Toggle checked={Boolean(editing.isActive)} onChange={(next) => handleToggle(editing, next)} label="Ko'rsatilsin" />}
+                title="Show"
+                subtitle={editing.isActive ? 'Visible in the panels' : 'Hidden right now'}
+                accessory={<Toggle checked={Boolean(editing.isActive)} onChange={(next) => handleToggle(editing, next)} label="Show" />}
               />
             </div>
           )}
           <Button type="submit" block disabled={submitting}>
-            {submitting ? 'Saqlanmoqda...' : editingId ? 'Saqlash' : 'Yuborish'}
+            {submitting ? 'Saving...' : editingId ? 'Save' : 'Send'}
           </Button>
           {editingId && (
             <Button variant="plain" tone="red" block style={{ marginTop: 8, color: 'var(--sa-red)' }} onClick={() => setConfirmDelete(true)}>
-              E'lonni o'chirish
+              Delete announcement
             </Button>
           )}
         </form>
@@ -191,9 +191,9 @@ export default function SuperAdminAnnouncements() {
 
       <ConfirmSheet
         open={confirmDelete}
-        title="E'lonni o'chirasizmi?"
-        message={editing ? `"${editing.title}" butunlay o'chiriladi.` : undefined}
-        confirmLabel="O'chirish"
+        title="Delete this announcement?"
+        message={editing ? `"${editing.title}" will be deleted for good.` : undefined}
+        confirmLabel="Delete"
         danger
         busy={submitting}
         onConfirm={handleDelete}

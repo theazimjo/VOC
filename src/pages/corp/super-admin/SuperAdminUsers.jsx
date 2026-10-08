@@ -10,17 +10,17 @@ import { useIsDesktop } from './useIsDesktop';
 const DAY = 24 * 60 * 60 * 1000;
 
 const FILTERS = [
-  { value: 'all', label: 'Hammasi' },
-  { value: 'personal', label: 'Shaxsiy' },
-  { value: 'group', label: 'Guruhda' },
-  { value: 'staff', label: 'Xodimlar' },
+  { value: 'all', label: 'All' },
+  { value: 'personal', label: 'Personal' },
+  { value: 'group', label: 'In a group' },
+  { value: 'staff', label: 'Staff' },
 ];
 
 const KIND_LABEL = {
-  center_admin: 'Markaz admini',
-  teacher: "O'qituvchi",
-  group: "Guruh o'quvchisi",
-  personal: 'Shaxsiy',
+  center_admin: 'Center admin',
+  teacher: 'Teacher',
+  group: 'Group student',
+  personal: 'Personal',
 };
 
 const KIND_TONE = { center_admin: 'blue', teacher: 'purple', group: 'green', personal: 'gray' };
@@ -34,18 +34,18 @@ function kindOf(u) {
 // How recently the account was used — the signal that matters most.
 function recency(lastSeen, now = Date.now()) {
   const t = lastSeen ? Date.parse(lastSeen) : 0;
-  if (!t) return { tone: 'gray', label: 'Kirmagan' };
+  if (!t) return { tone: 'gray', label: 'Never signed in' };
   const diff = now - t;
-  if (diff < DAY) return { tone: 'green', label: 'Bugun' };
-  if (diff < 7 * DAY) return { tone: 'green', label: 'Shu hafta' };
-  if (diff < 30 * DAY) return { tone: 'orange', label: 'Shu oy' };
-  return { tone: 'gray', label: 'Nofaol' };
+  if (diff < DAY) return { tone: 'green', label: 'Today' };
+  if (diff < 7 * DAY) return { tone: 'green', label: 'This week' };
+  if (diff < 30 * DAY) return { tone: 'orange', label: 'This month' };
+  return { tone: 'gray', label: 'Inactive' };
 }
 
-const displayName = (u) => u.name || u.email || 'Nomsiz foydalanuvchi';
+const displayName = (u) => u.name || u.email || 'Unnamed user';
 const initialOf = (u) => displayName(u).charAt(0).toUpperCase();
 const lastSeenText = (u) => (u.lastSeen ? formatRelative(Date.parse(u.lastSeen)) : '—');
-const fmtDate = (iso) => (iso ? new Date(iso).toLocaleDateString('uz-UZ', { day: 'numeric', month: 'long', year: 'numeric' }) : '—');
+const fmtDate = (iso) => (iso ? new Date(iso).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }) : '—');
 
 export default function SuperAdminUsers() {
   const navigate = useNavigate();
@@ -65,7 +65,7 @@ export default function SuperAdminUsers() {
       })
       .catch((err) => {
         console.error('Error loading users:', err);
-        showToast("Foydalanuvchilarni yuklab bo'lmadi", 'error');
+        showToast("Couldn't load the users", 'error');
       })
       .finally(() => setLoading(false));
   }, [showToast]);
@@ -117,34 +117,34 @@ export default function SuperAdminUsers() {
   }, [users, search, filter, placeById]);
 
   return (
-    <Page title="Foydalanuvchilar" subtitle="Platformadagi barcha hisoblar — shaxsiy, guruhdagi o'quvchilar va markaz xodimlari.">
+    <Page title="Users" subtitle="Every account on the platform — personal learners, group students and center staff.">
       <div className="sa-stats">
-        <Stat value={loading ? '–' : totals.all} label="Jami" />
-        <Stat value={loading ? '–' : totals.today} label="Bugun faol" tone="green" />
-        <Stat value={loading ? '–' : totals.week} label="7 kunda faol" tone="green" />
-        <Stat value={loading ? '–' : totals.newMonth} label="30 kunda yangi" tone="blue" />
+        <Stat value={loading ? '–' : totals.all} label="Total" />
+        <Stat value={loading ? '–' : totals.today} label="Active today" tone="green" />
+        <Stat value={loading ? '–' : totals.week} label="Active in 7 days" tone="green" />
+        <Stat value={loading ? '–' : totals.newMonth} label="New in 30 days" tone="blue" />
       </div>
 
       <div className={`sa-toolbar ${isDesktop ? 'is-inline' : ''}`}>
-        <SearchField value={search} onChange={setSearch} placeholder="Ism, email yoki markaz" />
-        <Segmented label="Turi" options={FILTERS} value={filter} onChange={setFilter} />
+        <SearchField value={search} onChange={setSearch} placeholder="Name, email or center" />
+        <Segmented label="Type" options={FILTERS} value={filter} onChange={setFilter} />
       </div>
 
       {loading ? (
         <LoadingRows count={8} />
       ) : visible.length === 0 ? (
         <div className="sa-group">
-          <EmptyState icon={<Users size={40} />} title="Hech kim topilmadi" text="Qidiruv yoki filtrni o'zgartirib ko'ring." />
+          <EmptyState icon={<Users size={40} />} title="Nobody found" text="Try a different search or filter." />
         </div>
       ) : isDesktop ? (
         <div className="sa-table" style={{ '--sa-cols': 'minmax(240px, 2fr) 150px minmax(180px, 1.5fr) 90px 150px 130px 20px' }}>
           <div className="sa-table-head">
-            <span>Foydalanuvchi</span>
-            <span>Turi</span>
-            <span>Markaz / guruh</span>
-            <span className="num">So'zlar</span>
-            <span>Oxirgi kirish</span>
-            <span>Holat</span>
+            <span>User</span>
+            <span>Type</span>
+            <span>Center / group</span>
+            <span className="num">Words</span>
+            <span>Last seen</span>
+            <span>Status</span>
             <span />
           </div>
           {visible.map((u) => {
@@ -165,7 +165,7 @@ export default function SuperAdminUsers() {
                 <span className="muted">{lastSeenText(u)}</span>
                 <span className="sa-cell-status">
                   <StatusDot tone={u.disabled ? 'red' : r.tone} />
-                  {u.disabled ? 'Bloklangan' : r.label}
+                  {u.disabled ? 'Blocked' : r.label}
                 </span>
                 <ChevronRight size={17} className="sa-cell-chevron" />
               </button>

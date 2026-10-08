@@ -13,7 +13,7 @@ import { useToast } from './useToast';
 import { useIsDesktop } from './useIsDesktop';
 
 const HEALTH_TONE = { active: 'green', quiet: 'orange', new: 'gray' };
-const fmtDate = (iso) => (iso ? new Date(iso).toLocaleDateString('uz-UZ', { day: 'numeric', month: 'long', year: 'numeric' }) : '—');
+const fmtDate = (iso) => (iso ? new Date(iso).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }) : '—');
 
 export default function SuperAdminCenterDetail() {
   const { centerId } = useParams();
@@ -38,7 +38,7 @@ export default function SuperAdminCenterDetail() {
       setCenter(await getCenter(centerId));
     } catch (err) {
       console.error('Error loading center:', err);
-      showToast("Markazni yuklab bo'lmadi", 'error');
+      showToast("Couldn't load the center", 'error');
     } finally {
       setLoading(false);
     }
@@ -63,7 +63,7 @@ export default function SuperAdminCenterDetail() {
   const teacherName = (id) => teachers.find((t) => t.id === id)?.name || '—';
   const groupsOf = (teacherId) => groups.filter((g) => g.teacherId === teacherId && g.status !== 'archived').length;
 
-  const back = { label: 'Markazlar', onClick: () => navigate('/corp/super-admin/centers') };
+  const back = { label: 'Centers', onClick: () => navigate('/corp/super-admin/centers') };
 
   if (loading) {
     return (
@@ -74,17 +74,17 @@ export default function SuperAdminCenterDetail() {
         </div>
 
         <div className="sa-stats" style={{ marginBottom: '28px' }}>
-          <Stat value="–" label="O'qituvchi" />
-          <Stat value="–" label="Faol guruh" />
-          <Stat value="–" label="O'quvchi" />
-          <Stat value="–" label="Bu hafta mashq qildi" />
+          <Stat value="–" label="Teachers" />
+          <Stat value="–" label="Active groups" />
+          <Stat value="–" label="Students" />
+          <Stat value="–" label="Practiced this week" />
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
-          <Section title="Guruhlar">
+          <Section title="Groups">
             <LoadingRows count={3} />
           </Section>
-          <Section title="O'qituvchilar">
+          <Section title="Teachers">
             <LoadingRows count={2} />
           </Section>
         </div>
@@ -94,16 +94,16 @@ export default function SuperAdminCenterDetail() {
 
   if (!center) {
     return (
-      <Page title="Markaz topilmadi" back={back}>
+      <Page title="Center not found" back={back}>
         <div className="sa-group">
-          <EmptyState icon={<Building2 size={40} />} title="Bu markaz yo'q" text="U o'chirilgan bo'lishi mumkin." />
+          <EmptyState icon={<Building2 size={40} />} title="This center doesn't exist" text="It may have been deleted." />
         </div>
       </Page>
     );
   }
 
   const suspended = center.status === 'suspended';
-  const name = center.name || `Nomsiz markaz (${center.id})`;
+  const name = center.name || `Unnamed center (${center.id})`;
 
   const saveEdit = async (e) => {
     e.preventDefault();
@@ -114,9 +114,9 @@ export default function SuperAdminCenterDetail() {
       await updateCenter(center.id, { name: nextName, phone: form.phone.trim() });
       setCenter((c) => ({ ...c, name: nextName, phone: form.phone.trim() }));
       setEditOpen(false);
-      showToast('Saqlandi');
+      showToast('Saved');
     } catch (err) {
-      showToast(`Xatolik: ${err.message}`, 'error');
+      showToast(`Error: ${err.message}`, 'error');
     } finally {
       setSaving(false);
     }
@@ -129,9 +129,9 @@ export default function SuperAdminCenterDetail() {
       await setCenterStatus(center.id, next);
       setCenter((c) => ({ ...c, status: next }));
       setConfirmSuspend(false);
-      showToast(next === 'suspended' ? "Markaz to'xtatildi" : 'Markaz faollashtirildi');
+      showToast(next === 'suspended' ? 'Center suspended' : 'Center activated');
     } catch (err) {
-      showToast(`Xatolik: ${err.message}`, 'error');
+      showToast(`Error: ${err.message}`, 'error');
     } finally {
       setBusy(false);
     }
@@ -151,33 +151,33 @@ export default function SuperAdminCenterDetail() {
     window.location.assign(ROLE_HOME[role]);
   };
   const joinAsStudent = async (g) => {
-    if (!g.code) { showToast("Guruh kodi topilmadi", 'error'); return; }
+    if (!g.code) { showToast('Group code not found', 'error'); return; }
     setBusy(true);
     try {
       await joinGroupAsUser(g.code, user.uid, { name: user.displayName || user.email || 'Super admin', email: user.email || '' });
       setActiveRole(null);
       window.location.assign(ROLE_HOME.student);
     } catch (err) {
-      showToast(err.message || "Qo'shilib bo'lmadi", 'error');
+      showToast(err.message || "Couldn't join", 'error');
       setBusy(false);
     }
   };
 
   const openAsSection = (
-    <Section title="Shu markazga ulanish">
+    <Section title="Connect to this center">
       <Row
         icon={<Building2 size={16} />}
         iconTone="blue"
-        title="Markaz admini sifatida ochish"
-        subtitle="Markazning admin panelini shu hisobingiz bilan boshqarasiz"
+        title="Open as center admin"
+        subtitle="Manage the center's admin panel with your own account"
         onClick={() => openAs('center_admin')}
       />
       {teachers.length > 0 && (
         <Row
           icon={<Users size={16} />}
           iconTone="purple"
-          title="O'qituvchi sifatida ochish"
-          subtitle="Pastdagi o'qituvchilar ro'yxatidan birini tanlang"
+          title="Open as teacher"
+          subtitle="Pick a teacher from the list below"
         />
       )}
       {groups.filter((g) => g.status !== 'archived' && g.code).slice(0, 12).map((g) => (
@@ -185,7 +185,7 @@ export default function SuperAdminCenterDetail() {
           key={g.id}
           icon={<GraduationCap size={16} />}
           iconTone="green"
-          title={`O'quvchi sifatida qo'shilish: ${g.name || 'Guruh'}`}
+          title={`Join as a student: ${g.name || 'Group'}`}
           subtitle={teacherName(g.teacherId)}
           onClick={busy ? undefined : () => joinAsStudent(g)}
         />
@@ -194,18 +194,18 @@ export default function SuperAdminCenterDetail() {
   );
 
   const groupsSection = (
-    <Section title={`Guruhlar (${groups.length})`}>
+    <Section title={`Groups (${groups.length})`}>
       {groups.length === 0 ? (
-        <Row title="Hali guruh yo'q" subtitle="O'qituvchilar guruh ochganda shu yerda ko'rinadi." />
+        <Row title="No groups yet" subtitle="Groups appear here once teachers create them." />
       ) : isDesktop ? (
         <div className="sa-table is-flat" style={{ '--sa-cols': 'minmax(220px, 2fr) minmax(160px, 1.2fr) 100px 100px 90px minmax(130px, 1fr) 18px' }}>
           <div className="sa-table-head">
-            <span>Guruh</span>
-            <span>O'qituvchi</span>
-            <span className="num">O'quvchi</span>
-            <span className="num">Bu hafta faol</span>
-            <span className="num">Vazifa</span>
-            <span>Oxirgi faollik</span>
+            <span>Group</span>
+            <span>Teacher</span>
+            <span className="num">Students</span>
+            <span className="num">Active this week</span>
+            <span className="num">Homework</span>
+            <span>Last activity</span>
             <span />
           </div>
           {groups.map((g) => (
@@ -213,8 +213,8 @@ export default function SuperAdminCenterDetail() {
               <span className="sa-cell-main">
                 <span className={`sa-row-icon tone-${g.status === 'archived' ? 'gray' : 'green'}`}><Users size={16} /></span>
                 <span className="sa-cell-text">
-                  <span className="sa-cell-title">{g.name || 'Guruh'}</span>
-                  <span className="sa-cell-sub">{[g.level, g.status === 'archived' ? 'Arxivda' : null].filter(Boolean).join(' · ') || '—'}</span>
+                  <span className="sa-cell-title">{g.name || 'Group'}</span>
+                  <span className="sa-cell-sub">{[g.level, g.status === 'archived' ? 'Archived' : null].filter(Boolean).join(' · ') || '—'}</span>
                 </span>
               </span>
               <span className="muted sa-cell-sub" style={{ fontSize: 15 }}>{teacherName(g.teacherId)}</span>
@@ -232,8 +232,8 @@ export default function SuperAdminCenterDetail() {
             key={g.id}
             icon={<Users size={16} />}
             iconTone={g.status === 'archived' ? 'gray' : 'green'}
-            title={g.name || 'Guruh'}
-            subtitle={`${teacherName(g.teacherId)} · ${g.activity.students} o'quvchi · ${formatRelative(g.activity.lastActivity)}`}
+            title={g.name || 'Group'}
+            subtitle={`${teacherName(g.teacherId)} · ${g.activity.students} ${g.activity.students === 1 ? 'student' : 'students'} · ${formatRelative(g.activity.lastActivity)}`}
             onClick={() => openGroup(g)}
           />
         ))
@@ -242,17 +242,17 @@ export default function SuperAdminCenterDetail() {
   );
 
   const teachersSection = (
-    <Section title={`O'qituvchilar (${teachers.length})`}>
+    <Section title={`Teachers (${teachers.length})`}>
       {teachers.length === 0 ? (
-        <Row title="Hali o'qituvchi yo'q" subtitle="Markaz admini o'qituvchi qo'shganda shu yerda ko'rinadi." />
+        <Row title="No teachers yet" subtitle="Teachers appear here once the center admin adds them." />
       ) : teachers.map((t) => (
         <Row
           key={t.id}
           icon={(t.name || '?').charAt(0).toUpperCase()}
           iconTone="purple"
-          title={t.name || "O'qituvchi"}
+          title={t.name || 'Teacher'}
           subtitle={[t.email, t.phone].filter(Boolean).join(' · ')}
-          detail={`${groupsOf(t.id)} guruh`}
+          detail={`${groupsOf(t.id)} ${groupsOf(t.id) === 1 ? 'group' : 'groups'}`}
           onClick={() => openAs('teacher', t)}
         />
       ))}
@@ -263,12 +263,12 @@ export default function SuperAdminCenterDetail() {
     <Page
       back={back}
       title={name}
-      subtitle={[center.adminEmail, `Qo'shilgan: ${fmtDate(center.createdAt)}`].filter(Boolean).join(' · ')}
+      subtitle={[center.adminEmail, `Joined: ${fmtDate(center.createdAt)}`].filter(Boolean).join(' · ')}
       action={
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <span className="sa-status-pill">
             <StatusDot tone={suspended ? 'red' : HEALTH_TONE[activity.health]} />
-            {suspended ? "To'xtatilgan" : HEALTH_LABEL[activity.health]}
+            {suspended ? 'Suspended' : HEALTH_LABEL[activity.health]}
           </span>
           <button type="button" className="sa-icon-btn" style={{ background: 'var(--sa-fill)', color: 'var(--sa-label)' }} onClick={() => setSettingsOpen(true)}>
             <Settings size={18} />
@@ -277,10 +277,10 @@ export default function SuperAdminCenterDetail() {
       }
     >
       <div className="sa-stats">
-        <Stat value={activity.teachers} label="O'qituvchi" />
-        <Stat value={activity.groups} label="Faol guruh" />
-        <Stat value={activity.students} label="O'quvchi" />
-        <Stat value={activity.activeWeek} label="Bu hafta mashq qildi" tone="green" />
+        <Stat value={activity.teachers} label="Teachers" />
+        <Stat value={activity.groups} label="Active groups" />
+        <Stat value={activity.students} label="Students" />
+        <Stat value={activity.activeWeek} label="Practiced this week" tone="green" />
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
@@ -289,63 +289,63 @@ export default function SuperAdminCenterDetail() {
         {teachersSection}
       </div>
 
-      <Sheet open={settingsOpen} onClose={() => setSettingsOpen(false)} title="Boshqaruv">
+      <Sheet open={settingsOpen} onClose={() => setSettingsOpen(false)} title="Manage">
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-          <Section title="Faollik">
-            <Row title="Bu hafta vazifa" detail={activity.homeworkWeek} />
-            <Row title="Jami vazifa" detail={activity.homeworkTotal} />
-            <Row title="Oxirgi faollik" detail={formatRelative(activity.lastActivity)} />
+          <Section title="Activity">
+            <Row title="Homework this week" detail={activity.homeworkWeek} />
+            <Row title="Homework in total" detail={activity.homeworkTotal} />
+            <Row title="Last activity" detail={formatRelative(activity.lastActivity)} />
           </Section>
 
           <Section title="Admin">
-            <Row icon={<Mail size={16} />} iconTone="blue" title={center.adminEmail || 'Kiritilmagan'} subtitle="Login" />
-            <Row icon={<Phone size={16} />} iconTone="green" title={center.phone || 'Kiritilmagan'} subtitle="Telefon" />
+            <Row icon={<Mail size={16} />} iconTone="blue" title={center.adminEmail || 'Not set'} subtitle="Login" />
+            <Row icon={<Phone size={16} />} iconTone="green" title={center.phone || 'Not set'} subtitle="Phone" />
           </Section>
 
-          <Section title="Boshqaruv">
+          <Section title="Manage">
             <Row
               icon={<Pencil size={16} />}
               iconTone="gray"
-              title="Tahrirlash"
+              title="Edit"
               onClick={() => { setForm({ name: center.name || '', phone: center.phone || '' }); setSettingsOpen(false); setEditOpen(true); }}
             />
             <Row
               icon={<KeyRound size={16} />}
               iconTone="orange"
-              title="Admin parolini o'zgartirish"
+              title="Change the admin's password"
               onClick={() => { setSettingsOpen(false); setPasswordOpen(true); }}
               disabled={!center.adminUid && !center.adminEmail}
             />
             <Row
               icon={suspended ? <PlayCircle size={16} /> : <PauseCircle size={16} />}
               iconTone={suspended ? 'green' : 'gray'}
-              title={suspended ? 'Faollashtirish' : "To'xtatish"}
+              title={suspended ? 'Activate' : 'Suspend'}
               onClick={() => { setSettingsOpen(false); setConfirmSuspend(true); }}
             />
           </Section>
 
-          <Section footer="Guruhlar, to'plamlar va o'qituvchilarning markaz hisobi o'chiriladi. O'quvchilar hisobi saqlanadi — ular faqat guruhdan chiqariladi.">
-            <Row title="Markazni o'chirish" destructive chevron={false} onClick={() => { setSettingsOpen(false); setDeleteOpen(true); }} />
+          <Section footer="Groups, packs and the teachers' center accounts are deleted. Student accounts are kept — they are only removed from the groups.">
+            <Row title="Delete center" destructive chevron={false} onClick={() => { setSettingsOpen(false); setDeleteOpen(true); }} />
           </Section>
         </div>
       </Sheet>
 
-      <Sheet open={editOpen} onClose={() => !saving && setEditOpen(false)} title="Markazni tahrirlash">
+      <Sheet open={editOpen} onClose={() => !saving && setEditOpen(false)} title="Edit center">
         <form onSubmit={saveEdit}>
-          <Field label="Markaz nomi">
+          <Field label="Center name">
             <input className="sa-input" required autoFocus value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
           </Field>
-          <Field label="Admin emaili" hint="Loginni o'zgartirib bo'lmaydi.">
+          <Field label="Admin email" hint="The login can't be changed.">
             <input className="sa-input" disabled value={center.adminEmail || ''} />
           </Field>
-          <Field label="Telefon">
+          <Field label="Phone">
             <input className="sa-input" type="tel" placeholder="+998 90 123 45 67" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
           </Field>
-          <Button type="submit" block disabled={saving}>{saving ? 'Saqlanmoqda...' : 'Saqlash'}</Button>
+          <Button type="submit" block disabled={saving}>{saving ? 'Saving...' : 'Save'}</Button>
         </form>
       </Sheet>
 
-      <SetPasswordSheet
+      <SetPasswordSheet en
         open={passwordOpen}
         onClose={() => setPasswordOpen(false)}
         target={{ uid: center.adminUid, email: center.adminEmail, label: name }}
@@ -353,11 +353,11 @@ export default function SuperAdminCenterDetail() {
 
       <ConfirmSheet
         open={confirmSuspend}
-        title={suspended ? 'Markazni faollashtirasizmi?' : "Markazni to'xtatasizmi?"}
+        title={suspended ? 'Activate this center?' : 'Suspend this center?'}
         message={suspended
-          ? "Admin va o'qituvchilar yana tizimga kira oladi."
-          : "Admin va o'qituvchilar tizimga kira olmay qoladi. Ma'lumotlar saqlanadi."}
-        confirmLabel={suspended ? 'Faollashtirish' : "To'xtatish"}
+          ? 'The admin and teachers will be able to sign in again.'
+          : 'The admin and teachers will no longer be able to sign in. Data is kept.'}
+        confirmLabel={suspended ? 'Activate' : 'Suspend'}
         danger={!suspended}
         busy={busy}
         onConfirm={toggleSuspend}
@@ -371,7 +371,7 @@ export default function SuperAdminCenterDetail() {
         onSuspendInstead={!suspended ? () => { setDeleteOpen(false); setConfirmSuspend(true); } : undefined}
         onDeleted={() => navigate('/corp/super-admin/centers', {
           replace: true,
-          state: { toast: `"${name}" o'chirildi. O'quvchilar hisobi saqlandi.` },
+          state: { toast: `"${name}" was deleted. Student accounts were kept.` },
         })}
       />
 

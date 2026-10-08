@@ -6,11 +6,11 @@ export default function SuperAdminBottomNav() {
   const location = useLocation();
 
   const navItems = [
-    { to: '/corp/super-admin', label: 'Bosh sahifa', icon: LayoutDashboard, end: true },
-    { to: '/corp/super-admin/centers', label: 'Markazlar', icon: Building2 },
-    { to: '/corp/super-admin/users', label: 'Odamlar', icon: Users },
+    { to: '/corp/super-admin', label: 'Overview', icon: LayoutDashboard, end: true },
+    { to: '/corp/super-admin/centers', label: 'Centers', icon: Building2 },
+    { to: '/corp/super-admin/users', label: 'Users', icon: Users },
     { to: '/corp/super-admin/blog', label: 'Blog', icon: Newspaper },
-    { to: '/corp/super-admin/settings', label: 'Sozlamalar', icon: Settings, alsoActive: '/corp/super-admin/announcements' },
+    { to: '/corp/super-admin/settings', label: 'Settings', icon: Settings, alsoActive: '/corp/super-admin/announcements' },
   ];
 
   return (

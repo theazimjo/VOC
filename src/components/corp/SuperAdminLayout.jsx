@@ -1,26 +1,39 @@
 import { Outlet, useOutletContext } from 'react-router-dom';
 import SuperAdminSidebar from './SuperAdminSidebar';
+import SuperAdminTopbar from './SuperAdminTopbar';
 import SuperAdminBottomNav from './SuperAdminBottomNav';
+import { PageStyleContext, PanelLanguageContext, SheetPlacementContext } from '../../pages/corp/super-admin/ui';
+import { usePanelTheme } from '../../pages/corp/center-admin/usePanelTheme';
 import './CorpAdminLayout.css';
 import '../../pages/corp/super-admin/sa.css';
+import '../../pages/corp/center-admin/theme.css';
+import '../../pages/corp/center-admin/uits.css';
+import '../../pages/corp/center-admin/vocabry.css';
 
-// Mirrors CorpAdminLayout: reads the identity CorpProtectedRoute resolved
-// and handed down via <Outlet context={identity} />, then passes the
-// super admin's email down to the sidebar for the account footer.
+// The same shell as the center admin panel (CorpAdminLayout): sidebar, topbar,
+// the Vocabry theme (ca-theme / is-center-admin, light or dark) and centered
+// sheets. The copy is English, like the other panels. CorpProtectedRoute hands the
+// identity down through <Outlet context>.
 export default function SuperAdminLayout() {
   const identity = useOutletContext();
+  const theme = usePanelTheme();
 
   return (
-    <div className="corp-admin-layout sa-layout">
-      {/* Super Admin Sidebar (desktop only) */}
-      <SuperAdminSidebar email={identity?.email || ''} />
+    <SheetPlacementContext.Provider value="center">
+      <PageStyleContext.Provider value="toolbar">
+        <PanelLanguageContext.Provider value="en">
+        <div className={`corp-admin-layout sa-layout ca-theme is-center-admin${theme === 'dark' ? ' is-dark' : ''}`}>
+          <SuperAdminSidebar />
 
-      <main className="corp-admin-main-pane">
-        <Outlet />
-      </main>
+          <main className="corp-admin-main-pane">
+            <SuperAdminTopbar email={identity?.email || ''} />
+            <Outlet />
+          </main>
 
-      {/* Super Admin Bottom Navigation (mobile only) */}
-      <SuperAdminBottomNav />
-    </div>
+          <SuperAdminBottomNav />
+        </div>
+        </PanelLanguageContext.Provider>
+      </PageStyleContext.Provider>
+    </SheetPlacementContext.Provider>
   );
 }

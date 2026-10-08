@@ -23,7 +23,7 @@ export default function SuperAdminGroupDetail() {
       loading={loading}
       group={group}
       teacher={group ? center?.teachers?.[group.teacherId] : null}
-      back={{ label: center?.name || 'Markaz', onClick: () => navigate(`/corp/super-admin/centers/${centerId}`) }}
+      back={{ label: center?.name || 'Center', onClick: () => navigate(`/corp/super-admin/centers/${centerId}`) }}
     />
   );
 }

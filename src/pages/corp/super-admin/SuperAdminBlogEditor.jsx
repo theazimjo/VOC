@@ -10,24 +10,24 @@ import '../../blog/Blog.css';
 import './blogEditor.css';
 
 const COVER_KEYS = [
-  ['board', 'Tablo'],
-  ['curve', "Unutish egri chizig'i"],
-  ['sessions', 'Mashq sessiyalari'],
-  ['factors', 'Baho omillari'],
-  ['compare', 'Taqqoslash'],
+  ['board', 'Dashboard'],
+  ['curve', 'Forgetting curve'],
+  ['sessions', 'Practice sessions'],
+  ['factors', 'Scoring factors'],
+  ['compare', 'Comparison'],
 ];
 const COVER_KEY_SET = new Set(COVER_KEYS.map(([k]) => k));
 
 // Snippets for the toolbar: [label, before, after, placeholder]
 const TOOLS = [
-  ['Sarlavha', '\n## ', '\n', 'Bo\'lim sarlavhasi'],
-  ['Qalin', '**', '**', 'qalin matn'],
-  ['Kursiv', '*', '*', 'kursiv matn'],
-  ['Ro\'yxat', '\n- ', '\n- \n', 'band'],
-  ['Iqtibos', '\n> ', '\n', 'muhim fikr'],
-  ['Havola', '[', '](https://)', 'matn'],
-  ['Rasm', '\n![', '](https://)\n', 'rasm izohi'],
-  ['Grafik', '\n:::bars ', '\nnote: izoh\nBirinchi | 0.50 | base\nIkkinchi | 0.78 | model\n:::\n', 'Grafik sarlavhasi'],
+  ['Heading', '\n## ', '\n', 'Section heading'],
+  ['Bold', '**', '**', 'bold text'],
+  ['Italic', '*', '*', 'italic text'],
+  ['List', '\n- ', '\n- \n', 'item'],
+  ['Quote', '\n> ', '\n', 'key idea'],
+  ['Link', '[', '](https://)', 'text'],
+  ['Image', '\n![', '](https://)\n', 'image caption'],
+  ['Chart', '\n:::bars ', '\nnote: caption\nFirst | 0.50 | base\nSecond | 0.78 | model\n:::\n', 'Chart title'],
 ];
 
 export default function SuperAdminBlogEditor() {
@@ -49,10 +49,10 @@ export default function SuperAdminBlogEditor() {
       .then((all) => {
         if (!alive) return;
         const found = all.find((p) => p.id === id);
-        if (!found) { showToast('Maqola topilmadi', 'error'); navigate('/corp/super-admin/blog', { replace: true }); return; }
+        if (!found) { showToast('Post not found', 'error'); navigate('/corp/super-admin/blog', { replace: true }); return; }
         setPost({ ...EMPTY_POST(), ...found, en: { ...EMPTY_POST().en, ...found.en } });
       })
-      .catch((err) => showToast(`Yuklab bo'lmadi: ${err.message}`, 'error'));
+      .catch((err) => showToast(`Couldn't load: ${err.message}`, 'error'));
     return () => { alive = false; };
   }, [id, isNew, navigate, showToast]);
 
@@ -97,7 +97,7 @@ export default function SuperAdminBlogEditor() {
     try {
       const saved = await saveBlogPost({ ...post, ...(publishNow === undefined ? {} : { published: publishNow }) });
       setPost({ ...EMPTY_POST(), ...saved });
-      showToast(saved.published ? 'Saqlandi va chop etildi' : 'Qoralama saqlandi');
+      showToast(saved.published ? 'Saved and published' : 'Draft saved');
       if (isNew) navigate(`/corp/super-admin/blog/${saved.id}`, { replace: true });
     } catch (err) {
       showToast(err.message, 'error');
@@ -122,7 +122,7 @@ export default function SuperAdminBlogEditor() {
 
   if (!post) {
     return (
-      <Page title="Maqola" back={goBack}>
+      <Page title="Post" back={goBack}>
         <LoadingRows count={4} />
         {toastNode}
       </Page>
@@ -133,78 +133,78 @@ export default function SuperAdminBlogEditor() {
 
   return (
     <Page
-      title={isNew ? 'Yangi maqola' : (post.en.title || 'Maqola')}
+      title={isNew ? 'New post' : (post.en.title || 'Post')}
       back={goBack}
-      action={<Button onClick={() => save()} disabled={saving}>{saving ? 'Saqlanmoqda...' : 'Saqlash'}</Button>}
+      action={<Button onClick={() => save()} disabled={saving}>{saving ? 'Saving...' : 'Save'}</Button>}
     >
       <div className="sa-blog-editor">
         <div className="sa-blog-form">
-          <Section title="Umumiy" footer="Havola maqola manzilini belgilaydi: /blog/havola. Faqat kichik lotin harflar, raqam va chiziqcha.">
+          <Section title="General" footer="The slug sets the post's address: /blog/slug. Lowercase Latin letters, digits and hyphens only.">
             <Row
-              title="Chop etilsin"
-              subtitle={post.published ? 'Saytda hamma ko\'radi' : 'Hozircha qoralama, faqat siz ko\'rasiz'}
-              accessory={<Toggle checked={post.published} onChange={(published) => patch({ published })} label="Chop etilsin" />}
+              title="Published"
+              subtitle={post.published ? 'Everyone can see it on the site' : 'A draft for now, only you can see it'}
+              accessory={<Toggle checked={post.published} onChange={(published) => patch({ published })} label="Published" />}
             />
           </Section>
 
           <div className="sa-blog-fields">
-            <Field label="Havola (slug)">
-              <input className="sa-input" value={post.slug} onChange={(e) => { setSlugTouched(true); patch({ slug: e.target.value }); }} placeholder="masalan: xotira-sirlari" />
+            <Field label="Slug">
+              <input className="sa-input" value={post.slug} onChange={(e) => { setSlugTouched(true); patch({ slug: e.target.value }); }} placeholder="e.g. memory-secrets" />
             </Field>
-            <Field label="Sana">
+            <Field label="Date">
               <input className="sa-input" type="date" value={post.date} onChange={(e) => patch({ date: e.target.value })} />
             </Field>
-            <Field label="Muqova">
+            <Field label="Cover">
               <select
                 className="sa-select"
                 value={coverIsKey ? post.cover : 'url'}
                 onChange={(e) => patch({ cover: e.target.value === 'url' ? 'https://' : e.target.value })}
               >
                 {COVER_KEYS.map(([k, label]) => <option key={k} value={k}>{label}</option>)}
-                <option value="url">O'z rasmim (havola)</option>
+                <option value="url">My own image (link)</option>
               </select>
             </Field>
             {!coverIsKey && (
-              <Field label="Rasm havolasi" hint="https:// bilan boshlanishi kerak.">
+              <Field label="Image link" hint="Must start with https://">
                 <input className="sa-input" value={post.cover} onChange={(e) => patch({ cover: e.target.value })} placeholder="https://..." />
               </Field>
             )}
           </div>
 
-          <p className="sa-blog-lang-note">Maqola inglizcha yoziladi.</p>
+          <p className="sa-blog-lang-note">Posts are written in English.</p>
           <div className="sa-blog-fields">
-            <Field label="Sarlavha">
+            <Field label="Title">
               <input className="sa-input" value={block.title} onChange={(e) => onTitle(e.target.value)} />
             </Field>
-            <Field label="Qisqacha mazmun" hint="Ro'yxatda va havola ulashilganda ko'rinadi.">
+            <Field label="Summary" hint="Shown in the list and when the link is shared.">
               <textarea className="sa-textarea" rows={2} value={block.excerpt} onChange={(e) => patchLang({ excerpt: e.target.value })} />
             </Field>
           </div>
 
-          <div className="sa-blog-toolbar" role="toolbar" aria-label="Matn asboblari">
+          <div className="sa-blog-toolbar" role="toolbar" aria-label="Text tools">
             {TOOLS.map((t) => (
               <button key={t[0]} type="button" className="sa-blog-tool" onClick={() => insert(t)}>{t[0]}</button>
             ))}
-            <select className="sa-blog-tool sa-blog-figure" value="" onChange={(e) => insertFigure(e.target.value)} aria-label="Illyustratsiya qo'shish">
-              <option value="">Illyustratsiya...</option>
+            <select className="sa-blog-tool sa-blog-figure" value="" onChange={(e) => insertFigure(e.target.value)} aria-label="Add an illustration">
+              <option value="">Illustration...</option>
               {COVER_KEYS.map(([k, label]) => <option key={k} value={k}>{label}</option>)}
             </select>
           </div>
-          <Field label="Matn" hint="Markdown: ## sarlavha, **qalin**, - ro'yxat, > iqtibos, [matn](havola), :::figure curve">
+          <Field label="Body" hint="Markdown: ## heading, **bold**, - list, > quote, [text](link), :::figure curve">
             <textarea ref={bodyRef} className="sa-textarea sa-blog-body" value={block.body} onChange={(e) => patchLang({ body: e.target.value })} spellCheck />
           </Field>
 
           {!isNew && (
             <Section>
-              <Row title="Maqolani o'chirish" destructive onClick={() => setConfirmDelete(true)} chevron={false} />
+              <Row title="Delete post" destructive onClick={() => setConfirmDelete(true)} chevron={false} />
             </Section>
           )}
         </div>
 
         <div className="sa-blog-preview">
-          <p className="sa-blog-preview-label">Ko'rinishi</p>
+          <p className="sa-blog-preview-label">Preview</p>
           <div className="bl-page bl-preview">
-            <h1 className="sa-blog-preview-title">{block.title || 'Sarlavha'}</h1>
+            <h1 className="sa-blog-preview-title">{block.title || 'Title'}</h1>
             <div className="bl-body">
               <BlogMarkdown blocks={parsed.blocks} lang={lang} />
             </div>
@@ -215,10 +215,10 @@ export default function SuperAdminBlogEditor() {
       <ConfirmSheet
         open={confirmDelete}
         danger
-        title="Maqola o'chirilsinmi?"
-        message="Bu amalni qaytarib bo'lmaydi."
-        confirmLabel="O'chirish"
-        cancelLabel="Bekor qilish"
+        title="Delete this post?"
+        message="This can't be undone."
+        confirmLabel="Delete"
+        cancelLabel="Cancel"
         busy={saving}
         onConfirm={remove}
         onCancel={() => setConfirmDelete(false)}

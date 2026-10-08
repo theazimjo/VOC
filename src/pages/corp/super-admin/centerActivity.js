@@ -110,22 +110,7 @@ export function studentTimeSpent(student, { sinceTs } = {}) {
   return seconds;
 }
 
-export function formatRelative(ts, now = Date.now()) {
-  if (!ts) return "hali faollik yo'q";
-  const diff = now - ts;
-  if (diff < 60 * 60 * 1000) return 'hozirgina';
-  if (diff < DAY) return `${Math.floor(diff / (60 * 60 * 1000))} soat oldin`;
-  const days = Math.floor(diff / DAY);
-  if (days === 1) return 'kecha';
-  if (days < 30) return `${days} kun oldin`;
-  return new Date(ts).toLocaleDateString('uz-UZ', { day: 'numeric', month: 'short' });
-}
-
-// English equivalent of formatRelative, for the center admin panel only
-// (built fully in English — see DESIGN.md's Language section). Teacher and
-// super admin stay on the Uzbek formatRelative above; this is a separate
-// function rather than a locale param so neither panel's copy can drift by
-// accident when one of them changes.
+// Relative time in English, for every staff panel (super admin, center admin, teacher).
 export function formatRelativeEn(ts, now = Date.now()) {
   if (!ts) return 'no activity yet';
   const diff = now - ts;
@@ -140,10 +125,12 @@ export function formatRelativeEn(ts, now = Date.now()) {
   return new Date(ts).toLocaleDateString('en-US', { day: 'numeric', month: 'short' });
 }
 
+export const formatRelative = formatRelativeEn;
+
 export const HEALTH_LABEL = {
-  active: 'Faol',
-  quiet: 'Sustlashgan',
-  new: 'Boshlanmagan',
+  active: 'Active',
+  quiet: 'Gone quiet',
+  new: 'Not started',
 };
 
 // One day's mastery point for a center: the average of every student (in

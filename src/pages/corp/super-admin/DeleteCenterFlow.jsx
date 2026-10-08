@@ -18,7 +18,7 @@ const HOLD_MS = 2000;
 
 function Stepper({ step }) {
   return (
-    <div className="sa-stepper" aria-label={`${step}-bosqich, jami ${STEPS}`}>
+    <div className="sa-stepper" aria-label={`Step ${step} of ${STEPS}`}>
       {Array.from({ length: STEPS }).map((_, i) => (
         <span key={i} className={`sa-stepper-seg ${i < step ? 'is-done' : ''}`} />
       ))}
@@ -79,11 +79,11 @@ export default function DeleteCenterFlow({ open, center, onClose, onDeleted, onS
 
   const reauthFailed = (err) => {
     const code = err?.code || '';
-    if (code === 'auth/wrong-password' || code === 'auth/invalid-credential') return "Parol noto'g'ri.";
-    if (code === 'auth/too-many-requests') return "Juda ko'p urinish. Birozdan so'ng qayta urinib ko'ring.";
-    if (code === 'auth/popup-closed-by-user' || code === 'auth/cancelled-popup-request') return 'Oyna yopildi. Qayta urinib ko\'ring.';
-    if (code === 'auth/user-mismatch') return 'Boshqa Google hisobi tanlandi. Super admin hisobini tanlang.';
-    return `Tasdiqlab bo'lmadi: ${err?.message || code}`;
+    if (code === 'auth/wrong-password' || code === 'auth/invalid-credential') return 'Wrong password.';
+    if (code === 'auth/too-many-requests') return 'Too many attempts. Try again in a moment.';
+    if (code === 'auth/popup-closed-by-user' || code === 'auth/cancelled-popup-request') return 'The window was closed. Try again.';
+    if (code === 'auth/user-mismatch') return 'A different Google account was chosen. Pick the super admin account.';
+    return `Couldn't verify: ${err?.message || code}`;
   };
 
   const confirmWithPassword = async (e) => {
@@ -122,7 +122,7 @@ export default function DeleteCenterFlow({ open, center, onClose, onDeleted, onS
       await deleteCenter(center.id);
       onDeleted(center);
     } catch (err) {
-      setError(`O'chirib bo'lmadi: ${err.message}`);
+      setError(`Couldn't delete: ${err.message}`);
       setDeleting(false);
       setHold(0);
     }
@@ -158,13 +158,13 @@ export default function DeleteCenterFlow({ open, center, onClose, onDeleted, onS
   const nameMatches = typed.trim() === name.trim() && name.trim().length > 0;
 
   const CONSEQUENCES = [
-    `${preview?.groups ?? 0} ta guruh, vazifalar va natijalar butunlay o'chadi`,
-    `${preview?.teachers ?? 0} ta o'qituvchi va admin markaz paneliga kira olmaydi`,
-    "Buni qaytarib bo'lmaydi",
+    `${preview?.groups ?? 0} groups, with their homework and results, are deleted for good`,
+    `${preview?.teachers ?? 0} teachers and admins can no longer open the center panel`,
+    "This can't be undone",
   ];
 
   return (
-    <Sheet open={open && Boolean(center)} onClose={close} title="Markazni o'chirish">
+    <Sheet open={open && Boolean(center)} onClose={close} title="Delete center">
       {center && (
         <div className="sa-delete-flow">
           <Stepper step={step} />
@@ -172,31 +172,31 @@ export default function DeleteCenterFlow({ open, center, onClose, onDeleted, onS
           {step === 1 && (
             <>
               <p className="sa-flow-lead">
-                <strong>{name}</strong> o'chirilsa nima bo'ladi:
+                What happens if <strong>{name}</strong> is deleted:
               </p>
-              <Section title="O'chiriladi">
-                <Row title="Guruhlar" detail={preview ? preview.groups : '…'} />
-                <Row title="So'z to'plamlari" detail={preview ? preview.packs : '…'} />
-                <Row title="O'qituvchilarning markaz hisobi" detail={preview ? preview.teachers : '…'} />
+              <Section title="Deleted">
+                <Row title="Groups" detail={preview ? preview.groups : '…'} />
+                <Row title="Word packs" detail={preview ? preview.packs : '…'} />
+                <Row title="Teachers' center accounts" detail={preview ? preview.teachers : '…'} />
               </Section>
-              <Section title="Saqlanadi" footer="O'quvchilar faqat shu markaz guruhlaridan chiqariladi. Ularning hisobi, so'zlari va shaxsiy ilovasi o'zgarmaydi.">
-                <Row title="O'quvchilar hisobi" detail={preview ? preview.students : '…'} />
+              <Section title="Kept" footer="Students are only removed from this center's groups. Their accounts, words and personal app stay as they are.">
+                <Row title="Student accounts" detail={preview ? preview.students : '…'} />
               </Section>
               <div className="sa-actions-stack">
-                <Button tone="red" onClick={() => setStep(2)} disabled={!preview}>Davom etish</Button>
+                <Button tone="red" onClick={() => setStep(2)} disabled={!preview}>Continue</Button>
                 {onSuspendInstead && (
                   <Button variant="tinted" tone="gray" onClick={onSuspendInstead}>
-                    O'rniga to'xtatib qo'yish
+                    Suspend it instead
                   </Button>
                 )}
-                <Button variant="plain" onClick={close}>Bekor qilish</Button>
+                <Button variant="plain" onClick={close}>Cancel</Button>
               </div>
             </>
           )}
 
           {step === 2 && (
             <>
-              <p className="sa-flow-lead">Davom etish uchun markaz nomini aynan shunday yozing:</p>
+              <p className="sa-flow-lead">To continue, type the center's name exactly as shown:</p>
               <p className="sa-flow-name">{name}</p>
               <input
                 className="sa-input"
@@ -206,20 +206,20 @@ export default function DeleteCenterFlow({ open, center, onClose, onDeleted, onS
                 value={typed}
                 onChange={(e) => setTyped(e.target.value)}
                 onPaste={(e) => e.preventDefault()}
-                placeholder="Markaz nomi"
-                aria-label="Markaz nomi"
+                placeholder="Center name"
+                aria-label="Center name"
               />
-              <p className="sa-flow-hint">Nusxalab qo'yish o'chirilgan — qo'lda yozing.</p>
+              <p className="sa-flow-hint">Pasting is turned off — type it by hand.</p>
               <div className="sa-actions-stack">
-                <Button tone="red" onClick={() => setStep(3)} disabled={!nameMatches}>Davom etish</Button>
-                <Button variant="plain" onClick={() => setStep(1)}>Orqaga</Button>
+                <Button tone="red" onClick={() => setStep(3)} disabled={!nameMatches}>Continue</Button>
+                <Button variant="plain" onClick={() => setStep(1)}>Back</Button>
               </div>
             </>
           )}
 
           {step === 3 && (
             <>
-              <p className="sa-flow-lead">Har birini o'qib, belgilang:</p>
+              <p className="sa-flow-lead">Read each one and tick it:</p>
               <div className="sa-group" style={{ marginBottom: 20 }}>
                 {CONSEQUENCES.map((text, i) => (
                   <button type="button" key={i} className="sa-row is-tappable" onClick={() => toggleCheck(i)} aria-pressed={checks[i]}>
@@ -229,8 +229,8 @@ export default function DeleteCenterFlow({ open, center, onClose, onDeleted, onS
                 ))}
               </div>
               <div className="sa-actions-stack">
-                <Button tone="red" onClick={() => setStep(4)} disabled={!checks.every(Boolean)}>Davom etish</Button>
-                <Button variant="plain" onClick={() => setStep(2)}>Orqaga</Button>
+                <Button tone="red" onClick={() => setStep(4)} disabled={!checks.every(Boolean)}>Continue</Button>
+                <Button variant="plain" onClick={() => setStep(2)}>Back</Button>
               </div>
             </>
           )}
@@ -239,7 +239,7 @@ export default function DeleteCenterFlow({ open, center, onClose, onDeleted, onS
             <>
               <div className="sa-flow-icon"><KeyRound size={26} /></div>
               <p className="sa-flow-lead" style={{ textAlign: 'center' }}>
-                Bu siz ekaningizni tasdiqlang — <strong>{user?.email}</strong>
+                Confirm it's you — <strong>{user?.email}</strong>
               </p>
               {canPassword && (
                 <form onSubmit={confirmWithPassword}>
@@ -250,13 +250,13 @@ export default function DeleteCenterFlow({ open, center, onClose, onDeleted, onS
                     autoComplete="current-password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Parolingiz"
-                    aria-label="Parol"
+                    placeholder="Your password"
+                    aria-label="Password"
                     style={{ marginBottom: 12 }}
                   />
                   {error && <p className="sa-flow-error">{error}</p>}
                   <Button type="submit" tone="red" block disabled={!password || verifying}>
-                    {verifying ? 'Tekshirilmoqda...' : 'Tasdiqlash'}
+                    {verifying ? 'Checking...' : 'Confirm'}
                   </Button>
                 </form>
               )}
@@ -271,15 +271,15 @@ export default function DeleteCenterFlow({ open, center, onClose, onDeleted, onS
                     onClick={confirmWithGoogle}
                     disabled={verifying}
                   >
-                    {verifying && !canPassword ? 'Tekshirilmoqda...' : 'Google orqali tasdiqlash'}
+                    {verifying && !canPassword ? 'Checking...' : 'Confirm with Google'}
                   </Button>
                 </>
               )}
               {!canPassword && !canGoogle && (
-                <p className="sa-flow-error">Bu hisob turini tasdiqlab bo'lmaydi. Email/parol yoki Google bilan kiring.</p>
+                <p className="sa-flow-error">This kind of account can't be verified. Sign in with email and password or with Google.</p>
               )}
               <div className="sa-actions-stack" style={{ marginTop: 10 }}>
-                <Button variant="plain" onClick={() => setStep(3)} disabled={verifying}>Orqaga</Button>
+                <Button variant="plain" onClick={() => setStep(3)} disabled={verifying}>Back</Button>
               </div>
             </>
           )}
@@ -288,8 +288,8 @@ export default function DeleteCenterFlow({ open, center, onClose, onDeleted, onS
             <>
               <div className="sa-flow-icon is-danger"><ShieldAlert size={26} /></div>
               <p className="sa-flow-lead" style={{ textAlign: 'center' }}>
-                Oxirgi qadam. <strong>{name}</strong> butunlay o'chiriladi.
-                {preview?.students ? ` ${preview.students} ta o'quvchi guruhdan chiqariladi.` : ''}
+                Last step. <strong>{name}</strong> will be deleted for good.
+                {preview?.students ? ` ${preview.students} students will be removed from the groups.` : ''}
               </p>
               {error && <p className="sa-flow-error">{error}</p>}
               <button
@@ -304,14 +304,14 @@ export default function DeleteCenterFlow({ open, center, onClose, onDeleted, onS
                 <span className="sa-hold-fill" style={{ transform: `scaleX(${hold})` }} />
                 <span className="sa-hold-label">
                   {deleting
-                    ? "O'chirilmoqda..."
+                    ? 'Deleting...'
                     : countdown > 0
-                      ? `${countdown} soniya kuting`
-                      : "O'chirish uchun bosib turing"}
+                      ? `Wait ${countdown} s`
+                      : 'Press and hold to delete'}
                 </span>
               </button>
               <div className="sa-actions-stack" style={{ marginTop: 10 }}>
-                <Button variant="plain" onClick={close} disabled={deleting}>Bekor qilish</Button>
+                <Button variant="plain" onClick={close} disabled={deleting}>Cancel</Button>
               </div>
             </>
           )}

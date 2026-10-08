@@ -17,7 +17,7 @@ export default function SuperAdminBlog() {
     let alive = true;
     listBlogPosts()
       .then((p) => alive && setPosts(p))
-      .catch((err) => alive && showToast(`Yuklab bo'lmadi: ${err.message}`, 'error'))
+      .catch((err) => alive && showToast(`Couldn't load: ${err.message}`, 'error'))
       .finally(() => alive && setLoading(false));
     return () => { alive = false; };
   }, [showToast]);
@@ -27,13 +27,13 @@ export default function SuperAdminBlog() {
   return (
     <Page
       title="Blog"
-      subtitle="Maqolalar faqat inglizcha yoziladi va /blog sahifasida chiqadi. Qoralama ko'rinmaydi."
+      subtitle="Posts are written in English and appear on the /blog page. Drafts are not shown."
       action={
         <div style={{ display: 'flex', gap: 8 }}>
-          <a className="sa-icon-btn" href="/blog" target="_blank" rel="noopener noreferrer" aria-label="Blogni yangi oynada ochish">
+          <a className="sa-icon-btn" href="/blog" target="_blank" rel="noopener noreferrer" aria-label="Open the blog in a new window">
             <ExternalLink size={18} strokeWidth={2.4} />
           </a>
-          <button type="button" className="sa-icon-btn" onClick={create} aria-label="Yangi maqola">
+          <button type="button" className="sa-icon-btn" onClick={create} aria-label="New post">
             <Plus size={20} strokeWidth={2.6} />
           </button>
         </div>
@@ -45,13 +45,13 @@ export default function SuperAdminBlog() {
         <div className="sa-group">
           <EmptyState
             icon={<FileText size={40} />}
-            title="Hali maqola yo'q"
-            text="Birinchi maqolani yozing. Tayyor bo'lgach 'Chop etilsin' ni yoqing."
-            action={<Button onClick={create}>Maqola yozish</Button>}
+            title="No posts yet"
+            text="Write the first post. When it is ready, turn on 'Published'."
+            action={<Button onClick={create}>Write a post</Button>}
           />
         </div>
       ) : (
-        <Section footer="Ilova bilan birga kelgan ikkita boshlang'ich maqola kodda turadi va bu ro'yxatda chiqmaydi.">
+        <Section footer="The two starter posts that ship with the app live in the code and are not listed here.">
           {posts.map((p) => (
             <Row
               key={p.id}
@@ -59,7 +59,7 @@ export default function SuperAdminBlog() {
               iconTone={p.published ? 'green' : 'gray'}
               title={titleOf(p)}
               subtitle={`${p.date} · /blog/${p.slug}`}
-              detail={<span style={{ fontSize: 15 }}>{p.published ? 'Chop etilgan' : 'Qoralama'}</span>}
+              detail={<span style={{ fontSize: 15 }}>{p.published ? 'Published' : 'Draft'}</span>}
               onClick={() => navigate(`/corp/super-admin/blog/${p.id}`)}
             />
           ))}

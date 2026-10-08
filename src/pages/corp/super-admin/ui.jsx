@@ -382,7 +382,7 @@ export function IOSSpinner() {
   );
 }
 
-export function PageLoading({ title = 'Yuklanmoqda...' }) {
+export function PageLoading({ title = 'Loading...' }) {
   return (
     <div className="sa-page-loading">
       <IOSSpinner />
