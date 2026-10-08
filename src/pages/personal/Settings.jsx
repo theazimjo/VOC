@@ -7,10 +7,10 @@ import { useStaffRole } from '../../hooks/useStaffRole';
 import { isSuperAdminEmail } from '../../components/corp/SuperRoleSwitcher';
 import { clearActiveRole, clearViewAs } from '../../utils/activeRole';
 import { useDailyNewWordLimit } from '../../hooks/useDailyNewWordLimit';
+import { PRIVACY_URL, privacyLabel } from '../../utils/legal';
 import {
   Moon, Volume2, BookOpen, Bell, Clock, Check, ChevronRight, Type,
-  KeyRound, Lock, ShieldCheck, AlertCircle, CheckCircle2, Shield, GraduationCap, Building2
-} from 'lucide-react';
+  KeyRound, Lock, ShieldCheck, AlertCircle, CheckCircle2, Shield, GraduationCap, Building2, FileText } from 'lucide-react';
 import './Settings.css';
 
 export default function Settings() {
@@ -18,7 +18,7 @@ export default function Settings() {
   const { identity } = useCorpRole();
 
   const { staffRole, openStaffPanel } = useStaffRole();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const {
     theme,
     setTheme,
@@ -256,6 +256,21 @@ export default function Settings() {
           </div>
         </>
       )}
+
+      {/* ABOUT: privacy policy (also linked from the store listing) */}
+      <div className="ios-settings-section">
+        <a className="ios-settings-row" href={PRIVACY_URL} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <div className="ios-settings-left">
+            <div className="ios-icon-box" style={{ background: '#8e8e93' }}>
+              <FileText size={16} strokeWidth={2.2} />
+            </div>
+            <span className="ios-row-title">{privacyLabel(language)}</span>
+          </div>
+          <div className="ios-settings-right">
+            <ChevronRight size={14} className="ios-chevron" />
+          </div>
+        </a>
+      </div>
 
       {/* SECTION 2: SECURITY & PASSWORD */}
       {user && (

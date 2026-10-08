@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   LogOut, ChevronRight, Mail, Pencil, X, Check,
-  Moon, Type, Volume2, Globe, Users, AlertCircle, CheckCircle2, Presentation, Building2, GraduationCap, Shield
+  Moon, Type, Volume2, Globe, Users, AlertCircle, CheckCircle2, Presentation, Building2, GraduationCap, Shield, FileText
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
@@ -12,6 +12,7 @@ import { useAvatar } from '../../hooks/useAvatar';
 import { useStaffRole } from '../../hooks/useStaffRole';
 import { joinGroupAsUser, switchActiveGroup } from '../../services/corpService';
 import { useGroupMode } from '../../hooks/useGroupMode';
+import { PRIVACY_URL, privacyLabel } from '../../utils/legal';
 import { isSuperAdminEmail } from '../../components/corp/SuperRoleSwitcher';
 import { clearActiveRole, clearViewAs, ROLE_HOME } from '../../utils/activeRole';
 import '../corp/student/StudentCorpProfile.css';
@@ -254,6 +255,13 @@ export default function ProfilePage() {
       {/* ── Account actions ── */}
       <div className="corp-profile-section-title">{t('profile.account')}</div>
       <div className="corp-profile-tiles">
+        <a className="corp-profile-tile" href={PRIVACY_URL} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <div className="corp-profile-tile-icon" style={{ background: '#8e8e93' }}>
+            <FileText size={17} strokeWidth={2.2} />
+          </div>
+          <span className="corp-profile-tile-text">{privacyLabel(language)}</span>
+          <ChevronRight size={16} className="corp-profile-appearance-chevron" style={{ marginLeft: 'auto' }} />
+        </a>
         <div className="corp-profile-tile danger" onClick={() => setShowLogoutModal(true)}>
           <div className="corp-profile-tile-icon" style={{ background: 'var(--error, #ff3b30)' }}>
             <LogOut size={17} strokeWidth={2.2} />

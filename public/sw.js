@@ -1,5 +1,5 @@
-const STATIC_CACHE_NAME = 'voc-static-v5';
-const DYNAMIC_CACHE_NAME = 'voc-dynamic-v5';
+const STATIC_CACHE_NAME = 'voc-static-v6';
+const DYNAMIC_CACHE_NAME = 'voc-dynamic-v6';
 
 const STATIC_ASSETS = [
   '/',
@@ -55,7 +55,9 @@ self.addEventListener('fetch', (event) => {
       fetch(event.request)
         .then((response) => {
           // Cache the latest page index
-          if (response && response.status === 200) {
+          // only the app itself is the offline shell - not the static privacy page or the blog
+          const isShell = !/^\/(privacy|blog|api)/.test(requestUrl.pathname);
+          if (response && response.status === 200 && isShell) {
             const clone = response.clone();
             caches.open(DYNAMIC_CACHE_NAME).then((cache) => {
               cache.put('/', clone);

@@ -107,6 +107,6 @@ export const CONTENT = {
       ],
     },
     close: { title: 'Add your first word today.', cta: 'Start free' },
-    footer: { login: 'Log in', start: 'Get started', beta: 'Beta' },
+    footer: { login: 'Log in', start: 'Get started', beta: 'Beta', privacy: 'Privacy policy' },
   },
 };

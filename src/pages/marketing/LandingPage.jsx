@@ -356,6 +356,7 @@ export default function LandingPage() {
           <Link to="/login">{t.footer.login}</Link>
           <Link to="/register">{t.footer.start}</Link>
           <a href="/blog" target="_blank" rel="noopener noreferrer">{t.nav.blog}</a>
+          <a href="/privacy.html" target="_blank" rel="noopener noreferrer">{t.footer.privacy}</a>
         </div>
         <span className="lp-footer-copy">&copy; {new Date().getFullYear()} VOCABRY &middot; {t.footer.beta} {APP_VERSION_LABEL}</span>
       </footer>

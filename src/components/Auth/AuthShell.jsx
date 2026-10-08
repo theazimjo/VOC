@@ -90,6 +90,7 @@ export function AuthShell({ copy, children }) {
 
         <footer className="as-bottom">
           <Link to="/welcome" className="as-back"><ArrowLeft size={15} strokeWidth={2.2} aria-hidden="true" />{copy.back}</Link>
+          <a className="as-back" href="/privacy.html" target="_blank" rel="noopener noreferrer">Privacy policy</a>
           <span className="as-version">Beta {APP_VERSION_LABEL}</span>
         </footer>
       </main>

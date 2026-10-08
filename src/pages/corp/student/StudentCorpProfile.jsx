@@ -4,14 +4,14 @@ import { motion } from 'framer-motion';
 import {
   ArrowRightLeft, LogOut, ChevronRight, Mail, User, Pencil, X, Check,
   Moon, Type, Volume2, Globe,
-  Repeat,
-} from 'lucide-react';
+  Repeat, FileText } from 'lucide-react';
 import { setAppMode, updateStudentProfile } from '../../../services/corpService';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useTheme } from '../../../contexts/ThemeContext';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import { useStudentT } from '../../../hooks/useStudentT';
 import { useRoleSwitch, ROLE_LABEL } from '../../../hooks/useRoleSwitch';
+import { PRIVACY_URL, privacyLabel } from '../../../utils/legal';
 import { isSuperAdminEmail } from '../../../components/corp/SuperRoleSwitcher';
 import { useAvatar } from '../../../hooks/useAvatar';
 import './StudentCorpProfile.css';
@@ -195,6 +195,14 @@ export default function StudentCorpProfile() {
                 <ChevronRight className="corp-profile-tile-arrow" size={16} strokeWidth={2.5} />
               </div>
             ))}
+
+            <a className="corp-profile-tile" href={PRIVACY_URL} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <div className="corp-profile-tile-icon" style={{ background: '#8e8e93' }}>
+                <FileText size={17} strokeWidth={2.2} />
+              </div>
+              <span className="corp-profile-tile-text">{privacyLabel(language)}</span>
+              <ChevronRight className="corp-profile-tile-arrow" size={16} strokeWidth={2.5} />
+            </a>
 
             <div className="corp-profile-tile danger" onClick={() => setShowLogoutModal(true)}>
               <div className="corp-profile-tile-icon" style={{ background: 'var(--error, #ff3b30)' }}>

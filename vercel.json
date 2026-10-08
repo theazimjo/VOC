@@ -9,6 +9,14 @@
       "destination": "/api/blog-page?slug=:slug"
     },
     {
+      "source": "/privacy",
+      "destination": "/privacy.html"
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/privacy.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
