@@ -342,7 +342,7 @@
     background: transparent !important;
   }
   .practice-flat .practice-session-content {
-    max-width: 720px;
+    max-width: min(1040px, 100%);
     margin: 0 auto;
     padding: 0 !important;
   }
@@ -356,9 +356,37 @@
     border-radius: var(--cp-radius);
     box-shadow: var(--cp-shadow);
     overflow: hidden;
+    /* fill the pane: the exercise is the page, not a small box on it */
+    min-height: calc(100vh - 120px) !important;
+    display: flex;
+    flex-direction: column;
   }
-  .practice-flat .duo-top-header { padding: 18px 22px 6px; }
-  .practice-flat .duo-spelling-body { padding: 12px 28px 28px !important; min-height: 380px; }
+  .practice-flat .duo-top-header { max-width: none; padding: 24px 40px 8px; }
+  .practice-flat .duo-spelling-body,
+  .practice-flat .duo-quiz-body,
+  .practice-flat .duo-match-body,
+  .practice-flat .duo-flashcard-body {
+    max-width: 820px !important;
+    padding: 24px 40px 40px !important;
+    flex: 1 1 auto;
+  }
+  .practice-flat .duo-spelling-body,
+  .practice-flat .duo-quiz-body,
+  .practice-flat .duo-match-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .practice-flat .duo-flashcard-body { justify-content: center; }
+  .practice-flat .duo-flashcard-page { --fc-card-h: 400px; }
+  .practice-flat .duo-bottom-bar-content,
+  .practice-flat .duo-flashcard-bottom-content { max-width: 820px; }
+  /* bigger touch/click targets and type for a desktop-sized card */
+  .practice-flat .duo-prompt-title { font-size: 2rem; }
+  .practice-flat .duo-quiz-option-card,
+  .practice-flat .duo-speed-option-card { min-height: 68px; font-size: 1.05rem; }
+  .practice-flat .duo-match-card { min-height: 64px; font-size: 1.05rem; }
+  .practice-flat .duo-tile { min-width: 52px; min-height: 52px; font-size: 1.25rem; }
   .practice-flat .duo-bottom-bar,
   .practice-flat .duo-flashcard-bottom-bar {
     position: static !important;
