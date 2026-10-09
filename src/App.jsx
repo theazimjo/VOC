@@ -1,7 +1,7 @@
 import { Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
-import { AuthProvider } from './contexts/AuthContext';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { PacksProvider } from './contexts/PacksContext';
@@ -16,6 +16,7 @@ import ErrorBoundary from './components/common/ErrorBoundary';
 import { installGlobalErrorLogging } from './utils/errorLogger';
 import { lazyWithRetry } from './utils/lazyWithRetry';
 
+import { prefetchMainRoutes } from './utils/prefetchRoutes';
 const LandingPage = lazyWithRetry(() => import('./pages/marketing/LandingPage'));
 const StartCenterPage = lazyWithRetry(() => import('./pages/marketing/StartCenterPage'));
 const BlogIndex = lazyWithRetry(() => import('./pages/blog/Blog').then((m) => ({ default: m.BlogIndex })));
@@ -97,6 +98,14 @@ function BookToPackRedirect() {
   return <Navigate to={`/packs/${bookId}`} replace />;
 }
 
+// Once someone is signed in and the screen is idle, fetch the other main pages in the background.
+function RoutePrefetcher() {
+  const { user, loading } = useAuth();
+  const signedIn = Boolean(user) && !loading;
+  useEffect(() => (signedIn ? prefetchMainRoutes() : undefined), [signedIn]);
+  return null;
+}
+
 function RouteLoader() {
   return <FullScreenLoader />;
 }
@@ -116,6 +125,7 @@ export default function App() {
             <LanguageProvider>
             <GroupModeProvider>
               <PacksProvider>
+                <RoutePrefetcher />
                 <Suspense fallback={<RouteLoader />}>
                   <Routes>
                     {/* Public routes */}

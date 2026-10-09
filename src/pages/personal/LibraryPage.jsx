@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import { lazy, Suspense, useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ref, push, update, get, remove, set, serverTimestamp } from 'firebase/database';
@@ -13,7 +13,8 @@ import PackCard from '../../components/Packs/PackCard';
 import PackForm from '../../components/Packs/PackForm';
 import FolderCard from '../../components/Packs/FolderCard';
 import FolderForm from '../../components/Packs/FolderForm';
-import MarketPackPreviewModal from '../../components/Packs/MarketPackPreviewModal';
+// the preview pulls in the book chapter texts (~900 KB) - only fetched when a pack is previewed
+const MarketPackPreviewModal = lazy(() => import('../../components/Packs/MarketPackPreviewModal'));
 import { packIcons } from '../../utils/helpers';
 import { playSound } from '../../utils/feedback';
 import { useMarketPacks } from '../../hooks/useMarketPacks';
@@ -27,7 +28,6 @@ export default function LibraryPage() {
   const { user } = useAuth();
   const { t } = useLanguage();
   const { books, loading: booksLoading } = useBooks(); // Loaded strictly for automatic migration
-  const marketPacks = useMarketPacks();
   const {
     packs: allPacks, loading: packsLoading, addPack, updatePack, deletePack, allWords,
     folders, addFolder, updateFolder, deleteFolder
@@ -37,6 +37,8 @@ export default function LibraryPage() {
   // regular Library list.
   const packs = allPacks.filter((p) => !p.courseId);
   const [searchParams, setSearchParams] = useSearchParams();
+  // the ~1 MB Market catalogue is fetched only when the Market tab is shown
+  const marketPacks = useMarketPacks(searchParams.get('tab') === 'market');
 
   // Tabs: 'library' (my packs) or 'market'
   const activeTab = searchParams.get('tab') === 'market' ? 'market' : 'library';
@@ -782,6 +784,7 @@ export default function LibraryPage() {
         const hasUpdate = isInstalled && installedPack && missingWords.length > 0;
 
         return (
+          <Suspense fallback={null}>
           <MarketPackPreviewModal
             isOpen={Boolean(previewMarketPack)}
             onClose={() => setPreviewMarketPack(null)}
@@ -795,6 +798,7 @@ export default function LibraryPage() {
             onInstall={handleInstallPack}
             onUpdate={handleUpdatePack}
           />
+          </Suspense>
         );
       })()}
 
