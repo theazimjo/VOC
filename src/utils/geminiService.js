@@ -4,8 +4,13 @@
  * for maximum reliability, speed, and minimal token cost.
  */
 
-const ENCODED_FALLBACK = "QVEuQWI4Uk42TFRjeE9hb2p0RjJYTml5b3BLdXBnOEJNZnNpSXpndzlyby03SWFwd3JKU1E=";
-const DEFAULT_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || (typeof atob === 'function' ? atob(ENCODED_FALLBACK) : "");
+import { auth } from '../firebase';
+
+// With no personal key the request goes through our own server (/api/gemini), which
+// holds the real key; this marker stands in for it. A learner's own key (Profile)
+// is still sent straight to Google from their device.
+const SERVER_KEY = 'server';
+const DEFAULT_API_KEY = SERVER_KEY;
 
 // Canonical dynamic aliases supported across all Google AI Studio keys
 const MODEL_CANDIDATES = [
@@ -30,10 +35,27 @@ export function setGeminiApiKey(key) {
   }
 }
 
+async function callGeminiViaServer(payload) {
+  const idToken = await auth.currentUser?.getIdToken();
+  if (!idToken) throw new Error("Avval tizimga kiring.");
+  const response = await fetch('/api/gemini', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ idToken, payload }),
+  });
+  if (response.ok) return response.json();
+  if (response.status === 429) {
+    throw new Error("AI so'rovlari kvotasi (limiti) vaqtincha tugadi. Iltimos, birozdan so'ng qayta urinib ko'ring yoki Profil bo'limida shaxsiy API kalitingizni kiriting.");
+  }
+  const err = await response.json().catch(() => ({}));
+  throw new Error(err.error || "Gemini AI xizmatiga ulanib bo'lmadi.");
+}
+
 /**
  * Executes Gemini API request with automatic model fallback if a model endpoint returns 404 or 429.
  */
 async function callGeminiWithFallback(payload, apiKey) {
+  if (apiKey === SERVER_KEY) return callGeminiViaServer(payload);
   let lastErrorText = "";
   let lastResponseStatus = 0;
 
