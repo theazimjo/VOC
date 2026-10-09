@@ -1450,26 +1450,8 @@ export async function getPlatformUser(uid) {
   ]);
   const u = userSnap.exists() ? userSnap.val() : {};
   const c = corpSnap.exists() ? corpSnap.val() : null;
-  const profile = u.profile || {};
-  const wordCount = Object.values(u.words || {}).reduce(
-    (sum, pack) => sum + (pack && typeof pack === 'object' ? Object.keys(pack).length : 0), 0,
-  );
-  const memberships = Object.values(u.groupMemberships || {});
-  return {
-    uid,
-    name: profile.displayName || c?.teacherName || c?.name || '',
-    email: profile.email || c?.email || '',
-    phone: c?.phone || profile.phone || '',
-    createdAt: profile.createdAt || c?.createdAt || null,
-    lastSeen: u.activity?.lastSeen || null,
-    sessions: u.activity?.sessionCount || 0,
-    streak: u.streak?.streakCount || 0,
-    wordCount,
-    packCount: Object.keys(u.packs || {}).length,
-    corpRole: c?.role || null, // 'center_admin' | 'teacher' | null
-    corpCenterName: c?.centerName || '',
-    disabled: Boolean(c?.disabled),
-    memberships, // [{ centerId, groupId, groupName, ... }]
-    activeMembership: u.groupMembership || null,
-  };
+  if (!userSnap.exists() && !c) return null;
+  // `raw` is the whole account node: the detail page works its learning
+  // numbers out of it (see super-admin/userInsights.js)
+  return { ...platformUserRow(uid, u, c), raw: u };
 }

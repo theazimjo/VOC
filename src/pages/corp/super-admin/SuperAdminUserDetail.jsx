@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Ban, CheckCircle2, KeyRound, Users } from 'lucide-react';
+import { Ban, BookOpen, CheckCircle2, Copy, KeyRound, Users } from 'lucide-react';
 import { getPlatformUser, sendCorpPasswordReset, deleteCorpUser, setCorpUserDisabled, getAllCenters } from '../../../services/corpService';
 import ConfirmSheet from '../../../components/corp/ConfirmSheet';
 import { Page, Section, Row, Stat, StatusDot, LoadingRows } from './ui';
 import { useToast } from './useToast';
 import SetPasswordSheet from './SetPasswordSheet';
+import { signInLabel, userInsights } from './userInsights';
 import './sa.css';
 
 // Helpers from SuperAdminUsers (simplified)
@@ -45,6 +46,30 @@ function lastSeenText(u) {
   return new Intl.DateTimeFormat('en-US', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }).format(new Date(u.lastSeen));
 }
 
+function ActivityGrid({ days }) {
+  const max = Math.max(1, ...days.map((d) => d.count));
+  const weeks = [];
+  for (let i = 0; i < days.length; i += 7) weeks.push(days.slice(i, i + 7));
+  return (
+    <div style={{ display: 'flex', gap: 3, padding: '12px 16px', overflowX: 'auto' }}>
+      {weeks.map((week) => (
+        <div key={week[0].key} style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+          {week.map((d) => (
+            <span
+              key={d.key}
+              title={`${d.key}: ${d.count} answers`}
+              style={{
+                width: 12, height: 12, borderRadius: 3,
+                background: d.count ? `rgba(52, 199, 89, ${0.25 + 0.75 * (d.count / max)})` : 'var(--sa-fill, rgba(120,120,128,0.16))',
+              }}
+            />
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function SuperAdminUserDetail() {
   const { uid } = useParams();
   const navigate = useNavigate();
@@ -56,6 +81,7 @@ export default function SuperAdminUserDetail() {
   const [error, setError] = useState(null);
   const [confirm, setConfirm] = useState(null);
   const [busy, setBusy] = useState(false);
+  const insights = useMemo(() => userInsights(user?.raw), [user]);
 
   useEffect(() => {
     async function load() {
@@ -144,10 +170,12 @@ export default function SuperAdminUserDetail() {
     );
   }
   if (error) return <Page title="Error" subtitle={error} />;
-  if (!user || !user.email) return <Page title="User not found" />;
+  if (!user) return <Page title="User not found" />;
 
   const openKind = kindOf(user);
   const openRecency = recency(user.lastSeen);
+  const login = signInLabel(user.email);
+  const hasEmail = login?.kind === 'email';
 
   return (
     <Page
@@ -170,19 +198,37 @@ export default function SuperAdminUserDetail() {
       </div>
 
       <div className="sa-stats" style={{ marginBottom: '28px' }}>
-        <Stat value={user.wordCount} label="Words" />
-        <Stat value={user.sessions} label="Sessions" />
+        <Stat value={insights.total} label="Words" />
+        <Stat value={insights.learned} label="Learned" tone={insights.learned ? 'green' : undefined} />
         <Stat value={user.streak} label="Streak" tone={user.streak ? 'orange' : undefined} />
-        <Stat value={user.packCount} label="Packs" />
+        <Stat value={user.sessions} label="Sessions" />
       </div>
 
       <div className="sa-columns">
         <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
           <Section title="Details">
-            <Row title="Email" detail={user.email || '—'} />
-            {user.phone && <Row title="Phone" detail={user.phone} />}
+            <Row title={login?.kind === 'phone' ? 'Signs in with phone' : login?.kind === 'username' ? 'Signs in with login' : 'Email'} detail={login?.value || '—'} />
+            {user.phone && login?.kind !== 'phone' && <Row title="Phone" detail={user.phone} />}
+            <Row title="User ID" detail={<span className="sa-mono">{user.uid.slice(0, 10)}…</span>} accessory={<Copy size={15} className="sa-row-chevron" />} chevron={false}
+              onClick={() => { navigator.clipboard?.writeText(user.uid).then(() => showToast('User ID copied')).catch(() => {}); }} />
             <Row title="Registered" detail={fmtDate(user.createdAt)} />
             <Row title="Last seen" detail={lastSeenText(user)} />
+            <Row title="Uses" detail={insights.appMode === 'group' ? 'Group mode' : 'Personal mode'} />
+            {insights.language && <Row title="App language" detail={insights.language.toUpperCase()} />}
+          </Section>
+
+          <Section title="Learning">
+            <Row title="Average mastery" detail={insights.avgMastery == null ? '—' : `${insights.avgMastery}%`} />
+            <Row title="Learned / practicing / new" detail={`${insights.learned} / ${insights.started - insights.learned} / ${insights.fresh}`} />
+            <Row title="Due for review now" detail={insights.due} />
+            <Row title="Answers given" detail={insights.reviews} />
+            <Row title="Last practice" detail={insights.lastReview ? fmtDate(new Date(insights.lastReview).toISOString()) : '—'} />
+            <Row title="Active days (last 30)" detail={insights.activeDays30} />
+            {insights.wordTarget != null && <Row title="Word goal" detail={insights.wordTarget} />}
+          </Section>
+
+          <Section title="Activity, last 12 weeks" footer="Each square is a day; the darker, the more answers that day.">
+            <ActivityGrid days={insights.days} />
           </Section>
 
           {user.corpRole ? (
@@ -210,8 +256,32 @@ export default function SuperAdminUserDetail() {
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
-          {user.email && (
-            <Section title="Manage">
+          <Section title={`Word packs (${insights.sources.length})`}>
+            {insights.sources.length === 0 ? (
+              <Row title="No words yet" />
+            ) : insights.sources.map((src) => (
+              <Row
+                key={src.id}
+                icon={src.icon ? <span>{src.icon}</span> : <BookOpen size={16} />}
+                iconTone={src.personal ? 'blue' : 'green'}
+                title={src.name || (src.personal ? 'Pack' : 'Group course topic')}
+                subtitle={`${src.words} words · ${src.learned} learned`}
+                detail={`${src.mastery}%`}
+                chevron={false}
+              />
+            ))}
+          </Section>
+
+          <Section title="Recently practiced">
+            {insights.recent.length === 0 ? (
+              <Row title="Nothing practiced yet" />
+            ) : insights.recent.map((w) => (
+              <Row key={w.id} title={w.word || '—'} subtitle={`${w.translation || ''}${w.source ? ` · ${w.source}` : ''}`} detail={`${w.mastery}%`} chevron={false} />
+            ))}
+          </Section>
+
+          {(user.email || user.corpRole) && (
+            <Section title="Manage" footer={!user.corpRole && !hasEmail ? 'This account has no e-mail. Its learning center admin can set a new password from the student page.' : undefined}>
               {user.corpRole ? (
                 <Row
                   icon={<KeyRound size={16} />}
@@ -219,7 +289,7 @@ export default function SuperAdminUserDetail() {
                   title="Change password"
                   onClick={() => setPasswordOpen(true)}
                 />
-              ) : (
+              ) : hasEmail ? (
                 <Row
                   icon={<KeyRound size={16} />}
                   iconTone="orange"
@@ -227,6 +297,8 @@ export default function SuperAdminUserDetail() {
                   onClick={handleReset}
                   disabled={busy}
                 />
+              ) : (
+                <Row icon={<KeyRound size={16} />} iconTone="gray" title="Password reset by e-mail" detail="No e-mail" chevron={false} />
               )}
               {user.corpRole && (
                 <Row
