@@ -10,6 +10,84 @@
 
 export const BUILT_IN_POSTS = [
   {
+    slug: 'two-learners-one-word',
+    date: '2026-10-09',
+    cover: 'twolearners',
+    minutes: 6,
+    en: {
+      title: 'Two learners, one word: how VOC decides when it comes back',
+      excerpt: 'Dilnoza loses a new word in about five days, Jasur in about three. A fixed schedule suits neither. Here is what VOC does instead, step by step.',
+      body: `Picture two students from the same class. Same ten new words on Monday, same homework. Dilnoza's memory holds a new word for about five days before it fades. Jasur's holds it for about three. Nobody did anything wrong. People differ, and so do words.
+
+A fixed plan, "tomorrow, then in a week, then in a month", is too slow for Jasur and too busy for Dilnoza. VOC does not use a plan. It keeps a number for every word, separately for every person, and updates that number after each answer. Here is how, in order.
+
+## 1. One number for each person and word
+
+For every word you have, VOC stores one number: how many days that memory lasts. We call it stability and write it S. The chance that you still remember the word after t days is e^(−t/S). In plain words, after S days about a third of it is left (37 percent).
+
+For Dilnoza's word S is about 5. For Jasur's it is about 3. A brand-new word starts at 1 day for everyone, because VOC cannot know who you are yet; the number settles where your memory really is after a few answers. In this story we skip ahead to the settled numbers.
+
+## 2. A word comes back at 75 percent
+
+VOC does not wait until a word is gone, and it does not call it back too early. It picks the moment when your chance of remembering has dropped to 75 percent, which is 0.29 × S days after the last review. For Dilnoza that is day 1.4. For Jasur it is day 0.9, about 21 hours.
+
+:::figure twolearners
+
+Read the picture like this: each line is the chance of remembering the word. When it touches the dashed line, the word is due, you answer, and the line jumps back to the top. Dilnoza's gaps open up quickly: 1.4, 3.1, 3.6, 8.3, 15.4 days. Jasur's reviews stay close together at first, and on day 2.2 he got one wrong. We will come back to that.
+
+## 3. What a correct answer is worth
+
+When you answer correctly, S grows. How much depends on how the answer went, and VOC never asks you "how sure were you?". It reads that from your speed: under 2.5 seconds counts as full confidence, under 5 seconds a little less, under 8 seconds less again, slower than that even less. Then it adds up a few more things. This is Dilnoza's first review:
+
+:::figure growth
+
+- A fast answer earns a small extra bonus, a very slow one loses a little.
+- A word that was already fading is worth more than one you reviewed too early, up to +0.30. Making your memory work is what strengthens it.
+- If you slept between the two reviews, +0.15. Sleep really does help memories settle.
+- If you typed or said the word instead of tapping, another +0.15.
+
+So Dilnoza's 5 days became 10.9. Jasur's first answer was slower, so his 3 days became 4.7.
+
+## 4. A wrong answer halves it
+
+On day 2.2 Jasur typed the word and got it wrong. His S went from 4.7 to 2.4, and VOC brought the word back 17 hours later. It is not a punishment. It is just an honest update: this word is shakier than we thought.
+
+## 5. Hard words and easy words
+
+Besides S, every word has a difficulty between 0 and 1. It starts in the middle. A wrong answer pushes it up, a correct one nudges it down, a confident one a little more. Then it works as a multiplier: an easy word grows up to 30 percent faster, a hard word up to 30 percent slower. This is why "table" and "reluctant" end up on different schedules even for the same person.
+
+## 6. Topic groups, and what "context" means here
+
+You may have wondered whether VOC understands a word through its context. Here is the honest answer, because it is narrower than it sounds. VOC puts every word into a group: about fifteen everyday topics (food, health, travel, family, money and so on), four word types (verbs, adjectives, adverbs, nouns), and any topic you or your teacher set on a word. For each group it compares what it predicted with what actually happened.
+
+If you remember the words of one group better than predicted, their growth is raised, by up to 40 percent. If you remember them worse, it is lowered, by up to 30 percent. VOC needs at least five reviews in a group before it trusts the comparison. So the "context" is the group a word belongs to, not the sentence around it.
+
+Sentences matter somewhere else. When you tap a word while reading a chapter, VOC uses the sentence to pick the translation that fits that sentence. That makes the right meaning appear, but it does not change the schedule.
+
+## 7. Typing counts more than tapping
+
+A flashcard "I know" is easy to press. A quiz can be guessed. So VOC does not treat all answers the same. In the personal Review session it also decides on its own how to ask: a word you have never seen is shown as a flashcard, because there is nothing to retrieve yet; after that, any word whose memory is shorter than 5 days is asked by typing; strong words are mostly tapped, but about one in five is still typed so that VOC keeps checking. (Group students get the same idea in step 8.)
+
+There is one more rule, and it matters: tapping alone cannot take a word past about 65 percent mastery. Until you have answered it correctly by typing or saying it, in two different exercises (for example spelling and pronunciation), its memory is held at about 12.6 days. Look back at Dilnoza. On day 4.6 she typed the word and the model wanted 25 days, but it was held at 12.6. A few days later she said it aloud, the two different exercises were done, and the word jumped to 28.9 days.
+
+## 8. One button
+
+In group mode students do not pick exercises. They press Practice, and VOC builds the session for that person:
+
+:::figure flow
+
+Words from older topics that started to fade come back first. Then the new words of the topic as flashcards, five at first and fewer later if you are struggling. Then the words you have seen but never typed. Then a rotation of quiz, match and spelling for words you have typed once. When everything is strong, the session is short.
+
+## Where the two end up
+
+Dilnoza needed five reviews in 32 days. Her word now lasts about 95 days in her memory and comes back in 27 days. Jasur needed six reviews in 11 days, one of them a miss. His word lasts about 26 days and comes back in 8. Different roads, the same word learned, and neither of them had to choose a plan.
+
+## What we have not proven
+
+The growth numbers in step 3 (0.35, 0.40, 0.20, and the rest) are judgement calls. They are sensible and we tested them on made-up learners, but we have not fitted them to real data yet. We did measure something else on real data: how well VOC predicts whether you remember a word. [That story is here](/blog/measured-not-guessed), and it is also why the schedule you see in this post still runs on the older logic. When we have more genuinely spaced reviews, we will fit these numbers too and write down what changed.`,
+    },
+  },
+  {
     slug: 'measured-not-guessed',
     date: '2026-10-05',
     cover: 'compare',

@@ -165,3 +165,19 @@
 @media (prefers-reduced-motion: reduce) {
   .bl-btn, .bl-lang button, .bl-feature-title, .bl-row-title, .bl-more svg, .bl-feature-cover .bl-ill, .bl-feature-cover .bl-cover-img, .bl-toc a, .bl-copy, .bl-next-title { transition: none; }
 }
+
+/* Animated figures (animated.jsx): they play once when scrolled into view. */
+.bl-anim .draw { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.bl-anim.is-shown .draw { stroke-dashoffset: 0; transition: stroke-dashoffset var(--dur, 2.4s) cubic-bezier(0.3, 0.6, 0.3, 1) var(--delay, 0s); }
+.bl-anim .pop { opacity: 0; transform-box: fill-box; transform-origin: center; transform: scale(0.4); }
+.bl-anim.is-shown .pop { opacity: 1; transform: none; transition: opacity 0.35s ease var(--delay, 0s), transform 0.5s cubic-bezier(0.3, 1.5, 0.5, 1) var(--delay, 0s); }
+.bl-anim .fade { opacity: 0; }
+.bl-anim.is-shown .fade { opacity: 1; transition: opacity 0.5s ease var(--delay, 0s); }
+.bl-anim .grow { transform-box: fill-box; transform-origin: left center; transform: scaleX(0); }
+.bl-anim.is-shown .grow { transform: none; transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) var(--delay, 0s); }
+@media (prefers-reduced-motion: reduce) {
+  .bl-anim .draw { stroke-dashoffset: 0; }
+  .bl-anim .pop, .bl-anim .fade { opacity: 1; transform: none; }
+  .bl-anim .grow { transform: none; }
+  .bl-anim.is-shown .draw, .bl-anim.is-shown .pop, .bl-anim.is-shown .fade, .bl-anim.is-shown .grow { transition: none; }
+}

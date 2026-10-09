@@ -3,6 +3,8 @@
 // no raster. Each takes `lang` ('uz' | 'ru' | 'en') for its few labels.
 // Used as a post cover (cover: 'curve') and inline (:::figure curve).
 
+import { ANIMATED_ILLUSTRATIONS } from './animated';
+
 const PAPER = '#f4f1e8';
 const DIM = 'rgba(244, 241, 232, 0.55)';
 const FAINT = 'rgba(244, 241, 232, 0.12)';
@@ -280,7 +282,7 @@ function Board({ t }) {
   );
 }
 
-export const ILLUSTRATIONS = { curve: Curve, sessions: Sessions, factors: Factors, compare: Compare, board: Board };
+export const ILLUSTRATIONS = { curve: Curve, sessions: Sessions, factors: Factors, compare: Compare, board: Board, ...ANIMATED_ILLUSTRATIONS };
 
 /** @param {{ name: string, lang?: 'uz'|'ru'|'en' }} props */
 export default function Illustration({ name, lang = 'uz' }) {
