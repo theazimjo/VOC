@@ -9,3 +9,9 @@
 // mastery on a given verb is one shared record no matter which group/center/
 // individual pack it was practiced through.
 export const IRREGULAR_VERBS_PACK_ID = 'irregular-verbs';
+
+// Bump when the verb list or its sets change (irregularVerbGroups.js, marketData).
+// Centers store it on their copy of the pack; a center that already has this
+// version is left alone, so opening the admin or teacher panel does not download
+// the ~1 MB word bank and rewrite the pack every time.
+export const IRREGULAR_VERBS_CONTENT_VERSION = 2;

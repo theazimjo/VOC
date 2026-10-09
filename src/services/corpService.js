@@ -2,7 +2,7 @@ import { ref, set, get, update, push, remove, runTransaction, increment } from '
 import { createUserWithEmailAndPassword, sendPasswordResetEmail, signOut } from 'firebase/auth';
 import { db, auth } from '../firebase';
 import { getSecondaryAuth } from '../firebaseSecondary';
-import { IRREGULAR_VERBS_PACK_ID } from '../data/irregularVerbsId';
+import { IRREGULAR_VERBS_PACK_ID, IRREGULAR_VERBS_CONTENT_VERSION } from '../data/irregularVerbsId';
 
 // Helper to generate unique 6-digit join PIN
 function generateJoinCode() {
@@ -840,9 +840,13 @@ export async function getCenterCustomPacks(centerId) {
  * to those (via CustomPackEditor) are left alone on later calls.
  */
 export async function ensureIrregularVerbsPack(centerId) {
+  const packRef = ref(db, `centers/${centerId}/customPacks/${IRREGULAR_VERBS_PACK_ID}`);
+  // Up to date already: nothing to do (and no 1 MB download).
+  const versionSnap = await get(ref(db, `centers/${centerId}/customPacks/${IRREGULAR_VERBS_PACK_ID}/contentVersion`));
+  if (versionSnap.val() === IRREGULAR_VERBS_CONTENT_VERSION) return null;
+
   // loaded on demand: building the pack pulls in the whole market word bank
   const { IRREGULAR_VERBS_CORP_PACK } = await import('../data/irregularVerbsCorpPack');
-  const packRef = ref(db, `centers/${centerId}/customPacks/${IRREGULAR_VERBS_PACK_ID}`);
   const snap = await get(packRef);
 
   if (snap.exists()) {
@@ -850,6 +854,7 @@ export async function ensureIrregularVerbsPack(centerId) {
     await update(packRef, {
       months: IRREGULAR_VERBS_CORP_PACK.months,
       wordCount: IRREGULAR_VERBS_CORP_PACK.wordCount,
+      contentVersion: IRREGULAR_VERBS_CONTENT_VERSION,
     });
     return { id: IRREGULAR_VERBS_PACK_ID, ...existing, months: IRREGULAR_VERBS_CORP_PACK.months, wordCount: IRREGULAR_VERBS_CORP_PACK.wordCount };
   }
@@ -857,6 +862,7 @@ export async function ensureIrregularVerbsPack(centerId) {
   const payload = {
     ...IRREGULAR_VERBS_CORP_PACK,
     centerId,
+    contentVersion: IRREGULAR_VERBS_CONTENT_VERSION,
     createdAt: new Date().toISOString(),
     createdBy: 'System',
   };

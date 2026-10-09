@@ -9,6 +9,7 @@ import { useAuth } from '../../../contexts/AuthContext';
 import { setActiveProfile } from '../../../utils/activeProfile';
 import ConfirmSheet from '../../../components/corp/ConfirmSheet';
 import { Button, Field, Page } from '../super-admin/ui';
+import StaffHelpCard from '../../../components/corp/StaffHelpCard';
 import ChangePasswordSheet from '../center-admin/ChangePasswordSheet';
 import GoogleLinkRows from '../super-admin/GoogleLinkRows';
 import { useToast } from '../super-admin/useToast';
@@ -188,6 +189,8 @@ export default function TeacherSettings() {
               Link a Google account to sign in with "Continue with Google" instead of remembering your phone and password. Your login and password keep working too.
             </p>
           </section>
+
+          <StaffHelpCard />
 
           <section className="ca-card">
             <div className="ca-card-head" style={{ marginBottom: 0, alignItems: 'center' }}>

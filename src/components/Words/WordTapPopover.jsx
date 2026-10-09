@@ -7,6 +7,12 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import IosSpinner from '../common/IosSpinner';
 import './WordTapPopover.css';
 
+const OFFLINE_TEXT = {
+  en: 'No internet. A new word needs a connection to be translated; words you looked up before still work.',
+  uz: "Internet yo'q. Yangi so'zni tarjima qilish uchun internet kerak; oldin ko'rgan so'zlaringiz ishlayveradi.",
+  ru: 'Нет интернета. Для перевода нового слова нужна сеть; слова, которые вы уже смотрели, работают.',
+};
+
 const POPOVER_WIDTH = 300;
 const POPOVER_GAP = 10;
 
@@ -39,7 +45,7 @@ export default function WordTapPopover({
   onAdd,
   onClose
 }) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [isDesktop, setIsDesktop] = useState(() => window.innerWidth >= 768);
 
   const [translationLangCode, setTranslationLangCode] = useState(() => {
@@ -351,7 +357,7 @@ export default function WordTapPopover({
               </div>
             </div>
           ) : lookupError ? (
-            <div className="wtp-error">{t('read.translationNotFound')}</div>
+            <div className="wtp-error">{typeof navigator !== 'undefined' && navigator.onLine === false ? OFFLINE_TEXT[language] || OFFLINE_TEXT.en : t('read.translationNotFound')}</div>
           ) : (
             <div className="wtp-content-scroll">
               {/* Word Image from Wikipedia */}

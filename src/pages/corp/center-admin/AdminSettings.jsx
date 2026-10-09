@@ -5,6 +5,7 @@ import { updateCenter } from '../../../services/corpService';
 import { useAuth } from '../../../contexts/AuthContext';
 import ConfirmSheet from '../../../components/corp/ConfirmSheet';
 import { Button, Field, LoadingRows, Page } from '../super-admin/ui';
+import StaffHelpCard from '../../../components/corp/StaffHelpCard';
 import { useIsDesktop } from '../super-admin/useIsDesktop';
 import { useToast } from '../super-admin/useToast';
 import GoogleLinkRows from '../super-admin/GoogleLinkRows';
@@ -167,6 +168,8 @@ export default function AdminSettings() {
               Linking a Google account also lets you sign in with "Sign in with Google". Forgot your password? Sign out and use "Forgot password" on the login page.
             </p>
           </section>
+
+          <StaffHelpCard />
 
           <section className="ca-card">
             <div className="ca-card-head" style={{ marginBottom: 0, alignItems: 'center' }}>
