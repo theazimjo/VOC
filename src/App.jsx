@@ -16,7 +16,8 @@ import ErrorBoundary from './components/common/ErrorBoundary';
 import { installGlobalErrorLogging } from './utils/errorLogger';
 import { lazyWithRetry } from './utils/lazyWithRetry';
 
-import { prefetchMainRoutes } from './utils/prefetchRoutes';
+import { prefetchMainRoutes, requestOfflineDownload } from './utils/prefetchRoutes';
+import OfflineIndicator from './offline/OfflineIndicator';
 const LandingPage = lazyWithRetry(() => import('./pages/marketing/LandingPage'));
 const StartCenterPage = lazyWithRetry(() => import('./pages/marketing/StartCenterPage'));
 const BlogIndex = lazyWithRetry(() => import('./pages/blog/Blog').then((m) => ({ default: m.BlogIndex })));
@@ -102,7 +103,12 @@ function BookToPackRedirect() {
 function RoutePrefetcher() {
   const { user, loading } = useAuth();
   const signedIn = Boolean(user) && !loading;
-  useEffect(() => (signedIn ? prefetchMainRoutes() : undefined), [signedIn]);
+  useEffect(() => {
+    if (!signedIn) return undefined;
+    const stopRoutes = prefetchMainRoutes();
+    const stopDownload = requestOfflineDownload();
+    return () => { stopRoutes(); stopDownload(); };
+  }, [signedIn]);
   return null;
 }
 
@@ -126,6 +132,7 @@ export default function App() {
             <GroupModeProvider>
               <PacksProvider>
                 <RoutePrefetcher />
+                <OfflineIndicator />
                 <Suspense fallback={<RouteLoader />}>
                   <Routes>
                     {/* Public routes */}

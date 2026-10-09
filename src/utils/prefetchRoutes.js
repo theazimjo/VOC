@@ -38,3 +38,18 @@ export function prefetchMainRoutes() {
   const timer = setTimeout(() => idle(next), 2500);
   return () => { stopped = true; clearTimeout(timer); };
 }
+
+// Offline use: once someone is signed in and the app has been idle for a while, the
+// service worker downloads the rest of the build (every page, grammar, book texts)
+// in the background. Skipped when the browser asks to save data.
+export function requestOfflineDownload() {
+  const conn = navigator.connection;
+  if (!('serviceWorker' in navigator) || (conn && conn.saveData)) return () => {};
+  const timer = setTimeout(async () => {
+    try {
+      const reg = await navigator.serviceWorker.getRegistration();
+      reg?.active?.postMessage({ type: 'PRECACHE_ALL' });
+    } catch { /* no service worker: the app just stays online-only */ }
+  }, 8000);
+  return () => clearTimeout(timer);
+}

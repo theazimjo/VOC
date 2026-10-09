@@ -2,6 +2,7 @@ import { defineConfig, loadEnv } from 'vite';
 import tailwindcss from '@tailwindcss/vite';
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 
 // Single source of truth for the version shown on the site: package.json.
 const pkg = JSON.parse(fs.readFileSync(new URL('./package.json', import.meta.url), 'utf8'));
@@ -69,13 +70,41 @@ function siteUrlInHtml() {
   };
 }
 
+// Lists every file of the build (precache.json) and stamps the build id into the
+// service worker, so each deploy is a new worker and knows which files to keep
+// for offline use (see public/sw.js).
+function precacheManifest() {
+  return {
+    name: 'precache-manifest',
+    apply: 'build',
+    closeBundle() {
+      const dist = path.resolve('dist');
+      const assetsDir = path.join(dist, 'assets');
+      if (!fs.existsSync(assetsDir)) return;
+      const files = fs.readdirSync(assetsDir)
+        .filter((name) => /\.(js|css|woff2?)$/.test(name))
+        .map((name) => ({ url: `/assets/${name}`, size: fs.statSync(path.join(assetsDir, name)).size }))
+        .sort((a, b) => a.size - b.size);
+      const id = crypto.createHash('sha1').update(files.map((f) => f.url).join('|')).digest('hex').slice(0, 10);
+      fs.writeFileSync(path.join(dist, 'precache.json'), JSON.stringify({ id, files }));
+      const sw = path.join(dist, 'sw.js');
+      if (fs.existsSync(sw)) fs.writeFileSync(sw, fs.readFileSync(sw, 'utf8').replace('__BUILD_ID__', id));
+    },
+  };
+}
+
 export default defineConfig({
   define: { __APP_VERSION__: JSON.stringify(pkg.version) },
   plugins: [
     tailwindcss(),
     vercelApiDev(),
     siteUrlInHtml(),
+    precacheManifest(),
   ],
+  resolve: {
+    // every 'firebase/database' import goes through the offline layer
+    alias: [{ find: /^firebase\/database$/, replacement: path.resolve('src/offline/rtdb.js') }],
+  },
   test: {
     environment: 'jsdom',
     include: ['src/**/*.test.js', 'packages/**/*.test.js'],

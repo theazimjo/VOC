@@ -1,0 +1,22 @@
+.offline-pill {
+  position: fixed;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 92px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3000;
+  max-width: calc(100vw - 24px);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font: 600 0.78rem/1.2 system-ui, -apple-system, sans-serif;
+  color: #fff;
+  background: #3a3a3c;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
+.offline-pill.is-offline { background: #c25400; }
+.offline-pill.is-syncing { background: #0a6cff; }
+.offline-pill-spin { animation: offline-spin 1.1s linear infinite; }
+@keyframes offline-spin { to { transform: rotate(360deg); } }

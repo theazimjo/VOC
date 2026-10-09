@@ -1,142 +1,177 @@
-const STATIC_CACHE_NAME = 'voc-static-v6';
-const DYNAMIC_CACHE_NAME = 'voc-dynamic-v6';
+// VOCABRY service worker: the app opens and works without a connection.
+//
+//   shell     index.html and the small start-up files are cached when the worker
+//             installs; the build id (stamped in by the build) makes every deploy
+//             a new worker.
+//   all code  after the first sign-in the page asks for PRECACHE_ALL: every other
+//             file of the build (every page, grammar levels, book texts, ...) is
+//             downloaded in the background, once; hashed files are never fetched twice.
+//   data      lives in IndexedDB (src/offline), not here.
+//
+// "/assets/*" files have a content hash in their name and never change, so they
+// are served cache-first. Pages are network-first with a short timeout, so a bad
+// connection falls back to the cached app instead of a blank wait.
 
-const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/favicon.png',
-  '/favicon.svg',
-  '/logo.png',
-  '/icons.svg'
-];
+const BUILD_ID = '__BUILD_ID__';
+const SHELL_CACHE = `voc-shell-${BUILD_ID}`;
+const ASSET_CACHE = 'voc-assets'; // survives deploys: hashed names never collide
+const RUNTIME_CACHE = 'voc-runtime-v7';
 
-// Install event: cache static shell assets
+const SHELL = ['/', '/index.html', '/manifest.json', '/favicon.png', '/favicon.svg', '/logo.png', '/icons.svg'];
+const SHELL_MAX_BYTES = 200 * 1024; // start-up and page chunks up to this size are precached at install
+const NAVIGATION_TIMEOUT_MS = 4000;
+// Responses say 'Vary: Origin'; a page's own module/stylesheet request sends an Origin
+// header the install-time fetch did not, which would make every cached file miss.
+const MATCH = { ignoreVary: true };
+
+async function readManifest() {
+  try {
+    const res = await fetch('/precache.json', { cache: 'no-store' });
+    return res.ok ? await res.json() : null;
+  } catch {
+    return null;
+  }
+}
+
+async function addIfMissing(cache, url) {
+  if (await cache.match(url)) return;
+  try {
+    const res = await fetch(url);
+    if (res.ok) await cache.put(url, res);
+  } catch { /* offline right now: the next PRECACHE_ALL will try again */ }
+}
+
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(STATIC_CACHE_NAME).then((cache) => {
-      console.log('[Service Worker] Caching app shell...');
-      return cache.addAll(STATIC_ASSETS);
-    }).then(() => self.skipWaiting())
-  );
+  event.waitUntil((async () => {
+    const shell = await caches.open(SHELL_CACHE);
+    await Promise.all(SHELL.map((url) => shell.add(url).catch(() => {})));
+    const manifest = await readManifest();
+    if (manifest) {
+      const assets = await caches.open(ASSET_CACHE);
+      await Promise.all(manifest.files.filter((f) => f.size <= SHELL_MAX_BYTES).map((f) => addIfMissing(assets, f.url)));
+    }
+    await self.skipWaiting();
+  })());
 });
 
-// Activate event: clean up outdated caches
 self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys().then((keys) => {
-      return Promise.all(
-        keys.map((key) => {
-          if (key !== STATIC_CACHE_NAME && key !== DYNAMIC_CACHE_NAME) {
-            console.log('[Service Worker] Removing old cache:', key);
-            return caches.delete(key);
-          }
-        })
-      );
-    }).then(() => self.clients.claim())
-  );
+  event.waitUntil((async () => {
+    const keep = new Set([SHELL_CACHE, ASSET_CACHE, RUNTIME_CACHE]);
+    const keys = await caches.keys();
+    await Promise.all(keys.filter((k) => !keep.has(k)).map((k) => caches.delete(k)));
+    await self.clients.claim();
+  })());
 });
 
-// Fetch event: caching strategies
+// The page asks for the rest of the build once someone is signed in and idle.
+self.addEventListener('message', (event) => {
+  if (event.data?.type !== 'PRECACHE_ALL') return;
+  event.waitUntil((async () => {
+    const manifest = await readManifest();
+    if (!manifest) return;
+    const assets = await caches.open(ASSET_CACHE);
+    const wanted = new Set(manifest.files.map((f) => f.url));
+    for (const file of manifest.files) {
+      await addIfMissing(assets, file.url); // one at a time: do not fight the app for bandwidth
+    }
+    // drop files of older builds
+    const cached = await assets.keys();
+    await Promise.all(cached.filter((req) => !wanted.has(new URL(req.url).pathname)).map((req) => assets.delete(req)));
+    const clients = await self.clients.matchAll();
+    clients.forEach((c) => c.postMessage({ type: 'PRECACHE_DONE', id: manifest.id }));
+  })());
+});
+
+const FONT_HOSTS = ['fonts.googleapis.com', 'fonts.gstatic.com'];
+
+function networkFirstWithTimeout(request, fallbackKeys) {
+  return new Promise((resolve) => {
+    let settled = false;
+    const fallback = async () => {
+      for (const key of fallbackKeys) {
+        const hit = await caches.match(key, MATCH);
+        if (hit) return hit;
+      }
+      return null;
+    };
+    const timer = setTimeout(async () => {
+      const hit = await fallback();
+      if (hit && !settled) { settled = true; resolve(hit); }
+    }, NAVIGATION_TIMEOUT_MS);
+    fetch(request).then(async (res) => {
+      clearTimeout(timer);
+      if (res && res.status === 200 && fallbackKeys.length && !/^\/(privacy|blog|api)/.test(new URL(request.url).pathname)) {
+        const cache = await caches.open(SHELL_CACHE);
+        cache.put('/', res.clone());
+      }
+      if (!settled) { settled = true; resolve(res); }
+    }, async () => {
+      clearTimeout(timer);
+      if (settled) return;
+      settled = true;
+      const hit = await fallback();
+      resolve(hit || new Response('Offline', { status: 503, statusText: 'Offline' }));
+    });
+  });
+}
+
 self.addEventListener('fetch', (event) => {
-  const requestUrl = new URL(event.request.url);
+  const request = event.request;
+  const url = new URL(request.url);
 
-  // Skip non-GET requests, Firebase WebSocket, or external APIs (like Auth/DB sync)
-  if (event.request.method !== 'GET' || 
-      requestUrl.protocol === 'chrome-extension:' ||
-      event.request.url.includes('firebaseio.com') ||
-      event.request.url.includes('identitytoolkit.googleapis.com')) {
+  if (request.method !== 'GET' || url.protocol === 'chrome-extension:') return;
+  if (url.hostname.endsWith('firebaseio.com') || url.hostname.endsWith('googleapis.com') && !FONT_HOSTS.includes(url.hostname)) return;
+  if (url.hostname.endsWith('gstatic.com') && !FONT_HOSTS.includes(url.hostname)) return;
+  if (url.origin === self.location.origin && url.pathname.startsWith('/api/')) return;
+  if (url.pathname.startsWith('/_vercel/')) return;
+
+  // The app's pages
+  if (request.mode === 'navigate') {
+    const isApp = !/^\/(privacy|blog)/.test(url.pathname);
+    event.respondWith(networkFirstWithTimeout(request, isApp ? ['/', '/index.html'] : []));
     return;
   }
 
-  // Strategy for navigation requests (HTML pages) -> Network-first with HTML fallback
-  if (event.request.mode === 'navigate') {
-    event.respondWith(
-      fetch(event.request)
-        .then((response) => {
-          // Cache the latest page index
-          // only the app itself is the offline shell - not the static privacy page or the blog
-          const isShell = !/^\/(privacy|blog|api)/.test(requestUrl.pathname);
-          if (response && response.status === 200 && isShell) {
-            const clone = response.clone();
-            caches.open(DYNAMIC_CACHE_NAME).then((cache) => {
-              cache.put('/', clone);
-            });
-          }
-          return response;
-        })
-        .catch(() => {
-          // If offline, return the cached app shell index
-          return caches.match('/').then((response) => {
-            return response || caches.match('/index.html');
-          });
-        })
-    );
+  // Hashed build files: cache-first, they never change
+  if (url.origin === self.location.origin && url.pathname.startsWith('/assets/')) {
+    event.respondWith((async () => {
+      const hit = await caches.match(request, MATCH);
+      if (hit) return hit;
+      try {
+        const res = await fetch(request);
+        if (res && res.status === 200) (await caches.open(ASSET_CACHE)).put(request, res.clone());
+        return res;
+      } catch {
+        return new Response('', { status: 404, statusText: 'Not Found' });
+      }
+    })());
     return;
   }
 
-  // Strategy for local static assets (JS, CSS, images, SVGs) -> Cache-first
-  const isLocalStatic = requestUrl.origin === self.location.origin && 
-    (requestUrl.pathname.includes('/assets/') || 
-     requestUrl.pathname.endsWith('.js') || 
-     requestUrl.pathname.endsWith('.css') || 
-     requestUrl.pathname.endsWith('.svg') || 
-     requestUrl.pathname.endsWith('.png'));
-
-  if (isLocalStatic) {
-    event.respondWith(
-      caches.match(event.request).then((cachedResponse) => {
-        if (cachedResponse) {
-          // Fetch in background to update cache (Stale-While-Revalidate)
-          fetch(event.request).then((networkResponse) => {
-            if (networkResponse && networkResponse.status === 200) {
-              caches.open(DYNAMIC_CACHE_NAME).then((cache) => {
-                cache.put(event.request, networkResponse.clone());
-              });
-            } else if (networkResponse && networkResponse.status === 404) {
-              // Asset no longer exists on server (new deploy) — purge stale copy from cache
-              caches.open(DYNAMIC_CACHE_NAME).then((cache) => {
-                cache.delete(event.request);
-              });
-            }
-          }).catch(() => {/* Ignore background fetch failures */});
-          
-          return cachedResponse;
-        }
-
-        return fetch(event.request).then((networkResponse) => {
-          if (!networkResponse || networkResponse.status !== 200) {
-            return networkResponse || new Response('', { status: 404, statusText: 'Not Found' });
-          }
-          return caches.open(DYNAMIC_CACHE_NAME).then((cache) => {
-            cache.put(event.request, networkResponse.clone());
-            return networkResponse;
-          });
-        }).catch((err) => {
-          console.warn('[Service Worker] Failed to fetch static asset:', event.request.url, err);
-          return new Response('', { status: 404, statusText: 'Not Found' });
-        });
-      })
-    );
+  // Fonts: cache-first (they are opaque cross-origin responses, which is fine to keep)
+  if (FONT_HOSTS.includes(url.hostname)) {
+    event.respondWith((async () => {
+      const hit = await caches.match(request, MATCH);
+      if (hit) return hit;
+      try {
+        const res = await fetch(request);
+        if (res && (res.status === 200 || res.type === 'opaque')) (await caches.open(RUNTIME_CACHE)).put(request, res.clone());
+        return res;
+      } catch {
+        return new Response('', { status: 404, statusText: 'Not Found' });
+      }
+    })());
     return;
   }
 
-  // Default: Network with Cache Fallback for other GET requests
-  event.respondWith(
-    fetch(event.request)
-      .then((response) => {
-        if (response && response.status === 200) {
-          const responseClone = response.clone();
-          caches.open(DYNAMIC_CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseClone);
-          });
-        }
-        return response;
-      })
-      .catch(() => {
-        return caches.match(event.request).then((cached) => {
-          return cached || new Response('', { status: 504, statusText: 'Gateway Timeout' });
-        });
-      })
-  );
+  // Everything else (icons, manifest, images): serve the copy, refresh it in the background
+  event.respondWith((async () => {
+    const hit = await caches.match(request, MATCH);
+    const refresh = fetch(request).then(async (res) => {
+      if (res && res.status === 200) (await caches.open(RUNTIME_CACHE)).put(request, res.clone());
+      return res;
+    }).catch(() => null);
+    if (hit) { refresh.catch(() => {}); return hit; }
+    return (await refresh) || new Response('', { status: 504, statusText: 'Gateway Timeout' });
+  })());
 });

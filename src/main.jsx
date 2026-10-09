@@ -73,9 +73,13 @@ if ('serviceWorker' in navigator && import.meta.env.PROD) {
   });
 
   // Handle case where controller change occurs
+  // The very first install also changes the controller (null -> worker); that must not
+  // reload the page under someone who is typing their password. Only a worker that
+  // replaces an older one needs the refresh.
   let refreshing = false;
+  const hadController = Boolean(navigator.serviceWorker.controller);
   navigator.serviceWorker.addEventListener('controllerchange', () => {
-    if (!refreshing) {
+    if (!refreshing && hadController) {
       refreshing = true;
       window.location.reload();
     }
