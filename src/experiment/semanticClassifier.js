@@ -369,7 +369,25 @@ const ALL_CLUSTERS_BY_KEY = new Map([
  * @param {{word?: string, translation?: string, topic?: string, clusterKey?: string, clusterName?: string, clusterIcon?: string}} wordRecord
  * @returns {{ key: string, name: string, icon: string }}
  */
+// Practice asks for the cluster of every word the user owns after each answer
+// (thousands of words, each classified by scanning all topic keyword sets), which
+// froze flashcards on phones. The answer depends only on these four fields, so it
+// is remembered for the session.
+const clusterCache = new Map();
+const CLUSTER_CACHE_MAX = 30000;
+
 export function getWordCluster(wordRecord = {}) {
+  const cacheKey = `${wordRecord.topic || ''}${wordRecord.clusterKey || ''}${wordRecord.word || ''}${wordRecord.translation || ''}`;
+  let cluster = clusterCache.get(cacheKey);
+  if (!cluster) {
+    cluster = computeWordCluster(wordRecord);
+    if (clusterCache.size >= CLUSTER_CACHE_MAX) clusterCache.clear();
+    clusterCache.set(cacheKey, cluster);
+  }
+  return cluster;
+}
+
+function computeWordCluster(wordRecord) {
   if (wordRecord.topic) {
     return { key: `topic_${wordRecord.topic}`, name: wordRecord.topic, icon: '🏷️' };
   }

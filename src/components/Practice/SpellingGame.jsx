@@ -185,9 +185,12 @@ export default function SpellingGame({
     startTimeRef.current = Date.now();
   }, [currentIndex, currentWordKey, currentWord, allWords, language]);
 
-  // Auto-focus hidden input on load or card change
+  // Auto-focus hidden input on load or card change - on a computer only. On a
+  // phone or tablet focusing opens the on-screen keyboard by itself; there it
+  // opens when the learner taps the letter boxes.
   useEffect(() => {
-    if (!answered) {
+    const touchFirst = typeof window !== 'undefined' && window.matchMedia?.('(pointer: coarse)').matches;
+    if (!answered && !touchFirst) {
       const timer = setTimeout(() => {
         inputRef.current?.focus();
       }, 50);

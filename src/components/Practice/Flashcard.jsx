@@ -234,11 +234,14 @@ export default function Flashcard({
     if (onAnswer) onAnswer(currentWord, isCorrect);
 
     const confidence = inferConfidenceFromSpeed(revealElapsedRef.current, isCorrect);
-    if (onUpdateWord) onUpdateWord(currentWord.id, {
-      isCorrect, confidence,
-      responseTime: revealElapsedRef.current,
-      retrievalType: 'passive_recall',
-    });
+    // Saving the review does real work (memory statistics over all of the learner's
+    // words, database writes). Done right at the swipe it stutters the card's
+    // fly-out on a phone, so it runs once that animation has finished.
+    if (onUpdateWord) {
+      const wordId = currentWord.id;
+      const input = { isCorrect, confidence, responseTime: revealElapsedRef.current, retrievalType: 'passive_recall' };
+      setTimeout(() => onUpdateWord(wordId, input), 340);
+    }
 
     const newCorrect   = results.correctCount   + (isCorrect ? 1 : 0);
     const newIncorrect = results.incorrectCount + (isCorrect ? 0 : 1);
