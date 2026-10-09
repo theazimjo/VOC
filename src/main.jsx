@@ -1,7 +1,11 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
+import './perf-lite.css'
 import App from './App.jsx'
+import { applyPerfMode } from './utils/perfMode'
+
+applyPerfMode()
 
 // Catch Vite chunk/CSS preload errors (happens when a new build is deployed and
 // the user's browser requests old asset hashes) — purge SW caches and reload.

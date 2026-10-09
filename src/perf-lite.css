@@ -1,0 +1,39 @@
+/* Lite rendering for phones (html[data-perf='lite'], set by utils/perfMode.js). */
+
+/* Frosted glass is re-computed every frame while anything behind it moves. */
+html[data-perf='lite'] *,
+html[data-perf='lite'] *::before,
+html[data-perf='lite'] *::after {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Surfaces that relied on the blur to stay readable get a solid-ish backing. */
+html[data-perf='lite'] .bottom-nav,
+html[data-perf='lite'] .corp-bottom-nav,
+html[data-perf='lite'] .navbar {
+  background-color: color-mix(in srgb, var(--bg-secondary, #fff) 96%, transparent);
+}
+
+/* Endless decorative motion (pulses, shimmers, floating blobs) keeps the GPU busy
+   and the battery draining; loading spinners are kept. */
+html[data-perf='lite'] [class*='pulse']:not([class*='spinner']):not([class*='loader']),
+html[data-perf='lite'] [class*='shimmer'],
+html[data-perf='lite'] [class*='glow'],
+html[data-perf='lite'] [class*='blob'] {
+  animation: none !important;
+}
+
+/* Decorative blurred blobs behind content. */
+html[data-perf='lite'] .adm-glow-bg,
+html[data-perf='lite'] .hero-decor-orbs {
+  display: none !important;
+}
+
+/* Taps should feel instant. */
+html[data-perf='lite'] * {
+  -webkit-tap-highlight-color: transparent;
+}
+html[data-perf='lite'] {
+  scroll-behavior: auto;
+}
