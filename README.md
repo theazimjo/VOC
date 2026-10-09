@@ -248,10 +248,7 @@ cd VOC
 npm install
 ```
 
-The Firebase client config lives in `src/firebase.js`. Optional AI features (photo word extraction) go through `api/gemini.js`, which reads the key from the server environment (Vercel → Environment Variables, or `.env.local` for `npm run dev`). Never put it in a `VITE_` variable: those are copied into the public app bundle.
-```env
-GEMINI_API_KEY=your_key
-```
+The Firebase client config lives in `src/firebase.js`.
 
 ### Run
 ```bash

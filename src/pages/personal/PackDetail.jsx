@@ -16,7 +16,6 @@ import { formatPageRange } from '../../utils/chapterPageRanges';
 import { hasChapterText } from '../../data/chapterTextKeys';
 import WordList from '../../components/Words/WordList';
 
-import PhotoWordExtractorModal from '../../components/Words/PhotoWordExtractorModal';
 import MoveWordsModal from '../../components/Words/MoveWordsModal';
 import SpeedDialFAB from '../../components/Words/SpeedDialFAB';
 import IosSpinner from '../../components/common/IosSpinner';
@@ -137,7 +136,6 @@ export default function PackDetail() {
   const [pack, setPack] = useState(null);
   const [showWordForm, setShowWordForm] = useState(false);
   const [showBulkImportForm, setShowBulkImportForm] = useState(false);
-  const [showPhotoExtractorModal, setShowPhotoExtractorModal] = useState(false);
   const [showMoveModal, setShowMoveModal] = useState(false);
   const [selectedWordIdsToMove, setSelectedWordIdsToMove] = useState([]);
   const [moveSuccessMsg, setMoveSuccessMsg] = useState(null);
@@ -707,20 +705,12 @@ export default function PackDetail() {
         language={pack.language || 'en-US'}
       />
 
-      <PhotoWordExtractorModal
-        isOpen={showPhotoExtractorModal}
-        onClose={() => setShowPhotoExtractorModal(false)}
-        onImport={(newWords) => handleBulkImport(newWords)}
-        existingWords={words}
-      />
-
       {pack.name !== 'Irregular Verbs' && (
         <SpeedDialFAB
           onAddWord={() => navigate(
             `/packs/${packId}/word/new${topicFilter ? `?topic=${encodeURIComponent(topicFilter)}` : ''}`
           )}
           onImportJson={() => navigate(`/packs/${packId}/import-json${topicFilter ? `?topic=${encodeURIComponent(topicFilter)}` : ''}`)}
-          onExtractPhoto={() => setShowPhotoExtractorModal(true)}
           onAddChapter={() => setShowAddChapterModal(true)}
         />
       )}
