@@ -3,6 +3,7 @@ import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import FullScreenLoader from '../common/FullScreenLoader';
 import { lazyWithRetry } from '../../utils/lazyWithRetry';
+import { isInstalledApp } from '../../utils/installedApp';
 
 // Lazy: only a logged-out visitor hitting "/" ever needs this chunk, so it
 // shouldn't add weight to the bundle every authenticated user already pays
@@ -22,7 +23,8 @@ export default function ProtectedRoute() {
     // directly (shared links, bookmarks, first visit) — show the public
     // landing page there instead of bouncing straight to the login form.
     // Every other protected route keeps the old straight-to-login redirect.
-    if (location.pathname === '/') {
+    // (not inside the installed app: there it opens on the sign-in screen)
+    if (location.pathname === '/' && !isInstalledApp()) {
       return (
         <Suspense fallback={<FullScreenLoader />}>
           <LandingPage />

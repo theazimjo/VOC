@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Eye, EyeOff, ArrowLeft } from 'lucide-react';
 import { APP_VERSION_LABEL } from '../../utils/appVersion';
 import BetaBadge from '../common/BetaBadge';
+import { isInstalledApp } from '../../utils/installedApp';
 import './AuthShell.css';
 
 const ASIDE_ROWS = [
@@ -75,11 +76,13 @@ export function Field({ label, type = 'text', value, onChange, autoComplete, dis
  * board on ink beside it (hidden on narrow screens).
  */
 export function AuthShell({ copy, children }) {
+  // in the installed app there is no public landing page to go back to
+  const home = isInstalledApp() ? null : '/welcome';
   return (
     <div className="as-page">
       <main className="as-main">
         <header className="as-top">
-          <Link to="/welcome" className="as-brand" aria-label="VOCABRY">
+          <Link to={home || '/login'} className="as-brand" aria-label="VOCABRY">
             <img src="/logo.png" alt="" width="34" height="34" />
             <span>VOCABRY</span>
             <BetaBadge />
@@ -89,7 +92,7 @@ export function AuthShell({ copy, children }) {
         <div className="as-card">{children}</div>
 
         <footer className="as-bottom">
-          <Link to="/welcome" className="as-back"><ArrowLeft size={15} strokeWidth={2.2} aria-hidden="true" />{copy.back}</Link>
+          {home ? <Link to={home} className="as-back"><ArrowLeft size={15} strokeWidth={2.2} aria-hidden="true" />{copy.back}</Link> : <span />}
           <a className="as-back" href="/privacy.html" target="_blank" rel="noopener noreferrer">Privacy policy</a>
           <span className="as-version">Beta {APP_VERSION_LABEL}</span>
         </footer>

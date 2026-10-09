@@ -171,3 +171,39 @@
   .as-submit, .as-google, .as-input, .as-lang button { transition: none; }
   .as-spinner { animation: as-spin 1.4s linear infinite; }
 }
+
+/* ---------- Phones: sign in / sign up fit on one screen without scrolling ---------- */
+@media (max-width: 640px) {
+  .as-main { min-height: 100dvh; padding: 12px 20px 10px; }
+  .as-brand span { font-size: 1.3rem; }
+  .as-brand img { width: 30px; height: 30px; }
+  .as-card { padding: 10px 0; }
+  .as-card h1 { font-size: 2.15rem; }
+  .as-sub { margin-top: 4px; font-size: 0.9rem; line-height: 1.35; }
+  .as-form { gap: 9px; margin-top: 12px; }
+  .as-field label { margin-bottom: 4px; font-size: 0.8125rem; }
+  .as-input { height: 44px; font-size: 0.95rem; }
+  .as-eye { width: 36px; height: 36px; }
+  .as-submit, .as-google { height: 46px; font-size: 0.95rem; }
+  .as-divider { margin: 12px 0; }
+  .as-switch { margin-top: 12px; font-size: 0.875rem; }
+  .as-error { margin-top: 10px; padding: 8px 12px; font-size: 0.85rem; }
+  .as-notice { margin-top: 12px; padding: 10px 12px; }
+  .as-strength { margin-top: 5px; }
+  .as-strength-hint { margin-top: 3px; font-size: 0.75rem; }
+  .as-bottom { font-size: 0.8rem; }
+  .as-back, .as-version { font-size: 0.78rem; }
+}
+/* very short screens (a phone with the browser bars, or landscape) */
+@media (max-width: 640px) and (max-height: 640px) {
+  .as-card h1 { font-size: 1.8rem; }
+  .as-sub { display: none; }
+  .as-form { gap: 7px; margin-top: 8px; }
+  .as-input { height: 40px; }
+  .as-submit, .as-google { height: 42px; }
+  .as-divider { margin: 8px 0; }
+  .as-switch { margin-top: 8px; }
+}
+@media (max-width: 640px) and (max-height: 560px) {
+  .as-top { display: none; }
+}
