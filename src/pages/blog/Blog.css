@@ -181,3 +181,13 @@
   .bl-anim .grow { transform: none; }
   .bl-anim.is-shown .draw, .bl-anim.is-shown .pop, .bl-anim.is-shown .fade, .bl-anim.is-shown .grow { transition: none; }
 }
+
+.bl-anim-box { position: relative; }
+.bl-replay { position: absolute; right: 10px; top: 10px; padding: 5px 10px; border: 1px solid rgba(244, 241, 232, 0.28); border-radius: 999px; background: rgba(16, 17, 19, 0.85); color: #f4f1e8; font-family: inherit; font-size: 0.78rem; font-weight: 600; line-height: 1; cursor: pointer; }
+.bl-replay:hover { background: #1f2126; border-color: #ffb020; }
+.bl-anim .rise { transform-box: fill-box; transform-origin: center bottom; transform: scaleY(0); }
+.bl-anim.is-shown .rise { transform: none; transition: transform 0.7s cubic-bezier(0.2, 0.9, 0.25, 1.1) var(--delay, 0s); }
+@media (prefers-reduced-motion: reduce) {
+  .bl-anim .rise { transform: none; }
+  .bl-anim.is-shown .rise { transition: none; }
+}

@@ -4,7 +4,7 @@
 
 // The blog is written in English only.
 export const LANGS = ['en'];
-export const COVERS = ['board', 'curve', 'compare', 'sessions', 'factors', 'twolearners', 'growth', 'flow'];
+export const COVERS = ['board', 'curve', 'compare', 'sessions', 'factors', 'twolearners', 'loop', 'fading', 'stopwatch', 'growth', 'difficulty', 'groups', 'ceiling', 'flow'];
 
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;

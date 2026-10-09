@@ -27,7 +27,7 @@ export default function Markdown({ blocks, lang }) {
       case 'figure':
         return (
           <figure key={i} className="bl-fig">
-            <Illustration name={b.name} lang={lang} />
+            <Illustration name={b.name} lang={lang} replay />
           </figure>
         );
       case 'image':

@@ -285,8 +285,8 @@ function Board({ t }) {
 export const ILLUSTRATIONS = { curve: Curve, sessions: Sessions, factors: Factors, compare: Compare, board: Board, ...ANIMATED_ILLUSTRATIONS };
 
 /** @param {{ name: string, lang?: 'uz'|'ru'|'en' }} props */
-export default function Illustration({ name, lang = 'uz' }) {
+export default function Illustration({ name, lang = 'uz', replay = false }) {
   const C = ILLUSTRATIONS[name];
   if (!C) return null;
-  return <C t={T[lang] || T.uz} />;
+  return <C t={T[lang] || T.uz} replay={replay} />;
 }
