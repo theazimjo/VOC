@@ -8,12 +8,8 @@ html[data-perf='lite'] *::after {
   -webkit-backdrop-filter: none !important;
 }
 
-/* Surfaces that relied on the blur to stay readable get a solid-ish backing. */
-html[data-perf='lite'] .bottom-nav,
-html[data-perf='lite'] .corp-bottom-nav,
-html[data-perf='lite'] .navbar {
-  background-color: color-mix(in srgb, var(--bg-secondary, #fff) 96%, transparent);
-}
+/* Bars keep their own (solid) backgrounds: index.css already turns the glass ones
+   solid on phones, and a panel's dark bar must stay dark under light text. */
 
 /* Endless decorative motion (pulses, shimmers, floating blobs) keeps the GPU busy
    and the battery draining; loading spinners are kept. */
