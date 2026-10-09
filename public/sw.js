@@ -33,11 +33,15 @@ async function readManifest() {
   }
 }
 
+// A missing build file can come back as the app's index.html (single-page-app
+// fallback). Keeping that under a .js name would break every later load.
+const isRealAsset = (res) => res && res.status === 200 && !/text\/html/i.test(res.headers.get('content-type') || '');
+
 async function addIfMissing(cache, url) {
   if (await cache.match(url)) return;
   try {
     const res = await fetch(url);
-    if (res.ok) await cache.put(url, res);
+    if (isRealAsset(res)) await cache.put(url, res);
   } catch { /* offline right now: the next PRECACHE_ALL will try again */ }
 }
 
@@ -139,7 +143,8 @@ self.addEventListener('fetch', (event) => {
       if (hit) return hit;
       try {
         const res = await fetch(request);
-        if (res && res.status === 200) (await caches.open(ASSET_CACHE)).put(request, res.clone());
+        if (!isRealAsset(res)) return new Response('', { status: 404, statusText: 'Not Found' });
+        (await caches.open(ASSET_CACHE)).put(request, res.clone());
         return res;
       } catch {
         return new Response('', { status: 404, statusText: 'Not Found' });
