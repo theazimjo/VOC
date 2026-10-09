@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Building2, Plus } from 'lucide-react';
-import { getAllCenters, getCenterStats } from '../../../services/corpService';
+import { getAllCenters, centerStatsFrom } from '../../../services/corpService';
 import { computeCenterActivity, formatRelative } from './centerActivity';
 import { EmptyState, LoadingRows, Page, Row, Section, Stat, StatusDot } from './ui';
 
@@ -20,7 +20,7 @@ export default function SuperAdminOverview() {
         const withStats = await Promise.all(
           centers.map(async (c) => {
             try {
-              return { center: c, activity: computeCenterActivity(await getCenterStats(c.id)) };
+              return { center: c, activity: computeCenterActivity(centerStatsFrom(c)) };
             } catch {
               return { center: c, activity: computeCenterActivity(null) };
             }

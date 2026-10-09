@@ -4,7 +4,7 @@ import { ref, get, update, onValue } from 'firebase/database';
 import { db } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
 import { useGroupMode } from '../../hooks/useGroupMode';
-import { getGroup, getCenterCustomPacks } from '../../services/corpService';
+import { getGroup, getCustomPacksLight } from '../../services/corpService';
 import StudentSidebar from './StudentSidebar';
 import StudentBottomNav from './StudentBottomNav';
 import Navbar from '../Layout/Navbar';
@@ -35,11 +35,17 @@ export default function StudentLayout() {
     async function loadGroupPacks() {
       setLoading(true);
       try {
-        const [freshGroup, centerPacks, centerNameSnap] = await Promise.all([
+        const [freshGroup, centerNameSnap] = await Promise.all([
           getGroup(membership.centerId, membership.groupId),
-          getCenterCustomPacks(membership.centerId),
           get(ref(db, `centers/${membership.centerId}/name`)),
         ]);
+        // only this group's packs, not every course of the center
+        const wanted = [...new Set([
+          ...(freshGroup?.assignedPacks || []),
+          ...(freshGroup?.additionalPacks || []),
+          ...(freshGroup?.requiredPacks || []),
+        ])].filter((id) => typeof id === 'string' && id);
+        const centerPacks = freshGroup ? await getCustomPacksLight(membership.centerId, wanted) : [];
         if (!freshGroup) {
           // Group was deleted by teacher! Clean up stale membership
           const updates = {};

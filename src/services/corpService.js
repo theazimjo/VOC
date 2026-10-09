@@ -60,47 +60,80 @@ export async function getCorpRole(uid) {
   return snap.exists() ? snap.val() : null;
 }
 
+// Child keys of a node without downloading what is under them (the REST API's
+// "shallow" read), for the super admin's lists. Throws if it cannot (offline).
+async function shallowKeys(path) {
+  const token = await auth.currentUser?.getIdToken();
+  if (!token) throw new Error('Not signed in');
+  const base = String(db.app.options.databaseURL || '').replace(/\/$/, '');
+  const res = await fetch(`${base}/${path}.json?shallow=true&auth=${encodeURIComponent(token)}`);
+  if (!res.ok) throw new Error(`Could not list ${path} (${res.status})`);
+  const json = await res.json();
+  return json && typeof json === 'object' ? Object.keys(json) : [];
+}
+
+const valOf = async (path) => (await get(ref(db, path))).val();
+
+function platformUserRow(uid, u, c) {
+  const profile = u.profile || {};
+  // Personal packs keep their own word count; group students' progress lives
+  // elsewhere and is not counted here.
+  const wordCount = u.words
+    ? Object.values(u.words).reduce((sum, pack) => sum + (pack && typeof pack === 'object' ? Object.keys(pack).length : 0), 0)
+    : Object.values(u.packs || {}).reduce((sum, pack) => sum + (Number(pack?.wordCount) || 0), 0);
+  return {
+    uid,
+    name: profile.displayName || c?.teacherName || c?.name || '',
+    email: profile.email || c?.email || '',
+    phone: c?.phone || profile.phone || '',
+    createdAt: profile.createdAt || c?.createdAt || null,
+    lastSeen: u.activity?.lastSeen || null,
+    sessions: u.activity?.sessionCount || 0,
+    streak: u.streak?.streakCount || 0,
+    wordCount,
+    packCount: Object.keys(u.packs || {}).length,
+    corpRole: c?.role || null, // 'center_admin' | 'teacher' | null
+    corpCenterName: c?.centerName || '',
+    disabled: Boolean(c?.disabled),
+    memberships: Object.values(u.groupMemberships || {}), // [{ centerId, groupId, groupName, ... }]
+    activeMembership: u.groupMembership || null,
+  };
+}
+
 /**
- * Super Admin: every account on the platform (users/*), merged with its
- * corpUsers role if it has one. Reads the whole users tree — fine at the
- * current scale (tens to low hundreds of accounts); needs a summary index
- * before it grows into the thousands.
+ * Super Admin: every account on the platform, merged with its corpUsers role.
+ * Only the small parts of each account are read (profile, activity, streak,
+ * packs, group memberships): reading the whole users tree meant downloading
+ * every learner's words and review history, which made the page crawl.
  */
 export async function getAllPlatformUsers() {
-  const [usersSnap, corpSnap] = await Promise.all([
-    get(ref(db, 'users')),
-    get(ref(db, 'corpUsers')),
-  ]);
+  const corpSnap = await get(ref(db, 'corpUsers'));
   const corp = corpSnap.exists() ? corpSnap.val() : {};
-  const users = usersSnap.exists() ? usersSnap.val() : {};
-  const uids = new Set([...Object.keys(users), ...Object.keys(corp)]);
-
-  return [...uids].map((uid) => {
-    const u = users[uid] || {};
-    const c = corp[uid] || null;
-    const profile = u.profile || {};
-    const wordCount = Object.values(u.words || {}).reduce(
-      (sum, pack) => sum + (pack && typeof pack === 'object' ? Object.keys(pack).length : 0), 0,
-    );
-    const memberships = Object.values(u.groupMemberships || {});
-    return {
-      uid,
-      name: profile.displayName || c?.teacherName || c?.name || '',
-      email: profile.email || c?.email || '',
-      phone: c?.phone || profile.phone || '',
-      createdAt: profile.createdAt || c?.createdAt || null,
-      lastSeen: u.activity?.lastSeen || null,
-      sessions: u.activity?.sessionCount || 0,
-      streak: u.streak?.streakCount || 0,
-      wordCount,
-      packCount: Object.keys(u.packs || {}).length,
-      corpRole: c?.role || null, // 'center_admin' | 'teacher' | null
-      corpCenterName: c?.centerName || '',
-      disabled: Boolean(c?.disabled),
-      memberships, // [{ centerId, groupId, groupName, ... }]
-      activeMembership: u.groupMembership || null,
-    };
-  });
+  let userIds;
+  try {
+    userIds = await shallowKeys('users');
+  } catch {
+    // no REST access (offline): fall back to the full read
+    const usersSnap = await get(ref(db, 'users'));
+    const users = usersSnap.exists() ? usersSnap.val() : {};
+    const uids = new Set([...Object.keys(users), ...Object.keys(corp)]);
+    return [...uids].map((uid) => platformUserRow(uid, users[uid] || {}, corp[uid] || null));
+  }
+  const uids = [...new Set([...userIds, ...Object.keys(corp)])];
+  return Promise.all(uids.map(async (uid) => {
+    const base = `users/${uid}`;
+    const [profile, activity, streakCount, packs, groupMemberships, groupMembership] = await Promise.all([
+      valOf(`${base}/profile`),
+      valOf(`${base}/activity`),
+      valOf(`${base}/streak/streakCount`),
+      valOf(`${base}/packs`),
+      valOf(`${base}/groupMemberships`),
+      valOf(`${base}/groupMembership`),
+    ]);
+    return platformUserRow(uid, {
+      profile: profile || {}, activity, streak: { streakCount }, packs, groupMemberships, groupMembership,
+    }, corp[uid] || null);
+  }));
 }
 
 /**
@@ -166,19 +199,105 @@ export async function createCenterAdminAccount(center) {
  * admin's aggregate view).
  */
 export async function getCenter(centerId) {
-  const snap = await get(ref(db, `centers/${centerId}`));
-  return snap.exists() ? { id: centerId, ...snap.val() } : null;
+  try {
+    // the center's fields and its packs are fetched side by side
+    const [keys, packs] = await Promise.all([shallowKeys(`centers/${centerId}`), getCustomPacksLight(centerId)]);
+    if (!keys.length) return null;
+    const out = { id: centerId };
+    await Promise.all(keys.map(async (key) => {
+      if (key === 'customPacks') {
+        out.customPacks = Object.fromEntries(packs.map((pk) => [pk.id, pk]));
+        return;
+      }
+      out[key] = await valOf(`centers/${centerId}/${key}`);
+    }));
+    return out;
+  } catch {
+    // offline (no REST): the whole node, from the device copy if need be
+    const snap = await get(ref(db, `centers/${centerId}`));
+    return snap.exists() ? { id: centerId, ...snap.val() } : null;
+  }
+}
+
+/**
+ * A center's word packs without the two flat copies of their words. A course
+ * keeps every word three times (in `months`, and again in `units` and `words`
+ * for older readers); everything reads `months` first, so when a pack has it
+ * the copies are skipped - a third of the download. With `ids`, only those packs.
+ */
+export async function getCustomPacksLight(centerId, ids = null) {
+  const base = `centers/${centerId}/customPacks`;
+  let packIds = ids;
+  if (!packIds) {
+    try {
+      packIds = await shallowKeys(base);
+    } catch {
+      return getCenterCustomPacks(centerId);
+    }
+  }
+  const packs = await Promise.all(packIds.map(async (id) => {
+    let keys;
+    try {
+      keys = await shallowKeys(`${base}/${id}`);
+    } catch {
+      const whole = await valOf(`${base}/${id}`);
+      return whole ? { id, ...whole } : null;
+    }
+    if (!keys.length) return null;
+    const skip = keys.includes('months') ? new Set(['units', 'words']) : new Set();
+    const out = { id };
+    await Promise.all(keys.filter((k) => !skip.has(k)).map(async (k) => { out[k] = await valOf(`${base}/${id}/${k}`); }));
+    return out;
+  }));
+  return packs.filter(Boolean);
 }
 
 /**
  * Super Admin: Get all Learning Centers
  */
 export async function getAllCenters() {
-  const centersRef = ref(db, 'centers');
-  const snapshot = await get(centersRef);
-  if (!snapshot.exists()) return [];
-  const val = snapshot.val();
-  return Object.keys(val).map(key => ({ id: key, ...val[key] }));
+  let ids;
+  try {
+    ids = await shallowKeys('centers');
+  } catch {
+    const snapshot = await get(ref(db, 'centers'));
+    if (!snapshot.exists()) return [];
+    const val = snapshot.val();
+    return Object.keys(val).map(key => ({ id: key, ...val[key] }));
+  }
+  return Promise.all(ids.map(getCenterLight));
+}
+
+/**
+ * Super Admin: one center without its word packs (only how many there are).
+ * The packs hold every word of every course, by far the biggest part of a
+ * center, and the super admin's lists never show them.
+ */
+export async function getCenterLight(centerId) {
+  const keys = await shallowKeys(`centers/${centerId}`);
+  const out = { id: centerId };
+  await Promise.all(keys.map(async (key) => {
+    if (key === 'customPacks') {
+      out.customPacksCount = (await shallowKeys(`centers/${centerId}/customPacks`)).length;
+      return;
+    }
+    out[key] = await valOf(`centers/${centerId}/${key}`);
+  }));
+  return out;
+}
+
+/** The numbers getCenterStats() returns, worked out from a center already loaded. */
+export function centerStatsFrom(center) {
+  const teachers = Object.entries(center?.teachers || {}).map(([id, t]) => ({ id, ...t }));
+  const groups = Object.entries(center?.groups || {}).map(([id, g]) => ({ id, ...g }));
+  return {
+    teachers,
+    groups,
+    packsCount: center?.customPacksCount ?? Object.keys(center?.customPacks || {}).length,
+    teachersCount: teachers.length,
+    groupsCount: groups.length,
+    studentsCount: groups.reduce((sum, g) => sum + (g.studentsCount || 0), 0),
+  };
 }
 
 /**
@@ -214,22 +333,20 @@ export async function getCenterGroups(centerId) {
  * plus the teacher list, used by the center detail view.
  */
 export async function getCenterStats(centerId) {
-  const [teachers, packs, groups] = await Promise.all([
-    getCenterTeachers(centerId),
-    getCenterCustomPacks(centerId),
-    getCenterGroups(centerId),
-  ]);
-
-  const studentsCount = groups.reduce((sum, g) => sum + (g.studentsCount || 0), 0);
-
-  return {
-    teachers,
-    groups,
-    packsCount: packs.length,
-    teachersCount: teachers.length,
-    groupsCount: groups.length,
-    studentsCount,
-  };
+  try {
+    return centerStatsFrom(await getCenterLight(centerId));
+  } catch {
+    const [teachers, packs, groups] = await Promise.all([
+      getCenterTeachers(centerId),
+      getCenterCustomPacks(centerId),
+      getCenterGroups(centerId),
+    ]);
+    return centerStatsFrom({
+      teachers: Object.fromEntries(teachers.map((t) => [t.id, t])),
+      groups: Object.fromEntries(groups.map((g) => [g.id, g])),
+      customPacksCount: packs.length,
+    });
+  }
 }
 
 /**
@@ -764,7 +881,7 @@ export async function duplicateCustomPack(centerId, pack, ownerUid = null) {
     level: pack.level,
     description: pack.description,
     language: pack.language,
-    words: pack.words || [],
+    words: pack.words || (pack.months || []).flatMap((m) => (m.units || []).flatMap((u) => u.words || [])),
     createdBy: pack.createdBy,
   }, ownerUid);
   // Month / topic structure too — without it the copy collapses into one

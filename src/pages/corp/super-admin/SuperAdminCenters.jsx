@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { Building2, Check, ChevronRight, Copy, Plus, Send, TriangleAlert } from 'lucide-react';
-import { getAllCenters, createCenter, createCenterAdminAccount, getCenterStats } from '../../../services/corpService';
+import { getAllCenters, createCenter, createCenterAdminAccount, centerStatsFrom } from '../../../services/corpService';
 import { computeCenterActivity, formatRelative, HEALTH_LABEL } from './centerActivity';
 import { Button, EmptyState, Field, LoadingRows, Page, Row, SearchField, Segmented, Sheet, StatusDot } from './ui';
 import { useToast } from './useToast';
@@ -56,14 +56,7 @@ export default function SuperAdminCenters() {
     try {
       const data = await getAllCenters();
       setCenters(data);
-      const entries = await Promise.all(data.map(async (c) => {
-        try {
-          return [c.id, await getCenterStats(c.id)];
-        } catch {
-          return [c.id, null];
-        }
-      }));
-      setStatsById(Object.fromEntries(entries));
+      setStatsById(Object.fromEntries(data.map((c) => [c.id, centerStatsFrom(c)])));
     } catch (err) {
       console.error('Error loading centers:', err);
       showToast("Couldn't load the centers", 'error');

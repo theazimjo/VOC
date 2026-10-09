@@ -304,11 +304,14 @@ export function get(query) {
       if (c) { resolve(c); return; }
     }
     let settled = false;
+    // While the connection is still coming up (app start), a copy we already have
+    // answers after a short wait instead of holding the screen; the server's answer
+    // still lands in the copy for the next read.
     const timer = setTimeout(() => {
       if (settled) return;
       const c = fromCopy();
       if (c) { settled = true; resolve(c); }
-    }, 3000);
+    }, connected === true ? 3000 : 1200);
     real.get(query).then((snap) => {
       clearTimeout(timer);
       const s = memoSnapshot(snap);
