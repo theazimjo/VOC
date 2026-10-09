@@ -66,6 +66,9 @@ export default function CorpPractice() {
   // menu (location.state.mode) is started as-is instead.
   const requestedMode = location.state?.mode || null;
   const autoStartedRef = useRef(false);
+  // true once Practice started on its own (smart session or a mode from the menu):
+  // finishing or leaving it goes back to the topic page, not to the mode list.
+  const fromTopicRef = useRef(false);
   const smartPlanRef = useRef(null); // { parts, index, summaries }
   const reviewWordsRef = useRef(new Map()); // composite id -> word of an earlier topic
   const [smartPart, setSmartPart] = useState(null); // { kind, index, total } for the intro screen
@@ -211,6 +214,7 @@ export default function CorpPractice() {
     if (requestedMode) {
       const pool = filterWordsForMode(sourceWords, requestedMode);
       if (pool.length < (PRACTICE_MODE_MIN_WORDS[requestedMode] || 1)) return; // stay on the mode list
+      fromTopicRef.current = true;
       setSelectedMode(requestedMode);
       setPracticeWords(weightedSelectWords(pool, Math.min(10, pool.length)));
       setStep('intro');
@@ -220,6 +224,7 @@ export default function CorpPractice() {
     const plan = planSmartSession({ unitWords: sourceWords, otherTopics });
     if (plan.parts.length === 0) return;
     plan.parts.forEach((part) => part.words.forEach((w) => { if (w.__storageId) reviewWordsRef.current.set(w.id, w); }));
+    fromTopicRef.current = true;
     smartPlanRef.current = { parts: plan.parts, index: 0, summaries: [] };
     const first = plan.parts[0];
     setSmartPart({ kind: first.kind, index: 0, total: plan.parts.length });
@@ -452,9 +457,12 @@ export default function CorpPractice() {
     }
   };
 
+  const backToTopic = () => navigate(`/corp/student/learn/topic/${packId}/${monthId}/${unitId}${topicBackQuery}`, { replace: true });
+
   const handleBack = (skipConfirm = false) => {
     if (step === 'practice' || step === 'intro') {
       if (skipConfirm === true) {
+        if (fromTopicRef.current) { backToTopic(); return; }
         setStep('mode');
         return;
       }
@@ -464,11 +472,13 @@ export default function CorpPractice() {
     if (step === 'mode') {
       navigate(`/corp/student/learn/topic/${packId}/${monthId}/${unitId}${topicBackQuery}`);
     } else if (step === 'results') {
+      if (fromTopicRef.current) { backToTopic(); return; }
       setStep('mode');
     }
   };
 
   const handleReset = () => {
+    if (fromTopicRef.current) { backToTopic(); return; }
     smartPlanRef.current = null;
     setSmartPart(null);
     setResults(null);
@@ -485,7 +495,7 @@ export default function CorpPractice() {
     // filters corp words out because they lack a .word field in Firebase, so
     // SpellingGame/QuizGame/MatchGame would have no corp context to compare against.
     allWords: sourceWords, handleAnswer, handleBack, handleComplete, handleRepeatReviewWords,
-    handleReset, handleStartPractice, handleUpdateWord, loadedPack, monthId,
+    fromTopic: fromTopicRef.current, handleReset, handleStartPractice, handleUpdateWord, loadedPack, monthId,
     navigate, packId, practiceWords, progressPct, results, roundNumber,
     selectedMode, setProgressPct, setShowExitModal, setStep, setWordCount, smartPart,
     showExitModal, sourceWords, step, topicBackQuery, unitId, wordCount, wrongWords,

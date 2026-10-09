@@ -5,7 +5,7 @@ import { usePracticeCase } from './practiceCase';
 import { speakWord } from '../../utils/helpers';
 import './PracticeResultsView.css';
 
-export default function PracticeResultsView({ results, wrongWords = [], onReset, language = 'en-US' }) {
+export default function PracticeResultsView({ results, wrongWords = [], onReset, actionLabel, language = 'en-US' }) {
   const { t } = useLanguage();
   const c = usePracticeCase();
 
@@ -145,7 +145,7 @@ export default function PracticeResultsView({ results, wrongWords = [], onReset,
             style={{ width: '100%', padding: '14px 24px' }}
             onClick={onReset}
           >
-            {c(t('practice.backToMenu')) || 'BACK TO PRACTICE MENU'}
+            {actionLabel || c(t('practice.backToMenu')) || 'BACK TO PRACTICE MENU'}
           </button>
         </div>
       </div>
@@ -157,7 +157,7 @@ export default function PracticeResultsView({ results, wrongWords = [], onReset,
           style={{ width: '100%', maxWidth: '440px', padding: '14px 24px' }}
           onClick={onReset}
         >
-          {c(t('practice.backToMenu')) || 'BACK TO PRACTICE MENU'}
+          {actionLabel || c(t('practice.backToMenu')) || 'BACK TO PRACTICE MENU'}
         </button>
       </div>
     </motion.div>

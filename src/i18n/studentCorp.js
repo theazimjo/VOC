@@ -136,6 +136,7 @@ export const studentCorp = {
       dateFmtShort: '{month} {day}',
     },
     practice: {
+      backToTopic: "Back to the topic",
       modeFlashcard: 'Flashcards',
       modeSpelling: 'Spelling',
       modeMatch: 'Matching',
@@ -295,6 +296,7 @@ export const studentCorp = {
       dateFmtShort: '{day} {month}',
     },
     practice: {
+      backToTopic: "Назад к теме",
       modeFlashcard: 'Карточки',
       modeSpelling: 'Правописание',
       modeMatch: 'Сопоставление',
@@ -454,6 +456,7 @@ export const studentCorp = {
       dateFmtShort: '{day}-{month}',
     },
     practice: {
+      backToTopic: "Mavzuga qaytish",
       modeFlashcard: 'Kartochkalar',
       modeSpelling: 'Imlo mashqi',
       modeMatch: 'Juftlash',
