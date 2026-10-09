@@ -17,7 +17,7 @@
       "destination": "/privacy.html"
     },
     {
-      "source": "/((?!assets/|api/|\.well-known/).*)",
+      "source": "/((?!assets/|api/|[.]well-known/).*)",
       "destination": "/index.html"
     }
   ],
