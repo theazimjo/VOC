@@ -3,7 +3,7 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "uz.vocabry.app",
+      "package_name": "vocabry.uz",
       "sha256_cert_fingerprints": [
         "D0:47:FE:22:12:63:FF:FD:60:00:53:CF:DA:BC:3C:2D:70:BF:8C:2F:F8:68:5E:30:93:43:F7:85:CC:64:B5:7E"
       ]
