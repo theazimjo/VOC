@@ -12,7 +12,8 @@ import { IRREGULAR_VERBS_PACK_ID } from '../../../data/irregularVerbsId';
 import { buildGroupInviteUrl } from '../../../utils/pendingJoin';
 import ConfirmSheet from '../../../components/corp/ConfirmSheet';
 import { formatRelativeEn as formatRelative } from '../super-admin/centerActivity';
-import { Button, EmptyState, Field, LoadingRows, Page, Row, Section, Sheet, Toggle } from '../super-admin/ui';
+import { Button, EmptyState, Field, LoadingRows, Page, Row, Section, Segmented, Sheet, Toggle } from '../super-admin/ui';
+import CreateStudentPanel from '../../../components/corp/CreateStudentPanel';
 import { useToast } from '../super-admin/useToast';
 import {
   GroupHeader, GroupStats, HomeworkPanel, ProgressPanel, StudentsPanel, TopicsPanel,
@@ -340,6 +341,8 @@ function EditGroupSheet({ open, group, onClose, showToast }) {
 // QR students scan in class, the same link for a Telegram chat, and the
 // 6-digit PIN as a fallback. The link opens /join/:code (JoinGroupPage).
 function InviteSheet({ open, group, onClose }) {
+  const { patchGroup } = useTeacherData();
+  const [how, setHow] = useState('invite'); // 'invite' (QR / link / PIN) | 'create' (an account made here)
   const [qrSrc, setQrSrc] = useState('');
   const [copied, setCopied] = useState('');
   const code = group.code || '';
@@ -377,7 +380,25 @@ function InviteSheet({ open, group, onClose }) {
   };
 
   return (
-    <Sheet open={open} onClose={onClose} title="Invite Students">
+    <Sheet open={open} onClose={onClose} title="Add Students">
+      <Segmented
+        label="invite-students-how"
+        value={how}
+        onChange={setHow}
+        options={[{ value: 'invite', label: 'QR / link' }, { value: 'create', label: 'Create account' }]}
+      />
+      {how === 'create' ? (
+        <CreateStudentPanel
+          groupId={group.id}
+          groupName={group.name}
+          onCreated={(st) => patchGroup(group.id, (g) => ({
+            ...g,
+            studentsCount: (g.studentsCount || 0) + 1,
+            students: { ...(g.students || {}), [st.uid]: { id: st.uid, name: st.name, email: st.login, joinedAt: new Date().toISOString(), progress: {} } },
+          }))}
+        />
+      ) : (
+      <>
       <div className="sa-qr">
         {qrSrc ? <img src={qrSrc} alt={`QR code to join ${group.name}`} /> : <div className="sa-qr-placeholder sa-skel" />}
       </div>
@@ -399,6 +420,8 @@ function InviteSheet({ open, group, onClose }) {
           onClick={() => copy(code, 'code')}
         />
       </Section>
+      </>
+      )}
     </Sheet>
   );
 }

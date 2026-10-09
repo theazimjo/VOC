@@ -12,6 +12,7 @@ import { useLanguage } from '../../../contexts/LanguageContext';
 import { useStudentT } from '../../../hooks/useStudentT';
 import { useRoleSwitch, ROLE_LABEL } from '../../../hooks/useRoleSwitch';
 import { PRIVACY_URL, privacyLabel } from '../../../utils/legal';
+import SupportTiles from '../../../components/common/SupportTiles';
 import { isSuperAdminEmail } from '../../../components/corp/SuperRoleSwitcher';
 import { useAvatar } from '../../../hooks/useAvatar';
 import './StudentCorpProfile.css';
@@ -195,6 +196,8 @@ export default function StudentCorpProfile() {
                 <ChevronRight className="corp-profile-tile-arrow" size={16} strokeWidth={2.5} />
               </div>
             ))}
+
+            <SupportTiles language={language} />
 
             <a className="corp-profile-tile" href={PRIVACY_URL} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
               <div className="corp-profile-tile-icon" style={{ background: '#8e8e93' }}>

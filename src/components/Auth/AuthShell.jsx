@@ -4,6 +4,8 @@ import { Eye, EyeOff, ArrowLeft } from 'lucide-react';
 import { APP_VERSION_LABEL } from '../../utils/appVersion';
 import BetaBadge from '../common/BetaBadge';
 import { isInstalledApp } from '../../utils/installedApp';
+import { SUPPORT, supportText } from '../../utils/support';
+import { useSiteLanguage } from '../../utils/useSiteLanguage';
 import './AuthShell.css';
 
 const ASIDE_ROWS = [
@@ -78,6 +80,7 @@ export function Field({ label, type = 'text', value, onChange, autoComplete, dis
 export function AuthShell({ copy, children }) {
   // in the installed app there is no public landing page to go back to
   const home = isInstalledApp() ? null : '/welcome';
+  const { lang } = useSiteLanguage();
   return (
     <div className="as-page">
       <main className="as-main">
@@ -93,6 +96,7 @@ export function AuthShell({ copy, children }) {
 
         <footer className="as-bottom">
           {home ? <Link to={home} className="as-back"><ArrowLeft size={15} strokeWidth={2.2} aria-hidden="true" />{copy.back}</Link> : <span />}
+          <a className="as-back" href={SUPPORT.telegramUrl} target="_blank" rel="noopener noreferrer">{supportText(lang).title}</a>
           <a className="as-back" href="/privacy.html" target="_blank" rel="noopener noreferrer">Privacy policy</a>
           <span className="as-version">Beta {APP_VERSION_LABEL}</span>
         </footer>

@@ -9,6 +9,7 @@ import { getPendingJoinPath } from '../../utils/pendingJoin';
 import { useSiteLanguage } from '../../utils/useSiteLanguage';
 import { AuthShell, Field, GoogleIcon } from './AuthShell';
 import { AUTH_CONTENT, firebaseMessage } from './authContent';
+import { loginCandidates, isWrongAccount } from './loginIdentifier';
 
 // Warm every lazy chunk *in the destination's render chain* while the
 // success transition plays — not just the leaf page. /corp/teacher, for
@@ -125,14 +126,6 @@ export default function LoginPage() {
     return '/';
   };
 
-  const resolveLoginEmail = (input) => {
-    const trimmed = input.trim();
-    if (trimmed.includes('@')) return trimmed;
-    const clean = trimmed.replace(/\D/g, '');
-    if (clean) return `teacher_${clean}@markaz.uz`;
-    return trimmed;
-  };
-
   useEffect(() => {
     // Skip whenever a sign-in attempt is in flight — completeSignIn() owns
     // navigation for it (see signingInRef above).
@@ -167,18 +160,28 @@ export default function LoginPage() {
     setSubmitting(true);
     signingInRef.current = true;
     try {
-      const loginIdentifier = resolveLoginEmail(currentEmail);
+      // A phone number can belong to a teacher or to a student, a username to a
+      // student: try each address it could be until one accepts the password.
+      const candidates = loginCandidates(currentEmail);
       let targetUser = null;
-      try {
-        const res = await login(loginIdentifier, currentPassword);
-        targetUser = res?.user || user;
-      } catch (authErr) {
+      let firstError = null;
+      for (const loginIdentifier of candidates) {
+        try {
+          const res = await login(loginIdentifier, currentPassword);
+          targetUser = res?.user || user;
+          break;
+        } catch (authErr) {
+          firstError = firstError || authErr;
+          if (!isWrongAccount(authErr)) throw authErr; // network, too many attempts...
+        }
+      }
+      if (!targetUser) {
         // Fallback: check admin password override table in Realtime Database
         try {
-          const res = await loginWithOverride(loginIdentifier, currentPassword);
+          const res = await loginWithOverride(candidates[0], currentPassword);
           targetUser = res?.user;
         } catch (overrideErr) {
-          throw authErr;
+          throw firstError || overrideErr;
         }
       }
       const targetPath = await getRedirectPath(targetUser);

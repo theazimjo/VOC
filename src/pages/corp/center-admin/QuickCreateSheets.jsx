@@ -4,7 +4,8 @@ import QRCode from 'qrcode';
 import { Check, Copy, Layers, Share2 } from 'lucide-react';
 import { createGroup } from '../../../services/corpService';
 import { buildGroupInviteUrl } from '../../../utils/pendingJoin';
-import { Button, EmptyState, Field, Row, Section, Sheet } from '../super-admin/ui';
+import { Button, EmptyState, Field, Row, Section, Segmented, Sheet } from '../super-admin/ui';
+import CreateStudentPanel from '../../../components/corp/CreateStudentPanel';
 import { useCenterData } from './CenterDataContext';
 
 // The two "+" quick-add actions that have no page of their own to open
@@ -75,18 +76,22 @@ export function NewGroupSheet({ open, onClose, defaultTeacherId = '' }) {
 // its QR code, link or PIN. So "New Student" picks the group and shows
 // exactly those three, ready to show in class or send to a chat.
 export function AddStudentsSheet({ open, onClose, onNewGroup }) {
-  const { activeGroups, teacherById } = useCenterData();
+  const { activeGroups, teacherById, patch } = useCenterData();
   const [groupId, setGroupId] = useState('');
+  const [how, setHow] = useState('invite'); // 'invite' (QR / link / PIN) | 'create' (an account made here)
   const [qrSrc, setQrSrc] = useState('');
   const [copied, setCopied] = useState('');
 
   const withCode = activeGroups.filter((g) => g.code);
-  const group = withCode.find((g) => g.id === groupId) || null;
+  // the chosen group, or the first one until something is chosen (no state to keep in sync)
+  const currentId = withCode.some((g) => g.id === groupId) ? groupId : withCode[0]?.id || '';
+  const group = withCode.find((g) => g.id === currentId) || null;
   const url = group ? buildGroupInviteUrl(group.code) : '';
 
   useEffect(() => {
     if (!open) return;
     setCopied('');
+    setHow('invite');
     setGroupId((id) => (withCode.some((g) => g.id === id) ? id : withCode[0]?.id || ''));
   }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -133,7 +138,7 @@ export function AddStudentsSheet({ open, onClose, onNewGroup }) {
       ) : (
         <>
           <Field label="Group">
-            <select className="sa-select" value={groupId} onChange={(e) => setGroupId(e.target.value)}>
+            <select className="sa-select" value={currentId} onChange={(e) => setGroupId(e.target.value)}>
               {withCode.map((g) => (
                 <option key={g.id} value={g.id}>
                   {g.name || 'Group'}{teacherById[g.teacherId]?.name ? ` · ${teacherById[g.teacherId].name}` : ''}
@@ -141,7 +146,26 @@ export function AddStudentsSheet({ open, onClose, onNewGroup }) {
               ))}
             </select>
           </Field>
-          {group && (
+          <Segmented
+            label="add-students-how"
+            value={how}
+            onChange={setHow}
+            options={[{ value: 'invite', label: 'QR / link' }, { value: 'create', label: 'Create account' }]}
+          />
+          {group && how === 'create' && (
+            <CreateStudentPanel
+              key={group.id}
+              groupId={group.id}
+              groupName={group.name}
+              onCreated={(st) => patch((c) => {
+                const g = c.groups?.[group.id];
+                if (!g) return c;
+                const entry = { id: st.uid, name: st.name, email: st.login, joinedAt: new Date().toISOString(), progress: {} };
+                return { ...c, groups: { ...c.groups, [group.id]: { ...g, studentsCount: (g.studentsCount || 0) + 1, students: { ...(g.students || {}), [st.uid]: entry } } } };
+              })}
+            />
+          )}
+          {group && how === 'invite' && (
             <>
               <div className="sa-qr">
                 {qrSrc ? <img src={qrSrc} alt={`QR code to join ${group.name}`} /> : <div className="sa-qr-placeholder sa-skel" />}

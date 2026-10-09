@@ -13,6 +13,7 @@ import { useStaffRole } from '../../hooks/useStaffRole';
 import { joinGroupAsUser, switchActiveGroup } from '../../services/corpService';
 import { useGroupMode } from '../../hooks/useGroupMode';
 import { PRIVACY_URL, privacyLabel } from '../../utils/legal';
+import SupportTiles from '../../components/common/SupportTiles';
 import { isSuperAdminEmail } from '../../components/corp/SuperRoleSwitcher';
 import { clearActiveRole, clearViewAs, ROLE_HOME } from '../../utils/activeRole';
 import '../corp/student/StudentCorpProfile.css';
@@ -255,6 +256,7 @@ export default function ProfilePage() {
       {/* ── Account actions ── */}
       <div className="corp-profile-section-title">{t('profile.account')}</div>
       <div className="corp-profile-tiles">
+        <SupportTiles language={language} />
         <a className="corp-profile-tile" href={PRIVACY_URL} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
           <div className="corp-profile-tile-icon" style={{ background: '#8e8e93' }}>
             <FileText size={17} strokeWidth={2.2} />

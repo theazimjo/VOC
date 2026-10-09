@@ -16,8 +16,8 @@ export const AUTH_CONTENT = {
     },
     login: {
       title: 'Xush kelibsiz',
-      sub: 'Email yoki telefon raqamingiz bilan kiring.',
-      identifier: 'Email yoki telefon raqami',
+      sub: 'Email, telefon raqami yoki login bilan kiring.',
+      identifier: 'Email, telefon raqami yoki login',
       password: 'Parol',
       forgot: 'Parolni unutdingizmi?',
       submit: 'Kirish',
@@ -25,7 +25,7 @@ export const AUTH_CONTENT = {
       signUp: "Ro'yxatdan o'tish",
       reset: {
         title: 'Parolni tiklash',
-        sub: 'Emailingizni kiriting, tiklash havolasini yuboramiz.',
+        sub: "Emailingizni kiriting, tiklash havolasini yuboramiz. Emailingiz yo'qmi? Ustozingizdan yangi parol so'rang.",
         email: 'Email',
         submit: 'Havolani yuborish',
         back: 'Kirishga qaytish',
@@ -85,7 +85,7 @@ export const AUTH_CONTENT = {
     login: {
       title: 'С возвращением',
       sub: 'Войдите по email или номеру телефона.',
-      identifier: 'Email или номер телефона',
+      identifier: 'Email, номер телефона или логин',
       password: 'Пароль',
       forgot: 'Забыли пароль?',
       submit: 'Войти',
@@ -93,7 +93,7 @@ export const AUTH_CONTENT = {
       signUp: 'Зарегистрироваться',
       reset: {
         title: 'Сброс пароля',
-        sub: 'Введите email, и мы отправим ссылку для сброса.',
+        sub: 'Введите email, и мы отправим ссылку для сброса. Нет email? Попросите новый пароль у учителя.',
         email: 'Email',
         submit: 'Отправить ссылку',
         back: 'Назад ко входу',
@@ -152,8 +152,8 @@ export const AUTH_CONTENT = {
     },
     login: {
       title: 'Welcome back',
-      sub: 'Sign in with your email or phone number.',
-      identifier: 'Email or phone number',
+      sub: 'Sign in with your email, phone number or username.',
+      identifier: 'Email, phone number or username',
       password: 'Password',
       forgot: 'Forgot password?',
       submit: 'Sign in',
@@ -161,7 +161,7 @@ export const AUTH_CONTENT = {
       signUp: 'Sign up',
       reset: {
         title: 'Reset password',
-        sub: "Enter your email and we'll send a reset link.",
+        sub: "Enter your email and we'll send a reset link. No email? Ask your teacher for a new password.",
         email: 'Email',
         submit: 'Send reset link',
         back: 'Back to sign in',
