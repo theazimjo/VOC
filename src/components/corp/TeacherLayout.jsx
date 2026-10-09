@@ -11,7 +11,7 @@ import '../../pages/corp/super-admin/sa.css';
 import '../../pages/corp/center-admin/theme.css';
 import '../../pages/corp/center-admin/uits.css';
 import '../../pages/corp/center-admin/vocabry.css';
-import { usePanelTheme } from '../../pages/corp/center-admin/usePanelTheme';
+import { useApplyPanelTheme, usePanelTheme } from '../../pages/corp/center-admin/usePanelTheme';
 import ViewAsBanner from './ViewAsBanner';
 
 // The same shell as the center admin panel (CorpAdminLayout): sidebar,
@@ -21,6 +21,7 @@ import ViewAsBanner from './ViewAsBanner';
 export default function TeacherLayout() {
   const identity = useOutletContext();
   const theme = usePanelTheme();
+  useApplyPanelTheme(theme);
 
   const value = useMemo(() => (identity?.centerId ? {
     centerId: identity.centerId,

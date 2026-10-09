@@ -9,7 +9,7 @@ import '../../pages/corp/super-admin/sa.css';
 import '../../pages/corp/center-admin/theme.css';
 import '../../pages/corp/center-admin/uits.css';
 import '../../pages/corp/center-admin/vocabry.css';
-import { usePanelTheme } from '../../pages/corp/center-admin/usePanelTheme';
+import { useApplyPanelTheme, usePanelTheme } from '../../pages/corp/center-admin/usePanelTheme';
 import ViewAsBanner from './ViewAsBanner';
 
 // The corp identity (role/centerId/centerName/email) is resolved once by
@@ -21,6 +21,7 @@ import ViewAsBanner from './ViewAsBanner';
 export default function CorpAdminLayout() {
   const identity = useOutletContext();
   const theme = usePanelTheme();
+  useApplyPanelTheme(theme);
 
   // Never fall back to a placeholder centerId — writes against a made-up id
   // create a nameless "ghost" center under centers/ (this happened with the

@@ -27,7 +27,8 @@ export function ThemeProvider({ children }) {
 
   useEffect(() => {
     const root = document.documentElement;
-    root.setAttribute('data-theme', theme);
+    // a staff panel is open: it sets data-theme itself (usePanelTheme.useApplyPanelTheme)
+    if (!root.hasAttribute('data-panel')) root.setAttribute('data-theme', theme);
     localStorage.setItem('voc-theme', theme);
   }, [theme]);
 

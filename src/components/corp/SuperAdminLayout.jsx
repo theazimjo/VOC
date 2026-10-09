@@ -3,7 +3,7 @@ import SuperAdminSidebar from './SuperAdminSidebar';
 import SuperAdminTopbar from './SuperAdminTopbar';
 import SuperAdminBottomNav from './SuperAdminBottomNav';
 import { PageStyleContext, PanelLanguageContext, SheetPlacementContext } from '../../pages/corp/super-admin/ui';
-import { usePanelTheme } from '../../pages/corp/center-admin/usePanelTheme';
+import { useApplyPanelTheme, usePanelTheme } from '../../pages/corp/center-admin/usePanelTheme';
 import './CorpAdminLayout.css';
 import '../../pages/corp/super-admin/sa.css';
 import '../../pages/corp/center-admin/theme.css';
@@ -17,6 +17,7 @@ import '../../pages/corp/center-admin/vocabry.css';
 export default function SuperAdminLayout() {
   const identity = useOutletContext();
   const theme = usePanelTheme();
+  useApplyPanelTheme(theme);
 
   return (
     <SheetPlacementContext.Provider value="center">
