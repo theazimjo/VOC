@@ -10,6 +10,8 @@ import { useWordTarget } from '../../hooks/useWordTarget';
 import { updateStudentWordTarget } from '../../services/corpService';
 import { predictRecall, computeUserRate } from '@voc/memory-engine';
 import { getDueWords } from '@voc/memory-engine';
+import { ref, get, set } from 'firebase/database';
+import { db } from '../../firebase';
 import OnboardingModal from '../../components/Onboarding/OnboardingModal';
 import WhatsNewModal, { WHATS_NEW_VERSION } from '../../components/Onboarding/WhatsNewModal';
 import PackHeaderHero from '../../components/corp/PackHeaderHero';
@@ -112,16 +114,24 @@ export default function Dashboard() {
       return;
     }
 
-    const whatsNewSeen = localStorage.getItem(`voc-whatsnew-seen-${WHATS_NEW_VERSION}-${user.uid}`);
-    if (!whatsNewSeen) {
+    // Shown once per account: remembered on this device and in the account itself,
+    // so the Android app, another browser or a cleared cache don't show it again.
+    const localKey = `voc-whatsnew-seen-${WHATS_NEW_VERSION}-${user.uid}`;
+    if (localStorage.getItem(localKey)) return undefined;
+    let alive = true;
+    const seenRef = ref(db, `users/${user.uid}/profile/whatsNewSeen/${WHATS_NEW_VERSION}`);
+    get(seenRef).then((snap) => {
+      if (!alive) return;
+      if (snap.exists()) { localStorage.setItem(localKey, 'true'); return; }
       setShowWhatsNew(true);
-    }
+      // counts as seen the moment it is shown, however it gets dismissed
+      localStorage.setItem(localKey, 'true');
+      set(seenRef, true).catch(() => {});
+    }).catch(() => {});
+    return () => { alive = false; };
   }, [user, packsLoading, packs]);
 
-  const handleCloseWhatsNew = () => {
-    if (user) localStorage.setItem(`voc-whatsnew-seen-${WHATS_NEW_VERSION}-${user.uid}`, 'true');
-    setShowWhatsNew(false);
-  };
+  const handleCloseWhatsNew = () => setShowWhatsNew(false);
 
   const totalWords = allWords.length;
   const learnedWords = useMemo(() => allWords.filter(w => (w.mastery || 0) >= 80).length, [allWords]);
