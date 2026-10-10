@@ -91,3 +91,35 @@ describe('dueSplit', () => {
     expect(dueSplit(words, NOW)).toEqual({ due: 2, fresh: 2 });
   });
 });
+
+import { goalForecast } from './statsAnalytics';
+
+describe('goalForecast', () => {
+  const DAY = 86400000;
+  const at = (days) => new Date(NOW + days * DAY).toISOString();
+  const started = (daysAgo) => ({ lastReviewed: at(-daysAgo + 1), reviewCount: 1, recallHistory: [{ ts: at(-daysAgo) }] });
+
+  it('measures the weekly pace from words started in the last 4 weeks', () => {
+    const words = [started(3), started(10), started(20), started(27), started(60), { id: 'new' }];
+    const f = goalForecast(words, 20, NOW);
+    expect(f.started).toBe(5);
+    expect(f.remaining).toBe(15);
+    expect(f.pace).toBe(1); // 4 words in 4 weeks
+    expect(Math.round(f.scenarios[0].weeks)).toBe(15);
+    expect(f.scenarios[1].weeks).toBeLessThan(f.scenarios[0].weeks);
+    expect(f.scenarios[2].weeks).toBeLessThan(f.scenarios[1].weeks);
+  });
+
+  it('has no date when nothing was started recently, but faster scenarios still work', () => {
+    const f = goalForecast([started(90)], 10, NOW);
+    expect(f.pace).toBe(0);
+    expect(f.scenarios[0].date).toBeNull();
+    expect(f.scenarios[1].date).not.toBeNull();
+  });
+
+  it('is done when the target is already reached', () => {
+    const f = goalForecast([started(3), started(4)], 2, NOW);
+    expect(f.remaining).toBe(0);
+    expect(f.scenarios[0].weeks).toBe(0);
+  });
+});

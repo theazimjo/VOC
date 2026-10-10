@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
-import { Infinity as InfinityIcon, BookOpenCheck, WifiOff, Sparkles, X, ChevronRight, BarChart3 } from 'lucide-react';
+import { Infinity as InfinityIcon, BookOpenCheck, WifiOff, Sparkles, X, ChevronRight, BarChart3, Snowflake } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useStudentPlan } from '../../hooks/usePlan';
@@ -17,6 +17,7 @@ const COPY = {
       [InfinityIcon, 'Cheksiz pack', "O'z pack'laringizni cheklovsiz yarating (bepul rejada 20 ta)."],
       [BookOpenCheck, "Barcha o'rganish usullari", "Takrorlash, yozish, talaffuz, o'qish: hammasi ochiq."],
       [BarChart3, 'Statistika va tahlil', "Har bir so'zning unutish egri chizig'i, takrorlash prognozi va shaxsiy tavsiyalar."],
+      [Snowflake, 'Streak himoyasi', "Kun o'tkazib yuborsangiz ham seriya uzilmaydi (oyiga 2 ta). Haftalik hisobotni rasm qilib ulashing."],
       [WifiOff, 'Oflayn ishlaydi', "Internetsiz ham o'rganing, ulanganda hammasi saqlanadi."],
       [Sparkles, 'Yangiliklar birinchi sizga', 'Yangi imkoniyatlarni hamma bilan bir vaqtda yoki undan oldin olasiz.'],
     ],
@@ -33,6 +34,7 @@ const COPY = {
       [InfinityIcon, 'Безлимит паков', 'Создавайте свои паки без ограничений (в бесплатном плане 20).'],
       [BookOpenCheck, 'Все способы обучения', 'Повторение, письмо, произношение, чтение: всё открыто.'],
       [BarChart3, 'Статистика и анализ', 'Кривая забывания каждого слова, прогноз повторений и личные советы.'],
+      [Snowflake, 'Защита серии', 'Пропустили день, а серия не прервётся (2 в месяц). Делитесь недельным отчётом картинкой.'],
       [WifiOff, 'Работает офлайн', 'Учитесь без интернета, всё сохранится при подключении.'],
       [Sparkles, 'Новинки первыми', 'Новые возможности вы получаете вместе со всеми или раньше.'],
     ],
@@ -49,6 +51,7 @@ const COPY = {
       [InfinityIcon, 'Unlimited packs', 'Create as many packs of your own as you like (the free plan allows 20).'],
       [BookOpenCheck, 'Every study mode', 'Review, writing, speaking, reading: all unlocked.'],
       [BarChart3, 'Statistics and insights', 'Forgetting curve for every word, review forecast and personal tips.'],
+      [Snowflake, 'Streak freeze', 'Miss a day and your streak survives (2 a month). Share your weekly report as a picture.'],
       [WifiOff, 'Works offline', 'Study without internet; everything syncs when you are back online.'],
       [Sparkles, 'New things first', 'New features reach you at the same time as everyone, or earlier.'],
     ],

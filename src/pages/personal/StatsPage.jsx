@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Flame, Target, TrendingUp, TrendingDown, BookOpen, Lock, Lightbulb, Play, CheckCircle2 } from 'lucide-react';
+import { Flame, Target, TrendingUp, TrendingDown, BookOpen, Lock, Lightbulb, Play, CheckCircle2, Snowflake } from 'lucide-react';
 import { usePacks } from '../../hooks/usePacks';
 import { useGrammarStats } from '../../hooks/useGrammarStats';
 import { useStreak } from '../../hooks/useStreak';
@@ -16,10 +16,13 @@ import {
 import IosSpinner from '../../components/common/IosSpinner';
 import { PremiumModal } from '../../components/Plan/PlanBadge';
 import MemoryInsights from './stats/MemoryInsights';
+import GoalForecast from './stats/GoalForecast';
+import { FREEZES_PER_MONTH } from '../../utils/streakRules';
 import './StatsPage.css';
 
 const LOCALE = { uz: 'uz-UZ', ru: 'ru-RU', en: 'en-US' };
 const LEECH_THRESHOLD = 3;
+const NO_FROZEN = {};
 
 const COPY = {
   uz: {
@@ -27,7 +30,7 @@ const COPY = {
     dueTitle: (n) => `${n} ta so'zni takrorlash vaqti keldi`, newLine: (n) => `Yana ${n} ta yangi so'z hali boshlanmagan.`, newTitle: (n) => `${n} ta yangi so'z boshlashni kutyapti`, newStart: "Yangi so'zlarni boshlash", dueSub: "Muddati kelgan so'zlarni takrorlasangiz, ular esdan chiqmaydi.", dueStart: 'Takrorlashni boshlash',
     dueNone: "Hozir takrorlash kerak so'z yo'q", dueNoneSub: "Yangi so'zlar qo'shish yoki mashq qilish uchun yaxshi payt.", dueLibrary: "Kutubxonaga o'tish",
     goalToday: 'Bugungi maqsad', ofGoal: (n, g) => `${n} / ${g}`, goalDone: 'Bajarildi', goalLeft: (n) => `Yana ${n} ta`, goalHint: "Mashq qilingan so'zlar soni",
-    streak: 'Ketma-ket kun',
+    streak: 'Ketma-ket kun', freezeLeft: (n) => `Streak himoyasi: ${n} ta qoldi`, freezeInfo: 'Kun o\'tkazib yuborsangiz, himoya seriyani saqlab qoladi (oyiga 2 ta)', frozenLegend: 'Himoya ishlatilgan kun',
     vocab: "So'z boyligingiz", vocabLine: (total, good) => `${total} ta so'zdan ${good} tasini yaxshi bilasiz`,
     stageNew: 'Yangi', stageNewD: "Hali mashq qilinmagan",
     stageLearning: "O'rganilmoqda", stageLearningD: "Endi eslab qolyapsiz",
@@ -57,7 +60,7 @@ const COPY = {
     dueTitle: (n) => `Пора повторить слов: ${n}`, newLine: (n) => `Ещё ${n} новых слов не начато.`, newTitle: (n) => `Новых слов ждут начала: ${n}`, newStart: 'Начать новые слова', dueSub: 'Повторяйте слова вовремя, и они не забудутся.', dueStart: 'Начать повторение',
     dueNone: 'Сейчас повторять нечего', dueNoneSub: 'Хорошее время добавить слова или потренироваться.', dueLibrary: 'В библиотеку',
     goalToday: 'Цель на сегодня', ofGoal: (n, g) => `${n} / ${g}`, goalDone: 'Выполнено', goalLeft: (n) => `Ещё ${n}`, goalHint: 'Количество слов в тренировках',
-    streak: 'Дней подряд',
+    streak: 'Дней подряд', freezeLeft: (n) => `Защита серии: осталось ${n}`, freezeInfo: 'Если пропустите день, защита сохранит серию (2 в месяц)', frozenLegend: 'День с защитой',
     vocab: 'Ваш словарный запас', vocabLine: (total, good) => `Из ${total} слов вы хорошо знаете ${good}`,
     stageNew: 'Новые', stageNewD: 'Ещё не тренировались',
     stageLearning: 'Изучаются', stageLearningD: 'Начинаете запоминать',
@@ -87,7 +90,7 @@ const COPY = {
     dueTitle: (n) => `${n} words are due for review`, newLine: (n) => `${n} more new words have not been started yet.`, newTitle: (n) => `${n} new words are waiting to be started`, newStart: 'Start new words', dueSub: 'Reviewing words when they are due keeps them from fading.', dueStart: 'Start reviewing',
     dueNone: 'Nothing to review right now', dueNoneSub: 'A good moment to add words or practice.', dueLibrary: 'Go to Library',
     goalToday: "Today's goal", ofGoal: (n, g) => `${n} / ${g}`, goalDone: 'Done', goalLeft: (n) => `${n} more`, goalHint: 'Words practiced today',
-    streak: 'Day streak',
+    streak: 'Day streak', freezeLeft: (n) => `Streak freeze: ${n} left`, freezeInfo: 'If you miss a day, a freeze keeps your streak (2 a month)', frozenLegend: 'Frozen day',
     vocab: 'Your vocabulary', vocabLine: (total, good) => `You know ${good} of your ${total} words well`,
     stageNew: 'New', stageNewD: 'Not practiced yet',
     stageLearning: 'Learning', stageLearningD: 'Starting to stick',
@@ -168,8 +171,8 @@ function PremiumSection({ unlocked, c, onOpen, children }) {
   );
 }
 
-function ActivityMap({ byDay, c, locale }) {
-  const weeks = useMemo(() => heatmapWeeks(byDay, 20), [byDay]);
+function ActivityMap({ byDay, frozen, freezeShown, c, locale }) {
+  const weeks = useMemo(() => heatmapWeeks(byDay, 20, Date.now(), frozen), [byDay, frozen]);
   const runs = useMemo(() => streakRuns(byDay), [byDay]);
   const activeCount = useMemo(() => weeks.reduce((s, w) => s + w.days.filter((d) => d && d.count > 0).length, 0), [weeks]);
   const [picked, setPicked] = useState(null);
@@ -196,7 +199,7 @@ function ActivityMap({ byDay, c, locale }) {
               {w.days.map((d, di) => (d ? (
                 <button
                   type="button" key={di} title={c.mapDay(fmt(d), d.count)} aria-label={c.mapDay(fmt(d), d.count)}
-                  className={`sp-cell level-${d.level}${d.isToday ? ' is-today' : ''}${picked?.date === d.date ? ' is-picked' : ''}`}
+                  className={`sp-cell level-${d.level}${d.frozen && d.count === 0 ? ' is-frozen' : ''}${d.isToday ? ' is-today' : ''}${picked?.date === d.date ? ' is-picked' : ''}`}
                   onClick={() => setPicked(picked?.date === d.date ? null : d)}
                 />
               ) : <span key={di} className="sp-cell is-future" />))}
@@ -205,11 +208,12 @@ function ActivityMap({ byDay, c, locale }) {
         </div>
       </div>
       <div className="sp-map-foot">
-        <span className="sp-map-picked">{picked ? c.mapDay(fmt(picked), picked.count) : ''}</span>
+        <span className="sp-map-picked">{picked ? (picked.frozen && picked.count === 0 ? `${fmt(picked)}: ${c.frozenLegend}` : c.mapDay(fmt(picked), picked.count)) : ''}</span>
         <span className="sp-map-legend">
           {c.mapLess}
           {[0, 1, 2, 3, 4].map((l) => <i key={l} className={`sp-cell level-${l}`} />)}
           {c.mapMore}
+          {freezeShown && <><i className="sp-cell is-frozen" /> {c.frozenLegend}</>}
         </span>
       </div>
     </div>
@@ -270,6 +274,9 @@ export default function StatsPage() {
   }
 
   const streakCount = streak?.streakCount || 0;
+  const freezeOn = hasFeature(planId, 'streakFreeze');
+  const thisMonth = dayKey(Date.now()).slice(0, 7);
+  const freezesLeft = streak?.freezeMonth === thisMonth ? Math.max(0, Number(streak?.freezes) || 0) : FREEZES_PER_MONTH;
   const goalDone = a.today >= dailyGoal;
   const weekday = (d, style = 'short') => d.toLocaleDateString(locale, { weekday: style });
 
@@ -337,6 +344,9 @@ export default function StatsPage() {
             <div className="sp-goal-text">
               <strong>{streakCount}</strong>
               <span className="sp-label">{c.streak}</span>
+              {freezeOn && (
+                <span className="sp-freeze" title={c.freezeInfo}><Snowflake size={13} /> {c.freezeLeft(freezesLeft)}</span>
+              )}
             </div>
           </div>
         </div>
@@ -378,13 +388,14 @@ export default function StatsPage() {
         <Bars items={a.week.map((d) => ({ value: d.count, label: weekday(d.day), accent: d.isToday }))} />
         <div className="sp-divider" />
         <div className="sp-head sp-head-tight"><div><h2 className="sp-h-sm">{c.mapTitle}</h2></div></div>
-        <ActivityMap byDay={a.byDay} c={c} locale={locale} />
+        <ActivityMap byDay={a.byDay} frozen={streak?.frozenDays || NO_FROZEN} freezeShown={freezeOn || Object.keys(streak?.frozenDays || {}).length > 0} c={c} locale={locale} />
       </section>
 
       {/* Premium: forecast + growth + tips */}
       <PremiumSection unlocked={unlocked} c={c} onOpen={() => setShowPremium(true)}>
         <div className="sp-premium-group">
-          <MemoryInsights words={allWords} tag={<span className="sp-tag">{c.premium}</span>} />
+          <GoalForecast words={allWords} tag={<span className="sp-tag">{c.premium}</span>} />
+          <MemoryInsights words={allWords} streakCount={streak?.streakCount || 0} tag={<span className="sp-tag">{c.premium}</span>} />
 
           <section className="sp-card">
             <div className="sp-head">
@@ -423,7 +434,7 @@ export default function StatsPage() {
           <div className="sp-head"><div><h2>{c.hard}</h2><p>{c.hardDesc(LEECH_THRESHOLD)}</p></div></div>
           <ul className="sp-list">
             {a.leech.slice(0, 6).map((w) => (
-              <li key={w.id}>
+              <li key={`${w.packId}-${w.id}`}>
                 <span className="sp-list-icon">{w.sourceIcon}</span>
                 <span className="sp-list-main"><strong>{w.word}</strong><small>{w.translation}</small></span>
                 <span className="sp-pill is-bad">{c.hardWrong(w.wrongCount)}</span>

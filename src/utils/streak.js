@@ -1,5 +1,6 @@
 import { ref, runTransaction } from 'firebase/database';
 import { db } from '../firebase';
+import { rolloverStreak } from './streakRules';
 
 function getLocalDateString() {
   const d = new Date();
@@ -8,63 +9,31 @@ function getLocalDateString() {
   return localDate.toISOString().split('T')[0]; // YYYY-MM-DD local
 }
 
-function getYesterdayDateString() {
-  const d = new Date();
-  d.setDate(d.getDate() - 1);
-  const offset = d.getTimezoneOffset();
-  const localDate = new Date(d.getTime() - offset * 60 * 1000);
-  return localDate.toISOString().split('T')[0];
-}
-
 /**
  * Read-time self-heal: if a day was missed since lastActiveDate without
  * meeting the daily goal, reset the streak count so the UI reflects the
- * break even before the user does any new activity.
+ * break even before the user does any new activity. With `allowance` > 0
+ * (Premium: streak freezes per month) missed days are covered by freezes
+ * instead, see streakRules.rolloverStreak.
  */
-export function checkAndHealStreak(data) {
+export function checkAndHealStreak(data, allowance = 0) {
   if (!data) return { modified: false, data };
-
-  const todayStr = getLocalDateString();
-  const yesterdayStr = getYesterdayDateString();
-
-  const streak = { ...data, activityLog: { ...(data.activityLog || {}) } };
-  if (streak.dailyGoal === undefined) streak.dailyGoal = 5;
-
-  if (!streak.lastActiveDate || streak.lastActiveDate === todayStr) {
-    return { modified: false, data: streak };
-  }
-
-  if (streak.lastActiveDate !== yesterdayStr) {
-    // Missed at least one full day
-    streak.streakCount = 0;
-  } else {
-    // Last active yesterday — verify the daily goal was actually met
-    const yesterdayProgress = streak.activityLog[yesterdayStr] || 0;
-    if (yesterdayProgress < streak.dailyGoal) {
-      streak.streakCount = 0;
-    }
-  }
-
-  // We're past the top guard, so lastActiveDate is definitely not today:
-  // reset today's progress too, otherwise the UI keeps showing a stale
-  // day's todayCount/lastActiveDate as if it were today's (already met goal).
-  streak.todayCount = 0;
-  streak.lastActiveDate = todayStr;
-
-  return { modified: true, data: streak };
+  const next = rolloverStreak(data, getLocalDateString(), allowance);
+  const modified = JSON.stringify(next) !== JSON.stringify({ ...data, activityLog: data.activityLog || {}, frozenDays: data.frozenDays || {}, dailyGoal: data.dailyGoal ?? 5 });
+  return { modified, data: next };
 }
 
 /**
  * Standalone utility to atomically increment points for a user's daily goal.
  */
-export async function incrementActivity(userId, amount = 1) {
+export async function incrementActivity(userId, amount = 1, allowance = 0) {
   if (!userId) return;
   const streakRef = ref(db, `users/${userId}/streak`);
 
   await runTransaction(streakRef, (currentData) => {
     const todayStr = getLocalDateString();
-    
-    const streak = currentData || {
+
+    const base = currentData || {
       streakCount: 0,
       lastActiveDate: '',
       todayCount: 0,
@@ -72,38 +41,17 @@ export async function incrementActivity(userId, amount = 1) {
       activityLog: {}
     };
 
-    if (!streak.activityLog) streak.activityLog = {};
-    if (streak.dailyGoal === undefined) streak.dailyGoal = 5;
+    // New day: cover or reset missed days, hand out this month's freezes
+    const streak = rolloverStreak(base, todayStr, allowance);
 
-    // Handle new day transition
-    if (streak.lastActiveDate !== todayStr) {
-      const yesterdayStr = getYesterdayDateString();
-      const lastActiveWasYesterday = streak.lastActiveDate === yesterdayStr;
-      const lastActiveWasEmpty = streak.lastActiveDate === '';
-
-      // If last active was yesterday, check if they completed the goal yesterday
-      if (lastActiveWasYesterday) {
-        const yesterdayProgress = streak.activityLog[yesterdayStr] || 0;
-        if (yesterdayProgress < streak.dailyGoal) {
-          // Didn't complete goal yesterday, streak broken!
-          streak.streakCount = 0;
-        }
-      } else if (!lastActiveWasEmpty) {
-        // Last active was older than yesterday, streak broken!
-        streak.streakCount = 0;
-      }
-
-      streak.todayCount = 0;
-      streak.lastActiveDate = todayStr;
-    }
-
-    const oldTodayCount = streak.todayCount;
-    streak.todayCount += amount;
+    const oldTodayCount = streak.todayCount || 0;
+    streak.lastActiveDate = todayStr;
+    streak.todayCount = oldTodayCount + amount;
     streak.activityLog[todayStr] = streak.todayCount;
 
     // Duolingo check: Just reached goal today?
     if (streak.todayCount >= streak.dailyGoal && oldTodayCount < streak.dailyGoal) {
-      streak.streakCount += 1;
+      streak.streakCount = (streak.streakCount || 0) + 1;
     }
 
     return streak;

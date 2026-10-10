@@ -33,6 +33,7 @@ export const CENTER_PLANS = {
 const FEATURES = {
   unlimitedPacks: ['plus', 'custom'],
   insights: ['plus', 'custom'], // forecast, growth and the written analysis on the Statistics page
+  streakFreeze: ['plus', 'custom'], // missed days are covered, see utils/streakRules.js
 };
 
 const TABLES = { student: STUDENT_PLANS, center: CENTER_PLANS };

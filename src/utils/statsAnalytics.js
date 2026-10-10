@@ -144,7 +144,7 @@ export function streakRuns(byDay, now = Date.now()) {
 
 // Calendar grid for the last `weeks` weeks: columns are weeks (Monday first), 7 days each.
 // Days after today are null. `level` runs 0-4 relative to the busiest day.
-export function heatmapWeeks(byDay, weeks = 20, now = Date.now()) {
+export function heatmapWeeks(byDay, weeks = 20, now = Date.now(), frozen = {}) {
   const today = startOfDay(now);
   const mondayOffset = (today.getDay() + 6) % 7;
   const start = new Date(today);
@@ -157,7 +157,7 @@ export function heatmapWeeks(byDay, weeks = 20, now = Date.now()) {
       if (date > today) return null;
       const count = Number(byDay[dayKey(date)]) || 0;
       const level = count === 0 ? 0 : Math.min(4, Math.max(1, Math.ceil((count / max) * 4)));
-      return { date: dayKey(date), day: date, count, level, isToday: date.getTime() === today.getTime() };
+      return { date: dayKey(date), day: date, count, level, frozen: Boolean(frozen[dayKey(date)]), isToday: date.getTime() === today.getTime() };
     });
     return { start: new Date(start.getTime() + w * 7 * DAY), days };
   });
@@ -174,4 +174,36 @@ export function dueSplit(words, now = Date.now()) {
     if (t <= now) due += 1;
   });
   return { due, fresh };
+}
+
+// ---- Goal forecast ---------------------------------------------------------------------
+// When the learner first met a word: the oldest recorded review, or the single review it has.
+function firstSeen(w) {
+  const times = (w.recallHistory || []).map((h) => new Date(h?.ts).getTime()).filter(Number.isFinite);
+  if (times.length) return Math.min(...times);
+  if (w.lastReviewed && (Number(w.reviewCount) || 1) <= 1) {
+    const t = new Date(w.lastReviewed).getTime();
+    return Number.isFinite(t) ? t : null;
+  }
+  return null;
+}
+
+// How many words were started in the last 4 weeks, and when the target will be reached at that pace
+// and at two faster paces (+2 and +5 new words a day). `target` is a number of words.
+export function goalForecast(words, target, now = Date.now()) {
+  const started = (words || []).filter((w) => w.lastReviewed).length;
+  const since = now - 28 * DAY;
+  const recent = (words || []).filter((w) => { const t = firstSeen(w); return t != null && t >= since; }).length;
+  const pace = Math.round((recent / 4) * 10) / 10; // words a week
+  const remaining = Math.max(0, (Number(target) || 0) - started);
+  const make = (key, perWeek) => {
+    if (remaining === 0) return { key, perWeek, weeks: 0, date: now };
+    if (perWeek <= 0) return { key, perWeek, weeks: null, date: null };
+    const weeks = remaining / perWeek;
+    return weeks > 520 ? { key, perWeek, weeks: null, date: null } : { key, perWeek, weeks, date: now + weeks * 7 * DAY };
+  };
+  return {
+    started, remaining, pace, target: Number(target) || 0,
+    scenarios: [make('now', pace), make('plus2', pace + 14), make('plus5', pace + 35)],
+  };
 }

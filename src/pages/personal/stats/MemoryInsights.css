@@ -156,3 +156,28 @@
 }
 
 .mi-strength { display: block; font-size: .6875rem; color: var(--text-muted); margin-top: 1px; }
+
+/* share + goal forecast */
+.mi-share { display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 0 16px; margin: -2px 0 12px; border: none; border-radius: 12px; background: var(--accent-1); color: #fff; font-family: inherit; font-size: .875rem; font-weight: 700; cursor: pointer; }
+.mi-share:disabled { opacity: .6; cursor: default; }
+.mi-share:active:not(:disabled) { transform: scale(.97); }
+
+.mi-goal-tabs { grid-template-columns: 1.3fr 1fr; }
+.mi-goal-custom { display: flex; align-items: center; gap: 6px; height: 36px; padding: 0 12px; border-radius: 10px; color: var(--text-secondary); font-size: .8125rem; font-weight: 700; cursor: text; }
+.mi-goal-custom.is-on { background: var(--bg-secondary); color: var(--text-primary); box-shadow: 0 1px 3px rgba(0, 0, 0, .12); }
+.mi-goal-custom input { flex: 1; min-width: 0; width: 100%; border: none; outline: none; background: transparent; color: inherit; font-family: inherit; font-size: 16px; font-weight: 700; }
+.mi-goal-custom input::placeholder { color: var(--text-muted); font-weight: 600; }
+.mi-goal-progress { margin: 4px 0 6px; }
+.mi-goal-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; font-size: .875rem; color: var(--text-secondary); font-weight: 600; }
+.mi-goal-row span { display: inline-flex; align-items: center; gap: 6px; }
+.mi-goal-row b { color: var(--text-primary); font-variant-numeric: tabular-nums; }
+.mi-goal-progress .mi-bar { height: 10px; }
+.mi-goal-progress .mi-bar i { background: var(--accent-1); }
+.mi-goal-pace { margin: 10px 0 12px; }
+.mi-scen { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.mi-scen-card { display: flex; flex-direction: column; gap: 3px; padding: 12px 10px; border-radius: 14px; background: var(--bg-tertiary); border: 1px solid transparent; min-width: 0; }
+.mi-scen-card.is-main { border-color: var(--accent-1); background: var(--accent-1-dim); }
+.mi-scen-label { font-size: .6875rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .03em; }
+.mi-scen-card strong { font-size: 1.125rem; font-weight: 800; color: var(--text-primary); }
+.mi-scen-card small { font-size: .6875rem; color: var(--text-muted); line-height: 1.25; }
+@media (max-width: 480px) { .mi-scen { grid-template-columns: 1fr; } .mi-scen-card { flex-direction: row; align-items: center; justify-content: space-between; } .mi-scen-card small { display: none; } }

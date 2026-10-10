@@ -195,3 +195,8 @@
   .sp-map-week { gap: 2px; }
   .sp-cell { border-radius: 3px; }
 }
+
+/* streak freeze */
+.sp-freeze { display: inline-flex; align-items: center; gap: 4px; margin-top: 4px; padding: 3px 9px; width: fit-content; border-radius: 999px; font-size: .6875rem; font-weight: 700; color: #0A84FF; background: rgba(10, 132, 255, .12); }
+.sp-cell.is-frozen { background: color-mix(in srgb, #64D2FF 55%, var(--bg-tertiary)); }
+.sp-map-legend .sp-cell.is-frozen { margin-left: 6px; }

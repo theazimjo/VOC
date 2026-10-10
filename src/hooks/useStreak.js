@@ -1,8 +1,11 @@
-﻿import { useState, useEffect, useCallback } from 'react';
+﻿import { useState, useEffect, useCallback, useRef } from 'react';
 import { ref, onValue, set, runTransaction } from 'firebase/database';
 import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
 import { incrementActivity as incrementActivityUtil, checkAndHealStreak } from '../utils/streak';
+import { useStudentPlan } from './usePlan';
+import { hasFeature } from '../utils/plans';
+import { FREEZES_PER_MONTH } from '../utils/streakRules';
 
 /**
  * useStreak hook
@@ -11,6 +14,14 @@ import { incrementActivity as incrementActivityUtil, checkAndHealStreak } from '
  */
 export function useStreak() {
   const { user } = useAuth();
+  // Premium: streak freezes cover missed days. Kept in a ref so a plan loading late
+  // does not re-subscribe the listener below.
+  const { planId, loaded: planLoaded } = useStudentPlan(user?.uid);
+  const allowance = hasFeature(planId, 'streakFreeze') ? FREEZES_PER_MONTH : 0;
+  const allowanceRef = useRef(allowance);
+  allowanceRef.current = allowance;
+  const planLoadedRef = useRef(planLoaded);
+  planLoadedRef.current = planLoaded;
   const [streak, setStreak] = useState(() => {
     if (typeof window !== 'undefined' && user) {
       const cached = localStorage.getItem(`voc-cache-streak-${user.uid}`);
@@ -42,9 +53,14 @@ export function useStreak() {
       streakRef,
       (snapshot) => {
         const data = snapshot.val();
-        if (data) {
+        if (data && !planLoadedRef.current) {
+          // The plan decides how many missed days a freeze may cover, so do not
+          // reset anything until it is known (the effect below heals right after).
+          localStorage.setItem(cacheKey, JSON.stringify(data));
+          setStreak(data);
+        } else if (data) {
           // Self-heal: verify if yesterday's goal was not met, reset streak
-          const healed = checkAndHealStreak(data);
+          const healed = checkAndHealStreak(data, allowanceRef.current);
           if (healed.modified) {
             // Use a transaction (not a plain set) so this can't clobber a
             // concurrent incrementActivity transaction with stale snapshot data —
@@ -52,7 +68,7 @@ export function useStreak() {
             // DB at commit time.
             runTransaction(streakRef, (currentData) => {
               if (!currentData) return currentData;
-              const rehealed = checkAndHealStreak(currentData);
+              const rehealed = checkAndHealStreak(currentData, allowanceRef.current);
               return rehealed.modified ? rehealed.data : currentData;
             });
           }
@@ -79,12 +95,12 @@ export function useStreak() {
     );
 
     return () => unsubscribe();
-  }, [user]);
+  }, [user, planLoaded]);
 
   // Atomically increment points for activity today
   const incrementActivity = useCallback(async (amount = 1) => {
     if (!user) return;
-    await incrementActivityUtil(user.uid, amount);
+    await incrementActivityUtil(user.uid, amount, allowanceRef.current);
   }, [user]);
 
   // Set new daily goal target

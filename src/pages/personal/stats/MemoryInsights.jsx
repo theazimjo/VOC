@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
-import { X, Search, ShieldCheck, Clock, Target, Repeat, CheckCircle2, XCircle, ArrowRight, TrendingUp, TrendingDown, Minus } from 'lucide-react';
+import { Share2, X, Search, ShieldCheck, Clock, Target, Repeat, CheckCircle2, XCircle, ArrowRight, TrendingUp, TrendingDown, Minus } from 'lucide-react';
 import { diagnoseForgetting, getConfusionPairsForWord } from '@voc/memory-engine';
 import { useAuth } from '../../../contexts/AuthContext';
 import { getConfusionPairs } from '../../../experiment/experimentDB';
+import { renderReportCard, shareReportImage } from '../../../utils/shareCard';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import {
   vocabCurve, wordCurve, whatIf, stabilityBuckets, accuracyByWeek, accuracyByTimeOfDay, rankWords, TARGET_RECALL,
@@ -36,6 +37,7 @@ const COPY = {
     history: 'Takrorlashlar tarixi', historyNone: 'Tarix saqlanmagan', gap: (n) => `${n} kun oralig'i`,
     d0: "Bu so'z hali mashq qilinmagan.", dDue: "Eslash ehtimoli 75% dan pastga tushgan. Hozir takrorlash tavsiya etiladi.", dOk: (n) => `Xotira hali mustahkam. Keyingi takrorlash ${n} kundan keyin.`, dHard: "Bu so'zda ko'p xato qilingan: yozib mashq qilish yordam beradi.",
     close: 'Yopish',
+    prevWeek: "o'tgan hafta", share: 'Ulashish', sharing: 'Tayyorlanmoqda...', streakDays: 'kun ketma-ket', footer: 'vocabry.uz · so\'z o\'rganish', shareText: (n, a) => `Bu hafta Vocabry'da ${n} ta so'z takrorladim${a != null ? `, aniqlik ${a}%` : ''}. vocabry.uz`,
     weekly: 'Haftalik hisobot', weeklySub: "Bu hafta o'tgan hafta bilan solishtirilgan", wReviews: 'Takrorlashlar', wAccuracy: 'Aniqlik', wSpeed: 'Javob tezligi', wAdded: "Yangi so'zlar",
     speed: 'Javob tezligi', speedSub: "Javob qancha tez bo'lsa, so'z shuncha ravon esda turadi (soniyada)", speedNone: "Hali yetarli ma'lumot yo'q", fastest: "Eng tez eslanadigan", slowest: "Eng sekin eslanadigan",
     speedFaster: (p) => `Javoblaringiz o'tgan haftadan ${p}% tezlashdi.`, speedSlower: (p) => `Javoblaringiz o'tgan haftadan ${p}% sekinlashdi.`,
@@ -67,6 +69,7 @@ const COPY = {
     history: 'История повторений', historyNone: 'История не сохранена', gap: (n) => `интервал ${n} дн.`,
     d0: 'Это слово ещё не тренировали.', dDue: 'Вероятность вспомнить упала ниже 75%. Рекомендуем повторить сейчас.', dOk: (n) => `Память пока крепкая. Следующее повторение через ${n} дн.`, dHard: 'В этом слове много ошибок: поможет письменная тренировка.',
     close: 'Закрыть',
+    prevWeek: 'прошлая неделя', share: 'Поделиться', sharing: 'Готовим...', streakDays: 'дней подряд', footer: 'vocabry.uz · учим слова', shareText: (n, a) => `На этой неделе я повторил(а) слов в Vocabry: ${n}${a != null ? `, точность ${a}%` : ''}. vocabry.uz`,
     weekly: 'Недельный отчёт', weeklySub: 'Эта неделя в сравнении с прошлой', wReviews: 'Повторения', wAccuracy: 'Точность', wSpeed: 'Скорость ответа', wAdded: 'Новые слова',
     speed: 'Скорость ответа', speedSub: 'Чем быстрее ответ, тем увереннее слово в памяти (в секундах)', speedNone: 'Пока мало данных', fastest: 'Быстрее всего вспоминаются', slowest: 'Медленнее всего вспоминаются',
     speedFaster: (p) => `Вы отвечаете на ${p}% быстрее, чем на прошлой неделе.`, speedSlower: (p) => `Вы отвечаете на ${p}% медленнее, чем на прошлой неделе.`,
@@ -98,6 +101,7 @@ const COPY = {
     history: 'Review history', historyNone: 'No history saved', gap: (n) => `${n} day gap`,
     d0: 'This word has not been practiced yet.', dDue: 'Recall chance has dropped below 75%. Reviewing now is recommended.', dOk: (n) => `Memory is still solid. Next review in ${n} days.`, dHard: 'This word has many mistakes: typing practice helps.',
     close: 'Close',
+    prevWeek: 'last week', share: 'Share', sharing: 'Preparing...', streakDays: 'day streak', footer: 'vocabry.uz · learn words', shareText: (n, a) => `This week I reviewed ${n} words on Vocabry${a != null ? `, ${a}% accuracy` : ''}. vocabry.uz`,
     weekly: 'Weekly report', weeklySub: 'This week compared with last week', wReviews: 'Reviews', wAccuracy: 'Accuracy', wSpeed: 'Answer speed', wAdded: 'New words',
     speed: 'Answer speed', speedSub: 'The faster you answer, the more fluent the word (in seconds)', speedNone: 'Not enough data yet', fastest: 'Recalled fastest', slowest: 'Recalled slowest',
     speedFaster: (p) => `You answer ${p}% faster than last week.`, speedSlower: (p) => `You answer ${p}% slower than last week.`,
@@ -285,7 +289,7 @@ function WordSheet({ item, now, c, locale, pairs, onClose }) {
 }
 
 // ---- cards ----------------------------------------------------------------------------------
-export default function MemoryInsights({ words, tag }) {
+export default function MemoryInsights({ words, tag, streakCount = 0 }) {
   const { language } = useLanguage();
   const c = COPY[language] || COPY.en;
   const locale = LOCALE[language] || LOCALE.en;
@@ -310,6 +314,38 @@ export default function MemoryInsights({ words, tag }) {
   const speed = useMemo(() => speedByWeek(words, 8, now), [words, now]);
   const speeds = useMemo(() => wordSpeeds(words), [words]);
   const pos = useMemo(() => posAccuracy(words), [words]);
+  const [sharing, setSharing] = useState(false);
+
+  const shareReport = async () => {
+    if (sharing) return;
+    setSharing(true);
+    try {
+      const today = new Date(now);
+      const monday = new Date(today); monday.setDate(today.getDate() - ((today.getDay() + 6) % 7));
+      const fmtShort = (d) => d.toLocaleDateString(locale, { day: 'numeric', month: 'short' });
+      const delta = (d, fmtv) => {
+        if (d.prev == null) return '';
+        const diff = d.cur != null ? d.cur - d.prev : 0;
+        const arrow = diff === 0 ? '' : diff > 0 ? '▲ ' : '▼ ';
+        return `${arrow}${c.prevWeek}: ${fmtv(d.prev)}`;
+      };
+      const tone = (d, lowerBetter) => (d.cur == null || d.prev == null || d.cur === d.prev ? null : (lowerBetter ? d.cur < d.prev : d.cur > d.prev) ? 'good' : 'bad');
+      const items = [
+        { label: c.wReviews, value: report.reviews.cur != null ? String(report.reviews.cur) : '-', delta: delta(report.reviews, String), tone: tone(report.reviews, false) },
+        { label: c.wAccuracy, value: report.accuracy.cur != null ? `${report.accuracy.cur}%` : '-', delta: delta(report.accuracy, (v) => `${v}%`), tone: tone(report.accuracy, false) },
+        { label: c.wSpeed, value: report.speed.cur != null ? c.sec(report.speed.cur) : '-', delta: delta(report.speed, c.sec), tone: tone(report.speed, true) },
+        { label: c.wAdded, value: String(report.added.cur), delta: delta(report.added, String), tone: tone(report.added, false) },
+      ];
+      const blob = await renderReportCard({
+        title: c.weekly, range: `${fmtShort(monday)} – ${fmtShort(today)}`, items, streak: streakCount, streakLabel: c.streakDays, footer: c.footer,
+      });
+      await shareReportImage(blob, { title: c.weekly, text: c.shareText(report.reviews.cur, report.accuracy.cur) });
+    } catch (e) {
+      console.warn('Share failed', e);
+    } finally {
+      setSharing(false);
+    }
+  };
 
   const rows = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -326,6 +362,7 @@ export default function MemoryInsights({ words, tag }) {
       {/* Weekly report */}
       <section className="sp-card">
         <div className="sp-head"><div><h2>{c.weekly}</h2><p>{c.weeklySub}</p></div>{tag}</div>
+        <button type="button" className="mi-share" onClick={shareReport} disabled={sharing}><Share2 size={16} /> {sharing ? c.sharing : c.share}</button>
         <div className="mi-report">
           {[
             [c.wReviews, report.reviews, (v) => v, false],
@@ -451,8 +488,8 @@ export default function MemoryInsights({ words, tag }) {
             )}
             {(speeds.fastest.length > 0) && (
               <div className="mi-speeds">
-                <div><h4 className="mi-h">{c.fastest}</h4><ul>{speeds.fastest.map((r) => <li key={r.word.id}><span>{r.word.word}</span><b>{c.sec(r.avg)}</b></li>)}</ul></div>
-                <div><h4 className="mi-h">{c.slowest}</h4><ul>{speeds.slowest.map((r) => <li key={r.word.id}><span>{r.word.word}</span><b>{c.sec(r.avg)}</b></li>)}</ul></div>
+                <div><h4 className="mi-h">{c.fastest}</h4><ul>{speeds.fastest.map((r) => <li key={`${r.word.packId}-${r.word.id}`}><span>{r.word.word}</span><b>{c.sec(r.avg)}</b></li>)}</ul></div>
+                <div><h4 className="mi-h">{c.slowest}</h4><ul>{speeds.slowest.map((r) => <li key={`${r.word.packId}-${r.word.id}`}><span>{r.word.word}</span><b>{c.sec(r.avg)}</b></li>)}</ul></div>
               </div>
             )}
           </>
@@ -508,7 +545,7 @@ export default function MemoryInsights({ words, tag }) {
         {rows.length > 0 ? (
           <ul className="mi-words">
             {rows.slice(0, shown).map((r) => (
-              <li key={r.word.id}>
+              <li key={`${r.word.packId}-${r.word.id}`}>
                 <button type="button" onClick={() => setOpen(r)}>
                   <span className="mi-w-main"><strong>{r.word.word}</strong><small>{r.word.translation}</small></span>
                   <span className={`mi-tier tier-${r.mem.tier}`}>{c.tier[r.mem.tier]}</span>
