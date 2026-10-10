@@ -15,6 +15,7 @@ import {
 } from '../../utils/statsAnalytics';
 import IosSpinner from '../../components/common/IosSpinner';
 import { PremiumModal } from '../../components/Plan/PlanBadge';
+import MemoryInsights from './stats/MemoryInsights';
 import './StatsPage.css';
 
 const LOCALE = { uz: 'uz-UZ', ru: 'ru-RU', en: 'en-US' };
@@ -383,6 +384,8 @@ export default function StatsPage() {
       {/* Premium: forecast + growth + tips */}
       <PremiumSection unlocked={unlocked} c={c} onOpen={() => setShowPremium(true)}>
         <div className="sp-premium-group">
+          <MemoryInsights words={allWords} tag={<span className="sp-tag">{c.premium}</span>} />
+
           <section className="sp-card">
             <div className="sp-head">
               <div><h2>{c.forecast}</h2><p>{c.forecastSub}</p></div>
