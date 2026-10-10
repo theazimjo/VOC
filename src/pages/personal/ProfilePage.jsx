@@ -1,3 +1,4 @@
+import PlanBadge from '../../components/Plan/PlanBadge';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -137,7 +138,7 @@ export default function ProfilePage() {
           )}
         </div>
         <div className="corp-profile-info">
-          <div className="corp-profile-name">{displayName}</div>
+          <div className="corp-profile-name">{displayName} <PlanBadge /></div>
           {user?.email && (
             <div className="corp-profile-email">
               <Mail size={13} style={{ flexShrink: 0 }} />

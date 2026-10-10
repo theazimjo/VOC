@@ -4,6 +4,10 @@
 // `centers/<id>/subscription` and is written only by a super admin.
 // Money is in UZS.
 
+// Launch period: every learner is on Plus (no pack limit) until the paid plans
+// go live. Flip to false to start enforcing the free-plan limits.
+export const EVERYONE_PREMIUM = true;
+
 export const GRACE_DAYS = 14;
 const DAY = 86400000;
 
@@ -49,11 +53,13 @@ export function mergePlans(kind, overrides) {
 
 // What a subscription is worth right now: its plan, or free once it lapsed
 // (after the grace period). Nothing is ever deleted when a plan lapses.
-export function resolvePlan(kind, subscription, now = Date.now()) {
+export function resolvePlan(kind, subscription, now = Date.now(), opts = {}) {
+  const everyonePremium = opts.everyonePremium ?? EVERYONE_PREMIUM;
   const table = TABLES[kind];
-  const freeId = 'free';
+  // During the launch period a learner who would be on Free is on Plus.
+  const fallback = kind === 'student' && everyonePremium ? 'plus' : 'free';
   // Centers with no subscription record predate plans: unlimited, as before.
-  const noSub = kind === 'center' ? 'custom' : freeId;
+  const noSub = kind === 'center' ? 'custom' : fallback;
   if (!subscription || !table[subscription.plan]) return { planId: noSub, status: 'none', daysLeft: null };
   const until = Number(subscription.until) || 0;
   if (!until) return { planId: subscription.plan, status: 'active', daysLeft: null };
@@ -61,7 +67,7 @@ export function resolvePlan(kind, subscription, now = Date.now()) {
   if (now <= until + GRACE_DAYS * DAY) {
     return { planId: subscription.plan, status: 'grace', daysLeft: Math.ceil((until + GRACE_DAYS * DAY - now) / DAY) };
   }
-  return { planId: freeId, status: 'lapsed', daysLeft: 0 };
+  return { planId: fallback, status: 'lapsed', daysLeft: 0 };
 }
 
 export function hasFeature(planId, feature) {

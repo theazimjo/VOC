@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Check } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { usePlansConfig } from '../../hooks/usePlan';
-import { formatUZS } from '../../utils/plans';
+import { EVERYONE_PREMIUM, formatUZS } from '../../utils/plans';
 import { SUPPORT } from '../../utils/support';
 import { COPY } from './pricingCopy';
 
@@ -100,6 +100,7 @@ export default function PricingPage() {
         <p style={{ color: 'var(--text-secondary)', margin: '0 0 36px', maxWidth: 620 }}>{c.sub}</p>
 
         <h2 style={{ fontSize: 20, margin: '0 0 16px' }}>{c.forLearners}</h2>
+        {EVERYONE_PREMIUM && <p style={{ margin: '-8px 0 16px', fontWeight: 600, color: 'var(--accent-1)' }}>{c.launch}</p>}
         <div style={{ ...grid, marginBottom: 44 }}>
           {LEARNER_ORDER.map((id) => (
             <Card

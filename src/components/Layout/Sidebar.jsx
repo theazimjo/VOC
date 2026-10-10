@@ -1,3 +1,4 @@
+import PlanBadge from '../Plan/PlanBadge';
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { LayoutDashboard, BookOpen, GraduationCap, RotateCcw, User, Presentation, Building2, LogOut } from 'lucide-react';
@@ -46,6 +47,7 @@ export default function Sidebar() {
         <span className="voc-logo-title sidebar-brand-name">
           vocabry<span className="sidebar-brand-tld">.uz</span>
         </span>
+        <PlanBadge compact />
       </div>
 
       <nav className="corp-sidebar-nav">
