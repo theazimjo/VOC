@@ -1,3 +1,4 @@
+import { isInstalledApp } from '../utils/installedApp';
 import { createContext, useContext, useState, useEffect } from 'react';
 import {
   onAuthStateChanged,
@@ -130,11 +131,15 @@ export function AuthProvider({ children }) {
   };
 
   const loginWithGoogle = async () => {
+    // Installed apps: a popup is unreliable there (and an off-site window breaks
+    // out of the app), so go through the same-window redirect.
+    if (isInstalledApp()) return signInWithRedirect(auth, googleProvider);
     try {
       return await signInWithPopup(auth, googleProvider);
     } catch (err) {
-      if (err.code === 'auth/popup-blocked' || err.code === 'auth/popup-closed-by-user') {
-        console.warn("Popup blocked or closed, falling back to redirect...");
+      // Only when the browser blocked the popup; closing it is the user cancelling.
+      if (err.code === 'auth/popup-blocked') {
+        console.warn("Popup blocked, falling back to redirect...");
         return signInWithRedirect(auth, googleProvider);
       }
       throw err;

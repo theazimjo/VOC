@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/__/auth/:path*",
+      "destination": "https://ai-chat-703e7.firebaseapp.com/__/auth/:path*"
+    },
+    {
       "source": "/blog",
       "destination": "/api/blog-page"
     },
@@ -17,7 +21,7 @@
       "destination": "/privacy.html"
     },
     {
-      "source": "/((?!assets/|api/|[.]well-known/).*)",
+      "source": "/((?!assets/|api/|__/|[.]well-known/).*)",
       "destination": "/index.html"
     }
   ],

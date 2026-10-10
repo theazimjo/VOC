@@ -128,6 +128,8 @@ self.addEventListener('fetch', (event) => {
   if (url.hostname.endsWith('gstatic.com') && !FONT_HOSTS.includes(url.hostname)) return;
   if (url.origin === self.location.origin && url.pathname.startsWith('/api/')) return;
   if (url.pathname.startsWith('/_vercel/')) return;
+  // Firebase sign-in handler (proxied by vercel.json): never cache it or answer it with the app shell
+  if (url.pathname.startsWith('/__/')) return;
 
   // The app's pages
   if (request.mode === 'navigate') {

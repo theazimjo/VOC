@@ -1,10 +1,18 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getDatabase } from "firebase/database";
+import { isInstalledApp } from "./utils/installedApp";
+
+// In an installed app (Microsoft Store, Play, home-screen) Google sign-in has to
+// finish inside the app window, so the sign-in handler is served from our own
+// domain (vercel.json proxies /__/auth/ to Firebase). The OAuth client must list
+// https://vocabry.uz/__/auth/handler as an authorized redirect URI.
+const OWN_HOSTS = ["vocabry.uz", "www.vocabry.uz"];
+const useOwnAuthDomain = typeof window !== "undefined" && OWN_HOSTS.includes(window.location.hostname) && isInstalledApp();
 
 const firebaseConfig = {
   apiKey: "AIzaSyCjAzSQYeftEQ0t84tDITRvy5xOX609WzU",
-  authDomain: "ai-chat-703e7.firebaseapp.com",
+  authDomain: useOwnAuthDomain ? window.location.hostname : "ai-chat-703e7.firebaseapp.com",
   databaseURL: "https://ai-chat-703e7-default-rtdb.firebaseio.com",
   projectId: "ai-chat-703e7",
   storageBucket: "ai-chat-703e7.appspot.com",
