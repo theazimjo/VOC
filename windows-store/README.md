@@ -14,9 +14,9 @@ section on the landing page (installs the app from Edge/Chrome today).
 - Identity: `Name = AzimLabs.VOCABRY`, `Publisher = CN=A52E6ACB-27B9-4FA8-A73E-D54FBFF6083A`,
   `PublisherDisplayName = Azim Labs`.
 - Package v1.0.1.0 was built with the PWABuilder service and uploaded to draft submission 1
-  (the build is kept outside git in `D:ndroid-build\windows`).
-- Still to do in Partner Center: accept the updated App Developer Agreement, Pricing (free),
-  Properties, Age ratings, Store listing with desktop screenshots, notes for certification, Submit.
+  (the build is kept outside git in `D:\android-build\windows`).
+- Draft submission 1 is complete (Pricing free, Properties, Age ratings 3+, Packages, Store listing
+  with 4 desktop screenshots, Submission options). Only "Submit for certification" is left.
   The package declares `runFullTrust` (every PWABuilder package does); certification asks why, answer:
   "The app is a web app (https://vocabry.uz) hosted in the Microsoft Edge WebView; it needs no extra access."
 
