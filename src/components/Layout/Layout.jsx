@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import { Outlet, useLocation, Navigate } from 'react-router-dom';
+import { rememberHome } from '../../utils/lastHome';
 import Sidebar from './Sidebar';
 import StudentSidebar from '../corp/StudentSidebar';
 import Navbar from './Navbar';
@@ -15,6 +17,9 @@ export default function Layout() {
 
   useDailyReminder();
   useAppBadge();
+  useEffect(() => {
+    if (!groupModeLoading && appMode === 'individual') rememberHome('personal');
+  }, [groupModeLoading, appMode]);
 
   // Redirection rules to separate the modes completely
   if (!groupModeLoading) {

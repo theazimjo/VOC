@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Navigate, Outlet, useOutletContext } from 'react-router-dom';
 import CorpAdminSidebar from './CorpAdminSidebar';
 import CorpAdminTopbar from './CorpAdminTopbar';
@@ -10,6 +11,7 @@ import '../../pages/corp/center-admin/theme.css';
 import '../../pages/corp/center-admin/uits.css';
 import '../../pages/corp/center-admin/vocabry.css';
 import { useApplyPanelTheme, usePanelTheme } from '../../pages/corp/center-admin/usePanelTheme';
+import { rememberHome } from '../../utils/lastHome';
 import ViewAsBanner from './ViewAsBanner';
 
 // The corp identity (role/centerId/centerName/email) is resolved once by
@@ -22,6 +24,7 @@ export default function CorpAdminLayout() {
   const identity = useOutletContext();
   const theme = usePanelTheme();
   useApplyPanelTheme(theme);
+  useEffect(() => { rememberHome('center_admin'); }, []);
 
   // Never fall back to a placeholder centerId — writes against a made-up id
   // create a nameless "ghost" center under centers/ (this happened with the

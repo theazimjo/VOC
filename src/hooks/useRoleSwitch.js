@@ -3,6 +3,7 @@ import { useCorpRole } from './useCorpRole';
 import { useGroupMode } from './useGroupMode';
 import { clearViewAs, ROLE_HOME, setActiveRole, clearActiveRole } from '../utils/activeRole';
 import { setActiveProfile } from '../utils/activeProfile';
+import { rememberHome } from '../utils/lastHome';
 
 // The roles this account can act as, and how to change. Switching saves the
 // choice and reloads into the new panel's home, so the identity is resolved
@@ -37,6 +38,7 @@ export function useRoleSwitch() {
 
   const switchTo = useCallback((role) => {
     clearViewAs();
+    rememberHome(role);
     if (role === 'teacher') { setActiveRole('teacher'); setActiveProfile('teacher'); }
     else if (role === 'personal') { setActiveProfile('personal'); clearActiveRole(); }
     else clearActiveRole();

@@ -6810,3 +6810,20 @@ button.ca-feed-item:hover {
 .ca-read-banner-text small { font-size: 0.8125rem; color: var(--va-mute, #6b7280); }
 
 .ca-ru-empty { color: var(--va-mute, #9aa3ad); }
+
+/* ---------- Center admin home and settings on a phone ---------- */
+@media (max-width: 768px) {
+  .ca-dash-head { flex-wrap: wrap; gap: 10px; }
+  .ca-dash-head-actions { width: 100%; justify-content: flex-start; }
+  .ca-dash-legend { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .ca-dash-legend-item { align-items: center; padding: 8px 10px; border-radius: 10px; background: var(--va-sunk0, rgba(16, 17, 19, 0.04)); }
+  .ca-dash-legend-dot { margin-top: 0; }
+  .ca-dash-legend-label { font-size: 12.5px; }
+  .ca-dash-legend-value { font-size: 14px; }
+  .ca-dash-tile-label { font-size: 11px; line-height: 1.25; }
+  .ca-dash-tile-foot { font-size: 11.5px; }
+  .ca-form-grid { grid-template-columns: minmax(0, 1fr) !important; }
+  .ca-form-actions { justify-content: stretch; }
+  .ca-form-actions > * { flex: 1; }
+  .ca-card-head { flex-wrap: wrap; gap: 10px; }
+}

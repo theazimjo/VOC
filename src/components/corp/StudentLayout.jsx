@@ -5,6 +5,7 @@ import { db } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
 import { useGroupMode } from '../../hooks/useGroupMode';
 import { getGroup, getCustomPacksLight } from '../../services/corpService';
+import { rememberHome } from '../../utils/lastHome';
 import StudentSidebar from './StudentSidebar';
 import StudentBottomNav from './StudentBottomNav';
 import Navbar from '../Layout/Navbar';
@@ -130,6 +131,10 @@ export default function StudentLayout() {
     });
     return unsub;
   }, [user]);
+
+  useEffect(() => {
+    if (!groupModeLoading && appMode === 'group') rememberHome('student');
+  }, [groupModeLoading, appMode]);
 
   // Complete separation: if individual mode, redirect away from corp student layout
   if (!groupModeLoading && appMode === 'individual') {

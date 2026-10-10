@@ -13,6 +13,7 @@ import ChangePasswordSheet from './ChangePasswordSheet';
 import { useCenterData } from './CenterDataContext';
 import AppearanceCard from './AppearanceCard';
 import SuperRoleSwitcher from '../../../components/corp/SuperRoleSwitcher';
+import ModeSwitchCard from '../../../components/corp/ModeSwitchCard';
 
 const TABS = [
   { id: 'center', label: 'Center', icon: Building2 },
@@ -137,6 +138,7 @@ export default function AdminSettings() {
 
       {tab === 'account' && (
         <div className="ca-stack">
+          <ModeSwitchCard />
           <SuperRoleSwitcher />
           <AppearanceCard />
           <section className="ca-card">

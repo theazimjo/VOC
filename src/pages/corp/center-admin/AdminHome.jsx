@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Activity, Calendar, Check, ChevronDown, ChevronRight, Clock, GraduationCap, RefreshCw, Target, User, Users } from 'lucide-react';
+import { Activity, Calendar, Check, ChevronDown, ChevronRight, Clock, GraduationCap, RefreshCw, Settings, Target, User, Users } from 'lucide-react';
 import { formatRelativeEn, latestUnitActivity, studentMastery, studentTimeSpent } from '../super-admin/centerActivity';
 import { Page, Row } from '../super-admin/ui';
 import { useIsDesktop } from '../super-admin/useIsDesktop';
@@ -191,6 +191,12 @@ export default function AdminHome() {
             <button type="button" className="ca-dash-btn is-icon" onClick={refresh} disabled={refreshing || loading} aria-label="Refresh" title="Refresh">
               <RefreshCw size={14} className={refreshing ? 'ca-spin' : ''} />
             </button>
+            {/* the phone's bottom bar has no Settings tab */}
+            {!isDesktop && (
+              <button type="button" className="ca-dash-btn is-icon" onClick={() => navigate('/corp/admin/settings')} aria-label="Settings" title="Settings">
+                <Settings size={14} />
+              </button>
+            )}
           </div>
         </div>
 
@@ -305,7 +311,7 @@ export default function AdminHome() {
                   icon={(st.name || '?').charAt(0).toUpperCase()}
                   iconTone="green"
                   title={st.name || 'Student'}
-                  subtitle={`${st.groupName || '—'} · ${formatRelativeEn(st.lastTs, now)}${st.timeSeconds > 0 ? ` · ${formatDuration(st.timeSeconds)}` : ''}`}
+                  subtitle={`${st.groupName || '—'} · ${formatRelativeEn(st.lastTs, now)}${st.timeSeconds > 0 ? ` · ${st.timeSeconds >= 60 ? `${Math.round(st.timeSeconds / 60)} min` : `${st.timeSeconds}s`}` : ''}`}
                   detail={st.mastery == null ? undefined : `${st.mastery}%`}
                   onClick={() => navigate(`/corp/admin/students/${st.uid}`)}
                 />
