@@ -1,12 +1,16 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Target, CheckCircle2, CalendarDays, RotateCcw, X, Check, ChevronRight, PartyPopper } from 'lucide-react';
+import { Target, CheckCircle2, CalendarDays, RotateCcw, X, Check, ChevronRight, PartyPopper, Flame, Snowflake } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { labCopy } from '../../experiment/labContent';
 import { usePacks } from '../../hooks/usePacks';
 import { useWordTarget } from '../../hooks/useWordTarget';
+import { useStreak } from '../../hooks/useStreak';
+import { useStudentPlan } from '../../hooks/usePlan';
+import { hasFeature } from '../../utils/plans';
+import { FREEZES_PER_MONTH } from '../../utils/streakRules';
 import { updateStudentWordTarget } from '../../services/corpService';
 import { predictRecall, computeUserRate } from '@voc/memory-engine';
 import { getDueWords } from '@voc/memory-engine';
@@ -16,6 +20,9 @@ import OnboardingModal from '../../components/Onboarding/OnboardingModal';
 import WhatsNewModal, { WHATS_NEW_VERSION } from '../../components/Onboarding/WhatsNewModal';
 import PackHeaderHero from '../../components/corp/PackHeaderHero';
 import './Dashboard.css';
+
+const STREAK_LABEL = { uz: 'kun ketma-ket', ru: 'дней подряд', en: 'day streak' };
+const FREEZE_LABEL = { uz: 'Streak himoyasi', ru: 'Защита серии', en: 'Streak freeze' };
 
 const TARGET_STEP = 10;
 const TARGET_MIN = 10;
@@ -287,12 +294,36 @@ export default function Dashboard() {
 
   const displayName = user?.displayName || user?.email?.split('@')[0] || t('nav.user');
 
+  const { streak } = useStreak();
+  const { planId } = useStudentPlan(user?.uid);
+  const streakCount = streak?.streakCount || 0;
+  const thisMonth = new Date().toISOString().slice(0, 7);
+  const freezeOn = hasFeature(planId, 'streakFreeze');
+  const freezesLeft = streak?.freezeMonth === thisMonth ? Math.max(0, Number(streak?.freezes) || 0) : FREEZES_PER_MONTH;
+
   return (
     <div className="dash-ov-container">
 
       <div className="dash-ov-topbar">
-        <span className="dash-ov-eyebrow">{getGreeting()}</span>
-        <h1 className="dash-ov-name">{displayName}</h1>
+        <div className="dash-ov-topbar-text">
+          <span className="dash-ov-eyebrow">{getGreeting()}</span>
+          <h1 className="dash-ov-name">{displayName}</h1>
+        </div>
+        <button
+          type="button"
+          className={`dash-ov-streak${streakCount > 0 ? ' is-on' : ''}`}
+          onClick={() => navigate('/stats')}
+          title={`${streakCount} ${STREAK_LABEL[language] || STREAK_LABEL.en}`}
+          aria-label={`${streakCount} ${STREAK_LABEL[language] || STREAK_LABEL.en}`}
+        >
+          <Flame size={20} strokeWidth={2.4} />
+          <strong>{streakCount}</strong>
+          {freezeOn && (
+            <span className="dash-ov-streak-freeze" title={`${FREEZE_LABEL[language] || FREEZE_LABEL.en}: ${freezesLeft}`}>
+              <Snowflake size={12} strokeWidth={2.6} />{freezesLeft}
+            </span>
+          )}
+        </button>
       </div>
 
       <div className="dash-ov-grid">

@@ -528,3 +528,17 @@
     font-size: 1.4rem;
   }
 }
+
+/* Streak pill next to the greeting */
+.dash-ov-topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.dash-ov-topbar-text { min-width: 0; }
+.dash-ov-streak {
+  flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px; height: 44px; padding: 0 14px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-muted); font-family: inherit; cursor: pointer;
+  transition: transform .12s ease;
+}
+.dash-ov-streak:active { transform: scale(.95); }
+.dash-ov-streak strong { font-size: 1.125rem; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+.dash-ov-streak.is-on { color: #FF7A00; border-color: rgba(255, 122, 0, .35); background: rgba(255, 122, 0, .1); }
+.dash-ov-streak.is-on strong { color: var(--text-primary); }
+.dash-ov-streak-freeze { display: inline-flex; align-items: center; gap: 2px; margin-left: 2px; padding: 2px 7px; border-radius: 999px; font-size: .6875rem; font-weight: 800; color: #0A84FF; background: rgba(10, 132, 255, .12); }
