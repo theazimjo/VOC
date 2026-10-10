@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Outlet, useLocation, Navigate } from 'react-router-dom';
-import { rememberHome } from '../../utils/lastHome';
+import { rememberHome, takeStartTarget } from '../../utils/lastHome';
 import Sidebar from './Sidebar';
 import StudentSidebar from '../corp/StudentSidebar';
 import Navbar from './Navbar';
@@ -15,11 +15,18 @@ export default function Layout() {
   const location = useLocation();
   const { loading: groupModeLoading, appMode } = useGroupMode();
 
+  // last worked in a staff panel: reopen it instead of the learner home (asked once, at first render)
+  const startTargetRef = useRef(undefined);
+  if (startTargetRef.current === undefined) startTargetRef.current = takeStartTarget(location.pathname);
+  const startTarget = startTargetRef.current;
+
   useDailyReminder();
   useAppBadge();
   useEffect(() => {
-    if (!groupModeLoading && appMode === 'individual') rememberHome('personal');
-  }, [groupModeLoading, appMode]);
+    if (!startTarget && !groupModeLoading && appMode === 'individual') rememberHome('personal');
+  }, [startTarget, groupModeLoading, appMode]);
+
+  if (startTarget) return <Navigate to={startTarget} replace />;
 
   // Redirection rules to separate the modes completely
   if (!groupModeLoading) {

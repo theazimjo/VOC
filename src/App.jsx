@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useRef } from 'react';
+import { Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
@@ -17,8 +17,7 @@ import { installGlobalErrorLogging } from './utils/errorLogger';
 import { lazyWithRetry } from './utils/lazyWithRetry';
 
 import { prefetchMainRoutes, requestOfflineDownload } from './utils/prefetchRoutes';
-import { lastHome } from './utils/lastHome';
-import { ROLE_HOME } from './utils/activeRole';
+import { takeStartTarget } from './utils/lastHome';
 import OfflineIndicator from './offline/OfflineIndicator';
 const LandingPage = lazyWithRetry(() => import('./pages/marketing/LandingPage'));
 const StartCenterPage = lazyWithRetry(() => import('./pages/marketing/StartCenterPage'));
@@ -114,25 +113,17 @@ function RoutePrefetcher() {
   return null;
 }
 
-// Read once at load, before this visit records anything: where the person was last.
-const START_HOME = lastHome();
-const STAFF_HOMES = new Set(['center_admin', 'teacher', 'super_admin']);
-
 // Opening the app lands on the learner side ('/', or the group page). Someone who
-// last worked in a staff panel goes straight back there instead. Only the very
-// first screen of a visit is touched; links and later navigation are left alone.
+// last worked in a staff panel goes straight back there instead (see lastHome.js);
+// the personal and group layouts ask the same question the moment they render.
 function StartRedirect() {
   const { user, loading } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-  const done = useRef(false);
   useEffect(() => {
-    if (done.current || loading) return;
-    done.current = true;
-    if (!user || !STAFF_HOMES.has(START_HOME)) return;
-    if (location.pathname === '/' || location.pathname === '/corp/student') {
-      navigate(ROLE_HOME[START_HOME], { replace: true });
-    }
+    if (loading || !user) return;
+    const target = takeStartTarget(location.pathname);
+    if (target) navigate(target, { replace: true });
   }, [user, loading]); // eslint-disable-line react-hooks/exhaustive-deps
   return null;
 }

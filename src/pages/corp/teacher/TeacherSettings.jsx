@@ -4,7 +4,8 @@ import {
   Archive, ChevronRight, KeyRound, LogOut, Repeat, Save, Settings as SettingsIcon, UserRound,
 } from 'lucide-react';
 import { auth } from '../../../firebase';
-import { updateTeacherProfile } from '../../../services/corpService';
+import { setAppMode, updateTeacherProfile } from '../../../services/corpService';
+import { rememberHome } from '../../../utils/lastHome';
 import { useAuth } from '../../../contexts/AuthContext';
 import { setActiveProfile } from '../../../utils/activeProfile';
 import ConfirmSheet from '../../../components/corp/ConfirmSheet';
@@ -28,7 +29,7 @@ const TAB_KEY = 'voc_teacher_settings_tab';
 // (TeacherLayout carries .is-center-admin).
 export default function TeacherSettings() {
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
   const [toastNode, showToast] = useToast();
   const { centerId, centerName, teacherId, teacherName, phone, email, center, archivedGroups, activeGroups, patch } = useTeacherData();
 
@@ -149,7 +150,13 @@ export default function TeacherSettings() {
                 </span>
                 <ChevronRight size={16} />
               </button>
-              <button type="button" className="ca-feed-item" onClick={() => { setActiveProfile('personal'); navigate('/'); }}>
+              <button type="button" className="ca-feed-item" onClick={async () => {
+                setActiveProfile('personal');
+                rememberHome('personal');
+                // an account that joined a group stays in group mode, which would send '/' to the group page
+                try { if (user?.uid) await setAppMode(user.uid, 'individual'); } catch (err) { console.warn('Could not save the mode:', err); }
+                navigate('/');
+              }}>
                 <span className="ca-icon-box is-sm"><Repeat size={14} /></span>
                 <span className="ca-feed-text">
                   <span className="ca-feed-title">Switch to personal mode</span>

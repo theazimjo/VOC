@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
-import { Outlet, Navigate } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
+import { Outlet, Navigate, useLocation } from 'react-router-dom';
 import { ref, get, update, onValue } from 'firebase/database';
 import { db } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
 import { useGroupMode } from '../../hooks/useGroupMode';
 import { getGroup, getCustomPacksLight } from '../../services/corpService';
-import { rememberHome } from '../../utils/lastHome';
+import { rememberHome, takeStartTarget } from '../../utils/lastHome';
 import StudentSidebar from './StudentSidebar';
 import StudentBottomNav from './StudentBottomNav';
 import Navbar from '../Layout/Navbar';
@@ -15,6 +15,11 @@ import './CorpAdminLayout.css';
 export default function StudentLayout() {
   const { user } = useAuth();
   const { loading: groupModeLoading, appMode, membership } = useGroupMode();
+  const location = useLocation();
+  // last worked in a staff panel: reopen it instead of the group home (asked once, at first render)
+  const startTargetRef = useRef(undefined);
+  if (startTargetRef.current === undefined) startTargetRef.current = takeStartTarget(location.pathname);
+  const startTarget = startTargetRef.current;
 
   const [group, setGroup] = useState(null);
   const [assignedPacks, setAssignedPacks] = useState([]);
@@ -133,8 +138,10 @@ export default function StudentLayout() {
   }, [user]);
 
   useEffect(() => {
-    if (!groupModeLoading && appMode === 'group') rememberHome('student');
-  }, [groupModeLoading, appMode]);
+    if (!startTarget && !groupModeLoading && appMode === 'group') rememberHome('student');
+  }, [startTarget, groupModeLoading, appMode]);
+
+  if (startTarget) return <Navigate to={startTarget} replace />;
 
   // Complete separation: if individual mode, redirect away from corp student layout
   if (!groupModeLoading && appMode === 'individual') {
