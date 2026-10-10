@@ -114,3 +114,22 @@ button.plan-badge:active { transform: scale(.94); }
 .plan-card-sub { font-size: .8125rem; font-weight: 600; opacity: .8; }
 .plan-card-chev { flex-shrink: 0; opacity: .7; }
 @media (prefers-reduced-motion: reduce) { .plan-card::after { animation: none; display: none; } }
+
+/* Glitter drifting over the dimmed page behind the dialog */
+.plan-glitter { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.plan-glitter::before {
+  content: ''; position: absolute; left: 50%; top: 42%; width: 120vmin; height: 120vmin; transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255, 190, 60, .38), rgba(255, 190, 60, 0) 62%); animation: plan-glow 4s ease-in-out infinite;
+}
+.plan-glitter span {
+  position: absolute; border-radius: 50%; background: #FFE9A8; opacity: 0;
+  box-shadow: 0 0 6px 1px rgba(255, 214, 110, .9), 0 0 14px 2px rgba(255, 170, 40, .5);
+  animation: plan-glitter ease-in-out infinite;
+}
+.plan-glitter span:nth-child(3n) { background: #fff; }
+@keyframes plan-glitter {
+  0%, 100% { opacity: 0; transform: translateY(8px) scale(.3); }
+  50% { opacity: .95; transform: translateY(-10px) scale(1); }
+}
+@keyframes plan-glow { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .plan-glitter { display: none; } }

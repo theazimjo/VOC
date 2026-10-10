@@ -57,6 +57,25 @@ export function playSound(type) {
       
       osc.start(now);
       osc.stop(now + 0.35);
+    } else if (type === 'sparkle') {
+      // Soft magical shimmer: a quick ascending run of bell-like notes that rings out
+      const notes = [1046.5, 1318.5, 1568, 2093, 2637, 3136]; // C6 E6 G6 C7 E7 G7
+      notes.forEach((freq, i) => {
+        const t0 = now + i * 0.085;
+        [1, 2.01].forEach((mult, k) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq * mult, t0);
+          gain.gain.setValueAtTime(0, t0);
+          gain.gain.linearRampToValueAtTime((k ? 0.012 : 0.05) * (1 - i * 0.07), t0 + 0.01);
+          gain.gain.exponentialRampToValueAtTime(0.0005, t0 + 1.1);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(t0);
+          osc.stop(t0 + 1.15);
+        });
+      });
     } else if (type === 'victory') {
       // Triumphant uplifting synth melody
       const osc1 = ctx.createOscillator();

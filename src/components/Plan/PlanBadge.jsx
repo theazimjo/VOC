@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import { Infinity as InfinityIcon, BookOpenCheck, WifiOff, Sparkles, X, ChevronRight } from 'lucide-react';
@@ -6,6 +6,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useStudentPlan } from '../../hooks/usePlan';
 import { EVERYONE_PREMIUM, PRICING_PAGE_PUBLIC } from '../../utils/plans';
+import { playSound } from '../../utils/feedback';
 import './PlanBadge.css';
 
 const COPY = {
@@ -87,11 +88,23 @@ const BURST = [
   [120, -26, 1], [92, -54, .7], [62, 40, .9], [132, 22, .6], [34, -62, .8],
 ];
 
+// [left %, top %, size px, delay s, duration s] for the glitter drifting over the dimmed page
+const GLITTER = Array.from({ length: 34 }, (_, i) => {
+  const r = (n) => { const x = Math.sin(i * 12.9898 + n * 78.233) * 43758.5453; return x - Math.floor(x); };
+  return [Math.round(r(1) * 100), Math.round(r(2) * 100), 3 + Math.round(r(3) * 6), +(r(4) * 4).toFixed(2), +(2.4 + r(5) * 2.6).toFixed(2)];
+});
+
 export function PremiumModal({ onClose }) {
   const { language } = useLanguage();
   const c = COPY[language] || COPY.en;
+  useEffect(() => { playSound('sparkle'); }, []);
   return createPortal(
     <div className="plan-modal-back" role="dialog" aria-modal="true" aria-label={c.title} onClick={onClose}>
+      <div className="plan-glitter" aria-hidden="true">
+        {GLITTER.map(([l, t, z, d, du], i) => (
+          <span key={i} style={{ left: `${l}%`, top: `${t}%`, width: z, height: z, animationDelay: `${d}s`, animationDuration: `${du}s` }} />
+        ))}
+      </div>
       <div className="plan-modal" onClick={(e) => e.stopPropagation()}>
         <div className="plan-modal-hero">
           <button type="button" className="plan-modal-close" onClick={onClose} aria-label={c.close}>
