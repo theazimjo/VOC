@@ -621,3 +621,13 @@
   background: rgba(239, 68, 68, 0.15);
 }
 
+
+/* Chapter row + an always-visible "Chapters" button (rename / reorder / delete / add) */
+.pack-topic-bar { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.pack-topic-bar .pack-topic-filter-row { flex: 1; min-width: 0; }
+.pack-topic-manage {
+  flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 12px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-primary);
+  font-family: inherit; font-size: .8125rem; font-weight: 700; cursor: pointer;
+}
+.pack-topic-manage:active { transform: scale(.96); }

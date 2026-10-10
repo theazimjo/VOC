@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { motion, Reorder, useDragControls } from 'framer-motion';
-import { Brain, AlertTriangle, Edit2, Trash2 } from 'lucide-react';
+import { Brain, AlertTriangle, Edit2, Trash2, ListOrdered } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { usePacks } from '../../hooks/usePacks';
@@ -17,6 +17,7 @@ import { hasChapterText } from '../../data/chapterTextKeys';
 import WordList from '../../components/Words/WordList';
 
 import MoveWordsModal from '../../components/Words/MoveWordsModal';
+import ChapterManagerSheet from '../../components/Words/ChapterManagerSheet';
 import SpeedDialFAB from '../../components/Words/SpeedDialFAB';
 import IosSpinner from '../../components/common/IosSpinner';
 import './PackDetail.css';
@@ -142,6 +143,7 @@ export default function PackDetail() {
   const [editingWord, setEditingWord] = useState(null);
   const [newWordsAddedCount, setNewWordsAddedCount] = useState(null);
   const [showAddChapterModal, setShowAddChapterModal] = useState(false);
+  const [showChapterManager, setShowChapterManager] = useState(false);
   const [newChapterName, setNewChapterName] = useState('');
 
   const [contextMenu, setContextMenu] = useState(null); // { x, y, topic }
@@ -193,6 +195,12 @@ export default function PackDetail() {
     // and the ref guard above already makes this effect run-once per pack.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [topics, topicFilter, packId]);
+
+  const topicWordCounts = useMemo(() => {
+    const m = {};
+    words.forEach(w => { if (w.topic) m[w.topic] = (m[w.topic] || 0) + 1; });
+    return m;
+  }, [words]);
 
   const displayedWords = topicFilter ? words.filter(w => w.topic === topicFilter) : words;
 
@@ -662,6 +670,7 @@ export default function PackDetail() {
       )}
 
       {topics.length > 0 && (
+        <div className="pack-topic-bar">
         <div className="pack-topic-filter-row" ref={topicRowRef}>
           <button
             type="button"
@@ -691,6 +700,25 @@ export default function PackDetail() {
             ))}
           </Reorder.Group>
         </div>
+        {pack.name !== 'Irregular Verbs' && (
+          <button type="button" className="pack-topic-manage" onClick={() => setShowChapterManager(true)}>
+            <ListOrdered size={16} />
+            <span>{({ uz: 'Boblar', ru: 'Главы', en: 'Chapters' })[language] || 'Chapters'}</span>
+          </button>
+        )}
+        </div>
+      )}
+
+      {showChapterManager && (
+        <ChapterManagerSheet
+          topics={topics}
+          wordCounts={topicWordCounts}
+          onReorder={handleReorderChapters}
+          onRename={(topic) => setRenameModal({ oldName: topic, newName: topic })}
+          onDelete={(topic) => setDeleteModal({ topic })}
+          onAdd={() => { setShowChapterManager(false); setShowAddChapterModal(true); }}
+          onClose={() => setShowChapterManager(false)}
+        />
       )}
 
       <WordList
