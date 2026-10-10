@@ -489,3 +489,7 @@
   color: var(--text-secondary);
 }
 
+
+/* Premium crown: the docked sidebar shows it on wide screens, the top bar everywhere else. */
+.navbar-premium { display: inline-flex; align-items: center; }
+@media (min-width: 1025px) { .navbar-premium { display: none; } }

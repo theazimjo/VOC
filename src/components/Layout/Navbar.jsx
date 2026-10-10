@@ -19,6 +19,7 @@ import { SELECTABLE_COURSES } from '../../data/coursePicker';
 const getCourseBasePath = (courseId) =>
   SELECTABLE_COURSES.find((c) => c.id === courseId)?.basePath || '/course';
 import GlobalSearch from '../common/GlobalSearch';
+import PlanBadge from '../Plan/PlanBadge';
 import './Navbar.css';
 
 export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: layoutAppMode }) {
@@ -469,6 +470,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
 
       {/* Right side */}
       <div className="navbar-right">
+        <span className="navbar-premium"><PlanBadge compact /></span>
 
         <button
           className="navbar-search-btn"
