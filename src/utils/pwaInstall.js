@@ -4,7 +4,7 @@
 //
 // MS_STORE_URL: the Microsoft Store listing, once the package is published
 // (windows-store/README.md). Empty means "not published yet": no Store button.
-export const MS_STORE_URL = '';
+export const MS_STORE_URL = 'https://apps.microsoft.com/detail/9NGJ2603XW6F';
 
 let deferred = null;
 let installed = false;

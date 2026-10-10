@@ -16,7 +16,7 @@ section on the landing page (installs the app from Edge/Chrome today).
 - Package v1.0.1.0 was built with the PWABuilder service and uploaded to draft submission 1
   (the build is kept outside git in `D:\android-build\windows`).
 - Draft submission 1 is complete (Pricing free, Properties, Age ratings 3+, Packages, Store listing
-  with 4 desktop screenshots, Submission options). Only "Submit for certification" is left.
+  with 4 desktop screenshots, Submission options). Certified and live in the Store (2026-10-10): https://apps.microsoft.com/detail/9NGJ2603XW6F, `MS_STORE_URL` is set.
   The package declares `runFullTrust` (every PWABuilder package does); certification asks why, answer:
   "The app is a web app (https://vocabry.uz) hosted in the Microsoft Edge WebView; it needs no extra access."
 
