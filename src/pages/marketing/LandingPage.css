@@ -306,3 +306,14 @@
   .lp-bar-fill { transition: none; }
   .lp-btn, .lp-board-btn, .lp-board-ctrl, .lp-faq-item summary::after { transition: none; }
 }
+
+/* ---------- Get the app ---------- */
+.lp-getapp { border-top: 1px solid var(--ground-line); display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); }
+.lp-getapp .lp-points { margin-top: 0; }
+.lp-getapp-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; margin-top: 28px; }
+.lp-getapp-actions .lp-btn { border: 0; cursor: pointer; font-family: inherit; }
+.lp-btn--ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 2px var(--ink); }
+.lp-btn--ghost:hover { background: var(--ink); color: var(--paper); }
+.lp-getapp-howto, .lp-getapp-done { max-width: 34rem; color: var(--ink-soft); font-size: 1rem; }
+.lp-getapp-done { color: var(--ink); font-weight: 600; }
+@media (max-width: 860px) { .lp-getapp { grid-template-columns: minmax(0, 1fr); } }

@@ -36,7 +36,7 @@ export const CONTENT = {
   en: {
     langLabel: 'Language',
     decimal: '.',
-    nav: { how: 'How it works', evidence: 'Results', centers: 'For centers', faq: 'FAQ', blog: 'Blog', login: 'Log in', start: 'Get started' },
+    nav: { how: 'How it works', evidence: 'Results', centers: 'For centers', app: 'Download', faq: 'FAQ', blog: 'Blog', login: 'Log in', start: 'Get started' },
     hero: {
       title: 'Every word has its own time.',
       sub: 'VOC tracks every word separately, just for you, and brings it back when you are about to forget it.',
@@ -93,6 +93,21 @@ export const CONTENT = {
         status: { done: 'PRACTISED', none: 'NOT TODAY', quiet: '3 DAYS QUIET' },
         aria: 'Sample group status board',
       },
+    },
+    getApp: {
+      title: 'Get the app',
+      titleWindows: 'VOCABRY for Windows',
+      lead: 'Install it like any other app: its own window, an icon on the taskbar and in the Start menu.',
+      points: [
+        'Opens in its own window, without browser tabs',
+        'Works without internet and syncs when you are back online',
+        'Updates itself, so there is nothing to download again',
+      ],
+      store: 'Get it from Microsoft Store',
+      install: 'Install the app',
+      installWindows: 'Install on Windows',
+      done: 'Installed. Find VOCABRY in your Start menu.',
+      howto: 'In Microsoft Edge or Google Chrome, open the browser menu and choose Apps, then Install VOCABRY. It is also the small install icon at the right end of the address bar.',
     },
     faq: {
       title: 'Questions',

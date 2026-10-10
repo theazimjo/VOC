@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useInView, useReducedMotion } from 'framer-motion';
-import { ArrowRight, ArrowUpRight, RotateCcw, FastForward } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Download, RotateCcw, FastForward } from 'lucide-react';
 import { APP_VERSION_LABEL } from '../../utils/appVersion';
 import BetaBadge from '../../components/common/BetaBadge';
+import { MS_STORE_URL, canPromptInstall, isWindows, promptInstall, subscribeInstall, wasInstalled } from '../../utils/pwaInstall';
 import { CONTENT, EVIDENCE, EVIDENCE_POST, GROUP_ROWS, WORDS } from './landingContent';
 
 import './LandingPage.css';
@@ -227,6 +228,51 @@ function EvidenceBars({ t }) {
   );
 }
 
+// "Get the app": installs the web app as a Windows (or any desktop) app, and links
+// the Microsoft Store listing once it exists.
+function GetTheApp({ t }) {
+  const g = t.getApp;
+  const [, setTick] = useState(0);
+  const [accepted, setAccepted] = useState(false);
+  useEffect(() => subscribeInstall(() => setTick((n) => n + 1)), []);
+  const can = canPromptInstall();
+  const done = accepted || wasInstalled();
+
+  const install = async () => { if (await promptInstall()) setAccepted(true); };
+
+  return (
+    <section className="lp-section lp-getapp" id="get-app">
+      <div className="lp-section-head">
+        <h2>{isWindows() ? g.titleWindows : g.title}</h2>
+        <p>{g.lead}</p>
+      </div>
+      <div className="lp-getapp-panel">
+        <ul className="lp-points">
+          {g.points.map((p) => <li key={p}>{p}</li>)}
+        </ul>
+        <div className="lp-getapp-actions">
+          {MS_STORE_URL && (
+            <a className="lp-btn lp-btn--lg" href={MS_STORE_URL} target="_blank" rel="noopener noreferrer">
+              <Download size={20} strokeWidth={2.4} aria-hidden="true" />
+              {g.store}
+            </a>
+          )}
+          {done ? (
+            <p className="lp-getapp-done" role="status">{g.done}</p>
+          ) : can ? (
+            <button type="button" className={`lp-btn lp-btn--lg${MS_STORE_URL ? ' lp-btn--ghost' : ''}`} onClick={install}>
+              <Download size={20} strokeWidth={2.4} aria-hidden="true" />
+              {isWindows() ? g.installWindows : g.install}
+            </button>
+          ) : (
+            <p className="lp-getapp-howto">{g.howto}</p>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function LandingPage() {
   const t = CONTENT.en;
   const reduce = useReducedMotion();
@@ -244,6 +290,7 @@ export default function LandingPage() {
           <a href="#how" onClick={scrollTo('how')}>{t.nav.how}</a>
           <a href="#evidence" onClick={scrollTo('evidence')}>{t.nav.evidence}</a>
           <a href="#centers" onClick={scrollTo('centers')}>{t.nav.centers}</a>
+          <a href="#get-app" onClick={scrollTo('get-app')}>{t.nav.app}</a>
           <a href="#faq" onClick={scrollTo('faq')}>{t.nav.faq}</a>
           <a href="/blog" target="_blank" rel="noopener noreferrer" className="lp-nav-ext">
             {t.nav.blog}<ArrowUpRight size={14} strokeWidth={2.4} aria-hidden="true" />
@@ -325,6 +372,8 @@ export default function LandingPage() {
           <GroupBoard t={t} />
         </section>
 
+        <GetTheApp t={t} />
+
         {/* ---------- FAQ ---------- */}
         <section className="lp-section lp-faq" id="faq">
           <div className="lp-section-head">
@@ -355,6 +404,7 @@ export default function LandingPage() {
         <div className="lp-footer-links">
           <Link to="/login">{t.footer.login}</Link>
           <Link to="/register">{t.footer.start}</Link>
+          <a href="#get-app" onClick={scrollTo('get-app')}>{t.nav.app}</a>
           <a href="/blog" target="_blank" rel="noopener noreferrer">{t.nav.blog}</a>
           <a href="/privacy.html" target="_blank" rel="noopener noreferrer">{t.footer.privacy}</a>
         </div>

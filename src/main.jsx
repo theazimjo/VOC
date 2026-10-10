@@ -4,6 +4,7 @@ import './index.css'
 import './perf-lite.css'
 import App from './App.jsx'
 import { applyPerfMode } from './utils/perfMode'
+import './utils/pwaInstall' // keeps the browser's install prompt for the Download button
 
 applyPerfMode()
 
