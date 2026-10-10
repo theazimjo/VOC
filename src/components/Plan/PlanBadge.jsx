@@ -7,6 +7,7 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { useStudentPlan } from '../../hooks/usePlan';
 import { EVERYONE_PREMIUM, PRICING_PAGE_PUBLIC } from '../../utils/plans';
 import { playSound } from '../../utils/feedback';
+import { startAmbientMusic } from '../../utils/ambientMusic';
 import './PlanBadge.css';
 
 const COPY = {
@@ -97,11 +98,10 @@ const GLITTER = Array.from({ length: 34 }, (_, i) => {
 export function PremiumModal({ onClose }) {
   const { language } = useLanguage();
   const c = COPY[language] || COPY.en;
-  // the shimmer repeats softly for as long as the dialog stays open
+  // a soft looping melody plays for as long as the dialog is open
   useEffect(() => {
     playSound('sparkle');
-    const timer = setInterval(() => playSound('sparkle'), 3600);
-    return () => clearInterval(timer);
+    return startAmbientMusic();
   }, []);
   return createPortal(
     <div className="plan-modal-back" role="dialog" aria-modal="true" aria-label={c.title} onClick={onClose}>
