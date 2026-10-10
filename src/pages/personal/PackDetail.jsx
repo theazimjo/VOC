@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { motion, Reorder, useDragControls } from 'framer-motion';
-import { Brain, AlertTriangle, Edit2, Trash2, ListOrdered } from 'lucide-react';
+import { Brain, AlertTriangle, Edit2, Trash2, ListOrdered, ChevronDown } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { usePacks } from '../../hooks/usePacks';
@@ -700,6 +700,12 @@ export default function PackDetail() {
             ))}
           </Reorder.Group>
         </div>
+        <button type="button" className="pack-topic-select" onClick={() => setShowChapterManager(true)}>
+          <ListOrdered size={18} />
+          <span className="pack-topic-select-label">{topicFilter || t('packDetail.allTopics')}</span>
+          <span className="pack-topic-select-count">{topics.length}</span>
+          <ChevronDown size={16} />
+        </button>
         {pack.name !== 'Irregular Verbs' && (
           <button type="button" className="pack-topic-manage" onClick={() => setShowChapterManager(true)}>
             <ListOrdered size={16} />
@@ -713,6 +719,10 @@ export default function PackDetail() {
         <ChapterManagerSheet
           topics={topics}
           wordCounts={topicWordCounts}
+          masteries={topicMastery}
+          activeTopic={topicFilter}
+          totalWords={words.length}
+          onPick={(topic) => { setTopicFilter(topic); setShowChapterManager(false); }}
           onReorder={handleReorderChapters}
           onRename={(topic) => setRenameModal({ oldName: topic, newName: topic })}
           onDelete={(topic) => setDeleteModal({ topic })}

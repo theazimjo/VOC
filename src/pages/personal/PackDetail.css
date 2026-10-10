@@ -631,3 +631,20 @@
   font-family: inherit; font-size: .8125rem; font-weight: 700; cursor: pointer;
 }
 .pack-topic-manage:active { transform: scale(.96); }
+
+/* Phones: one tap-target instead of a long swipeable chip row */
+.pack-topic-select { display: none; }
+@media (max-width: 680px) {
+  .pack-topic-bar { display: block; margin: 6px 0; }
+  .pack-topic-bar .pack-topic-filter-row, .pack-topic-manage { display: none; }
+  .pack-topic-select {
+    display: flex; align-items: center; gap: 10px; width: 100%; min-height: 50px; padding: 0 16px; box-sizing: border-box;
+    border: 1px solid var(--border); border-radius: 14px; background: var(--bg-secondary); color: var(--text-primary);
+    font-family: inherit; font-size: .9375rem; font-weight: 700; cursor: pointer; text-align: left;
+  }
+  .pack-topic-select:active { transform: scale(.99); }
+  .pack-topic-select > svg:first-child { color: var(--accent-1); flex-shrink: 0; }
+  .pack-topic-select-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pack-topic-select-count { padding: 2px 9px; border-radius: 999px; background: var(--bg-tertiary); color: var(--text-muted); font-size: .75rem; font-weight: 700; }
+  .pack-topic-select > svg:last-child { color: var(--text-muted); flex-shrink: 0; }
+}

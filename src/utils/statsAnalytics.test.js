@@ -17,7 +17,7 @@ describe('statsAnalytics', () => {
     expect(weekCompare({}, NOW).change).toBeNull();
   });
 
-  it('forecasts reviews, overdue words count as today and unscheduled ones are skipped', () => {
+  it('forecasts reviews; overdue and never-reviewed words count as today', () => {
     const words = [
       { nextReview: new Date(2026, 9, 1).toISOString() },
       { nextReview: new Date(2026, 9, 14, 20).toISOString() },
@@ -25,7 +25,7 @@ describe('statsAnalytics', () => {
       { nextReview: new Date(2026, 10, 30).toISOString() },
       {},
     ];
-    expect(reviewForecast(words, 7, NOW).map((d) => d.count)).toEqual([2, 0, 1, 0, 0, 0, 0]);
+    expect(reviewForecast(words, 7, NOW).map((d) => d.count)).toEqual([3, 0, 1, 0, 0, 0, 0]);
   });
 
   it('sorts words into stages', () => {

@@ -38,15 +38,16 @@ export function activeDays(activityLog = {}, n = 30, now = Date.now()) {
   return lastDays(activityLog, n, now).filter((d) => d.count > 0).length;
 }
 
-// Reviews coming due in each of the next `n` days. Anything already overdue lands on today.
-// Words that were never reviewed have no schedule and are left out.
+// Reviews coming due in each of the next `n` days. Anything already overdue lands on today,
+// and so do words that were never reviewed (the Dashboard counts them as due too, so the
+// numbers agree).
 export function reviewForecast(words, n = 7, now = Date.now()) {
   const today = startOfDay(now).getTime();
   const out = Array.from({ length: n }, (_, i) => ({ day: new Date(today + i * DAY), count: 0 }));
   words.forEach((w) => {
-    if (!w.nextReview) return;
+    if (!w.nextReview) { out[0].count += 1; return; }
     const t = new Date(w.nextReview).getTime();
-    if (!Number.isFinite(t)) return;
+    if (!Number.isFinite(t)) { out[0].count += 1; return; }
     const idx = Math.max(0, Math.floor((startOfDay(t).getTime() - today) / DAY));
     if (idx < n) out[idx].count += 1;
   });

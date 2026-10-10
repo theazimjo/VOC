@@ -1,3 +1,4 @@
+import { isRemovedLanguagePack } from '../utils/hiddenPacks';
 import { createContext, useContext, useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { ref, push, update, remove, get, onValue, onChildAdded, onChildChanged, onChildRemoved, serverTimestamp, runTransaction } from 'firebase/database';
 import { db } from '../firebase';
@@ -185,6 +186,7 @@ export function PacksProvider({ children }) {
 
     Object.keys(wordsByPack).forEach((packId) => {
       const pack = packById[packId];
+      if (isRemovedLanguagePack(pack)) return; // leftovers of removed courses count nowhere
       const wordsObj = wordsByPack[packId] || {};
       const source = pack?.name || 'Kutubxona';
       const sourceIcon = pack?.icon || '📦';

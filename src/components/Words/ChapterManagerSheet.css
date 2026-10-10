@@ -38,3 +38,18 @@
   .cms-back { align-items: center; }
   .cms-sheet { border-radius: 24px; padding-bottom: 16px; }
 }
+
+.cms-head-actions { display: flex; align-items: center; gap: 8px; }
+.cms-edit { height: 34px; padding: 0 14px; border: none; border-radius: 999px; background: var(--bg-tertiary); color: var(--accent-1); font-family: inherit; font-size: .875rem; font-weight: 700; cursor: pointer; }
+.cms-pick, .cms-all {
+  flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 6px 10px; border: none; background: transparent;
+  color: inherit; font-family: inherit; text-align: left; cursor: pointer;
+}
+.cms-pick:disabled { cursor: default; }
+.cms-all { width: 100%; box-sizing: border-box; flex: 0 0 auto; margin: 10px 0 8px; border-radius: 16px; background: var(--bg-tertiary); border: 1px solid var(--border); padding: 6px 14px; }
+.cms-row.is-active, .cms-all.is-active { border-color: var(--accent-1); background: var(--accent-1-dim); }
+.cms-row .cms-pick { padding-left: 14px; }
+.cms-row:has(.cms-handle) .cms-pick { padding-left: 2px; }
+.cms-check { color: var(--accent-1); flex-shrink: 0; }
+.cms-chev { color: var(--text-muted); flex-shrink: 0; }
+.cms-pick:active { opacity: .7; }
