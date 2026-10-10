@@ -97,7 +97,12 @@ const GLITTER = Array.from({ length: 34 }, (_, i) => {
 export function PremiumModal({ onClose }) {
   const { language } = useLanguage();
   const c = COPY[language] || COPY.en;
-  useEffect(() => { playSound('sparkle'); }, []);
+  // the shimmer repeats softly for as long as the dialog stays open
+  useEffect(() => {
+    playSound('sparkle');
+    const timer = setInterval(() => playSound('sparkle'), 3600);
+    return () => clearInterval(timer);
+  }, []);
   return createPortal(
     <div className="plan-modal-back" role="dialog" aria-modal="true" aria-label={c.title} onClick={onClose}>
       <div className="plan-glitter" aria-hidden="true">
