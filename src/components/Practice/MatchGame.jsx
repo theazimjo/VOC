@@ -173,6 +173,7 @@ export default function MatchGame({
                     isMatched ? 'is-matched' : ''
                   } ${isError ? 'is-error' : ''}`}
                   onClick={() => handleItemClick(item, true)}
+                  style={{ gridColumn: 1, gridRow: idx + 1 }}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: idx * 0.05 }}
@@ -210,6 +211,7 @@ export default function MatchGame({
                     isMatched ? 'is-matched' : ''
                   } ${isError ? 'is-error' : ''}`}
                   onClick={() => handleItemClick(item, false)}
+                  style={{ gridColumn: 2, gridRow: idx + 1 }}
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: idx * 0.05 }}

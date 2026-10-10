@@ -473,7 +473,7 @@ export default function LibraryPage() {
             {activeTab === 'library' && (
               <motion.div className="active-tab-pill" layoutId="activeTabPill" />
             )}
-            <span className="tab-label">{t('library.myPacks')}</span>
+            <span className="tab-label">🏠 {t('library.myPacks')}</span>
             {!isLoading && packs.length > 0 && (
               <span className="tab-count-badge">{packs.length}</span>
             )}
@@ -485,7 +485,7 @@ export default function LibraryPage() {
             {activeTab === 'market' && (
               <motion.div className="active-tab-pill" layoutId="activeTabPill" />
             )}
-            <span className="tab-label">{t('library.market')}</span>
+            <span className="tab-label">🛒 {t('library.market')}</span>
             {marketPacks.length > 0 && (
               <span className="tab-count-badge">
                 {marketPacks.length}

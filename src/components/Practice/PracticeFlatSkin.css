@@ -78,7 +78,6 @@
 .practice-flat .duo-match-card.is-selected,
 .practice-flat .duo-tile-placed { border-width: 1.5px !important; }
 .practice-flat .duo-match-card.is-selected { box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-1) 18%, transparent) !important; }
-.practice-flat .duo-match-card.is-matched,
 .practice-flat .duo-quiz-option-card.is-correct,
 .practice-flat .duo-speed-option-card.is-correct,
 .practice-flat .duo-tile-placed.tile-correct {
@@ -92,6 +91,9 @@
   border-width: 1.5px !important;
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--error) 16%, transparent) !important;
 }
+
+/* matched pair: settled and quiet, no halo */
+.practice-flat .duo-match-card.is-matched { border-width: 1.5px !important; box-shadow: none !important; transform: none !important; }
 
 /* ---- Practice mode list ------------------------------------------------- */
 .practice-flat .practice-mode-icon-wrap,

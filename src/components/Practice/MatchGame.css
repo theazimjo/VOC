@@ -29,15 +29,15 @@
 .duo-match-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 12px 16px;
   width: 100%;
   align-items: stretch;
 }
 
+/* Columns dissolve into the grid so each pair of cards shares one row height
+   (a long translation no longer pushes the two columns out of line). */
 .duo-match-column {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  display: contents;
 }
 
 /* 3D Interactive Card (Duolingo Style) */
@@ -92,13 +92,13 @@
   color: var(--accent-1);
 }
 
-/* Matched state (Green success) */
-.duo-match-card.is-matched {
-  background-color: var(--success-dim, rgba(52, 199, 89, 0.12));
-  border-color: var(--success);
-  box-shadow: 0 4px 0 color-mix(in srgb, var(--success) 75%, black);
-  color: var(--success);
-  opacity: 0.55;
+/* Matched state: quiet and readable (muted text, green check), no glow */
+.duo-match-card.is-matched,
+.duo-match-card.is-matched:disabled {
+  background-color: color-mix(in srgb, var(--success) 10%, var(--bg-secondary));
+  border-color: color-mix(in srgb, var(--success) 45%, var(--border));
+  box-shadow: none;
+  color: var(--text-secondary);
   cursor: default;
 }
 
@@ -137,11 +137,7 @@
   }
 
   .duo-match-grid {
-    gap: 10px;
-  }
-
-  .duo-match-column {
-    gap: 8px;
+    gap: 8px 10px;
   }
 
   .duo-match-card {
