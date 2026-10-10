@@ -75,6 +75,7 @@ export default function SuperAdminUserDetail() {
   const navigate = useNavigate();
   const [toastNode, showToast] = useToast();
   const [passwordOpen, setPasswordOpen] = useState(false);
+  const [studentPasswordOpen, setStudentPasswordOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [centerNames, setCenterNames] = useState({});
   const [loading, setLoading] = useState(true);
@@ -280,8 +281,7 @@ export default function SuperAdminUserDetail() {
             ))}
           </Section>
 
-          {(user.email || user.corpRole) && (
-            <Section title="Manage" footer={!user.corpRole && !hasEmail ? 'This account has no e-mail. Its learning center admin can set a new password from the student page.' : undefined}>
+          <Section title="Manage" footer={!user.corpRole ? 'A new password is shown to you to hand over; nothing is sent by e-mail. The old password stops working at once.' : undefined}>
               {user.corpRole ? (
                 <Row
                   icon={<KeyRound size={16} />}
@@ -289,16 +289,25 @@ export default function SuperAdminUserDetail() {
                   title="Change password"
                   onClick={() => setPasswordOpen(true)}
                 />
-              ) : hasEmail ? (
-                <Row
-                  icon={<KeyRound size={16} />}
-                  iconTone="orange"
-                  title="Send a password reset email"
-                  onClick={handleReset}
-                  disabled={busy}
-                />
               ) : (
-                <Row icon={<KeyRound size={16} />} iconTone="gray" title="Password reset by e-mail" detail="No e-mail" chevron={false} />
+                <>
+                  <Row
+                    icon={<KeyRound size={16} />}
+                    iconTone="orange"
+                    title="Set a new password"
+                    subtitle="Shown to you, no e-mail is sent"
+                    onClick={() => setStudentPasswordOpen(true)}
+                  />
+                  {hasEmail && (
+                    <Row
+                      icon={<KeyRound size={16} />}
+                      iconTone="gray"
+                      title="Send a password reset email"
+                      onClick={handleReset}
+                      disabled={busy}
+                    />
+                  )}
+                </>
               )}
               {user.corpRole && (
                 <Row
@@ -308,8 +317,7 @@ export default function SuperAdminUserDetail() {
                   onClick={() => setConfirm({ kind: 'block' })}
                 />
               )}
-            </Section>
-          )}
+          </Section>
 
           {user.corpRole && (
             <Section footer="The account is not deleted, only its access to the center panel is removed.">
@@ -335,6 +343,16 @@ export default function SuperAdminUserDetail() {
         onConfirm={runConfirmed}
         onCancel={() => !busy && setConfirm(null)}
       />
+
+      {!user.corpRole && (
+        <SetPasswordSheet en
+          open={studentPasswordOpen}
+          onClose={() => setStudentPasswordOpen(false)}
+          endpoint="/api/student-account"
+          extraBody={{ action: 'set-password', studentId: user.uid }}
+          target={{ uid: user.uid, email: user.email, login: login?.value, label: displayName(user) }}
+        />
+      )}
 
       {user.corpRole && (
         <SetPasswordSheet en

@@ -2,7 +2,15 @@ import { getAuth } from 'firebase-admin/auth';
 import { getDatabase } from 'firebase-admin/database';
 import { SUPER_ADMINS, requireAdminApp, requirePost } from './_firebaseAdmin.js';
 
-// A center admin's view of one of their students.
+// A student's account, for the staff who look after them.
+//
+// Who may call it:
+//   center admin  any student of their own center's groups (details + set-password)
+//   teacher       set-password for a student of a group they run
+//   super admin   any non-staff account on the platform (details + set-password)
+// A password change never sends an e-mail: the new password is shown to whoever
+// made it, to hand over. Staff accounts (anyone with a corpUsers role) are never
+// touched through here, even if they joined a group - set-user-password.js covers them.
 //
 //   POST { idToken, studentId, action: 'details' }
 //     → { account, activity, streak, words, groupIds }
@@ -90,20 +98,44 @@ export default async function handler(req, res) {
   }
 
   const db = getDatabase(app);
-  const callerCorp = (await db.ref(`corpUsers/${caller.uid}`).get()).val();
-  if (callerCorp?.role !== 'center_admin' || callerCorp.disabled === true || !callerCorp.centerId) {
-    res.status(403).json({ error: 'Faqat markaz admini uchun.' });
-    return;
+  const isSuper = Boolean(caller.email && SUPER_ADMINS.includes(caller.email.toLowerCase()));
+  let callerCorp = null;
+  let centerId = null;
+  if (!isSuper) {
+    callerCorp = (await db.ref(`corpUsers/${caller.uid}`).get()).val();
+    const okRole = callerCorp?.role === 'center_admin' || callerCorp?.role === 'teacher';
+    if (!okRole || callerCorp.disabled === true || !callerCorp.centerId) {
+      res.status(403).json({ error: "Faqat markaz admini, o'qituvchi yoki super admin uchun." });
+      return;
+    }
+    if (callerCorp.role === 'teacher' && action !== 'set-password') {
+      res.status(403).json({ error: "O'qituvchi faqat parol o'rnata oladi." });
+      return;
+    }
+    centerId = callerCorp.centerId;
   }
-  const centerId = callerCorp.centerId;
 
-  const allGroups = (await db.ref(`centers/${centerId}/groups`).get()).val() || {};
-  const groups = Object.entries(allGroups)
-    .filter(([, g]) => g?.students?.[studentId])
-    .map(([id, g]) => ({ id, ...g }));
-  if (!groups.length) {
-    res.status(404).json({ error: "Bu o'quvchi markazingiz guruhida yo'q." });
-    return;
+  let groups = [];
+  if (centerId) {
+    const allGroups = (await db.ref(`centers/${centerId}/groups`).get()).val() || {};
+    groups = Object.entries(allGroups)
+      .filter(([, g]) => g?.students?.[studentId])
+      // a teacher only reaches students of the groups they run
+      .filter(([, g]) => callerCorp.role !== 'teacher' || g.teacherId === callerCorp.teacherId || g.teacherId === caller.uid)
+      .map(([id, g]) => ({ id, ...g }));
+    if (!groups.length) {
+      res.status(404).json({ error: callerCorp.role === 'teacher' ? "Bu o'quvchi sizning guruhingizda yo'q." : "Bu o'quvchi markazingiz guruhida yo'q." });
+      return;
+    }
+  } else {
+    // super admin: the groups this account belongs to (none for a personal learner)
+    const memberships = Object.values((await db.ref(`users/${studentId}/groupMemberships`).get()).val() || {});
+    for (const m of memberships) {
+      if (!m?.centerId || !m?.groupId) continue;
+      const g = (await db.ref(`centers/${m.centerId}/groups/${m.groupId}`).get()).val();
+      if (g) groups.push({ id: m.groupId, centerId: m.centerId, ...g });
+    }
+    centerId = groups[0]?.centerId || null;
   }
 
   let target;
@@ -127,7 +159,7 @@ export default async function handler(req, res) {
     }
     try {
       await auth.updateUser(studentId, { password });
-      await db.ref(`centers/${centerId}/studentPasswordResets`).push({
+      await db.ref(centerId ? `centers/${centerId}/studentPasswordResets` : 'platformPasswordResets').push({
         uid: studentId,
         groupIds: groups.map((g) => g.id),
         by: caller.uid,

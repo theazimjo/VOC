@@ -14,6 +14,8 @@ import ConfirmSheet from '../../../components/corp/ConfirmSheet';
 import { formatRelativeEn as formatRelative } from '../super-admin/centerActivity';
 import { Button, EmptyState, Field, LoadingRows, Page, Row, Section, Segmented, Sheet, Toggle } from '../super-admin/ui';
 import CreateStudentPanel from '../../../components/corp/CreateStudentPanel';
+import SetPasswordSheet from '../super-admin/SetPasswordSheet';
+import { signInLabel } from '../super-admin/userInsights';
 import { useToast } from '../super-admin/useToast';
 import {
   GroupHeader, GroupStats, HomeworkPanel, ProgressPanel, StudentsPanel, TopicsPanel,
@@ -565,6 +567,7 @@ function StudentSheet({ student, group, onClose, onConfirm, showToast }) {
   const [shown, setShown] = useState(null);
   useEffect(() => { if (student) setShown(student); }, [student]);
   const st = student || shown;
+  const [passwordOpen, setPasswordOpen] = useState(false);
 
   const remove = () => {
     const target = st;
@@ -660,11 +663,29 @@ function StudentSheet({ student, group, onClose, onConfirm, showToast }) {
             );
           })}
 
+          <Button variant="tinted" block onClick={() => setPasswordOpen(true)} style={{ marginTop: 14 }}>
+            Set a new password
+          </Button>
           <button type="button" className="faculty-btn-delete ca-st-remove" onClick={remove}>
             Remove from group
           </button>
+          <SetPasswordSheet
+            open={passwordOpen}
+            onClose={() => setPasswordOpen(false)}
+            endpoint="/api/student-account"
+            extraBody={{ action: 'set-password', studentId: st.uid }}
+            target={{ uid: st.uid, email: st.email, login: signInLabelOf(st.email), label: st.name }}
+            en
+          />
         </>
       )}
     </Sheet>
   );
+}
+
+// what the student types on the sign-in screen: the phone or username behind a made-up address
+function signInLabelOf(login) {
+  if (!login) return '';
+  if (!login.includes('@')) return login;
+  return signInLabel(login)?.value || login;
 }

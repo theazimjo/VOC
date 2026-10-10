@@ -55,6 +55,8 @@ beforeEach(() => {
     admin: { uid: 'admin1', email: 'admin@c1.uz' },
     otherAdmin: { uid: 'admin2', email: 'admin@c2.uz' },
     teacher: { uid: 'teacher1', email: 't@c1.uz' },
+    otherTeacher: { uid: 'teacher2', email: 't2@c1.uz' },
+    superAdmin: { uid: 'sa1', email: 'azimjonxolmirzayev30@gmail.com' },
   };
   accounts = {
     s1: {
@@ -65,23 +67,26 @@ beforeEach(() => {
     },
     s2: { email: '', providerData: [] },
     teacher1: { email: 't@c1.uz', providerData: [{ providerId: 'password' }] },
+    s3: { email: 'u_kid.01@markaz.uz', providerData: [{ providerId: 'password' }] },
   };
   tree = {
     corpUsers: {
       admin1: { role: 'center_admin', centerId: 'c1' },
       admin2: { role: 'center_admin', centerId: 'c2' },
-      teacher1: { role: 'teacher', centerId: 'c1' },
+      teacher1: { role: 'teacher', centerId: 'c1', teacherId: 'T1' },
+      teacher2: { role: 'teacher', centerId: 'c1', teacherId: 'T2' },
     },
     centers: {
       c1: {
         groups: {
-          g1: { assignedPacks: ['p1'], additionalPacks: ['p2'], students: { s1: { name: 'Ali' }, s2: { name: 'Vali' }, teacher1: { name: 'T' } } },
-          g2: { assignedPacks: ['p3', 'p1'], students: { s1: { name: 'Ali' } } },
+          g1: { teacherId: 'T1', assignedPacks: ['p1'], additionalPacks: ['p2'], students: { s1: { name: 'Ali' }, s2: { name: 'Vali' }, s3: { name: 'Kid' }, teacher1: { name: 'T' } } },
+          g2: { teacherId: 'T2', assignedPacks: ['p3', 'p1'], students: { s1: { name: 'Ali' } } },
           g3: { assignedPacks: ['p4'], students: { s2: { name: 'Vali' } } },
         },
       },
     },
     users: {
+      s3: { groupMemberships: { g1: { centerId: 'c1', groupId: 'g1' } } },
       s1: {
         activity: { lastSeen: '2026-09-25T10:00:00Z', sessionCount: 14 },
         streak: { streakCount: 3, dailyGoal: 5, lastActiveDate: today, activityLog: { [today]: 7, '2020-01-01': 9 } },
@@ -125,9 +130,27 @@ describe('student-account API', () => {
     expect(updated).toHaveLength(0);
   });
 
-  it('refuses a teacher caller', async () => {
-    const r = await call({ idToken: 'teacher', studentId: 's1', action: 'details' });
-    expect(r.status).toBe(403);
+  it('a teacher can set the password of a student in a group they run, but not read details', async () => {
+    expect((await call({ idToken: 'teacher', studentId: 's1', action: 'details' })).status).toBe(403);
+    const r = await call({ idToken: 'teacher', studentId: 's3', action: 'set-password', password: 'NewPass123' });
+    expect(r).toEqual({ status: 200, data: { ok: true, email: 'u_kid.01@markaz.uz' } });
+    expect(updated).toEqual([{ uid: 's3', password: 'NewPass123' }]);
+    expect(pushed[0].value).toMatchObject({ by: 'teacher1', groupIds: ['g1'] });
+  });
+
+  it("a teacher cannot reach another teacher's group", async () => {
+    // s1 is in g1 (T1) and g2 (T2): T2 reaches him through g2 only
+    const r = await call({ idToken: 'otherTeacher', studentId: 's3', action: 'set-password', password: 'NewPass123' });
+    expect(r.status).toBe(404);
+    expect(updated).toHaveLength(0);
+  });
+
+  it('a super admin can set the password of any non-staff account, and details too', async () => {
+    const r = await call({ idToken: 'superAdmin', studentId: 's3', action: 'set-password', password: 'NewPass123' });
+    expect(r.status).toBe(200);
+    expect(pushed[0].path).toBe('centers/c1/studentPasswordResets');
+    expect((await call({ idToken: 'superAdmin', studentId: 's3', action: 'details' })).status).toBe(200);
+    expect((await call({ idToken: 'superAdmin', studentId: 'teacher1', action: 'set-password', password: 'NewPass123' })).status).toBe(403);
   });
 
   it('never resets a staff account that sits in a group', async () => {

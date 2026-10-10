@@ -2,6 +2,9 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
+// the sheets ask the browser about the screen size
+window.matchMedia = window.matchMedia || ((query) => ({ matches: false, media: query, addEventListener() {}, removeEventListener() {}, addListener() {}, removeListener() {} }));
+
 const NOW = Date.now();
 const ago = (d) => new Date(NOW - d * 86400000).toISOString();
 
@@ -55,6 +58,8 @@ describe('SuperAdminUserDetail', () => {
     expect(screen.getByText('Group course topic')).toBeTruthy();
     expect(screen.getByText('mother')).toBeTruthy();
     expect(screen.getByText('Kids A')).toBeTruthy();
-    expect(screen.getByText('No e-mail')).toBeTruthy();
+    // no real e-mail: a new password is set by hand and shown, nothing is mailed
+    expect(screen.getByText('Set a new password')).toBeTruthy();
+    expect(screen.queryByText('Send a password reset email')).toBeNull();
   });
 });
