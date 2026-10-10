@@ -17,7 +17,7 @@ describe('statsAnalytics', () => {
     expect(weekCompare({}, NOW).change).toBeNull();
   });
 
-  it('forecasts reviews; overdue and never-reviewed words count as today', () => {
+  it('forecasts reviews; overdue words count as today and never-started words are not reviews', () => {
     const words = [
       { nextReview: new Date(2026, 9, 1).toISOString() },
       { nextReview: new Date(2026, 9, 14, 20).toISOString() },
@@ -25,7 +25,7 @@ describe('statsAnalytics', () => {
       { nextReview: new Date(2026, 10, 30).toISOString() },
       {},
     ];
-    expect(reviewForecast(words, 7, NOW).map((d) => d.count)).toEqual([3, 0, 1, 0, 0, 0, 0]);
+    expect(reviewForecast(words, 7, NOW).map((d) => d.count)).toEqual([2, 0, 1, 0, 0, 0, 0]);
   });
 
   it('sorts words into stages', () => {
@@ -74,5 +74,20 @@ describe('activity map helpers', () => {
     expect(weeks[1].days[1].level).toBe(1);
     expect(weeks[1].days[3]).toBeNull(); // Thursday is in the future
     expect(weeks[0].days.every(Boolean)).toBe(true);
+  });
+});
+
+import { dueSplit } from './statsAnalytics';
+
+describe('dueSplit', () => {
+  it('separates words to review from words never started', () => {
+    const words = [
+      { nextReview: new Date(2026, 9, 1).toISOString() },
+      { nextReview: new Date(2026, 9, 20).toISOString() },
+      { nextReview: new Date(2026, 9, 14, 10).toISOString() },
+      {},
+      { nextReview: 'bad' },
+    ];
+    expect(dueSplit(words, NOW)).toEqual({ due: 2, fresh: 2 });
   });
 });

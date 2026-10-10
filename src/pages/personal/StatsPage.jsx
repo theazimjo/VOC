@@ -10,9 +10,8 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { useStudentPlan } from '../../hooks/usePlan';
 import { hasFeature } from '../../utils/plans';
 import { grammarTopicCounts } from '../../data/grammarTopicCounts';
-import { getDueWords } from '@voc/memory-engine';
 import {
-  dayKey, lastDays, reviewForecast, stageCounts, weeklyGrowth, sourceRanking, activityByDay, streakRuns, heatmapWeeks,
+  dayKey, lastDays, dueSplit, reviewForecast, stageCounts, weeklyGrowth, sourceRanking, activityByDay, streakRuns, heatmapWeeks,
 } from '../../utils/statsAnalytics';
 import IosSpinner from '../../components/common/IosSpinner';
 import { PremiumModal } from '../../components/Plan/PlanBadge';
@@ -24,8 +23,8 @@ const LEECH_THRESHOLD = 3;
 const COPY = {
   uz: {
     title: 'Statistika', loading: 'Yuklanmoqda...',
-    dueTitle: (n) => `${n} ta so'z takrorlash kutyapti`, dueSub: "Muddati kelgan so'zlarni takrorlasangiz, ular esdan chiqmaydi.", dueStart: 'Takrorlashni boshlash',
-    dueNone: 'Bugun hammasi takrorlandi', dueNoneSub: "Yangi so'zlar qo'shish yoki mashq qilish uchun yaxshi payt.", dueLibrary: "Kutubxonaga o'tish",
+    dueTitle: (n) => `${n} ta so'zni takrorlash vaqti keldi`, newLine: (n) => `Yana ${n} ta yangi so'z hali boshlanmagan.`, newTitle: (n) => `${n} ta yangi so'z boshlashni kutyapti`, newStart: "Yangi so'zlarni boshlash", dueSub: "Muddati kelgan so'zlarni takrorlasangiz, ular esdan chiqmaydi.", dueStart: 'Takrorlashni boshlash',
+    dueNone: "Hozir takrorlash kerak so'z yo'q", dueNoneSub: "Yangi so'zlar qo'shish yoki mashq qilish uchun yaxshi payt.", dueLibrary: "Kutubxonaga o'tish",
     goalToday: 'Bugungi maqsad', ofGoal: (n, g) => `${n} / ${g}`, goalDone: 'Bajarildi', goalLeft: (n) => `Yana ${n} ta`, goalHint: "Mashq qilingan so'zlar soni",
     streak: 'Ketma-ket kun',
     vocab: "So'z boyligingiz", vocabLine: (total, good) => `${total} ta so'zdan ${good} tasini yaxshi bilasiz`,
@@ -35,10 +34,11 @@ const COPY = {
     stageMastered: 'Yaxshi bilasiz', stageMasteredD: 'Xotirada mustahkam',
     activity: 'Faollik', activitySub: "Har kuni takrorlangan so'zlar soni", weekTotal: (n) => `Bu hafta ${n} ta so'z takrorlandi`, weekNone: "Bu hafta hali mashq qilinmadi", vsPrev: "o'tgan haftaga nisbatan",
     mapTitle: "So'nggi 20 hafta", mapSummary: (days, best) => `${days} kun faol, eng uzun seriya: ${best} kun`, mapDay: (d, n) => (n > 0 ? `${d}: ${n} ta so'z` : `${d}: mashq yo'q`), mapLess: 'Kam', mapMore: "Ko'p",
-    forecast: 'Takrorlash prognozi', forecastSub: "Qaysi kuni nechta so'z takrorlashga keladi", today: 'Bugun', overdueNote: "Bugun: muddati o'tganlar va yangi so'zlar ham shu yerda",
+    forecast: 'Takrorlash prognozi', forecastSub: "Qaysi kuni nechta so'z takrorlashga keladi", today: 'Bugun', overdueNote: "Bugun: muddati o'tib ketgan so'zlar ham shu yerda",
     growth: "Qo'shilgan so'zlar", growthSub: "Haftasiga nechta yangi so'z qo'shdingiz",
     insights: 'Maslahatlar',
-    insDue: (n) => `Hozir ${n} ta so'z takrorlashga tayyor. Bugun takrorlash eslab qolishni saqlaydi.`,
+    insDue: (n) => `${n} ta so'zning takrorlash vaqti keldi. Bugun takrorlash eslab qolishni saqlaydi.`,
+    insNew: (n) => `${n} ta yangi so'z hali mashq qilinmagan. Kuniga bir nechtasini boshlang.`,
     insWeekUp: (p) => `Bu hafta o'tgan haftadan ${p}% faolroqsiz. Shunday davom eting.`,
     insWeekDown: (p) => `Bu hafta faollik o'tgan haftadan ${p}% past. Kuniga bir necha so'z ham yetarli.`,
     insWeak: (name, avg) => `Eng zaif manba: "${name}" (o'rtacha ${avg}%). Unga ko'proq vaqt ajrating.`,
@@ -53,8 +53,8 @@ const COPY = {
   },
   ru: {
     title: 'Статистика', loading: 'Загрузка...',
-    dueTitle: (n) => `${n} слов ждут повторения`, dueSub: 'Повторяйте слова вовремя, и они не забудутся.', dueStart: 'Начать повторение',
-    dueNone: 'Сегодня всё повторено', dueNoneSub: 'Хорошее время добавить слова или потренироваться.', dueLibrary: 'В библиотеку',
+    dueTitle: (n) => `Пора повторить слов: ${n}`, newLine: (n) => `Ещё ${n} новых слов не начато.`, newTitle: (n) => `Новых слов ждут начала: ${n}`, newStart: 'Начать новые слова', dueSub: 'Повторяйте слова вовремя, и они не забудутся.', dueStart: 'Начать повторение',
+    dueNone: 'Сейчас повторять нечего', dueNoneSub: 'Хорошее время добавить слова или потренироваться.', dueLibrary: 'В библиотеку',
     goalToday: 'Цель на сегодня', ofGoal: (n, g) => `${n} / ${g}`, goalDone: 'Выполнено', goalLeft: (n) => `Ещё ${n}`, goalHint: 'Количество слов в тренировках',
     streak: 'Дней подряд',
     vocab: 'Ваш словарный запас', vocabLine: (total, good) => `Из ${total} слов вы хорошо знаете ${good}`,
@@ -64,10 +64,11 @@ const COPY = {
     stageMastered: 'Знаете хорошо', stageMasteredD: 'Прочно в памяти',
     activity: 'Активность', activitySub: 'Сколько слов повторено по дням', weekTotal: (n) => `На этой неделе повторено слов: ${n}`, weekNone: 'На этой неделе ещё не тренировались', vsPrev: 'к прошлой неделе',
     mapTitle: 'Последние 20 недель', mapSummary: (days, best) => `Активных дней: ${days}, лучшая серия: ${best}`, mapDay: (d, n) => (n > 0 ? `${d}: слов ${n}` : `${d}: без тренировок`), mapLess: 'Меньше', mapMore: 'Больше',
-    forecast: 'Прогноз повторений', forecastSub: 'Сколько слов придёт на повторение по дням', today: 'Сегодня', overdueNote: 'В «Сегодня» входят просроченные и новые слова',
+    forecast: 'Прогноз повторений', forecastSub: 'Сколько слов придёт на повторение по дням', today: 'Сегодня', overdueNote: 'В «Сегодня» входят и просроченные слова',
     growth: 'Добавленные слова', growthSub: 'Сколько новых слов вы добавляли каждую неделю',
     insights: 'Советы',
-    insDue: (n) => `Сейчас готовы к повторению ${n} слов. Повторите их сегодня, чтобы не забыть.`,
+    insDue: (n) => `Пора повторить слов: ${n}. Повторите их сегодня, чтобы не забыть.`,
+    insNew: (n) => `Новых слов без тренировок: ${n}. Начинайте по несколько в день.`,
     insWeekUp: (p) => `На этой неделе вы активнее прошлой на ${p}%. Так держать.`,
     insWeekDown: (p) => `Активность на ${p}% ниже прошлой недели. Даже несколько слов в день помогают.`,
     insWeak: (name, avg) => `Слабее всего пак «${name}» (в среднем ${avg}%). Уделите ему больше времени.`,
@@ -82,8 +83,8 @@ const COPY = {
   },
   en: {
     title: 'Statistics', loading: 'Loading...',
-    dueTitle: (n) => `${n} words are waiting for review`, dueSub: 'Reviewing words when they are due keeps them from fading.', dueStart: 'Start reviewing',
-    dueNone: 'Everything is reviewed for today', dueNoneSub: 'A good moment to add words or practice.', dueLibrary: 'Go to Library',
+    dueTitle: (n) => `${n} words are due for review`, newLine: (n) => `${n} more new words have not been started yet.`, newTitle: (n) => `${n} new words are waiting to be started`, newStart: 'Start new words', dueSub: 'Reviewing words when they are due keeps them from fading.', dueStart: 'Start reviewing',
+    dueNone: 'Nothing to review right now', dueNoneSub: 'A good moment to add words or practice.', dueLibrary: 'Go to Library',
     goalToday: "Today's goal", ofGoal: (n, g) => `${n} / ${g}`, goalDone: 'Done', goalLeft: (n) => `${n} more`, goalHint: 'Words practiced today',
     streak: 'Day streak',
     vocab: 'Your vocabulary', vocabLine: (total, good) => `You know ${good} of your ${total} words well`,
@@ -93,10 +94,11 @@ const COPY = {
     stageMastered: 'Know well', stageMasteredD: 'Solid in memory',
     activity: 'Activity', activitySub: 'Words reviewed each day', weekTotal: (n) => `${n} words reviewed this week`, weekNone: 'No practice yet this week', vsPrev: 'vs last week',
     mapTitle: 'Last 20 weeks', mapSummary: (days, best) => `${days} active days, longest streak: ${best}`, mapDay: (d, n) => (n > 0 ? `${d}: ${n} words` : `${d}: no practice`), mapLess: 'Less', mapMore: 'More',
-    forecast: 'Review forecast', forecastSub: 'How many words come due on each day', today: 'Today', overdueNote: 'Today also includes overdue and new words',
+    forecast: 'Review forecast', forecastSub: 'How many words come due on each day', today: 'Today', overdueNote: 'Today also includes overdue words',
     growth: 'Words added', growthSub: 'How many new words you added each week',
     insights: 'Tips',
-    insDue: (n) => `${n} words are ready to review right now. Reviewing them today keeps them fresh.`,
+    insDue: (n) => `${n} words are due for review. Reviewing them today keeps them fresh.`,
+    insNew: (n) => `${n} new words have not been practiced yet. Start a few each day.`,
     insWeekUp: (p) => `You are ${p}% more active than last week. Keep it up.`,
     insWeekDown: (p) => `Activity is ${p}% below last week. Even a few words a day help.`,
     insWeak: (name, avg) => `Weakest pack: "${name}" (${avg}% on average). Give it more time.`,
@@ -232,7 +234,7 @@ export default function StatsPage() {
     const now = Date.now();
     const total = allWords.length;
     const stages = stageCounts(allWords);
-    const dueNow = getDueWords(allWords).length;
+    const { due: dueNow, fresh: freshCount } = dueSplit(allWords, now);
     const byDay = activityByDay(allWords, log);
     const week = lastDays(byDay, 7, now);
     const prevWeek = lastDays(byDay, 14, now).slice(0, 7);
@@ -244,7 +246,7 @@ export default function StatsPage() {
     const forecast = reviewForecast(allWords, 7, now);
     const growth = weeklyGrowth(allWords, 8, now);
     const busiest = lastDays(byDay, 30, now).reduce((best, d) => (d.count > (best?.count || 0) ? d : best), null);
-    return { total, stages, dueNow, byDay, week, cur, change, sources, leech, forecast, growth, busiest, today: Math.max(Number(log?.[dayKey(now)]) || 0, byDay[dayKey(now)] || 0) };
+    return { total, stages, dueNow, freshCount, byDay, week, cur, change, sources, leech, forecast, growth, busiest, today: Math.max(Number(log?.[dayKey(now)]) || 0, byDay[dayKey(now)] || 0) };
   }, [allWords, log]);
 
   if (loading || grammarLoading) {
@@ -272,6 +274,7 @@ export default function StatsPage() {
 
   const tips = [];
   if (a.dueNow > 0) tips.push(c.insDue(a.dueNow));
+  if (a.freshCount > 0) tips.push(c.insNew(a.freshCount));
   if (a.change != null && Math.abs(a.change) > 5) tips.push(a.change > 0 ? c.insWeekUp(a.change) : c.insWeekDown(Math.abs(a.change)));
   const weakest = [...a.sources].filter((s) => s.count >= 5).sort((x, y) => x.avg - y.avg)[0];
   if (weakest && weakest.avg < 70) tips.push(c.insWeak(weakest.name, weakest.avg));
@@ -299,8 +302,14 @@ export default function StatsPage() {
           {a.dueNow > 0 ? (
             <>
               <h2>{c.dueTitle(a.dueNow)}</h2>
-              <p>{c.dueSub}</p>
+              <p>{c.dueSub}{a.freshCount > 0 ? ` ${c.newLine(a.freshCount)}` : ''}</p>
               <Link to="/mixed-practice?filter=due" className="btn btn-primary sp-cta-inline"><Play size={16} /> {c.dueStart}</Link>
+            </>
+          ) : a.freshCount > 0 ? (
+            <>
+              <h2 className="is-done"><CheckCircle2 size={22} /> {c.dueNone}</h2>
+              <p>{c.newTitle(a.freshCount)}</p>
+              <Link to="/mixed-practice?filter=due" className="btn btn-primary sp-cta-inline"><Play size={16} /> {c.newStart}</Link>
             </>
           ) : (
             <>
