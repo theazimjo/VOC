@@ -1,53 +1,91 @@
-// A calm, looping music-box melody for the Premium dialog, synthesised with Web Audio
-// (no audio files). startAmbientMusic() returns a function that fades it out and stops it.
+// Slow, cinematic background music for the Premium dialog, synthesised with Web Audio
+// (no audio files): a warm evolving pad, a deep root note and a sparse felt-piano
+// melody, all washed in a long reverb. startAmbientMusic() returns a function that
+// fades it out and stops it.
 import { getAudioContext } from './feedback';
 
-const BPM = 78;
-const STEP = 60 / BPM / 2; // eighth note
-// four bars: Cmaj7 - Am7 - Fmaj7 - G(add6); [arpeggio tones, pad tones]
-const BARS = [
-  { arp: [523.25, 659.25, 783.99, 987.77], pad: [130.81, 196, 246.94] },
-  { arp: [440, 523.25, 659.25, 783.99], pad: [110, 164.81, 220] },
-  { arp: [349.23, 440, 523.25, 659.25], pad: [87.31, 130.81, 174.61] },
-  { arp: [392, 493.88, 587.33, 659.25], pad: [98, 146.83, 196] },
-];
-const PATTERN = [0, 1, 2, 3, 2, 1, 2, 1]; // index into the bar's arp tones, per eighth note
-const MELODY = [ // an occasional high note on beat 1 of each bar, 0 = rest
-  [1318.5, 0, 0, 0, 1174.7, 0, 0, 0],
-  [1046.5, 0, 0, 0, 1318.5, 0, 0, 0],
-  [1396.9, 0, 0, 0, 1318.5, 0, 0, 0],
-  [1174.7, 0, 0, 0, 1568, 0, 0, 0],
+const BAR = 6.4; // seconds per chord (about 75 bpm in 2 beats of 3.2s feel)
+const hz = (n) => 440 * 2 ** ((n - 69) / 12); // MIDI note -> Hz
+
+// Cmaj9 - Am9 - Fmaj7(#11) - Gsus/6 : pad notes, root, then the melody (beat offset in seconds, note)
+const CHORDS = [
+  { root: 36, pad: [55, 59, 62, 64, 67], mel: [[0.2, 83], [1.8, 79], [3.2, 81], [4.6, 76]] },
+  { root: 33, pad: [57, 60, 64, 67, 71], mel: [[0.2, 81], [1.6, 84], [3.0, 83], [4.8, 79]] },
+  { root: 29, pad: [53, 57, 60, 64, 67], mel: [[0.2, 84], [2.0, 81], [3.4, 79], [4.8, 77]] },
+  { root: 31, pad: [55, 59, 62, 64, 69], mel: [[0.2, 79], [1.6, 83], [3.0, 86], [4.6, 83]] },
 ];
 
-function bell(ctx, out, freq, t, vol, len) {
-  [[1, vol], [2.0, vol * 0.28], [3.01, vol * 0.1]].forEach(([mult, v]) => {
+function makeReverb(ctx, seconds = 3.6) {
+  const rate = ctx.sampleRate;
+  const len = Math.floor(rate * seconds);
+  const ir = ctx.createBuffer(2, len, rate);
+  for (let ch = 0; ch < 2; ch++) {
+    const data = ir.getChannelData(ch);
+    for (let i = 0; i < len; i++) {
+      const t = i / len;
+      data[i] = (Math.random() * 2 - 1) * (1 - t) ** 2.6;
+    }
+  }
+  const conv = ctx.createConvolver();
+  conv.buffer = ir;
+  return conv;
+}
+
+// warm pad voice: two detuned saws through a slowly opening lowpass, long swell in and out
+function padNote(ctx, out, midi, t, len, pan) {
+  const lp = ctx.createBiquadFilter();
+  lp.type = 'lowpass';
+  lp.Q.value = 0.6;
+  lp.frequency.setValueAtTime(380, t);
+  lp.frequency.linearRampToValueAtTime(1500, t + len * 0.55);
+  lp.frequency.linearRampToValueAtTime(500, t + len + 1.5);
+  const g = ctx.createGain();
+  g.gain.setValueAtTime(0, t);
+  g.gain.linearRampToValueAtTime(0.022, t + 2.4);
+  g.gain.setValueAtTime(0.022, t + len - 0.4);
+  g.gain.linearRampToValueAtTime(0, t + len + 2.2);
+  const p = ctx.createStereoPanner();
+  p.pan.value = pan;
+  lp.connect(g); g.connect(p); p.connect(out);
+  [-7, 7].forEach((detune) => {
     const osc = ctx.createOscillator();
-    const g = ctx.createGain();
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(freq * mult, t);
-    g.gain.setValueAtTime(0, t);
-    g.gain.linearRampToValueAtTime(v, t + 0.008);
-    g.gain.exponentialRampToValueAtTime(0.0003, t + len / mult ** 0.35);
-    osc.connect(g); g.connect(out);
-    osc.start(t); osc.stop(t + len + 0.05);
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(hz(midi), t);
+    osc.detune.setValueAtTime(detune, t);
+    osc.connect(lp);
+    osc.start(t); osc.stop(t + len + 2.3);
   });
 }
 
-function pad(ctx, out, freqs, t, len) {
-  freqs.forEach((f) => {
-    [-4, 4].forEach((detune) => {
-      const osc = ctx.createOscillator();
-      const g = ctx.createGain();
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(f, t);
-      osc.detune.setValueAtTime(detune, t);
-      g.gain.setValueAtTime(0, t);
-      g.gain.linearRampToValueAtTime(0.014, t + 0.9);
-      g.gain.linearRampToValueAtTime(0.014, t + len - 0.9);
-      g.gain.linearRampToValueAtTime(0, t + len + 0.4);
-      osc.connect(g); g.connect(out);
-      osc.start(t); osc.stop(t + len + 0.45);
-    });
+function rootNote(ctx, out, midi, t, len) {
+  const osc = ctx.createOscillator();
+  const g = ctx.createGain();
+  osc.type = 'sine';
+  osc.frequency.setValueAtTime(hz(midi), t);
+  g.gain.setValueAtTime(0, t);
+  g.gain.linearRampToValueAtTime(0.11, t + 1.6);
+  g.gain.setValueAtTime(0.11, t + len - 0.5);
+  g.gain.linearRampToValueAtTime(0, t + len + 1.4);
+  osc.connect(g); g.connect(out);
+  osc.start(t); osc.stop(t + len + 1.5);
+}
+
+// soft felt-piano / glass tone: sine + a quiet octave, quick attack, long fade
+function pianoNote(ctx, out, midi, t, vol) {
+  const lp = ctx.createBiquadFilter();
+  lp.type = 'lowpass';
+  lp.frequency.value = 3200;
+  lp.connect(out);
+  [[1, vol], [2, vol * 0.22], [3, vol * 0.07]].forEach(([mult, v], i) => {
+    const osc = ctx.createOscillator();
+    const g = ctx.createGain();
+    osc.type = i === 0 ? 'triangle' : 'sine';
+    osc.frequency.setValueAtTime(hz(midi) * mult, t);
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(v, t + 0.012);
+    g.gain.exponentialRampToValueAtTime(0.0004, t + 3.2 / mult ** 0.5);
+    osc.connect(g); g.connect(lp);
+    osc.start(t); osc.stop(t + 3.4);
   });
 }
 
@@ -57,44 +95,40 @@ export function startAmbientMusic() {
     const ctx = getAudioContext();
     if (ctx.state === 'suspended') ctx.resume();
 
-    // master -> soft lowpass -> destination, plus an echo for the shimmer
     const master = ctx.createGain();
     master.gain.setValueAtTime(0, ctx.currentTime);
-    master.gain.linearRampToValueAtTime(1, ctx.currentTime + 1.6);
-    const lp = ctx.createBiquadFilter();
-    lp.type = 'lowpass'; lp.frequency.value = 5200;
-    const echo = ctx.createDelay(1);
-    echo.delayTime.value = STEP * 3;
-    const fb = ctx.createGain(); fb.gain.value = 0.34;
-    const wet = ctx.createGain(); wet.gain.value = 0.45;
-    master.connect(lp); lp.connect(ctx.destination);
-    master.connect(echo); echo.connect(fb); fb.connect(echo); echo.connect(wet); wet.connect(lp);
+    master.gain.linearRampToValueAtTime(0.9, ctx.currentTime + 3);
+    const dry = ctx.createGain(); dry.gain.value = 0.7;
+    const wet = ctx.createGain(); wet.gain.value = 0.85;
+    const verb = makeReverb(ctx);
+    const bus = ctx.createGain(); // everything plays into the bus, then dry + reverb
+    bus.connect(dry); dry.connect(master);
+    bus.connect(verb); verb.connect(wet); wet.connect(master);
+    master.connect(ctx.destination);
 
-    let step = 0;
-    let nextTime = ctx.currentTime + 0.25;
-    const barLen = STEP * 8;
+    let bar = 0;
+    let nextBar = ctx.currentTime + 0.2;
     const schedule = () => {
-      while (nextTime < ctx.currentTime + 1.2) {
-        const bar = BARS[Math.floor(step / 8) % BARS.length];
-        const pos = step % 8;
-        if (pos === 0) pad(ctx, master, bar.pad, nextTime, barLen);
-        bell(ctx, master, bar.arp[PATTERN[pos]], nextTime, 0.06, 1.3);
-        const m = MELODY[Math.floor(step / 8) % BARS.length][pos];
-        if (m) bell(ctx, master, m, nextTime, 0.045, 1.8);
-        nextTime += STEP;
-        step += 1;
+      while (nextBar < ctx.currentTime + 2) {
+        const c = CHORDS[bar % CHORDS.length];
+        rootNote(ctx, bus, c.root, nextBar, BAR);
+        c.pad.forEach((n, i) => padNote(ctx, bus, n, nextBar, BAR, (i - 2) * 0.28));
+        // the melody only starts from the second bar, so the pad can bloom first
+        if (bar > 0) c.mel.forEach(([off, n]) => pianoNote(ctx, bus, n, nextBar + off, 0.07));
+        nextBar += BAR;
+        bar += 1;
       }
     };
     schedule();
-    const timer = setInterval(schedule, 250);
+    const timer = setInterval(schedule, 500);
 
     return () => {
       clearInterval(timer);
       try {
         master.gain.cancelScheduledValues(ctx.currentTime);
         master.gain.setValueAtTime(master.gain.value, ctx.currentTime);
-        master.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.5);
-        setTimeout(() => { try { master.disconnect(); } catch { /* already gone */ } }, 3500);
+        master.gain.linearRampToValueAtTime(0, ctx.currentTime + 1.2);
+        setTimeout(() => { try { master.disconnect(); } catch { /* already gone */ } }, 6000);
       } catch { /* ignore */ }
     };
   } catch (error) {
