@@ -63,6 +63,24 @@ function Crown({ size = 14 }) {
   );
 }
 
+// Four-point sparkle.
+function Star() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.9 7.2 4.8 11.1 12 12-7.2.9-11.1 4.8-12 12-.9-7.2-4.8-11.1-12-12C7.2 11.1 11.1 7.2 12 0z" fill="currentColor" /></svg>
+  );
+}
+
+// [left %, top px, size px, delay s] for the twinkling stars
+const TWINKLE = [
+  [8, 20, 10, 0], [20, 78, 7, .6], [30, 14, 8, 1.2], [70, 12, 7, .3], [82, 62, 11, .9],
+  [92, 24, 8, 1.6], [14, 52, 6, 1.9], [88, 96, 7, .4], [6, 96, 8, 1.4], [62, 98, 6, 2],
+];
+// [dx, dy, scale] for the burst from the crown
+const BURST = [
+  [-120, -30, 1], [-90, -52, .7], [-60, 36, .9], [-130, 20, .6], [-30, -60, .8],
+  [120, -26, 1], [92, -54, .7], [62, 40, .9], [132, 22, .6], [34, -62, .8],
+];
+
 function PremiumModal({ onClose }) {
   const { language } = useLanguage();
   const c = COPY[language] || COPY.en;
@@ -73,6 +91,12 @@ function PremiumModal({ onClose }) {
           <button type="button" className="plan-modal-close" onClick={onClose} aria-label={c.close}>
             <X size={16} strokeWidth={2.6} />
           </button>
+          {TWINKLE.map(([l, t, z, d]) => (
+            <span key={`t${l}-${t}`} className="plan-star is-twinkle" style={{ left: `${l}%`, top: t, width: z, height: z, animationDelay: `${d}s` }}><Star /></span>
+          ))}
+          {BURST.map(([dx, dy, sc], i) => (
+            <span key={`b${i}`} className="plan-star is-burst" style={{ '--dx': `${dx}px`, '--dy': `${dy}px`, '--s': sc, animationDelay: `${0.1 + (i % 5) * 0.04}s` }}><Star /></span>
+          ))}
           <div className="plan-modal-crown"><Crown size={38} /></div>
           <h3 className="plan-modal-title">{c.title}</h3>
           <p className="plan-modal-sub">{c.sub}</p>

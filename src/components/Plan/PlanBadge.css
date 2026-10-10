@@ -67,3 +67,27 @@ button.plan-badge:active { transform: scale(.94); }
 @keyframes plan-modal-fade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes plan-modal-pop { from { opacity: 0; transform: translateY(14px) scale(.96); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .plan-modal, .plan-modal-back { animation: none; } }
+
+/* Sparkles in the dialog header: a one-time burst from the crown, then twinkling stars. */
+.plan-star { position: absolute; display: block; pointer-events: none; color: #fff; }
+.plan-star svg { display: block; width: 100%; height: 100%; filter: drop-shadow(0 0 4px rgba(255, 255, 255, .9)); }
+.plan-star.is-twinkle { animation: plan-twinkle 2.4s ease-in-out infinite; }
+.plan-star.is-burst { left: 50%; top: 58px; width: 12px; height: 12px; margin: -6px 0 0 -6px; opacity: 0; animation: plan-burst .95s cubic-bezier(.15, .8, .3, 1) both; }
+.plan-modal-crown { animation: plan-crown-bob 3.2s ease-in-out infinite; }
+.plan-modal-crown::before {
+  content: ''; position: absolute; inset: -6px; border-radius: 26px; border: 2px solid rgba(255, 255, 255, .8);
+  opacity: 0; animation: plan-ring .9s ease-out .15s both;
+}
+@keyframes plan-twinkle { 0%, 100% { opacity: .15; transform: scale(.4) rotate(0deg); } 50% { opacity: 1; transform: scale(1) rotate(45deg); } }
+@keyframes plan-burst {
+  0% { opacity: 0; transform: translate(0, 0) scale(.2) rotate(0deg); }
+  20% { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(var(--s, 1)) rotate(180deg); }
+}
+@keyframes plan-ring { 0% { opacity: .9; transform: scale(.85); } 100% { opacity: 0; transform: scale(1.9); } }
+@keyframes plan-crown-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+@media (prefers-reduced-motion: reduce) {
+  .plan-star.is-burst, .plan-modal-crown::before { display: none; }
+  .plan-star.is-twinkle { animation: none; opacity: .7; transform: scale(.8); }
+  .plan-modal-crown { animation: none; }
+}
