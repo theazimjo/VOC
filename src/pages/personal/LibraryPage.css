@@ -834,3 +834,74 @@
 }
 
 
+
+/* ===== Market: professional pass (overrides the earlier market rules) ===== */
+.market-controls { gap: 12px; margin-bottom: var(--space-md); }
+.market-search-input { height: 46px; border-radius: 14px; box-shadow: none; }
+.market-search-input:focus { box-shadow: 0 0 0 3px var(--accent-1-dim); }
+
+.market-chips-scroll-container { gap: 8px; padding: 0 0 2px; }
+.market-chip {
+  height: 36px; padding: 0 14px; gap: 8px; background: transparent; border: 1px solid var(--border);
+  color: var(--text-secondary); font-weight: 600; box-shadow: none;
+}
+.market-chip.active { background: var(--text-primary); color: var(--bg-primary); border-color: transparent; box-shadow: none; }
+.market-chip.active .market-chip-count { background: rgba(255, 255, 255, .22); color: inherit; }
+.market-chip-count { background: var(--bg-tertiary); font-size: .68rem; padding: 1px 7px; }
+
+.market-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.market-result-count { font-size: var(--font-xs); font-weight: 700; color: var(--text-muted); letter-spacing: .02em; font-variant-numeric: tabular-nums; }
+.market-toolbar-selects { display: flex; gap: 8px; }
+.market-select-pill-wrapper { position: relative; }
+.market-select-pill {
+  height: 32px; padding: 0 28px 0 12px; background-image: none; background: var(--bg-secondary);
+  border-radius: 10px; font-size: .78rem; max-width: 150px;
+}
+.market-select-chev { position: absolute; right: 9px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
+
+.market-cards-grid { gap: 14px; }
+.market-card {
+  min-height: 0; padding: 18px; border-radius: 18px; gap: 16px; cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .04); transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.market-card:hover { transform: translateY(-2px); border-color: var(--border-light); box-shadow: 0 10px 28px rgba(0, 0, 0, .10); }
+.market-card:active { transform: scale(.992); }
+.market-card-top { gap: 12px; }
+.market-card-header { gap: 14px; align-items: center; }
+.market-card-icon {
+  flex-shrink: 0; width: 52px; height: 52px; font-size: 1.6rem; border-radius: 15px; border: none;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, .14), inset 0 1px 0 rgba(255, 255, 255, .35);
+}
+.market-card-heading { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.market-card-title { font-size: 1.05rem; font-weight: 700; letter-spacing: -.01em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.market-card-meta { display: flex; align-items: center; gap: 7px; font-size: .75rem; font-weight: 600; color: var(--text-muted); min-width: 0; }
+.market-card-dot { width: 3px; height: 3px; border-radius: 50%; background: currentColor; opacity: .6; flex-shrink: 0; }
+.market-level.level-beginner { color: #10B981; }
+.market-level.level-intermediate { color: #0EA5E9; }
+.market-level.level-advanced { color: #A855F7; }
+.market-card-desc { margin: 0; font-size: .84rem; line-height: 1.5; -webkit-line-clamp: 2; }
+
+.market-card-bottom { margin-top: 0; padding-top: 14px; }
+.market-card-words { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; }
+.market-install-btn {
+  height: 36px; padding: 0 16px; border-radius: 11px; font-size: .8125rem; font-weight: 700; gap: 6px;
+  background: var(--accent-1); border-color: transparent; color: #fff; box-shadow: none;
+}
+.market-install-btn:hover:not(:disabled) { filter: brightness(1.08); background: var(--accent-1); box-shadow: 0 4px 12px rgba(0, 122, 255, .28); }
+.market-install-btn:active:not(:disabled) { transform: scale(.96); }
+.market-install-btn:disabled { cursor: default; }
+.market-install-btn.is-installed:disabled { background: rgba(16, 185, 129, .12); color: #0E9F6E; border-color: transparent; }
+.market-install-btn.has-update { background: rgba(255, 159, 10, .14); color: #D98200; border-color: transparent; }
+.market-install-btn.has-update:hover:not(:disabled) { background: #FF9F0A; color: #fff; filter: none; }
+.market-install-btn:disabled:not(.is-installed) { background: var(--bg-tertiary); color: var(--text-muted); border-color: transparent; }
+.market-spin { animation: market-spin .8s linear infinite; }
+@keyframes market-spin { to { transform: rotate(360deg); } }
+
+.library-tab-btn svg { flex-shrink: 0; }
+
+@media (max-width: 640px) {
+  .market-card { min-height: 0; padding: 16px; }
+  .market-chip { height: 34px; padding: 0 12px; }
+  .market-select-pill { height: 32px; padding: 0 26px 0 10px; }
+  .market-card-desc { font-size: .82rem; }
+}

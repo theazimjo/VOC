@@ -2,7 +2,7 @@ import { lazy, Suspense, useState, useEffect, useRef, useMemo, useCallback } fro
 import { useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ref, push, update, get, remove, set, serverTimestamp } from 'firebase/database';
-import { ArrowLeft, MoreVertical, Search, X, RotateCcw } from 'lucide-react';
+import { ArrowLeft, MoreVertical, Search, X, RotateCcw, Download, Check, RefreshCw, Loader2, Layers, Store, ChevronDown, BookOpen } from 'lucide-react';
 import { db } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -23,6 +23,9 @@ import { findKnownSnapshot } from '../../utils/crossPackKnowledge';
 import { IRREGULAR_VERBS_PACK_ID } from '../../data/irregularVerbsId';
 import IosSpinner from '../../components/common/IosSpinner';
 import './LibraryPage.css';
+
+// Some translated labels carry decorative emoji; the Market uses icons instead.
+const stripEmoji = (str) => String(str ?? '').replace(/[\u{1F300}-\u{1FAFF}☀-➿⌛⏳]️?/gu, '').trim();
 
 export default function LibraryPage() {
   const { user } = useAuth();
@@ -483,7 +486,7 @@ export default function LibraryPage() {
             {activeTab === 'library' && (
               <motion.div className="active-tab-pill" layoutId="activeTabPill" />
             )}
-            <span className="tab-label">🏠 {t('library.myPacks')}</span>
+            <span className="tab-label"><Layers size={16} strokeWidth={2.2} /> {t('library.myPacks')}</span>
             {!isLoading && packs.length > 0 && (
               <span className="tab-count-badge">{packs.length}</span>
             )}
@@ -495,7 +498,7 @@ export default function LibraryPage() {
             {activeTab === 'market' && (
               <motion.div className="active-tab-pill" layoutId="activeTabPill" />
             )}
-            <span className="tab-label">🛒 {t('library.market')}</span>
+            <span className="tab-label"><Store size={16} strokeWidth={2.2} /> {t('library.market')}</span>
             {marketPacks.length > 0 && (
               <span className="tab-count-badge">
                 {marketPacks.length}
@@ -621,33 +624,6 @@ export default function LibraryPage() {
                     </div>
 
                     <div className="market-chips-scroll-container">
-                      <div className="market-select-pill-wrapper">
-                        <select
-                          className="market-select-pill"
-                          value={activeLevel}
-                          onChange={(e) => setActiveLevel(e.target.value)}
-                        >
-                          <option value="all">🎛️ {getLevelLabel('all')}</option>
-                          <option value="beginner">🟢 {getLevelLabel('beginner')}</option>
-                          <option value="intermediate">🔵 {getLevelLabel('intermediate')}</option>
-                          <option value="advanced">🟣 {getLevelLabel('advanced')}</option>
-                        </select>
-                      </div>
-
-                      <div className="market-select-pill-wrapper">
-                        <select
-                          className="market-select-pill"
-                          value={activeStatus}
-                          onChange={(e) => setActiveStatus(e.target.value)}
-                        >
-                          <option value="all">📦 {t('library.allStatus')}</option>
-                          <option value="available">📥 {t('library.notInstalledOnly')}</option>
-                          <option value="installed">✅ {t('library.installedOnly')}</option>
-                        </select>
-                      </div>
-
-                      <div className="market-chips-divider" />
-
                       {categoryChips.map((chip) => (
                         <button
                           key={chip.id}
@@ -655,11 +631,33 @@ export default function LibraryPage() {
                           className={`market-chip ${activeCategory === chip.id ? 'active' : ''}`}
                           onClick={() => setActiveCategory(chip.id)}
                         >
-                          <span className="market-chip-icon">{chip.icon}</span>
                           <span className="market-chip-label">{chip.label}</span>
                           <span className="market-chip-count">{chip.count}</span>
                         </button>
                       ))}
+                    </div>
+
+                    <div className="market-toolbar">
+                      <span className="market-result-count">{filteredMarketPacks.length} / {marketPacks.length}</span>
+                      <div className="market-toolbar-selects">
+                        <label className="market-select-pill-wrapper">
+                          <select className="market-select-pill" value={activeLevel} onChange={(e) => setActiveLevel(e.target.value)}>
+                            <option value="all">{getLevelLabel('all')}</option>
+                            <option value="beginner">{getLevelLabel('beginner')}</option>
+                            <option value="intermediate">{getLevelLabel('intermediate')}</option>
+                            <option value="advanced">{getLevelLabel('advanced')}</option>
+                          </select>
+                          <ChevronDown size={14} className="market-select-chev" />
+                        </label>
+                        <label className="market-select-pill-wrapper">
+                          <select className="market-select-pill" value={activeStatus} onChange={(e) => setActiveStatus(e.target.value)}>
+                            <option value="all">{stripEmoji(t('library.allStatus'))}</option>
+                            <option value="available">{stripEmoji(t('library.notInstalledOnly'))}</option>
+                            <option value="installed">{stripEmoji(t('library.installedOnly'))}</option>
+                          </select>
+                          <ChevronDown size={14} className="market-select-chev" />
+                        </label>
+                      </div>
                     </div>
                   </div>
 
@@ -682,12 +680,15 @@ export default function LibraryPage() {
                           >
                             <div className="market-card-top">
                               <div className="market-card-header">
-                                <span className="market-card-icon">{pack.icon}</span>
-                                <h3 className="market-card-title">{pack.name}</h3>
-                              </div>
-                              <div className="market-card-badges">
-                                <span className="market-badge category">{getCategoryLabel(pack.category)}</span>
-                                <span className={`market-badge level level-${pack.level}`}>{getLevelLabel(pack.level)}</span>
+                                <span className="market-card-icon" style={{ background: pack.color }}>{pack.icon}</span>
+                                <div className="market-card-heading">
+                                  <h3 className="market-card-title">{pack.name}</h3>
+                                  <div className="market-card-meta">
+                                    <span>{getCategoryLabel(pack.category)}</span>
+                                    <span className="market-card-dot" />
+                                    <span className={`market-level level-${pack.level}`}>{getLevelLabel(pack.level)}</span>
+                                  </div>
+                                </div>
                               </div>
                               <p className="market-card-desc">{pack.description}</p>
                             </div>
@@ -697,12 +698,12 @@ export default function LibraryPage() {
                                 const uniqueCount = new Set((pack.words || []).map(w => (w.word || '').trim().toLowerCase())).size;
                                 return (
                                   <span className="market-card-words">
-                                    📊 {t('library.words', { count: uniqueCount })}
+                                    <BookOpen size={14} /> {t('library.words', { count: uniqueCount })}
                                   </span>
                                 );
                               })()}
                               <button
-                                className={`market-install-btn${hasUpdate ? ' has-update' : ''}`}
+                                className={`market-install-btn${hasUpdate ? ' has-update' : ''}${isInstalled && !hasUpdate ? ' is-installed' : ''}`}
                                 disabled={isInstalling || isUpdating || (isInstalled && !hasUpdate)}
                                 onClick={(e) => {
                                   e.stopPropagation();
@@ -714,15 +715,15 @@ export default function LibraryPage() {
                                 }}
                               >
                                 {isInstalling ? (
-                                  <>{t('library.installing')}</>
+                                  <><Loader2 size={14} className="market-spin" /> {stripEmoji(t('library.installing'))}</>
                                 ) : isUpdating ? (
-                                  <>{t('library.updating')}</>
+                                  <><Loader2 size={14} className="market-spin" /> {stripEmoji(t('library.updating'))}</>
                                 ) : hasUpdate ? (
-                                  <>Update (+{missingWords.length}) 🔄</>
+                                  <><RefreshCw size={14} /> Update (+{missingWords.length})</>
                                 ) : isInstalled ? (
-                                  <>{t('library.installed')}</>
+                                  <><Check size={14} strokeWidth={2.6} /> {stripEmoji(t('library.installed'))}</>
                                 ) : (
-                                  <>{t('library.download')}</>
+                                  <><Download size={14} /> {stripEmoji(t('library.download'))}</>
                                 )}
                               </button>
                             </div>
