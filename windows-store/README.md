@@ -7,6 +7,19 @@ What is already in the repo: a complete web manifest (`public/manifest.json`: id
 maskable icons, screenshots, shortcuts), a service worker with offline support, and the "Download"
 section on the landing page (installs the app from Edge/Chrome today).
 
+## Status (2026-10-10)
+
+- Partner Center product **VOCABRY** is reserved. Store ID `9NGJ2603XW6F`, listing link
+  `https://apps.microsoft.com/detail/9NGJ2603XW6F` (live only after the app is published).
+- Identity: `Name = AzimLabs.VOCABRY`, `Publisher = CN=A52E6ACB-27B9-4FA8-A73E-D54FBFF6083A`,
+  `PublisherDisplayName = Azim Labs`.
+- Package v1.0.1.0 was built with the PWABuilder service and uploaded to draft submission 1
+  (the build is kept outside git in `D:ndroid-build\windows`).
+- Still to do in Partner Center: accept the updated App Developer Agreement, Pricing (free),
+  Properties, Age ratings, Store listing with desktop screenshots, notes for certification, Submit.
+  The package declares `runFullTrust` (every PWABuilder package does); certification asks why, answer:
+  "The app is a web app (https://vocabry.uz) hosted in the Microsoft Edge WebView; it needs no extra access."
+
 ## One-time: your Microsoft account (only you can do this)
 
 1. Open <https://partner.microsoft.com/dashboard/registration/developer> and register as an
