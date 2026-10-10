@@ -142,7 +142,9 @@ export default function Dashboard() {
     // getDueWords clamps each word's nextReview before comparing, so a
     // legacy word whose stored date is a holdover from a since-fixed
     // runaway stability doesn't silently disappear from the due queue.
-    const due = getDueWords(allWords);
+    // Only words that were already learned and are now due. Never-started words are new words,
+    // not reviews; the Statistics page and the Review page count them the same way.
+    const due = getDueWords(allWords).filter((w) => w.nextReview);
     // Most at-risk first — lowest current recall probability, not just oldest
     // due date, since two overdue words with different stability forget at
     // different rates.

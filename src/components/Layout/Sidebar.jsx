@@ -1,7 +1,7 @@
 import PlanBadge from '../Plan/PlanBadge';
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, BookOpen, GraduationCap, RotateCcw, User, Presentation, Building2, LogOut } from 'lucide-react';
+import { LayoutDashboard, BookOpen, GraduationCap, User, Presentation, Building2, LogOut } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import ConfirmSheet from '../corp/ConfirmSheet';
@@ -25,7 +25,6 @@ export default function Sidebar() {
     { to: '/', icon: LayoutDashboard, label: t('nav.dashboard') },
     { to: '/library', icon: BookOpen, label: t('nav.library') },
     { to: '/grammar', icon: GraduationCap, label: t('nav.grammar') },
-    { to: '/experiment', icon: RotateCcw, label: t('nav.lab') },
     { to: '/profile', icon: User, label: t('nav.profile') },
   ];
 
