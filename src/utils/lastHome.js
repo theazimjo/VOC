@@ -20,6 +20,15 @@ export function lastHome() {
 
 // Where this visit started from, read once at load (before anything records the new visit).
 const START = lastHome();
+
+// Only the first page load of a visit (a new tab, or the app launched again) goes back
+// to the last panel. A reload inside the same visit - which is how the app switches
+// mode, e.g. staff panel -> personal - must be left alone, or the switch bounces back.
+let FRESH = true;
+try {
+  FRESH = sessionStorage.getItem('voc_visit') !== '1';
+  sessionStorage.setItem('voc_visit', '1');
+} catch { /* no sessionStorage: treat every load as a launch */ }
 const STAFF_PANELS = new Set(['center_admin', 'teacher', 'super_admin']);
 let startHandled = false;
 
@@ -27,7 +36,7 @@ let startHandled = false;
 // last worked in a staff panel, this returns that panel's path - once; every later call
 // (and every other path) returns null, so links and later navigation are never touched.
 export function takeStartTarget(pathname) {
-  if (startHandled) return null;
+  if (startHandled || !FRESH) return null;
   if (pathname !== '/' && pathname !== '/corp/student') return null;
   startHandled = true;
   return STAFF_PANELS.has(START) ? ROLE_HOME[START] : null;
