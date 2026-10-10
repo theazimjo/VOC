@@ -1,0 +1,18 @@
+.plan-badge {
+  position: relative; display: inline-flex; align-items: center; gap: 5px; overflow: hidden;
+  padding: 4px 10px 4px 7px; border-radius: 999px; vertical-align: middle; white-space: nowrap;
+  background: linear-gradient(135deg, #FFE27A 0%, #FFB627 48%, #F28C0F 100%);
+  color: #4A2E00; border: 1px solid rgba(255, 255, 255, .55);
+  box-shadow: 0 1px 2px rgba(150, 90, 0, .35), 0 3px 10px rgba(255, 170, 30, .35), inset 0 1px 0 rgba(255, 255, 255, .7);
+  font: 800 0.6875rem/1 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: 0.1em;
+}
+.plan-badge.is-compact { padding: 4px; gap: 0; }
+.plan-badge svg { display: block; flex-shrink: 0; filter: drop-shadow(0 1px 0 rgba(255, 255, 255, .5)); }
+.plan-badge::after {
+  content: ''; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .75), transparent);
+  transform: skewX(-20deg); animation: plan-badge-shine 4.5s ease-in-out infinite;
+}
+@keyframes plan-badge-shine { 0%, 62% { left: -60%; } 100% { left: 130%; } }
+@media (prefers-reduced-motion: reduce) { .plan-badge::after { animation: none; display: none; } }
