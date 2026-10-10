@@ -32,6 +32,7 @@ export const CENTER_PLANS = {
 // Features that are switched on per plan (limits are separate, see withinLimit).
 const FEATURES = {
   unlimitedPacks: ['plus', 'custom'],
+  insights: ['plus', 'custom'], // forecast, growth and the written analysis on the Statistics page
 };
 
 const TABLES = { student: STUDENT_PLANS, center: CENTER_PLANS };

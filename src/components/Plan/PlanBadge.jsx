@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
-import { Infinity as InfinityIcon, BookOpenCheck, WifiOff, Sparkles, X, ChevronRight } from 'lucide-react';
+import { Infinity as InfinityIcon, BookOpenCheck, WifiOff, Sparkles, X, ChevronRight, BarChart3 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useStudentPlan } from '../../hooks/usePlan';
@@ -16,6 +16,7 @@ const COPY = {
     items: [
       [InfinityIcon, 'Cheksiz pack', "O'z pack'laringizni cheklovsiz yarating (bepul rejada 20 ta)."],
       [BookOpenCheck, "Barcha o'rganish usullari", "Takrorlash, yozish, talaffuz, o'qish: hammasi ochiq."],
+      [BarChart3, 'Statistika va tahlil', "Takrorlash prognozi, o'sish grafigi va shaxsiy tavsiyalar."],
       [WifiOff, 'Oflayn ishlaydi', "Internetsiz ham o'rganing, ulanganda hammasi saqlanadi."],
       [Sparkles, 'Yangiliklar birinchi sizga', 'Yangi imkoniyatlarni hamma bilan bir vaqtda yoki undan oldin olasiz.'],
     ],
@@ -31,6 +32,7 @@ const COPY = {
     items: [
       [InfinityIcon, 'Безлимит паков', 'Создавайте свои паки без ограничений (в бесплатном плане 20).'],
       [BookOpenCheck, 'Все способы обучения', 'Повторение, письмо, произношение, чтение: всё открыто.'],
+      [BarChart3, 'Статистика и анализ', 'Прогноз повторений, график роста и личные советы.'],
       [WifiOff, 'Работает офлайн', 'Учитесь без интернета, всё сохранится при подключении.'],
       [Sparkles, 'Новинки первыми', 'Новые возможности вы получаете вместе со всеми или раньше.'],
     ],
@@ -46,6 +48,7 @@ const COPY = {
     items: [
       [InfinityIcon, 'Unlimited packs', 'Create as many packs of your own as you like (the free plan allows 20).'],
       [BookOpenCheck, 'Every study mode', 'Review, writing, speaking, reading: all unlocked.'],
+      [BarChart3, 'Statistics and insights', 'Review forecast, growth chart and personal tips.'],
       [WifiOff, 'Works offline', 'Study without internet; everything syncs when you are back online.'],
       [Sparkles, 'New things first', 'New features reach you at the same time as everyone, or earlier.'],
     ],
