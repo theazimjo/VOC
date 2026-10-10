@@ -1,3 +1,4 @@
+import SubscriptionControl from './SubscriptionControl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Building2, ChevronRight, GraduationCap, KeyRound, Mail, PauseCircle, Pencil, Phone, PlayCircle, Users, Settings } from 'lucide-react';
@@ -301,6 +302,8 @@ export default function SuperAdminCenterDetail() {
             <Row icon={<Mail size={16} />} iconTone="blue" title={center.adminEmail || 'Not set'} subtitle="Login" />
             <Row icon={<Phone size={16} />} iconTone="green" title={center.phone || 'Not set'} subtitle="Phone" />
           </Section>
+
+          <SubscriptionControl kind="center" basePath={`centers/${centerId}`} onToast={showToast} />
 
           <Section title="Manage">
             <Row

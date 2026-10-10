@@ -1,10 +1,17 @@
 {
   "rules": {
+    "plans": {
+      ".read": true,
+      ".write": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com')"
+    },
     "users": {
       ".read": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com')",
       "$uid": {
         ".read": "auth != null && (auth.uid === $uid || auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com')",
         ".write": "auth != null && (auth.uid === $uid || auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com')",
+        "subscription": {
+          ".validate": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com')"
+        },
         "meta": {
           "lastPackCreatedAt": {
             ".validate": "newData.isNumber() && newData.val() === now"
@@ -262,6 +269,9 @@
       "$centerId": {
         ".read": "auth != null && ((auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com') || (root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId && root.child('corpUsers').child(auth.uid).child('disabled').val() !== true))",
         ".write": "auth != null && ((auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com') || (!data.exists() && newData.exists() && auth.token.email_verified === true && newData.child('adminUid').val() === auth.uid && newData.child('adminEmail').val() === auth.token.email.toLowerCase() && newData.child('status').val() === 'active' && !root.child('corpUsers').child(auth.uid).exists()))",
+        "subscription": {
+          ".validate": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com')"
+        },
         "name": {
           ".read": true,
           ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId"

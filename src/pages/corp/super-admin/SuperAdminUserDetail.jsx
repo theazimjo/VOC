@@ -1,3 +1,4 @@
+import SubscriptionControl from './SubscriptionControl';
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Ban, BookOpen, CheckCircle2, Copy, KeyRound, Users } from 'lucide-react';
@@ -217,6 +218,8 @@ export default function SuperAdminUserDetail() {
             <Row title="Uses" detail={insights.appMode === 'group' ? 'Group mode' : 'Personal mode'} />
             {insights.language && <Row title="App language" detail={insights.language.toUpperCase()} />}
           </Section>
+
+          <SubscriptionControl kind="student" basePath={`users/${uid}`} onToast={showToast} />
 
           <Section title="Learning">
             <Row title="Average mastery" detail={insights.avgMastery == null ? '—' : `${insights.avgMastery}%`} />

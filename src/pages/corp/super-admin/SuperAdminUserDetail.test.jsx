@@ -8,6 +8,9 @@ window.matchMedia = window.matchMedia || ((query) => ({ matches: false, media: q
 const NOW = Date.now();
 const ago = (d) => new Date(NOW - d * 86400000).toISOString();
 
+// The plan control talks to Firebase directly; it has its own behavior and isn't under test here.
+vi.mock('./SubscriptionControl', () => ({ default: () => null }));
+
 vi.mock('../../../services/corpService', () => ({
   getPlatformUser: vi.fn(async (uid) => ({
     uid,

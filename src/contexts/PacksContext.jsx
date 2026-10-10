@@ -5,11 +5,14 @@ import { useAuth } from './AuthContext';
 import { migratePackWordsIfNeeded } from '../utils/wordsMigration';
 import { getDecayedMastery } from '@voc/memory-engine';
 import { classifyWordSemantic } from '../experiment/semanticClassifier';
+import { useStudentPlan } from '../hooks/usePlan';
+import { getLimit } from '../utils/plans';
 
 const PacksContext = createContext(null);
 
 export function PacksProvider({ children }) {
   const { user } = useAuth();
+  const plan = useStudentPlan(user?.uid);
   const [packs, setPacks] = useState(() => {
     if (typeof window !== 'undefined' && user) {
       const cached = localStorage.getItem(`voc-cache-packs-${user.uid}`);
@@ -23,6 +26,8 @@ export function PacksProvider({ children }) {
   const [folders, setFolders] = useState([]);
   const [foldersLoading, setFoldersLoading] = useState(true);
   const migratedRef = useRef(new Set());
+  const packsRef2 = useRef([]);
+  packsRef2.current = packs;
 
   // Single real-time listener for pack metadata (name/icon/wordCount), shared
   // across the whole app. Word contents are intentionally NOT read here —
@@ -286,6 +291,19 @@ export function PacksProvider({ children }) {
     async (data) => {
       if (!user) return null;
 
+      // Plan limit on packs the learner creates themselves (bundled market
+      // packs and courses are free and don't count). Soft limit: RTDB rules
+      // can't count children, so this only guards the app UI. Existing packs
+      // are never touched.
+      if (!data.marketPackId && !data.courseId && plan.loaded) {
+        const own = packsRef2.current.filter((p) => !p.marketPackId && !p.courseId && (p.type || 'default') === 'default').length;
+        const limit = getLimit(plan.plans, plan.planId, 'packs');
+        if (own >= limit) {
+          window.dispatchEvent(new CustomEvent('voc:plan-limit', { detail: { key: 'packs', limit } }));
+          return null;
+        }
+      }
+
       const packsRef = ref(db, `users/${user.uid}/packs`);
       const newPackRef = push(packsRef);
       const packData = {
@@ -324,7 +342,7 @@ export function PacksProvider({ children }) {
 
       return newPackRef.key;
     },
-    [user]
+    [user, plan.loaded, plan.planId, plan.plans]
   );
 
   const updatePack = useCallback(

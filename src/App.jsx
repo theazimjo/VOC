@@ -21,6 +21,8 @@ import { takeStartTarget } from './utils/lastHome';
 import OfflineIndicator from './offline/OfflineIndicator';
 const LandingPage = lazyWithRetry(() => import('./pages/marketing/LandingPage'));
 const StartCenterPage = lazyWithRetry(() => import('./pages/marketing/StartCenterPage'));
+const PricingPage = lazyWithRetry(() => import('./pages/pricing/PricingPage'));
+import PlanLimitModal from './components/Plan/PlanLimitModal';
 const BlogIndex = lazyWithRetry(() => import('./pages/blog/Blog').then((m) => ({ default: m.BlogIndex })));
 const BlogPost = lazyWithRetry(() => import('./pages/blog/Blog').then((m) => ({ default: m.BlogPost })));
 const Dashboard = lazyWithRetry(() => import('./pages/personal/Dashboard'));
@@ -150,6 +152,7 @@ export default function App() {
                 <RoutePrefetcher />
                 <StartRedirect />
                 <OfflineIndicator />
+                <PlanLimitModal />
                 <Suspense fallback={<RouteLoader />}>
                   <Routes>
                     {/* Public routes */}
@@ -161,6 +164,7 @@ export default function App() {
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/start-center" element={<StartCenterPage />} />
+                    <Route path="/pricing" element={<PricingPage />} />
                     <Route path="/choose-profile" element={<ProfileChooser />} />
   
                     {/* Protected routes */}
