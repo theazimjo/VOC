@@ -2,7 +2,7 @@ import { lazy, Suspense, useState, useEffect, useRef, useMemo, useCallback } fro
 import { useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ref, push, update, get, remove, set, serverTimestamp } from 'firebase/database';
-import { ArrowLeft, MoreVertical, Search, X, RotateCcw, Download, Check, RefreshCw, Loader2, Layers, Store, ChevronDown, BookOpen } from 'lucide-react';
+import { ArrowLeft, MoreVertical, Search, X, RotateCcw, Download, Check, RefreshCw, Loader2, BookOpen } from 'lucide-react';
 import { db } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -74,8 +74,6 @@ export default function LibraryPage() {
   // Market Search & Filtering state
   const [marketSearchQuery, setMarketSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
-  const [activeLevel, setActiveLevel] = useState('all');
-  const [activeStatus, setActiveStatus] = useState('all');
 
   // Find the user's own pack that was installed from a given market pack
   // (matched by marketPackId when available, falling back to name for
@@ -155,20 +153,9 @@ export default function LibraryPage() {
         return false;
       }
 
-      if (activeLevel !== 'all' && pack.level !== activeLevel) {
-        return false;
-      }
-
-      if (activeStatus !== 'all') {
-        const installedPack = findInstalledPack(pack);
-        const isInstalled = !!installedPack || justInstalledIds.includes(pack.id);
-        if (activeStatus === 'installed' && !isInstalled) return false;
-        if (activeStatus === 'available' && isInstalled) return false;
-      }
-
       return true;
     });
-  }, [marketPacks, marketSearchQuery, activeCategory, activeLevel, activeStatus, packs, justInstalledIds]);
+  }, [marketPacks, marketSearchQuery, activeCategory]);
 
   // Words already present in the user's installed copy of a market pack,
   // used to figure out which market words are new.
@@ -486,7 +473,7 @@ export default function LibraryPage() {
             {activeTab === 'library' && (
               <motion.div className="active-tab-pill" layoutId="activeTabPill" />
             )}
-            <span className="tab-label"><Layers size={16} strokeWidth={2.2} /> {t('library.myPacks')}</span>
+            <span className="tab-label">{t('library.myPacks')}</span>
             {!isLoading && packs.length > 0 && (
               <span className="tab-count-badge">{packs.length}</span>
             )}
@@ -498,7 +485,7 @@ export default function LibraryPage() {
             {activeTab === 'market' && (
               <motion.div className="active-tab-pill" layoutId="activeTabPill" />
             )}
-            <span className="tab-label"><Store size={16} strokeWidth={2.2} /> {t('library.market')}</span>
+            <span className="tab-label">{t('library.market')}</span>
             {marketPacks.length > 0 && (
               <span className="tab-count-badge">
                 {marketPacks.length}
@@ -636,29 +623,6 @@ export default function LibraryPage() {
                         </button>
                       ))}
                     </div>
-
-                    <div className="market-toolbar">
-                      <span className="market-result-count">{filteredMarketPacks.length} / {marketPacks.length}</span>
-                      <div className="market-toolbar-selects">
-                        <label className="market-select-pill-wrapper">
-                          <select className="market-select-pill" value={activeLevel} onChange={(e) => setActiveLevel(e.target.value)}>
-                            <option value="all">{getLevelLabel('all')}</option>
-                            <option value="beginner">{getLevelLabel('beginner')}</option>
-                            <option value="intermediate">{getLevelLabel('intermediate')}</option>
-                            <option value="advanced">{getLevelLabel('advanced')}</option>
-                          </select>
-                          <ChevronDown size={14} className="market-select-chev" />
-                        </label>
-                        <label className="market-select-pill-wrapper">
-                          <select className="market-select-pill" value={activeStatus} onChange={(e) => setActiveStatus(e.target.value)}>
-                            <option value="all">{stripEmoji(t('library.allStatus'))}</option>
-                            <option value="available">{stripEmoji(t('library.notInstalledOnly'))}</option>
-                            <option value="installed">{stripEmoji(t('library.installedOnly'))}</option>
-                          </select>
-                          <ChevronDown size={14} className="market-select-chev" />
-                        </label>
-                      </div>
-                    </div>
                   </div>
 
                   {filteredMarketPacks.length > 0 ? (
@@ -742,8 +706,6 @@ export default function LibraryPage() {
                         onClick={() => {
                           setMarketSearchQuery('');
                           setActiveCategory('all');
-                          setActiveLevel('all');
-                          setActiveStatus('all');
                         }}
                       >
                         <RotateCcw size={15} /> {t('library.clearFilters')}
