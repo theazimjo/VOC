@@ -242,3 +242,12 @@
 }
 
 .word-list-sentinel { height: 1px; width: 100%; grid-column: 1 / -1; }
+
+/* Phones: the selection bar fits the screen (counter row + three equal buttons) so Delete is never cut off */
+@media (max-width: 550px) {
+  .word-selection-toolbar { top: 62px; display: grid; grid-template-columns: 1fr; gap: 10px; padding: 10px 12px; border-radius: 18px; }
+  .word-selection-left { min-width: 0; }
+  .word-selection-actions { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 8px; width: 100%; }
+  .word-selection-actions > button { justify-content: center; min-height: 42px; padding: 0 6px; min-width: 0; font-size: .8rem; gap: 5px; }
+  .word-selection-actions > button span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+}

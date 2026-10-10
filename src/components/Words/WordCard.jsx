@@ -50,6 +50,10 @@ function WordCard({
           onPointerDownCard(word.id, e);
         }
       }}
+      onContextMenu={(e) => {
+        // a long press on a phone starts selecting; it should not open the system menu
+        if (!readOnly && onPointerDownCard && window.matchMedia?.('(pointer: coarse)').matches) e.preventDefault();
+      }}
       onClick={(e) => {
         if (isSelectionMode) {
           e.preventDefault();

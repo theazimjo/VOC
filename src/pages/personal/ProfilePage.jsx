@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   LogOut, ChevronRight, Mail, Pencil, X, Check,
-  Moon, Type, Volume2, Globe, Users, AlertCircle, CheckCircle2, Presentation, Building2, GraduationCap, Shield, FileText
+  BarChart3, Moon, Type, Volume2, Globe, Users, AlertCircle, CheckCircle2, Presentation, Building2, GraduationCap, Shield, FileText
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
@@ -152,6 +152,16 @@ export default function ProfilePage() {
       </div>
 
       <PremiumCard />
+
+      <div className="corp-profile-tiles" style={{ marginBottom: 18 }}>
+        <div className="corp-profile-tile" onClick={() => navigate('/stats')}>
+          <div className="corp-profile-tile-icon" style={{ background: '#af52de' }}>
+            <BarChart3 size={17} strokeWidth={2.2} />
+          </div>
+          <span className="corp-profile-tile-text">{t('nav.statistics')}</span>
+          <ChevronRight size={16} className="corp-profile-appearance-chevron" style={{ marginLeft: 'auto' }} />
+        </div>
+      </div>
 
       {/* ── Appearance ── */}
       <div className="corp-profile-section-title">{t('profile.appearance')}</div>

@@ -26,6 +26,21 @@ export default function WordList({ words, onEdit, onDelete, onBulkDelete, onBulk
   const isDraggingRef = useRef(false);
   const dragModeRef = useRef('select'); // 'select' | 'deselect'
   const pointerStartPosRef = useRef({ x: 0, y: 0 });
+  const touchTapRef = useRef(null); // a touch that may still turn out to be a tap
+  const scrollLockedRef = useRef(false);
+
+  // While a finger drags to select several cards, the page must not scroll under it.
+  const blockTouchScroll = useCallback((e) => { if (e.cancelable) e.preventDefault(); }, []);
+  const lockScroll = useCallback(() => {
+    if (scrollLockedRef.current) return;
+    scrollLockedRef.current = true;
+    window.addEventListener('touchmove', blockTouchScroll, { passive: false });
+  }, [blockTouchScroll]);
+  const unlockScroll = useCallback(() => {
+    if (!scrollLockedRef.current) return;
+    scrollLockedRef.current = false;
+    window.removeEventListener('touchmove', blockTouchScroll);
+  }, [blockTouchScroll]);
 
   // Latest selection state for the stable callbacks below (cards are memoized).
   const selectionRef = useRef({ mode: false, ids: selectedWordIds, readOnly });
@@ -46,6 +61,37 @@ export default function WordList({ words, onEdit, onDelete, onBulkDelete, onBulk
     if (e.button && e.button !== 0) return;
 
     pointerStartPosRef.current = { x: e.clientX, y: e.clientY };
+
+    if (e.pointerType === 'touch') {
+      // Touch: a quick tap toggles the card (on release, so scrolling never selects anything);
+      // a press-and-hold starts selecting, and dragging then selects more cards.
+      touchTapRef.current = { id: wordId };
+      if (longPressTimerRef.current) clearTimeout(longPressTimerRef.current);
+      longPressTimerRef.current = setTimeout(() => {
+        longPressTimerRef.current = null;
+        touchTapRef.current = null;
+        if (navigator.vibrate) {
+          try { navigator.vibrate(40); } catch { /* ignore */ }
+        }
+        const cur = selectionRef.current;
+        if (!cur.mode) {
+          setIsSelectionMode(true);
+          setSelectedWordIds(new Set([wordId]));
+          dragModeRef.current = 'select';
+        } else {
+          const had = cur.ids.has(wordId);
+          dragModeRef.current = had ? 'deselect' : 'select';
+          setSelectedWordIds(prev => {
+            const next = new Set(prev);
+            if (had) next.delete(wordId); else next.add(wordId);
+            return next;
+          });
+        }
+        isDraggingRef.current = true;
+        lockScroll();
+      }, 320);
+      return;
+    }
 
     if (mode) {
       isDraggingRef.current = true;
@@ -70,7 +116,7 @@ export default function WordList({ words, onEdit, onDelete, onBulkDelete, onBulk
         dragModeRef.current = 'select';
       }, 350);
     }
-  }, []);
+  }, [lockScroll]);
 
   useEffect(() => {
     const handleWindowPointerMove = (e) => {
@@ -79,6 +125,7 @@ export default function WordList({ words, onEdit, onDelete, onBulkDelete, onBulk
         if (dist > 10) {
           clearTimeout(longPressTimerRef.current);
           longPressTimerRef.current = null;
+          touchTapRef.current = null; // it is a scroll, not a tap
         }
       }
 
@@ -109,12 +156,22 @@ export default function WordList({ words, onEdit, onDelete, onBulkDelete, onBulk
       }
     };
 
-    const handleWindowPointerUp = () => {
+    const handleWindowPointerUp = (e) => {
       if (longPressTimerRef.current) {
         clearTimeout(longPressTimerRef.current);
         longPressTimerRef.current = null;
       }
+      const tap = touchTapRef.current;
+      touchTapRef.current = null;
+      if (tap && e.type === 'pointerup' && selectionRef.current.mode) {
+        setSelectedWordIds(prev => {
+          const next = new Set(prev);
+          if (next.has(tap.id)) next.delete(tap.id); else next.add(tap.id);
+          return next;
+        });
+      }
       isDraggingRef.current = false;
+      unlockScroll();
     };
 
     window.addEventListener('pointermove', handleWindowPointerMove);
@@ -125,8 +182,9 @@ export default function WordList({ words, onEdit, onDelete, onBulkDelete, onBulk
       window.removeEventListener('pointermove', handleWindowPointerMove);
       window.removeEventListener('pointerup', handleWindowPointerUp);
       window.removeEventListener('pointercancel', handleWindowPointerUp);
+      unlockScroll();
     };
-  }, []);
+  }, [unlockScroll]);
 
   const sortedWords = useMemo(() => {
     const q = deferredSearch.toLowerCase();
