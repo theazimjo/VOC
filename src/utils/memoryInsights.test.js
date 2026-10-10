@@ -80,3 +80,41 @@ describe('memoryInsights', () => {
     expect(rankWords(words, 'strong', NOW).rows[0].word.id).toBe('strong');
   });
 });
+
+import { speedByWeek, wordSpeeds, posAccuracy, weeklyReport } from './memoryInsights';
+
+describe('speed, word types and weekly report', () => {
+  const at = (days) => new Date(NOW + days * DAY).toISOString();
+  it('averages answer time per week and ignores junk times', () => {
+    const words = [{ recallHistory: [{ ts: at(0), responseTime: 2 }, { ts: at(0), responseTime: 4 }, { ts: at(0), responseTime: 999 }, { ts: at(-8), responseTime: 6 }] }];
+    const w = speedByWeek(words, 3, NOW);
+    expect(w[2].avg).toBe(3);
+    expect(w[1].avg).toBe(6);
+    expect(w[0].avg).toBeNull();
+  });
+
+  it('finds the fastest and slowest words', () => {
+    const mk = (id, ts) => ({ id, recallHistory: ts.map((t) => ({ ts: at(0), responseTime: t })) });
+    const r = wordSpeeds([mk('a', [1, 1]), mk('b', [9, 9]), mk('c', [3]), mk('d', [5, 5])]);
+    expect(r.fastest[0].word.id).toBe('a');
+    expect(r.slowest[0].word.id).toBe('b');
+    expect(r.fastest.concat(r.slowest).some((x) => x.word.id === 'c')).toBe(false);
+  });
+
+  it('groups accuracy by part of speech and drops tiny groups', () => {
+    const w = (pos, correct) => ({ lastReviewed: at(-1), partOfSpeech: pos, reviewCount: 4, correctCount: correct, stability: 5 });
+    const r = posAccuracy([w('noun', 4), w('noun', 4), w('noun', 4), w('verb', 2), w('verb', 2), w('verb', 2), w('adverb', 1)]);
+    expect(r.map((x) => x.key)).toEqual(['noun', 'verb']);
+    expect(r[0].accuracy).toBe(100);
+    expect(r[1].accuracy).toBe(50);
+  });
+
+  it('compares this week with the last in the weekly report', () => {
+    const words = [{ addedAt: at(0), recallHistory: [{ ts: at(0), result: true, responseTime: 2 }, { ts: at(-8), result: false, responseTime: 4 }] }];
+    const r = weeklyReport(words, NOW);
+    expect(r.reviews).toEqual({ prev: 1, cur: 1 });
+    expect(r.accuracy).toEqual({ prev: 0, cur: 100 });
+    expect(r.speed).toEqual({ prev: 4, cur: 2 });
+    expect(r.added.cur).toBe(1);
+  });
+});

@@ -111,3 +111,48 @@
   .mi-tiles { grid-template-columns: repeat(2, 1fr); }
   .mi-whatif li { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr) 38px; }
 }
+
+/* weekly report */
+.mi-report { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.mi-rep { display: flex; flex-direction: column; gap: 3px; padding: 12px 10px; border-radius: 14px; background: var(--bg-tertiary); min-width: 0; }
+.mi-rep-label { font-size: .6875rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mi-rep strong { font-size: 1.375rem; line-height: 1.1; font-weight: 800; letter-spacing: -0.01em; color: var(--text-primary); }
+.mi-rep-diff { display: inline-flex; align-items: center; gap: 4px; font-size: .75rem; font-weight: 700; color: var(--text-muted); }
+.mi-rep-diff.is-good { color: var(--success); }
+.mi-rep-diff.is-bad { color: var(--error); }
+
+/* speed lists */
+.mi-speeds { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 6px; }
+.mi-speeds ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.mi-speeds li { display: flex; justify-content: space-between; gap: 8px; font-size: .875rem; color: var(--text-secondary); }
+.mi-speeds li span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.mi-speeds li b { color: var(--text-primary); font-variant-numeric: tabular-nums; }
+
+/* word types */
+.mi-pos { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.mi-pos li { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) 42px; align-items: center; gap: 10px; }
+.mi-pos-name { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.mi-pos-name strong { font-size: .9rem; color: var(--text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mi-pos-name small { font-size: .75rem; color: var(--text-muted); }
+.mi-pos b { text-align: right; font-weight: 800; color: var(--text-primary); font-variant-numeric: tabular-nums; }
+
+/* confusable pairs */
+.mi-pairs { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.mi-pairs li { display: flex; align-items: center; gap: 8px; padding: 11px 0; border-top: 1px solid var(--border); }
+.mi-pairs li:first-child { border-top: none; padding-top: 0; }
+.mi-pair-a, .mi-pair-b { font-weight: 700; color: var(--text-primary); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mi-pair-arrow { color: var(--text-muted); flex-shrink: 0; }
+.mi-pair-n { margin-left: auto; flex-shrink: 0; padding: 3px 10px; border-radius: 999px; font-size: .75rem; font-weight: 700; color: var(--warning); background: rgba(255, 159, 10, .14); }
+
+/* why did you forget */
+.mi-why { list-style: none; margin: 0 0 10px; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.mi-why li { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) 40px; align-items: center; gap: 10px; font-size: .8125rem; color: var(--text-secondary); }
+.mi-why b { text-align: right; font-weight: 800; color: var(--text-primary); }
+.mi-why .mi-bar i { background: var(--warning); }
+
+@media (max-width: 480px) {
+  .mi-report { grid-template-columns: repeat(2, 1fr); }
+  .mi-speeds { grid-template-columns: 1fr; }
+}
+
+.mi-strength { display: block; font-size: .6875rem; color: var(--text-muted); margin-top: 1px; }

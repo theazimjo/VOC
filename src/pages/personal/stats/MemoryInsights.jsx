@@ -1,10 +1,14 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
-import { X, Search, ShieldCheck, Clock, Target, Repeat, CheckCircle2, XCircle } from 'lucide-react';
+import { X, Search, ShieldCheck, Clock, Target, Repeat, CheckCircle2, XCircle, ArrowRight, TrendingUp, TrendingDown, Minus } from 'lucide-react';
+import { diagnoseForgetting, getConfusionPairsForWord } from '@voc/memory-engine';
+import { useAuth } from '../../../contexts/AuthContext';
+import { getConfusionPairs } from '../../../experiment/experimentDB';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import {
   vocabCurve, wordCurve, whatIf, stabilityBuckets, accuracyByWeek, accuracyByTimeOfDay, rankWords, TARGET_RECALL,
+  speedByWeek, wordSpeeds, posAccuracy, weeklyReport,
 } from '../../../utils/memoryInsights';
 import './MemoryInsights.css';
 
@@ -28,10 +32,20 @@ const COPY = {
     sheetRecall: "Hozir eslash ehtimoli", curveTitle: "Unutish egri chizig'i", today: 'Bugun', review: 'Takrorlash vaqti', correctDot: "To'g'ri", wrongDot: 'Xato',
     stStability: 'Mustahkamlik', stReviews: 'Takrorlashlar', stAccuracy: "To'g'ri javoblar", stWrong: 'Xatolar', stSpeed: "O'rtacha javob", stNext: 'Keyingi takrorlash',
     days: (n) => `${n} kun`, sec: (n) => `${n} s`, nextNow: 'Hozir', nextIn: (n) => `${n} kundan keyin`, nextNone: "Belgilanmagan",
-    whatIf: 'Qachon takrorlash yaxshi?', whatIfSub: "30 kundan keyin necha foiz eslaysiz", whatNone: 'Takrorlamasangiz', whatDay: (d) => `${d} kundan keyin takrorlasangiz`,
+    whatIf: 'Qachon takrorlash yaxshi?', whatIfSub: (h) => `${h} kundan keyin necha foiz eslaysiz`, strengthTo: (a, b) => `mustahkamlik ${a} → ${b} kun`, whatNone: 'Takrorlamasangiz', whatDay: (d) => `${d} kundan keyin takrorlasangiz`,
     history: 'Takrorlashlar tarixi', historyNone: 'Tarix saqlanmagan', gap: (n) => `${n} kun oralig'i`,
     d0: "Bu so'z hali mashq qilinmagan.", dDue: "Eslash ehtimoli 75% dan pastga tushgan. Hozir takrorlash tavsiya etiladi.", dOk: (n) => `Xotira hali mustahkam. Keyingi takrorlash ${n} kundan keyin.`, dHard: "Bu so'zda ko'p xato qilingan: yozib mashq qilish yordam beradi.",
     close: 'Yopish',
+    weekly: 'Haftalik hisobot', weeklySub: "Bu hafta o'tgan hafta bilan solishtirilgan", wReviews: 'Takrorlashlar', wAccuracy: 'Aniqlik', wSpeed: 'Javob tezligi', wAdded: "Yangi so'zlar",
+    speed: 'Javob tezligi', speedSub: "Javob qancha tez bo'lsa, so'z shuncha ravon esda turadi (soniyada)", speedNone: "Hali yetarli ma'lumot yo'q", fastest: "Eng tez eslanadigan", slowest: "Eng sekin eslanadigan",
+    speedFaster: (p) => `Javoblaringiz o'tgan haftadan ${p}% tezlashdi.`, speedSlower: (p) => `Javoblaringiz o'tgan haftadan ${p}% sekinlashdi.`,
+    pos: "So'z turlari bo'yicha", posSub: "Qaysi turdagi so'zlarni yaxshiroq eslaysiz (to'g'ri javoblar ulushi)", posWords: (n) => `${n} ta so'z`,
+    posBest: (a, p) => `Eng kuchli: ${a} (${p}%).`, posWeak: (a, p) => `Eng zaif: ${a} (${p}%).`,
+    posNames: { noun: 'Ot', verb: "Fe'l", adjective: 'Sifat', adverb: 'Ravish', preposition: 'Predlog', pronoun: 'Olmosh', conjunction: "Bog'lovchi", interjection: 'Undov', phrase: 'Ibora', article: 'Artikl', other: 'Boshqa' },
+    conf: 'Adashtiradigan juftliklar', confSub: "Bir-birini almashtirib yuboradigan so'zlar", times: (n) => `${n} marta`, confTip: "Ularni yonma-yon, birga takrorlash eng yaxshi yordam beradi.", confNone: "Hali adashgan juftlik yo'q. Ular mashq paytida o'zi aniqlanadi.",
+    why: 'Nega unutdingiz?', whySub: 'Taxminiy sabablar (aniq xulosa emas)',
+    whyLabels: { confusion: "So'zlarni adashtirish", interval: "Takrorlash oralig'i uzun", confidence: 'Ishonch past', exposure: "Kam ko'rilgan" },
+    whyAdvice: { confusion: (p) => (p ? `"${p}" bilan yonma-yon takrorlang.` : "O'xshash so'zlar bilan birga takrorlang."), interval: "Tez-tez takrorlang, yozib mashq qiling.", confidence: "Jumlalar va misollar ichida o'rganing.", exposure: "Ko'proq mashq qiling: xotira hali shakllanmagan." },
   },
   ru: {
     retention: 'Память и забывание', retentionSub: 'Как будет забываться ваш словарь со временем, если не повторять',
@@ -49,10 +63,20 @@ const COPY = {
     sheetRecall: 'Вероятность вспомнить сейчас', curveTitle: 'Кривая забывания', today: 'Сегодня', review: 'Время повторить', correctDot: 'Верно', wrongDot: 'Ошибка',
     stStability: 'Прочность', stReviews: 'Повторений', stAccuracy: 'Верных ответов', stWrong: 'Ошибок', stSpeed: 'Средний ответ', stNext: 'Следующее повторение',
     days: (n) => `${n} дн.`, sec: (n) => `${n} с`, nextNow: 'Сейчас', nextIn: (n) => `Через ${n} дн.`, nextNone: 'Не назначено',
-    whatIf: 'Когда лучше повторить?', whatIfSub: 'Сколько вы будете помнить через 30 дней', whatNone: 'Если не повторять', whatDay: (d) => `Если повторить через ${d} дн.`,
+    whatIf: 'Когда лучше повторить?', whatIfSub: (h) => `Сколько вы будете помнить через ${h} дн.`, strengthTo: (a, b) => `прочность ${a} → ${b} дн.`, whatNone: 'Если не повторять', whatDay: (d) => `Если повторить через ${d} дн.`,
     history: 'История повторений', historyNone: 'История не сохранена', gap: (n) => `интервал ${n} дн.`,
     d0: 'Это слово ещё не тренировали.', dDue: 'Вероятность вспомнить упала ниже 75%. Рекомендуем повторить сейчас.', dOk: (n) => `Память пока крепкая. Следующее повторение через ${n} дн.`, dHard: 'В этом слове много ошибок: поможет письменная тренировка.',
     close: 'Закрыть',
+    weekly: 'Недельный отчёт', weeklySub: 'Эта неделя в сравнении с прошлой', wReviews: 'Повторения', wAccuracy: 'Точность', wSpeed: 'Скорость ответа', wAdded: 'Новые слова',
+    speed: 'Скорость ответа', speedSub: 'Чем быстрее ответ, тем увереннее слово в памяти (в секундах)', speedNone: 'Пока мало данных', fastest: 'Быстрее всего вспоминаются', slowest: 'Медленнее всего вспоминаются',
+    speedFaster: (p) => `Вы отвечаете на ${p}% быстрее, чем на прошлой неделе.`, speedSlower: (p) => `Вы отвечаете на ${p}% медленнее, чем на прошлой неделе.`,
+    pos: 'По частям речи', posSub: 'Какие слова вы помните лучше (доля верных ответов)', posWords: (n) => `${n} слов`,
+    posBest: (a, p) => `Сильнее всего: ${a} (${p}%).`, posWeak: (a, p) => `Слабее всего: ${a} (${p}%).`,
+    posNames: { noun: 'Существительное', verb: 'Глагол', adjective: 'Прилагательное', adverb: 'Наречие', preposition: 'Предлог', pronoun: 'Местоимение', conjunction: 'Союз', interjection: 'Междометие', phrase: 'Выражение', article: 'Артикль', other: 'Другое' },
+    conf: 'Путаемые пары', confSub: 'Слова, которые вы принимаете одно за другое', times: (n) => `${n} раз`, confTip: 'Лучше всего помогает повторять их вместе, рядом.', confNone: 'Путаемых пар пока нет. Они определяются во время тренировок.',
+    why: 'Почему забыли?', whySub: 'Вероятные причины (не точный вывод)',
+    whyLabels: { confusion: 'Путаница слов', interval: 'Слишком большой интервал', confidence: 'Низкая уверенность', exposure: 'Мало повторений' },
+    whyAdvice: { confusion: (p) => (p ? `Повторяйте вместе с «${p}».` : 'Повторяйте вместе с похожими словами.'), interval: 'Повторяйте чаще и тренируйте письмом.', confidence: 'Учите в предложениях и примерах.', exposure: 'Больше практики: память ещё не сформировалась.' },
   },
   en: {
     retention: 'Memory and forgetting', retentionSub: 'How your vocabulary fades over time if nothing is reviewed',
@@ -70,10 +94,20 @@ const COPY = {
     sheetRecall: 'Chance to recall right now', curveTitle: 'Forgetting curve', today: 'Today', review: 'Review time', correctDot: 'Correct', wrongDot: 'Wrong',
     stStability: 'Strength', stReviews: 'Reviews', stAccuracy: 'Correct answers', stWrong: 'Mistakes', stSpeed: 'Average answer', stNext: 'Next review',
     days: (n) => `${n} d`, sec: (n) => `${n} s`, nextNow: 'Now', nextIn: (n) => `In ${n} days`, nextNone: 'Not scheduled',
-    whatIf: 'When is the best time to review?', whatIfSub: 'How much you will remember in 30 days', whatNone: 'If not reviewed', whatDay: (d) => `If reviewed in ${d} days`,
+    whatIf: 'When is the best time to review?', whatIfSub: (h) => `How much you will remember in ${h} days`, strengthTo: (a, b) => `strength ${a} → ${b} d`, whatNone: 'If not reviewed', whatDay: (d) => `If reviewed in ${d} days`,
     history: 'Review history', historyNone: 'No history saved', gap: (n) => `${n} day gap`,
     d0: 'This word has not been practiced yet.', dDue: 'Recall chance has dropped below 75%. Reviewing now is recommended.', dOk: (n) => `Memory is still solid. Next review in ${n} days.`, dHard: 'This word has many mistakes: typing practice helps.',
     close: 'Close',
+    weekly: 'Weekly report', weeklySub: 'This week compared with last week', wReviews: 'Reviews', wAccuracy: 'Accuracy', wSpeed: 'Answer speed', wAdded: 'New words',
+    speed: 'Answer speed', speedSub: 'The faster you answer, the more fluent the word (in seconds)', speedNone: 'Not enough data yet', fastest: 'Recalled fastest', slowest: 'Recalled slowest',
+    speedFaster: (p) => `You answer ${p}% faster than last week.`, speedSlower: (p) => `You answer ${p}% slower than last week.`,
+    pos: 'By word type', posSub: 'Which kinds of words you remember best (share of correct answers)', posWords: (n) => `${n} words`,
+    posBest: (a, p) => `Strongest: ${a} (${p}%).`, posWeak: (a, p) => `Weakest: ${a} (${p}%).`,
+    posNames: { noun: 'Noun', verb: 'Verb', adjective: 'Adjective', adverb: 'Adverb', preposition: 'Preposition', pronoun: 'Pronoun', conjunction: 'Conjunction', interjection: 'Interjection', phrase: 'Phrase', article: 'Article', other: 'Other' },
+    conf: 'Words you mix up', confSub: 'Pairs of words you keep swapping', times: (n) => `${n} times`, confTip: 'Reviewing them side by side helps the most.', confNone: 'No mixed-up pairs yet. They are detected while you practice.',
+    why: 'Why did you forget?', whySub: 'Likely reasons (not a definite answer)',
+    whyLabels: { confusion: 'Mixing up words', interval: 'Review gap too long', confidence: 'Low confidence', exposure: 'Seen too few times' },
+    whyAdvice: { confusion: (p) => (p ? `Review it side by side with "${p}".` : 'Review it together with similar words.'), interval: 'Review more often and practice by typing.', confidence: 'Learn it inside sentences and examples.', exposure: 'Practice more: the memory has not formed yet.' },
   },
 };
 
@@ -143,9 +177,12 @@ function WordChart({ word, mem, now, c, locale }) {
 }
 
 // ---- word sheet -----------------------------------------------------------------------------
-function WordSheet({ item, now, c, locale, onClose }) {
+function WordSheet({ item, now, c, locale, pairs, onClose }) {
   const { word, mem } = item;
-  const options = useMemo(() => (mem.hasReview ? whatIf(word) : []), [word, mem.hasReview]);
+  const partner = useMemo(() => getConfusionPairsForWord(word.id, pairs), [word.id, pairs]);
+  const why = useMemo(() => diagnoseForgetting({ recallHistory: word.recallHistory, totalReviews: word.reviewCount, wordData: { word: word.word } }, partner), [word, partner]);
+  const horizon = Math.min(30, Math.max(7, Math.round(mem.stability * 5)));
+  const options = useMemo(() => (mem.hasReview ? whatIf(word, [1, 3, 7, 14].filter((d) => d < horizon), horizon) : []), [word, mem.hasReview, horizon]);
   const fmt = (t) => new Date(t).toLocaleDateString(locale, { day: 'numeric', month: 'short', year: 'numeric' });
   const advice = !mem.hasReview ? c.d0
     : mem.recall < TARGET_RECALL ? c.dDue
@@ -195,13 +232,37 @@ function WordSheet({ item, now, c, locale, onClose }) {
             </div>
 
             <h4 className="mi-h">{c.whatIf}</h4>
-            <p className="mi-sub">{c.whatIfSub}</p>
+            <p className="mi-sub">{c.whatIfSub(horizon)}</p>
             <ul className="mi-whatif">
               <li><span>{c.whatNone}</span><span className="mi-bar"><i style={{ width: `${pct(options[0]?.without ?? 0)}%` }} className="is-none" /></span><b>{pct(options[0]?.without ?? 0)}%</b></li>
               {options.map((o) => (
-                <li key={o.day}><span>{c.whatDay(o.day)}</span><span className="mi-bar"><i style={{ width: `${pct(o.withReview)}%` }} /></span><b>{pct(o.withReview)}%</b></li>
+                <li key={o.day}>
+                  <span>{c.whatDay(o.day)}<small className="mi-strength">{c.strengthTo(Math.round(mem.stability * 10) / 10, Math.round(o.newStability * 10) / 10)}</small></span>
+                  <span className="mi-bar"><i style={{ width: `${pct(o.withReview)}%` }} /></span><b>{pct(o.withReview)}%</b>
+                </li>
               ))}
             </ul>
+
+            {why.hasEnoughData && (
+              <>
+                <h4 className="mi-h">{c.why}</h4>
+                <p className="mi-sub">{c.whySub}</p>
+                <ul className="mi-why">
+                  {why.factors.filter((f) => f.weight >= 0.15).slice(0, 3).map((f) => (
+                    <li key={f.key}>
+                      <span>{c.whyLabels[f.key]}</span>
+                      <span className="mi-bar"><i style={{ width: `${Math.round(f.weight * 100)}%` }} /></span>
+                      <b>{Math.round(f.weight * 100)}%</b>
+                    </li>
+                  ))}
+                </ul>
+                {why.primaryCause && (
+                  <p className="mi-advice">
+                    {typeof c.whyAdvice[why.primaryCause] === 'function' ? c.whyAdvice[why.primaryCause](partner[0]?.partnerWord) : c.whyAdvice[why.primaryCause]}
+                  </p>
+                )}
+              </>
+            )}
 
             <h4 className="mi-h">{c.history}</h4>
             {mem.history.length > 0 ? (
@@ -233,12 +294,22 @@ export default function MemoryInsights({ words, tag }) {
   const [query, setQuery] = useState('');
   const [shown, setShown] = useState(20);
   const [open, setOpen] = useState(null);
+  const { user } = useAuth();
+  const [pairs, setPairs] = useState([]);
+  useEffect(() => {
+    if (!user) return;
+    getConfusionPairs(user.uid).then(setPairs).catch(() => setPairs([]));
+  }, [user]);
 
   const curve = useMemo(() => vocabCurve(words, now), [words, now]);
   const buckets = useMemo(() => stabilityBuckets(words), [words]);
   const weeks = useMemo(() => accuracyByWeek(words, 8, now), [words, now]);
   const slots = useMemo(() => accuracyByTimeOfDay(words), [words]);
   const ranked = useMemo(() => rankWords(words, tab, now), [words, tab, now]);
+  const report = useMemo(() => weeklyReport(words, now), [words, now]);
+  const speed = useMemo(() => speedByWeek(words, 8, now), [words, now]);
+  const speeds = useMemo(() => wordSpeeds(words), [words]);
+  const pos = useMemo(() => posAccuracy(words), [words]);
 
   const rows = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -252,6 +323,33 @@ export default function MemoryInsights({ words, tag }) {
 
   return (
     <>
+      {/* Weekly report */}
+      <section className="sp-card">
+        <div className="sp-head"><div><h2>{c.weekly}</h2><p>{c.weeklySub}</p></div>{tag}</div>
+        <div className="mi-report">
+          {[
+            [c.wReviews, report.reviews, (v) => v, false],
+            [c.wAccuracy, report.accuracy, (v) => `${v}%`, false],
+            [c.wSpeed, report.speed, (v) => c.sec(v), true],
+            [c.wAdded, report.added, (v) => v, false],
+          ].map(([label, d, fmtv, lowerIsBetter]) => {
+            const has = d.cur != null;
+            const diff = has && d.prev != null ? d.cur - d.prev : null;
+            const good = diff == null || diff === 0 ? null : lowerIsBetter ? diff < 0 : diff > 0;
+            const Icon = diff == null || diff === 0 ? Minus : diff > 0 ? TrendingUp : TrendingDown;
+            return (
+              <div className="mi-rep" key={label}>
+                <span className="mi-rep-label">{label}</span>
+                <strong>{has ? fmtv(d.cur) : '-'}</strong>
+                <span className={`mi-rep-diff${good === true ? ' is-good' : good === false ? ' is-bad' : ''}`}>
+                  <Icon size={13} />{d.prev != null ? fmtv(d.prev) : '-'}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
       {/* Forgetting curve of the whole vocabulary */}
       <section className="sp-card">
         <div className="sp-head"><div><h2>{c.retention}</h2><p>{c.retentionSub}</p></div>{tag}</div>
@@ -325,6 +423,79 @@ export default function MemoryInsights({ words, tag }) {
         ) : <p className="sp-foot">{c.accNone}</p>}
       </section>
 
+      {/* Answer speed */}
+      <section className="sp-card">
+        <div className="sp-head"><div><h2>{c.speed}</h2><p>{c.speedSub}</p></div>{tag}</div>
+        {speed.some((w) => w.avg != null) ? (
+          <>
+            <div className="sp-bars">
+              {speed.map((w, i) => {
+                const max = Math.max(...speed.map((x) => x.avg || 0), 1);
+                return (
+                  <div className="sp-bar-col" key={i}>
+                    <span className="sp-bar-val">{w.avg != null ? w.avg : ''}</span>
+                    <div className="sp-bar-track">
+                      <motion.div className={`sp-bar${i === speed.length - 1 ? ' is-accent' : ''}`} initial={{ height: 0 }} animate={{ height: `${w.avg != null ? (w.avg / max) * 100 : 0}%` }} transition={{ duration: 0.5, delay: i * 0.04 }} />
+                    </div>
+                    <span className="sp-bar-label">{w.start.toLocaleDateString(locale, { day: 'numeric', month: 'short' })}</span>
+                  </div>
+                );
+              })}
+            </div>
+            {report.speed.cur != null && report.speed.prev != null && Math.abs(report.speed.cur - report.speed.prev) / report.speed.prev > 0.05 && (
+              <p className="sp-foot">
+                {report.speed.cur < report.speed.prev
+                  ? c.speedFaster(Math.round((1 - report.speed.cur / report.speed.prev) * 100))
+                  : c.speedSlower(Math.round((report.speed.cur / report.speed.prev - 1) * 100))}
+              </p>
+            )}
+            {(speeds.fastest.length > 0) && (
+              <div className="mi-speeds">
+                <div><h4 className="mi-h">{c.fastest}</h4><ul>{speeds.fastest.map((r) => <li key={r.word.id}><span>{r.word.word}</span><b>{c.sec(r.avg)}</b></li>)}</ul></div>
+                <div><h4 className="mi-h">{c.slowest}</h4><ul>{speeds.slowest.map((r) => <li key={r.word.id}><span>{r.word.word}</span><b>{c.sec(r.avg)}</b></li>)}</ul></div>
+              </div>
+            )}
+          </>
+        ) : <p className="sp-foot">{c.speedNone}</p>}
+      </section>
+
+      {/* Accuracy by word type */}
+      {pos.length > 0 && (
+        <section className="sp-card">
+          <div className="sp-head"><div><h2>{c.pos}</h2><p>{c.posSub}</p></div>{tag}</div>
+          <ul className="mi-pos">
+            {pos.map((g) => (
+              <li key={g.key}>
+                <span className="mi-pos-name"><strong>{c.posNames[g.key] || g.key}</strong><small>{c.posWords(g.words)}</small></span>
+                <span className="mi-bar"><i style={{ width: `${g.accuracy}%` }} /></span>
+                <b>{g.accuracy}%</b>
+              </li>
+            ))}
+          </ul>
+          {pos.length > 1 && <p className="sp-foot">{c.posBest(c.posNames[pos[0].key] || pos[0].key, pos[0].accuracy)} {c.posWeak(c.posNames[pos[pos.length - 1].key] || pos[pos.length - 1].key, pos[pos.length - 1].accuracy)}</p>}
+        </section>
+      )}
+
+      {/* Confusable pairs */}
+      <section className="sp-card">
+        <div className="sp-head"><div><h2>{c.conf}</h2><p>{c.confSub}</p></div>{tag}</div>
+        {pairs.length > 0 ? (
+          <>
+            <ul className="mi-pairs">
+              {pairs.slice(0, 8).map((p) => (
+                <li key={p.key || `${p.wordIdA}-${p.wordIdB}`}>
+                  <span className="mi-pair-a">{p.wordA || '?'}</span>
+                  <ArrowRight size={14} className="mi-pair-arrow" />
+                  <span className="mi-pair-b">{p.wordB || '?'}</span>
+                  <span className="mi-pair-n">{c.times(p.count || 1)}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="sp-foot">{c.confTip}</p>
+          </>
+        ) : <p className="sp-foot">{c.confNone}</p>}
+      </section>
+
       {/* Word explorer */}
       <section className="sp-card">
         <div className="sp-head"><div><h2>{c.explorer}</h2><p>{c.explorerSub}</p></div>{tag}</div>
@@ -350,7 +521,7 @@ export default function MemoryInsights({ words, tag }) {
         {rows.length > shown && <button type="button" className="mi-more" onClick={() => setShown((n) => n + 20)}>{c.more}</button>}
       </section>
 
-      {open && <WordSheet item={open} now={now} c={c} locale={locale} onClose={() => setOpen(null)} />}
+      {open && <WordSheet item={open} now={now} c={c} locale={locale} pairs={pairs} onClose={() => setOpen(null)} />}
     </>
   );
 }

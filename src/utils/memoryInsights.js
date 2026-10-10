@@ -2,6 +2,7 @@
 // strength, accuracy trends. All of it uses the scheduler's own forgetting model, recall =
 // exp(-days / stability), so the curve, the review date and the "what if I review" projections
 // always agree with each other (the engine schedules a review when recall reaches 75%).
+import { weeklyGrowth } from './statsAnalytics';
 import {
   computeRecallProbability, resolveStability, resolveCorrectCount, simulateReviewDayOptions,
 } from '@voc/memory-engine';
@@ -73,7 +74,7 @@ export function wordCurve(word, now = Date.now(), ahead = 30, steps = 48) {
 // What a review on day 1 / 3 / 7 / 14 would do to recall 30 days from now.
 export function whatIf(word, days = [1, 3, 7, 14], horizon = 30) {
   return simulateReviewDayOptions(resolveStability(word), days, horizon).map((r) => ({
-    day: r.reviewDay, without: r.withoutReview, withReview: r.withReview,
+    day: r.reviewDay, without: r.withoutReview, withReview: r.withReview, newStability: r.newStabilityAfterReview,
   }));
 }
 
@@ -131,4 +132,68 @@ export function rankWords(words, mode, now = Date.now()) {
   else if (mode === 'hard') rows.sort((a, b) => (b.mem.wrong - a.mem.wrong) || (a.mem.recall - b.mem.recall));
   else rows.sort((a, b) => a.mem.recall - b.mem.recall);
   return { rows };
+}
+
+// ---- Speed, word types, weekly report -----------------------------------------------------
+const validTime = (x) => Number.isFinite(Number(x)) && Number(x) > 0 && Number(x) <= 60;
+
+// Average answer time (seconds) per week for the last `n` weeks; faster means more fluent recall.
+export function speedByWeek(words, n = 8, now = Date.now()) {
+  const today = new Date(now); today.setHours(0, 0, 0, 0);
+  const monday = new Date(today); monday.setDate(today.getDate() - ((today.getDay() + 6) % 7));
+  const weeks = Array.from({ length: n }, (_, i) => {
+    const d = new Date(monday); d.setDate(monday.getDate() - (n - 1 - i) * 7);
+    return { start: d, sum: 0, count: 0 };
+  });
+  const first = weeks[0].start.getTime();
+  (words || []).forEach((w) => (w.recallHistory || []).forEach((h) => {
+    const t = new Date(h?.ts).getTime();
+    if (!Number.isFinite(t) || t < first || !validTime(h.responseTime)) return;
+    const idx = Math.min(n - 1, Math.floor((t - first) / (7 * DAY)));
+    weeks[idx].sum += Number(h.responseTime);
+    weeks[idx].count += 1;
+  }));
+  return weeks.map((w) => ({ start: w.start, count: w.count, avg: w.count > 0 ? Math.round((w.sum / w.count) * 10) / 10 : null }));
+}
+
+// Fastest and slowest words by average answer time (needs at least 2 timed answers).
+export function wordSpeeds(words, min = 2) {
+  const rows = [];
+  (words || []).forEach((w) => {
+    const times = (w.recallHistory || []).map((h) => Number(h?.responseTime)).filter(validTime);
+    if (times.length >= min) rows.push({ word: w, avg: Math.round(mean(times) * 10) / 10, n: times.length });
+  });
+  rows.sort((a, b) => a.avg - b.avg);
+  return { fastest: rows.slice(0, 3), slowest: rows.slice(-3).reverse() };
+}
+
+// Accuracy and memory strength by part of speech (groups with at least 3 words that were reviewed).
+export function posAccuracy(words) {
+  const map = {};
+  reviewedWords(words).forEach((w) => {
+    const key = (w.partOfSpeech || 'other').toLowerCase();
+    const g = map[key] || (map[key] = { key, words: 0, reviews: 0, correct: 0, stability: 0 });
+    const n = Number(w.reviewCount) || 1;
+    g.words += 1;
+    g.reviews += n;
+    g.correct += Math.min(n, resolveCorrectCount(w));
+    g.stability += resolveStability(w);
+  });
+  return Object.values(map)
+    .filter((g) => g.words >= 3)
+    .map((g) => ({ key: g.key, words: g.words, accuracy: Math.round((g.correct / g.reviews) * 100), stability: Math.round((g.stability / g.words) * 10) / 10 }))
+    .sort((a, b) => b.accuracy - a.accuracy);
+}
+
+// This week against the last one: reviews, accuracy, answer speed and new words.
+export function weeklyReport(words, now = Date.now()) {
+  const acc = accuracyByWeek(words, 2, now);
+  const spd = speedByWeek(words, 2, now);
+  const grow = weeklyGrowth(words, 2, now);
+  return {
+    reviews: { prev: acc[0].total, cur: acc[1].total },
+    accuracy: { prev: acc[0].rate, cur: acc[1].rate },
+    speed: { prev: spd[0].avg, cur: spd[1].avg },
+    added: { prev: grow[0].count, cur: grow[1].count },
+  };
 }
