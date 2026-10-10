@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
-import { Infinity as InfinityIcon, BookOpenCheck, WifiOff, Sparkles, X } from 'lucide-react';
+import { Infinity as InfinityIcon, BookOpenCheck, WifiOff, Sparkles, X, ChevronRight } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useStudentPlan } from '../../hooks/usePlan';
@@ -21,6 +21,8 @@ const COPY = {
     launch: 'Hozir ishga tushirish davri: Premium hamma uchun bepul.',
     plans: "Narxlarni ko'rish",
     close: 'Yopish',
+    cardFree: 'Hozircha bepul',
+    cardLeft: (n) => `${n} kun qoldi`,
   },
   ru: {
     title: 'Premium',
@@ -34,6 +36,8 @@ const COPY = {
     launch: 'Сейчас период запуска: Premium бесплатен для всех.',
     plans: 'Смотреть цены',
     close: 'Закрыть',
+    cardFree: 'Сейчас бесплатно',
+    cardLeft: (n) => `Осталось ${n} дн.`,
   },
   en: {
     title: 'Premium',
@@ -47,6 +51,8 @@ const COPY = {
     launch: 'Launch period: Premium is free for everyone right now.',
     plans: 'See plans',
     close: 'Close',
+    cardFree: 'Free for now',
+    cardLeft: (n) => `${n} days left`,
   },
 };
 
@@ -81,7 +87,7 @@ const BURST = [
   [120, -26, 1], [92, -54, .7], [62, 40, .9], [132, 22, .6], [34, -62, .8],
 ];
 
-function PremiumModal({ onClose }) {
+export function PremiumModal({ onClose }) {
   const { language } = useLanguage();
   const c = COPY[language] || COPY.en;
   return createPortal(
@@ -134,6 +140,30 @@ export default function PlanBadge({ compact = false }) {
       <button type="button" className={`plan-badge${compact ? ' is-compact' : ''}`} title="Premium" onClick={() => setOpen(true)}>
         <Crown size={compact ? 15 : 14} />
         {!compact && 'PREMIUM'}
+      </button>
+      {open && <PremiumModal onClose={() => setOpen(false)} />}
+    </>
+  );
+}
+
+// Profile card: shows the plan and opens the same benefits dialog.
+export function PremiumCard() {
+  const { user } = useAuth();
+  const { language } = useLanguage();
+  const { planId, status, daysLeft, loaded } = useStudentPlan(user?.uid);
+  const [open, setOpen] = useState(false);
+  if (!user || !loaded || planId !== 'plus') return null;
+  const c = COPY[language] || COPY.en;
+  const detail = status === 'active' && daysLeft ? c.cardLeft(daysLeft) : EVERYONE_PREMIUM && status === 'none' ? c.cardFree : c.sub;
+  return (
+    <>
+      <button type="button" className="plan-card" onClick={() => setOpen(true)}>
+        <span className="plan-card-crown"><Crown size={24} /></span>
+        <span className="plan-card-text">
+          <span className="plan-card-title">{c.title}</span>
+          <span className="plan-card-sub">{c.sub} · {detail}</span>
+        </span>
+        <ChevronRight size={18} className="plan-card-chev" />
       </button>
       {open && <PremiumModal onClose={() => setOpen(false)} />}
     </>
