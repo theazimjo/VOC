@@ -10,6 +10,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { usePacks } from '../hooks/usePacks';
+import { useStreak } from '../hooks/useStreak';
 import {
   saveReviewEvent,
   recordConfusionPair,
@@ -23,6 +24,7 @@ import { getWordCluster } from './semanticClassifier';
 export function useMemoryExperiment() {
   const { user } = useAuth();
   const { allWords: packWords, allWordsLoading } = usePacks();
+  const { incrementActivity } = useStreak();
 
   const [confusionPairs, setConfusionPairs] = useState([]);
   const [confusionLoading, setConfusionLoading] = useState(true);
@@ -212,6 +214,9 @@ export function useMemoryExperiment() {
       newStability: updatedMemory.stability,
     };
 
+    // every reviewed word counts toward today's goal and the streak, like Practice does
+    incrementActivity(1).catch(() => {});
+
     const newResults = [...session.results, result];
     const nextIndex = session.index + 1;
     const done = nextIndex >= session.queue.length;
@@ -219,7 +224,7 @@ export function useMemoryExperiment() {
     setSession((prev) => ({ ...prev, results: newResults, index: nextIndex, finished: done }));
 
     return { done, updatedMemory };
-  }, [session, user, memoryMap]);
+  }, [session, user, memoryMap, incrementActivity]);
 
   /**
    * Skip the current word (no review recorded).
