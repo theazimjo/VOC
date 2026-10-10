@@ -45,3 +45,34 @@ describe('statsAnalytics', () => {
     expect(dayKey(NOW)).toBe('2026-10-14');
   });
 });
+
+import { activityByDay, streakRuns, heatmapWeeks } from './statsAnalytics';
+
+describe('activity map helpers', () => {
+  it('merges practice log and review stamps, taking the larger number per day', () => {
+    const words = [
+      { lastReviewed: new Date(2026, 9, 13, 9).toISOString() },
+      { lastReviewed: new Date(2026, 9, 13, 18).toISOString() },
+      { lastReviewed: new Date(2026, 9, 12).toISOString() },
+      { lastReviewed: 'bad' },
+    ];
+    const m = activityByDay(words, { '2026-10-13': 1, '2026-10-12': 9, '2026-10-01': 4 });
+    expect(m).toEqual({ '2026-10-13': 2, '2026-10-12': 9, '2026-10-01': 4 });
+  });
+
+  it('finds the longest run and the one still alive', () => {
+    const m = { '2026-10-08': 1, '2026-10-09': 2, '2026-10-10': 1, '2026-10-12': 3, '2026-10-13': 1 };
+    expect(streakRuns(m, NOW)).toEqual({ longest: 3, current: 2 });
+    expect(streakRuns({}, NOW)).toEqual({ longest: 0, current: 0 });
+  });
+
+  it('builds weeks Monday to Sunday with future days empty', () => {
+    const weeks = heatmapWeeks({ '2026-10-14': 4, '2026-10-13': 1 }, 2, NOW);
+    expect(weeks).toHaveLength(2);
+    expect(weeks[1].days[2].date).toBe('2026-10-14'); // Wed
+    expect(weeks[1].days[2].level).toBe(4);
+    expect(weeks[1].days[1].level).toBe(1);
+    expect(weeks[1].days[3]).toBeNull(); // Thursday is in the future
+    expect(weeks[0].days.every(Boolean)).toBe(true);
+  });
+});

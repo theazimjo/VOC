@@ -101,3 +101,65 @@ export function sourceRanking(words) {
     .map((s) => ({ name: s.name, icon: s.icon, count: s.count, avg: Math.round(s.sum / s.count) }))
     .sort((a, b) => b.count - a.count);
 }
+
+// ---- Activity -------------------------------------------------------------------------
+// The streak's activityLog only records finished practice sessions. Every review also stamps the
+// word's `lastReviewed`, so a day counts as active when either source says so (the larger of the
+// two numbers wins). That way study done anywhere in the app shows up on the map.
+export function activityByDay(words, activityLog = {}) {
+  const reviewed = {};
+  words.forEach((w) => {
+    if (!w.lastReviewed) return;
+    const t = new Date(w.lastReviewed).getTime();
+    if (!Number.isFinite(t)) return;
+    const k = dayKey(t);
+    reviewed[k] = (reviewed[k] || 0) + 1;
+  });
+  const out = { ...reviewed };
+  Object.entries(activityLog || {}).forEach(([k, v]) => {
+    const n = Number(v) || 0;
+    if (n > (out[k] || 0)) out[k] = n;
+  });
+  return out;
+}
+
+// Longest run of consecutive active days, and the run that is still alive (today or yesterday).
+export function streakRuns(byDay, now = Date.now()) {
+  const keys = Object.keys(byDay).filter((k) => byDay[k] > 0).sort();
+  let longest = 0;
+  let run = 0;
+  let prev = null;
+  keys.forEach((k) => {
+    const d = startOfDay(new Date(`${k}T00:00:00`)).getTime();
+    run = prev !== null && Math.round((d - prev) / DAY) === 1 ? run + 1 : 1;
+    longest = Math.max(longest, run);
+    prev = d;
+  });
+  let current = 0;
+  const today = startOfDay(now).getTime();
+  const cursor = new Date(today);
+  if (!(byDay[dayKey(cursor)] > 0)) cursor.setDate(cursor.getDate() - 1); // today may not be done yet
+  while (byDay[dayKey(cursor)] > 0) { current += 1; cursor.setDate(cursor.getDate() - 1); }
+  return { longest, current };
+}
+
+// Calendar grid for the last `weeks` weeks: columns are weeks (Monday first), 7 days each.
+// Days after today are null. `level` runs 0-4 relative to the busiest day.
+export function heatmapWeeks(byDay, weeks = 20, now = Date.now()) {
+  const today = startOfDay(now);
+  const mondayOffset = (today.getDay() + 6) % 7;
+  const start = new Date(today);
+  start.setDate(today.getDate() - mondayOffset - (weeks - 1) * 7);
+  const max = Math.max(1, ...Object.values(byDay).map((v) => Number(v) || 0));
+  return Array.from({ length: weeks }, (_, w) => {
+    const days = Array.from({ length: 7 }, (_, d) => {
+      const date = new Date(start);
+      date.setDate(start.getDate() + w * 7 + d);
+      if (date > today) return null;
+      const count = Number(byDay[dayKey(date)]) || 0;
+      const level = count === 0 ? 0 : Math.min(4, Math.max(1, Math.ceil((count / max) * 4)));
+      return { date: dayKey(date), day: date, count, level, isToday: date.getTime() === today.getTime() };
+    });
+    return { start: new Date(start.getTime() + w * 7 * DAY), days };
+  });
+}
