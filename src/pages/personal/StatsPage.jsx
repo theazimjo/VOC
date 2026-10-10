@@ -304,13 +304,13 @@ export default function StatsPage() {
             <>
               <h2>{c.dueTitle(a.dueNow)}</h2>
               <p>{c.dueSub}{a.freshCount > 0 ? ` ${c.newLine(a.freshCount)}` : ''}</p>
-              <Link to="/mixed-practice?filter=due" className="btn btn-primary sp-cta-inline"><Play size={16} /> {c.dueStart}</Link>
+              <Link to="/experiment" className="btn btn-primary sp-cta-inline"><Play size={16} /> {c.dueStart}</Link>
             </>
           ) : a.freshCount > 0 ? (
             <>
               <h2 className="is-done"><CheckCircle2 size={22} /> {c.dueNone}</h2>
               <p>{c.newTitle(a.freshCount)}</p>
-              <Link to="/mixed-practice?filter=due" className="btn btn-primary sp-cta-inline"><Play size={16} /> {c.newStart}</Link>
+              <Link to="/experiment" className="btn btn-primary sp-cta-inline"><Play size={16} /> {c.newStart}</Link>
             </>
           ) : (
             <>

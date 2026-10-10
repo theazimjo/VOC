@@ -360,7 +360,7 @@ export default function Dashboard() {
                       key={word.id}
                       type="button"
                       className="dash-ov-hw-item"
-                      onClick={() => navigate('/mixed-practice?filter=due')}
+                      onClick={() => navigate('/experiment')}
                     >
                       <div className="dash-ov-hw-item-check" style={{ backgroundColor: `${recall.color}15`, color: recall.color, borderColor: 'transparent' }}>
                         {recall.pct == null ? newLabel : `${recall.pct}%`}
@@ -377,7 +377,7 @@ export default function Dashboard() {
               <button
                 type="button"
                 className="dash-ov-hw-practice-btn"
-                onClick={() => navigate('/mixed-practice?filter=due')}
+                onClick={() => navigate('/experiment')}
               >
                 {t('dashboard.startReview')}
               </button>

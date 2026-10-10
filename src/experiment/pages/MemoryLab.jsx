@@ -1,16 +1,14 @@
 /**
  * Review page (route /experiment, still called "Memory Lab" in the code).
  *
- * Three tabs, written for learners in plain language:
- *   Review   — words waiting to be reviewed + start a session
- *   My words — every word with a simple status (new / weak / medium / strong)
- *   Results  — how the learner is doing overall
+ * One job: review the words that are due (start a session, answer, see the result). The
+ * per-word memory view and the overall results live on the Statistics page now.
  */
 
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { RotateCcw, ListChecks, BarChart2, ArrowLeft, Play, RefreshCw, CheckCircle, XCircle } from 'lucide-react';
+import { RotateCcw, ArrowLeft, Play, RefreshCw, CheckCircle, XCircle } from 'lucide-react';
 import { computeUserRate } from '@voc/memory-engine';
 
 import { useMemoryExperiment } from '../useMemoryExperiment';
@@ -18,7 +16,6 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { labCopy } from '../labContent';
 import { wordStatus } from '../wordStatus';
 import WordMemorySession from './WordMemorySession';
-import MyWords from './MyWords';
 import './MemoryLab.css';
 
 const SESSION_SIZE = 20;
@@ -30,77 +27,6 @@ function nextReviewText(c, strength) {
   if (days < 0.75) return c.session.next.today;
   if (days < 1.5) return c.session.next.tomorrow;
   return c.session.next.days(Math.round(days));
-}
-
-// ─── Results tab ─────────────────────────────────────────────────────────────
-
-function ResultsPanel({ memoryMap }) {
-  const { language } = useLanguage();
-  const lab = labCopy(language);
-  const c = lab.results;
-
-  const { counts, total, reviewsCount, accuracy, last10 } = useMemo(() => {
-    const list = Object.values(memoryMap).filter((m) => m.wordData?.word);
-    const userRate = computeUserRate(list);
-    const counts = { strong: 0, medium: 0, weak: 0, new: 0 };
-    const events = [];
-    list.forEach((m) => {
-      counts[wordStatus(m, userRate).key] += 1;
-      (m.recallHistory || []).forEach((h) => events.push({ ...h, word: m.wordData.word }));
-    });
-    events.sort((a, b) => new Date(b.ts) - new Date(a.ts));
-    return {
-      counts,
-      total: list.length,
-      reviewsCount: events.length,
-      accuracy: events.length ? Math.round((events.filter((h) => h.result).length / events.length) * 100) : null,
-      last10: events.slice(0, 10),
-    };
-  }, [memoryMap]);
-
-  if (total === 0 || reviewsCount === 0) {
-    return <div className="mem-empty-state"><p>{c.empty}</p></div>;
-  }
-
-  const last10Rate = Math.round((last10.filter((h) => h.result).length / last10.length) * 100);
-  const max = Math.max(...Object.values(counts), 1);
-  const tones = { strong: '#34d399', medium: '#f59e0b', weak: '#f87171', new: '#8b8fa8' };
-
-  return (
-    <div className="mem-stats-panel">
-      <h2 className="mem-words-title">{c.title}</h2>
-      <div className="mem-stats-grid mem-stats-grid--3">
-        <div className="mem-stat-card"><div className="mem-stat-val">{total}</div><div className="mem-stat-lbl">{c.wordsLabel}</div></div>
-        <div className="mem-stat-card"><div className="mem-stat-val">{accuracy}%</div><div className="mem-stat-lbl">{c.accuracyLabel}</div></div>
-        <div className="mem-stat-card"><div className="mem-stat-val">{reviewsCount}</div><div className="mem-stat-lbl">{c.reviewsLabel}</div></div>
-      </div>
-
-      <div className="mem-dist-section">
-        <div className="mem-section-title">{c.strengthTitle}</div>
-        <div className="mem-dist-bars">
-          {['strong', 'medium', 'weak', 'new'].map((key) => (
-            <div key={key} className="mem-dist-row">
-              <div className="mem-dist-label">{lab.status[key]}</div>
-              <div className="mem-dist-bar-track">
-                <motion.div className="mem-dist-bar-fill" style={{ background: tones[key] }} initial={{ width: 0 }} animate={{ width: `${(counts[key] / max) * 100}%` }} transition={{ duration: 0.6 }} />
-              </div>
-              <div className="mem-dist-count" style={{ color: tones[key] }}>{counts[key]}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="mem-recent-section">
-        <div className="mem-section-title">{c.last10Title}</div>
-        <div className="mem-recent-dots">
-          {last10.map((h, i) => (
-            <div key={i} className={`mem-recent-dot ${h.result ? 'correct' : 'wrong'}`} title={`${h.word}: ${h.result ? '✓' : '✗'}`} />
-          ))}
-        </div>
-        <div className="mem-accuracy-label">{c.last10Rate(last10Rate)}</div>
-      </div>
-    </div>
-  );
 }
 
 // ─── Session results ─────────────────────────────────────────────────────────
@@ -237,14 +163,13 @@ function ReviewTab({ dueWords, allWords, onStart, loading }) {
 // ─── Page ────────────────────────────────────────────────────────────────────
 
 /** Presentational page: everything comes in through `data` (the shape useMemoryExperiment returns). */
-export function MemoryLabView({ data, initialTab = 'review' }) {
+export function MemoryLabView({ data }) {
   const navigate = useNavigate();
   const { language } = useLanguage();
   const lab = labCopy(language);
-  const [activeTab, setActiveTab] = useState(initialTab);
 
   const {
-    allWords, dueWords, memoryMap, confusionPairs, loading, error,
+    allWords, dueWords, loading, error,
     session, startSession, submitReview, skipWord, endSession, reportConfusion,
   } = data;
 
@@ -261,25 +186,8 @@ export function MemoryLabView({ data, initialTab = 'review' }) {
     );
   }
 
-  const tabs = [
-    { key: 'review', icon: <RotateCcw size={16} />, label: lab.tabs.review },
-    { key: 'words', icon: <ListChecks size={16} />, label: lab.tabs.words },
-    { key: 'results', icon: <BarChart2 size={16} />, label: lab.tabs.results },
-  ];
-
   return (
     <div className="mem-page">
-      {!inSession && !sessionDone && (
-        <div className="mem-tab-bar">
-          {tabs.map((tab) => (
-            <button key={tab.key} className={`mem-tab ${activeTab === tab.key ? 'active' : ''}`} onClick={() => setActiveTab(tab.key)}>
-              {tab.icon}
-              {tab.label}
-            </button>
-          ))}
-        </div>
-      )}
-
       <div className="mem-content">
         {inSession && (
           <motion.div key="session" initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ width: '100%' }}>
@@ -301,10 +209,8 @@ export function MemoryLabView({ data, initialTab = 'review' }) {
         )}
 
         {!inSession && !sessionDone && (
-          <motion.div key={activeTab} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.15 }} style={{ width: '100%' }}>
-            {activeTab === 'review' && <ReviewTab dueWords={dueWords} allWords={allWords} onStart={startSession} loading={loading} />}
-            {activeTab === 'words' && <MyWords memoryMap={memoryMap} confusionPairs={confusionPairs} loading={loading} />}
-            {activeTab === 'results' && <ResultsPanel memoryMap={memoryMap} />}
+          <motion.div key="review" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.15 }} style={{ width: '100%' }}>
+            <ReviewTab dueWords={dueWords} allWords={allWords} onStart={startSession} loading={loading} />
           </motion.div>
         )}
       </div>
