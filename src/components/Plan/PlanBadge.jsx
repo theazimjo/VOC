@@ -5,7 +5,7 @@ import { Infinity as InfinityIcon, BookOpenCheck, WifiOff, Sparkles, X, ChevronR
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useStudentPlan } from '../../hooks/usePlan';
-import { EVERYONE_PREMIUM } from '../../utils/plans';
+import { EVERYONE_PREMIUM, PRICING_PAGE_PUBLIC } from '../../utils/plans';
 import './PlanBadge.css';
 
 const COPY = {
@@ -120,7 +120,11 @@ export function PremiumModal({ onClose }) {
         </ul>
         <div className="plan-modal-foot">
           {EVERYONE_PREMIUM && <p className="plan-modal-note">{c.launch}</p>}
-          <Link to="/pricing" className="plan-modal-btn" onClick={onClose}>{c.plans}</Link>
+          {PRICING_PAGE_PUBLIC ? (
+            <Link to="/pricing" className="plan-modal-btn" onClick={onClose}>{c.plans}</Link>
+          ) : (
+            <button type="button" className="plan-modal-btn" onClick={onClose}>{c.close}</button>
+          )}
         </div>
       </div>
     </div>,

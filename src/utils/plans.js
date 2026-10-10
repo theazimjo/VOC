@@ -8,6 +8,10 @@
 // go live. Flip to false to start enforcing the free-plan limits.
 export const EVERYONE_PREMIUM = true;
 
+// The /pricing page is hidden until the prices are final: the route redirects home
+// and the links to it are not shown. Set to true to publish it.
+export const PRICING_PAGE_PUBLIC = false;
+
 export const GRACE_DAYS = 14;
 const DAY = 86400000;
 

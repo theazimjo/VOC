@@ -269,6 +269,7 @@
 .navbar-group-switcher-wrapper {
   position: relative;
   margin-left: auto;
+  min-width: 0;
 }
 
 .navbar-group-switcher-btn {
@@ -286,7 +287,18 @@
   font-weight: 600;
   height: 32px;
   margin-right: 8px;
+  max-width: min(280px, 100%);
+  white-space: nowrap;
   transition: all var(--transition-fast);
+}
+
+/* A long group or course name stays on one line and is cut with an ellipsis. */
+.navbar-group-switcher-btn > svg { flex-shrink: 0; }
+.navbar-group-switcher-btn > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .navbar-group-switcher-btn:hover {
@@ -318,6 +330,8 @@
   .navbar-group-switcher-btn {
     margin-right: 0;
     padding: 4px 8px 4px 4px;
+    /* leave room for the crown, search and avatar on the right */
+    max-width: calc(100vw - 168px);
   }
 
   .navbar-group-switcher-popover {

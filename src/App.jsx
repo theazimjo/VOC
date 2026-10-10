@@ -23,6 +23,7 @@ const LandingPage = lazyWithRetry(() => import('./pages/marketing/LandingPage'))
 const StartCenterPage = lazyWithRetry(() => import('./pages/marketing/StartCenterPage'));
 const PricingPage = lazyWithRetry(() => import('./pages/pricing/PricingPage'));
 import PlanLimitModal from './components/Plan/PlanLimitModal';
+import { PRICING_PAGE_PUBLIC } from './utils/plans';
 const BlogIndex = lazyWithRetry(() => import('./pages/blog/Blog').then((m) => ({ default: m.BlogIndex })));
 const BlogPost = lazyWithRetry(() => import('./pages/blog/Blog').then((m) => ({ default: m.BlogPost })));
 const Dashboard = lazyWithRetry(() => import('./pages/personal/Dashboard'));
@@ -164,7 +165,7 @@ export default function App() {
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/start-center" element={<StartCenterPage />} />
-                    <Route path="/pricing" element={<PricingPage />} />
+                    <Route path="/pricing" element={PRICING_PAGE_PUBLIC ? <PricingPage /> : <Navigate to="/" replace />} />
                     <Route path="/choose-profile" element={<ProfileChooser />} />
   
                     {/* Protected routes */}
