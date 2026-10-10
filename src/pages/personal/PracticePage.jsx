@@ -44,6 +44,7 @@ export default function PracticePage({ embedded = false, initialSource = null, i
   const [step, setStep] = useState(urlSourceId ? 'loading' : 'source'); // 'loading' | 'source' | 'mode' | 'practice' | 'results'
   const [selectedSource, setSelectedSource] = useState(null);
   const [selectedMode, setSelectedMode] = useState(null);
+  const [streakInfo, setStreakInfo] = useState(null);
 
   const [wordCount, setWordCountState] = useState(() => {
     try {
@@ -409,7 +410,8 @@ export default function PracticePage({ embedded = false, initialSource = null, i
     const fullResults = { ...resultData, durationFormatted, durationSec: elapsedSec };
     setResults(fullResults);
     setStep('results');
-    incrementActivity(resultData.totalWords || 1);
+    setStreakInfo(null);
+    Promise.resolve(incrementActivity(resultData.totalWords || 1)).then((r) => setStreakInfo(r || null)).catch(() => {});
 
     if (urlSourceId) {
       try {
@@ -747,6 +749,7 @@ export default function PracticePage({ embedded = false, initialSource = null, i
               wrongWords={wrongWords}
               onReset={handleReset}
               language={selectedSource?.language || 'en-US'}
+              streakInfo={streakInfo}
             />
           )}
       </div>

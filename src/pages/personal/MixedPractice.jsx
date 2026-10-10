@@ -14,6 +14,7 @@ import { useStreak } from '../../hooks/useStreak';
 import { shuffleArray } from '../../utils/helpers';
 import { playSound, triggerVibration } from '../../utils/feedback';
 import { getDueWords } from '@voc/memory-engine';
+import StreakBanner from '../../components/Practice/StreakBanner';
 import { inferConfidenceFromSpeed, computeClusterCalibration, computeUserRate, getRecommendedRetrievalType } from '@voc/memory-engine';
 import { saveReviewEvent } from '../../experiment/experimentDB';
 import { getWordCluster } from '../../experiment/semanticClassifier';
@@ -48,6 +49,7 @@ export default function MixedPractice() {
   const { t, language } = useLanguage();
   const { allWords, allWordsLoading } = usePacks();
   const { incrementActivity } = useStreak();
+  const [streakInfo, setStreakInfo] = useState(null);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const isLeechMode = searchParams.get('filter') === 'leech';
@@ -271,7 +273,8 @@ export default function MixedPractice() {
       setStep('results');
       playSound('victory');
       triggerVibration('victory');
-      incrementActivity(questions.length || 1);
+      setStreakInfo(null);
+      Promise.resolve(incrementActivity(questions.length || 1)).then((r) => setStreakInfo(r || null)).catch(() => {});
     }
   };
 
@@ -528,6 +531,8 @@ export default function MixedPractice() {
                     </div>
 
                     <div className="results-label">{getTrans('mixedPractice.wordsAnsweredCorrectly', 'Words correct')}</div>
+
+                    <StreakBanner info={streakInfo} />
 
                     {/* Mistakes review */}
                     {questions.some(q => !q.isCorrect) && (

@@ -29,6 +29,7 @@ export function checkAndHealStreak(data, allowance = 0) {
 export async function incrementActivity(userId, amount = 1, allowance = 0) {
   if (!userId) return;
   const streakRef = ref(db, `users/${userId}/streak`);
+  let outcome = null; // what this increment did, for the results screen
 
   await runTransaction(streakRef, (currentData) => {
     const todayStr = getLocalDateString();
@@ -44,6 +45,7 @@ export async function incrementActivity(userId, amount = 1, allowance = 0) {
     // New day: cover or reset missed days, hand out this month's freezes
     const streak = rolloverStreak(base, todayStr, allowance);
 
+    const before = streak.streakCount || 0;
     const oldTodayCount = streak.todayCount || 0;
     streak.lastActiveDate = todayStr;
     streak.todayCount = oldTodayCount + amount;
@@ -54,6 +56,12 @@ export async function incrementActivity(userId, amount = 1, allowance = 0) {
       streak.streakCount = (streak.streakCount || 0) + 1;
     }
 
+    outcome = {
+      before, after: streak.streakCount || 0, increased: (streak.streakCount || 0) > before,
+      todayCount: streak.todayCount, goal: streak.dailyGoal,
+    };
     return streak;
   });
+
+  return outcome;
 }

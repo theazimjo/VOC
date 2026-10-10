@@ -3,9 +3,10 @@ import { Sparkles, TrendingDown, Volume2 } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { usePracticeCase } from './practiceCase';
 import { speakWord } from '../../utils/helpers';
+import StreakBanner from './StreakBanner';
 import './PracticeResultsView.css';
 
-export default function PracticeResultsView({ results, wrongWords = [], onReset, actionLabel, language = 'en-US' }) {
+export default function PracticeResultsView({ results, wrongWords = [], onReset, actionLabel, language = 'en-US', streakInfo = null }) {
   const { t } = useLanguage();
   const c = usePracticeCase();
 
@@ -104,6 +105,8 @@ export default function PracticeResultsView({ results, wrongWords = [], onReset,
             </div>
           </div>
         </div>
+
+        <StreakBanner info={streakInfo} />
 
         {/* Mistakes / weaknesses analysis */}
         {wrongWords && wrongWords.length > 0 ? (

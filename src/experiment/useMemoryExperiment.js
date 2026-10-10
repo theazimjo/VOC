@@ -31,6 +31,7 @@ export function useMemoryExperiment() {
 
   // ── Session state ──────────────────────────────────────────────
   const [session, setSession] = useState(null);          // null | { queue, index, results }
+  const [streakInfo, setStreakInfo] = useState(null);    // what this sitting did to the streak
 
   // ── Confusion pairs (Memory-Lab-only metadata, not part of any word record) ──
   useEffect(() => {
@@ -155,6 +156,7 @@ export function useMemoryExperiment() {
     const queue = (words || dueWords).filter((w) => w.wordData);
     if (queue.length === 0) return;
 
+    setStreakInfo(null);
     setSession({
       queue,
       index: 0,
@@ -215,7 +217,9 @@ export function useMemoryExperiment() {
     };
 
     // every reviewed word counts toward today's goal and the streak, like Practice does
-    incrementActivity(1).catch(() => {});
+    Promise.resolve(incrementActivity(1)).then((r) => {
+      if (r) setStreakInfo((prev) => ({ ...r, increased: Boolean(prev?.increased) || r.increased, before: prev?.before ?? r.before }));
+    }).catch(() => {});
 
     const newResults = [...session.results, result];
     const nextIndex = session.index + 1;
@@ -276,6 +280,7 @@ export function useMemoryExperiment() {
     error: null,
     // Session
     session,
+    streakInfo,
     currentSessionWord,
     startSession,
     submitReview,

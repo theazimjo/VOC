@@ -100,7 +100,7 @@ export function useStreak() {
   // Atomically increment points for activity today
   const incrementActivity = useCallback(async (amount = 1) => {
     if (!user) return;
-    await incrementActivityUtil(user.uid, amount, allowanceRef.current);
+    return incrementActivityUtil(user.uid, amount, allowanceRef.current);
   }, [user]);
 
   // Set new daily goal target

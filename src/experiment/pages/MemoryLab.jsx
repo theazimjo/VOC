@@ -16,6 +16,7 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { labCopy } from '../labContent';
 import { wordStatus } from '../wordStatus';
 import WordMemorySession from './WordMemorySession';
+import StreakBanner from '../../components/Practice/StreakBanner';
 import './MemoryLab.css';
 
 const SESSION_SIZE = 20;
@@ -31,7 +32,7 @@ function nextReviewText(c, strength) {
 
 // ─── Session results ─────────────────────────────────────────────────────────
 
-function SessionResults({ session, onRestart, onDone }) {
+function SessionResults({ session, streakInfo, onRestart, onDone }) {
   const { language } = useLanguage();
   const c = labCopy(language);
   const results = session?.results || [];
@@ -61,6 +62,8 @@ function SessionResults({ session, onRestart, onDone }) {
         <div className="mem-result-pill"><CheckCircle size={14} color="#34d399" /><span>{c.session.correct(correct)}</span></div>
         <div className="mem-result-pill"><XCircle size={14} color="#f87171" /><span>{c.session.wrong(total - correct)}</span></div>
       </div>
+
+      <StreakBanner info={streakInfo} />
 
       <div className="mem-results-list">
         {results.map((r, i) => (
@@ -170,7 +173,7 @@ export function MemoryLabView({ data }) {
 
   const {
     allWords, dueWords, loading, error,
-    session, startSession, submitReview, skipWord, endSession, reportConfusion,
+    session, streakInfo, startSession, submitReview, skipWord, endSession, reportConfusion,
   } = data;
 
   const inSession = !!session && !session.finished;
@@ -204,7 +207,7 @@ export function MemoryLabView({ data }) {
 
         {sessionDone && (
           <motion.div key="results" initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ width: '100%' }}>
-            <SessionResults session={session} onRestart={() => startSession(session.queue)} onDone={endSession} />
+            <SessionResults session={session} streakInfo={streakInfo} onRestart={() => startSession(session.queue)} onDone={endSession} />
           </motion.div>
         )}
 
