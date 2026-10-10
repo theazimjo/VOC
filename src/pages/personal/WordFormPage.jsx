@@ -596,7 +596,7 @@ export default function WordFormPage() {
                 ) : meaningsChecked ? (
                   <div className="wfp-compact-disabled">{t('wordForm.noOtherMeanings')}</div>
                 ) : (
-                  <div className="wfp-compact-disabled">{t('wordForm.otherMeaningsHint')}</div>
+                  <div className="wfp-compact-disabled is-hint">{t('wordForm.otherMeaningsHint')}</div>
                 )}
               </div>
             </div>

@@ -673,3 +673,54 @@
     font-size: 0.82rem;
   }
 }
+
+/* ---------- Phone layout: easier to read and reach with a thumb ---------- */
+@media (max-width: 680px) {
+  .word-form-page { padding: 10px 14px 110px; gap: 14px; }
+  .wfp-title-wrap h1 { font-size: 1.25rem; }
+
+  /* one flat card, fields that look like fields (not disabled grey boxes) */
+  .wfp-card { padding: 16px; gap: 16px; box-shadow: none; border-radius: 18px; }
+  .wfp-grid { gap: 16px; }
+  .wfp-grid .input-group > label,
+  .wfp-lang-picker-header { height: auto; min-height: 24px; margin-bottom: 8px; }
+  .wfp-grid .input-group > label { font-size: .8rem; font-weight: 700; letter-spacing: .01em; color: var(--text-secondary); }
+
+  /* the language picker reads as a label with a small switch, no doubled flag */
+  .wfp-lang-picker-btn { margin-left: 0; padding: 4px 10px 4px 8px; border-radius: 999px; font-size: .8rem; }
+  .wfp-lang-picker-btn .wfp-lang-flag { display: none; }
+  .wfp-lang-dropdown { min-width: min(260px, calc(100vw - 56px)); }
+
+  .wfp-input-with-action .input,
+  .wfp-card .select,
+  .wfp-card .textarea,
+  .wfp-card .input {
+    min-height: 50px; font-size: 16px; /* 16px stops iOS from zooming the page on focus */
+    background: var(--bg-secondary); border-color: var(--border-light, var(--border));
+  }
+  .wfp-input-with-action .input { padding-right: 54px; }
+  .wfp-input-lookup-btn { width: 40px; height: 40px; right: 5px; border-radius: 12px; }
+
+  /* the "search the word first" hint box is noise on a small screen */
+  .wfp-compact-disabled.is-hint { display: none; }
+  .wfp-secondary-row { padding-top: 0; gap: 10px; }
+  .wfp-secondary-row:has(.wfp-compact-disabled.is-hint:only-child) { gap: 0; }
+  .wfp-compact-meanings:has(.wfp-compact-disabled.is-hint) { display: none; }
+
+  /* "More details" is a quiet link-style row instead of a big grey button */
+  .btn-more-options-page {
+    min-height: 44px; border: none; background: transparent; color: var(--accent-1); justify-content: flex-start; padding: 0 2px;
+  }
+  .btn-more-options-page:hover { background: transparent; color: var(--accent-1); }
+  .wfp-compact-btn, .wfp-compact-loading, .wfp-compact-disabled { height: 50px; }
+
+  /* Save bar: full-width, sits at the bottom, clears the home indicator */
+  .wfp-actions {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; border: none; border-radius: 0;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: color-mix(in srgb, var(--bg-primary) 88%, transparent);
+    -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    box-shadow: 0 -1px 0 var(--border);
+  }
+  .wfp-submit-btn { min-height: 52px; border-radius: 14px; font-size: 1rem; font-weight: 700; }
+}
