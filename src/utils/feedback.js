@@ -1,7 +1,7 @@
 // Web Audio API Synth for premium sound effects
 let audioCtx = null;
 
-export function getAudioContext() {
+function getAudioContext() {
   if (!audioCtx) {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   }
