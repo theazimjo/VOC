@@ -130,7 +130,9 @@ export default function LoginPage() {
     // Skip whenever a sign-in attempt is in flight — completeSignIn() owns
     // navigation for it (see signingInRef above).
     if (!loading && user && !redirecting && !signingInRef.current) {
-      getRedirectPath(user).then((targetPath) => {
+      // A slow or stuck role lookup must not leave the screen waiting: after a few seconds go home.
+      const slow = new Promise((resolve) => setTimeout(() => resolve('/'), 6000));
+      Promise.race([getRedirectPath(user), slow]).then((targetPath) => {
         navigate(targetPath, { replace: true });
       });
     }
@@ -140,7 +142,8 @@ export default function LoginPage() {
   // generic loader, then go straight there (no celebratory animation).
   const completeSignIn = async (targetPath) => {
     setRedirecting(true);
-    await prefetchRoute(targetPath);
+    // Preloading is only an optimisation: never wait more than a moment for it.
+    await Promise.race([prefetchRoute(targetPath), new Promise((resolve) => setTimeout(resolve, 3000))]);
     navigate(targetPath, { replace: true });
   };
 

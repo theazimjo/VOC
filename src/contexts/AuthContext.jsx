@@ -29,35 +29,46 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+    // Profile bookkeeping runs in the background: it must never keep the app on its loading
+    // spinner (a slow or stuck database connection used to freeze the sign-in screen forever).
+    const syncProfile = async (firebaseUser) => {
+      try {
+        // Create user profile in RTDB if it doesn't exist
+        const profileRef = ref(db, `users/${firebaseUser.uid}/profile`);
+        const snap = await get(profileRef);
+        if (!snap.exists()) {
+          await set(profileRef, {
+            displayName: firebaseUser.displayName || '',
+            email: firebaseUser.email,
+            photoURL: firebaseUser.photoURL || '',
+            createdAt: new Date().toISOString()
+          });
+        } else {
+          // Update mutable fields (displayName may change)
+          await update(profileRef, {
+            displayName: firebaseUser.displayName || snap.val().displayName || '',
+            photoURL: firebaseUser.photoURL || snap.val().photoURL || '',
+          });
+        }
+        // Track activity: lastSeen + session count
+        await update(ref(db, `users/${firebaseUser.uid}/activity`), {
+          lastSeen: new Date().toISOString(),
+          sessionCount: increment(1),
+        });
+      } catch (error) {
+        console.error("Error fetching user profile from RTDB:", error);
+      }
+    };
+
+    // If Firebase never reports the sign-in state (stuck storage, blocked auth iframe), stop
+    // waiting after a while and show the sign-in form instead of an endless spinner.
+    const giveUp = setTimeout(() => setLoading(false), 8000);
+
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      clearTimeout(giveUp);
       if (firebaseUser) {
         setUser(firebaseUser);
-        try {
-          // Create user profile in RTDB if it doesn't exist
-          const profileRef = ref(db, `users/${firebaseUser.uid}/profile`);
-          const snap = await get(profileRef);
-          if (!snap.exists()) {
-            await set(profileRef, {
-              displayName: firebaseUser.displayName || '',
-              email: firebaseUser.email,
-              photoURL: firebaseUser.photoURL || '',
-              createdAt: new Date().toISOString()
-            });
-          } else {
-            // Update mutable fields (displayName may change)
-            await update(profileRef, {
-              displayName: firebaseUser.displayName || snap.val().displayName || '',
-              photoURL: firebaseUser.photoURL || snap.val().photoURL || '',
-            });
-          }
-          // Track activity: lastSeen + session count
-          await update(ref(db, `users/${firebaseUser.uid}/activity`), {
-            lastSeen: new Date().toISOString(),
-            sessionCount: increment(1),
-          });
-        } catch (error) {
-          console.error("Error fetching user profile from RTDB:", error);
-        }
+        syncProfile(firebaseUser);
       } else {
         // Check for local admin password override session
         const savedOverride = localStorage.getItem('voc_override_user');
@@ -79,7 +90,10 @@ export function AuthProvider({ children }) {
       setLoading(false);
     });
 
-    return () => unsubscribe();
+    return () => {
+      clearTimeout(giveUp);
+      unsubscribe();
+    };
   }, []);
 
   const login = async (email, password) => {
