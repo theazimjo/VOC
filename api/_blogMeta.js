@@ -36,6 +36,11 @@ export function applyBlogMeta(html, { title, description, url, type = 'article' 
   out = setMeta(out, 'property', 'og:description', description);
   out = setMeta(out, 'property', 'og:type', type);
   out = setMeta(out, 'name', 'twitter:title', title);
-  if (url) out = setMeta(out, 'property', 'og:url', url);
+  if (url) {
+    out = setMeta(out, 'property', 'og:url', url);
+    out = out.replace(/<link rel="canonical" href="[^"]*" \/>/i, `<link rel="canonical" href="${esc(url)}" />`);
+  }
+  // The crawler-readable text inside #root describes this page, not the home page.
+  out = out.replace(/<!--seo-splash-->[\s\S]*?<!--\/seo-splash-->/, `<!--seo-splash--><main id="seo-splash" style="max-width:640px;margin:0 auto;padding:72px 24px;font-family:sans-serif;line-height:1.5"><h1>${esc(title)}</h1><p>${esc(description)}</p><p><a href="/blog">Blog</a> · <a href="/">Vocabry</a></p></main><!--/seo-splash-->`);
   return out;
 }
