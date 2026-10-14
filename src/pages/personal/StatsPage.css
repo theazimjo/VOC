@@ -200,3 +200,45 @@
 .sp-freeze { display: inline-flex; align-items: center; gap: 4px; margin-top: 4px; padding: 3px 9px; width: fit-content; border-radius: 999px; font-size: .6875rem; font-weight: 700; color: #0A84FF; background: rgba(10, 132, 255, .12); }
 .sp-cell.is-frozen { background: color-mix(in srgb, #64D2FF 55%, var(--bg-tertiary)); }
 .sp-map-legend .sp-cell.is-frozen { margin-left: 6px; }
+
+/* ===== Today card (redesign): action on the left, goal and streak as two equal tiles ===== */
+.td-card { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 22px 32px; align-items: center; padding: 24px; }
+.td-main { min-width: 0; }
+.td-eyebrow { display: inline-block; margin-bottom: 8px; font-size: .75rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-1); }
+.td-main h2 { margin: 0 0 8px; font-size: 1.5rem; line-height: 1.2; font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary); }
+.td-main h2.is-done { display: flex; align-items: center; gap: 8px; color: var(--success); }
+.td-main p { margin: 0 0 18px; max-width: 460px; font-size: .9375rem; line-height: 1.5; color: var(--text-secondary); }
+.td-main .sp-cta-inline { min-height: 48px; padding: 0 22px; border-radius: 14px; font-size: .9375rem; box-shadow: 0 6px 16px color-mix(in srgb, var(--accent-1) 28%, transparent); }
+
+.td-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 340px; }
+.td-tile {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 16px 12px; text-align: center;
+  border-radius: 20px; background: var(--bg-tertiary); border: 1px solid var(--border); min-width: 0;
+}
+.td-ring { position: relative; width: 84px; height: 84px; }
+.td-ring .sp-ring { display: block; }
+.td-ring-text { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1; }
+.td-ring-text strong { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary); }
+.td-ring-text small { margin-top: 3px; font-size: .75rem; font-weight: 700; color: var(--text-muted); }
+.td-tile-text { display: flex; flex-direction: column; align-items: center; gap: 3px; min-width: 0; }
+.td-label { font-size: .6875rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); }
+.td-sub { font-size: .875rem; font-weight: 700; color: var(--text-secondary); }
+.td-sub.is-good { color: var(--success); }
+.td-flame { width: 56px; height: 56px; border-radius: 18px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); background: var(--bg-secondary); border: 1px solid var(--border); }
+.td-flame.is-on { color: #FF7A00; background: rgba(255, 122, 0, .14); border-color: rgba(255, 122, 0, .3); }
+.td-streak-n { font-size: 1.75rem; line-height: 1; font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary); }
+.td-freeze { white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; gap: 5px; max-width: 100%; padding: 4px 10px; border-radius: 999px; font-size: .6875rem; font-weight: 700; line-height: 1.2; color: #0A84FF; background: rgba(10, 132, 255, .12); }
+
+@media (max-width: 780px) {
+  .td-card { grid-template-columns: 1fr; gap: 18px; padding: 18px; }
+  .td-main h2 { font-size: 1.3125rem; }
+  .td-main p { margin-bottom: 16px; max-width: none; }
+  .td-main .sp-cta-inline { width: 100%; justify-content: center; }
+  .td-tiles { width: 100%; gap: 10px; }
+  .td-tile { padding: 14px 10px; border-radius: 18px; }
+}
+@media (max-width: 380px) {
+  .td-ring, .td-ring .sp-ring { width: 72px; height: 72px; }
+  .td-ring-text strong { font-size: 1.25rem; }
+  .td-freeze { font-size: .625rem; }
+}

@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Flame, Target, TrendingUp, TrendingDown, BookOpen, Lock, Lightbulb, Play, CheckCircle2, Snowflake } from 'lucide-react';
+import { Flame, TrendingUp, TrendingDown, BookOpen, Lock, Lightbulb, Play, CheckCircle2, Snowflake } from 'lucide-react';
 import { usePacks } from '../../hooks/usePacks';
 import { useGrammarStats } from '../../hooks/useGrammarStats';
 import { useStreak } from '../../hooks/useStreak';
@@ -26,11 +26,11 @@ const NO_FROZEN = {};
 
 const COPY = {
   uz: {
-    title: 'Statistika', loading: 'Yuklanmoqda...',
+    title: 'Statistika', loading: 'Yuklanmoqda...', todayEyebrow: 'Bugun',
     dueTitle: (n) => `${n} ta so'zni takrorlash vaqti keldi`, newLine: (n) => `Yana ${n} ta yangi so'z hali boshlanmagan.`, newTitle: (n) => `${n} ta yangi so'z boshlashni kutyapti`, newStart: "Yangi so'zlarni boshlash", dueSub: "Muddati kelgan so'zlarni takrorlasangiz, ular esdan chiqmaydi.", dueStart: 'Takrorlashni boshlash',
     dueNone: "Hozir takrorlash kerak so'z yo'q", dueNoneSub: "Yangi so'zlar qo'shish yoki mashq qilish uchun yaxshi payt.", dueLibrary: "Kutubxonaga o'tish",
     goalToday: 'Bugungi maqsad', ofGoal: (n, g) => `${n} / ${g}`, goalDone: 'Bajarildi', goalLeft: (n) => `Yana ${n} ta`, goalHint: "Mashq qilingan so'zlar soni",
-    streak: 'Ketma-ket kun', freezeLeft: (n) => `Streak himoyasi: ${n} ta qoldi`, freezeInfo: 'Kun o\'tkazib yuborsangiz, himoya seriyani saqlab qoladi (oyiga 2 ta)', frozenLegend: 'Himoya ishlatilgan kun',
+    streak: 'Ketma-ket kun', freezeLeft: (n) => `Himoya: ${n} ta`, freezeInfo: 'Kun o\'tkazib yuborsangiz, himoya seriyani saqlab qoladi (oyiga 2 ta)', frozenLegend: 'Himoya ishlatilgan kun',
     vocab: "So'z boyligingiz", vocabLine: (total, good) => `${total} ta so'zdan ${good} tasini yaxshi bilasiz`,
     stageNew: 'Yangi', stageNewD: "Hali mashq qilinmagan",
     stageLearning: "O'rganilmoqda", stageLearningD: "Endi eslab qolyapsiz",
@@ -56,11 +56,11 @@ const COPY = {
     premium: 'Premium', lockText: "Bu bo'lim Premium'da ochiladi", lockBtn: 'Premium haqida',
   },
   ru: {
-    title: 'Статистика', loading: 'Загрузка...',
+    title: 'Статистика', loading: 'Загрузка...', todayEyebrow: 'Сегодня',
     dueTitle: (n) => `Пора повторить слов: ${n}`, newLine: (n) => `Ещё ${n} новых слов не начато.`, newTitle: (n) => `Новых слов ждут начала: ${n}`, newStart: 'Начать новые слова', dueSub: 'Повторяйте слова вовремя, и они не забудутся.', dueStart: 'Начать повторение',
     dueNone: 'Сейчас повторять нечего', dueNoneSub: 'Хорошее время добавить слова или потренироваться.', dueLibrary: 'В библиотеку',
     goalToday: 'Цель на сегодня', ofGoal: (n, g) => `${n} / ${g}`, goalDone: 'Выполнено', goalLeft: (n) => `Ещё ${n}`, goalHint: 'Количество слов в тренировках',
-    streak: 'Дней подряд', freezeLeft: (n) => `Защита серии: осталось ${n}`, freezeInfo: 'Если пропустите день, защита сохранит серию (2 в месяц)', frozenLegend: 'День с защитой',
+    streak: 'Дней подряд', freezeLeft: (n) => `Защита: ${n}`, freezeInfo: 'Если пропустите день, защита сохранит серию (2 в месяц)', frozenLegend: 'День с защитой',
     vocab: 'Ваш словарный запас', vocabLine: (total, good) => `Из ${total} слов вы хорошо знаете ${good}`,
     stageNew: 'Новые', stageNewD: 'Ещё не тренировались',
     stageLearning: 'Изучаются', stageLearningD: 'Начинаете запоминать',
@@ -86,11 +86,11 @@ const COPY = {
     premium: 'Premium', lockText: 'Этот раздел открыт в Premium', lockBtn: 'О Premium',
   },
   en: {
-    title: 'Statistics', loading: 'Loading...',
+    title: 'Statistics', loading: 'Loading...', todayEyebrow: 'Today',
     dueTitle: (n) => `${n} words are due for review`, newLine: (n) => `${n} more new words have not been started yet.`, newTitle: (n) => `${n} new words are waiting to be started`, newStart: 'Start new words', dueSub: 'Reviewing words when they are due keeps them from fading.', dueStart: 'Start reviewing',
     dueNone: 'Nothing to review right now', dueNoneSub: 'A good moment to add words or practice.', dueLibrary: 'Go to Library',
     goalToday: "Today's goal", ofGoal: (n, g) => `${n} / ${g}`, goalDone: 'Done', goalLeft: (n) => `${n} more`, goalHint: 'Words practiced today',
-    streak: 'Day streak', freezeLeft: (n) => `Streak freeze: ${n} left`, freezeInfo: 'If you miss a day, a freeze keeps your streak (2 a month)', frozenLegend: 'Frozen day',
+    streak: 'Day streak', freezeLeft: (n) => `Freeze: ${n} left`, freezeInfo: 'If you miss a day, a freeze keeps your streak (2 a month)', frozenLegend: 'Frozen day',
     vocab: 'Your vocabulary', vocabLine: (total, good) => `You know ${good} of your ${total} words well`,
     stageNew: 'New', stageNewD: 'Not practiced yet',
     stageLearning: 'Learning', stageLearningD: 'Starting to stick',
@@ -125,7 +125,7 @@ function Ring({ value, max, size = 72, stroke = 8 }) {
   const pct = Math.max(0, Math.min(1, max > 0 ? value / max : 0));
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="sp-ring" aria-hidden="true">
-      <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="var(--bg-tertiary)" strokeWidth={stroke} />
+      <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="var(--border-light, var(--border))" strokeWidth={stroke} />
       <motion.circle
         cx={size / 2} cy={size / 2} r={r} fill="none" stroke="var(--accent-1)" strokeWidth={stroke} strokeLinecap="round"
         strokeDasharray={c} initial={{ strokeDashoffset: c }} animate={{ strokeDashoffset: c * (1 - pct) }}
@@ -305,8 +305,9 @@ export default function StatsPage() {
       <h1 className="sp-title">{c.title}</h1>
 
       {/* What to do today */}
-      <section className="sp-card sp-today">
-        <div className="sp-today-main">
+      <section className="sp-card td-card">
+        <div className="td-main">
+          <span className="td-eyebrow">{c.todayEyebrow}</span>
           {a.dueNow > 0 ? (
             <>
               <h2>{c.dueTitle(a.dueNow)}</h2>
@@ -327,27 +328,26 @@ export default function StatsPage() {
             </>
           )}
         </div>
-        <div className="sp-today-side">
-          <div className="sp-goal">
-            <div className="sp-ring-wrap">
-              <Ring value={a.today} max={dailyGoal} />
-              <span className="sp-ring-center"><Target size={18} /></span>
+        <div className="td-tiles">
+          <div className="td-tile">
+            <div className="td-ring">
+              <Ring value={a.today} max={dailyGoal} size={84} stroke={10} />
+              <span className="td-ring-text"><strong>{a.today}</strong><small>/ {dailyGoal}</small></span>
             </div>
-            <div className="sp-goal-text">
-              <span className="sp-label">{c.goalToday}</span>
-              <strong>{c.ofGoal(a.today, dailyGoal)}</strong>
-              <span className={`sp-sub${goalDone ? ' is-good' : ''}`}>{goalDone ? c.goalDone : c.goalLeft(dailyGoal - a.today)}</span>
+            <div className="td-tile-text">
+              <span className="td-label">{c.goalToday}</span>
+              <span className={`td-sub${goalDone ? ' is-good' : ''}`}>{goalDone ? c.goalDone : c.goalLeft(dailyGoal - a.today)}</span>
             </div>
           </div>
-          <div className="sp-streak">
-            <span className="sp-streak-flame"><Flame size={22} /></span>
-            <div className="sp-goal-text">
-              <strong>{streakCount}</strong>
-              <span className="sp-label">{c.streak}</span>
-              {freezeOn && (
-                <span className="sp-freeze" title={c.freezeInfo}><Snowflake size={13} /> {c.freezeLeft(freezesLeft)}</span>
-              )}
+          <div className="td-tile">
+            <span className={`td-flame${streakCount > 0 ? ' is-on' : ''}`}><Flame size={26} strokeWidth={2.3} /></span>
+            <div className="td-tile-text">
+              <strong className="td-streak-n">{streakCount}</strong>
+              <span className="td-label">{c.streak}</span>
             </div>
+            {freezeOn && (
+              <span className="td-freeze" title={c.freezeInfo}><Snowflake size={13} strokeWidth={2.5} /> {c.freezeLeft(freezesLeft)}</span>
+            )}
           </div>
         </div>
       </section>
