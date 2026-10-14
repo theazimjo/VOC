@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { AlertCircle, CheckCircle2 } from 'lucide-react';
+import { getRedirectResult } from 'firebase/auth';
+import { auth } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
 import { resolveCorpIdentity } from '../../hooks/useCorpRole';
 import { getActiveProfile } from '../../utils/activeProfile';
@@ -63,6 +65,11 @@ export default function LoginPage() {
   const [submitting, setSubmitting] = useState(false);
   // Set the instant sign-in succeeds, while the destination's chunks load.
   const [redirecting, setRedirecting] = useState(false);
+  // Coming back from Google (installed apps sign in through a redirect): the result is
+  // finished here, with a time limit and a visible reason instead of an endless spinner.
+  const [finishingGoogle, setFinishingGoogle] = useState(() => {
+    try { return Object.keys(sessionStorage).some((k) => k.startsWith('firebase:pendingRedirect')); } catch { return false; }
+  });
 
   // Inline "forgot password" mode — no separate route needed for a single email field.
   const [mode, setMode] = useState('login'); // 'login' | 'reset'
@@ -137,6 +144,27 @@ export default function LoginPage() {
       });
     }
   }, [user, loading, navigate, mode, redirecting]);
+
+  useEffect(() => {
+    if (!finishingGoogle) return undefined;
+    let alive = true;
+    const limit = new Promise((_, reject) => setTimeout(() => reject(Object.assign(new Error('timeout'), { code: 'auth/google-timeout' })), 20000));
+    Promise.race([getRedirectResult(auth), limit])
+      .then(async (res) => {
+        if (!alive || !res?.user) return;
+        signingInRef.current = true;
+        completeSignIn(await getRedirectPath(res.user));
+      })
+      .catch((err) => {
+        if (!alive) return;
+        console.error('Google redirect sign-in failed:', err);
+        const code = err?.code || err?.message || 'error';
+        setError(`${firebaseMessage(copy, err?.code)} (${code})`);
+      })
+      .finally(() => { if (alive) setFinishingGoogle(false); });
+    return () => { alive = false; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Warm the destination's chunks first so navigating doesn't flash the
   // generic loader, then go straight there (no celebratory animation).
@@ -218,11 +246,11 @@ export default function LoginPage() {
     }
   };
 
-  const showForm = !loading && !user && !redirecting;
+  const showForm = !loading && !user && !redirecting && !finishingGoogle;
 
   return (
     <AuthShell copy={copy}>
-      {loading || redirecting ? (
+      {loading || redirecting || finishingGoogle ? (
         <span className="as-spinner" style={{ borderColor: 'rgba(16,17,19,0.2)', borderTopColor: '#101113' }} aria-label="Loading" />
       ) : showForm ? (
         <>
