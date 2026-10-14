@@ -251,7 +251,8 @@ export default function StatsPage() {
     const forecast = reviewForecast(allWords, 7, now);
     const growth = weeklyGrowth(allWords, 8, now);
     const busiest = lastDays(byDay, 30, now).reduce((best, d) => (d.count > (best?.count || 0) ? d : best), null);
-    return { total, stages, dueNow, freshCount, byDay, week, cur, change, sources, leech, forecast, growth, busiest, today: Math.max(Number(log?.[dayKey(now)]) || 0, byDay[dayKey(now)] || 0) };
+    return { total, stages, dueNow, freshCount, byDay, week, cur, change, sources, leech, forecast, growth, busiest, // the goal ring counts exactly what the streak counts (finished practice), not every review stamp
+      today: Number(log?.[dayKey(now)]) || 0 };
   }, [allWords, log]);
 
   if (loading || grammarLoading) {
