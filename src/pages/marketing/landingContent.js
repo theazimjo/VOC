@@ -98,6 +98,7 @@ export const CONTENT = {
       title: 'Get the app',
       titleWindows: 'VOCABRY for Windows',
       lead: 'Install it like any other app: its own window, an icon on the taskbar and in the Start menu.',
+      leadMobile: 'Add it to your home screen: it opens full screen with its own icon, like any other app.',
       points: [
         'Opens in its own window, without browser tabs',
         'Works without internet and syncs when you are back online',
@@ -107,6 +108,27 @@ export const CONTENT = {
       install: 'Install the app',
       installWindows: 'Install on Windows',
       done: 'Installed. Find VOCABRY in your Start menu.',
+      tabs: { ios: 'iPhone / iPad', android: 'Android', desktop: 'Computer' },
+      steps: {
+        ios: [
+          'Open vocabry.uz in Safari (or Chrome)',
+          'Tap the Share button',
+          'Choose “Add to Home Screen”',
+          'Tap Add. VOCABRY now opens like an app',
+        ],
+        android: [
+          'Open vocabry.uz in Chrome (or Samsung Internet, Edge, Firefox)',
+          'Tap the ⋮ menu in the top corner',
+          'Choose “Install app” (or “Add to Home screen”)',
+          'Confirm. VOCABRY appears with your other apps',
+        ],
+        desktop: [
+          'Open vocabry.uz in Microsoft Edge or Google Chrome',
+          'Click the install icon at the right end of the address bar',
+          'Or open the browser menu, then Apps, then Install VOCABRY',
+        ],
+      },
+      stepsTitle: 'How to install',
       howto: 'In Microsoft Edge or Google Chrome, open the browser menu and choose Apps, then Install VOCABRY. It is also the small install icon at the right end of the address bar.',
     },
     faq: {

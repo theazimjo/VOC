@@ -50,3 +50,12 @@ export async function promptInstall() {
 export function isWindows() {
   return typeof navigator !== 'undefined' && /Windows/i.test(navigator.userAgent || '');
 }
+
+// 'ios' | 'android' | 'desktop'. iPadOS reports itself as a Mac, so touch points tell them apart.
+export function detectPlatform() {
+  if (typeof navigator === 'undefined') return 'desktop';
+  const ua = navigator.userAgent || '';
+  if (/iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1)) return 'ios';
+  if (/Android/i.test(ua)) return 'android';
+  return 'desktop';
+}

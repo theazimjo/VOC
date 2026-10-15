@@ -4,7 +4,7 @@ import { useInView, useReducedMotion } from 'framer-motion';
 import { ArrowRight, ArrowUpRight, Download, RotateCcw, FastForward } from 'lucide-react';
 import { APP_VERSION_LABEL } from '../../utils/appVersion';
 import BetaBadge from '../../components/common/BetaBadge';
-import { MS_STORE_URL, canPromptInstall, isWindows, promptInstall, subscribeInstall, wasInstalled } from '../../utils/pwaInstall';
+import { MS_STORE_URL, canPromptInstall, detectPlatform, isWindows, promptInstall, subscribeInstall, wasInstalled } from '../../utils/pwaInstall';
 import { CONTENT, EVIDENCE, EVIDENCE_POST, GROUP_ROWS, WORDS } from './landingContent';
 
 import './LandingPage.css';
@@ -234,7 +234,9 @@ function GetTheApp({ t }) {
   const g = t.getApp;
   const [, setTick] = useState(0);
   const [accepted, setAccepted] = useState(false);
+  const [platform, setPlatform] = useState(detectPlatform);
   useEffect(() => subscribeInstall(() => setTick((n) => n + 1)), []);
+  const mobile = detectPlatform() !== 'desktop';
   const can = canPromptInstall();
   const done = accepted || wasInstalled();
 
@@ -244,14 +246,14 @@ function GetTheApp({ t }) {
     <section className="lp-section lp-getapp" id="get-app">
       <div className="lp-section-head">
         <h2>{isWindows() ? g.titleWindows : g.title}</h2>
-        <p>{g.lead}</p>
+        <p>{mobile ? g.leadMobile : g.lead}</p>
       </div>
       <div className="lp-getapp-panel">
         <ul className="lp-points">
           {g.points.map((p) => <li key={p}>{p}</li>)}
         </ul>
         <div className="lp-getapp-actions">
-          {MS_STORE_URL && (
+          {MS_STORE_URL && !mobile && (
             <a className="lp-btn lp-btn--lg" href={MS_STORE_URL} target="_blank" rel="noopener noreferrer">
               <Download size={20} strokeWidth={2.4} aria-hidden="true" />
               {g.store}
@@ -264,10 +266,30 @@ function GetTheApp({ t }) {
               <Download size={20} strokeWidth={2.4} aria-hidden="true" />
               {isWindows() ? g.installWindows : g.install}
             </button>
-          ) : (
-            <p className="lp-getapp-howto">{g.howto}</p>
-          )}
+          ) : null}
         </div>
+        {!done && (
+          <div className="lp-install">
+            <h3 className="lp-install-title">{g.stepsTitle}</h3>
+            <div className="lp-install-tabs" role="tablist" aria-label={g.stepsTitle}>
+              {['ios', 'android', 'desktop'].map((k) => (
+                <button
+                  key={k}
+                  type="button"
+                  role="tab"
+                  aria-selected={platform === k}
+                  className={`lp-install-tab${platform === k ? ' is-on' : ''}`}
+                  onClick={() => setPlatform(k)}
+                >
+                  {g.tabs[k]}
+                </button>
+              ))}
+            </div>
+            <ol className="lp-install-steps">
+              {g.steps[platform].map((s) => <li key={s}>{s}</li>)}
+            </ol>
+          </div>
+        )}
       </div>
     </section>
   );
