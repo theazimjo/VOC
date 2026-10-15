@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useInView, useReducedMotion } from 'framer-motion';
-import { ArrowRight, ArrowUpRight, Download, RotateCcw, FastForward } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Check, Download, EllipsisVertical, Globe, Monitor, RotateCcw, FastForward, Share, Smartphone, SquarePlus } from 'lucide-react';
 import { APP_VERSION_LABEL } from '../../utils/appVersion';
 import BetaBadge from '../../components/common/BetaBadge';
 import { MS_STORE_URL, canPromptInstall, detectPlatform, isWindows, promptInstall, subscribeInstall, wasInstalled } from '../../utils/pwaInstall';
@@ -228,6 +228,14 @@ function EvidenceBars({ t }) {
   );
 }
 
+const TAB_ICONS = { ios: Smartphone, android: Smartphone, desktop: Monitor };
+// One icon per step, in the order of landingContent getApp.steps.
+const STEP_ICONS = {
+  ios: [Globe, Share, SquarePlus, Check],
+  android: [Globe, EllipsisVertical, Download, Check],
+  desktop: [Globe, Download, EllipsisVertical],
+};
+
 // "Get the app": installs the web app as a Windows (or any desktop) app, and links
 // the Microsoft Store listing once it exists.
 function GetTheApp({ t }) {
@@ -268,29 +276,44 @@ function GetTheApp({ t }) {
             </button>
           ) : null}
         </div>
-        {!done && (
-          <div className="lp-install">
+      </div>
+      {!done && (
+        <div className="lp-install">
+          <div className="lp-install-head">
             <h3 className="lp-install-title">{g.stepsTitle}</h3>
             <div className="lp-install-tabs" role="tablist" aria-label={g.stepsTitle}>
-              {['ios', 'android', 'desktop'].map((k) => (
-                <button
-                  key={k}
-                  type="button"
-                  role="tab"
-                  aria-selected={platform === k}
-                  className={`lp-install-tab${platform === k ? ' is-on' : ''}`}
-                  onClick={() => setPlatform(k)}
-                >
-                  {g.tabs[k]}
-                </button>
-              ))}
+              {['ios', 'android', 'desktop'].map((k) => {
+                const TabIcon = TAB_ICONS[k];
+                return (
+                  <button
+                    key={k}
+                    type="button"
+                    role="tab"
+                    aria-selected={platform === k}
+                    className={`lp-install-tab${platform === k ? ' is-on' : ''}`}
+                    onClick={() => setPlatform(k)}
+                  >
+                    <TabIcon size={17} strokeWidth={2.2} aria-hidden="true" />
+                    <span>{g.tabs[k]}</span>
+                  </button>
+                );
+              })}
             </div>
-            <ol className="lp-install-steps">
-              {g.steps[platform].map((s) => <li key={s}>{s}</li>)}
-            </ol>
           </div>
-        )}
-      </div>
+          <ol className="lp-install-steps" key={platform}>
+            {g.steps[platform].map((text, i) => {
+              const StepIcon = STEP_ICONS[platform][i] || Check;
+              return (
+                <li key={text} style={{ '--i': i }}>
+                  <span className="lp-step-num" aria-hidden="true">{i + 1}</span>
+                  <span className="lp-step-icon" aria-hidden="true"><StepIcon size={22} strokeWidth={2} /></span>
+                  <span className="lp-step-text">{text}</span>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      )}
     </section>
   );
 }
